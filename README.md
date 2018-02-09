@@ -9,12 +9,12 @@ This implementation includes a full relational database, Dao, service and RESTfu
 
 It has 2321 unit tests, 2321 integration tests. All passed.
 
-Please do not modify the code directly.  if new features and changes are needed please update the templates instead.  
+Please do not modify the code directly.  if new features and changes are needed please update the templates instead.
 Will provide an interface for updating the templates
 
 if have questions please email: gmai2006@gmail.com
 
-
+<pre>
 LOC of generated code
 -----------------------------------------------------------------------------------
 Language                         files          blank        comment           code
@@ -28,4 +28,4 @@ Visualforce Component                1              0              0            
 -----------------------------------------------------------------------------------
 SUM:                              3117          78967         130634         424184
 -----------------------------------------------------------------------------------
-
+</pre>
