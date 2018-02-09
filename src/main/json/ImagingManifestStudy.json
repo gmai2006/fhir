@@ -1,0 +1,99 @@
+{
+  "className": "ImagingManifestStudy",
+  "type": "OBJECT",
+  "descr": "\"A text description of the DICOM SOP instances selected in the ImagingManifest; or the reason for, or significance of, the selection.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "uid",
+      "descr": "\"Study instance UID of the SOP instances in the selection.\"",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"urn:oid:(0|[1-9][0-9]*)(\\\\.(0|[1-9][0-9]*))*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_uid",
+      "descr": "\"Extensions for uid\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "imagingStudy",
+      "descr": "\"Reference to the Imaging Study in FHIR form.\"",
+      "typeName": "Reference",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "endpoint",
+      "descr": "\"The network service providing access (e.g., query, view, or retrieval) for the study. See implementation notes for information about using DICOM endpoints. A study-level endpoint applies to each series in the study, unless overridden by a series-level endpoint with the same Endpoint.type.\"",
+      "typeName": "Reference",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "series",
+      "descr": "\"Series identity and locating information of the DICOM SOP instances in the selection.\"",
+      "typeName": "ImagingManifestSeries",
+      "isArray": true,
+      "isRequired": true,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "modifierExtension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\"\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

@@ -1,0 +1,367 @@
+{
+  "className": "TestScriptOperation",
+  "type": "COMPLEX",
+  "descr": "\"A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "type",
+      "descr": "\"Server interaction or operation type.\"",
+      "typeName": "Coding",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "resource",
+      "descr": "\"The type of the resource.  See http://build.fhir.org/resourcelist.html.\"",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[^\\\\s]+([\\\\s]?[^\\\\s]+)*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_resource",
+      "descr": "\"Extensions for resource\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "label",
+      "descr": "\"The label would be used for tracking/logging purposes by test engines.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_label",
+      "descr": "\"Extensions for label\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "description",
+      "descr": "\"The description would be used by test engines for tracking and reporting purposes.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_description",
+      "descr": "\"Extensions for description\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "accept",
+      "descr": "\"The content-type or mime-type to use for RESTful operation in the \u0027Accept\u0027 header.\"",
+      "typeName": "string",
+      "enums": [
+        "xml",
+        "json",
+        "ttl",
+        "none"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_accept",
+      "descr": "\"Extensions for accept\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "contentType",
+      "descr": "\"The content-type or mime-type to use for RESTful operation in the \u0027Content-Type\u0027 header.\"",
+      "typeName": "string",
+      "enums": [
+        "xml",
+        "json",
+        "ttl",
+        "none"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_contentType",
+      "descr": "\"Extensions for contentType\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "destination",
+      "descr": "\"The server where the request message is destined for.  Must be one of the server numbers listed in TestScript.destination section.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_destination",
+      "descr": "\"Extensions for destination\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "encodeRequestUrl",
+      "descr": "\"Whether or not to implicitly send the request url in encoded format. The default is true to match the standard RESTful client behavior. Set to false when communicating with a server that does not support encoded url paths.\"",
+      "typeName": "boolean",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_encodeRequestUrl",
+      "descr": "\"Extensions for encodeRequestUrl\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "origin",
+      "descr": "\"The server where the request message originates from.  Must be one of the server numbers listed in TestScript.origin section.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_origin",
+      "descr": "\"Extensions for origin\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "params",
+      "descr": "\"Path plus parameters after [type].  Used to set parts of the request URL explicitly.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_params",
+      "descr": "\"Extensions for params\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "requestHeader",
+      "descr": "\"Header elements would be used to set HTTP headers.\"",
+      "typeName": "TestScriptRequestHeader",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "requestId",
+      "descr": "\"The fixture id (maybe new) to map to the request.\"",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[A-Za-z0-9\\\\-\\\\.]{1,64}\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_requestId",
+      "descr": "\"Extensions for requestId\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "responseId",
+      "descr": "\"The fixture id (maybe new) to map to the response.\"",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[A-Za-z0-9\\\\-\\\\.]{1,64}\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_responseId",
+      "descr": "\"Extensions for responseId\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "sourceId",
+      "descr": "\"The id of the fixture used as the body of a PUT or POST request.\"",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[A-Za-z0-9\\\\-\\\\.]{1,64}\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_sourceId",
+      "descr": "\"Extensions for sourceId\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "targetId",
+      "descr": "\"Id of fixture used for extracting the [id],  [type], and [vid] for GET requests.\"",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[A-Za-z0-9\\\\-\\\\.]{1,64}\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_targetId",
+      "descr": "\"Extensions for targetId\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "url",
+      "descr": "\"Complete request URL.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_url",
+      "descr": "\"Extensions for url\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "modifierExtension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\"\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

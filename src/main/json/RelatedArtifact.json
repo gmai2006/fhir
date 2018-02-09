@@ -1,0 +1,148 @@
+{
+  "className": "RelatedArtifact",
+  "type": "OBJECT",
+  "descr": "\"Related artifacts such as additional documentation, justification, or bibliographic references.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "type",
+      "descr": "\"The type of relationship to the related artifact.\"",
+      "typeName": "string",
+      "enums": [
+        "documentation",
+        "justification",
+        "citation",
+        "predecessor",
+        "successor",
+        "derivedfrom",
+        "dependson",
+        "composedof"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_type",
+      "descr": "\"Extensions for type\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "display",
+      "descr": "\"A brief description of the document or knowledge resource being referenced, suitable for display to a consumer.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_display",
+      "descr": "\"Extensions for display\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "citation",
+      "descr": "\"A bibliographic citation for the related artifact. This text SHOULD be formatted according to an accepted citation format.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_citation",
+      "descr": "\"Extensions for citation\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "url",
+      "descr": "\"A url for the artifact that can be followed to access the actual content.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_url",
+      "descr": "\"Extensions for url\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "document",
+      "descr": "\"The document being referenced, represented as an attachment. This is exclusive with the resource element.\"",
+      "typeName": "Attachment",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "resource",
+      "descr": "\"The related resource, such as a library, value set, profile, or other knowledge resource.\"",
+      "typeName": "Reference",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

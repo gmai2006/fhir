@@ -1,0 +1,288 @@
+{
+  "className": "Account",
+  "type": "OBJECT",
+  "descr": "\"A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc.\"",
+  "isInnerClass": false,
+  "fields": [
+    {
+      "name": "resourceType",
+      "descr": "\"This is a Account resource\"",
+      "typeName": "string",
+      "enums": [
+        "Account"
+      ],
+      "isArray": false,
+      "isRequired": true,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "identifier",
+      "descr": "\"Unique identifier used to reference the account.  May or may not be intended for human use (e.g. credit card number).\"",
+      "typeName": "Identifier",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "status",
+      "descr": "\"Indicates whether the account is presently used/usable or not.\"",
+      "typeName": "string",
+      "enums": [
+        "active",
+        "inactive",
+        "enteredinerror"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_status",
+      "descr": "\"Extensions for status\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "type",
+      "descr": "\"Categorizes the account for reporting and searching purposes.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "name",
+      "descr": "\"Name used for the account when displaying it to humans in reports, etc.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_name",
+      "descr": "\"Extensions for name\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "subject",
+      "descr": "\"Identifies the patient, device, practitioner, location or other object the account is associated with.\"",
+      "typeName": "Reference",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "period",
+      "descr": "\"Identifies the period of time the account applies to; e.g. accounts created per fiscal year, quarter, etc.\"",
+      "typeName": "Period",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "active",
+      "descr": "\"Indicates the period of time over which the account is allowed to have transactions posted to it.\\nThis period may be different to the coveragePeriod which is the duration of time that services may occur.\"",
+      "typeName": "Period",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "balance",
+      "descr": "\"Represents the sum of all credits less all debits associated with the account.  Might be positive, zero or negative.\"",
+      "typeName": "Money",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "coverage",
+      "descr": "\"The party(s) that are responsible for covering the payment of this account, and what order should they be applied to the account.\"",
+      "typeName": "AccountCoverage",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "owner",
+      "descr": "\"Indicates the organization, department, etc. with responsibility for the account.\"",
+      "typeName": "Reference",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "description",
+      "descr": "\"Provides additional information about what the account tracks and how it is used.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_description",
+      "descr": "\"Extensions for description\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "guarantor",
+      "descr": "\"Parties financially responsible for the account.\"",
+      "typeName": "AccountGuarantor",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "text",
+      "descr": "\"A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \\\"clinically safe\\\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.\"\n derived from DomainResource",
+      "typeName": "Narrative",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "contained",
+      "descr": "\"These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.\"\n derived from DomainResource",
+      "typeName": "ResourceList",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from DomainResource",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "modifierExtension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\"\n derived from DomainResource",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[A-Za-z0-9\\\\-\\\\.]{1,64}\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "meta",
+      "descr": "\"The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource.\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "Meta",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "implicitRules",
+      "descr": "\"A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content.\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_implicitRules",
+      "descr": "\"Extensions for implicitRules\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "language",
+      "descr": "\"The base language in which the resource is written.\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[^\\\\s]+([\\\\s]?[^\\\\s]+)*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_language",
+      "descr": "\"Extensions for language\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    }
+  ]
+}

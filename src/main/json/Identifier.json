@@ -1,0 +1,134 @@
+{
+  "className": "Identifier",
+  "type": "COMPLEX",
+  "descr": "\"A technical identifier - identifies some entity uniquely and unambiguously.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "use",
+      "descr": "\"The purpose of this identifier.\"",
+      "typeName": "string",
+      "enums": [
+        "usual",
+        "official",
+        "temp",
+        "secondary"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_use",
+      "descr": "\"Extensions for use\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "type",
+      "descr": "\"A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "system",
+      "descr": "\"Establishes the namespace for the value - that is, a URL that describes a set values that are unique.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_system",
+      "descr": "\"Extensions for system\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "value",
+      "descr": "\"The portion of the identifier typically relevant to the user and which is unique within the context of the system.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_value",
+      "descr": "\"Extensions for value\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "period",
+      "descr": "\"Time period during which identifier is/was valid for use.\"",
+      "typeName": "Period",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "assigner",
+      "descr": "\"Organization that issued/manages the identifier.\"",
+      "typeName": "Reference",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

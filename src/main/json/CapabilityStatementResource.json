@@ -1,0 +1,342 @@
+{
+  "className": "CapabilityStatementResource",
+  "type": "OBJECT",
+  "descr": "\"A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "type",
+      "descr": "\"A type of resource exposed via the restful interface.\"",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[^\\\\s]+([\\\\s]?[^\\\\s]+)*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_type",
+      "descr": "\"Extensions for type\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "profile",
+      "descr": "\"A specification of the profile that describes the solution\u0027s overall support for the resource, including any constraints on cardinality, bindings, lengths or other limitations. See further discussion in [Using Profiles](profiling.html#profile-uses).\"",
+      "typeName": "Reference",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "documentation",
+      "descr": "\"Additional information about the resource type used by the system.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_documentation",
+      "descr": "\"Extensions for documentation\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "interaction",
+      "descr": "\"Identifies a restful operation supported by the solution.\"",
+      "typeName": "CapabilityStatementInteraction",
+      "isArray": true,
+      "isRequired": true,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "versioning",
+      "descr": "\"This field is set to no-version to specify that the system does not support (server) or use (client) versioning for this resource type. If this has some other value, the server must at least correctly track and populate the versionId meta-property on resources. If the value is \u0027versioned-update\u0027, then the server supports all the versioning features, including using e-tags for version integrity in the API.\"",
+      "typeName": "string",
+      "enums": [
+        "noversion",
+        "versioned",
+        "versionedupdate"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_versioning",
+      "descr": "\"Extensions for versioning\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "readHistory",
+      "descr": "\"A flag for whether the server is able to return past versions as part of the vRead operation.\"",
+      "typeName": "boolean",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_readHistory",
+      "descr": "\"Extensions for readHistory\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "updateCreate",
+      "descr": "\"A flag to indicate that the server allows or needs to allow the client to create new identities on the server (e.g. that is, the client PUTs to a location where there is no existing resource). Allowing this operation means that the server allows the client to create new identities on the server.\"",
+      "typeName": "boolean",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_updateCreate",
+      "descr": "\"Extensions for updateCreate\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "conditionalCreate",
+      "descr": "\"A flag that indicates that the server supports conditional create.\"",
+      "typeName": "boolean",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_conditionalCreate",
+      "descr": "\"Extensions for conditionalCreate\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "conditionalRead",
+      "descr": "\"A code that indicates how the server supports conditional read.\"",
+      "typeName": "string",
+      "enums": [
+        "notsupported",
+        "modifiedsince",
+        "notmatch",
+        "fullsupport"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_conditionalRead",
+      "descr": "\"Extensions for conditionalRead\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "conditionalUpdate",
+      "descr": "\"A flag that indicates that the server supports conditional update.\"",
+      "typeName": "boolean",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_conditionalUpdate",
+      "descr": "\"Extensions for conditionalUpdate\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "conditionalDelete",
+      "descr": "\"A code that indicates how the server supports conditional delete.\"",
+      "typeName": "string",
+      "enums": [
+        "notsupported",
+        "single",
+        "multiple"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_conditionalDelete",
+      "descr": "\"Extensions for conditionalDelete\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "referencePolicy",
+      "descr": "\"A set of flags that defines how references are supported.\"",
+      "typeName": "string",
+      "enums": [
+        "literal",
+        "logical",
+        "resolves",
+        "enforced",
+        "local"
+      ],
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_referencePolicy",
+      "descr": "\"Extensions for referencePolicy\"",
+      "typeName": "Element",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "searchInclude",
+      "descr": "\"A list of _include values supported by the server.\"",
+      "typeName": "string",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_searchInclude",
+      "descr": "\"Extensions for searchInclude\"",
+      "typeName": "Element",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "searchRevInclude",
+      "descr": "\"A list of _revinclude (reverse include) values supported by the server.\"",
+      "typeName": "string",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_searchRevInclude",
+      "descr": "\"Extensions for searchRevInclude\"",
+      "typeName": "Element",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "searchParam",
+      "descr": "\"Search parameters for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation.\"",
+      "typeName": "CapabilityStatementSearchParam",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "modifierExtension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\"\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "className": "ClaimResponseAddItem",
+  "type": "OBJECT",
+  "descr": "\"This resource provides the adjudication details from the processing of a Claim resource.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "sequenceLinkId",
+      "descr": "\"List of input service items which this service line is intended to replace.\"",
+      "typeName": "number",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_sequenceLinkId",
+      "descr": "\"Extensions for sequenceLinkId\"",
+      "typeName": "Element",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "revenue",
+      "descr": "\"The type of reveneu or cost center providing the product and/or service.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "category",
+      "descr": "\"Health Care Service Type Codes  to identify the classification of service or benefits.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "service",
+      "descr": "\"A code to indicate the Professional Service or Product supplied.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "modifier",
+      "descr": "\"Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours.\"",
+      "typeName": "CodeableConcept",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "fee",
+      "descr": "\"The fee charged for the professional service or product..\"",
+      "typeName": "Money",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "noteNumber",
+      "descr": "\"A list of note references to the notes provided below.\"",
+      "typeName": "number",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_noteNumber",
+      "descr": "\"Extensions for noteNumber\"",
+      "typeName": "Element",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "adjudication",
+      "descr": "\"The adjudications results.\"",
+      "typeName": "ClaimResponseAdjudication",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "detail",
+      "descr": "\"The second tier service adjudications for payor added services.\"",
+      "typeName": "ClaimResponseDetail1",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "modifierExtension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\"\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

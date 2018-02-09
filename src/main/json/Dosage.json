@@ -1,0 +1,259 @@
+{
+  "className": "Dosage",
+  "type": "OBJECT",
+  "descr": "\"Indicates how the medication is/was taken or should be taken by the patient.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "sequence",
+      "descr": "\"Indicates the order in which the dosage instructions should be applied or interpreted.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_sequence",
+      "descr": "\"Extensions for sequence\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "text",
+      "descr": "\"Free text dosage instructions e.g. SIG.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_text",
+      "descr": "\"Extensions for text\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "additionalInstruction",
+      "descr": "\"Supplemental instruction - e.g. \\\"with meals\\\".\"",
+      "typeName": "CodeableConcept",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "patientInstruction",
+      "descr": "\"Instructions in terms that are understood by the patient or consumer.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_patientInstruction",
+      "descr": "\"Extensions for patientInstruction\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "timing",
+      "descr": "\"When medication should be administered.\"",
+      "typeName": "Timing",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "asNeededBoolean",
+      "descr": "\"Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept).\"",
+      "typeName": "boolean",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_asNeededBoolean",
+      "descr": "\"Extensions for asNeededBoolean\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "asNeededCodeableConcept",
+      "descr": "\"Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept).\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "site",
+      "descr": "\"Body site to administer to.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "route",
+      "descr": "\"How drug should enter body.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "method",
+      "descr": "\"Technique for administering medication.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "doseRange",
+      "descr": "\"Amount of medication per dose.\"",
+      "typeName": "Range",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "doseSimpleQuantity",
+      "descr": "\"Amount of medication per dose.\"",
+      "typeName": "Quantity",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "maxDosePerPeriod",
+      "descr": "\"Upper limit on medication per unit of time.\"",
+      "typeName": "Ratio",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "maxDosePerAdministration",
+      "descr": "\"Upper limit on medication per administration.\"",
+      "typeName": "Quantity",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "maxDosePerLifetime",
+      "descr": "\"Upper limit on medication per lifetime of the patient.\"",
+      "typeName": "Quantity",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "rateRatio",
+      "descr": "\"Amount of medication per unit of time.\"",
+      "typeName": "Ratio",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "rateRange",
+      "descr": "\"Amount of medication per unit of time.\"",
+      "typeName": "Range",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "rateSimpleQuantity",
+      "descr": "\"Amount of medication per unit of time.\"",
+      "typeName": "Quantity",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "className": "SampledData",
+  "type": "COMPLEX",
+  "descr": "\"A series of measurements taken by a device, with upper and lower limits. There may be more than one dimension in the data.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "origin",
+      "descr": "\"The base quantity that a measured value of zero represents. In addition, this provides the units of the entire measurement series.\"",
+      "typeName": "Quantity",
+      "isArray": false,
+      "isRequired": true,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "period",
+      "descr": "\"The length of time between sampling times, measured in milliseconds.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_period",
+      "descr": "\"Extensions for period\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "factor",
+      "descr": "\"A correction factor that is applied to the sampled data points before they are added to the origin.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_factor",
+      "descr": "\"Extensions for factor\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "lowerLimit",
+      "descr": "\"The lower limit of detection of the measured points. This is needed if any of the data points have the value \\\"L\\\" (lower than detection limit).\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_lowerLimit",
+      "descr": "\"Extensions for lowerLimit\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "upperLimit",
+      "descr": "\"The upper limit of detection of the measured points. This is needed if any of the data points have the value \\\"U\\\" (higher than detection limit).\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_upperLimit",
+      "descr": "\"Extensions for upperLimit\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "dimensions",
+      "descr": "\"The number of sample points at each time point. If this value is greater than one, then the dimensions will be interlaced - all the sample points for a point in time will be recorded at once.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"[1-9][0-9]*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_dimensions",
+      "descr": "\"Extensions for dimensions\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "data",
+      "descr": "\"A series of data points which are decimal values separated by a single space (character u20). The special values \\\"E\\\" (error), \\\"L\\\" (below detection limit) and \\\"U\\\" (above detection limit) can also be used in place of a decimal value.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_data",
+      "descr": "\"Extensions for data\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

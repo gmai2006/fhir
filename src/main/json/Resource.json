@@ -1,0 +1,90 @@
+{
+  "className": "Resource",
+  "type": "OBJECT",
+  "descr": "\"This is the base resource type for everything.\"",
+  "isInnerClass": false,
+  "fields": [
+    {
+      "name": "id",
+      "descr": "\"The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.\"",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[A-Za-z0-9\\\\-\\\\.]{1,64}\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "meta",
+      "descr": "\"The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource.\"",
+      "typeName": "Meta",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "implicitRules",
+      "descr": "\"A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_implicitRules",
+      "descr": "\"Extensions for implicitRules\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "language",
+      "descr": "\"The base language in which the resource is written.\"",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[^\\\\s]+([\\\\s]?[^\\\\s]+)*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_language",
+      "descr": "\"Extensions for language\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

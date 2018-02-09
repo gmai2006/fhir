@@ -1,0 +1,282 @@
+{
+  "className": "Group",
+  "type": "OBJECT",
+  "descr": "\"Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn\u0027t an Organization.\"",
+  "isInnerClass": false,
+  "fields": [
+    {
+      "name": "resourceType",
+      "descr": "\"This is a Group resource\"",
+      "typeName": "string",
+      "enums": [
+        "Group"
+      ],
+      "isArray": false,
+      "isRequired": true,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "identifier",
+      "descr": "\"A unique business identifier for this group.\"",
+      "typeName": "Identifier",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "active",
+      "descr": "\"Indicates whether the record for the group is available for use or is merely being retained for historical purposes.\"",
+      "typeName": "boolean",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_active",
+      "descr": "\"Extensions for active\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "type",
+      "descr": "\"Identifies the broad classification of the kind of resources the group includes.\"",
+      "typeName": "string",
+      "enums": [
+        "person",
+        "animal",
+        "practitioner",
+        "device",
+        "medication",
+        "substance"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_type",
+      "descr": "\"Extensions for type\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "actual",
+      "descr": "\"If true, indicates that the resource refers to a specific group of real individuals.  If false, the group defines a set of intended individuals.\"",
+      "typeName": "boolean",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_actual",
+      "descr": "\"Extensions for actual\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "code",
+      "descr": "\"Provides a specific type of resource the group includes; e.g. \\\"cow\\\", \\\"syringe\\\", etc.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "name",
+      "descr": "\"A label assigned to the group for human identification and communication.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_name",
+      "descr": "\"Extensions for name\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "quantity",
+      "descr": "\"A count of the number of resource instances that are part of the group.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"[0]|([1-9][0-9]*)\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_quantity",
+      "descr": "\"Extensions for quantity\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "characteristic",
+      "descr": "\"Identifies the traits shared by members of the group.\"",
+      "typeName": "GroupCharacteristic",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "member",
+      "descr": "\"Identifies the resource instances that are members of the group.\"",
+      "typeName": "GroupMember",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "text",
+      "descr": "\"A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \\\"clinically safe\\\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.\"\n derived from DomainResource",
+      "typeName": "Narrative",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "contained",
+      "descr": "\"These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.\"\n derived from DomainResource",
+      "typeName": "ResourceList",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from DomainResource",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "modifierExtension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\"\n derived from DomainResource",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[A-Za-z0-9\\\\-\\\\.]{1,64}\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "meta",
+      "descr": "\"The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource.\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "Meta",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "implicitRules",
+      "descr": "\"A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content.\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_implicitRules",
+      "descr": "\"Extensions for implicitRules\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "language",
+      "descr": "\"The base language in which the resource is written.\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"[^\\\\s]+([\\\\s]?[^\\\\s]+)*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_language",
+      "descr": "\"Extensions for language\"\n derived from Resource\n derived from DomainResource",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    }
+  ]
+}

@@ -1,0 +1,391 @@
+{
+  "className": "ExplanationOfBenefitItem",
+  "type": "OBJECT",
+  "descr": "\"This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "sequence",
+      "descr": "\"A service line number.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"[1-9][0-9]*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_sequence",
+      "descr": "\"Extensions for sequence\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "careTeamLinkId",
+      "descr": "\"Careteam applicable for this service or product line.\"",
+      "typeName": "number",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_careTeamLinkId",
+      "descr": "\"Extensions for careTeamLinkId\"",
+      "typeName": "Element",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "diagnosisLinkId",
+      "descr": "\"Diagnosis applicable for this service or product line.\"",
+      "typeName": "number",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_diagnosisLinkId",
+      "descr": "\"Extensions for diagnosisLinkId\"",
+      "typeName": "Element",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "procedureLinkId",
+      "descr": "\"Procedures applicable for this service or product line.\"",
+      "typeName": "number",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_procedureLinkId",
+      "descr": "\"Extensions for procedureLinkId\"",
+      "typeName": "Element",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "informationLinkId",
+      "descr": "\"Exceptions, special conditions and supporting information pplicable for this service or product line.\"",
+      "typeName": "number",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_informationLinkId",
+      "descr": "\"Extensions for informationLinkId\"",
+      "typeName": "Element",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "revenue",
+      "descr": "\"The type of reveneu or cost center providing the product and/or service.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "category",
+      "descr": "\"Health Care Service Type Codes  to identify the classification of service or benefits.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "service",
+      "descr": "\"If this is an actual service or product line, ie. not a Group, then use code to indicate the Professional Service or Product supplied (eg. CTP, HCPCS,USCLS,ICD10, NCPDP,DIN,ACHI,CCI). If a grouping item then use a group code to indicate the type of thing being grouped eg. \u0027glasses\u0027 or \u0027compound\u0027.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "modifier",
+      "descr": "\"Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours.\"",
+      "typeName": "CodeableConcept",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "programCode",
+      "descr": "\"For programs which require reson codes for the inclusion, covering, of this billed item under the program or sub-program.\"",
+      "typeName": "CodeableConcept",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "servicedDate",
+      "descr": "\"The date or dates when the enclosed suite of services were performed or completed.\"",
+      "typeName": "string",
+      "isArray": false,
+      "pattern": "\"-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_servicedDate",
+      "descr": "\"Extensions for servicedDate\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "servicedPeriod",
+      "descr": "\"The date or dates when the enclosed suite of services were performed or completed.\"",
+      "typeName": "Period",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "locationCodeableConcept",
+      "descr": "\"Where the service was provided.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "locationAddress",
+      "descr": "\"Where the service was provided.\"",
+      "typeName": "Address",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "locationReference",
+      "descr": "\"Where the service was provided.\"",
+      "typeName": "Reference",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "quantity",
+      "descr": "\"The number of repetitions of a service or product.\"",
+      "typeName": "Quantity",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "unitPrice",
+      "descr": "\"If the item is a node then this is the fee for the product or service, otherwise this is the total of the fees for the children of the group.\"",
+      "typeName": "Money",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "factor",
+      "descr": "\"A real number that represents a multiplier used in determining the overall value of services delivered and/or goods received. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_factor",
+      "descr": "\"Extensions for factor\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "net",
+      "descr": "\"The quantity times the unit price for an addittional service or product or charge. For example, the formula: unit Quantity * unit Price (Cost per Point) * factor Number  * points \u003d net Amount. Quantity, factor and points are assumed to be 1 if not supplied.\"",
+      "typeName": "Money",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "udi",
+      "descr": "\"List of Unique Device Identifiers associated with this line item.\"",
+      "typeName": "Reference",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "bodySite",
+      "descr": "\"Physical service site on the patient (limb, tooth, etc).\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "subSite",
+      "descr": "\"A region or surface of the site, eg. limb region or tooth surface(s).\"",
+      "typeName": "CodeableConcept",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "encounter",
+      "descr": "\"A billed item may include goods or services provided in multiple encounters.\"",
+      "typeName": "Reference",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "noteNumber",
+      "descr": "\"A list of note references to the notes provided below.\"",
+      "typeName": "number",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_noteNumber",
+      "descr": "\"Extensions for noteNumber\"",
+      "typeName": "Element",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "adjudication",
+      "descr": "\"The adjudications results.\"",
+      "typeName": "ExplanationOfBenefitAdjudication",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "detail",
+      "descr": "\"Second tier of goods and services.\"",
+      "typeName": "ExplanationOfBenefitDetail",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "OBJECT"
+    },
+    {
+      "name": "modifierExtension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\"\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

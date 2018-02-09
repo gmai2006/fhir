@@ -1,0 +1,108 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+apply plugin: 'maven'
+apply plugin: 'war'
+apply plugin: 'ear'
+
+mainClassName = ' '
+
+task dd << {
+        println 'i am a clean task'
+}
+task aa << {
+        println 'i am a test task'
+}
+task ff(dependsOn: [dd, aa]) << {
+        println "i am build depends on test"
+}
+
+war {
+    archiveName 'FHIR.war'
+    from  'src/main/webapp'
+}
+
+ear  {
+	deploymentDescriptor {  
+      webModule("lib/FHIR.war", "/")  
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+}
+
+// In this section you declare where to find the ddependsOnependencies of your project
+repositories {
+    mavenCentral()
+    flatDir { dirs "./" }
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    
+  compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+
+	runtime group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.5.0'
+	
+	// https://mvnrepository.com/artifact/com.google.guava/guava
+  compile group: 'com.google.guava', name: 'guava', version: '19.0'
+
+compile group: 'javax.validation', name: 'validation-api', version: '1.0.0.GA'
+	
+
+compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.12.Final'
+
+compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.2'
+
+
+compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
+compile group: 'com.google.inject.extensions', name: 'guice-servlet', version: '4.1.0'
+compile group: 'com.google.inject.extensions', name: 'guice-persist', version: '4.1.0'
+
+	//runtime group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.1'
+  //runtime group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.1'
+  //runtime group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+
+compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '2.3.5.Final'
+    
+    
+	runtime group: 'org.codehaus.jackson', name: 'jackson-jaxrs', version: '1.9.13'
+        
+  // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+  runtime group: 'mysql', name: 'mysql-connector-java', version: '6.0.3'
+  
+  runtime "log4j:log4j:1.2.17"
+    
+  testCompile group: 'org.mockito', name: 'mockito-core', version:'2.4.2'
+  testCompile "junit:junit:4.11"
+
+  testCompile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.22.1'
+  testCompile group: 'org.glassfish.jersey.core', name: 'jersey-server', version: '2.22.1'
+testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-grizzly2', version: '2.22.1'
+  
+  
+
+}
+
+eclipse {
+    classpath {
+        //customizing the classes output directory:
+        defaultOutputDir = file('./src/main/webapp/WEB-INF/classes')
+    }
+}
+
+task buildlibdir(type: Copy) {
+    into "./src/main/webapp/WEB-INF/lib/"
+    from configurations.runtime
+}
+
+task cleanlibdir (type: Delete) {
+    doLast {
+        FileTree tree = fileTree(dir: "./src/main/webapp/WEB-INF/lib/");
+        tree.each { File file ->
+            delete(file)
+        }
+    }
+}
+

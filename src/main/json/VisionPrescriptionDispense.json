@@ -1,0 +1,336 @@
+{
+  "className": "VisionPrescriptionDispense",
+  "type": "OBJECT",
+  "descr": "\"An authorization for the supply of glasses and/or contact lenses to a patient.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "product",
+      "descr": "\"Identifies the type of vision correction product which is required for the patient.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "eye",
+      "descr": "\"The eye for which the lens applies.\"",
+      "typeName": "string",
+      "enums": [
+        "right",
+        "left"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_eye",
+      "descr": "\"Extensions for eye\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "sphere",
+      "descr": "\"Lens power measured in diopters (0.25 units).\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_sphere",
+      "descr": "\"Extensions for sphere\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "cylinder",
+      "descr": "\"Power adjustment for astigmatism measured in diopters (0.25 units).\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_cylinder",
+      "descr": "\"Extensions for cylinder\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "axis",
+      "descr": "\"Adjustment for astigmatism measured in integer degrees.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_axis",
+      "descr": "\"Extensions for axis\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "prism",
+      "descr": "\"Amount of prism to compensate for eye alignment in fractional units.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_prism",
+      "descr": "\"Extensions for prism\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "base",
+      "descr": "\"The relative base, or reference lens edge, for the prism.\"",
+      "typeName": "string",
+      "enums": [
+        "up",
+        "down",
+        "in",
+        "out"
+      ],
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_base",
+      "descr": "\"Extensions for base\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "add",
+      "descr": "\"Power adjustment for multifocal lenses measured in diopters (0.25 units).\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_add",
+      "descr": "\"Extensions for add\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "power",
+      "descr": "\"Contact lens power measured in diopters (0.25 units).\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_power",
+      "descr": "\"Extensions for power\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "backCurve",
+      "descr": "\"Back curvature measured in millimeters.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_backCurve",
+      "descr": "\"Extensions for backCurve\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "diameter",
+      "descr": "\"Contact lens diameter measured in millimeters.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"-?([0]|([1-9][0-9]*))(\\\\.[0-9]+)?\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_diameter",
+      "descr": "\"Extensions for diameter\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "duration",
+      "descr": "\"The recommended maximum wear period for the lens.\"",
+      "typeName": "Quantity",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "color",
+      "descr": "\"Special color or pattern.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_color",
+      "descr": "\"Extensions for color\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "brand",
+      "descr": "\"Brand recommendations or restrictions.\"",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_brand",
+      "descr": "\"Extensions for brand\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "note",
+      "descr": "\"Notes for special requirements such as coatings and lens materials.\"",
+      "typeName": "Annotation",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "modifierExtension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\"\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "className": "ClaimResponseError",
+  "type": "OBJECT",
+  "descr": "\"This resource provides the adjudication details from the processing of a Claim resource.\"",
+  "isInnerClass": true,
+  "fields": [
+    {
+      "name": "sequenceLinkId",
+      "descr": "\"The sequence number of the line item submitted which contains the error. This value is omitted when the error is elsewhere.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"[1-9][0-9]*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_sequenceLinkId",
+      "descr": "\"Extensions for sequenceLinkId\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "detailSequenceLinkId",
+      "descr": "\"The sequence number of the addition within the line item submitted which contains the error. This value is omitted when the error is not related to an Addition.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"[1-9][0-9]*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_detailSequenceLinkId",
+      "descr": "\"Extensions for detailSequenceLinkId\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "subdetailSequenceLinkId",
+      "descr": "\"The sequence number of the addition within the line item submitted which contains the error. This value is omitted when the error is not related to an Addition.\"",
+      "typeName": "number",
+      "isArray": false,
+      "pattern": "\"[1-9][0-9]*\"",
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_subdetailSequenceLinkId",
+      "descr": "\"Extensions for subdetailSequenceLinkId\"",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "code",
+      "descr": "\"An error code,from a specified code system, which details why the claim could not be adjudicated.\"",
+      "typeName": "CodeableConcept",
+      "isArray": false,
+      "isRequired": true,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "modifierExtension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\"\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "id",
+      "descr": "\"unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "string",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "PRIMITIVE"
+    },
+    {
+      "name": "_id",
+      "descr": "\"Extensions for id\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Element",
+      "isArray": false,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": true,
+      "type": "COMPLEX"
+    },
+    {
+      "name": "extension",
+      "descr": "\"May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\"\n derived from Element\n derived from BackboneElement",
+      "typeName": "Extension",
+      "isArray": true,
+      "isRequired": false,
+      "size": 1024,
+      "isTransient": false,
+      "type": "COMPLEX"
+    }
+  ]
+}
