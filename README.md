@@ -1,4 +1,4 @@
-# fhir
+# FHIR
 An implementation of the Fast Healthcare Interoperability Resources (FHIR) version 3.0.1 
 This implentation is 100% auto generated
 
@@ -14,8 +14,8 @@ Will provide an interface for updating the templates
 
 if have questions please email: gmai2006@gmail.com
 
+##LOC of generated code
 <pre>
-LOC of generated code
 -----------------------------------------------------------------------------------
 Language                         files          blank        comment           code
 -----------------------------------------------------------------------------------
