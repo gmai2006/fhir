@@ -32,7 +32,5 @@ public interface DataElementMappingService {
 	public DataElementMapping find(String id);
   public List<DataElementMapping> select(int maxResult);
   public List<DataElementMapping> selectAll();
-  public DataElementMapping create(DataElementMapping bean);
-  public DataElementMapping update(DataElementMapping bean);
   public void delete(DataElementMapping bean);
 }

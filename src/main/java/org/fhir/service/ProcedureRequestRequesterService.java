@@ -32,7 +32,5 @@ public interface ProcedureRequestRequesterService {
 	public ProcedureRequestRequester find(String id);
   public List<ProcedureRequestRequester> select(int maxResult);
   public List<ProcedureRequestRequester> selectAll();
-  public ProcedureRequestRequester create(ProcedureRequestRequester bean);
-  public ProcedureRequestRequester update(ProcedureRequestRequester bean);
   public void delete(ProcedureRequestRequester bean);
 }

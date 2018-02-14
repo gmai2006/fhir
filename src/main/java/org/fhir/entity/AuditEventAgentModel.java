@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
 */
 @Entity
 @Table(name="auditeventagent")
-public class AuditEventAgentModel  {
+public class AuditEventAgentModel  implements Serializable {
+	private static final long serialVersionUID = 151857669666076531L;
   /**
   * Description: "The security role that the user was acting under, that come from local codes defined by the access control security system (e.g. RBAC, ABAC) used in the local context."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -53,13 +54,13 @@ public class AuditEventAgentModel  {
   @Column(name="\"reference_id\"")
   private String reference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`reference_id`", insertable=false, updatable=false)
-  private ReferenceModel reference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> reference;
 
   /**
   * Description: "Unique identifier for the user actively participating in the event."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -94,22 +95,20 @@ public class AuditEventAgentModel  {
   @Column(name="\"location_id\"")
   private String location_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`location_id`", insertable=false, updatable=false)
-  private ReferenceModel location;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> location;
 
   /**
   * Description: "The policy or plan that authorized the activity being recorded. Typically, a single activity may have multiple applicable policies, such as patient consent, guarantor funding, etc. The policy would also indicate the security token used."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"policy\"", length = 16777215)
+  @Column(name="\"policy\"")
   private String policy;
 
   /**
   * Description: "Type of media involved. Used when the event is about exporting/importing onto media."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -123,13 +122,13 @@ public class AuditEventAgentModel  {
   @Column(name="\"network_id\"")
   private String network_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`network_id`", insertable=false, updatable=false)
-  private AuditEventNetworkModel network;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="network_id", insertable=false, updatable=false)
+  private java.util.List<AuditEventNetworkModel> network;
 
   /**
   * Description: "The reason (purpose of use), specific to this agent, that was used during the event being recorded."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -139,7 +138,7 @@ public class AuditEventAgentModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -151,6 +150,7 @@ public class AuditEventAgentModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -159,164 +159,175 @@ public class AuditEventAgentModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public AuditEventAgentModel() {
   }
 
-  public AuditEventAgentModel(AuditEventAgent o) {
-    this.id = o.getId();
-      this.role = CodeableConcept.toJson(o.getRole());
-      if (null != o.getReference()) {
-      	this.reference_id = "reference" + this.getId();
-        this.reference = new ReferenceModel(o.getReference());
-        this.reference.setId(this.reference_id);
-        this.reference.parent_id = this.reference.getId();
-      }
-
-      this.userId = Identifier.toJson(o.getUserId());
-      this.altId = o.getAltId();
-
-      this.name = o.getName();
-
-      this.requestor = o.getRequestor();
-
-      if (null != o.getLocation()) {
-      	this.location_id = "location" + this.getId();
-        this.location = new ReferenceModel(o.getLocation());
-        this.location.setId(this.location_id);
-        this.location.parent_id = this.location.getId();
-      }
-
-      this.policy = org.fhir.utils.JsonUtils.write2String(o.getPolicy());
-
-      this.media = Coding.toJson(o.getMedia());
-      if (null != o.getNetwork()) {
-      	this.network_id = "network" + this.getId();
-        this.network = new AuditEventNetworkModel(o.getNetwork());
-        this.network.setId(this.network_id);
-        this.network.parent_id = this.network.getId();
-      }
-
-      this.purposeOfUse = CodeableConcept.toJson(o.getPurposeOfUse());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public AuditEventAgentModel(AuditEventAgent o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    if (null != o.getReference() ) {
+    	this.reference_id = "reference" + this.parent_id;
+    	this.reference = ReferenceHelper.toModel(o.getReference(), this.reference_id);
+    }
+    this.userId = IdentifierHelper.toJson(o.getUserId());
+    this.altId = o.getAltId();
+    this.name = o.getName();
+    this.requestor = o.getRequestor();
+    if (null != o.getLocation() ) {
+    	this.location_id = "location" + this.parent_id;
+    	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
+    }
+    this.policy = org.fhir.utils.JsonUtils.write2String(o.getPolicy());
+    this.media = CodingHelper.toJson(o.getMedia());
+    if (null != o.getNetwork() ) {
+    	this.network_id = "network" + this.parent_id;
+    	this.network = AuditEventNetworkHelper.toModel(o.getNetwork(), this.network_id);
+    }
   }
 
-  public void setRole( String value) {
-    this.role = value;
-  }
   public String getRole() {
     return this.role;
   }
-  public void setReference( ReferenceModel value) {
-    this.reference = value;
+  public void setRole( String value) {
+    this.role = value;
   }
-  public ReferenceModel getReference() {
+  public java.util.List<ReferenceModel> getReference() {
     return this.reference;
   }
-  public void setUserId( String value) {
-    this.userId = value;
+  public void setReference( java.util.List<ReferenceModel> value) {
+    this.reference = value;
   }
   public String getUserId() {
     return this.userId;
   }
-  public void setAltId( String value) {
-    this.altId = value;
+  public void setUserId( String value) {
+    this.userId = value;
   }
   public String getAltId() {
     return this.altId;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setAltId( String value) {
+    this.altId = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setRequestor( Boolean value) {
-    this.requestor = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public Boolean getRequestor() {
     return this.requestor;
   }
-  public void setLocation( ReferenceModel value) {
-    this.location = value;
+  public void setRequestor( Boolean value) {
+    this.requestor = value;
   }
-  public ReferenceModel getLocation() {
+  public java.util.List<ReferenceModel> getLocation() {
     return this.location;
   }
-  public void setPolicy( String value) {
-    this.policy = value;
+  public void setLocation( java.util.List<ReferenceModel> value) {
+    this.location = value;
   }
   public String getPolicy() {
     return this.policy;
   }
-  public void setMedia( String value) {
-    this.media = value;
+  public void setPolicy( String value) {
+    this.policy = value;
   }
   public String getMedia() {
     return this.media;
   }
-  public void setNetwork( AuditEventNetworkModel value) {
-    this.network = value;
+  public void setMedia( String value) {
+    this.media = value;
   }
-  public AuditEventNetworkModel getNetwork() {
+  public java.util.List<AuditEventNetworkModel> getNetwork() {
     return this.network;
   }
-  public void setPurposeOfUse( String value) {
-    this.purposeOfUse = value;
+  public void setNetwork( java.util.List<AuditEventNetworkModel> value) {
+    this.network = value;
   }
   public String getPurposeOfUse() {
     return this.purposeOfUse;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setPurposeOfUse( String value) {
+    this.purposeOfUse = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("userId" + "[" + String.valueOf(this.userId) + "]\n"); 
-     builder.append("altId" + "[" + String.valueOf(this.altId) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("requestor" + "[" + String.valueOf(this.requestor) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("policy" + "[" + String.valueOf(this.policy) + "]\n"); 
-     builder.append("media" + "[" + String.valueOf(this.media) + "]\n"); 
-     builder.append("network" + "[" + String.valueOf(this.network) + "]\n"); 
-     builder.append("purposeOfUse" + "[" + String.valueOf(this.purposeOfUse) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AuditEventAgentModel]:" + "\n");
+     builder.append("role" + "->" + this.role + "\n"); 
+     builder.append("userId" + "->" + this.userId + "\n"); 
+     builder.append("altId" + "->" + this.altId + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("requestor" + "->" + this.requestor + "\n"); 
+     builder.append("policy" + "->" + this.policy + "\n"); 
+     builder.append("media" + "->" + this.media + "\n"); 
+     builder.append("purposeOfUse" + "->" + this.purposeOfUse + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[AuditEventAgentModel]:" + "\n");
+     builder.append("role" + "->" + this.role + "\n"); 
+     builder.append("reference" + "->" + this.reference + "\n"); 
+     builder.append("userId" + "->" + this.userId + "\n"); 
+     builder.append("altId" + "->" + this.altId + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("requestor" + "->" + this.requestor + "\n"); 
+     builder.append("location" + "->" + this.location + "\n"); 
+     builder.append("policy" + "->" + this.policy + "\n"); 
+     builder.append("media" + "->" + this.media + "\n"); 
+     builder.append("network" + "->" + this.network + "\n"); 
+     builder.append("purposeOfUse" + "->" + this.purposeOfUse + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

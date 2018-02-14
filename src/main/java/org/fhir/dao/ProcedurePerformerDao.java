@@ -34,10 +34,5 @@ public interface ProcedurePerformerDao {
   public List<ProcedurePerformer> select(int maxResult);
 
   public List<ProcedurePerformer> selectAll();
-
-  public ProcedurePerformer create(ProcedurePerformer e);
-
-  public ProcedurePerformer update(ProcedurePerformer e);
-
   public void delete(ProcedurePerformer e);
 }

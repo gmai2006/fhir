@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExpansionProfileFixedVersionModel;
 import org.fhir.pojo.ExpansionProfileFixedVersion;
+import org.fhir.pojo.ExpansionProfileFixedVersionHelper;
 
 public class ExpansionProfileFixedVersionDaoImpl implements ExpansionProfileFixedVersionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExpansionProfileFixedVersionDaoImpl implements ExpansionProfileFixe
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExpansionProfileFixedVersionModel a", ExpansionProfileFixedVersionModel.class).setMaxResults(maxResult);
       List<ExpansionProfileFixedVersionModel> models = query.getResultList();
-      return ExpansionProfileFixedVersion.fromArray(models);
+      return ExpansionProfileFixedVersionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ExpansionProfileFixedVersionDaoImpl implements ExpansionProfileFixe
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExpansionProfileFixedVersionModel a", ExpansionProfileFixedVersionModel.class);
       List<ExpansionProfileFixedVersionModel> models = query.getResultList();
-      return ExpansionProfileFixedVersion.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ExpansionProfileFixedVersion create(ExpansionProfileFixedVersion e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ExpansionProfileFixedVersionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ExpansionProfileFixedVersion update(ExpansionProfileFixedVersion e) {
-      final EntityManager em = entityManagerProvider.get();
-      ExpansionProfileFixedVersionModel model = em.merge(new ExpansionProfileFixedVersionModel(e));
-      return new ExpansionProfileFixedVersion(model);
+      return ExpansionProfileFixedVersionHelper.fromArray2Array(models);
   }
 
   @Override

@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection."
 */
 @Entity
 @Table(name="appointmentresponse")
-public class AppointmentResponseModel  {
+public class AppointmentResponseModel  implements Serializable {
+	private static final long serialVersionUID = 151857669713286021L;
   /**
   * Description: "This is a AppointmentResponse resource"
   */
@@ -47,7 +48,7 @@ public class AppointmentResponseModel  {
 
   /**
   * Description: "This records identifiers associated with this appointment response concern that are defined by business processes and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -61,9 +62,9 @@ public class AppointmentResponseModel  {
   @Column(name="\"appointment_id\"")
   private String appointment_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`appointment_id`", insertable=false, updatable=false)
-  private ReferenceModel appointment;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="appointment_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> appointment;
 
   /**
   * Description: "Date/Time that the appointment is to take place, or requested new start time."
@@ -81,7 +82,7 @@ public class AppointmentResponseModel  {
 
   /**
   * Description: "Role of participant in the appointment."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -95,9 +96,9 @@ public class AppointmentResponseModel  {
   @Column(name="\"actor_id\"")
   private String actor_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`actor_id`", insertable=false, updatable=false)
-  private ReferenceModel actor;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="actor_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> actor;
 
   /**
   * Description: "Participation status of the participant. When the status is declined or tentative if the start/end times are different to the appointment, then these times should be interpreted as a requested time change. When the status is accepted, the times can either be the time of the appointment (as a confirmation of the time) or can be empty."
@@ -122,14 +123,14 @@ public class AppointmentResponseModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -139,7 +140,7 @@ public class AppointmentResponseModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -149,7 +150,7 @@ public class AppointmentResponseModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -161,6 +162,7 @@ public class AppointmentResponseModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -175,9 +177,9 @@ public class AppointmentResponseModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -198,187 +200,179 @@ public class AppointmentResponseModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public AppointmentResponseModel() {
   }
 
   public AppointmentResponseModel(AppointmentResponse o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      if (null != o.getAppointment()) {
-      	this.appointment_id = "appointment" + this.getId();
-        this.appointment = new ReferenceModel(o.getAppointment());
-        this.appointment.setId(this.appointment_id);
-        this.appointment.parent_id = this.appointment.getId();
-      }
-
-      this.start = o.getStart();
-
-      this.end = o.getEnd();
-
-      this.participantType = CodeableConcept.toJson(o.getParticipantType());
-      if (null != o.getActor()) {
-      	this.actor_id = "actor" + this.getId();
-        this.actor = new ReferenceModel(o.getActor());
-        this.actor.setId(this.actor_id);
-        this.actor.parent_id = this.actor.getId();
-      }
-
-      this.participantStatus = o.getParticipantStatus();
-
-      this.comment = o.getComment();
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    if (null != o.getAppointment() ) {
+    	this.appointment_id = "appointment" + this.id;
+    	this.appointment = ReferenceHelper.toModel(o.getAppointment(), this.appointment_id);
+    }
+    this.start = o.getStart();
+    this.end = o.getEnd();
+    if (null != o.getActor() ) {
+    	this.actor_id = "actor" + this.id;
+    	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);
+    }
+    this.participantStatus = o.getParticipantStatus();
+    this.comment = o.getComment();
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setAppointment( ReferenceModel value) {
-    this.appointment = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
-  public ReferenceModel getAppointment() {
+  public java.util.List<ReferenceModel> getAppointment() {
     return this.appointment;
   }
-  public void setStart( String value) {
-    this.start = value;
+  public void setAppointment( java.util.List<ReferenceModel> value) {
+    this.appointment = value;
   }
   public String getStart() {
     return this.start;
   }
-  public void setEnd( String value) {
-    this.end = value;
+  public void setStart( String value) {
+    this.start = value;
   }
   public String getEnd() {
     return this.end;
   }
-  public void setParticipantType( String value) {
-    this.participantType = value;
+  public void setEnd( String value) {
+    this.end = value;
   }
   public String getParticipantType() {
     return this.participantType;
   }
-  public void setActor( ReferenceModel value) {
-    this.actor = value;
+  public void setParticipantType( String value) {
+    this.participantType = value;
   }
-  public ReferenceModel getActor() {
+  public java.util.List<ReferenceModel> getActor() {
     return this.actor;
   }
-  public void setParticipantStatus( String value) {
-    this.participantStatus = value;
+  public void setActor( java.util.List<ReferenceModel> value) {
+    this.actor = value;
   }
   public String getParticipantStatus() {
     return this.participantStatus;
   }
-  public void setComment( String value) {
-    this.comment = value;
+  public void setParticipantStatus( String value) {
+    this.participantStatus = value;
   }
   public String getComment() {
     return this.comment;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setComment( String value) {
+    this.comment = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("appointment" + "[" + String.valueOf(this.appointment) + "]\n"); 
-     builder.append("start" + "[" + String.valueOf(this.start) + "]\n"); 
-     builder.append("end" + "[" + String.valueOf(this.end) + "]\n"); 
-     builder.append("participantType" + "[" + String.valueOf(this.participantType) + "]\n"); 
-     builder.append("actor" + "[" + String.valueOf(this.actor) + "]\n"); 
-     builder.append("participantStatus" + "[" + String.valueOf(this.participantStatus) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[AppointmentResponseModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("start" + "->" + this.start + "\n"); 
+     builder.append("end" + "->" + this.end + "\n"); 
+     builder.append("participantType" + "->" + this.participantType + "\n"); 
+     builder.append("participantStatus" + "->" + this.participantStatus + "\n"); 
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[AppointmentResponseModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("appointment" + "->" + this.appointment + "\n"); 
+     builder.append("start" + "->" + this.start + "\n"); 
+     builder.append("end" + "->" + this.end + "\n"); 
+     builder.append("participantType" + "->" + this.participantType + "\n"); 
+     builder.append("actor" + "->" + this.actor + "\n"); 
+     builder.append("participantStatus" + "->" + this.participantStatus + "\n"); 
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

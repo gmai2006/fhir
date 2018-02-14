@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DosageModel;
 import org.fhir.pojo.Dosage;
+import org.fhir.pojo.DosageHelper;
 
 public class DosageDaoImpl implements DosageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DosageDaoImpl implements DosageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DosageModel a", DosageModel.class).setMaxResults(maxResult);
       List<DosageModel> models = query.getResultList();
-      return Dosage.fromArray(models);
+      return DosageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DosageDaoImpl implements DosageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DosageModel a", DosageModel.class);
       List<DosageModel> models = query.getResultList();
-      return Dosage.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public Dosage create(Dosage e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DosageModel(e));
-      return e;
-  }
-
-  @Transactional
-  public Dosage update(Dosage e) {
-      final EntityManager em = entityManagerProvider.get();
-      DosageModel model = em.merge(new DosageModel(e));
-      return new Dosage(model);
+      return DosageHelper.fromArray2Array(models);
   }
 
   @Override

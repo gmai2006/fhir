@@ -131,6 +131,7 @@ public class ObservationComponent  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -152,36 +153,31 @@ public class ObservationComponent  {
 
   public ObservationComponent(ObservationComponentModel o) {
     this.id = o.getId();
-      this.code = CodeableConcept.fromJson(o.getCode());
-      this.valueQuantity = Quantity.fromJson(o.getValueQuantity());
-      this.valueCodeableConcept = CodeableConcept.fromJson(o.getValueCodeableConcept());
-      if (null != o.getValueString()) {
-        this.valueString = new String(o.getValueString());
-      }
-
-      this.valueRange = Range.fromJson(o.getValueRange());
-      this.valueRatio = Ratio.fromJson(o.getValueRatio());
-      this.valueSampledData = SampledData.fromJson(o.getValueSampledData());
-      this.valueAttachment = Attachment.fromJson(o.getValueAttachment());
-      if (null != o.getValueTime()) {
-        this.valueTime = new String(o.getValueTime());
-      }
-
-      if (null != o.getValueDateTime()) {
-        this.valueDateTime = new String(o.getValueDateTime());
-      }
-
-      this.valuePeriod = Period.fromJson(o.getValuePeriod());
-      this.dataAbsentReason = CodeableConcept.fromJson(o.getDataAbsentReason());
-      this.interpretation = CodeableConcept.fromJson(o.getInterpretation());
-      this.referenceRange = ObservationReferenceRange.fromArray(o.getReferenceRange());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
+    if (null != o.getValueString()) {
+      this.valueString = o.getValueString();
+    }
+    this.valueRange = RangeHelper.fromJson(o.getValueRange());
+    this.valueRatio = RatioHelper.fromJson(o.getValueRatio());
+    this.valueSampledData = SampledDataHelper.fromJson(o.getValueSampledData());
+    this.valueAttachment = AttachmentHelper.fromJson(o.getValueAttachment());
+    if (null != o.getValueTime()) {
+      this.valueTime = o.getValueTime();
+    }
+    if (null != o.getValueDateTime()) {
+      this.valueDateTime = o.getValueDateTime();
+    }
+    this.valuePeriod = PeriodHelper.fromJson(o.getValuePeriod());
+    this.dataAbsentReason = CodeableConceptHelper.fromJson(o.getDataAbsentReason());
+    this.interpretation = CodeableConceptHelper.fromJson(o.getInterpretation());
+    if (null != o.getReferenceRange() && !o.getReferenceRange().isEmpty()) {
+    	this.referenceRange = ObservationReferenceRangeHelper.fromArray2Array(o.getReferenceRange());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( CodeableConcept value) {
@@ -314,61 +310,30 @@ public class ObservationComponent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("valueQuantity" + "[" + String.valueOf(this.valueQuantity) + "]\n"); 
-     builder.append("valueCodeableConcept" + "[" + String.valueOf(this.valueCodeableConcept) + "]\n"); 
-     builder.append("valueString" + "[" + String.valueOf(this.valueString) + "]\n"); 
-     builder.append("_valueString" + "[" + String.valueOf(this._valueString) + "]\n"); 
-     builder.append("valueRange" + "[" + String.valueOf(this.valueRange) + "]\n"); 
-     builder.append("valueRatio" + "[" + String.valueOf(this.valueRatio) + "]\n"); 
-     builder.append("valueSampledData" + "[" + String.valueOf(this.valueSampledData) + "]\n"); 
-     builder.append("valueAttachment" + "[" + String.valueOf(this.valueAttachment) + "]\n"); 
-     builder.append("valueTime" + "[" + String.valueOf(this.valueTime) + "]\n"); 
-     builder.append("_valueTime" + "[" + String.valueOf(this._valueTime) + "]\n"); 
-     builder.append("valueDateTime" + "[" + String.valueOf(this.valueDateTime) + "]\n"); 
-     builder.append("_valueDateTime" + "[" + String.valueOf(this._valueDateTime) + "]\n"); 
-     builder.append("valuePeriod" + "[" + String.valueOf(this.valuePeriod) + "]\n"); 
-     builder.append("dataAbsentReason" + "[" + String.valueOf(this.dataAbsentReason) + "]\n"); 
-     builder.append("interpretation" + "[" + String.valueOf(this.interpretation) + "]\n"); 
-     builder.append("referenceRange" + "[" + String.valueOf(this.referenceRange) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ObservationComponent]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.valueQuantity != null) builder.append("valueQuantity" + "->" + this.valueQuantity.toString() + "\n"); 
+     if(this.valueCodeableConcept != null) builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept.toString() + "\n"); 
+     if(this.valueString != null) builder.append("valueString" + "->" + this.valueString.toString() + "\n"); 
+     if(this._valueString != null) builder.append("_valueString" + "->" + this._valueString.toString() + "\n"); 
+     if(this.valueRange != null) builder.append("valueRange" + "->" + this.valueRange.toString() + "\n"); 
+     if(this.valueRatio != null) builder.append("valueRatio" + "->" + this.valueRatio.toString() + "\n"); 
+     if(this.valueSampledData != null) builder.append("valueSampledData" + "->" + this.valueSampledData.toString() + "\n"); 
+     if(this.valueAttachment != null) builder.append("valueAttachment" + "->" + this.valueAttachment.toString() + "\n"); 
+     if(this.valueTime != null) builder.append("valueTime" + "->" + this.valueTime.toString() + "\n"); 
+     if(this._valueTime != null) builder.append("_valueTime" + "->" + this._valueTime.toString() + "\n"); 
+     if(this.valueDateTime != null) builder.append("valueDateTime" + "->" + this.valueDateTime.toString() + "\n"); 
+     if(this._valueDateTime != null) builder.append("_valueDateTime" + "->" + this._valueDateTime.toString() + "\n"); 
+     if(this.valuePeriod != null) builder.append("valuePeriod" + "->" + this.valuePeriod.toString() + "\n"); 
+     if(this.dataAbsentReason != null) builder.append("dataAbsentReason" + "->" + this.dataAbsentReason.toString() + "\n"); 
+     if(this.interpretation != null) builder.append("interpretation" + "->" + this.interpretation.toString() + "\n"); 
+     if(this.referenceRange != null) builder.append("referenceRange" + "->" + this.referenceRange.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ObservationComponent> fromArray(java.util.List<ObservationComponentModel> list) {
-    return (java.util.List<ObservationComponent>)list.stream()
-      .map(model -> new ObservationComponent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ObservationComponentModel> toModelArray(java.util.List<ObservationComponent> list) {
-    return (java.util.List<ObservationComponentModel>)list.stream()
-      .map(model -> new ObservationComponentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ObservationComponent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ObservationComponent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ObservationComponent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ObservationComponent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

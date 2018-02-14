@@ -34,10 +34,5 @@ public interface ExpansionProfileExcludeDao {
   public List<ExpansionProfileExclude> select(int maxResult);
 
   public List<ExpansionProfileExclude> selectAll();
-
-  public ExpansionProfileExclude create(ExpansionProfileExclude e);
-
-  public ExpansionProfileExclude update(ExpansionProfileExclude e);
-
   public void delete(ExpansionProfileExclude e);
 }

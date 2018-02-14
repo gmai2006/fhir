@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.BasicModel;
 import org.fhir.pojo.Basic;
+import org.fhir.pojo.BasicHelper;
 
 public class BasicDaoImpl implements BasicDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class BasicDaoImpl implements BasicDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BasicModel a", BasicModel.class).setMaxResults(maxResult);
       List<BasicModel> models = query.getResultList();
-      return Basic.fromArray(models);
+      return BasicHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class BasicDaoImpl implements BasicDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BasicModel a", BasicModel.class);
       List<BasicModel> models = query.getResultList();
-      return Basic.fromArray(models);
+      return BasicHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class BasicDaoImpl implements BasicDao {
       BasicModel model = em.merge(new BasicModel(e));
       return new Basic(model);
   }
-
   @Override
   @Transactional
   public void delete(Basic e) {

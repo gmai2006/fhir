@@ -133,6 +133,7 @@ public class EpisodeOfCare  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -184,67 +185,52 @@ public class EpisodeOfCare  {
 
   public EpisodeOfCare(EpisodeOfCareModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.statusHistory = EpisodeOfCareStatusHistory.fromArray(o.getStatusHistory());
-
-      this.type = CodeableConcept.fromArray(o.getType());
-      this.diagnosis = EpisodeOfCareDiagnosis.fromArray(o.getDiagnosis());
-
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      if (null != o.getManagingOrganization()) {
-        this.managingOrganization = new Reference(o.getManagingOrganization());
-        this.managingOrganization.setId(this.getId());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.referralRequest = Reference.fromArray(o.getReferralRequest());
-
-      if (null != o.getCareManager()) {
-        this.careManager = new Reference(o.getCareManager());
-        this.careManager.setId(this.getId());
-      }
-
-      this.team = Reference.fromArray(o.getTeam());
-
-      this.account = Reference.fromArray(o.getAccount());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getStatusHistory() && !o.getStatusHistory().isEmpty()) {
+    	this.statusHistory = EpisodeOfCareStatusHistoryHelper.fromArray2Array(o.getStatusHistory());
+    }
+    if (null != o.getDiagnosis() && !o.getDiagnosis().isEmpty()) {
+    	this.diagnosis = EpisodeOfCareDiagnosisHelper.fromArray2Array(o.getDiagnosis());
+    }
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    if (null != o.getManagingOrganization() && !o.getManagingOrganization().isEmpty()) {
+      this.managingOrganization = new Reference(o.getManagingOrganization().get(0));
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getReferralRequest() && !o.getReferralRequest().isEmpty()) {
+    	this.referralRequest = ReferenceHelper.fromArray2Array(o.getReferralRequest());
+    }
+    if (null != o.getCareManager() && !o.getCareManager().isEmpty()) {
+      this.careManager = new Reference(o.getCareManager().get(0));
+    }
+    if (null != o.getTeam() && !o.getTeam().isEmpty()) {
+    	this.team = ReferenceHelper.fromArray2Array(o.getTeam());
+    }
+    if (null != o.getAccount() && !o.getAccount().isEmpty()) {
+    	this.account = ReferenceHelper.fromArray2Array(o.getAccount());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -401,31 +387,32 @@ public class EpisodeOfCare  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("statusHistory" + "[" + String.valueOf(this.statusHistory) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("diagnosis" + "[" + String.valueOf(this.diagnosis) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("managingOrganization" + "[" + String.valueOf(this.managingOrganization) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("referralRequest" + "[" + String.valueOf(this.referralRequest) + "]\n"); 
-     builder.append("careManager" + "[" + String.valueOf(this.careManager) + "]\n"); 
-     builder.append("team" + "[" + String.valueOf(this.team) + "]\n"); 
-     builder.append("account" + "[" + String.valueOf(this.account) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[EpisodeOfCare]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.statusHistory != null) builder.append("statusHistory" + "->" + this.statusHistory.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.diagnosis != null) builder.append("diagnosis" + "->" + this.diagnosis.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.managingOrganization != null) builder.append("managingOrganization" + "->" + this.managingOrganization.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.referralRequest != null) builder.append("referralRequest" + "->" + this.referralRequest.toString() + "\n"); 
+     if(this.careManager != null) builder.append("careManager" + "->" + this.careManager.toString() + "\n"); 
+     if(this.team != null) builder.append("team" + "->" + this.team.toString() + "\n"); 
+     if(this.account != null) builder.append("account" + "->" + this.account.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -465,36 +452,4 @@ public class EpisodeOfCare  {
   	}
   }
 
-  public static java.util.List<EpisodeOfCare> fromArray(java.util.List<EpisodeOfCareModel> list) {
-    return (java.util.List<EpisodeOfCare>)list.stream()
-      .map(model -> new EpisodeOfCare(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<EpisodeOfCareModel> toModelArray(java.util.List<EpisodeOfCare> list) {
-    return (java.util.List<EpisodeOfCareModel>)list.stream()
-      .map(model -> new EpisodeOfCareModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static EpisodeOfCare fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, EpisodeOfCare.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(EpisodeOfCare o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<EpisodeOfCare> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -75,6 +75,7 @@ public class ValueSetCompose  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -96,24 +97,21 @@ public class ValueSetCompose  {
 
   public ValueSetCompose(ValueSetComposeModel o) {
     this.id = o.getId();
-      if (null != o.getLockedDate()) {
-        this.lockedDate = new String(o.getLockedDate());
-      }
-
-      if (null != o.getInactive()) {
-        this.inactive = new Boolean(o.getInactive());
-      }
-
-      this.include = ValueSetInclude.fromArray(o.getInclude());
-
-      this.exclude = ValueSetInclude.fromArray(o.getExclude());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getLockedDate()) {
+      this.lockedDate = o.getLockedDate();
+    }
+    if (null != o.getInactive()) {
+      this.inactive = o.getInactive();
+    }
+    if (null != o.getInclude() && !o.getInclude().isEmpty()) {
+    	this.include = ValueSetIncludeHelper.fromArray2Array(o.getInclude());
+    }
+    if (null != o.getExclude() && !o.getExclude().isEmpty()) {
+    	this.exclude = ValueSetIncludeHelper.fromArray2Array(o.getExclude());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLockedDate( String value) {
@@ -180,50 +178,19 @@ public class ValueSetCompose  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("lockedDate" + "[" + String.valueOf(this.lockedDate) + "]\n"); 
-     builder.append("_lockedDate" + "[" + String.valueOf(this._lockedDate) + "]\n"); 
-     builder.append("inactive" + "[" + String.valueOf(this.inactive) + "]\n"); 
-     builder.append("_inactive" + "[" + String.valueOf(this._inactive) + "]\n"); 
-     builder.append("include" + "[" + String.valueOf(this.include) + "]\n"); 
-     builder.append("exclude" + "[" + String.valueOf(this.exclude) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ValueSetCompose]:" + "\n");
+     if(this.lockedDate != null) builder.append("lockedDate" + "->" + this.lockedDate.toString() + "\n"); 
+     if(this._lockedDate != null) builder.append("_lockedDate" + "->" + this._lockedDate.toString() + "\n"); 
+     if(this.inactive != null) builder.append("inactive" + "->" + this.inactive.toString() + "\n"); 
+     if(this._inactive != null) builder.append("_inactive" + "->" + this._inactive.toString() + "\n"); 
+     if(this.include != null) builder.append("include" + "->" + this.include.toString() + "\n"); 
+     if(this.exclude != null) builder.append("exclude" + "->" + this.exclude.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ValueSetCompose> fromArray(java.util.List<ValueSetComposeModel> list) {
-    return (java.util.List<ValueSetCompose>)list.stream()
-      .map(model -> new ValueSetCompose(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ValueSetComposeModel> toModelArray(java.util.List<ValueSetCompose> list) {
-    return (java.util.List<ValueSetComposeModel>)list.stream()
-      .map(model -> new ValueSetComposeModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ValueSetCompose fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ValueSetCompose.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ValueSetCompose o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ValueSetCompose> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.RequestGroupActionModel;
 import org.fhir.pojo.RequestGroupAction;
+import org.fhir.pojo.RequestGroupActionHelper;
 
 public class RequestGroupActionDaoImpl implements RequestGroupActionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class RequestGroupActionDaoImpl implements RequestGroupActionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RequestGroupActionModel a", RequestGroupActionModel.class).setMaxResults(maxResult);
       List<RequestGroupActionModel> models = query.getResultList();
-      return RequestGroupAction.fromArray(models);
+      return RequestGroupActionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class RequestGroupActionDaoImpl implements RequestGroupActionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RequestGroupActionModel a", RequestGroupActionModel.class);
       List<RequestGroupActionModel> models = query.getResultList();
-      return RequestGroupAction.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public RequestGroupAction create(RequestGroupAction e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new RequestGroupActionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public RequestGroupAction update(RequestGroupAction e) {
-      final EntityManager em = entityManagerProvider.get();
-      RequestGroupActionModel model = em.merge(new RequestGroupActionModel(e));
-      return new RequestGroupAction(model);
+      return RequestGroupActionHelper.fromArray2Array(models);
   }
 
   @Override

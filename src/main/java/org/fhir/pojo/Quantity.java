@@ -87,6 +87,7 @@ public class Quantity  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -185,40 +186,21 @@ public class Quantity  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("_value" + "[" + String.valueOf(this._value) + "]\n"); 
-     builder.append("comparator" + "[" + String.valueOf(this.comparator) + "]\n"); 
-     builder.append("_comparator" + "[" + String.valueOf(this._comparator) + "]\n"); 
-     builder.append("unit" + "[" + String.valueOf(this.unit) + "]\n"); 
-     builder.append("_unit" + "[" + String.valueOf(this._unit) + "]\n"); 
-     builder.append("system" + "[" + String.valueOf(this.system) + "]\n"); 
-     builder.append("_system" + "[" + String.valueOf(this._system) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Quantity]:" + "\n");
+     if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
+     if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
+     if(this.comparator != null) builder.append("comparator" + "->" + this.comparator.toString() + "\n"); 
+     if(this._comparator != null) builder.append("_comparator" + "->" + this._comparator.toString() + "\n"); 
+     if(this.unit != null) builder.append("unit" + "->" + this.unit.toString() + "\n"); 
+     if(this._unit != null) builder.append("_unit" + "->" + this._unit.toString() + "\n"); 
+     if(this.system != null) builder.append("system" + "->" + this.system.toString() + "\n"); 
+     if(this._system != null) builder.append("_system" + "->" + this._system.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static Quantity fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Quantity.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Quantity o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Quantity> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum ComparatorEnum {

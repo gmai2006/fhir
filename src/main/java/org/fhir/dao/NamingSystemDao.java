@@ -34,10 +34,8 @@ public interface NamingSystemDao {
   public List<NamingSystem> select(int maxResult);
 
   public List<NamingSystem> selectAll();
-
   public NamingSystem create(NamingSystem e);
 
   public NamingSystem update(NamingSystem e);
-
   public void delete(NamingSystem e);
 }

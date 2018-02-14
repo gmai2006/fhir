@@ -100,6 +100,7 @@ public class HumanName  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -216,43 +217,24 @@ public class HumanName  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("use" + "[" + String.valueOf(this.use) + "]\n"); 
-     builder.append("_use" + "[" + String.valueOf(this._use) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("family" + "[" + String.valueOf(this.family) + "]\n"); 
-     builder.append("_family" + "[" + String.valueOf(this._family) + "]\n"); 
-     builder.append("given" + "[" + String.valueOf(this.given) + "]\n"); 
-     builder.append("_given" + "[" + String.valueOf(this._given) + "]\n"); 
-     builder.append("prefix" + "[" + String.valueOf(this.prefix) + "]\n"); 
-     builder.append("_prefix" + "[" + String.valueOf(this._prefix) + "]\n"); 
-     builder.append("suffix" + "[" + String.valueOf(this.suffix) + "]\n"); 
-     builder.append("_suffix" + "[" + String.valueOf(this._suffix) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[HumanName]:" + "\n");
+     if(this.use != null) builder.append("use" + "->" + this.use.toString() + "\n"); 
+     if(this._use != null) builder.append("_use" + "->" + this._use.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.family != null) builder.append("family" + "->" + this.family.toString() + "\n"); 
+     if(this._family != null) builder.append("_family" + "->" + this._family.toString() + "\n"); 
+     if(this.given != null) builder.append("given" + "->" + this.given.toString() + "\n"); 
+     if(this._given != null) builder.append("_given" + "->" + this._given.toString() + "\n"); 
+     if(this.prefix != null) builder.append("prefix" + "->" + this.prefix.toString() + "\n"); 
+     if(this._prefix != null) builder.append("_prefix" + "->" + this._prefix.toString() + "\n"); 
+     if(this.suffix != null) builder.append("suffix" + "->" + this.suffix.toString() + "\n"); 
+     if(this._suffix != null) builder.append("_suffix" + "->" + this._suffix.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static HumanName fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, HumanName.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(HumanName o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<HumanName> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum UseEnum {

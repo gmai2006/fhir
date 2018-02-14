@@ -58,6 +58,7 @@ public class SubstanceIngredient  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -79,19 +80,14 @@ public class SubstanceIngredient  {
 
   public SubstanceIngredient(SubstanceIngredientModel o) {
     this.id = o.getId();
-      this.quantity = Ratio.fromJson(o.getQuantity());
-      this.substanceCodeableConcept = CodeableConcept.fromJson(o.getSubstanceCodeableConcept());
-      if (null != o.getSubstanceReference()) {
-        this.substanceReference = new Reference(o.getSubstanceReference());
-        this.substanceReference.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.quantity = RatioHelper.fromJson(o.getQuantity());
+    this.substanceCodeableConcept = CodeableConceptHelper.fromJson(o.getSubstanceCodeableConcept());
+    if (null != o.getSubstanceReference() && !o.getSubstanceReference().isEmpty()) {
+      this.substanceReference = new Reference(o.getSubstanceReference().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setQuantity( Ratio value) {
@@ -140,47 +136,16 @@ public class SubstanceIngredient  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("substanceCodeableConcept" + "[" + String.valueOf(this.substanceCodeableConcept) + "]\n"); 
-     builder.append("substanceReference" + "[" + String.valueOf(this.substanceReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SubstanceIngredient]:" + "\n");
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.substanceCodeableConcept != null) builder.append("substanceCodeableConcept" + "->" + this.substanceCodeableConcept.toString() + "\n"); 
+     if(this.substanceReference != null) builder.append("substanceReference" + "->" + this.substanceReference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<SubstanceIngredient> fromArray(java.util.List<SubstanceIngredientModel> list) {
-    return (java.util.List<SubstanceIngredient>)list.stream()
-      .map(model -> new SubstanceIngredient(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SubstanceIngredientModel> toModelArray(java.util.List<SubstanceIngredient> list) {
-    return (java.util.List<SubstanceIngredientModel>)list.stream()
-      .map(model -> new SubstanceIngredientModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SubstanceIngredient fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SubstanceIngredient.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SubstanceIngredient o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SubstanceIngredient> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

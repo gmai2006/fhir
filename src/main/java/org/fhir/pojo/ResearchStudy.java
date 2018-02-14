@@ -182,6 +182,7 @@ public class ResearchStudy  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -233,79 +234,62 @@ public class ResearchStudy  {
 
   public ResearchStudy(ResearchStudyModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getTitle()) {
-        this.title = new String(o.getTitle());
-      }
-
-      this.protocol = Reference.fromArray(o.getProtocol());
-
-      this.partOf = Reference.fromArray(o.getPartOf());
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.category = CodeableConcept.fromArray(o.getCategory());
-      this.focus = CodeableConcept.fromArray(o.getFocus());
-      this.contact = ContactDetail.fromArray(o.getContact());
-
-      this.relatedArtifact = RelatedArtifact.fromArray(o.getRelatedArtifact());
-
-      this.keyword = CodeableConcept.fromArray(o.getKeyword());
-      this.jurisdiction = CodeableConcept.fromArray(o.getJurisdiction());
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.enrollment = Reference.fromArray(o.getEnrollment());
-
-      this.period = Period.fromJson(o.getPeriod());
-      if (null != o.getSponsor()) {
-        this.sponsor = new Reference(o.getSponsor());
-        this.sponsor.setId(this.getId());
-      }
-
-      if (null != o.getPrincipalInvestigator()) {
-        this.principalInvestigator = new Reference(o.getPrincipalInvestigator());
-        this.principalInvestigator.setId(this.getId());
-      }
-
-      this.site = Reference.fromArray(o.getSite());
-
-      this.reasonStopped = CodeableConcept.fromJson(o.getReasonStopped());
-      this.note = Annotation.fromArray(o.getNote());
-      this.arm = ResearchStudyArm.fromArray(o.getArm());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getTitle()) {
+      this.title = o.getTitle();
+    }
+    if (null != o.getProtocol() && !o.getProtocol().isEmpty()) {
+    	this.protocol = ReferenceHelper.fromArray2Array(o.getProtocol());
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+    	this.partOf = ReferenceHelper.fromArray2Array(o.getPartOf());
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact = ContactDetailHelper.fromArray2Array(o.getContact());
+    }
+    if (null != o.getRelatedArtifact() && !o.getRelatedArtifact().isEmpty()) {
+    	this.relatedArtifact = RelatedArtifactHelper.fromArray2Array(o.getRelatedArtifact());
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getEnrollment() && !o.getEnrollment().isEmpty()) {
+    	this.enrollment = ReferenceHelper.fromArray2Array(o.getEnrollment());
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getSponsor() && !o.getSponsor().isEmpty()) {
+      this.sponsor = new Reference(o.getSponsor().get(0));
+    }
+    if (null != o.getPrincipalInvestigator() && !o.getPrincipalInvestigator().isEmpty()) {
+      this.principalInvestigator = new Reference(o.getPrincipalInvestigator().get(0));
+    }
+    if (null != o.getSite() && !o.getSite().isEmpty()) {
+    	this.site = ReferenceHelper.fromArray2Array(o.getSite());
+    }
+    this.reasonStopped = CodeableConceptHelper.fromJson(o.getReasonStopped());
+    if (null != o.getArm() && !o.getArm().isEmpty()) {
+    	this.arm = ResearchStudyArmHelper.fromArray2Array(o.getArm());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -522,41 +506,42 @@ public class ResearchStudy  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("protocol" + "[" + String.valueOf(this.protocol) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("focus" + "[" + String.valueOf(this.focus) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("relatedArtifact" + "[" + String.valueOf(this.relatedArtifact) + "]\n"); 
-     builder.append("keyword" + "[" + String.valueOf(this.keyword) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("enrollment" + "[" + String.valueOf(this.enrollment) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("sponsor" + "[" + String.valueOf(this.sponsor) + "]\n"); 
-     builder.append("principalInvestigator" + "[" + String.valueOf(this.principalInvestigator) + "]\n"); 
-     builder.append("site" + "[" + String.valueOf(this.site) + "]\n"); 
-     builder.append("reasonStopped" + "[" + String.valueOf(this.reasonStopped) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("arm" + "[" + String.valueOf(this.arm) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[ResearchStudy]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.protocol != null) builder.append("protocol" + "->" + this.protocol.toString() + "\n"); 
+     if(this.partOf != null) builder.append("partOf" + "->" + this.partOf.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.focus != null) builder.append("focus" + "->" + this.focus.toString() + "\n"); 
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
+     if(this.relatedArtifact != null) builder.append("relatedArtifact" + "->" + this.relatedArtifact.toString() + "\n"); 
+     if(this.keyword != null) builder.append("keyword" + "->" + this.keyword.toString() + "\n"); 
+     if(this.jurisdiction != null) builder.append("jurisdiction" + "->" + this.jurisdiction.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.enrollment != null) builder.append("enrollment" + "->" + this.enrollment.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.sponsor != null) builder.append("sponsor" + "->" + this.sponsor.toString() + "\n"); 
+     if(this.principalInvestigator != null) builder.append("principalInvestigator" + "->" + this.principalInvestigator.toString() + "\n"); 
+     if(this.site != null) builder.append("site" + "->" + this.site.toString() + "\n"); 
+     if(this.reasonStopped != null) builder.append("reasonStopped" + "->" + this.reasonStopped.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.arm != null) builder.append("arm" + "->" + this.arm.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -594,36 +579,4 @@ public class ResearchStudy  {
   	}
   }
 
-  public static java.util.List<ResearchStudy> fromArray(java.util.List<ResearchStudyModel> list) {
-    return (java.util.List<ResearchStudy>)list.stream()
-      .map(model -> new ResearchStudy(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ResearchStudyModel> toModelArray(java.util.List<ResearchStudy> list) {
-    return (java.util.List<ResearchStudyModel>)list.stream()
-      .map(model -> new ResearchStudyModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ResearchStudy fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ResearchStudy.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ResearchStudy o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ResearchStudy> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

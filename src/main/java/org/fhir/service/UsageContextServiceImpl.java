@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public UsageContext create(UsageContext bean) {
-  	requireNonNull(bean);
-    logger.info("create(UsageContext={}) - entered bean ");
-
-    final UsageContext result = dao.create(bean);
-
-    logger.info("create(UsageContext) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public UsageContext update(UsageContext bean) {
-  	requireNonNull(bean);
-    logger.info("update(UsageContext={}) - entered bean ");
-
-    final UsageContext result = dao.update(bean);
-
-    logger.info("update(UsageContext) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

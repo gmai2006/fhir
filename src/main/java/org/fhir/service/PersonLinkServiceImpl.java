@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public PersonLink create(PersonLink bean) {
-  	requireNonNull(bean);
-    logger.info("create(PersonLink={}) - entered bean ");
-
-    final PersonLink result = dao.create(bean);
-
-    logger.info("create(PersonLink) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public PersonLink update(PersonLink bean) {
-  	requireNonNull(bean);
-    logger.info("update(PersonLink={}) - entered bean ");
-
-    final PersonLink result = dao.update(bean);
-
-    logger.info("update(PersonLink) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

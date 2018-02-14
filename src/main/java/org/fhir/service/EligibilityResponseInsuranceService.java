@@ -32,7 +32,5 @@ public interface EligibilityResponseInsuranceService {
 	public EligibilityResponseInsurance find(String id);
   public List<EligibilityResponseInsurance> select(int maxResult);
   public List<EligibilityResponseInsurance> selectAll();
-  public EligibilityResponseInsurance create(EligibilityResponseInsurance bean);
-  public EligibilityResponseInsurance update(EligibilityResponseInsurance bean);
   public void delete(EligibilityResponseInsurance bean);
 }

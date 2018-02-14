@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public RequestGroupAction create(RequestGroupAction bean) {
-  	requireNonNull(bean);
-    logger.info("create(RequestGroupAction={}) - entered bean ");
-
-    final RequestGroupAction result = dao.create(bean);
-
-    logger.info("create(RequestGroupAction) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public RequestGroupAction update(RequestGroupAction bean) {
-  	requireNonNull(bean);
-    logger.info("update(RequestGroupAction={}) - entered bean ");
-
-    final RequestGroupAction result = dao.update(bean);
-
-    logger.info("update(RequestGroupAction) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

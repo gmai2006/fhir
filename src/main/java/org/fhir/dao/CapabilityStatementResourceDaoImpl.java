@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementResourceModel;
 import org.fhir.pojo.CapabilityStatementResource;
+import org.fhir.pojo.CapabilityStatementResourceHelper;
 
 public class CapabilityStatementResourceDaoImpl implements CapabilityStatementResourceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementResourceDaoImpl implements CapabilityStatementRe
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementResourceModel a", CapabilityStatementResourceModel.class).setMaxResults(maxResult);
       List<CapabilityStatementResourceModel> models = query.getResultList();
-      return CapabilityStatementResource.fromArray(models);
+      return CapabilityStatementResourceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CapabilityStatementResourceDaoImpl implements CapabilityStatementRe
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementResourceModel a", CapabilityStatementResourceModel.class);
       List<CapabilityStatementResourceModel> models = query.getResultList();
-      return CapabilityStatementResource.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementResource create(CapabilityStatementResource e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CapabilityStatementResourceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CapabilityStatementResource update(CapabilityStatementResource e) {
-      final EntityManager em = entityManagerProvider.get();
-      CapabilityStatementResourceModel model = em.merge(new CapabilityStatementResourceModel(e));
-      return new CapabilityStatementResource(model);
+      return CapabilityStatementResourceHelper.fromArray2Array(models);
   }
 
   @Override

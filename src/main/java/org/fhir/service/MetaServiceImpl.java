@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public Meta create(Meta bean) {
-  	requireNonNull(bean);
-    logger.info("create(Meta={}) - entered bean ");
-
-    final Meta result = dao.create(bean);
-
-    logger.info("create(Meta) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public Meta update(Meta bean) {
-  	requireNonNull(bean);
-    logger.info("update(Meta={}) - entered bean ");
-
-    final Meta result = dao.update(bean);
-
-    logger.info("update(Meta) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

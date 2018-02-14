@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DocumentReferenceContent create(DocumentReferenceContent bean) {
-  	requireNonNull(bean);
-    logger.info("create(DocumentReferenceContent={}) - entered bean ");
-
-    final DocumentReferenceContent result = dao.create(bean);
-
-    logger.info("create(DocumentReferenceContent) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DocumentReferenceContent update(DocumentReferenceContent bean) {
-  	requireNonNull(bean);
-    logger.info("update(DocumentReferenceContent={}) - entered bean ");
-
-    final DocumentReferenceContent result = dao.update(bean);
-
-    logger.info("update(DocumentReferenceContent) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

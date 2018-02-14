@@ -194,6 +194,7 @@ public class Device  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -245,92 +246,61 @@ public class Device  {
 
   public Device(DeviceModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getUdi()) {
-        this.udi = new DeviceUdi(o.getUdi());
-        this.udi.setId(this.getId());
-      }
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getLotNumber()) {
-        this.lotNumber = new String(o.getLotNumber());
-      }
-
-      if (null != o.getManufacturer()) {
-        this.manufacturer = new String(o.getManufacturer());
-      }
-
-      if (null != o.getManufactureDate()) {
-        this.manufactureDate = new String(o.getManufactureDate());
-      }
-
-      if (null != o.getExpirationDate()) {
-        this.expirationDate = new String(o.getExpirationDate());
-      }
-
-      if (null != o.getModel()) {
-        this.model = new String(o.getModel());
-      }
-
-      if (null != o.getVersion()) {
-        this.version = new String(o.getVersion());
-      }
-
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      if (null != o.getOwner()) {
-        this.owner = new Reference(o.getOwner());
-        this.owner.setId(this.getId());
-      }
-
-      this.contact = ContactPoint.fromArray(o.getContact());
-      if (null != o.getLocation()) {
-        this.location = new Reference(o.getLocation());
-        this.location.setId(this.getId());
-      }
-
-      if (null != o.getUrl()) {
-        this.url = new String(o.getUrl());
-      }
-
-      this.note = Annotation.fromArray(o.getNote());
-      this.safety = CodeableConcept.fromArray(o.getSafety());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getUdi() && !o.getUdi().isEmpty()) {
+      this.udi = new DeviceUdi(o.getUdi().get(0));
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getLotNumber()) {
+      this.lotNumber = o.getLotNumber();
+    }
+    if (null != o.getManufacturer()) {
+      this.manufacturer = o.getManufacturer();
+    }
+    if (null != o.getManufactureDate()) {
+      this.manufactureDate = o.getManufactureDate();
+    }
+    if (null != o.getExpirationDate()) {
+      this.expirationDate = o.getExpirationDate();
+    }
+    if (null != o.getModel()) {
+      this.model = o.getModel();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    if (null != o.getOwner() && !o.getOwner().isEmpty()) {
+      this.owner = new Reference(o.getOwner().get(0));
+    }
+    if (null != o.getLocation() && !o.getLocation().isEmpty()) {
+      this.location = new Reference(o.getLocation().get(0));
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -559,43 +529,44 @@ public class Device  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("udi" + "[" + String.valueOf(this.udi) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("lotNumber" + "[" + String.valueOf(this.lotNumber) + "]\n"); 
-     builder.append("_lotNumber" + "[" + String.valueOf(this._lotNumber) + "]\n"); 
-     builder.append("manufacturer" + "[" + String.valueOf(this.manufacturer) + "]\n"); 
-     builder.append("_manufacturer" + "[" + String.valueOf(this._manufacturer) + "]\n"); 
-     builder.append("manufactureDate" + "[" + String.valueOf(this.manufactureDate) + "]\n"); 
-     builder.append("_manufactureDate" + "[" + String.valueOf(this._manufactureDate) + "]\n"); 
-     builder.append("expirationDate" + "[" + String.valueOf(this.expirationDate) + "]\n"); 
-     builder.append("_expirationDate" + "[" + String.valueOf(this._expirationDate) + "]\n"); 
-     builder.append("model" + "[" + String.valueOf(this.model) + "]\n"); 
-     builder.append("_model" + "[" + String.valueOf(this._model) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("owner" + "[" + String.valueOf(this.owner) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("safety" + "[" + String.valueOf(this.safety) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Device]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.udi != null) builder.append("udi" + "->" + this.udi.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.lotNumber != null) builder.append("lotNumber" + "->" + this.lotNumber.toString() + "\n"); 
+     if(this._lotNumber != null) builder.append("_lotNumber" + "->" + this._lotNumber.toString() + "\n"); 
+     if(this.manufacturer != null) builder.append("manufacturer" + "->" + this.manufacturer.toString() + "\n"); 
+     if(this._manufacturer != null) builder.append("_manufacturer" + "->" + this._manufacturer.toString() + "\n"); 
+     if(this.manufactureDate != null) builder.append("manufactureDate" + "->" + this.manufactureDate.toString() + "\n"); 
+     if(this._manufactureDate != null) builder.append("_manufactureDate" + "->" + this._manufactureDate.toString() + "\n"); 
+     if(this.expirationDate != null) builder.append("expirationDate" + "->" + this.expirationDate.toString() + "\n"); 
+     if(this._expirationDate != null) builder.append("_expirationDate" + "->" + this._expirationDate.toString() + "\n"); 
+     if(this.model != null) builder.append("model" + "->" + this.model.toString() + "\n"); 
+     if(this._model != null) builder.append("_model" + "->" + this._model.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.owner != null) builder.append("owner" + "->" + this.owner.toString() + "\n"); 
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.safety != null) builder.append("safety" + "->" + this.safety.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -629,36 +600,4 @@ public class Device  {
   	}
   }
 
-  public static java.util.List<Device> fromArray(java.util.List<DeviceModel> list) {
-    return (java.util.List<Device>)list.stream()
-      .map(model -> new Device(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DeviceModel> toModelArray(java.util.List<Device> list) {
-    return (java.util.List<DeviceModel>)list.stream()
-      .map(model -> new DeviceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Device fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Device.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Device o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Device> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

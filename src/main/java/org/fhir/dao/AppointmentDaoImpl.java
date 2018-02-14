@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AppointmentModel;
 import org.fhir.pojo.Appointment;
+import org.fhir.pojo.AppointmentHelper;
 
 public class AppointmentDaoImpl implements AppointmentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AppointmentModel a", AppointmentModel.class).setMaxResults(maxResult);
       List<AppointmentModel> models = query.getResultList();
-      return Appointment.fromArray(models);
+      return AppointmentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AppointmentModel a", AppointmentModel.class);
       List<AppointmentModel> models = query.getResultList();
-      return Appointment.fromArray(models);
+      return AppointmentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class AppointmentDaoImpl implements AppointmentDao {
       AppointmentModel model = em.merge(new AppointmentModel(e));
       return new Appointment(model);
   }
-
   @Override
   @Transactional
   public void delete(Appointment e) {

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public TimingRepeat create(TimingRepeat bean) {
-  	requireNonNull(bean);
-    logger.info("create(TimingRepeat={}) - entered bean ");
-
-    final TimingRepeat result = dao.create(bean);
-
-    logger.info("create(TimingRepeat) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public TimingRepeat update(TimingRepeat bean) {
-  	requireNonNull(bean);
-    logger.info("update(TimingRepeat={}) - entered bean ");
-
-    final TimingRepeat result = dao.update(bean);
-
-    logger.info("update(TimingRepeat) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -34,10 +34,5 @@ public interface QuestionnaireEnableWhenDao {
   public List<QuestionnaireEnableWhen> select(int maxResult);
 
   public List<QuestionnaireEnableWhen> selectAll();
-
-  public QuestionnaireEnableWhen create(QuestionnaireEnableWhen e);
-
-  public QuestionnaireEnableWhen update(QuestionnaireEnableWhen e);
-
   public void delete(QuestionnaireEnableWhen e);
 }

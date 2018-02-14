@@ -30,19 +30,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A container for a collection of resources."
 */
 @Entity
 @Table(name="bundleentry")
-public class BundleEntryModel  {
+public class BundleEntryModel  implements Serializable {
+	private static final long serialVersionUID = 151857669691489354L;
   /**
   * Description: "A series of links that provide context to this entry."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<BundleLinkModel> link = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"link_id\"")
+  private String link_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="link_id", insertable=false, updatable=false)
+  private java.util.List<BundleLinkModel> link;
 
   /**
   * Description: "The Absolute URL for the resource.  The fullUrl SHALL not disagree with the id in the resource. The fullUrl is a version independent reference to the resource. The fullUrl element SHALL have a value except that: \n* fullUrl can be empty on a POST (although it does not need to when specifying a temporary id for reference in the bundle)\n* Results from operations might involve resources that are not identified."
@@ -53,7 +58,7 @@ public class BundleEntryModel  {
 
   /**
   * Description: "The Resources for the entry."
-  * Actual type: ResourceList
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -67,9 +72,9 @@ public class BundleEntryModel  {
   @Column(name="\"search_id\"")
   private String search_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`search_id`", insertable=false, updatable=false)
-  private BundleSearchModel search;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="search_id", insertable=false, updatable=false)
+  private java.util.List<BundleSearchModel> search;
 
   /**
   * Description: "Additional information about how this entry should be processed as part of a transaction."
@@ -78,9 +83,9 @@ public class BundleEntryModel  {
   @Column(name="\"request_id\"")
   private String request_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`request_id`", insertable=false, updatable=false)
-  private BundleRequestModel request;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  private java.util.List<BundleRequestModel> request;
 
   /**
   * Description: "Additional information about how this entry should be processed as part of a transaction."
@@ -89,14 +94,14 @@ public class BundleEntryModel  {
   @Column(name="\"response_id\"")
   private String response_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`response_id`", insertable=false, updatable=false)
-  private BundleResponseModel response;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="response_id", insertable=false, updatable=false)
+  private java.util.List<BundleResponseModel> response;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -108,6 +113,7 @@ public class BundleEntryModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -116,122 +122,134 @@ public class BundleEntryModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public BundleEntryModel() {
   }
 
-  public BundleEntryModel(BundleEntry o) {
-    this.id = o.getId();
-      this.link = BundleLink.toModelArray(o.getLink());
-
-      this.fullUrl = o.getFullUrl();
-
-      this.resource = ResourceList.toJson(o.getResource());
-      if (null != o.getSearch()) {
-      	this.search_id = "search" + this.getId();
-        this.search = new BundleSearchModel(o.getSearch());
-        this.search.setId(this.search_id);
-        this.search.parent_id = this.search.getId();
-      }
-
-      if (null != o.getRequest()) {
-      	this.request_id = "request" + this.getId();
-        this.request = new BundleRequestModel(o.getRequest());
-        this.request.setId(this.request_id);
-        this.request.parent_id = this.request.getId();
-      }
-
-      if (null != o.getResponse()) {
-      	this.response_id = "response" + this.getId();
-        this.response = new BundleResponseModel(o.getResponse());
-        this.response.setId(this.response_id);
-        this.response.parent_id = this.response.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public BundleEntryModel(BundleEntry o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    if (null != o.getLink() && !o.getLink().isEmpty()) {
+    	this.link_id = "link" + this.parent_id;
+    	this.link = BundleLinkHelper.toModelFromArray(o.getLink(), this.link_id);
+    }
+    this.fullUrl = o.getFullUrl();
+    this.resource = ResourceListHelper.toJson(o.getResource());
+    if (null != o.getSearch() ) {
+    	this.search_id = "search" + this.parent_id;
+    	this.search = BundleSearchHelper.toModel(o.getSearch(), this.search_id);
+    }
+    if (null != o.getRequest() ) {
+    	this.request_id = "request" + this.parent_id;
+    	this.request = BundleRequestHelper.toModel(o.getRequest(), this.request_id);
+    }
+    if (null != o.getResponse() ) {
+    	this.response_id = "response" + this.parent_id;
+    	this.response = BundleResponseHelper.toModel(o.getResponse(), this.response_id);
+    }
   }
 
-  public void setLink( java.util.List<BundleLinkModel> value) {
-    this.link = value;
-  }
   public java.util.List<BundleLinkModel> getLink() {
     return this.link;
   }
-  public void setFullUrl( String value) {
-    this.fullUrl = value;
+  public void setLink( java.util.List<BundleLinkModel> value) {
+    this.link = value;
   }
   public String getFullUrl() {
     return this.fullUrl;
   }
-  public void setResource( String value) {
-    this.resource = value;
+  public void setFullUrl( String value) {
+    this.fullUrl = value;
   }
   public String getResource() {
     return this.resource;
   }
-  public void setSearch( BundleSearchModel value) {
-    this.search = value;
+  public void setResource( String value) {
+    this.resource = value;
   }
-  public BundleSearchModel getSearch() {
+  public java.util.List<BundleSearchModel> getSearch() {
     return this.search;
   }
-  public void setRequest( BundleRequestModel value) {
-    this.request = value;
+  public void setSearch( java.util.List<BundleSearchModel> value) {
+    this.search = value;
   }
-  public BundleRequestModel getRequest() {
+  public java.util.List<BundleRequestModel> getRequest() {
     return this.request;
   }
-  public void setResponse( BundleResponseModel value) {
-    this.response = value;
+  public void setRequest( java.util.List<BundleRequestModel> value) {
+    this.request = value;
   }
-  public BundleResponseModel getResponse() {
+  public java.util.List<BundleResponseModel> getResponse() {
     return this.response;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setResponse( java.util.List<BundleResponseModel> value) {
+    this.response = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("link" + "[" + String.valueOf(this.link) + "]\n"); 
-     builder.append("fullUrl" + "[" + String.valueOf(this.fullUrl) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("search" + "[" + String.valueOf(this.search) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("response" + "[" + String.valueOf(this.response) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[BundleEntryModel]:" + "\n");
+     builder.append("fullUrl" + "->" + this.fullUrl + "\n"); 
+     builder.append("resource" + "->" + this.resource + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[BundleEntryModel]:" + "\n");
+     builder.append("link" + "->" + this.link + "\n"); 
+     builder.append("fullUrl" + "->" + this.fullUrl + "\n"); 
+     builder.append("resource" + "->" + this.resource + "\n"); 
+     builder.append("search" + "->" + this.search + "\n"); 
+     builder.append("request" + "->" + this.request + "\n"); 
+     builder.append("response" + "->" + this.response + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

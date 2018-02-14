@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ReferralRequestModel;
 import org.fhir.pojo.ReferralRequest;
+import org.fhir.pojo.ReferralRequestHelper;
 
 public class ReferralRequestDaoImpl implements ReferralRequestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ReferralRequestDaoImpl implements ReferralRequestDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ReferralRequestModel a", ReferralRequestModel.class).setMaxResults(maxResult);
       List<ReferralRequestModel> models = query.getResultList();
-      return ReferralRequest.fromArray(models);
+      return ReferralRequestHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ReferralRequestDaoImpl implements ReferralRequestDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ReferralRequestModel a", ReferralRequestModel.class);
       List<ReferralRequestModel> models = query.getResultList();
-      return ReferralRequest.fromArray(models);
+      return ReferralRequestHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ReferralRequestDaoImpl implements ReferralRequestDao {
       ReferralRequestModel model = em.merge(new ReferralRequestModel(e));
       return new ReferralRequest(model);
   }
-
   @Override
   @Transactional
   public void delete(ReferralRequest e) {

@@ -34,10 +34,5 @@ public interface ConsentPolicyDao {
   public List<ConsentPolicy> select(int maxResult);
 
   public List<ConsentPolicy> selectAll();
-
-  public ConsentPolicy create(ConsentPolicy e);
-
-  public ConsentPolicy update(ConsentPolicy e);
-
   public void delete(ConsentPolicy e);
 }

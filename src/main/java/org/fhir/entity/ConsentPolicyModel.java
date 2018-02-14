@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
 */
 @Entity
 @Table(name="consentpolicy")
-public class ConsentPolicyModel  {
+public class ConsentPolicyModel  implements Serializable {
+	private static final long serialVersionUID = 151857669717678916L;
   /**
   * Description: "Entity or Organization having regulatory jurisdiction or accountability for  enforcing policies pertaining to Consent Directives."
   */
@@ -54,7 +55,7 @@ public class ConsentPolicyModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -66,6 +67,7 @@ public class ConsentPolicyModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -74,72 +76,90 @@ public class ConsentPolicyModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ConsentPolicyModel() {
   }
 
-  public ConsentPolicyModel(ConsentPolicy o) {
-    this.id = o.getId();
-      this.authority = o.getAuthority();
-
-      this.uri = o.getUri();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ConsentPolicyModel(ConsentPolicy o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.authority = o.getAuthority();
+    this.uri = o.getUri();
   }
 
-  public void setAuthority( String value) {
-    this.authority = value;
-  }
   public String getAuthority() {
     return this.authority;
   }
-  public void setUri( String value) {
-    this.uri = value;
+  public void setAuthority( String value) {
+    this.authority = value;
   }
   public String getUri() {
     return this.uri;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setUri( String value) {
+    this.uri = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("authority" + "[" + String.valueOf(this.authority) + "]\n"); 
-     builder.append("uri" + "[" + String.valueOf(this.uri) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConsentPolicyModel]:" + "\n");
+     builder.append("authority" + "->" + this.authority + "\n"); 
+     builder.append("uri" + "->" + this.uri + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ConsentPolicyModel]:" + "\n");
+     builder.append("authority" + "->" + this.authority + "\n"); 
+     builder.append("uri" + "->" + this.uri + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

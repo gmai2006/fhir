@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DocumentManifestModel;
 import org.fhir.pojo.DocumentManifest;
+import org.fhir.pojo.DocumentManifestHelper;
 
 public class DocumentManifestDaoImpl implements DocumentManifestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DocumentManifestDaoImpl implements DocumentManifestDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentManifestModel a", DocumentManifestModel.class).setMaxResults(maxResult);
       List<DocumentManifestModel> models = query.getResultList();
-      return DocumentManifest.fromArray(models);
+      return DocumentManifestHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class DocumentManifestDaoImpl implements DocumentManifestDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentManifestModel a", DocumentManifestModel.class);
       List<DocumentManifestModel> models = query.getResultList();
-      return DocumentManifest.fromArray(models);
+      return DocumentManifestHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class DocumentManifestDaoImpl implements DocumentManifestDao {
       DocumentManifestModel model = em.merge(new DocumentManifestModel(e));
       return new DocumentManifest(model);
   }
-
   @Override
   @Transactional
   public void delete(DocumentManifest e) {

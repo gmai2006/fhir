@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public AuditEventNetwork create(AuditEventNetwork bean) {
-  	requireNonNull(bean);
-    logger.info("create(AuditEventNetwork={}) - entered bean ");
-
-    final AuditEventNetwork result = dao.create(bean);
-
-    logger.info("create(AuditEventNetwork) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public AuditEventNetwork update(AuditEventNetwork bean) {
-  	requireNonNull(bean);
-    logger.info("update(AuditEventNetwork={}) - entered bean ");
-
-    final AuditEventNetwork result = dao.update(bean);
-
-    logger.info("update(AuditEventNetwork) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

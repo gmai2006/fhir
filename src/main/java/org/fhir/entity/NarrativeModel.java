@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A human-readable formatted text, including images."
 */
 @Entity
 @Table(name="narrative")
-public class NarrativeModel  {
+public class NarrativeModel  implements Serializable {
+	private static final long serialVersionUID = 15185766966992882L;
   /**
   * Description: "The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data."
   */
@@ -56,6 +57,7 @@ public class NarrativeModel  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -63,64 +65,82 @@ public class NarrativeModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public NarrativeModel() {
   }
 
-  public NarrativeModel(Narrative o) {
-    this.id = o.getId();
-      this.status = o.getStatus();
-
-      this.div = o.getDiv();
-
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public NarrativeModel(Narrative o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.status = o.getStatus();
+    this.div = o.getDiv();
   }
 
-  public void setStatus( String value) {
-    this.status = value;
-  }
   public String getStatus() {
     return this.status;
   }
-  public void setDiv( String value) {
-    this.div = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getDiv() {
     return this.div;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setDiv( String value) {
+    this.div = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("div" + "[" + String.valueOf(this.div) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[NarrativeModel]:" + "\n");
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("div" + "->" + this.div + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[NarrativeModel]:" + "\n");
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("div" + "->" + this.div + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

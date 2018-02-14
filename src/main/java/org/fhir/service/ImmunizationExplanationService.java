@@ -32,7 +32,5 @@ public interface ImmunizationExplanationService {
 	public ImmunizationExplanation find(String id);
   public List<ImmunizationExplanation> select(int maxResult);
   public List<ImmunizationExplanation> selectAll();
-  public ImmunizationExplanation create(ImmunizationExplanation bean);
-  public ImmunizationExplanation update(ImmunizationExplanation bean);
   public void delete(ImmunizationExplanation bean);
 }

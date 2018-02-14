@@ -32,7 +32,5 @@ public interface ImmunizationReactionService {
 	public ImmunizationReaction find(String id);
   public List<ImmunizationReaction> select(int maxResult);
   public List<ImmunizationReaction> selectAll();
-  public ImmunizationReaction create(ImmunizationReaction bean);
-  public ImmunizationReaction update(ImmunizationReaction bean);
   public void delete(ImmunizationReaction bean);
 }

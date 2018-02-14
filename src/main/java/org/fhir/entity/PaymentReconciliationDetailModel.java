@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides payment details and claim references supporting a bulk payment."
 */
 @Entity
 @Table(name="paymentreconciliationdetail")
-public class PaymentReconciliationDetailModel  {
+public class PaymentReconciliationDetailModel  implements Serializable {
+	private static final long serialVersionUID = 151857669715347467L;
   /**
   * Description: "Code to indicate the nature of the payment, adjustment, funds advance, etc."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -54,9 +55,9 @@ public class PaymentReconciliationDetailModel  {
   @Column(name="\"request_id\"")
   private String request_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`request_id`", insertable=false, updatable=false)
-  private ReferenceModel request;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> request;
 
   /**
   * Description: "The claim response resource."
@@ -65,9 +66,9 @@ public class PaymentReconciliationDetailModel  {
   @Column(name="\"response_id\"")
   private String response_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`response_id`", insertable=false, updatable=false)
-  private ReferenceModel response;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="response_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> response;
 
   /**
   * Description: "The Organization which submitted the claim or financial transaction."
@@ -76,9 +77,9 @@ public class PaymentReconciliationDetailModel  {
   @Column(name="\"submitter_id\"")
   private String submitter_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`submitter_id`", insertable=false, updatable=false)
-  private ReferenceModel submitter;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="submitter_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> submitter;
 
   /**
   * Description: "The organization which is receiving the payment."
@@ -87,9 +88,9 @@ public class PaymentReconciliationDetailModel  {
   @Column(name="\"payee_id\"")
   private String payee_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`payee_id`", insertable=false, updatable=false)
-  private ReferenceModel payee;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payee_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> payee;
 
   /**
   * Description: "The date of the invoice or financial resource."
@@ -101,7 +102,7 @@ public class PaymentReconciliationDetailModel  {
 
   /**
   * Description: "Amount paid for this detail."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -111,7 +112,7 @@ public class PaymentReconciliationDetailModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -123,6 +124,7 @@ public class PaymentReconciliationDetailModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -131,135 +133,143 @@ public class PaymentReconciliationDetailModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public PaymentReconciliationDetailModel() {
   }
 
-  public PaymentReconciliationDetailModel(PaymentReconciliationDetail o) {
-    this.id = o.getId();
-      this.type = CodeableConcept.toJson(o.getType());
-      if (null != o.getRequest()) {
-      	this.request_id = "request" + this.getId();
-        this.request = new ReferenceModel(o.getRequest());
-        this.request.setId(this.request_id);
-        this.request.parent_id = this.request.getId();
-      }
-
-      if (null != o.getResponse()) {
-      	this.response_id = "response" + this.getId();
-        this.response = new ReferenceModel(o.getResponse());
-        this.response.setId(this.response_id);
-        this.response.parent_id = this.response.getId();
-      }
-
-      if (null != o.getSubmitter()) {
-      	this.submitter_id = "submitter" + this.getId();
-        this.submitter = new ReferenceModel(o.getSubmitter());
-        this.submitter.setId(this.submitter_id);
-        this.submitter.parent_id = this.submitter.getId();
-      }
-
-      if (null != o.getPayee()) {
-      	this.payee_id = "payee" + this.getId();
-        this.payee = new ReferenceModel(o.getPayee());
-        this.payee.setId(this.payee_id);
-        this.payee.parent_id = this.payee.getId();
-      }
-
-      this.date = o.getDate();
-
-      this.amount = Money.toJson(o.getAmount());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public PaymentReconciliationDetailModel(PaymentReconciliationDetail o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    if (null != o.getRequest() ) {
+    	this.request_id = "request" + this.parent_id;
+    	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
+    }
+    if (null != o.getResponse() ) {
+    	this.response_id = "response" + this.parent_id;
+    	this.response = ReferenceHelper.toModel(o.getResponse(), this.response_id);
+    }
+    if (null != o.getSubmitter() ) {
+    	this.submitter_id = "submitter" + this.parent_id;
+    	this.submitter = ReferenceHelper.toModel(o.getSubmitter(), this.submitter_id);
+    }
+    if (null != o.getPayee() ) {
+    	this.payee_id = "payee" + this.parent_id;
+    	this.payee = ReferenceHelper.toModel(o.getPayee(), this.payee_id);
+    }
+    this.date = o.getDate();
+    this.amount = MoneyHelper.toJson(o.getAmount());
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setRequest( ReferenceModel value) {
-    this.request = value;
+  public void setType( String value) {
+    this.type = value;
   }
-  public ReferenceModel getRequest() {
+  public java.util.List<ReferenceModel> getRequest() {
     return this.request;
   }
-  public void setResponse( ReferenceModel value) {
-    this.response = value;
+  public void setRequest( java.util.List<ReferenceModel> value) {
+    this.request = value;
   }
-  public ReferenceModel getResponse() {
+  public java.util.List<ReferenceModel> getResponse() {
     return this.response;
   }
-  public void setSubmitter( ReferenceModel value) {
-    this.submitter = value;
+  public void setResponse( java.util.List<ReferenceModel> value) {
+    this.response = value;
   }
-  public ReferenceModel getSubmitter() {
+  public java.util.List<ReferenceModel> getSubmitter() {
     return this.submitter;
   }
-  public void setPayee( ReferenceModel value) {
-    this.payee = value;
+  public void setSubmitter( java.util.List<ReferenceModel> value) {
+    this.submitter = value;
   }
-  public ReferenceModel getPayee() {
+  public java.util.List<ReferenceModel> getPayee() {
     return this.payee;
   }
-  public void setDate( String value) {
-    this.date = value;
+  public void setPayee( java.util.List<ReferenceModel> value) {
+    this.payee = value;
   }
   public String getDate() {
     return this.date;
   }
-  public void setAmount( String value) {
-    this.amount = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public String getAmount() {
     return this.amount;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setAmount( String value) {
+    this.amount = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("response" + "[" + String.valueOf(this.response) + "]\n"); 
-     builder.append("submitter" + "[" + String.valueOf(this.submitter) + "]\n"); 
-     builder.append("payee" + "[" + String.valueOf(this.payee) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("amount" + "[" + String.valueOf(this.amount) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PaymentReconciliationDetailModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("amount" + "->" + this.amount + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[PaymentReconciliationDetailModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("request" + "->" + this.request + "\n"); 
+     builder.append("response" + "->" + this.response + "\n"); 
+     builder.append("submitter" + "->" + this.submitter + "\n"); 
+     builder.append("payee" + "->" + this.payee + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("amount" + "->" + this.amount + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

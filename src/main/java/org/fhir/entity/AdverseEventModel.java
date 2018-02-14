@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death."
 */
 @Entity
 @Table(name="adverseevent")
-public class AdverseEventModel  {
+public class AdverseEventModel  implements Serializable {
+	private static final long serialVersionUID = 151857669718032455L;
   /**
   * Description: "This is a AdverseEvent resource"
   */
@@ -47,7 +48,7 @@ public class AdverseEventModel  {
 
   /**
   * Description: "The identifier(s) of this adverse event that are assigned by business processes and/or used to refer to it when a direct URL reference to the resource itsefl is not appropriate."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -63,7 +64,7 @@ public class AdverseEventModel  {
 
   /**
   * Description: "This element defines the specific type of event that occurred or that was prevented from occurring."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -77,9 +78,9 @@ public class AdverseEventModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "The date (and perhaps time) when the adverse event occurred."
@@ -92,9 +93,13 @@ public class AdverseEventModel  {
   /**
   * Description: "Includes information about the reaction that occurred as a result of exposure to a substance (for example, a drug or a chemical)."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> reaction = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"reaction_id\"")
+  private String reaction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reaction_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> reaction;
 
   /**
   * Description: "The information about where the adverse event occurred."
@@ -103,13 +108,13 @@ public class AdverseEventModel  {
   @Column(name="\"location_id\"")
   private String location_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`location_id`", insertable=false, updatable=false)
-  private ReferenceModel location;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> location;
 
   /**
   * Description: "Describes the seriousness or severity of the adverse event."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -118,7 +123,7 @@ public class AdverseEventModel  {
 
   /**
   * Description: "Describes the type of outcome from the adverse event."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -132,9 +137,9 @@ public class AdverseEventModel  {
   @Column(name="\"recorder_id\"")
   private String recorder_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`recorder_id`", insertable=false, updatable=false)
-  private ReferenceModel recorder;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="recorder_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> recorder;
 
   /**
   * Description: "Parties that may or should contribute or have contributed information to the Act. Such information includes information leading to the decision to perform the Act and how to perform the Act (e.g. consultant), information that the Act itself seeks to reveal (e.g. informant of clinical history), or information about what Act was performed (e.g. informant witness)."
@@ -143,9 +148,9 @@ public class AdverseEventModel  {
   @Column(name="\"eventparticipant_id\"")
   private String eventparticipant_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`eventparticipant_id`", insertable=false, updatable=false)
-  private ReferenceModel eventParticipant;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="eventparticipant_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> eventParticipant;
 
   /**
   * Description: "Describes the adverse event in text."
@@ -157,30 +162,46 @@ public class AdverseEventModel  {
   /**
   * Description: "Describes the entity that is suspected to have caused the adverse event."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<AdverseEventSuspectEntityModel> suspectEntity = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"suspectentity_id\"")
+  private String suspectentity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="suspectentity_id", insertable=false, updatable=false)
+  private java.util.List<AdverseEventSuspectEntityModel> suspectEntity;
 
   /**
   * Description: "AdverseEvent.subjectMedicalHistory."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> subjectMedicalHistory = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"subjectmedicalhistory_id\"")
+  private String subjectmedicalhistory_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subjectmedicalhistory_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subjectMedicalHistory;
 
   /**
   * Description: "AdverseEvent.referenceDocument."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> referenceDocument = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"referencedocument_id\"")
+  private String referencedocument_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="referencedocument_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> referenceDocument;
 
   /**
   * Description: "AdverseEvent.study."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> study = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"study_id\"")
+  private String study_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="study_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> study;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -190,14 +211,14 @@ public class AdverseEventModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -207,7 +228,7 @@ public class AdverseEventModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -217,7 +238,7 @@ public class AdverseEventModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -229,6 +250,7 @@ public class AdverseEventModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -243,9 +265,9 @@ public class AdverseEventModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -266,267 +288,267 @@ public class AdverseEventModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public AdverseEventModel() {
   }
 
   public AdverseEventModel(AdverseEvent o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.category = o.getCategory();
-
-      this.type = CodeableConcept.toJson(o.getType());
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      this.date = o.getDate();
-
-      this.reaction = Reference.toModelArray(o.getReaction());
-
-      if (null != o.getLocation()) {
-      	this.location_id = "location" + this.getId();
-        this.location = new ReferenceModel(o.getLocation());
-        this.location.setId(this.location_id);
-        this.location.parent_id = this.location.getId();
-      }
-
-      this.seriousness = CodeableConcept.toJson(o.getSeriousness());
-      this.outcome = CodeableConcept.toJson(o.getOutcome());
-      if (null != o.getRecorder()) {
-      	this.recorder_id = "recorder" + this.getId();
-        this.recorder = new ReferenceModel(o.getRecorder());
-        this.recorder.setId(this.recorder_id);
-        this.recorder.parent_id = this.recorder.getId();
-      }
-
-      if (null != o.getEventParticipant()) {
-      	this.eventparticipant_id = "eventParticipant" + this.getId();
-        this.eventParticipant = new ReferenceModel(o.getEventParticipant());
-        this.eventParticipant.setId(this.eventparticipant_id);
-        this.eventParticipant.parent_id = this.eventParticipant.getId();
-      }
-
-      this.description = o.getDescription();
-
-      this.suspectEntity = AdverseEventSuspectEntity.toModelArray(o.getSuspectEntity());
-
-      this.subjectMedicalHistory = Reference.toModelArray(o.getSubjectMedicalHistory());
-
-      this.referenceDocument = Reference.toModelArray(o.getReferenceDocument());
-
-      this.study = Reference.toModelArray(o.getStudy());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.category = o.getCategory();
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    this.date = o.getDate();
+    if (null != o.getReaction() && !o.getReaction().isEmpty()) {
+    	this.reaction_id = "reaction" + this.id;
+    	this.reaction = ReferenceHelper.toModelFromArray(o.getReaction(), this.reaction_id);
+    }
+    if (null != o.getLocation() ) {
+    	this.location_id = "location" + this.id;
+    	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
+    }
+    this.seriousness = CodeableConceptHelper.toJson(o.getSeriousness());
+    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    if (null != o.getRecorder() ) {
+    	this.recorder_id = "recorder" + this.id;
+    	this.recorder = ReferenceHelper.toModel(o.getRecorder(), this.recorder_id);
+    }
+    if (null != o.getEventParticipant() ) {
+    	this.eventparticipant_id = "eventparticipant" + this.id;
+    	this.eventParticipant = ReferenceHelper.toModel(o.getEventParticipant(), this.eventparticipant_id);
+    }
+    this.description = o.getDescription();
+    if (null != o.getSuspectEntity() && !o.getSuspectEntity().isEmpty()) {
+    	this.suspectentity_id = "suspectentity" + this.id;
+    	this.suspectEntity = AdverseEventSuspectEntityHelper.toModelFromArray(o.getSuspectEntity(), this.suspectentity_id);
+    }
+    if (null != o.getSubjectMedicalHistory() && !o.getSubjectMedicalHistory().isEmpty()) {
+    	this.subjectmedicalhistory_id = "subjectmedicalhistory" + this.id;
+    	this.subjectMedicalHistory = ReferenceHelper.toModelFromArray(o.getSubjectMedicalHistory(), this.subjectmedicalhistory_id);
+    }
+    if (null != o.getReferenceDocument() && !o.getReferenceDocument().isEmpty()) {
+    	this.referencedocument_id = "referencedocument" + this.id;
+    	this.referenceDocument = ReferenceHelper.toModelFromArray(o.getReferenceDocument(), this.referencedocument_id);
+    }
+    if (null != o.getStudy() && !o.getStudy().isEmpty()) {
+    	this.study_id = "study" + this.id;
+    	this.study = ReferenceHelper.toModelFromArray(o.getStudy(), this.study_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setType( String value) {
+    this.type = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setDate( String value) {
-    this.date = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
   public String getDate() {
     return this.date;
   }
-  public void setReaction( java.util.List<ReferenceModel> value) {
-    this.reaction = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public java.util.List<ReferenceModel> getReaction() {
     return this.reaction;
   }
-  public void setLocation( ReferenceModel value) {
-    this.location = value;
+  public void setReaction( java.util.List<ReferenceModel> value) {
+    this.reaction = value;
   }
-  public ReferenceModel getLocation() {
+  public java.util.List<ReferenceModel> getLocation() {
     return this.location;
   }
-  public void setSeriousness( String value) {
-    this.seriousness = value;
+  public void setLocation( java.util.List<ReferenceModel> value) {
+    this.location = value;
   }
   public String getSeriousness() {
     return this.seriousness;
   }
-  public void setOutcome( String value) {
-    this.outcome = value;
+  public void setSeriousness( String value) {
+    this.seriousness = value;
   }
   public String getOutcome() {
     return this.outcome;
   }
-  public void setRecorder( ReferenceModel value) {
-    this.recorder = value;
+  public void setOutcome( String value) {
+    this.outcome = value;
   }
-  public ReferenceModel getRecorder() {
+  public java.util.List<ReferenceModel> getRecorder() {
     return this.recorder;
   }
-  public void setEventParticipant( ReferenceModel value) {
-    this.eventParticipant = value;
+  public void setRecorder( java.util.List<ReferenceModel> value) {
+    this.recorder = value;
   }
-  public ReferenceModel getEventParticipant() {
+  public java.util.List<ReferenceModel> getEventParticipant() {
     return this.eventParticipant;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setEventParticipant( java.util.List<ReferenceModel> value) {
+    this.eventParticipant = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setSuspectEntity( java.util.List<AdverseEventSuspectEntityModel> value) {
-    this.suspectEntity = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public java.util.List<AdverseEventSuspectEntityModel> getSuspectEntity() {
     return this.suspectEntity;
   }
-  public void setSubjectMedicalHistory( java.util.List<ReferenceModel> value) {
-    this.subjectMedicalHistory = value;
+  public void setSuspectEntity( java.util.List<AdverseEventSuspectEntityModel> value) {
+    this.suspectEntity = value;
   }
   public java.util.List<ReferenceModel> getSubjectMedicalHistory() {
     return this.subjectMedicalHistory;
   }
-  public void setReferenceDocument( java.util.List<ReferenceModel> value) {
-    this.referenceDocument = value;
+  public void setSubjectMedicalHistory( java.util.List<ReferenceModel> value) {
+    this.subjectMedicalHistory = value;
   }
   public java.util.List<ReferenceModel> getReferenceDocument() {
     return this.referenceDocument;
   }
-  public void setStudy( java.util.List<ReferenceModel> value) {
-    this.study = value;
+  public void setReferenceDocument( java.util.List<ReferenceModel> value) {
+    this.referenceDocument = value;
   }
   public java.util.List<ReferenceModel> getStudy() {
     return this.study;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setStudy( java.util.List<ReferenceModel> value) {
+    this.study = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("reaction" + "[" + String.valueOf(this.reaction) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("seriousness" + "[" + String.valueOf(this.seriousness) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("recorder" + "[" + String.valueOf(this.recorder) + "]\n"); 
-     builder.append("eventParticipant" + "[" + String.valueOf(this.eventParticipant) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("suspectEntity" + "[" + String.valueOf(this.suspectEntity) + "]\n"); 
-     builder.append("subjectMedicalHistory" + "[" + String.valueOf(this.subjectMedicalHistory) + "]\n"); 
-     builder.append("referenceDocument" + "[" + String.valueOf(this.referenceDocument) + "]\n"); 
-     builder.append("study" + "[" + String.valueOf(this.study) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[AdverseEventModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("seriousness" + "->" + this.seriousness + "\n"); 
+     builder.append("outcome" + "->" + this.outcome + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[AdverseEventModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("reaction" + "->" + this.reaction + "\n"); 
+     builder.append("location" + "->" + this.location + "\n"); 
+     builder.append("seriousness" + "->" + this.seriousness + "\n"); 
+     builder.append("outcome" + "->" + this.outcome + "\n"); 
+     builder.append("recorder" + "->" + this.recorder + "\n"); 
+     builder.append("eventParticipant" + "->" + this.eventParticipant + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("suspectEntity" + "->" + this.suspectEntity + "\n"); 
+     builder.append("subjectMedicalHistory" + "->" + this.subjectMedicalHistory + "\n"); 
+     builder.append("referenceDocument" + "->" + this.referenceDocument + "\n"); 
+     builder.append("study" + "->" + this.study + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

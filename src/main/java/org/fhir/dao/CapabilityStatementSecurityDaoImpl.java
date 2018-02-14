@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementSecurityModel;
 import org.fhir.pojo.CapabilityStatementSecurity;
+import org.fhir.pojo.CapabilityStatementSecurityHelper;
 
 public class CapabilityStatementSecurityDaoImpl implements CapabilityStatementSecurityDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementSecurityDaoImpl implements CapabilityStatementSe
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementSecurityModel a", CapabilityStatementSecurityModel.class).setMaxResults(maxResult);
       List<CapabilityStatementSecurityModel> models = query.getResultList();
-      return CapabilityStatementSecurity.fromArray(models);
+      return CapabilityStatementSecurityHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CapabilityStatementSecurityDaoImpl implements CapabilityStatementSe
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementSecurityModel a", CapabilityStatementSecurityModel.class);
       List<CapabilityStatementSecurityModel> models = query.getResultList();
-      return CapabilityStatementSecurity.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementSecurity create(CapabilityStatementSecurity e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CapabilityStatementSecurityModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CapabilityStatementSecurity update(CapabilityStatementSecurity e) {
-      final EntityManager em = entityManagerProvider.get();
-      CapabilityStatementSecurityModel model = em.merge(new CapabilityStatementSecurityModel(e));
-      return new CapabilityStatementSecurity(model);
+      return CapabilityStatementSecurityHelper.fromArray2Array(models);
   }
 
   @Override

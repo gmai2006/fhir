@@ -32,7 +32,5 @@ public interface ObservationComponentService {
 	public ObservationComponent find(String id);
   public List<ObservationComponent> select(int maxResult);
   public List<ObservationComponent> selectAll();
-  public ObservationComponent create(ObservationComponent bean);
-  public ObservationComponent update(ObservationComponent bean);
   public void delete(ObservationComponent bean);
 }

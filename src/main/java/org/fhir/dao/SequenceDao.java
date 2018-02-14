@@ -34,10 +34,8 @@ public interface SequenceDao {
   public List<Sequence> select(int maxResult);
 
   public List<Sequence> selectAll();
-
   public Sequence create(Sequence e);
 
   public Sequence update(Sequence e);
-
   public void delete(Sequence e);
 }

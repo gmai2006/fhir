@@ -100,6 +100,7 @@ public class GraphDefinitionLink  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -121,34 +122,27 @@ public class GraphDefinitionLink  {
 
   public GraphDefinitionLink(GraphDefinitionLinkModel o) {
     this.id = o.getId();
-      if (null != o.getPath()) {
-        this.path = new String(o.getPath());
-      }
-
-      if (null != o.getSliceName()) {
-        this.sliceName = new String(o.getSliceName());
-      }
-
-      if (null != o.getMin()) {
-        this.min = new Float(o.getMin());
-      }
-
-      if (null != o.getMax()) {
-        this.max = new String(o.getMax());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.target = GraphDefinitionTarget.fromArray(o.getTarget());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getPath()) {
+      this.path = o.getPath();
+    }
+    if (null != o.getSliceName()) {
+      this.sliceName = o.getSliceName();
+    }
+    if (null != o.getMin()) {
+      this.min = o.getMin();
+    }
+    if (null != o.getMax()) {
+      this.max = o.getMax();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+    	this.target = GraphDefinitionTargetHelper.fromArray2Array(o.getTarget());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setPath( String value) {
@@ -245,55 +239,24 @@ public class GraphDefinitionLink  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("path" + "[" + String.valueOf(this.path) + "]\n"); 
-     builder.append("_path" + "[" + String.valueOf(this._path) + "]\n"); 
-     builder.append("sliceName" + "[" + String.valueOf(this.sliceName) + "]\n"); 
-     builder.append("_sliceName" + "[" + String.valueOf(this._sliceName) + "]\n"); 
-     builder.append("min" + "[" + String.valueOf(this.min) + "]\n"); 
-     builder.append("_min" + "[" + String.valueOf(this._min) + "]\n"); 
-     builder.append("max" + "[" + String.valueOf(this.max) + "]\n"); 
-     builder.append("_max" + "[" + String.valueOf(this._max) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[GraphDefinitionLink]:" + "\n");
+     if(this.path != null) builder.append("path" + "->" + this.path.toString() + "\n"); 
+     if(this._path != null) builder.append("_path" + "->" + this._path.toString() + "\n"); 
+     if(this.sliceName != null) builder.append("sliceName" + "->" + this.sliceName.toString() + "\n"); 
+     if(this._sliceName != null) builder.append("_sliceName" + "->" + this._sliceName.toString() + "\n"); 
+     if(this.min != null) builder.append("min" + "->" + this.min.toString() + "\n"); 
+     if(this._min != null) builder.append("_min" + "->" + this._min.toString() + "\n"); 
+     if(this.max != null) builder.append("max" + "->" + this.max.toString() + "\n"); 
+     if(this._max != null) builder.append("_max" + "->" + this._max.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<GraphDefinitionLink> fromArray(java.util.List<GraphDefinitionLinkModel> list) {
-    return (java.util.List<GraphDefinitionLink>)list.stream()
-      .map(model -> new GraphDefinitionLink(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<GraphDefinitionLinkModel> toModelArray(java.util.List<GraphDefinitionLink> list) {
-    return (java.util.List<GraphDefinitionLinkModel>)list.stream()
-      .map(model -> new GraphDefinitionLinkModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static GraphDefinitionLink fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, GraphDefinitionLink.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(GraphDefinitionLink o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<GraphDefinitionLink> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

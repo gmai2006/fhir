@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ProcedurePerformerModel;
 import org.fhir.pojo.ProcedurePerformer;
+import org.fhir.pojo.ProcedurePerformerHelper;
 
 public class ProcedurePerformerDaoImpl implements ProcedurePerformerDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ProcedurePerformerDaoImpl implements ProcedurePerformerDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProcedurePerformerModel a", ProcedurePerformerModel.class).setMaxResults(maxResult);
       List<ProcedurePerformerModel> models = query.getResultList();
-      return ProcedurePerformer.fromArray(models);
+      return ProcedurePerformerHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ProcedurePerformerDaoImpl implements ProcedurePerformerDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProcedurePerformerModel a", ProcedurePerformerModel.class);
       List<ProcedurePerformerModel> models = query.getResultList();
-      return ProcedurePerformer.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ProcedurePerformer create(ProcedurePerformer e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ProcedurePerformerModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ProcedurePerformer update(ProcedurePerformer e) {
-      final EntityManager em = entityManagerProvider.get();
-      ProcedurePerformerModel model = em.merge(new ProcedurePerformerModel(e));
-      return new ProcedurePerformer(model);
+      return ProcedurePerformerHelper.fromArray2Array(models);
   }
 
   @Override

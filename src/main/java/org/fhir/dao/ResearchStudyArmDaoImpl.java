@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ResearchStudyArmModel;
 import org.fhir.pojo.ResearchStudyArm;
+import org.fhir.pojo.ResearchStudyArmHelper;
 
 public class ResearchStudyArmDaoImpl implements ResearchStudyArmDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ResearchStudyArmDaoImpl implements ResearchStudyArmDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ResearchStudyArmModel a", ResearchStudyArmModel.class).setMaxResults(maxResult);
       List<ResearchStudyArmModel> models = query.getResultList();
-      return ResearchStudyArm.fromArray(models);
+      return ResearchStudyArmHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ResearchStudyArmDaoImpl implements ResearchStudyArmDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ResearchStudyArmModel a", ResearchStudyArmModel.class);
       List<ResearchStudyArmModel> models = query.getResultList();
-      return ResearchStudyArm.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ResearchStudyArm create(ResearchStudyArm e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ResearchStudyArmModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ResearchStudyArm update(ResearchStudyArm e) {
-      final EntityManager em = entityManagerProvider.get();
-      ResearchStudyArmModel model = em.merge(new ResearchStudyArmModel(e));
-      return new ResearchStudyArm(model);
+      return ResearchStudyArmHelper.fromArray2Array(models);
   }
 
   @Override

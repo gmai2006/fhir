@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.TestReportOperationModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -72,6 +73,7 @@ public class TestReportOperation  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -88,7 +90,24 @@ public class TestReportOperation  {
   */
   private java.util.List<Extension> extension = new java.util.ArrayList<>();
 
-  public TestReportOperation() {}
+  public TestReportOperation() {
+  }
+
+  public TestReportOperation(TestReportOperationModel o) {
+    this.id = o.getId();
+    if (null != o.getResult()) {
+      this.result = o.getResult();
+    }
+    if (null != o.getMessage()) {
+      this.message = o.getMessage();
+    }
+    if (null != o.getDetail()) {
+      this.detail = o.getDetail();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+  }
 
   public void setResult( String value) {
     this.result = ResultEnum.fromCode(value);
@@ -154,37 +173,18 @@ public class TestReportOperation  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("result" + "[" + String.valueOf(this.result) + "]\n"); 
-     builder.append("_result" + "[" + String.valueOf(this._result) + "]\n"); 
-     builder.append("message" + "[" + String.valueOf(this.message) + "]\n"); 
-     builder.append("_message" + "[" + String.valueOf(this._message) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("_detail" + "[" + String.valueOf(this._detail) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TestReportOperation]:" + "\n");
+     if(this.result != null) builder.append("result" + "->" + this.result.toString() + "\n"); 
+     if(this._result != null) builder.append("_result" + "->" + this._result.toString() + "\n"); 
+     if(this.message != null) builder.append("message" + "->" + this.message.toString() + "\n"); 
+     if(this._message != null) builder.append("_message" + "->" + this._message.toString() + "\n"); 
+     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); 
+     if(this._detail != null) builder.append("_detail" + "->" + this._detail.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static TestReportOperation fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TestReportOperation.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TestReportOperation o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TestReportOperation> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum ResultEnum {
@@ -206,4 +206,5 @@ public class TestReportOperation  {
   		}
   	}
   }
+
 }

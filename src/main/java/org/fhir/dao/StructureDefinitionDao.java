@@ -34,10 +34,8 @@ public interface StructureDefinitionDao {
   public List<StructureDefinition> select(int maxResult);
 
   public List<StructureDefinition> selectAll();
-
   public StructureDefinition create(StructureDefinition e);
 
   public StructureDefinition update(StructureDefinition e);
-
   public void delete(StructureDefinition e);
 }

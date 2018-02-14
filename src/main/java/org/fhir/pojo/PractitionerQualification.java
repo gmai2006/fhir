@@ -64,6 +64,7 @@ public class PractitionerQualification  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -85,20 +86,14 @@ public class PractitionerQualification  {
 
   public PractitionerQualification(PractitionerQualificationModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.code = CodeableConcept.fromJson(o.getCode());
-      this.period = Period.fromJson(o.getPeriod());
-      if (null != o.getIssuer()) {
-        this.issuer = new Reference(o.getIssuer());
-        this.issuer.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getIssuer() && !o.getIssuer().isEmpty()) {
+      this.issuer = new Reference(o.getIssuer().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( java.util.List<Identifier> value) {
@@ -153,48 +148,17 @@ public class PractitionerQualification  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("issuer" + "[" + String.valueOf(this.issuer) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PractitionerQualification]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.issuer != null) builder.append("issuer" + "->" + this.issuer.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<PractitionerQualification> fromArray(java.util.List<PractitionerQualificationModel> list) {
-    return (java.util.List<PractitionerQualification>)list.stream()
-      .map(model -> new PractitionerQualification(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PractitionerQualificationModel> toModelArray(java.util.List<PractitionerQualification> list) {
-    return (java.util.List<PractitionerQualificationModel>)list.stream()
-      .map(model -> new PractitionerQualificationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PractitionerQualification fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PractitionerQualification.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PractitionerQualification o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PractitionerQualification> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

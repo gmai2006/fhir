@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.QuestionnaireOptionModel;
 import org.fhir.pojo.QuestionnaireOption;
+import org.fhir.pojo.QuestionnaireOptionHelper;
 
 public class QuestionnaireOptionDaoImpl implements QuestionnaireOptionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class QuestionnaireOptionDaoImpl implements QuestionnaireOptionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from QuestionnaireOptionModel a", QuestionnaireOptionModel.class).setMaxResults(maxResult);
       List<QuestionnaireOptionModel> models = query.getResultList();
-      return QuestionnaireOption.fromArray(models);
+      return QuestionnaireOptionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class QuestionnaireOptionDaoImpl implements QuestionnaireOptionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from QuestionnaireOptionModel a", QuestionnaireOptionModel.class);
       List<QuestionnaireOptionModel> models = query.getResultList();
-      return QuestionnaireOption.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public QuestionnaireOption create(QuestionnaireOption e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new QuestionnaireOptionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public QuestionnaireOption update(QuestionnaireOption e) {
-      final EntityManager em = entityManagerProvider.get();
-      QuestionnaireOptionModel model = em.merge(new QuestionnaireOptionModel(e));
-      return new QuestionnaireOption(model);
+      return QuestionnaireOptionHelper.fromArray2Array(models);
   }
 
   @Override

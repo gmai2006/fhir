@@ -34,10 +34,8 @@ public interface PlanDefinitionDao {
   public List<PlanDefinition> select(int maxResult);
 
   public List<PlanDefinition> selectAll();
-
   public PlanDefinition create(PlanDefinition e);
 
   public PlanDefinition update(PlanDefinition e);
-
   public void delete(PlanDefinition e);
 }

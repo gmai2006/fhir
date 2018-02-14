@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PractitionerRoleNotAvailableModel;
 import org.fhir.pojo.PractitionerRoleNotAvailable;
+import org.fhir.pojo.PractitionerRoleNotAvailableHelper;
 
 public class PractitionerRoleNotAvailableDaoImpl implements PractitionerRoleNotAvailableDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PractitionerRoleNotAvailableDaoImpl implements PractitionerRoleNotA
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PractitionerRoleNotAvailableModel a", PractitionerRoleNotAvailableModel.class).setMaxResults(maxResult);
       List<PractitionerRoleNotAvailableModel> models = query.getResultList();
-      return PractitionerRoleNotAvailable.fromArray(models);
+      return PractitionerRoleNotAvailableHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PractitionerRoleNotAvailableDaoImpl implements PractitionerRoleNotA
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PractitionerRoleNotAvailableModel a", PractitionerRoleNotAvailableModel.class);
       List<PractitionerRoleNotAvailableModel> models = query.getResultList();
-      return PractitionerRoleNotAvailable.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PractitionerRoleNotAvailable create(PractitionerRoleNotAvailable e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PractitionerRoleNotAvailableModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PractitionerRoleNotAvailable update(PractitionerRoleNotAvailable e) {
-      final EntityManager em = entityManagerProvider.get();
-      PractitionerRoleNotAvailableModel model = em.merge(new PractitionerRoleNotAvailableModel(e));
-      return new PractitionerRoleNotAvailable(model);
+      return PractitionerRoleNotAvailableHelper.fromArray2Array(models);
   }
 
   @Override

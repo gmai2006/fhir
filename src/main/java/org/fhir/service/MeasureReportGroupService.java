@@ -32,7 +32,5 @@ public interface MeasureReportGroupService {
 	public MeasureReportGroup find(String id);
   public List<MeasureReportGroup> select(int maxResult);
   public List<MeasureReportGroup> selectAll();
-  public MeasureReportGroup create(MeasureReportGroup bean);
-  public MeasureReportGroup update(MeasureReportGroup bean);
   public void delete(MeasureReportGroup bean);
 }

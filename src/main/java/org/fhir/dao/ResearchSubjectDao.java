@@ -34,10 +34,8 @@ public interface ResearchSubjectDao {
   public List<ResearchSubject> select(int maxResult);
 
   public List<ResearchSubject> selectAll();
-
   public ResearchSubject create(ResearchSubject e);
 
   public ResearchSubject update(ResearchSubject e);
-
   public void delete(ResearchSubject e);
 }

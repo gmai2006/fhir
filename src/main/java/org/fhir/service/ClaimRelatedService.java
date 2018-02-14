@@ -32,7 +32,5 @@ public interface ClaimRelatedService {
 	public ClaimRelated find(String id);
   public List<ClaimRelated> select(int maxResult);
   public List<ClaimRelated> selectAll();
-  public ClaimRelated create(ClaimRelated bean);
-  public ClaimRelated update(ClaimRelated bean);
   public void delete(ClaimRelated bean);
 }

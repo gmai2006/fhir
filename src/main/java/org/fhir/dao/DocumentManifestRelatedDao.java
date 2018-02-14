@@ -34,10 +34,5 @@ public interface DocumentManifestRelatedDao {
   public List<DocumentManifestRelated> select(int maxResult);
 
   public List<DocumentManifestRelated> selectAll();
-
-  public DocumentManifestRelated create(DocumentManifestRelated e);
-
-  public DocumentManifestRelated update(DocumentManifestRelated e);
-
   public void delete(DocumentManifestRelated e);
 }

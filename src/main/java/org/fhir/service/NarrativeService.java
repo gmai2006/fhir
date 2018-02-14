@@ -32,7 +32,5 @@ public interface NarrativeService {
 	public Narrative find(String id);
   public List<Narrative> select(int maxResult);
   public List<Narrative> selectAll();
-  public Narrative create(Narrative bean);
-  public Narrative update(Narrative bean);
   public void delete(Narrative bean);
 }

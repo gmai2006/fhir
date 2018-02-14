@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ImplementationGuideDependency create(ImplementationGuideDependency bean) {
-  	requireNonNull(bean);
-    logger.info("create(ImplementationGuideDependency={}) - entered bean ");
-
-    final ImplementationGuideDependency result = dao.create(bean);
-
-    logger.info("create(ImplementationGuideDependency) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ImplementationGuideDependency update(ImplementationGuideDependency bean) {
-  	requireNonNull(bean);
-    logger.info("update(ImplementationGuideDependency={}) - entered bean ");
-
-    final ImplementationGuideDependency result = dao.update(bean);
-
-    logger.info("update(ImplementationGuideDependency) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

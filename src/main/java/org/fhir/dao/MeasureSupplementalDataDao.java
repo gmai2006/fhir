@@ -34,10 +34,5 @@ public interface MeasureSupplementalDataDao {
   public List<MeasureSupplementalData> select(int maxResult);
 
   public List<MeasureSupplementalData> selectAll();
-
-  public MeasureSupplementalData create(MeasureSupplementalData e);
-
-  public MeasureSupplementalData update(MeasureSupplementalData e);
-
   public void delete(MeasureSupplementalData e);
 }

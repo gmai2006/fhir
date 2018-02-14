@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Describes a measurement, calculation or setting capability of a medical device."
 */
 @Entity
 @Table(name="devicemetric")
-public class DeviceMetricModel  {
+public class DeviceMetricModel  implements Serializable {
+	private static final long serialVersionUID = 151857669664099685L;
   /**
   * Description: "This is a DeviceMetric resource"
   */
@@ -47,7 +48,7 @@ public class DeviceMetricModel  {
 
   /**
   * Description: "Describes the unique identification of this metric that has been assigned by the device or gateway software. For example: handle ID.  It should be noted that in order to make the identifier unique, the system element of the identifier should be set to the unique identifier of the device."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -57,7 +58,7 @@ public class DeviceMetricModel  {
 
   /**
   * Description: "Describes the type of the metric. For example: Heart Rate, PEEP Setting, etc."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -67,7 +68,7 @@ public class DeviceMetricModel  {
 
   /**
   * Description: "Describes the unit that an observed value determined for this metric will have. For example: Percent, Seconds, etc."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -81,9 +82,9 @@ public class DeviceMetricModel  {
   @Column(name="\"source_id\"")
   private String source_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`source_id`", insertable=false, updatable=false)
-  private ReferenceModel source;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="source_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> source;
 
   /**
   * Description: "Describes the link to the  DeviceComponent that this DeviceMetric belongs to and that provide information about the location of this DeviceMetric in the containment structure of the parent Device. An example would be a DeviceComponent that represents a Channel. This reference can be used by a client application to distinguish DeviceMetrics that have the same type, but should be interpreted based on their containment location."
@@ -92,9 +93,9 @@ public class DeviceMetricModel  {
   @Column(name="\"parent_id\"")
   private String parent_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`parent_id`", insertable=false, updatable=false)
-  private ReferenceModel parent;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="parent_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> parent;
 
   /**
   * Description: "Indicates current operational state of the device. For example: On, Off, Standby, etc."
@@ -119,7 +120,7 @@ public class DeviceMetricModel  {
 
   /**
   * Description: "Describes the measurement repetition time. This is not necessarily the same as the update period. The measurement repetition time can range from milliseconds up to hours. An example for a measurement repetition time in the range of milliseconds is the sampling rate of an ECG. An example for a measurement repetition time in the range of hours is a NIBP that is triggered automatically every hour. The update period may be different than the measurement repetition time, if the device does not update the published observed value with the same frequency as it was measured."
-  * Actual type: Timing
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -129,9 +130,13 @@ public class DeviceMetricModel  {
   /**
   * Description: "Describes the calibrations that have been performed or that are required to be performed."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<DeviceMetricCalibrationModel> calibration = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"calibration_id\"")
+  private String calibration_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="calibration_id", insertable=false, updatable=false)
+  private java.util.List<DeviceMetricCalibrationModel> calibration;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -141,14 +146,14 @@ public class DeviceMetricModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -158,7 +163,7 @@ public class DeviceMetricModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -168,7 +173,7 @@ public class DeviceMetricModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -180,6 +185,7 @@ public class DeviceMetricModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -194,9 +200,9 @@ public class DeviceMetricModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -217,203 +223,201 @@ public class DeviceMetricModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public DeviceMetricModel() {
   }
 
   public DeviceMetricModel(DeviceMetric o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.type = CodeableConcept.toJson(o.getType());
-      this.unit = CodeableConcept.toJson(o.getUnit());
-      if (null != o.getSource()) {
-      	this.source_id = "source" + this.getId();
-        this.source = new ReferenceModel(o.getSource());
-        this.source.setId(this.source_id);
-        this.source.parent_id = this.source.getId();
-      }
-
-      if (null != o.getParent()) {
-      	this.parent_id = "parent" + this.getId();
-        this.parent = new ReferenceModel(o.getParent());
-        this.parent.setId(this.parent_id);
-        this.parent.parent_id = this.parent.getId();
-      }
-
-      this.operationalStatus = o.getOperationalStatus();
-
-      this.color = o.getColor();
-
-      this.category = o.getCategory();
-
-      this.measurementPeriod = Timing.toJson(o.getMeasurementPeriod());
-      this.calibration = DeviceMetricCalibration.toModelArray(o.getCalibration());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.unit = CodeableConceptHelper.toJson(o.getUnit());
+    if (null != o.getSource() ) {
+    	this.source_id = "source" + this.id;
+    	this.source = ReferenceHelper.toModel(o.getSource(), this.source_id);
+    }
+    if (null != o.getParent() ) {
+    	this.parent_id = "parent" + this.id;
+    	this.parent = ReferenceHelper.toModel(o.getParent(), this.parent_id);
+    }
+    this.operationalStatus = o.getOperationalStatus();
+    this.color = o.getColor();
+    this.category = o.getCategory();
+    this.measurementPeriod = TimingHelper.toJson(o.getMeasurementPeriod());
+    if (null != o.getCalibration() && !o.getCalibration().isEmpty()) {
+    	this.calibration_id = "calibration" + this.id;
+    	this.calibration = DeviceMetricCalibrationHelper.toModelFromArray(o.getCalibration(), this.calibration_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setUnit( String value) {
-    this.unit = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getUnit() {
     return this.unit;
   }
-  public void setSource( ReferenceModel value) {
-    this.source = value;
+  public void setUnit( String value) {
+    this.unit = value;
   }
-  public ReferenceModel getSource() {
+  public java.util.List<ReferenceModel> getSource() {
     return this.source;
   }
-  public void setParent( ReferenceModel value) {
-    this.parent = value;
+  public void setSource( java.util.List<ReferenceModel> value) {
+    this.source = value;
   }
-  public ReferenceModel getParent() {
+  public java.util.List<ReferenceModel> getParent() {
     return this.parent;
   }
-  public void setOperationalStatus( String value) {
-    this.operationalStatus = value;
+  public void setParent( java.util.List<ReferenceModel> value) {
+    this.parent = value;
   }
   public String getOperationalStatus() {
     return this.operationalStatus;
   }
-  public void setColor( String value) {
-    this.color = value;
+  public void setOperationalStatus( String value) {
+    this.operationalStatus = value;
   }
   public String getColor() {
     return this.color;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setColor( String value) {
+    this.color = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setMeasurementPeriod( String value) {
-    this.measurementPeriod = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getMeasurementPeriod() {
     return this.measurementPeriod;
   }
-  public void setCalibration( java.util.List<DeviceMetricCalibrationModel> value) {
-    this.calibration = value;
+  public void setMeasurementPeriod( String value) {
+    this.measurementPeriod = value;
   }
   public java.util.List<DeviceMetricCalibrationModel> getCalibration() {
     return this.calibration;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setCalibration( java.util.List<DeviceMetricCalibrationModel> value) {
+    this.calibration = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("unit" + "[" + String.valueOf(this.unit) + "]\n"); 
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("parent" + "[" + String.valueOf(this.parent) + "]\n"); 
-     builder.append("operationalStatus" + "[" + String.valueOf(this.operationalStatus) + "]\n"); 
-     builder.append("color" + "[" + String.valueOf(this.color) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("measurementPeriod" + "[" + String.valueOf(this.measurementPeriod) + "]\n"); 
-     builder.append("calibration" + "[" + String.valueOf(this.calibration) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[DeviceMetricModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("unit" + "->" + this.unit + "\n"); 
+     builder.append("operationalStatus" + "->" + this.operationalStatus + "\n"); 
+     builder.append("color" + "->" + this.color + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("measurementPeriod" + "->" + this.measurementPeriod + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[DeviceMetricModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("unit" + "->" + this.unit + "\n"); 
+     builder.append("source" + "->" + this.source + "\n"); 
+     builder.append("parent" + "->" + this.parent + "\n"); 
+     builder.append("operationalStatus" + "->" + this.operationalStatus + "\n"); 
+     builder.append("color" + "->" + this.color + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("measurementPeriod" + "->" + this.measurementPeriod + "\n"); 
+     builder.append("calibration" + "->" + this.calibration + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.RiskAssessmentModel;
 import org.fhir.pojo.RiskAssessment;
+import org.fhir.pojo.RiskAssessmentHelper;
 
 public class RiskAssessmentDaoImpl implements RiskAssessmentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class RiskAssessmentDaoImpl implements RiskAssessmentDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RiskAssessmentModel a", RiskAssessmentModel.class).setMaxResults(maxResult);
       List<RiskAssessmentModel> models = query.getResultList();
-      return RiskAssessment.fromArray(models);
+      return RiskAssessmentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class RiskAssessmentDaoImpl implements RiskAssessmentDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RiskAssessmentModel a", RiskAssessmentModel.class);
       List<RiskAssessmentModel> models = query.getResultList();
-      return RiskAssessment.fromArray(models);
+      return RiskAssessmentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class RiskAssessmentDaoImpl implements RiskAssessmentDao {
       RiskAssessmentModel model = em.merge(new RiskAssessmentModel(e));
       return new RiskAssessment(model);
   }
-
   @Override
   @Transactional
   public void delete(RiskAssessment e) {

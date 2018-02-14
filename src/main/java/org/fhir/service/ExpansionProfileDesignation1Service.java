@@ -32,7 +32,5 @@ public interface ExpansionProfileDesignation1Service {
 	public ExpansionProfileDesignation1 find(String id);
   public List<ExpansionProfileDesignation1> select(int maxResult);
   public List<ExpansionProfileDesignation1> selectAll();
-  public ExpansionProfileDesignation1 create(ExpansionProfileDesignation1 bean);
-  public ExpansionProfileDesignation1 update(ExpansionProfileDesignation1 bean);
   public void delete(ExpansionProfileDesignation1 bean);
 }

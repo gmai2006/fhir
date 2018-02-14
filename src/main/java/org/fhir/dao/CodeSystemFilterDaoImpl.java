@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CodeSystemFilterModel;
 import org.fhir.pojo.CodeSystemFilter;
+import org.fhir.pojo.CodeSystemFilterHelper;
 
 public class CodeSystemFilterDaoImpl implements CodeSystemFilterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CodeSystemFilterDaoImpl implements CodeSystemFilterDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CodeSystemFilterModel a", CodeSystemFilterModel.class).setMaxResults(maxResult);
       List<CodeSystemFilterModel> models = query.getResultList();
-      return CodeSystemFilter.fromArray(models);
+      return CodeSystemFilterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CodeSystemFilterDaoImpl implements CodeSystemFilterDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CodeSystemFilterModel a", CodeSystemFilterModel.class);
       List<CodeSystemFilterModel> models = query.getResultList();
-      return CodeSystemFilter.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CodeSystemFilter create(CodeSystemFilter e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CodeSystemFilterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CodeSystemFilter update(CodeSystemFilter e) {
-      final EntityManager em = entityManagerProvider.get();
-      CodeSystemFilterModel model = em.merge(new CodeSystemFilterModel(e));
-      return new CodeSystemFilter(model);
+      return CodeSystemFilterHelper.fromArray2Array(models);
   }
 
   @Override

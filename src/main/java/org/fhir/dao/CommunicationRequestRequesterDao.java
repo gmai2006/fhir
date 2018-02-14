@@ -34,10 +34,5 @@ public interface CommunicationRequestRequesterDao {
   public List<CommunicationRequestRequester> select(int maxResult);
 
   public List<CommunicationRequestRequester> selectAll();
-
-  public CommunicationRequestRequester create(CommunicationRequestRequester e);
-
-  public CommunicationRequestRequester update(CommunicationRequestRequester e);
-
   public void delete(CommunicationRequestRequester e);
 }

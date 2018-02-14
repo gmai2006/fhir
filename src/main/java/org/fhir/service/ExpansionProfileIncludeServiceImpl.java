@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ExpansionProfileInclude create(ExpansionProfileInclude bean) {
-  	requireNonNull(bean);
-    logger.info("create(ExpansionProfileInclude={}) - entered bean ");
-
-    final ExpansionProfileInclude result = dao.create(bean);
-
-    logger.info("create(ExpansionProfileInclude) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ExpansionProfileInclude update(ExpansionProfileInclude bean) {
-  	requireNonNull(bean);
-    logger.info("update(ExpansionProfileInclude={}) - entered bean ");
-
-    final ExpansionProfileInclude result = dao.update(bean);
-
-    logger.info("update(ExpansionProfileInclude) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -34,10 +34,5 @@ public interface SequenceVariantDao {
   public List<SequenceVariant> select(int maxResult);
 
   public List<SequenceVariant> selectAll();
-
-  public SequenceVariant create(SequenceVariant e);
-
-  public SequenceVariant update(SequenceVariant e);
-
   public void delete(SequenceVariant e);
 }

@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to."
 */
 @Entity
 @Table(name="questionnaireresponseitem")
-public class QuestionnaireResponseItemModel  {
+public class QuestionnaireResponseItemModel  implements Serializable {
+	private static final long serialVersionUID = 151857669678810609L;
   /**
   * Description: "The item from the Questionnaire that corresponds to this item in the QuestionnaireResponse resource."
   */
@@ -65,28 +66,36 @@ public class QuestionnaireResponseItemModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "The respondent's answer(s) to the question."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<QuestionnaireResponseAnswerModel> answer = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"answer_id\"")
+  private String answer_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="answer_id", insertable=false, updatable=false)
+  private java.util.List<QuestionnaireResponseAnswerModel> answer;
 
   /**
   * Description: "Questions or sub-groups nested beneath a question or group."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<QuestionnaireResponseItemModel> item = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"item_id\"")
+  private String item_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
+  private java.util.List<QuestionnaireResponseItemModel> item;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -98,6 +107,7 @@ public class QuestionnaireResponseItemModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -106,113 +116,132 @@ public class QuestionnaireResponseItemModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public QuestionnaireResponseItemModel() {
   }
 
-  public QuestionnaireResponseItemModel(QuestionnaireResponseItem o) {
-    this.id = o.getId();
-      this.linkId = o.getLinkId();
-
-      this.definition = o.getDefinition();
-
-      this.text = o.getText();
-
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      this.answer = QuestionnaireResponseAnswer.toModelArray(o.getAnswer());
-
-      this.item = QuestionnaireResponseItem.toModelArray(o.getItem());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public QuestionnaireResponseItemModel(QuestionnaireResponseItem o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.linkId = o.getLinkId();
+    this.definition = o.getDefinition();
+    this.text = o.getText();
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.parent_id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    if (null != o.getAnswer() && !o.getAnswer().isEmpty()) {
+    	this.answer_id = "answer" + this.parent_id;
+    	this.answer = QuestionnaireResponseAnswerHelper.toModelFromArray(o.getAnswer(), this.answer_id);
+    }
+    if (null != o.getItem() && !o.getItem().isEmpty()) {
+    	this.item_id = "item" + this.parent_id;
+    	this.item = QuestionnaireResponseItemHelper.toModelFromArray(o.getItem(), this.item_id);
+    }
   }
 
-  public void setLinkId( String value) {
-    this.linkId = value;
-  }
   public String getLinkId() {
     return this.linkId;
   }
-  public void setDefinition( String value) {
-    this.definition = value;
+  public void setLinkId( String value) {
+    this.linkId = value;
   }
   public String getDefinition() {
     return this.definition;
   }
-  public void setText( String value) {
-    this.text = value;
+  public void setDefinition( String value) {
+    this.definition = value;
   }
   public String getText() {
     return this.text;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setText( String value) {
+    this.text = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setAnswer( java.util.List<QuestionnaireResponseAnswerModel> value) {
-    this.answer = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
   public java.util.List<QuestionnaireResponseAnswerModel> getAnswer() {
     return this.answer;
   }
-  public void setItem( java.util.List<QuestionnaireResponseItemModel> value) {
-    this.item = value;
+  public void setAnswer( java.util.List<QuestionnaireResponseAnswerModel> value) {
+    this.answer = value;
   }
   public java.util.List<QuestionnaireResponseItemModel> getItem() {
     return this.item;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setItem( java.util.List<QuestionnaireResponseItemModel> value) {
+    this.item = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("linkId" + "[" + String.valueOf(this.linkId) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("answer" + "[" + String.valueOf(this.answer) + "]\n"); 
-     builder.append("item" + "[" + String.valueOf(this.item) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[QuestionnaireResponseItemModel]:" + "\n");
+     builder.append("linkId" + "->" + this.linkId + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[QuestionnaireResponseItemModel]:" + "\n");
+     builder.append("linkId" + "->" + this.linkId + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("answer" + "->" + this.answer + "\n"); 
+     builder.append("item" + "->" + this.item + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

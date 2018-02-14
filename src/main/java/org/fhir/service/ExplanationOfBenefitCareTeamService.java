@@ -32,7 +32,5 @@ public interface ExplanationOfBenefitCareTeamService {
 	public ExplanationOfBenefitCareTeam find(String id);
   public List<ExplanationOfBenefitCareTeam> select(int maxResult);
   public List<ExplanationOfBenefitCareTeam> selectAll();
-  public ExplanationOfBenefitCareTeam create(ExplanationOfBenefitCareTeam bean);
-  public ExplanationOfBenefitCareTeam update(ExplanationOfBenefitCareTeam bean);
   public void delete(ExplanationOfBenefitCareTeam bean);
 }

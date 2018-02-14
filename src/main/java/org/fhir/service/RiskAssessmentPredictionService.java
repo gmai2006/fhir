@@ -32,7 +32,5 @@ public interface RiskAssessmentPredictionService {
 	public RiskAssessmentPrediction find(String id);
   public List<RiskAssessmentPrediction> select(int maxResult);
   public List<RiskAssessmentPrediction> selectAll();
-  public RiskAssessmentPrediction create(RiskAssessmentPrediction bean);
-  public RiskAssessmentPrediction update(RiskAssessmentPrediction bean);
   public void delete(RiskAssessmentPrediction bean);
 }

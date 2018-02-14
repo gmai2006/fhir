@@ -32,7 +32,5 @@ public interface AuditEventAgentService {
 	public AuditEventAgent find(String id);
   public List<AuditEventAgent> select(int maxResult);
   public List<AuditEventAgent> selectAll();
-  public AuditEventAgent create(AuditEventAgent bean);
-  public AuditEventAgent update(AuditEventAgent bean);
   public void delete(AuditEventAgent bean);
 }

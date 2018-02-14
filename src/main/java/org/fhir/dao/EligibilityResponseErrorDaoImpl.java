@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EligibilityResponseErrorModel;
 import org.fhir.pojo.EligibilityResponseError;
+import org.fhir.pojo.EligibilityResponseErrorHelper;
 
 public class EligibilityResponseErrorDaoImpl implements EligibilityResponseErrorDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EligibilityResponseErrorDaoImpl implements EligibilityResponseError
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EligibilityResponseErrorModel a", EligibilityResponseErrorModel.class).setMaxResults(maxResult);
       List<EligibilityResponseErrorModel> models = query.getResultList();
-      return EligibilityResponseError.fromArray(models);
+      return EligibilityResponseErrorHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EligibilityResponseErrorDaoImpl implements EligibilityResponseError
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EligibilityResponseErrorModel a", EligibilityResponseErrorModel.class);
       List<EligibilityResponseErrorModel> models = query.getResultList();
-      return EligibilityResponseError.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EligibilityResponseError create(EligibilityResponseError e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EligibilityResponseErrorModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EligibilityResponseError update(EligibilityResponseError e) {
-      final EntityManager em = entityManagerProvider.get();
-      EligibilityResponseErrorModel model = em.merge(new EligibilityResponseErrorModel(e));
-      return new EligibilityResponseError(model);
+      return EligibilityResponseErrorHelper.fromArray2Array(models);
   }
 
   @Override

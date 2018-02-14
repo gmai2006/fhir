@@ -34,10 +34,5 @@ public interface DocumentReferenceRelatedDao {
   public List<DocumentReferenceRelated> select(int maxResult);
 
   public List<DocumentReferenceRelated> selectAll();
-
-  public DocumentReferenceRelated create(DocumentReferenceRelated e);
-
-  public DocumentReferenceRelated update(DocumentReferenceRelated e);
-
   public void delete(DocumentReferenceRelated e);
 }

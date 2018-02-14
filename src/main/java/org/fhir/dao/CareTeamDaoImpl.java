@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CareTeamModel;
 import org.fhir.pojo.CareTeam;
+import org.fhir.pojo.CareTeamHelper;
 
 public class CareTeamDaoImpl implements CareTeamDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CareTeamDaoImpl implements CareTeamDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CareTeamModel a", CareTeamModel.class).setMaxResults(maxResult);
       List<CareTeamModel> models = query.getResultList();
-      return CareTeam.fromArray(models);
+      return CareTeamHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class CareTeamDaoImpl implements CareTeamDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CareTeamModel a", CareTeamModel.class);
       List<CareTeamModel> models = query.getResultList();
-      return CareTeam.fromArray(models);
+      return CareTeamHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class CareTeamDaoImpl implements CareTeamDao {
       CareTeamModel model = em.merge(new CareTeamModel(e));
       return new CareTeam(model);
   }
-
   @Override
   @Transactional
   public void delete(CareTeam e) {

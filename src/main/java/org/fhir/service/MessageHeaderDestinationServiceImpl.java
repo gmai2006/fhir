@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public MessageHeaderDestination create(MessageHeaderDestination bean) {
-  	requireNonNull(bean);
-    logger.info("create(MessageHeaderDestination={}) - entered bean ");
-
-    final MessageHeaderDestination result = dao.create(bean);
-
-    logger.info("create(MessageHeaderDestination) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public MessageHeaderDestination update(MessageHeaderDestination bean) {
-  	requireNonNull(bean);
-    logger.info("update(MessageHeaderDestination={}) - entered bean ");
-
-    final MessageHeaderDestination result = dao.update(bean);
-
-    logger.info("update(MessageHeaderDestination) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

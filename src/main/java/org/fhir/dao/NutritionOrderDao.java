@@ -34,10 +34,8 @@ public interface NutritionOrderDao {
   public List<NutritionOrder> select(int maxResult);
 
   public List<NutritionOrder> selectAll();
-
   public NutritionOrder create(NutritionOrder e);
 
   public NutritionOrder update(NutritionOrder e);
-
   public void delete(NutritionOrder e);
 }

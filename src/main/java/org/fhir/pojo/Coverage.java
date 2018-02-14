@@ -179,6 +179,7 @@ public class Coverage  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -230,87 +231,63 @@ public class Coverage  {
 
   public Coverage(CoverageModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getPolicyHolder()) {
-        this.policyHolder = new Reference(o.getPolicyHolder());
-        this.policyHolder.setId(this.getId());
-      }
-
-      if (null != o.getSubscriber()) {
-        this.subscriber = new Reference(o.getSubscriber());
-        this.subscriber.setId(this.getId());
-      }
-
-      if (null != o.getSubscriberId()) {
-        this.subscriberId = new String(o.getSubscriberId());
-      }
-
-      if (null != o.getBeneficiary()) {
-        this.beneficiary = new Reference(o.getBeneficiary());
-        this.beneficiary.setId(this.getId());
-      }
-
-      this.relationship = CodeableConcept.fromJson(o.getRelationship());
-      this.period = Period.fromJson(o.getPeriod());
-      this.payor = Reference.fromArray(o.getPayor());
-
-      if (null != o.getGrouping()) {
-        this.grouping = new CoverageGrouping(o.getGrouping());
-        this.grouping.setId(this.getId());
-      }
-
-      if (null != o.getDependent()) {
-        this.dependent = new String(o.getDependent());
-      }
-
-      if (null != o.getSequence()) {
-        this.sequence = new String(o.getSequence());
-      }
-
-      if (null != o.getOrder()) {
-        this.order = new Float(o.getOrder());
-      }
-
-      if (null != o.getNetwork()) {
-        this.network = new String(o.getNetwork());
-      }
-
-      this.contract = Reference.fromArray(o.getContract());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getPolicyHolder() && !o.getPolicyHolder().isEmpty()) {
+      this.policyHolder = new Reference(o.getPolicyHolder().get(0));
+    }
+    if (null != o.getSubscriber() && !o.getSubscriber().isEmpty()) {
+      this.subscriber = new Reference(o.getSubscriber().get(0));
+    }
+    if (null != o.getSubscriberId()) {
+      this.subscriberId = o.getSubscriberId();
+    }
+    if (null != o.getBeneficiary() && !o.getBeneficiary().isEmpty()) {
+      this.beneficiary = new Reference(o.getBeneficiary().get(0));
+    }
+    this.relationship = CodeableConceptHelper.fromJson(o.getRelationship());
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getPayor() && !o.getPayor().isEmpty()) {
+    	this.payor = ReferenceHelper.fromArray2Array(o.getPayor());
+    }
+    if (null != o.getGrouping() && !o.getGrouping().isEmpty()) {
+      this.grouping = new CoverageGrouping(o.getGrouping().get(0));
+    }
+    if (null != o.getDependent()) {
+      this.dependent = o.getDependent();
+    }
+    if (null != o.getSequence()) {
+      this.sequence = o.getSequence();
+    }
+    if (null != o.getOrder()) {
+      this.order = o.getOrder();
+    }
+    if (null != o.getNetwork()) {
+      this.network = o.getNetwork();
+    }
+    if (null != o.getContract() && !o.getContract().isEmpty()) {
+    	this.contract = ReferenceHelper.fromArray2Array(o.getContract());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -521,40 +498,41 @@ public class Coverage  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("policyHolder" + "[" + String.valueOf(this.policyHolder) + "]\n"); 
-     builder.append("subscriber" + "[" + String.valueOf(this.subscriber) + "]\n"); 
-     builder.append("subscriberId" + "[" + String.valueOf(this.subscriberId) + "]\n"); 
-     builder.append("_subscriberId" + "[" + String.valueOf(this._subscriberId) + "]\n"); 
-     builder.append("beneficiary" + "[" + String.valueOf(this.beneficiary) + "]\n"); 
-     builder.append("relationship" + "[" + String.valueOf(this.relationship) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("payor" + "[" + String.valueOf(this.payor) + "]\n"); 
-     builder.append("grouping" + "[" + String.valueOf(this.grouping) + "]\n"); 
-     builder.append("dependent" + "[" + String.valueOf(this.dependent) + "]\n"); 
-     builder.append("_dependent" + "[" + String.valueOf(this._dependent) + "]\n"); 
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("_sequence" + "[" + String.valueOf(this._sequence) + "]\n"); 
-     builder.append("order" + "[" + String.valueOf(this.order) + "]\n"); 
-     builder.append("_order" + "[" + String.valueOf(this._order) + "]\n"); 
-     builder.append("network" + "[" + String.valueOf(this.network) + "]\n"); 
-     builder.append("_network" + "[" + String.valueOf(this._network) + "]\n"); 
-     builder.append("contract" + "[" + String.valueOf(this.contract) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Coverage]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.policyHolder != null) builder.append("policyHolder" + "->" + this.policyHolder.toString() + "\n"); 
+     if(this.subscriber != null) builder.append("subscriber" + "->" + this.subscriber.toString() + "\n"); 
+     if(this.subscriberId != null) builder.append("subscriberId" + "->" + this.subscriberId.toString() + "\n"); 
+     if(this._subscriberId != null) builder.append("_subscriberId" + "->" + this._subscriberId.toString() + "\n"); 
+     if(this.beneficiary != null) builder.append("beneficiary" + "->" + this.beneficiary.toString() + "\n"); 
+     if(this.relationship != null) builder.append("relationship" + "->" + this.relationship.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.payor != null) builder.append("payor" + "->" + this.payor.toString() + "\n"); 
+     if(this.grouping != null) builder.append("grouping" + "->" + this.grouping.toString() + "\n"); 
+     if(this.dependent != null) builder.append("dependent" + "->" + this.dependent.toString() + "\n"); 
+     if(this._dependent != null) builder.append("_dependent" + "->" + this._dependent.toString() + "\n"); 
+     if(this.sequence != null) builder.append("sequence" + "->" + this.sequence.toString() + "\n"); 
+     if(this._sequence != null) builder.append("_sequence" + "->" + this._sequence.toString() + "\n"); 
+     if(this.order != null) builder.append("order" + "->" + this.order.toString() + "\n"); 
+     if(this._order != null) builder.append("_order" + "->" + this._order.toString() + "\n"); 
+     if(this.network != null) builder.append("network" + "->" + this.network.toString() + "\n"); 
+     if(this._network != null) builder.append("_network" + "->" + this._network.toString() + "\n"); 
+     if(this.contract != null) builder.append("contract" + "->" + this.contract.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -570,36 +548,4 @@ public class Coverage  {
   	}
   }
 
-  public static java.util.List<Coverage> fromArray(java.util.List<CoverageModel> list) {
-    return (java.util.List<Coverage>)list.stream()
-      .map(model -> new Coverage(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CoverageModel> toModelArray(java.util.List<Coverage> list) {
-    return (java.util.List<CoverageModel>)list.stream()
-      .map(model -> new CoverageModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Coverage fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Coverage.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Coverage o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Coverage> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

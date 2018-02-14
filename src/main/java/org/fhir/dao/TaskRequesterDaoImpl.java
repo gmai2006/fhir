@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.TaskRequesterModel;
 import org.fhir.pojo.TaskRequester;
+import org.fhir.pojo.TaskRequesterHelper;
 
 public class TaskRequesterDaoImpl implements TaskRequesterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class TaskRequesterDaoImpl implements TaskRequesterDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TaskRequesterModel a", TaskRequesterModel.class).setMaxResults(maxResult);
       List<TaskRequesterModel> models = query.getResultList();
-      return TaskRequester.fromArray(models);
+      return TaskRequesterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class TaskRequesterDaoImpl implements TaskRequesterDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TaskRequesterModel a", TaskRequesterModel.class);
       List<TaskRequesterModel> models = query.getResultList();
-      return TaskRequester.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public TaskRequester create(TaskRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new TaskRequesterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public TaskRequester update(TaskRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      TaskRequesterModel model = em.merge(new TaskRequesterModel(e));
-      return new TaskRequester(model);
+      return TaskRequesterHelper.fromArray2Array(models);
   }
 
   @Override

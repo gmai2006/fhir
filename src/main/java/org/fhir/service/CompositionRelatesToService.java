@@ -32,7 +32,5 @@ public interface CompositionRelatesToService {
 	public CompositionRelatesTo find(String id);
   public List<CompositionRelatesTo> select(int maxResult);
   public List<CompositionRelatesTo> selectAll();
-  public CompositionRelatesTo create(CompositionRelatesTo bean);
-  public CompositionRelatesTo update(CompositionRelatesTo bean);
   public void delete(CompositionRelatesTo bean);
 }

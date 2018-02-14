@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ImmunizationReaction create(ImmunizationReaction bean) {
-  	requireNonNull(bean);
-    logger.info("create(ImmunizationReaction={}) - entered bean ");
-
-    final ImmunizationReaction result = dao.create(bean);
-
-    logger.info("create(ImmunizationReaction) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ImmunizationReaction update(ImmunizationReaction bean) {
-  	requireNonNull(bean);
-    logger.info("update(ImmunizationReaction={}) - entered bean ");
-
-    final ImmunizationReaction result = dao.update(bean);
-
-    logger.info("update(ImmunizationReaction) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -106,6 +106,7 @@ public class ContractValuedItem1  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -127,34 +128,26 @@ public class ContractValuedItem1  {
 
   public ContractValuedItem1(ContractValuedItem1Model o) {
     this.id = o.getId();
-      this.entityCodeableConcept = CodeableConcept.fromJson(o.getEntityCodeableConcept());
-      if (null != o.getEntityReference()) {
-        this.entityReference = new Reference(o.getEntityReference());
-        this.entityReference.setId(this.getId());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getEffectiveTime()) {
-        this.effectiveTime = new String(o.getEffectiveTime());
-      }
-
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      this.unitPrice = Money.fromJson(o.getUnitPrice());
-      if (null != o.getFactor()) {
-        this.factor = new Float(o.getFactor());
-      }
-
-      if (null != o.getPoints()) {
-        this.points = new Float(o.getPoints());
-      }
-
-      this.net = Money.fromJson(o.getNet());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.entityCodeableConcept = CodeableConceptHelper.fromJson(o.getEntityCodeableConcept());
+    if (null != o.getEntityReference() && !o.getEntityReference().isEmpty()) {
+      this.entityReference = new Reference(o.getEntityReference().get(0));
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getEffectiveTime()) {
+      this.effectiveTime = o.getEffectiveTime();
+    }
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    this.unitPrice = MoneyHelper.fromJson(o.getUnitPrice());
+    if (null != o.getFactor()) {
+      this.factor = o.getFactor();
+    }
+    if (null != o.getPoints()) {
+      this.points = o.getPoints();
+    }
+    this.net = MoneyHelper.fromJson(o.getNet());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setEntityCodeableConcept( CodeableConcept value) {
@@ -257,56 +250,25 @@ public class ContractValuedItem1  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("entityCodeableConcept" + "[" + String.valueOf(this.entityCodeableConcept) + "]\n"); 
-     builder.append("entityReference" + "[" + String.valueOf(this.entityReference) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("effectiveTime" + "[" + String.valueOf(this.effectiveTime) + "]\n"); 
-     builder.append("_effectiveTime" + "[" + String.valueOf(this._effectiveTime) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("unitPrice" + "[" + String.valueOf(this.unitPrice) + "]\n"); 
-     builder.append("factor" + "[" + String.valueOf(this.factor) + "]\n"); 
-     builder.append("_factor" + "[" + String.valueOf(this._factor) + "]\n"); 
-     builder.append("points" + "[" + String.valueOf(this.points) + "]\n"); 
-     builder.append("_points" + "[" + String.valueOf(this._points) + "]\n"); 
-     builder.append("net" + "[" + String.valueOf(this.net) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ContractValuedItem1]:" + "\n");
+     if(this.entityCodeableConcept != null) builder.append("entityCodeableConcept" + "->" + this.entityCodeableConcept.toString() + "\n"); 
+     if(this.entityReference != null) builder.append("entityReference" + "->" + this.entityReference.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.effectiveTime != null) builder.append("effectiveTime" + "->" + this.effectiveTime.toString() + "\n"); 
+     if(this._effectiveTime != null) builder.append("_effectiveTime" + "->" + this._effectiveTime.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.unitPrice != null) builder.append("unitPrice" + "->" + this.unitPrice.toString() + "\n"); 
+     if(this.factor != null) builder.append("factor" + "->" + this.factor.toString() + "\n"); 
+     if(this._factor != null) builder.append("_factor" + "->" + this._factor.toString() + "\n"); 
+     if(this.points != null) builder.append("points" + "->" + this.points.toString() + "\n"); 
+     if(this._points != null) builder.append("_points" + "->" + this._points.toString() + "\n"); 
+     if(this.net != null) builder.append("net" + "->" + this.net.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ContractValuedItem1> fromArray(java.util.List<ContractValuedItem1Model> list) {
-    return (java.util.List<ContractValuedItem1>)list.stream()
-      .map(model -> new ContractValuedItem1(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ContractValuedItem1Model> toModelArray(java.util.List<ContractValuedItem1> list) {
-    return (java.util.List<ContractValuedItem1Model>)list.stream()
-      .map(model -> new ContractValuedItem1Model(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ContractValuedItem1 fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ContractValuedItem1.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ContractValuedItem1 o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ContractValuedItem1> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

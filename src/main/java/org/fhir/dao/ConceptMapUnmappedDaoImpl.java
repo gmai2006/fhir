@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ConceptMapUnmappedModel;
 import org.fhir.pojo.ConceptMapUnmapped;
+import org.fhir.pojo.ConceptMapUnmappedHelper;
 
 public class ConceptMapUnmappedDaoImpl implements ConceptMapUnmappedDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ConceptMapUnmappedDaoImpl implements ConceptMapUnmappedDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConceptMapUnmappedModel a", ConceptMapUnmappedModel.class).setMaxResults(maxResult);
       List<ConceptMapUnmappedModel> models = query.getResultList();
-      return ConceptMapUnmapped.fromArray(models);
+      return ConceptMapUnmappedHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ConceptMapUnmappedDaoImpl implements ConceptMapUnmappedDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConceptMapUnmappedModel a", ConceptMapUnmappedModel.class);
       List<ConceptMapUnmappedModel> models = query.getResultList();
-      return ConceptMapUnmapped.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ConceptMapUnmapped create(ConceptMapUnmapped e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ConceptMapUnmappedModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ConceptMapUnmapped update(ConceptMapUnmapped e) {
-      final EntityManager em = entityManagerProvider.get();
-      ConceptMapUnmappedModel model = em.merge(new ConceptMapUnmappedModel(e));
-      return new ConceptMapUnmapped(model);
+      return ConceptMapUnmappedHelper.fromArray2Array(models);
   }
 
   @Override

@@ -34,10 +34,5 @@ public interface FamilyMemberHistoryConditionDao {
   public List<FamilyMemberHistoryCondition> select(int maxResult);
 
   public List<FamilyMemberHistoryCondition> selectAll();
-
-  public FamilyMemberHistoryCondition create(FamilyMemberHistoryCondition e);
-
-  public FamilyMemberHistoryCondition update(FamilyMemberHistoryCondition e);
-
   public void delete(FamilyMemberHistoryCondition e);
 }

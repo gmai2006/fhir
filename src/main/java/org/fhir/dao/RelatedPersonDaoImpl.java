@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.RelatedPersonModel;
 import org.fhir.pojo.RelatedPerson;
+import org.fhir.pojo.RelatedPersonHelper;
 
 public class RelatedPersonDaoImpl implements RelatedPersonDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class RelatedPersonDaoImpl implements RelatedPersonDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RelatedPersonModel a", RelatedPersonModel.class).setMaxResults(maxResult);
       List<RelatedPersonModel> models = query.getResultList();
-      return RelatedPerson.fromArray(models);
+      return RelatedPersonHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class RelatedPersonDaoImpl implements RelatedPersonDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RelatedPersonModel a", RelatedPersonModel.class);
       List<RelatedPersonModel> models = query.getResultList();
-      return RelatedPerson.fromArray(models);
+      return RelatedPersonHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class RelatedPersonDaoImpl implements RelatedPersonDao {
       RelatedPersonModel model = em.merge(new RelatedPersonModel(e));
       return new RelatedPerson(model);
   }
-
   @Override
   @Transactional
   public void delete(RelatedPerson e) {

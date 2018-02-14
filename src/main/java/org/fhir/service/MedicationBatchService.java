@@ -32,7 +32,5 @@ public interface MedicationBatchService {
 	public MedicationBatch find(String id);
   public List<MedicationBatch> select(int maxResult);
   public List<MedicationBatch> selectAll();
-  public MedicationBatch create(MedicationBatch bean);
-  public MedicationBatch update(MedicationBatch bean);
   public void delete(MedicationBatch bean);
 }

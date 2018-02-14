@@ -34,10 +34,8 @@ public interface ProcedureDao {
   public List<Procedure> select(int maxResult);
 
   public List<Procedure> selectAll();
-
   public Procedure create(Procedure e);
 
   public Procedure update(Procedure e);
-
   public void delete(Procedure e);
 }

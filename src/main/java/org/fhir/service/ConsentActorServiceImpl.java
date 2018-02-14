@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ConsentActor create(ConsentActor bean) {
-  	requireNonNull(bean);
-    logger.info("create(ConsentActor={}) - entered bean ");
-
-    final ConsentActor result = dao.create(bean);
-
-    logger.info("create(ConsentActor) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ConsentActor update(ConsentActor bean) {
-  	requireNonNull(bean);
-    logger.info("update(ConsentActor={}) - entered bean ");
-
-    final ConsentActor result = dao.update(bean);
-
-    logger.info("update(ConsentActor) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

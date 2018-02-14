@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public MeasureGroup create(MeasureGroup bean) {
-  	requireNonNull(bean);
-    logger.info("create(MeasureGroup={}) - entered bean ");
-
-    final MeasureGroup result = dao.create(bean);
-
-    logger.info("create(MeasureGroup) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public MeasureGroup update(MeasureGroup bean) {
-  	requireNonNull(bean);
-    logger.info("update(MeasureGroup={}) - entered bean ");
-
-    final MeasureGroup result = dao.update(bean);
-
-    logger.info("update(MeasureGroup) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

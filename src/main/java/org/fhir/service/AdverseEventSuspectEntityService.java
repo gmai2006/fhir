@@ -32,7 +32,5 @@ public interface AdverseEventSuspectEntityService {
 	public AdverseEventSuspectEntity find(String id);
   public List<AdverseEventSuspectEntity> select(int maxResult);
   public List<AdverseEventSuspectEntity> selectAll();
-  public AdverseEventSuspectEntity create(AdverseEventSuspectEntity bean);
-  public AdverseEventSuspectEntity update(AdverseEventSuspectEntity bean);
   public void delete(AdverseEventSuspectEntity bean);
 }

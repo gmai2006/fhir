@@ -74,6 +74,7 @@ public class ExplanationOfBenefitProcessNote  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -95,22 +96,17 @@ public class ExplanationOfBenefitProcessNote  {
 
   public ExplanationOfBenefitProcessNote(ExplanationOfBenefitProcessNoteModel o) {
     this.id = o.getId();
-      if (null != o.getNumber()) {
-        this.number = new Float(o.getNumber());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getText()) {
-        this.text = new String(o.getText());
-      }
-
-      this.language = CodeableConcept.fromJson(o.getLanguage());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getNumber()) {
+      this.number = o.getNumber();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+    this.language = CodeableConceptHelper.fromJson(o.getLanguage());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setNumber( Float value) {
@@ -177,50 +173,19 @@ public class ExplanationOfBenefitProcessNote  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("number" + "[" + String.valueOf(this.number) + "]\n"); 
-     builder.append("_number" + "[" + String.valueOf(this._number) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitProcessNote]:" + "\n");
+     if(this.number != null) builder.append("number" + "->" + this.number.toString() + "\n"); 
+     if(this._number != null) builder.append("_number" + "->" + this._number.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExplanationOfBenefitProcessNote> fromArray(java.util.List<ExplanationOfBenefitProcessNoteModel> list) {
-    return (java.util.List<ExplanationOfBenefitProcessNote>)list.stream()
-      .map(model -> new ExplanationOfBenefitProcessNote(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExplanationOfBenefitProcessNoteModel> toModelArray(java.util.List<ExplanationOfBenefitProcessNote> list) {
-    return (java.util.List<ExplanationOfBenefitProcessNoteModel>)list.stream()
-      .map(model -> new ExplanationOfBenefitProcessNoteModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExplanationOfBenefitProcessNote fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExplanationOfBenefitProcessNote.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExplanationOfBenefitProcessNote o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExplanationOfBenefitProcessNote> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

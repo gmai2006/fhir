@@ -34,10 +34,5 @@ public interface MedicationAdministrationPerformerDao {
   public List<MedicationAdministrationPerformer> select(int maxResult);
 
   public List<MedicationAdministrationPerformer> selectAll();
-
-  public MedicationAdministrationPerformer create(MedicationAdministrationPerformer e);
-
-  public MedicationAdministrationPerformer update(MedicationAdministrationPerformer e);
-
   public void delete(MedicationAdministrationPerformer e);
 }

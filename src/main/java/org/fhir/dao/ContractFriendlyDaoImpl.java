@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ContractFriendlyModel;
 import org.fhir.pojo.ContractFriendly;
+import org.fhir.pojo.ContractFriendlyHelper;
 
 public class ContractFriendlyDaoImpl implements ContractFriendlyDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ContractFriendlyDaoImpl implements ContractFriendlyDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContractFriendlyModel a", ContractFriendlyModel.class).setMaxResults(maxResult);
       List<ContractFriendlyModel> models = query.getResultList();
-      return ContractFriendly.fromArray(models);
+      return ContractFriendlyHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ContractFriendlyDaoImpl implements ContractFriendlyDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContractFriendlyModel a", ContractFriendlyModel.class);
       List<ContractFriendlyModel> models = query.getResultList();
-      return ContractFriendly.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ContractFriendly create(ContractFriendly e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ContractFriendlyModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ContractFriendly update(ContractFriendly e) {
-      final EntityManager em = entityManagerProvider.get();
-      ContractFriendlyModel model = em.merge(new ContractFriendlyModel(e));
-      return new ContractFriendly(model);
+      return ContractFriendlyHelper.fromArray2Array(models);
   }
 
   @Override

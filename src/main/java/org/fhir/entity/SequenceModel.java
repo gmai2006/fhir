@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Raw data describing a biological sequence."
 */
 @Entity
 @Table(name="sequence")
-public class SequenceModel  {
+public class SequenceModel  implements Serializable {
+	private static final long serialVersionUID = 151857669700444522L;
   /**
   * Description: "This is a Sequence resource"
   */
@@ -47,7 +48,7 @@ public class SequenceModel  {
 
   /**
   * Description: "A unique identifier for this particular sequence instance. This is a FHIR-defined id."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -76,9 +77,9 @@ public class SequenceModel  {
   @Column(name="\"patient_id\"")
   private String patient_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`patient_id`", insertable=false, updatable=false)
-  private ReferenceModel patient;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> patient;
 
   /**
   * Description: "Specimen used for sequencing."
@@ -87,9 +88,9 @@ public class SequenceModel  {
   @Column(name="\"specimen_id\"")
   private String specimen_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`specimen_id`", insertable=false, updatable=false)
-  private ReferenceModel specimen;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specimen_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> specimen;
 
   /**
   * Description: "The method for sequencing, for example, chip information."
@@ -98,9 +99,9 @@ public class SequenceModel  {
   @Column(name="\"device_id\"")
   private String device_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`device_id`", insertable=false, updatable=false)
-  private ReferenceModel device;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="device_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> device;
 
   /**
   * Description: "The organization or lab that should be responsible for this result."
@@ -109,13 +110,13 @@ public class SequenceModel  {
   @Column(name="\"performer_id\"")
   private String performer_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`performer_id`", insertable=false, updatable=false)
-  private ReferenceModel performer;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performer_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> performer;
 
   /**
   * Description: "The number of copies of the seqeunce of interest. (RNASeq)."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -129,16 +130,20 @@ public class SequenceModel  {
   @Column(name="\"referenceseq_id\"")
   private String referenceseq_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`referenceseq_id`", insertable=false, updatable=false)
-  private SequenceReferenceSeqModel referenceSeq;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="referenceseq_id", insertable=false, updatable=false)
+  private java.util.List<SequenceReferenceSeqModel> referenceSeq;
 
   /**
   * Description: "The definition of variant here originates from Sequence ontology ([variant_of](http://www.sequenceontology.org/browser/current_svn/term/variant_of)). This element can represent amino acid or nucleic sequence change(including insertion,deletion,SNP,etc.)  It can represent some complex mutation or segment variation with the assist of CIGAR string."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<SequenceVariantModel> variant = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"variant_id\"")
+  private String variant_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="variant_id", insertable=false, updatable=false)
+  private java.util.List<SequenceVariantModel> variant;
 
   /**
   * Description: "Sequence that was observed. It is the result marked by referenceSeq along with variant records on referenceSeq. This shall starts from referenceSeq.windowStart and end by referenceSeq.windowEnd."
@@ -150,9 +155,13 @@ public class SequenceModel  {
   /**
   * Description: "An experimental feature attribute that defines the quality of the feature in a quantitative way, such as a phred quality score ([SO:0001686](http://www.sequenceontology.org/browser/current_svn/term/SO:0001686))."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<SequenceQualityModel> quality = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"quality_id\"")
+  private String quality_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quality_id", insertable=false, updatable=false)
+  private java.util.List<SequenceQualityModel> quality;
 
   /**
   * Description: "Coverage (read depth or depth) is the average number of reads representing a given nucleotide in the reconstructed sequence."
@@ -165,16 +174,24 @@ public class SequenceModel  {
   /**
   * Description: "Configurations of the external repository. The repository shall store target's observedSeq or records related with target's observedSeq."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<SequenceRepositoryModel> repository = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"repository_id\"")
+  private String repository_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="repository_id", insertable=false, updatable=false)
+  private java.util.List<SequenceRepositoryModel> repository;
 
   /**
   * Description: "Pointer to next atomic sequence which at most contains one variant."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> pointer = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"pointer_id\"")
+  private String pointer_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="pointer_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> pointer;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -184,14 +201,14 @@ public class SequenceModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -201,7 +218,7 @@ public class SequenceModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -211,7 +228,7 @@ public class SequenceModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -223,6 +240,7 @@ public class SequenceModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -237,9 +255,9 @@ public class SequenceModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -260,265 +278,257 @@ public class SequenceModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public SequenceModel() {
   }
 
   public SequenceModel(Sequence o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.type = o.getType();
-
-      this.coordinateSystem = o.getCoordinateSystem();
-
-      if (null != o.getPatient()) {
-      	this.patient_id = "patient" + this.getId();
-        this.patient = new ReferenceModel(o.getPatient());
-        this.patient.setId(this.patient_id);
-        this.patient.parent_id = this.patient.getId();
-      }
-
-      if (null != o.getSpecimen()) {
-      	this.specimen_id = "specimen" + this.getId();
-        this.specimen = new ReferenceModel(o.getSpecimen());
-        this.specimen.setId(this.specimen_id);
-        this.specimen.parent_id = this.specimen.getId();
-      }
-
-      if (null != o.getDevice()) {
-      	this.device_id = "device" + this.getId();
-        this.device = new ReferenceModel(o.getDevice());
-        this.device.setId(this.device_id);
-        this.device.parent_id = this.device.getId();
-      }
-
-      if (null != o.getPerformer()) {
-      	this.performer_id = "performer" + this.getId();
-        this.performer = new ReferenceModel(o.getPerformer());
-        this.performer.setId(this.performer_id);
-        this.performer.parent_id = this.performer.getId();
-      }
-
-      this.quantity = Quantity.toJson(o.getQuantity());
-      if (null != o.getReferenceSeq()) {
-      	this.referenceseq_id = "referenceSeq" + this.getId();
-        this.referenceSeq = new SequenceReferenceSeqModel(o.getReferenceSeq());
-        this.referenceSeq.setId(this.referenceseq_id);
-        this.referenceSeq.parent_id = this.referenceSeq.getId();
-      }
-
-      this.variant = SequenceVariant.toModelArray(o.getVariant());
-
-      this.observedSeq = o.getObservedSeq();
-
-      this.quality = SequenceQuality.toModelArray(o.getQuality());
-
-      this.readCoverage = o.getReadCoverage();
-
-      this.repository = SequenceRepository.toModelArray(o.getRepository());
-
-      this.pointer = Reference.toModelArray(o.getPointer());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.type = o.getType();
+    this.coordinateSystem = o.getCoordinateSystem();
+    if (null != o.getPatient() ) {
+    	this.patient_id = "patient" + this.id;
+    	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
+    }
+    if (null != o.getSpecimen() ) {
+    	this.specimen_id = "specimen" + this.id;
+    	this.specimen = ReferenceHelper.toModel(o.getSpecimen(), this.specimen_id);
+    }
+    if (null != o.getDevice() ) {
+    	this.device_id = "device" + this.id;
+    	this.device = ReferenceHelper.toModel(o.getDevice(), this.device_id);
+    }
+    if (null != o.getPerformer() ) {
+    	this.performer_id = "performer" + this.id;
+    	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);
+    }
+    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    if (null != o.getReferenceSeq() ) {
+    	this.referenceseq_id = "referenceseq" + this.id;
+    	this.referenceSeq = SequenceReferenceSeqHelper.toModel(o.getReferenceSeq(), this.referenceseq_id);
+    }
+    if (null != o.getVariant() && !o.getVariant().isEmpty()) {
+    	this.variant_id = "variant" + this.id;
+    	this.variant = SequenceVariantHelper.toModelFromArray(o.getVariant(), this.variant_id);
+    }
+    this.observedSeq = o.getObservedSeq();
+    if (null != o.getQuality() && !o.getQuality().isEmpty()) {
+    	this.quality_id = "quality" + this.id;
+    	this.quality = SequenceQualityHelper.toModelFromArray(o.getQuality(), this.quality_id);
+    }
+    this.readCoverage = o.getReadCoverage();
+    if (null != o.getRepository() && !o.getRepository().isEmpty()) {
+    	this.repository_id = "repository" + this.id;
+    	this.repository = SequenceRepositoryHelper.toModelFromArray(o.getRepository(), this.repository_id);
+    }
+    if (null != o.getPointer() && !o.getPointer().isEmpty()) {
+    	this.pointer_id = "pointer" + this.id;
+    	this.pointer = ReferenceHelper.toModelFromArray(o.getPointer(), this.pointer_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setCoordinateSystem( Float value) {
-    this.coordinateSystem = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public Float getCoordinateSystem() {
     return this.coordinateSystem;
   }
-  public void setPatient( ReferenceModel value) {
-    this.patient = value;
+  public void setCoordinateSystem( Float value) {
+    this.coordinateSystem = value;
   }
-  public ReferenceModel getPatient() {
+  public java.util.List<ReferenceModel> getPatient() {
     return this.patient;
   }
-  public void setSpecimen( ReferenceModel value) {
-    this.specimen = value;
+  public void setPatient( java.util.List<ReferenceModel> value) {
+    this.patient = value;
   }
-  public ReferenceModel getSpecimen() {
+  public java.util.List<ReferenceModel> getSpecimen() {
     return this.specimen;
   }
-  public void setDevice( ReferenceModel value) {
-    this.device = value;
+  public void setSpecimen( java.util.List<ReferenceModel> value) {
+    this.specimen = value;
   }
-  public ReferenceModel getDevice() {
+  public java.util.List<ReferenceModel> getDevice() {
     return this.device;
   }
-  public void setPerformer( ReferenceModel value) {
-    this.performer = value;
+  public void setDevice( java.util.List<ReferenceModel> value) {
+    this.device = value;
   }
-  public ReferenceModel getPerformer() {
+  public java.util.List<ReferenceModel> getPerformer() {
     return this.performer;
   }
-  public void setQuantity( String value) {
-    this.quantity = value;
+  public void setPerformer( java.util.List<ReferenceModel> value) {
+    this.performer = value;
   }
   public String getQuantity() {
     return this.quantity;
   }
-  public void setReferenceSeq( SequenceReferenceSeqModel value) {
-    this.referenceSeq = value;
+  public void setQuantity( String value) {
+    this.quantity = value;
   }
-  public SequenceReferenceSeqModel getReferenceSeq() {
+  public java.util.List<SequenceReferenceSeqModel> getReferenceSeq() {
     return this.referenceSeq;
   }
-  public void setVariant( java.util.List<SequenceVariantModel> value) {
-    this.variant = value;
+  public void setReferenceSeq( java.util.List<SequenceReferenceSeqModel> value) {
+    this.referenceSeq = value;
   }
   public java.util.List<SequenceVariantModel> getVariant() {
     return this.variant;
   }
-  public void setObservedSeq( String value) {
-    this.observedSeq = value;
+  public void setVariant( java.util.List<SequenceVariantModel> value) {
+    this.variant = value;
   }
   public String getObservedSeq() {
     return this.observedSeq;
   }
-  public void setQuality( java.util.List<SequenceQualityModel> value) {
-    this.quality = value;
+  public void setObservedSeq( String value) {
+    this.observedSeq = value;
   }
   public java.util.List<SequenceQualityModel> getQuality() {
     return this.quality;
   }
-  public void setReadCoverage( Float value) {
-    this.readCoverage = value;
+  public void setQuality( java.util.List<SequenceQualityModel> value) {
+    this.quality = value;
   }
   public Float getReadCoverage() {
     return this.readCoverage;
   }
-  public void setRepository( java.util.List<SequenceRepositoryModel> value) {
-    this.repository = value;
+  public void setReadCoverage( Float value) {
+    this.readCoverage = value;
   }
   public java.util.List<SequenceRepositoryModel> getRepository() {
     return this.repository;
   }
-  public void setPointer( java.util.List<ReferenceModel> value) {
-    this.pointer = value;
+  public void setRepository( java.util.List<SequenceRepositoryModel> value) {
+    this.repository = value;
   }
   public java.util.List<ReferenceModel> getPointer() {
     return this.pointer;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setPointer( java.util.List<ReferenceModel> value) {
+    this.pointer = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("coordinateSystem" + "[" + String.valueOf(this.coordinateSystem) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("specimen" + "[" + String.valueOf(this.specimen) + "]\n"); 
-     builder.append("device" + "[" + String.valueOf(this.device) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("referenceSeq" + "[" + String.valueOf(this.referenceSeq) + "]\n"); 
-     builder.append("variant" + "[" + String.valueOf(this.variant) + "]\n"); 
-     builder.append("observedSeq" + "[" + String.valueOf(this.observedSeq) + "]\n"); 
-     builder.append("quality" + "[" + String.valueOf(this.quality) + "]\n"); 
-     builder.append("readCoverage" + "[" + String.valueOf(this.readCoverage) + "]\n"); 
-     builder.append("repository" + "[" + String.valueOf(this.repository) + "]\n"); 
-     builder.append("pointer" + "[" + String.valueOf(this.pointer) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[SequenceModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("coordinateSystem" + "->" + this.coordinateSystem + "\n"); 
+     builder.append("quantity" + "->" + this.quantity + "\n"); 
+     builder.append("observedSeq" + "->" + this.observedSeq + "\n"); 
+     builder.append("readCoverage" + "->" + this.readCoverage + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[SequenceModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("coordinateSystem" + "->" + this.coordinateSystem + "\n"); 
+     builder.append("patient" + "->" + this.patient + "\n"); 
+     builder.append("specimen" + "->" + this.specimen + "\n"); 
+     builder.append("device" + "->" + this.device + "\n"); 
+     builder.append("performer" + "->" + this.performer + "\n"); 
+     builder.append("quantity" + "->" + this.quantity + "\n"); 
+     builder.append("referenceSeq" + "->" + this.referenceSeq + "\n"); 
+     builder.append("variant" + "->" + this.variant + "\n"); 
+     builder.append("observedSeq" + "->" + this.observedSeq + "\n"); 
+     builder.append("quality" + "->" + this.quality + "\n"); 
+     builder.append("readCoverage" + "->" + this.readCoverage + "\n"); 
+     builder.append("repository" + "->" + this.repository + "\n"); 
+     builder.append("pointer" + "->" + this.pointer + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

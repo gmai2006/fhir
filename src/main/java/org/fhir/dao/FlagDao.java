@@ -34,10 +34,8 @@ public interface FlagDao {
   public List<Flag> select(int maxResult);
 
   public List<Flag> selectAll();
-
   public Flag create(Flag e);
 
   public Flag update(Flag e);
-
   public void delete(Flag e);
 }

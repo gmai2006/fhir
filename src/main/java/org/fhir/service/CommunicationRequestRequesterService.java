@@ -32,7 +32,5 @@ public interface CommunicationRequestRequesterService {
 	public CommunicationRequestRequester find(String id);
   public List<CommunicationRequestRequester> select(int maxResult);
   public List<CommunicationRequestRequester> selectAll();
-  public CommunicationRequestRequester create(CommunicationRequestRequester bean);
-  public CommunicationRequestRequester update(CommunicationRequestRequester bean);
   public void delete(CommunicationRequestRequester bean);
 }

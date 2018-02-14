@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
 */
 @Entity
 @Table(name="immunizationrecommendationrecommendation")
-public class ImmunizationRecommendationRecommendationModel  {
+public class ImmunizationRecommendationRecommendationModel  implements Serializable {
+	private static final long serialVersionUID = 15185766970067688L;
   /**
   * Description: "The date the immunization recommendation was created."
   */
@@ -47,7 +48,7 @@ public class ImmunizationRecommendationRecommendationModel  {
 
   /**
   * Description: "Vaccine that pertains to the recommendation."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -56,7 +57,7 @@ public class ImmunizationRecommendationRecommendationModel  {
 
   /**
   * Description: "The targeted disease for the recommendation."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -73,7 +74,7 @@ public class ImmunizationRecommendationRecommendationModel  {
 
   /**
   * Description: "Vaccine administration status."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -84,9 +85,13 @@ public class ImmunizationRecommendationRecommendationModel  {
   /**
   * Description: "Vaccine date recommendations.  For example, earliest date to administer, latest date to administer, etc."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ImmunizationRecommendationDateCriterionModel> dateCriterion = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"datecriterion_id\"")
+  private String datecriterion_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="datecriterion_id", insertable=false, updatable=false)
+  private java.util.List<ImmunizationRecommendationDateCriterionModel> dateCriterion;
 
   /**
   * Description: "Contains information about the protocol under which the vaccine was administered."
@@ -95,28 +100,36 @@ public class ImmunizationRecommendationRecommendationModel  {
   @Column(name="\"protocol_id\"")
   private String protocol_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`protocol_id`", insertable=false, updatable=false)
-  private ImmunizationRecommendationProtocolModel protocol;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="protocol_id", insertable=false, updatable=false)
+  private java.util.List<ImmunizationRecommendationProtocolModel> protocol;
 
   /**
   * Description: "Immunization event history that supports the status and recommendation."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> supportingImmunization = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"supportingimmunization_id\"")
+  private String supportingimmunization_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="supportingimmunization_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> supportingImmunization;
 
   /**
   * Description: "Patient Information that supports the status and recommendation.  This includes patient observations, adverse reactions and allergy/intolerance information."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> supportingPatientInformation = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"supportingpatientinformation_id\"")
+  private String supportingpatientinformation_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="supportingpatientinformation_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> supportingPatientInformation;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -128,6 +141,7 @@ public class ImmunizationRecommendationRecommendationModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -136,137 +150,161 @@ public class ImmunizationRecommendationRecommendationModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ImmunizationRecommendationRecommendationModel() {
   }
 
-  public ImmunizationRecommendationRecommendationModel(ImmunizationRecommendationRecommendation o) {
-    this.id = o.getId();
-      this.date = o.getDate();
-
-      this.vaccineCode = CodeableConcept.toJson(o.getVaccineCode());
-      this.targetDisease = CodeableConcept.toJson(o.getTargetDisease());
-      this.doseNumber = o.getDoseNumber();
-
-      this.forecastStatus = CodeableConcept.toJson(o.getForecastStatus());
-      this.dateCriterion = ImmunizationRecommendationDateCriterion.toModelArray(o.getDateCriterion());
-
-      if (null != o.getProtocol()) {
-      	this.protocol_id = "protocol" + this.getId();
-        this.protocol = new ImmunizationRecommendationProtocolModel(o.getProtocol());
-        this.protocol.setId(this.protocol_id);
-        this.protocol.parent_id = this.protocol.getId();
-      }
-
-      this.supportingImmunization = Reference.toModelArray(o.getSupportingImmunization());
-
-      this.supportingPatientInformation = Reference.toModelArray(o.getSupportingPatientInformation());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ImmunizationRecommendationRecommendationModel(ImmunizationRecommendationRecommendation o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.date = o.getDate();
+    this.vaccineCode = CodeableConceptHelper.toJson(o.getVaccineCode());
+    this.targetDisease = CodeableConceptHelper.toJson(o.getTargetDisease());
+    this.doseNumber = o.getDoseNumber();
+    this.forecastStatus = CodeableConceptHelper.toJson(o.getForecastStatus());
+    if (null != o.getDateCriterion() && !o.getDateCriterion().isEmpty()) {
+    	this.datecriterion_id = "datecriterion" + this.parent_id;
+    	this.dateCriterion = ImmunizationRecommendationDateCriterionHelper.toModelFromArray(o.getDateCriterion(), this.datecriterion_id);
+    }
+    if (null != o.getProtocol() ) {
+    	this.protocol_id = "protocol" + this.parent_id;
+    	this.protocol = ImmunizationRecommendationProtocolHelper.toModel(o.getProtocol(), this.protocol_id);
+    }
+    if (null != o.getSupportingImmunization() && !o.getSupportingImmunization().isEmpty()) {
+    	this.supportingimmunization_id = "supportingimmunization" + this.parent_id;
+    	this.supportingImmunization = ReferenceHelper.toModelFromArray(o.getSupportingImmunization(), this.supportingimmunization_id);
+    }
+    if (null != o.getSupportingPatientInformation() && !o.getSupportingPatientInformation().isEmpty()) {
+    	this.supportingpatientinformation_id = "supportingpatientinformation" + this.parent_id;
+    	this.supportingPatientInformation = ReferenceHelper.toModelFromArray(o.getSupportingPatientInformation(), this.supportingpatientinformation_id);
+    }
   }
 
-  public void setDate( String value) {
-    this.date = value;
-  }
   public String getDate() {
     return this.date;
   }
-  public void setVaccineCode( String value) {
-    this.vaccineCode = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public String getVaccineCode() {
     return this.vaccineCode;
   }
-  public void setTargetDisease( String value) {
-    this.targetDisease = value;
+  public void setVaccineCode( String value) {
+    this.vaccineCode = value;
   }
   public String getTargetDisease() {
     return this.targetDisease;
   }
-  public void setDoseNumber( Float value) {
-    this.doseNumber = value;
+  public void setTargetDisease( String value) {
+    this.targetDisease = value;
   }
   public Float getDoseNumber() {
     return this.doseNumber;
   }
-  public void setForecastStatus( String value) {
-    this.forecastStatus = value;
+  public void setDoseNumber( Float value) {
+    this.doseNumber = value;
   }
   public String getForecastStatus() {
     return this.forecastStatus;
   }
-  public void setDateCriterion( java.util.List<ImmunizationRecommendationDateCriterionModel> value) {
-    this.dateCriterion = value;
+  public void setForecastStatus( String value) {
+    this.forecastStatus = value;
   }
   public java.util.List<ImmunizationRecommendationDateCriterionModel> getDateCriterion() {
     return this.dateCriterion;
   }
-  public void setProtocol( ImmunizationRecommendationProtocolModel value) {
-    this.protocol = value;
+  public void setDateCriterion( java.util.List<ImmunizationRecommendationDateCriterionModel> value) {
+    this.dateCriterion = value;
   }
-  public ImmunizationRecommendationProtocolModel getProtocol() {
+  public java.util.List<ImmunizationRecommendationProtocolModel> getProtocol() {
     return this.protocol;
   }
-  public void setSupportingImmunization( java.util.List<ReferenceModel> value) {
-    this.supportingImmunization = value;
+  public void setProtocol( java.util.List<ImmunizationRecommendationProtocolModel> value) {
+    this.protocol = value;
   }
   public java.util.List<ReferenceModel> getSupportingImmunization() {
     return this.supportingImmunization;
   }
-  public void setSupportingPatientInformation( java.util.List<ReferenceModel> value) {
-    this.supportingPatientInformation = value;
+  public void setSupportingImmunization( java.util.List<ReferenceModel> value) {
+    this.supportingImmunization = value;
   }
   public java.util.List<ReferenceModel> getSupportingPatientInformation() {
     return this.supportingPatientInformation;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setSupportingPatientInformation( java.util.List<ReferenceModel> value) {
+    this.supportingPatientInformation = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("vaccineCode" + "[" + String.valueOf(this.vaccineCode) + "]\n"); 
-     builder.append("targetDisease" + "[" + String.valueOf(this.targetDisease) + "]\n"); 
-     builder.append("doseNumber" + "[" + String.valueOf(this.doseNumber) + "]\n"); 
-     builder.append("forecastStatus" + "[" + String.valueOf(this.forecastStatus) + "]\n"); 
-     builder.append("dateCriterion" + "[" + String.valueOf(this.dateCriterion) + "]\n"); 
-     builder.append("protocol" + "[" + String.valueOf(this.protocol) + "]\n"); 
-     builder.append("supportingImmunization" + "[" + String.valueOf(this.supportingImmunization) + "]\n"); 
-     builder.append("supportingPatientInformation" + "[" + String.valueOf(this.supportingPatientInformation) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImmunizationRecommendationRecommendationModel]:" + "\n");
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("vaccineCode" + "->" + this.vaccineCode + "\n"); 
+     builder.append("targetDisease" + "->" + this.targetDisease + "\n"); 
+     builder.append("doseNumber" + "->" + this.doseNumber + "\n"); 
+     builder.append("forecastStatus" + "->" + this.forecastStatus + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ImmunizationRecommendationRecommendationModel]:" + "\n");
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("vaccineCode" + "->" + this.vaccineCode + "\n"); 
+     builder.append("targetDisease" + "->" + this.targetDisease + "\n"); 
+     builder.append("doseNumber" + "->" + this.doseNumber + "\n"); 
+     builder.append("forecastStatus" + "->" + this.forecastStatus + "\n"); 
+     builder.append("dateCriterion" + "->" + this.dateCriterion + "\n"); 
+     builder.append("protocol" + "->" + this.protocol + "\n"); 
+     builder.append("supportingImmunization" + "->" + this.supportingImmunization + "\n"); 
+     builder.append("supportingPatientInformation" + "->" + this.supportingPatientInformation + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

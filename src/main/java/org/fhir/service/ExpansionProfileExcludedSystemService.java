@@ -32,7 +32,5 @@ public interface ExpansionProfileExcludedSystemService {
 	public ExpansionProfileExcludedSystem find(String id);
   public List<ExpansionProfileExcludedSystem> select(int maxResult);
   public List<ExpansionProfileExcludedSystem> selectAll();
-  public ExpansionProfileExcludedSystem create(ExpansionProfileExcludedSystem bean);
-  public ExpansionProfileExcludedSystem update(ExpansionProfileExcludedSystem bean);
   public void delete(ExpansionProfileExcludedSystem bean);
 }

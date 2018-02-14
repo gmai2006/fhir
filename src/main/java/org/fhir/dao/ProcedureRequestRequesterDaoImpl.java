@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ProcedureRequestRequesterModel;
 import org.fhir.pojo.ProcedureRequestRequester;
+import org.fhir.pojo.ProcedureRequestRequesterHelper;
 
 public class ProcedureRequestRequesterDaoImpl implements ProcedureRequestRequesterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ProcedureRequestRequesterDaoImpl implements ProcedureRequestRequest
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProcedureRequestRequesterModel a", ProcedureRequestRequesterModel.class).setMaxResults(maxResult);
       List<ProcedureRequestRequesterModel> models = query.getResultList();
-      return ProcedureRequestRequester.fromArray(models);
+      return ProcedureRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ProcedureRequestRequesterDaoImpl implements ProcedureRequestRequest
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProcedureRequestRequesterModel a", ProcedureRequestRequesterModel.class);
       List<ProcedureRequestRequesterModel> models = query.getResultList();
-      return ProcedureRequestRequester.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ProcedureRequestRequester create(ProcedureRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ProcedureRequestRequesterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ProcedureRequestRequester update(ProcedureRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      ProcedureRequestRequesterModel model = em.merge(new ProcedureRequestRequesterModel(e));
-      return new ProcedureRequestRequester(model);
+      return ProcedureRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override

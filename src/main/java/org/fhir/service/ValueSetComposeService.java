@@ -32,7 +32,5 @@ public interface ValueSetComposeService {
 	public ValueSetCompose find(String id);
   public List<ValueSetCompose> select(int maxResult);
   public List<ValueSetCompose> selectAll();
-  public ValueSetCompose create(ValueSetCompose bean);
-  public ValueSetCompose update(ValueSetCompose bean);
   public void delete(ValueSetCompose bean);
 }

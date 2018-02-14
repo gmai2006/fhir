@@ -32,7 +32,5 @@ public interface ConceptMapElementService {
 	public ConceptMapElement find(String id);
   public List<ConceptMapElement> select(int maxResult);
   public List<ConceptMapElement> selectAll();
-  public ConceptMapElement create(ConceptMapElement bean);
-  public ConceptMapElement update(ConceptMapElement bean);
   public void delete(ConceptMapElement bean);
 }

@@ -53,6 +53,7 @@ public class DocumentManifestRelated  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -74,18 +75,13 @@ public class DocumentManifestRelated  {
 
   public DocumentManifestRelated(DocumentManifestRelatedModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getRef()) {
-        this.ref = new Reference(o.getRef());
-        this.ref.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getRef() && !o.getRef().isEmpty()) {
+      this.ref = new Reference(o.getRef().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( Identifier value) {
@@ -128,46 +124,15 @@ public class DocumentManifestRelated  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("ref" + "[" + String.valueOf(this.ref) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DocumentManifestRelated]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.ref != null) builder.append("ref" + "->" + this.ref.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<DocumentManifestRelated> fromArray(java.util.List<DocumentManifestRelatedModel> list) {
-    return (java.util.List<DocumentManifestRelated>)list.stream()
-      .map(model -> new DocumentManifestRelated(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DocumentManifestRelatedModel> toModelArray(java.util.List<DocumentManifestRelated> list) {
-    return (java.util.List<DocumentManifestRelatedModel>)list.stream()
-      .map(model -> new DocumentManifestRelatedModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DocumentManifestRelated fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DocumentManifestRelated.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DocumentManifestRelated o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DocumentManifestRelated> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

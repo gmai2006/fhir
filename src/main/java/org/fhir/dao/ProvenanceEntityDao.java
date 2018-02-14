@@ -34,10 +34,5 @@ public interface ProvenanceEntityDao {
   public List<ProvenanceEntity> select(int maxResult);
 
   public List<ProvenanceEntity> selectAll();
-
-  public ProvenanceEntity create(ProvenanceEntity e);
-
-  public ProvenanceEntity update(ProvenanceEntity e);
-
   public void delete(ProvenanceEntity e);
 }

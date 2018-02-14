@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AllergyIntoleranceReactionModel;
 import org.fhir.pojo.AllergyIntoleranceReaction;
+import org.fhir.pojo.AllergyIntoleranceReactionHelper;
 
 public class AllergyIntoleranceReactionDaoImpl implements AllergyIntoleranceReactionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AllergyIntoleranceReactionDaoImpl implements AllergyIntoleranceReac
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AllergyIntoleranceReactionModel a", AllergyIntoleranceReactionModel.class).setMaxResults(maxResult);
       List<AllergyIntoleranceReactionModel> models = query.getResultList();
-      return AllergyIntoleranceReaction.fromArray(models);
+      return AllergyIntoleranceReactionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class AllergyIntoleranceReactionDaoImpl implements AllergyIntoleranceReac
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AllergyIntoleranceReactionModel a", AllergyIntoleranceReactionModel.class);
       List<AllergyIntoleranceReactionModel> models = query.getResultList();
-      return AllergyIntoleranceReaction.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public AllergyIntoleranceReaction create(AllergyIntoleranceReaction e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new AllergyIntoleranceReactionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public AllergyIntoleranceReaction update(AllergyIntoleranceReaction e) {
-      final EntityManager em = entityManagerProvider.get();
-      AllergyIntoleranceReactionModel model = em.merge(new AllergyIntoleranceReactionModel(e));
-      return new AllergyIntoleranceReaction(model);
+      return AllergyIntoleranceReactionHelper.fromArray2Array(models);
   }
 
   @Override

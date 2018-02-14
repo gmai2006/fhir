@@ -34,10 +34,5 @@ public interface ResearchStudyArmDao {
   public List<ResearchStudyArm> select(int maxResult);
 
   public List<ResearchStudyArm> selectAll();
-
-  public ResearchStudyArm create(ResearchStudyArm e);
-
-  public ResearchStudyArm update(ResearchStudyArm e);
-
   public void delete(ResearchStudyArm e);
 }

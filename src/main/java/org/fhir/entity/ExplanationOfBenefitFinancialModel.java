@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitfinancial")
-public class ExplanationOfBenefitFinancialModel  {
+public class ExplanationOfBenefitFinancialModel  implements Serializable {
+	private static final long serialVersionUID = 151857669666957558L;
   /**
   * Description: "Deductable, visits, benefit amount."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -64,7 +65,7 @@ public class ExplanationOfBenefitFinancialModel  {
 
   /**
   * Description: "Benefits allowed."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -81,7 +82,7 @@ public class ExplanationOfBenefitFinancialModel  {
 
   /**
   * Description: "Benefits used."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -91,7 +92,7 @@ public class ExplanationOfBenefitFinancialModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -103,6 +104,7 @@ public class ExplanationOfBenefitFinancialModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -111,105 +113,126 @@ public class ExplanationOfBenefitFinancialModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ExplanationOfBenefitFinancialModel() {
   }
 
-  public ExplanationOfBenefitFinancialModel(ExplanationOfBenefitFinancial o) {
-    this.id = o.getId();
-      this.type = CodeableConcept.toJson(o.getType());
-      this.allowedUnsignedInt = o.getAllowedUnsignedInt();
-
-      this.allowedString = o.getAllowedString();
-
-      this.allowedMoney = Money.toJson(o.getAllowedMoney());
-      this.usedUnsignedInt = o.getUsedUnsignedInt();
-
-      this.usedMoney = Money.toJson(o.getUsedMoney());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ExplanationOfBenefitFinancialModel(ExplanationOfBenefitFinancial o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.allowedUnsignedInt = o.getAllowedUnsignedInt();
+    this.allowedString = o.getAllowedString();
+    this.allowedMoney = MoneyHelper.toJson(o.getAllowedMoney());
+    this.usedUnsignedInt = o.getUsedUnsignedInt();
+    this.usedMoney = MoneyHelper.toJson(o.getUsedMoney());
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setAllowedUnsignedInt( Float value) {
-    this.allowedUnsignedInt = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public Float getAllowedUnsignedInt() {
     return this.allowedUnsignedInt;
   }
-  public void setAllowedString( String value) {
-    this.allowedString = value;
+  public void setAllowedUnsignedInt( Float value) {
+    this.allowedUnsignedInt = value;
   }
   public String getAllowedString() {
     return this.allowedString;
   }
-  public void setAllowedMoney( String value) {
-    this.allowedMoney = value;
+  public void setAllowedString( String value) {
+    this.allowedString = value;
   }
   public String getAllowedMoney() {
     return this.allowedMoney;
   }
-  public void setUsedUnsignedInt( Float value) {
-    this.usedUnsignedInt = value;
+  public void setAllowedMoney( String value) {
+    this.allowedMoney = value;
   }
   public Float getUsedUnsignedInt() {
     return this.usedUnsignedInt;
   }
-  public void setUsedMoney( String value) {
-    this.usedMoney = value;
+  public void setUsedUnsignedInt( Float value) {
+    this.usedUnsignedInt = value;
   }
   public String getUsedMoney() {
     return this.usedMoney;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setUsedMoney( String value) {
+    this.usedMoney = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("allowedUnsignedInt" + "[" + String.valueOf(this.allowedUnsignedInt) + "]\n"); 
-     builder.append("allowedString" + "[" + String.valueOf(this.allowedString) + "]\n"); 
-     builder.append("allowedMoney" + "[" + String.valueOf(this.allowedMoney) + "]\n"); 
-     builder.append("usedUnsignedInt" + "[" + String.valueOf(this.usedUnsignedInt) + "]\n"); 
-     builder.append("usedMoney" + "[" + String.valueOf(this.usedMoney) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitFinancialModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("allowedUnsignedInt" + "->" + this.allowedUnsignedInt + "\n"); 
+     builder.append("allowedString" + "->" + this.allowedString + "\n"); 
+     builder.append("allowedMoney" + "->" + this.allowedMoney + "\n"); 
+     builder.append("usedUnsignedInt" + "->" + this.usedUnsignedInt + "\n"); 
+     builder.append("usedMoney" + "->" + this.usedMoney + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ExplanationOfBenefitFinancialModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("allowedUnsignedInt" + "->" + this.allowedUnsignedInt + "\n"); 
+     builder.append("allowedString" + "->" + this.allowedString + "\n"); 
+     builder.append("allowedMoney" + "->" + this.allowedMoney + "\n"); 
+     builder.append("usedUnsignedInt" + "->" + this.usedUnsignedInt + "\n"); 
+     builder.append("usedMoney" + "->" + this.usedMoney + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

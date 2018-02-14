@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ConceptMapElement create(ConceptMapElement bean) {
-  	requireNonNull(bean);
-    logger.info("create(ConceptMapElement={}) - entered bean ");
-
-    final ConceptMapElement result = dao.create(bean);
-
-    logger.info("create(ConceptMapElement) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ConceptMapElement update(ConceptMapElement bean) {
-  	requireNonNull(bean);
-    logger.info("update(ConceptMapElement={}) - entered bean ");
-
-    final ConceptMapElement result = dao.update(bean);
-
-    logger.info("update(ConceptMapElement) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

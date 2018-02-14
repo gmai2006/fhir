@@ -32,7 +32,5 @@ public interface PractitionerRoleNotAvailableService {
 	public PractitionerRoleNotAvailable find(String id);
   public List<PractitionerRoleNotAvailable> select(int maxResult);
   public List<PractitionerRoleNotAvailable> selectAll();
-  public PractitionerRoleNotAvailable create(PractitionerRoleNotAvailable bean);
-  public PractitionerRoleNotAvailable update(PractitionerRoleNotAvailable bean);
   public void delete(PractitionerRoleNotAvailable bean);
 }

@@ -32,7 +32,5 @@ public interface EligibilityResponseErrorService {
 	public EligibilityResponseError find(String id);
   public List<EligibilityResponseError> select(int maxResult);
   public List<EligibilityResponseError> selectAll();
-  public EligibilityResponseError create(EligibilityResponseError bean);
-  public EligibilityResponseError update(EligibilityResponseError bean);
   public void delete(EligibilityResponseError bean);
 }

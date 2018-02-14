@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExplanationOfBenefitProcessNoteModel;
 import org.fhir.pojo.ExplanationOfBenefitProcessNote;
+import org.fhir.pojo.ExplanationOfBenefitProcessNoteHelper;
 
 public class ExplanationOfBenefitProcessNoteDaoImpl implements ExplanationOfBenefitProcessNoteDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExplanationOfBenefitProcessNoteDaoImpl implements ExplanationOfBene
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitProcessNoteModel a", ExplanationOfBenefitProcessNoteModel.class).setMaxResults(maxResult);
       List<ExplanationOfBenefitProcessNoteModel> models = query.getResultList();
-      return ExplanationOfBenefitProcessNote.fromArray(models);
+      return ExplanationOfBenefitProcessNoteHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ExplanationOfBenefitProcessNoteDaoImpl implements ExplanationOfBene
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitProcessNoteModel a", ExplanationOfBenefitProcessNoteModel.class);
       List<ExplanationOfBenefitProcessNoteModel> models = query.getResultList();
-      return ExplanationOfBenefitProcessNote.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ExplanationOfBenefitProcessNote create(ExplanationOfBenefitProcessNote e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ExplanationOfBenefitProcessNoteModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ExplanationOfBenefitProcessNote update(ExplanationOfBenefitProcessNote e) {
-      final EntityManager em = entityManagerProvider.get();
-      ExplanationOfBenefitProcessNoteModel model = em.merge(new ExplanationOfBenefitProcessNoteModel(e));
-      return new ExplanationOfBenefitProcessNote(model);
+      return ExplanationOfBenefitProcessNoteHelper.fromArray2Array(models);
   }
 
   @Override

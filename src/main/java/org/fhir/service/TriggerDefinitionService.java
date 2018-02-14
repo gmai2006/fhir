@@ -32,7 +32,5 @@ public interface TriggerDefinitionService {
 	public TriggerDefinition find(String id);
   public List<TriggerDefinition> select(int maxResult);
   public List<TriggerDefinition> selectAll();
-  public TriggerDefinition create(TriggerDefinition bean);
-  public TriggerDefinition update(TriggerDefinition bean);
   public void delete(TriggerDefinition bean);
 }

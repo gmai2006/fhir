@@ -34,10 +34,5 @@ public interface ValueSetContainsDao {
   public List<ValueSetContains> select(int maxResult);
 
   public List<ValueSetContains> selectAll();
-
-  public ValueSetContains create(ValueSetContains e);
-
-  public ValueSetContains update(ValueSetContains e);
-
   public void delete(ValueSetContains e);
 }

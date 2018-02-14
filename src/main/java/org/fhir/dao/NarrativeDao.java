@@ -34,10 +34,5 @@ public interface NarrativeDao {
   public List<Narrative> select(int maxResult);
 
   public List<Narrative> selectAll();
-
-  public Narrative create(Narrative e);
-
-  public Narrative update(Narrative e);
-
   public void delete(Narrative e);
 }

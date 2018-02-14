@@ -32,7 +32,5 @@ public interface GraphDefinitionCompartmentService {
 	public GraphDefinitionCompartment find(String id);
   public List<GraphDefinitionCompartment> select(int maxResult);
   public List<GraphDefinitionCompartment> selectAll();
-  public GraphDefinitionCompartment create(GraphDefinitionCompartment bean);
-  public GraphDefinitionCompartment update(GraphDefinitionCompartment bean);
   public void delete(GraphDefinitionCompartment bean);
 }

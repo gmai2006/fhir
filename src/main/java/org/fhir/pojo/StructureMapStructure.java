@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.StructureMapStructureModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -82,6 +83,7 @@ public class StructureMapStructure  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -98,7 +100,27 @@ public class StructureMapStructure  {
   */
   private java.util.List<Extension> extension = new java.util.ArrayList<>();
 
-  public StructureMapStructure() {}
+  public StructureMapStructure() {
+  }
+
+  public StructureMapStructure(StructureMapStructureModel o) {
+    this.id = o.getId();
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    if (null != o.getMode()) {
+      this.mode = o.getMode();
+    }
+    if (null != o.getAlias()) {
+      this.alias = o.getAlias();
+    }
+    if (null != o.getDocumentation()) {
+      this.documentation = o.getDocumentation();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+  }
 
   public void setUrl( String value) {
     this.url = value;
@@ -176,39 +198,20 @@ public class StructureMapStructure  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("alias" + "[" + String.valueOf(this.alias) + "]\n"); 
-     builder.append("_alias" + "[" + String.valueOf(this._alias) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("_documentation" + "[" + String.valueOf(this._documentation) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[StructureMapStructure]:" + "\n");
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.alias != null) builder.append("alias" + "->" + this.alias.toString() + "\n"); 
+     if(this._alias != null) builder.append("_alias" + "->" + this._alias.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static StructureMapStructure fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, StructureMapStructure.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(StructureMapStructure o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<StructureMapStructure> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum ModeEnum {
@@ -228,4 +231,5 @@ public class StructureMapStructure  {
   		}
   	}
   }
+
 }

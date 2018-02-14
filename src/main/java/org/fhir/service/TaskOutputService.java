@@ -32,7 +32,5 @@ public interface TaskOutputService {
 	public TaskOutput find(String id);
   public List<TaskOutput> select(int maxResult);
   public List<TaskOutput> selectAll();
-  public TaskOutput create(TaskOutput bean);
-  public TaskOutput update(TaskOutput bean);
   public void delete(TaskOutput bean);
 }

@@ -63,6 +63,7 @@ public class CapabilityStatementImplementation  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,20 +85,15 @@ public class CapabilityStatementImplementation  {
 
   public CapabilityStatementImplementation(CapabilityStatementImplementationModel o) {
     this.id = o.getId();
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getUrl()) {
-        this.url = new String(o.getUrl());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setDescription( String value) {
@@ -152,48 +148,17 @@ public class CapabilityStatementImplementation  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementImplementation]:" + "\n");
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CapabilityStatementImplementation> fromArray(java.util.List<CapabilityStatementImplementationModel> list) {
-    return (java.util.List<CapabilityStatementImplementation>)list.stream()
-      .map(model -> new CapabilityStatementImplementation(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementImplementationModel> toModelArray(java.util.List<CapabilityStatementImplementation> list) {
-    return (java.util.List<CapabilityStatementImplementationModel>)list.stream()
-      .map(model -> new CapabilityStatementImplementationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatementImplementation fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatementImplementation.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementImplementation o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementImplementation> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

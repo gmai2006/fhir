@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ConceptMapUnmapped create(ConceptMapUnmapped bean) {
-  	requireNonNull(bean);
-    logger.info("create(ConceptMapUnmapped={}) - entered bean ");
-
-    final ConceptMapUnmapped result = dao.create(bean);
-
-    logger.info("create(ConceptMapUnmapped) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ConceptMapUnmapped update(ConceptMapUnmapped bean) {
-  	requireNonNull(bean);
-    logger.info("update(ConceptMapUnmapped={}) - entered bean ");
-
-    final ConceptMapUnmapped result = dao.update(bean);
-
-    logger.info("update(ConceptMapUnmapped) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

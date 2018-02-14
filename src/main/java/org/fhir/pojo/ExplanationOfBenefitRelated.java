@@ -58,6 +58,7 @@ public class ExplanationOfBenefitRelated  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -79,19 +80,14 @@ public class ExplanationOfBenefitRelated  {
 
   public ExplanationOfBenefitRelated(ExplanationOfBenefitRelatedModel o) {
     this.id = o.getId();
-      if (null != o.getClaim()) {
-        this.claim = new Reference(o.getClaim());
-        this.claim.setId(this.getId());
-      }
-
-      this.relationship = CodeableConcept.fromJson(o.getRelationship());
-      this.reference = Identifier.fromJson(o.getReference());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getClaim() && !o.getClaim().isEmpty()) {
+      this.claim = new Reference(o.getClaim().get(0));
+    }
+    this.relationship = CodeableConceptHelper.fromJson(o.getRelationship());
+    this.reference = IdentifierHelper.fromJson(o.getReference());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setClaim( Reference value) {
@@ -140,47 +136,16 @@ public class ExplanationOfBenefitRelated  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("claim" + "[" + String.valueOf(this.claim) + "]\n"); 
-     builder.append("relationship" + "[" + String.valueOf(this.relationship) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitRelated]:" + "\n");
+     if(this.claim != null) builder.append("claim" + "->" + this.claim.toString() + "\n"); 
+     if(this.relationship != null) builder.append("relationship" + "->" + this.relationship.toString() + "\n"); 
+     if(this.reference != null) builder.append("reference" + "->" + this.reference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExplanationOfBenefitRelated> fromArray(java.util.List<ExplanationOfBenefitRelatedModel> list) {
-    return (java.util.List<ExplanationOfBenefitRelated>)list.stream()
-      .map(model -> new ExplanationOfBenefitRelated(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExplanationOfBenefitRelatedModel> toModelArray(java.util.List<ExplanationOfBenefitRelated> list) {
-    return (java.util.List<ExplanationOfBenefitRelatedModel>)list.stream()
-      .map(model -> new ExplanationOfBenefitRelatedModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExplanationOfBenefitRelated fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExplanationOfBenefitRelated.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExplanationOfBenefitRelated o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExplanationOfBenefitRelated> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

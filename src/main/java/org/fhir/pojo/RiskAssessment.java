@@ -179,6 +179,7 @@ public class RiskAssessment  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -230,95 +231,68 @@ public class RiskAssessment  {
 
   public RiskAssessment(RiskAssessmentModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getBasedOn()) {
-        this.basedOn = new Reference(o.getBasedOn());
-        this.basedOn.setId(this.getId());
-      }
-
-      if (null != o.getParent()) {
-        this.parent = new Reference(o.getParent());
-        this.parent.setId(this.getId());
-      }
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.method = CodeableConcept.fromJson(o.getMethod());
-      this.code = CodeableConcept.fromJson(o.getCode());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getOccurrenceDateTime()) {
-        this.occurrenceDateTime = new String(o.getOccurrenceDateTime());
-      }
-
-      this.occurrencePeriod = Period.fromJson(o.getOccurrencePeriod());
-      if (null != o.getCondition()) {
-        this.condition = new Reference(o.getCondition());
-        this.condition.setId(this.getId());
-      }
-
-      if (null != o.getPerformer()) {
-        this.performer = new Reference(o.getPerformer());
-        this.performer.setId(this.getId());
-      }
-
-      this.reasonCodeableConcept = CodeableConcept.fromJson(o.getReasonCodeableConcept());
-      if (null != o.getReasonReference()) {
-        this.reasonReference = new Reference(o.getReasonReference());
-        this.reasonReference.setId(this.getId());
-      }
-
-      this.basis = Reference.fromArray(o.getBasis());
-
-      this.prediction = RiskAssessmentPrediction.fromArray(o.getPrediction());
-
-      if (null != o.getMitigation()) {
-        this.mitigation = new String(o.getMitigation());
-      }
-
-      if (null != o.getComment()) {
-        this.comment = new String(o.getComment());
-      }
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+      this.basedOn = new Reference(o.getBasedOn().get(0));
+    }
+    if (null != o.getParent() && !o.getParent().isEmpty()) {
+      this.parent = new Reference(o.getParent().get(0));
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.method = CodeableConceptHelper.fromJson(o.getMethod());
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getOccurrenceDateTime()) {
+      this.occurrenceDateTime = o.getOccurrenceDateTime();
+    }
+    this.occurrencePeriod = PeriodHelper.fromJson(o.getOccurrencePeriod());
+    if (null != o.getCondition() && !o.getCondition().isEmpty()) {
+      this.condition = new Reference(o.getCondition().get(0));
+    }
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+      this.performer = new Reference(o.getPerformer().get(0));
+    }
+    this.reasonCodeableConcept = CodeableConceptHelper.fromJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
+      this.reasonReference = new Reference(o.getReasonReference().get(0));
+    }
+    if (null != o.getBasis() && !o.getBasis().isEmpty()) {
+    	this.basis = ReferenceHelper.fromArray2Array(o.getBasis());
+    }
+    if (null != o.getPrediction() && !o.getPrediction().isEmpty()) {
+    	this.prediction = RiskAssessmentPredictionHelper.fromArray2Array(o.getPrediction());
+    }
+    if (null != o.getMitigation()) {
+      this.mitigation = o.getMitigation();
+    }
+    if (null != o.getComment()) {
+      this.comment = o.getComment();
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -529,40 +503,41 @@ public class RiskAssessment  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("parent" + "[" + String.valueOf(this.parent) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("method" + "[" + String.valueOf(this.method) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("occurrenceDateTime" + "[" + String.valueOf(this.occurrenceDateTime) + "]\n"); 
-     builder.append("_occurrenceDateTime" + "[" + String.valueOf(this._occurrenceDateTime) + "]\n"); 
-     builder.append("occurrencePeriod" + "[" + String.valueOf(this.occurrencePeriod) + "]\n"); 
-     builder.append("condition" + "[" + String.valueOf(this.condition) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("reasonCodeableConcept" + "[" + String.valueOf(this.reasonCodeableConcept) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("basis" + "[" + String.valueOf(this.basis) + "]\n"); 
-     builder.append("prediction" + "[" + String.valueOf(this.prediction) + "]\n"); 
-     builder.append("mitigation" + "[" + String.valueOf(this.mitigation) + "]\n"); 
-     builder.append("_mitigation" + "[" + String.valueOf(this._mitigation) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("_comment" + "[" + String.valueOf(this._comment) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[RiskAssessment]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.basedOn != null) builder.append("basedOn" + "->" + this.basedOn.toString() + "\n"); 
+     if(this.parent != null) builder.append("parent" + "->" + this.parent.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.method != null) builder.append("method" + "->" + this.method.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.occurrenceDateTime != null) builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime.toString() + "\n"); 
+     if(this._occurrenceDateTime != null) builder.append("_occurrenceDateTime" + "->" + this._occurrenceDateTime.toString() + "\n"); 
+     if(this.occurrencePeriod != null) builder.append("occurrencePeriod" + "->" + this.occurrencePeriod.toString() + "\n"); 
+     if(this.condition != null) builder.append("condition" + "->" + this.condition.toString() + "\n"); 
+     if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
+     if(this.reasonCodeableConcept != null) builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept.toString() + "\n"); 
+     if(this.reasonReference != null) builder.append("reasonReference" + "->" + this.reasonReference.toString() + "\n"); 
+     if(this.basis != null) builder.append("basis" + "->" + this.basis.toString() + "\n"); 
+     if(this.prediction != null) builder.append("prediction" + "->" + this.prediction.toString() + "\n"); 
+     if(this.mitigation != null) builder.append("mitigation" + "->" + this.mitigation.toString() + "\n"); 
+     if(this._mitigation != null) builder.append("_mitigation" + "->" + this._mitigation.toString() + "\n"); 
+     if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
+     if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -578,36 +553,4 @@ public class RiskAssessment  {
   	}
   }
 
-  public static java.util.List<RiskAssessment> fromArray(java.util.List<RiskAssessmentModel> list) {
-    return (java.util.List<RiskAssessment>)list.stream()
-      .map(model -> new RiskAssessment(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<RiskAssessmentModel> toModelArray(java.util.List<RiskAssessment> list) {
-    return (java.util.List<RiskAssessmentModel>)list.stream()
-      .map(model -> new RiskAssessmentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static RiskAssessment fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, RiskAssessment.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(RiskAssessment o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<RiskAssessment> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

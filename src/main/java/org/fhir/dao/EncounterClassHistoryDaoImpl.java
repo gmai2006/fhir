@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EncounterClassHistoryModel;
 import org.fhir.pojo.EncounterClassHistory;
+import org.fhir.pojo.EncounterClassHistoryHelper;
 
 public class EncounterClassHistoryDaoImpl implements EncounterClassHistoryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EncounterClassHistoryDaoImpl implements EncounterClassHistoryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterClassHistoryModel a", EncounterClassHistoryModel.class).setMaxResults(maxResult);
       List<EncounterClassHistoryModel> models = query.getResultList();
-      return EncounterClassHistory.fromArray(models);
+      return EncounterClassHistoryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EncounterClassHistoryDaoImpl implements EncounterClassHistoryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterClassHistoryModel a", EncounterClassHistoryModel.class);
       List<EncounterClassHistoryModel> models = query.getResultList();
-      return EncounterClassHistory.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EncounterClassHistory create(EncounterClassHistory e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EncounterClassHistoryModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EncounterClassHistory update(EncounterClassHistory e) {
-      final EntityManager em = entityManagerProvider.get();
-      EncounterClassHistoryModel model = em.merge(new EncounterClassHistoryModel(e));
-      return new EncounterClassHistory(model);
+      return EncounterClassHistoryHelper.fromArray2Array(models);
   }
 
   @Override

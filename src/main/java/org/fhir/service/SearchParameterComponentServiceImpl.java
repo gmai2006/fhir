@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public SearchParameterComponent create(SearchParameterComponent bean) {
-  	requireNonNull(bean);
-    logger.info("create(SearchParameterComponent={}) - entered bean ");
-
-    final SearchParameterComponent result = dao.create(bean);
-
-    logger.info("create(SearchParameterComponent) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public SearchParameterComponent update(SearchParameterComponent bean) {
-  	requireNonNull(bean);
-    logger.info("update(SearchParameterComponent={}) - entered bean ");
-
-    final SearchParameterComponent result = dao.update(bean);
-
-    logger.info("update(SearchParameterComponent) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

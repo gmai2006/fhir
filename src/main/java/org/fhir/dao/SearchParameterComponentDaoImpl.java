@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SearchParameterComponentModel;
 import org.fhir.pojo.SearchParameterComponent;
+import org.fhir.pojo.SearchParameterComponentHelper;
 
 public class SearchParameterComponentDaoImpl implements SearchParameterComponentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SearchParameterComponentDaoImpl implements SearchParameterComponent
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SearchParameterComponentModel a", SearchParameterComponentModel.class).setMaxResults(maxResult);
       List<SearchParameterComponentModel> models = query.getResultList();
-      return SearchParameterComponent.fromArray(models);
+      return SearchParameterComponentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SearchParameterComponentDaoImpl implements SearchParameterComponent
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SearchParameterComponentModel a", SearchParameterComponentModel.class);
       List<SearchParameterComponentModel> models = query.getResultList();
-      return SearchParameterComponent.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SearchParameterComponent create(SearchParameterComponent e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SearchParameterComponentModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SearchParameterComponent update(SearchParameterComponent e) {
-      final EntityManager em = entityManagerProvider.get();
-      SearchParameterComponentModel model = em.merge(new SearchParameterComponentModel(e));
-      return new SearchParameterComponent(model);
+      return SearchParameterComponentHelper.fromArray2Array(models);
   }
 
   @Override

@@ -34,10 +34,5 @@ public interface ConceptMapElementDao {
   public List<ConceptMapElement> select(int maxResult);
 
   public List<ConceptMapElement> selectAll();
-
-  public ConceptMapElement create(ConceptMapElement e);
-
-  public ConceptMapElement update(ConceptMapElement e);
-
   public void delete(ConceptMapElement e);
 }

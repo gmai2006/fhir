@@ -34,10 +34,5 @@ public interface LinkageItemDao {
   public List<LinkageItem> select(int maxResult);
 
   public List<LinkageItem> selectAll();
-
-  public LinkageItem create(LinkageItem e);
-
-  public LinkageItem update(LinkageItem e);
-
   public void delete(LinkageItem e);
 }

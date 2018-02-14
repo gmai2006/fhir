@@ -34,10 +34,5 @@ public interface ImmunizationRecommendationRecommendationDao {
   public List<ImmunizationRecommendationRecommendation> select(int maxResult);
 
   public List<ImmunizationRecommendationRecommendation> selectAll();
-
-  public ImmunizationRecommendationRecommendation create(ImmunizationRecommendationRecommendation e);
-
-  public ImmunizationRecommendationRecommendation update(ImmunizationRecommendationRecommendation e);
-
   public void delete(ImmunizationRecommendationRecommendation e);
 }

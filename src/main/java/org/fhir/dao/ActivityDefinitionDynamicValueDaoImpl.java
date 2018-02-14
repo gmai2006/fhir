@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ActivityDefinitionDynamicValueModel;
 import org.fhir.pojo.ActivityDefinitionDynamicValue;
+import org.fhir.pojo.ActivityDefinitionDynamicValueHelper;
 
 public class ActivityDefinitionDynamicValueDaoImpl implements ActivityDefinitionDynamicValueDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ActivityDefinitionDynamicValueDaoImpl implements ActivityDefinition
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ActivityDefinitionDynamicValueModel a", ActivityDefinitionDynamicValueModel.class).setMaxResults(maxResult);
       List<ActivityDefinitionDynamicValueModel> models = query.getResultList();
-      return ActivityDefinitionDynamicValue.fromArray(models);
+      return ActivityDefinitionDynamicValueHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ActivityDefinitionDynamicValueDaoImpl implements ActivityDefinition
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ActivityDefinitionDynamicValueModel a", ActivityDefinitionDynamicValueModel.class);
       List<ActivityDefinitionDynamicValueModel> models = query.getResultList();
-      return ActivityDefinitionDynamicValue.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ActivityDefinitionDynamicValue create(ActivityDefinitionDynamicValue e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ActivityDefinitionDynamicValueModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ActivityDefinitionDynamicValue update(ActivityDefinitionDynamicValue e) {
-      final EntityManager em = entityManagerProvider.get();
-      ActivityDefinitionDynamicValueModel model = em.merge(new ActivityDefinitionDynamicValueModel(e));
-      return new ActivityDefinitionDynamicValue(model);
+      return ActivityDefinitionDynamicValueHelper.fromArray2Array(models);
   }
 
   @Override

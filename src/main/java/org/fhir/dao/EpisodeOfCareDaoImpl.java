@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EpisodeOfCareModel;
 import org.fhir.pojo.EpisodeOfCare;
+import org.fhir.pojo.EpisodeOfCareHelper;
 
 public class EpisodeOfCareDaoImpl implements EpisodeOfCareDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EpisodeOfCareDaoImpl implements EpisodeOfCareDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EpisodeOfCareModel a", EpisodeOfCareModel.class).setMaxResults(maxResult);
       List<EpisodeOfCareModel> models = query.getResultList();
-      return EpisodeOfCare.fromArray(models);
+      return EpisodeOfCareHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class EpisodeOfCareDaoImpl implements EpisodeOfCareDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EpisodeOfCareModel a", EpisodeOfCareModel.class);
       List<EpisodeOfCareModel> models = query.getResultList();
-      return EpisodeOfCare.fromArray(models);
+      return EpisodeOfCareHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class EpisodeOfCareDaoImpl implements EpisodeOfCareDao {
       EpisodeOfCareModel model = em.merge(new EpisodeOfCareModel(e));
       return new EpisodeOfCare(model);
   }
-
   @Override
   @Transactional
   public void delete(EpisodeOfCare e) {

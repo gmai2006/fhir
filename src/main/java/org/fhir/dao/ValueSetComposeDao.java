@@ -34,10 +34,5 @@ public interface ValueSetComposeDao {
   public List<ValueSetCompose> select(int maxResult);
 
   public List<ValueSetCompose> selectAll();
-
-  public ValueSetCompose create(ValueSetCompose e);
-
-  public ValueSetCompose update(ValueSetCompose e);
-
   public void delete(ValueSetCompose e);
 }

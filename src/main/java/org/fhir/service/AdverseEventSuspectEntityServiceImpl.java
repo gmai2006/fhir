@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public AdverseEventSuspectEntity create(AdverseEventSuspectEntity bean) {
-  	requireNonNull(bean);
-    logger.info("create(AdverseEventSuspectEntity={}) - entered bean ");
-
-    final AdverseEventSuspectEntity result = dao.create(bean);
-
-    logger.info("create(AdverseEventSuspectEntity) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public AdverseEventSuspectEntity update(AdverseEventSuspectEntity bean) {
-  	requireNonNull(bean);
-    logger.info("update(AdverseEventSuspectEntity={}) - entered bean ");
-
-    final AdverseEventSuspectEntity result = dao.update(bean);
-
-    logger.info("update(AdverseEventSuspectEntity) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

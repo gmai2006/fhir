@@ -34,10 +34,5 @@ public interface ExplanationOfBenefitInsuranceDao {
   public List<ExplanationOfBenefitInsurance> select(int maxResult);
 
   public List<ExplanationOfBenefitInsurance> selectAll();
-
-  public ExplanationOfBenefitInsurance create(ExplanationOfBenefitInsurance e);
-
-  public ExplanationOfBenefitInsurance update(ExplanationOfBenefitInsurance e);
-
   public void delete(ExplanationOfBenefitInsurance e);
 }

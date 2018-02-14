@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DistanceModel;
 import org.fhir.pojo.Distance;
+import org.fhir.pojo.DistanceHelper;
 
 public class DistanceDaoImpl implements DistanceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DistanceDaoImpl implements DistanceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DistanceModel a", DistanceModel.class).setMaxResults(maxResult);
       List<DistanceModel> models = query.getResultList();
-      return Distance.fromArray(models);
+      return DistanceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DistanceDaoImpl implements DistanceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DistanceModel a", DistanceModel.class);
       List<DistanceModel> models = query.getResultList();
-      return Distance.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public Distance create(Distance e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DistanceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public Distance update(Distance e) {
-      final EntityManager em = entityManagerProvider.get();
-      DistanceModel model = em.merge(new DistanceModel(e));
-      return new Distance(model);
+      return DistanceHelper.fromArray2Array(models);
   }
 
   @Override

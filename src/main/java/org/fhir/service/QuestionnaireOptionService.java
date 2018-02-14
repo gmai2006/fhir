@@ -32,7 +32,5 @@ public interface QuestionnaireOptionService {
 	public QuestionnaireOption find(String id);
   public List<QuestionnaireOption> select(int maxResult);
   public List<QuestionnaireOption> selectAll();
-  public QuestionnaireOption create(QuestionnaireOption bean);
-  public QuestionnaireOption update(QuestionnaireOption bean);
   public void delete(QuestionnaireOption bean);
 }

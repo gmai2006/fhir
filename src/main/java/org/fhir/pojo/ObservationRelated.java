@@ -59,6 +59,7 @@ public class ObservationRelated  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,21 +81,15 @@ public class ObservationRelated  {
 
   public ObservationRelated(ObservationRelatedModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getTarget()) {
-        this.target = new Reference(o.getTarget());
-        this.target.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+      this.target = new Reference(o.getTarget().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -143,13 +138,14 @@ public class ObservationRelated  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ObservationRelated]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -175,36 +171,4 @@ public class ObservationRelated  {
   	}
   }
 
-  public static java.util.List<ObservationRelated> fromArray(java.util.List<ObservationRelatedModel> list) {
-    return (java.util.List<ObservationRelated>)list.stream()
-      .map(model -> new ObservationRelated(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ObservationRelatedModel> toModelArray(java.util.List<ObservationRelated> list) {
-    return (java.util.List<ObservationRelatedModel>)list.stream()
-      .map(model -> new ObservationRelatedModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ObservationRelated fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ObservationRelated.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ObservationRelated o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ObservationRelated> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

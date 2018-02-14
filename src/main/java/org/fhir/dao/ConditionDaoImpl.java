@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ConditionModel;
 import org.fhir.pojo.Condition;
+import org.fhir.pojo.ConditionHelper;
 
 public class ConditionDaoImpl implements ConditionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ConditionDaoImpl implements ConditionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConditionModel a", ConditionModel.class).setMaxResults(maxResult);
       List<ConditionModel> models = query.getResultList();
-      return Condition.fromArray(models);
+      return ConditionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ConditionDaoImpl implements ConditionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConditionModel a", ConditionModel.class);
       List<ConditionModel> models = query.getResultList();
-      return Condition.fromArray(models);
+      return ConditionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ConditionDaoImpl implements ConditionDao {
       ConditionModel model = em.merge(new ConditionModel(e));
       return new Condition(model);
   }
-
   @Override
   @Transactional
   public void delete(Condition e) {

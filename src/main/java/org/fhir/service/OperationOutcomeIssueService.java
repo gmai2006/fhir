@@ -32,7 +32,5 @@ public interface OperationOutcomeIssueService {
 	public OperationOutcomeIssue find(String id);
   public List<OperationOutcomeIssue> select(int maxResult);
   public List<OperationOutcomeIssue> selectAll();
-  public OperationOutcomeIssue create(OperationOutcomeIssue bean);
-  public OperationOutcomeIssue update(OperationOutcomeIssue bean);
   public void delete(OperationOutcomeIssue bean);
 }

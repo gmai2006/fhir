@@ -68,6 +68,7 @@ public class OperationDefinitionBinding  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -89,25 +90,18 @@ public class OperationDefinitionBinding  {
 
   public OperationDefinitionBinding(OperationDefinitionBindingModel o) {
     this.id = o.getId();
-      if (null != o.getStrength()) {
-        this.strength = new String(o.getStrength());
-      }
-
-      if (null != o.getValueSetUri()) {
-        this.valueSetUri = new String(o.getValueSetUri());
-      }
-
-      if (null != o.getValueSetReference()) {
-        this.valueSetReference = new Reference(o.getValueSetReference());
-        this.valueSetReference.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getStrength()) {
+      this.strength = o.getStrength();
+    }
+    if (null != o.getValueSetUri()) {
+      this.valueSetUri = o.getValueSetUri();
+    }
+    if (null != o.getValueSetReference() && !o.getValueSetReference().isEmpty()) {
+      this.valueSetReference = new Reference(o.getValueSetReference().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setStrength( String value) {
@@ -168,15 +162,16 @@ public class OperationDefinitionBinding  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("strength" + "[" + String.valueOf(this.strength) + "]\n"); 
-     builder.append("_strength" + "[" + String.valueOf(this._strength) + "]\n"); 
-     builder.append("valueSetUri" + "[" + String.valueOf(this.valueSetUri) + "]\n"); 
-     builder.append("_valueSetUri" + "[" + String.valueOf(this._valueSetUri) + "]\n"); 
-     builder.append("valueSetReference" + "[" + String.valueOf(this.valueSetReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[OperationDefinitionBinding]:" + "\n");
+     if(this.strength != null) builder.append("strength" + "->" + this.strength.toString() + "\n"); 
+     if(this._strength != null) builder.append("_strength" + "->" + this._strength.toString() + "\n"); 
+     if(this.valueSetUri != null) builder.append("valueSetUri" + "->" + this.valueSetUri.toString() + "\n"); 
+     if(this._valueSetUri != null) builder.append("_valueSetUri" + "->" + this._valueSetUri.toString() + "\n"); 
+     if(this.valueSetReference != null) builder.append("valueSetReference" + "->" + this.valueSetReference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -198,36 +193,4 @@ public class OperationDefinitionBinding  {
   	}
   }
 
-  public static java.util.List<OperationDefinitionBinding> fromArray(java.util.List<OperationDefinitionBindingModel> list) {
-    return (java.util.List<OperationDefinitionBinding>)list.stream()
-      .map(model -> new OperationDefinitionBinding(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<OperationDefinitionBindingModel> toModelArray(java.util.List<OperationDefinitionBinding> list) {
-    return (java.util.List<OperationDefinitionBindingModel>)list.stream()
-      .map(model -> new OperationDefinitionBindingModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static OperationDefinitionBinding fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, OperationDefinitionBinding.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(OperationDefinitionBinding o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<OperationDefinitionBinding> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

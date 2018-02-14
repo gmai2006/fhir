@@ -34,10 +34,8 @@ public interface EnrollmentRequestDao {
   public List<EnrollmentRequest> select(int maxResult);
 
   public List<EnrollmentRequest> selectAll();
-
   public EnrollmentRequest create(EnrollmentRequest e);
 
   public EnrollmentRequest update(EnrollmentRequest e);
-
   public void delete(EnrollmentRequest e);
 }

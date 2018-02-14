@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ProvenanceModel;
 import org.fhir.pojo.Provenance;
+import org.fhir.pojo.ProvenanceHelper;
 
 public class ProvenanceDaoImpl implements ProvenanceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ProvenanceDaoImpl implements ProvenanceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProvenanceModel a", ProvenanceModel.class).setMaxResults(maxResult);
       List<ProvenanceModel> models = query.getResultList();
-      return Provenance.fromArray(models);
+      return ProvenanceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ProvenanceDaoImpl implements ProvenanceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProvenanceModel a", ProvenanceModel.class);
       List<ProvenanceModel> models = query.getResultList();
-      return Provenance.fromArray(models);
+      return ProvenanceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ProvenanceDaoImpl implements ProvenanceDao {
       ProvenanceModel model = em.merge(new ProvenanceModel(e));
       return new Provenance(model);
   }
-
   @Override
   @Transactional
   public void delete(Provenance e) {

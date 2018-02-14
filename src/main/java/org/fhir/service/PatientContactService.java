@@ -32,7 +32,5 @@ public interface PatientContactService {
 	public PatientContact find(String id);
   public List<PatientContact> select(int maxResult);
   public List<PatientContact> selectAll();
-  public PatientContact create(PatientContact bean);
-  public PatientContact update(PatientContact bean);
   public void delete(PatientContact bean);
 }

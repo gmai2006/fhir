@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ObservationModel;
 import org.fhir.pojo.Observation;
+import org.fhir.pojo.ObservationHelper;
 
 public class ObservationDaoImpl implements ObservationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ObservationDaoImpl implements ObservationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ObservationModel a", ObservationModel.class).setMaxResults(maxResult);
       List<ObservationModel> models = query.getResultList();
-      return Observation.fromArray(models);
+      return ObservationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ObservationDaoImpl implements ObservationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ObservationModel a", ObservationModel.class);
       List<ObservationModel> models = query.getResultList();
-      return Observation.fromArray(models);
+      return ObservationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ObservationDaoImpl implements ObservationDao {
       ObservationModel model = em.merge(new ObservationModel(e));
       return new Observation(model);
   }
-
   @Override
   @Transactional
   public void delete(Observation e) {

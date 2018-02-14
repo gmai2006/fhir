@@ -63,6 +63,7 @@ public class DeviceComponentProductionSpecification  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,18 +85,14 @@ public class DeviceComponentProductionSpecification  {
 
   public DeviceComponentProductionSpecification(DeviceComponentProductionSpecificationModel o) {
     this.id = o.getId();
-      this.specType = CodeableConcept.fromJson(o.getSpecType());
-      this.componentId = Identifier.fromJson(o.getComponentId());
-      if (null != o.getProductionSpec()) {
-        this.productionSpec = new String(o.getProductionSpec());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.specType = CodeableConceptHelper.fromJson(o.getSpecType());
+    this.componentId = IdentifierHelper.fromJson(o.getComponentId());
+    if (null != o.getProductionSpec()) {
+      this.productionSpec = o.getProductionSpec();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSpecType( CodeableConcept value) {
@@ -150,48 +147,17 @@ public class DeviceComponentProductionSpecification  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("specType" + "[" + String.valueOf(this.specType) + "]\n"); 
-     builder.append("componentId" + "[" + String.valueOf(this.componentId) + "]\n"); 
-     builder.append("productionSpec" + "[" + String.valueOf(this.productionSpec) + "]\n"); 
-     builder.append("_productionSpec" + "[" + String.valueOf(this._productionSpec) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DeviceComponentProductionSpecification]:" + "\n");
+     if(this.specType != null) builder.append("specType" + "->" + this.specType.toString() + "\n"); 
+     if(this.componentId != null) builder.append("componentId" + "->" + this.componentId.toString() + "\n"); 
+     if(this.productionSpec != null) builder.append("productionSpec" + "->" + this.productionSpec.toString() + "\n"); 
+     if(this._productionSpec != null) builder.append("_productionSpec" + "->" + this._productionSpec.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<DeviceComponentProductionSpecification> fromArray(java.util.List<DeviceComponentProductionSpecificationModel> list) {
-    return (java.util.List<DeviceComponentProductionSpecification>)list.stream()
-      .map(model -> new DeviceComponentProductionSpecification(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DeviceComponentProductionSpecificationModel> toModelArray(java.util.List<DeviceComponentProductionSpecification> list) {
-    return (java.util.List<DeviceComponentProductionSpecificationModel>)list.stream()
-      .map(model -> new DeviceComponentProductionSpecificationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DeviceComponentProductionSpecification fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DeviceComponentProductionSpecification.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DeviceComponentProductionSpecification o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DeviceComponentProductionSpecification> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

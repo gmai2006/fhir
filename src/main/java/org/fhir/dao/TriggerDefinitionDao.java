@@ -34,10 +34,5 @@ public interface TriggerDefinitionDao {
   public List<TriggerDefinition> select(int maxResult);
 
   public List<TriggerDefinition> selectAll();
-
-  public TriggerDefinition create(TriggerDefinition e);
-
-  public TriggerDefinition update(TriggerDefinition e);
-
   public void delete(TriggerDefinition e);
 }

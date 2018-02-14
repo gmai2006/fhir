@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.StructureMapTargetModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -120,6 +121,7 @@ public class StructureMapTarget  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -136,7 +138,39 @@ public class StructureMapTarget  {
   */
   private java.util.List<Extension> extension = new java.util.ArrayList<>();
 
-  public StructureMapTarget() {}
+  public StructureMapTarget() {
+  }
+
+  public StructureMapTarget(StructureMapTargetModel o) {
+    this.id = o.getId();
+    if (null != o.getContext()) {
+      this.context = o.getContext();
+    }
+    if (null != o.getContextType()) {
+      this.contextType = o.getContextType();
+    }
+    if (null != o.getElement()) {
+      this.element = o.getElement();
+    }
+    if (null != o.getVariable()) {
+      this.variable = o.getVariable();
+    }
+    if (o.getListMode() != null) {
+    	this.listMode = org.fhir.utils.JsonUtils.json2Array(o.getListMode());
+    }
+    if (null != o.getListRuleId()) {
+      this.listRuleId = o.getListRuleId();
+    }
+    if (null != o.getTransform()) {
+      this.transform = o.getTransform();
+    }
+    if (null != o.getParameter() && !o.getParameter().isEmpty()) {
+    	this.parameter = StructureMapParameterHelper.fromArray2Array(o.getParameter());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+  }
 
   public void setContext( String value) {
     this.context = value;
@@ -256,46 +290,27 @@ public class StructureMapTarget  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("_context" + "[" + String.valueOf(this._context) + "]\n"); 
-     builder.append("contextType" + "[" + String.valueOf(this.contextType) + "]\n"); 
-     builder.append("_contextType" + "[" + String.valueOf(this._contextType) + "]\n"); 
-     builder.append("element" + "[" + String.valueOf(this.element) + "]\n"); 
-     builder.append("_element" + "[" + String.valueOf(this._element) + "]\n"); 
-     builder.append("variable" + "[" + String.valueOf(this.variable) + "]\n"); 
-     builder.append("_variable" + "[" + String.valueOf(this._variable) + "]\n"); 
-     builder.append("listMode" + "[" + String.valueOf(this.listMode) + "]\n"); 
-     builder.append("_listMode" + "[" + String.valueOf(this._listMode) + "]\n"); 
-     builder.append("listRuleId" + "[" + String.valueOf(this.listRuleId) + "]\n"); 
-     builder.append("_listRuleId" + "[" + String.valueOf(this._listRuleId) + "]\n"); 
-     builder.append("transform" + "[" + String.valueOf(this.transform) + "]\n"); 
-     builder.append("_transform" + "[" + String.valueOf(this._transform) + "]\n"); 
-     builder.append("parameter" + "[" + String.valueOf(this.parameter) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[StructureMapTarget]:" + "\n");
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this._context != null) builder.append("_context" + "->" + this._context.toString() + "\n"); 
+     if(this.contextType != null) builder.append("contextType" + "->" + this.contextType.toString() + "\n"); 
+     if(this._contextType != null) builder.append("_contextType" + "->" + this._contextType.toString() + "\n"); 
+     if(this.element != null) builder.append("element" + "->" + this.element.toString() + "\n"); 
+     if(this._element != null) builder.append("_element" + "->" + this._element.toString() + "\n"); 
+     if(this.variable != null) builder.append("variable" + "->" + this.variable.toString() + "\n"); 
+     if(this._variable != null) builder.append("_variable" + "->" + this._variable.toString() + "\n"); 
+     if(this.listMode != null) builder.append("listMode" + "->" + this.listMode.toString() + "\n"); 
+     if(this._listMode != null) builder.append("_listMode" + "->" + this._listMode.toString() + "\n"); 
+     if(this.listRuleId != null) builder.append("listRuleId" + "->" + this.listRuleId.toString() + "\n"); 
+     if(this._listRuleId != null) builder.append("_listRuleId" + "->" + this._listRuleId.toString() + "\n"); 
+     if(this.transform != null) builder.append("transform" + "->" + this.transform.toString() + "\n"); 
+     if(this._transform != null) builder.append("_transform" + "->" + this._transform.toString() + "\n"); 
+     if(this.parameter != null) builder.append("parameter" + "->" + this.parameter.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static StructureMapTarget fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, StructureMapTarget.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(StructureMapTarget o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<StructureMapTarget> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum ContextTypeEnum {
@@ -310,7 +325,9 @@ public class StructureMapTarget  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum ListModeEnum {
+  }
+
+  public enum ListModeEnum {
   	first,
   	share,
   	last,
@@ -330,7 +347,9 @@ public class StructureMapTarget  {
   	  		}
   	  		return result;
   	  	}
-  }public enum TransformEnum {
+  }
+
+  public enum TransformEnum {
   	create,
   	copy,
   	truncate,
@@ -373,4 +392,5 @@ public class StructureMapTarget  {
   		}
   	}
   }
+
 }

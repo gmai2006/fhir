@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ScheduleModel;
 import org.fhir.pojo.Schedule;
+import org.fhir.pojo.ScheduleHelper;
 
 public class ScheduleDaoImpl implements ScheduleDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ScheduleModel a", ScheduleModel.class).setMaxResults(maxResult);
       List<ScheduleModel> models = query.getResultList();
-      return Schedule.fromArray(models);
+      return ScheduleHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ScheduleModel a", ScheduleModel.class);
       List<ScheduleModel> models = query.getResultList();
-      return Schedule.fromArray(models);
+      return ScheduleHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ScheduleDaoImpl implements ScheduleDao {
       ScheduleModel model = em.merge(new ScheduleModel(e));
       return new Schedule(model);
   }
-
   @Override
   @Transactional
   public void delete(Schedule e) {

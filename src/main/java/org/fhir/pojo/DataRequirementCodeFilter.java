@@ -88,6 +88,7 @@ public class DataRequirementCodeFilter  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -109,29 +110,21 @@ public class DataRequirementCodeFilter  {
 
   public DataRequirementCodeFilter(DataRequirementCodeFilterModel o) {
     this.id = o.getId();
-      if (null != o.getPath()) {
-        this.path = new String(o.getPath());
-      }
-
-      if (null != o.getValueSetString()) {
-        this.valueSetString = new String(o.getValueSetString());
-      }
-
-      if (null != o.getValueSetReference()) {
-        this.valueSetReference = new Reference(o.getValueSetReference());
-        this.valueSetReference.setId(this.getId());
-      }
-
-      this.valueCode = org.fhir.utils.JsonUtils.json2Array(o.getValueCode());
-
-      this.valueCoding = Coding.fromArray(o.getValueCoding());
-      this.valueCodeableConcept = CodeableConcept.fromArray(o.getValueCodeableConcept());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getPath()) {
+      this.path = o.getPath();
+    }
+    if (null != o.getValueSetString()) {
+      this.valueSetString = o.getValueSetString();
+    }
+    if (null != o.getValueSetReference() && !o.getValueSetReference().isEmpty()) {
+      this.valueSetReference = new Reference(o.getValueSetReference().get(0));
+    }
+    if (o.getValueCode() != null) {
+    	this.valueCode = org.fhir.utils.JsonUtils.json2Array(o.getValueCode());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setPath( String value) {
@@ -216,53 +209,22 @@ public class DataRequirementCodeFilter  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("path" + "[" + String.valueOf(this.path) + "]\n"); 
-     builder.append("_path" + "[" + String.valueOf(this._path) + "]\n"); 
-     builder.append("valueSetString" + "[" + String.valueOf(this.valueSetString) + "]\n"); 
-     builder.append("_valueSetString" + "[" + String.valueOf(this._valueSetString) + "]\n"); 
-     builder.append("valueSetReference" + "[" + String.valueOf(this.valueSetReference) + "]\n"); 
-     builder.append("valueCode" + "[" + String.valueOf(this.valueCode) + "]\n"); 
-     builder.append("_valueCode" + "[" + String.valueOf(this._valueCode) + "]\n"); 
-     builder.append("valueCoding" + "[" + String.valueOf(this.valueCoding) + "]\n"); 
-     builder.append("valueCodeableConcept" + "[" + String.valueOf(this.valueCodeableConcept) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DataRequirementCodeFilter]:" + "\n");
+     if(this.path != null) builder.append("path" + "->" + this.path.toString() + "\n"); 
+     if(this._path != null) builder.append("_path" + "->" + this._path.toString() + "\n"); 
+     if(this.valueSetString != null) builder.append("valueSetString" + "->" + this.valueSetString.toString() + "\n"); 
+     if(this._valueSetString != null) builder.append("_valueSetString" + "->" + this._valueSetString.toString() + "\n"); 
+     if(this.valueSetReference != null) builder.append("valueSetReference" + "->" + this.valueSetReference.toString() + "\n"); 
+     if(this.valueCode != null) builder.append("valueCode" + "->" + this.valueCode.toString() + "\n"); 
+     if(this._valueCode != null) builder.append("_valueCode" + "->" + this._valueCode.toString() + "\n"); 
+     if(this.valueCoding != null) builder.append("valueCoding" + "->" + this.valueCoding.toString() + "\n"); 
+     if(this.valueCodeableConcept != null) builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<DataRequirementCodeFilter> fromArray(java.util.List<DataRequirementCodeFilterModel> list) {
-    return (java.util.List<DataRequirementCodeFilter>)list.stream()
-      .map(model -> new DataRequirementCodeFilter(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DataRequirementCodeFilterModel> toModelArray(java.util.List<DataRequirementCodeFilter> list) {
-    return (java.util.List<DataRequirementCodeFilterModel>)list.stream()
-      .map(model -> new DataRequirementCodeFilterModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DataRequirementCodeFilter fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DataRequirementCodeFilter.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DataRequirementCodeFilter o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DataRequirementCodeFilter> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -32,7 +32,5 @@ public interface ConceptMapUnmappedService {
 	public ConceptMapUnmapped find(String id);
   public List<ConceptMapUnmapped> select(int maxResult);
   public List<ConceptMapUnmapped> selectAll();
-  public ConceptMapUnmapped create(ConceptMapUnmapped bean);
-  public ConceptMapUnmapped update(ConceptMapUnmapped bean);
   public void delete(ConceptMapUnmapped bean);
 }

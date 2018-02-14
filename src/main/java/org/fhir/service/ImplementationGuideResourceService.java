@@ -32,7 +32,5 @@ public interface ImplementationGuideResourceService {
 	public ImplementationGuideResource find(String id);
   public List<ImplementationGuideResource> select(int maxResult);
   public List<ImplementationGuideResource> selectAll();
-  public ImplementationGuideResource create(ImplementationGuideResource bean);
-  public ImplementationGuideResource update(ImplementationGuideResource bean);
   public void delete(ImplementationGuideResource bean);
 }

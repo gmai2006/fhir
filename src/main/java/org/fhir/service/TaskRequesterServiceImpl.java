@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public TaskRequester create(TaskRequester bean) {
-  	requireNonNull(bean);
-    logger.info("create(TaskRequester={}) - entered bean ");
-
-    final TaskRequester result = dao.create(bean);
-
-    logger.info("create(TaskRequester) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public TaskRequester update(TaskRequester bean) {
-  	requireNonNull(bean);
-    logger.info("update(TaskRequester={}) - entered bean ");
-
-    final TaskRequester result = dao.update(bean);
-
-    logger.info("update(TaskRequester) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

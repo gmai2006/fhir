@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public NamingSystemUniqueId create(NamingSystemUniqueId bean) {
-  	requireNonNull(bean);
-    logger.info("create(NamingSystemUniqueId={}) - entered bean ");
-
-    final NamingSystemUniqueId result = dao.create(bean);
-
-    logger.info("create(NamingSystemUniqueId) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public NamingSystemUniqueId update(NamingSystemUniqueId bean) {
-  	requireNonNull(bean);
-    logger.info("update(NamingSystemUniqueId={}) - entered bean ");
-
-    final NamingSystemUniqueId result = dao.update(bean);
-
-    logger.info("update(NamingSystemUniqueId) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

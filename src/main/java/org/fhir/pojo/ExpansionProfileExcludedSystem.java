@@ -63,6 +63,7 @@ public class ExpansionProfileExcludedSystem  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,20 +85,15 @@ public class ExpansionProfileExcludedSystem  {
 
   public ExpansionProfileExcludedSystem(ExpansionProfileExcludedSystemModel o) {
     this.id = o.getId();
-      if (null != o.getSystem()) {
-        this.system = new String(o.getSystem());
-      }
-
-      if (null != o.getVersion()) {
-        this.version = new String(o.getVersion());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSystem()) {
+      this.system = o.getSystem();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSystem( String value) {
@@ -152,48 +148,17 @@ public class ExpansionProfileExcludedSystem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("system" + "[" + String.valueOf(this.system) + "]\n"); 
-     builder.append("_system" + "[" + String.valueOf(this._system) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExpansionProfileExcludedSystem]:" + "\n");
+     if(this.system != null) builder.append("system" + "->" + this.system.toString() + "\n"); 
+     if(this._system != null) builder.append("_system" + "->" + this._system.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExpansionProfileExcludedSystem> fromArray(java.util.List<ExpansionProfileExcludedSystemModel> list) {
-    return (java.util.List<ExpansionProfileExcludedSystem>)list.stream()
-      .map(model -> new ExpansionProfileExcludedSystem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExpansionProfileExcludedSystemModel> toModelArray(java.util.List<ExpansionProfileExcludedSystem> list) {
-    return (java.util.List<ExpansionProfileExcludedSystemModel>)list.stream()
-      .map(model -> new ExpansionProfileExcludedSystemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExpansionProfileExcludedSystem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExpansionProfileExcludedSystem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExpansionProfileExcludedSystem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExpansionProfileExcludedSystem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

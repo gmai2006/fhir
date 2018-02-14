@@ -32,7 +32,5 @@ public interface MessageHeaderResponseService {
 	public MessageHeaderResponse find(String id);
   public List<MessageHeaderResponse> select(int maxResult);
   public List<MessageHeaderResponse> selectAll();
-  public MessageHeaderResponse create(MessageHeaderResponse bean);
-  public MessageHeaderResponse update(MessageHeaderResponse bean);
   public void delete(MessageHeaderResponse bean);
 }

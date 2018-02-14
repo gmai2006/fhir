@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition."
 */
 @Entity
 @Table(name="communication")
-public class CommunicationModel  {
+public class CommunicationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669674086205L;
   /**
   * Description: "This is a Communication resource"
   */
@@ -47,7 +48,7 @@ public class CommunicationModel  {
 
   /**
   * Description: "Identifiers associated with this Communication that are defined by business processes and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -57,23 +58,35 @@ public class CommunicationModel  {
   /**
   * Description: "A protocol, guideline, or other definition that was adhered to in whole or in part by this communication event."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> definition = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"definition_id\"")
+  private String definition_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="definition_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> definition;
 
   /**
   * Description: "An order, proposal or plan fulfilled in whole or in part by this Communication."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> basedOn = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"basedon_id\"")
+  private String basedon_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="basedon_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> basedOn;
 
   /**
   * Description: "Part of this action."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> partOf = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"partof_id\"")
+  private String partof_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="partof_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> partOf;
 
   /**
   * Description: "The status of the transmission."
@@ -92,7 +105,7 @@ public class CommunicationModel  {
 
   /**
   * Description: "Describes why the communication event did not occur in coded and/or textual form."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -101,7 +114,7 @@ public class CommunicationModel  {
 
   /**
   * Description: "The type of message conveyed such as alert, notification, reminder, instruction, etc."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -110,7 +123,7 @@ public class CommunicationModel  {
 
   /**
   * Description: "A channel that was used for this communication (e.g. email, fax)."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -124,23 +137,31 @@ public class CommunicationModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "The entity (e.g. person, organization, clinical information system, or device) which was the target of the communication. If receipts need to be tracked by individual, a separate resource instance will need to be created for each recipient.  Multiple recipient communications are intended where either a receipt(s) is not tracked (e.g. a mass mail-out) or is captured in aggregate (all emails confirmed received by a particular time)."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> recipient = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"recipient_id\"")
+  private String recipient_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="recipient_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> recipient;
 
   /**
   * Description: "The resources which were responsible for or related to producing this communication."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> topic = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"topic_id\"")
+  private String topic_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="topic_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> topic;
 
   /**
   * Description: "The encounter within which the communication was sent."
@@ -149,9 +170,9 @@ public class CommunicationModel  {
   @Column(name="\"context_id\"")
   private String context_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`context_id`", insertable=false, updatable=false)
-  private ReferenceModel context;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> context;
 
   /**
   * Description: "The time when this communication was sent."
@@ -176,13 +197,13 @@ public class CommunicationModel  {
   @Column(name="\"sender_id\"")
   private String sender_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`sender_id`", insertable=false, updatable=false)
-  private ReferenceModel sender;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="sender_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> sender;
 
   /**
   * Description: "The reason or justification for the communication."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -192,20 +213,28 @@ public class CommunicationModel  {
   /**
   * Description: "Indicates another resource whose existence justifies this communication."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> reasonReference = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"reasonreference_id\"")
+  private String reasonreference_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> reasonReference;
 
   /**
   * Description: "Text, attachment(s), or resource(s) that was communicated to the recipient."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<CommunicationPayloadModel> payload = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"payload_id\"")
+  private String payload_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payload_id", insertable=false, updatable=false)
+  private java.util.List<CommunicationPayloadModel> payload;
 
   /**
   * Description: "Additional notes or commentary about the communication by the sender, receiver or other interested parties."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -220,14 +249,14 @@ public class CommunicationModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -237,7 +266,7 @@ public class CommunicationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -247,7 +276,7 @@ public class CommunicationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -259,6 +288,7 @@ public class CommunicationModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -273,9 +303,9 @@ public class CommunicationModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -296,296 +326,300 @@ public class CommunicationModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public CommunicationModel() {
   }
 
   public CommunicationModel(Communication o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.definition = Reference.toModelArray(o.getDefinition());
-
-      this.basedOn = Reference.toModelArray(o.getBasedOn());
-
-      this.partOf = Reference.toModelArray(o.getPartOf());
-
-      this.status = o.getStatus();
-
-      this.notDone = o.getNotDone();
-
-      this.notDoneReason = CodeableConcept.toJson(o.getNotDoneReason());
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.medium = CodeableConcept.toJson(o.getMedium());
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      this.recipient = Reference.toModelArray(o.getRecipient());
-
-      this.topic = Reference.toModelArray(o.getTopic());
-
-      if (null != o.getContext()) {
-      	this.context_id = "context" + this.getId();
-        this.context = new ReferenceModel(o.getContext());
-        this.context.setId(this.context_id);
-        this.context.parent_id = this.context.getId();
-      }
-
-      this.sent = o.getSent();
-
-      this.received = o.getReceived();
-
-      if (null != o.getSender()) {
-      	this.sender_id = "sender" + this.getId();
-        this.sender = new ReferenceModel(o.getSender());
-        this.sender.setId(this.sender_id);
-        this.sender.parent_id = this.sender.getId();
-      }
-
-      this.reasonCode = CodeableConcept.toJson(o.getReasonCode());
-      this.reasonReference = Reference.toModelArray(o.getReasonReference());
-
-      this.payload = CommunicationPayload.toModelArray(o.getPayload());
-
-      this.note = Annotation.toJson(o.getNote());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+    	this.definition_id = "definition" + this.id;
+    	this.definition = ReferenceHelper.toModelFromArray(o.getDefinition(), this.definition_id);
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedon_id = "basedon" + this.id;
+    	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+    	this.partof_id = "partof" + this.id;
+    	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
+    }
+    this.status = o.getStatus();
+    this.notDone = o.getNotDone();
+    this.notDoneReason = CodeableConceptHelper.toJson(o.getNotDoneReason());
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    if (null != o.getRecipient() && !o.getRecipient().isEmpty()) {
+    	this.recipient_id = "recipient" + this.id;
+    	this.recipient = ReferenceHelper.toModelFromArray(o.getRecipient(), this.recipient_id);
+    }
+    if (null != o.getTopic() && !o.getTopic().isEmpty()) {
+    	this.topic_id = "topic" + this.id;
+    	this.topic = ReferenceHelper.toModelFromArray(o.getTopic(), this.topic_id);
+    }
+    if (null != o.getContext() ) {
+    	this.context_id = "context" + this.id;
+    	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
+    }
+    this.sent = o.getSent();
+    this.received = o.getReceived();
+    if (null != o.getSender() ) {
+    	this.sender_id = "sender" + this.id;
+    	this.sender = ReferenceHelper.toModel(o.getSender(), this.sender_id);
+    }
+    if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
+    	this.reasonreference_id = "reasonreference" + this.id;
+    	this.reasonReference = ReferenceHelper.toModelFromArray(o.getReasonReference(), this.reasonreference_id);
+    }
+    if (null != o.getPayload() && !o.getPayload().isEmpty()) {
+    	this.payload_id = "payload" + this.id;
+    	this.payload = CommunicationPayloadHelper.toModelFromArray(o.getPayload(), this.payload_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setDefinition( java.util.List<ReferenceModel> value) {
-    this.definition = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public java.util.List<ReferenceModel> getDefinition() {
     return this.definition;
   }
-  public void setBasedOn( java.util.List<ReferenceModel> value) {
-    this.basedOn = value;
+  public void setDefinition( java.util.List<ReferenceModel> value) {
+    this.definition = value;
   }
   public java.util.List<ReferenceModel> getBasedOn() {
     return this.basedOn;
   }
-  public void setPartOf( java.util.List<ReferenceModel> value) {
-    this.partOf = value;
+  public void setBasedOn( java.util.List<ReferenceModel> value) {
+    this.basedOn = value;
   }
   public java.util.List<ReferenceModel> getPartOf() {
     return this.partOf;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setPartOf( java.util.List<ReferenceModel> value) {
+    this.partOf = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setNotDone( Boolean value) {
-    this.notDone = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public Boolean getNotDone() {
     return this.notDone;
   }
-  public void setNotDoneReason( String value) {
-    this.notDoneReason = value;
+  public void setNotDone( Boolean value) {
+    this.notDone = value;
   }
   public String getNotDoneReason() {
     return this.notDoneReason;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setNotDoneReason( String value) {
+    this.notDoneReason = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setMedium( String value) {
-    this.medium = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getMedium() {
     return this.medium;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setMedium( String value) {
+    this.medium = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setRecipient( java.util.List<ReferenceModel> value) {
-    this.recipient = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
   public java.util.List<ReferenceModel> getRecipient() {
     return this.recipient;
   }
-  public void setTopic( java.util.List<ReferenceModel> value) {
-    this.topic = value;
+  public void setRecipient( java.util.List<ReferenceModel> value) {
+    this.recipient = value;
   }
   public java.util.List<ReferenceModel> getTopic() {
     return this.topic;
   }
-  public void setContext( ReferenceModel value) {
-    this.context = value;
+  public void setTopic( java.util.List<ReferenceModel> value) {
+    this.topic = value;
   }
-  public ReferenceModel getContext() {
+  public java.util.List<ReferenceModel> getContext() {
     return this.context;
   }
-  public void setSent( String value) {
-    this.sent = value;
+  public void setContext( java.util.List<ReferenceModel> value) {
+    this.context = value;
   }
   public String getSent() {
     return this.sent;
   }
-  public void setReceived( String value) {
-    this.received = value;
+  public void setSent( String value) {
+    this.sent = value;
   }
   public String getReceived() {
     return this.received;
   }
-  public void setSender( ReferenceModel value) {
-    this.sender = value;
+  public void setReceived( String value) {
+    this.received = value;
   }
-  public ReferenceModel getSender() {
+  public java.util.List<ReferenceModel> getSender() {
     return this.sender;
   }
-  public void setReasonCode( String value) {
-    this.reasonCode = value;
+  public void setSender( java.util.List<ReferenceModel> value) {
+    this.sender = value;
   }
   public String getReasonCode() {
     return this.reasonCode;
   }
-  public void setReasonReference( java.util.List<ReferenceModel> value) {
-    this.reasonReference = value;
+  public void setReasonCode( String value) {
+    this.reasonCode = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
     return this.reasonReference;
   }
-  public void setPayload( java.util.List<CommunicationPayloadModel> value) {
-    this.payload = value;
+  public void setReasonReference( java.util.List<ReferenceModel> value) {
+    this.reasonReference = value;
   }
   public java.util.List<CommunicationPayloadModel> getPayload() {
     return this.payload;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setPayload( java.util.List<CommunicationPayloadModel> value) {
+    this.payload = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setNote( String value) {
+    this.note = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("notDone" + "[" + String.valueOf(this.notDone) + "]\n"); 
-     builder.append("notDoneReason" + "[" + String.valueOf(this.notDoneReason) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("medium" + "[" + String.valueOf(this.medium) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("recipient" + "[" + String.valueOf(this.recipient) + "]\n"); 
-     builder.append("topic" + "[" + String.valueOf(this.topic) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("sent" + "[" + String.valueOf(this.sent) + "]\n"); 
-     builder.append("received" + "[" + String.valueOf(this.received) + "]\n"); 
-     builder.append("sender" + "[" + String.valueOf(this.sender) + "]\n"); 
-     builder.append("reasonCode" + "[" + String.valueOf(this.reasonCode) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("payload" + "[" + String.valueOf(this.payload) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[CommunicationModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("notDone" + "->" + this.notDone + "\n"); 
+     builder.append("notDoneReason" + "->" + this.notDoneReason + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("medium" + "->" + this.medium + "\n"); 
+     builder.append("sent" + "->" + this.sent + "\n"); 
+     builder.append("received" + "->" + this.received + "\n"); 
+     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[CommunicationModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
+     builder.append("partOf" + "->" + this.partOf + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("notDone" + "->" + this.notDone + "\n"); 
+     builder.append("notDoneReason" + "->" + this.notDoneReason + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("medium" + "->" + this.medium + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("recipient" + "->" + this.recipient + "\n"); 
+     builder.append("topic" + "->" + this.topic + "\n"); 
+     builder.append("context" + "->" + this.context + "\n"); 
+     builder.append("sent" + "->" + this.sent + "\n"); 
+     builder.append("received" + "->" + this.received + "\n"); 
+     builder.append("sender" + "->" + this.sender + "\n"); 
+     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
+     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
+     builder.append("payload" + "->" + this.payload + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

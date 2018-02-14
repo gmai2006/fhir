@@ -32,7 +32,5 @@ public interface DocumentReferenceRelatesToService {
 	public DocumentReferenceRelatesTo find(String id);
   public List<DocumentReferenceRelatesTo> select(int maxResult);
   public List<DocumentReferenceRelatesTo> selectAll();
-  public DocumentReferenceRelatesTo create(DocumentReferenceRelatesTo bean);
-  public DocumentReferenceRelatesTo update(DocumentReferenceRelatesTo bean);
   public void delete(DocumentReferenceRelatesTo bean);
 }

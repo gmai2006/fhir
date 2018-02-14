@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.QuestionnaireModel;
 import org.fhir.pojo.Questionnaire;
+import org.fhir.pojo.QuestionnaireHelper;
 
 public class QuestionnaireDaoImpl implements QuestionnaireDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class QuestionnaireDaoImpl implements QuestionnaireDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from QuestionnaireModel a", QuestionnaireModel.class).setMaxResults(maxResult);
       List<QuestionnaireModel> models = query.getResultList();
-      return Questionnaire.fromArray(models);
+      return QuestionnaireHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class QuestionnaireDaoImpl implements QuestionnaireDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from QuestionnaireModel a", QuestionnaireModel.class);
       List<QuestionnaireModel> models = query.getResultList();
-      return Questionnaire.fromArray(models);
+      return QuestionnaireHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class QuestionnaireDaoImpl implements QuestionnaireDao {
       QuestionnaireModel model = em.merge(new QuestionnaireModel(e));
       return new Questionnaire(model);
   }
-
   @Override
   @Transactional
   public void delete(Questionnaire e) {

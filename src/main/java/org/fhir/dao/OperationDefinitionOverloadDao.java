@@ -34,10 +34,5 @@ public interface OperationDefinitionOverloadDao {
   public List<OperationDefinitionOverload> select(int maxResult);
 
   public List<OperationDefinitionOverload> selectAll();
-
-  public OperationDefinitionOverload create(OperationDefinitionOverload e);
-
-  public OperationDefinitionOverload update(OperationDefinitionOverload e);
-
   public void delete(OperationDefinitionOverload e);
 }

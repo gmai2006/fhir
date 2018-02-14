@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public MedicationDispensePerformer create(MedicationDispensePerformer bean) {
-  	requireNonNull(bean);
-    logger.info("create(MedicationDispensePerformer={}) - entered bean ");
-
-    final MedicationDispensePerformer result = dao.create(bean);
-
-    logger.info("create(MedicationDispensePerformer) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public MedicationDispensePerformer update(MedicationDispensePerformer bean) {
-  	requireNonNull(bean);
-    logger.info("update(MedicationDispensePerformer={}) - entered bean ");
-
-    final MedicationDispensePerformer result = dao.update(bean);
-
-    logger.info("update(MedicationDispensePerformer) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -32,7 +32,5 @@ public interface CapabilityStatementCertificateService {
 	public CapabilityStatementCertificate find(String id);
   public List<CapabilityStatementCertificate> select(int maxResult);
   public List<CapabilityStatementCertificate> selectAll();
-  public CapabilityStatementCertificate create(CapabilityStatementCertificate bean);
-  public CapabilityStatementCertificate update(CapabilityStatementCertificate bean);
   public void delete(CapabilityStatementCertificate bean);
 }

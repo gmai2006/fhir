@@ -74,6 +74,7 @@ public class CapabilityStatementSoftware  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -95,24 +96,18 @@ public class CapabilityStatementSoftware  {
 
   public CapabilityStatementSoftware(CapabilityStatementSoftwareModel o) {
     this.id = o.getId();
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getVersion()) {
-        this.version = new String(o.getVersion());
-      }
-
-      if (null != o.getReleaseDate()) {
-        this.releaseDate = new String(o.getReleaseDate());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getReleaseDate()) {
+      this.releaseDate = o.getReleaseDate();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setName( String value) {
@@ -179,50 +174,19 @@ public class CapabilityStatementSoftware  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("releaseDate" + "[" + String.valueOf(this.releaseDate) + "]\n"); 
-     builder.append("_releaseDate" + "[" + String.valueOf(this._releaseDate) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementSoftware]:" + "\n");
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.releaseDate != null) builder.append("releaseDate" + "->" + this.releaseDate.toString() + "\n"); 
+     if(this._releaseDate != null) builder.append("_releaseDate" + "->" + this._releaseDate.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CapabilityStatementSoftware> fromArray(java.util.List<CapabilityStatementSoftwareModel> list) {
-    return (java.util.List<CapabilityStatementSoftware>)list.stream()
-      .map(model -> new CapabilityStatementSoftware(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementSoftwareModel> toModelArray(java.util.List<CapabilityStatementSoftware> list) {
-    return (java.util.List<CapabilityStatementSoftwareModel>)list.stream()
-      .map(model -> new CapabilityStatementSoftwareModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatementSoftware fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatementSoftware.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementSoftware o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementSoftware> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

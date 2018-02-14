@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public VisionPrescriptionDispense create(VisionPrescriptionDispense bean) {
-  	requireNonNull(bean);
-    logger.info("create(VisionPrescriptionDispense={}) - entered bean ");
-
-    final VisionPrescriptionDispense result = dao.create(bean);
-
-    logger.info("create(VisionPrescriptionDispense) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public VisionPrescriptionDispense update(VisionPrescriptionDispense bean) {
-  	requireNonNull(bean);
-    logger.info("update(VisionPrescriptionDispense={}) - entered bean ");
-
-    final VisionPrescriptionDispense result = dao.update(bean);
-
-    logger.info("update(VisionPrescriptionDispense) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

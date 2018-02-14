@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PlanDefinitionRelatedActionModel;
 import org.fhir.pojo.PlanDefinitionRelatedAction;
+import org.fhir.pojo.PlanDefinitionRelatedActionHelper;
 
 public class PlanDefinitionRelatedActionDaoImpl implements PlanDefinitionRelatedActionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PlanDefinitionRelatedActionDaoImpl implements PlanDefinitionRelated
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PlanDefinitionRelatedActionModel a", PlanDefinitionRelatedActionModel.class).setMaxResults(maxResult);
       List<PlanDefinitionRelatedActionModel> models = query.getResultList();
-      return PlanDefinitionRelatedAction.fromArray(models);
+      return PlanDefinitionRelatedActionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PlanDefinitionRelatedActionDaoImpl implements PlanDefinitionRelated
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PlanDefinitionRelatedActionModel a", PlanDefinitionRelatedActionModel.class);
       List<PlanDefinitionRelatedActionModel> models = query.getResultList();
-      return PlanDefinitionRelatedAction.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PlanDefinitionRelatedAction create(PlanDefinitionRelatedAction e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PlanDefinitionRelatedActionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PlanDefinitionRelatedAction update(PlanDefinitionRelatedAction e) {
-      final EntityManager em = entityManagerProvider.get();
-      PlanDefinitionRelatedActionModel model = em.merge(new PlanDefinitionRelatedActionModel(e));
-      return new PlanDefinitionRelatedAction(model);
+      return PlanDefinitionRelatedActionHelper.fromArray2Array(models);
   }
 
   @Override

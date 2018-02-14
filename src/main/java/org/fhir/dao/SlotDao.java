@@ -34,10 +34,8 @@ public interface SlotDao {
   public List<Slot> select(int maxResult);
 
   public List<Slot> selectAll();
-
   public Slot create(Slot e);
 
   public Slot update(Slot e);
-
   public void delete(Slot e);
 }

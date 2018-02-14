@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.OperationOutcomeIssueModel;
 import org.fhir.pojo.OperationOutcomeIssue;
+import org.fhir.pojo.OperationOutcomeIssueHelper;
 
 public class OperationOutcomeIssueDaoImpl implements OperationOutcomeIssueDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class OperationOutcomeIssueDaoImpl implements OperationOutcomeIssueDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OperationOutcomeIssueModel a", OperationOutcomeIssueModel.class).setMaxResults(maxResult);
       List<OperationOutcomeIssueModel> models = query.getResultList();
-      return OperationOutcomeIssue.fromArray(models);
+      return OperationOutcomeIssueHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class OperationOutcomeIssueDaoImpl implements OperationOutcomeIssueDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OperationOutcomeIssueModel a", OperationOutcomeIssueModel.class);
       List<OperationOutcomeIssueModel> models = query.getResultList();
-      return OperationOutcomeIssue.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public OperationOutcomeIssue create(OperationOutcomeIssue e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new OperationOutcomeIssueModel(e));
-      return e;
-  }
-
-  @Transactional
-  public OperationOutcomeIssue update(OperationOutcomeIssue e) {
-      final EntityManager em = entityManagerProvider.get();
-      OperationOutcomeIssueModel model = em.merge(new OperationOutcomeIssueModel(e));
-      return new OperationOutcomeIssue(model);
+      return OperationOutcomeIssueHelper.fromArray2Array(models);
   }
 
   @Override

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.NarrativeModel;
 import org.fhir.pojo.Narrative;
+import org.fhir.pojo.NarrativeHelper;
 
 public class NarrativeDaoImpl implements NarrativeDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class NarrativeDaoImpl implements NarrativeDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NarrativeModel a", NarrativeModel.class).setMaxResults(maxResult);
       List<NarrativeModel> models = query.getResultList();
-      return Narrative.fromArray(models);
+      return NarrativeHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class NarrativeDaoImpl implements NarrativeDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NarrativeModel a", NarrativeModel.class);
       List<NarrativeModel> models = query.getResultList();
-      return Narrative.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public Narrative create(Narrative e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new NarrativeModel(e));
-      return e;
-  }
-
-  @Transactional
-  public Narrative update(Narrative e) {
-      final EntityManager em = entityManagerProvider.get();
-      NarrativeModel model = em.merge(new NarrativeModel(e));
-      return new Narrative(model);
+      return NarrativeHelper.fromArray2Array(models);
   }
 
   @Override

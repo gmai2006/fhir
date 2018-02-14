@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
 @Entity
 @Table(name="careplanactivity")
-public class CarePlanActivityModel  {
+public class CarePlanActivityModel  implements Serializable {
+	private static final long serialVersionUID = 151857669693272338L;
   /**
   * Description: "Identifies the outcome at the point when the status of the activity is assessed.  For example, the outcome of an education activity could be patient understands (or not)."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -49,13 +50,17 @@ public class CarePlanActivityModel  {
   /**
   * Description: "Details of the outcome or action resulting from the activity.  The reference to an \"event\" resource, such as Procedure or Encounter or Observation, is the result/outcome of the activity itself.  The activity can be conveyed using CarePlan.activity.detail OR using the CarePlan.activity.reference (a reference to a “request” resource)."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> outcomeReference = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"outcomereference_id\"")
+  private String outcomereference_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcomereference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> outcomeReference;
 
   /**
   * Description: "Notes about the adherence/status/progress of the activity."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -69,9 +74,9 @@ public class CarePlanActivityModel  {
   @Column(name="\"reference_id\"")
   private String reference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`reference_id`", insertable=false, updatable=false)
-  private ReferenceModel reference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> reference;
 
   /**
   * Description: "A simple summary of a planned activity suitable for a general care plan system (e.g. form driven) that doesn't know about specific resources such as procedure etc."
@@ -80,14 +85,14 @@ public class CarePlanActivityModel  {
   @Column(name="\"detail_id\"")
   private String detail_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`detail_id`", insertable=false, updatable=false)
-  private CarePlanDetailModel detail;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="detail_id", insertable=false, updatable=false)
+  private java.util.List<CarePlanDetailModel> detail;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -99,6 +104,7 @@ public class CarePlanActivityModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -107,107 +113,121 @@ public class CarePlanActivityModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public CarePlanActivityModel() {
   }
 
-  public CarePlanActivityModel(CarePlanActivity o) {
-    this.id = o.getId();
-      this.outcomeCodeableConcept = CodeableConcept.toJson(o.getOutcomeCodeableConcept());
-      this.outcomeReference = Reference.toModelArray(o.getOutcomeReference());
-
-      this.progress = Annotation.toJson(o.getProgress());
-      if (null != o.getReference()) {
-      	this.reference_id = "reference" + this.getId();
-        this.reference = new ReferenceModel(o.getReference());
-        this.reference.setId(this.reference_id);
-        this.reference.parent_id = this.reference.getId();
-      }
-
-      if (null != o.getDetail()) {
-      	this.detail_id = "detail" + this.getId();
-        this.detail = new CarePlanDetailModel(o.getDetail());
-        this.detail.setId(this.detail_id);
-        this.detail.parent_id = this.detail.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public CarePlanActivityModel(CarePlanActivity o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    if (null != o.getOutcomeReference() && !o.getOutcomeReference().isEmpty()) {
+    	this.outcomereference_id = "outcomereference" + this.parent_id;
+    	this.outcomeReference = ReferenceHelper.toModelFromArray(o.getOutcomeReference(), this.outcomereference_id);
+    }
+    if (null != o.getReference() ) {
+    	this.reference_id = "reference" + this.parent_id;
+    	this.reference = ReferenceHelper.toModel(o.getReference(), this.reference_id);
+    }
+    if (null != o.getDetail() ) {
+    	this.detail_id = "detail" + this.parent_id;
+    	this.detail = CarePlanDetailHelper.toModel(o.getDetail(), this.detail_id);
+    }
   }
 
-  public void setOutcomeCodeableConcept( String value) {
-    this.outcomeCodeableConcept = value;
-  }
   public String getOutcomeCodeableConcept() {
     return this.outcomeCodeableConcept;
   }
-  public void setOutcomeReference( java.util.List<ReferenceModel> value) {
-    this.outcomeReference = value;
+  public void setOutcomeCodeableConcept( String value) {
+    this.outcomeCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getOutcomeReference() {
     return this.outcomeReference;
   }
-  public void setProgress( String value) {
-    this.progress = value;
+  public void setOutcomeReference( java.util.List<ReferenceModel> value) {
+    this.outcomeReference = value;
   }
   public String getProgress() {
     return this.progress;
   }
-  public void setReference( ReferenceModel value) {
-    this.reference = value;
+  public void setProgress( String value) {
+    this.progress = value;
   }
-  public ReferenceModel getReference() {
+  public java.util.List<ReferenceModel> getReference() {
     return this.reference;
   }
-  public void setDetail( CarePlanDetailModel value) {
-    this.detail = value;
+  public void setReference( java.util.List<ReferenceModel> value) {
+    this.reference = value;
   }
-  public CarePlanDetailModel getDetail() {
+  public java.util.List<CarePlanDetailModel> getDetail() {
     return this.detail;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setDetail( java.util.List<CarePlanDetailModel> value) {
+    this.detail = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("outcomeCodeableConcept" + "[" + String.valueOf(this.outcomeCodeableConcept) + "]\n"); 
-     builder.append("outcomeReference" + "[" + String.valueOf(this.outcomeReference) + "]\n"); 
-     builder.append("progress" + "[" + String.valueOf(this.progress) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CarePlanActivityModel]:" + "\n");
+     builder.append("outcomeCodeableConcept" + "->" + this.outcomeCodeableConcept + "\n"); 
+     builder.append("progress" + "->" + this.progress + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[CarePlanActivityModel]:" + "\n");
+     builder.append("outcomeCodeableConcept" + "->" + this.outcomeCodeableConcept + "\n"); 
+     builder.append("outcomeReference" + "->" + this.outcomeReference + "\n"); 
+     builder.append("progress" + "->" + this.progress + "\n"); 
+     builder.append("reference" + "->" + this.reference + "\n"); 
+     builder.append("detail" + "->" + this.detail + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

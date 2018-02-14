@@ -34,10 +34,5 @@ public interface AppointmentParticipantDao {
   public List<AppointmentParticipant> select(int maxResult);
 
   public List<AppointmentParticipant> selectAll();
-
-  public AppointmentParticipant create(AppointmentParticipant e);
-
-  public AppointmentParticipant update(AppointmentParticipant e);
-
   public void delete(AppointmentParticipant e);
 }

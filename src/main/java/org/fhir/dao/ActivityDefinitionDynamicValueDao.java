@@ -34,10 +34,5 @@ public interface ActivityDefinitionDynamicValueDao {
   public List<ActivityDefinitionDynamicValue> select(int maxResult);
 
   public List<ActivityDefinitionDynamicValue> selectAll();
-
-  public ActivityDefinitionDynamicValue create(ActivityDefinitionDynamicValue e);
-
-  public ActivityDefinitionDynamicValue update(ActivityDefinitionDynamicValue e);
-
   public void delete(ActivityDefinitionDynamicValue e);
 }

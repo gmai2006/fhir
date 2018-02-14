@@ -34,10 +34,5 @@ public interface ProcessResponseProcessNoteDao {
   public List<ProcessResponseProcessNote> select(int maxResult);
 
   public List<ProcessResponseProcessNote> selectAll();
-
-  public ProcessResponseProcessNote create(ProcessResponseProcessNote e);
-
-  public ProcessResponseProcessNote update(ProcessResponseProcessNote e);
-
   public void delete(ProcessResponseProcessNote e);
 }

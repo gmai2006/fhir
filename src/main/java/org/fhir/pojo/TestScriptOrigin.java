@@ -59,6 +59,7 @@ public class TestScriptOrigin  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -123,34 +124,15 @@ public class TestScriptOrigin  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("index" + "[" + String.valueOf(this.index) + "]\n"); 
-     builder.append("_index" + "[" + String.valueOf(this._index) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TestScriptOrigin]:" + "\n");
+     if(this.index != null) builder.append("index" + "->" + this.index.toString() + "\n"); 
+     if(this._index != null) builder.append("_index" + "->" + this._index.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static TestScriptOrigin fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TestScriptOrigin.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TestScriptOrigin o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TestScriptOrigin> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

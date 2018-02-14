@@ -60,6 +60,7 @@ public class AccountCoverage  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -81,21 +82,15 @@ public class AccountCoverage  {
 
   public AccountCoverage(AccountCoverageModel o) {
     this.id = o.getId();
-      if (null != o.getCoverage()) {
-        this.coverage = new Reference(o.getCoverage());
-        this.coverage.setId(this.getId());
-      }
-
-      if (null != o.getPriority()) {
-        this.priority = new Float(o.getPriority());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCoverage() && !o.getCoverage().isEmpty()) {
+      this.coverage = new Reference(o.getCoverage().get(0));
+    }
+    if (null != o.getPriority()) {
+      this.priority = o.getPriority();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCoverage( Reference value) {
@@ -144,47 +139,16 @@ public class AccountCoverage  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("coverage" + "[" + String.valueOf(this.coverage) + "]\n"); 
-     builder.append("priority" + "[" + String.valueOf(this.priority) + "]\n"); 
-     builder.append("_priority" + "[" + String.valueOf(this._priority) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AccountCoverage]:" + "\n");
+     if(this.coverage != null) builder.append("coverage" + "->" + this.coverage.toString() + "\n"); 
+     if(this.priority != null) builder.append("priority" + "->" + this.priority.toString() + "\n"); 
+     if(this._priority != null) builder.append("_priority" + "->" + this._priority.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<AccountCoverage> fromArray(java.util.List<AccountCoverageModel> list) {
-    return (java.util.List<AccountCoverage>)list.stream()
-      .map(model -> new AccountCoverage(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AccountCoverageModel> toModelArray(java.util.List<AccountCoverage> list) {
-    return (java.util.List<AccountCoverageModel>)list.stream()
-      .map(model -> new AccountCoverageModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AccountCoverage fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AccountCoverage.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AccountCoverage o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AccountCoverage> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

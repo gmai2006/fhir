@@ -170,6 +170,7 @@ public class Goal  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -221,77 +222,54 @@ public class Goal  {
 
   public Goal(GoalModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.category = CodeableConcept.fromArray(o.getCategory());
-      this.priority = CodeableConcept.fromJson(o.getPriority());
-      this.description = CodeableConcept.fromJson(o.getDescription());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getStartDate()) {
-        this.startDate = new String(o.getStartDate());
-      }
-
-      this.startCodeableConcept = CodeableConcept.fromJson(o.getStartCodeableConcept());
-      if (null != o.getTarget()) {
-        this.target = new GoalTarget(o.getTarget());
-        this.target.setId(this.getId());
-      }
-
-      if (null != o.getStatusDate()) {
-        this.statusDate = new String(o.getStatusDate());
-      }
-
-      if (null != o.getStatusReason()) {
-        this.statusReason = new String(o.getStatusReason());
-      }
-
-      if (null != o.getExpressedBy()) {
-        this.expressedBy = new Reference(o.getExpressedBy());
-        this.expressedBy.setId(this.getId());
-      }
-
-      this.addresses = Reference.fromArray(o.getAddresses());
-
-      this.note = Annotation.fromArray(o.getNote());
-      this.outcomeCode = CodeableConcept.fromArray(o.getOutcomeCode());
-      this.outcomeReference = Reference.fromArray(o.getOutcomeReference());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.priority = CodeableConceptHelper.fromJson(o.getPriority());
+    this.description = CodeableConceptHelper.fromJson(o.getDescription());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getStartDate()) {
+      this.startDate = o.getStartDate();
+    }
+    this.startCodeableConcept = CodeableConceptHelper.fromJson(o.getStartCodeableConcept());
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+      this.target = new GoalTarget(o.getTarget().get(0));
+    }
+    if (null != o.getStatusDate()) {
+      this.statusDate = o.getStatusDate();
+    }
+    if (null != o.getStatusReason()) {
+      this.statusReason = o.getStatusReason();
+    }
+    if (null != o.getExpressedBy() && !o.getExpressedBy().isEmpty()) {
+      this.expressedBy = new Reference(o.getExpressedBy().get(0));
+    }
+    if (null != o.getAddresses() && !o.getAddresses().isEmpty()) {
+    	this.addresses = ReferenceHelper.fromArray2Array(o.getAddresses());
+    }
+    if (null != o.getOutcomeReference() && !o.getOutcomeReference().isEmpty()) {
+    	this.outcomeReference = ReferenceHelper.fromArray2Array(o.getOutcomeReference());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -490,38 +468,39 @@ public class Goal  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("priority" + "[" + String.valueOf(this.priority) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("startDate" + "[" + String.valueOf(this.startDate) + "]\n"); 
-     builder.append("_startDate" + "[" + String.valueOf(this._startDate) + "]\n"); 
-     builder.append("startCodeableConcept" + "[" + String.valueOf(this.startCodeableConcept) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("statusDate" + "[" + String.valueOf(this.statusDate) + "]\n"); 
-     builder.append("_statusDate" + "[" + String.valueOf(this._statusDate) + "]\n"); 
-     builder.append("statusReason" + "[" + String.valueOf(this.statusReason) + "]\n"); 
-     builder.append("_statusReason" + "[" + String.valueOf(this._statusReason) + "]\n"); 
-     builder.append("expressedBy" + "[" + String.valueOf(this.expressedBy) + "]\n"); 
-     builder.append("addresses" + "[" + String.valueOf(this.addresses) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("outcomeCode" + "[" + String.valueOf(this.outcomeCode) + "]\n"); 
-     builder.append("outcomeReference" + "[" + String.valueOf(this.outcomeReference) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Goal]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.priority != null) builder.append("priority" + "->" + this.priority.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.startDate != null) builder.append("startDate" + "->" + this.startDate.toString() + "\n"); 
+     if(this._startDate != null) builder.append("_startDate" + "->" + this._startDate.toString() + "\n"); 
+     if(this.startCodeableConcept != null) builder.append("startCodeableConcept" + "->" + this.startCodeableConcept.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this.statusDate != null) builder.append("statusDate" + "->" + this.statusDate.toString() + "\n"); 
+     if(this._statusDate != null) builder.append("_statusDate" + "->" + this._statusDate.toString() + "\n"); 
+     if(this.statusReason != null) builder.append("statusReason" + "->" + this.statusReason.toString() + "\n"); 
+     if(this._statusReason != null) builder.append("_statusReason" + "->" + this._statusReason.toString() + "\n"); 
+     if(this.expressedBy != null) builder.append("expressedBy" + "->" + this.expressedBy.toString() + "\n"); 
+     if(this.addresses != null) builder.append("addresses" + "->" + this.addresses.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.outcomeCode != null) builder.append("outcomeCode" + "->" + this.outcomeCode.toString() + "\n"); 
+     if(this.outcomeReference != null) builder.append("outcomeReference" + "->" + this.outcomeReference.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -573,36 +552,4 @@ public class Goal  {
   	}
   }
 
-  public static java.util.List<Goal> fromArray(java.util.List<GoalModel> list) {
-    return (java.util.List<Goal>)list.stream()
-      .map(model -> new Goal(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<GoalModel> toModelArray(java.util.List<Goal> list) {
-    return (java.util.List<GoalModel>)list.stream()
-      .map(model -> new GoalModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Goal fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Goal.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Goal o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Goal> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

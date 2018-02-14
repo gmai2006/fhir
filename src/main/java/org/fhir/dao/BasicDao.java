@@ -34,10 +34,8 @@ public interface BasicDao {
   public List<Basic> select(int maxResult);
 
   public List<Basic> selectAll();
-
   public Basic create(Basic e);
 
   public Basic update(Basic e);
-
   public void delete(Basic e);
 }

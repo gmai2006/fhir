@@ -34,10 +34,8 @@ public interface MessageDefinitionDao {
   public List<MessageDefinition> select(int maxResult);
 
   public List<MessageDefinition> selectAll();
-
   public MessageDefinition create(MessageDefinition e);
 
   public MessageDefinition update(MessageDefinition e);
-
   public void delete(MessageDefinition e);
 }

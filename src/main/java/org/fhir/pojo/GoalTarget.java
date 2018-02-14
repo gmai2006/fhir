@@ -79,6 +79,7 @@ public class GoalTarget  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -100,21 +101,17 @@ public class GoalTarget  {
 
   public GoalTarget(GoalTargetModel o) {
     this.id = o.getId();
-      this.measure = CodeableConcept.fromJson(o.getMeasure());
-      this.detailQuantity = Quantity.fromJson(o.getDetailQuantity());
-      this.detailRange = Range.fromJson(o.getDetailRange());
-      this.detailCodeableConcept = CodeableConcept.fromJson(o.getDetailCodeableConcept());
-      if (null != o.getDueDate()) {
-        this.dueDate = new String(o.getDueDate());
-      }
-
-      this.dueDuration = Duration.fromJson(o.getDueDuration());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.measure = CodeableConceptHelper.fromJson(o.getMeasure());
+    this.detailQuantity = QuantityHelper.fromJson(o.getDetailQuantity());
+    this.detailRange = RangeHelper.fromJson(o.getDetailRange());
+    this.detailCodeableConcept = CodeableConceptHelper.fromJson(o.getDetailCodeableConcept());
+    if (null != o.getDueDate()) {
+      this.dueDate = o.getDueDate();
+    }
+    this.dueDuration = DurationHelper.fromJson(o.getDueDuration());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setMeasure( CodeableConcept value) {
@@ -187,51 +184,20 @@ public class GoalTarget  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("measure" + "[" + String.valueOf(this.measure) + "]\n"); 
-     builder.append("detailQuantity" + "[" + String.valueOf(this.detailQuantity) + "]\n"); 
-     builder.append("detailRange" + "[" + String.valueOf(this.detailRange) + "]\n"); 
-     builder.append("detailCodeableConcept" + "[" + String.valueOf(this.detailCodeableConcept) + "]\n"); 
-     builder.append("dueDate" + "[" + String.valueOf(this.dueDate) + "]\n"); 
-     builder.append("_dueDate" + "[" + String.valueOf(this._dueDate) + "]\n"); 
-     builder.append("dueDuration" + "[" + String.valueOf(this.dueDuration) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[GoalTarget]:" + "\n");
+     if(this.measure != null) builder.append("measure" + "->" + this.measure.toString() + "\n"); 
+     if(this.detailQuantity != null) builder.append("detailQuantity" + "->" + this.detailQuantity.toString() + "\n"); 
+     if(this.detailRange != null) builder.append("detailRange" + "->" + this.detailRange.toString() + "\n"); 
+     if(this.detailCodeableConcept != null) builder.append("detailCodeableConcept" + "->" + this.detailCodeableConcept.toString() + "\n"); 
+     if(this.dueDate != null) builder.append("dueDate" + "->" + this.dueDate.toString() + "\n"); 
+     if(this._dueDate != null) builder.append("_dueDate" + "->" + this._dueDate.toString() + "\n"); 
+     if(this.dueDuration != null) builder.append("dueDuration" + "->" + this.dueDuration.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<GoalTarget> fromArray(java.util.List<GoalTargetModel> list) {
-    return (java.util.List<GoalTarget>)list.stream()
-      .map(model -> new GoalTarget(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<GoalTargetModel> toModelArray(java.util.List<GoalTarget> list) {
-    return (java.util.List<GoalTargetModel>)list.stream()
-      .map(model -> new GoalTargetModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static GoalTarget fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, GoalTarget.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(GoalTarget o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<GoalTarget> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -34,10 +34,5 @@ public interface PractitionerQualificationDao {
   public List<PractitionerQualification> select(int maxResult);
 
   public List<PractitionerQualification> selectAll();
-
-  public PractitionerQualification create(PractitionerQualification e);
-
-  public PractitionerQualification update(PractitionerQualification e);
-
   public void delete(PractitionerQualification e);
 }

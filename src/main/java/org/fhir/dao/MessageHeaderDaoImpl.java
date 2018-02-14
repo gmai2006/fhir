@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MessageHeaderModel;
 import org.fhir.pojo.MessageHeader;
+import org.fhir.pojo.MessageHeaderHelper;
 
 public class MessageHeaderDaoImpl implements MessageHeaderDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MessageHeaderDaoImpl implements MessageHeaderDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageHeaderModel a", MessageHeaderModel.class).setMaxResults(maxResult);
       List<MessageHeaderModel> models = query.getResultList();
-      return MessageHeader.fromArray(models);
+      return MessageHeaderHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class MessageHeaderDaoImpl implements MessageHeaderDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageHeaderModel a", MessageHeaderModel.class);
       List<MessageHeaderModel> models = query.getResultList();
-      return MessageHeader.fromArray(models);
+      return MessageHeaderHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class MessageHeaderDaoImpl implements MessageHeaderDao {
       MessageHeaderModel model = em.merge(new MessageHeaderModel(e));
       return new MessageHeader(model);
   }
-
   @Override
   @Transactional
   public void delete(MessageHeader e) {

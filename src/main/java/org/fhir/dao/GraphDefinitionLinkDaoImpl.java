@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.GraphDefinitionLinkModel;
 import org.fhir.pojo.GraphDefinitionLink;
+import org.fhir.pojo.GraphDefinitionLinkHelper;
 
 public class GraphDefinitionLinkDaoImpl implements GraphDefinitionLinkDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class GraphDefinitionLinkDaoImpl implements GraphDefinitionLinkDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GraphDefinitionLinkModel a", GraphDefinitionLinkModel.class).setMaxResults(maxResult);
       List<GraphDefinitionLinkModel> models = query.getResultList();
-      return GraphDefinitionLink.fromArray(models);
+      return GraphDefinitionLinkHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class GraphDefinitionLinkDaoImpl implements GraphDefinitionLinkDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GraphDefinitionLinkModel a", GraphDefinitionLinkModel.class);
       List<GraphDefinitionLinkModel> models = query.getResultList();
-      return GraphDefinitionLink.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public GraphDefinitionLink create(GraphDefinitionLink e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new GraphDefinitionLinkModel(e));
-      return e;
-  }
-
-  @Transactional
-  public GraphDefinitionLink update(GraphDefinitionLink e) {
-      final EntityManager em = entityManagerProvider.get();
-      GraphDefinitionLinkModel model = em.merge(new GraphDefinitionLinkModel(e));
-      return new GraphDefinitionLink(model);
+      return GraphDefinitionLinkHelper.fromArray2Array(models);
   }
 
   @Override

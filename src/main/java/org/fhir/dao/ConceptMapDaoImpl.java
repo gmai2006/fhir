@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ConceptMapModel;
 import org.fhir.pojo.ConceptMap;
+import org.fhir.pojo.ConceptMapHelper;
 
 public class ConceptMapDaoImpl implements ConceptMapDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ConceptMapDaoImpl implements ConceptMapDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConceptMapModel a", ConceptMapModel.class).setMaxResults(maxResult);
       List<ConceptMapModel> models = query.getResultList();
-      return ConceptMap.fromArray(models);
+      return ConceptMapHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ConceptMapDaoImpl implements ConceptMapDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConceptMapModel a", ConceptMapModel.class);
       List<ConceptMapModel> models = query.getResultList();
-      return ConceptMap.fromArray(models);
+      return ConceptMapHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ConceptMapDaoImpl implements ConceptMapDao {
       ConceptMapModel model = em.merge(new ConceptMapModel(e));
       return new ConceptMap(model);
   }
-
   @Override
   @Transactional
   public void delete(ConceptMap e) {

@@ -88,6 +88,7 @@ public class MessageHeaderSource  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -109,29 +110,22 @@ public class MessageHeaderSource  {
 
   public MessageHeaderSource(MessageHeaderSourceModel o) {
     this.id = o.getId();
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getSoftware()) {
-        this.software = new String(o.getSoftware());
-      }
-
-      if (null != o.getVersion()) {
-        this.version = new String(o.getVersion());
-      }
-
-      this.contact = ContactPoint.fromJson(o.getContact());
-      if (null != o.getEndpoint()) {
-        this.endpoint = new String(o.getEndpoint());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getSoftware()) {
+      this.software = o.getSoftware();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    this.contact = ContactPointHelper.fromJson(o.getContact());
+    if (null != o.getEndpoint()) {
+      this.endpoint = o.getEndpoint();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setName( String value) {
@@ -216,53 +210,22 @@ public class MessageHeaderSource  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("software" + "[" + String.valueOf(this.software) + "]\n"); 
-     builder.append("_software" + "[" + String.valueOf(this._software) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("_endpoint" + "[" + String.valueOf(this._endpoint) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MessageHeaderSource]:" + "\n");
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.software != null) builder.append("software" + "->" + this.software.toString() + "\n"); 
+     if(this._software != null) builder.append("_software" + "->" + this._software.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
+     if(this._endpoint != null) builder.append("_endpoint" + "->" + this._endpoint.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MessageHeaderSource> fromArray(java.util.List<MessageHeaderSourceModel> list) {
-    return (java.util.List<MessageHeaderSource>)list.stream()
-      .map(model -> new MessageHeaderSource(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MessageHeaderSourceModel> toModelArray(java.util.List<MessageHeaderSource> list) {
-    return (java.util.List<MessageHeaderSourceModel>)list.stream()
-      .map(model -> new MessageHeaderSourceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MessageHeaderSource fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MessageHeaderSource.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MessageHeaderSource o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MessageHeaderSource> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

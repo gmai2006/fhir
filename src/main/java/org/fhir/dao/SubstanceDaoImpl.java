@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SubstanceModel;
 import org.fhir.pojo.Substance;
+import org.fhir.pojo.SubstanceHelper;
 
 public class SubstanceDaoImpl implements SubstanceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SubstanceDaoImpl implements SubstanceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SubstanceModel a", SubstanceModel.class).setMaxResults(maxResult);
       List<SubstanceModel> models = query.getResultList();
-      return Substance.fromArray(models);
+      return SubstanceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class SubstanceDaoImpl implements SubstanceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SubstanceModel a", SubstanceModel.class);
       List<SubstanceModel> models = query.getResultList();
-      return Substance.fromArray(models);
+      return SubstanceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class SubstanceDaoImpl implements SubstanceDao {
       SubstanceModel model = em.merge(new SubstanceModel(e));
       return new Substance(model);
   }
-
   @Override
   @Transactional
   public void delete(Substance e) {

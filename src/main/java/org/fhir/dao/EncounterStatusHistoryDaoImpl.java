@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EncounterStatusHistoryModel;
 import org.fhir.pojo.EncounterStatusHistory;
+import org.fhir.pojo.EncounterStatusHistoryHelper;
 
 public class EncounterStatusHistoryDaoImpl implements EncounterStatusHistoryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EncounterStatusHistoryDaoImpl implements EncounterStatusHistoryDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterStatusHistoryModel a", EncounterStatusHistoryModel.class).setMaxResults(maxResult);
       List<EncounterStatusHistoryModel> models = query.getResultList();
-      return EncounterStatusHistory.fromArray(models);
+      return EncounterStatusHistoryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EncounterStatusHistoryDaoImpl implements EncounterStatusHistoryDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterStatusHistoryModel a", EncounterStatusHistoryModel.class);
       List<EncounterStatusHistoryModel> models = query.getResultList();
-      return EncounterStatusHistory.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EncounterStatusHistory create(EncounterStatusHistory e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EncounterStatusHistoryModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EncounterStatusHistory update(EncounterStatusHistory e) {
-      final EntityManager em = entityManagerProvider.get();
-      EncounterStatusHistoryModel model = em.merge(new EncounterStatusHistoryModel(e));
-      return new EncounterStatusHistory(model);
+      return EncounterStatusHistoryHelper.fromArray2Array(models);
   }
 
   @Override

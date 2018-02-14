@@ -69,6 +69,7 @@ public class MeasureReportStratum  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -90,22 +91,18 @@ public class MeasureReportStratum  {
 
   public MeasureReportStratum(MeasureReportStratumModel o) {
     this.id = o.getId();
-      if (null != o.getValue()) {
-        this.value = new String(o.getValue());
-      }
-
-      this.population = MeasureReportPopulation1.fromArray(o.getPopulation());
-
-      if (null != o.getMeasureScore()) {
-        this.measureScore = new Float(o.getMeasureScore());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getValue()) {
+      this.value = o.getValue();
+    }
+    if (null != o.getPopulation() && !o.getPopulation().isEmpty()) {
+    	this.population = MeasureReportPopulation1Helper.fromArray2Array(o.getPopulation());
+    }
+    if (null != o.getMeasureScore()) {
+      this.measureScore = o.getMeasureScore();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setValue( String value) {
@@ -166,49 +163,18 @@ public class MeasureReportStratum  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("_value" + "[" + String.valueOf(this._value) + "]\n"); 
-     builder.append("population" + "[" + String.valueOf(this.population) + "]\n"); 
-     builder.append("measureScore" + "[" + String.valueOf(this.measureScore) + "]\n"); 
-     builder.append("_measureScore" + "[" + String.valueOf(this._measureScore) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MeasureReportStratum]:" + "\n");
+     if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
+     if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
+     if(this.population != null) builder.append("population" + "->" + this.population.toString() + "\n"); 
+     if(this.measureScore != null) builder.append("measureScore" + "->" + this.measureScore.toString() + "\n"); 
+     if(this._measureScore != null) builder.append("_measureScore" + "->" + this._measureScore.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MeasureReportStratum> fromArray(java.util.List<MeasureReportStratumModel> list) {
-    return (java.util.List<MeasureReportStratum>)list.stream()
-      .map(model -> new MeasureReportStratum(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MeasureReportStratumModel> toModelArray(java.util.List<MeasureReportStratum> list) {
-    return (java.util.List<MeasureReportStratumModel>)list.stream()
-      .map(model -> new MeasureReportStratumModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MeasureReportStratum fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MeasureReportStratum.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MeasureReportStratum o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MeasureReportStratum> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

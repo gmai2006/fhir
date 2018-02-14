@@ -32,7 +32,5 @@ public interface MeasureReportPopulationService {
 	public MeasureReportPopulation find(String id);
   public List<MeasureReportPopulation> select(int maxResult);
   public List<MeasureReportPopulation> selectAll();
-  public MeasureReportPopulation create(MeasureReportPopulation bean);
-  public MeasureReportPopulation update(MeasureReportPopulation bean);
   public void delete(MeasureReportPopulation bean);
 }

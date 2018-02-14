@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CompartmentDefinitionModel;
 import org.fhir.pojo.CompartmentDefinition;
+import org.fhir.pojo.CompartmentDefinitionHelper;
 
 public class CompartmentDefinitionDaoImpl implements CompartmentDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CompartmentDefinitionDaoImpl implements CompartmentDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompartmentDefinitionModel a", CompartmentDefinitionModel.class).setMaxResults(maxResult);
       List<CompartmentDefinitionModel> models = query.getResultList();
-      return CompartmentDefinition.fromArray(models);
+      return CompartmentDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class CompartmentDefinitionDaoImpl implements CompartmentDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompartmentDefinitionModel a", CompartmentDefinitionModel.class);
       List<CompartmentDefinitionModel> models = query.getResultList();
-      return CompartmentDefinition.fromArray(models);
+      return CompartmentDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class CompartmentDefinitionDaoImpl implements CompartmentDefinitionDao {
       CompartmentDefinitionModel model = em.merge(new CompartmentDefinitionModel(e));
       return new CompartmentDefinition(model);
   }
-
   @Override
   @Transactional
   public void delete(CompartmentDefinition e) {

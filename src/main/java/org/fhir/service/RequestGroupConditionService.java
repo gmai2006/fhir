@@ -32,7 +32,5 @@ public interface RequestGroupConditionService {
 	public RequestGroupCondition find(String id);
   public List<RequestGroupCondition> select(int maxResult);
   public List<RequestGroupCondition> selectAll();
-  public RequestGroupCondition create(RequestGroupCondition bean);
-  public RequestGroupCondition update(RequestGroupCondition bean);
   public void delete(RequestGroupCondition bean);
 }

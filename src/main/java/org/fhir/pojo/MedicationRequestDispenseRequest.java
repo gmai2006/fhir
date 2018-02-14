@@ -74,6 +74,7 @@ public class MedicationRequestDispenseRequest  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -95,24 +96,18 @@ public class MedicationRequestDispenseRequest  {
 
   public MedicationRequestDispenseRequest(MedicationRequestDispenseRequestModel o) {
     this.id = o.getId();
-      this.validityPeriod = Period.fromJson(o.getValidityPeriod());
-      if (null != o.getNumberOfRepeatsAllowed()) {
-        this.numberOfRepeatsAllowed = new Float(o.getNumberOfRepeatsAllowed());
-      }
-
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      this.expectedSupplyDuration = Duration.fromJson(o.getExpectedSupplyDuration());
-      if (null != o.getPerformer()) {
-        this.performer = new Reference(o.getPerformer());
-        this.performer.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.validityPeriod = PeriodHelper.fromJson(o.getValidityPeriod());
+    if (null != o.getNumberOfRepeatsAllowed()) {
+      this.numberOfRepeatsAllowed = o.getNumberOfRepeatsAllowed();
+    }
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    this.expectedSupplyDuration = DurationHelper.fromJson(o.getExpectedSupplyDuration());
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+      this.performer = new Reference(o.getPerformer().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setValidityPeriod( Period value) {
@@ -179,50 +174,19 @@ public class MedicationRequestDispenseRequest  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("validityPeriod" + "[" + String.valueOf(this.validityPeriod) + "]\n"); 
-     builder.append("numberOfRepeatsAllowed" + "[" + String.valueOf(this.numberOfRepeatsAllowed) + "]\n"); 
-     builder.append("_numberOfRepeatsAllowed" + "[" + String.valueOf(this._numberOfRepeatsAllowed) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("expectedSupplyDuration" + "[" + String.valueOf(this.expectedSupplyDuration) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MedicationRequestDispenseRequest]:" + "\n");
+     if(this.validityPeriod != null) builder.append("validityPeriod" + "->" + this.validityPeriod.toString() + "\n"); 
+     if(this.numberOfRepeatsAllowed != null) builder.append("numberOfRepeatsAllowed" + "->" + this.numberOfRepeatsAllowed.toString() + "\n"); 
+     if(this._numberOfRepeatsAllowed != null) builder.append("_numberOfRepeatsAllowed" + "->" + this._numberOfRepeatsAllowed.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.expectedSupplyDuration != null) builder.append("expectedSupplyDuration" + "->" + this.expectedSupplyDuration.toString() + "\n"); 
+     if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MedicationRequestDispenseRequest> fromArray(java.util.List<MedicationRequestDispenseRequestModel> list) {
-    return (java.util.List<MedicationRequestDispenseRequest>)list.stream()
-      .map(model -> new MedicationRequestDispenseRequest(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MedicationRequestDispenseRequestModel> toModelArray(java.util.List<MedicationRequestDispenseRequest> list) {
-    return (java.util.List<MedicationRequestDispenseRequestModel>)list.stream()
-      .map(model -> new MedicationRequestDispenseRequestModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MedicationRequestDispenseRequest fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MedicationRequestDispenseRequest.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MedicationRequestDispenseRequest o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MedicationRequestDispenseRequest> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

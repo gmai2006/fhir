@@ -32,7 +32,5 @@ public interface ClaimProcedureService {
 	public ClaimProcedure find(String id);
   public List<ClaimProcedure> select(int maxResult);
   public List<ClaimProcedure> selectAll();
-  public ClaimProcedure create(ClaimProcedure bean);
-  public ClaimProcedure update(ClaimProcedure bean);
   public void delete(ClaimProcedure bean);
 }

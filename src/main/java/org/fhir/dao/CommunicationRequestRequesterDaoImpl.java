@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CommunicationRequestRequesterModel;
 import org.fhir.pojo.CommunicationRequestRequester;
+import org.fhir.pojo.CommunicationRequestRequesterHelper;
 
 public class CommunicationRequestRequesterDaoImpl implements CommunicationRequestRequesterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CommunicationRequestRequesterDaoImpl implements CommunicationReques
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CommunicationRequestRequesterModel a", CommunicationRequestRequesterModel.class).setMaxResults(maxResult);
       List<CommunicationRequestRequesterModel> models = query.getResultList();
-      return CommunicationRequestRequester.fromArray(models);
+      return CommunicationRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CommunicationRequestRequesterDaoImpl implements CommunicationReques
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CommunicationRequestRequesterModel a", CommunicationRequestRequesterModel.class);
       List<CommunicationRequestRequesterModel> models = query.getResultList();
-      return CommunicationRequestRequester.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CommunicationRequestRequester create(CommunicationRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CommunicationRequestRequesterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CommunicationRequestRequester update(CommunicationRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      CommunicationRequestRequesterModel model = em.merge(new CommunicationRequestRequesterModel(e));
-      return new CommunicationRequestRequester(model);
+      return CommunicationRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override

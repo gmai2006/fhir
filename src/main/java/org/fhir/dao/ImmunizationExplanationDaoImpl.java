@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImmunizationExplanationModel;
 import org.fhir.pojo.ImmunizationExplanation;
+import org.fhir.pojo.ImmunizationExplanationHelper;
 
 public class ImmunizationExplanationDaoImpl implements ImmunizationExplanationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImmunizationExplanationDaoImpl implements ImmunizationExplanationDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationExplanationModel a", ImmunizationExplanationModel.class).setMaxResults(maxResult);
       List<ImmunizationExplanationModel> models = query.getResultList();
-      return ImmunizationExplanation.fromArray(models);
+      return ImmunizationExplanationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImmunizationExplanationDaoImpl implements ImmunizationExplanationDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationExplanationModel a", ImmunizationExplanationModel.class);
       List<ImmunizationExplanationModel> models = query.getResultList();
-      return ImmunizationExplanation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImmunizationExplanation create(ImmunizationExplanation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImmunizationExplanationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImmunizationExplanation update(ImmunizationExplanation e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImmunizationExplanationModel model = em.merge(new ImmunizationExplanationModel(e));
-      return new ImmunizationExplanation(model);
+      return ImmunizationExplanationHelper.fromArray2Array(models);
   }
 
   @Override

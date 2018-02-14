@@ -86,6 +86,7 @@ public class Coding  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -184,40 +185,21 @@ public class Coding  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("system" + "[" + String.valueOf(this.system) + "]\n"); 
-     builder.append("_system" + "[" + String.valueOf(this._system) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("_display" + "[" + String.valueOf(this._display) + "]\n"); 
-     builder.append("userSelected" + "[" + String.valueOf(this.userSelected) + "]\n"); 
-     builder.append("_userSelected" + "[" + String.valueOf(this._userSelected) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Coding]:" + "\n");
+     if(this.system != null) builder.append("system" + "->" + this.system.toString() + "\n"); 
+     if(this._system != null) builder.append("_system" + "->" + this._system.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
+     if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
+     if(this.userSelected != null) builder.append("userSelected" + "->" + this.userSelected.toString() + "\n"); 
+     if(this._userSelected != null) builder.append("_userSelected" + "->" + this._userSelected.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static Coding fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Coding.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Coding o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Coding> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

@@ -59,6 +59,7 @@ public class PatientLink  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,21 +81,15 @@ public class PatientLink  {
 
   public PatientLink(PatientLinkModel o) {
     this.id = o.getId();
-      if (null != o.getOther()) {
-        this.other = new Reference(o.getOther());
-        this.other.setId(this.getId());
-      }
-
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getOther() && !o.getOther().isEmpty()) {
+      this.other = new Reference(o.getOther().get(0));
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setOther( Reference value) {
@@ -143,13 +138,14 @@ public class PatientLink  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("other" + "[" + String.valueOf(this.other) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PatientLink]:" + "\n");
+     if(this.other != null) builder.append("other" + "->" + this.other.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -171,36 +167,4 @@ public class PatientLink  {
   	}
   }
 
-  public static java.util.List<PatientLink> fromArray(java.util.List<PatientLinkModel> list) {
-    return (java.util.List<PatientLink>)list.stream()
-      .map(model -> new PatientLink(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PatientLinkModel> toModelArray(java.util.List<PatientLink> list) {
-    return (java.util.List<PatientLinkModel>)list.stream()
-      .map(model -> new PatientLinkModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PatientLink fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PatientLink.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PatientLink o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PatientLink> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -34,10 +34,5 @@ public interface EncounterHospitalizationDao {
   public List<EncounterHospitalization> select(int maxResult);
 
   public List<EncounterHospitalization> selectAll();
-
-  public EncounterHospitalization create(EncounterHospitalization e);
-
-  public EncounterHospitalization update(EncounterHospitalization e);
-
   public void delete(EncounterHospitalization e);
 }

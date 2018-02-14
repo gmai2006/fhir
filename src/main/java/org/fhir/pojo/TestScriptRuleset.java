@@ -54,6 +54,7 @@ public class TestScriptRuleset  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -112,33 +113,14 @@ public class TestScriptRuleset  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("rule" + "[" + String.valueOf(this.rule) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TestScriptRuleset]:" + "\n");
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
+     if(this.rule != null) builder.append("rule" + "->" + this.rule.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static TestScriptRuleset fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TestScriptRuleset.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TestScriptRuleset o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TestScriptRuleset> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

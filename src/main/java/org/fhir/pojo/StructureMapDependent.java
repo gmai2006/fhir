@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.StructureMapDependentModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -63,6 +64,7 @@ public class StructureMapDependent  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -79,7 +81,21 @@ public class StructureMapDependent  {
   */
   private java.util.List<Extension> extension = new java.util.ArrayList<>();
 
-  public StructureMapDependent() {}
+  public StructureMapDependent() {
+  }
+
+  public StructureMapDependent(StructureMapDependentModel o) {
+    this.id = o.getId();
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (o.getVariable() != null) {
+    	this.variable = org.fhir.utils.JsonUtils.json2Array(o.getVariable());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+  }
 
   public void setName( String value) {
     this.name = value;
@@ -133,35 +149,17 @@ public class StructureMapDependent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("variable" + "[" + String.valueOf(this.variable) + "]\n"); 
-     builder.append("_variable" + "[" + String.valueOf(this._variable) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[StructureMapDependent]:" + "\n");
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.variable != null) builder.append("variable" + "->" + this.variable.toString() + "\n"); 
+     if(this._variable != null) builder.append("_variable" + "->" + this._variable.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
-  public static StructureMapDependent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, StructureMapDependent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(StructureMapDependent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<StructureMapDependent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 
 }

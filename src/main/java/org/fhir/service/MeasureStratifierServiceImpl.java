@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public MeasureStratifier create(MeasureStratifier bean) {
-  	requireNonNull(bean);
-    logger.info("create(MeasureStratifier={}) - entered bean ");
-
-    final MeasureStratifier result = dao.create(bean);
-
-    logger.info("create(MeasureStratifier) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public MeasureStratifier update(MeasureStratifier bean) {
-  	requireNonNull(bean);
-    logger.info("update(MeasureStratifier={}) - entered bean ");
-
-    final MeasureStratifier result = dao.update(bean);
-
-    logger.info("update(MeasureStratifier) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

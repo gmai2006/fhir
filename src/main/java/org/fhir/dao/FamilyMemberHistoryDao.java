@@ -34,10 +34,8 @@ public interface FamilyMemberHistoryDao {
   public List<FamilyMemberHistory> select(int maxResult);
 
   public List<FamilyMemberHistory> selectAll();
-
   public FamilyMemberHistory create(FamilyMemberHistory e);
 
   public FamilyMemberHistory update(FamilyMemberHistory e);
-
   public void delete(FamilyMemberHistory e);
 }

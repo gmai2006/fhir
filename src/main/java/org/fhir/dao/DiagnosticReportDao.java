@@ -34,10 +34,8 @@ public interface DiagnosticReportDao {
   public List<DiagnosticReport> select(int maxResult);
 
   public List<DiagnosticReport> selectAll();
-
   public DiagnosticReport create(DiagnosticReport e);
 
   public DiagnosticReport update(DiagnosticReport e);
-
   public void delete(DiagnosticReport e);
 }

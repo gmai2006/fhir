@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public TriggerDefinition create(TriggerDefinition bean) {
-  	requireNonNull(bean);
-    logger.info("create(TriggerDefinition={}) - entered bean ");
-
-    final TriggerDefinition result = dao.create(bean);
-
-    logger.info("create(TriggerDefinition) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public TriggerDefinition update(TriggerDefinition bean) {
-  	requireNonNull(bean);
-    logger.info("update(TriggerDefinition={}) - entered bean ");
-
-    final TriggerDefinition result = dao.update(bean);
-
-    logger.info("update(TriggerDefinition) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

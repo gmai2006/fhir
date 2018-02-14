@@ -34,10 +34,8 @@ public interface CareTeamDao {
   public List<CareTeam> select(int maxResult);
 
   public List<CareTeam> selectAll();
-
   public CareTeam create(CareTeam e);
 
   public CareTeam update(CareTeam e);
-
   public void delete(CareTeam e);
 }

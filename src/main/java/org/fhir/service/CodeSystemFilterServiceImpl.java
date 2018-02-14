@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CodeSystemFilter create(CodeSystemFilter bean) {
-  	requireNonNull(bean);
-    logger.info("create(CodeSystemFilter={}) - entered bean ");
-
-    final CodeSystemFilter result = dao.create(bean);
-
-    logger.info("create(CodeSystemFilter) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CodeSystemFilter update(CodeSystemFilter bean) {
-  	requireNonNull(bean);
-    logger.info("update(CodeSystemFilter={}) - entered bean ");
-
-    final CodeSystemFilter result = dao.update(bean);
-
-    logger.info("update(CodeSystemFilter) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

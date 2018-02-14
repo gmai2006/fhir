@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ReferralRequestRequesterModel;
 import org.fhir.pojo.ReferralRequestRequester;
+import org.fhir.pojo.ReferralRequestRequesterHelper;
 
 public class ReferralRequestRequesterDaoImpl implements ReferralRequestRequesterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ReferralRequestRequesterDaoImpl implements ReferralRequestRequester
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ReferralRequestRequesterModel a", ReferralRequestRequesterModel.class).setMaxResults(maxResult);
       List<ReferralRequestRequesterModel> models = query.getResultList();
-      return ReferralRequestRequester.fromArray(models);
+      return ReferralRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ReferralRequestRequesterDaoImpl implements ReferralRequestRequester
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ReferralRequestRequesterModel a", ReferralRequestRequesterModel.class);
       List<ReferralRequestRequesterModel> models = query.getResultList();
-      return ReferralRequestRequester.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ReferralRequestRequester create(ReferralRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ReferralRequestRequesterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ReferralRequestRequester update(ReferralRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      ReferralRequestRequesterModel model = em.merge(new ReferralRequestRequesterModel(e));
-      return new ReferralRequestRequester(model);
+      return ReferralRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override

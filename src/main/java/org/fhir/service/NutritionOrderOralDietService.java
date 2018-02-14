@@ -32,7 +32,5 @@ public interface NutritionOrderOralDietService {
 	public NutritionOrderOralDiet find(String id);
   public List<NutritionOrderOralDiet> select(int maxResult);
   public List<NutritionOrderOralDiet> selectAll();
-  public NutritionOrderOralDiet create(NutritionOrderOralDiet bean);
-  public NutritionOrderOralDiet update(NutritionOrderOralDiet bean);
   public void delete(NutritionOrderOralDiet bean);
 }

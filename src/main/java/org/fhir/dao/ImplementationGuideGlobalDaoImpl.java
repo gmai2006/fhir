@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImplementationGuideGlobalModel;
 import org.fhir.pojo.ImplementationGuideGlobal;
+import org.fhir.pojo.ImplementationGuideGlobalHelper;
 
 public class ImplementationGuideGlobalDaoImpl implements ImplementationGuideGlobalDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImplementationGuideGlobalDaoImpl implements ImplementationGuideGlob
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImplementationGuideGlobalModel a", ImplementationGuideGlobalModel.class).setMaxResults(maxResult);
       List<ImplementationGuideGlobalModel> models = query.getResultList();
-      return ImplementationGuideGlobal.fromArray(models);
+      return ImplementationGuideGlobalHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImplementationGuideGlobalDaoImpl implements ImplementationGuideGlob
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImplementationGuideGlobalModel a", ImplementationGuideGlobalModel.class);
       List<ImplementationGuideGlobalModel> models = query.getResultList();
-      return ImplementationGuideGlobal.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImplementationGuideGlobal create(ImplementationGuideGlobal e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImplementationGuideGlobalModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImplementationGuideGlobal update(ImplementationGuideGlobal e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImplementationGuideGlobalModel model = em.merge(new ImplementationGuideGlobalModel(e));
-      return new ImplementationGuideGlobal(model);
+      return ImplementationGuideGlobalHelper.fromArray2Array(models);
   }
 
   @Override

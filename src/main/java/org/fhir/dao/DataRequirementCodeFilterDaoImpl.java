@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DataRequirementCodeFilterModel;
 import org.fhir.pojo.DataRequirementCodeFilter;
+import org.fhir.pojo.DataRequirementCodeFilterHelper;
 
 public class DataRequirementCodeFilterDaoImpl implements DataRequirementCodeFilterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DataRequirementCodeFilterDaoImpl implements DataRequirementCodeFilt
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DataRequirementCodeFilterModel a", DataRequirementCodeFilterModel.class).setMaxResults(maxResult);
       List<DataRequirementCodeFilterModel> models = query.getResultList();
-      return DataRequirementCodeFilter.fromArray(models);
+      return DataRequirementCodeFilterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DataRequirementCodeFilterDaoImpl implements DataRequirementCodeFilt
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DataRequirementCodeFilterModel a", DataRequirementCodeFilterModel.class);
       List<DataRequirementCodeFilterModel> models = query.getResultList();
-      return DataRequirementCodeFilter.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DataRequirementCodeFilter create(DataRequirementCodeFilter e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DataRequirementCodeFilterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DataRequirementCodeFilter update(DataRequirementCodeFilter e) {
-      final EntityManager em = entityManagerProvider.get();
-      DataRequirementCodeFilterModel model = em.merge(new DataRequirementCodeFilterModel(e));
-      return new DataRequirementCodeFilter(model);
+      return DataRequirementCodeFilterHelper.fromArray2Array(models);
   }
 
   @Override

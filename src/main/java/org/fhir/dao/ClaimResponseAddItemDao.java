@@ -34,10 +34,5 @@ public interface ClaimResponseAddItemDao {
   public List<ClaimResponseAddItem> select(int maxResult);
 
   public List<ClaimResponseAddItem> selectAll();
-
-  public ClaimResponseAddItem create(ClaimResponseAddItem e);
-
-  public ClaimResponseAddItem update(ClaimResponseAddItem e);
-
   public void delete(ClaimResponseAddItem e);
 }

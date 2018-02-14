@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.QuestionnaireItemModel;
 import org.fhir.pojo.QuestionnaireItem;
+import org.fhir.pojo.QuestionnaireItemHelper;
 
 public class QuestionnaireItemDaoImpl implements QuestionnaireItemDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class QuestionnaireItemDaoImpl implements QuestionnaireItemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from QuestionnaireItemModel a", QuestionnaireItemModel.class).setMaxResults(maxResult);
       List<QuestionnaireItemModel> models = query.getResultList();
-      return QuestionnaireItem.fromArray(models);
+      return QuestionnaireItemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class QuestionnaireItemDaoImpl implements QuestionnaireItemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from QuestionnaireItemModel a", QuestionnaireItemModel.class);
       List<QuestionnaireItemModel> models = query.getResultList();
-      return QuestionnaireItem.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public QuestionnaireItem create(QuestionnaireItem e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new QuestionnaireItemModel(e));
-      return e;
-  }
-
-  @Transactional
-  public QuestionnaireItem update(QuestionnaireItem e) {
-      final EntityManager em = entityManagerProvider.get();
-      QuestionnaireItemModel model = em.merge(new QuestionnaireItemModel(e));
-      return new QuestionnaireItem(model);
+      return QuestionnaireItemHelper.fromArray2Array(models);
   }
 
   @Override

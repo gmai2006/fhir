@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.NutritionOrderOralDietModel;
 import org.fhir.pojo.NutritionOrderOralDiet;
+import org.fhir.pojo.NutritionOrderOralDietHelper;
 
 public class NutritionOrderOralDietDaoImpl implements NutritionOrderOralDietDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class NutritionOrderOralDietDaoImpl implements NutritionOrderOralDietDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NutritionOrderOralDietModel a", NutritionOrderOralDietModel.class).setMaxResults(maxResult);
       List<NutritionOrderOralDietModel> models = query.getResultList();
-      return NutritionOrderOralDiet.fromArray(models);
+      return NutritionOrderOralDietHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class NutritionOrderOralDietDaoImpl implements NutritionOrderOralDietDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NutritionOrderOralDietModel a", NutritionOrderOralDietModel.class);
       List<NutritionOrderOralDietModel> models = query.getResultList();
-      return NutritionOrderOralDiet.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public NutritionOrderOralDiet create(NutritionOrderOralDiet e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new NutritionOrderOralDietModel(e));
-      return e;
-  }
-
-  @Transactional
-  public NutritionOrderOralDiet update(NutritionOrderOralDiet e) {
-      final EntityManager em = entityManagerProvider.get();
-      NutritionOrderOralDietModel model = em.merge(new NutritionOrderOralDietModel(e));
-      return new NutritionOrderOralDiet(model);
+      return NutritionOrderOralDietHelper.fromArray2Array(models);
   }
 
   @Override

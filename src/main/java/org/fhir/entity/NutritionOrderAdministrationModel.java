@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
 @Entity
 @Table(name="nutritionorderadministration")
-public class NutritionOrderAdministrationModel  {
+public class NutritionOrderAdministrationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669675030133L;
   /**
   * Description: "The time period and frequency at which the enteral formula should be delivered to the patient."
-  * Actual type: Timing
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -48,7 +49,7 @@ public class NutritionOrderAdministrationModel  {
 
   /**
   * Description: "The volume of formula to provide to the patient per the specified administration schedule."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -57,7 +58,7 @@ public class NutritionOrderAdministrationModel  {
 
   /**
   * Description: "The rate of administration of formula via a feeding pump, e.g. 60 mL per hour, according to the specified schedule."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -66,7 +67,7 @@ public class NutritionOrderAdministrationModel  {
 
   /**
   * Description: "The rate of administration of formula via a feeding pump, e.g. 60 mL per hour, according to the specified schedule."
-  * Actual type: Ratio
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -76,7 +77,7 @@ public class NutritionOrderAdministrationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -88,6 +89,7 @@ public class NutritionOrderAdministrationModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -96,86 +98,108 @@ public class NutritionOrderAdministrationModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public NutritionOrderAdministrationModel() {
   }
 
-  public NutritionOrderAdministrationModel(NutritionOrderAdministration o) {
-    this.id = o.getId();
-      this.schedule = Timing.toJson(o.getSchedule());
-      this.quantity = Quantity.toJson(o.getQuantity());
-      this.rateSimpleQuantity = Quantity.toJson(o.getRateSimpleQuantity());
-      this.rateRatio = Ratio.toJson(o.getRateRatio());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public NutritionOrderAdministrationModel(NutritionOrderAdministration o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.schedule = TimingHelper.toJson(o.getSchedule());
+    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    this.rateSimpleQuantity = QuantityHelper.toJson(o.getRateSimpleQuantity());
+    this.rateRatio = RatioHelper.toJson(o.getRateRatio());
   }
 
-  public void setSchedule( String value) {
-    this.schedule = value;
-  }
   public String getSchedule() {
     return this.schedule;
   }
-  public void setQuantity( String value) {
-    this.quantity = value;
+  public void setSchedule( String value) {
+    this.schedule = value;
   }
   public String getQuantity() {
     return this.quantity;
   }
-  public void setRateSimpleQuantity( String value) {
-    this.rateSimpleQuantity = value;
+  public void setQuantity( String value) {
+    this.quantity = value;
   }
   public String getRateSimpleQuantity() {
     return this.rateSimpleQuantity;
   }
-  public void setRateRatio( String value) {
-    this.rateRatio = value;
+  public void setRateSimpleQuantity( String value) {
+    this.rateSimpleQuantity = value;
   }
   public String getRateRatio() {
     return this.rateRatio;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setRateRatio( String value) {
+    this.rateRatio = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("schedule" + "[" + String.valueOf(this.schedule) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("rateSimpleQuantity" + "[" + String.valueOf(this.rateSimpleQuantity) + "]\n"); 
-     builder.append("rateRatio" + "[" + String.valueOf(this.rateRatio) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[NutritionOrderAdministrationModel]:" + "\n");
+     builder.append("schedule" + "->" + this.schedule + "\n"); 
+     builder.append("quantity" + "->" + this.quantity + "\n"); 
+     builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity + "\n"); 
+     builder.append("rateRatio" + "->" + this.rateRatio + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[NutritionOrderAdministrationModel]:" + "\n");
+     builder.append("schedule" + "->" + this.schedule + "\n"); 
+     builder.append("quantity" + "->" + this.quantity + "\n"); 
+     builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity + "\n"); 
+     builder.append("rateRatio" + "->" + this.rateRatio + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

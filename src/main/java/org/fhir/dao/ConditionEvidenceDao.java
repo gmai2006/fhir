@@ -34,10 +34,5 @@ public interface ConditionEvidenceDao {
   public List<ConditionEvidence> select(int maxResult);
 
   public List<ConditionEvidence> selectAll();
-
-  public ConditionEvidence create(ConditionEvidence e);
-
-  public ConditionEvidence update(ConditionEvidence e);
-
   public void delete(ConditionEvidence e);
 }

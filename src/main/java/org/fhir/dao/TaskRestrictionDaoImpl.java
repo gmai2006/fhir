@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.TaskRestrictionModel;
 import org.fhir.pojo.TaskRestriction;
+import org.fhir.pojo.TaskRestrictionHelper;
 
 public class TaskRestrictionDaoImpl implements TaskRestrictionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class TaskRestrictionDaoImpl implements TaskRestrictionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TaskRestrictionModel a", TaskRestrictionModel.class).setMaxResults(maxResult);
       List<TaskRestrictionModel> models = query.getResultList();
-      return TaskRestriction.fromArray(models);
+      return TaskRestrictionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class TaskRestrictionDaoImpl implements TaskRestrictionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TaskRestrictionModel a", TaskRestrictionModel.class);
       List<TaskRestrictionModel> models = query.getResultList();
-      return TaskRestriction.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public TaskRestriction create(TaskRestriction e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new TaskRestrictionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public TaskRestriction update(TaskRestriction e) {
-      final EntityManager em = entityManagerProvider.get();
-      TaskRestrictionModel model = em.merge(new TaskRestrictionModel(e));
-      return new TaskRestriction(model);
+      return TaskRestrictionHelper.fromArray2Array(models);
   }
 
   @Override

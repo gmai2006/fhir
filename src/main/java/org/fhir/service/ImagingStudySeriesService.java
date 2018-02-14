@@ -32,7 +32,5 @@ public interface ImagingStudySeriesService {
 	public ImagingStudySeries find(String id);
   public List<ImagingStudySeries> select(int maxResult);
   public List<ImagingStudySeries> selectAll();
-  public ImagingStudySeries create(ImagingStudySeries bean);
-  public ImagingStudySeries update(ImagingStudySeries bean);
   public void delete(ImagingStudySeries bean);
 }

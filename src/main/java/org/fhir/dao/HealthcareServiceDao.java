@@ -34,10 +34,8 @@ public interface HealthcareServiceDao {
   public List<HealthcareService> select(int maxResult);
 
   public List<HealthcareService> selectAll();
-
   public HealthcareService create(HealthcareService e);
 
   public HealthcareService update(HealthcareService e);
-
   public void delete(HealthcareService e);
 }

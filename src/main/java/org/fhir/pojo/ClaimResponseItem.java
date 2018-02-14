@@ -74,6 +74,7 @@ public class ClaimResponseItem  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -95,22 +96,21 @@ public class ClaimResponseItem  {
 
   public ClaimResponseItem(ClaimResponseItemModel o) {
     this.id = o.getId();
-      if (null != o.getSequenceLinkId()) {
-        this.sequenceLinkId = new Float(o.getSequenceLinkId());
-      }
-
-      this.noteNumber = org.fhir.utils.JsonUtils.json2Array(o.getNoteNumber());
-
-      this.adjudication = ClaimResponseAdjudication.fromArray(o.getAdjudication());
-
-      this.detail = ClaimResponseDetail.fromArray(o.getDetail());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSequenceLinkId()) {
+      this.sequenceLinkId = o.getSequenceLinkId();
+    }
+    if (o.getNoteNumber() != null) {
+    	this.noteNumber = org.fhir.utils.JsonUtils.json2Array(o.getNoteNumber());
+    }
+    if (null != o.getAdjudication() && !o.getAdjudication().isEmpty()) {
+    	this.adjudication = ClaimResponseAdjudicationHelper.fromArray2Array(o.getAdjudication());
+    }
+    if (null != o.getDetail() && !o.getDetail().isEmpty()) {
+    	this.detail = ClaimResponseDetailHelper.fromArray2Array(o.getDetail());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSequenceLinkId( Float value) {
@@ -177,50 +177,19 @@ public class ClaimResponseItem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequenceLinkId" + "[" + String.valueOf(this.sequenceLinkId) + "]\n"); 
-     builder.append("_sequenceLinkId" + "[" + String.valueOf(this._sequenceLinkId) + "]\n"); 
-     builder.append("noteNumber" + "[" + String.valueOf(this.noteNumber) + "]\n"); 
-     builder.append("_noteNumber" + "[" + String.valueOf(this._noteNumber) + "]\n"); 
-     builder.append("adjudication" + "[" + String.valueOf(this.adjudication) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ClaimResponseItem]:" + "\n");
+     if(this.sequenceLinkId != null) builder.append("sequenceLinkId" + "->" + this.sequenceLinkId.toString() + "\n"); 
+     if(this._sequenceLinkId != null) builder.append("_sequenceLinkId" + "->" + this._sequenceLinkId.toString() + "\n"); 
+     if(this.noteNumber != null) builder.append("noteNumber" + "->" + this.noteNumber.toString() + "\n"); 
+     if(this._noteNumber != null) builder.append("_noteNumber" + "->" + this._noteNumber.toString() + "\n"); 
+     if(this.adjudication != null) builder.append("adjudication" + "->" + this.adjudication.toString() + "\n"); 
+     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ClaimResponseItem> fromArray(java.util.List<ClaimResponseItemModel> list) {
-    return (java.util.List<ClaimResponseItem>)list.stream()
-      .map(model -> new ClaimResponseItem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ClaimResponseItemModel> toModelArray(java.util.List<ClaimResponseItem> list) {
-    return (java.util.List<ClaimResponseItemModel>)list.stream()
-      .map(model -> new ClaimResponseItemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ClaimResponseItem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ClaimResponseItem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ClaimResponseItem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ClaimResponseItem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

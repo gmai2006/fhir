@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public FamilyMemberHistoryCondition create(FamilyMemberHistoryCondition bean) {
-  	requireNonNull(bean);
-    logger.info("create(FamilyMemberHistoryCondition={}) - entered bean ");
-
-    final FamilyMemberHistoryCondition result = dao.create(bean);
-
-    logger.info("create(FamilyMemberHistoryCondition) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public FamilyMemberHistoryCondition update(FamilyMemberHistoryCondition bean) {
-  	requireNonNull(bean);
-    logger.info("update(FamilyMemberHistoryCondition={}) - entered bean ");
-
-    final FamilyMemberHistoryCondition result = dao.update(bean);
-
-    logger.info("update(FamilyMemberHistoryCondition) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

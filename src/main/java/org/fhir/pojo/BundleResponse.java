@@ -88,6 +88,7 @@ public class BundleResponse  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -109,29 +110,22 @@ public class BundleResponse  {
 
   public BundleResponse(BundleResponseModel o) {
     this.id = o.getId();
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getLocation()) {
-        this.location = new String(o.getLocation());
-      }
-
-      if (null != o.getEtag()) {
-        this.etag = new String(o.getEtag());
-      }
-
-      if (null != o.getLastModified()) {
-        this.lastModified = new String(o.getLastModified());
-      }
-
-      this.outcome = ResourceList.fromJson(o.getOutcome());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getLocation()) {
+      this.location = o.getLocation();
+    }
+    if (null != o.getEtag()) {
+      this.etag = o.getEtag();
+    }
+    if (null != o.getLastModified()) {
+      this.lastModified = o.getLastModified();
+    }
+    this.outcome = ResourceListHelper.fromJson(o.getOutcome());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setStatus( String value) {
@@ -216,53 +210,22 @@ public class BundleResponse  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("_location" + "[" + String.valueOf(this._location) + "]\n"); 
-     builder.append("etag" + "[" + String.valueOf(this.etag) + "]\n"); 
-     builder.append("_etag" + "[" + String.valueOf(this._etag) + "]\n"); 
-     builder.append("lastModified" + "[" + String.valueOf(this.lastModified) + "]\n"); 
-     builder.append("_lastModified" + "[" + String.valueOf(this._lastModified) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[BundleResponse]:" + "\n");
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this._location != null) builder.append("_location" + "->" + this._location.toString() + "\n"); 
+     if(this.etag != null) builder.append("etag" + "->" + this.etag.toString() + "\n"); 
+     if(this._etag != null) builder.append("_etag" + "->" + this._etag.toString() + "\n"); 
+     if(this.lastModified != null) builder.append("lastModified" + "->" + this.lastModified.toString() + "\n"); 
+     if(this._lastModified != null) builder.append("_lastModified" + "->" + this._lastModified.toString() + "\n"); 
+     if(this.outcome != null) builder.append("outcome" + "->" + this.outcome.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<BundleResponse> fromArray(java.util.List<BundleResponseModel> list) {
-    return (java.util.List<BundleResponse>)list.stream()
-      .map(model -> new BundleResponse(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<BundleResponseModel> toModelArray(java.util.List<BundleResponse> list) {
-    return (java.util.List<BundleResponseModel>)list.stream()
-      .map(model -> new BundleResponseModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static BundleResponse fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, BundleResponse.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(BundleResponse o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<BundleResponse> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

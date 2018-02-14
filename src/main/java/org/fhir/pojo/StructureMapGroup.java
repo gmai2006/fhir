@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.StructureMapGroupModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -96,6 +97,7 @@ public class StructureMapGroup  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -112,7 +114,33 @@ public class StructureMapGroup  {
   */
   private java.util.List<Extension> extension = new java.util.ArrayList<>();
 
-  public StructureMapGroup() {}
+  public StructureMapGroup() {
+  }
+
+  public StructureMapGroup(StructureMapGroupModel o) {
+    this.id = o.getId();
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getFHIRextends()) {
+      this.FHIRextends = o.getFHIRextends();
+    }
+    if (null != o.getTypeMode()) {
+      this.typeMode = o.getTypeMode();
+    }
+    if (null != o.getDocumentation()) {
+      this.documentation = o.getDocumentation();
+    }
+    if (null != o.getInput() && !o.getInput().isEmpty()) {
+    	this.input = StructureMapInputHelper.fromArray2Array(o.getInput());
+    }
+    if (null != o.getRule() && !o.getRule().isEmpty()) {
+    	this.rule = StructureMapRuleHelper.fromArray2Array(o.getRule());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+  }
 
   public void setName( String value) {
     this.name = value;
@@ -202,41 +230,22 @@ public class StructureMapGroup  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("FHIRextends" + "[" + String.valueOf(this.FHIRextends) + "]\n"); 
-     builder.append("_extends" + "[" + String.valueOf(this._extends) + "]\n"); 
-     builder.append("typeMode" + "[" + String.valueOf(this.typeMode) + "]\n"); 
-     builder.append("_typeMode" + "[" + String.valueOf(this._typeMode) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("_documentation" + "[" + String.valueOf(this._documentation) + "]\n"); 
-     builder.append("input" + "[" + String.valueOf(this.input) + "]\n"); 
-     builder.append("rule" + "[" + String.valueOf(this.rule) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[StructureMapGroup]:" + "\n");
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.FHIRextends != null) builder.append("FHIRextends" + "->" + this.FHIRextends.toString() + "\n"); 
+     if(this._extends != null) builder.append("_extends" + "->" + this._extends.toString() + "\n"); 
+     if(this.typeMode != null) builder.append("typeMode" + "->" + this.typeMode.toString() + "\n"); 
+     if(this._typeMode != null) builder.append("_typeMode" + "->" + this._typeMode.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
+     if(this.input != null) builder.append("input" + "->" + this.input.toString() + "\n"); 
+     if(this.rule != null) builder.append("rule" + "->" + this.rule.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static StructureMapGroup fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, StructureMapGroup.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(StructureMapGroup o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<StructureMapGroup> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum TypeModeEnum {
@@ -254,4 +263,5 @@ public class StructureMapGroup  {
   		}
   	}
   }
+
 }

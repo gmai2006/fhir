@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public Narrative create(Narrative bean) {
-  	requireNonNull(bean);
-    logger.info("create(Narrative={}) - entered bean ");
-
-    final Narrative result = dao.create(bean);
-
-    logger.info("create(Narrative) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public Narrative update(Narrative bean) {
-  	requireNonNull(bean);
-    logger.info("update(Narrative={}) - entered bean ");
-
-    final Narrative result = dao.update(bean);
-
-    logger.info("update(Narrative) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

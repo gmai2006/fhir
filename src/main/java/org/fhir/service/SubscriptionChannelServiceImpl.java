@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public SubscriptionChannel create(SubscriptionChannel bean) {
-  	requireNonNull(bean);
-    logger.info("create(SubscriptionChannel={}) - entered bean ");
-
-    final SubscriptionChannel result = dao.create(bean);
-
-    logger.info("create(SubscriptionChannel) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public SubscriptionChannel update(SubscriptionChannel bean) {
-  	requireNonNull(bean);
-    logger.info("update(SubscriptionChannel={}) - entered bean ");
-
-    final SubscriptionChannel result = dao.update(bean);
-
-    logger.info("update(SubscriptionChannel) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

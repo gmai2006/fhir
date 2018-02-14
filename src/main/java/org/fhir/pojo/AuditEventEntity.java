@@ -108,6 +108,7 @@ public class AuditEventEntity  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -129,36 +130,28 @@ public class AuditEventEntity  {
 
   public AuditEventEntity(AuditEventEntityModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getReference()) {
-        this.reference = new Reference(o.getReference());
-        this.reference.setId(this.getId());
-      }
-
-      this.type = Coding.fromJson(o.getType());
-      this.role = Coding.fromJson(o.getRole());
-      this.lifecycle = Coding.fromJson(o.getLifecycle());
-      this.securityLabel = Coding.fromArray(o.getSecurityLabel());
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getQuery()) {
-        this.query = new String(o.getQuery());
-      }
-
-      this.detail = AuditEventDetail.fromArray(o.getDetail());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getReference() && !o.getReference().isEmpty()) {
+      this.reference = new Reference(o.getReference().get(0));
+    }
+    this.type = CodingHelper.fromJson(o.getType());
+    this.role = CodingHelper.fromJson(o.getRole());
+    this.lifecycle = CodingHelper.fromJson(o.getLifecycle());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getQuery()) {
+      this.query = o.getQuery();
+    }
+    if (null != o.getDetail() && !o.getDetail().isEmpty()) {
+    	this.detail = AuditEventDetailHelper.fromArray2Array(o.getDetail());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( Identifier value) {
@@ -267,57 +260,26 @@ public class AuditEventEntity  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("lifecycle" + "[" + String.valueOf(this.lifecycle) + "]\n"); 
-     builder.append("securityLabel" + "[" + String.valueOf(this.securityLabel) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("query" + "[" + String.valueOf(this.query) + "]\n"); 
-     builder.append("_query" + "[" + String.valueOf(this._query) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AuditEventEntity]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.reference != null) builder.append("reference" + "->" + this.reference.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.role != null) builder.append("role" + "->" + this.role.toString() + "\n"); 
+     if(this.lifecycle != null) builder.append("lifecycle" + "->" + this.lifecycle.toString() + "\n"); 
+     if(this.securityLabel != null) builder.append("securityLabel" + "->" + this.securityLabel.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.query != null) builder.append("query" + "->" + this.query.toString() + "\n"); 
+     if(this._query != null) builder.append("_query" + "->" + this._query.toString() + "\n"); 
+     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<AuditEventEntity> fromArray(java.util.List<AuditEventEntityModel> list) {
-    return (java.util.List<AuditEventEntity>)list.stream()
-      .map(model -> new AuditEventEntity(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AuditEventEntityModel> toModelArray(java.util.List<AuditEventEntity> list) {
-    return (java.util.List<AuditEventEntityModel>)list.stream()
-      .map(model -> new AuditEventEntityModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AuditEventEntity fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AuditEventEntity.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AuditEventEntity o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AuditEventEntity> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

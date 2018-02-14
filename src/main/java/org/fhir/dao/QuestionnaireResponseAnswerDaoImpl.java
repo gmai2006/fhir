@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.QuestionnaireResponseAnswerModel;
 import org.fhir.pojo.QuestionnaireResponseAnswer;
+import org.fhir.pojo.QuestionnaireResponseAnswerHelper;
 
 public class QuestionnaireResponseAnswerDaoImpl implements QuestionnaireResponseAnswerDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class QuestionnaireResponseAnswerDaoImpl implements QuestionnaireResponse
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from QuestionnaireResponseAnswerModel a", QuestionnaireResponseAnswerModel.class).setMaxResults(maxResult);
       List<QuestionnaireResponseAnswerModel> models = query.getResultList();
-      return QuestionnaireResponseAnswer.fromArray(models);
+      return QuestionnaireResponseAnswerHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class QuestionnaireResponseAnswerDaoImpl implements QuestionnaireResponse
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from QuestionnaireResponseAnswerModel a", QuestionnaireResponseAnswerModel.class);
       List<QuestionnaireResponseAnswerModel> models = query.getResultList();
-      return QuestionnaireResponseAnswer.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public QuestionnaireResponseAnswer create(QuestionnaireResponseAnswer e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new QuestionnaireResponseAnswerModel(e));
-      return e;
-  }
-
-  @Transactional
-  public QuestionnaireResponseAnswer update(QuestionnaireResponseAnswer e) {
-      final EntityManager em = entityManagerProvider.get();
-      QuestionnaireResponseAnswerModel model = em.merge(new QuestionnaireResponseAnswerModel(e));
-      return new QuestionnaireResponseAnswer(model);
+      return QuestionnaireResponseAnswerHelper.fromArray2Array(models);
   }
 
   @Override

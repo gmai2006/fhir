@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
 */
 @Entity
 @Table(name="expansionprofiledesignation")
-public class ExpansionProfileDesignationModel  {
+public class ExpansionProfileDesignationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669669261225L;
   /**
   * Description: "Designations to be included."
   */
@@ -44,9 +45,9 @@ public class ExpansionProfileDesignationModel  {
   @Column(name="\"include_id\"")
   private String include_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`include_id`", insertable=false, updatable=false)
-  private ExpansionProfileIncludeModel include;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="include_id", insertable=false, updatable=false)
+  private java.util.List<ExpansionProfileIncludeModel> include;
 
   /**
   * Description: "Designations to be excluded."
@@ -55,14 +56,14 @@ public class ExpansionProfileDesignationModel  {
   @Column(name="\"exclude_id\"")
   private String exclude_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`exclude_id`", insertable=false, updatable=false)
-  private ExpansionProfileExcludeModel exclude;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="exclude_id", insertable=false, updatable=false)
+  private java.util.List<ExpansionProfileExcludeModel> exclude;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -74,6 +75,7 @@ public class ExpansionProfileDesignationModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -82,82 +84,94 @@ public class ExpansionProfileDesignationModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ExpansionProfileDesignationModel() {
   }
 
-  public ExpansionProfileDesignationModel(ExpansionProfileDesignation o) {
-    this.id = o.getId();
-      if (null != o.getInclude()) {
-      	this.include_id = "include" + this.getId();
-        this.include = new ExpansionProfileIncludeModel(o.getInclude());
-        this.include.setId(this.include_id);
-        this.include.parent_id = this.include.getId();
-      }
-
-      if (null != o.getExclude()) {
-      	this.exclude_id = "exclude" + this.getId();
-        this.exclude = new ExpansionProfileExcludeModel(o.getExclude());
-        this.exclude.setId(this.exclude_id);
-        this.exclude.parent_id = this.exclude.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ExpansionProfileDesignationModel(ExpansionProfileDesignation o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    if (null != o.getInclude() ) {
+    	this.include_id = "include" + this.parent_id;
+    	this.include = ExpansionProfileIncludeHelper.toModel(o.getInclude(), this.include_id);
+    }
+    if (null != o.getExclude() ) {
+    	this.exclude_id = "exclude" + this.parent_id;
+    	this.exclude = ExpansionProfileExcludeHelper.toModel(o.getExclude(), this.exclude_id);
+    }
   }
 
-  public void setInclude( ExpansionProfileIncludeModel value) {
-    this.include = value;
-  }
-  public ExpansionProfileIncludeModel getInclude() {
+  public java.util.List<ExpansionProfileIncludeModel> getInclude() {
     return this.include;
   }
-  public void setExclude( ExpansionProfileExcludeModel value) {
-    this.exclude = value;
+  public void setInclude( java.util.List<ExpansionProfileIncludeModel> value) {
+    this.include = value;
   }
-  public ExpansionProfileExcludeModel getExclude() {
+  public java.util.List<ExpansionProfileExcludeModel> getExclude() {
     return this.exclude;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExclude( java.util.List<ExpansionProfileExcludeModel> value) {
+    this.exclude = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("include" + "[" + String.valueOf(this.include) + "]\n"); 
-     builder.append("exclude" + "[" + String.valueOf(this.exclude) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExpansionProfileDesignationModel]:" + "\n");
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ExpansionProfileDesignationModel]:" + "\n");
+     builder.append("include" + "->" + this.include + "\n"); 
+     builder.append("exclude" + "->" + this.exclude + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

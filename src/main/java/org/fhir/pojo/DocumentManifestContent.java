@@ -53,6 +53,7 @@ public class DocumentManifestContent  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -74,18 +75,13 @@ public class DocumentManifestContent  {
 
   public DocumentManifestContent(DocumentManifestContentModel o) {
     this.id = o.getId();
-      this.pAttachment = Attachment.fromJson(o.getPAttachment());
-      if (null != o.getPReference()) {
-        this.pReference = new Reference(o.getPReference());
-        this.pReference.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.pAttachment = AttachmentHelper.fromJson(o.getPAttachment());
+    if (null != o.getPReference() && !o.getPReference().isEmpty()) {
+      this.pReference = new Reference(o.getPReference().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setPAttachment( Attachment value) {
@@ -128,46 +124,15 @@ public class DocumentManifestContent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("pAttachment" + "[" + String.valueOf(this.pAttachment) + "]\n"); 
-     builder.append("pReference" + "[" + String.valueOf(this.pReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DocumentManifestContent]:" + "\n");
+     if(this.pAttachment != null) builder.append("pAttachment" + "->" + this.pAttachment.toString() + "\n"); 
+     if(this.pReference != null) builder.append("pReference" + "->" + this.pReference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<DocumentManifestContent> fromArray(java.util.List<DocumentManifestContentModel> list) {
-    return (java.util.List<DocumentManifestContent>)list.stream()
-      .map(model -> new DocumentManifestContent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DocumentManifestContentModel> toModelArray(java.util.List<DocumentManifestContent> list) {
-    return (java.util.List<DocumentManifestContentModel>)list.stream()
-      .map(model -> new DocumentManifestContentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DocumentManifestContent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DocumentManifestContent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DocumentManifestContent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DocumentManifestContent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

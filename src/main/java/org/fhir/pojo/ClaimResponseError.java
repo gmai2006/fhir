@@ -82,6 +82,7 @@ public class ClaimResponseError  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -103,25 +104,19 @@ public class ClaimResponseError  {
 
   public ClaimResponseError(ClaimResponseErrorModel o) {
     this.id = o.getId();
-      if (null != o.getSequenceLinkId()) {
-        this.sequenceLinkId = new Float(o.getSequenceLinkId());
-      }
-
-      if (null != o.getDetailSequenceLinkId()) {
-        this.detailSequenceLinkId = new Float(o.getDetailSequenceLinkId());
-      }
-
-      if (null != o.getSubdetailSequenceLinkId()) {
-        this.subdetailSequenceLinkId = new Float(o.getSubdetailSequenceLinkId());
-      }
-
-      this.code = CodeableConcept.fromJson(o.getCode());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSequenceLinkId()) {
+      this.sequenceLinkId = o.getSequenceLinkId();
+    }
+    if (null != o.getDetailSequenceLinkId()) {
+      this.detailSequenceLinkId = o.getDetailSequenceLinkId();
+    }
+    if (null != o.getSubdetailSequenceLinkId()) {
+      this.subdetailSequenceLinkId = o.getSubdetailSequenceLinkId();
+    }
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSequenceLinkId( Float value) {
@@ -194,51 +189,20 @@ public class ClaimResponseError  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequenceLinkId" + "[" + String.valueOf(this.sequenceLinkId) + "]\n"); 
-     builder.append("_sequenceLinkId" + "[" + String.valueOf(this._sequenceLinkId) + "]\n"); 
-     builder.append("detailSequenceLinkId" + "[" + String.valueOf(this.detailSequenceLinkId) + "]\n"); 
-     builder.append("_detailSequenceLinkId" + "[" + String.valueOf(this._detailSequenceLinkId) + "]\n"); 
-     builder.append("subdetailSequenceLinkId" + "[" + String.valueOf(this.subdetailSequenceLinkId) + "]\n"); 
-     builder.append("_subdetailSequenceLinkId" + "[" + String.valueOf(this._subdetailSequenceLinkId) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ClaimResponseError]:" + "\n");
+     if(this.sequenceLinkId != null) builder.append("sequenceLinkId" + "->" + this.sequenceLinkId.toString() + "\n"); 
+     if(this._sequenceLinkId != null) builder.append("_sequenceLinkId" + "->" + this._sequenceLinkId.toString() + "\n"); 
+     if(this.detailSequenceLinkId != null) builder.append("detailSequenceLinkId" + "->" + this.detailSequenceLinkId.toString() + "\n"); 
+     if(this._detailSequenceLinkId != null) builder.append("_detailSequenceLinkId" + "->" + this._detailSequenceLinkId.toString() + "\n"); 
+     if(this.subdetailSequenceLinkId != null) builder.append("subdetailSequenceLinkId" + "->" + this.subdetailSequenceLinkId.toString() + "\n"); 
+     if(this._subdetailSequenceLinkId != null) builder.append("_subdetailSequenceLinkId" + "->" + this._subdetailSequenceLinkId.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ClaimResponseError> fromArray(java.util.List<ClaimResponseErrorModel> list) {
-    return (java.util.List<ClaimResponseError>)list.stream()
-      .map(model -> new ClaimResponseError(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ClaimResponseErrorModel> toModelArray(java.util.List<ClaimResponseError> list) {
-    return (java.util.List<ClaimResponseErrorModel>)list.stream()
-      .map(model -> new ClaimResponseErrorModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ClaimResponseError fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ClaimResponseError.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ClaimResponseError o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ClaimResponseError> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

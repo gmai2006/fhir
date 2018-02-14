@@ -32,7 +32,5 @@ public interface ContractSignerService {
 	public ContractSigner find(String id);
   public List<ContractSigner> select(int maxResult);
   public List<ContractSigner> selectAll();
-  public ContractSigner create(ContractSigner bean);
-  public ContractSigner update(ContractSigner bean);
   public void delete(ContractSigner bean);
 }

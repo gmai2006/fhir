@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EncounterParticipantModel;
 import org.fhir.pojo.EncounterParticipant;
+import org.fhir.pojo.EncounterParticipantHelper;
 
 public class EncounterParticipantDaoImpl implements EncounterParticipantDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EncounterParticipantDaoImpl implements EncounterParticipantDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterParticipantModel a", EncounterParticipantModel.class).setMaxResults(maxResult);
       List<EncounterParticipantModel> models = query.getResultList();
-      return EncounterParticipant.fromArray(models);
+      return EncounterParticipantHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EncounterParticipantDaoImpl implements EncounterParticipantDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterParticipantModel a", EncounterParticipantModel.class);
       List<EncounterParticipantModel> models = query.getResultList();
-      return EncounterParticipant.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EncounterParticipant create(EncounterParticipant e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EncounterParticipantModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EncounterParticipant update(EncounterParticipant e) {
-      final EntityManager em = entityManagerProvider.get();
-      EncounterParticipantModel model = em.merge(new EncounterParticipantModel(e));
-      return new EncounterParticipant(model);
+      return EncounterParticipantHelper.fromArray2Array(models);
   }
 
   @Override

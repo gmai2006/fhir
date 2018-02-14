@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExpansionProfileIncludeModel;
 import org.fhir.pojo.ExpansionProfileInclude;
+import org.fhir.pojo.ExpansionProfileIncludeHelper;
 
 public class ExpansionProfileIncludeDaoImpl implements ExpansionProfileIncludeDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExpansionProfileIncludeDaoImpl implements ExpansionProfileIncludeDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExpansionProfileIncludeModel a", ExpansionProfileIncludeModel.class).setMaxResults(maxResult);
       List<ExpansionProfileIncludeModel> models = query.getResultList();
-      return ExpansionProfileInclude.fromArray(models);
+      return ExpansionProfileIncludeHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ExpansionProfileIncludeDaoImpl implements ExpansionProfileIncludeDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExpansionProfileIncludeModel a", ExpansionProfileIncludeModel.class);
       List<ExpansionProfileIncludeModel> models = query.getResultList();
-      return ExpansionProfileInclude.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ExpansionProfileInclude create(ExpansionProfileInclude e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ExpansionProfileIncludeModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ExpansionProfileInclude update(ExpansionProfileInclude e) {
-      final EntityManager em = entityManagerProvider.get();
-      ExpansionProfileIncludeModel model = em.merge(new ExpansionProfileIncludeModel(e));
-      return new ExpansionProfileInclude(model);
+      return ExpansionProfileIncludeHelper.fromArray2Array(models);
   }
 
   @Override

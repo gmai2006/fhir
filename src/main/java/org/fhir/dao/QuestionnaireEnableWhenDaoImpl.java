@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.QuestionnaireEnableWhenModel;
 import org.fhir.pojo.QuestionnaireEnableWhen;
+import org.fhir.pojo.QuestionnaireEnableWhenHelper;
 
 public class QuestionnaireEnableWhenDaoImpl implements QuestionnaireEnableWhenDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class QuestionnaireEnableWhenDaoImpl implements QuestionnaireEnableWhenDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from QuestionnaireEnableWhenModel a", QuestionnaireEnableWhenModel.class).setMaxResults(maxResult);
       List<QuestionnaireEnableWhenModel> models = query.getResultList();
-      return QuestionnaireEnableWhen.fromArray(models);
+      return QuestionnaireEnableWhenHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class QuestionnaireEnableWhenDaoImpl implements QuestionnaireEnableWhenDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from QuestionnaireEnableWhenModel a", QuestionnaireEnableWhenModel.class);
       List<QuestionnaireEnableWhenModel> models = query.getResultList();
-      return QuestionnaireEnableWhen.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public QuestionnaireEnableWhen create(QuestionnaireEnableWhen e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new QuestionnaireEnableWhenModel(e));
-      return e;
-  }
-
-  @Transactional
-  public QuestionnaireEnableWhen update(QuestionnaireEnableWhen e) {
-      final EntityManager em = entityManagerProvider.get();
-      QuestionnaireEnableWhenModel model = em.merge(new QuestionnaireEnableWhenModel(e));
-      return new QuestionnaireEnableWhen(model);
+      return QuestionnaireEnableWhenHelper.fromArray2Array(models);
   }
 
   @Override

@@ -32,7 +32,5 @@ public interface CapabilityStatementImplementationService {
 	public CapabilityStatementImplementation find(String id);
   public List<CapabilityStatementImplementation> select(int maxResult);
   public List<CapabilityStatementImplementation> selectAll();
-  public CapabilityStatementImplementation create(CapabilityStatementImplementation bean);
-  public CapabilityStatementImplementation update(CapabilityStatementImplementation bean);
   public void delete(CapabilityStatementImplementation bean);
 }

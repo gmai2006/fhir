@@ -237,6 +237,7 @@ public class Condition  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -288,101 +289,71 @@ public class Condition  {
 
   public Condition(ConditionModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getClinicalStatus()) {
-        this.clinicalStatus = new String(o.getClinicalStatus());
-      }
-
-      if (null != o.getVerificationStatus()) {
-        this.verificationStatus = new String(o.getVerificationStatus());
-      }
-
-      this.category = CodeableConcept.fromArray(o.getCategory());
-      this.severity = CodeableConcept.fromJson(o.getSeverity());
-      this.code = CodeableConcept.fromJson(o.getCode());
-      this.bodySite = CodeableConcept.fromArray(o.getBodySite());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getOnsetDateTime()) {
-        this.onsetDateTime = new String(o.getOnsetDateTime());
-      }
-
-      this.onsetAge = Age.fromJson(o.getOnsetAge());
-      this.onsetPeriod = Period.fromJson(o.getOnsetPeriod());
-      this.onsetRange = Range.fromJson(o.getOnsetRange());
-      if (null != o.getOnsetString()) {
-        this.onsetString = new String(o.getOnsetString());
-      }
-
-      if (null != o.getAbatementDateTime()) {
-        this.abatementDateTime = new String(o.getAbatementDateTime());
-      }
-
-      this.abatementAge = Age.fromJson(o.getAbatementAge());
-      if (null != o.getAbatementBoolean()) {
-        this.abatementBoolean = new Boolean(o.getAbatementBoolean());
-      }
-
-      this.abatementPeriod = Period.fromJson(o.getAbatementPeriod());
-      this.abatementRange = Range.fromJson(o.getAbatementRange());
-      if (null != o.getAbatementString()) {
-        this.abatementString = new String(o.getAbatementString());
-      }
-
-      if (null != o.getAssertedDate()) {
-        this.assertedDate = new String(o.getAssertedDate());
-      }
-
-      if (null != o.getAsserter()) {
-        this.asserter = new Reference(o.getAsserter());
-        this.asserter.setId(this.getId());
-      }
-
-      if (null != o.getStage()) {
-        this.stage = new ConditionStage(o.getStage());
-        this.stage.setId(this.getId());
-      }
-
-      this.evidence = ConditionEvidence.fromArray(o.getEvidence());
-
-      this.note = Annotation.fromArray(o.getNote());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getClinicalStatus()) {
+      this.clinicalStatus = o.getClinicalStatus();
+    }
+    if (null != o.getVerificationStatus()) {
+      this.verificationStatus = o.getVerificationStatus();
+    }
+    this.severity = CodeableConceptHelper.fromJson(o.getSeverity());
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getOnsetDateTime()) {
+      this.onsetDateTime = o.getOnsetDateTime();
+    }
+    this.onsetAge = AgeHelper.fromJson(o.getOnsetAge());
+    this.onsetPeriod = PeriodHelper.fromJson(o.getOnsetPeriod());
+    this.onsetRange = RangeHelper.fromJson(o.getOnsetRange());
+    if (null != o.getOnsetString()) {
+      this.onsetString = o.getOnsetString();
+    }
+    if (null != o.getAbatementDateTime()) {
+      this.abatementDateTime = o.getAbatementDateTime();
+    }
+    this.abatementAge = AgeHelper.fromJson(o.getAbatementAge());
+    if (null != o.getAbatementBoolean()) {
+      this.abatementBoolean = o.getAbatementBoolean();
+    }
+    this.abatementPeriod = PeriodHelper.fromJson(o.getAbatementPeriod());
+    this.abatementRange = RangeHelper.fromJson(o.getAbatementRange());
+    if (null != o.getAbatementString()) {
+      this.abatementString = o.getAbatementString();
+    }
+    if (null != o.getAssertedDate()) {
+      this.assertedDate = o.getAssertedDate();
+    }
+    if (null != o.getAsserter() && !o.getAsserter().isEmpty()) {
+      this.asserter = new Reference(o.getAsserter().get(0));
+    }
+    if (null != o.getStage() && !o.getStage().isEmpty()) {
+      this.stage = new ConditionStage(o.getStage().get(0));
+    }
+    if (null != o.getEvidence() && !o.getEvidence().isEmpty()) {
+    	this.evidence = ConditionEvidenceHelper.fromArray2Array(o.getEvidence());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -659,51 +630,52 @@ public class Condition  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("clinicalStatus" + "[" + String.valueOf(this.clinicalStatus) + "]\n"); 
-     builder.append("_clinicalStatus" + "[" + String.valueOf(this._clinicalStatus) + "]\n"); 
-     builder.append("verificationStatus" + "[" + String.valueOf(this.verificationStatus) + "]\n"); 
-     builder.append("_verificationStatus" + "[" + String.valueOf(this._verificationStatus) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("severity" + "[" + String.valueOf(this.severity) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("onsetDateTime" + "[" + String.valueOf(this.onsetDateTime) + "]\n"); 
-     builder.append("_onsetDateTime" + "[" + String.valueOf(this._onsetDateTime) + "]\n"); 
-     builder.append("onsetAge" + "[" + String.valueOf(this.onsetAge) + "]\n"); 
-     builder.append("onsetPeriod" + "[" + String.valueOf(this.onsetPeriod) + "]\n"); 
-     builder.append("onsetRange" + "[" + String.valueOf(this.onsetRange) + "]\n"); 
-     builder.append("onsetString" + "[" + String.valueOf(this.onsetString) + "]\n"); 
-     builder.append("_onsetString" + "[" + String.valueOf(this._onsetString) + "]\n"); 
-     builder.append("abatementDateTime" + "[" + String.valueOf(this.abatementDateTime) + "]\n"); 
-     builder.append("_abatementDateTime" + "[" + String.valueOf(this._abatementDateTime) + "]\n"); 
-     builder.append("abatementAge" + "[" + String.valueOf(this.abatementAge) + "]\n"); 
-     builder.append("abatementBoolean" + "[" + String.valueOf(this.abatementBoolean) + "]\n"); 
-     builder.append("_abatementBoolean" + "[" + String.valueOf(this._abatementBoolean) + "]\n"); 
-     builder.append("abatementPeriod" + "[" + String.valueOf(this.abatementPeriod) + "]\n"); 
-     builder.append("abatementRange" + "[" + String.valueOf(this.abatementRange) + "]\n"); 
-     builder.append("abatementString" + "[" + String.valueOf(this.abatementString) + "]\n"); 
-     builder.append("_abatementString" + "[" + String.valueOf(this._abatementString) + "]\n"); 
-     builder.append("assertedDate" + "[" + String.valueOf(this.assertedDate) + "]\n"); 
-     builder.append("_assertedDate" + "[" + String.valueOf(this._assertedDate) + "]\n"); 
-     builder.append("asserter" + "[" + String.valueOf(this.asserter) + "]\n"); 
-     builder.append("stage" + "[" + String.valueOf(this.stage) + "]\n"); 
-     builder.append("evidence" + "[" + String.valueOf(this.evidence) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Condition]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.clinicalStatus != null) builder.append("clinicalStatus" + "->" + this.clinicalStatus.toString() + "\n"); 
+     if(this._clinicalStatus != null) builder.append("_clinicalStatus" + "->" + this._clinicalStatus.toString() + "\n"); 
+     if(this.verificationStatus != null) builder.append("verificationStatus" + "->" + this.verificationStatus.toString() + "\n"); 
+     if(this._verificationStatus != null) builder.append("_verificationStatus" + "->" + this._verificationStatus.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.severity != null) builder.append("severity" + "->" + this.severity.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.bodySite != null) builder.append("bodySite" + "->" + this.bodySite.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.onsetDateTime != null) builder.append("onsetDateTime" + "->" + this.onsetDateTime.toString() + "\n"); 
+     if(this._onsetDateTime != null) builder.append("_onsetDateTime" + "->" + this._onsetDateTime.toString() + "\n"); 
+     if(this.onsetAge != null) builder.append("onsetAge" + "->" + this.onsetAge.toString() + "\n"); 
+     if(this.onsetPeriod != null) builder.append("onsetPeriod" + "->" + this.onsetPeriod.toString() + "\n"); 
+     if(this.onsetRange != null) builder.append("onsetRange" + "->" + this.onsetRange.toString() + "\n"); 
+     if(this.onsetString != null) builder.append("onsetString" + "->" + this.onsetString.toString() + "\n"); 
+     if(this._onsetString != null) builder.append("_onsetString" + "->" + this._onsetString.toString() + "\n"); 
+     if(this.abatementDateTime != null) builder.append("abatementDateTime" + "->" + this.abatementDateTime.toString() + "\n"); 
+     if(this._abatementDateTime != null) builder.append("_abatementDateTime" + "->" + this._abatementDateTime.toString() + "\n"); 
+     if(this.abatementAge != null) builder.append("abatementAge" + "->" + this.abatementAge.toString() + "\n"); 
+     if(this.abatementBoolean != null) builder.append("abatementBoolean" + "->" + this.abatementBoolean.toString() + "\n"); 
+     if(this._abatementBoolean != null) builder.append("_abatementBoolean" + "->" + this._abatementBoolean.toString() + "\n"); 
+     if(this.abatementPeriod != null) builder.append("abatementPeriod" + "->" + this.abatementPeriod.toString() + "\n"); 
+     if(this.abatementRange != null) builder.append("abatementRange" + "->" + this.abatementRange.toString() + "\n"); 
+     if(this.abatementString != null) builder.append("abatementString" + "->" + this.abatementString.toString() + "\n"); 
+     if(this._abatementString != null) builder.append("_abatementString" + "->" + this._abatementString.toString() + "\n"); 
+     if(this.assertedDate != null) builder.append("assertedDate" + "->" + this.assertedDate.toString() + "\n"); 
+     if(this._assertedDate != null) builder.append("_assertedDate" + "->" + this._assertedDate.toString() + "\n"); 
+     if(this.asserter != null) builder.append("asserter" + "->" + this.asserter.toString() + "\n"); 
+     if(this.stage != null) builder.append("stage" + "->" + this.stage.toString() + "\n"); 
+     if(this.evidence != null) builder.append("evidence" + "->" + this.evidence.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -741,36 +713,4 @@ public class Condition  {
   	}
   }
 
-  public static java.util.List<Condition> fromArray(java.util.List<ConditionModel> list) {
-    return (java.util.List<Condition>)list.stream()
-      .map(model -> new Condition(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConditionModel> toModelArray(java.util.List<Condition> list) {
-    return (java.util.List<ConditionModel>)list.stream()
-      .map(model -> new ConditionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Condition fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Condition.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Condition o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Condition> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

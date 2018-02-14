@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImplementationGuideModel;
 import org.fhir.pojo.ImplementationGuide;
+import org.fhir.pojo.ImplementationGuideHelper;
 
 public class ImplementationGuideDaoImpl implements ImplementationGuideDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImplementationGuideDaoImpl implements ImplementationGuideDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImplementationGuideModel a", ImplementationGuideModel.class).setMaxResults(maxResult);
       List<ImplementationGuideModel> models = query.getResultList();
-      return ImplementationGuide.fromArray(models);
+      return ImplementationGuideHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ImplementationGuideDaoImpl implements ImplementationGuideDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImplementationGuideModel a", ImplementationGuideModel.class);
       List<ImplementationGuideModel> models = query.getResultList();
-      return ImplementationGuide.fromArray(models);
+      return ImplementationGuideHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ImplementationGuideDaoImpl implements ImplementationGuideDao {
       ImplementationGuideModel model = em.merge(new ImplementationGuideModel(e));
       return new ImplementationGuide(model);
   }
-
   @Override
   @Transactional
   public void delete(ImplementationGuide e) {

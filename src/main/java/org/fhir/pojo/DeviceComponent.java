@@ -129,6 +129,7 @@ public class DeviceComponent  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -180,60 +181,43 @@ public class DeviceComponent  {
 
   public DeviceComponent(DeviceComponentModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getLastSystemChange()) {
-        this.lastSystemChange = new String(o.getLastSystemChange());
-      }
-
-      if (null != o.getSource()) {
-        this.source = new Reference(o.getSource());
-        this.source.setId(this.getId());
-      }
-
-      if (null != o.getParent()) {
-        this.parent = new Reference(o.getParent());
-        this.parent.setId(this.getId());
-      }
-
-      this.operationalStatus = CodeableConcept.fromArray(o.getOperationalStatus());
-      this.parameterGroup = CodeableConcept.fromJson(o.getParameterGroup());
-      if (null != o.getMeasurementPrinciple()) {
-        this.measurementPrinciple = new String(o.getMeasurementPrinciple());
-      }
-
-      this.productionSpecification = DeviceComponentProductionSpecification.fromArray(o.getProductionSpecification());
-
-      this.languageCode = CodeableConcept.fromJson(o.getLanguageCode());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getLastSystemChange()) {
+      this.lastSystemChange = o.getLastSystemChange();
+    }
+    if (null != o.getSource() && !o.getSource().isEmpty()) {
+      this.source = new Reference(o.getSource().get(0));
+    }
+    if (null != o.getParent() && !o.getParent().isEmpty()) {
+      this.parent = new Reference(o.getParent().get(0));
+    }
+    this.parameterGroup = CodeableConceptHelper.fromJson(o.getParameterGroup());
+    if (null != o.getMeasurementPrinciple()) {
+      this.measurementPrinciple = o.getMeasurementPrinciple();
+    }
+    if (null != o.getProductionSpecification() && !o.getProductionSpecification().isEmpty()) {
+    	this.productionSpecification = DeviceComponentProductionSpecificationHelper.fromArray2Array(o.getProductionSpecification());
+    }
+    this.languageCode = CodeableConceptHelper.fromJson(o.getLanguageCode());
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -384,30 +368,31 @@ public class DeviceComponent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("lastSystemChange" + "[" + String.valueOf(this.lastSystemChange) + "]\n"); 
-     builder.append("_lastSystemChange" + "[" + String.valueOf(this._lastSystemChange) + "]\n"); 
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("parent" + "[" + String.valueOf(this.parent) + "]\n"); 
-     builder.append("operationalStatus" + "[" + String.valueOf(this.operationalStatus) + "]\n"); 
-     builder.append("parameterGroup" + "[" + String.valueOf(this.parameterGroup) + "]\n"); 
-     builder.append("measurementPrinciple" + "[" + String.valueOf(this.measurementPrinciple) + "]\n"); 
-     builder.append("_measurementPrinciple" + "[" + String.valueOf(this._measurementPrinciple) + "]\n"); 
-     builder.append("productionSpecification" + "[" + String.valueOf(this.productionSpecification) + "]\n"); 
-     builder.append("languageCode" + "[" + String.valueOf(this.languageCode) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[DeviceComponent]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.lastSystemChange != null) builder.append("lastSystemChange" + "->" + this.lastSystemChange.toString() + "\n"); 
+     if(this._lastSystemChange != null) builder.append("_lastSystemChange" + "->" + this._lastSystemChange.toString() + "\n"); 
+     if(this.source != null) builder.append("source" + "->" + this.source.toString() + "\n"); 
+     if(this.parent != null) builder.append("parent" + "->" + this.parent.toString() + "\n"); 
+     if(this.operationalStatus != null) builder.append("operationalStatus" + "->" + this.operationalStatus.toString() + "\n"); 
+     if(this.parameterGroup != null) builder.append("parameterGroup" + "->" + this.parameterGroup.toString() + "\n"); 
+     if(this.measurementPrinciple != null) builder.append("measurementPrinciple" + "->" + this.measurementPrinciple.toString() + "\n"); 
+     if(this._measurementPrinciple != null) builder.append("_measurementPrinciple" + "->" + this._measurementPrinciple.toString() + "\n"); 
+     if(this.productionSpecification != null) builder.append("productionSpecification" + "->" + this.productionSpecification.toString() + "\n"); 
+     if(this.languageCode != null) builder.append("languageCode" + "->" + this.languageCode.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -455,36 +440,4 @@ public class DeviceComponent  {
   	}
   }
 
-  public static java.util.List<DeviceComponent> fromArray(java.util.List<DeviceComponentModel> list) {
-    return (java.util.List<DeviceComponent>)list.stream()
-      .map(model -> new DeviceComponent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DeviceComponentModel> toModelArray(java.util.List<DeviceComponent> list) {
-    return (java.util.List<DeviceComponentModel>)list.stream()
-      .map(model -> new DeviceComponentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DeviceComponent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DeviceComponent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DeviceComponent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DeviceComponent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -32,7 +32,5 @@ public interface CompartmentDefinitionResourceService {
 	public CompartmentDefinitionResource find(String id);
   public List<CompartmentDefinitionResource> select(int maxResult);
   public List<CompartmentDefinitionResource> selectAll();
-  public CompartmentDefinitionResource create(CompartmentDefinitionResource bean);
-  public CompartmentDefinitionResource update(CompartmentDefinitionResource bean);
   public void delete(CompartmentDefinitionResource bean);
 }

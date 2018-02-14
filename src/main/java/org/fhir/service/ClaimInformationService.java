@@ -32,7 +32,5 @@ public interface ClaimInformationService {
 	public ClaimInformation find(String id);
   public List<ClaimInformation> select(int maxResult);
   public List<ClaimInformation> selectAll();
-  public ClaimInformation create(ClaimInformation bean);
-  public ClaimInformation update(ClaimInformation bean);
   public void delete(ClaimInformation bean);
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.OperationDefinitionBindingModel;
 import org.fhir.pojo.OperationDefinitionBinding;
+import org.fhir.pojo.OperationDefinitionBindingHelper;
 
 public class OperationDefinitionBindingDaoImpl implements OperationDefinitionBindingDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class OperationDefinitionBindingDaoImpl implements OperationDefinitionBin
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OperationDefinitionBindingModel a", OperationDefinitionBindingModel.class).setMaxResults(maxResult);
       List<OperationDefinitionBindingModel> models = query.getResultList();
-      return OperationDefinitionBinding.fromArray(models);
+      return OperationDefinitionBindingHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class OperationDefinitionBindingDaoImpl implements OperationDefinitionBin
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OperationDefinitionBindingModel a", OperationDefinitionBindingModel.class);
       List<OperationDefinitionBindingModel> models = query.getResultList();
-      return OperationDefinitionBinding.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public OperationDefinitionBinding create(OperationDefinitionBinding e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new OperationDefinitionBindingModel(e));
-      return e;
-  }
-
-  @Transactional
-  public OperationDefinitionBinding update(OperationDefinitionBinding e) {
-      final EntityManager em = entityManagerProvider.get();
-      OperationDefinitionBindingModel model = em.merge(new OperationDefinitionBindingModel(e));
-      return new OperationDefinitionBinding(model);
+      return OperationDefinitionBindingHelper.fromArray2Array(models);
   }
 
   @Override

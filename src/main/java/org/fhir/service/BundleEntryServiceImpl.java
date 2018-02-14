@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public BundleEntry create(BundleEntry bean) {
-  	requireNonNull(bean);
-    logger.info("create(BundleEntry={}) - entered bean ");
-
-    final BundleEntry result = dao.create(bean);
-
-    logger.info("create(BundleEntry) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public BundleEntry update(BundleEntry bean) {
-  	requireNonNull(bean);
-    logger.info("update(BundleEntry={}) - entered bean ");
-
-    final BundleEntry result = dao.update(bean);
-
-    logger.info("update(BundleEntry) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

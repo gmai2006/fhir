@@ -34,10 +34,8 @@ public interface PaymentNoticeDao {
   public List<PaymentNotice> select(int maxResult);
 
   public List<PaymentNotice> selectAll();
-
   public PaymentNotice create(PaymentNotice e);
 
   public PaymentNotice update(PaymentNotice e);
-
   public void delete(PaymentNotice e);
 }

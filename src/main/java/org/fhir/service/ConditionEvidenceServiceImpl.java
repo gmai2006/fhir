@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ConditionEvidence create(ConditionEvidence bean) {
-  	requireNonNull(bean);
-    logger.info("create(ConditionEvidence={}) - entered bean ");
-
-    final ConditionEvidence result = dao.create(bean);
-
-    logger.info("create(ConditionEvidence) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ConditionEvidence update(ConditionEvidence bean) {
-  	requireNonNull(bean);
-    logger.info("update(ConditionEvidence={}) - entered bean ");
-
-    final ConditionEvidence result = dao.update(bean);
-
-    logger.info("update(ConditionEvidence) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

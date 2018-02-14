@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public Contributor create(Contributor bean) {
-  	requireNonNull(bean);
-    logger.info("create(Contributor={}) - entered bean ");
-
-    final Contributor result = dao.create(bean);
-
-    logger.info("create(Contributor) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public Contributor update(Contributor bean) {
-  	requireNonNull(bean);
-    logger.info("update(Contributor={}) - entered bean ");
-
-    final Contributor result = dao.update(bean);
-
-    logger.info("update(Contributor) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

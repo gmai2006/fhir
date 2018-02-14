@@ -34,10 +34,8 @@ public interface ValueSetDao {
   public List<ValueSet> select(int maxResult);
 
   public List<ValueSet> selectAll();
-
   public ValueSet create(ValueSet e);
 
   public ValueSet update(ValueSet e);
-
   public void delete(ValueSet e);
 }

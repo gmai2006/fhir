@@ -91,6 +91,7 @@ public class ExplanationOfBenefitFinancial  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -112,27 +113,21 @@ public class ExplanationOfBenefitFinancial  {
 
   public ExplanationOfBenefitFinancial(ExplanationOfBenefitFinancialModel o) {
     this.id = o.getId();
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getAllowedUnsignedInt()) {
-        this.allowedUnsignedInt = new Float(o.getAllowedUnsignedInt());
-      }
-
-      if (null != o.getAllowedString()) {
-        this.allowedString = new String(o.getAllowedString());
-      }
-
-      this.allowedMoney = Money.fromJson(o.getAllowedMoney());
-      if (null != o.getUsedUnsignedInt()) {
-        this.usedUnsignedInt = new Float(o.getUsedUnsignedInt());
-      }
-
-      this.usedMoney = Money.fromJson(o.getUsedMoney());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getAllowedUnsignedInt()) {
+      this.allowedUnsignedInt = o.getAllowedUnsignedInt();
+    }
+    if (null != o.getAllowedString()) {
+      this.allowedString = o.getAllowedString();
+    }
+    this.allowedMoney = MoneyHelper.fromJson(o.getAllowedMoney());
+    if (null != o.getUsedUnsignedInt()) {
+      this.usedUnsignedInt = o.getUsedUnsignedInt();
+    }
+    this.usedMoney = MoneyHelper.fromJson(o.getUsedMoney());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( CodeableConcept value) {
@@ -217,53 +212,22 @@ public class ExplanationOfBenefitFinancial  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("allowedUnsignedInt" + "[" + String.valueOf(this.allowedUnsignedInt) + "]\n"); 
-     builder.append("_allowedUnsignedInt" + "[" + String.valueOf(this._allowedUnsignedInt) + "]\n"); 
-     builder.append("allowedString" + "[" + String.valueOf(this.allowedString) + "]\n"); 
-     builder.append("_allowedString" + "[" + String.valueOf(this._allowedString) + "]\n"); 
-     builder.append("allowedMoney" + "[" + String.valueOf(this.allowedMoney) + "]\n"); 
-     builder.append("usedUnsignedInt" + "[" + String.valueOf(this.usedUnsignedInt) + "]\n"); 
-     builder.append("_usedUnsignedInt" + "[" + String.valueOf(this._usedUnsignedInt) + "]\n"); 
-     builder.append("usedMoney" + "[" + String.valueOf(this.usedMoney) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitFinancial]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.allowedUnsignedInt != null) builder.append("allowedUnsignedInt" + "->" + this.allowedUnsignedInt.toString() + "\n"); 
+     if(this._allowedUnsignedInt != null) builder.append("_allowedUnsignedInt" + "->" + this._allowedUnsignedInt.toString() + "\n"); 
+     if(this.allowedString != null) builder.append("allowedString" + "->" + this.allowedString.toString() + "\n"); 
+     if(this._allowedString != null) builder.append("_allowedString" + "->" + this._allowedString.toString() + "\n"); 
+     if(this.allowedMoney != null) builder.append("allowedMoney" + "->" + this.allowedMoney.toString() + "\n"); 
+     if(this.usedUnsignedInt != null) builder.append("usedUnsignedInt" + "->" + this.usedUnsignedInt.toString() + "\n"); 
+     if(this._usedUnsignedInt != null) builder.append("_usedUnsignedInt" + "->" + this._usedUnsignedInt.toString() + "\n"); 
+     if(this.usedMoney != null) builder.append("usedMoney" + "->" + this.usedMoney.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExplanationOfBenefitFinancial> fromArray(java.util.List<ExplanationOfBenefitFinancialModel> list) {
-    return (java.util.List<ExplanationOfBenefitFinancial>)list.stream()
-      .map(model -> new ExplanationOfBenefitFinancial(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExplanationOfBenefitFinancialModel> toModelArray(java.util.List<ExplanationOfBenefitFinancial> list) {
-    return (java.util.List<ExplanationOfBenefitFinancialModel>)list.stream()
-      .map(model -> new ExplanationOfBenefitFinancialModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExplanationOfBenefitFinancial fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExplanationOfBenefitFinancial.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExplanationOfBenefitFinancial o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExplanationOfBenefitFinancial> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

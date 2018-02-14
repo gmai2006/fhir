@@ -34,10 +34,5 @@ public interface ClaimResponseAdjudicationDao {
   public List<ClaimResponseAdjudication> select(int maxResult);
 
   public List<ClaimResponseAdjudication> selectAll();
-
-  public ClaimResponseAdjudication create(ClaimResponseAdjudication e);
-
-  public ClaimResponseAdjudication update(ClaimResponseAdjudication e);
-
   public void delete(ClaimResponseAdjudication e);
 }

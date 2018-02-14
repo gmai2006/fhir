@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.BundleEntryModel;
 import org.fhir.pojo.BundleEntry;
+import org.fhir.pojo.BundleEntryHelper;
 
 public class BundleEntryDaoImpl implements BundleEntryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class BundleEntryDaoImpl implements BundleEntryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BundleEntryModel a", BundleEntryModel.class).setMaxResults(maxResult);
       List<BundleEntryModel> models = query.getResultList();
-      return BundleEntry.fromArray(models);
+      return BundleEntryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class BundleEntryDaoImpl implements BundleEntryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BundleEntryModel a", BundleEntryModel.class);
       List<BundleEntryModel> models = query.getResultList();
-      return BundleEntry.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public BundleEntry create(BundleEntry e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new BundleEntryModel(e));
-      return e;
-  }
-
-  @Transactional
-  public BundleEntry update(BundleEntry e) {
-      final EntityManager em = entityManagerProvider.get();
-      BundleEntryModel model = em.merge(new BundleEntryModel(e));
-      return new BundleEntry(model);
+      return BundleEntryHelper.fromArray2Array(models);
   }
 
   @Override

@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.ValueSetParameterModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -115,6 +116,7 @@ public class ValueSetParameter  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -131,7 +133,36 @@ public class ValueSetParameter  {
   */
   private java.util.List<Extension> extension = new java.util.ArrayList<>();
 
-  public ValueSetParameter() {}
+  public ValueSetParameter() {
+  }
+
+  public ValueSetParameter(ValueSetParameterModel o) {
+    this.id = o.getId();
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getValueString()) {
+      this.valueString = o.getValueString();
+    }
+    if (null != o.getValueBoolean()) {
+      this.valueBoolean = o.getValueBoolean();
+    }
+    if (null != o.getValueInteger()) {
+      this.valueInteger = o.getValueInteger();
+    }
+    if (null != o.getValueDecimal()) {
+      this.valueDecimal = o.getValueDecimal();
+    }
+    if (null != o.getValueUri()) {
+      this.valueUri = o.getValueUri();
+    }
+    if (null != o.getValueCode()) {
+      this.valueCode = o.getValueCode();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+  }
 
   public void setName( String value) {
     this.name = value;
@@ -245,45 +276,27 @@ public class ValueSetParameter  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("valueString" + "[" + String.valueOf(this.valueString) + "]\n"); 
-     builder.append("_valueString" + "[" + String.valueOf(this._valueString) + "]\n"); 
-     builder.append("valueBoolean" + "[" + String.valueOf(this.valueBoolean) + "]\n"); 
-     builder.append("_valueBoolean" + "[" + String.valueOf(this._valueBoolean) + "]\n"); 
-     builder.append("valueInteger" + "[" + String.valueOf(this.valueInteger) + "]\n"); 
-     builder.append("_valueInteger" + "[" + String.valueOf(this._valueInteger) + "]\n"); 
-     builder.append("valueDecimal" + "[" + String.valueOf(this.valueDecimal) + "]\n"); 
-     builder.append("_valueDecimal" + "[" + String.valueOf(this._valueDecimal) + "]\n"); 
-     builder.append("valueUri" + "[" + String.valueOf(this.valueUri) + "]\n"); 
-     builder.append("_valueUri" + "[" + String.valueOf(this._valueUri) + "]\n"); 
-     builder.append("valueCode" + "[" + String.valueOf(this.valueCode) + "]\n"); 
-     builder.append("_valueCode" + "[" + String.valueOf(this._valueCode) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ValueSetParameter]:" + "\n");
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.valueString != null) builder.append("valueString" + "->" + this.valueString.toString() + "\n"); 
+     if(this._valueString != null) builder.append("_valueString" + "->" + this._valueString.toString() + "\n"); 
+     if(this.valueBoolean != null) builder.append("valueBoolean" + "->" + this.valueBoolean.toString() + "\n"); 
+     if(this._valueBoolean != null) builder.append("_valueBoolean" + "->" + this._valueBoolean.toString() + "\n"); 
+     if(this.valueInteger != null) builder.append("valueInteger" + "->" + this.valueInteger.toString() + "\n"); 
+     if(this._valueInteger != null) builder.append("_valueInteger" + "->" + this._valueInteger.toString() + "\n"); 
+     if(this.valueDecimal != null) builder.append("valueDecimal" + "->" + this.valueDecimal.toString() + "\n"); 
+     if(this._valueDecimal != null) builder.append("_valueDecimal" + "->" + this._valueDecimal.toString() + "\n"); 
+     if(this.valueUri != null) builder.append("valueUri" + "->" + this.valueUri.toString() + "\n"); 
+     if(this._valueUri != null) builder.append("_valueUri" + "->" + this._valueUri.toString() + "\n"); 
+     if(this.valueCode != null) builder.append("valueCode" + "->" + this.valueCode.toString() + "\n"); 
+     if(this._valueCode != null) builder.append("_valueCode" + "->" + this._valueCode.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
-  public static ValueSetParameter fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ValueSetParameter.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ValueSetParameter o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ValueSetParameter> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 
 }

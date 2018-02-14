@@ -34,10 +34,5 @@ public interface NutritionOrderSupplementDao {
   public List<NutritionOrderSupplement> select(int maxResult);
 
   public List<NutritionOrderSupplement> selectAll();
-
-  public NutritionOrderSupplement create(NutritionOrderSupplement e);
-
-  public NutritionOrderSupplement update(NutritionOrderSupplement e);
-
   public void delete(NutritionOrderSupplement e);
 }

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ContractValuedItem create(ContractValuedItem bean) {
-  	requireNonNull(bean);
-    logger.info("create(ContractValuedItem={}) - entered bean ");
-
-    final ContractValuedItem result = dao.create(bean);
-
-    logger.info("create(ContractValuedItem) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ContractValuedItem update(ContractValuedItem bean) {
-  	requireNonNull(bean);
-    logger.info("update(ContractValuedItem={}) - entered bean ");
-
-    final ContractValuedItem result = dao.update(bean);
-
-    logger.info("update(ContractValuedItem) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

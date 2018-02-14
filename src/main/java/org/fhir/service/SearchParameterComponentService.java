@@ -32,7 +32,5 @@ public interface SearchParameterComponentService {
 	public SearchParameterComponent find(String id);
   public List<SearchParameterComponent> select(int maxResult);
   public List<SearchParameterComponent> selectAll();
-  public SearchParameterComponent create(SearchParameterComponent bean);
-  public SearchParameterComponent update(SearchParameterComponent bean);
   public void delete(SearchParameterComponent bean);
 }

@@ -69,6 +69,7 @@ public class CapabilityStatementDocument  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -90,25 +91,18 @@ public class CapabilityStatementDocument  {
 
   public CapabilityStatementDocument(CapabilityStatementDocumentModel o) {
     this.id = o.getId();
-      if (null != o.getMode()) {
-        this.mode = new String(o.getMode());
-      }
-
-      if (null != o.getDocumentation()) {
-        this.documentation = new String(o.getDocumentation());
-      }
-
-      if (null != o.getProfile()) {
-        this.profile = new Reference(o.getProfile());
-        this.profile.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getMode()) {
+      this.mode = o.getMode();
+    }
+    if (null != o.getDocumentation()) {
+      this.documentation = o.getDocumentation();
+    }
+    if (null != o.getProfile() && !o.getProfile().isEmpty()) {
+      this.profile = new Reference(o.getProfile().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setMode( String value) {
@@ -169,15 +163,16 @@ public class CapabilityStatementDocument  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("_documentation" + "[" + String.valueOf(this._documentation) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementDocument]:" + "\n");
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -195,36 +190,4 @@ public class CapabilityStatementDocument  {
   	}
   }
 
-  public static java.util.List<CapabilityStatementDocument> fromArray(java.util.List<CapabilityStatementDocumentModel> list) {
-    return (java.util.List<CapabilityStatementDocument>)list.stream()
-      .map(model -> new CapabilityStatementDocument(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementDocumentModel> toModelArray(java.util.List<CapabilityStatementDocument> list) {
-    return (java.util.List<CapabilityStatementDocumentModel>)list.stream()
-      .map(model -> new CapabilityStatementDocumentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatementDocument fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatementDocument.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementDocument o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementDocument> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

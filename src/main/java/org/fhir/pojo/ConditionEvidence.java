@@ -53,6 +53,7 @@ public class ConditionEvidence  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -74,15 +75,12 @@ public class ConditionEvidence  {
 
   public ConditionEvidence(ConditionEvidenceModel o) {
     this.id = o.getId();
-      this.code = CodeableConcept.fromArray(o.getCode());
-      this.detail = Reference.fromArray(o.getDetail());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getDetail() && !o.getDetail().isEmpty()) {
+    	this.detail = ReferenceHelper.fromArray2Array(o.getDetail());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( java.util.List<CodeableConcept> value) {
@@ -125,46 +123,15 @@ public class ConditionEvidence  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConditionEvidence]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ConditionEvidence> fromArray(java.util.List<ConditionEvidenceModel> list) {
-    return (java.util.List<ConditionEvidence>)list.stream()
-      .map(model -> new ConditionEvidence(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConditionEvidenceModel> toModelArray(java.util.List<ConditionEvidence> list) {
-    return (java.util.List<ConditionEvidenceModel>)list.stream()
-      .map(model -> new ConditionEvidenceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ConditionEvidence fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ConditionEvidence.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ConditionEvidence o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ConditionEvidence> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

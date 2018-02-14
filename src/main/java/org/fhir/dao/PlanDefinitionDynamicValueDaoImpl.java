@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PlanDefinitionDynamicValueModel;
 import org.fhir.pojo.PlanDefinitionDynamicValue;
+import org.fhir.pojo.PlanDefinitionDynamicValueHelper;
 
 public class PlanDefinitionDynamicValueDaoImpl implements PlanDefinitionDynamicValueDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PlanDefinitionDynamicValueDaoImpl implements PlanDefinitionDynamicV
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PlanDefinitionDynamicValueModel a", PlanDefinitionDynamicValueModel.class).setMaxResults(maxResult);
       List<PlanDefinitionDynamicValueModel> models = query.getResultList();
-      return PlanDefinitionDynamicValue.fromArray(models);
+      return PlanDefinitionDynamicValueHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PlanDefinitionDynamicValueDaoImpl implements PlanDefinitionDynamicV
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PlanDefinitionDynamicValueModel a", PlanDefinitionDynamicValueModel.class);
       List<PlanDefinitionDynamicValueModel> models = query.getResultList();
-      return PlanDefinitionDynamicValue.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PlanDefinitionDynamicValue create(PlanDefinitionDynamicValue e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PlanDefinitionDynamicValueModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PlanDefinitionDynamicValue update(PlanDefinitionDynamicValue e) {
-      final EntityManager em = entityManagerProvider.get();
-      PlanDefinitionDynamicValueModel model = em.merge(new PlanDefinitionDynamicValueModel(e));
-      return new PlanDefinitionDynamicValue(model);
+      return PlanDefinitionDynamicValueHelper.fromArray2Array(models);
   }
 
   @Override

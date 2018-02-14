@@ -34,10 +34,5 @@ public interface CapabilityStatementSupportedMessageDao {
   public List<CapabilityStatementSupportedMessage> select(int maxResult);
 
   public List<CapabilityStatementSupportedMessage> selectAll();
-
-  public CapabilityStatementSupportedMessage create(CapabilityStatementSupportedMessage e);
-
-  public CapabilityStatementSupportedMessage update(CapabilityStatementSupportedMessage e);
-
   public void delete(CapabilityStatementSupportedMessage e);
 }

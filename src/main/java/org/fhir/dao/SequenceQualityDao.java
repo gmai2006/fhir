@@ -34,10 +34,5 @@ public interface SequenceQualityDao {
   public List<SequenceQuality> select(int maxResult);
 
   public List<SequenceQuality> selectAll();
-
-  public SequenceQuality create(SequenceQuality e);
-
-  public SequenceQuality update(SequenceQuality e);
-
   public void delete(SequenceQuality e);
 }

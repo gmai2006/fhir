@@ -32,7 +32,5 @@ public interface PatientAnimalService {
 	public PatientAnimal find(String id);
   public List<PatientAnimal> select(int maxResult);
   public List<PatientAnimal> selectAll();
-  public PatientAnimal create(PatientAnimal bean);
-  public PatientAnimal update(PatientAnimal bean);
   public void delete(PatientAnimal bean);
 }

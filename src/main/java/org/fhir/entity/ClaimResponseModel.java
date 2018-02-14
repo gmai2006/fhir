@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
 @Entity
 @Table(name="claimresponse")
-public class ClaimResponseModel  {
+public class ClaimResponseModel  implements Serializable {
+	private static final long serialVersionUID = 151857669685198850L;
   /**
   * Description: "This is a ClaimResponse resource"
   */
@@ -47,7 +48,7 @@ public class ClaimResponseModel  {
 
   /**
   * Description: "The Response business identifier."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -69,9 +70,9 @@ public class ClaimResponseModel  {
   @Column(name="\"patient_id\"")
   private String patient_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`patient_id`", insertable=false, updatable=false)
-  private ReferenceModel patient;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> patient;
 
   /**
   * Description: "The date when the enclosed suite of services were performed or completed."
@@ -88,9 +89,9 @@ public class ClaimResponseModel  {
   @Column(name="\"insurer_id\"")
   private String insurer_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`insurer_id`", insertable=false, updatable=false)
-  private ReferenceModel insurer;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="insurer_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> insurer;
 
   /**
   * Description: "The practitioner who is responsible for the services rendered to the patient."
@@ -99,9 +100,9 @@ public class ClaimResponseModel  {
   @Column(name="\"requestprovider_id\"")
   private String requestprovider_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`requestprovider_id`", insertable=false, updatable=false)
-  private ReferenceModel requestProvider;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requestprovider_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> requestProvider;
 
   /**
   * Description: "The organization which is responsible for the services rendered to the patient."
@@ -110,9 +111,9 @@ public class ClaimResponseModel  {
   @Column(name="\"requestorganization_id\"")
   private String requestorganization_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`requestorganization_id`", insertable=false, updatable=false)
-  private ReferenceModel requestOrganization;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requestorganization_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> requestOrganization;
 
   /**
   * Description: "Original request resource referrence."
@@ -121,13 +122,13 @@ public class ClaimResponseModel  {
   @Column(name="\"request_id\"")
   private String request_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`request_id`", insertable=false, updatable=false)
-  private ReferenceModel request;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> request;
 
   /**
   * Description: "Processing outcome errror, partial or complete processing."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -143,7 +144,7 @@ public class ClaimResponseModel  {
 
   /**
   * Description: "Party to be reimbursed: Subscriber, provider, other."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -153,27 +154,39 @@ public class ClaimResponseModel  {
   /**
   * Description: "The first tier service adjudications for submitted services."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ClaimResponseItemModel> item = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"item_id\"")
+  private String item_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
+  private java.util.List<ClaimResponseItemModel> item;
 
   /**
   * Description: "The first tier service adjudications for payor added services."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ClaimResponseAddItemModel> addItem = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"additem_id\"")
+  private String additem_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="additem_id", insertable=false, updatable=false)
+  private java.util.List<ClaimResponseAddItemModel> addItem;
 
   /**
   * Description: "Mutually exclusive with Services Provided (Item)."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ClaimResponseErrorModel> error = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"error_id\"")
+  private String error_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="error_id", insertable=false, updatable=false)
+  private java.util.List<ClaimResponseErrorModel> error;
 
   /**
   * Description: "The total cost of the services reported."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -182,7 +195,7 @@ public class ClaimResponseModel  {
 
   /**
   * Description: "The amount of deductible applied which was not allocated to any particular service line."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -191,7 +204,7 @@ public class ClaimResponseModel  {
 
   /**
   * Description: "Total amount of benefit payable (Equal to sum of the Benefit amounts from all detail lines and additions less the Unallocated Deductible)."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -205,13 +218,13 @@ public class ClaimResponseModel  {
   @Column(name="\"payment_id\"")
   private String payment_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`payment_id`", insertable=false, updatable=false)
-  private ClaimResponsePaymentModel payment;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payment_id", insertable=false, updatable=false)
+  private java.util.List<ClaimResponsePaymentModel> payment;
 
   /**
   * Description: "Status of funds reservation (For provider, for Patient, None)."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -220,7 +233,7 @@ public class ClaimResponseModel  {
 
   /**
   * Description: "The form to be used for printing the content."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -230,23 +243,35 @@ public class ClaimResponseModel  {
   /**
   * Description: "Note text."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ClaimResponseProcessNoteModel> processNote = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"processnote_id\"")
+  private String processnote_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="processnote_id", insertable=false, updatable=false)
+  private java.util.List<ClaimResponseProcessNoteModel> processNote;
 
   /**
   * Description: "Request for additional supporting or authorizing information, such as: documents, images or resources."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> communicationRequest = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"communicationrequest_id\"")
+  private String communicationrequest_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="communicationrequest_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> communicationRequest;
 
   /**
   * Description: "Financial instrument by which payment information for health care."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ClaimResponseInsuranceModel> insurance = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"insurance_id\"")
+  private String insurance_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="insurance_id", insertable=false, updatable=false)
+  private java.util.List<ClaimResponseInsuranceModel> insurance;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -256,14 +281,14 @@ public class ClaimResponseModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -273,7 +298,7 @@ public class ClaimResponseModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -283,7 +308,7 @@ public class ClaimResponseModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -295,6 +320,7 @@ public class ClaimResponseModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -309,9 +335,9 @@ public class ClaimResponseModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -332,336 +358,335 @@ public class ClaimResponseModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public ClaimResponseModel() {
   }
 
   public ClaimResponseModel(ClaimResponse o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.status = o.getStatus();
-
-      if (null != o.getPatient()) {
-      	this.patient_id = "patient" + this.getId();
-        this.patient = new ReferenceModel(o.getPatient());
-        this.patient.setId(this.patient_id);
-        this.patient.parent_id = this.patient.getId();
-      }
-
-      this.created = o.getCreated();
-
-      if (null != o.getInsurer()) {
-      	this.insurer_id = "insurer" + this.getId();
-        this.insurer = new ReferenceModel(o.getInsurer());
-        this.insurer.setId(this.insurer_id);
-        this.insurer.parent_id = this.insurer.getId();
-      }
-
-      if (null != o.getRequestProvider()) {
-      	this.requestprovider_id = "requestProvider" + this.getId();
-        this.requestProvider = new ReferenceModel(o.getRequestProvider());
-        this.requestProvider.setId(this.requestprovider_id);
-        this.requestProvider.parent_id = this.requestProvider.getId();
-      }
-
-      if (null != o.getRequestOrganization()) {
-      	this.requestorganization_id = "requestOrganization" + this.getId();
-        this.requestOrganization = new ReferenceModel(o.getRequestOrganization());
-        this.requestOrganization.setId(this.requestorganization_id);
-        this.requestOrganization.parent_id = this.requestOrganization.getId();
-      }
-
-      if (null != o.getRequest()) {
-      	this.request_id = "request" + this.getId();
-        this.request = new ReferenceModel(o.getRequest());
-        this.request.setId(this.request_id);
-        this.request.parent_id = this.request.getId();
-      }
-
-      this.outcome = CodeableConcept.toJson(o.getOutcome());
-      this.disposition = o.getDisposition();
-
-      this.payeeType = CodeableConcept.toJson(o.getPayeeType());
-      this.item = ClaimResponseItem.toModelArray(o.getItem());
-
-      this.addItem = ClaimResponseAddItem.toModelArray(o.getAddItem());
-
-      this.error = ClaimResponseError.toModelArray(o.getError());
-
-      this.totalCost = Money.toJson(o.getTotalCost());
-      this.unallocDeductable = Money.toJson(o.getUnallocDeductable());
-      this.totalBenefit = Money.toJson(o.getTotalBenefit());
-      if (null != o.getPayment()) {
-      	this.payment_id = "payment" + this.getId();
-        this.payment = new ClaimResponsePaymentModel(o.getPayment());
-        this.payment.setId(this.payment_id);
-        this.payment.parent_id = this.payment.getId();
-      }
-
-      this.reserved = Coding.toJson(o.getReserved());
-      this.form = CodeableConcept.toJson(o.getForm());
-      this.processNote = ClaimResponseProcessNote.toModelArray(o.getProcessNote());
-
-      this.communicationRequest = Reference.toModelArray(o.getCommunicationRequest());
-
-      this.insurance = ClaimResponseInsurance.toModelArray(o.getInsurance());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.status = o.getStatus();
+    if (null != o.getPatient() ) {
+    	this.patient_id = "patient" + this.id;
+    	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
+    }
+    this.created = o.getCreated();
+    if (null != o.getInsurer() ) {
+    	this.insurer_id = "insurer" + this.id;
+    	this.insurer = ReferenceHelper.toModel(o.getInsurer(), this.insurer_id);
+    }
+    if (null != o.getRequestProvider() ) {
+    	this.requestprovider_id = "requestprovider" + this.id;
+    	this.requestProvider = ReferenceHelper.toModel(o.getRequestProvider(), this.requestprovider_id);
+    }
+    if (null != o.getRequestOrganization() ) {
+    	this.requestorganization_id = "requestorganization" + this.id;
+    	this.requestOrganization = ReferenceHelper.toModel(o.getRequestOrganization(), this.requestorganization_id);
+    }
+    if (null != o.getRequest() ) {
+    	this.request_id = "request" + this.id;
+    	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
+    }
+    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.disposition = o.getDisposition();
+    this.payeeType = CodeableConceptHelper.toJson(o.getPayeeType());
+    if (null != o.getItem() && !o.getItem().isEmpty()) {
+    	this.item_id = "item" + this.id;
+    	this.item = ClaimResponseItemHelper.toModelFromArray(o.getItem(), this.item_id);
+    }
+    if (null != o.getAddItem() && !o.getAddItem().isEmpty()) {
+    	this.additem_id = "additem" + this.id;
+    	this.addItem = ClaimResponseAddItemHelper.toModelFromArray(o.getAddItem(), this.additem_id);
+    }
+    if (null != o.getError() && !o.getError().isEmpty()) {
+    	this.error_id = "error" + this.id;
+    	this.error = ClaimResponseErrorHelper.toModelFromArray(o.getError(), this.error_id);
+    }
+    this.totalCost = MoneyHelper.toJson(o.getTotalCost());
+    this.unallocDeductable = MoneyHelper.toJson(o.getUnallocDeductable());
+    this.totalBenefit = MoneyHelper.toJson(o.getTotalBenefit());
+    if (null != o.getPayment() ) {
+    	this.payment_id = "payment" + this.id;
+    	this.payment = ClaimResponsePaymentHelper.toModel(o.getPayment(), this.payment_id);
+    }
+    this.reserved = CodingHelper.toJson(o.getReserved());
+    this.form = CodeableConceptHelper.toJson(o.getForm());
+    if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
+    	this.processnote_id = "processnote" + this.id;
+    	this.processNote = ClaimResponseProcessNoteHelper.toModelFromArray(o.getProcessNote(), this.processnote_id);
+    }
+    if (null != o.getCommunicationRequest() && !o.getCommunicationRequest().isEmpty()) {
+    	this.communicationrequest_id = "communicationrequest" + this.id;
+    	this.communicationRequest = ReferenceHelper.toModelFromArray(o.getCommunicationRequest(), this.communicationrequest_id);
+    }
+    if (null != o.getInsurance() && !o.getInsurance().isEmpty()) {
+    	this.insurance_id = "insurance" + this.id;
+    	this.insurance = ClaimResponseInsuranceHelper.toModelFromArray(o.getInsurance(), this.insurance_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setPatient( ReferenceModel value) {
-    this.patient = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
-  public ReferenceModel getPatient() {
+  public java.util.List<ReferenceModel> getPatient() {
     return this.patient;
   }
-  public void setCreated( String value) {
-    this.created = value;
+  public void setPatient( java.util.List<ReferenceModel> value) {
+    this.patient = value;
   }
   public String getCreated() {
     return this.created;
   }
-  public void setInsurer( ReferenceModel value) {
-    this.insurer = value;
+  public void setCreated( String value) {
+    this.created = value;
   }
-  public ReferenceModel getInsurer() {
+  public java.util.List<ReferenceModel> getInsurer() {
     return this.insurer;
   }
-  public void setRequestProvider( ReferenceModel value) {
-    this.requestProvider = value;
+  public void setInsurer( java.util.List<ReferenceModel> value) {
+    this.insurer = value;
   }
-  public ReferenceModel getRequestProvider() {
+  public java.util.List<ReferenceModel> getRequestProvider() {
     return this.requestProvider;
   }
-  public void setRequestOrganization( ReferenceModel value) {
-    this.requestOrganization = value;
+  public void setRequestProvider( java.util.List<ReferenceModel> value) {
+    this.requestProvider = value;
   }
-  public ReferenceModel getRequestOrganization() {
+  public java.util.List<ReferenceModel> getRequestOrganization() {
     return this.requestOrganization;
   }
-  public void setRequest( ReferenceModel value) {
-    this.request = value;
+  public void setRequestOrganization( java.util.List<ReferenceModel> value) {
+    this.requestOrganization = value;
   }
-  public ReferenceModel getRequest() {
+  public java.util.List<ReferenceModel> getRequest() {
     return this.request;
   }
-  public void setOutcome( String value) {
-    this.outcome = value;
+  public void setRequest( java.util.List<ReferenceModel> value) {
+    this.request = value;
   }
   public String getOutcome() {
     return this.outcome;
   }
-  public void setDisposition( String value) {
-    this.disposition = value;
+  public void setOutcome( String value) {
+    this.outcome = value;
   }
   public String getDisposition() {
     return this.disposition;
   }
-  public void setPayeeType( String value) {
-    this.payeeType = value;
+  public void setDisposition( String value) {
+    this.disposition = value;
   }
   public String getPayeeType() {
     return this.payeeType;
   }
-  public void setItem( java.util.List<ClaimResponseItemModel> value) {
-    this.item = value;
+  public void setPayeeType( String value) {
+    this.payeeType = value;
   }
   public java.util.List<ClaimResponseItemModel> getItem() {
     return this.item;
   }
-  public void setAddItem( java.util.List<ClaimResponseAddItemModel> value) {
-    this.addItem = value;
+  public void setItem( java.util.List<ClaimResponseItemModel> value) {
+    this.item = value;
   }
   public java.util.List<ClaimResponseAddItemModel> getAddItem() {
     return this.addItem;
   }
-  public void setError( java.util.List<ClaimResponseErrorModel> value) {
-    this.error = value;
+  public void setAddItem( java.util.List<ClaimResponseAddItemModel> value) {
+    this.addItem = value;
   }
   public java.util.List<ClaimResponseErrorModel> getError() {
     return this.error;
   }
-  public void setTotalCost( String value) {
-    this.totalCost = value;
+  public void setError( java.util.List<ClaimResponseErrorModel> value) {
+    this.error = value;
   }
   public String getTotalCost() {
     return this.totalCost;
   }
-  public void setUnallocDeductable( String value) {
-    this.unallocDeductable = value;
+  public void setTotalCost( String value) {
+    this.totalCost = value;
   }
   public String getUnallocDeductable() {
     return this.unallocDeductable;
   }
-  public void setTotalBenefit( String value) {
-    this.totalBenefit = value;
+  public void setUnallocDeductable( String value) {
+    this.unallocDeductable = value;
   }
   public String getTotalBenefit() {
     return this.totalBenefit;
   }
-  public void setPayment( ClaimResponsePaymentModel value) {
-    this.payment = value;
+  public void setTotalBenefit( String value) {
+    this.totalBenefit = value;
   }
-  public ClaimResponsePaymentModel getPayment() {
+  public java.util.List<ClaimResponsePaymentModel> getPayment() {
     return this.payment;
   }
-  public void setReserved( String value) {
-    this.reserved = value;
+  public void setPayment( java.util.List<ClaimResponsePaymentModel> value) {
+    this.payment = value;
   }
   public String getReserved() {
     return this.reserved;
   }
-  public void setForm( String value) {
-    this.form = value;
+  public void setReserved( String value) {
+    this.reserved = value;
   }
   public String getForm() {
     return this.form;
   }
-  public void setProcessNote( java.util.List<ClaimResponseProcessNoteModel> value) {
-    this.processNote = value;
+  public void setForm( String value) {
+    this.form = value;
   }
   public java.util.List<ClaimResponseProcessNoteModel> getProcessNote() {
     return this.processNote;
   }
-  public void setCommunicationRequest( java.util.List<ReferenceModel> value) {
-    this.communicationRequest = value;
+  public void setProcessNote( java.util.List<ClaimResponseProcessNoteModel> value) {
+    this.processNote = value;
   }
   public java.util.List<ReferenceModel> getCommunicationRequest() {
     return this.communicationRequest;
   }
-  public void setInsurance( java.util.List<ClaimResponseInsuranceModel> value) {
-    this.insurance = value;
+  public void setCommunicationRequest( java.util.List<ReferenceModel> value) {
+    this.communicationRequest = value;
   }
   public java.util.List<ClaimResponseInsuranceModel> getInsurance() {
     return this.insurance;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setInsurance( java.util.List<ClaimResponseInsuranceModel> value) {
+    this.insurance = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("created" + "[" + String.valueOf(this.created) + "]\n"); 
-     builder.append("insurer" + "[" + String.valueOf(this.insurer) + "]\n"); 
-     builder.append("requestProvider" + "[" + String.valueOf(this.requestProvider) + "]\n"); 
-     builder.append("requestOrganization" + "[" + String.valueOf(this.requestOrganization) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("disposition" + "[" + String.valueOf(this.disposition) + "]\n"); 
-     builder.append("payeeType" + "[" + String.valueOf(this.payeeType) + "]\n"); 
-     builder.append("item" + "[" + String.valueOf(this.item) + "]\n"); 
-     builder.append("addItem" + "[" + String.valueOf(this.addItem) + "]\n"); 
-     builder.append("error" + "[" + String.valueOf(this.error) + "]\n"); 
-     builder.append("totalCost" + "[" + String.valueOf(this.totalCost) + "]\n"); 
-     builder.append("unallocDeductable" + "[" + String.valueOf(this.unallocDeductable) + "]\n"); 
-     builder.append("totalBenefit" + "[" + String.valueOf(this.totalBenefit) + "]\n"); 
-     builder.append("payment" + "[" + String.valueOf(this.payment) + "]\n"); 
-     builder.append("reserved" + "[" + String.valueOf(this.reserved) + "]\n"); 
-     builder.append("form" + "[" + String.valueOf(this.form) + "]\n"); 
-     builder.append("processNote" + "[" + String.valueOf(this.processNote) + "]\n"); 
-     builder.append("communicationRequest" + "[" + String.valueOf(this.communicationRequest) + "]\n"); 
-     builder.append("insurance" + "[" + String.valueOf(this.insurance) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[ClaimResponseModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("created" + "->" + this.created + "\n"); 
+     builder.append("outcome" + "->" + this.outcome + "\n"); 
+     builder.append("disposition" + "->" + this.disposition + "\n"); 
+     builder.append("payeeType" + "->" + this.payeeType + "\n"); 
+     builder.append("totalCost" + "->" + this.totalCost + "\n"); 
+     builder.append("unallocDeductable" + "->" + this.unallocDeductable + "\n"); 
+     builder.append("totalBenefit" + "->" + this.totalBenefit + "\n"); 
+     builder.append("reserved" + "->" + this.reserved + "\n"); 
+     builder.append("form" + "->" + this.form + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ClaimResponseModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("patient" + "->" + this.patient + "\n"); 
+     builder.append("created" + "->" + this.created + "\n"); 
+     builder.append("insurer" + "->" + this.insurer + "\n"); 
+     builder.append("requestProvider" + "->" + this.requestProvider + "\n"); 
+     builder.append("requestOrganization" + "->" + this.requestOrganization + "\n"); 
+     builder.append("request" + "->" + this.request + "\n"); 
+     builder.append("outcome" + "->" + this.outcome + "\n"); 
+     builder.append("disposition" + "->" + this.disposition + "\n"); 
+     builder.append("payeeType" + "->" + this.payeeType + "\n"); 
+     builder.append("item" + "->" + this.item + "\n"); 
+     builder.append("addItem" + "->" + this.addItem + "\n"); 
+     builder.append("error" + "->" + this.error + "\n"); 
+     builder.append("totalCost" + "->" + this.totalCost + "\n"); 
+     builder.append("unallocDeductable" + "->" + this.unallocDeductable + "\n"); 
+     builder.append("totalBenefit" + "->" + this.totalBenefit + "\n"); 
+     builder.append("payment" + "->" + this.payment + "\n"); 
+     builder.append("reserved" + "->" + this.reserved + "\n"); 
+     builder.append("form" + "->" + this.form + "\n"); 
+     builder.append("processNote" + "->" + this.processNote + "\n"); 
+     builder.append("communicationRequest" + "->" + this.communicationRequest + "\n"); 
+     builder.append("insurance" + "->" + this.insurance + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

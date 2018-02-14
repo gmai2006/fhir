@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public AccountCoverage create(AccountCoverage bean) {
-  	requireNonNull(bean);
-    logger.info("create(AccountCoverage={}) - entered bean ");
-
-    final AccountCoverage result = dao.create(bean);
-
-    logger.info("create(AccountCoverage) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public AccountCoverage update(AccountCoverage bean) {
-  	requireNonNull(bean);
-    logger.info("update(AccountCoverage={}) - entered bean ");
-
-    final AccountCoverage result = dao.update(bean);
-
-    logger.info("update(AccountCoverage) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -74,6 +74,7 @@ public class CompartmentDefinitionResource  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -95,22 +96,18 @@ public class CompartmentDefinitionResource  {
 
   public CompartmentDefinitionResource(CompartmentDefinitionResourceModel o) {
     this.id = o.getId();
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      this.param = org.fhir.utils.JsonUtils.json2Array(o.getParam());
-
-      if (null != o.getDocumentation()) {
-        this.documentation = new String(o.getDocumentation());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (o.getParam() != null) {
+    	this.param = org.fhir.utils.JsonUtils.json2Array(o.getParam());
+    }
+    if (null != o.getDocumentation()) {
+      this.documentation = o.getDocumentation();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( String value) {
@@ -177,50 +174,19 @@ public class CompartmentDefinitionResource  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("param" + "[" + String.valueOf(this.param) + "]\n"); 
-     builder.append("_param" + "[" + String.valueOf(this._param) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("_documentation" + "[" + String.valueOf(this._documentation) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CompartmentDefinitionResource]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.param != null) builder.append("param" + "->" + this.param.toString() + "\n"); 
+     if(this._param != null) builder.append("_param" + "->" + this._param.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CompartmentDefinitionResource> fromArray(java.util.List<CompartmentDefinitionResourceModel> list) {
-    return (java.util.List<CompartmentDefinitionResource>)list.stream()
-      .map(model -> new CompartmentDefinitionResource(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CompartmentDefinitionResourceModel> toModelArray(java.util.List<CompartmentDefinitionResource> list) {
-    return (java.util.List<CompartmentDefinitionResourceModel>)list.stream()
-      .map(model -> new CompartmentDefinitionResourceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CompartmentDefinitionResource fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CompartmentDefinitionResource.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CompartmentDefinitionResource o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CompartmentDefinitionResource> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

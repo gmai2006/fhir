@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ValueSetConcept create(ValueSetConcept bean) {
-  	requireNonNull(bean);
-    logger.info("create(ValueSetConcept={}) - entered bean ");
-
-    final ValueSetConcept result = dao.create(bean);
-
-    logger.info("create(ValueSetConcept) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ValueSetConcept update(ValueSetConcept bean) {
-  	requireNonNull(bean);
-    logger.info("update(ValueSetConcept={}) - entered bean ");
-
-    final ValueSetConcept result = dao.update(bean);
-
-    logger.info("update(ValueSetConcept) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -34,10 +34,5 @@ public interface ExplanationOfBenefitAdjudicationDao {
   public List<ExplanationOfBenefitAdjudication> select(int maxResult);
 
   public List<ExplanationOfBenefitAdjudication> selectAll();
-
-  public ExplanationOfBenefitAdjudication create(ExplanationOfBenefitAdjudication e);
-
-  public ExplanationOfBenefitAdjudication update(ExplanationOfBenefitAdjudication e);
-
   public void delete(ExplanationOfBenefitAdjudication e);
 }

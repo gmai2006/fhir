@@ -294,6 +294,7 @@ public class CapabilityStatement  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -345,122 +346,102 @@ public class CapabilityStatement  {
 
   public CapabilityStatement(CapabilityStatementModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      if (null != o.getUrl()) {
-        this.url = new String(o.getUrl());
-      }
-
-      if (null != o.getVersion()) {
-        this.version = new String(o.getVersion());
-      }
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getTitle()) {
-        this.title = new String(o.getTitle());
-      }
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getExperimental()) {
-        this.experimental = new Boolean(o.getExperimental());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      if (null != o.getPublisher()) {
-        this.publisher = new String(o.getPublisher());
-      }
-
-      this.contact = ContactDetail.fromArray(o.getContact());
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.useContext = UsageContext.fromArray(o.getUseContext());
-
-      this.jurisdiction = CodeableConcept.fromArray(o.getJurisdiction());
-      if (null != o.getPurpose()) {
-        this.purpose = new String(o.getPurpose());
-      }
-
-      if (null != o.getCopyright()) {
-        this.copyright = new String(o.getCopyright());
-      }
-
-      if (null != o.getKind()) {
-        this.kind = new String(o.getKind());
-      }
-
-      this.instantiates = org.fhir.utils.JsonUtils.json2Array(o.getInstantiates());
-
-      if (null != o.getSoftware()) {
-        this.software = new CapabilityStatementSoftware(o.getSoftware());
-        this.software.setId(this.getId());
-      }
-
-      if (null != o.getImplementation()) {
-        this.implementation = new CapabilityStatementImplementation(o.getImplementation());
-        this.implementation.setId(this.getId());
-      }
-
-      if (null != o.getFhirVersion()) {
-        this.fhirVersion = new String(o.getFhirVersion());
-      }
-
-      if (null != o.getAcceptUnknown()) {
-        this.acceptUnknown = new String(o.getAcceptUnknown());
-      }
-
-      this.format = org.fhir.utils.JsonUtils.json2Array(o.getFormat());
-
-      this.patchFormat = org.fhir.utils.JsonUtils.json2Array(o.getPatchFormat());
-
-      this.implementationGuide = org.fhir.utils.JsonUtils.json2Array(o.getImplementationGuide());
-
-      this.profile = Reference.fromArray(o.getProfile());
-
-      this.rest = CapabilityStatementRest.fromArray(o.getRest());
-
-      this.messaging = CapabilityStatementMessaging.fromArray(o.getMessaging());
-
-      this.document = CapabilityStatementDocument.fromArray(o.getDocument());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getTitle()) {
+      this.title = o.getTitle();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getExperimental()) {
+      this.experimental = o.getExperimental();
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getPublisher()) {
+      this.publisher = o.getPublisher();
+    }
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact = ContactDetailHelper.fromArray2Array(o.getContact());
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
+    }
+    if (null != o.getPurpose()) {
+      this.purpose = o.getPurpose();
+    }
+    if (null != o.getCopyright()) {
+      this.copyright = o.getCopyright();
+    }
+    if (null != o.getKind()) {
+      this.kind = o.getKind();
+    }
+    if (o.getInstantiates() != null) {
+    	this.instantiates = org.fhir.utils.JsonUtils.json2Array(o.getInstantiates());
+    }
+    if (null != o.getSoftware() && !o.getSoftware().isEmpty()) {
+      this.software = new CapabilityStatementSoftware(o.getSoftware().get(0));
+    }
+    if (null != o.getImplementation() && !o.getImplementation().isEmpty()) {
+      this.implementation = new CapabilityStatementImplementation(o.getImplementation().get(0));
+    }
+    if (null != o.getFhirVersion()) {
+      this.fhirVersion = o.getFhirVersion();
+    }
+    if (null != o.getAcceptUnknown()) {
+      this.acceptUnknown = o.getAcceptUnknown();
+    }
+    if (o.getFormat() != null) {
+    	this.format = org.fhir.utils.JsonUtils.json2Array(o.getFormat());
+    }
+    if (o.getPatchFormat() != null) {
+    	this.patchFormat = org.fhir.utils.JsonUtils.json2Array(o.getPatchFormat());
+    }
+    if (o.getImplementationGuide() != null) {
+    	this.implementationGuide = org.fhir.utils.JsonUtils.json2Array(o.getImplementationGuide());
+    }
+    if (null != o.getProfile() && !o.getProfile().isEmpty()) {
+    	this.profile = ReferenceHelper.fromArray2Array(o.getProfile());
+    }
+    if (null != o.getRest() && !o.getRest().isEmpty()) {
+    	this.rest = CapabilityStatementRestHelper.fromArray2Array(o.getRest());
+    }
+    if (null != o.getMessaging() && !o.getMessaging().isEmpty()) {
+    	this.messaging = CapabilityStatementMessagingHelper.fromArray2Array(o.getMessaging());
+    }
+    if (null != o.getDocument() && !o.getDocument().isEmpty()) {
+    	this.document = CapabilityStatementDocumentHelper.fromArray2Array(o.getDocument());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -809,63 +790,64 @@ public class CapabilityStatement  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("experimental" + "[" + String.valueOf(this.experimental) + "]\n"); 
-     builder.append("_experimental" + "[" + String.valueOf(this._experimental) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("_publisher" + "[" + String.valueOf(this._publisher) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("_purpose" + "[" + String.valueOf(this._purpose) + "]\n"); 
-     builder.append("copyright" + "[" + String.valueOf(this.copyright) + "]\n"); 
-     builder.append("_copyright" + "[" + String.valueOf(this._copyright) + "]\n"); 
-     builder.append("kind" + "[" + String.valueOf(this.kind) + "]\n"); 
-     builder.append("_kind" + "[" + String.valueOf(this._kind) + "]\n"); 
-     builder.append("instantiates" + "[" + String.valueOf(this.instantiates) + "]\n"); 
-     builder.append("_instantiates" + "[" + String.valueOf(this._instantiates) + "]\n"); 
-     builder.append("software" + "[" + String.valueOf(this.software) + "]\n"); 
-     builder.append("implementation" + "[" + String.valueOf(this.implementation) + "]\n"); 
-     builder.append("fhirVersion" + "[" + String.valueOf(this.fhirVersion) + "]\n"); 
-     builder.append("_fhirVersion" + "[" + String.valueOf(this._fhirVersion) + "]\n"); 
-     builder.append("acceptUnknown" + "[" + String.valueOf(this.acceptUnknown) + "]\n"); 
-     builder.append("_acceptUnknown" + "[" + String.valueOf(this._acceptUnknown) + "]\n"); 
-     builder.append("format" + "[" + String.valueOf(this.format) + "]\n"); 
-     builder.append("_format" + "[" + String.valueOf(this._format) + "]\n"); 
-     builder.append("patchFormat" + "[" + String.valueOf(this.patchFormat) + "]\n"); 
-     builder.append("_patchFormat" + "[" + String.valueOf(this._patchFormat) + "]\n"); 
-     builder.append("implementationGuide" + "[" + String.valueOf(this.implementationGuide) + "]\n"); 
-     builder.append("_implementationGuide" + "[" + String.valueOf(this._implementationGuide) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("rest" + "[" + String.valueOf(this.rest) + "]\n"); 
-     builder.append("messaging" + "[" + String.valueOf(this.messaging) + "]\n"); 
-     builder.append("document" + "[" + String.valueOf(this.document) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[CapabilityStatement]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.experimental != null) builder.append("experimental" + "->" + this.experimental.toString() + "\n"); 
+     if(this._experimental != null) builder.append("_experimental" + "->" + this._experimental.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.publisher != null) builder.append("publisher" + "->" + this.publisher.toString() + "\n"); 
+     if(this._publisher != null) builder.append("_publisher" + "->" + this._publisher.toString() + "\n"); 
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.useContext != null) builder.append("useContext" + "->" + this.useContext.toString() + "\n"); 
+     if(this.jurisdiction != null) builder.append("jurisdiction" + "->" + this.jurisdiction.toString() + "\n"); 
+     if(this.purpose != null) builder.append("purpose" + "->" + this.purpose.toString() + "\n"); 
+     if(this._purpose != null) builder.append("_purpose" + "->" + this._purpose.toString() + "\n"); 
+     if(this.copyright != null) builder.append("copyright" + "->" + this.copyright.toString() + "\n"); 
+     if(this._copyright != null) builder.append("_copyright" + "->" + this._copyright.toString() + "\n"); 
+     if(this.kind != null) builder.append("kind" + "->" + this.kind.toString() + "\n"); 
+     if(this._kind != null) builder.append("_kind" + "->" + this._kind.toString() + "\n"); 
+     if(this.instantiates != null) builder.append("instantiates" + "->" + this.instantiates.toString() + "\n"); 
+     if(this._instantiates != null) builder.append("_instantiates" + "->" + this._instantiates.toString() + "\n"); 
+     if(this.software != null) builder.append("software" + "->" + this.software.toString() + "\n"); 
+     if(this.implementation != null) builder.append("implementation" + "->" + this.implementation.toString() + "\n"); 
+     if(this.fhirVersion != null) builder.append("fhirVersion" + "->" + this.fhirVersion.toString() + "\n"); 
+     if(this._fhirVersion != null) builder.append("_fhirVersion" + "->" + this._fhirVersion.toString() + "\n"); 
+     if(this.acceptUnknown != null) builder.append("acceptUnknown" + "->" + this.acceptUnknown.toString() + "\n"); 
+     if(this._acceptUnknown != null) builder.append("_acceptUnknown" + "->" + this._acceptUnknown.toString() + "\n"); 
+     if(this.format != null) builder.append("format" + "->" + this.format.toString() + "\n"); 
+     if(this._format != null) builder.append("_format" + "->" + this._format.toString() + "\n"); 
+     if(this.patchFormat != null) builder.append("patchFormat" + "->" + this.patchFormat.toString() + "\n"); 
+     if(this._patchFormat != null) builder.append("_patchFormat" + "->" + this._patchFormat.toString() + "\n"); 
+     if(this.implementationGuide != null) builder.append("implementationGuide" + "->" + this.implementationGuide.toString() + "\n"); 
+     if(this._implementationGuide != null) builder.append("_implementationGuide" + "->" + this._implementationGuide.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this.rest != null) builder.append("rest" + "->" + this.rest.toString() + "\n"); 
+     if(this.messaging != null) builder.append("messaging" + "->" + this.messaging.toString() + "\n"); 
+     if(this.document != null) builder.append("document" + "->" + this.document.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -933,36 +915,4 @@ public class CapabilityStatement  {
   	}
   }
 
-  public static java.util.List<CapabilityStatement> fromArray(java.util.List<CapabilityStatementModel> list) {
-    return (java.util.List<CapabilityStatement>)list.stream()
-      .map(model -> new CapabilityStatement(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementModel> toModelArray(java.util.List<CapabilityStatement> list) {
-    return (java.util.List<CapabilityStatementModel>)list.stream()
-      .map(model -> new CapabilityStatementModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatement fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatement.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatement o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatement> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SequenceVariantModel;
 import org.fhir.pojo.SequenceVariant;
+import org.fhir.pojo.SequenceVariantHelper;
 
 public class SequenceVariantDaoImpl implements SequenceVariantDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SequenceVariantDaoImpl implements SequenceVariantDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SequenceVariantModel a", SequenceVariantModel.class).setMaxResults(maxResult);
       List<SequenceVariantModel> models = query.getResultList();
-      return SequenceVariant.fromArray(models);
+      return SequenceVariantHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SequenceVariantDaoImpl implements SequenceVariantDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SequenceVariantModel a", SequenceVariantModel.class);
       List<SequenceVariantModel> models = query.getResultList();
-      return SequenceVariant.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SequenceVariant create(SequenceVariant e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SequenceVariantModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SequenceVariant update(SequenceVariant e) {
-      final EntityManager em = entityManagerProvider.get();
-      SequenceVariantModel model = em.merge(new SequenceVariantModel(e));
-      return new SequenceVariant(model);
+      return SequenceVariantHelper.fromArray2Array(models);
   }
 
   @Override

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public SequenceRepository create(SequenceRepository bean) {
-  	requireNonNull(bean);
-    logger.info("create(SequenceRepository={}) - entered bean ");
-
-    final SequenceRepository result = dao.create(bean);
-
-    logger.info("create(SequenceRepository) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public SequenceRepository update(SequenceRepository bean) {
-  	requireNonNull(bean);
-    logger.info("update(SequenceRepository={}) - entered bean ");
-
-    final SequenceRepository result = dao.update(bean);
-
-    logger.info("update(SequenceRepository) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data."
 */
 @Entity
 @Table(name="datarequirementdatefilter")
-public class DataRequirementDateFilterModel  {
+public class DataRequirementDateFilterModel  implements Serializable {
+	private static final long serialVersionUID = 151857669678627437L;
   /**
   * Description: "The date-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type dateTime, Period, Schedule, or Timing."
   */
@@ -54,7 +55,7 @@ public class DataRequirementDateFilterModel  {
 
   /**
   * Description: "The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration from now."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -63,7 +64,7 @@ public class DataRequirementDateFilterModel  {
 
   /**
   * Description: "The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration from now."
-  * Actual type: Duration
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -73,7 +74,7 @@ public class DataRequirementDateFilterModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -85,6 +86,7 @@ public class DataRequirementDateFilterModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -93,88 +95,108 @@ public class DataRequirementDateFilterModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public DataRequirementDateFilterModel() {
   }
 
-  public DataRequirementDateFilterModel(DataRequirementDateFilter o) {
-    this.id = o.getId();
-      this.path = o.getPath();
-
-      this.valueDateTime = o.getValueDateTime();
-
-      this.valuePeriod = Period.toJson(o.getValuePeriod());
-      this.valueDuration = Duration.toJson(o.getValueDuration());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public DataRequirementDateFilterModel(DataRequirementDateFilter o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.path = o.getPath();
+    this.valueDateTime = o.getValueDateTime();
+    this.valuePeriod = PeriodHelper.toJson(o.getValuePeriod());
+    this.valueDuration = DurationHelper.toJson(o.getValueDuration());
   }
 
-  public void setPath( String value) {
-    this.path = value;
-  }
   public String getPath() {
     return this.path;
   }
-  public void setValueDateTime( String value) {
-    this.valueDateTime = value;
+  public void setPath( String value) {
+    this.path = value;
   }
   public String getValueDateTime() {
     return this.valueDateTime;
   }
-  public void setValuePeriod( String value) {
-    this.valuePeriod = value;
+  public void setValueDateTime( String value) {
+    this.valueDateTime = value;
   }
   public String getValuePeriod() {
     return this.valuePeriod;
   }
-  public void setValueDuration( String value) {
-    this.valueDuration = value;
+  public void setValuePeriod( String value) {
+    this.valuePeriod = value;
   }
   public String getValueDuration() {
     return this.valueDuration;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setValueDuration( String value) {
+    this.valueDuration = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("path" + "[" + String.valueOf(this.path) + "]\n"); 
-     builder.append("valueDateTime" + "[" + String.valueOf(this.valueDateTime) + "]\n"); 
-     builder.append("valuePeriod" + "[" + String.valueOf(this.valuePeriod) + "]\n"); 
-     builder.append("valueDuration" + "[" + String.valueOf(this.valueDuration) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DataRequirementDateFilterModel]:" + "\n");
+     builder.append("path" + "->" + this.path + "\n"); 
+     builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
+     builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
+     builder.append("valueDuration" + "->" + this.valueDuration + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[DataRequirementDateFilterModel]:" + "\n");
+     builder.append("path" + "->" + this.path + "\n"); 
+     builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
+     builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
+     builder.append("valueDuration" + "->" + this.valueDuration + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DeviceMetricCalibration create(DeviceMetricCalibration bean) {
-  	requireNonNull(bean);
-    logger.info("create(DeviceMetricCalibration={}) - entered bean ");
-
-    final DeviceMetricCalibration result = dao.create(bean);
-
-    logger.info("create(DeviceMetricCalibration) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DeviceMetricCalibration update(DeviceMetricCalibration bean) {
-  	requireNonNull(bean);
-    logger.info("update(DeviceMetricCalibration={}) - entered bean ");
-
-    final DeviceMetricCalibration result = dao.update(bean);
-
-    logger.info("update(DeviceMetricCalibration) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

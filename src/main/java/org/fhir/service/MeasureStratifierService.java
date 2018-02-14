@@ -32,7 +32,5 @@ public interface MeasureStratifierService {
 	public MeasureStratifier find(String id);
   public List<MeasureStratifier> select(int maxResult);
   public List<MeasureStratifier> selectAll();
-  public MeasureStratifier create(MeasureStratifier bean);
-  public MeasureStratifier update(MeasureStratifier bean);
   public void delete(MeasureStratifier bean);
 }

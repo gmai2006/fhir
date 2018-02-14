@@ -32,7 +32,5 @@ public interface CompositionSectionService {
 	public CompositionSection find(String id);
   public List<CompositionSection> select(int maxResult);
   public List<CompositionSection> selectAll();
-  public CompositionSection create(CompositionSection bean);
-  public CompositionSection update(CompositionSection bean);
   public void delete(CompositionSection bean);
 }

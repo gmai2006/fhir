@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImagingStudySeriesModel;
 import org.fhir.pojo.ImagingStudySeries;
+import org.fhir.pojo.ImagingStudySeriesHelper;
 
 public class ImagingStudySeriesDaoImpl implements ImagingStudySeriesDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImagingStudySeriesDaoImpl implements ImagingStudySeriesDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImagingStudySeriesModel a", ImagingStudySeriesModel.class).setMaxResults(maxResult);
       List<ImagingStudySeriesModel> models = query.getResultList();
-      return ImagingStudySeries.fromArray(models);
+      return ImagingStudySeriesHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImagingStudySeriesDaoImpl implements ImagingStudySeriesDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImagingStudySeriesModel a", ImagingStudySeriesModel.class);
       List<ImagingStudySeriesModel> models = query.getResultList();
-      return ImagingStudySeries.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImagingStudySeries create(ImagingStudySeries e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImagingStudySeriesModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImagingStudySeries update(ImagingStudySeries e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImagingStudySeriesModel model = em.merge(new ImagingStudySeriesModel(e));
-      return new ImagingStudySeries(model);
+      return ImagingStudySeriesHelper.fromArray2Array(models);
   }
 
   @Override

@@ -34,10 +34,8 @@ public interface RelatedPersonDao {
   public List<RelatedPerson> select(int maxResult);
 
   public List<RelatedPerson> selectAll();
-
   public RelatedPerson create(RelatedPerson e);
 
   public RelatedPerson update(RelatedPerson e);
-
   public void delete(RelatedPerson e);
 }

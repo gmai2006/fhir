@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
 */
 @Entity
 @Table(name="codesystemconcept")
-public class CodeSystemConceptModel  {
+public class CodeSystemConceptModel  implements Serializable {
+	private static final long serialVersionUID = 151857669694487159L;
   /**
   * Description: "A code - a text symbol - that uniquely identifies the concept within the code system."
   */
@@ -62,28 +63,40 @@ public class CodeSystemConceptModel  {
   /**
   * Description: "Additional representations for the concept - other languages, aliases, specialized purposes, used for particular purposes, etc."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<CodeSystemDesignationModel> designation = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"designation_id\"")
+  private String designation_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="designation_id", insertable=false, updatable=false)
+  private java.util.List<CodeSystemDesignationModel> designation;
 
   /**
   * Description: "A property value for this concept."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<CodeSystemProperty1Model> property = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"property_id\"")
+  private String property_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="property_id", insertable=false, updatable=false)
+  private java.util.List<CodeSystemProperty1Model> property;
 
   /**
   * Description: "Defines children of a concept to produce a hierarchy of concepts. The nature of the relationships is variable (is-a/contains/categorizes) - see hierarchyMeaning."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<CodeSystemConceptModel> concept = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"concept_id\"")
+  private String concept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="concept_id", insertable=false, updatable=false)
+  private java.util.List<CodeSystemConceptModel> concept;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -95,6 +108,7 @@ public class CodeSystemConceptModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -103,108 +117,132 @@ public class CodeSystemConceptModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public CodeSystemConceptModel() {
   }
 
-  public CodeSystemConceptModel(CodeSystemConcept o) {
-    this.id = o.getId();
-      this.code = o.getCode();
-
-      this.display = o.getDisplay();
-
-      this.definition = o.getDefinition();
-
-      this.designation = CodeSystemDesignation.toModelArray(o.getDesignation());
-
-      this.property = CodeSystemProperty1.toModelArray(o.getProperty());
-
-      this.concept = CodeSystemConcept.toModelArray(o.getConcept());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public CodeSystemConceptModel(CodeSystemConcept o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.code = o.getCode();
+    this.display = o.getDisplay();
+    this.definition = o.getDefinition();
+    if (null != o.getDesignation() && !o.getDesignation().isEmpty()) {
+    	this.designation_id = "designation" + this.parent_id;
+    	this.designation = CodeSystemDesignationHelper.toModelFromArray(o.getDesignation(), this.designation_id);
+    }
+    if (null != o.getProperty() && !o.getProperty().isEmpty()) {
+    	this.property_id = "property" + this.parent_id;
+    	this.property = CodeSystemProperty1Helper.toModelFromArray(o.getProperty(), this.property_id);
+    }
+    if (null != o.getConcept() && !o.getConcept().isEmpty()) {
+    	this.concept_id = "concept" + this.parent_id;
+    	this.concept = CodeSystemConceptHelper.toModelFromArray(o.getConcept(), this.concept_id);
+    }
   }
 
-  public void setCode( String value) {
-    this.code = value;
-  }
   public String getCode() {
     return this.code;
   }
-  public void setDisplay( String value) {
-    this.display = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public String getDisplay() {
     return this.display;
   }
-  public void setDefinition( String value) {
-    this.definition = value;
+  public void setDisplay( String value) {
+    this.display = value;
   }
   public String getDefinition() {
     return this.definition;
   }
-  public void setDesignation( java.util.List<CodeSystemDesignationModel> value) {
-    this.designation = value;
+  public void setDefinition( String value) {
+    this.definition = value;
   }
   public java.util.List<CodeSystemDesignationModel> getDesignation() {
     return this.designation;
   }
-  public void setProperty( java.util.List<CodeSystemProperty1Model> value) {
-    this.property = value;
+  public void setDesignation( java.util.List<CodeSystemDesignationModel> value) {
+    this.designation = value;
   }
   public java.util.List<CodeSystemProperty1Model> getProperty() {
     return this.property;
   }
-  public void setConcept( java.util.List<CodeSystemConceptModel> value) {
-    this.concept = value;
+  public void setProperty( java.util.List<CodeSystemProperty1Model> value) {
+    this.property = value;
   }
   public java.util.List<CodeSystemConceptModel> getConcept() {
     return this.concept;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setConcept( java.util.List<CodeSystemConceptModel> value) {
+    this.concept = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("designation" + "[" + String.valueOf(this.designation) + "]\n"); 
-     builder.append("property" + "[" + String.valueOf(this.property) + "]\n"); 
-     builder.append("concept" + "[" + String.valueOf(this.concept) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CodeSystemConceptModel]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("display" + "->" + this.display + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[CodeSystemConceptModel]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("display" + "->" + this.display + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("designation" + "->" + this.designation + "\n"); 
+     builder.append("property" + "->" + this.property + "\n"); 
+     builder.append("concept" + "->" + this.concept + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public EncounterClassHistory create(EncounterClassHistory bean) {
-  	requireNonNull(bean);
-    logger.info("create(EncounterClassHistory={}) - entered bean ");
-
-    final EncounterClassHistory result = dao.create(bean);
-
-    logger.info("create(EncounterClassHistory) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public EncounterClassHistory update(EncounterClassHistory bean) {
-  	requireNonNull(bean);
-    logger.info("update(EncounterClassHistory={}) - entered bean ");
-
-    final EncounterClassHistory result = dao.update(bean);
-
-    logger.info("update(EncounterClassHistory) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

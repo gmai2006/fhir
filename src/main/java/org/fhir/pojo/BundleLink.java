@@ -63,6 +63,7 @@ public class BundleLink  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,20 +85,15 @@ public class BundleLink  {
 
   public BundleLink(BundleLinkModel o) {
     this.id = o.getId();
-      if (null != o.getRelation()) {
-        this.relation = new String(o.getRelation());
-      }
-
-      if (null != o.getUrl()) {
-        this.url = new String(o.getUrl());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getRelation()) {
+      this.relation = o.getRelation();
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setRelation( String value) {
@@ -152,48 +148,17 @@ public class BundleLink  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("relation" + "[" + String.valueOf(this.relation) + "]\n"); 
-     builder.append("_relation" + "[" + String.valueOf(this._relation) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[BundleLink]:" + "\n");
+     if(this.relation != null) builder.append("relation" + "->" + this.relation.toString() + "\n"); 
+     if(this._relation != null) builder.append("_relation" + "->" + this._relation.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<BundleLink> fromArray(java.util.List<BundleLinkModel> list) {
-    return (java.util.List<BundleLink>)list.stream()
-      .map(model -> new BundleLink(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<BundleLinkModel> toModelArray(java.util.List<BundleLink> list) {
-    return (java.util.List<BundleLinkModel>)list.stream()
-      .map(model -> new BundleLinkModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static BundleLink fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, BundleLink.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(BundleLink o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<BundleLink> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

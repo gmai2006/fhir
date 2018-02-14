@@ -54,6 +54,7 @@ public class MedicationAdministrationPerformer  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -75,22 +76,15 @@ public class MedicationAdministrationPerformer  {
 
   public MedicationAdministrationPerformer(MedicationAdministrationPerformerModel o) {
     this.id = o.getId();
-      if (null != o.getActor()) {
-        this.actor = new Reference(o.getActor());
-        this.actor.setId(this.getId());
-      }
-
-      if (null != o.getOnBehalfOf()) {
-        this.onBehalfOf = new Reference(o.getOnBehalfOf());
-        this.onBehalfOf.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getActor() && !o.getActor().isEmpty()) {
+      this.actor = new Reference(o.getActor().get(0));
+    }
+    if (null != o.getOnBehalfOf() && !o.getOnBehalfOf().isEmpty()) {
+      this.onBehalfOf = new Reference(o.getOnBehalfOf().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setActor( Reference value) {
@@ -133,46 +127,15 @@ public class MedicationAdministrationPerformer  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("actor" + "[" + String.valueOf(this.actor) + "]\n"); 
-     builder.append("onBehalfOf" + "[" + String.valueOf(this.onBehalfOf) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MedicationAdministrationPerformer]:" + "\n");
+     if(this.actor != null) builder.append("actor" + "->" + this.actor.toString() + "\n"); 
+     if(this.onBehalfOf != null) builder.append("onBehalfOf" + "->" + this.onBehalfOf.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MedicationAdministrationPerformer> fromArray(java.util.List<MedicationAdministrationPerformerModel> list) {
-    return (java.util.List<MedicationAdministrationPerformer>)list.stream()
-      .map(model -> new MedicationAdministrationPerformer(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MedicationAdministrationPerformerModel> toModelArray(java.util.List<MedicationAdministrationPerformer> list) {
-    return (java.util.List<MedicationAdministrationPerformerModel>)list.stream()
-      .map(model -> new MedicationAdministrationPerformerModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MedicationAdministrationPerformer fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MedicationAdministrationPerformer.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MedicationAdministrationPerformer o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MedicationAdministrationPerformer> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

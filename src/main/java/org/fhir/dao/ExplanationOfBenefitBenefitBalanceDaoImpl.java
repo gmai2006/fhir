@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExplanationOfBenefitBenefitBalanceModel;
 import org.fhir.pojo.ExplanationOfBenefitBenefitBalance;
+import org.fhir.pojo.ExplanationOfBenefitBenefitBalanceHelper;
 
 public class ExplanationOfBenefitBenefitBalanceDaoImpl implements ExplanationOfBenefitBenefitBalanceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExplanationOfBenefitBenefitBalanceDaoImpl implements ExplanationOfB
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitBenefitBalanceModel a", ExplanationOfBenefitBenefitBalanceModel.class).setMaxResults(maxResult);
       List<ExplanationOfBenefitBenefitBalanceModel> models = query.getResultList();
-      return ExplanationOfBenefitBenefitBalance.fromArray(models);
+      return ExplanationOfBenefitBenefitBalanceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ExplanationOfBenefitBenefitBalanceDaoImpl implements ExplanationOfB
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitBenefitBalanceModel a", ExplanationOfBenefitBenefitBalanceModel.class);
       List<ExplanationOfBenefitBenefitBalanceModel> models = query.getResultList();
-      return ExplanationOfBenefitBenefitBalance.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ExplanationOfBenefitBenefitBalance create(ExplanationOfBenefitBenefitBalance e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ExplanationOfBenefitBenefitBalanceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ExplanationOfBenefitBenefitBalance update(ExplanationOfBenefitBenefitBalance e) {
-      final EntityManager em = entityManagerProvider.get();
-      ExplanationOfBenefitBenefitBalanceModel model = em.merge(new ExplanationOfBenefitBenefitBalanceModel(e));
-      return new ExplanationOfBenefitBenefitBalance(model);
+      return ExplanationOfBenefitBenefitBalanceHelper.fromArray2Array(models);
   }
 
   @Override

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ContributorModel;
 import org.fhir.pojo.Contributor;
+import org.fhir.pojo.ContributorHelper;
 
 public class ContributorDaoImpl implements ContributorDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ContributorDaoImpl implements ContributorDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContributorModel a", ContributorModel.class).setMaxResults(maxResult);
       List<ContributorModel> models = query.getResultList();
-      return Contributor.fromArray(models);
+      return ContributorHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ContributorDaoImpl implements ContributorDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContributorModel a", ContributorModel.class);
       List<ContributorModel> models = query.getResultList();
-      return Contributor.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public Contributor create(Contributor e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ContributorModel(e));
-      return e;
-  }
-
-  @Transactional
-  public Contributor update(Contributor e) {
-      final EntityManager em = entityManagerProvider.get();
-      ContributorModel model = em.merge(new ContributorModel(e));
-      return new Contributor(model);
+      return ContributorHelper.fromArray2Array(models);
   }
 
   @Override

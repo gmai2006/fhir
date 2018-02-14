@@ -34,10 +34,5 @@ public interface MeasureReportPopulationDao {
   public List<MeasureReportPopulation> select(int maxResult);
 
   public List<MeasureReportPopulation> selectAll();
-
-  public MeasureReportPopulation create(MeasureReportPopulation e);
-
-  public MeasureReportPopulation update(MeasureReportPopulation e);
-
   public void delete(MeasureReportPopulation e);
 }

@@ -34,10 +34,5 @@ public interface EligibilityResponseBenefitBalanceDao {
   public List<EligibilityResponseBenefitBalance> select(int maxResult);
 
   public List<EligibilityResponseBenefitBalance> selectAll();
-
-  public EligibilityResponseBenefitBalance create(EligibilityResponseBenefitBalance e);
-
-  public EligibilityResponseBenefitBalance update(EligibilityResponseBenefitBalance e);
-
   public void delete(EligibilityResponseBenefitBalance e);
 }

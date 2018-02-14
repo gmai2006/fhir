@@ -65,6 +65,7 @@ public class DetectedIssueMitigation  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -86,22 +87,16 @@ public class DetectedIssueMitigation  {
 
   public DetectedIssueMitigation(DetectedIssueMitigationModel o) {
     this.id = o.getId();
-      this.action = CodeableConcept.fromJson(o.getAction());
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      if (null != o.getAuthor()) {
-        this.author = new Reference(o.getAuthor());
-        this.author.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.action = CodeableConceptHelper.fromJson(o.getAction());
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getAuthor() && !o.getAuthor().isEmpty()) {
+      this.author = new Reference(o.getAuthor().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setAction( CodeableConcept value) {
@@ -156,48 +151,17 @@ public class DetectedIssueMitigation  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("author" + "[" + String.valueOf(this.author) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DetectedIssueMitigation]:" + "\n");
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.author != null) builder.append("author" + "->" + this.author.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<DetectedIssueMitigation> fromArray(java.util.List<DetectedIssueMitigationModel> list) {
-    return (java.util.List<DetectedIssueMitigation>)list.stream()
-      .map(model -> new DetectedIssueMitigation(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DetectedIssueMitigationModel> toModelArray(java.util.List<DetectedIssueMitigation> list) {
-    return (java.util.List<DetectedIssueMitigationModel>)list.stream()
-      .map(model -> new DetectedIssueMitigationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DetectedIssueMitigation fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DetectedIssueMitigation.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DetectedIssueMitigation o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DetectedIssueMitigation> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

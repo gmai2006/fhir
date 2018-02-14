@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ContractAgent1 create(ContractAgent1 bean) {
-  	requireNonNull(bean);
-    logger.info("create(ContractAgent1={}) - entered bean ");
-
-    final ContractAgent1 result = dao.create(bean);
-
-    logger.info("create(ContractAgent1) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ContractAgent1 update(ContractAgent1 bean) {
-  	requireNonNull(bean);
-    logger.info("update(ContractAgent1={}) - entered bean ");
-
-    final ContractAgent1 result = dao.update(bean);
-
-    logger.info("update(ContractAgent1) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

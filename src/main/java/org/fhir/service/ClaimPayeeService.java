@@ -32,7 +32,5 @@ public interface ClaimPayeeService {
 	public ClaimPayee find(String id);
   public List<ClaimPayee> select(int maxResult);
   public List<ClaimPayee> selectAll();
-  public ClaimPayee create(ClaimPayee bean);
-  public ClaimPayee update(ClaimPayee bean);
   public void delete(ClaimPayee bean);
 }

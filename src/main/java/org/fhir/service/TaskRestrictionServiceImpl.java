@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public TaskRestriction create(TaskRestriction bean) {
-  	requireNonNull(bean);
-    logger.info("create(TaskRestriction={}) - entered bean ");
-
-    final TaskRestriction result = dao.create(bean);
-
-    logger.info("create(TaskRestriction) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public TaskRestriction update(TaskRestriction bean) {
-  	requireNonNull(bean);
-    logger.info("update(TaskRestriction={}) - entered bean ");
-
-    final TaskRestriction result = dao.update(bean);
-
-    logger.info("update(TaskRestriction) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

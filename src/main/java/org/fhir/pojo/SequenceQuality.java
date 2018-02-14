@@ -178,6 +178,7 @@ public class SequenceQuality  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -199,59 +200,45 @@ public class SequenceQuality  {
 
   public SequenceQuality(SequenceQualityModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      this.standardSequence = CodeableConcept.fromJson(o.getStandardSequence());
-      if (null != o.getStart()) {
-        this.start = new Float(o.getStart());
-      }
-
-      if (null != o.getEnd()) {
-        this.end = new Float(o.getEnd());
-      }
-
-      this.score = Quantity.fromJson(o.getScore());
-      this.method = CodeableConcept.fromJson(o.getMethod());
-      if (null != o.getTruthTP()) {
-        this.truthTP = new Float(o.getTruthTP());
-      }
-
-      if (null != o.getQueryTP()) {
-        this.queryTP = new Float(o.getQueryTP());
-      }
-
-      if (null != o.getTruthFN()) {
-        this.truthFN = new Float(o.getTruthFN());
-      }
-
-      if (null != o.getQueryFP()) {
-        this.queryFP = new Float(o.getQueryFP());
-      }
-
-      if (null != o.getGtFP()) {
-        this.gtFP = new Float(o.getGtFP());
-      }
-
-      if (null != o.getPrecision()) {
-        this.precision = new Float(o.getPrecision());
-      }
-
-      if (null != o.getRecall()) {
-        this.recall = new Float(o.getRecall());
-      }
-
-      if (null != o.getFScore()) {
-        this.fScore = new Float(o.getFScore());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    this.standardSequence = CodeableConceptHelper.fromJson(o.getStandardSequence());
+    if (null != o.getStart()) {
+      this.start = o.getStart();
+    }
+    if (null != o.getEnd()) {
+      this.end = o.getEnd();
+    }
+    this.score = QuantityHelper.fromJson(o.getScore());
+    this.method = CodeableConceptHelper.fromJson(o.getMethod());
+    if (null != o.getTruthTP()) {
+      this.truthTP = o.getTruthTP();
+    }
+    if (null != o.getQueryTP()) {
+      this.queryTP = o.getQueryTP();
+    }
+    if (null != o.getTruthFN()) {
+      this.truthFN = o.getTruthFN();
+    }
+    if (null != o.getQueryFP()) {
+      this.queryFP = o.getQueryFP();
+    }
+    if (null != o.getGtFP()) {
+      this.gtFP = o.getGtFP();
+    }
+    if (null != o.getPrecision()) {
+      this.precision = o.getPrecision();
+    }
+    if (null != o.getRecall()) {
+      this.recall = o.getRecall();
+    }
+    if (null != o.getFScore()) {
+      this.fScore = o.getFScore();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -432,35 +419,36 @@ public class SequenceQuality  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("standardSequence" + "[" + String.valueOf(this.standardSequence) + "]\n"); 
-     builder.append("start" + "[" + String.valueOf(this.start) + "]\n"); 
-     builder.append("_start" + "[" + String.valueOf(this._start) + "]\n"); 
-     builder.append("end" + "[" + String.valueOf(this.end) + "]\n"); 
-     builder.append("_end" + "[" + String.valueOf(this._end) + "]\n"); 
-     builder.append("score" + "[" + String.valueOf(this.score) + "]\n"); 
-     builder.append("method" + "[" + String.valueOf(this.method) + "]\n"); 
-     builder.append("truthTP" + "[" + String.valueOf(this.truthTP) + "]\n"); 
-     builder.append("_truthTP" + "[" + String.valueOf(this._truthTP) + "]\n"); 
-     builder.append("queryTP" + "[" + String.valueOf(this.queryTP) + "]\n"); 
-     builder.append("_queryTP" + "[" + String.valueOf(this._queryTP) + "]\n"); 
-     builder.append("truthFN" + "[" + String.valueOf(this.truthFN) + "]\n"); 
-     builder.append("_truthFN" + "[" + String.valueOf(this._truthFN) + "]\n"); 
-     builder.append("queryFP" + "[" + String.valueOf(this.queryFP) + "]\n"); 
-     builder.append("_queryFP" + "[" + String.valueOf(this._queryFP) + "]\n"); 
-     builder.append("gtFP" + "[" + String.valueOf(this.gtFP) + "]\n"); 
-     builder.append("_gtFP" + "[" + String.valueOf(this._gtFP) + "]\n"); 
-     builder.append("precision" + "[" + String.valueOf(this.precision) + "]\n"); 
-     builder.append("_precision" + "[" + String.valueOf(this._precision) + "]\n"); 
-     builder.append("recall" + "[" + String.valueOf(this.recall) + "]\n"); 
-     builder.append("_recall" + "[" + String.valueOf(this._recall) + "]\n"); 
-     builder.append("fScore" + "[" + String.valueOf(this.fScore) + "]\n"); 
-     builder.append("_fScore" + "[" + String.valueOf(this._fScore) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SequenceQuality]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.standardSequence != null) builder.append("standardSequence" + "->" + this.standardSequence.toString() + "\n"); 
+     if(this.start != null) builder.append("start" + "->" + this.start.toString() + "\n"); 
+     if(this._start != null) builder.append("_start" + "->" + this._start.toString() + "\n"); 
+     if(this.end != null) builder.append("end" + "->" + this.end.toString() + "\n"); 
+     if(this._end != null) builder.append("_end" + "->" + this._end.toString() + "\n"); 
+     if(this.score != null) builder.append("score" + "->" + this.score.toString() + "\n"); 
+     if(this.method != null) builder.append("method" + "->" + this.method.toString() + "\n"); 
+     if(this.truthTP != null) builder.append("truthTP" + "->" + this.truthTP.toString() + "\n"); 
+     if(this._truthTP != null) builder.append("_truthTP" + "->" + this._truthTP.toString() + "\n"); 
+     if(this.queryTP != null) builder.append("queryTP" + "->" + this.queryTP.toString() + "\n"); 
+     if(this._queryTP != null) builder.append("_queryTP" + "->" + this._queryTP.toString() + "\n"); 
+     if(this.truthFN != null) builder.append("truthFN" + "->" + this.truthFN.toString() + "\n"); 
+     if(this._truthFN != null) builder.append("_truthFN" + "->" + this._truthFN.toString() + "\n"); 
+     if(this.queryFP != null) builder.append("queryFP" + "->" + this.queryFP.toString() + "\n"); 
+     if(this._queryFP != null) builder.append("_queryFP" + "->" + this._queryFP.toString() + "\n"); 
+     if(this.gtFP != null) builder.append("gtFP" + "->" + this.gtFP.toString() + "\n"); 
+     if(this._gtFP != null) builder.append("_gtFP" + "->" + this._gtFP.toString() + "\n"); 
+     if(this.precision != null) builder.append("precision" + "->" + this.precision.toString() + "\n"); 
+     if(this._precision != null) builder.append("_precision" + "->" + this._precision.toString() + "\n"); 
+     if(this.recall != null) builder.append("recall" + "->" + this.recall.toString() + "\n"); 
+     if(this._recall != null) builder.append("_recall" + "->" + this._recall.toString() + "\n"); 
+     if(this.fScore != null) builder.append("fScore" + "->" + this.fScore.toString() + "\n"); 
+     if(this._fScore != null) builder.append("_fScore" + "->" + this._fScore.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -480,36 +468,4 @@ public class SequenceQuality  {
   	}
   }
 
-  public static java.util.List<SequenceQuality> fromArray(java.util.List<SequenceQualityModel> list) {
-    return (java.util.List<SequenceQuality>)list.stream()
-      .map(model -> new SequenceQuality(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SequenceQualityModel> toModelArray(java.util.List<SequenceQuality> list) {
-    return (java.util.List<SequenceQualityModel>)list.stream()
-      .map(model -> new SequenceQualityModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SequenceQuality fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SequenceQuality.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SequenceQuality o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SequenceQuality> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CompositionEventModel;
 import org.fhir.pojo.CompositionEvent;
+import org.fhir.pojo.CompositionEventHelper;
 
 public class CompositionEventDaoImpl implements CompositionEventDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CompositionEventDaoImpl implements CompositionEventDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompositionEventModel a", CompositionEventModel.class).setMaxResults(maxResult);
       List<CompositionEventModel> models = query.getResultList();
-      return CompositionEvent.fromArray(models);
+      return CompositionEventHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CompositionEventDaoImpl implements CompositionEventDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompositionEventModel a", CompositionEventModel.class);
       List<CompositionEventModel> models = query.getResultList();
-      return CompositionEvent.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CompositionEvent create(CompositionEvent e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CompositionEventModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CompositionEvent update(CompositionEvent e) {
-      final EntityManager em = entityManagerProvider.get();
-      CompositionEventModel model = em.merge(new CompositionEventModel(e));
-      return new CompositionEvent(model);
+      return CompositionEventHelper.fromArray2Array(models);
   }
 
   @Override

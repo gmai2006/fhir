@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public QuestionnaireItem create(QuestionnaireItem bean) {
-  	requireNonNull(bean);
-    logger.info("create(QuestionnaireItem={}) - entered bean ");
-
-    final QuestionnaireItem result = dao.create(bean);
-
-    logger.info("create(QuestionnaireItem) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public QuestionnaireItem update(QuestionnaireItem bean) {
-  	requireNonNull(bean);
-    logger.info("update(QuestionnaireItem={}) - entered bean ");
-
-    final QuestionnaireItem result = dao.update(bean);
-
-    logger.info("update(QuestionnaireItem) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

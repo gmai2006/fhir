@@ -32,7 +32,5 @@ public interface ReferenceService {
 	public Reference find(String id);
   public List<Reference> select(int maxResult);
   public List<Reference> selectAll();
-  public Reference create(Reference bean);
-  public Reference update(Reference bean);
   public void delete(Reference bean);
 }

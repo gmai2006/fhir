@@ -32,7 +32,5 @@ public interface ConditionStageService {
 	public ConditionStage find(String id);
   public List<ConditionStage> select(int maxResult);
   public List<ConditionStage> selectAll();
-  public ConditionStage create(ConditionStage bean);
-  public ConditionStage update(ConditionStage bean);
   public void delete(ConditionStage bean);
 }

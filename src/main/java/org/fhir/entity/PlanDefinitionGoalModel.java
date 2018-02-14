@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinitiongoal")
-public class PlanDefinitionGoalModel  {
+public class PlanDefinitionGoalModel  implements Serializable {
+	private static final long serialVersionUID = 151857669696996406L;
   /**
   * Description: "Indicates a category the goal falls within."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -48,7 +49,7 @@ public class PlanDefinitionGoalModel  {
 
   /**
   * Description: "Human-readable and/or coded description of a specific desired objective of care, such as \"control blood pressure\" or \"negotiate an obstacle course\" or \"dance with child at wedding\"."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -58,7 +59,7 @@ public class PlanDefinitionGoalModel  {
 
   /**
   * Description: "Identifies the expected level of importance associated with reaching/sustaining the defined goal."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -67,7 +68,7 @@ public class PlanDefinitionGoalModel  {
 
   /**
   * Description: "The event after which the goal should begin being pursued."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -76,7 +77,7 @@ public class PlanDefinitionGoalModel  {
 
   /**
   * Description: "Identifies problems, conditions, issues, or concerns the goal is intended to address."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -86,21 +87,29 @@ public class PlanDefinitionGoalModel  {
   /**
   * Description: "Didactic or other informational resources associated with the goal that provide further supporting information about the goal. Information resources can include inline text commentary and links to web resources."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<RelatedArtifactModel> documentation = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"documentation_id\"")
+  private String documentation_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="documentation_id", insertable=false, updatable=false)
+  private java.util.List<RelatedArtifactModel> documentation;
 
   /**
   * Description: "Indicates what should be done and within what timeframe."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<PlanDefinitionTargetModel> target = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"target_id\"")
+  private String target_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="target_id", insertable=false, updatable=false)
+  private java.util.List<PlanDefinitionTargetModel> target;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -112,6 +121,7 @@ public class PlanDefinitionGoalModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -120,112 +130,138 @@ public class PlanDefinitionGoalModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public PlanDefinitionGoalModel() {
   }
 
-  public PlanDefinitionGoalModel(PlanDefinitionGoal o) {
-    this.id = o.getId();
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.description = CodeableConcept.toJson(o.getDescription());
-      this.priority = CodeableConcept.toJson(o.getPriority());
-      this.start = CodeableConcept.toJson(o.getStart());
-      this.addresses = CodeableConcept.toJson(o.getAddresses());
-      this.documentation = RelatedArtifact.toModelArray(o.getDocumentation());
-
-      this.target = PlanDefinitionTarget.toModelArray(o.getTarget());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public PlanDefinitionGoalModel(PlanDefinitionGoal o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.description = CodeableConceptHelper.toJson(o.getDescription());
+    this.priority = CodeableConceptHelper.toJson(o.getPriority());
+    this.start = CodeableConceptHelper.toJson(o.getStart());
+    if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
+    	this.documentation_id = "documentation" + this.parent_id;
+    	this.documentation = RelatedArtifactHelper.toModelFromArray(o.getDocumentation(), this.documentation_id);
+    }
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+    	this.target_id = "target" + this.parent_id;
+    	this.target = PlanDefinitionTargetHelper.toModelFromArray(o.getTarget(), this.target_id);
+    }
   }
 
-  public void setCategory( String value) {
-    this.category = value;
-  }
   public String getCategory() {
     return this.category;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setPriority( String value) {
-    this.priority = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public String getPriority() {
     return this.priority;
   }
-  public void setStart( String value) {
-    this.start = value;
+  public void setPriority( String value) {
+    this.priority = value;
   }
   public String getStart() {
     return this.start;
   }
-  public void setAddresses( String value) {
-    this.addresses = value;
+  public void setStart( String value) {
+    this.start = value;
   }
   public String getAddresses() {
     return this.addresses;
   }
-  public void setDocumentation( java.util.List<RelatedArtifactModel> value) {
-    this.documentation = value;
+  public void setAddresses( String value) {
+    this.addresses = value;
   }
   public java.util.List<RelatedArtifactModel> getDocumentation() {
     return this.documentation;
   }
-  public void setTarget( java.util.List<PlanDefinitionTargetModel> value) {
-    this.target = value;
+  public void setDocumentation( java.util.List<RelatedArtifactModel> value) {
+    this.documentation = value;
   }
   public java.util.List<PlanDefinitionTargetModel> getTarget() {
     return this.target;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setTarget( java.util.List<PlanDefinitionTargetModel> value) {
+    this.target = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("priority" + "[" + String.valueOf(this.priority) + "]\n"); 
-     builder.append("start" + "[" + String.valueOf(this.start) + "]\n"); 
-     builder.append("addresses" + "[" + String.valueOf(this.addresses) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PlanDefinitionGoalModel]:" + "\n");
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("priority" + "->" + this.priority + "\n"); 
+     builder.append("start" + "->" + this.start + "\n"); 
+     builder.append("addresses" + "->" + this.addresses + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[PlanDefinitionGoalModel]:" + "\n");
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("priority" + "->" + this.priority + "\n"); 
+     builder.append("start" + "->" + this.start + "\n"); 
+     builder.append("addresses" + "->" + this.addresses + "\n"); 
+     builder.append("documentation" + "->" + this.documentation + "\n"); 
+     builder.append("target" + "->" + this.target + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimModel;
 import org.fhir.pojo.Claim;
+import org.fhir.pojo.ClaimHelper;
 
 public class ClaimDaoImpl implements ClaimDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimDaoImpl implements ClaimDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimModel a", ClaimModel.class).setMaxResults(maxResult);
       List<ClaimModel> models = query.getResultList();
-      return Claim.fromArray(models);
+      return ClaimHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ClaimDaoImpl implements ClaimDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimModel a", ClaimModel.class);
       List<ClaimModel> models = query.getResultList();
-      return Claim.fromArray(models);
+      return ClaimHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ClaimDaoImpl implements ClaimDao {
       ClaimModel model = em.merge(new ClaimModel(e));
       return new Claim(model);
   }
-
   @Override
   @Transactional
   public void delete(Claim e) {

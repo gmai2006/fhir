@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public OperationDefinitionBinding create(OperationDefinitionBinding bean) {
-  	requireNonNull(bean);
-    logger.info("create(OperationDefinitionBinding={}) - entered bean ");
-
-    final OperationDefinitionBinding result = dao.create(bean);
-
-    logger.info("create(OperationDefinitionBinding) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public OperationDefinitionBinding update(OperationDefinitionBinding bean) {
-  	requireNonNull(bean);
-    logger.info("update(OperationDefinitionBinding={}) - entered bean ");
-
-    final OperationDefinitionBinding result = dao.update(bean);
-
-    logger.info("update(OperationDefinitionBinding) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

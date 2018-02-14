@@ -73,6 +73,7 @@ public class CapabilityStatementSecurity  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -94,23 +95,18 @@ public class CapabilityStatementSecurity  {
 
   public CapabilityStatementSecurity(CapabilityStatementSecurityModel o) {
     this.id = o.getId();
-      if (null != o.getCors()) {
-        this.cors = new Boolean(o.getCors());
-      }
-
-      this.service = CodeableConcept.fromArray(o.getService());
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.certificate = CapabilityStatementCertificate.fromArray(o.getCertificate());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCors()) {
+      this.cors = o.getCors();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getCertificate() && !o.getCertificate().isEmpty()) {
+    	this.certificate = CapabilityStatementCertificateHelper.fromArray2Array(o.getCertificate());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCors( Boolean value) {
@@ -177,50 +173,19 @@ public class CapabilityStatementSecurity  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("cors" + "[" + String.valueOf(this.cors) + "]\n"); 
-     builder.append("_cors" + "[" + String.valueOf(this._cors) + "]\n"); 
-     builder.append("service" + "[" + String.valueOf(this.service) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("certificate" + "[" + String.valueOf(this.certificate) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementSecurity]:" + "\n");
+     if(this.cors != null) builder.append("cors" + "->" + this.cors.toString() + "\n"); 
+     if(this._cors != null) builder.append("_cors" + "->" + this._cors.toString() + "\n"); 
+     if(this.service != null) builder.append("service" + "->" + this.service.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.certificate != null) builder.append("certificate" + "->" + this.certificate.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CapabilityStatementSecurity> fromArray(java.util.List<CapabilityStatementSecurityModel> list) {
-    return (java.util.List<CapabilityStatementSecurity>)list.stream()
-      .map(model -> new CapabilityStatementSecurity(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementSecurityModel> toModelArray(java.util.List<CapabilityStatementSecurity> list) {
-    return (java.util.List<CapabilityStatementSecurityModel>)list.stream()
-      .map(model -> new CapabilityStatementSecurityModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatementSecurity fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatementSecurity.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementSecurity o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementSecurity> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

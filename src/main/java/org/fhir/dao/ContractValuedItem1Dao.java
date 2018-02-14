@@ -34,10 +34,5 @@ public interface ContractValuedItem1Dao {
   public List<ContractValuedItem1> select(int maxResult);
 
   public List<ContractValuedItem1> selectAll();
-
-  public ContractValuedItem1 create(ContractValuedItem1 e);
-
-  public ContractValuedItem1 update(ContractValuedItem1 e);
-
   public void delete(ContractValuedItem1 e);
 }

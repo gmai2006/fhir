@@ -32,7 +32,5 @@ public interface ObservationRelatedService {
 	public ObservationRelated find(String id);
   public List<ObservationRelated> select(int maxResult);
   public List<ObservationRelated> selectAll();
-  public ObservationRelated create(ObservationRelated bean);
-  public ObservationRelated update(ObservationRelated bean);
   public void delete(ObservationRelated bean);
 }

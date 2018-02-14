@@ -54,6 +54,7 @@ public class ProcessRequestItem  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -75,16 +76,12 @@ public class ProcessRequestItem  {
 
   public ProcessRequestItem(ProcessRequestItemModel o) {
     this.id = o.getId();
-      if (null != o.getSequenceLinkId()) {
-        this.sequenceLinkId = new Float(o.getSequenceLinkId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSequenceLinkId()) {
+      this.sequenceLinkId = o.getSequenceLinkId();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSequenceLinkId( Float value) {
@@ -127,46 +124,15 @@ public class ProcessRequestItem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequenceLinkId" + "[" + String.valueOf(this.sequenceLinkId) + "]\n"); 
-     builder.append("_sequenceLinkId" + "[" + String.valueOf(this._sequenceLinkId) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ProcessRequestItem]:" + "\n");
+     if(this.sequenceLinkId != null) builder.append("sequenceLinkId" + "->" + this.sequenceLinkId.toString() + "\n"); 
+     if(this._sequenceLinkId != null) builder.append("_sequenceLinkId" + "->" + this._sequenceLinkId.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ProcessRequestItem> fromArray(java.util.List<ProcessRequestItemModel> list) {
-    return (java.util.List<ProcessRequestItem>)list.stream()
-      .map(model -> new ProcessRequestItem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ProcessRequestItemModel> toModelArray(java.util.List<ProcessRequestItem> list) {
-    return (java.util.List<ProcessRequestItemModel>)list.stream()
-      .map(model -> new ProcessRequestItemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ProcessRequestItem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ProcessRequestItem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ProcessRequestItem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ProcessRequestItem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

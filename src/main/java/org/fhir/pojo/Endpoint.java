@@ -149,6 +149,7 @@ public class Endpoint  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -200,61 +201,44 @@ public class Endpoint  {
 
   public Endpoint(EndpointModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.connectionType = Coding.fromJson(o.getConnectionType());
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getManagingOrganization()) {
-        this.managingOrganization = new Reference(o.getManagingOrganization());
-        this.managingOrganization.setId(this.getId());
-      }
-
-      this.contact = ContactPoint.fromArray(o.getContact());
-      this.period = Period.fromJson(o.getPeriod());
-      this.payloadType = CodeableConcept.fromArray(o.getPayloadType());
-      this.payloadMimeType = org.fhir.utils.JsonUtils.json2Array(o.getPayloadMimeType());
-
-      if (null != o.getAddress()) {
-        this.address = new String(o.getAddress());
-      }
-
-      this.header = org.fhir.utils.JsonUtils.json2Array(o.getHeader());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.connectionType = CodingHelper.fromJson(o.getConnectionType());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getManagingOrganization() && !o.getManagingOrganization().isEmpty()) {
+      this.managingOrganization = new Reference(o.getManagingOrganization().get(0));
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (o.getPayloadMimeType() != null) {
+    	this.payloadMimeType = org.fhir.utils.JsonUtils.json2Array(o.getPayloadMimeType());
+    }
+    if (null != o.getAddress()) {
+      this.address = o.getAddress();
+    }
+    if (o.getHeader() != null) {
+    	this.header = org.fhir.utils.JsonUtils.json2Array(o.getHeader());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -429,34 +413,35 @@ public class Endpoint  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("connectionType" + "[" + String.valueOf(this.connectionType) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("managingOrganization" + "[" + String.valueOf(this.managingOrganization) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("payloadType" + "[" + String.valueOf(this.payloadType) + "]\n"); 
-     builder.append("payloadMimeType" + "[" + String.valueOf(this.payloadMimeType) + "]\n"); 
-     builder.append("_payloadMimeType" + "[" + String.valueOf(this._payloadMimeType) + "]\n"); 
-     builder.append("address" + "[" + String.valueOf(this.address) + "]\n"); 
-     builder.append("_address" + "[" + String.valueOf(this._address) + "]\n"); 
-     builder.append("header" + "[" + String.valueOf(this.header) + "]\n"); 
-     builder.append("_header" + "[" + String.valueOf(this._header) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Endpoint]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.connectionType != null) builder.append("connectionType" + "->" + this.connectionType.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.managingOrganization != null) builder.append("managingOrganization" + "->" + this.managingOrganization.toString() + "\n"); 
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.payloadType != null) builder.append("payloadType" + "->" + this.payloadType.toString() + "\n"); 
+     if(this.payloadMimeType != null) builder.append("payloadMimeType" + "->" + this.payloadMimeType.toString() + "\n"); 
+     if(this._payloadMimeType != null) builder.append("_payloadMimeType" + "->" + this._payloadMimeType.toString() + "\n"); 
+     if(this.address != null) builder.append("address" + "->" + this.address.toString() + "\n"); 
+     if(this._address != null) builder.append("_address" + "->" + this._address.toString() + "\n"); 
+     if(this.header != null) builder.append("header" + "->" + this.header.toString() + "\n"); 
+     if(this._header != null) builder.append("_header" + "->" + this._header.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -494,36 +479,4 @@ public class Endpoint  {
   	}
   }
 
-  public static java.util.List<Endpoint> fromArray(java.util.List<EndpointModel> list) {
-    return (java.util.List<Endpoint>)list.stream()
-      .map(model -> new Endpoint(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<EndpointModel> toModelArray(java.util.List<Endpoint> list) {
-    return (java.util.List<EndpointModel>)list.stream()
-      .map(model -> new EndpointModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Endpoint fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Endpoint.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Endpoint o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Endpoint> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

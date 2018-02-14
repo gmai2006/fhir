@@ -160,6 +160,7 @@ public class GuidanceResponse  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -211,89 +212,62 @@ public class GuidanceResponse  {
 
   public GuidanceResponse(GuidanceResponseModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      if (null != o.getRequestId()) {
-        this.requestId = new String(o.getRequestId());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getModule()) {
-        this.module = new Reference(o.getModule());
-        this.module.setId(this.getId());
-      }
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getOccurrenceDateTime()) {
-        this.occurrenceDateTime = new String(o.getOccurrenceDateTime());
-      }
-
-      if (null != o.getPerformer()) {
-        this.performer = new Reference(o.getPerformer());
-        this.performer.setId(this.getId());
-      }
-
-      this.reasonCodeableConcept = CodeableConcept.fromJson(o.getReasonCodeableConcept());
-      if (null != o.getReasonReference()) {
-        this.reasonReference = new Reference(o.getReasonReference());
-        this.reasonReference.setId(this.getId());
-      }
-
-      this.note = Annotation.fromArray(o.getNote());
-      this.evaluationMessage = Reference.fromArray(o.getEvaluationMessage());
-
-      if (null != o.getOutputParameters()) {
-        this.outputParameters = new Reference(o.getOutputParameters());
-        this.outputParameters.setId(this.getId());
-      }
-
-      if (null != o.getResult()) {
-        this.result = new Reference(o.getResult());
-        this.result.setId(this.getId());
-      }
-
-      this.dataRequirement = DataRequirement.fromArray(o.getDataRequirement());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getRequestId()) {
+      this.requestId = o.getRequestId();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getModule() && !o.getModule().isEmpty()) {
+      this.module = new Reference(o.getModule().get(0));
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getOccurrenceDateTime()) {
+      this.occurrenceDateTime = o.getOccurrenceDateTime();
+    }
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+      this.performer = new Reference(o.getPerformer().get(0));
+    }
+    this.reasonCodeableConcept = CodeableConceptHelper.fromJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
+      this.reasonReference = new Reference(o.getReasonReference().get(0));
+    }
+    if (null != o.getEvaluationMessage() && !o.getEvaluationMessage().isEmpty()) {
+    	this.evaluationMessage = ReferenceHelper.fromArray2Array(o.getEvaluationMessage());
+    }
+    if (null != o.getOutputParameters() && !o.getOutputParameters().isEmpty()) {
+      this.outputParameters = new Reference(o.getOutputParameters().get(0));
+    }
+    if (null != o.getResult() && !o.getResult().isEmpty()) {
+      this.result = new Reference(o.getResult().get(0));
+    }
+    if (null != o.getDataRequirement() && !o.getDataRequirement().isEmpty()) {
+    	this.dataRequirement = DataRequirementHelper.fromArray2Array(o.getDataRequirement());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -480,36 +454,37 @@ public class GuidanceResponse  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("requestId" + "[" + String.valueOf(this.requestId) + "]\n"); 
-     builder.append("_requestId" + "[" + String.valueOf(this._requestId) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("module" + "[" + String.valueOf(this.module) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("occurrenceDateTime" + "[" + String.valueOf(this.occurrenceDateTime) + "]\n"); 
-     builder.append("_occurrenceDateTime" + "[" + String.valueOf(this._occurrenceDateTime) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("reasonCodeableConcept" + "[" + String.valueOf(this.reasonCodeableConcept) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("evaluationMessage" + "[" + String.valueOf(this.evaluationMessage) + "]\n"); 
-     builder.append("outputParameters" + "[" + String.valueOf(this.outputParameters) + "]\n"); 
-     builder.append("result" + "[" + String.valueOf(this.result) + "]\n"); 
-     builder.append("dataRequirement" + "[" + String.valueOf(this.dataRequirement) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[GuidanceResponse]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.requestId != null) builder.append("requestId" + "->" + this.requestId.toString() + "\n"); 
+     if(this._requestId != null) builder.append("_requestId" + "->" + this._requestId.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.module != null) builder.append("module" + "->" + this.module.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.occurrenceDateTime != null) builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime.toString() + "\n"); 
+     if(this._occurrenceDateTime != null) builder.append("_occurrenceDateTime" + "->" + this._occurrenceDateTime.toString() + "\n"); 
+     if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
+     if(this.reasonCodeableConcept != null) builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept.toString() + "\n"); 
+     if(this.reasonReference != null) builder.append("reasonReference" + "->" + this.reasonReference.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.evaluationMessage != null) builder.append("evaluationMessage" + "->" + this.evaluationMessage.toString() + "\n"); 
+     if(this.outputParameters != null) builder.append("outputParameters" + "->" + this.outputParameters.toString() + "\n"); 
+     if(this.result != null) builder.append("result" + "->" + this.result.toString() + "\n"); 
+     if(this.dataRequirement != null) builder.append("dataRequirement" + "->" + this.dataRequirement.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -547,36 +522,4 @@ public class GuidanceResponse  {
   	}
   }
 
-  public static java.util.List<GuidanceResponse> fromArray(java.util.List<GuidanceResponseModel> list) {
-    return (java.util.List<GuidanceResponse>)list.stream()
-      .map(model -> new GuidanceResponse(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<GuidanceResponseModel> toModelArray(java.util.List<GuidanceResponse> list) {
-    return (java.util.List<GuidanceResponseModel>)list.stream()
-      .map(model -> new GuidanceResponseModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static GuidanceResponse fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, GuidanceResponse.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(GuidanceResponse o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<GuidanceResponse> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

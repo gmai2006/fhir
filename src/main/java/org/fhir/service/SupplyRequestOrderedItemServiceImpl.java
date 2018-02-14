@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public SupplyRequestOrderedItem create(SupplyRequestOrderedItem bean) {
-  	requireNonNull(bean);
-    logger.info("create(SupplyRequestOrderedItem={}) - entered bean ");
-
-    final SupplyRequestOrderedItem result = dao.create(bean);
-
-    logger.info("create(SupplyRequestOrderedItem) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public SupplyRequestOrderedItem update(SupplyRequestOrderedItem bean) {
-  	requireNonNull(bean);
-    logger.info("update(SupplyRequestOrderedItem={}) - entered bean ");
-
-    final SupplyRequestOrderedItem result = dao.update(bean);
-
-    logger.info("update(SupplyRequestOrderedItem) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

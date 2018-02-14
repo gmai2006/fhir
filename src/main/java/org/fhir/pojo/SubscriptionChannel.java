@@ -83,6 +83,7 @@ public class SubscriptionChannel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -104,26 +105,21 @@ public class SubscriptionChannel  {
 
   public SubscriptionChannel(SubscriptionChannelModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getEndpoint()) {
-        this.endpoint = new String(o.getEndpoint());
-      }
-
-      if (null != o.getPayload()) {
-        this.payload = new String(o.getPayload());
-      }
-
-      this.header = org.fhir.utils.JsonUtils.json2Array(o.getHeader());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getEndpoint()) {
+      this.endpoint = o.getEndpoint();
+    }
+    if (null != o.getPayload()) {
+      this.payload = o.getPayload();
+    }
+    if (o.getHeader() != null) {
+    	this.header = org.fhir.utils.JsonUtils.json2Array(o.getHeader());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -202,18 +198,19 @@ public class SubscriptionChannel  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("_endpoint" + "[" + String.valueOf(this._endpoint) + "]\n"); 
-     builder.append("payload" + "[" + String.valueOf(this.payload) + "]\n"); 
-     builder.append("_payload" + "[" + String.valueOf(this._payload) + "]\n"); 
-     builder.append("header" + "[" + String.valueOf(this.header) + "]\n"); 
-     builder.append("_header" + "[" + String.valueOf(this._header) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SubscriptionChannel]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
+     if(this._endpoint != null) builder.append("_endpoint" + "->" + this._endpoint.toString() + "\n"); 
+     if(this.payload != null) builder.append("payload" + "->" + this.payload.toString() + "\n"); 
+     if(this._payload != null) builder.append("_payload" + "->" + this._payload.toString() + "\n"); 
+     if(this.header != null) builder.append("header" + "->" + this.header.toString() + "\n"); 
+     if(this._header != null) builder.append("_header" + "->" + this._header.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -237,36 +234,4 @@ public class SubscriptionChannel  {
   	}
   }
 
-  public static java.util.List<SubscriptionChannel> fromArray(java.util.List<SubscriptionChannelModel> list) {
-    return (java.util.List<SubscriptionChannel>)list.stream()
-      .map(model -> new SubscriptionChannel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SubscriptionChannelModel> toModelArray(java.util.List<SubscriptionChannel> list) {
-    return (java.util.List<SubscriptionChannelModel>)list.stream()
-      .map(model -> new SubscriptionChannelModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SubscriptionChannel fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SubscriptionChannel.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SubscriptionChannel o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SubscriptionChannel> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

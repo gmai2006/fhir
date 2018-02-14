@@ -32,7 +32,5 @@ public interface CapabilityStatementSecurityService {
 	public CapabilityStatementSecurity find(String id);
   public List<CapabilityStatementSecurity> select(int maxResult);
   public List<CapabilityStatementSecurity> selectAll();
-  public CapabilityStatementSecurity create(CapabilityStatementSecurity bean);
-  public CapabilityStatementSecurity update(CapabilityStatementSecurity bean);
   public void delete(CapabilityStatementSecurity bean);
 }

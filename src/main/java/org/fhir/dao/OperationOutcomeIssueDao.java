@@ -34,10 +34,5 @@ public interface OperationOutcomeIssueDao {
   public List<OperationOutcomeIssue> select(int maxResult);
 
   public List<OperationOutcomeIssue> selectAll();
-
-  public OperationOutcomeIssue create(OperationOutcomeIssue e);
-
-  public OperationOutcomeIssue update(OperationOutcomeIssue e);
-
   public void delete(OperationOutcomeIssue e);
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CompartmentDefinitionResourceModel;
 import org.fhir.pojo.CompartmentDefinitionResource;
+import org.fhir.pojo.CompartmentDefinitionResourceHelper;
 
 public class CompartmentDefinitionResourceDaoImpl implements CompartmentDefinitionResourceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CompartmentDefinitionResourceDaoImpl implements CompartmentDefiniti
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompartmentDefinitionResourceModel a", CompartmentDefinitionResourceModel.class).setMaxResults(maxResult);
       List<CompartmentDefinitionResourceModel> models = query.getResultList();
-      return CompartmentDefinitionResource.fromArray(models);
+      return CompartmentDefinitionResourceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CompartmentDefinitionResourceDaoImpl implements CompartmentDefiniti
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompartmentDefinitionResourceModel a", CompartmentDefinitionResourceModel.class);
       List<CompartmentDefinitionResourceModel> models = query.getResultList();
-      return CompartmentDefinitionResource.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CompartmentDefinitionResource create(CompartmentDefinitionResource e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CompartmentDefinitionResourceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CompartmentDefinitionResource update(CompartmentDefinitionResource e) {
-      final EntityManager em = entityManagerProvider.get();
-      CompartmentDefinitionResourceModel model = em.merge(new CompartmentDefinitionResourceModel(e));
-      return new CompartmentDefinitionResource(model);
+      return CompartmentDefinitionResourceHelper.fromArray2Array(models);
   }
 
   @Override

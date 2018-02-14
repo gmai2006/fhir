@@ -34,10 +34,8 @@ public interface EnrollmentResponseDao {
   public List<EnrollmentResponse> select(int maxResult);
 
   public List<EnrollmentResponse> selectAll();
-
   public EnrollmentResponse create(EnrollmentResponse e);
 
   public EnrollmentResponse update(EnrollmentResponse e);
-
   public void delete(EnrollmentResponse e);
 }

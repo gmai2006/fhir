@@ -34,10 +34,5 @@ public interface RequestGroupRelatedActionDao {
   public List<RequestGroupRelatedAction> select(int maxResult);
 
   public List<RequestGroupRelatedAction> selectAll();
-
-  public RequestGroupRelatedAction create(RequestGroupRelatedAction e);
-
-  public RequestGroupRelatedAction update(RequestGroupRelatedAction e);
-
   public void delete(RequestGroupRelatedAction e);
 }

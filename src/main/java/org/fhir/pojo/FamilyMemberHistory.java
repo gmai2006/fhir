@@ -262,6 +262,7 @@ public class FamilyMemberHistory  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -313,104 +314,79 @@ public class FamilyMemberHistory  {
 
   public FamilyMemberHistory(FamilyMemberHistoryModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.definition = Reference.fromArray(o.getDefinition());
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getNotDone()) {
-        this.notDone = new Boolean(o.getNotDone());
-      }
-
-      this.notDoneReason = CodeableConcept.fromJson(o.getNotDoneReason());
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      this.relationship = CodeableConcept.fromJson(o.getRelationship());
-      if (null != o.getGender()) {
-        this.gender = new String(o.getGender());
-      }
-
-      this.bornPeriod = Period.fromJson(o.getBornPeriod());
-      if (null != o.getBornDate()) {
-        this.bornDate = new String(o.getBornDate());
-      }
-
-      if (null != o.getBornString()) {
-        this.bornString = new String(o.getBornString());
-      }
-
-      this.ageAge = Age.fromJson(o.getAgeAge());
-      this.ageRange = Range.fromJson(o.getAgeRange());
-      if (null != o.getAgeString()) {
-        this.ageString = new String(o.getAgeString());
-      }
-
-      if (null != o.getEstimatedAge()) {
-        this.estimatedAge = new Boolean(o.getEstimatedAge());
-      }
-
-      if (null != o.getDeceasedBoolean()) {
-        this.deceasedBoolean = new Boolean(o.getDeceasedBoolean());
-      }
-
-      this.deceasedAge = Age.fromJson(o.getDeceasedAge());
-      this.deceasedRange = Range.fromJson(o.getDeceasedRange());
-      if (null != o.getDeceasedDate()) {
-        this.deceasedDate = new String(o.getDeceasedDate());
-      }
-
-      if (null != o.getDeceasedString()) {
-        this.deceasedString = new String(o.getDeceasedString());
-      }
-
-      this.reasonCode = CodeableConcept.fromArray(o.getReasonCode());
-      this.reasonReference = Reference.fromArray(o.getReasonReference());
-
-      this.note = Annotation.fromArray(o.getNote());
-      this.condition = FamilyMemberHistoryCondition.fromArray(o.getCondition());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+    	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getNotDone()) {
+      this.notDone = o.getNotDone();
+    }
+    this.notDoneReason = CodeableConceptHelper.fromJson(o.getNotDoneReason());
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    this.relationship = CodeableConceptHelper.fromJson(o.getRelationship());
+    if (null != o.getGender()) {
+      this.gender = o.getGender();
+    }
+    this.bornPeriod = PeriodHelper.fromJson(o.getBornPeriod());
+    if (null != o.getBornDate()) {
+      this.bornDate = o.getBornDate();
+    }
+    if (null != o.getBornString()) {
+      this.bornString = o.getBornString();
+    }
+    this.ageAge = AgeHelper.fromJson(o.getAgeAge());
+    this.ageRange = RangeHelper.fromJson(o.getAgeRange());
+    if (null != o.getAgeString()) {
+      this.ageString = o.getAgeString();
+    }
+    if (null != o.getEstimatedAge()) {
+      this.estimatedAge = o.getEstimatedAge();
+    }
+    if (null != o.getDeceasedBoolean()) {
+      this.deceasedBoolean = o.getDeceasedBoolean();
+    }
+    this.deceasedAge = AgeHelper.fromJson(o.getDeceasedAge());
+    this.deceasedRange = RangeHelper.fromJson(o.getDeceasedRange());
+    if (null != o.getDeceasedDate()) {
+      this.deceasedDate = o.getDeceasedDate();
+    }
+    if (null != o.getDeceasedString()) {
+      this.deceasedString = o.getDeceasedString();
+    }
+    if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
+    	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
+    }
+    if (null != o.getCondition() && !o.getCondition().isEmpty()) {
+    	this.condition = FamilyMemberHistoryConditionHelper.fromArray2Array(o.getCondition());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -717,56 +693,57 @@ public class FamilyMemberHistory  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("notDone" + "[" + String.valueOf(this.notDone) + "]\n"); 
-     builder.append("_notDone" + "[" + String.valueOf(this._notDone) + "]\n"); 
-     builder.append("notDoneReason" + "[" + String.valueOf(this.notDoneReason) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("relationship" + "[" + String.valueOf(this.relationship) + "]\n"); 
-     builder.append("gender" + "[" + String.valueOf(this.gender) + "]\n"); 
-     builder.append("_gender" + "[" + String.valueOf(this._gender) + "]\n"); 
-     builder.append("bornPeriod" + "[" + String.valueOf(this.bornPeriod) + "]\n"); 
-     builder.append("bornDate" + "[" + String.valueOf(this.bornDate) + "]\n"); 
-     builder.append("_bornDate" + "[" + String.valueOf(this._bornDate) + "]\n"); 
-     builder.append("bornString" + "[" + String.valueOf(this.bornString) + "]\n"); 
-     builder.append("_bornString" + "[" + String.valueOf(this._bornString) + "]\n"); 
-     builder.append("ageAge" + "[" + String.valueOf(this.ageAge) + "]\n"); 
-     builder.append("ageRange" + "[" + String.valueOf(this.ageRange) + "]\n"); 
-     builder.append("ageString" + "[" + String.valueOf(this.ageString) + "]\n"); 
-     builder.append("_ageString" + "[" + String.valueOf(this._ageString) + "]\n"); 
-     builder.append("estimatedAge" + "[" + String.valueOf(this.estimatedAge) + "]\n"); 
-     builder.append("_estimatedAge" + "[" + String.valueOf(this._estimatedAge) + "]\n"); 
-     builder.append("deceasedBoolean" + "[" + String.valueOf(this.deceasedBoolean) + "]\n"); 
-     builder.append("_deceasedBoolean" + "[" + String.valueOf(this._deceasedBoolean) + "]\n"); 
-     builder.append("deceasedAge" + "[" + String.valueOf(this.deceasedAge) + "]\n"); 
-     builder.append("deceasedRange" + "[" + String.valueOf(this.deceasedRange) + "]\n"); 
-     builder.append("deceasedDate" + "[" + String.valueOf(this.deceasedDate) + "]\n"); 
-     builder.append("_deceasedDate" + "[" + String.valueOf(this._deceasedDate) + "]\n"); 
-     builder.append("deceasedString" + "[" + String.valueOf(this.deceasedString) + "]\n"); 
-     builder.append("_deceasedString" + "[" + String.valueOf(this._deceasedString) + "]\n"); 
-     builder.append("reasonCode" + "[" + String.valueOf(this.reasonCode) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("condition" + "[" + String.valueOf(this.condition) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[FamilyMemberHistory]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.notDone != null) builder.append("notDone" + "->" + this.notDone.toString() + "\n"); 
+     if(this._notDone != null) builder.append("_notDone" + "->" + this._notDone.toString() + "\n"); 
+     if(this.notDoneReason != null) builder.append("notDoneReason" + "->" + this.notDoneReason.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.relationship != null) builder.append("relationship" + "->" + this.relationship.toString() + "\n"); 
+     if(this.gender != null) builder.append("gender" + "->" + this.gender.toString() + "\n"); 
+     if(this._gender != null) builder.append("_gender" + "->" + this._gender.toString() + "\n"); 
+     if(this.bornPeriod != null) builder.append("bornPeriod" + "->" + this.bornPeriod.toString() + "\n"); 
+     if(this.bornDate != null) builder.append("bornDate" + "->" + this.bornDate.toString() + "\n"); 
+     if(this._bornDate != null) builder.append("_bornDate" + "->" + this._bornDate.toString() + "\n"); 
+     if(this.bornString != null) builder.append("bornString" + "->" + this.bornString.toString() + "\n"); 
+     if(this._bornString != null) builder.append("_bornString" + "->" + this._bornString.toString() + "\n"); 
+     if(this.ageAge != null) builder.append("ageAge" + "->" + this.ageAge.toString() + "\n"); 
+     if(this.ageRange != null) builder.append("ageRange" + "->" + this.ageRange.toString() + "\n"); 
+     if(this.ageString != null) builder.append("ageString" + "->" + this.ageString.toString() + "\n"); 
+     if(this._ageString != null) builder.append("_ageString" + "->" + this._ageString.toString() + "\n"); 
+     if(this.estimatedAge != null) builder.append("estimatedAge" + "->" + this.estimatedAge.toString() + "\n"); 
+     if(this._estimatedAge != null) builder.append("_estimatedAge" + "->" + this._estimatedAge.toString() + "\n"); 
+     if(this.deceasedBoolean != null) builder.append("deceasedBoolean" + "->" + this.deceasedBoolean.toString() + "\n"); 
+     if(this._deceasedBoolean != null) builder.append("_deceasedBoolean" + "->" + this._deceasedBoolean.toString() + "\n"); 
+     if(this.deceasedAge != null) builder.append("deceasedAge" + "->" + this.deceasedAge.toString() + "\n"); 
+     if(this.deceasedRange != null) builder.append("deceasedRange" + "->" + this.deceasedRange.toString() + "\n"); 
+     if(this.deceasedDate != null) builder.append("deceasedDate" + "->" + this.deceasedDate.toString() + "\n"); 
+     if(this._deceasedDate != null) builder.append("_deceasedDate" + "->" + this._deceasedDate.toString() + "\n"); 
+     if(this.deceasedString != null) builder.append("deceasedString" + "->" + this.deceasedString.toString() + "\n"); 
+     if(this._deceasedString != null) builder.append("_deceasedString" + "->" + this._deceasedString.toString() + "\n"); 
+     if(this.reasonCode != null) builder.append("reasonCode" + "->" + this.reasonCode.toString() + "\n"); 
+     if(this.reasonReference != null) builder.append("reasonReference" + "->" + this.reasonReference.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.condition != null) builder.append("condition" + "->" + this.condition.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -818,36 +795,4 @@ public class FamilyMemberHistory  {
   	}
   }
 
-  public static java.util.List<FamilyMemberHistory> fromArray(java.util.List<FamilyMemberHistoryModel> list) {
-    return (java.util.List<FamilyMemberHistory>)list.stream()
-      .map(model -> new FamilyMemberHistory(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<FamilyMemberHistoryModel> toModelArray(java.util.List<FamilyMemberHistory> list) {
-    return (java.util.List<FamilyMemberHistoryModel>)list.stream()
-      .map(model -> new FamilyMemberHistoryModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static FamilyMemberHistory fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, FamilyMemberHistory.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(FamilyMemberHistory o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<FamilyMemberHistory> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

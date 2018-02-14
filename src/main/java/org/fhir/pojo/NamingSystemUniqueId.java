@@ -88,6 +88,7 @@ public class NamingSystemUniqueId  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -109,29 +110,22 @@ public class NamingSystemUniqueId  {
 
   public NamingSystemUniqueId(NamingSystemUniqueIdModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getValue()) {
-        this.value = new String(o.getValue());
-      }
-
-      if (null != o.getPreferred()) {
-        this.preferred = new Boolean(o.getPreferred());
-      }
-
-      if (null != o.getComment()) {
-        this.comment = new String(o.getComment());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getValue()) {
+      this.value = o.getValue();
+    }
+    if (null != o.getPreferred()) {
+      this.preferred = o.getPreferred();
+    }
+    if (null != o.getComment()) {
+      this.comment = o.getComment();
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -216,19 +210,20 @@ public class NamingSystemUniqueId  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("_value" + "[" + String.valueOf(this._value) + "]\n"); 
-     builder.append("preferred" + "[" + String.valueOf(this.preferred) + "]\n"); 
-     builder.append("_preferred" + "[" + String.valueOf(this._preferred) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("_comment" + "[" + String.valueOf(this._comment) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[NamingSystemUniqueId]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
+     if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
+     if(this.preferred != null) builder.append("preferred" + "->" + this.preferred.toString() + "\n"); 
+     if(this._preferred != null) builder.append("_preferred" + "->" + this._preferred.toString() + "\n"); 
+     if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
+     if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -250,36 +245,4 @@ public class NamingSystemUniqueId  {
   	}
   }
 
-  public static java.util.List<NamingSystemUniqueId> fromArray(java.util.List<NamingSystemUniqueIdModel> list) {
-    return (java.util.List<NamingSystemUniqueId>)list.stream()
-      .map(model -> new NamingSystemUniqueId(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<NamingSystemUniqueIdModel> toModelArray(java.util.List<NamingSystemUniqueId> list) {
-    return (java.util.List<NamingSystemUniqueIdModel>)list.stream()
-      .map(model -> new NamingSystemUniqueIdModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static NamingSystemUniqueId fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, NamingSystemUniqueId.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(NamingSystemUniqueId o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<NamingSystemUniqueId> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

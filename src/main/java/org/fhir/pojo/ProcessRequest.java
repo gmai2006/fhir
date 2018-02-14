@@ -179,6 +179,7 @@ public class ProcessRequest  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -230,88 +231,64 @@ public class ProcessRequest  {
 
   public ProcessRequest(ProcessRequestModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getAction()) {
-        this.action = new String(o.getAction());
-      }
-
-      if (null != o.getTarget()) {
-        this.target = new Reference(o.getTarget());
-        this.target.setId(this.getId());
-      }
-
-      if (null != o.getCreated()) {
-        this.created = new String(o.getCreated());
-      }
-
-      if (null != o.getProvider()) {
-        this.provider = new Reference(o.getProvider());
-        this.provider.setId(this.getId());
-      }
-
-      if (null != o.getOrganization()) {
-        this.organization = new Reference(o.getOrganization());
-        this.organization.setId(this.getId());
-      }
-
-      if (null != o.getRequest()) {
-        this.request = new Reference(o.getRequest());
-        this.request.setId(this.getId());
-      }
-
-      if (null != o.getResponse()) {
-        this.response = new Reference(o.getResponse());
-        this.response.setId(this.getId());
-      }
-
-      if (null != o.getNullify()) {
-        this.nullify = new Boolean(o.getNullify());
-      }
-
-      if (null != o.getReference()) {
-        this.reference = new String(o.getReference());
-      }
-
-      this.item = ProcessRequestItem.fromArray(o.getItem());
-
-      this.include = org.fhir.utils.JsonUtils.json2Array(o.getInclude());
-
-      this.exclude = org.fhir.utils.JsonUtils.json2Array(o.getExclude());
-
-      this.period = Period.fromJson(o.getPeriod());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getAction()) {
+      this.action = o.getAction();
+    }
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+      this.target = new Reference(o.getTarget().get(0));
+    }
+    if (null != o.getCreated()) {
+      this.created = o.getCreated();
+    }
+    if (null != o.getProvider() && !o.getProvider().isEmpty()) {
+      this.provider = new Reference(o.getProvider().get(0));
+    }
+    if (null != o.getOrganization() && !o.getOrganization().isEmpty()) {
+      this.organization = new Reference(o.getOrganization().get(0));
+    }
+    if (null != o.getRequest() && !o.getRequest().isEmpty()) {
+      this.request = new Reference(o.getRequest().get(0));
+    }
+    if (null != o.getResponse() && !o.getResponse().isEmpty()) {
+      this.response = new Reference(o.getResponse().get(0));
+    }
+    if (null != o.getNullify()) {
+      this.nullify = o.getNullify();
+    }
+    if (null != o.getReference()) {
+      this.reference = o.getReference();
+    }
+    if (null != o.getItem() && !o.getItem().isEmpty()) {
+    	this.item = ProcessRequestItemHelper.fromArray2Array(o.getItem());
+    }
+    if (o.getInclude() != null) {
+    	this.include = org.fhir.utils.JsonUtils.json2Array(o.getInclude());
+    }
+    if (o.getExclude() != null) {
+    	this.exclude = org.fhir.utils.JsonUtils.json2Array(o.getExclude());
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -522,40 +499,41 @@ public class ProcessRequest  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("_action" + "[" + String.valueOf(this._action) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("created" + "[" + String.valueOf(this.created) + "]\n"); 
-     builder.append("_created" + "[" + String.valueOf(this._created) + "]\n"); 
-     builder.append("provider" + "[" + String.valueOf(this.provider) + "]\n"); 
-     builder.append("organization" + "[" + String.valueOf(this.organization) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("response" + "[" + String.valueOf(this.response) + "]\n"); 
-     builder.append("nullify" + "[" + String.valueOf(this.nullify) + "]\n"); 
-     builder.append("_nullify" + "[" + String.valueOf(this._nullify) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("_reference" + "[" + String.valueOf(this._reference) + "]\n"); 
-     builder.append("item" + "[" + String.valueOf(this.item) + "]\n"); 
-     builder.append("include" + "[" + String.valueOf(this.include) + "]\n"); 
-     builder.append("_include" + "[" + String.valueOf(this._include) + "]\n"); 
-     builder.append("exclude" + "[" + String.valueOf(this.exclude) + "]\n"); 
-     builder.append("_exclude" + "[" + String.valueOf(this._exclude) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[ProcessRequest]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
+     if(this._action != null) builder.append("_action" + "->" + this._action.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this.created != null) builder.append("created" + "->" + this.created.toString() + "\n"); 
+     if(this._created != null) builder.append("_created" + "->" + this._created.toString() + "\n"); 
+     if(this.provider != null) builder.append("provider" + "->" + this.provider.toString() + "\n"); 
+     if(this.organization != null) builder.append("organization" + "->" + this.organization.toString() + "\n"); 
+     if(this.request != null) builder.append("request" + "->" + this.request.toString() + "\n"); 
+     if(this.response != null) builder.append("response" + "->" + this.response.toString() + "\n"); 
+     if(this.nullify != null) builder.append("nullify" + "->" + this.nullify.toString() + "\n"); 
+     if(this._nullify != null) builder.append("_nullify" + "->" + this._nullify.toString() + "\n"); 
+     if(this.reference != null) builder.append("reference" + "->" + this.reference.toString() + "\n"); 
+     if(this._reference != null) builder.append("_reference" + "->" + this._reference.toString() + "\n"); 
+     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); 
+     if(this.include != null) builder.append("include" + "->" + this.include.toString() + "\n"); 
+     if(this._include != null) builder.append("_include" + "->" + this._include.toString() + "\n"); 
+     if(this.exclude != null) builder.append("exclude" + "->" + this.exclude.toString() + "\n"); 
+     if(this._exclude != null) builder.append("_exclude" + "->" + this._exclude.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -589,36 +567,4 @@ public class ProcessRequest  {
   	}
   }
 
-  public static java.util.List<ProcessRequest> fromArray(java.util.List<ProcessRequestModel> list) {
-    return (java.util.List<ProcessRequest>)list.stream()
-      .map(model -> new ProcessRequest(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ProcessRequestModel> toModelArray(java.util.List<ProcessRequest> list) {
-    return (java.util.List<ProcessRequestModel>)list.stream()
-      .map(model -> new ProcessRequestModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ProcessRequest fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ProcessRequest.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ProcessRequest o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ProcessRequest> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

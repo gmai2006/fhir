@@ -32,7 +32,5 @@ public interface ClaimResponseErrorService {
 	public ClaimResponseError find(String id);
   public List<ClaimResponseError> select(int maxResult);
   public List<ClaimResponseError> selectAll();
-  public ClaimResponseError create(ClaimResponseError bean);
-  public ClaimResponseError update(ClaimResponseError bean);
   public void delete(ClaimResponseError bean);
 }

@@ -63,6 +63,7 @@ public class OrganizationContact  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,16 +85,12 @@ public class OrganizationContact  {
 
   public OrganizationContact(OrganizationContactModel o) {
     this.id = o.getId();
-      this.purpose = CodeableConcept.fromJson(o.getPurpose());
-      this.name = HumanName.fromJson(o.getName());
-      this.telecom = ContactPoint.fromArray(o.getTelecom());
-      this.address = Address.fromJson(o.getAddress());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.purpose = CodeableConceptHelper.fromJson(o.getPurpose());
+    this.name = HumanNameHelper.fromJson(o.getName());
+    this.address = AddressHelper.fromJson(o.getAddress());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setPurpose( CodeableConcept value) {
@@ -148,48 +145,17 @@ public class OrganizationContact  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("telecom" + "[" + String.valueOf(this.telecom) + "]\n"); 
-     builder.append("address" + "[" + String.valueOf(this.address) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[OrganizationContact]:" + "\n");
+     if(this.purpose != null) builder.append("purpose" + "->" + this.purpose.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this.telecom != null) builder.append("telecom" + "->" + this.telecom.toString() + "\n"); 
+     if(this.address != null) builder.append("address" + "->" + this.address.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<OrganizationContact> fromArray(java.util.List<OrganizationContactModel> list) {
-    return (java.util.List<OrganizationContact>)list.stream()
-      .map(model -> new OrganizationContact(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<OrganizationContactModel> toModelArray(java.util.List<OrganizationContact> list) {
-    return (java.util.List<OrganizationContactModel>)list.stream()
-      .map(model -> new OrganizationContactModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static OrganizationContact fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, OrganizationContact.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(OrganizationContact o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<OrganizationContact> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -32,7 +32,5 @@ public interface AppointmentParticipantService {
 	public AppointmentParticipant find(String id);
   public List<AppointmentParticipant> select(int maxResult);
   public List<AppointmentParticipant> selectAll();
-  public AppointmentParticipant create(AppointmentParticipant bean);
-  public AppointmentParticipant update(AppointmentParticipant bean);
   public void delete(AppointmentParticipant bean);
 }

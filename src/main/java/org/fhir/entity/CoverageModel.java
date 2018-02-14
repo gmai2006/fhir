@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Financial instrument which may be used to reimburse or pay for health care products and services."
 */
 @Entity
 @Table(name="coverage")
-public class CoverageModel  {
+public class CoverageModel  implements Serializable {
+	private static final long serialVersionUID = 151857669651434425L;
   /**
   * Description: "This is a Coverage resource"
   */
@@ -47,7 +48,7 @@ public class CoverageModel  {
 
   /**
   * Description: "The main (and possibly only) identifier for the coverage - often referred to as a Member Id, Certificate number, Personal Health Number or Case ID. May be constructed as the concatination of the Coverage.SubscriberID and the Coverage.dependant."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -64,7 +65,7 @@ public class CoverageModel  {
 
   /**
   * Description: "The type of coverage: social program, medical plan, accident coverage (workers compensation, auto), group health or payment by an individual or organization."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -78,9 +79,9 @@ public class CoverageModel  {
   @Column(name="\"policyholder_id\"")
   private String policyholder_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`policyholder_id`", insertable=false, updatable=false)
-  private ReferenceModel policyHolder;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="policyholder_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> policyHolder;
 
   /**
   * Description: "The party who has signed-up for or 'owns' the contractual relationship to the policy or to whom the benefit of the policy for services rendered to them or their family is due."
@@ -89,9 +90,9 @@ public class CoverageModel  {
   @Column(name="\"subscriber_id\"")
   private String subscriber_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subscriber_id`", insertable=false, updatable=false)
-  private ReferenceModel subscriber;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subscriber_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subscriber;
 
   /**
   * Description: "The insurer assigned ID for the Subscriber."
@@ -107,13 +108,13 @@ public class CoverageModel  {
   @Column(name="\"beneficiary_id\"")
   private String beneficiary_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`beneficiary_id`", insertable=false, updatable=false)
-  private ReferenceModel beneficiary;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="beneficiary_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> beneficiary;
 
   /**
   * Description: "The relationship of beneficiary (patient) to the subscriber."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -122,7 +123,7 @@ public class CoverageModel  {
 
   /**
   * Description: "Time period during which the coverage is in force. A missing start date indicates the start date isn't known, a missing end date means the coverage is continuing to be in force."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -132,9 +133,13 @@ public class CoverageModel  {
   /**
   * Description: "The program or plan underwriter or payor including both insurance and non-insurance agreements, such as patient-pay agreements. May provide multiple identifiers such as insurance company identifier or business identifier (BIN number)."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> payor = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"payor_id\"")
+  private String payor_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payor_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> payor;
 
   /**
   * Description: "A suite of underwrite specific classifiers, for example may be used to identify a class of coverage or employer group, Policy, Plan."
@@ -143,9 +148,9 @@ public class CoverageModel  {
   @Column(name="\"grouping_id\"")
   private String grouping_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`grouping_id`", insertable=false, updatable=false)
-  private CoverageGroupingModel grouping;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="grouping_id", insertable=false, updatable=false)
+  private java.util.List<CoverageGroupingModel> grouping;
 
   /**
   * Description: "A unique identifier for a dependent under the coverage."
@@ -179,9 +184,13 @@ public class CoverageModel  {
   /**
   * Description: "The policy(s) which constitute this insurance coverage."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> contract = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contract_id\"")
+  private String contract_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contract_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> contract;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -191,14 +200,14 @@ public class CoverageModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -208,7 +217,7 @@ public class CoverageModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -218,7 +227,7 @@ public class CoverageModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -230,6 +239,7 @@ public class CoverageModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -244,9 +254,9 @@ public class CoverageModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -267,267 +277,260 @@ public class CoverageModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public CoverageModel() {
   }
 
   public CoverageModel(Coverage o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.status = o.getStatus();
-
-      this.type = CodeableConcept.toJson(o.getType());
-      if (null != o.getPolicyHolder()) {
-      	this.policyholder_id = "policyHolder" + this.getId();
-        this.policyHolder = new ReferenceModel(o.getPolicyHolder());
-        this.policyHolder.setId(this.policyholder_id);
-        this.policyHolder.parent_id = this.policyHolder.getId();
-      }
-
-      if (null != o.getSubscriber()) {
-      	this.subscriber_id = "subscriber" + this.getId();
-        this.subscriber = new ReferenceModel(o.getSubscriber());
-        this.subscriber.setId(this.subscriber_id);
-        this.subscriber.parent_id = this.subscriber.getId();
-      }
-
-      this.subscriberId = o.getSubscriberId();
-
-      if (null != o.getBeneficiary()) {
-      	this.beneficiary_id = "beneficiary" + this.getId();
-        this.beneficiary = new ReferenceModel(o.getBeneficiary());
-        this.beneficiary.setId(this.beneficiary_id);
-        this.beneficiary.parent_id = this.beneficiary.getId();
-      }
-
-      this.relationship = CodeableConcept.toJson(o.getRelationship());
-      this.period = Period.toJson(o.getPeriod());
-      this.payor = Reference.toModelArray(o.getPayor());
-
-      if (null != o.getGrouping()) {
-      	this.grouping_id = "grouping" + this.getId();
-        this.grouping = new CoverageGroupingModel(o.getGrouping());
-        this.grouping.setId(this.grouping_id);
-        this.grouping.parent_id = this.grouping.getId();
-      }
-
-      this.dependent = o.getDependent();
-
-      this.sequence = o.getSequence();
-
-      this.order = o.getOrder();
-
-      this.network = o.getNetwork();
-
-      this.contract = Reference.toModelArray(o.getContract());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.status = o.getStatus();
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    if (null != o.getPolicyHolder() ) {
+    	this.policyholder_id = "policyholder" + this.id;
+    	this.policyHolder = ReferenceHelper.toModel(o.getPolicyHolder(), this.policyholder_id);
+    }
+    if (null != o.getSubscriber() ) {
+    	this.subscriber_id = "subscriber" + this.id;
+    	this.subscriber = ReferenceHelper.toModel(o.getSubscriber(), this.subscriber_id);
+    }
+    this.subscriberId = o.getSubscriberId();
+    if (null != o.getBeneficiary() ) {
+    	this.beneficiary_id = "beneficiary" + this.id;
+    	this.beneficiary = ReferenceHelper.toModel(o.getBeneficiary(), this.beneficiary_id);
+    }
+    this.relationship = CodeableConceptHelper.toJson(o.getRelationship());
+    this.period = PeriodHelper.toJson(o.getPeriod());
+    if (null != o.getPayor() && !o.getPayor().isEmpty()) {
+    	this.payor_id = "payor" + this.id;
+    	this.payor = ReferenceHelper.toModelFromArray(o.getPayor(), this.payor_id);
+    }
+    if (null != o.getGrouping() ) {
+    	this.grouping_id = "grouping" + this.id;
+    	this.grouping = CoverageGroupingHelper.toModel(o.getGrouping(), this.grouping_id);
+    }
+    this.dependent = o.getDependent();
+    this.sequence = o.getSequence();
+    this.order = o.getOrder();
+    this.network = o.getNetwork();
+    if (null != o.getContract() && !o.getContract().isEmpty()) {
+    	this.contract_id = "contract" + this.id;
+    	this.contract = ReferenceHelper.toModelFromArray(o.getContract(), this.contract_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setPolicyHolder( ReferenceModel value) {
-    this.policyHolder = value;
+  public void setType( String value) {
+    this.type = value;
   }
-  public ReferenceModel getPolicyHolder() {
+  public java.util.List<ReferenceModel> getPolicyHolder() {
     return this.policyHolder;
   }
-  public void setSubscriber( ReferenceModel value) {
-    this.subscriber = value;
+  public void setPolicyHolder( java.util.List<ReferenceModel> value) {
+    this.policyHolder = value;
   }
-  public ReferenceModel getSubscriber() {
+  public java.util.List<ReferenceModel> getSubscriber() {
     return this.subscriber;
   }
-  public void setSubscriberId( String value) {
-    this.subscriberId = value;
+  public void setSubscriber( java.util.List<ReferenceModel> value) {
+    this.subscriber = value;
   }
   public String getSubscriberId() {
     return this.subscriberId;
   }
-  public void setBeneficiary( ReferenceModel value) {
-    this.beneficiary = value;
+  public void setSubscriberId( String value) {
+    this.subscriberId = value;
   }
-  public ReferenceModel getBeneficiary() {
+  public java.util.List<ReferenceModel> getBeneficiary() {
     return this.beneficiary;
   }
-  public void setRelationship( String value) {
-    this.relationship = value;
+  public void setBeneficiary( java.util.List<ReferenceModel> value) {
+    this.beneficiary = value;
   }
   public String getRelationship() {
     return this.relationship;
   }
-  public void setPeriod( String value) {
-    this.period = value;
+  public void setRelationship( String value) {
+    this.relationship = value;
   }
   public String getPeriod() {
     return this.period;
   }
-  public void setPayor( java.util.List<ReferenceModel> value) {
-    this.payor = value;
+  public void setPeriod( String value) {
+    this.period = value;
   }
   public java.util.List<ReferenceModel> getPayor() {
     return this.payor;
   }
-  public void setGrouping( CoverageGroupingModel value) {
-    this.grouping = value;
+  public void setPayor( java.util.List<ReferenceModel> value) {
+    this.payor = value;
   }
-  public CoverageGroupingModel getGrouping() {
+  public java.util.List<CoverageGroupingModel> getGrouping() {
     return this.grouping;
   }
-  public void setDependent( String value) {
-    this.dependent = value;
+  public void setGrouping( java.util.List<CoverageGroupingModel> value) {
+    this.grouping = value;
   }
   public String getDependent() {
     return this.dependent;
   }
-  public void setSequence( String value) {
-    this.sequence = value;
+  public void setDependent( String value) {
+    this.dependent = value;
   }
   public String getSequence() {
     return this.sequence;
   }
-  public void setOrder( Float value) {
-    this.order = value;
+  public void setSequence( String value) {
+    this.sequence = value;
   }
   public Float getOrder() {
     return this.order;
   }
-  public void setNetwork( String value) {
-    this.network = value;
+  public void setOrder( Float value) {
+    this.order = value;
   }
   public String getNetwork() {
     return this.network;
   }
-  public void setContract( java.util.List<ReferenceModel> value) {
-    this.contract = value;
+  public void setNetwork( String value) {
+    this.network = value;
   }
   public java.util.List<ReferenceModel> getContract() {
     return this.contract;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setContract( java.util.List<ReferenceModel> value) {
+    this.contract = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("policyHolder" + "[" + String.valueOf(this.policyHolder) + "]\n"); 
-     builder.append("subscriber" + "[" + String.valueOf(this.subscriber) + "]\n"); 
-     builder.append("subscriberId" + "[" + String.valueOf(this.subscriberId) + "]\n"); 
-     builder.append("beneficiary" + "[" + String.valueOf(this.beneficiary) + "]\n"); 
-     builder.append("relationship" + "[" + String.valueOf(this.relationship) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("payor" + "[" + String.valueOf(this.payor) + "]\n"); 
-     builder.append("grouping" + "[" + String.valueOf(this.grouping) + "]\n"); 
-     builder.append("dependent" + "[" + String.valueOf(this.dependent) + "]\n"); 
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("order" + "[" + String.valueOf(this.order) + "]\n"); 
-     builder.append("network" + "[" + String.valueOf(this.network) + "]\n"); 
-     builder.append("contract" + "[" + String.valueOf(this.contract) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[CoverageModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("subscriberId" + "->" + this.subscriberId + "\n"); 
+     builder.append("relationship" + "->" + this.relationship + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("dependent" + "->" + this.dependent + "\n"); 
+     builder.append("sequence" + "->" + this.sequence + "\n"); 
+     builder.append("order" + "->" + this.order + "\n"); 
+     builder.append("network" + "->" + this.network + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[CoverageModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("policyHolder" + "->" + this.policyHolder + "\n"); 
+     builder.append("subscriber" + "->" + this.subscriber + "\n"); 
+     builder.append("subscriberId" + "->" + this.subscriberId + "\n"); 
+     builder.append("beneficiary" + "->" + this.beneficiary + "\n"); 
+     builder.append("relationship" + "->" + this.relationship + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("payor" + "->" + this.payor + "\n"); 
+     builder.append("grouping" + "->" + this.grouping + "\n"); 
+     builder.append("dependent" + "->" + this.dependent + "\n"); 
+     builder.append("sequence" + "->" + this.sequence + "\n"); 
+     builder.append("order" + "->" + this.order + "\n"); 
+     builder.append("network" + "->" + this.network + "\n"); 
+     builder.append("contract" + "->" + this.contract + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

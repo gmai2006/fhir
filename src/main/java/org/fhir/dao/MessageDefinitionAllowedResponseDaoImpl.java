@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MessageDefinitionAllowedResponseModel;
 import org.fhir.pojo.MessageDefinitionAllowedResponse;
+import org.fhir.pojo.MessageDefinitionAllowedResponseHelper;
 
 public class MessageDefinitionAllowedResponseDaoImpl implements MessageDefinitionAllowedResponseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MessageDefinitionAllowedResponseDaoImpl implements MessageDefinitio
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageDefinitionAllowedResponseModel a", MessageDefinitionAllowedResponseModel.class).setMaxResults(maxResult);
       List<MessageDefinitionAllowedResponseModel> models = query.getResultList();
-      return MessageDefinitionAllowedResponse.fromArray(models);
+      return MessageDefinitionAllowedResponseHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MessageDefinitionAllowedResponseDaoImpl implements MessageDefinitio
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageDefinitionAllowedResponseModel a", MessageDefinitionAllowedResponseModel.class);
       List<MessageDefinitionAllowedResponseModel> models = query.getResultList();
-      return MessageDefinitionAllowedResponse.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MessageDefinitionAllowedResponse create(MessageDefinitionAllowedResponse e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MessageDefinitionAllowedResponseModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MessageDefinitionAllowedResponse update(MessageDefinitionAllowedResponse e) {
-      final EntityManager em = entityManagerProvider.get();
-      MessageDefinitionAllowedResponseModel model = em.merge(new MessageDefinitionAllowedResponseModel(e));
-      return new MessageDefinitionAllowedResponse(model);
+      return MessageDefinitionAllowedResponseHelper.fromArray2Array(models);
   }
 
   @Override

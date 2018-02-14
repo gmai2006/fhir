@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "The subscription resource is used to define a push based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined \"channel\" so that another system is able to take an appropriate action."
 */
 @Entity
 @Table(name="subscriptionchannel")
-public class SubscriptionChannelModel  {
+public class SubscriptionChannelModel  implements Serializable {
+	private static final long serialVersionUID = 151857669694185792L;
   /**
   * Description: "The type of channel to send notifications on."
   */
@@ -60,17 +61,15 @@ public class SubscriptionChannelModel  {
 
   /**
   * Description: "Additional headers / information to send as part of the notification."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"header\"", length = 16777215)
+  @Column(name="\"header\"")
   private String header;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -82,6 +81,7 @@ public class SubscriptionChannelModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -90,90 +90,108 @@ public class SubscriptionChannelModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public SubscriptionChannelModel() {
   }
 
-  public SubscriptionChannelModel(SubscriptionChannel o) {
-    this.id = o.getId();
-      this.type = o.getType();
-
-      this.endpoint = o.getEndpoint();
-
-      this.payload = o.getPayload();
-
-      this.header = org.fhir.utils.JsonUtils.write2String(o.getHeader());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public SubscriptionChannelModel(SubscriptionChannel o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.type = o.getType();
+    this.endpoint = o.getEndpoint();
+    this.payload = o.getPayload();
+    this.header = org.fhir.utils.JsonUtils.write2String(o.getHeader());
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setEndpoint( String value) {
-    this.endpoint = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getEndpoint() {
     return this.endpoint;
   }
-  public void setPayload( String value) {
-    this.payload = value;
+  public void setEndpoint( String value) {
+    this.endpoint = value;
   }
   public String getPayload() {
     return this.payload;
   }
-  public void setHeader( String value) {
-    this.header = value;
+  public void setPayload( String value) {
+    this.payload = value;
   }
   public String getHeader() {
     return this.header;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setHeader( String value) {
+    this.header = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("payload" + "[" + String.valueOf(this.payload) + "]\n"); 
-     builder.append("header" + "[" + String.valueOf(this.header) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SubscriptionChannelModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
+     builder.append("payload" + "->" + this.payload + "\n"); 
+     builder.append("header" + "->" + this.header + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[SubscriptionChannelModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
+     builder.append("payload" + "->" + this.payload + "\n"); 
+     builder.append("header" + "->" + this.header + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

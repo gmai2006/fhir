@@ -34,10 +34,8 @@ public interface CommunicationDao {
   public List<Communication> select(int maxResult);
 
   public List<Communication> selectAll();
-
   public Communication create(Communication e);
 
   public Communication update(Communication e);
-
   public void delete(Communication e);
 }

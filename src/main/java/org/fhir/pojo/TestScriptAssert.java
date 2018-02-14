@@ -275,6 +275,7 @@ public class TestScriptAssert  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -597,77 +598,58 @@ public class TestScriptAssert  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("label" + "[" + String.valueOf(this.label) + "]\n"); 
-     builder.append("_label" + "[" + String.valueOf(this._label) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("direction" + "[" + String.valueOf(this.direction) + "]\n"); 
-     builder.append("_direction" + "[" + String.valueOf(this._direction) + "]\n"); 
-     builder.append("compareToSourceId" + "[" + String.valueOf(this.compareToSourceId) + "]\n"); 
-     builder.append("_compareToSourceId" + "[" + String.valueOf(this._compareToSourceId) + "]\n"); 
-     builder.append("compareToSourceExpression" + "[" + String.valueOf(this.compareToSourceExpression) + "]\n"); 
-     builder.append("_compareToSourceExpression" + "[" + String.valueOf(this._compareToSourceExpression) + "]\n"); 
-     builder.append("compareToSourcePath" + "[" + String.valueOf(this.compareToSourcePath) + "]\n"); 
-     builder.append("_compareToSourcePath" + "[" + String.valueOf(this._compareToSourcePath) + "]\n"); 
-     builder.append("contentType" + "[" + String.valueOf(this.contentType) + "]\n"); 
-     builder.append("_contentType" + "[" + String.valueOf(this._contentType) + "]\n"); 
-     builder.append("expression" + "[" + String.valueOf(this.expression) + "]\n"); 
-     builder.append("_expression" + "[" + String.valueOf(this._expression) + "]\n"); 
-     builder.append("headerField" + "[" + String.valueOf(this.headerField) + "]\n"); 
-     builder.append("_headerField" + "[" + String.valueOf(this._headerField) + "]\n"); 
-     builder.append("minimumId" + "[" + String.valueOf(this.minimumId) + "]\n"); 
-     builder.append("_minimumId" + "[" + String.valueOf(this._minimumId) + "]\n"); 
-     builder.append("navigationLinks" + "[" + String.valueOf(this.navigationLinks) + "]\n"); 
-     builder.append("_navigationLinks" + "[" + String.valueOf(this._navigationLinks) + "]\n"); 
-     builder.append("operator" + "[" + String.valueOf(this.operator) + "]\n"); 
-     builder.append("_operator" + "[" + String.valueOf(this._operator) + "]\n"); 
-     builder.append("path" + "[" + String.valueOf(this.path) + "]\n"); 
-     builder.append("_path" + "[" + String.valueOf(this._path) + "]\n"); 
-     builder.append("requestMethod" + "[" + String.valueOf(this.requestMethod) + "]\n"); 
-     builder.append("_requestMethod" + "[" + String.valueOf(this._requestMethod) + "]\n"); 
-     builder.append("requestURL" + "[" + String.valueOf(this.requestURL) + "]\n"); 
-     builder.append("_requestURL" + "[" + String.valueOf(this._requestURL) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("_resource" + "[" + String.valueOf(this._resource) + "]\n"); 
-     builder.append("response" + "[" + String.valueOf(this.response) + "]\n"); 
-     builder.append("_response" + "[" + String.valueOf(this._response) + "]\n"); 
-     builder.append("responseCode" + "[" + String.valueOf(this.responseCode) + "]\n"); 
-     builder.append("_responseCode" + "[" + String.valueOf(this._responseCode) + "]\n"); 
-     builder.append("rule" + "[" + String.valueOf(this.rule) + "]\n"); 
-     builder.append("ruleset" + "[" + String.valueOf(this.ruleset) + "]\n"); 
-     builder.append("sourceId" + "[" + String.valueOf(this.sourceId) + "]\n"); 
-     builder.append("_sourceId" + "[" + String.valueOf(this._sourceId) + "]\n"); 
-     builder.append("validateProfileId" + "[" + String.valueOf(this.validateProfileId) + "]\n"); 
-     builder.append("_validateProfileId" + "[" + String.valueOf(this._validateProfileId) + "]\n"); 
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("_value" + "[" + String.valueOf(this._value) + "]\n"); 
-     builder.append("warningOnly" + "[" + String.valueOf(this.warningOnly) + "]\n"); 
-     builder.append("_warningOnly" + "[" + String.valueOf(this._warningOnly) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TestScriptAssert]:" + "\n");
+     if(this.label != null) builder.append("label" + "->" + this.label.toString() + "\n"); 
+     if(this._label != null) builder.append("_label" + "->" + this._label.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.direction != null) builder.append("direction" + "->" + this.direction.toString() + "\n"); 
+     if(this._direction != null) builder.append("_direction" + "->" + this._direction.toString() + "\n"); 
+     if(this.compareToSourceId != null) builder.append("compareToSourceId" + "->" + this.compareToSourceId.toString() + "\n"); 
+     if(this._compareToSourceId != null) builder.append("_compareToSourceId" + "->" + this._compareToSourceId.toString() + "\n"); 
+     if(this.compareToSourceExpression != null) builder.append("compareToSourceExpression" + "->" + this.compareToSourceExpression.toString() + "\n"); 
+     if(this._compareToSourceExpression != null) builder.append("_compareToSourceExpression" + "->" + this._compareToSourceExpression.toString() + "\n"); 
+     if(this.compareToSourcePath != null) builder.append("compareToSourcePath" + "->" + this.compareToSourcePath.toString() + "\n"); 
+     if(this._compareToSourcePath != null) builder.append("_compareToSourcePath" + "->" + this._compareToSourcePath.toString() + "\n"); 
+     if(this.contentType != null) builder.append("contentType" + "->" + this.contentType.toString() + "\n"); 
+     if(this._contentType != null) builder.append("_contentType" + "->" + this._contentType.toString() + "\n"); 
+     if(this.expression != null) builder.append("expression" + "->" + this.expression.toString() + "\n"); 
+     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); 
+     if(this.headerField != null) builder.append("headerField" + "->" + this.headerField.toString() + "\n"); 
+     if(this._headerField != null) builder.append("_headerField" + "->" + this._headerField.toString() + "\n"); 
+     if(this.minimumId != null) builder.append("minimumId" + "->" + this.minimumId.toString() + "\n"); 
+     if(this._minimumId != null) builder.append("_minimumId" + "->" + this._minimumId.toString() + "\n"); 
+     if(this.navigationLinks != null) builder.append("navigationLinks" + "->" + this.navigationLinks.toString() + "\n"); 
+     if(this._navigationLinks != null) builder.append("_navigationLinks" + "->" + this._navigationLinks.toString() + "\n"); 
+     if(this.operator != null) builder.append("operator" + "->" + this.operator.toString() + "\n"); 
+     if(this._operator != null) builder.append("_operator" + "->" + this._operator.toString() + "\n"); 
+     if(this.path != null) builder.append("path" + "->" + this.path.toString() + "\n"); 
+     if(this._path != null) builder.append("_path" + "->" + this._path.toString() + "\n"); 
+     if(this.requestMethod != null) builder.append("requestMethod" + "->" + this.requestMethod.toString() + "\n"); 
+     if(this._requestMethod != null) builder.append("_requestMethod" + "->" + this._requestMethod.toString() + "\n"); 
+     if(this.requestURL != null) builder.append("requestURL" + "->" + this.requestURL.toString() + "\n"); 
+     if(this._requestURL != null) builder.append("_requestURL" + "->" + this._requestURL.toString() + "\n"); 
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
+     if(this._resource != null) builder.append("_resource" + "->" + this._resource.toString() + "\n"); 
+     if(this.response != null) builder.append("response" + "->" + this.response.toString() + "\n"); 
+     if(this._response != null) builder.append("_response" + "->" + this._response.toString() + "\n"); 
+     if(this.responseCode != null) builder.append("responseCode" + "->" + this.responseCode.toString() + "\n"); 
+     if(this._responseCode != null) builder.append("_responseCode" + "->" + this._responseCode.toString() + "\n"); 
+     if(this.rule != null) builder.append("rule" + "->" + this.rule.toString() + "\n"); 
+     if(this.ruleset != null) builder.append("ruleset" + "->" + this.ruleset.toString() + "\n"); 
+     if(this.sourceId != null) builder.append("sourceId" + "->" + this.sourceId.toString() + "\n"); 
+     if(this._sourceId != null) builder.append("_sourceId" + "->" + this._sourceId.toString() + "\n"); 
+     if(this.validateProfileId != null) builder.append("validateProfileId" + "->" + this.validateProfileId.toString() + "\n"); 
+     if(this._validateProfileId != null) builder.append("_validateProfileId" + "->" + this._validateProfileId.toString() + "\n"); 
+     if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
+     if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
+     if(this.warningOnly != null) builder.append("warningOnly" + "->" + this.warningOnly.toString() + "\n"); 
+     if(this._warningOnly != null) builder.append("_warningOnly" + "->" + this._warningOnly.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static TestScriptAssert fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TestScriptAssert.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TestScriptAssert o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TestScriptAssert> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum DirectionEnum {

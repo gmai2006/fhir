@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public BundleLink create(BundleLink bean) {
-  	requireNonNull(bean);
-    logger.info("create(BundleLink={}) - entered bean ");
-
-    final BundleLink result = dao.create(bean);
-
-    logger.info("create(BundleLink) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public BundleLink update(BundleLink bean) {
-  	requireNonNull(bean);
-    logger.info("update(BundleLink={}) - entered bean ");
-
-    final BundleLink result = dao.update(bean);
-
-    logger.info("update(BundleLink) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

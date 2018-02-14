@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public Reference create(Reference bean) {
-  	requireNonNull(bean);
-    logger.info("create(Reference={}) - entered bean ");
-
-    final Reference result = dao.create(bean);
-
-    logger.info("create(Reference) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public Reference update(Reference bean) {
-  	requireNonNull(bean);
-    logger.info("update(Reference={}) - entered bean ");
-
-    final Reference result = dao.update(bean);
-
-    logger.info("update(Reference) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

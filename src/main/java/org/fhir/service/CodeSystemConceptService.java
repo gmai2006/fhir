@@ -32,7 +32,5 @@ public interface CodeSystemConceptService {
 	public CodeSystemConcept find(String id);
   public List<CodeSystemConcept> select(int maxResult);
   public List<CodeSystemConcept> selectAll();
-  public CodeSystemConcept create(CodeSystemConcept bean);
-  public CodeSystemConcept update(CodeSystemConcept bean);
   public void delete(CodeSystemConcept bean);
 }

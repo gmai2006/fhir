@@ -62,6 +62,7 @@ public class TestScriptRequestHeader  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -132,35 +133,16 @@ public class TestScriptRequestHeader  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("field" + "[" + String.valueOf(this.field) + "]\n"); 
-     builder.append("_field" + "[" + String.valueOf(this._field) + "]\n"); 
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("_value" + "[" + String.valueOf(this._value) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TestScriptRequestHeader]:" + "\n");
+     if(this.field != null) builder.append("field" + "->" + this.field.toString() + "\n"); 
+     if(this._field != null) builder.append("_field" + "->" + this._field.toString() + "\n"); 
+     if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
+     if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static TestScriptRequestHeader fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TestScriptRequestHeader.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TestScriptRequestHeader o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TestScriptRequestHeader> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

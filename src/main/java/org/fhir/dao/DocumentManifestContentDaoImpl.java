@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DocumentManifestContentModel;
 import org.fhir.pojo.DocumentManifestContent;
+import org.fhir.pojo.DocumentManifestContentHelper;
 
 public class DocumentManifestContentDaoImpl implements DocumentManifestContentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DocumentManifestContentDaoImpl implements DocumentManifestContentDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentManifestContentModel a", DocumentManifestContentModel.class).setMaxResults(maxResult);
       List<DocumentManifestContentModel> models = query.getResultList();
-      return DocumentManifestContent.fromArray(models);
+      return DocumentManifestContentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DocumentManifestContentDaoImpl implements DocumentManifestContentDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentManifestContentModel a", DocumentManifestContentModel.class);
       List<DocumentManifestContentModel> models = query.getResultList();
-      return DocumentManifestContent.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DocumentManifestContent create(DocumentManifestContent e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DocumentManifestContentModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DocumentManifestContent update(DocumentManifestContent e) {
-      final EntityManager em = entityManagerProvider.get();
-      DocumentManifestContentModel model = em.merge(new DocumentManifestContentModel(e));
-      return new DocumentManifestContent(model);
+      return DocumentManifestContentHelper.fromArray2Array(models);
   }
 
   @Override

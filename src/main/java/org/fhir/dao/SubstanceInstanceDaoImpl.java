@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SubstanceInstanceModel;
 import org.fhir.pojo.SubstanceInstance;
+import org.fhir.pojo.SubstanceInstanceHelper;
 
 public class SubstanceInstanceDaoImpl implements SubstanceInstanceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SubstanceInstanceDaoImpl implements SubstanceInstanceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SubstanceInstanceModel a", SubstanceInstanceModel.class).setMaxResults(maxResult);
       List<SubstanceInstanceModel> models = query.getResultList();
-      return SubstanceInstance.fromArray(models);
+      return SubstanceInstanceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SubstanceInstanceDaoImpl implements SubstanceInstanceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SubstanceInstanceModel a", SubstanceInstanceModel.class);
       List<SubstanceInstanceModel> models = query.getResultList();
-      return SubstanceInstance.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SubstanceInstance create(SubstanceInstance e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SubstanceInstanceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SubstanceInstance update(SubstanceInstance e) {
-      final EntityManager em = entityManagerProvider.get();
-      SubstanceInstanceModel model = em.merge(new SubstanceInstanceModel(e));
-      return new SubstanceInstance(model);
+      return SubstanceInstanceHelper.fromArray2Array(models);
   }
 
   @Override

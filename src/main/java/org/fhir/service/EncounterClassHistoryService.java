@@ -32,7 +32,5 @@ public interface EncounterClassHistoryService {
 	public EncounterClassHistory find(String id);
   public List<EncounterClassHistory> select(int maxResult);
   public List<EncounterClassHistory> selectAll();
-  public EncounterClassHistory create(EncounterClassHistory bean);
-  public EncounterClassHistory update(EncounterClassHistory bean);
   public void delete(EncounterClassHistory bean);
 }

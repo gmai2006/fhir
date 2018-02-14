@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public RiskAssessmentPrediction create(RiskAssessmentPrediction bean) {
-  	requireNonNull(bean);
-    logger.info("create(RiskAssessmentPrediction={}) - entered bean ");
-
-    final RiskAssessmentPrediction result = dao.create(bean);
-
-    logger.info("create(RiskAssessmentPrediction) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public RiskAssessmentPrediction update(RiskAssessmentPrediction bean) {
-  	requireNonNull(bean);
-    logger.info("update(RiskAssessmentPrediction={}) - entered bean ");
-
-    final RiskAssessmentPrediction result = dao.update(bean);
-
-    logger.info("update(RiskAssessmentPrediction) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

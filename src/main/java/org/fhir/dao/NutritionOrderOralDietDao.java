@@ -34,10 +34,5 @@ public interface NutritionOrderOralDietDao {
   public List<NutritionOrderOralDiet> select(int maxResult);
 
   public List<NutritionOrderOralDiet> selectAll();
-
-  public NutritionOrderOralDiet create(NutritionOrderOralDiet e);
-
-  public NutritionOrderOralDiet update(NutritionOrderOralDiet e);
-
   public void delete(NutritionOrderOralDiet e);
 }

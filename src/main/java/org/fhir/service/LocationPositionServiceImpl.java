@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public LocationPosition create(LocationPosition bean) {
-  	requireNonNull(bean);
-    logger.info("create(LocationPosition={}) - entered bean ");
-
-    final LocationPosition result = dao.create(bean);
-
-    logger.info("create(LocationPosition) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public LocationPosition update(LocationPosition bean) {
-  	requireNonNull(bean);
-    logger.info("update(LocationPosition={}) - entered bean ");
-
-    final LocationPosition result = dao.update(bean);
-
-    logger.info("update(LocationPosition) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

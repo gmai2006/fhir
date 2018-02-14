@@ -34,10 +34,5 @@ public interface ClaimAccidentDao {
   public List<ClaimAccident> select(int maxResult);
 
   public List<ClaimAccident> selectAll();
-
-  public ClaimAccident create(ClaimAccident e);
-
-  public ClaimAccident update(ClaimAccident e);
-
   public void delete(ClaimAccident e);
 }

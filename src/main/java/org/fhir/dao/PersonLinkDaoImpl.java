@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PersonLinkModel;
 import org.fhir.pojo.PersonLink;
+import org.fhir.pojo.PersonLinkHelper;
 
 public class PersonLinkDaoImpl implements PersonLinkDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PersonLinkDaoImpl implements PersonLinkDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PersonLinkModel a", PersonLinkModel.class).setMaxResults(maxResult);
       List<PersonLinkModel> models = query.getResultList();
-      return PersonLink.fromArray(models);
+      return PersonLinkHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PersonLinkDaoImpl implements PersonLinkDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PersonLinkModel a", PersonLinkModel.class);
       List<PersonLinkModel> models = query.getResultList();
-      return PersonLink.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PersonLink create(PersonLink e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PersonLinkModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PersonLink update(PersonLink e) {
-      final EntityManager em = entityManagerProvider.get();
-      PersonLinkModel model = em.merge(new PersonLinkModel(e));
-      return new PersonLink(model);
+      return PersonLinkHelper.fromArray2Array(models);
   }
 
   @Override

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ProcedureFocalDeviceModel;
 import org.fhir.pojo.ProcedureFocalDevice;
+import org.fhir.pojo.ProcedureFocalDeviceHelper;
 
 public class ProcedureFocalDeviceDaoImpl implements ProcedureFocalDeviceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ProcedureFocalDeviceDaoImpl implements ProcedureFocalDeviceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProcedureFocalDeviceModel a", ProcedureFocalDeviceModel.class).setMaxResults(maxResult);
       List<ProcedureFocalDeviceModel> models = query.getResultList();
-      return ProcedureFocalDevice.fromArray(models);
+      return ProcedureFocalDeviceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ProcedureFocalDeviceDaoImpl implements ProcedureFocalDeviceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProcedureFocalDeviceModel a", ProcedureFocalDeviceModel.class);
       List<ProcedureFocalDeviceModel> models = query.getResultList();
-      return ProcedureFocalDevice.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ProcedureFocalDevice create(ProcedureFocalDevice e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ProcedureFocalDeviceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ProcedureFocalDevice update(ProcedureFocalDevice e) {
-      final EntityManager em = entityManagerProvider.get();
-      ProcedureFocalDeviceModel model = em.merge(new ProcedureFocalDeviceModel(e));
-      return new ProcedureFocalDevice(model);
+      return ProcedureFocalDeviceHelper.fromArray2Array(models);
   }
 
   @Override

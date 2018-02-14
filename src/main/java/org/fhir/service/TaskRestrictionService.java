@@ -32,7 +32,5 @@ public interface TaskRestrictionService {
 	public TaskRestriction find(String id);
   public List<TaskRestriction> select(int maxResult);
   public List<TaskRestriction> selectAll();
-  public TaskRestriction create(TaskRestriction bean);
-  public TaskRestriction update(TaskRestriction bean);
   public void delete(TaskRestriction bean);
 }

@@ -60,6 +60,7 @@ public class ImplementationGuideGlobal  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -81,21 +82,15 @@ public class ImplementationGuideGlobal  {
 
   public ImplementationGuideGlobal(ImplementationGuideGlobalModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getProfile()) {
-        this.profile = new Reference(o.getProfile());
-        this.profile.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getProfile() && !o.getProfile().isEmpty()) {
+      this.profile = new Reference(o.getProfile().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -144,47 +139,16 @@ public class ImplementationGuideGlobal  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImplementationGuideGlobal]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ImplementationGuideGlobal> fromArray(java.util.List<ImplementationGuideGlobalModel> list) {
-    return (java.util.List<ImplementationGuideGlobal>)list.stream()
-      .map(model -> new ImplementationGuideGlobal(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImplementationGuideGlobalModel> toModelArray(java.util.List<ImplementationGuideGlobal> list) {
-    return (java.util.List<ImplementationGuideGlobalModel>)list.stream()
-      .map(model -> new ImplementationGuideGlobalModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImplementationGuideGlobal fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImplementationGuideGlobal.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImplementationGuideGlobal o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImplementationGuideGlobal> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

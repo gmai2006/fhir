@@ -34,10 +34,8 @@ public interface CompartmentDefinitionDao {
   public List<CompartmentDefinition> select(int maxResult);
 
   public List<CompartmentDefinition> selectAll();
-
   public CompartmentDefinition create(CompartmentDefinition e);
 
   public CompartmentDefinition update(CompartmentDefinition e);
-
   public void delete(CompartmentDefinition e);
 }

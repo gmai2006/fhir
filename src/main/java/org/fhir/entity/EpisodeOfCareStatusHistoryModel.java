@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time."
 */
 @Entity
 @Table(name="episodeofcarestatushistory")
-public class EpisodeOfCareStatusHistoryModel  {
+public class EpisodeOfCareStatusHistoryModel  implements Serializable {
+	private static final long serialVersionUID = 151857669689941567L;
   /**
   * Description: "planned | waitlist | active | onhold | finished | cancelled."
   */
@@ -46,7 +47,7 @@ public class EpisodeOfCareStatusHistoryModel  {
 
   /**
   * Description: "The period during this EpisodeOfCare that the specific status applied."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -57,7 +58,7 @@ public class EpisodeOfCareStatusHistoryModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -69,6 +70,7 @@ public class EpisodeOfCareStatusHistoryModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -77,71 +79,90 @@ public class EpisodeOfCareStatusHistoryModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public EpisodeOfCareStatusHistoryModel() {
   }
 
-  public EpisodeOfCareStatusHistoryModel(EpisodeOfCareStatusHistory o) {
-    this.id = o.getId();
-      this.status = o.getStatus();
-
-      this.period = Period.toJson(o.getPeriod());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public EpisodeOfCareStatusHistoryModel(EpisodeOfCareStatusHistory o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.status = o.getStatus();
+    this.period = PeriodHelper.toJson(o.getPeriod());
   }
 
-  public void setStatus( String value) {
-    this.status = value;
-  }
   public String getStatus() {
     return this.status;
   }
-  public void setPeriod( String value) {
-    this.period = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getPeriod() {
     return this.period;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setPeriod( String value) {
+    this.period = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[EpisodeOfCareStatusHistoryModel]:" + "\n");
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[EpisodeOfCareStatusHistoryModel]:" + "\n");
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

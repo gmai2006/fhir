@@ -22,7 +22,7 @@ public class TestPojo {
 		String inputFile = "/media/paul/workspace/fhir-data/examples-json/account-example.json";
 		
 		String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
-		Account account = Account.fromJson(json);
+		Account account = AccountHelper.fromJson(json);
 		assertEquals("Expect status", "active", account.getStatus());
 		Coding coding = account.getType().getCoding().get(0);
 		assertEquals("Expect code", "PBILLACCT", coding.getCode());

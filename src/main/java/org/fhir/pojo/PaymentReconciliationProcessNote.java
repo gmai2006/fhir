@@ -58,6 +58,7 @@ public class PaymentReconciliationProcessNote  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -79,17 +80,13 @@ public class PaymentReconciliationProcessNote  {
 
   public PaymentReconciliationProcessNote(PaymentReconciliationProcessNoteModel o) {
     this.id = o.getId();
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getText()) {
-        this.text = new String(o.getText());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( CodeableConcept value) {
@@ -138,47 +135,16 @@ public class PaymentReconciliationProcessNote  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PaymentReconciliationProcessNote]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<PaymentReconciliationProcessNote> fromArray(java.util.List<PaymentReconciliationProcessNoteModel> list) {
-    return (java.util.List<PaymentReconciliationProcessNote>)list.stream()
-      .map(model -> new PaymentReconciliationProcessNote(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PaymentReconciliationProcessNoteModel> toModelArray(java.util.List<PaymentReconciliationProcessNote> list) {
-    return (java.util.List<PaymentReconciliationProcessNoteModel>)list.stream()
-      .map(model -> new PaymentReconciliationProcessNoteModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PaymentReconciliationProcessNote fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PaymentReconciliationProcessNote.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PaymentReconciliationProcessNote o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PaymentReconciliationProcessNote> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

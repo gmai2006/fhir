@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SequenceQualityModel;
 import org.fhir.pojo.SequenceQuality;
+import org.fhir.pojo.SequenceQualityHelper;
 
 public class SequenceQualityDaoImpl implements SequenceQualityDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SequenceQualityDaoImpl implements SequenceQualityDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SequenceQualityModel a", SequenceQualityModel.class).setMaxResults(maxResult);
       List<SequenceQualityModel> models = query.getResultList();
-      return SequenceQuality.fromArray(models);
+      return SequenceQualityHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SequenceQualityDaoImpl implements SequenceQualityDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SequenceQualityModel a", SequenceQualityModel.class);
       List<SequenceQualityModel> models = query.getResultList();
-      return SequenceQuality.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SequenceQuality create(SequenceQuality e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SequenceQualityModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SequenceQuality update(SequenceQuality e) {
-      final EntityManager em = entityManagerProvider.get();
-      SequenceQualityModel model = em.merge(new SequenceQualityModel(e));
-      return new SequenceQuality(model);
+      return SequenceQualityHelper.fromArray2Array(models);
   }
 
   @Override

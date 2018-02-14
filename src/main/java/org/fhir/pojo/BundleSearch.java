@@ -64,6 +64,7 @@ public class BundleSearch  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -85,20 +86,15 @@ public class BundleSearch  {
 
   public BundleSearch(BundleSearchModel o) {
     this.id = o.getId();
-      if (null != o.getMode()) {
-        this.mode = new String(o.getMode());
-      }
-
-      if (null != o.getScore()) {
-        this.score = new Float(o.getScore());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getMode()) {
+      this.mode = o.getMode();
+    }
+    if (null != o.getScore()) {
+      this.score = o.getScore();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setMode( String value) {
@@ -153,14 +149,15 @@ public class BundleSearch  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("score" + "[" + String.valueOf(this.score) + "]\n"); 
-     builder.append("_score" + "[" + String.valueOf(this._score) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[BundleSearch]:" + "\n");
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.score != null) builder.append("score" + "->" + this.score.toString() + "\n"); 
+     if(this._score != null) builder.append("_score" + "->" + this._score.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -180,36 +177,4 @@ public class BundleSearch  {
   	}
   }
 
-  public static java.util.List<BundleSearch> fromArray(java.util.List<BundleSearchModel> list) {
-    return (java.util.List<BundleSearch>)list.stream()
-      .map(model -> new BundleSearch(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<BundleSearchModel> toModelArray(java.util.List<BundleSearch> list) {
-    return (java.util.List<BundleSearchModel>)list.stream()
-      .map(model -> new BundleSearchModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static BundleSearch fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, BundleSearch.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(BundleSearch o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<BundleSearch> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

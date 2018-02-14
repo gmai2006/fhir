@@ -34,10 +34,5 @@ public interface ConceptMapDependsOnDao {
   public List<ConceptMapDependsOn> select(int maxResult);
 
   public List<ConceptMapDependsOn> selectAll();
-
-  public ConceptMapDependsOn create(ConceptMapDependsOn e);
-
-  public ConceptMapDependsOn update(ConceptMapDependsOn e);
-
   public void delete(ConceptMapDependsOn e);
 }

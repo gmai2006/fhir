@@ -34,10 +34,5 @@ public interface TaskRestrictionDao {
   public List<TaskRestriction> select(int maxResult);
 
   public List<TaskRestriction> selectAll();
-
-  public TaskRestriction create(TaskRestriction e);
-
-  public TaskRestriction update(TaskRestriction e);
-
   public void delete(TaskRestriction e);
 }

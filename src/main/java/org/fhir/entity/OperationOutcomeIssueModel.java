@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A collection of error, warning or information messages that result from a system action."
 */
 @Entity
 @Table(name="operationoutcomeissue")
-public class OperationOutcomeIssueModel  {
+public class OperationOutcomeIssueModel  implements Serializable {
+	private static final long serialVersionUID = 151857669688792913L;
   /**
   * Description: "Indicates whether the issue indicates a variation from successful processing."
   */
@@ -53,7 +54,7 @@ public class OperationOutcomeIssueModel  {
 
   /**
   * Description: "Additional details about the error. This may be a text description of the error, or a system code that identifies the error."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -69,26 +70,22 @@ public class OperationOutcomeIssueModel  {
 
   /**
   * Description: "For resource issues, this will be a simple XPath limited to element names, repetition indicators and the default child access that identifies one of the elements in the resource that caused this issue to be raised.  For HTTP errors, will be \"http.\" + the parameter name."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"location\"", length = 16777215)
+  @Column(name="\"location\"")
   private String location;
 
   /**
   * Description: "A simple FHIRPath limited to element names, repetition indicators and the default child access that identifies one of the elements in the resource that caused this issue to be raised."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"expression\"", length = 16777215)
+  @Column(name="\"expression\"")
   private String expression;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -100,6 +97,7 @@ public class OperationOutcomeIssueModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -108,107 +106,126 @@ public class OperationOutcomeIssueModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public OperationOutcomeIssueModel() {
   }
 
-  public OperationOutcomeIssueModel(OperationOutcomeIssue o) {
-    this.id = o.getId();
-      this.severity = o.getSeverity();
-
-      this.code = o.getCode();
-
-      this.details = CodeableConcept.toJson(o.getDetails());
-      this.diagnostics = o.getDiagnostics();
-
-      this.location = org.fhir.utils.JsonUtils.write2String(o.getLocation());
-
-      this.expression = org.fhir.utils.JsonUtils.write2String(o.getExpression());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public OperationOutcomeIssueModel(OperationOutcomeIssue o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.severity = o.getSeverity();
+    this.code = o.getCode();
+    this.details = CodeableConceptHelper.toJson(o.getDetails());
+    this.diagnostics = o.getDiagnostics();
+    this.location = org.fhir.utils.JsonUtils.write2String(o.getLocation());
+    this.expression = org.fhir.utils.JsonUtils.write2String(o.getExpression());
   }
 
-  public void setSeverity( String value) {
-    this.severity = value;
-  }
   public String getSeverity() {
     return this.severity;
   }
-  public void setCode( String value) {
-    this.code = value;
+  public void setSeverity( String value) {
+    this.severity = value;
   }
   public String getCode() {
     return this.code;
   }
-  public void setDetails( String value) {
-    this.details = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public String getDetails() {
     return this.details;
   }
-  public void setDiagnostics( String value) {
-    this.diagnostics = value;
+  public void setDetails( String value) {
+    this.details = value;
   }
   public String getDiagnostics() {
     return this.diagnostics;
   }
-  public void setLocation( String value) {
-    this.location = value;
+  public void setDiagnostics( String value) {
+    this.diagnostics = value;
   }
   public String getLocation() {
     return this.location;
   }
-  public void setExpression( String value) {
-    this.expression = value;
+  public void setLocation( String value) {
+    this.location = value;
   }
   public String getExpression() {
     return this.expression;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExpression( String value) {
+    this.expression = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("severity" + "[" + String.valueOf(this.severity) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("details" + "[" + String.valueOf(this.details) + "]\n"); 
-     builder.append("diagnostics" + "[" + String.valueOf(this.diagnostics) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("expression" + "[" + String.valueOf(this.expression) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[OperationOutcomeIssueModel]:" + "\n");
+     builder.append("severity" + "->" + this.severity + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("details" + "->" + this.details + "\n"); 
+     builder.append("diagnostics" + "->" + this.diagnostics + "\n"); 
+     builder.append("location" + "->" + this.location + "\n"); 
+     builder.append("expression" + "->" + this.expression + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[OperationOutcomeIssueModel]:" + "\n");
+     builder.append("severity" + "->" + this.severity + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("details" + "->" + this.details + "\n"); 
+     builder.append("diagnostics" + "->" + this.diagnostics + "\n"); 
+     builder.append("location" + "->" + this.location + "\n"); 
+     builder.append("expression" + "->" + this.expression + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

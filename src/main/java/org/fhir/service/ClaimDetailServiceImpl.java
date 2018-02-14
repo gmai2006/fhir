@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ClaimDetail create(ClaimDetail bean) {
-  	requireNonNull(bean);
-    logger.info("create(ClaimDetail={}) - entered bean ");
-
-    final ClaimDetail result = dao.create(bean);
-
-    logger.info("create(ClaimDetail) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ClaimDetail update(ClaimDetail bean) {
-  	requireNonNull(bean);
-    logger.info("update(ClaimDetail={}) - entered bean ");
-
-    final ClaimDetail result = dao.update(bean);
-
-    logger.info("update(ClaimDetail) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -34,10 +34,5 @@ public interface MessageHeaderSourceDao {
   public List<MessageHeaderSource> select(int maxResult);
 
   public List<MessageHeaderSource> selectAll();
-
-  public MessageHeaderSource create(MessageHeaderSource e);
-
-  public MessageHeaderSource update(MessageHeaderSource e);
-
   public void delete(MessageHeaderSource e);
 }

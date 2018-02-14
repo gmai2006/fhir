@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MessageDefinitionFocusModel;
 import org.fhir.pojo.MessageDefinitionFocus;
+import org.fhir.pojo.MessageDefinitionFocusHelper;
 
 public class MessageDefinitionFocusDaoImpl implements MessageDefinitionFocusDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MessageDefinitionFocusDaoImpl implements MessageDefinitionFocusDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageDefinitionFocusModel a", MessageDefinitionFocusModel.class).setMaxResults(maxResult);
       List<MessageDefinitionFocusModel> models = query.getResultList();
-      return MessageDefinitionFocus.fromArray(models);
+      return MessageDefinitionFocusHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MessageDefinitionFocusDaoImpl implements MessageDefinitionFocusDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageDefinitionFocusModel a", MessageDefinitionFocusModel.class);
       List<MessageDefinitionFocusModel> models = query.getResultList();
-      return MessageDefinitionFocus.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MessageDefinitionFocus create(MessageDefinitionFocus e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MessageDefinitionFocusModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MessageDefinitionFocus update(MessageDefinitionFocus e) {
-      final EntityManager em = entityManagerProvider.get();
-      MessageDefinitionFocusModel model = em.merge(new MessageDefinitionFocusModel(e));
-      return new MessageDefinitionFocus(model);
+      return MessageDefinitionFocusHelper.fromArray2Array(models);
   }
 
   @Override

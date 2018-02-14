@@ -70,6 +70,7 @@ public class ImagingManifestStudy  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -91,25 +92,21 @@ public class ImagingManifestStudy  {
 
   public ImagingManifestStudy(ImagingManifestStudyModel o) {
     this.id = o.getId();
-      if (null != o.getUid()) {
-        this.uid = new String(o.getUid());
-      }
-
-      if (null != o.getImagingStudy()) {
-        this.imagingStudy = new Reference(o.getImagingStudy());
-        this.imagingStudy.setId(this.getId());
-      }
-
-      this.endpoint = Reference.fromArray(o.getEndpoint());
-
-      this.series = ImagingManifestSeries.fromArray(o.getSeries());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getUid()) {
+      this.uid = o.getUid();
+    }
+    if (null != o.getImagingStudy() && !o.getImagingStudy().isEmpty()) {
+      this.imagingStudy = new Reference(o.getImagingStudy().get(0));
+    }
+    if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
+    	this.endpoint = ReferenceHelper.fromArray2Array(o.getEndpoint());
+    }
+    if (null != o.getSeries() && !o.getSeries().isEmpty()) {
+    	this.series = ImagingManifestSeriesHelper.fromArray2Array(o.getSeries());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setUid( String value) {
@@ -170,49 +167,18 @@ public class ImagingManifestStudy  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("uid" + "[" + String.valueOf(this.uid) + "]\n"); 
-     builder.append("_uid" + "[" + String.valueOf(this._uid) + "]\n"); 
-     builder.append("imagingStudy" + "[" + String.valueOf(this.imagingStudy) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("series" + "[" + String.valueOf(this.series) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImagingManifestStudy]:" + "\n");
+     if(this.uid != null) builder.append("uid" + "->" + this.uid.toString() + "\n"); 
+     if(this._uid != null) builder.append("_uid" + "->" + this._uid.toString() + "\n"); 
+     if(this.imagingStudy != null) builder.append("imagingStudy" + "->" + this.imagingStudy.toString() + "\n"); 
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
+     if(this.series != null) builder.append("series" + "->" + this.series.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ImagingManifestStudy> fromArray(java.util.List<ImagingManifestStudyModel> list) {
-    return (java.util.List<ImagingManifestStudy>)list.stream()
-      .map(model -> new ImagingManifestStudy(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImagingManifestStudyModel> toModelArray(java.util.List<ImagingManifestStudy> list) {
-    return (java.util.List<ImagingManifestStudyModel>)list.stream()
-      .map(model -> new ImagingManifestStudyModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImagingManifestStudy fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImagingManifestStudy.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImagingManifestStudy o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImagingManifestStudy> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

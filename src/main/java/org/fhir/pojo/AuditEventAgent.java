@@ -118,6 +118,7 @@ public class AuditEventAgent  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -139,45 +140,32 @@ public class AuditEventAgent  {
 
   public AuditEventAgent(AuditEventAgentModel o) {
     this.id = o.getId();
-      this.role = CodeableConcept.fromArray(o.getRole());
-      if (null != o.getReference()) {
-        this.reference = new Reference(o.getReference());
-        this.reference.setId(this.getId());
-      }
-
-      this.userId = Identifier.fromJson(o.getUserId());
-      if (null != o.getAltId()) {
-        this.altId = new String(o.getAltId());
-      }
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getRequestor()) {
-        this.requestor = new Boolean(o.getRequestor());
-      }
-
-      if (null != o.getLocation()) {
-        this.location = new Reference(o.getLocation());
-        this.location.setId(this.getId());
-      }
-
-      this.policy = org.fhir.utils.JsonUtils.json2Array(o.getPolicy());
-
-      this.media = Coding.fromJson(o.getMedia());
-      if (null != o.getNetwork()) {
-        this.network = new AuditEventNetwork(o.getNetwork());
-        this.network.setId(this.getId());
-      }
-
-      this.purposeOfUse = CodeableConcept.fromArray(o.getPurposeOfUse());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getReference() && !o.getReference().isEmpty()) {
+      this.reference = new Reference(o.getReference().get(0));
+    }
+    this.userId = IdentifierHelper.fromJson(o.getUserId());
+    if (null != o.getAltId()) {
+      this.altId = o.getAltId();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getRequestor()) {
+      this.requestor = o.getRequestor();
+    }
+    if (null != o.getLocation() && !o.getLocation().isEmpty()) {
+      this.location = new Reference(o.getLocation().get(0));
+    }
+    if (o.getPolicy() != null) {
+    	this.policy = org.fhir.utils.JsonUtils.json2Array(o.getPolicy());
+    }
+    this.media = CodingHelper.fromJson(o.getMedia());
+    if (null != o.getNetwork() && !o.getNetwork().isEmpty()) {
+      this.network = new AuditEventNetwork(o.getNetwork().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setRole( java.util.List<CodeableConcept> value) {
@@ -298,59 +286,28 @@ public class AuditEventAgent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("userId" + "[" + String.valueOf(this.userId) + "]\n"); 
-     builder.append("altId" + "[" + String.valueOf(this.altId) + "]\n"); 
-     builder.append("_altId" + "[" + String.valueOf(this._altId) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("requestor" + "[" + String.valueOf(this.requestor) + "]\n"); 
-     builder.append("_requestor" + "[" + String.valueOf(this._requestor) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("policy" + "[" + String.valueOf(this.policy) + "]\n"); 
-     builder.append("_policy" + "[" + String.valueOf(this._policy) + "]\n"); 
-     builder.append("media" + "[" + String.valueOf(this.media) + "]\n"); 
-     builder.append("network" + "[" + String.valueOf(this.network) + "]\n"); 
-     builder.append("purposeOfUse" + "[" + String.valueOf(this.purposeOfUse) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AuditEventAgent]:" + "\n");
+     if(this.role != null) builder.append("role" + "->" + this.role.toString() + "\n"); 
+     if(this.reference != null) builder.append("reference" + "->" + this.reference.toString() + "\n"); 
+     if(this.userId != null) builder.append("userId" + "->" + this.userId.toString() + "\n"); 
+     if(this.altId != null) builder.append("altId" + "->" + this.altId.toString() + "\n"); 
+     if(this._altId != null) builder.append("_altId" + "->" + this._altId.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.requestor != null) builder.append("requestor" + "->" + this.requestor.toString() + "\n"); 
+     if(this._requestor != null) builder.append("_requestor" + "->" + this._requestor.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this.policy != null) builder.append("policy" + "->" + this.policy.toString() + "\n"); 
+     if(this._policy != null) builder.append("_policy" + "->" + this._policy.toString() + "\n"); 
+     if(this.media != null) builder.append("media" + "->" + this.media.toString() + "\n"); 
+     if(this.network != null) builder.append("network" + "->" + this.network.toString() + "\n"); 
+     if(this.purposeOfUse != null) builder.append("purposeOfUse" + "->" + this.purposeOfUse.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<AuditEventAgent> fromArray(java.util.List<AuditEventAgentModel> list) {
-    return (java.util.List<AuditEventAgent>)list.stream()
-      .map(model -> new AuditEventAgent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AuditEventAgentModel> toModelArray(java.util.List<AuditEventAgent> list) {
-    return (java.util.List<AuditEventAgentModel>)list.stream()
-      .map(model -> new AuditEventAgentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AuditEventAgent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AuditEventAgent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AuditEventAgent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AuditEventAgent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

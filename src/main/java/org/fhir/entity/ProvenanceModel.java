@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies."
 */
 @Entity
 @Table(name="provenance")
-public class ProvenanceModel  {
+public class ProvenanceModel  implements Serializable {
+	private static final long serialVersionUID = 1518576697077878L;
   /**
   * Description: "This is a Provenance resource"
   */
@@ -48,13 +49,17 @@ public class ProvenanceModel  {
   /**
   * Description: "The Reference(s) that were generated or updated by  the activity described in this resource. A provenance can point to more than one target if multiple resources were created/updated by the same activity."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> target = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"target_id\"")
+  private String target_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="target_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> target;
 
   /**
   * Description: "The period during which the activity occurred."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -70,11 +75,9 @@ public class ProvenanceModel  {
 
   /**
   * Description: "Policy or plan the activity was defined by. Typically, a single activity may have multiple applicable policy documents, such as patient consent, guarantor funding, etc."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"policy\"", length = 16777215)
+  @Column(name="\"policy\"")
   private String policy;
 
   /**
@@ -84,13 +87,13 @@ public class ProvenanceModel  {
   @Column(name="\"location_id\"")
   private String location_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`location_id`", insertable=false, updatable=false)
-  private ReferenceModel location;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> location;
 
   /**
   * Description: "The reason that the activity was taking place."
-  * Actual type: Array of Coding-> List<Coding>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -99,7 +102,7 @@ public class ProvenanceModel  {
 
   /**
   * Description: "An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -109,20 +112,28 @@ public class ProvenanceModel  {
   /**
   * Description: "An actor taking a role in an activity  for which it can be assigned some degree of responsibility for the activity taking place."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ProvenanceAgentModel> agent = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"agent_id\"")
+  private String agent_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="agent_id", insertable=false, updatable=false)
+  private java.util.List<ProvenanceAgentModel> agent;
 
   /**
   * Description: "An entity used in this activity."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ProvenanceEntityModel> entity = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"entity_id\"")
+  private String entity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="entity_id", insertable=false, updatable=false)
+  private java.util.List<ProvenanceEntityModel> entity;
 
   /**
   * Description: "A digital signature on the target Reference(s). The signer should match a Provenance.agent. The purpose of the signature is indicated."
-  * Actual type: Array of Signature-> List<Signature>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -137,14 +148,14 @@ public class ProvenanceModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -154,7 +165,7 @@ public class ProvenanceModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -164,7 +175,7 @@ public class ProvenanceModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -176,6 +187,7 @@ public class ProvenanceModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -190,9 +202,9 @@ public class ProvenanceModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -213,198 +225,201 @@ public class ProvenanceModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public ProvenanceModel() {
   }
 
   public ProvenanceModel(Provenance o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.target = Reference.toModelArray(o.getTarget());
-
-      this.period = Period.toJson(o.getPeriod());
-      this.recorded = o.getRecorded();
-
-      this.policy = org.fhir.utils.JsonUtils.write2String(o.getPolicy());
-
-      if (null != o.getLocation()) {
-      	this.location_id = "location" + this.getId();
-        this.location = new ReferenceModel(o.getLocation());
-        this.location.setId(this.location_id);
-        this.location.parent_id = this.location.getId();
-      }
-
-      this.reason = Coding.toJson(o.getReason());
-      this.activity = Coding.toJson(o.getActivity());
-      this.agent = ProvenanceAgent.toModelArray(o.getAgent());
-
-      this.entity = ProvenanceEntity.toModelArray(o.getEntity());
-
-      this.signature = Signature.toJson(o.getSignature());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+    	this.target_id = "target" + this.id;
+    	this.target = ReferenceHelper.toModelFromArray(o.getTarget(), this.target_id);
+    }
+    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.recorded = o.getRecorded();
+    this.policy = org.fhir.utils.JsonUtils.write2String(o.getPolicy());
+    if (null != o.getLocation() ) {
+    	this.location_id = "location" + this.id;
+    	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
+    }
+    this.activity = CodingHelper.toJson(o.getActivity());
+    if (null != o.getAgent() && !o.getAgent().isEmpty()) {
+    	this.agent_id = "agent" + this.id;
+    	this.agent = ProvenanceAgentHelper.toModelFromArray(o.getAgent(), this.agent_id);
+    }
+    if (null != o.getEntity() && !o.getEntity().isEmpty()) {
+    	this.entity_id = "entity" + this.id;
+    	this.entity = ProvenanceEntityHelper.toModelFromArray(o.getEntity(), this.entity_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setTarget( java.util.List<ReferenceModel> value) {
-    this.target = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public java.util.List<ReferenceModel> getTarget() {
     return this.target;
   }
-  public void setPeriod( String value) {
-    this.period = value;
+  public void setTarget( java.util.List<ReferenceModel> value) {
+    this.target = value;
   }
   public String getPeriod() {
     return this.period;
   }
-  public void setRecorded( String value) {
-    this.recorded = value;
+  public void setPeriod( String value) {
+    this.period = value;
   }
   public String getRecorded() {
     return this.recorded;
   }
-  public void setPolicy( String value) {
-    this.policy = value;
+  public void setRecorded( String value) {
+    this.recorded = value;
   }
   public String getPolicy() {
     return this.policy;
   }
-  public void setLocation( ReferenceModel value) {
-    this.location = value;
+  public void setPolicy( String value) {
+    this.policy = value;
   }
-  public ReferenceModel getLocation() {
+  public java.util.List<ReferenceModel> getLocation() {
     return this.location;
   }
-  public void setReason( String value) {
-    this.reason = value;
+  public void setLocation( java.util.List<ReferenceModel> value) {
+    this.location = value;
   }
   public String getReason() {
     return this.reason;
   }
-  public void setActivity( String value) {
-    this.activity = value;
+  public void setReason( String value) {
+    this.reason = value;
   }
   public String getActivity() {
     return this.activity;
   }
-  public void setAgent( java.util.List<ProvenanceAgentModel> value) {
-    this.agent = value;
+  public void setActivity( String value) {
+    this.activity = value;
   }
   public java.util.List<ProvenanceAgentModel> getAgent() {
     return this.agent;
   }
-  public void setEntity( java.util.List<ProvenanceEntityModel> value) {
-    this.entity = value;
+  public void setAgent( java.util.List<ProvenanceAgentModel> value) {
+    this.agent = value;
   }
   public java.util.List<ProvenanceEntityModel> getEntity() {
     return this.entity;
   }
-  public void setSignature( String value) {
-    this.signature = value;
+  public void setEntity( java.util.List<ProvenanceEntityModel> value) {
+    this.entity = value;
   }
   public String getSignature() {
     return this.signature;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setSignature( String value) {
+    this.signature = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("recorded" + "[" + String.valueOf(this.recorded) + "]\n"); 
-     builder.append("policy" + "[" + String.valueOf(this.policy) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("activity" + "[" + String.valueOf(this.activity) + "]\n"); 
-     builder.append("agent" + "[" + String.valueOf(this.agent) + "]\n"); 
-     builder.append("entity" + "[" + String.valueOf(this.entity) + "]\n"); 
-     builder.append("signature" + "[" + String.valueOf(this.signature) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[ProvenanceModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("recorded" + "->" + this.recorded + "\n"); 
+     builder.append("policy" + "->" + this.policy + "\n"); 
+     builder.append("reason" + "->" + this.reason + "\n"); 
+     builder.append("activity" + "->" + this.activity + "\n"); 
+     builder.append("signature" + "->" + this.signature + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ProvenanceModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("target" + "->" + this.target + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("recorded" + "->" + this.recorded + "\n"); 
+     builder.append("policy" + "->" + this.policy + "\n"); 
+     builder.append("location" + "->" + this.location + "\n"); 
+     builder.append("reason" + "->" + this.reason + "\n"); 
+     builder.append("activity" + "->" + this.activity + "\n"); 
+     builder.append("agent" + "->" + this.agent + "\n"); 
+     builder.append("entity" + "->" + this.entity + "\n"); 
+     builder.append("signature" + "->" + this.signature + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

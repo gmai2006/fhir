@@ -79,6 +79,7 @@ public class CapabilityStatementMessaging  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -100,26 +101,24 @@ public class CapabilityStatementMessaging  {
 
   public CapabilityStatementMessaging(CapabilityStatementMessagingModel o) {
     this.id = o.getId();
-      this.endpoint = CapabilityStatementEndpoint.fromArray(o.getEndpoint());
-
-      if (null != o.getReliableCache()) {
-        this.reliableCache = new Float(o.getReliableCache());
-      }
-
-      if (null != o.getDocumentation()) {
-        this.documentation = new String(o.getDocumentation());
-      }
-
-      this.supportedMessage = CapabilityStatementSupportedMessage.fromArray(o.getSupportedMessage());
-
-      this.event = CapabilityStatementEvent.fromArray(o.getEvent());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
+    	this.endpoint = CapabilityStatementEndpointHelper.fromArray2Array(o.getEndpoint());
+    }
+    if (null != o.getReliableCache()) {
+      this.reliableCache = o.getReliableCache();
+    }
+    if (null != o.getDocumentation()) {
+      this.documentation = o.getDocumentation();
+    }
+    if (null != o.getSupportedMessage() && !o.getSupportedMessage().isEmpty()) {
+    	this.supportedMessage = CapabilityStatementSupportedMessageHelper.fromArray2Array(o.getSupportedMessage());
+    }
+    if (null != o.getEvent() && !o.getEvent().isEmpty()) {
+    	this.event = CapabilityStatementEventHelper.fromArray2Array(o.getEvent());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setEndpoint( java.util.List<CapabilityStatementEndpoint> value) {
@@ -192,51 +191,20 @@ public class CapabilityStatementMessaging  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("reliableCache" + "[" + String.valueOf(this.reliableCache) + "]\n"); 
-     builder.append("_reliableCache" + "[" + String.valueOf(this._reliableCache) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("_documentation" + "[" + String.valueOf(this._documentation) + "]\n"); 
-     builder.append("supportedMessage" + "[" + String.valueOf(this.supportedMessage) + "]\n"); 
-     builder.append("event" + "[" + String.valueOf(this.event) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementMessaging]:" + "\n");
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
+     if(this.reliableCache != null) builder.append("reliableCache" + "->" + this.reliableCache.toString() + "\n"); 
+     if(this._reliableCache != null) builder.append("_reliableCache" + "->" + this._reliableCache.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
+     if(this.supportedMessage != null) builder.append("supportedMessage" + "->" + this.supportedMessage.toString() + "\n"); 
+     if(this.event != null) builder.append("event" + "->" + this.event.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CapabilityStatementMessaging> fromArray(java.util.List<CapabilityStatementMessagingModel> list) {
-    return (java.util.List<CapabilityStatementMessaging>)list.stream()
-      .map(model -> new CapabilityStatementMessaging(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementMessagingModel> toModelArray(java.util.List<CapabilityStatementMessaging> list) {
-    return (java.util.List<CapabilityStatementMessagingModel>)list.stream()
-      .map(model -> new CapabilityStatementMessagingModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatementMessaging fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatementMessaging.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementMessaging o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementMessaging> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -34,10 +34,8 @@ public interface ResourceDao {
   public List<Resource> select(int maxResult);
 
   public List<Resource> selectAll();
-
   public Resource create(Resource e);
 
   public Resource update(Resource e);
-
   public void delete(Resource e);
 }

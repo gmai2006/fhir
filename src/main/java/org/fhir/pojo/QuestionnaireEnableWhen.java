@@ -168,6 +168,7 @@ public class QuestionnaireEnableWhen  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -189,60 +190,45 @@ public class QuestionnaireEnableWhen  {
 
   public QuestionnaireEnableWhen(QuestionnaireEnableWhenModel o) {
     this.id = o.getId();
-      if (null != o.getQuestion()) {
-        this.question = new String(o.getQuestion());
-      }
-
-      if (null != o.getHasAnswer()) {
-        this.hasAnswer = new Boolean(o.getHasAnswer());
-      }
-
-      if (null != o.getAnswerBoolean()) {
-        this.answerBoolean = new Boolean(o.getAnswerBoolean());
-      }
-
-      if (null != o.getAnswerDecimal()) {
-        this.answerDecimal = new Float(o.getAnswerDecimal());
-      }
-
-      if (null != o.getAnswerInteger()) {
-        this.answerInteger = new Float(o.getAnswerInteger());
-      }
-
-      if (null != o.getAnswerDate()) {
-        this.answerDate = new String(o.getAnswerDate());
-      }
-
-      if (null != o.getAnswerDateTime()) {
-        this.answerDateTime = new String(o.getAnswerDateTime());
-      }
-
-      if (null != o.getAnswerTime()) {
-        this.answerTime = new String(o.getAnswerTime());
-      }
-
-      if (null != o.getAnswerString()) {
-        this.answerString = new String(o.getAnswerString());
-      }
-
-      if (null != o.getAnswerUri()) {
-        this.answerUri = new String(o.getAnswerUri());
-      }
-
-      this.answerAttachment = Attachment.fromJson(o.getAnswerAttachment());
-      this.answerCoding = Coding.fromJson(o.getAnswerCoding());
-      this.answerQuantity = Quantity.fromJson(o.getAnswerQuantity());
-      if (null != o.getAnswerReference()) {
-        this.answerReference = new Reference(o.getAnswerReference());
-        this.answerReference.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getQuestion()) {
+      this.question = o.getQuestion();
+    }
+    if (null != o.getHasAnswer()) {
+      this.hasAnswer = o.getHasAnswer();
+    }
+    if (null != o.getAnswerBoolean()) {
+      this.answerBoolean = o.getAnswerBoolean();
+    }
+    if (null != o.getAnswerDecimal()) {
+      this.answerDecimal = o.getAnswerDecimal();
+    }
+    if (null != o.getAnswerInteger()) {
+      this.answerInteger = o.getAnswerInteger();
+    }
+    if (null != o.getAnswerDate()) {
+      this.answerDate = o.getAnswerDate();
+    }
+    if (null != o.getAnswerDateTime()) {
+      this.answerDateTime = o.getAnswerDateTime();
+    }
+    if (null != o.getAnswerTime()) {
+      this.answerTime = o.getAnswerTime();
+    }
+    if (null != o.getAnswerString()) {
+      this.answerString = o.getAnswerString();
+    }
+    if (null != o.getAnswerUri()) {
+      this.answerUri = o.getAnswerUri();
+    }
+    this.answerAttachment = AttachmentHelper.fromJson(o.getAnswerAttachment());
+    this.answerCoding = CodingHelper.fromJson(o.getAnswerCoding());
+    this.answerQuantity = QuantityHelper.fromJson(o.getAnswerQuantity());
+    if (null != o.getAnswerReference() && !o.getAnswerReference().isEmpty()) {
+      this.answerReference = new Reference(o.getAnswerReference().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setQuestion( String value) {
@@ -417,68 +403,37 @@ public class QuestionnaireEnableWhen  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("question" + "[" + String.valueOf(this.question) + "]\n"); 
-     builder.append("_question" + "[" + String.valueOf(this._question) + "]\n"); 
-     builder.append("hasAnswer" + "[" + String.valueOf(this.hasAnswer) + "]\n"); 
-     builder.append("_hasAnswer" + "[" + String.valueOf(this._hasAnswer) + "]\n"); 
-     builder.append("answerBoolean" + "[" + String.valueOf(this.answerBoolean) + "]\n"); 
-     builder.append("_answerBoolean" + "[" + String.valueOf(this._answerBoolean) + "]\n"); 
-     builder.append("answerDecimal" + "[" + String.valueOf(this.answerDecimal) + "]\n"); 
-     builder.append("_answerDecimal" + "[" + String.valueOf(this._answerDecimal) + "]\n"); 
-     builder.append("answerInteger" + "[" + String.valueOf(this.answerInteger) + "]\n"); 
-     builder.append("_answerInteger" + "[" + String.valueOf(this._answerInteger) + "]\n"); 
-     builder.append("answerDate" + "[" + String.valueOf(this.answerDate) + "]\n"); 
-     builder.append("_answerDate" + "[" + String.valueOf(this._answerDate) + "]\n"); 
-     builder.append("answerDateTime" + "[" + String.valueOf(this.answerDateTime) + "]\n"); 
-     builder.append("_answerDateTime" + "[" + String.valueOf(this._answerDateTime) + "]\n"); 
-     builder.append("answerTime" + "[" + String.valueOf(this.answerTime) + "]\n"); 
-     builder.append("_answerTime" + "[" + String.valueOf(this._answerTime) + "]\n"); 
-     builder.append("answerString" + "[" + String.valueOf(this.answerString) + "]\n"); 
-     builder.append("_answerString" + "[" + String.valueOf(this._answerString) + "]\n"); 
-     builder.append("answerUri" + "[" + String.valueOf(this.answerUri) + "]\n"); 
-     builder.append("_answerUri" + "[" + String.valueOf(this._answerUri) + "]\n"); 
-     builder.append("answerAttachment" + "[" + String.valueOf(this.answerAttachment) + "]\n"); 
-     builder.append("answerCoding" + "[" + String.valueOf(this.answerCoding) + "]\n"); 
-     builder.append("answerQuantity" + "[" + String.valueOf(this.answerQuantity) + "]\n"); 
-     builder.append("answerReference" + "[" + String.valueOf(this.answerReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[QuestionnaireEnableWhen]:" + "\n");
+     if(this.question != null) builder.append("question" + "->" + this.question.toString() + "\n"); 
+     if(this._question != null) builder.append("_question" + "->" + this._question.toString() + "\n"); 
+     if(this.hasAnswer != null) builder.append("hasAnswer" + "->" + this.hasAnswer.toString() + "\n"); 
+     if(this._hasAnswer != null) builder.append("_hasAnswer" + "->" + this._hasAnswer.toString() + "\n"); 
+     if(this.answerBoolean != null) builder.append("answerBoolean" + "->" + this.answerBoolean.toString() + "\n"); 
+     if(this._answerBoolean != null) builder.append("_answerBoolean" + "->" + this._answerBoolean.toString() + "\n"); 
+     if(this.answerDecimal != null) builder.append("answerDecimal" + "->" + this.answerDecimal.toString() + "\n"); 
+     if(this._answerDecimal != null) builder.append("_answerDecimal" + "->" + this._answerDecimal.toString() + "\n"); 
+     if(this.answerInteger != null) builder.append("answerInteger" + "->" + this.answerInteger.toString() + "\n"); 
+     if(this._answerInteger != null) builder.append("_answerInteger" + "->" + this._answerInteger.toString() + "\n"); 
+     if(this.answerDate != null) builder.append("answerDate" + "->" + this.answerDate.toString() + "\n"); 
+     if(this._answerDate != null) builder.append("_answerDate" + "->" + this._answerDate.toString() + "\n"); 
+     if(this.answerDateTime != null) builder.append("answerDateTime" + "->" + this.answerDateTime.toString() + "\n"); 
+     if(this._answerDateTime != null) builder.append("_answerDateTime" + "->" + this._answerDateTime.toString() + "\n"); 
+     if(this.answerTime != null) builder.append("answerTime" + "->" + this.answerTime.toString() + "\n"); 
+     if(this._answerTime != null) builder.append("_answerTime" + "->" + this._answerTime.toString() + "\n"); 
+     if(this.answerString != null) builder.append("answerString" + "->" + this.answerString.toString() + "\n"); 
+     if(this._answerString != null) builder.append("_answerString" + "->" + this._answerString.toString() + "\n"); 
+     if(this.answerUri != null) builder.append("answerUri" + "->" + this.answerUri.toString() + "\n"); 
+     if(this._answerUri != null) builder.append("_answerUri" + "->" + this._answerUri.toString() + "\n"); 
+     if(this.answerAttachment != null) builder.append("answerAttachment" + "->" + this.answerAttachment.toString() + "\n"); 
+     if(this.answerCoding != null) builder.append("answerCoding" + "->" + this.answerCoding.toString() + "\n"); 
+     if(this.answerQuantity != null) builder.append("answerQuantity" + "->" + this.answerQuantity.toString() + "\n"); 
+     if(this.answerReference != null) builder.append("answerReference" + "->" + this.answerReference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<QuestionnaireEnableWhen> fromArray(java.util.List<QuestionnaireEnableWhenModel> list) {
-    return (java.util.List<QuestionnaireEnableWhen>)list.stream()
-      .map(model -> new QuestionnaireEnableWhen(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<QuestionnaireEnableWhenModel> toModelArray(java.util.List<QuestionnaireEnableWhen> list) {
-    return (java.util.List<QuestionnaireEnableWhenModel>)list.stream()
-      .map(model -> new QuestionnaireEnableWhenModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static QuestionnaireEnableWhen fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, QuestionnaireEnableWhen.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(QuestionnaireEnableWhen o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<QuestionnaireEnableWhen> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

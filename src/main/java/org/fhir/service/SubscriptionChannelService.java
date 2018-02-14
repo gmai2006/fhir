@@ -32,7 +32,5 @@ public interface SubscriptionChannelService {
 	public SubscriptionChannel find(String id);
   public List<SubscriptionChannel> select(int maxResult);
   public List<SubscriptionChannel> selectAll();
-  public SubscriptionChannel create(SubscriptionChannel bean);
-  public SubscriptionChannel update(SubscriptionChannel bean);
   public void delete(SubscriptionChannel bean);
 }

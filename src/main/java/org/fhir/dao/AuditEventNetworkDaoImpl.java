@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AuditEventNetworkModel;
 import org.fhir.pojo.AuditEventNetwork;
+import org.fhir.pojo.AuditEventNetworkHelper;
 
 public class AuditEventNetworkDaoImpl implements AuditEventNetworkDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AuditEventNetworkDaoImpl implements AuditEventNetworkDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AuditEventNetworkModel a", AuditEventNetworkModel.class).setMaxResults(maxResult);
       List<AuditEventNetworkModel> models = query.getResultList();
-      return AuditEventNetwork.fromArray(models);
+      return AuditEventNetworkHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class AuditEventNetworkDaoImpl implements AuditEventNetworkDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AuditEventNetworkModel a", AuditEventNetworkModel.class);
       List<AuditEventNetworkModel> models = query.getResultList();
-      return AuditEventNetwork.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public AuditEventNetwork create(AuditEventNetwork e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new AuditEventNetworkModel(e));
-      return e;
-  }
-
-  @Transactional
-  public AuditEventNetwork update(AuditEventNetwork e) {
-      final EntityManager em = entityManagerProvider.get();
-      AuditEventNetworkModel model = em.merge(new AuditEventNetworkModel(e));
-      return new AuditEventNetwork(model);
+      return AuditEventNetworkHelper.fromArray2Array(models);
   }
 
   @Override

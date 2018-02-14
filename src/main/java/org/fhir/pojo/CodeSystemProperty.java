@@ -84,6 +84,7 @@ public class CodeSystemProperty  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -105,28 +106,21 @@ public class CodeSystemProperty  {
 
   public CodeSystemProperty(CodeSystemPropertyModel o) {
     this.id = o.getId();
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getUri()) {
-        this.uri = new String(o.getUri());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getUri()) {
+      this.uri = o.getUri();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( String value) {
@@ -205,18 +199,19 @@ public class CodeSystemProperty  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("uri" + "[" + String.valueOf(this.uri) + "]\n"); 
-     builder.append("_uri" + "[" + String.valueOf(this._uri) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CodeSystemProperty]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.uri != null) builder.append("uri" + "->" + this.uri.toString() + "\n"); 
+     if(this._uri != null) builder.append("_uri" + "->" + this._uri.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -242,36 +237,4 @@ public class CodeSystemProperty  {
   	}
   }
 
-  public static java.util.List<CodeSystemProperty> fromArray(java.util.List<CodeSystemPropertyModel> list) {
-    return (java.util.List<CodeSystemProperty>)list.stream()
-      .map(model -> new CodeSystemProperty(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CodeSystemPropertyModel> toModelArray(java.util.List<CodeSystemProperty> list) {
-    return (java.util.List<CodeSystemPropertyModel>)list.stream()
-      .map(model -> new CodeSystemPropertyModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CodeSystemProperty fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CodeSystemProperty.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CodeSystemProperty o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CodeSystemProperty> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

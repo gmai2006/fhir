@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DeviceComponentProductionSpecificationModel;
 import org.fhir.pojo.DeviceComponentProductionSpecification;
+import org.fhir.pojo.DeviceComponentProductionSpecificationHelper;
 
 public class DeviceComponentProductionSpecificationDaoImpl implements DeviceComponentProductionSpecificationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DeviceComponentProductionSpecificationDaoImpl implements DeviceComp
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceComponentProductionSpecificationModel a", DeviceComponentProductionSpecificationModel.class).setMaxResults(maxResult);
       List<DeviceComponentProductionSpecificationModel> models = query.getResultList();
-      return DeviceComponentProductionSpecification.fromArray(models);
+      return DeviceComponentProductionSpecificationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DeviceComponentProductionSpecificationDaoImpl implements DeviceComp
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceComponentProductionSpecificationModel a", DeviceComponentProductionSpecificationModel.class);
       List<DeviceComponentProductionSpecificationModel> models = query.getResultList();
-      return DeviceComponentProductionSpecification.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DeviceComponentProductionSpecification create(DeviceComponentProductionSpecification e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DeviceComponentProductionSpecificationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DeviceComponentProductionSpecification update(DeviceComponentProductionSpecification e) {
-      final EntityManager em = entityManagerProvider.get();
-      DeviceComponentProductionSpecificationModel model = em.merge(new DeviceComponentProductionSpecificationModel(e));
-      return new DeviceComponentProductionSpecification(model);
+      return DeviceComponentProductionSpecificationHelper.fromArray2Array(models);
   }
 
   @Override

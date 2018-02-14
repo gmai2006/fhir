@@ -32,7 +32,5 @@ public interface ExplanationOfBenefitProcessNoteService {
 	public ExplanationOfBenefitProcessNote find(String id);
   public List<ExplanationOfBenefitProcessNote> select(int maxResult);
   public List<ExplanationOfBenefitProcessNote> selectAll();
-  public ExplanationOfBenefitProcessNote create(ExplanationOfBenefitProcessNote bean);
-  public ExplanationOfBenefitProcessNote update(ExplanationOfBenefitProcessNote bean);
   public void delete(ExplanationOfBenefitProcessNote bean);
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AppointmentResponseModel;
 import org.fhir.pojo.AppointmentResponse;
+import org.fhir.pojo.AppointmentResponseHelper;
 
 public class AppointmentResponseDaoImpl implements AppointmentResponseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AppointmentResponseDaoImpl implements AppointmentResponseDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AppointmentResponseModel a", AppointmentResponseModel.class).setMaxResults(maxResult);
       List<AppointmentResponseModel> models = query.getResultList();
-      return AppointmentResponse.fromArray(models);
+      return AppointmentResponseHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class AppointmentResponseDaoImpl implements AppointmentResponseDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AppointmentResponseModel a", AppointmentResponseModel.class);
       List<AppointmentResponseModel> models = query.getResultList();
-      return AppointmentResponse.fromArray(models);
+      return AppointmentResponseHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class AppointmentResponseDaoImpl implements AppointmentResponseDao {
       AppointmentResponseModel model = em.merge(new AppointmentResponseModel(e));
       return new AppointmentResponse(model);
   }
-
   @Override
   @Transactional
   public void delete(AppointmentResponse e) {

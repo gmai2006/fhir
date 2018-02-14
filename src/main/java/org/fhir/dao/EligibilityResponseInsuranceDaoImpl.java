@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EligibilityResponseInsuranceModel;
 import org.fhir.pojo.EligibilityResponseInsurance;
+import org.fhir.pojo.EligibilityResponseInsuranceHelper;
 
 public class EligibilityResponseInsuranceDaoImpl implements EligibilityResponseInsuranceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EligibilityResponseInsuranceDaoImpl implements EligibilityResponseI
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EligibilityResponseInsuranceModel a", EligibilityResponseInsuranceModel.class).setMaxResults(maxResult);
       List<EligibilityResponseInsuranceModel> models = query.getResultList();
-      return EligibilityResponseInsurance.fromArray(models);
+      return EligibilityResponseInsuranceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EligibilityResponseInsuranceDaoImpl implements EligibilityResponseI
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EligibilityResponseInsuranceModel a", EligibilityResponseInsuranceModel.class);
       List<EligibilityResponseInsuranceModel> models = query.getResultList();
-      return EligibilityResponseInsurance.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EligibilityResponseInsurance create(EligibilityResponseInsurance e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EligibilityResponseInsuranceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EligibilityResponseInsurance update(EligibilityResponseInsurance e) {
-      final EntityManager em = entityManagerProvider.get();
-      EligibilityResponseInsuranceModel model = em.merge(new EligibilityResponseInsuranceModel(e));
-      return new EligibilityResponseInsurance(model);
+      return EligibilityResponseInsuranceHelper.fromArray2Array(models);
   }
 
   @Override

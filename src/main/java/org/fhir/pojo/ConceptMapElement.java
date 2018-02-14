@@ -69,6 +69,7 @@ public class ConceptMapElement  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -90,22 +91,18 @@ public class ConceptMapElement  {
 
   public ConceptMapElement(ConceptMapElementModel o) {
     this.id = o.getId();
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getDisplay()) {
-        this.display = new String(o.getDisplay());
-      }
-
-      this.target = ConceptMapTarget.fromArray(o.getTarget());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getDisplay()) {
+      this.display = o.getDisplay();
+    }
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+    	this.target = ConceptMapTargetHelper.fromArray2Array(o.getTarget());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( String value) {
@@ -166,49 +163,18 @@ public class ConceptMapElement  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("_display" + "[" + String.valueOf(this._display) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConceptMapElement]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
+     if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ConceptMapElement> fromArray(java.util.List<ConceptMapElementModel> list) {
-    return (java.util.List<ConceptMapElement>)list.stream()
-      .map(model -> new ConceptMapElement(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConceptMapElementModel> toModelArray(java.util.List<ConceptMapElement> list) {
-    return (java.util.List<ConceptMapElementModel>)list.stream()
-      .map(model -> new ConceptMapElementModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ConceptMapElement fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ConceptMapElement.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ConceptMapElement o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ConceptMapElement> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

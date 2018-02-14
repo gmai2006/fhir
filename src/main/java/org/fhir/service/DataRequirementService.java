@@ -32,7 +32,5 @@ public interface DataRequirementService {
 	public DataRequirement find(String id);
   public List<DataRequirement> select(int maxResult);
   public List<DataRequirement> selectAll();
-  public DataRequirement create(DataRequirement bean);
-  public DataRequirement update(DataRequirement bean);
   public void delete(DataRequirement bean);
 }

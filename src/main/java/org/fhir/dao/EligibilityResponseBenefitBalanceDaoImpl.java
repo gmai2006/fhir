@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EligibilityResponseBenefitBalanceModel;
 import org.fhir.pojo.EligibilityResponseBenefitBalance;
+import org.fhir.pojo.EligibilityResponseBenefitBalanceHelper;
 
 public class EligibilityResponseBenefitBalanceDaoImpl implements EligibilityResponseBenefitBalanceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EligibilityResponseBenefitBalanceDaoImpl implements EligibilityResp
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EligibilityResponseBenefitBalanceModel a", EligibilityResponseBenefitBalanceModel.class).setMaxResults(maxResult);
       List<EligibilityResponseBenefitBalanceModel> models = query.getResultList();
-      return EligibilityResponseBenefitBalance.fromArray(models);
+      return EligibilityResponseBenefitBalanceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EligibilityResponseBenefitBalanceDaoImpl implements EligibilityResp
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EligibilityResponseBenefitBalanceModel a", EligibilityResponseBenefitBalanceModel.class);
       List<EligibilityResponseBenefitBalanceModel> models = query.getResultList();
-      return EligibilityResponseBenefitBalance.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EligibilityResponseBenefitBalance create(EligibilityResponseBenefitBalance e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EligibilityResponseBenefitBalanceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EligibilityResponseBenefitBalance update(EligibilityResponseBenefitBalance e) {
-      final EntityManager em = entityManagerProvider.get();
-      EligibilityResponseBenefitBalanceModel model = em.merge(new EligibilityResponseBenefitBalanceModel(e));
-      return new EligibilityResponseBenefitBalance(model);
+      return EligibilityResponseBenefitBalanceHelper.fromArray2Array(models);
   }
 
   @Override

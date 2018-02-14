@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public EligibilityResponseError create(EligibilityResponseError bean) {
-  	requireNonNull(bean);
-    logger.info("create(EligibilityResponseError={}) - entered bean ");
-
-    final EligibilityResponseError result = dao.create(bean);
-
-    logger.info("create(EligibilityResponseError) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public EligibilityResponseError update(EligibilityResponseError bean) {
-  	requireNonNull(bean);
-    logger.info("update(EligibilityResponseError={}) - entered bean ");
-
-    final EligibilityResponseError result = dao.update(bean);
-
-    logger.info("update(EligibilityResponseError) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

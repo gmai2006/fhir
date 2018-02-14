@@ -34,10 +34,5 @@ public interface SpecimenProcessingDao {
   public List<SpecimenProcessing> select(int maxResult);
 
   public List<SpecimenProcessing> selectAll();
-
-  public SpecimenProcessing create(SpecimenProcessing e);
-
-  public SpecimenProcessing update(SpecimenProcessing e);
-
   public void delete(SpecimenProcessing e);
 }

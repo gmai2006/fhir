@@ -34,10 +34,5 @@ public interface MeasureGroupDao {
   public List<MeasureGroup> select(int maxResult);
 
   public List<MeasureGroup> selectAll();
-
-  public MeasureGroup create(MeasureGroup e);
-
-  public MeasureGroup update(MeasureGroup e);
-
   public void delete(MeasureGroup e);
 }

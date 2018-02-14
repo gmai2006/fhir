@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImagingManifestStudyModel;
 import org.fhir.pojo.ImagingManifestStudy;
+import org.fhir.pojo.ImagingManifestStudyHelper;
 
 public class ImagingManifestStudyDaoImpl implements ImagingManifestStudyDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImagingManifestStudyDaoImpl implements ImagingManifestStudyDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImagingManifestStudyModel a", ImagingManifestStudyModel.class).setMaxResults(maxResult);
       List<ImagingManifestStudyModel> models = query.getResultList();
-      return ImagingManifestStudy.fromArray(models);
+      return ImagingManifestStudyHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImagingManifestStudyDaoImpl implements ImagingManifestStudyDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImagingManifestStudyModel a", ImagingManifestStudyModel.class);
       List<ImagingManifestStudyModel> models = query.getResultList();
-      return ImagingManifestStudy.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImagingManifestStudy create(ImagingManifestStudy e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImagingManifestStudyModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImagingManifestStudy update(ImagingManifestStudy e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImagingManifestStudyModel model = em.merge(new ImagingManifestStudyModel(e));
-      return new ImagingManifestStudy(model);
+      return ImagingManifestStudyHelper.fromArray2Array(models);
   }
 
   @Override

@@ -59,6 +59,7 @@ public class LinkageItem  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,21 +81,15 @@ public class LinkageItem  {
 
   public LinkageItem(LinkageItemModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getResource()) {
-        this.resource = new Reference(o.getResource());
-        this.resource.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getResource() && !o.getResource().isEmpty()) {
+      this.resource = new Reference(o.getResource().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -143,13 +138,14 @@ public class LinkageItem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[LinkageItem]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -169,36 +165,4 @@ public class LinkageItem  {
   	}
   }
 
-  public static java.util.List<LinkageItem> fromArray(java.util.List<LinkageItemModel> list) {
-    return (java.util.List<LinkageItem>)list.stream()
-      .map(model -> new LinkageItem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<LinkageItemModel> toModelArray(java.util.List<LinkageItem> list) {
-    return (java.util.List<LinkageItemModel>)list.stream()
-      .map(model -> new LinkageItemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static LinkageItem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, LinkageItem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(LinkageItem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<LinkageItem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

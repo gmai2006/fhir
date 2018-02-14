@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MedicationDispensePerformerModel;
 import org.fhir.pojo.MedicationDispensePerformer;
+import org.fhir.pojo.MedicationDispensePerformerHelper;
 
 public class MedicationDispensePerformerDaoImpl implements MedicationDispensePerformerDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MedicationDispensePerformerDaoImpl implements MedicationDispensePer
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationDispensePerformerModel a", MedicationDispensePerformerModel.class).setMaxResults(maxResult);
       List<MedicationDispensePerformerModel> models = query.getResultList();
-      return MedicationDispensePerformer.fromArray(models);
+      return MedicationDispensePerformerHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MedicationDispensePerformerDaoImpl implements MedicationDispensePer
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationDispensePerformerModel a", MedicationDispensePerformerModel.class);
       List<MedicationDispensePerformerModel> models = query.getResultList();
-      return MedicationDispensePerformer.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MedicationDispensePerformer create(MedicationDispensePerformer e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MedicationDispensePerformerModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MedicationDispensePerformer update(MedicationDispensePerformer e) {
-      final EntityManager em = entityManagerProvider.get();
-      MedicationDispensePerformerModel model = em.merge(new MedicationDispensePerformerModel(e));
-      return new MedicationDispensePerformer(model);
+      return MedicationDispensePerformerHelper.fromArray2Array(models);
   }
 
   @Override

@@ -34,10 +34,8 @@ public interface DataElementDao {
   public List<DataElement> select(int maxResult);
 
   public List<DataElement> selectAll();
-
   public DataElement create(DataElement e);
 
   public DataElement update(DataElement e);
-
   public void delete(DataElement e);
 }

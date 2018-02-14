@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle."
 */
 @Entity
 @Table(name="messageheaderdestination")
-public class MessageHeaderDestinationModel  {
+public class MessageHeaderDestinationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669679934347L;
   /**
   * Description: "Human-readable name for the target system."
   */
@@ -51,9 +52,9 @@ public class MessageHeaderDestinationModel  {
   @Column(name="\"target_id\"")
   private String target_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`target_id`", insertable=false, updatable=false)
-  private ReferenceModel target;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="target_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> target;
 
   /**
   * Description: "Indicates where the message should be routed to."
@@ -65,7 +66,7 @@ public class MessageHeaderDestinationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -77,6 +78,7 @@ public class MessageHeaderDestinationModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -85,86 +87,101 @@ public class MessageHeaderDestinationModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public MessageHeaderDestinationModel() {
   }
 
-  public MessageHeaderDestinationModel(MessageHeaderDestination o) {
-    this.id = o.getId();
-      this.name = o.getName();
-
-      if (null != o.getTarget()) {
-      	this.target_id = "target" + this.getId();
-        this.target = new ReferenceModel(o.getTarget());
-        this.target.setId(this.target_id);
-        this.target.parent_id = this.target.getId();
-      }
-
-      this.endpoint = o.getEndpoint();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public MessageHeaderDestinationModel(MessageHeaderDestination o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.name = o.getName();
+    if (null != o.getTarget() ) {
+    	this.target_id = "target" + this.parent_id;
+    	this.target = ReferenceHelper.toModel(o.getTarget(), this.target_id);
+    }
+    this.endpoint = o.getEndpoint();
   }
 
-  public void setName( String value) {
-    this.name = value;
-  }
   public String getName() {
     return this.name;
   }
-  public void setTarget( ReferenceModel value) {
-    this.target = value;
+  public void setName( String value) {
+    this.name = value;
   }
-  public ReferenceModel getTarget() {
+  public java.util.List<ReferenceModel> getTarget() {
     return this.target;
   }
-  public void setEndpoint( String value) {
-    this.endpoint = value;
+  public void setTarget( java.util.List<ReferenceModel> value) {
+    this.target = value;
   }
   public String getEndpoint() {
     return this.endpoint;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setEndpoint( String value) {
+    this.endpoint = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MessageHeaderDestinationModel]:" + "\n");
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[MessageHeaderDestinationModel]:" + "\n");
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("target" + "->" + this.target + "\n"); 
+     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

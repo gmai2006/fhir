@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DeviceComponentProductionSpecification create(DeviceComponentProductionSpecification bean) {
-  	requireNonNull(bean);
-    logger.info("create(DeviceComponentProductionSpecification={}) - entered bean ");
-
-    final DeviceComponentProductionSpecification result = dao.create(bean);
-
-    logger.info("create(DeviceComponentProductionSpecification) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DeviceComponentProductionSpecification update(DeviceComponentProductionSpecification bean) {
-  	requireNonNull(bean);
-    logger.info("update(DeviceComponentProductionSpecification={}) - entered bean ");
-
-    final DeviceComponentProductionSpecification result = dao.update(bean);
-
-    logger.info("update(DeviceComponentProductionSpecification) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

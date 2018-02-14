@@ -32,7 +32,5 @@ public interface ConceptMapDependsOnService {
 	public ConceptMapDependsOn find(String id);
   public List<ConceptMapDependsOn> select(int maxResult);
   public List<ConceptMapDependsOn> selectAll();
-  public ConceptMapDependsOn create(ConceptMapDependsOn bean);
-  public ConceptMapDependsOn update(ConceptMapDependsOn bean);
   public void delete(ConceptMapDependsOn bean);
 }

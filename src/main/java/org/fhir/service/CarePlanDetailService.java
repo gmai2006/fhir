@@ -32,7 +32,5 @@ public interface CarePlanDetailService {
 	public CarePlanDetail find(String id);
   public List<CarePlanDetail> select(int maxResult);
   public List<CarePlanDetail> selectAll();
-  public CarePlanDetail create(CarePlanDetail bean);
-  public CarePlanDetail update(CarePlanDetail bean);
   public void delete(CarePlanDetail bean);
 }

@@ -138,6 +138,7 @@ public class Group  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -189,61 +190,46 @@ public class Group  {
 
   public Group(GroupModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getActive()) {
-        this.active = new Boolean(o.getActive());
-      }
-
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getActual()) {
-        this.actual = new Boolean(o.getActual());
-      }
-
-      this.code = CodeableConcept.fromJson(o.getCode());
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getQuantity()) {
-        this.quantity = new Float(o.getQuantity());
-      }
-
-      this.characteristic = GroupCharacteristic.fromArray(o.getCharacteristic());
-
-      this.member = GroupMember.fromArray(o.getMember());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getActive()) {
+      this.active = o.getActive();
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getActual()) {
+      this.actual = o.getActual();
+    }
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getQuantity()) {
+      this.quantity = o.getQuantity();
+    }
+    if (null != o.getCharacteristic() && !o.getCharacteristic().isEmpty()) {
+    	this.characteristic = GroupCharacteristicHelper.fromArray2Array(o.getCharacteristic());
+    }
+    if (null != o.getMember() && !o.getMember().isEmpty()) {
+    	this.member = GroupMemberHelper.fromArray2Array(o.getMember());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -406,32 +392,33 @@ public class Group  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("active" + "[" + String.valueOf(this.active) + "]\n"); 
-     builder.append("_active" + "[" + String.valueOf(this._active) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("actual" + "[" + String.valueOf(this.actual) + "]\n"); 
-     builder.append("_actual" + "[" + String.valueOf(this._actual) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("_quantity" + "[" + String.valueOf(this._quantity) + "]\n"); 
-     builder.append("characteristic" + "[" + String.valueOf(this.characteristic) + "]\n"); 
-     builder.append("member" + "[" + String.valueOf(this.member) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Group]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.active != null) builder.append("active" + "->" + this.active.toString() + "\n"); 
+     if(this._active != null) builder.append("_active" + "->" + this._active.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.actual != null) builder.append("actual" + "->" + this.actual.toString() + "\n"); 
+     if(this._actual != null) builder.append("_actual" + "->" + this._actual.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this._quantity != null) builder.append("_quantity" + "->" + this._quantity.toString() + "\n"); 
+     if(this.characteristic != null) builder.append("characteristic" + "->" + this.characteristic.toString() + "\n"); 
+     if(this.member != null) builder.append("member" + "->" + this.member.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -469,36 +456,4 @@ public class Group  {
   	}
   }
 
-  public static java.util.List<Group> fromArray(java.util.List<GroupModel> list) {
-    return (java.util.List<Group>)list.stream()
-      .map(model -> new Group(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<GroupModel> toModelArray(java.util.List<Group> list) {
-    return (java.util.List<GroupModel>)list.stream()
-      .map(model -> new GroupModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Group fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Group.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Group o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Group> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImplementationGuidePackageModel;
 import org.fhir.pojo.ImplementationGuidePackage;
+import org.fhir.pojo.ImplementationGuidePackageHelper;
 
 public class ImplementationGuidePackageDaoImpl implements ImplementationGuidePackageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImplementationGuidePackageDaoImpl implements ImplementationGuidePac
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImplementationGuidePackageModel a", ImplementationGuidePackageModel.class).setMaxResults(maxResult);
       List<ImplementationGuidePackageModel> models = query.getResultList();
-      return ImplementationGuidePackage.fromArray(models);
+      return ImplementationGuidePackageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImplementationGuidePackageDaoImpl implements ImplementationGuidePac
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImplementationGuidePackageModel a", ImplementationGuidePackageModel.class);
       List<ImplementationGuidePackageModel> models = query.getResultList();
-      return ImplementationGuidePackage.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImplementationGuidePackage create(ImplementationGuidePackage e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImplementationGuidePackageModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImplementationGuidePackage update(ImplementationGuidePackage e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImplementationGuidePackageModel model = em.merge(new ImplementationGuidePackageModel(e));
-      return new ImplementationGuidePackage(model);
+      return ImplementationGuidePackageHelper.fromArray2Array(models);
   }
 
   @Override

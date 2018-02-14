@@ -34,10 +34,5 @@ public interface ActivityDefinitionParticipantDao {
   public List<ActivityDefinitionParticipant> select(int maxResult);
 
   public List<ActivityDefinitionParticipant> selectAll();
-
-  public ActivityDefinitionParticipant create(ActivityDefinitionParticipant e);
-
-  public ActivityDefinitionParticipant update(ActivityDefinitionParticipant e);
-
   public void delete(ActivityDefinitionParticipant e);
 }

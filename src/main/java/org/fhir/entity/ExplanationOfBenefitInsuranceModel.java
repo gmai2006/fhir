@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitinsurance")
-public class ExplanationOfBenefitInsuranceModel  {
+public class ExplanationOfBenefitInsuranceModel  implements Serializable {
+	private static final long serialVersionUID = 151857669663223879L;
   /**
   * Description: "Reference to the program or plan identification, underwriter or payor."
   */
@@ -44,23 +45,21 @@ public class ExplanationOfBenefitInsuranceModel  {
   @Column(name="\"coverage_id\"")
   private String coverage_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`coverage_id`", insertable=false, updatable=false)
-  private ReferenceModel coverage;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="coverage_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> coverage;
 
   /**
   * Description: "A list of references from the Insurer to which these services pertain."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"preAuthRef\"", length = 16777215)
+  @Column(name="\"preAuthRef\"")
   private String preAuthRef;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -72,6 +71,7 @@ public class ExplanationOfBenefitInsuranceModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -80,77 +80,92 @@ public class ExplanationOfBenefitInsuranceModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ExplanationOfBenefitInsuranceModel() {
   }
 
-  public ExplanationOfBenefitInsuranceModel(ExplanationOfBenefitInsurance o) {
-    this.id = o.getId();
-      if (null != o.getCoverage()) {
-      	this.coverage_id = "coverage" + this.getId();
-        this.coverage = new ReferenceModel(o.getCoverage());
-        this.coverage.setId(this.coverage_id);
-        this.coverage.parent_id = this.coverage.getId();
-      }
-
-      this.preAuthRef = org.fhir.utils.JsonUtils.write2String(o.getPreAuthRef());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ExplanationOfBenefitInsuranceModel(ExplanationOfBenefitInsurance o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    if (null != o.getCoverage() ) {
+    	this.coverage_id = "coverage" + this.parent_id;
+    	this.coverage = ReferenceHelper.toModel(o.getCoverage(), this.coverage_id);
+    }
+    this.preAuthRef = org.fhir.utils.JsonUtils.write2String(o.getPreAuthRef());
   }
 
-  public void setCoverage( ReferenceModel value) {
-    this.coverage = value;
-  }
-  public ReferenceModel getCoverage() {
+  public java.util.List<ReferenceModel> getCoverage() {
     return this.coverage;
   }
-  public void setPreAuthRef( String value) {
-    this.preAuthRef = value;
+  public void setCoverage( java.util.List<ReferenceModel> value) {
+    this.coverage = value;
   }
   public String getPreAuthRef() {
     return this.preAuthRef;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setPreAuthRef( String value) {
+    this.preAuthRef = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("coverage" + "[" + String.valueOf(this.coverage) + "]\n"); 
-     builder.append("preAuthRef" + "[" + String.valueOf(this.preAuthRef) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitInsuranceModel]:" + "\n");
+     builder.append("preAuthRef" + "->" + this.preAuthRef + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ExplanationOfBenefitInsuranceModel]:" + "\n");
+     builder.append("coverage" + "->" + this.coverage + "\n"); 
+     builder.append("preAuthRef" + "->" + this.preAuthRef + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

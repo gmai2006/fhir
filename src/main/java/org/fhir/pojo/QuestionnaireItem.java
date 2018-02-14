@@ -264,6 +264,7 @@ public class QuestionnaireItem  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -285,100 +286,78 @@ public class QuestionnaireItem  {
 
   public QuestionnaireItem(QuestionnaireItemModel o) {
     this.id = o.getId();
-      if (null != o.getLinkId()) {
-        this.linkId = new String(o.getLinkId());
-      }
-
-      if (null != o.getDefinition()) {
-        this.definition = new String(o.getDefinition());
-      }
-
-      this.code = Coding.fromArray(o.getCode());
-      if (null != o.getPrefix()) {
-        this.prefix = new String(o.getPrefix());
-      }
-
-      if (null != o.getText()) {
-        this.text = new String(o.getText());
-      }
-
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      this.enableWhen = QuestionnaireEnableWhen.fromArray(o.getEnableWhen());
-
-      if (null != o.getRequired()) {
-        this.required = new Boolean(o.getRequired());
-      }
-
-      if (null != o.getRepeats()) {
-        this.repeats = new Boolean(o.getRepeats());
-      }
-
-      if (null != o.getReadOnly()) {
-        this.readOnly = new Boolean(o.getReadOnly());
-      }
-
-      if (null != o.getMaxLength()) {
-        this.maxLength = new Float(o.getMaxLength());
-      }
-
-      if (null != o.getOptions()) {
-        this.options = new Reference(o.getOptions());
-        this.options.setId(this.getId());
-      }
-
-      this.option = QuestionnaireOption.fromArray(o.getOption());
-
-      if (null != o.getInitialBoolean()) {
-        this.initialBoolean = new Boolean(o.getInitialBoolean());
-      }
-
-      if (null != o.getInitialDecimal()) {
-        this.initialDecimal = new Float(o.getInitialDecimal());
-      }
-
-      if (null != o.getInitialInteger()) {
-        this.initialInteger = new Float(o.getInitialInteger());
-      }
-
-      if (null != o.getInitialDate()) {
-        this.initialDate = new String(o.getInitialDate());
-      }
-
-      if (null != o.getInitialDateTime()) {
-        this.initialDateTime = new String(o.getInitialDateTime());
-      }
-
-      if (null != o.getInitialTime()) {
-        this.initialTime = new String(o.getInitialTime());
-      }
-
-      if (null != o.getInitialString()) {
-        this.initialString = new String(o.getInitialString());
-      }
-
-      if (null != o.getInitialUri()) {
-        this.initialUri = new String(o.getInitialUri());
-      }
-
-      this.initialAttachment = Attachment.fromJson(o.getInitialAttachment());
-      this.initialCoding = Coding.fromJson(o.getInitialCoding());
-      this.initialQuantity = Quantity.fromJson(o.getInitialQuantity());
-      if (null != o.getInitialReference()) {
-        this.initialReference = new Reference(o.getInitialReference());
-        this.initialReference.setId(this.getId());
-      }
-
-      this.item = QuestionnaireItem.fromArray(o.getItem());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getLinkId()) {
+      this.linkId = o.getLinkId();
+    }
+    if (null != o.getDefinition()) {
+      this.definition = o.getDefinition();
+    }
+    if (null != o.getPrefix()) {
+      this.prefix = o.getPrefix();
+    }
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getEnableWhen() && !o.getEnableWhen().isEmpty()) {
+    	this.enableWhen = QuestionnaireEnableWhenHelper.fromArray2Array(o.getEnableWhen());
+    }
+    if (null != o.getRequired()) {
+      this.required = o.getRequired();
+    }
+    if (null != o.getRepeats()) {
+      this.repeats = o.getRepeats();
+    }
+    if (null != o.getReadOnly()) {
+      this.readOnly = o.getReadOnly();
+    }
+    if (null != o.getMaxLength()) {
+      this.maxLength = o.getMaxLength();
+    }
+    if (null != o.getOptions() && !o.getOptions().isEmpty()) {
+      this.options = new Reference(o.getOptions().get(0));
+    }
+    if (null != o.getOption() && !o.getOption().isEmpty()) {
+    	this.option = QuestionnaireOptionHelper.fromArray2Array(o.getOption());
+    }
+    if (null != o.getInitialBoolean()) {
+      this.initialBoolean = o.getInitialBoolean();
+    }
+    if (null != o.getInitialDecimal()) {
+      this.initialDecimal = o.getInitialDecimal();
+    }
+    if (null != o.getInitialInteger()) {
+      this.initialInteger = o.getInitialInteger();
+    }
+    if (null != o.getInitialDate()) {
+      this.initialDate = o.getInitialDate();
+    }
+    if (null != o.getInitialDateTime()) {
+      this.initialDateTime = o.getInitialDateTime();
+    }
+    if (null != o.getInitialTime()) {
+      this.initialTime = o.getInitialTime();
+    }
+    if (null != o.getInitialString()) {
+      this.initialString = o.getInitialString();
+    }
+    if (null != o.getInitialUri()) {
+      this.initialUri = o.getInitialUri();
+    }
+    this.initialAttachment = AttachmentHelper.fromJson(o.getInitialAttachment());
+    this.initialCoding = CodingHelper.fromJson(o.getInitialCoding());
+    this.initialQuantity = QuantityHelper.fromJson(o.getInitialQuantity());
+    if (null != o.getInitialReference() && !o.getInitialReference().isEmpty()) {
+      this.initialReference = new Reference(o.getInitialReference().get(0));
+    }
+    if (null != o.getItem() && !o.getItem().isEmpty()) {
+    	this.item = QuestionnaireItemHelper.fromArray2Array(o.getItem());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLinkId( String value) {
@@ -667,53 +646,54 @@ public class QuestionnaireItem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("linkId" + "[" + String.valueOf(this.linkId) + "]\n"); 
-     builder.append("_linkId" + "[" + String.valueOf(this._linkId) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("_definition" + "[" + String.valueOf(this._definition) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("prefix" + "[" + String.valueOf(this.prefix) + "]\n"); 
-     builder.append("_prefix" + "[" + String.valueOf(this._prefix) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("enableWhen" + "[" + String.valueOf(this.enableWhen) + "]\n"); 
-     builder.append("required" + "[" + String.valueOf(this.required) + "]\n"); 
-     builder.append("_required" + "[" + String.valueOf(this._required) + "]\n"); 
-     builder.append("repeats" + "[" + String.valueOf(this.repeats) + "]\n"); 
-     builder.append("_repeats" + "[" + String.valueOf(this._repeats) + "]\n"); 
-     builder.append("readOnly" + "[" + String.valueOf(this.readOnly) + "]\n"); 
-     builder.append("_readOnly" + "[" + String.valueOf(this._readOnly) + "]\n"); 
-     builder.append("maxLength" + "[" + String.valueOf(this.maxLength) + "]\n"); 
-     builder.append("_maxLength" + "[" + String.valueOf(this._maxLength) + "]\n"); 
-     builder.append("options" + "[" + String.valueOf(this.options) + "]\n"); 
-     builder.append("option" + "[" + String.valueOf(this.option) + "]\n"); 
-     builder.append("initialBoolean" + "[" + String.valueOf(this.initialBoolean) + "]\n"); 
-     builder.append("_initialBoolean" + "[" + String.valueOf(this._initialBoolean) + "]\n"); 
-     builder.append("initialDecimal" + "[" + String.valueOf(this.initialDecimal) + "]\n"); 
-     builder.append("_initialDecimal" + "[" + String.valueOf(this._initialDecimal) + "]\n"); 
-     builder.append("initialInteger" + "[" + String.valueOf(this.initialInteger) + "]\n"); 
-     builder.append("_initialInteger" + "[" + String.valueOf(this._initialInteger) + "]\n"); 
-     builder.append("initialDate" + "[" + String.valueOf(this.initialDate) + "]\n"); 
-     builder.append("_initialDate" + "[" + String.valueOf(this._initialDate) + "]\n"); 
-     builder.append("initialDateTime" + "[" + String.valueOf(this.initialDateTime) + "]\n"); 
-     builder.append("_initialDateTime" + "[" + String.valueOf(this._initialDateTime) + "]\n"); 
-     builder.append("initialTime" + "[" + String.valueOf(this.initialTime) + "]\n"); 
-     builder.append("_initialTime" + "[" + String.valueOf(this._initialTime) + "]\n"); 
-     builder.append("initialString" + "[" + String.valueOf(this.initialString) + "]\n"); 
-     builder.append("_initialString" + "[" + String.valueOf(this._initialString) + "]\n"); 
-     builder.append("initialUri" + "[" + String.valueOf(this.initialUri) + "]\n"); 
-     builder.append("_initialUri" + "[" + String.valueOf(this._initialUri) + "]\n"); 
-     builder.append("initialAttachment" + "[" + String.valueOf(this.initialAttachment) + "]\n"); 
-     builder.append("initialCoding" + "[" + String.valueOf(this.initialCoding) + "]\n"); 
-     builder.append("initialQuantity" + "[" + String.valueOf(this.initialQuantity) + "]\n"); 
-     builder.append("initialReference" + "[" + String.valueOf(this.initialReference) + "]\n"); 
-     builder.append("item" + "[" + String.valueOf(this.item) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[QuestionnaireItem]:" + "\n");
+     if(this.linkId != null) builder.append("linkId" + "->" + this.linkId.toString() + "\n"); 
+     if(this._linkId != null) builder.append("_linkId" + "->" + this._linkId.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this._definition != null) builder.append("_definition" + "->" + this._definition.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.prefix != null) builder.append("prefix" + "->" + this.prefix.toString() + "\n"); 
+     if(this._prefix != null) builder.append("_prefix" + "->" + this._prefix.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.enableWhen != null) builder.append("enableWhen" + "->" + this.enableWhen.toString() + "\n"); 
+     if(this.required != null) builder.append("required" + "->" + this.required.toString() + "\n"); 
+     if(this._required != null) builder.append("_required" + "->" + this._required.toString() + "\n"); 
+     if(this.repeats != null) builder.append("repeats" + "->" + this.repeats.toString() + "\n"); 
+     if(this._repeats != null) builder.append("_repeats" + "->" + this._repeats.toString() + "\n"); 
+     if(this.readOnly != null) builder.append("readOnly" + "->" + this.readOnly.toString() + "\n"); 
+     if(this._readOnly != null) builder.append("_readOnly" + "->" + this._readOnly.toString() + "\n"); 
+     if(this.maxLength != null) builder.append("maxLength" + "->" + this.maxLength.toString() + "\n"); 
+     if(this._maxLength != null) builder.append("_maxLength" + "->" + this._maxLength.toString() + "\n"); 
+     if(this.options != null) builder.append("options" + "->" + this.options.toString() + "\n"); 
+     if(this.option != null) builder.append("option" + "->" + this.option.toString() + "\n"); 
+     if(this.initialBoolean != null) builder.append("initialBoolean" + "->" + this.initialBoolean.toString() + "\n"); 
+     if(this._initialBoolean != null) builder.append("_initialBoolean" + "->" + this._initialBoolean.toString() + "\n"); 
+     if(this.initialDecimal != null) builder.append("initialDecimal" + "->" + this.initialDecimal.toString() + "\n"); 
+     if(this._initialDecimal != null) builder.append("_initialDecimal" + "->" + this._initialDecimal.toString() + "\n"); 
+     if(this.initialInteger != null) builder.append("initialInteger" + "->" + this.initialInteger.toString() + "\n"); 
+     if(this._initialInteger != null) builder.append("_initialInteger" + "->" + this._initialInteger.toString() + "\n"); 
+     if(this.initialDate != null) builder.append("initialDate" + "->" + this.initialDate.toString() + "\n"); 
+     if(this._initialDate != null) builder.append("_initialDate" + "->" + this._initialDate.toString() + "\n"); 
+     if(this.initialDateTime != null) builder.append("initialDateTime" + "->" + this.initialDateTime.toString() + "\n"); 
+     if(this._initialDateTime != null) builder.append("_initialDateTime" + "->" + this._initialDateTime.toString() + "\n"); 
+     if(this.initialTime != null) builder.append("initialTime" + "->" + this.initialTime.toString() + "\n"); 
+     if(this._initialTime != null) builder.append("_initialTime" + "->" + this._initialTime.toString() + "\n"); 
+     if(this.initialString != null) builder.append("initialString" + "->" + this.initialString.toString() + "\n"); 
+     if(this._initialString != null) builder.append("_initialString" + "->" + this._initialString.toString() + "\n"); 
+     if(this.initialUri != null) builder.append("initialUri" + "->" + this.initialUri.toString() + "\n"); 
+     if(this._initialUri != null) builder.append("_initialUri" + "->" + this._initialUri.toString() + "\n"); 
+     if(this.initialAttachment != null) builder.append("initialAttachment" + "->" + this.initialAttachment.toString() + "\n"); 
+     if(this.initialCoding != null) builder.append("initialCoding" + "->" + this.initialCoding.toString() + "\n"); 
+     if(this.initialQuantity != null) builder.append("initialQuantity" + "->" + this.initialQuantity.toString() + "\n"); 
+     if(this.initialReference != null) builder.append("initialReference" + "->" + this.initialReference.toString() + "\n"); 
+     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -759,36 +739,4 @@ public class QuestionnaireItem  {
   	}
   }
 
-  public static java.util.List<QuestionnaireItem> fromArray(java.util.List<QuestionnaireItemModel> list) {
-    return (java.util.List<QuestionnaireItem>)list.stream()
-      .map(model -> new QuestionnaireItem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<QuestionnaireItemModel> toModelArray(java.util.List<QuestionnaireItem> list) {
-    return (java.util.List<QuestionnaireItemModel>)list.stream()
-      .map(model -> new QuestionnaireItemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static QuestionnaireItem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, QuestionnaireItem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(QuestionnaireItem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<QuestionnaireItem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

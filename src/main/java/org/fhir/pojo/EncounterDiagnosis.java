@@ -65,6 +65,7 @@ public class EncounterDiagnosis  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -86,22 +87,16 @@ public class EncounterDiagnosis  {
 
   public EncounterDiagnosis(EncounterDiagnosisModel o) {
     this.id = o.getId();
-      if (null != o.getCondition()) {
-        this.condition = new Reference(o.getCondition());
-        this.condition.setId(this.getId());
-      }
-
-      this.role = CodeableConcept.fromJson(o.getRole());
-      if (null != o.getRank()) {
-        this.rank = new Float(o.getRank());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCondition() && !o.getCondition().isEmpty()) {
+      this.condition = new Reference(o.getCondition().get(0));
+    }
+    this.role = CodeableConceptHelper.fromJson(o.getRole());
+    if (null != o.getRank()) {
+      this.rank = o.getRank();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCondition( Reference value) {
@@ -156,48 +151,17 @@ public class EncounterDiagnosis  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("condition" + "[" + String.valueOf(this.condition) + "]\n"); 
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("rank" + "[" + String.valueOf(this.rank) + "]\n"); 
-     builder.append("_rank" + "[" + String.valueOf(this._rank) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[EncounterDiagnosis]:" + "\n");
+     if(this.condition != null) builder.append("condition" + "->" + this.condition.toString() + "\n"); 
+     if(this.role != null) builder.append("role" + "->" + this.role.toString() + "\n"); 
+     if(this.rank != null) builder.append("rank" + "->" + this.rank.toString() + "\n"); 
+     if(this._rank != null) builder.append("_rank" + "->" + this._rank.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<EncounterDiagnosis> fromArray(java.util.List<EncounterDiagnosisModel> list) {
-    return (java.util.List<EncounterDiagnosis>)list.stream()
-      .map(model -> new EncounterDiagnosis(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<EncounterDiagnosisModel> toModelArray(java.util.List<EncounterDiagnosis> list) {
-    return (java.util.List<EncounterDiagnosisModel>)list.stream()
-      .map(model -> new EncounterDiagnosisModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static EncounterDiagnosis fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, EncounterDiagnosis.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(EncounterDiagnosis o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<EncounterDiagnosis> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

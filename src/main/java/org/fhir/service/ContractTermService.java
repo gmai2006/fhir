@@ -32,7 +32,5 @@ public interface ContractTermService {
 	public ContractTerm find(String id);
   public List<ContractTerm> select(int maxResult);
   public List<ContractTerm> selectAll();
-  public ContractTerm create(ContractTerm bean);
-  public ContractTerm update(ContractTerm bean);
   public void delete(ContractTerm bean);
 }

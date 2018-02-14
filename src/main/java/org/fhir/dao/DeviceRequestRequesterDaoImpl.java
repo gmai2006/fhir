@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DeviceRequestRequesterModel;
 import org.fhir.pojo.DeviceRequestRequester;
+import org.fhir.pojo.DeviceRequestRequesterHelper;
 
 public class DeviceRequestRequesterDaoImpl implements DeviceRequestRequesterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DeviceRequestRequesterDaoImpl implements DeviceRequestRequesterDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceRequestRequesterModel a", DeviceRequestRequesterModel.class).setMaxResults(maxResult);
       List<DeviceRequestRequesterModel> models = query.getResultList();
-      return DeviceRequestRequester.fromArray(models);
+      return DeviceRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DeviceRequestRequesterDaoImpl implements DeviceRequestRequesterDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceRequestRequesterModel a", DeviceRequestRequesterModel.class);
       List<DeviceRequestRequesterModel> models = query.getResultList();
-      return DeviceRequestRequester.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DeviceRequestRequester create(DeviceRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DeviceRequestRequesterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DeviceRequestRequester update(DeviceRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      DeviceRequestRequesterModel model = em.merge(new DeviceRequestRequesterModel(e));
-      return new DeviceRequestRequester(model);
+      return DeviceRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override

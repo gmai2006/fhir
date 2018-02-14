@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ReferralRequestRequester create(ReferralRequestRequester bean) {
-  	requireNonNull(bean);
-    logger.info("create(ReferralRequestRequester={}) - entered bean ");
-
-    final ReferralRequestRequester result = dao.create(bean);
-
-    logger.info("create(ReferralRequestRequester) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ReferralRequestRequester update(ReferralRequestRequester bean) {
-  	requireNonNull(bean);
-    logger.info("update(ReferralRequestRequester={}) - entered bean ");
-
-    final ReferralRequestRequester result = dao.update(bean);
-
-    logger.info("update(ReferralRequestRequester) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

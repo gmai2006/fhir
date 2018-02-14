@@ -81,6 +81,7 @@ public class ContactPoint  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -173,39 +174,20 @@ public class ContactPoint  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("system" + "[" + String.valueOf(this.system) + "]\n"); 
-     builder.append("_system" + "[" + String.valueOf(this._system) + "]\n"); 
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("_value" + "[" + String.valueOf(this._value) + "]\n"); 
-     builder.append("use" + "[" + String.valueOf(this.use) + "]\n"); 
-     builder.append("_use" + "[" + String.valueOf(this._use) + "]\n"); 
-     builder.append("rank" + "[" + String.valueOf(this.rank) + "]\n"); 
-     builder.append("_rank" + "[" + String.valueOf(this._rank) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ContactPoint]:" + "\n");
+     if(this.system != null) builder.append("system" + "->" + this.system.toString() + "\n"); 
+     if(this._system != null) builder.append("_system" + "->" + this._system.toString() + "\n"); 
+     if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
+     if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
+     if(this.use != null) builder.append("use" + "->" + this.use.toString() + "\n"); 
+     if(this._use != null) builder.append("_use" + "->" + this._use.toString() + "\n"); 
+     if(this.rank != null) builder.append("rank" + "->" + this.rank.toString() + "\n"); 
+     if(this._rank != null) builder.append("_rank" + "->" + this._rank.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static ContactPoint fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ContactPoint.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ContactPoint o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ContactPoint> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum SystemEnum {

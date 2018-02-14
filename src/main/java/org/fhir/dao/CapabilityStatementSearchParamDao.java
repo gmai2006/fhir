@@ -34,10 +34,5 @@ public interface CapabilityStatementSearchParamDao {
   public List<CapabilityStatementSearchParam> select(int maxResult);
 
   public List<CapabilityStatementSearchParam> selectAll();
-
-  public CapabilityStatementSearchParam create(CapabilityStatementSearchParam e);
-
-  public CapabilityStatementSearchParam update(CapabilityStatementSearchParam e);
-
   public void delete(CapabilityStatementSearchParam e);
 }

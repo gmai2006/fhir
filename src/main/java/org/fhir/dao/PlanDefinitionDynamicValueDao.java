@@ -34,10 +34,5 @@ public interface PlanDefinitionDynamicValueDao {
   public List<PlanDefinitionDynamicValue> select(int maxResult);
 
   public List<PlanDefinitionDynamicValue> selectAll();
-
-  public PlanDefinitionDynamicValue create(PlanDefinitionDynamicValue e);
-
-  public PlanDefinitionDynamicValue update(PlanDefinitionDynamicValue e);
-
   public void delete(PlanDefinitionDynamicValue e);
 }

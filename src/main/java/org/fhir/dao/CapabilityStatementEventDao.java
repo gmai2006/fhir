@@ -34,10 +34,5 @@ public interface CapabilityStatementEventDao {
   public List<CapabilityStatementEvent> select(int maxResult);
 
   public List<CapabilityStatementEvent> selectAll();
-
-  public CapabilityStatementEvent create(CapabilityStatementEvent e);
-
-  public CapabilityStatementEvent update(CapabilityStatementEvent e);
-
   public void delete(CapabilityStatementEvent e);
 }

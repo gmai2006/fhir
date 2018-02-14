@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitadjudication")
-public class ExplanationOfBenefitAdjudicationModel  {
+public class ExplanationOfBenefitAdjudicationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669702428751L;
   /**
   * Description: "Code indicating: Co-Pay, deductable, elegible, benefit, tax, etc."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -49,7 +50,7 @@ public class ExplanationOfBenefitAdjudicationModel  {
 
   /**
   * Description: "Adjudication reason such as limit reached."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -58,7 +59,7 @@ public class ExplanationOfBenefitAdjudicationModel  {
 
   /**
   * Description: "Monitory amount associated with the code."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -76,7 +77,7 @@ public class ExplanationOfBenefitAdjudicationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -88,6 +89,7 @@ public class ExplanationOfBenefitAdjudicationModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -96,87 +98,108 @@ public class ExplanationOfBenefitAdjudicationModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ExplanationOfBenefitAdjudicationModel() {
   }
 
-  public ExplanationOfBenefitAdjudicationModel(ExplanationOfBenefitAdjudication o) {
-    this.id = o.getId();
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.reason = CodeableConcept.toJson(o.getReason());
-      this.amount = Money.toJson(o.getAmount());
-      this.value = o.getValue();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ExplanationOfBenefitAdjudicationModel(ExplanationOfBenefitAdjudication o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.reason = CodeableConceptHelper.toJson(o.getReason());
+    this.amount = MoneyHelper.toJson(o.getAmount());
+    this.value = o.getValue();
   }
 
-  public void setCategory( String value) {
-    this.category = value;
-  }
   public String getCategory() {
     return this.category;
   }
-  public void setReason( String value) {
-    this.reason = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getReason() {
     return this.reason;
   }
-  public void setAmount( String value) {
-    this.amount = value;
+  public void setReason( String value) {
+    this.reason = value;
   }
   public String getAmount() {
     return this.amount;
   }
-  public void setValue( Float value) {
-    this.value = value;
+  public void setAmount( String value) {
+    this.amount = value;
   }
   public Float getValue() {
     return this.value;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setValue( Float value) {
+    this.value = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("amount" + "[" + String.valueOf(this.amount) + "]\n"); 
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitAdjudicationModel]:" + "\n");
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("reason" + "->" + this.reason + "\n"); 
+     builder.append("amount" + "->" + this.amount + "\n"); 
+     builder.append("value" + "->" + this.value + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ExplanationOfBenefitAdjudicationModel]:" + "\n");
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("reason" + "->" + this.reason + "\n"); 
+     builder.append("amount" + "->" + this.amount + "\n"); 
+     builder.append("value" + "->" + this.value + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

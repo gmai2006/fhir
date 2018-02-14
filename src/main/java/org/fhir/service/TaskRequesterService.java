@@ -32,7 +32,5 @@ public interface TaskRequesterService {
 	public TaskRequester find(String id);
   public List<TaskRequester> select(int maxResult);
   public List<TaskRequester> selectAll();
-  public TaskRequester create(TaskRequester bean);
-  public TaskRequester update(TaskRequester bean);
   public void delete(TaskRequester bean);
 }

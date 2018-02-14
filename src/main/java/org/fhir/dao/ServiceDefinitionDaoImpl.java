@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ServiceDefinitionModel;
 import org.fhir.pojo.ServiceDefinition;
+import org.fhir.pojo.ServiceDefinitionHelper;
 
 public class ServiceDefinitionDaoImpl implements ServiceDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ServiceDefinitionDaoImpl implements ServiceDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ServiceDefinitionModel a", ServiceDefinitionModel.class).setMaxResults(maxResult);
       List<ServiceDefinitionModel> models = query.getResultList();
-      return ServiceDefinition.fromArray(models);
+      return ServiceDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ServiceDefinitionDaoImpl implements ServiceDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ServiceDefinitionModel a", ServiceDefinitionModel.class);
       List<ServiceDefinitionModel> models = query.getResultList();
-      return ServiceDefinition.fromArray(models);
+      return ServiceDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ServiceDefinitionDaoImpl implements ServiceDefinitionDao {
       ServiceDefinitionModel model = em.merge(new ServiceDefinitionModel(e));
       return new ServiceDefinition(model);
   }
-
   @Override
   @Transactional
   public void delete(ServiceDefinition e) {

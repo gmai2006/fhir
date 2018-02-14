@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ProcessRequestItemModel;
 import org.fhir.pojo.ProcessRequestItem;
+import org.fhir.pojo.ProcessRequestItemHelper;
 
 public class ProcessRequestItemDaoImpl implements ProcessRequestItemDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ProcessRequestItemDaoImpl implements ProcessRequestItemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProcessRequestItemModel a", ProcessRequestItemModel.class).setMaxResults(maxResult);
       List<ProcessRequestItemModel> models = query.getResultList();
-      return ProcessRequestItem.fromArray(models);
+      return ProcessRequestItemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ProcessRequestItemDaoImpl implements ProcessRequestItemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProcessRequestItemModel a", ProcessRequestItemModel.class);
       List<ProcessRequestItemModel> models = query.getResultList();
-      return ProcessRequestItem.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ProcessRequestItem create(ProcessRequestItem e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ProcessRequestItemModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ProcessRequestItem update(ProcessRequestItem e) {
-      final EntityManager em = entityManagerProvider.get();
-      ProcessRequestItemModel model = em.merge(new ProcessRequestItemModel(e));
-      return new ProcessRequestItem(model);
+      return ProcessRequestItemHelper.fromArray2Array(models);
   }
 
   @Override

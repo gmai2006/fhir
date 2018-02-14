@@ -78,6 +78,7 @@ public class NutritionOrderOralDiet  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -99,23 +100,18 @@ public class NutritionOrderOralDiet  {
 
   public NutritionOrderOralDiet(NutritionOrderOralDietModel o) {
     this.id = o.getId();
-      this.type = CodeableConcept.fromArray(o.getType());
-      this.schedule = Timing.fromArray(o.getSchedule());
-      this.nutrient = NutritionOrderNutrient.fromArray(o.getNutrient());
-
-      this.texture = NutritionOrderTexture.fromArray(o.getTexture());
-
-      this.fluidConsistencyType = CodeableConcept.fromArray(o.getFluidConsistencyType());
-      if (null != o.getInstruction()) {
-        this.instruction = new String(o.getInstruction());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getNutrient() && !o.getNutrient().isEmpty()) {
+    	this.nutrient = NutritionOrderNutrientHelper.fromArray2Array(o.getNutrient());
+    }
+    if (null != o.getTexture() && !o.getTexture().isEmpty()) {
+    	this.texture = NutritionOrderTextureHelper.fromArray2Array(o.getTexture());
+    }
+    if (null != o.getInstruction()) {
+      this.instruction = o.getInstruction();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( java.util.List<CodeableConcept> value) {
@@ -188,51 +184,20 @@ public class NutritionOrderOralDiet  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("schedule" + "[" + String.valueOf(this.schedule) + "]\n"); 
-     builder.append("nutrient" + "[" + String.valueOf(this.nutrient) + "]\n"); 
-     builder.append("texture" + "[" + String.valueOf(this.texture) + "]\n"); 
-     builder.append("fluidConsistencyType" + "[" + String.valueOf(this.fluidConsistencyType) + "]\n"); 
-     builder.append("instruction" + "[" + String.valueOf(this.instruction) + "]\n"); 
-     builder.append("_instruction" + "[" + String.valueOf(this._instruction) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[NutritionOrderOralDiet]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.schedule != null) builder.append("schedule" + "->" + this.schedule.toString() + "\n"); 
+     if(this.nutrient != null) builder.append("nutrient" + "->" + this.nutrient.toString() + "\n"); 
+     if(this.texture != null) builder.append("texture" + "->" + this.texture.toString() + "\n"); 
+     if(this.fluidConsistencyType != null) builder.append("fluidConsistencyType" + "->" + this.fluidConsistencyType.toString() + "\n"); 
+     if(this.instruction != null) builder.append("instruction" + "->" + this.instruction.toString() + "\n"); 
+     if(this._instruction != null) builder.append("_instruction" + "->" + this._instruction.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<NutritionOrderOralDiet> fromArray(java.util.List<NutritionOrderOralDietModel> list) {
-    return (java.util.List<NutritionOrderOralDiet>)list.stream()
-      .map(model -> new NutritionOrderOralDiet(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<NutritionOrderOralDietModel> toModelArray(java.util.List<NutritionOrderOralDiet> list) {
-    return (java.util.List<NutritionOrderOralDietModel>)list.stream()
-      .map(model -> new NutritionOrderOralDietModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static NutritionOrderOralDiet fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, NutritionOrderOralDiet.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(NutritionOrderOralDiet o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<NutritionOrderOralDiet> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

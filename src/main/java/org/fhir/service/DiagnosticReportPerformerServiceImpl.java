@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DiagnosticReportPerformer create(DiagnosticReportPerformer bean) {
-  	requireNonNull(bean);
-    logger.info("create(DiagnosticReportPerformer={}) - entered bean ");
-
-    final DiagnosticReportPerformer result = dao.create(bean);
-
-    logger.info("create(DiagnosticReportPerformer) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DiagnosticReportPerformer update(DiagnosticReportPerformer bean) {
-  	requireNonNull(bean);
-    logger.info("update(DiagnosticReportPerformer={}) - entered bean ");
-
-    final DiagnosticReportPerformer result = dao.update(bean);
-
-    logger.info("update(DiagnosticReportPerformer) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

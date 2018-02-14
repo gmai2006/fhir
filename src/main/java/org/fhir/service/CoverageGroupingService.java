@@ -32,7 +32,5 @@ public interface CoverageGroupingService {
 	public CoverageGrouping find(String id);
   public List<CoverageGrouping> select(int maxResult);
   public List<CoverageGrouping> selectAll();
-  public CoverageGrouping create(CoverageGrouping bean);
-  public CoverageGrouping update(CoverageGrouping bean);
   public void delete(CoverageGrouping bean);
 }

@@ -32,7 +32,5 @@ public interface MedicationRequestDispenseRequestService {
 	public MedicationRequestDispenseRequest find(String id);
   public List<MedicationRequestDispenseRequest> select(int maxResult);
   public List<MedicationRequestDispenseRequest> selectAll();
-  public MedicationRequestDispenseRequest create(MedicationRequestDispenseRequest bean);
-  public MedicationRequestDispenseRequest update(MedicationRequestDispenseRequest bean);
   public void delete(MedicationRequestDispenseRequest bean);
 }

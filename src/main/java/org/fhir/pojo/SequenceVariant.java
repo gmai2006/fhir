@@ -100,6 +100,7 @@ public class SequenceVariant  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -121,37 +122,27 @@ public class SequenceVariant  {
 
   public SequenceVariant(SequenceVariantModel o) {
     this.id = o.getId();
-      if (null != o.getStart()) {
-        this.start = new Float(o.getStart());
-      }
-
-      if (null != o.getEnd()) {
-        this.end = new Float(o.getEnd());
-      }
-
-      if (null != o.getObservedAllele()) {
-        this.observedAllele = new String(o.getObservedAllele());
-      }
-
-      if (null != o.getReferenceAllele()) {
-        this.referenceAllele = new String(o.getReferenceAllele());
-      }
-
-      if (null != o.getCigar()) {
-        this.cigar = new String(o.getCigar());
-      }
-
-      if (null != o.getVariantPointer()) {
-        this.variantPointer = new Reference(o.getVariantPointer());
-        this.variantPointer.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getStart()) {
+      this.start = o.getStart();
+    }
+    if (null != o.getEnd()) {
+      this.end = o.getEnd();
+    }
+    if (null != o.getObservedAllele()) {
+      this.observedAllele = o.getObservedAllele();
+    }
+    if (null != o.getReferenceAllele()) {
+      this.referenceAllele = o.getReferenceAllele();
+    }
+    if (null != o.getCigar()) {
+      this.cigar = o.getCigar();
+    }
+    if (null != o.getVariantPointer() && !o.getVariantPointer().isEmpty()) {
+      this.variantPointer = new Reference(o.getVariantPointer().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setStart( Float value) {
@@ -248,55 +239,24 @@ public class SequenceVariant  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("start" + "[" + String.valueOf(this.start) + "]\n"); 
-     builder.append("_start" + "[" + String.valueOf(this._start) + "]\n"); 
-     builder.append("end" + "[" + String.valueOf(this.end) + "]\n"); 
-     builder.append("_end" + "[" + String.valueOf(this._end) + "]\n"); 
-     builder.append("observedAllele" + "[" + String.valueOf(this.observedAllele) + "]\n"); 
-     builder.append("_observedAllele" + "[" + String.valueOf(this._observedAllele) + "]\n"); 
-     builder.append("referenceAllele" + "[" + String.valueOf(this.referenceAllele) + "]\n"); 
-     builder.append("_referenceAllele" + "[" + String.valueOf(this._referenceAllele) + "]\n"); 
-     builder.append("cigar" + "[" + String.valueOf(this.cigar) + "]\n"); 
-     builder.append("_cigar" + "[" + String.valueOf(this._cigar) + "]\n"); 
-     builder.append("variantPointer" + "[" + String.valueOf(this.variantPointer) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SequenceVariant]:" + "\n");
+     if(this.start != null) builder.append("start" + "->" + this.start.toString() + "\n"); 
+     if(this._start != null) builder.append("_start" + "->" + this._start.toString() + "\n"); 
+     if(this.end != null) builder.append("end" + "->" + this.end.toString() + "\n"); 
+     if(this._end != null) builder.append("_end" + "->" + this._end.toString() + "\n"); 
+     if(this.observedAllele != null) builder.append("observedAllele" + "->" + this.observedAllele.toString() + "\n"); 
+     if(this._observedAllele != null) builder.append("_observedAllele" + "->" + this._observedAllele.toString() + "\n"); 
+     if(this.referenceAllele != null) builder.append("referenceAllele" + "->" + this.referenceAllele.toString() + "\n"); 
+     if(this._referenceAllele != null) builder.append("_referenceAllele" + "->" + this._referenceAllele.toString() + "\n"); 
+     if(this.cigar != null) builder.append("cigar" + "->" + this.cigar.toString() + "\n"); 
+     if(this._cigar != null) builder.append("_cigar" + "->" + this._cigar.toString() + "\n"); 
+     if(this.variantPointer != null) builder.append("variantPointer" + "->" + this.variantPointer.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<SequenceVariant> fromArray(java.util.List<SequenceVariantModel> list) {
-    return (java.util.List<SequenceVariant>)list.stream()
-      .map(model -> new SequenceVariant(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SequenceVariantModel> toModelArray(java.util.List<SequenceVariant> list) {
-    return (java.util.List<SequenceVariantModel>)list.stream()
-      .map(model -> new SequenceVariantModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SequenceVariant fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SequenceVariant.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SequenceVariant o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SequenceVariant> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

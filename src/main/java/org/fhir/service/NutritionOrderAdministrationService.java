@@ -32,7 +32,5 @@ public interface NutritionOrderAdministrationService {
 	public NutritionOrderAdministration find(String id);
   public List<NutritionOrderAdministration> select(int maxResult);
   public List<NutritionOrderAdministration> selectAll();
-  public NutritionOrderAdministration create(NutritionOrderAdministration bean);
-  public NutritionOrderAdministration update(NutritionOrderAdministration bean);
   public void delete(NutritionOrderAdministration bean);
 }

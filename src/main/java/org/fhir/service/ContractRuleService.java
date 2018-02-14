@@ -32,7 +32,5 @@ public interface ContractRuleService {
 	public ContractRule find(String id);
   public List<ContractRule> select(int maxResult);
   public List<ContractRule> selectAll();
-  public ContractRule create(ContractRule bean);
-  public ContractRule update(ContractRule bean);
   public void delete(ContractRule bean);
 }

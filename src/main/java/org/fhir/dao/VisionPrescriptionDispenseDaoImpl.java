@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.VisionPrescriptionDispenseModel;
 import org.fhir.pojo.VisionPrescriptionDispense;
+import org.fhir.pojo.VisionPrescriptionDispenseHelper;
 
 public class VisionPrescriptionDispenseDaoImpl implements VisionPrescriptionDispenseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class VisionPrescriptionDispenseDaoImpl implements VisionPrescriptionDisp
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from VisionPrescriptionDispenseModel a", VisionPrescriptionDispenseModel.class).setMaxResults(maxResult);
       List<VisionPrescriptionDispenseModel> models = query.getResultList();
-      return VisionPrescriptionDispense.fromArray(models);
+      return VisionPrescriptionDispenseHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class VisionPrescriptionDispenseDaoImpl implements VisionPrescriptionDisp
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from VisionPrescriptionDispenseModel a", VisionPrescriptionDispenseModel.class);
       List<VisionPrescriptionDispenseModel> models = query.getResultList();
-      return VisionPrescriptionDispense.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public VisionPrescriptionDispense create(VisionPrescriptionDispense e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new VisionPrescriptionDispenseModel(e));
-      return e;
-  }
-
-  @Transactional
-  public VisionPrescriptionDispense update(VisionPrescriptionDispense e) {
-      final EntityManager em = entityManagerProvider.get();
-      VisionPrescriptionDispenseModel model = em.merge(new VisionPrescriptionDispenseModel(e));
-      return new VisionPrescriptionDispense(model);
+      return VisionPrescriptionDispenseHelper.fromArray2Array(models);
   }
 
   @Override

@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
 @Entity
 @Table(name="encounterhospitalization")
-public class EncounterHospitalizationModel  {
+public class EncounterHospitalizationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669695466283L;
   /**
   * Description: "Pre-admission identifier."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -53,13 +54,13 @@ public class EncounterHospitalizationModel  {
   @Column(name="\"origin_id\"")
   private String origin_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`origin_id`", insertable=false, updatable=false)
-  private ReferenceModel origin;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="origin_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> origin;
 
   /**
   * Description: "From where patient was admitted (physician referral, transfer)."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -68,7 +69,7 @@ public class EncounterHospitalizationModel  {
 
   /**
   * Description: "Whether this hospitalization is a readmission and why if known."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -77,7 +78,7 @@ public class EncounterHospitalizationModel  {
 
   /**
   * Description: "Diet preferences reported by the patient."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -86,7 +87,7 @@ public class EncounterHospitalizationModel  {
 
   /**
   * Description: "Special courtesies (VIP, board member)."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -95,7 +96,7 @@ public class EncounterHospitalizationModel  {
 
   /**
   * Description: "Any special requests that have been made for this hospitalization encounter, such as the provision of specific equipment or other things."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -109,13 +110,13 @@ public class EncounterHospitalizationModel  {
   @Column(name="\"destination_id\"")
   private String destination_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`destination_id`", insertable=false, updatable=false)
-  private ReferenceModel destination;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="destination_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> destination;
 
   /**
   * Description: "Category or kind of location after discharge."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -125,7 +126,7 @@ public class EncounterHospitalizationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -137,6 +138,7 @@ public class EncounterHospitalizationModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -145,138 +147,154 @@ public class EncounterHospitalizationModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public EncounterHospitalizationModel() {
   }
 
-  public EncounterHospitalizationModel(EncounterHospitalization o) {
-    this.id = o.getId();
-      this.preAdmissionIdentifier = Identifier.toJson(o.getPreAdmissionIdentifier());
-      if (null != o.getOrigin()) {
-      	this.origin_id = "origin" + this.getId();
-        this.origin = new ReferenceModel(o.getOrigin());
-        this.origin.setId(this.origin_id);
-        this.origin.parent_id = this.origin.getId();
-      }
-
-      this.admitSource = CodeableConcept.toJson(o.getAdmitSource());
-      this.reAdmission = CodeableConcept.toJson(o.getReAdmission());
-      this.dietPreference = CodeableConcept.toJson(o.getDietPreference());
-      this.specialCourtesy = CodeableConcept.toJson(o.getSpecialCourtesy());
-      this.specialArrangement = CodeableConcept.toJson(o.getSpecialArrangement());
-      if (null != o.getDestination()) {
-      	this.destination_id = "destination" + this.getId();
-        this.destination = new ReferenceModel(o.getDestination());
-        this.destination.setId(this.destination_id);
-        this.destination.parent_id = this.destination.getId();
-      }
-
-      this.dischargeDisposition = CodeableConcept.toJson(o.getDischargeDisposition());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public EncounterHospitalizationModel(EncounterHospitalization o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.preAdmissionIdentifier = IdentifierHelper.toJson(o.getPreAdmissionIdentifier());
+    if (null != o.getOrigin() ) {
+    	this.origin_id = "origin" + this.parent_id;
+    	this.origin = ReferenceHelper.toModel(o.getOrigin(), this.origin_id);
+    }
+    this.admitSource = CodeableConceptHelper.toJson(o.getAdmitSource());
+    this.reAdmission = CodeableConceptHelper.toJson(o.getReAdmission());
+    if (null != o.getDestination() ) {
+    	this.destination_id = "destination" + this.parent_id;
+    	this.destination = ReferenceHelper.toModel(o.getDestination(), this.destination_id);
+    }
+    this.dischargeDisposition = CodeableConceptHelper.toJson(o.getDischargeDisposition());
   }
 
-  public void setPreAdmissionIdentifier( String value) {
-    this.preAdmissionIdentifier = value;
-  }
   public String getPreAdmissionIdentifier() {
     return this.preAdmissionIdentifier;
   }
-  public void setOrigin( ReferenceModel value) {
-    this.origin = value;
+  public void setPreAdmissionIdentifier( String value) {
+    this.preAdmissionIdentifier = value;
   }
-  public ReferenceModel getOrigin() {
+  public java.util.List<ReferenceModel> getOrigin() {
     return this.origin;
   }
-  public void setAdmitSource( String value) {
-    this.admitSource = value;
+  public void setOrigin( java.util.List<ReferenceModel> value) {
+    this.origin = value;
   }
   public String getAdmitSource() {
     return this.admitSource;
   }
-  public void setReAdmission( String value) {
-    this.reAdmission = value;
+  public void setAdmitSource( String value) {
+    this.admitSource = value;
   }
   public String getReAdmission() {
     return this.reAdmission;
   }
-  public void setDietPreference( String value) {
-    this.dietPreference = value;
+  public void setReAdmission( String value) {
+    this.reAdmission = value;
   }
   public String getDietPreference() {
     return this.dietPreference;
   }
-  public void setSpecialCourtesy( String value) {
-    this.specialCourtesy = value;
+  public void setDietPreference( String value) {
+    this.dietPreference = value;
   }
   public String getSpecialCourtesy() {
     return this.specialCourtesy;
   }
-  public void setSpecialArrangement( String value) {
-    this.specialArrangement = value;
+  public void setSpecialCourtesy( String value) {
+    this.specialCourtesy = value;
   }
   public String getSpecialArrangement() {
     return this.specialArrangement;
   }
-  public void setDestination( ReferenceModel value) {
-    this.destination = value;
+  public void setSpecialArrangement( String value) {
+    this.specialArrangement = value;
   }
-  public ReferenceModel getDestination() {
+  public java.util.List<ReferenceModel> getDestination() {
     return this.destination;
   }
-  public void setDischargeDisposition( String value) {
-    this.dischargeDisposition = value;
+  public void setDestination( java.util.List<ReferenceModel> value) {
+    this.destination = value;
   }
   public String getDischargeDisposition() {
     return this.dischargeDisposition;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setDischargeDisposition( String value) {
+    this.dischargeDisposition = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("preAdmissionIdentifier" + "[" + String.valueOf(this.preAdmissionIdentifier) + "]\n"); 
-     builder.append("origin" + "[" + String.valueOf(this.origin) + "]\n"); 
-     builder.append("admitSource" + "[" + String.valueOf(this.admitSource) + "]\n"); 
-     builder.append("reAdmission" + "[" + String.valueOf(this.reAdmission) + "]\n"); 
-     builder.append("dietPreference" + "[" + String.valueOf(this.dietPreference) + "]\n"); 
-     builder.append("specialCourtesy" + "[" + String.valueOf(this.specialCourtesy) + "]\n"); 
-     builder.append("specialArrangement" + "[" + String.valueOf(this.specialArrangement) + "]\n"); 
-     builder.append("destination" + "[" + String.valueOf(this.destination) + "]\n"); 
-     builder.append("dischargeDisposition" + "[" + String.valueOf(this.dischargeDisposition) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[EncounterHospitalizationModel]:" + "\n");
+     builder.append("preAdmissionIdentifier" + "->" + this.preAdmissionIdentifier + "\n"); 
+     builder.append("admitSource" + "->" + this.admitSource + "\n"); 
+     builder.append("reAdmission" + "->" + this.reAdmission + "\n"); 
+     builder.append("dietPreference" + "->" + this.dietPreference + "\n"); 
+     builder.append("specialCourtesy" + "->" + this.specialCourtesy + "\n"); 
+     builder.append("specialArrangement" + "->" + this.specialArrangement + "\n"); 
+     builder.append("dischargeDisposition" + "->" + this.dischargeDisposition + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[EncounterHospitalizationModel]:" + "\n");
+     builder.append("preAdmissionIdentifier" + "->" + this.preAdmissionIdentifier + "\n"); 
+     builder.append("origin" + "->" + this.origin + "\n"); 
+     builder.append("admitSource" + "->" + this.admitSource + "\n"); 
+     builder.append("reAdmission" + "->" + this.reAdmission + "\n"); 
+     builder.append("dietPreference" + "->" + this.dietPreference + "\n"); 
+     builder.append("specialCourtesy" + "->" + this.specialCourtesy + "\n"); 
+     builder.append("specialArrangement" + "->" + this.specialArrangement + "\n"); 
+     builder.append("destination" + "->" + this.destination + "\n"); 
+     builder.append("dischargeDisposition" + "->" + this.dischargeDisposition + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

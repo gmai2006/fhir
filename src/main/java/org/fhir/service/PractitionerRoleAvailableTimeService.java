@@ -32,7 +32,5 @@ public interface PractitionerRoleAvailableTimeService {
 	public PractitionerRoleAvailableTime find(String id);
   public List<PractitionerRoleAvailableTime> select(int maxResult);
   public List<PractitionerRoleAvailableTime> selectAll();
-  public PractitionerRoleAvailableTime create(PractitionerRoleAvailableTime bean);
-  public PractitionerRoleAvailableTime update(PractitionerRoleAvailableTime bean);
   public void delete(PractitionerRoleAvailableTime bean);
 }

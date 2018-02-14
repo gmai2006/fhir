@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.OrganizationModel;
 import org.fhir.pojo.Organization;
+import org.fhir.pojo.OrganizationHelper;
 
 public class OrganizationDaoImpl implements OrganizationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OrganizationModel a", OrganizationModel.class).setMaxResults(maxResult);
       List<OrganizationModel> models = query.getResultList();
-      return Organization.fromArray(models);
+      return OrganizationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OrganizationModel a", OrganizationModel.class);
       List<OrganizationModel> models = query.getResultList();
-      return Organization.fromArray(models);
+      return OrganizationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class OrganizationDaoImpl implements OrganizationDao {
       OrganizationModel model = em.merge(new OrganizationModel(e));
       return new Organization(model);
   }
-
   @Override
   @Transactional
   public void delete(Organization e) {

@@ -32,7 +32,5 @@ public interface GoalTargetService {
 	public GoalTarget find(String id);
   public List<GoalTarget> select(int maxResult);
   public List<GoalTarget> selectAll();
-  public GoalTarget create(GoalTarget bean);
-  public GoalTarget update(GoalTarget bean);
   public void delete(GoalTarget bean);
 }

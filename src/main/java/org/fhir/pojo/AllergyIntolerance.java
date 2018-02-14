@@ -211,6 +211,7 @@ public class AllergyIntolerance  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -262,92 +263,67 @@ public class AllergyIntolerance  {
 
   public AllergyIntolerance(AllergyIntoleranceModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getClinicalStatus()) {
-        this.clinicalStatus = new String(o.getClinicalStatus());
-      }
-
-      if (null != o.getVerificationStatus()) {
-        this.verificationStatus = new String(o.getVerificationStatus());
-      }
-
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      this.category = org.fhir.utils.JsonUtils.json2Array(o.getCategory());
-
-      if (null != o.getCriticality()) {
-        this.criticality = new String(o.getCriticality());
-      }
-
-      this.code = CodeableConcept.fromJson(o.getCode());
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      if (null != o.getOnsetDateTime()) {
-        this.onsetDateTime = new String(o.getOnsetDateTime());
-      }
-
-      this.onsetAge = Age.fromJson(o.getOnsetAge());
-      this.onsetPeriod = Period.fromJson(o.getOnsetPeriod());
-      this.onsetRange = Range.fromJson(o.getOnsetRange());
-      if (null != o.getOnsetString()) {
-        this.onsetString = new String(o.getOnsetString());
-      }
-
-      if (null != o.getAssertedDate()) {
-        this.assertedDate = new String(o.getAssertedDate());
-      }
-
-      if (null != o.getRecorder()) {
-        this.recorder = new Reference(o.getRecorder());
-        this.recorder.setId(this.getId());
-      }
-
-      if (null != o.getAsserter()) {
-        this.asserter = new Reference(o.getAsserter());
-        this.asserter.setId(this.getId());
-      }
-
-      if (null != o.getLastOccurrence()) {
-        this.lastOccurrence = new String(o.getLastOccurrence());
-      }
-
-      this.note = Annotation.fromArray(o.getNote());
-      this.reaction = AllergyIntoleranceReaction.fromArray(o.getReaction());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getClinicalStatus()) {
+      this.clinicalStatus = o.getClinicalStatus();
+    }
+    if (null != o.getVerificationStatus()) {
+      this.verificationStatus = o.getVerificationStatus();
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (o.getCategory() != null) {
+    	this.category = org.fhir.utils.JsonUtils.json2Array(o.getCategory());
+    }
+    if (null != o.getCriticality()) {
+      this.criticality = o.getCriticality();
+    }
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    if (null != o.getOnsetDateTime()) {
+      this.onsetDateTime = o.getOnsetDateTime();
+    }
+    this.onsetAge = AgeHelper.fromJson(o.getOnsetAge());
+    this.onsetPeriod = PeriodHelper.fromJson(o.getOnsetPeriod());
+    this.onsetRange = RangeHelper.fromJson(o.getOnsetRange());
+    if (null != o.getOnsetString()) {
+      this.onsetString = o.getOnsetString();
+    }
+    if (null != o.getAssertedDate()) {
+      this.assertedDate = o.getAssertedDate();
+    }
+    if (null != o.getRecorder() && !o.getRecorder().isEmpty()) {
+      this.recorder = new Reference(o.getRecorder().get(0));
+    }
+    if (null != o.getAsserter() && !o.getAsserter().isEmpty()) {
+      this.asserter = new Reference(o.getAsserter().get(0));
+    }
+    if (null != o.getLastOccurrence()) {
+      this.lastOccurrence = o.getLastOccurrence();
+    }
+    if (null != o.getReaction() && !o.getReaction().isEmpty()) {
+    	this.reaction = AllergyIntoleranceReactionHelper.fromArray2Array(o.getReaction());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -594,46 +570,47 @@ public class AllergyIntolerance  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("clinicalStatus" + "[" + String.valueOf(this.clinicalStatus) + "]\n"); 
-     builder.append("_clinicalStatus" + "[" + String.valueOf(this._clinicalStatus) + "]\n"); 
-     builder.append("verificationStatus" + "[" + String.valueOf(this.verificationStatus) + "]\n"); 
-     builder.append("_verificationStatus" + "[" + String.valueOf(this._verificationStatus) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("_category" + "[" + String.valueOf(this._category) + "]\n"); 
-     builder.append("criticality" + "[" + String.valueOf(this.criticality) + "]\n"); 
-     builder.append("_criticality" + "[" + String.valueOf(this._criticality) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("onsetDateTime" + "[" + String.valueOf(this.onsetDateTime) + "]\n"); 
-     builder.append("_onsetDateTime" + "[" + String.valueOf(this._onsetDateTime) + "]\n"); 
-     builder.append("onsetAge" + "[" + String.valueOf(this.onsetAge) + "]\n"); 
-     builder.append("onsetPeriod" + "[" + String.valueOf(this.onsetPeriod) + "]\n"); 
-     builder.append("onsetRange" + "[" + String.valueOf(this.onsetRange) + "]\n"); 
-     builder.append("onsetString" + "[" + String.valueOf(this.onsetString) + "]\n"); 
-     builder.append("_onsetString" + "[" + String.valueOf(this._onsetString) + "]\n"); 
-     builder.append("assertedDate" + "[" + String.valueOf(this.assertedDate) + "]\n"); 
-     builder.append("_assertedDate" + "[" + String.valueOf(this._assertedDate) + "]\n"); 
-     builder.append("recorder" + "[" + String.valueOf(this.recorder) + "]\n"); 
-     builder.append("asserter" + "[" + String.valueOf(this.asserter) + "]\n"); 
-     builder.append("lastOccurrence" + "[" + String.valueOf(this.lastOccurrence) + "]\n"); 
-     builder.append("_lastOccurrence" + "[" + String.valueOf(this._lastOccurrence) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("reaction" + "[" + String.valueOf(this.reaction) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[AllergyIntolerance]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.clinicalStatus != null) builder.append("clinicalStatus" + "->" + this.clinicalStatus.toString() + "\n"); 
+     if(this._clinicalStatus != null) builder.append("_clinicalStatus" + "->" + this._clinicalStatus.toString() + "\n"); 
+     if(this.verificationStatus != null) builder.append("verificationStatus" + "->" + this.verificationStatus.toString() + "\n"); 
+     if(this._verificationStatus != null) builder.append("_verificationStatus" + "->" + this._verificationStatus.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this._category != null) builder.append("_category" + "->" + this._category.toString() + "\n"); 
+     if(this.criticality != null) builder.append("criticality" + "->" + this.criticality.toString() + "\n"); 
+     if(this._criticality != null) builder.append("_criticality" + "->" + this._criticality.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.onsetDateTime != null) builder.append("onsetDateTime" + "->" + this.onsetDateTime.toString() + "\n"); 
+     if(this._onsetDateTime != null) builder.append("_onsetDateTime" + "->" + this._onsetDateTime.toString() + "\n"); 
+     if(this.onsetAge != null) builder.append("onsetAge" + "->" + this.onsetAge.toString() + "\n"); 
+     if(this.onsetPeriod != null) builder.append("onsetPeriod" + "->" + this.onsetPeriod.toString() + "\n"); 
+     if(this.onsetRange != null) builder.append("onsetRange" + "->" + this.onsetRange.toString() + "\n"); 
+     if(this.onsetString != null) builder.append("onsetString" + "->" + this.onsetString.toString() + "\n"); 
+     if(this._onsetString != null) builder.append("_onsetString" + "->" + this._onsetString.toString() + "\n"); 
+     if(this.assertedDate != null) builder.append("assertedDate" + "->" + this.assertedDate.toString() + "\n"); 
+     if(this._assertedDate != null) builder.append("_assertedDate" + "->" + this._assertedDate.toString() + "\n"); 
+     if(this.recorder != null) builder.append("recorder" + "->" + this.recorder.toString() + "\n"); 
+     if(this.asserter != null) builder.append("asserter" + "->" + this.asserter.toString() + "\n"); 
+     if(this.lastOccurrence != null) builder.append("lastOccurrence" + "->" + this.lastOccurrence.toString() + "\n"); 
+     if(this._lastOccurrence != null) builder.append("_lastOccurrence" + "->" + this._lastOccurrence.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.reaction != null) builder.append("reaction" + "->" + this.reaction.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -735,36 +712,4 @@ public class AllergyIntolerance  {
   	}
   }
 
-  public static java.util.List<AllergyIntolerance> fromArray(java.util.List<AllergyIntoleranceModel> list) {
-    return (java.util.List<AllergyIntolerance>)list.stream()
-      .map(model -> new AllergyIntolerance(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AllergyIntoleranceModel> toModelArray(java.util.List<AllergyIntolerance> list) {
-    return (java.util.List<AllergyIntoleranceModel>)list.stream()
-      .map(model -> new AllergyIntoleranceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AllergyIntolerance fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AllergyIntolerance.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AllergyIntolerance o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AllergyIntolerance> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

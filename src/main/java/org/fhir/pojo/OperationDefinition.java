@@ -269,6 +269,7 @@ public class OperationDefinition  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -320,114 +321,90 @@ public class OperationDefinition  {
 
   public OperationDefinition(OperationDefinitionModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      if (null != o.getUrl()) {
-        this.url = new String(o.getUrl());
-      }
-
-      if (null != o.getVersion()) {
-        this.version = new String(o.getVersion());
-      }
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getKind()) {
-        this.kind = new String(o.getKind());
-      }
-
-      if (null != o.getExperimental()) {
-        this.experimental = new Boolean(o.getExperimental());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      if (null != o.getPublisher()) {
-        this.publisher = new String(o.getPublisher());
-      }
-
-      this.contact = ContactDetail.fromArray(o.getContact());
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.useContext = UsageContext.fromArray(o.getUseContext());
-
-      this.jurisdiction = CodeableConcept.fromArray(o.getJurisdiction());
-      if (null != o.getPurpose()) {
-        this.purpose = new String(o.getPurpose());
-      }
-
-      if (null != o.getIdempotent()) {
-        this.idempotent = new Boolean(o.getIdempotent());
-      }
-
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getComment()) {
-        this.comment = new String(o.getComment());
-      }
-
-      if (null != o.getBase()) {
-        this.base = new Reference(o.getBase());
-        this.base.setId(this.getId());
-      }
-
-      this.resource = org.fhir.utils.JsonUtils.json2Array(o.getResource());
-
-      if (null != o.getSystem()) {
-        this.system = new Boolean(o.getSystem());
-      }
-
-      if (null != o.getType()) {
-        this.type = new Boolean(o.getType());
-      }
-
-      if (null != o.getInstance()) {
-        this.instance = new Boolean(o.getInstance());
-      }
-
-      this.parameter = OperationDefinitionParameter.fromArray(o.getParameter());
-      this.overload = OperationDefinitionOverload.fromArray(o.getOverload());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getKind()) {
+      this.kind = o.getKind();
+    }
+    if (null != o.getExperimental()) {
+      this.experimental = o.getExperimental();
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getPublisher()) {
+      this.publisher = o.getPublisher();
+    }
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact = ContactDetailHelper.fromArray2Array(o.getContact());
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
+    }
+    if (null != o.getPurpose()) {
+      this.purpose = o.getPurpose();
+    }
+    if (null != o.getIdempotent()) {
+      this.idempotent = o.getIdempotent();
+    }
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getComment()) {
+      this.comment = o.getComment();
+    }
+    if (null != o.getBase() && !o.getBase().isEmpty()) {
+      this.base = new Reference(o.getBase().get(0));
+    }
+    if (o.getResource() != null) {
+    	this.resource = org.fhir.utils.JsonUtils.json2Array(o.getResource());
+    }
+    if (null != o.getSystem()) {
+      this.system = o.getSystem();
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getInstance()) {
+      this.instance = o.getInstance();
+    }
+    if (null != o.getParameter() && !o.getParameter().isEmpty()) {
+    	this.parameter = OperationDefinitionParameterHelper.fromArray2Array(o.getParameter());
+    }
+    if (null != o.getOverload() && !o.getOverload().isEmpty()) {
+    	this.overload = OperationDefinitionOverloadHelper.fromArray2Array(o.getOverload());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -746,58 +723,59 @@ public class OperationDefinition  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("kind" + "[" + String.valueOf(this.kind) + "]\n"); 
-     builder.append("_kind" + "[" + String.valueOf(this._kind) + "]\n"); 
-     builder.append("experimental" + "[" + String.valueOf(this.experimental) + "]\n"); 
-     builder.append("_experimental" + "[" + String.valueOf(this._experimental) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("_publisher" + "[" + String.valueOf(this._publisher) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("_purpose" + "[" + String.valueOf(this._purpose) + "]\n"); 
-     builder.append("idempotent" + "[" + String.valueOf(this.idempotent) + "]\n"); 
-     builder.append("_idempotent" + "[" + String.valueOf(this._idempotent) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("_comment" + "[" + String.valueOf(this._comment) + "]\n"); 
-     builder.append("base" + "[" + String.valueOf(this.base) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("_resource" + "[" + String.valueOf(this._resource) + "]\n"); 
-     builder.append("system" + "[" + String.valueOf(this.system) + "]\n"); 
-     builder.append("_system" + "[" + String.valueOf(this._system) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("instance" + "[" + String.valueOf(this.instance) + "]\n"); 
-     builder.append("_instance" + "[" + String.valueOf(this._instance) + "]\n"); 
-     builder.append("parameter" + "[" + String.valueOf(this.parameter) + "]\n"); 
-     builder.append("overload" + "[" + String.valueOf(this.overload) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[OperationDefinition]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.kind != null) builder.append("kind" + "->" + this.kind.toString() + "\n"); 
+     if(this._kind != null) builder.append("_kind" + "->" + this._kind.toString() + "\n"); 
+     if(this.experimental != null) builder.append("experimental" + "->" + this.experimental.toString() + "\n"); 
+     if(this._experimental != null) builder.append("_experimental" + "->" + this._experimental.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.publisher != null) builder.append("publisher" + "->" + this.publisher.toString() + "\n"); 
+     if(this._publisher != null) builder.append("_publisher" + "->" + this._publisher.toString() + "\n"); 
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.useContext != null) builder.append("useContext" + "->" + this.useContext.toString() + "\n"); 
+     if(this.jurisdiction != null) builder.append("jurisdiction" + "->" + this.jurisdiction.toString() + "\n"); 
+     if(this.purpose != null) builder.append("purpose" + "->" + this.purpose.toString() + "\n"); 
+     if(this._purpose != null) builder.append("_purpose" + "->" + this._purpose.toString() + "\n"); 
+     if(this.idempotent != null) builder.append("idempotent" + "->" + this.idempotent.toString() + "\n"); 
+     if(this._idempotent != null) builder.append("_idempotent" + "->" + this._idempotent.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
+     if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
+     if(this.base != null) builder.append("base" + "->" + this.base.toString() + "\n"); 
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
+     if(this._resource != null) builder.append("_resource" + "->" + this._resource.toString() + "\n"); 
+     if(this.system != null) builder.append("system" + "->" + this.system.toString() + "\n"); 
+     if(this._system != null) builder.append("_system" + "->" + this._system.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.instance != null) builder.append("instance" + "->" + this.instance.toString() + "\n"); 
+     if(this._instance != null) builder.append("_instance" + "->" + this._instance.toString() + "\n"); 
+     if(this.parameter != null) builder.append("parameter" + "->" + this.parameter.toString() + "\n"); 
+     if(this.overload != null) builder.append("overload" + "->" + this.overload.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -845,36 +823,4 @@ public class OperationDefinition  {
   	}
   }
 
-  public static java.util.List<OperationDefinition> fromArray(java.util.List<OperationDefinitionModel> list) {
-    return (java.util.List<OperationDefinition>)list.stream()
-      .map(model -> new OperationDefinition(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<OperationDefinitionModel> toModelArray(java.util.List<OperationDefinition> list) {
-    return (java.util.List<OperationDefinitionModel>)list.stream()
-      .map(model -> new OperationDefinitionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static OperationDefinition fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, OperationDefinition.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(OperationDefinition o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<OperationDefinition> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

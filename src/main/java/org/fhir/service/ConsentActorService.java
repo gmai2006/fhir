@@ -32,7 +32,5 @@ public interface ConsentActorService {
 	public ConsentActor find(String id);
   public List<ConsentActor> select(int maxResult);
   public List<ConsentActor> selectAll();
-  public ConsentActor create(ConsentActor bean);
-  public ConsentActor update(ConsentActor bean);
   public void delete(ConsentActor bean);
 }

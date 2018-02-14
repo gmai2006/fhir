@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public PlanDefinitionCondition create(PlanDefinitionCondition bean) {
-  	requireNonNull(bean);
-    logger.info("create(PlanDefinitionCondition={}) - entered bean ");
-
-    final PlanDefinitionCondition result = dao.create(bean);
-
-    logger.info("create(PlanDefinitionCondition) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public PlanDefinitionCondition update(PlanDefinitionCondition bean) {
-  	requireNonNull(bean);
-    logger.info("update(PlanDefinitionCondition={}) - entered bean ");
-
-    final PlanDefinitionCondition result = dao.update(bean);
-
-    logger.info("update(PlanDefinitionCondition) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

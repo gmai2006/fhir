@@ -34,10 +34,5 @@ public interface AccountCoverageDao {
   public List<AccountCoverage> select(int maxResult);
 
   public List<AccountCoverage> selectAll();
-
-  public AccountCoverage create(AccountCoverage e);
-
-  public AccountCoverage update(AccountCoverage e);
-
   public void delete(AccountCoverage e);
 }

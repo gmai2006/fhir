@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.BundleLinkModel;
 import org.fhir.pojo.BundleLink;
+import org.fhir.pojo.BundleLinkHelper;
 
 public class BundleLinkDaoImpl implements BundleLinkDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class BundleLinkDaoImpl implements BundleLinkDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BundleLinkModel a", BundleLinkModel.class).setMaxResults(maxResult);
       List<BundleLinkModel> models = query.getResultList();
-      return BundleLink.fromArray(models);
+      return BundleLinkHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class BundleLinkDaoImpl implements BundleLinkDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BundleLinkModel a", BundleLinkModel.class);
       List<BundleLinkModel> models = query.getResultList();
-      return BundleLink.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public BundleLink create(BundleLink e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new BundleLinkModel(e));
-      return e;
-  }
-
-  @Transactional
-  public BundleLink update(BundleLink e) {
-      final EntityManager em = entityManagerProvider.get();
-      BundleLinkModel model = em.merge(new BundleLinkModel(e));
-      return new BundleLink(model);
+      return BundleLinkHelper.fromArray2Array(models);
   }
 
   @Override

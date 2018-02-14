@@ -34,10 +34,5 @@ public interface ProcessRequestItemDao {
   public List<ProcessRequestItem> select(int maxResult);
 
   public List<ProcessRequestItem> selectAll();
-
-  public ProcessRequestItem create(ProcessRequestItem e);
-
-  public ProcessRequestItem update(ProcessRequestItem e);
-
   public void delete(ProcessRequestItem e);
 }

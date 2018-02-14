@@ -34,10 +34,8 @@ public interface ConditionDao {
   public List<Condition> select(int maxResult);
 
   public List<Condition> selectAll();
-
   public Condition create(Condition e);
 
   public Condition update(Condition e);
-
   public void delete(Condition e);
 }

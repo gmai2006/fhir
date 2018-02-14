@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.TimingRepeatModel;
 import org.fhir.pojo.TimingRepeat;
+import org.fhir.pojo.TimingRepeatHelper;
 
 public class TimingRepeatDaoImpl implements TimingRepeatDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class TimingRepeatDaoImpl implements TimingRepeatDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TimingRepeatModel a", TimingRepeatModel.class).setMaxResults(maxResult);
       List<TimingRepeatModel> models = query.getResultList();
-      return TimingRepeat.fromArray(models);
+      return TimingRepeatHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class TimingRepeatDaoImpl implements TimingRepeatDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TimingRepeatModel a", TimingRepeatModel.class);
       List<TimingRepeatModel> models = query.getResultList();
-      return TimingRepeat.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public TimingRepeat create(TimingRepeat e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new TimingRepeatModel(e));
-      return e;
-  }
-
-  @Transactional
-  public TimingRepeat update(TimingRepeat e) {
-      final EntityManager em = entityManagerProvider.get();
-      TimingRepeatModel model = em.merge(new TimingRepeatModel(e));
-      return new TimingRepeat(model);
+      return TimingRepeatHelper.fromArray2Array(models);
   }
 
   @Override

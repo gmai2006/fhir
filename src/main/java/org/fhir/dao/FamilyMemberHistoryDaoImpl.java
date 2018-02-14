@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.FamilyMemberHistoryModel;
 import org.fhir.pojo.FamilyMemberHistory;
+import org.fhir.pojo.FamilyMemberHistoryHelper;
 
 public class FamilyMemberHistoryDaoImpl implements FamilyMemberHistoryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class FamilyMemberHistoryDaoImpl implements FamilyMemberHistoryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from FamilyMemberHistoryModel a", FamilyMemberHistoryModel.class).setMaxResults(maxResult);
       List<FamilyMemberHistoryModel> models = query.getResultList();
-      return FamilyMemberHistory.fromArray(models);
+      return FamilyMemberHistoryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class FamilyMemberHistoryDaoImpl implements FamilyMemberHistoryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from FamilyMemberHistoryModel a", FamilyMemberHistoryModel.class);
       List<FamilyMemberHistoryModel> models = query.getResultList();
-      return FamilyMemberHistory.fromArray(models);
+      return FamilyMemberHistoryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class FamilyMemberHistoryDaoImpl implements FamilyMemberHistoryDao {
       FamilyMemberHistoryModel model = em.merge(new FamilyMemberHistoryModel(e));
       return new FamilyMemberHistory(model);
   }
-
   @Override
   @Transactional
   public void delete(FamilyMemberHistory e) {

@@ -95,6 +95,7 @@ public class AllergyIntoleranceReaction  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -116,28 +117,20 @@ public class AllergyIntoleranceReaction  {
 
   public AllergyIntoleranceReaction(AllergyIntoleranceReactionModel o) {
     this.id = o.getId();
-      this.substance = CodeableConcept.fromJson(o.getSubstance());
-      this.manifestation = CodeableConcept.fromArray(o.getManifestation());
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getOnset()) {
-        this.onset = new String(o.getOnset());
-      }
-
-      if (null != o.getSeverity()) {
-        this.severity = new String(o.getSeverity());
-      }
-
-      this.exposureRoute = CodeableConcept.fromJson(o.getExposureRoute());
-      this.note = Annotation.fromArray(o.getNote());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.substance = CodeableConceptHelper.fromJson(o.getSubstance());
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getOnset()) {
+      this.onset = o.getOnset();
+    }
+    if (null != o.getSeverity()) {
+      this.severity = o.getSeverity();
+    }
+    this.exposureRoute = CodeableConceptHelper.fromJson(o.getExposureRoute());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSubstance( CodeableConcept value) {
@@ -228,20 +221,21 @@ public class AllergyIntoleranceReaction  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("substance" + "[" + String.valueOf(this.substance) + "]\n"); 
-     builder.append("manifestation" + "[" + String.valueOf(this.manifestation) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("onset" + "[" + String.valueOf(this.onset) + "]\n"); 
-     builder.append("_onset" + "[" + String.valueOf(this._onset) + "]\n"); 
-     builder.append("severity" + "[" + String.valueOf(this.severity) + "]\n"); 
-     builder.append("_severity" + "[" + String.valueOf(this._severity) + "]\n"); 
-     builder.append("exposureRoute" + "[" + String.valueOf(this.exposureRoute) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AllergyIntoleranceReaction]:" + "\n");
+     if(this.substance != null) builder.append("substance" + "->" + this.substance.toString() + "\n"); 
+     if(this.manifestation != null) builder.append("manifestation" + "->" + this.manifestation.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.onset != null) builder.append("onset" + "->" + this.onset.toString() + "\n"); 
+     if(this._onset != null) builder.append("_onset" + "->" + this._onset.toString() + "\n"); 
+     if(this.severity != null) builder.append("severity" + "->" + this.severity.toString() + "\n"); 
+     if(this._severity != null) builder.append("_severity" + "->" + this._severity.toString() + "\n"); 
+     if(this.exposureRoute != null) builder.append("exposureRoute" + "->" + this.exposureRoute.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -261,36 +255,4 @@ public class AllergyIntoleranceReaction  {
   	}
   }
 
-  public static java.util.List<AllergyIntoleranceReaction> fromArray(java.util.List<AllergyIntoleranceReactionModel> list) {
-    return (java.util.List<AllergyIntoleranceReaction>)list.stream()
-      .map(model -> new AllergyIntoleranceReaction(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AllergyIntoleranceReactionModel> toModelArray(java.util.List<AllergyIntoleranceReaction> list) {
-    return (java.util.List<AllergyIntoleranceReactionModel>)list.stream()
-      .map(model -> new AllergyIntoleranceReactionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AllergyIntoleranceReaction fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AllergyIntoleranceReaction.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AllergyIntoleranceReaction o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AllergyIntoleranceReaction> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

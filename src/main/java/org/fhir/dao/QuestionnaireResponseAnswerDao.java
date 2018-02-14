@@ -34,10 +34,5 @@ public interface QuestionnaireResponseAnswerDao {
   public List<QuestionnaireResponseAnswer> select(int maxResult);
 
   public List<QuestionnaireResponseAnswer> selectAll();
-
-  public QuestionnaireResponseAnswer create(QuestionnaireResponseAnswer e);
-
-  public QuestionnaireResponseAnswer update(QuestionnaireResponseAnswer e);
-
   public void delete(QuestionnaireResponseAnswer e);
 }

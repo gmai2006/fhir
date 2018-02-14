@@ -34,10 +34,5 @@ public interface EligibilityResponseInsuranceDao {
   public List<EligibilityResponseInsurance> select(int maxResult);
 
   public List<EligibilityResponseInsurance> selectAll();
-
-  public EligibilityResponseInsurance create(EligibilityResponseInsurance e);
-
-  public EligibilityResponseInsurance update(EligibilityResponseInsurance e);
-
   public void delete(EligibilityResponseInsurance e);
 }

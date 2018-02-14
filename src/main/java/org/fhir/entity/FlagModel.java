@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Prospective warnings of potential issues when providing care to the patient."
 */
 @Entity
 @Table(name="flag")
-public class FlagModel  {
+public class FlagModel  implements Serializable {
+	private static final long serialVersionUID = 15185766966626608L;
   /**
   * Description: "This is a Flag resource"
   */
@@ -47,7 +48,7 @@ public class FlagModel  {
 
   /**
   * Description: "Identifier assigned to the flag for external use (outside the FHIR environment)."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -63,7 +64,7 @@ public class FlagModel  {
 
   /**
   * Description: "Allows an flag to be divided into different categories like clinical, administrative etc. Intended to be used as a means of filtering which flags are displayed to particular user or in a given context."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -72,7 +73,7 @@ public class FlagModel  {
 
   /**
   * Description: "The coded value or textual component of the flag to display to the user."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -87,13 +88,13 @@ public class FlagModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "The period of time from the activation of the flag to inactivation of the flag. If the flag is active, the end of the period should be unspecified."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -107,9 +108,9 @@ public class FlagModel  {
   @Column(name="\"encounter_id\"")
   private String encounter_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`encounter_id`", insertable=false, updatable=false)
-  private ReferenceModel encounter;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> encounter;
 
   /**
   * Description: "The person, organization or device that created the flag."
@@ -118,9 +119,9 @@ public class FlagModel  {
   @Column(name="\"author_id\"")
   private String author_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`author_id`", insertable=false, updatable=false)
-  private ReferenceModel author;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="author_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> author;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -130,14 +131,14 @@ public class FlagModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -147,7 +148,7 @@ public class FlagModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -157,7 +158,7 @@ public class FlagModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -169,6 +170,7 @@ public class FlagModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -183,9 +185,9 @@ public class FlagModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -206,190 +208,182 @@ public class FlagModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public FlagModel() {
   }
 
   public FlagModel(Flag o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.status = o.getStatus();
-
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.code = CodeableConcept.toJson(o.getCode());
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      this.period = Period.toJson(o.getPeriod());
-      if (null != o.getEncounter()) {
-      	this.encounter_id = "encounter" + this.getId();
-        this.encounter = new ReferenceModel(o.getEncounter());
-        this.encounter.setId(this.encounter_id);
-        this.encounter.parent_id = this.encounter.getId();
-      }
-
-      if (null != o.getAuthor()) {
-      	this.author_id = "author" + this.getId();
-        this.author = new ReferenceModel(o.getAuthor());
-        this.author.setId(this.author_id);
-        this.author.parent_id = this.author.getId();
-      }
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.status = o.getStatus();
+    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.code = CodeableConceptHelper.toJson(o.getCode());
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    this.period = PeriodHelper.toJson(o.getPeriod());
+    if (null != o.getEncounter() ) {
+    	this.encounter_id = "encounter" + this.id;
+    	this.encounter = ReferenceHelper.toModel(o.getEncounter(), this.encounter_id);
+    }
+    if (null != o.getAuthor() ) {
+    	this.author_id = "author" + this.id;
+    	this.author = ReferenceHelper.toModel(o.getAuthor(), this.author_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setCode( String value) {
-    this.code = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getCode() {
     return this.code;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setCode( String value) {
+    this.code = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setPeriod( String value) {
-    this.period = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
   public String getPeriod() {
     return this.period;
   }
-  public void setEncounter( ReferenceModel value) {
-    this.encounter = value;
+  public void setPeriod( String value) {
+    this.period = value;
   }
-  public ReferenceModel getEncounter() {
+  public java.util.List<ReferenceModel> getEncounter() {
     return this.encounter;
   }
-  public void setAuthor( ReferenceModel value) {
-    this.author = value;
+  public void setEncounter( java.util.List<ReferenceModel> value) {
+    this.encounter = value;
   }
-  public ReferenceModel getAuthor() {
+  public java.util.List<ReferenceModel> getAuthor() {
     return this.author;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setAuthor( java.util.List<ReferenceModel> value) {
+    this.author = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("encounter" + "[" + String.valueOf(this.encounter) + "]\n"); 
-     builder.append("author" + "[" + String.valueOf(this.author) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[FlagModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[FlagModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("encounter" + "->" + this.encounter + "\n"); 
+     builder.append("author" + "->" + this.author + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

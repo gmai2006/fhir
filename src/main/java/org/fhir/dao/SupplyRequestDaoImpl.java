@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SupplyRequestModel;
 import org.fhir.pojo.SupplyRequest;
+import org.fhir.pojo.SupplyRequestHelper;
 
 public class SupplyRequestDaoImpl implements SupplyRequestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SupplyRequestDaoImpl implements SupplyRequestDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SupplyRequestModel a", SupplyRequestModel.class).setMaxResults(maxResult);
       List<SupplyRequestModel> models = query.getResultList();
-      return SupplyRequest.fromArray(models);
+      return SupplyRequestHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class SupplyRequestDaoImpl implements SupplyRequestDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SupplyRequestModel a", SupplyRequestModel.class);
       List<SupplyRequestModel> models = query.getResultList();
-      return SupplyRequest.fromArray(models);
+      return SupplyRequestHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class SupplyRequestDaoImpl implements SupplyRequestDao {
       SupplyRequestModel model = em.merge(new SupplyRequestModel(e));
       return new SupplyRequest(model);
   }
-
   @Override
   @Transactional
   public void delete(SupplyRequest e) {

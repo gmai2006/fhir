@@ -180,6 +180,7 @@ public class CapabilityStatementResource  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -201,63 +202,54 @@ public class CapabilityStatementResource  {
 
   public CapabilityStatementResource(CapabilityStatementResourceModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getProfile()) {
-        this.profile = new Reference(o.getProfile());
-        this.profile.setId(this.getId());
-      }
-
-      if (null != o.getDocumentation()) {
-        this.documentation = new String(o.getDocumentation());
-      }
-
-      this.interaction = CapabilityStatementInteraction.fromArray(o.getInteraction());
-
-      if (null != o.getVersioning()) {
-        this.versioning = new String(o.getVersioning());
-      }
-
-      if (null != o.getReadHistory()) {
-        this.readHistory = new Boolean(o.getReadHistory());
-      }
-
-      if (null != o.getUpdateCreate()) {
-        this.updateCreate = new Boolean(o.getUpdateCreate());
-      }
-
-      if (null != o.getConditionalCreate()) {
-        this.conditionalCreate = new Boolean(o.getConditionalCreate());
-      }
-
-      if (null != o.getConditionalRead()) {
-        this.conditionalRead = new String(o.getConditionalRead());
-      }
-
-      if (null != o.getConditionalUpdate()) {
-        this.conditionalUpdate = new Boolean(o.getConditionalUpdate());
-      }
-
-      if (null != o.getConditionalDelete()) {
-        this.conditionalDelete = new String(o.getConditionalDelete());
-      }
-
-      this.referencePolicy = org.fhir.utils.JsonUtils.json2Array(o.getReferencePolicy());
-
-      this.searchInclude = org.fhir.utils.JsonUtils.json2Array(o.getSearchInclude());
-
-      this.searchRevInclude = org.fhir.utils.JsonUtils.json2Array(o.getSearchRevInclude());
-
-      this.searchParam = CapabilityStatementSearchParam.fromArray(o.getSearchParam());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getProfile() && !o.getProfile().isEmpty()) {
+      this.profile = new Reference(o.getProfile().get(0));
+    }
+    if (null != o.getDocumentation()) {
+      this.documentation = o.getDocumentation();
+    }
+    if (null != o.getInteraction() && !o.getInteraction().isEmpty()) {
+    	this.interaction = CapabilityStatementInteractionHelper.fromArray2Array(o.getInteraction());
+    }
+    if (null != o.getVersioning()) {
+      this.versioning = o.getVersioning();
+    }
+    if (null != o.getReadHistory()) {
+      this.readHistory = o.getReadHistory();
+    }
+    if (null != o.getUpdateCreate()) {
+      this.updateCreate = o.getUpdateCreate();
+    }
+    if (null != o.getConditionalCreate()) {
+      this.conditionalCreate = o.getConditionalCreate();
+    }
+    if (null != o.getConditionalRead()) {
+      this.conditionalRead = o.getConditionalRead();
+    }
+    if (null != o.getConditionalUpdate()) {
+      this.conditionalUpdate = o.getConditionalUpdate();
+    }
+    if (null != o.getConditionalDelete()) {
+      this.conditionalDelete = o.getConditionalDelete();
+    }
+    if (o.getReferencePolicy() != null) {
+    	this.referencePolicy = org.fhir.utils.JsonUtils.json2Array(o.getReferencePolicy());
+    }
+    if (o.getSearchInclude() != null) {
+    	this.searchInclude = org.fhir.utils.JsonUtils.json2Array(o.getSearchInclude());
+    }
+    if (o.getSearchRevInclude() != null) {
+    	this.searchRevInclude = org.fhir.utils.JsonUtils.json2Array(o.getSearchRevInclude());
+    }
+    if (null != o.getSearchParam() && !o.getSearchParam().isEmpty()) {
+    	this.searchParam = CapabilityStatementSearchParamHelper.fromArray2Array(o.getSearchParam());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -450,37 +442,38 @@ public class CapabilityStatementResource  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("_documentation" + "[" + String.valueOf(this._documentation) + "]\n"); 
-     builder.append("interaction" + "[" + String.valueOf(this.interaction) + "]\n"); 
-     builder.append("versioning" + "[" + String.valueOf(this.versioning) + "]\n"); 
-     builder.append("_versioning" + "[" + String.valueOf(this._versioning) + "]\n"); 
-     builder.append("readHistory" + "[" + String.valueOf(this.readHistory) + "]\n"); 
-     builder.append("_readHistory" + "[" + String.valueOf(this._readHistory) + "]\n"); 
-     builder.append("updateCreate" + "[" + String.valueOf(this.updateCreate) + "]\n"); 
-     builder.append("_updateCreate" + "[" + String.valueOf(this._updateCreate) + "]\n"); 
-     builder.append("conditionalCreate" + "[" + String.valueOf(this.conditionalCreate) + "]\n"); 
-     builder.append("_conditionalCreate" + "[" + String.valueOf(this._conditionalCreate) + "]\n"); 
-     builder.append("conditionalRead" + "[" + String.valueOf(this.conditionalRead) + "]\n"); 
-     builder.append("_conditionalRead" + "[" + String.valueOf(this._conditionalRead) + "]\n"); 
-     builder.append("conditionalUpdate" + "[" + String.valueOf(this.conditionalUpdate) + "]\n"); 
-     builder.append("_conditionalUpdate" + "[" + String.valueOf(this._conditionalUpdate) + "]\n"); 
-     builder.append("conditionalDelete" + "[" + String.valueOf(this.conditionalDelete) + "]\n"); 
-     builder.append("_conditionalDelete" + "[" + String.valueOf(this._conditionalDelete) + "]\n"); 
-     builder.append("referencePolicy" + "[" + String.valueOf(this.referencePolicy) + "]\n"); 
-     builder.append("_referencePolicy" + "[" + String.valueOf(this._referencePolicy) + "]\n"); 
-     builder.append("searchInclude" + "[" + String.valueOf(this.searchInclude) + "]\n"); 
-     builder.append("_searchInclude" + "[" + String.valueOf(this._searchInclude) + "]\n"); 
-     builder.append("searchRevInclude" + "[" + String.valueOf(this.searchRevInclude) + "]\n"); 
-     builder.append("_searchRevInclude" + "[" + String.valueOf(this._searchRevInclude) + "]\n"); 
-     builder.append("searchParam" + "[" + String.valueOf(this.searchParam) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementResource]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
+     if(this.interaction != null) builder.append("interaction" + "->" + this.interaction.toString() + "\n"); 
+     if(this.versioning != null) builder.append("versioning" + "->" + this.versioning.toString() + "\n"); 
+     if(this._versioning != null) builder.append("_versioning" + "->" + this._versioning.toString() + "\n"); 
+     if(this.readHistory != null) builder.append("readHistory" + "->" + this.readHistory.toString() + "\n"); 
+     if(this._readHistory != null) builder.append("_readHistory" + "->" + this._readHistory.toString() + "\n"); 
+     if(this.updateCreate != null) builder.append("updateCreate" + "->" + this.updateCreate.toString() + "\n"); 
+     if(this._updateCreate != null) builder.append("_updateCreate" + "->" + this._updateCreate.toString() + "\n"); 
+     if(this.conditionalCreate != null) builder.append("conditionalCreate" + "->" + this.conditionalCreate.toString() + "\n"); 
+     if(this._conditionalCreate != null) builder.append("_conditionalCreate" + "->" + this._conditionalCreate.toString() + "\n"); 
+     if(this.conditionalRead != null) builder.append("conditionalRead" + "->" + this.conditionalRead.toString() + "\n"); 
+     if(this._conditionalRead != null) builder.append("_conditionalRead" + "->" + this._conditionalRead.toString() + "\n"); 
+     if(this.conditionalUpdate != null) builder.append("conditionalUpdate" + "->" + this.conditionalUpdate.toString() + "\n"); 
+     if(this._conditionalUpdate != null) builder.append("_conditionalUpdate" + "->" + this._conditionalUpdate.toString() + "\n"); 
+     if(this.conditionalDelete != null) builder.append("conditionalDelete" + "->" + this.conditionalDelete.toString() + "\n"); 
+     if(this._conditionalDelete != null) builder.append("_conditionalDelete" + "->" + this._conditionalDelete.toString() + "\n"); 
+     if(this.referencePolicy != null) builder.append("referencePolicy" + "->" + this.referencePolicy.toString() + "\n"); 
+     if(this._referencePolicy != null) builder.append("_referencePolicy" + "->" + this._referencePolicy.toString() + "\n"); 
+     if(this.searchInclude != null) builder.append("searchInclude" + "->" + this.searchInclude.toString() + "\n"); 
+     if(this._searchInclude != null) builder.append("_searchInclude" + "->" + this._searchInclude.toString() + "\n"); 
+     if(this.searchRevInclude != null) builder.append("searchRevInclude" + "->" + this.searchRevInclude.toString() + "\n"); 
+     if(this._searchRevInclude != null) builder.append("_searchRevInclude" + "->" + this._searchRevInclude.toString() + "\n"); 
+     if(this.searchParam != null) builder.append("searchParam" + "->" + this.searchParam.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -558,36 +551,4 @@ public class CapabilityStatementResource  {
   	  	}
   }
 
-  public static java.util.List<CapabilityStatementResource> fromArray(java.util.List<CapabilityStatementResourceModel> list) {
-    return (java.util.List<CapabilityStatementResource>)list.stream()
-      .map(model -> new CapabilityStatementResource(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementResourceModel> toModelArray(java.util.List<CapabilityStatementResource> list) {
-    return (java.util.List<CapabilityStatementResourceModel>)list.stream()
-      .map(model -> new CapabilityStatementResourceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatementResource fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatementResource.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementResource o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementResource> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

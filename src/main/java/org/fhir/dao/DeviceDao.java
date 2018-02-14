@@ -34,10 +34,8 @@ public interface DeviceDao {
   public List<Device> select(int maxResult);
 
   public List<Device> selectAll();
-
   public Device create(Device e);
 
   public Device update(Device e);
-
   public void delete(Device e);
 }

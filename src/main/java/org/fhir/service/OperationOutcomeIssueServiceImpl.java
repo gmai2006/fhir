@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public OperationOutcomeIssue create(OperationOutcomeIssue bean) {
-  	requireNonNull(bean);
-    logger.info("create(OperationOutcomeIssue={}) - entered bean ");
-
-    final OperationOutcomeIssue result = dao.create(bean);
-
-    logger.info("create(OperationOutcomeIssue) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public OperationOutcomeIssue update(OperationOutcomeIssue bean) {
-  	requireNonNull(bean);
-    logger.info("update(OperationOutcomeIssue={}) - entered bean ");
-
-    final OperationOutcomeIssue result = dao.update(bean);
-
-    logger.info("update(OperationOutcomeIssue) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

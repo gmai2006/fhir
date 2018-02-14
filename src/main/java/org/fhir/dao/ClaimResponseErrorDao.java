@@ -34,10 +34,5 @@ public interface ClaimResponseErrorDao {
   public List<ClaimResponseError> select(int maxResult);
 
   public List<ClaimResponseError> selectAll();
-
-  public ClaimResponseError create(ClaimResponseError e);
-
-  public ClaimResponseError update(ClaimResponseError e);
-
   public void delete(ClaimResponseError e);
 }

@@ -34,10 +34,5 @@ public interface MessageDefinitionFocusDao {
   public List<MessageDefinitionFocus> select(int maxResult);
 
   public List<MessageDefinitionFocus> selectAll();
-
-  public MessageDefinitionFocus create(MessageDefinitionFocus e);
-
-  public MessageDefinitionFocus update(MessageDefinitionFocus e);
-
   public void delete(MessageDefinitionFocus e);
 }

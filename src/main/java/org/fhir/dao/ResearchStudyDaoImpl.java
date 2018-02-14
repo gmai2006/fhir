@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ResearchStudyModel;
 import org.fhir.pojo.ResearchStudy;
+import org.fhir.pojo.ResearchStudyHelper;
 
 public class ResearchStudyDaoImpl implements ResearchStudyDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ResearchStudyDaoImpl implements ResearchStudyDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ResearchStudyModel a", ResearchStudyModel.class).setMaxResults(maxResult);
       List<ResearchStudyModel> models = query.getResultList();
-      return ResearchStudy.fromArray(models);
+      return ResearchStudyHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ResearchStudyDaoImpl implements ResearchStudyDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ResearchStudyModel a", ResearchStudyModel.class);
       List<ResearchStudyModel> models = query.getResultList();
-      return ResearchStudy.fromArray(models);
+      return ResearchStudyHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ResearchStudyDaoImpl implements ResearchStudyDao {
       ResearchStudyModel model = em.merge(new ResearchStudyModel(e));
       return new ResearchStudy(model);
   }
-
   @Override
   @Transactional
   public void delete(ResearchStudy e) {

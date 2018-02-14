@@ -32,7 +32,5 @@ public interface CodeSystemPropertyService {
 	public CodeSystemProperty find(String id);
   public List<CodeSystemProperty> select(int maxResult);
   public List<CodeSystemProperty> selectAll();
-  public CodeSystemProperty create(CodeSystemProperty bean);
-  public CodeSystemProperty update(CodeSystemProperty bean);
   public void delete(CodeSystemProperty bean);
 }

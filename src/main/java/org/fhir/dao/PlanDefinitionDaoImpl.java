@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PlanDefinitionModel;
 import org.fhir.pojo.PlanDefinition;
+import org.fhir.pojo.PlanDefinitionHelper;
 
 public class PlanDefinitionDaoImpl implements PlanDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PlanDefinitionDaoImpl implements PlanDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PlanDefinitionModel a", PlanDefinitionModel.class).setMaxResults(maxResult);
       List<PlanDefinitionModel> models = query.getResultList();
-      return PlanDefinition.fromArray(models);
+      return PlanDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class PlanDefinitionDaoImpl implements PlanDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PlanDefinitionModel a", PlanDefinitionModel.class);
       List<PlanDefinitionModel> models = query.getResultList();
-      return PlanDefinition.fromArray(models);
+      return PlanDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class PlanDefinitionDaoImpl implements PlanDefinitionDao {
       PlanDefinitionModel model = em.merge(new PlanDefinitionModel(e));
       return new PlanDefinition(model);
   }
-
   @Override
   @Transactional
   public void delete(PlanDefinition e) {

@@ -92,6 +92,7 @@ public class ElementDefinitionType  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -198,41 +199,22 @@ public class ElementDefinitionType  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("_profile" + "[" + String.valueOf(this._profile) + "]\n"); 
-     builder.append("targetProfile" + "[" + String.valueOf(this.targetProfile) + "]\n"); 
-     builder.append("_targetProfile" + "[" + String.valueOf(this._targetProfile) + "]\n"); 
-     builder.append("aggregation" + "[" + String.valueOf(this.aggregation) + "]\n"); 
-     builder.append("_aggregation" + "[" + String.valueOf(this._aggregation) + "]\n"); 
-     builder.append("versioning" + "[" + String.valueOf(this.versioning) + "]\n"); 
-     builder.append("_versioning" + "[" + String.valueOf(this._versioning) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ElementDefinitionType]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this._profile != null) builder.append("_profile" + "->" + this._profile.toString() + "\n"); 
+     if(this.targetProfile != null) builder.append("targetProfile" + "->" + this.targetProfile.toString() + "\n"); 
+     if(this._targetProfile != null) builder.append("_targetProfile" + "->" + this._targetProfile.toString() + "\n"); 
+     if(this.aggregation != null) builder.append("aggregation" + "->" + this.aggregation.toString() + "\n"); 
+     if(this._aggregation != null) builder.append("_aggregation" + "->" + this._aggregation.toString() + "\n"); 
+     if(this.versioning != null) builder.append("versioning" + "->" + this.versioning.toString() + "\n"); 
+     if(this._versioning != null) builder.append("_versioning" + "->" + this._versioning.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static ElementDefinitionType fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ElementDefinitionType.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ElementDefinitionType o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ElementDefinitionType> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum AggregationEnum {

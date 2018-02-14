@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
 */
 @Entity
 @Table(name="immunizationrecommendationprotocol")
-public class ImmunizationRecommendationProtocolModel  {
+public class ImmunizationRecommendationProtocolModel  implements Serializable {
+	private static final long serialVersionUID = 151857669678240176L;
   /**
   * Description: "Indicates the nominal position in a series of the next dose.  This is the recommended dose number as per a specified protocol."
   */
@@ -59,9 +60,9 @@ public class ImmunizationRecommendationProtocolModel  {
   @Column(name="\"authority_id\"")
   private String authority_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`authority_id`", insertable=false, updatable=false)
-  private ReferenceModel authority;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="authority_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> authority;
 
   /**
   * Description: "One possible path to achieve presumed immunity against a disease - within the context of an authority."
@@ -73,7 +74,7 @@ public class ImmunizationRecommendationProtocolModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -85,6 +86,7 @@ public class ImmunizationRecommendationProtocolModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -93,95 +95,110 @@ public class ImmunizationRecommendationProtocolModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ImmunizationRecommendationProtocolModel() {
   }
 
-  public ImmunizationRecommendationProtocolModel(ImmunizationRecommendationProtocol o) {
-    this.id = o.getId();
-      this.doseSequence = o.getDoseSequence();
-
-      this.description = o.getDescription();
-
-      if (null != o.getAuthority()) {
-      	this.authority_id = "authority" + this.getId();
-        this.authority = new ReferenceModel(o.getAuthority());
-        this.authority.setId(this.authority_id);
-        this.authority.parent_id = this.authority.getId();
-      }
-
-      this.series = o.getSeries();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ImmunizationRecommendationProtocolModel(ImmunizationRecommendationProtocol o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.doseSequence = o.getDoseSequence();
+    this.description = o.getDescription();
+    if (null != o.getAuthority() ) {
+    	this.authority_id = "authority" + this.parent_id;
+    	this.authority = ReferenceHelper.toModel(o.getAuthority(), this.authority_id);
+    }
+    this.series = o.getSeries();
   }
 
-  public void setDoseSequence( Float value) {
-    this.doseSequence = value;
-  }
   public Float getDoseSequence() {
     return this.doseSequence;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setDoseSequence( Float value) {
+    this.doseSequence = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setAuthority( ReferenceModel value) {
-    this.authority = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
-  public ReferenceModel getAuthority() {
+  public java.util.List<ReferenceModel> getAuthority() {
     return this.authority;
   }
-  public void setSeries( String value) {
-    this.series = value;
+  public void setAuthority( java.util.List<ReferenceModel> value) {
+    this.authority = value;
   }
   public String getSeries() {
     return this.series;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setSeries( String value) {
+    this.series = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("doseSequence" + "[" + String.valueOf(this.doseSequence) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("authority" + "[" + String.valueOf(this.authority) + "]\n"); 
-     builder.append("series" + "[" + String.valueOf(this.series) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImmunizationRecommendationProtocolModel]:" + "\n");
+     builder.append("doseSequence" + "->" + this.doseSequence + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("series" + "->" + this.series + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ImmunizationRecommendationProtocolModel]:" + "\n");
+     builder.append("doseSequence" + "->" + this.doseSequence + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("authority" + "->" + this.authority + "\n"); 
+     builder.append("series" + "->" + this.series + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

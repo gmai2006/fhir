@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MedicationAdministrationModel;
 import org.fhir.pojo.MedicationAdministration;
+import org.fhir.pojo.MedicationAdministrationHelper;
 
 public class MedicationAdministrationDaoImpl implements MedicationAdministrationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MedicationAdministrationDaoImpl implements MedicationAdministration
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationAdministrationModel a", MedicationAdministrationModel.class).setMaxResults(maxResult);
       List<MedicationAdministrationModel> models = query.getResultList();
-      return MedicationAdministration.fromArray(models);
+      return MedicationAdministrationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class MedicationAdministrationDaoImpl implements MedicationAdministration
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationAdministrationModel a", MedicationAdministrationModel.class);
       List<MedicationAdministrationModel> models = query.getResultList();
-      return MedicationAdministration.fromArray(models);
+      return MedicationAdministrationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class MedicationAdministrationDaoImpl implements MedicationAdministration
       MedicationAdministrationModel model = em.merge(new MedicationAdministrationModel(e));
       return new MedicationAdministration(model);
   }
-
   @Override
   @Transactional
   public void delete(MedicationAdministration e) {

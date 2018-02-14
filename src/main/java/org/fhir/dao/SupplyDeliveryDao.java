@@ -34,10 +34,8 @@ public interface SupplyDeliveryDao {
   public List<SupplyDelivery> select(int maxResult);
 
   public List<SupplyDelivery> selectAll();
-
   public SupplyDelivery create(SupplyDelivery e);
 
   public SupplyDelivery update(SupplyDelivery e);
-
   public void delete(SupplyDelivery e);
 }

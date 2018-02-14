@@ -32,7 +32,5 @@ public interface UsageContextService {
 	public UsageContext find(String id);
   public List<UsageContext> select(int maxResult);
   public List<UsageContext> selectAll();
-  public UsageContext create(UsageContext bean);
-  public UsageContext update(UsageContext bean);
   public void delete(UsageContext bean);
 }

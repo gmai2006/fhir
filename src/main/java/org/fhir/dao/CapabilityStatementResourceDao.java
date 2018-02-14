@@ -34,10 +34,5 @@ public interface CapabilityStatementResourceDao {
   public List<CapabilityStatementResource> select(int maxResult);
 
   public List<CapabilityStatementResource> selectAll();
-
-  public CapabilityStatementResource create(CapabilityStatementResource e);
-
-  public CapabilityStatementResource update(CapabilityStatementResource e);
-
   public void delete(CapabilityStatementResource e);
 }

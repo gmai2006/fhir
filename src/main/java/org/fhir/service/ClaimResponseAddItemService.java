@@ -32,7 +32,5 @@ public interface ClaimResponseAddItemService {
 	public ClaimResponseAddItem find(String id);
   public List<ClaimResponseAddItem> select(int maxResult);
   public List<ClaimResponseAddItem> selectAll();
-  public ClaimResponseAddItem create(ClaimResponseAddItem bean);
-  public ClaimResponseAddItem update(ClaimResponseAddItem bean);
   public void delete(ClaimResponseAddItem bean);
 }

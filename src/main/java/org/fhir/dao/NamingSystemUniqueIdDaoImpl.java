@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.NamingSystemUniqueIdModel;
 import org.fhir.pojo.NamingSystemUniqueId;
+import org.fhir.pojo.NamingSystemUniqueIdHelper;
 
 public class NamingSystemUniqueIdDaoImpl implements NamingSystemUniqueIdDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class NamingSystemUniqueIdDaoImpl implements NamingSystemUniqueIdDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NamingSystemUniqueIdModel a", NamingSystemUniqueIdModel.class).setMaxResults(maxResult);
       List<NamingSystemUniqueIdModel> models = query.getResultList();
-      return NamingSystemUniqueId.fromArray(models);
+      return NamingSystemUniqueIdHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class NamingSystemUniqueIdDaoImpl implements NamingSystemUniqueIdDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NamingSystemUniqueIdModel a", NamingSystemUniqueIdModel.class);
       List<NamingSystemUniqueIdModel> models = query.getResultList();
-      return NamingSystemUniqueId.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public NamingSystemUniqueId create(NamingSystemUniqueId e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new NamingSystemUniqueIdModel(e));
-      return e;
-  }
-
-  @Transactional
-  public NamingSystemUniqueId update(NamingSystemUniqueId e) {
-      final EntityManager em = entityManagerProvider.get();
-      NamingSystemUniqueIdModel model = em.merge(new NamingSystemUniqueIdModel(e));
-      return new NamingSystemUniqueId(model);
+      return NamingSystemUniqueIdHelper.fromArray2Array(models);
   }
 
   @Override

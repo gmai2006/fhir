@@ -34,10 +34,5 @@ public interface EncounterStatusHistoryDao {
   public List<EncounterStatusHistory> select(int maxResult);
 
   public List<EncounterStatusHistory> selectAll();
-
-  public EncounterStatusHistory create(EncounterStatusHistory e);
-
-  public EncounterStatusHistory update(EncounterStatusHistory e);
-
   public void delete(EncounterStatusHistory e);
 }

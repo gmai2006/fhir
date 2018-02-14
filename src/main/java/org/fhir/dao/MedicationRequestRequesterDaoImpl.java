@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MedicationRequestRequesterModel;
 import org.fhir.pojo.MedicationRequestRequester;
+import org.fhir.pojo.MedicationRequestRequesterHelper;
 
 public class MedicationRequestRequesterDaoImpl implements MedicationRequestRequesterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MedicationRequestRequesterDaoImpl implements MedicationRequestReque
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationRequestRequesterModel a", MedicationRequestRequesterModel.class).setMaxResults(maxResult);
       List<MedicationRequestRequesterModel> models = query.getResultList();
-      return MedicationRequestRequester.fromArray(models);
+      return MedicationRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MedicationRequestRequesterDaoImpl implements MedicationRequestReque
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationRequestRequesterModel a", MedicationRequestRequesterModel.class);
       List<MedicationRequestRequesterModel> models = query.getResultList();
-      return MedicationRequestRequester.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MedicationRequestRequester create(MedicationRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MedicationRequestRequesterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MedicationRequestRequester update(MedicationRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      MedicationRequestRequesterModel model = em.merge(new MedicationRequestRequesterModel(e));
-      return new MedicationRequestRequester(model);
+      return MedicationRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override

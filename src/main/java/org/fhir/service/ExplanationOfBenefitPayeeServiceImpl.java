@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ExplanationOfBenefitPayee create(ExplanationOfBenefitPayee bean) {
-  	requireNonNull(bean);
-    logger.info("create(ExplanationOfBenefitPayee={}) - entered bean ");
-
-    final ExplanationOfBenefitPayee result = dao.create(bean);
-
-    logger.info("create(ExplanationOfBenefitPayee) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ExplanationOfBenefitPayee update(ExplanationOfBenefitPayee bean) {
-  	requireNonNull(bean);
-    logger.info("update(ExplanationOfBenefitPayee={}) - entered bean ");
-
-    final ExplanationOfBenefitPayee result = dao.update(bean);
-
-    logger.info("update(ExplanationOfBenefitPayee) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

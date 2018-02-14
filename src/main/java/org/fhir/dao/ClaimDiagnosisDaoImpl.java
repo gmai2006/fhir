@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimDiagnosisModel;
 import org.fhir.pojo.ClaimDiagnosis;
+import org.fhir.pojo.ClaimDiagnosisHelper;
 
 public class ClaimDiagnosisDaoImpl implements ClaimDiagnosisDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimDiagnosisDaoImpl implements ClaimDiagnosisDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimDiagnosisModel a", ClaimDiagnosisModel.class).setMaxResults(maxResult);
       List<ClaimDiagnosisModel> models = query.getResultList();
-      return ClaimDiagnosis.fromArray(models);
+      return ClaimDiagnosisHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimDiagnosisDaoImpl implements ClaimDiagnosisDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimDiagnosisModel a", ClaimDiagnosisModel.class);
       List<ClaimDiagnosisModel> models = query.getResultList();
-      return ClaimDiagnosis.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimDiagnosis create(ClaimDiagnosis e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimDiagnosisModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimDiagnosis update(ClaimDiagnosis e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimDiagnosisModel model = em.merge(new ClaimDiagnosisModel(e));
-      return new ClaimDiagnosis(model);
+      return ClaimDiagnosisHelper.fromArray2Array(models);
   }
 
   @Override

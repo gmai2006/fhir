@@ -34,10 +34,5 @@ public interface ImmunizationPractitionerDao {
   public List<ImmunizationPractitioner> select(int maxResult);
 
   public List<ImmunizationPractitioner> selectAll();
-
-  public ImmunizationPractitioner create(ImmunizationPractitioner e);
-
-  public ImmunizationPractitioner update(ImmunizationPractitioner e);
-
   public void delete(ImmunizationPractitioner e);
 }

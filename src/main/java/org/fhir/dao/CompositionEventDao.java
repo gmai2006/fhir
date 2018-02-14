@@ -34,10 +34,5 @@ public interface CompositionEventDao {
   public List<CompositionEvent> select(int maxResult);
 
   public List<CompositionEvent> selectAll();
-
-  public CompositionEvent create(CompositionEvent e);
-
-  public CompositionEvent update(CompositionEvent e);
-
   public void delete(CompositionEvent e);
 }

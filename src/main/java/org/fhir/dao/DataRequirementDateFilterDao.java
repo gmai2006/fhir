@@ -34,10 +34,5 @@ public interface DataRequirementDateFilterDao {
   public List<DataRequirementDateFilter> select(int maxResult);
 
   public List<DataRequirementDateFilter> selectAll();
-
-  public DataRequirementDateFilter create(DataRequirementDateFilter e);
-
-  public DataRequirementDateFilter update(DataRequirementDateFilter e);
-
   public void delete(DataRequirementDateFilter e);
 }

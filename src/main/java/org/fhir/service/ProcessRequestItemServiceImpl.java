@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ProcessRequestItem create(ProcessRequestItem bean) {
-  	requireNonNull(bean);
-    logger.info("create(ProcessRequestItem={}) - entered bean ");
-
-    final ProcessRequestItem result = dao.create(bean);
-
-    logger.info("create(ProcessRequestItem) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ProcessRequestItem update(ProcessRequestItem bean) {
-  	requireNonNull(bean);
-    logger.info("update(ProcessRequestItem={}) - entered bean ");
-
-    final ProcessRequestItem result = dao.update(bean);
-
-    logger.info("update(ProcessRequestItem) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

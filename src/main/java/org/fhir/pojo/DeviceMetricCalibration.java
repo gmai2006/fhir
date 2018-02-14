@@ -73,6 +73,7 @@ public class DeviceMetricCalibration  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -94,24 +95,18 @@ public class DeviceMetricCalibration  {
 
   public DeviceMetricCalibration(DeviceMetricCalibrationModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getState()) {
-        this.state = new String(o.getState());
-      }
-
-      if (null != o.getTime()) {
-        this.time = new String(o.getTime());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getState()) {
+      this.state = o.getState();
+    }
+    if (null != o.getTime()) {
+      this.time = o.getTime();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -178,16 +173,17 @@ public class DeviceMetricCalibration  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("state" + "[" + String.valueOf(this.state) + "]\n"); 
-     builder.append("_state" + "[" + String.valueOf(this._state) + "]\n"); 
-     builder.append("time" + "[" + String.valueOf(this.time) + "]\n"); 
-     builder.append("_time" + "[" + String.valueOf(this._time) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DeviceMetricCalibration]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.state != null) builder.append("state" + "->" + this.state.toString() + "\n"); 
+     if(this._state != null) builder.append("_state" + "->" + this._state.toString() + "\n"); 
+     if(this.time != null) builder.append("time" + "->" + this.time.toString() + "\n"); 
+     if(this._time != null) builder.append("_time" + "->" + this._time.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -227,36 +223,4 @@ public class DeviceMetricCalibration  {
   	}
   }
 
-  public static java.util.List<DeviceMetricCalibration> fromArray(java.util.List<DeviceMetricCalibrationModel> list) {
-    return (java.util.List<DeviceMetricCalibration>)list.stream()
-      .map(model -> new DeviceMetricCalibration(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DeviceMetricCalibrationModel> toModelArray(java.util.List<DeviceMetricCalibration> list) {
-    return (java.util.List<DeviceMetricCalibrationModel>)list.stream()
-      .map(model -> new DeviceMetricCalibrationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DeviceMetricCalibration fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DeviceMetricCalibration.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DeviceMetricCalibration o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DeviceMetricCalibration> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

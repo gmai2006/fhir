@@ -34,10 +34,5 @@ public interface SequenceRepositoryDao {
   public List<SequenceRepository> select(int maxResult);
 
   public List<SequenceRepository> selectAll();
-
-  public SequenceRepository create(SequenceRepository e);
-
-  public SequenceRepository update(SequenceRepository e);
-
   public void delete(SequenceRepository e);
 }

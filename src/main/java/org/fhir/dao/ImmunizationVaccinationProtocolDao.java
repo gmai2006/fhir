@@ -34,10 +34,5 @@ public interface ImmunizationVaccinationProtocolDao {
   public List<ImmunizationVaccinationProtocol> select(int maxResult);
 
   public List<ImmunizationVaccinationProtocol> selectAll();
-
-  public ImmunizationVaccinationProtocol create(ImmunizationVaccinationProtocol e);
-
-  public ImmunizationVaccinationProtocol update(ImmunizationVaccinationProtocol e);
-
   public void delete(ImmunizationVaccinationProtocol e);
 }

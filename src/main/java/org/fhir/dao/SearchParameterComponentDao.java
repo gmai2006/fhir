@@ -34,10 +34,5 @@ public interface SearchParameterComponentDao {
   public List<SearchParameterComponent> select(int maxResult);
 
   public List<SearchParameterComponent> selectAll();
-
-  public SearchParameterComponent create(SearchParameterComponent e);
-
-  public SearchParameterComponent update(SearchParameterComponent e);
-
   public void delete(SearchParameterComponent e);
 }

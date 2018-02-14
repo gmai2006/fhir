@@ -34,10 +34,8 @@ public interface MediaDao {
   public List<Media> select(int maxResult);
 
   public List<Media> selectAll();
-
   public Media create(Media e);
 
   public Media update(Media e);
-
   public void delete(Media e);
 }

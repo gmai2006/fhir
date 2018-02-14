@@ -69,6 +69,7 @@ public class MessageHeaderResponse  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -90,25 +91,18 @@ public class MessageHeaderResponse  {
 
   public MessageHeaderResponse(MessageHeaderResponseModel o) {
     this.id = o.getId();
-      if (null != o.getIdentifier()) {
-        this.identifier = new String(o.getIdentifier());
-      }
-
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getDetails()) {
-        this.details = new Reference(o.getDetails());
-        this.details.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getIdentifier()) {
+      this.identifier = o.getIdentifier();
+    }
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getDetails() && !o.getDetails().isEmpty()) {
+      this.details = new Reference(o.getDetails().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( String value) {
@@ -169,15 +163,16 @@ public class MessageHeaderResponse  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("_identifier" + "[" + String.valueOf(this._identifier) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("details" + "[" + String.valueOf(this.details) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MessageHeaderResponse]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this._identifier != null) builder.append("_identifier" + "->" + this._identifier.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.details != null) builder.append("details" + "->" + this.details.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -197,36 +192,4 @@ public class MessageHeaderResponse  {
   	}
   }
 
-  public static java.util.List<MessageHeaderResponse> fromArray(java.util.List<MessageHeaderResponseModel> list) {
-    return (java.util.List<MessageHeaderResponse>)list.stream()
-      .map(model -> new MessageHeaderResponse(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MessageHeaderResponseModel> toModelArray(java.util.List<MessageHeaderResponse> list) {
-    return (java.util.List<MessageHeaderResponseModel>)list.stream()
-      .map(model -> new MessageHeaderResponseModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MessageHeaderResponse fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MessageHeaderResponse.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MessageHeaderResponse o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MessageHeaderResponse> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

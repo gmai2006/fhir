@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects."
 */
 @Entity
 @Table(name="researchstudy")
-public class ResearchStudyModel  {
+public class ResearchStudyModel  implements Serializable {
+	private static final long serialVersionUID = 151857669708720743L;
   /**
   * Description: "This is a ResearchStudy resource"
   */
@@ -47,7 +48,7 @@ public class ResearchStudyModel  {
 
   /**
   * Description: "Identifiers assigned to this research study by the sponsor or other systems."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -64,16 +65,24 @@ public class ResearchStudyModel  {
   /**
   * Description: "The set of steps expected to be performed as part of the execution of the study."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> protocol = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"protocol_id\"")
+  private String protocol_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="protocol_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> protocol;
 
   /**
   * Description: "A larger research study of which this particular study is a component or step."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> partOf = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"partof_id\"")
+  private String partof_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="partof_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> partOf;
 
   /**
   * Description: "The current state of the study."
@@ -84,7 +93,7 @@ public class ResearchStudyModel  {
 
   /**
   * Description: "Codes categorizing the type of study such as investigational vs. observational, type of blinding, type of randomization, safety vs. efficacy, etc."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -93,7 +102,7 @@ public class ResearchStudyModel  {
 
   /**
   * Description: "The condition(s), medication(s), food(s), therapy(ies), device(s) or other concerns or interventions that the study is seeking to gain more information about."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -103,20 +112,28 @@ public class ResearchStudyModel  {
   /**
   * Description: "Contact details to assist a user in learning more about or engaging with the study."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContactDetailModel> contact = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contact_id\"")
+  private String contact_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  private java.util.List<ContactDetailModel> contact;
 
   /**
   * Description: "Citations, references and other related documents."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<RelatedArtifactModel> relatedArtifact = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"relatedartifact_id\"")
+  private String relatedartifact_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatedartifact_id", insertable=false, updatable=false)
+  private java.util.List<RelatedArtifactModel> relatedArtifact;
 
   /**
   * Description: "Key terms to aid in searching for or filtering the study."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -125,7 +142,7 @@ public class ResearchStudyModel  {
 
   /**
   * Description: "Indicates a country, state or other region where the study is taking place."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -142,13 +159,17 @@ public class ResearchStudyModel  {
   /**
   * Description: "Reference to a Group that defines the criteria for and quantity of subjects participating in the study.  E.g. \" 200 female Europeans between the ages of 20 and 45 with early onset diabetes\"."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> enrollment = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"enrollment_id\"")
+  private String enrollment_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="enrollment_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> enrollment;
 
   /**
   * Description: "Identifies the start date and the expected (or actual, depending on status) end date for the study."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -162,9 +183,9 @@ public class ResearchStudyModel  {
   @Column(name="\"sponsor_id\"")
   private String sponsor_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`sponsor_id`", insertable=false, updatable=false)
-  private ReferenceModel sponsor;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="sponsor_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> sponsor;
 
   /**
   * Description: "Indicates the individual who has primary oversite of the execution of the study."
@@ -173,20 +194,24 @@ public class ResearchStudyModel  {
   @Column(name="\"principalinvestigator_id\"")
   private String principalinvestigator_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`principalinvestigator_id`", insertable=false, updatable=false)
-  private ReferenceModel principalInvestigator;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="principalinvestigator_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> principalInvestigator;
 
   /**
   * Description: "Clinic, hospital or other healthcare location that is participating in the study."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> site = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"site_id\"")
+  private String site_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> site;
 
   /**
   * Description: "A description and/or code explaining the premature termination of the study."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -195,7 +220,7 @@ public class ResearchStudyModel  {
 
   /**
   * Description: "Comments made about the event by the performer, subject or other participants."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -205,9 +230,13 @@ public class ResearchStudyModel  {
   /**
   * Description: "Describes an expected sequence of events for one of the participants of a study.  E.g. Exposure to drug A, wash-out, exposure to drug B, wash-out, follow-up."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ResearchStudyArmModel> arm = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"arm_id\"")
+  private String arm_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="arm_id", insertable=false, updatable=false)
+  private java.util.List<ResearchStudyArmModel> arm;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -217,14 +246,14 @@ public class ResearchStudyModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -234,7 +263,7 @@ public class ResearchStudyModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -244,7 +273,7 @@ public class ResearchStudyModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -256,6 +285,7 @@ public class ResearchStudyModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -270,9 +300,9 @@ public class ResearchStudyModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -293,289 +323,297 @@ public class ResearchStudyModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public ResearchStudyModel() {
   }
 
   public ResearchStudyModel(ResearchStudy o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.title = o.getTitle();
-
-      this.protocol = Reference.toModelArray(o.getProtocol());
-
-      this.partOf = Reference.toModelArray(o.getPartOf());
-
-      this.status = o.getStatus();
-
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.focus = CodeableConcept.toJson(o.getFocus());
-      this.contact = ContactDetail.toModelArray(o.getContact());
-
-      this.relatedArtifact = RelatedArtifact.toModelArray(o.getRelatedArtifact());
-
-      this.keyword = CodeableConcept.toJson(o.getKeyword());
-      this.jurisdiction = CodeableConcept.toJson(o.getJurisdiction());
-      this.description = o.getDescription();
-
-      this.enrollment = Reference.toModelArray(o.getEnrollment());
-
-      this.period = Period.toJson(o.getPeriod());
-      if (null != o.getSponsor()) {
-      	this.sponsor_id = "sponsor" + this.getId();
-        this.sponsor = new ReferenceModel(o.getSponsor());
-        this.sponsor.setId(this.sponsor_id);
-        this.sponsor.parent_id = this.sponsor.getId();
-      }
-
-      if (null != o.getPrincipalInvestigator()) {
-      	this.principalinvestigator_id = "principalInvestigator" + this.getId();
-        this.principalInvestigator = new ReferenceModel(o.getPrincipalInvestigator());
-        this.principalInvestigator.setId(this.principalinvestigator_id);
-        this.principalInvestigator.parent_id = this.principalInvestigator.getId();
-      }
-
-      this.site = Reference.toModelArray(o.getSite());
-
-      this.reasonStopped = CodeableConcept.toJson(o.getReasonStopped());
-      this.note = Annotation.toJson(o.getNote());
-      this.arm = ResearchStudyArm.toModelArray(o.getArm());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.title = o.getTitle();
+    if (null != o.getProtocol() && !o.getProtocol().isEmpty()) {
+    	this.protocol_id = "protocol" + this.id;
+    	this.protocol = ReferenceHelper.toModelFromArray(o.getProtocol(), this.protocol_id);
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+    	this.partof_id = "partof" + this.id;
+    	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
+    }
+    this.status = o.getStatus();
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact_id = "contact" + this.id;
+    	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
+    }
+    if (null != o.getRelatedArtifact() && !o.getRelatedArtifact().isEmpty()) {
+    	this.relatedartifact_id = "relatedartifact" + this.id;
+    	this.relatedArtifact = RelatedArtifactHelper.toModelFromArray(o.getRelatedArtifact(), this.relatedartifact_id);
+    }
+    this.description = o.getDescription();
+    if (null != o.getEnrollment() && !o.getEnrollment().isEmpty()) {
+    	this.enrollment_id = "enrollment" + this.id;
+    	this.enrollment = ReferenceHelper.toModelFromArray(o.getEnrollment(), this.enrollment_id);
+    }
+    this.period = PeriodHelper.toJson(o.getPeriod());
+    if (null != o.getSponsor() ) {
+    	this.sponsor_id = "sponsor" + this.id;
+    	this.sponsor = ReferenceHelper.toModel(o.getSponsor(), this.sponsor_id);
+    }
+    if (null != o.getPrincipalInvestigator() ) {
+    	this.principalinvestigator_id = "principalinvestigator" + this.id;
+    	this.principalInvestigator = ReferenceHelper.toModel(o.getPrincipalInvestigator(), this.principalinvestigator_id);
+    }
+    if (null != o.getSite() && !o.getSite().isEmpty()) {
+    	this.site_id = "site" + this.id;
+    	this.site = ReferenceHelper.toModelFromArray(o.getSite(), this.site_id);
+    }
+    this.reasonStopped = CodeableConceptHelper.toJson(o.getReasonStopped());
+    if (null != o.getArm() && !o.getArm().isEmpty()) {
+    	this.arm_id = "arm" + this.id;
+    	this.arm = ResearchStudyArmHelper.toModelFromArray(o.getArm(), this.arm_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setTitle( String value) {
-    this.title = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getTitle() {
     return this.title;
   }
-  public void setProtocol( java.util.List<ReferenceModel> value) {
-    this.protocol = value;
+  public void setTitle( String value) {
+    this.title = value;
   }
   public java.util.List<ReferenceModel> getProtocol() {
     return this.protocol;
   }
-  public void setPartOf( java.util.List<ReferenceModel> value) {
-    this.partOf = value;
+  public void setProtocol( java.util.List<ReferenceModel> value) {
+    this.protocol = value;
   }
   public java.util.List<ReferenceModel> getPartOf() {
     return this.partOf;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setPartOf( java.util.List<ReferenceModel> value) {
+    this.partOf = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setFocus( String value) {
-    this.focus = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getFocus() {
     return this.focus;
   }
-  public void setContact( java.util.List<ContactDetailModel> value) {
-    this.contact = value;
+  public void setFocus( String value) {
+    this.focus = value;
   }
   public java.util.List<ContactDetailModel> getContact() {
     return this.contact;
   }
-  public void setRelatedArtifact( java.util.List<RelatedArtifactModel> value) {
-    this.relatedArtifact = value;
+  public void setContact( java.util.List<ContactDetailModel> value) {
+    this.contact = value;
   }
   public java.util.List<RelatedArtifactModel> getRelatedArtifact() {
     return this.relatedArtifact;
   }
-  public void setKeyword( String value) {
-    this.keyword = value;
+  public void setRelatedArtifact( java.util.List<RelatedArtifactModel> value) {
+    this.relatedArtifact = value;
   }
   public String getKeyword() {
     return this.keyword;
   }
-  public void setJurisdiction( String value) {
-    this.jurisdiction = value;
+  public void setKeyword( String value) {
+    this.keyword = value;
   }
   public String getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setJurisdiction( String value) {
+    this.jurisdiction = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setEnrollment( java.util.List<ReferenceModel> value) {
-    this.enrollment = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public java.util.List<ReferenceModel> getEnrollment() {
     return this.enrollment;
   }
-  public void setPeriod( String value) {
-    this.period = value;
+  public void setEnrollment( java.util.List<ReferenceModel> value) {
+    this.enrollment = value;
   }
   public String getPeriod() {
     return this.period;
   }
-  public void setSponsor( ReferenceModel value) {
-    this.sponsor = value;
+  public void setPeriod( String value) {
+    this.period = value;
   }
-  public ReferenceModel getSponsor() {
+  public java.util.List<ReferenceModel> getSponsor() {
     return this.sponsor;
   }
-  public void setPrincipalInvestigator( ReferenceModel value) {
-    this.principalInvestigator = value;
+  public void setSponsor( java.util.List<ReferenceModel> value) {
+    this.sponsor = value;
   }
-  public ReferenceModel getPrincipalInvestigator() {
+  public java.util.List<ReferenceModel> getPrincipalInvestigator() {
     return this.principalInvestigator;
   }
-  public void setSite( java.util.List<ReferenceModel> value) {
-    this.site = value;
+  public void setPrincipalInvestigator( java.util.List<ReferenceModel> value) {
+    this.principalInvestigator = value;
   }
   public java.util.List<ReferenceModel> getSite() {
     return this.site;
   }
-  public void setReasonStopped( String value) {
-    this.reasonStopped = value;
+  public void setSite( java.util.List<ReferenceModel> value) {
+    this.site = value;
   }
   public String getReasonStopped() {
     return this.reasonStopped;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setReasonStopped( String value) {
+    this.reasonStopped = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setArm( java.util.List<ResearchStudyArmModel> value) {
-    this.arm = value;
+  public void setNote( String value) {
+    this.note = value;
   }
   public java.util.List<ResearchStudyArmModel> getArm() {
     return this.arm;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setArm( java.util.List<ResearchStudyArmModel> value) {
+    this.arm = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("protocol" + "[" + String.valueOf(this.protocol) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("focus" + "[" + String.valueOf(this.focus) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("relatedArtifact" + "[" + String.valueOf(this.relatedArtifact) + "]\n"); 
-     builder.append("keyword" + "[" + String.valueOf(this.keyword) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("enrollment" + "[" + String.valueOf(this.enrollment) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("sponsor" + "[" + String.valueOf(this.sponsor) + "]\n"); 
-     builder.append("principalInvestigator" + "[" + String.valueOf(this.principalInvestigator) + "]\n"); 
-     builder.append("site" + "[" + String.valueOf(this.site) + "]\n"); 
-     builder.append("reasonStopped" + "[" + String.valueOf(this.reasonStopped) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("arm" + "[" + String.valueOf(this.arm) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[ResearchStudyModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("focus" + "->" + this.focus + "\n"); 
+     builder.append("keyword" + "->" + this.keyword + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("reasonStopped" + "->" + this.reasonStopped + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ResearchStudyModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("protocol" + "->" + this.protocol + "\n"); 
+     builder.append("partOf" + "->" + this.partOf + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("focus" + "->" + this.focus + "\n"); 
+     builder.append("contact" + "->" + this.contact + "\n"); 
+     builder.append("relatedArtifact" + "->" + this.relatedArtifact + "\n"); 
+     builder.append("keyword" + "->" + this.keyword + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("enrollment" + "->" + this.enrollment + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("sponsor" + "->" + this.sponsor + "\n"); 
+     builder.append("principalInvestigator" + "->" + this.principalInvestigator + "\n"); 
+     builder.append("site" + "->" + this.site + "\n"); 
+     builder.append("reasonStopped" + "->" + this.reasonStopped + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("arm" + "->" + this.arm + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

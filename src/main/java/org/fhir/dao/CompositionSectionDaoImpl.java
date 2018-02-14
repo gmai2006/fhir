@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CompositionSectionModel;
 import org.fhir.pojo.CompositionSection;
+import org.fhir.pojo.CompositionSectionHelper;
 
 public class CompositionSectionDaoImpl implements CompositionSectionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CompositionSectionDaoImpl implements CompositionSectionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompositionSectionModel a", CompositionSectionModel.class).setMaxResults(maxResult);
       List<CompositionSectionModel> models = query.getResultList();
-      return CompositionSection.fromArray(models);
+      return CompositionSectionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CompositionSectionDaoImpl implements CompositionSectionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompositionSectionModel a", CompositionSectionModel.class);
       List<CompositionSectionModel> models = query.getResultList();
-      return CompositionSection.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CompositionSection create(CompositionSection e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CompositionSectionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CompositionSection update(CompositionSection e) {
-      final EntityManager em = entityManagerProvider.get();
-      CompositionSectionModel model = em.merge(new CompositionSectionModel(e));
-      return new CompositionSection(model);
+      return CompositionSectionHelper.fromArray2Array(models);
   }
 
   @Override

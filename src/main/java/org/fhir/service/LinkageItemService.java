@@ -32,7 +32,5 @@ public interface LinkageItemService {
 	public LinkageItem find(String id);
   public List<LinkageItem> select(int maxResult);
   public List<LinkageItem> selectAll();
-  public LinkageItem create(LinkageItem bean);
-  public LinkageItem update(LinkageItem bean);
   public void delete(LinkageItem bean);
 }

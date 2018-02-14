@@ -34,10 +34,5 @@ public interface ProcedureFocalDeviceDao {
   public List<ProcedureFocalDevice> select(int maxResult);
 
   public List<ProcedureFocalDevice> selectAll();
-
-  public ProcedureFocalDevice create(ProcedureFocalDevice e);
-
-  public ProcedureFocalDevice update(ProcedureFocalDevice e);
-
   public void delete(ProcedureFocalDevice e);
 }

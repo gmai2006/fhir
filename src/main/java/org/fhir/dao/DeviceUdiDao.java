@@ -34,10 +34,5 @@ public interface DeviceUdiDao {
   public List<DeviceUdi> select(int maxResult);
 
   public List<DeviceUdi> selectAll();
-
-  public DeviceUdi create(DeviceUdi e);
-
-  public DeviceUdi update(DeviceUdi e);
-
   public void delete(DeviceUdi e);
 }

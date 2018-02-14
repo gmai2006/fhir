@@ -101,6 +101,7 @@ public class RiskAssessmentPrediction  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -122,29 +123,23 @@ public class RiskAssessmentPrediction  {
 
   public RiskAssessmentPrediction(RiskAssessmentPredictionModel o) {
     this.id = o.getId();
-      this.outcome = CodeableConcept.fromJson(o.getOutcome());
-      if (null != o.getProbabilityDecimal()) {
-        this.probabilityDecimal = new Float(o.getProbabilityDecimal());
-      }
-
-      this.probabilityRange = Range.fromJson(o.getProbabilityRange());
-      this.qualitativeRisk = CodeableConcept.fromJson(o.getQualitativeRisk());
-      if (null != o.getRelativeRisk()) {
-        this.relativeRisk = new Float(o.getRelativeRisk());
-      }
-
-      this.whenPeriod = Period.fromJson(o.getWhenPeriod());
-      this.whenRange = Range.fromJson(o.getWhenRange());
-      if (null != o.getRationale()) {
-        this.rationale = new String(o.getRationale());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getProbabilityDecimal()) {
+      this.probabilityDecimal = o.getProbabilityDecimal();
+    }
+    this.probabilityRange = RangeHelper.fromJson(o.getProbabilityRange());
+    this.qualitativeRisk = CodeableConceptHelper.fromJson(o.getQualitativeRisk());
+    if (null != o.getRelativeRisk()) {
+      this.relativeRisk = o.getRelativeRisk();
+    }
+    this.whenPeriod = PeriodHelper.fromJson(o.getWhenPeriod());
+    this.whenRange = RangeHelper.fromJson(o.getWhenRange());
+    if (null != o.getRationale()) {
+      this.rationale = o.getRationale();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setOutcome( CodeableConcept value) {
@@ -241,55 +236,24 @@ public class RiskAssessmentPrediction  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("probabilityDecimal" + "[" + String.valueOf(this.probabilityDecimal) + "]\n"); 
-     builder.append("_probabilityDecimal" + "[" + String.valueOf(this._probabilityDecimal) + "]\n"); 
-     builder.append("probabilityRange" + "[" + String.valueOf(this.probabilityRange) + "]\n"); 
-     builder.append("qualitativeRisk" + "[" + String.valueOf(this.qualitativeRisk) + "]\n"); 
-     builder.append("relativeRisk" + "[" + String.valueOf(this.relativeRisk) + "]\n"); 
-     builder.append("_relativeRisk" + "[" + String.valueOf(this._relativeRisk) + "]\n"); 
-     builder.append("whenPeriod" + "[" + String.valueOf(this.whenPeriod) + "]\n"); 
-     builder.append("whenRange" + "[" + String.valueOf(this.whenRange) + "]\n"); 
-     builder.append("rationale" + "[" + String.valueOf(this.rationale) + "]\n"); 
-     builder.append("_rationale" + "[" + String.valueOf(this._rationale) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[RiskAssessmentPrediction]:" + "\n");
+     if(this.outcome != null) builder.append("outcome" + "->" + this.outcome.toString() + "\n"); 
+     if(this.probabilityDecimal != null) builder.append("probabilityDecimal" + "->" + this.probabilityDecimal.toString() + "\n"); 
+     if(this._probabilityDecimal != null) builder.append("_probabilityDecimal" + "->" + this._probabilityDecimal.toString() + "\n"); 
+     if(this.probabilityRange != null) builder.append("probabilityRange" + "->" + this.probabilityRange.toString() + "\n"); 
+     if(this.qualitativeRisk != null) builder.append("qualitativeRisk" + "->" + this.qualitativeRisk.toString() + "\n"); 
+     if(this.relativeRisk != null) builder.append("relativeRisk" + "->" + this.relativeRisk.toString() + "\n"); 
+     if(this._relativeRisk != null) builder.append("_relativeRisk" + "->" + this._relativeRisk.toString() + "\n"); 
+     if(this.whenPeriod != null) builder.append("whenPeriod" + "->" + this.whenPeriod.toString() + "\n"); 
+     if(this.whenRange != null) builder.append("whenRange" + "->" + this.whenRange.toString() + "\n"); 
+     if(this.rationale != null) builder.append("rationale" + "->" + this.rationale.toString() + "\n"); 
+     if(this._rationale != null) builder.append("_rationale" + "->" + this._rationale.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<RiskAssessmentPrediction> fromArray(java.util.List<RiskAssessmentPredictionModel> list) {
-    return (java.util.List<RiskAssessmentPrediction>)list.stream()
-      .map(model -> new RiskAssessmentPrediction(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<RiskAssessmentPredictionModel> toModelArray(java.util.List<RiskAssessmentPrediction> list) {
-    return (java.util.List<RiskAssessmentPredictionModel>)list.stream()
-      .map(model -> new RiskAssessmentPredictionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static RiskAssessmentPrediction fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, RiskAssessmentPrediction.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(RiskAssessmentPrediction o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<RiskAssessmentPrediction> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

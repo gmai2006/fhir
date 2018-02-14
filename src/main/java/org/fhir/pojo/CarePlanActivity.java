@@ -68,6 +68,7 @@ public class CarePlanActivity  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -89,26 +90,18 @@ public class CarePlanActivity  {
 
   public CarePlanActivity(CarePlanActivityModel o) {
     this.id = o.getId();
-      this.outcomeCodeableConcept = CodeableConcept.fromArray(o.getOutcomeCodeableConcept());
-      this.outcomeReference = Reference.fromArray(o.getOutcomeReference());
-
-      this.progress = Annotation.fromArray(o.getProgress());
-      if (null != o.getReference()) {
-        this.reference = new Reference(o.getReference());
-        this.reference.setId(this.getId());
-      }
-
-      if (null != o.getDetail()) {
-        this.detail = new CarePlanDetail(o.getDetail());
-        this.detail.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getOutcomeReference() && !o.getOutcomeReference().isEmpty()) {
+    	this.outcomeReference = ReferenceHelper.fromArray2Array(o.getOutcomeReference());
+    }
+    if (null != o.getReference() && !o.getReference().isEmpty()) {
+      this.reference = new Reference(o.getReference().get(0));
+    }
+    if (null != o.getDetail() && !o.getDetail().isEmpty()) {
+      this.detail = new CarePlanDetail(o.getDetail().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setOutcomeCodeableConcept( java.util.List<CodeableConcept> value) {
@@ -169,49 +162,18 @@ public class CarePlanActivity  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("outcomeCodeableConcept" + "[" + String.valueOf(this.outcomeCodeableConcept) + "]\n"); 
-     builder.append("outcomeReference" + "[" + String.valueOf(this.outcomeReference) + "]\n"); 
-     builder.append("progress" + "[" + String.valueOf(this.progress) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CarePlanActivity]:" + "\n");
+     if(this.outcomeCodeableConcept != null) builder.append("outcomeCodeableConcept" + "->" + this.outcomeCodeableConcept.toString() + "\n"); 
+     if(this.outcomeReference != null) builder.append("outcomeReference" + "->" + this.outcomeReference.toString() + "\n"); 
+     if(this.progress != null) builder.append("progress" + "->" + this.progress.toString() + "\n"); 
+     if(this.reference != null) builder.append("reference" + "->" + this.reference.toString() + "\n"); 
+     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CarePlanActivity> fromArray(java.util.List<CarePlanActivityModel> list) {
-    return (java.util.List<CarePlanActivity>)list.stream()
-      .map(model -> new CarePlanActivity(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CarePlanActivityModel> toModelArray(java.util.List<CarePlanActivity> list) {
-    return (java.util.List<CarePlanActivityModel>)list.stream()
-      .map(model -> new CarePlanActivityModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CarePlanActivity fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CarePlanActivity.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CarePlanActivity o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CarePlanActivity> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

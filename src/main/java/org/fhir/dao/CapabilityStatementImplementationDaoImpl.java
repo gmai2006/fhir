@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementImplementationModel;
 import org.fhir.pojo.CapabilityStatementImplementation;
+import org.fhir.pojo.CapabilityStatementImplementationHelper;
 
 public class CapabilityStatementImplementationDaoImpl implements CapabilityStatementImplementationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementImplementationDaoImpl implements CapabilityState
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementImplementationModel a", CapabilityStatementImplementationModel.class).setMaxResults(maxResult);
       List<CapabilityStatementImplementationModel> models = query.getResultList();
-      return CapabilityStatementImplementation.fromArray(models);
+      return CapabilityStatementImplementationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CapabilityStatementImplementationDaoImpl implements CapabilityState
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementImplementationModel a", CapabilityStatementImplementationModel.class);
       List<CapabilityStatementImplementationModel> models = query.getResultList();
-      return CapabilityStatementImplementation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementImplementation create(CapabilityStatementImplementation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CapabilityStatementImplementationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CapabilityStatementImplementation update(CapabilityStatementImplementation e) {
-      final EntityManager em = entityManagerProvider.get();
-      CapabilityStatementImplementationModel model = em.merge(new CapabilityStatementImplementationModel(e));
-      return new CapabilityStatementImplementation(model);
+      return CapabilityStatementImplementationHelper.fromArray2Array(models);
   }
 
   @Override

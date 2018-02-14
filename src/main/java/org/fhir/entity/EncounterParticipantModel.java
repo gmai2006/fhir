@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
 @Entity
 @Table(name="encounterparticipant")
-public class EncounterParticipantModel  {
+public class EncounterParticipantModel  implements Serializable {
+	private static final long serialVersionUID = 1518576696923377L;
   /**
   * Description: "Role of participant in encounter."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -48,7 +49,7 @@ public class EncounterParticipantModel  {
 
   /**
   * Description: "The period of time that the specified participant participated in the encounter. These can overlap or be sub-sets of the overall encounter's period."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -62,14 +63,14 @@ public class EncounterParticipantModel  {
   @Column(name="\"individual_id\"")
   private String individual_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`individual_id`", insertable=false, updatable=false)
-  private ReferenceModel individual;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="individual_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> individual;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -81,6 +82,7 @@ public class EncounterParticipantModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -89,84 +91,100 @@ public class EncounterParticipantModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public EncounterParticipantModel() {
   }
 
-  public EncounterParticipantModel(EncounterParticipant o) {
-    this.id = o.getId();
-      this.type = CodeableConcept.toJson(o.getType());
-      this.period = Period.toJson(o.getPeriod());
-      if (null != o.getIndividual()) {
-      	this.individual_id = "individual" + this.getId();
-        this.individual = new ReferenceModel(o.getIndividual());
-        this.individual.setId(this.individual_id);
-        this.individual.parent_id = this.individual.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public EncounterParticipantModel(EncounterParticipant o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.period = PeriodHelper.toJson(o.getPeriod());
+    if (null != o.getIndividual() ) {
+    	this.individual_id = "individual" + this.parent_id;
+    	this.individual = ReferenceHelper.toModel(o.getIndividual(), this.individual_id);
+    }
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setPeriod( String value) {
-    this.period = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getPeriod() {
     return this.period;
   }
-  public void setIndividual( ReferenceModel value) {
-    this.individual = value;
+  public void setPeriod( String value) {
+    this.period = value;
   }
-  public ReferenceModel getIndividual() {
+  public java.util.List<ReferenceModel> getIndividual() {
     return this.individual;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setIndividual( java.util.List<ReferenceModel> value) {
+    this.individual = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("individual" + "[" + String.valueOf(this.individual) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[EncounterParticipantModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[EncounterParticipantModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("individual" + "->" + this.individual + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

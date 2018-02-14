@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EligibilityResponseModel;
 import org.fhir.pojo.EligibilityResponse;
+import org.fhir.pojo.EligibilityResponseHelper;
 
 public class EligibilityResponseDaoImpl implements EligibilityResponseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EligibilityResponseDaoImpl implements EligibilityResponseDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EligibilityResponseModel a", EligibilityResponseModel.class).setMaxResults(maxResult);
       List<EligibilityResponseModel> models = query.getResultList();
-      return EligibilityResponse.fromArray(models);
+      return EligibilityResponseHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class EligibilityResponseDaoImpl implements EligibilityResponseDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EligibilityResponseModel a", EligibilityResponseModel.class);
       List<EligibilityResponseModel> models = query.getResultList();
-      return EligibilityResponse.fromArray(models);
+      return EligibilityResponseHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class EligibilityResponseDaoImpl implements EligibilityResponseDao {
       EligibilityResponseModel model = em.merge(new EligibilityResponseModel(e));
       return new EligibilityResponse(model);
   }
-
   @Override
   @Transactional
   public void delete(EligibilityResponse e) {

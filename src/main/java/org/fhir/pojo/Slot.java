@@ -148,6 +148,7 @@ public class Slot  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -199,65 +200,44 @@ public class Slot  {
 
   public Slot(SlotModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.serviceCategory = CodeableConcept.fromJson(o.getServiceCategory());
-      this.serviceType = CodeableConcept.fromArray(o.getServiceType());
-      this.specialty = CodeableConcept.fromArray(o.getSpecialty());
-      this.appointmentType = CodeableConcept.fromJson(o.getAppointmentType());
-      if (null != o.getSchedule()) {
-        this.schedule = new Reference(o.getSchedule());
-        this.schedule.setId(this.getId());
-      }
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getStart()) {
-        this.start = new String(o.getStart());
-      }
-
-      if (null != o.getEnd()) {
-        this.end = new String(o.getEnd());
-      }
-
-      if (null != o.getOverbooked()) {
-        this.overbooked = new Boolean(o.getOverbooked());
-      }
-
-      if (null != o.getComment()) {
-        this.comment = new String(o.getComment());
-      }
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.serviceCategory = CodeableConceptHelper.fromJson(o.getServiceCategory());
+    this.appointmentType = CodeableConceptHelper.fromJson(o.getAppointmentType());
+    if (null != o.getSchedule() && !o.getSchedule().isEmpty()) {
+      this.schedule = new Reference(o.getSchedule().get(0));
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getStart()) {
+      this.start = o.getStart();
+    }
+    if (null != o.getEnd()) {
+      this.end = o.getEnd();
+    }
+    if (null != o.getOverbooked()) {
+      this.overbooked = o.getOverbooked();
+    }
+    if (null != o.getComment()) {
+      this.comment = o.getComment();
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -432,34 +412,35 @@ public class Slot  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("serviceCategory" + "[" + String.valueOf(this.serviceCategory) + "]\n"); 
-     builder.append("serviceType" + "[" + String.valueOf(this.serviceType) + "]\n"); 
-     builder.append("specialty" + "[" + String.valueOf(this.specialty) + "]\n"); 
-     builder.append("appointmentType" + "[" + String.valueOf(this.appointmentType) + "]\n"); 
-     builder.append("schedule" + "[" + String.valueOf(this.schedule) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("start" + "[" + String.valueOf(this.start) + "]\n"); 
-     builder.append("_start" + "[" + String.valueOf(this._start) + "]\n"); 
-     builder.append("end" + "[" + String.valueOf(this.end) + "]\n"); 
-     builder.append("_end" + "[" + String.valueOf(this._end) + "]\n"); 
-     builder.append("overbooked" + "[" + String.valueOf(this.overbooked) + "]\n"); 
-     builder.append("_overbooked" + "[" + String.valueOf(this._overbooked) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("_comment" + "[" + String.valueOf(this._comment) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Slot]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.serviceCategory != null) builder.append("serviceCategory" + "->" + this.serviceCategory.toString() + "\n"); 
+     if(this.serviceType != null) builder.append("serviceType" + "->" + this.serviceType.toString() + "\n"); 
+     if(this.specialty != null) builder.append("specialty" + "->" + this.specialty.toString() + "\n"); 
+     if(this.appointmentType != null) builder.append("appointmentType" + "->" + this.appointmentType.toString() + "\n"); 
+     if(this.schedule != null) builder.append("schedule" + "->" + this.schedule.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.start != null) builder.append("start" + "->" + this.start.toString() + "\n"); 
+     if(this._start != null) builder.append("_start" + "->" + this._start.toString() + "\n"); 
+     if(this.end != null) builder.append("end" + "->" + this.end.toString() + "\n"); 
+     if(this._end != null) builder.append("_end" + "->" + this._end.toString() + "\n"); 
+     if(this.overbooked != null) builder.append("overbooked" + "->" + this.overbooked.toString() + "\n"); 
+     if(this._overbooked != null) builder.append("_overbooked" + "->" + this._overbooked.toString() + "\n"); 
+     if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
+     if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -495,36 +476,4 @@ public class Slot  {
   	}
   }
 
-  public static java.util.List<Slot> fromArray(java.util.List<SlotModel> list) {
-    return (java.util.List<Slot>)list.stream()
-      .map(model -> new Slot(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SlotModel> toModelArray(java.util.List<Slot> list) {
-    return (java.util.List<SlotModel>)list.stream()
-      .map(model -> new SlotModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Slot fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Slot.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Slot o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Slot> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

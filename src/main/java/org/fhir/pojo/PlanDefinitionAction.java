@@ -244,6 +244,7 @@ public class PlanDefinitionAction  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -265,89 +266,80 @@ public class PlanDefinitionAction  {
 
   public PlanDefinitionAction(PlanDefinitionActionModel o) {
     this.id = o.getId();
-      if (null != o.getLabel()) {
-        this.label = new String(o.getLabel());
-      }
-
-      if (null != o.getTitle()) {
-        this.title = new String(o.getTitle());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getTextEquivalent()) {
-        this.textEquivalent = new String(o.getTextEquivalent());
-      }
-
-      this.code = CodeableConcept.fromArray(o.getCode());
-      this.reason = CodeableConcept.fromArray(o.getReason());
-      this.documentation = RelatedArtifact.fromArray(o.getDocumentation());
-
-      this.goalId = org.fhir.utils.JsonUtils.json2Array(o.getGoalId());
-
-      this.triggerDefinition = TriggerDefinition.fromArray(o.getTriggerDefinition());
-
-      this.condition = PlanDefinitionCondition.fromArray(o.getCondition());
-
-      this.input = DataRequirement.fromArray(o.getInput());
-
-      this.output = DataRequirement.fromArray(o.getOutput());
-
-      this.relatedAction = PlanDefinitionRelatedAction.fromArray(o.getRelatedAction());
-
-      if (null != o.getTimingDateTime()) {
-        this.timingDateTime = new String(o.getTimingDateTime());
-      }
-
-      this.timingPeriod = Period.fromJson(o.getTimingPeriod());
-      this.timingDuration = Duration.fromJson(o.getTimingDuration());
-      this.timingRange = Range.fromJson(o.getTimingRange());
-      this.timingTiming = Timing.fromJson(o.getTimingTiming());
-      this.participant = PlanDefinitionParticipant.fromArray(o.getParticipant());
-
-      this.type = Coding.fromJson(o.getType());
-      if (null != o.getGroupingBehavior()) {
-        this.groupingBehavior = new String(o.getGroupingBehavior());
-      }
-
-      if (null != o.getSelectionBehavior()) {
-        this.selectionBehavior = new String(o.getSelectionBehavior());
-      }
-
-      if (null != o.getRequiredBehavior()) {
-        this.requiredBehavior = new String(o.getRequiredBehavior());
-      }
-
-      if (null != o.getPrecheckBehavior()) {
-        this.precheckBehavior = new String(o.getPrecheckBehavior());
-      }
-
-      if (null != o.getCardinalityBehavior()) {
-        this.cardinalityBehavior = new String(o.getCardinalityBehavior());
-      }
-
-      if (null != o.getDefinition()) {
-        this.definition = new Reference(o.getDefinition());
-        this.definition.setId(this.getId());
-      }
-
-      if (null != o.getTransform()) {
-        this.transform = new Reference(o.getTransform());
-        this.transform.setId(this.getId());
-      }
-
-      this.dynamicValue = PlanDefinitionDynamicValue.fromArray(o.getDynamicValue());
-
-      this.action = PlanDefinitionAction.fromArray(o.getAction());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getLabel()) {
+      this.label = o.getLabel();
+    }
+    if (null != o.getTitle()) {
+      this.title = o.getTitle();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getTextEquivalent()) {
+      this.textEquivalent = o.getTextEquivalent();
+    }
+    if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
+    	this.documentation = RelatedArtifactHelper.fromArray2Array(o.getDocumentation());
+    }
+    if (o.getGoalId() != null) {
+    	this.goalId = org.fhir.utils.JsonUtils.json2Array(o.getGoalId());
+    }
+    if (null != o.getTriggerDefinition() && !o.getTriggerDefinition().isEmpty()) {
+    	this.triggerDefinition = TriggerDefinitionHelper.fromArray2Array(o.getTriggerDefinition());
+    }
+    if (null != o.getCondition() && !o.getCondition().isEmpty()) {
+    	this.condition = PlanDefinitionConditionHelper.fromArray2Array(o.getCondition());
+    }
+    if (null != o.getInput() && !o.getInput().isEmpty()) {
+    	this.input = DataRequirementHelper.fromArray2Array(o.getInput());
+    }
+    if (null != o.getOutput() && !o.getOutput().isEmpty()) {
+    	this.output = DataRequirementHelper.fromArray2Array(o.getOutput());
+    }
+    if (null != o.getRelatedAction() && !o.getRelatedAction().isEmpty()) {
+    	this.relatedAction = PlanDefinitionRelatedActionHelper.fromArray2Array(o.getRelatedAction());
+    }
+    if (null != o.getTimingDateTime()) {
+      this.timingDateTime = o.getTimingDateTime();
+    }
+    this.timingPeriod = PeriodHelper.fromJson(o.getTimingPeriod());
+    this.timingDuration = DurationHelper.fromJson(o.getTimingDuration());
+    this.timingRange = RangeHelper.fromJson(o.getTimingRange());
+    this.timingTiming = TimingHelper.fromJson(o.getTimingTiming());
+    if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
+    	this.participant = PlanDefinitionParticipantHelper.fromArray2Array(o.getParticipant());
+    }
+    this.type = CodingHelper.fromJson(o.getType());
+    if (null != o.getGroupingBehavior()) {
+      this.groupingBehavior = o.getGroupingBehavior();
+    }
+    if (null != o.getSelectionBehavior()) {
+      this.selectionBehavior = o.getSelectionBehavior();
+    }
+    if (null != o.getRequiredBehavior()) {
+      this.requiredBehavior = o.getRequiredBehavior();
+    }
+    if (null != o.getPrecheckBehavior()) {
+      this.precheckBehavior = o.getPrecheckBehavior();
+    }
+    if (null != o.getCardinalityBehavior()) {
+      this.cardinalityBehavior = o.getCardinalityBehavior();
+    }
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+      this.definition = new Reference(o.getDefinition().get(0));
+    }
+    if (null != o.getTransform() && !o.getTransform().isEmpty()) {
+      this.transform = new Reference(o.getTransform().get(0));
+    }
+    if (null != o.getDynamicValue() && !o.getDynamicValue().isEmpty()) {
+    	this.dynamicValue = PlanDefinitionDynamicValueHelper.fromArray2Array(o.getDynamicValue());
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action = PlanDefinitionActionHelper.fromArray2Array(o.getAction());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLabel( String value) {
@@ -618,50 +610,51 @@ public class PlanDefinitionAction  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("label" + "[" + String.valueOf(this.label) + "]\n"); 
-     builder.append("_label" + "[" + String.valueOf(this._label) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("textEquivalent" + "[" + String.valueOf(this.textEquivalent) + "]\n"); 
-     builder.append("_textEquivalent" + "[" + String.valueOf(this._textEquivalent) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("goalId" + "[" + String.valueOf(this.goalId) + "]\n"); 
-     builder.append("_goalId" + "[" + String.valueOf(this._goalId) + "]\n"); 
-     builder.append("triggerDefinition" + "[" + String.valueOf(this.triggerDefinition) + "]\n"); 
-     builder.append("condition" + "[" + String.valueOf(this.condition) + "]\n"); 
-     builder.append("input" + "[" + String.valueOf(this.input) + "]\n"); 
-     builder.append("output" + "[" + String.valueOf(this.output) + "]\n"); 
-     builder.append("relatedAction" + "[" + String.valueOf(this.relatedAction) + "]\n"); 
-     builder.append("timingDateTime" + "[" + String.valueOf(this.timingDateTime) + "]\n"); 
-     builder.append("_timingDateTime" + "[" + String.valueOf(this._timingDateTime) + "]\n"); 
-     builder.append("timingPeriod" + "[" + String.valueOf(this.timingPeriod) + "]\n"); 
-     builder.append("timingDuration" + "[" + String.valueOf(this.timingDuration) + "]\n"); 
-     builder.append("timingRange" + "[" + String.valueOf(this.timingRange) + "]\n"); 
-     builder.append("timingTiming" + "[" + String.valueOf(this.timingTiming) + "]\n"); 
-     builder.append("participant" + "[" + String.valueOf(this.participant) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("groupingBehavior" + "[" + String.valueOf(this.groupingBehavior) + "]\n"); 
-     builder.append("_groupingBehavior" + "[" + String.valueOf(this._groupingBehavior) + "]\n"); 
-     builder.append("selectionBehavior" + "[" + String.valueOf(this.selectionBehavior) + "]\n"); 
-     builder.append("_selectionBehavior" + "[" + String.valueOf(this._selectionBehavior) + "]\n"); 
-     builder.append("requiredBehavior" + "[" + String.valueOf(this.requiredBehavior) + "]\n"); 
-     builder.append("_requiredBehavior" + "[" + String.valueOf(this._requiredBehavior) + "]\n"); 
-     builder.append("precheckBehavior" + "[" + String.valueOf(this.precheckBehavior) + "]\n"); 
-     builder.append("_precheckBehavior" + "[" + String.valueOf(this._precheckBehavior) + "]\n"); 
-     builder.append("cardinalityBehavior" + "[" + String.valueOf(this.cardinalityBehavior) + "]\n"); 
-     builder.append("_cardinalityBehavior" + "[" + String.valueOf(this._cardinalityBehavior) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("transform" + "[" + String.valueOf(this.transform) + "]\n"); 
-     builder.append("dynamicValue" + "[" + String.valueOf(this.dynamicValue) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PlanDefinitionAction]:" + "\n");
+     if(this.label != null) builder.append("label" + "->" + this.label.toString() + "\n"); 
+     if(this._label != null) builder.append("_label" + "->" + this._label.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.textEquivalent != null) builder.append("textEquivalent" + "->" + this.textEquivalent.toString() + "\n"); 
+     if(this._textEquivalent != null) builder.append("_textEquivalent" + "->" + this._textEquivalent.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this.goalId != null) builder.append("goalId" + "->" + this.goalId.toString() + "\n"); 
+     if(this._goalId != null) builder.append("_goalId" + "->" + this._goalId.toString() + "\n"); 
+     if(this.triggerDefinition != null) builder.append("triggerDefinition" + "->" + this.triggerDefinition.toString() + "\n"); 
+     if(this.condition != null) builder.append("condition" + "->" + this.condition.toString() + "\n"); 
+     if(this.input != null) builder.append("input" + "->" + this.input.toString() + "\n"); 
+     if(this.output != null) builder.append("output" + "->" + this.output.toString() + "\n"); 
+     if(this.relatedAction != null) builder.append("relatedAction" + "->" + this.relatedAction.toString() + "\n"); 
+     if(this.timingDateTime != null) builder.append("timingDateTime" + "->" + this.timingDateTime.toString() + "\n"); 
+     if(this._timingDateTime != null) builder.append("_timingDateTime" + "->" + this._timingDateTime.toString() + "\n"); 
+     if(this.timingPeriod != null) builder.append("timingPeriod" + "->" + this.timingPeriod.toString() + "\n"); 
+     if(this.timingDuration != null) builder.append("timingDuration" + "->" + this.timingDuration.toString() + "\n"); 
+     if(this.timingRange != null) builder.append("timingRange" + "->" + this.timingRange.toString() + "\n"); 
+     if(this.timingTiming != null) builder.append("timingTiming" + "->" + this.timingTiming.toString() + "\n"); 
+     if(this.participant != null) builder.append("participant" + "->" + this.participant.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.groupingBehavior != null) builder.append("groupingBehavior" + "->" + this.groupingBehavior.toString() + "\n"); 
+     if(this._groupingBehavior != null) builder.append("_groupingBehavior" + "->" + this._groupingBehavior.toString() + "\n"); 
+     if(this.selectionBehavior != null) builder.append("selectionBehavior" + "->" + this.selectionBehavior.toString() + "\n"); 
+     if(this._selectionBehavior != null) builder.append("_selectionBehavior" + "->" + this._selectionBehavior.toString() + "\n"); 
+     if(this.requiredBehavior != null) builder.append("requiredBehavior" + "->" + this.requiredBehavior.toString() + "\n"); 
+     if(this._requiredBehavior != null) builder.append("_requiredBehavior" + "->" + this._requiredBehavior.toString() + "\n"); 
+     if(this.precheckBehavior != null) builder.append("precheckBehavior" + "->" + this.precheckBehavior.toString() + "\n"); 
+     if(this._precheckBehavior != null) builder.append("_precheckBehavior" + "->" + this._precheckBehavior.toString() + "\n"); 
+     if(this.cardinalityBehavior != null) builder.append("cardinalityBehavior" + "->" + this.cardinalityBehavior.toString() + "\n"); 
+     if(this._cardinalityBehavior != null) builder.append("_cardinalityBehavior" + "->" + this._cardinalityBehavior.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this.transform != null) builder.append("transform" + "->" + this.transform.toString() + "\n"); 
+     if(this.dynamicValue != null) builder.append("dynamicValue" + "->" + this.dynamicValue.toString() + "\n"); 
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -747,36 +740,4 @@ public class PlanDefinitionAction  {
   	}
   }
 
-  public static java.util.List<PlanDefinitionAction> fromArray(java.util.List<PlanDefinitionActionModel> list) {
-    return (java.util.List<PlanDefinitionAction>)list.stream()
-      .map(model -> new PlanDefinitionAction(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PlanDefinitionActionModel> toModelArray(java.util.List<PlanDefinitionAction> list) {
-    return (java.util.List<PlanDefinitionActionModel>)list.stream()
-      .map(model -> new PlanDefinitionActionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PlanDefinitionAction fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PlanDefinitionAction.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PlanDefinitionAction o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PlanDefinitionAction> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

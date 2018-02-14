@@ -103,6 +103,7 @@ public class BundleRequest  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -124,36 +125,27 @@ public class BundleRequest  {
 
   public BundleRequest(BundleRequestModel o) {
     this.id = o.getId();
-      if (null != o.getMethod()) {
-        this.method = new String(o.getMethod());
-      }
-
-      if (null != o.getUrl()) {
-        this.url = new String(o.getUrl());
-      }
-
-      if (null != o.getIfNoneMatch()) {
-        this.ifNoneMatch = new String(o.getIfNoneMatch());
-      }
-
-      if (null != o.getIfModifiedSince()) {
-        this.ifModifiedSince = new String(o.getIfModifiedSince());
-      }
-
-      if (null != o.getIfMatch()) {
-        this.ifMatch = new String(o.getIfMatch());
-      }
-
-      if (null != o.getIfNoneExist()) {
-        this.ifNoneExist = new String(o.getIfNoneExist());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getMethod()) {
+      this.method = o.getMethod();
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    if (null != o.getIfNoneMatch()) {
+      this.ifNoneMatch = o.getIfNoneMatch();
+    }
+    if (null != o.getIfModifiedSince()) {
+      this.ifModifiedSince = o.getIfModifiedSince();
+    }
+    if (null != o.getIfMatch()) {
+      this.ifMatch = o.getIfMatch();
+    }
+    if (null != o.getIfNoneExist()) {
+      this.ifNoneExist = o.getIfNoneExist();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setMethod( String value) {
@@ -256,22 +248,23 @@ public class BundleRequest  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("method" + "[" + String.valueOf(this.method) + "]\n"); 
-     builder.append("_method" + "[" + String.valueOf(this._method) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("ifNoneMatch" + "[" + String.valueOf(this.ifNoneMatch) + "]\n"); 
-     builder.append("_ifNoneMatch" + "[" + String.valueOf(this._ifNoneMatch) + "]\n"); 
-     builder.append("ifModifiedSince" + "[" + String.valueOf(this.ifModifiedSince) + "]\n"); 
-     builder.append("_ifModifiedSince" + "[" + String.valueOf(this._ifModifiedSince) + "]\n"); 
-     builder.append("ifMatch" + "[" + String.valueOf(this.ifMatch) + "]\n"); 
-     builder.append("_ifMatch" + "[" + String.valueOf(this._ifMatch) + "]\n"); 
-     builder.append("ifNoneExist" + "[" + String.valueOf(this.ifNoneExist) + "]\n"); 
-     builder.append("_ifNoneExist" + "[" + String.valueOf(this._ifNoneExist) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[BundleRequest]:" + "\n");
+     if(this.method != null) builder.append("method" + "->" + this.method.toString() + "\n"); 
+     if(this._method != null) builder.append("_method" + "->" + this._method.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.ifNoneMatch != null) builder.append("ifNoneMatch" + "->" + this.ifNoneMatch.toString() + "\n"); 
+     if(this._ifNoneMatch != null) builder.append("_ifNoneMatch" + "->" + this._ifNoneMatch.toString() + "\n"); 
+     if(this.ifModifiedSince != null) builder.append("ifModifiedSince" + "->" + this.ifModifiedSince.toString() + "\n"); 
+     if(this._ifModifiedSince != null) builder.append("_ifModifiedSince" + "->" + this._ifModifiedSince.toString() + "\n"); 
+     if(this.ifMatch != null) builder.append("ifMatch" + "->" + this.ifMatch.toString() + "\n"); 
+     if(this._ifMatch != null) builder.append("_ifMatch" + "->" + this._ifMatch.toString() + "\n"); 
+     if(this.ifNoneExist != null) builder.append("ifNoneExist" + "->" + this.ifNoneExist.toString() + "\n"); 
+     if(this._ifNoneExist != null) builder.append("_ifNoneExist" + "->" + this._ifNoneExist.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -293,36 +286,4 @@ public class BundleRequest  {
   	}
   }
 
-  public static java.util.List<BundleRequest> fromArray(java.util.List<BundleRequestModel> list) {
-    return (java.util.List<BundleRequest>)list.stream()
-      .map(model -> new BundleRequest(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<BundleRequestModel> toModelArray(java.util.List<BundleRequest> list) {
-    return (java.util.List<BundleRequestModel>)list.stream()
-      .map(model -> new BundleRequestModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static BundleRequest fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, BundleRequest.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(BundleRequest o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<BundleRequest> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

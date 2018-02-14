@@ -84,6 +84,7 @@ public class ConceptMapUnmapped  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -105,28 +106,21 @@ public class ConceptMapUnmapped  {
 
   public ConceptMapUnmapped(ConceptMapUnmappedModel o) {
     this.id = o.getId();
-      if (null != o.getMode()) {
-        this.mode = new String(o.getMode());
-      }
-
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getDisplay()) {
-        this.display = new String(o.getDisplay());
-      }
-
-      if (null != o.getUrl()) {
-        this.url = new String(o.getUrl());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getMode()) {
+      this.mode = o.getMode();
+    }
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getDisplay()) {
+      this.display = o.getDisplay();
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setMode( String value) {
@@ -205,18 +199,19 @@ public class ConceptMapUnmapped  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("_display" + "[" + String.valueOf(this._display) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConceptMapUnmapped]:" + "\n");
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
+     if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -236,36 +231,4 @@ public class ConceptMapUnmapped  {
   	}
   }
 
-  public static java.util.List<ConceptMapUnmapped> fromArray(java.util.List<ConceptMapUnmappedModel> list) {
-    return (java.util.List<ConceptMapUnmapped>)list.stream()
-      .map(model -> new ConceptMapUnmapped(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConceptMapUnmappedModel> toModelArray(java.util.List<ConceptMapUnmapped> list) {
-    return (java.util.List<ConceptMapUnmappedModel>)list.stream()
-      .map(model -> new ConceptMapUnmappedModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ConceptMapUnmapped fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ConceptMapUnmapped.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ConceptMapUnmapped o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ConceptMapUnmapped> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

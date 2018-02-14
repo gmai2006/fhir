@@ -71,6 +71,7 @@ public class Annotation  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -151,37 +152,18 @@ public class Annotation  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("authorReference" + "[" + String.valueOf(this.authorReference) + "]\n"); 
-     builder.append("authorString" + "[" + String.valueOf(this.authorString) + "]\n"); 
-     builder.append("_authorString" + "[" + String.valueOf(this._authorString) + "]\n"); 
-     builder.append("time" + "[" + String.valueOf(this.time) + "]\n"); 
-     builder.append("_time" + "[" + String.valueOf(this._time) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Annotation]:" + "\n");
+     if(this.authorReference != null) builder.append("authorReference" + "->" + this.authorReference.toString() + "\n"); 
+     if(this.authorString != null) builder.append("authorString" + "->" + this.authorString.toString() + "\n"); 
+     if(this._authorString != null) builder.append("_authorString" + "->" + this._authorString.toString() + "\n"); 
+     if(this.time != null) builder.append("time" + "->" + this.time.toString() + "\n"); 
+     if(this._time != null) builder.append("_time" + "->" + this._time.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static Annotation fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Annotation.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Annotation o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Annotation> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

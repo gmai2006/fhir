@@ -32,7 +32,5 @@ public interface MetaService {
 	public Meta find(String id);
   public List<Meta> select(int maxResult);
   public List<Meta> selectAll();
-  public Meta create(Meta bean);
-  public Meta update(Meta bean);
   public void delete(Meta bean);
 }

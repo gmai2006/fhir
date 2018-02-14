@@ -80,6 +80,7 @@ public class ExplanationOfBenefitCareTeam  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -101,27 +102,20 @@ public class ExplanationOfBenefitCareTeam  {
 
   public ExplanationOfBenefitCareTeam(ExplanationOfBenefitCareTeamModel o) {
     this.id = o.getId();
-      if (null != o.getSequence()) {
-        this.sequence = new Float(o.getSequence());
-      }
-
-      if (null != o.getProvider()) {
-        this.provider = new Reference(o.getProvider());
-        this.provider.setId(this.getId());
-      }
-
-      if (null != o.getResponsible()) {
-        this.responsible = new Boolean(o.getResponsible());
-      }
-
-      this.role = CodeableConcept.fromJson(o.getRole());
-      this.qualification = CodeableConcept.fromJson(o.getQualification());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSequence()) {
+      this.sequence = o.getSequence();
+    }
+    if (null != o.getProvider() && !o.getProvider().isEmpty()) {
+      this.provider = new Reference(o.getProvider().get(0));
+    }
+    if (null != o.getResponsible()) {
+      this.responsible = o.getResponsible();
+    }
+    this.role = CodeableConceptHelper.fromJson(o.getRole());
+    this.qualification = CodeableConceptHelper.fromJson(o.getQualification());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSequence( Float value) {
@@ -194,51 +188,20 @@ public class ExplanationOfBenefitCareTeam  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("_sequence" + "[" + String.valueOf(this._sequence) + "]\n"); 
-     builder.append("provider" + "[" + String.valueOf(this.provider) + "]\n"); 
-     builder.append("responsible" + "[" + String.valueOf(this.responsible) + "]\n"); 
-     builder.append("_responsible" + "[" + String.valueOf(this._responsible) + "]\n"); 
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("qualification" + "[" + String.valueOf(this.qualification) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitCareTeam]:" + "\n");
+     if(this.sequence != null) builder.append("sequence" + "->" + this.sequence.toString() + "\n"); 
+     if(this._sequence != null) builder.append("_sequence" + "->" + this._sequence.toString() + "\n"); 
+     if(this.provider != null) builder.append("provider" + "->" + this.provider.toString() + "\n"); 
+     if(this.responsible != null) builder.append("responsible" + "->" + this.responsible.toString() + "\n"); 
+     if(this._responsible != null) builder.append("_responsible" + "->" + this._responsible.toString() + "\n"); 
+     if(this.role != null) builder.append("role" + "->" + this.role.toString() + "\n"); 
+     if(this.qualification != null) builder.append("qualification" + "->" + this.qualification.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExplanationOfBenefitCareTeam> fromArray(java.util.List<ExplanationOfBenefitCareTeamModel> list) {
-    return (java.util.List<ExplanationOfBenefitCareTeam>)list.stream()
-      .map(model -> new ExplanationOfBenefitCareTeam(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExplanationOfBenefitCareTeamModel> toModelArray(java.util.List<ExplanationOfBenefitCareTeam> list) {
-    return (java.util.List<ExplanationOfBenefitCareTeamModel>)list.stream()
-      .map(model -> new ExplanationOfBenefitCareTeamModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExplanationOfBenefitCareTeam fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExplanationOfBenefitCareTeam.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExplanationOfBenefitCareTeam o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExplanationOfBenefitCareTeam> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

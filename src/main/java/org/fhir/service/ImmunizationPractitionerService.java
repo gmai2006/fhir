@@ -32,7 +32,5 @@ public interface ImmunizationPractitionerService {
 	public ImmunizationPractitioner find(String id);
   public List<ImmunizationPractitioner> select(int maxResult);
   public List<ImmunizationPractitioner> selectAll();
-  public ImmunizationPractitioner create(ImmunizationPractitioner bean);
-  public ImmunizationPractitioner update(ImmunizationPractitioner bean);
   public void delete(ImmunizationPractitioner bean);
 }

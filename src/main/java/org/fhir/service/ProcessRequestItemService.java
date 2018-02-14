@@ -32,7 +32,5 @@ public interface ProcessRequestItemService {
 	public ProcessRequestItem find(String id);
   public List<ProcessRequestItem> select(int maxResult);
   public List<ProcessRequestItem> selectAll();
-  public ProcessRequestItem create(ProcessRequestItem bean);
-  public ProcessRequestItem update(ProcessRequestItem bean);
   public void delete(ProcessRequestItem bean);
 }

@@ -32,7 +32,5 @@ public interface SupplyRequestOrderedItemService {
 	public SupplyRequestOrderedItem find(String id);
   public List<SupplyRequestOrderedItem> select(int maxResult);
   public List<SupplyRequestOrderedItem> selectAll();
-  public SupplyRequestOrderedItem create(SupplyRequestOrderedItem bean);
-  public SupplyRequestOrderedItem update(SupplyRequestOrderedItem bean);
   public void delete(SupplyRequestOrderedItem bean);
 }

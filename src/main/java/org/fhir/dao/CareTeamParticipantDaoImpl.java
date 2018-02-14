@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CareTeamParticipantModel;
 import org.fhir.pojo.CareTeamParticipant;
+import org.fhir.pojo.CareTeamParticipantHelper;
 
 public class CareTeamParticipantDaoImpl implements CareTeamParticipantDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CareTeamParticipantDaoImpl implements CareTeamParticipantDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CareTeamParticipantModel a", CareTeamParticipantModel.class).setMaxResults(maxResult);
       List<CareTeamParticipantModel> models = query.getResultList();
-      return CareTeamParticipant.fromArray(models);
+      return CareTeamParticipantHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CareTeamParticipantDaoImpl implements CareTeamParticipantDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CareTeamParticipantModel a", CareTeamParticipantModel.class);
       List<CareTeamParticipantModel> models = query.getResultList();
-      return CareTeamParticipant.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CareTeamParticipant create(CareTeamParticipant e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CareTeamParticipantModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CareTeamParticipant update(CareTeamParticipant e) {
-      final EntityManager em = entityManagerProvider.get();
-      CareTeamParticipantModel model = em.merge(new CareTeamParticipantModel(e));
-      return new CareTeamParticipant(model);
+      return CareTeamParticipantHelper.fromArray2Array(models);
   }
 
   @Override

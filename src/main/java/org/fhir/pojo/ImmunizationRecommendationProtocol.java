@@ -79,6 +79,7 @@ public class ImmunizationRecommendationProtocol  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -100,29 +101,21 @@ public class ImmunizationRecommendationProtocol  {
 
   public ImmunizationRecommendationProtocol(ImmunizationRecommendationProtocolModel o) {
     this.id = o.getId();
-      if (null != o.getDoseSequence()) {
-        this.doseSequence = new Float(o.getDoseSequence());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getAuthority()) {
-        this.authority = new Reference(o.getAuthority());
-        this.authority.setId(this.getId());
-      }
-
-      if (null != o.getSeries()) {
-        this.series = new String(o.getSeries());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getDoseSequence()) {
+      this.doseSequence = o.getDoseSequence();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getAuthority() && !o.getAuthority().isEmpty()) {
+      this.authority = new Reference(o.getAuthority().get(0));
+    }
+    if (null != o.getSeries()) {
+      this.series = o.getSeries();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setDoseSequence( Float value) {
@@ -195,51 +188,20 @@ public class ImmunizationRecommendationProtocol  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("doseSequence" + "[" + String.valueOf(this.doseSequence) + "]\n"); 
-     builder.append("_doseSequence" + "[" + String.valueOf(this._doseSequence) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("authority" + "[" + String.valueOf(this.authority) + "]\n"); 
-     builder.append("series" + "[" + String.valueOf(this.series) + "]\n"); 
-     builder.append("_series" + "[" + String.valueOf(this._series) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImmunizationRecommendationProtocol]:" + "\n");
+     if(this.doseSequence != null) builder.append("doseSequence" + "->" + this.doseSequence.toString() + "\n"); 
+     if(this._doseSequence != null) builder.append("_doseSequence" + "->" + this._doseSequence.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.authority != null) builder.append("authority" + "->" + this.authority.toString() + "\n"); 
+     if(this.series != null) builder.append("series" + "->" + this.series.toString() + "\n"); 
+     if(this._series != null) builder.append("_series" + "->" + this._series.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ImmunizationRecommendationProtocol> fromArray(java.util.List<ImmunizationRecommendationProtocolModel> list) {
-    return (java.util.List<ImmunizationRecommendationProtocol>)list.stream()
-      .map(model -> new ImmunizationRecommendationProtocol(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImmunizationRecommendationProtocolModel> toModelArray(java.util.List<ImmunizationRecommendationProtocol> list) {
-    return (java.util.List<ImmunizationRecommendationProtocolModel>)list.stream()
-      .map(model -> new ImmunizationRecommendationProtocolModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImmunizationRecommendationProtocol fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImmunizationRecommendationProtocol.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImmunizationRecommendationProtocol o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImmunizationRecommendationProtocol> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -84,6 +84,7 @@ public class RequestGroupCondition  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -105,28 +106,21 @@ public class RequestGroupCondition  {
 
   public RequestGroupCondition(RequestGroupConditionModel o) {
     this.id = o.getId();
-      if (null != o.getKind()) {
-        this.kind = new String(o.getKind());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
-      if (null != o.getExpression()) {
-        this.expression = new String(o.getExpression());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getKind()) {
+      this.kind = o.getKind();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
+    if (null != o.getExpression()) {
+      this.expression = o.getExpression();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setKind( String value) {
@@ -205,52 +199,21 @@ public class RequestGroupCondition  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("kind" + "[" + String.valueOf(this.kind) + "]\n"); 
-     builder.append("_kind" + "[" + String.valueOf(this._kind) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); 
-     builder.append("expression" + "[" + String.valueOf(this.expression) + "]\n"); 
-     builder.append("_expression" + "[" + String.valueOf(this._expression) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[RequestGroupCondition]:" + "\n");
+     if(this.kind != null) builder.append("kind" + "->" + this.kind.toString() + "\n"); 
+     if(this._kind != null) builder.append("_kind" + "->" + this._kind.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); 
+     if(this.expression != null) builder.append("expression" + "->" + this.expression.toString() + "\n"); 
+     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<RequestGroupCondition> fromArray(java.util.List<RequestGroupConditionModel> list) {
-    return (java.util.List<RequestGroupCondition>)list.stream()
-      .map(model -> new RequestGroupCondition(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<RequestGroupConditionModel> toModelArray(java.util.List<RequestGroupCondition> list) {
-    return (java.util.List<RequestGroupConditionModel>)list.stream()
-      .map(model -> new RequestGroupConditionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static RequestGroupCondition fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, RequestGroupCondition.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(RequestGroupCondition o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<RequestGroupCondition> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

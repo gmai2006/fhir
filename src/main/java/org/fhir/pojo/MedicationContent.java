@@ -58,6 +58,7 @@ public class MedicationContent  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -79,19 +80,14 @@ public class MedicationContent  {
 
   public MedicationContent(MedicationContentModel o) {
     this.id = o.getId();
-      this.itemCodeableConcept = CodeableConcept.fromJson(o.getItemCodeableConcept());
-      if (null != o.getItemReference()) {
-        this.itemReference = new Reference(o.getItemReference());
-        this.itemReference.setId(this.getId());
-      }
-
-      this.amount = Quantity.fromJson(o.getAmount());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.itemCodeableConcept = CodeableConceptHelper.fromJson(o.getItemCodeableConcept());
+    if (null != o.getItemReference() && !o.getItemReference().isEmpty()) {
+      this.itemReference = new Reference(o.getItemReference().get(0));
+    }
+    this.amount = QuantityHelper.fromJson(o.getAmount());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setItemCodeableConcept( CodeableConcept value) {
@@ -140,47 +136,16 @@ public class MedicationContent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("itemCodeableConcept" + "[" + String.valueOf(this.itemCodeableConcept) + "]\n"); 
-     builder.append("itemReference" + "[" + String.valueOf(this.itemReference) + "]\n"); 
-     builder.append("amount" + "[" + String.valueOf(this.amount) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MedicationContent]:" + "\n");
+     if(this.itemCodeableConcept != null) builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept.toString() + "\n"); 
+     if(this.itemReference != null) builder.append("itemReference" + "->" + this.itemReference.toString() + "\n"); 
+     if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MedicationContent> fromArray(java.util.List<MedicationContentModel> list) {
-    return (java.util.List<MedicationContent>)list.stream()
-      .map(model -> new MedicationContent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MedicationContentModel> toModelArray(java.util.List<MedicationContent> list) {
-    return (java.util.List<MedicationContentModel>)list.stream()
-      .map(model -> new MedicationContentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MedicationContent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MedicationContent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MedicationContent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MedicationContent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

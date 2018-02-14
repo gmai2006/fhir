@@ -34,10 +34,8 @@ public interface DeviceMetricDao {
   public List<DeviceMetric> select(int maxResult);
 
   public List<DeviceMetric> selectAll();
-
   public DeviceMetric create(DeviceMetric e);
 
   public DeviceMetric update(DeviceMetric e);
-
   public void delete(DeviceMetric e);
 }

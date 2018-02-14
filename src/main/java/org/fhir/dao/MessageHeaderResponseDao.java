@@ -34,10 +34,5 @@ public interface MessageHeaderResponseDao {
   public List<MessageHeaderResponse> select(int maxResult);
 
   public List<MessageHeaderResponse> selectAll();
-
-  public MessageHeaderResponse create(MessageHeaderResponse e);
-
-  public MessageHeaderResponse update(MessageHeaderResponse e);
-
   public void delete(MessageHeaderResponse e);
 }

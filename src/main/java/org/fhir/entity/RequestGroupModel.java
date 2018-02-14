@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
 */
 @Entity
 @Table(name="requestgroup")
-public class RequestGroupModel  {
+public class RequestGroupModel  implements Serializable {
+	private static final long serialVersionUID = 151857669697123554L;
   /**
   * Description: "This is a RequestGroup resource"
   */
@@ -47,7 +48,7 @@ public class RequestGroupModel  {
 
   /**
   * Description: "Allows a service to provide a unique, business identifier for the request."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -57,27 +58,39 @@ public class RequestGroupModel  {
   /**
   * Description: "A protocol, guideline, orderset or other definition that is adhered to in whole or in part by this request."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> definition = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"definition_id\"")
+  private String definition_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="definition_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> definition;
 
   /**
   * Description: "A plan, proposal or order that is fulfilled in whole or in part by this request."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> basedOn = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"basedon_id\"")
+  private String basedon_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="basedon_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> basedOn;
 
   /**
   * Description: "Completed or terminated request(s) whose function is taken by this new request."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> replaces = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"replaces_id\"")
+  private String replaces_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="replaces_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> replaces;
 
   /**
   * Description: "A shared identifier common to all requests that were authorized more or less simultaneously by a single author, representing the identifier of the requisition, prescription or similar form."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -115,9 +128,9 @@ public class RequestGroupModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "Describes the context of the request group, if any."
@@ -126,9 +139,9 @@ public class RequestGroupModel  {
   @Column(name="\"context_id\"")
   private String context_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`context_id`", insertable=false, updatable=false)
-  private ReferenceModel context;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> context;
 
   /**
   * Description: "Indicates when the request group was created."
@@ -145,13 +158,13 @@ public class RequestGroupModel  {
   @Column(name="\"author_id\"")
   private String author_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`author_id`", insertable=false, updatable=false)
-  private ReferenceModel author;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="author_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> author;
 
   /**
   * Description: "Indicates the reason the request group was created. This is typically provided as a parameter to the evaluation and echoed by the service, although for some use cases, such as subscription- or event-based scenarios, it may provide an indication of the cause for the response."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -165,13 +178,13 @@ public class RequestGroupModel  {
   @Column(name="\"reasonreference_id\"")
   private String reasonreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`reasonreference_id`", insertable=false, updatable=false)
-  private ReferenceModel reasonReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> reasonReference;
 
   /**
   * Description: "Provides a mechanism to communicate additional information about the response."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -181,9 +194,13 @@ public class RequestGroupModel  {
   /**
   * Description: "The actions, if any, produced by the evaluation of the artifact."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<RequestGroupActionModel> action = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"action_id\"")
+  private String action_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  private java.util.List<RequestGroupActionModel> action;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -193,14 +210,14 @@ public class RequestGroupModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -210,7 +227,7 @@ public class RequestGroupModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -220,7 +237,7 @@ public class RequestGroupModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -232,6 +249,7 @@ public class RequestGroupModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -246,9 +264,9 @@ public class RequestGroupModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -269,267 +287,263 @@ public class RequestGroupModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public RequestGroupModel() {
   }
 
   public RequestGroupModel(RequestGroup o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.definition = Reference.toModelArray(o.getDefinition());
-
-      this.basedOn = Reference.toModelArray(o.getBasedOn());
-
-      this.replaces = Reference.toModelArray(o.getReplaces());
-
-      this.groupIdentifier = Identifier.toJson(o.getGroupIdentifier());
-      this.status = o.getStatus();
-
-      this.intent = o.getIntent();
-
-      this.priority = o.getPriority();
-
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      if (null != o.getContext()) {
-      	this.context_id = "context" + this.getId();
-        this.context = new ReferenceModel(o.getContext());
-        this.context.setId(this.context_id);
-        this.context.parent_id = this.context.getId();
-      }
-
-      this.authoredOn = o.getAuthoredOn();
-
-      if (null != o.getAuthor()) {
-      	this.author_id = "author" + this.getId();
-        this.author = new ReferenceModel(o.getAuthor());
-        this.author.setId(this.author_id);
-        this.author.parent_id = this.author.getId();
-      }
-
-      this.reasonCodeableConcept = CodeableConcept.toJson(o.getReasonCodeableConcept());
-      if (null != o.getReasonReference()) {
-      	this.reasonreference_id = "reasonReference" + this.getId();
-        this.reasonReference = new ReferenceModel(o.getReasonReference());
-        this.reasonReference.setId(this.reasonreference_id);
-        this.reasonReference.parent_id = this.reasonReference.getId();
-      }
-
-      this.note = Annotation.toJson(o.getNote());
-      this.action = RequestGroupAction.toModelArray(o.getAction());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+    	this.definition_id = "definition" + this.id;
+    	this.definition = ReferenceHelper.toModelFromArray(o.getDefinition(), this.definition_id);
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedon_id = "basedon" + this.id;
+    	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
+    }
+    if (null != o.getReplaces() && !o.getReplaces().isEmpty()) {
+    	this.replaces_id = "replaces" + this.id;
+    	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
+    }
+    this.groupIdentifier = IdentifierHelper.toJson(o.getGroupIdentifier());
+    this.status = o.getStatus();
+    this.intent = o.getIntent();
+    this.priority = o.getPriority();
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    if (null != o.getContext() ) {
+    	this.context_id = "context" + this.id;
+    	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
+    }
+    this.authoredOn = o.getAuthoredOn();
+    if (null != o.getAuthor() ) {
+    	this.author_id = "author" + this.id;
+    	this.author = ReferenceHelper.toModel(o.getAuthor(), this.author_id);
+    }
+    this.reasonCodeableConcept = CodeableConceptHelper.toJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonReference() ) {
+    	this.reasonreference_id = "reasonreference" + this.id;
+    	this.reasonReference = ReferenceHelper.toModel(o.getReasonReference(), this.reasonreference_id);
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action_id = "action" + this.id;
+    	this.action = RequestGroupActionHelper.toModelFromArray(o.getAction(), this.action_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setDefinition( java.util.List<ReferenceModel> value) {
-    this.definition = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public java.util.List<ReferenceModel> getDefinition() {
     return this.definition;
   }
-  public void setBasedOn( java.util.List<ReferenceModel> value) {
-    this.basedOn = value;
+  public void setDefinition( java.util.List<ReferenceModel> value) {
+    this.definition = value;
   }
   public java.util.List<ReferenceModel> getBasedOn() {
     return this.basedOn;
   }
-  public void setReplaces( java.util.List<ReferenceModel> value) {
-    this.replaces = value;
+  public void setBasedOn( java.util.List<ReferenceModel> value) {
+    this.basedOn = value;
   }
   public java.util.List<ReferenceModel> getReplaces() {
     return this.replaces;
   }
-  public void setGroupIdentifier( String value) {
-    this.groupIdentifier = value;
+  public void setReplaces( java.util.List<ReferenceModel> value) {
+    this.replaces = value;
   }
   public String getGroupIdentifier() {
     return this.groupIdentifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setGroupIdentifier( String value) {
+    this.groupIdentifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setIntent( String value) {
-    this.intent = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getIntent() {
     return this.intent;
   }
-  public void setPriority( String value) {
-    this.priority = value;
+  public void setIntent( String value) {
+    this.intent = value;
   }
   public String getPriority() {
     return this.priority;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setPriority( String value) {
+    this.priority = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setContext( ReferenceModel value) {
-    this.context = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
-  public ReferenceModel getContext() {
+  public java.util.List<ReferenceModel> getContext() {
     return this.context;
   }
-  public void setAuthoredOn( String value) {
-    this.authoredOn = value;
+  public void setContext( java.util.List<ReferenceModel> value) {
+    this.context = value;
   }
   public String getAuthoredOn() {
     return this.authoredOn;
   }
-  public void setAuthor( ReferenceModel value) {
-    this.author = value;
+  public void setAuthoredOn( String value) {
+    this.authoredOn = value;
   }
-  public ReferenceModel getAuthor() {
+  public java.util.List<ReferenceModel> getAuthor() {
     return this.author;
   }
-  public void setReasonCodeableConcept( String value) {
-    this.reasonCodeableConcept = value;
+  public void setAuthor( java.util.List<ReferenceModel> value) {
+    this.author = value;
   }
   public String getReasonCodeableConcept() {
     return this.reasonCodeableConcept;
   }
-  public void setReasonReference( ReferenceModel value) {
-    this.reasonReference = value;
+  public void setReasonCodeableConcept( String value) {
+    this.reasonCodeableConcept = value;
   }
-  public ReferenceModel getReasonReference() {
+  public java.util.List<ReferenceModel> getReasonReference() {
     return this.reasonReference;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setReasonReference( java.util.List<ReferenceModel> value) {
+    this.reasonReference = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setAction( java.util.List<RequestGroupActionModel> value) {
-    this.action = value;
+  public void setNote( String value) {
+    this.note = value;
   }
   public java.util.List<RequestGroupActionModel> getAction() {
     return this.action;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setAction( java.util.List<RequestGroupActionModel> value) {
+    this.action = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("replaces" + "[" + String.valueOf(this.replaces) + "]\n"); 
-     builder.append("groupIdentifier" + "[" + String.valueOf(this.groupIdentifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("intent" + "[" + String.valueOf(this.intent) + "]\n"); 
-     builder.append("priority" + "[" + String.valueOf(this.priority) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("authoredOn" + "[" + String.valueOf(this.authoredOn) + "]\n"); 
-     builder.append("author" + "[" + String.valueOf(this.author) + "]\n"); 
-     builder.append("reasonCodeableConcept" + "[" + String.valueOf(this.reasonCodeableConcept) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[RequestGroupModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("groupIdentifier" + "->" + this.groupIdentifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("intent" + "->" + this.intent + "\n"); 
+     builder.append("priority" + "->" + this.priority + "\n"); 
+     builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
+     builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[RequestGroupModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
+     builder.append("replaces" + "->" + this.replaces + "\n"); 
+     builder.append("groupIdentifier" + "->" + this.groupIdentifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("intent" + "->" + this.intent + "\n"); 
+     builder.append("priority" + "->" + this.priority + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("context" + "->" + this.context + "\n"); 
+     builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
+     builder.append("author" + "->" + this.author + "\n"); 
+     builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept + "\n"); 
+     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("action" + "->" + this.action + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

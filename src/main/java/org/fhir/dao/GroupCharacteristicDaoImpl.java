@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.GroupCharacteristicModel;
 import org.fhir.pojo.GroupCharacteristic;
+import org.fhir.pojo.GroupCharacteristicHelper;
 
 public class GroupCharacteristicDaoImpl implements GroupCharacteristicDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class GroupCharacteristicDaoImpl implements GroupCharacteristicDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GroupCharacteristicModel a", GroupCharacteristicModel.class).setMaxResults(maxResult);
       List<GroupCharacteristicModel> models = query.getResultList();
-      return GroupCharacteristic.fromArray(models);
+      return GroupCharacteristicHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class GroupCharacteristicDaoImpl implements GroupCharacteristicDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GroupCharacteristicModel a", GroupCharacteristicModel.class);
       List<GroupCharacteristicModel> models = query.getResultList();
-      return GroupCharacteristic.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public GroupCharacteristic create(GroupCharacteristic e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new GroupCharacteristicModel(e));
-      return e;
-  }
-
-  @Transactional
-  public GroupCharacteristic update(GroupCharacteristic e) {
-      final EntityManager em = entityManagerProvider.get();
-      GroupCharacteristicModel model = em.merge(new GroupCharacteristicModel(e));
-      return new GroupCharacteristic(model);
+      return GroupCharacteristicHelper.fromArray2Array(models);
   }
 
   @Override

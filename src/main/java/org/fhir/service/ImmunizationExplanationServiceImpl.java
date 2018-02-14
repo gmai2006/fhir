@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ImmunizationExplanation create(ImmunizationExplanation bean) {
-  	requireNonNull(bean);
-    logger.info("create(ImmunizationExplanation={}) - entered bean ");
-
-    final ImmunizationExplanation result = dao.create(bean);
-
-    logger.info("create(ImmunizationExplanation) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ImmunizationExplanation update(ImmunizationExplanation bean) {
-  	requireNonNull(bean);
-    logger.info("update(ImmunizationExplanation={}) - entered bean ");
-
-    final ImmunizationExplanation result = dao.update(bean);
-
-    logger.info("update(ImmunizationExplanation) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

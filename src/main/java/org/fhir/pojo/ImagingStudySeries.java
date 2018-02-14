@@ -138,6 +138,7 @@ public class ImagingStudySeries  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -159,45 +160,39 @@ public class ImagingStudySeries  {
 
   public ImagingStudySeries(ImagingStudySeriesModel o) {
     this.id = o.getId();
-      if (null != o.getUid()) {
-        this.uid = new String(o.getUid());
-      }
-
-      if (null != o.getNumber()) {
-        this.number = new Float(o.getNumber());
-      }
-
-      this.modality = Coding.fromJson(o.getModality());
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getNumberOfInstances()) {
-        this.numberOfInstances = new Float(o.getNumberOfInstances());
-      }
-
-      if (null != o.getAvailability()) {
-        this.availability = new String(o.getAvailability());
-      }
-
-      this.endpoint = Reference.fromArray(o.getEndpoint());
-
-      this.bodySite = Coding.fromJson(o.getBodySite());
-      this.laterality = Coding.fromJson(o.getLaterality());
-      if (null != o.getStarted()) {
-        this.started = new String(o.getStarted());
-      }
-
-      this.performer = Reference.fromArray(o.getPerformer());
-
-      this.instance = ImagingStudyInstance.fromArray(o.getInstance());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getUid()) {
+      this.uid = o.getUid();
+    }
+    if (null != o.getNumber()) {
+      this.number = o.getNumber();
+    }
+    this.modality = CodingHelper.fromJson(o.getModality());
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getNumberOfInstances()) {
+      this.numberOfInstances = o.getNumberOfInstances();
+    }
+    if (null != o.getAvailability()) {
+      this.availability = o.getAvailability();
+    }
+    if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
+    	this.endpoint = ReferenceHelper.fromArray2Array(o.getEndpoint());
+    }
+    this.bodySite = CodingHelper.fromJson(o.getBodySite());
+    this.laterality = CodingHelper.fromJson(o.getLaterality());
+    if (null != o.getStarted()) {
+      this.started = o.getStarted();
+    }
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+    	this.performer = ReferenceHelper.fromArray2Array(o.getPerformer());
+    }
+    if (null != o.getInstance() && !o.getInstance().isEmpty()) {
+    	this.instance = ImagingStudyInstanceHelper.fromArray2Array(o.getInstance());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setUid( String value) {
@@ -336,28 +331,29 @@ public class ImagingStudySeries  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("uid" + "[" + String.valueOf(this.uid) + "]\n"); 
-     builder.append("_uid" + "[" + String.valueOf(this._uid) + "]\n"); 
-     builder.append("number" + "[" + String.valueOf(this.number) + "]\n"); 
-     builder.append("_number" + "[" + String.valueOf(this._number) + "]\n"); 
-     builder.append("modality" + "[" + String.valueOf(this.modality) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("numberOfInstances" + "[" + String.valueOf(this.numberOfInstances) + "]\n"); 
-     builder.append("_numberOfInstances" + "[" + String.valueOf(this._numberOfInstances) + "]\n"); 
-     builder.append("availability" + "[" + String.valueOf(this.availability) + "]\n"); 
-     builder.append("_availability" + "[" + String.valueOf(this._availability) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("laterality" + "[" + String.valueOf(this.laterality) + "]\n"); 
-     builder.append("started" + "[" + String.valueOf(this.started) + "]\n"); 
-     builder.append("_started" + "[" + String.valueOf(this._started) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("instance" + "[" + String.valueOf(this.instance) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImagingStudySeries]:" + "\n");
+     if(this.uid != null) builder.append("uid" + "->" + this.uid.toString() + "\n"); 
+     if(this._uid != null) builder.append("_uid" + "->" + this._uid.toString() + "\n"); 
+     if(this.number != null) builder.append("number" + "->" + this.number.toString() + "\n"); 
+     if(this._number != null) builder.append("_number" + "->" + this._number.toString() + "\n"); 
+     if(this.modality != null) builder.append("modality" + "->" + this.modality.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.numberOfInstances != null) builder.append("numberOfInstances" + "->" + this.numberOfInstances.toString() + "\n"); 
+     if(this._numberOfInstances != null) builder.append("_numberOfInstances" + "->" + this._numberOfInstances.toString() + "\n"); 
+     if(this.availability != null) builder.append("availability" + "->" + this.availability.toString() + "\n"); 
+     if(this._availability != null) builder.append("_availability" + "->" + this._availability.toString() + "\n"); 
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
+     if(this.bodySite != null) builder.append("bodySite" + "->" + this.bodySite.toString() + "\n"); 
+     if(this.laterality != null) builder.append("laterality" + "->" + this.laterality.toString() + "\n"); 
+     if(this.started != null) builder.append("started" + "->" + this.started.toString() + "\n"); 
+     if(this._started != null) builder.append("_started" + "->" + this._started.toString() + "\n"); 
+     if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
+     if(this.instance != null) builder.append("instance" + "->" + this.instance.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -379,36 +375,4 @@ public class ImagingStudySeries  {
   	}
   }
 
-  public static java.util.List<ImagingStudySeries> fromArray(java.util.List<ImagingStudySeriesModel> list) {
-    return (java.util.List<ImagingStudySeries>)list.stream()
-      .map(model -> new ImagingStudySeries(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImagingStudySeriesModel> toModelArray(java.util.List<ImagingStudySeries> list) {
-    return (java.util.List<ImagingStudySeriesModel>)list.stream()
-      .map(model -> new ImagingStudySeriesModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImagingStudySeries fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImagingStudySeries.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImagingStudySeries o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImagingStudySeries> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

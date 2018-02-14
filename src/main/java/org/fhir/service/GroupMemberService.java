@@ -32,7 +32,5 @@ public interface GroupMemberService {
 	public GroupMember find(String id);
   public List<GroupMember> select(int maxResult);
   public List<GroupMember> selectAll();
-  public GroupMember create(GroupMember bean);
-  public GroupMember update(GroupMember bean);
   public void delete(GroupMember bean);
 }

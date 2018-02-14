@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EncounterModel;
 import org.fhir.pojo.Encounter;
+import org.fhir.pojo.EncounterHelper;
 
 public class EncounterDaoImpl implements EncounterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EncounterDaoImpl implements EncounterDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterModel a", EncounterModel.class).setMaxResults(maxResult);
       List<EncounterModel> models = query.getResultList();
-      return Encounter.fromArray(models);
+      return EncounterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class EncounterDaoImpl implements EncounterDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterModel a", EncounterModel.class);
       List<EncounterModel> models = query.getResultList();
-      return Encounter.fromArray(models);
+      return EncounterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class EncounterDaoImpl implements EncounterDao {
       EncounterModel model = em.merge(new EncounterModel(e));
       return new Encounter(model);
   }
-
   @Override
   @Transactional
   public void delete(Encounter e) {

@@ -34,10 +34,8 @@ public interface EncounterDao {
   public List<Encounter> select(int maxResult);
 
   public List<Encounter> selectAll();
-
   public Encounter create(Encounter e);
 
   public Encounter update(Encounter e);
-
   public void delete(Encounter e);
 }

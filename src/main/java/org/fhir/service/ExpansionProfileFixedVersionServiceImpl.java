@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ExpansionProfileFixedVersion create(ExpansionProfileFixedVersion bean) {
-  	requireNonNull(bean);
-    logger.info("create(ExpansionProfileFixedVersion={}) - entered bean ");
-
-    final ExpansionProfileFixedVersion result = dao.create(bean);
-
-    logger.info("create(ExpansionProfileFixedVersion) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ExpansionProfileFixedVersion update(ExpansionProfileFixedVersion bean) {
-  	requireNonNull(bean);
-    logger.info("update(ExpansionProfileFixedVersion={}) - entered bean ");
-
-    final ExpansionProfileFixedVersion result = dao.update(bean);
-
-    logger.info("update(ExpansionProfileFixedVersion) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

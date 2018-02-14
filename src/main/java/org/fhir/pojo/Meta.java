@@ -77,6 +77,7 @@ public class Meta  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -96,23 +97,18 @@ public class Meta  {
 
   public Meta(MetaModel o) {
     this.id = o.getId();
-      if (null != o.getVersionId()) {
-        this.versionId = new String(o.getVersionId());
-      }
-
-      if (null != o.getLastUpdated()) {
-        this.lastUpdated = new String(o.getLastUpdated());
-      }
-
-      this.profile = org.fhir.utils.JsonUtils.json2Array(o.getProfile());
-
-      this.security = Coding.fromArray(o.getSecurity());
-      this.tag = Coding.fromArray(o.getTag());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getVersionId()) {
+      this.versionId = o.getVersionId();
+    }
+    if (null != o.getLastUpdated()) {
+      this.lastUpdated = o.getLastUpdated();
+    }
+    if (o.getProfile() != null) {
+    	this.profile = org.fhir.utils.JsonUtils.json2Array(o.getProfile());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setVersionId( String value) {
@@ -185,51 +181,20 @@ public class Meta  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("versionId" + "[" + String.valueOf(this.versionId) + "]\n"); 
-     builder.append("_versionId" + "[" + String.valueOf(this._versionId) + "]\n"); 
-     builder.append("lastUpdated" + "[" + String.valueOf(this.lastUpdated) + "]\n"); 
-     builder.append("_lastUpdated" + "[" + String.valueOf(this._lastUpdated) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("_profile" + "[" + String.valueOf(this._profile) + "]\n"); 
-     builder.append("security" + "[" + String.valueOf(this.security) + "]\n"); 
-     builder.append("tag" + "[" + String.valueOf(this.tag) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Meta]:" + "\n");
+     if(this.versionId != null) builder.append("versionId" + "->" + this.versionId.toString() + "\n"); 
+     if(this._versionId != null) builder.append("_versionId" + "->" + this._versionId.toString() + "\n"); 
+     if(this.lastUpdated != null) builder.append("lastUpdated" + "->" + this.lastUpdated.toString() + "\n"); 
+     if(this._lastUpdated != null) builder.append("_lastUpdated" + "->" + this._lastUpdated.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this._profile != null) builder.append("_profile" + "->" + this._profile.toString() + "\n"); 
+     if(this.security != null) builder.append("security" + "->" + this.security.toString() + "\n"); 
+     if(this.tag != null) builder.append("tag" + "->" + this.tag.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<Meta> fromArray(java.util.List<MetaModel> list) {
-    return (java.util.List<Meta>)list.stream()
-      .map(model -> new Meta(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MetaModel> toModelArray(java.util.List<Meta> list) {
-    return (java.util.List<MetaModel>)list.stream()
-      .map(model -> new MetaModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Meta fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Meta.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Meta o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Meta> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

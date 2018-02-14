@@ -83,6 +83,7 @@ public class SpecimenContainer  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -104,26 +105,19 @@ public class SpecimenContainer  {
 
   public SpecimenContainer(SpecimenContainerModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.capacity = Quantity.fromJson(o.getCapacity());
-      this.specimenQuantity = Quantity.fromJson(o.getSpecimenQuantity());
-      this.additiveCodeableConcept = CodeableConcept.fromJson(o.getAdditiveCodeableConcept());
-      if (null != o.getAdditiveReference()) {
-        this.additiveReference = new Reference(o.getAdditiveReference());
-        this.additiveReference.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    this.capacity = QuantityHelper.fromJson(o.getCapacity());
+    this.specimenQuantity = QuantityHelper.fromJson(o.getSpecimenQuantity());
+    this.additiveCodeableConcept = CodeableConceptHelper.fromJson(o.getAdditiveCodeableConcept());
+    if (null != o.getAdditiveReference() && !o.getAdditiveReference().isEmpty()) {
+      this.additiveReference = new Reference(o.getAdditiveReference().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( java.util.List<Identifier> value) {
@@ -202,52 +196,21 @@ public class SpecimenContainer  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("capacity" + "[" + String.valueOf(this.capacity) + "]\n"); 
-     builder.append("specimenQuantity" + "[" + String.valueOf(this.specimenQuantity) + "]\n"); 
-     builder.append("additiveCodeableConcept" + "[" + String.valueOf(this.additiveCodeableConcept) + "]\n"); 
-     builder.append("additiveReference" + "[" + String.valueOf(this.additiveReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SpecimenContainer]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.capacity != null) builder.append("capacity" + "->" + this.capacity.toString() + "\n"); 
+     if(this.specimenQuantity != null) builder.append("specimenQuantity" + "->" + this.specimenQuantity.toString() + "\n"); 
+     if(this.additiveCodeableConcept != null) builder.append("additiveCodeableConcept" + "->" + this.additiveCodeableConcept.toString() + "\n"); 
+     if(this.additiveReference != null) builder.append("additiveReference" + "->" + this.additiveReference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<SpecimenContainer> fromArray(java.util.List<SpecimenContainerModel> list) {
-    return (java.util.List<SpecimenContainer>)list.stream()
-      .map(model -> new SpecimenContainer(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SpecimenContainerModel> toModelArray(java.util.List<SpecimenContainer> list) {
-    return (java.util.List<SpecimenContainerModel>)list.stream()
-      .map(model -> new SpecimenContainerModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SpecimenContainer fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SpecimenContainer.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SpecimenContainer o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SpecimenContainer> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

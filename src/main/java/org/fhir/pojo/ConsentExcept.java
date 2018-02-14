@@ -98,6 +98,7 @@ public class ConsentExcept  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -119,27 +120,20 @@ public class ConsentExcept  {
 
   public ConsentExcept(ConsentExceptModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.actor = ConsentActor1.fromArray(o.getActor());
-
-      this.action = CodeableConcept.fromArray(o.getAction());
-      this.securityLabel = Coding.fromArray(o.getSecurityLabel());
-      this.purpose = Coding.fromArray(o.getPurpose());
-      this.FHIRclass = Coding.fromArray(o.getFHIRclass());
-      this.code = Coding.fromArray(o.getCode());
-      this.dataPeriod = Period.fromJson(o.getDataPeriod());
-      this.data = ConsentData1.fromArray(o.getData());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getActor() && !o.getActor().isEmpty()) {
+    	this.actor = ConsentActor1Helper.fromArray2Array(o.getActor());
+    }
+    this.dataPeriod = PeriodHelper.fromJson(o.getDataPeriod());
+    if (null != o.getData() && !o.getData().isEmpty()) {
+    	this.data = ConsentData1Helper.fromArray2Array(o.getData());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -236,21 +230,22 @@ public class ConsentExcept  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("actor" + "[" + String.valueOf(this.actor) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("securityLabel" + "[" + String.valueOf(this.securityLabel) + "]\n"); 
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("FHIRclass" + "[" + String.valueOf(this.FHIRclass) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("dataPeriod" + "[" + String.valueOf(this.dataPeriod) + "]\n"); 
-     builder.append("data" + "[" + String.valueOf(this.data) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConsentExcept]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.actor != null) builder.append("actor" + "->" + this.actor.toString() + "\n"); 
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
+     if(this.securityLabel != null) builder.append("securityLabel" + "->" + this.securityLabel.toString() + "\n"); 
+     if(this.purpose != null) builder.append("purpose" + "->" + this.purpose.toString() + "\n"); 
+     if(this.FHIRclass != null) builder.append("FHIRclass" + "->" + this.FHIRclass.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.dataPeriod != null) builder.append("dataPeriod" + "->" + this.dataPeriod.toString() + "\n"); 
+     if(this.data != null) builder.append("data" + "->" + this.data.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -268,36 +263,4 @@ public class ConsentExcept  {
   	}
   }
 
-  public static java.util.List<ConsentExcept> fromArray(java.util.List<ConsentExceptModel> list) {
-    return (java.util.List<ConsentExcept>)list.stream()
-      .map(model -> new ConsentExcept(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConsentExceptModel> toModelArray(java.util.List<ConsentExcept> list) {
-    return (java.util.List<ConsentExceptModel>)list.stream()
-      .map(model -> new ConsentExceptModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ConsentExcept fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ConsentExcept.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ConsentExcept o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ConsentExcept> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

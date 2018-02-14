@@ -32,7 +32,5 @@ public interface ClinicalImpressionFindingService {
 	public ClinicalImpressionFinding find(String id);
   public List<ClinicalImpressionFinding> select(int maxResult);
   public List<ClinicalImpressionFinding> selectAll();
-  public ClinicalImpressionFinding create(ClinicalImpressionFinding bean);
-  public ClinicalImpressionFinding update(ClinicalImpressionFinding bean);
   public void delete(ClinicalImpressionFinding bean);
 }

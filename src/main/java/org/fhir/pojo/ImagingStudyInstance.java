@@ -86,6 +86,7 @@ public class ImagingStudyInstance  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -107,28 +108,21 @@ public class ImagingStudyInstance  {
 
   public ImagingStudyInstance(ImagingStudyInstanceModel o) {
     this.id = o.getId();
-      if (null != o.getUid()) {
-        this.uid = new String(o.getUid());
-      }
-
-      if (null != o.getNumber()) {
-        this.number = new Float(o.getNumber());
-      }
-
-      if (null != o.getSopClass()) {
-        this.sopClass = new String(o.getSopClass());
-      }
-
-      if (null != o.getTitle()) {
-        this.title = new String(o.getTitle());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getUid()) {
+      this.uid = o.getUid();
+    }
+    if (null != o.getNumber()) {
+      this.number = o.getNumber();
+    }
+    if (null != o.getSopClass()) {
+      this.sopClass = o.getSopClass();
+    }
+    if (null != o.getTitle()) {
+      this.title = o.getTitle();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setUid( String value) {
@@ -207,52 +201,21 @@ public class ImagingStudyInstance  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("uid" + "[" + String.valueOf(this.uid) + "]\n"); 
-     builder.append("_uid" + "[" + String.valueOf(this._uid) + "]\n"); 
-     builder.append("number" + "[" + String.valueOf(this.number) + "]\n"); 
-     builder.append("_number" + "[" + String.valueOf(this._number) + "]\n"); 
-     builder.append("sopClass" + "[" + String.valueOf(this.sopClass) + "]\n"); 
-     builder.append("_sopClass" + "[" + String.valueOf(this._sopClass) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImagingStudyInstance]:" + "\n");
+     if(this.uid != null) builder.append("uid" + "->" + this.uid.toString() + "\n"); 
+     if(this._uid != null) builder.append("_uid" + "->" + this._uid.toString() + "\n"); 
+     if(this.number != null) builder.append("number" + "->" + this.number.toString() + "\n"); 
+     if(this._number != null) builder.append("_number" + "->" + this._number.toString() + "\n"); 
+     if(this.sopClass != null) builder.append("sopClass" + "->" + this.sopClass.toString() + "\n"); 
+     if(this._sopClass != null) builder.append("_sopClass" + "->" + this._sopClass.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ImagingStudyInstance> fromArray(java.util.List<ImagingStudyInstanceModel> list) {
-    return (java.util.List<ImagingStudyInstance>)list.stream()
-      .map(model -> new ImagingStudyInstance(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImagingStudyInstanceModel> toModelArray(java.util.List<ImagingStudyInstance> list) {
-    return (java.util.List<ImagingStudyInstanceModel>)list.stream()
-      .map(model -> new ImagingStudyInstanceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImagingStudyInstance fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImagingStudyInstance.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImagingStudyInstance o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImagingStudyInstance> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

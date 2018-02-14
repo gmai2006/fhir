@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public LinkageItem create(LinkageItem bean) {
-  	requireNonNull(bean);
-    logger.info("create(LinkageItem={}) - entered bean ");
-
-    final LinkageItem result = dao.create(bean);
-
-    logger.info("create(LinkageItem) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public LinkageItem update(LinkageItem bean) {
-  	requireNonNull(bean);
-    logger.info("update(LinkageItem={}) - entered bean ");
-
-    final LinkageItem result = dao.update(bean);
-
-    logger.info("update(LinkageItem) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

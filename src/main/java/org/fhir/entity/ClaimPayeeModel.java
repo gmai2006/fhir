@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
 @Entity
 @Table(name="claimpayee")
-public class ClaimPayeeModel  {
+public class ClaimPayeeModel  implements Serializable {
+	private static final long serialVersionUID = 151857669675544435L;
   /**
   * Description: "Type of Party to be reimbursed: Subscriber, provider, other."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -49,7 +50,7 @@ public class ClaimPayeeModel  {
 
   /**
   * Description: "organization | patient | practitioner | relatedperson."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -63,14 +64,14 @@ public class ClaimPayeeModel  {
   @Column(name="\"party_id\"")
   private String party_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`party_id`", insertable=false, updatable=false)
-  private ReferenceModel party;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="party_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> party;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -82,6 +83,7 @@ public class ClaimPayeeModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -90,84 +92,101 @@ public class ClaimPayeeModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ClaimPayeeModel() {
   }
 
-  public ClaimPayeeModel(ClaimPayee o) {
-    this.id = o.getId();
-      this.type = CodeableConcept.toJson(o.getType());
-      this.resourceType = Coding.toJson(o.getResourceType());
-      if (null != o.getParty()) {
-      	this.party_id = "party" + this.getId();
-        this.party = new ReferenceModel(o.getParty());
-        this.party.setId(this.party_id);
-        this.party.parent_id = this.party.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ClaimPayeeModel(ClaimPayee o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.resourceType = CodingHelper.toJson(o.getResourceType());
+    if (null != o.getParty() ) {
+    	this.party_id = "party" + this.parent_id;
+    	this.party = ReferenceHelper.toModel(o.getParty(), this.party_id);
+    }
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setResourceType( String value) {
-    this.resourceType = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setParty( ReferenceModel value) {
-    this.party = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
-  public ReferenceModel getParty() {
+  public java.util.List<ReferenceModel> getParty() {
     return this.party;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setParty( java.util.List<ReferenceModel> value) {
+    this.party = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("party" + "[" + String.valueOf(this.party) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ClaimPayeeModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ClaimPayeeModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("party" + "->" + this.party + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

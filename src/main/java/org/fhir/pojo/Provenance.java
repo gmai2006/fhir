@@ -129,6 +129,7 @@ public class Provenance  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -180,56 +181,44 @@ public class Provenance  {
 
   public Provenance(ProvenanceModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.target = Reference.fromArray(o.getTarget());
-
-      this.period = Period.fromJson(o.getPeriod());
-      if (null != o.getRecorded()) {
-        this.recorded = new String(o.getRecorded());
-      }
-
-      this.policy = org.fhir.utils.JsonUtils.json2Array(o.getPolicy());
-
-      if (null != o.getLocation()) {
-        this.location = new Reference(o.getLocation());
-        this.location.setId(this.getId());
-      }
-
-      this.reason = Coding.fromArray(o.getReason());
-      this.activity = Coding.fromJson(o.getActivity());
-      this.agent = ProvenanceAgent.fromArray(o.getAgent());
-
-      this.entity = ProvenanceEntity.fromArray(o.getEntity());
-
-      this.signature = Signature.fromArray(o.getSignature());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+    	this.target = ReferenceHelper.fromArray2Array(o.getTarget());
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getRecorded()) {
+      this.recorded = o.getRecorded();
+    }
+    if (o.getPolicy() != null) {
+    	this.policy = org.fhir.utils.JsonUtils.json2Array(o.getPolicy());
+    }
+    if (null != o.getLocation() && !o.getLocation().isEmpty()) {
+      this.location = new Reference(o.getLocation().get(0));
+    }
+    this.activity = CodingHelper.fromJson(o.getActivity());
+    if (null != o.getAgent() && !o.getAgent().isEmpty()) {
+    	this.agent = ProvenanceAgentHelper.fromArray2Array(o.getAgent());
+    }
+    if (null != o.getEntity() && !o.getEntity().isEmpty()) {
+    	this.entity = ProvenanceEntityHelper.fromArray2Array(o.getEntity());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -380,30 +369,31 @@ public class Provenance  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("recorded" + "[" + String.valueOf(this.recorded) + "]\n"); 
-     builder.append("_recorded" + "[" + String.valueOf(this._recorded) + "]\n"); 
-     builder.append("policy" + "[" + String.valueOf(this.policy) + "]\n"); 
-     builder.append("_policy" + "[" + String.valueOf(this._policy) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("activity" + "[" + String.valueOf(this.activity) + "]\n"); 
-     builder.append("agent" + "[" + String.valueOf(this.agent) + "]\n"); 
-     builder.append("entity" + "[" + String.valueOf(this.entity) + "]\n"); 
-     builder.append("signature" + "[" + String.valueOf(this.signature) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Provenance]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.recorded != null) builder.append("recorded" + "->" + this.recorded.toString() + "\n"); 
+     if(this._recorded != null) builder.append("_recorded" + "->" + this._recorded.toString() + "\n"); 
+     if(this.policy != null) builder.append("policy" + "->" + this.policy.toString() + "\n"); 
+     if(this._policy != null) builder.append("_policy" + "->" + this._policy.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); 
+     if(this.activity != null) builder.append("activity" + "->" + this.activity.toString() + "\n"); 
+     if(this.agent != null) builder.append("agent" + "->" + this.agent.toString() + "\n"); 
+     if(this.entity != null) builder.append("entity" + "->" + this.entity.toString() + "\n"); 
+     if(this.signature != null) builder.append("signature" + "->" + this.signature.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -419,36 +409,4 @@ public class Provenance  {
   	}
   }
 
-  public static java.util.List<Provenance> fromArray(java.util.List<ProvenanceModel> list) {
-    return (java.util.List<Provenance>)list.stream()
-      .map(model -> new Provenance(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ProvenanceModel> toModelArray(java.util.List<Provenance> list) {
-    return (java.util.List<ProvenanceModel>)list.stream()
-      .map(model -> new ProvenanceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Provenance fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Provenance.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Provenance o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Provenance> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

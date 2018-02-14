@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "The characteristics, operational status and capabilities of a medical-related component of a medical device."
 */
 @Entity
 @Table(name="devicecomponent")
-public class DeviceComponentModel  {
+public class DeviceComponentModel  implements Serializable {
+	private static final long serialVersionUID = 151857669673666338L;
   /**
   * Description: "This is a DeviceComponent resource"
   */
@@ -47,7 +48,7 @@ public class DeviceComponentModel  {
 
   /**
   * Description: "The locally assigned unique identification by the software. For example: handle ID."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -57,7 +58,7 @@ public class DeviceComponentModel  {
 
   /**
   * Description: "The component type as defined in the object-oriented or metric nomenclature partition."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -79,9 +80,9 @@ public class DeviceComponentModel  {
   @Column(name="\"source_id\"")
   private String source_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`source_id`", insertable=false, updatable=false)
-  private ReferenceModel source;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="source_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> source;
 
   /**
   * Description: "The link to the parent resource. For example: Channel is linked to its VMD parent."
@@ -90,13 +91,13 @@ public class DeviceComponentModel  {
   @Column(name="\"parent_id\"")
   private String parent_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`parent_id`", insertable=false, updatable=false)
-  private ReferenceModel parent;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="parent_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> parent;
 
   /**
   * Description: "The current operational status of the device. For example: On, Off, Standby, etc."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -105,7 +106,7 @@ public class DeviceComponentModel  {
 
   /**
   * Description: "The parameter group supported by the current device component that is based on some nomenclature, e.g. cardiovascular."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -122,13 +123,17 @@ public class DeviceComponentModel  {
   /**
   * Description: "The production specification such as component revision, serial number, etc."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<DeviceComponentProductionSpecificationModel> productionSpecification = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"productionspecification_id\"")
+  private String productionspecification_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="productionspecification_id", insertable=false, updatable=false)
+  private java.util.List<DeviceComponentProductionSpecificationModel> productionSpecification;
 
   /**
   * Description: "The language code for the human-readable text string produced by the device. This language code will follow the IETF language tag. Example: en-US."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -143,14 +148,14 @@ public class DeviceComponentModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -160,7 +165,7 @@ public class DeviceComponentModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -170,7 +175,7 @@ public class DeviceComponentModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -182,6 +187,7 @@ public class DeviceComponentModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -196,9 +202,9 @@ public class DeviceComponentModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -219,202 +225,200 @@ public class DeviceComponentModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public DeviceComponentModel() {
   }
 
   public DeviceComponentModel(DeviceComponent o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.type = CodeableConcept.toJson(o.getType());
-      this.lastSystemChange = o.getLastSystemChange();
-
-      if (null != o.getSource()) {
-      	this.source_id = "source" + this.getId();
-        this.source = new ReferenceModel(o.getSource());
-        this.source.setId(this.source_id);
-        this.source.parent_id = this.source.getId();
-      }
-
-      if (null != o.getParent()) {
-      	this.parent_id = "parent" + this.getId();
-        this.parent = new ReferenceModel(o.getParent());
-        this.parent.setId(this.parent_id);
-        this.parent.parent_id = this.parent.getId();
-      }
-
-      this.operationalStatus = CodeableConcept.toJson(o.getOperationalStatus());
-      this.parameterGroup = CodeableConcept.toJson(o.getParameterGroup());
-      this.measurementPrinciple = o.getMeasurementPrinciple();
-
-      this.productionSpecification = DeviceComponentProductionSpecification.toModelArray(o.getProductionSpecification());
-
-      this.languageCode = CodeableConcept.toJson(o.getLanguageCode());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.lastSystemChange = o.getLastSystemChange();
+    if (null != o.getSource() ) {
+    	this.source_id = "source" + this.id;
+    	this.source = ReferenceHelper.toModel(o.getSource(), this.source_id);
+    }
+    if (null != o.getParent() ) {
+    	this.parent_id = "parent" + this.id;
+    	this.parent = ReferenceHelper.toModel(o.getParent(), this.parent_id);
+    }
+    this.parameterGroup = CodeableConceptHelper.toJson(o.getParameterGroup());
+    this.measurementPrinciple = o.getMeasurementPrinciple();
+    if (null != o.getProductionSpecification() && !o.getProductionSpecification().isEmpty()) {
+    	this.productionspecification_id = "productionspecification" + this.id;
+    	this.productionSpecification = DeviceComponentProductionSpecificationHelper.toModelFromArray(o.getProductionSpecification(), this.productionspecification_id);
+    }
+    this.languageCode = CodeableConceptHelper.toJson(o.getLanguageCode());
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setLastSystemChange( String value) {
-    this.lastSystemChange = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getLastSystemChange() {
     return this.lastSystemChange;
   }
-  public void setSource( ReferenceModel value) {
-    this.source = value;
+  public void setLastSystemChange( String value) {
+    this.lastSystemChange = value;
   }
-  public ReferenceModel getSource() {
+  public java.util.List<ReferenceModel> getSource() {
     return this.source;
   }
-  public void setParent( ReferenceModel value) {
-    this.parent = value;
+  public void setSource( java.util.List<ReferenceModel> value) {
+    this.source = value;
   }
-  public ReferenceModel getParent() {
+  public java.util.List<ReferenceModel> getParent() {
     return this.parent;
   }
-  public void setOperationalStatus( String value) {
-    this.operationalStatus = value;
+  public void setParent( java.util.List<ReferenceModel> value) {
+    this.parent = value;
   }
   public String getOperationalStatus() {
     return this.operationalStatus;
   }
-  public void setParameterGroup( String value) {
-    this.parameterGroup = value;
+  public void setOperationalStatus( String value) {
+    this.operationalStatus = value;
   }
   public String getParameterGroup() {
     return this.parameterGroup;
   }
-  public void setMeasurementPrinciple( String value) {
-    this.measurementPrinciple = value;
+  public void setParameterGroup( String value) {
+    this.parameterGroup = value;
   }
   public String getMeasurementPrinciple() {
     return this.measurementPrinciple;
   }
-  public void setProductionSpecification( java.util.List<DeviceComponentProductionSpecificationModel> value) {
-    this.productionSpecification = value;
+  public void setMeasurementPrinciple( String value) {
+    this.measurementPrinciple = value;
   }
   public java.util.List<DeviceComponentProductionSpecificationModel> getProductionSpecification() {
     return this.productionSpecification;
   }
-  public void setLanguageCode( String value) {
-    this.languageCode = value;
+  public void setProductionSpecification( java.util.List<DeviceComponentProductionSpecificationModel> value) {
+    this.productionSpecification = value;
   }
   public String getLanguageCode() {
     return this.languageCode;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setLanguageCode( String value) {
+    this.languageCode = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("lastSystemChange" + "[" + String.valueOf(this.lastSystemChange) + "]\n"); 
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("parent" + "[" + String.valueOf(this.parent) + "]\n"); 
-     builder.append("operationalStatus" + "[" + String.valueOf(this.operationalStatus) + "]\n"); 
-     builder.append("parameterGroup" + "[" + String.valueOf(this.parameterGroup) + "]\n"); 
-     builder.append("measurementPrinciple" + "[" + String.valueOf(this.measurementPrinciple) + "]\n"); 
-     builder.append("productionSpecification" + "[" + String.valueOf(this.productionSpecification) + "]\n"); 
-     builder.append("languageCode" + "[" + String.valueOf(this.languageCode) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[DeviceComponentModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("lastSystemChange" + "->" + this.lastSystemChange + "\n"); 
+     builder.append("operationalStatus" + "->" + this.operationalStatus + "\n"); 
+     builder.append("parameterGroup" + "->" + this.parameterGroup + "\n"); 
+     builder.append("measurementPrinciple" + "->" + this.measurementPrinciple + "\n"); 
+     builder.append("languageCode" + "->" + this.languageCode + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[DeviceComponentModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("lastSystemChange" + "->" + this.lastSystemChange + "\n"); 
+     builder.append("source" + "->" + this.source + "\n"); 
+     builder.append("parent" + "->" + this.parent + "\n"); 
+     builder.append("operationalStatus" + "->" + this.operationalStatus + "\n"); 
+     builder.append("parameterGroup" + "->" + this.parameterGroup + "\n"); 
+     builder.append("measurementPrinciple" + "->" + this.measurementPrinciple + "\n"); 
+     builder.append("productionSpecification" + "->" + this.productionSpecification + "\n"); 
+     builder.append("languageCode" + "->" + this.languageCode + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

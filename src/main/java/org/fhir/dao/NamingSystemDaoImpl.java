@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.NamingSystemModel;
 import org.fhir.pojo.NamingSystem;
+import org.fhir.pojo.NamingSystemHelper;
 
 public class NamingSystemDaoImpl implements NamingSystemDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class NamingSystemDaoImpl implements NamingSystemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NamingSystemModel a", NamingSystemModel.class).setMaxResults(maxResult);
       List<NamingSystemModel> models = query.getResultList();
-      return NamingSystem.fromArray(models);
+      return NamingSystemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class NamingSystemDaoImpl implements NamingSystemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NamingSystemModel a", NamingSystemModel.class);
       List<NamingSystemModel> models = query.getResultList();
-      return NamingSystem.fromArray(models);
+      return NamingSystemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class NamingSystemDaoImpl implements NamingSystemDao {
       NamingSystemModel model = em.merge(new NamingSystemModel(e));
       return new NamingSystem(model);
   }
-
   @Override
   @Transactional
   public void delete(NamingSystem e) {

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AdverseEventModel;
 import org.fhir.pojo.AdverseEvent;
+import org.fhir.pojo.AdverseEventHelper;
 
 public class AdverseEventDaoImpl implements AdverseEventDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AdverseEventDaoImpl implements AdverseEventDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AdverseEventModel a", AdverseEventModel.class).setMaxResults(maxResult);
       List<AdverseEventModel> models = query.getResultList();
-      return AdverseEvent.fromArray(models);
+      return AdverseEventHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class AdverseEventDaoImpl implements AdverseEventDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AdverseEventModel a", AdverseEventModel.class);
       List<AdverseEventModel> models = query.getResultList();
-      return AdverseEvent.fromArray(models);
+      return AdverseEventHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class AdverseEventDaoImpl implements AdverseEventDao {
       AdverseEventModel model = em.merge(new AdverseEventModel(e));
       return new AdverseEvent(model);
   }
-
   @Override
   @Transactional
   public void delete(AdverseEvent e) {

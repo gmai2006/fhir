@@ -32,7 +32,5 @@ public interface ClaimResponsePaymentService {
 	public ClaimResponsePayment find(String id);
   public List<ClaimResponsePayment> select(int maxResult);
   public List<ClaimResponsePayment> selectAll();
-  public ClaimResponsePayment create(ClaimResponsePayment bean);
-  public ClaimResponsePayment update(ClaimResponsePayment bean);
   public void delete(ClaimResponsePayment bean);
 }

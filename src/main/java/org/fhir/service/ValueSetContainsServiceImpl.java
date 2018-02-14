@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ValueSetContains create(ValueSetContains bean) {
-  	requireNonNull(bean);
-    logger.info("create(ValueSetContains={}) - entered bean ");
-
-    final ValueSetContains result = dao.create(bean);
-
-    logger.info("create(ValueSetContains) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ValueSetContains update(ValueSetContains bean) {
-  	requireNonNull(bean);
-    logger.info("update(ValueSetContains={}) - entered bean ");
-
-    final ValueSetContains result = dao.update(bean);
-
-    logger.info("update(ValueSetContains) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MeasureSupplementalDataModel;
 import org.fhir.pojo.MeasureSupplementalData;
+import org.fhir.pojo.MeasureSupplementalDataHelper;
 
 public class MeasureSupplementalDataDaoImpl implements MeasureSupplementalDataDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MeasureSupplementalDataDaoImpl implements MeasureSupplementalDataDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureSupplementalDataModel a", MeasureSupplementalDataModel.class).setMaxResults(maxResult);
       List<MeasureSupplementalDataModel> models = query.getResultList();
-      return MeasureSupplementalData.fromArray(models);
+      return MeasureSupplementalDataHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MeasureSupplementalDataDaoImpl implements MeasureSupplementalDataDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureSupplementalDataModel a", MeasureSupplementalDataModel.class);
       List<MeasureSupplementalDataModel> models = query.getResultList();
-      return MeasureSupplementalData.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MeasureSupplementalData create(MeasureSupplementalData e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MeasureSupplementalDataModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MeasureSupplementalData update(MeasureSupplementalData e) {
-      final EntityManager em = entityManagerProvider.get();
-      MeasureSupplementalDataModel model = em.merge(new MeasureSupplementalDataModel(e));
-      return new MeasureSupplementalData(model);
+      return MeasureSupplementalDataHelper.fromArray2Array(models);
   }
 
   @Override

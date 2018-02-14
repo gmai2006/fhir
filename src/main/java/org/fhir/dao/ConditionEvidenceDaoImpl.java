@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ConditionEvidenceModel;
 import org.fhir.pojo.ConditionEvidence;
+import org.fhir.pojo.ConditionEvidenceHelper;
 
 public class ConditionEvidenceDaoImpl implements ConditionEvidenceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ConditionEvidenceDaoImpl implements ConditionEvidenceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConditionEvidenceModel a", ConditionEvidenceModel.class).setMaxResults(maxResult);
       List<ConditionEvidenceModel> models = query.getResultList();
-      return ConditionEvidence.fromArray(models);
+      return ConditionEvidenceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ConditionEvidenceDaoImpl implements ConditionEvidenceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConditionEvidenceModel a", ConditionEvidenceModel.class);
       List<ConditionEvidenceModel> models = query.getResultList();
-      return ConditionEvidence.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ConditionEvidence create(ConditionEvidence e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ConditionEvidenceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ConditionEvidence update(ConditionEvidence e) {
-      final EntityManager em = entityManagerProvider.get();
-      ConditionEvidenceModel model = em.merge(new ConditionEvidenceModel(e));
-      return new ConditionEvidence(model);
+      return ConditionEvidenceHelper.fromArray2Array(models);
   }
 
   @Override

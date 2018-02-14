@@ -32,7 +32,5 @@ public interface BundleEntryService {
 	public BundleEntry find(String id);
   public List<BundleEntry> select(int maxResult);
   public List<BundleEntry> selectAll();
-  public BundleEntry create(BundleEntry bean);
-  public BundleEntry update(BundleEntry bean);
   public void delete(BundleEntry bean);
 }

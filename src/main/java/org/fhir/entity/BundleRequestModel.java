@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A container for a collection of resources."
 */
 @Entity
 @Table(name="bundlerequest")
-public class BundleRequestModel  {
+public class BundleRequestModel  implements Serializable {
+	private static final long serialVersionUID = 151857669681077747L;
   /**
   * Description: "The HTTP verb for this entry in either a change history, or a transaction/ transaction response."
   */
@@ -82,7 +83,7 @@ public class BundleRequestModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -94,6 +95,7 @@ public class BundleRequestModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -102,108 +104,126 @@ public class BundleRequestModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public BundleRequestModel() {
   }
 
-  public BundleRequestModel(BundleRequest o) {
-    this.id = o.getId();
-      this.method = o.getMethod();
-
-      this.url = o.getUrl();
-
-      this.ifNoneMatch = o.getIfNoneMatch();
-
-      this.ifModifiedSince = o.getIfModifiedSince();
-
-      this.ifMatch = o.getIfMatch();
-
-      this.ifNoneExist = o.getIfNoneExist();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public BundleRequestModel(BundleRequest o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.method = o.getMethod();
+    this.url = o.getUrl();
+    this.ifNoneMatch = o.getIfNoneMatch();
+    this.ifModifiedSince = o.getIfModifiedSince();
+    this.ifMatch = o.getIfMatch();
+    this.ifNoneExist = o.getIfNoneExist();
   }
 
-  public void setMethod( String value) {
-    this.method = value;
-  }
   public String getMethod() {
     return this.method;
   }
-  public void setUrl( String value) {
-    this.url = value;
+  public void setMethod( String value) {
+    this.method = value;
   }
   public String getUrl() {
     return this.url;
   }
-  public void setIfNoneMatch( String value) {
-    this.ifNoneMatch = value;
+  public void setUrl( String value) {
+    this.url = value;
   }
   public String getIfNoneMatch() {
     return this.ifNoneMatch;
   }
-  public void setIfModifiedSince( String value) {
-    this.ifModifiedSince = value;
+  public void setIfNoneMatch( String value) {
+    this.ifNoneMatch = value;
   }
   public String getIfModifiedSince() {
     return this.ifModifiedSince;
   }
-  public void setIfMatch( String value) {
-    this.ifMatch = value;
+  public void setIfModifiedSince( String value) {
+    this.ifModifiedSince = value;
   }
   public String getIfMatch() {
     return this.ifMatch;
   }
-  public void setIfNoneExist( String value) {
-    this.ifNoneExist = value;
+  public void setIfMatch( String value) {
+    this.ifMatch = value;
   }
   public String getIfNoneExist() {
     return this.ifNoneExist;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setIfNoneExist( String value) {
+    this.ifNoneExist = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("method" + "[" + String.valueOf(this.method) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("ifNoneMatch" + "[" + String.valueOf(this.ifNoneMatch) + "]\n"); 
-     builder.append("ifModifiedSince" + "[" + String.valueOf(this.ifModifiedSince) + "]\n"); 
-     builder.append("ifMatch" + "[" + String.valueOf(this.ifMatch) + "]\n"); 
-     builder.append("ifNoneExist" + "[" + String.valueOf(this.ifNoneExist) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[BundleRequestModel]:" + "\n");
+     builder.append("method" + "->" + this.method + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("ifNoneMatch" + "->" + this.ifNoneMatch + "\n"); 
+     builder.append("ifModifiedSince" + "->" + this.ifModifiedSince + "\n"); 
+     builder.append("ifMatch" + "->" + this.ifMatch + "\n"); 
+     builder.append("ifNoneExist" + "->" + this.ifNoneExist + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[BundleRequestModel]:" + "\n");
+     builder.append("method" + "->" + this.method + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("ifNoneMatch" + "->" + this.ifNoneMatch + "\n"); 
+     builder.append("ifModifiedSince" + "->" + this.ifModifiedSince + "\n"); 
+     builder.append("ifMatch" + "->" + this.ifMatch + "\n"); 
+     builder.append("ifNoneExist" + "->" + this.ifNoneExist + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

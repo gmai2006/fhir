@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public AllergyIntoleranceReaction create(AllergyIntoleranceReaction bean) {
-  	requireNonNull(bean);
-    logger.info("create(AllergyIntoleranceReaction={}) - entered bean ");
-
-    final AllergyIntoleranceReaction result = dao.create(bean);
-
-    logger.info("create(AllergyIntoleranceReaction) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public AllergyIntoleranceReaction update(AllergyIntoleranceReaction bean) {
-  	requireNonNull(bean);
-    logger.info("update(AllergyIntoleranceReaction={}) - entered bean ");
-
-    final AllergyIntoleranceReaction result = dao.update(bean);
-
-    logger.info("update(AllergyIntoleranceReaction) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

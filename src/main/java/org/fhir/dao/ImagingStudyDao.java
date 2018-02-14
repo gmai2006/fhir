@@ -34,10 +34,8 @@ public interface ImagingStudyDao {
   public List<ImagingStudy> select(int maxResult);
 
   public List<ImagingStudy> selectAll();
-
   public ImagingStudy create(ImagingStudy e);
 
   public ImagingStudy update(ImagingStudy e);
-
   public void delete(ImagingStudy e);
 }

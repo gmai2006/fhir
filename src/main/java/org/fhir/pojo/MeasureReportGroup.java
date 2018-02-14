@@ -70,6 +70,7 @@ public class MeasureReportGroup  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -91,21 +92,19 @@ public class MeasureReportGroup  {
 
   public MeasureReportGroup(MeasureReportGroupModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      this.population = MeasureReportPopulation.fromArray(o.getPopulation());
-
-      if (null != o.getMeasureScore()) {
-        this.measureScore = new Float(o.getMeasureScore());
-      }
-
-      this.stratifier = MeasureReportStratifier.fromArray(o.getStratifier());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getPopulation() && !o.getPopulation().isEmpty()) {
+    	this.population = MeasureReportPopulationHelper.fromArray2Array(o.getPopulation());
+    }
+    if (null != o.getMeasureScore()) {
+      this.measureScore = o.getMeasureScore();
+    }
+    if (null != o.getStratifier() && !o.getStratifier().isEmpty()) {
+    	this.stratifier = MeasureReportStratifierHelper.fromArray2Array(o.getStratifier());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( Identifier value) {
@@ -166,49 +165,18 @@ public class MeasureReportGroup  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("population" + "[" + String.valueOf(this.population) + "]\n"); 
-     builder.append("measureScore" + "[" + String.valueOf(this.measureScore) + "]\n"); 
-     builder.append("_measureScore" + "[" + String.valueOf(this._measureScore) + "]\n"); 
-     builder.append("stratifier" + "[" + String.valueOf(this.stratifier) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MeasureReportGroup]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.population != null) builder.append("population" + "->" + this.population.toString() + "\n"); 
+     if(this.measureScore != null) builder.append("measureScore" + "->" + this.measureScore.toString() + "\n"); 
+     if(this._measureScore != null) builder.append("_measureScore" + "->" + this._measureScore.toString() + "\n"); 
+     if(this.stratifier != null) builder.append("stratifier" + "->" + this.stratifier.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MeasureReportGroup> fromArray(java.util.List<MeasureReportGroupModel> list) {
-    return (java.util.List<MeasureReportGroup>)list.stream()
-      .map(model -> new MeasureReportGroup(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MeasureReportGroupModel> toModelArray(java.util.List<MeasureReportGroup> list) {
-    return (java.util.List<MeasureReportGroupModel>)list.stream()
-      .map(model -> new MeasureReportGroupModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MeasureReportGroup fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MeasureReportGroup.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MeasureReportGroup o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MeasureReportGroup> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

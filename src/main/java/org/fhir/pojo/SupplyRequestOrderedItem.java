@@ -59,6 +59,7 @@ public class SupplyRequestOrderedItem  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,19 +81,14 @@ public class SupplyRequestOrderedItem  {
 
   public SupplyRequestOrderedItem(SupplyRequestOrderedItemModel o) {
     this.id = o.getId();
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      this.itemCodeableConcept = CodeableConcept.fromJson(o.getItemCodeableConcept());
-      if (null != o.getItemReference()) {
-        this.itemReference = new Reference(o.getItemReference());
-        this.itemReference.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    this.itemCodeableConcept = CodeableConceptHelper.fromJson(o.getItemCodeableConcept());
+    if (null != o.getItemReference() && !o.getItemReference().isEmpty()) {
+      this.itemReference = new Reference(o.getItemReference().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setQuantity( Quantity value) {
@@ -141,47 +137,16 @@ public class SupplyRequestOrderedItem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("itemCodeableConcept" + "[" + String.valueOf(this.itemCodeableConcept) + "]\n"); 
-     builder.append("itemReference" + "[" + String.valueOf(this.itemReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SupplyRequestOrderedItem]:" + "\n");
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.itemCodeableConcept != null) builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept.toString() + "\n"); 
+     if(this.itemReference != null) builder.append("itemReference" + "->" + this.itemReference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<SupplyRequestOrderedItem> fromArray(java.util.List<SupplyRequestOrderedItemModel> list) {
-    return (java.util.List<SupplyRequestOrderedItem>)list.stream()
-      .map(model -> new SupplyRequestOrderedItem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SupplyRequestOrderedItemModel> toModelArray(java.util.List<SupplyRequestOrderedItem> list) {
-    return (java.util.List<SupplyRequestOrderedItemModel>)list.stream()
-      .map(model -> new SupplyRequestOrderedItemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SupplyRequestOrderedItem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SupplyRequestOrderedItem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SupplyRequestOrderedItem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SupplyRequestOrderedItem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

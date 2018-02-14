@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A container for a collection of resources."
 */
 @Entity
 @Table(name="bundle")
-public class BundleModel  {
+public class BundleModel  implements Serializable {
+	private static final long serialVersionUID = 151857669709597499L;
   /**
   * Description: "This is a Bundle resource"
   */
@@ -47,7 +48,7 @@ public class BundleModel  {
 
   /**
   * Description: "A persistent identifier for the batch that won't change as a batch is copied from server to server."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -72,20 +73,28 @@ public class BundleModel  {
   /**
   * Description: "A series of links that provide context to this bundle."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<BundleLinkModel> link = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"link_id\"")
+  private String link_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="link_id", insertable=false, updatable=false)
+  private java.util.List<BundleLinkModel> link;
 
   /**
   * Description: "An entry in a bundle resource - will either contain a resource, or information about a resource (transactions and history only)."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<BundleEntryModel> entry = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"entry_id\"")
+  private String entry_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="entry_id", insertable=false, updatable=false)
+  private java.util.List<BundleEntryModel> entry;
 
   /**
   * Description: "Digital Signature - base64 encoded. XML-DSIg or a JWT."
-  * Actual type: Signature
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -96,6 +105,7 @@ public class BundleModel  {
   * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
    derived from Resource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -109,9 +119,9 @@ public class BundleModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -134,136 +144,143 @@ public class BundleModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from Resource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-
   public BundleModel() {
   }
 
   public BundleModel(Bundle o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.type = o.getType();
-
-      this.total = o.getTotal();
-
-      this.link = BundleLink.toModelArray(o.getLink());
-
-      this.entry = BundleEntry.toModelArray(o.getEntry());
-
-      this.signature = Signature.toJson(o.getSignature());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
-      this.extension = Extension.toJson(o.getExtension());
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.type = o.getType();
+    this.total = o.getTotal();
+    if (null != o.getLink() && !o.getLink().isEmpty()) {
+    	this.link_id = "link" + this.id;
+    	this.link = BundleLinkHelper.toModelFromArray(o.getLink(), this.link_id);
+    }
+    if (null != o.getEntry() && !o.getEntry().isEmpty()) {
+    	this.entry_id = "entry" + this.id;
+    	this.entry = BundleEntryHelper.toModelFromArray(o.getEntry(), this.entry_id);
+    }
+    this.signature = SignatureHelper.toJson(o.getSignature());
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setTotal( Float value) {
-    this.total = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public Float getTotal() {
     return this.total;
   }
-  public void setLink( java.util.List<BundleLinkModel> value) {
-    this.link = value;
+  public void setTotal( Float value) {
+    this.total = value;
   }
   public java.util.List<BundleLinkModel> getLink() {
     return this.link;
   }
-  public void setEntry( java.util.List<BundleEntryModel> value) {
-    this.entry = value;
+  public void setLink( java.util.List<BundleLinkModel> value) {
+    this.link = value;
   }
   public java.util.List<BundleEntryModel> getEntry() {
     return this.entry;
   }
-  public void setSignature( String value) {
-    this.signature = value;
+  public void setEntry( java.util.List<BundleEntryModel> value) {
+    this.entry = value;
   }
   public String getSignature() {
     return this.signature;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setSignature( String value) {
+    this.signature = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setLanguage( String value) {
+    this.language = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("total" + "[" + String.valueOf(this.total) + "]\n"); 
-     builder.append("link" + "[" + String.valueOf(this.link) + "]\n"); 
-     builder.append("entry" + "[" + String.valueOf(this.entry) + "]\n"); 
-     builder.append("signature" + "[" + String.valueOf(this.signature) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[BundleModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("total" + "->" + this.total + "\n"); 
+     builder.append("signature" + "->" + this.signature + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[BundleModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("total" + "->" + this.total + "\n"); 
+     builder.append("link" + "->" + this.link + "\n"); 
+     builder.append("entry" + "->" + this.entry + "\n"); 
+     builder.append("signature" + "->" + this.signature + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); ;
     return builder.toString();
   }
 }

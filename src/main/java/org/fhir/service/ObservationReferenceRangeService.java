@@ -32,7 +32,5 @@ public interface ObservationReferenceRangeService {
 	public ObservationReferenceRange find(String id);
   public List<ObservationReferenceRange> select(int maxResult);
   public List<ObservationReferenceRange> selectAll();
-  public ObservationReferenceRange create(ObservationReferenceRange bean);
-  public ObservationReferenceRange update(ObservationReferenceRange bean);
   public void delete(ObservationReferenceRange bean);
 }

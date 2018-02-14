@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.NutritionOrderAdministrationModel;
 import org.fhir.pojo.NutritionOrderAdministration;
+import org.fhir.pojo.NutritionOrderAdministrationHelper;
 
 public class NutritionOrderAdministrationDaoImpl implements NutritionOrderAdministrationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class NutritionOrderAdministrationDaoImpl implements NutritionOrderAdmini
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NutritionOrderAdministrationModel a", NutritionOrderAdministrationModel.class).setMaxResults(maxResult);
       List<NutritionOrderAdministrationModel> models = query.getResultList();
-      return NutritionOrderAdministration.fromArray(models);
+      return NutritionOrderAdministrationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class NutritionOrderAdministrationDaoImpl implements NutritionOrderAdmini
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NutritionOrderAdministrationModel a", NutritionOrderAdministrationModel.class);
       List<NutritionOrderAdministrationModel> models = query.getResultList();
-      return NutritionOrderAdministration.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public NutritionOrderAdministration create(NutritionOrderAdministration e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new NutritionOrderAdministrationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public NutritionOrderAdministration update(NutritionOrderAdministration e) {
-      final EntityManager em = entityManagerProvider.get();
-      NutritionOrderAdministrationModel model = em.merge(new NutritionOrderAdministrationModel(e));
-      return new NutritionOrderAdministration(model);
+      return NutritionOrderAdministrationHelper.fromArray2Array(models);
   }
 
   @Override

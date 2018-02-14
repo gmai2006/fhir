@@ -34,10 +34,5 @@ public interface CapabilityStatementOperationDao {
   public List<CapabilityStatementOperation> select(int maxResult);
 
   public List<CapabilityStatementOperation> selectAll();
-
-  public CapabilityStatementOperation create(CapabilityStatementOperation e);
-
-  public CapabilityStatementOperation update(CapabilityStatementOperation e);
-
   public void delete(CapabilityStatementOperation e);
 }

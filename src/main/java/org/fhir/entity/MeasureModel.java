@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "The Measure resource provides the definition of a quality measure."
 */
 @Entity
 @Table(name="measure")
-public class MeasureModel  {
+public class MeasureModel  implements Serializable {
+	private static final long serialVersionUID = 151857669649095587L;
   /**
   * Description: "This is a Measure resource"
   */
@@ -54,7 +55,7 @@ public class MeasureModel  {
 
   /**
   * Description: "A formal identifier that is used to identify this measure when it is represented in other formats, or referenced in a specification, model, design or an instance."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -150,7 +151,7 @@ public class MeasureModel  {
 
   /**
   * Description: "The period during which the measure content was or is planned to be in active use."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -160,13 +161,17 @@ public class MeasureModel  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate measure instances."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<UsageContextModel> useContext = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"usecontext_id\"")
+  private String usecontext_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
+  private java.util.List<UsageContextModel> useContext;
 
   /**
   * Description: "A legal or geographic region in which the measure is intended to be used."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -175,7 +180,7 @@ public class MeasureModel  {
 
   /**
   * Description: "Descriptive topics related to the content of the measure. Topics provide a high-level categorization of the type of the measure that can be useful for filtering and searching."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -185,16 +190,24 @@ public class MeasureModel  {
   /**
   * Description: "A contributor to the content of the measure, including authors, editors, reviewers, and endorsers."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContributorModel> contributor = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contributor_id\"")
+  private String contributor_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contributor_id", insertable=false, updatable=false)
+  private java.util.List<ContributorModel> contributor;
 
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContactDetailModel> contact = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contact_id\"")
+  private String contact_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  private java.util.List<ContactDetailModel> contact;
 
   /**
   * Description: "A copyright statement relating to the measure and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the measure."
@@ -206,16 +219,24 @@ public class MeasureModel  {
   /**
   * Description: "Related artifacts such as additional documentation, justification, or bibliographic references."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<RelatedArtifactModel> relatedArtifact = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"relatedartifact_id\"")
+  private String relatedartifact_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatedartifact_id", insertable=false, updatable=false)
+  private java.util.List<RelatedArtifactModel> relatedArtifact;
 
   /**
   * Description: "A reference to a Library resource containing the formal logic used by the measure."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> library = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"library_id\"")
+  private String library_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="library_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> library;
 
   /**
   * Description: "Notices and disclaimers regarding the use of the measure, or related to intellectual property (such as code systems) referenced by the measure."
@@ -226,7 +247,7 @@ public class MeasureModel  {
 
   /**
   * Description: "Indicates how the calculation is performed for the measure, including proportion, ratio, continuous variable, and cohort. The value set is extensible, allowing additional measure scoring types to be represented."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -235,7 +256,7 @@ public class MeasureModel  {
 
   /**
   * Description: "If this is a composite measure, the scoring method used to combine the component measures to determine the composite score."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -244,7 +265,7 @@ public class MeasureModel  {
 
   /**
   * Description: "Indicates whether the measure is used to examine a process, an outcome over time, a patient-reported outcome, or a structure measure such as utilization."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -288,11 +309,9 @@ public class MeasureModel  {
 
   /**
   * Description: "Provides a description of an individual term used within the measure."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"definition\"", length = 16777215)
+  @Column(name="\"definition\"")
   private String definition;
 
   /**
@@ -312,16 +331,24 @@ public class MeasureModel  {
   /**
   * Description: "A group of population criteria for the measure."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<MeasureGroupModel> group = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"group_id\"")
+  private String group_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="group_id", insertable=false, updatable=false)
+  private java.util.List<MeasureGroupModel> group;
 
   /**
   * Description: "The supplemental data criteria for the measure report, specified as either the name of a valid CQL expression within a referenced library, or a valid FHIR Resource Path."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<MeasureSupplementalDataModel> supplementalData = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"supplementaldata_id\"")
+  private String supplementaldata_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="supplementaldata_id", insertable=false, updatable=false)
+  private java.util.List<MeasureSupplementalDataModel> supplementalData;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -331,14 +358,14 @@ public class MeasureModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -348,7 +375,7 @@ public class MeasureModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -358,7 +385,7 @@ public class MeasureModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -370,6 +397,7 @@ public class MeasureModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -384,9 +412,9 @@ public class MeasureModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -407,433 +435,448 @@ public class MeasureModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public MeasureModel() {
   }
 
   public MeasureModel(Measure o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.url = o.getUrl();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.version = o.getVersion();
-
-      this.name = o.getName();
-
-      this.title = o.getTitle();
-
-      this.status = o.getStatus();
-
-      this.experimental = o.getExperimental();
-
-      this.date = o.getDate();
-
-      this.publisher = o.getPublisher();
-
-      this.description = o.getDescription();
-
-      this.purpose = o.getPurpose();
-
-      this.usage = o.getUsage();
-
-      this.approvalDate = o.getApprovalDate();
-
-      this.lastReviewDate = o.getLastReviewDate();
-
-      this.effectivePeriod = Period.toJson(o.getEffectivePeriod());
-      this.useContext = UsageContext.toModelArray(o.getUseContext());
-
-      this.jurisdiction = CodeableConcept.toJson(o.getJurisdiction());
-      this.topic = CodeableConcept.toJson(o.getTopic());
-      this.contributor = Contributor.toModelArray(o.getContributor());
-
-      this.contact = ContactDetail.toModelArray(o.getContact());
-
-      this.copyright = o.getCopyright();
-
-      this.relatedArtifact = RelatedArtifact.toModelArray(o.getRelatedArtifact());
-
-      this.library = Reference.toModelArray(o.getLibrary());
-
-      this.disclaimer = o.getDisclaimer();
-
-      this.scoring = CodeableConcept.toJson(o.getScoring());
-      this.compositeScoring = CodeableConcept.toJson(o.getCompositeScoring());
-      this.type = CodeableConcept.toJson(o.getType());
-      this.riskAdjustment = o.getRiskAdjustment();
-
-      this.rateAggregation = o.getRateAggregation();
-
-      this.rationale = o.getRationale();
-
-      this.clinicalRecommendationStatement = o.getClinicalRecommendationStatement();
-
-      this.improvementNotation = o.getImprovementNotation();
-
-      this.definition = org.fhir.utils.JsonUtils.write2String(o.getDefinition());
-
-      this.guidance = o.getGuidance();
-
-      this.set = o.getSet();
-
-      this.group = MeasureGroup.toModelArray(o.getGroup());
-
-      this.supplementalData = MeasureSupplementalData.toModelArray(o.getSupplementalData());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.url = o.getUrl();
+    this.version = o.getVersion();
+    this.name = o.getName();
+    this.title = o.getTitle();
+    this.status = o.getStatus();
+    this.experimental = o.getExperimental();
+    this.date = o.getDate();
+    this.publisher = o.getPublisher();
+    this.description = o.getDescription();
+    this.purpose = o.getPurpose();
+    this.usage = o.getUsage();
+    this.approvalDate = o.getApprovalDate();
+    this.lastReviewDate = o.getLastReviewDate();
+    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.usecontext_id = "usecontext" + this.id;
+    	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
+    }
+    if (null != o.getContributor() && !o.getContributor().isEmpty()) {
+    	this.contributor_id = "contributor" + this.id;
+    	this.contributor = ContributorHelper.toModelFromArray(o.getContributor(), this.contributor_id);
+    }
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact_id = "contact" + this.id;
+    	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
+    }
+    this.copyright = o.getCopyright();
+    if (null != o.getRelatedArtifact() && !o.getRelatedArtifact().isEmpty()) {
+    	this.relatedartifact_id = "relatedartifact" + this.id;
+    	this.relatedArtifact = RelatedArtifactHelper.toModelFromArray(o.getRelatedArtifact(), this.relatedartifact_id);
+    }
+    if (null != o.getLibrary() && !o.getLibrary().isEmpty()) {
+    	this.library_id = "library" + this.id;
+    	this.library = ReferenceHelper.toModelFromArray(o.getLibrary(), this.library_id);
+    }
+    this.disclaimer = o.getDisclaimer();
+    this.scoring = CodeableConceptHelper.toJson(o.getScoring());
+    this.compositeScoring = CodeableConceptHelper.toJson(o.getCompositeScoring());
+    this.riskAdjustment = o.getRiskAdjustment();
+    this.rateAggregation = o.getRateAggregation();
+    this.rationale = o.getRationale();
+    this.clinicalRecommendationStatement = o.getClinicalRecommendationStatement();
+    this.improvementNotation = o.getImprovementNotation();
+    this.definition = org.fhir.utils.JsonUtils.write2String(o.getDefinition());
+    this.guidance = o.getGuidance();
+    this.set = o.getSet();
+    if (null != o.getGroup() && !o.getGroup().isEmpty()) {
+    	this.group_id = "group" + this.id;
+    	this.group = MeasureGroupHelper.toModelFromArray(o.getGroup(), this.group_id);
+    }
+    if (null != o.getSupplementalData() && !o.getSupplementalData().isEmpty()) {
+    	this.supplementaldata_id = "supplementaldata" + this.id;
+    	this.supplementalData = MeasureSupplementalDataHelper.toModelFromArray(o.getSupplementalData(), this.supplementaldata_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setUrl( String value) {
-    this.url = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getUrl() {
     return this.url;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setUrl( String value) {
+    this.url = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setVersion( String value) {
-    this.version = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getVersion() {
     return this.version;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setVersion( String value) {
+    this.version = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setTitle( String value) {
-    this.title = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getTitle() {
     return this.title;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setTitle( String value) {
+    this.title = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setExperimental( Boolean value) {
-    this.experimental = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public Boolean getExperimental() {
     return this.experimental;
   }
-  public void setDate( String value) {
-    this.date = value;
+  public void setExperimental( Boolean value) {
+    this.experimental = value;
   }
   public String getDate() {
     return this.date;
   }
-  public void setPublisher( String value) {
-    this.publisher = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public String getPublisher() {
     return this.publisher;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setPublisher( String value) {
+    this.publisher = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setPurpose( String value) {
-    this.purpose = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public String getPurpose() {
     return this.purpose;
   }
-  public void setUsage( String value) {
-    this.usage = value;
+  public void setPurpose( String value) {
+    this.purpose = value;
   }
   public String getUsage() {
     return this.usage;
   }
-  public void setApprovalDate( String value) {
-    this.approvalDate = value;
+  public void setUsage( String value) {
+    this.usage = value;
   }
   public String getApprovalDate() {
     return this.approvalDate;
   }
-  public void setLastReviewDate( String value) {
-    this.lastReviewDate = value;
+  public void setApprovalDate( String value) {
+    this.approvalDate = value;
   }
   public String getLastReviewDate() {
     return this.lastReviewDate;
   }
-  public void setEffectivePeriod( String value) {
-    this.effectivePeriod = value;
+  public void setLastReviewDate( String value) {
+    this.lastReviewDate = value;
   }
   public String getEffectivePeriod() {
     return this.effectivePeriod;
   }
-  public void setUseContext( java.util.List<UsageContextModel> value) {
-    this.useContext = value;
+  public void setEffectivePeriod( String value) {
+    this.effectivePeriod = value;
   }
   public java.util.List<UsageContextModel> getUseContext() {
     return this.useContext;
   }
-  public void setJurisdiction( String value) {
-    this.jurisdiction = value;
+  public void setUseContext( java.util.List<UsageContextModel> value) {
+    this.useContext = value;
   }
   public String getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setTopic( String value) {
-    this.topic = value;
+  public void setJurisdiction( String value) {
+    this.jurisdiction = value;
   }
   public String getTopic() {
     return this.topic;
   }
-  public void setContributor( java.util.List<ContributorModel> value) {
-    this.contributor = value;
+  public void setTopic( String value) {
+    this.topic = value;
   }
   public java.util.List<ContributorModel> getContributor() {
     return this.contributor;
   }
-  public void setContact( java.util.List<ContactDetailModel> value) {
-    this.contact = value;
+  public void setContributor( java.util.List<ContributorModel> value) {
+    this.contributor = value;
   }
   public java.util.List<ContactDetailModel> getContact() {
     return this.contact;
   }
-  public void setCopyright( String value) {
-    this.copyright = value;
+  public void setContact( java.util.List<ContactDetailModel> value) {
+    this.contact = value;
   }
   public String getCopyright() {
     return this.copyright;
   }
-  public void setRelatedArtifact( java.util.List<RelatedArtifactModel> value) {
-    this.relatedArtifact = value;
+  public void setCopyright( String value) {
+    this.copyright = value;
   }
   public java.util.List<RelatedArtifactModel> getRelatedArtifact() {
     return this.relatedArtifact;
   }
-  public void setLibrary( java.util.List<ReferenceModel> value) {
-    this.library = value;
+  public void setRelatedArtifact( java.util.List<RelatedArtifactModel> value) {
+    this.relatedArtifact = value;
   }
   public java.util.List<ReferenceModel> getLibrary() {
     return this.library;
   }
-  public void setDisclaimer( String value) {
-    this.disclaimer = value;
+  public void setLibrary( java.util.List<ReferenceModel> value) {
+    this.library = value;
   }
   public String getDisclaimer() {
     return this.disclaimer;
   }
-  public void setScoring( String value) {
-    this.scoring = value;
+  public void setDisclaimer( String value) {
+    this.disclaimer = value;
   }
   public String getScoring() {
     return this.scoring;
   }
-  public void setCompositeScoring( String value) {
-    this.compositeScoring = value;
+  public void setScoring( String value) {
+    this.scoring = value;
   }
   public String getCompositeScoring() {
     return this.compositeScoring;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setCompositeScoring( String value) {
+    this.compositeScoring = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setRiskAdjustment( String value) {
-    this.riskAdjustment = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getRiskAdjustment() {
     return this.riskAdjustment;
   }
-  public void setRateAggregation( String value) {
-    this.rateAggregation = value;
+  public void setRiskAdjustment( String value) {
+    this.riskAdjustment = value;
   }
   public String getRateAggregation() {
     return this.rateAggregation;
   }
-  public void setRationale( String value) {
-    this.rationale = value;
+  public void setRateAggregation( String value) {
+    this.rateAggregation = value;
   }
   public String getRationale() {
     return this.rationale;
   }
-  public void setClinicalRecommendationStatement( String value) {
-    this.clinicalRecommendationStatement = value;
+  public void setRationale( String value) {
+    this.rationale = value;
   }
   public String getClinicalRecommendationStatement() {
     return this.clinicalRecommendationStatement;
   }
-  public void setImprovementNotation( String value) {
-    this.improvementNotation = value;
+  public void setClinicalRecommendationStatement( String value) {
+    this.clinicalRecommendationStatement = value;
   }
   public String getImprovementNotation() {
     return this.improvementNotation;
   }
-  public void setDefinition( String value) {
-    this.definition = value;
+  public void setImprovementNotation( String value) {
+    this.improvementNotation = value;
   }
   public String getDefinition() {
     return this.definition;
   }
-  public void setGuidance( String value) {
-    this.guidance = value;
+  public void setDefinition( String value) {
+    this.definition = value;
   }
   public String getGuidance() {
     return this.guidance;
   }
-  public void setSet( String value) {
-    this.set = value;
+  public void setGuidance( String value) {
+    this.guidance = value;
   }
   public String getSet() {
     return this.set;
   }
-  public void setGroup( java.util.List<MeasureGroupModel> value) {
-    this.group = value;
+  public void setSet( String value) {
+    this.set = value;
   }
   public java.util.List<MeasureGroupModel> getGroup() {
     return this.group;
   }
-  public void setSupplementalData( java.util.List<MeasureSupplementalDataModel> value) {
-    this.supplementalData = value;
+  public void setGroup( java.util.List<MeasureGroupModel> value) {
+    this.group = value;
   }
   public java.util.List<MeasureSupplementalDataModel> getSupplementalData() {
     return this.supplementalData;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setSupplementalData( java.util.List<MeasureSupplementalDataModel> value) {
+    this.supplementalData = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("experimental" + "[" + String.valueOf(this.experimental) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("usage" + "[" + String.valueOf(this.usage) + "]\n"); 
-     builder.append("approvalDate" + "[" + String.valueOf(this.approvalDate) + "]\n"); 
-     builder.append("lastReviewDate" + "[" + String.valueOf(this.lastReviewDate) + "]\n"); 
-     builder.append("effectivePeriod" + "[" + String.valueOf(this.effectivePeriod) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("topic" + "[" + String.valueOf(this.topic) + "]\n"); 
-     builder.append("contributor" + "[" + String.valueOf(this.contributor) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("copyright" + "[" + String.valueOf(this.copyright) + "]\n"); 
-     builder.append("relatedArtifact" + "[" + String.valueOf(this.relatedArtifact) + "]\n"); 
-     builder.append("library" + "[" + String.valueOf(this.library) + "]\n"); 
-     builder.append("disclaimer" + "[" + String.valueOf(this.disclaimer) + "]\n"); 
-     builder.append("scoring" + "[" + String.valueOf(this.scoring) + "]\n"); 
-     builder.append("compositeScoring" + "[" + String.valueOf(this.compositeScoring) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("riskAdjustment" + "[" + String.valueOf(this.riskAdjustment) + "]\n"); 
-     builder.append("rateAggregation" + "[" + String.valueOf(this.rateAggregation) + "]\n"); 
-     builder.append("rationale" + "[" + String.valueOf(this.rationale) + "]\n"); 
-     builder.append("clinicalRecommendationStatement" + "[" + String.valueOf(this.clinicalRecommendationStatement) + "]\n"); 
-     builder.append("improvementNotation" + "[" + String.valueOf(this.improvementNotation) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("guidance" + "[" + String.valueOf(this.guidance) + "]\n"); 
-     builder.append("set" + "[" + String.valueOf(this.set) + "]\n"); 
-     builder.append("group" + "[" + String.valueOf(this.group) + "]\n"); 
-     builder.append("supplementalData" + "[" + String.valueOf(this.supplementalData) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[MeasureModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("experimental" + "->" + this.experimental + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("purpose" + "->" + this.purpose + "\n"); 
+     builder.append("usage" + "->" + this.usage + "\n"); 
+     builder.append("approvalDate" + "->" + this.approvalDate + "\n"); 
+     builder.append("lastReviewDate" + "->" + this.lastReviewDate + "\n"); 
+     builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("topic" + "->" + this.topic + "\n"); 
+     builder.append("copyright" + "->" + this.copyright + "\n"); 
+     builder.append("disclaimer" + "->" + this.disclaimer + "\n"); 
+     builder.append("scoring" + "->" + this.scoring + "\n"); 
+     builder.append("compositeScoring" + "->" + this.compositeScoring + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("riskAdjustment" + "->" + this.riskAdjustment + "\n"); 
+     builder.append("rateAggregation" + "->" + this.rateAggregation + "\n"); 
+     builder.append("rationale" + "->" + this.rationale + "\n"); 
+     builder.append("clinicalRecommendationStatement" + "->" + this.clinicalRecommendationStatement + "\n"); 
+     builder.append("improvementNotation" + "->" + this.improvementNotation + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("guidance" + "->" + this.guidance + "\n"); 
+     builder.append("set" + "->" + this.set + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[MeasureModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("experimental" + "->" + this.experimental + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("purpose" + "->" + this.purpose + "\n"); 
+     builder.append("usage" + "->" + this.usage + "\n"); 
+     builder.append("approvalDate" + "->" + this.approvalDate + "\n"); 
+     builder.append("lastReviewDate" + "->" + this.lastReviewDate + "\n"); 
+     builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
+     builder.append("useContext" + "->" + this.useContext + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("topic" + "->" + this.topic + "\n"); 
+     builder.append("contributor" + "->" + this.contributor + "\n"); 
+     builder.append("contact" + "->" + this.contact + "\n"); 
+     builder.append("copyright" + "->" + this.copyright + "\n"); 
+     builder.append("relatedArtifact" + "->" + this.relatedArtifact + "\n"); 
+     builder.append("library" + "->" + this.library + "\n"); 
+     builder.append("disclaimer" + "->" + this.disclaimer + "\n"); 
+     builder.append("scoring" + "->" + this.scoring + "\n"); 
+     builder.append("compositeScoring" + "->" + this.compositeScoring + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("riskAdjustment" + "->" + this.riskAdjustment + "\n"); 
+     builder.append("rateAggregation" + "->" + this.rateAggregation + "\n"); 
+     builder.append("rationale" + "->" + this.rationale + "\n"); 
+     builder.append("clinicalRecommendationStatement" + "->" + this.clinicalRecommendationStatement + "\n"); 
+     builder.append("improvementNotation" + "->" + this.improvementNotation + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("guidance" + "->" + this.guidance + "\n"); 
+     builder.append("set" + "->" + this.set + "\n"); 
+     builder.append("group" + "->" + this.group + "\n"); 
+     builder.append("supplementalData" + "->" + this.supplementalData + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

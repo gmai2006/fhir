@@ -59,6 +59,7 @@ public class PatientAnimal  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,15 +81,12 @@ public class PatientAnimal  {
 
   public PatientAnimal(PatientAnimalModel o) {
     this.id = o.getId();
-      this.species = CodeableConcept.fromJson(o.getSpecies());
-      this.breed = CodeableConcept.fromJson(o.getBreed());
-      this.genderStatus = CodeableConcept.fromJson(o.getGenderStatus());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.species = CodeableConceptHelper.fromJson(o.getSpecies());
+    this.breed = CodeableConceptHelper.fromJson(o.getBreed());
+    this.genderStatus = CodeableConceptHelper.fromJson(o.getGenderStatus());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSpecies( CodeableConcept value) {
@@ -137,47 +135,16 @@ public class PatientAnimal  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("species" + "[" + String.valueOf(this.species) + "]\n"); 
-     builder.append("breed" + "[" + String.valueOf(this.breed) + "]\n"); 
-     builder.append("genderStatus" + "[" + String.valueOf(this.genderStatus) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PatientAnimal]:" + "\n");
+     if(this.species != null) builder.append("species" + "->" + this.species.toString() + "\n"); 
+     if(this.breed != null) builder.append("breed" + "->" + this.breed.toString() + "\n"); 
+     if(this.genderStatus != null) builder.append("genderStatus" + "->" + this.genderStatus.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<PatientAnimal> fromArray(java.util.List<PatientAnimalModel> list) {
-    return (java.util.List<PatientAnimal>)list.stream()
-      .map(model -> new PatientAnimal(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PatientAnimalModel> toModelArray(java.util.List<PatientAnimal> list) {
-    return (java.util.List<PatientAnimalModel>)list.stream()
-      .map(model -> new PatientAnimalModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PatientAnimal fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PatientAnimal.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PatientAnimal o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PatientAnimal> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -34,10 +34,8 @@ public interface SubscriptionDao {
   public List<Subscription> select(int maxResult);
 
   public List<Subscription> selectAll();
-
   public Subscription create(Subscription e);
 
   public Subscription update(Subscription e);
-
   public void delete(Subscription e);
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MeasureStratifierModel;
 import org.fhir.pojo.MeasureStratifier;
+import org.fhir.pojo.MeasureStratifierHelper;
 
 public class MeasureStratifierDaoImpl implements MeasureStratifierDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MeasureStratifierDaoImpl implements MeasureStratifierDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureStratifierModel a", MeasureStratifierModel.class).setMaxResults(maxResult);
       List<MeasureStratifierModel> models = query.getResultList();
-      return MeasureStratifier.fromArray(models);
+      return MeasureStratifierHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MeasureStratifierDaoImpl implements MeasureStratifierDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureStratifierModel a", MeasureStratifierModel.class);
       List<MeasureStratifierModel> models = query.getResultList();
-      return MeasureStratifier.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MeasureStratifier create(MeasureStratifier e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MeasureStratifierModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MeasureStratifier update(MeasureStratifier e) {
-      final EntityManager em = entityManagerProvider.get();
-      MeasureStratifierModel model = em.merge(new MeasureStratifierModel(e));
-      return new MeasureStratifier(model);
+      return MeasureStratifierHelper.fromArray2Array(models);
   }
 
   @Override

@@ -34,10 +34,8 @@ public interface OperationDefinitionDao {
   public List<OperationDefinition> select(int maxResult);
 
   public List<OperationDefinition> selectAll();
-
   public OperationDefinition create(OperationDefinition e);
 
   public OperationDefinition update(OperationDefinition e);
-
   public void delete(OperationDefinition e);
 }

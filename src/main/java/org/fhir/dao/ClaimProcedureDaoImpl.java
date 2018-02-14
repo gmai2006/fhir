@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimProcedureModel;
 import org.fhir.pojo.ClaimProcedure;
+import org.fhir.pojo.ClaimProcedureHelper;
 
 public class ClaimProcedureDaoImpl implements ClaimProcedureDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimProcedureDaoImpl implements ClaimProcedureDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimProcedureModel a", ClaimProcedureModel.class).setMaxResults(maxResult);
       List<ClaimProcedureModel> models = query.getResultList();
-      return ClaimProcedure.fromArray(models);
+      return ClaimProcedureHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimProcedureDaoImpl implements ClaimProcedureDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimProcedureModel a", ClaimProcedureModel.class);
       List<ClaimProcedureModel> models = query.getResultList();
-      return ClaimProcedure.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimProcedure create(ClaimProcedure e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimProcedureModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimProcedure update(ClaimProcedure e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimProcedureModel model = em.merge(new ClaimProcedureModel(e));
-      return new ClaimProcedure(model);
+      return ClaimProcedureHelper.fromArray2Array(models);
   }
 
   @Override

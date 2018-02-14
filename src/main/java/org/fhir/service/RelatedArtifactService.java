@@ -32,7 +32,5 @@ public interface RelatedArtifactService {
 	public RelatedArtifact find(String id);
   public List<RelatedArtifact> select(int maxResult);
   public List<RelatedArtifact> selectAll();
-  public RelatedArtifact create(RelatedArtifact bean);
-  public RelatedArtifact update(RelatedArtifact bean);
   public void delete(RelatedArtifact bean);
 }

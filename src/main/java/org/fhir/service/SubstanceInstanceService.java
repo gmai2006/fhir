@@ -32,7 +32,5 @@ public interface SubstanceInstanceService {
 	public SubstanceInstance find(String id);
   public List<SubstanceInstance> select(int maxResult);
   public List<SubstanceInstance> selectAll();
-  public SubstanceInstance create(SubstanceInstance bean);
-  public SubstanceInstance update(SubstanceInstance bean);
   public void delete(SubstanceInstance bean);
 }

@@ -34,10 +34,5 @@ public interface ValueSetFilterDao {
   public List<ValueSetFilter> select(int maxResult);
 
   public List<ValueSetFilter> selectAll();
-
-  public ValueSetFilter create(ValueSetFilter e);
-
-  public ValueSetFilter update(ValueSetFilter e);
-
   public void delete(ValueSetFilter e);
 }

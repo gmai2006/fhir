@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken."
 */
 @Entity
 @Table(name="guidanceresponse")
-public class GuidanceResponseModel  {
+public class GuidanceResponseModel  implements Serializable {
+	private static final long serialVersionUID = 151857669713564231L;
   /**
   * Description: "This is a GuidanceResponse resource"
   */
@@ -55,7 +56,7 @@ public class GuidanceResponseModel  {
 
   /**
   * Description: "Allows a service to provide a unique, business identifier for the response."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -69,9 +70,9 @@ public class GuidanceResponseModel  {
   @Column(name="\"module_id\"")
   private String module_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`module_id`", insertable=false, updatable=false)
-  private ReferenceModel module;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="module_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> module;
 
   /**
   * Description: "The status of the response. If the evaluation is completed successfully, the status will indicate success. However, in order to complete the evaluation, the engine may require more information. In this case, the status will be data-required, and the response will contain a description of the additional required information. If the evaluation completed successfully, but the engine determines that a potentially more accurate response could be provided if more data was available, the status will be data-requested, and the response will contain a description of the additional requested information."
@@ -87,9 +88,9 @@ public class GuidanceResponseModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable."
@@ -98,9 +99,9 @@ public class GuidanceResponseModel  {
   @Column(name="\"context_id\"")
   private String context_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`context_id`", insertable=false, updatable=false)
-  private ReferenceModel context;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> context;
 
   /**
   * Description: "Indicates when the guidance response was processed."
@@ -117,13 +118,13 @@ public class GuidanceResponseModel  {
   @Column(name="\"performer_id\"")
   private String performer_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`performer_id`", insertable=false, updatable=false)
-  private ReferenceModel performer;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performer_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> performer;
 
   /**
   * Description: "Indicates the reason the request was initiated. This is typically provided as a parameter to the evaluation and echoed by the service, although for some use cases, such as subscription- or event-based scenarios, it may provide an indication of the cause for the response."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -137,13 +138,13 @@ public class GuidanceResponseModel  {
   @Column(name="\"reasonreference_id\"")
   private String reasonreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`reasonreference_id`", insertable=false, updatable=false)
-  private ReferenceModel reasonReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> reasonReference;
 
   /**
   * Description: "Provides a mechanism to communicate additional information about the response."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -153,9 +154,13 @@ public class GuidanceResponseModel  {
   /**
   * Description: "Messages resulting from the evaluation of the artifact or artifacts. As part of evaluating the request, the engine may produce informational or warning messages. These messages will be provided by this element."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> evaluationMessage = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"evaluationmessage_id\"")
+  private String evaluationmessage_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="evaluationmessage_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> evaluationMessage;
 
   /**
   * Description: "The output parameters of the evaluation, if any. Many modules will result in the return of specific resources such as procedure or communication requests that are returned as part of the operation result. However, modules may define specific outputs that would be returned as the result of the evaluation, and these would be returned in this element."
@@ -164,9 +169,9 @@ public class GuidanceResponseModel  {
   @Column(name="\"outputparameters_id\"")
   private String outputparameters_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`outputparameters_id`", insertable=false, updatable=false)
-  private ReferenceModel outputParameters;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outputparameters_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> outputParameters;
 
   /**
   * Description: "The actions, if any, produced by the evaluation of the artifact."
@@ -175,16 +180,20 @@ public class GuidanceResponseModel  {
   @Column(name="\"result_id\"")
   private String result_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`result_id`", insertable=false, updatable=false)
-  private ReferenceModel result;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="result_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> result;
 
   /**
   * Description: "If the evaluation could not be completed due to lack of information, or additional information would potentially result in a more accurate response, this element will a description of the data required in order to proceed with the evaluation. A subsequent request to the service should include this data."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<DataRequirementModel> dataRequirement = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"datarequirement_id\"")
+  private String datarequirement_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="datarequirement_id", insertable=false, updatable=false)
+  private java.util.List<DataRequirementModel> dataRequirement;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -194,14 +203,14 @@ public class GuidanceResponseModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -211,7 +220,7 @@ public class GuidanceResponseModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -221,7 +230,7 @@ public class GuidanceResponseModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -233,6 +242,7 @@ public class GuidanceResponseModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -247,9 +257,9 @@ public class GuidanceResponseModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -270,274 +280,257 @@ public class GuidanceResponseModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public GuidanceResponseModel() {
   }
 
   public GuidanceResponseModel(GuidanceResponse o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.requestId = o.getRequestId();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      if (null != o.getModule()) {
-      	this.module_id = "module" + this.getId();
-        this.module = new ReferenceModel(o.getModule());
-        this.module.setId(this.module_id);
-        this.module.parent_id = this.module.getId();
-      }
-
-      this.status = o.getStatus();
-
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      if (null != o.getContext()) {
-      	this.context_id = "context" + this.getId();
-        this.context = new ReferenceModel(o.getContext());
-        this.context.setId(this.context_id);
-        this.context.parent_id = this.context.getId();
-      }
-
-      this.occurrenceDateTime = o.getOccurrenceDateTime();
-
-      if (null != o.getPerformer()) {
-      	this.performer_id = "performer" + this.getId();
-        this.performer = new ReferenceModel(o.getPerformer());
-        this.performer.setId(this.performer_id);
-        this.performer.parent_id = this.performer.getId();
-      }
-
-      this.reasonCodeableConcept = CodeableConcept.toJson(o.getReasonCodeableConcept());
-      if (null != o.getReasonReference()) {
-      	this.reasonreference_id = "reasonReference" + this.getId();
-        this.reasonReference = new ReferenceModel(o.getReasonReference());
-        this.reasonReference.setId(this.reasonreference_id);
-        this.reasonReference.parent_id = this.reasonReference.getId();
-      }
-
-      this.note = Annotation.toJson(o.getNote());
-      this.evaluationMessage = Reference.toModelArray(o.getEvaluationMessage());
-
-      if (null != o.getOutputParameters()) {
-      	this.outputparameters_id = "outputParameters" + this.getId();
-        this.outputParameters = new ReferenceModel(o.getOutputParameters());
-        this.outputParameters.setId(this.outputparameters_id);
-        this.outputParameters.parent_id = this.outputParameters.getId();
-      }
-
-      if (null != o.getResult()) {
-      	this.result_id = "result" + this.getId();
-        this.result = new ReferenceModel(o.getResult());
-        this.result.setId(this.result_id);
-        this.result.parent_id = this.result.getId();
-      }
-
-      this.dataRequirement = DataRequirement.toModelArray(o.getDataRequirement());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.requestId = o.getRequestId();
+    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    if (null != o.getModule() ) {
+    	this.module_id = "module" + this.id;
+    	this.module = ReferenceHelper.toModel(o.getModule(), this.module_id);
+    }
+    this.status = o.getStatus();
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    if (null != o.getContext() ) {
+    	this.context_id = "context" + this.id;
+    	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
+    }
+    this.occurrenceDateTime = o.getOccurrenceDateTime();
+    if (null != o.getPerformer() ) {
+    	this.performer_id = "performer" + this.id;
+    	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);
+    }
+    this.reasonCodeableConcept = CodeableConceptHelper.toJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonReference() ) {
+    	this.reasonreference_id = "reasonreference" + this.id;
+    	this.reasonReference = ReferenceHelper.toModel(o.getReasonReference(), this.reasonreference_id);
+    }
+    if (null != o.getEvaluationMessage() && !o.getEvaluationMessage().isEmpty()) {
+    	this.evaluationmessage_id = "evaluationmessage" + this.id;
+    	this.evaluationMessage = ReferenceHelper.toModelFromArray(o.getEvaluationMessage(), this.evaluationmessage_id);
+    }
+    if (null != o.getOutputParameters() ) {
+    	this.outputparameters_id = "outputparameters" + this.id;
+    	this.outputParameters = ReferenceHelper.toModel(o.getOutputParameters(), this.outputparameters_id);
+    }
+    if (null != o.getResult() ) {
+    	this.result_id = "result" + this.id;
+    	this.result = ReferenceHelper.toModel(o.getResult(), this.result_id);
+    }
+    if (null != o.getDataRequirement() && !o.getDataRequirement().isEmpty()) {
+    	this.datarequirement_id = "datarequirement" + this.id;
+    	this.dataRequirement = DataRequirementHelper.toModelFromArray(o.getDataRequirement(), this.datarequirement_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setRequestId( String value) {
-    this.requestId = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getRequestId() {
     return this.requestId;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setRequestId( String value) {
+    this.requestId = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setModule( ReferenceModel value) {
-    this.module = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
-  public ReferenceModel getModule() {
+  public java.util.List<ReferenceModel> getModule() {
     return this.module;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setModule( java.util.List<ReferenceModel> value) {
+    this.module = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setContext( ReferenceModel value) {
-    this.context = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
-  public ReferenceModel getContext() {
+  public java.util.List<ReferenceModel> getContext() {
     return this.context;
   }
-  public void setOccurrenceDateTime( String value) {
-    this.occurrenceDateTime = value;
+  public void setContext( java.util.List<ReferenceModel> value) {
+    this.context = value;
   }
   public String getOccurrenceDateTime() {
     return this.occurrenceDateTime;
   }
-  public void setPerformer( ReferenceModel value) {
-    this.performer = value;
+  public void setOccurrenceDateTime( String value) {
+    this.occurrenceDateTime = value;
   }
-  public ReferenceModel getPerformer() {
+  public java.util.List<ReferenceModel> getPerformer() {
     return this.performer;
   }
-  public void setReasonCodeableConcept( String value) {
-    this.reasonCodeableConcept = value;
+  public void setPerformer( java.util.List<ReferenceModel> value) {
+    this.performer = value;
   }
   public String getReasonCodeableConcept() {
     return this.reasonCodeableConcept;
   }
-  public void setReasonReference( ReferenceModel value) {
-    this.reasonReference = value;
+  public void setReasonCodeableConcept( String value) {
+    this.reasonCodeableConcept = value;
   }
-  public ReferenceModel getReasonReference() {
+  public java.util.List<ReferenceModel> getReasonReference() {
     return this.reasonReference;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setReasonReference( java.util.List<ReferenceModel> value) {
+    this.reasonReference = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setEvaluationMessage( java.util.List<ReferenceModel> value) {
-    this.evaluationMessage = value;
+  public void setNote( String value) {
+    this.note = value;
   }
   public java.util.List<ReferenceModel> getEvaluationMessage() {
     return this.evaluationMessage;
   }
-  public void setOutputParameters( ReferenceModel value) {
-    this.outputParameters = value;
+  public void setEvaluationMessage( java.util.List<ReferenceModel> value) {
+    this.evaluationMessage = value;
   }
-  public ReferenceModel getOutputParameters() {
+  public java.util.List<ReferenceModel> getOutputParameters() {
     return this.outputParameters;
   }
-  public void setResult( ReferenceModel value) {
-    this.result = value;
+  public void setOutputParameters( java.util.List<ReferenceModel> value) {
+    this.outputParameters = value;
   }
-  public ReferenceModel getResult() {
+  public java.util.List<ReferenceModel> getResult() {
     return this.result;
   }
-  public void setDataRequirement( java.util.List<DataRequirementModel> value) {
-    this.dataRequirement = value;
+  public void setResult( java.util.List<ReferenceModel> value) {
+    this.result = value;
   }
   public java.util.List<DataRequirementModel> getDataRequirement() {
     return this.dataRequirement;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setDataRequirement( java.util.List<DataRequirementModel> value) {
+    this.dataRequirement = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("requestId" + "[" + String.valueOf(this.requestId) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("module" + "[" + String.valueOf(this.module) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("occurrenceDateTime" + "[" + String.valueOf(this.occurrenceDateTime) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("reasonCodeableConcept" + "[" + String.valueOf(this.reasonCodeableConcept) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("evaluationMessage" + "[" + String.valueOf(this.evaluationMessage) + "]\n"); 
-     builder.append("outputParameters" + "[" + String.valueOf(this.outputParameters) + "]\n"); 
-     builder.append("result" + "[" + String.valueOf(this.result) + "]\n"); 
-     builder.append("dataRequirement" + "[" + String.valueOf(this.dataRequirement) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[GuidanceResponseModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("requestId" + "->" + this.requestId + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
+     builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[GuidanceResponseModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("requestId" + "->" + this.requestId + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("module" + "->" + this.module + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("context" + "->" + this.context + "\n"); 
+     builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
+     builder.append("performer" + "->" + this.performer + "\n"); 
+     builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept + "\n"); 
+     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("evaluationMessage" + "->" + this.evaluationMessage + "\n"); 
+     builder.append("outputParameters" + "->" + this.outputParameters + "\n"); 
+     builder.append("result" + "->" + this.result + "\n"); 
+     builder.append("dataRequirement" + "->" + this.dataRequirement + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

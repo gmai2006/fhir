@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CompositionModel;
 import org.fhir.pojo.Composition;
+import org.fhir.pojo.CompositionHelper;
 
 public class CompositionDaoImpl implements CompositionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CompositionDaoImpl implements CompositionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompositionModel a", CompositionModel.class).setMaxResults(maxResult);
       List<CompositionModel> models = query.getResultList();
-      return Composition.fromArray(models);
+      return CompositionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class CompositionDaoImpl implements CompositionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompositionModel a", CompositionModel.class);
       List<CompositionModel> models = query.getResultList();
-      return Composition.fromArray(models);
+      return CompositionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class CompositionDaoImpl implements CompositionDao {
       CompositionModel model = em.merge(new CompositionModel(e));
       return new Composition(model);
   }
-
   @Override
   @Transactional
   public void delete(Composition e) {

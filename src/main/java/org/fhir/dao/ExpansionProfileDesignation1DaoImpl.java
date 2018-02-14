@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExpansionProfileDesignation1Model;
 import org.fhir.pojo.ExpansionProfileDesignation1;
+import org.fhir.pojo.ExpansionProfileDesignation1Helper;
 
 public class ExpansionProfileDesignation1DaoImpl implements ExpansionProfileDesignation1Dao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExpansionProfileDesignation1DaoImpl implements ExpansionProfileDesi
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExpansionProfileDesignation1Model a", ExpansionProfileDesignation1Model.class).setMaxResults(maxResult);
       List<ExpansionProfileDesignation1Model> models = query.getResultList();
-      return ExpansionProfileDesignation1.fromArray(models);
+      return ExpansionProfileDesignation1Helper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ExpansionProfileDesignation1DaoImpl implements ExpansionProfileDesi
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExpansionProfileDesignation1Model a", ExpansionProfileDesignation1Model.class);
       List<ExpansionProfileDesignation1Model> models = query.getResultList();
-      return ExpansionProfileDesignation1.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ExpansionProfileDesignation1 create(ExpansionProfileDesignation1 e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ExpansionProfileDesignation1Model(e));
-      return e;
-  }
-
-  @Transactional
-  public ExpansionProfileDesignation1 update(ExpansionProfileDesignation1 e) {
-      final EntityManager em = entityManagerProvider.get();
-      ExpansionProfileDesignation1Model model = em.merge(new ExpansionProfileDesignation1Model(e));
-      return new ExpansionProfileDesignation1(model);
+      return ExpansionProfileDesignation1Helper.fromArray2Array(models);
   }
 
   @Override

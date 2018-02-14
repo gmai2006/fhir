@@ -34,10 +34,8 @@ public interface BinaryDao {
   public List<Binary> select(int maxResult);
 
   public List<Binary> selectAll();
-
   public Binary create(Binary e);
 
   public Binary update(Binary e);
-
   public void delete(Binary e);
 }

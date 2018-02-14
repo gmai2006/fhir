@@ -59,6 +59,7 @@ public class SearchParameterComponent  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,21 +81,15 @@ public class SearchParameterComponent  {
 
   public SearchParameterComponent(SearchParameterComponentModel o) {
     this.id = o.getId();
-      if (null != o.getDefinition()) {
-        this.definition = new Reference(o.getDefinition());
-        this.definition.setId(this.getId());
-      }
-
-      if (null != o.getExpression()) {
-        this.expression = new String(o.getExpression());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+      this.definition = new Reference(o.getDefinition().get(0));
+    }
+    if (null != o.getExpression()) {
+      this.expression = o.getExpression();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setDefinition( Reference value) {
@@ -143,47 +138,16 @@ public class SearchParameterComponent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("expression" + "[" + String.valueOf(this.expression) + "]\n"); 
-     builder.append("_expression" + "[" + String.valueOf(this._expression) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SearchParameterComponent]:" + "\n");
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this.expression != null) builder.append("expression" + "->" + this.expression.toString() + "\n"); 
+     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<SearchParameterComponent> fromArray(java.util.List<SearchParameterComponentModel> list) {
-    return (java.util.List<SearchParameterComponent>)list.stream()
-      .map(model -> new SearchParameterComponent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SearchParameterComponentModel> toModelArray(java.util.List<SearchParameterComponent> list) {
-    return (java.util.List<SearchParameterComponentModel>)list.stream()
-      .map(model -> new SearchParameterComponentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SearchParameterComponent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SearchParameterComponent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SearchParameterComponent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SearchParameterComponent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

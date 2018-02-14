@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
 @Entity
 @Table(name="observationreferencerange")
-public class ObservationReferenceRangeModel  {
+public class ObservationReferenceRangeModel  implements Serializable {
+	private static final long serialVersionUID = 151857669710022042L;
   /**
   * Description: "The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3)."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -48,7 +49,7 @@ public class ObservationReferenceRangeModel  {
 
   /**
   * Description: "The value of the high bound of the reference range.  The high bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the high bound is omitted,  it is assumed to be meaningless (e.g. reference range is >= 2.3)."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -57,7 +58,7 @@ public class ObservationReferenceRangeModel  {
 
   /**
   * Description: "Codes to indicate the what part of the targeted reference population it applies to. For example, the normal or therapeutic range."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -66,7 +67,7 @@ public class ObservationReferenceRangeModel  {
 
   /**
   * Description: "Codes to indicate the target population this reference range applies to.  For example, a reference range may be based on the normal population or a particular sex or race."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -75,7 +76,7 @@ public class ObservationReferenceRangeModel  {
 
   /**
   * Description: "The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so."
-  * Actual type: Range
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -92,7 +93,7 @@ public class ObservationReferenceRangeModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -104,6 +105,7 @@ public class ObservationReferenceRangeModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -112,103 +114,125 @@ public class ObservationReferenceRangeModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ObservationReferenceRangeModel() {
   }
 
-  public ObservationReferenceRangeModel(ObservationReferenceRange o) {
-    this.id = o.getId();
-      this.low = Quantity.toJson(o.getLow());
-      this.high = Quantity.toJson(o.getHigh());
-      this.type = CodeableConcept.toJson(o.getType());
-      this.appliesTo = CodeableConcept.toJson(o.getAppliesTo());
-      this.age = Range.toJson(o.getAge());
-      this.text = o.getText();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ObservationReferenceRangeModel(ObservationReferenceRange o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.low = QuantityHelper.toJson(o.getLow());
+    this.high = QuantityHelper.toJson(o.getHigh());
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.age = RangeHelper.toJson(o.getAge());
+    this.text = o.getText();
   }
 
-  public void setLow( String value) {
-    this.low = value;
-  }
   public String getLow() {
     return this.low;
   }
-  public void setHigh( String value) {
-    this.high = value;
+  public void setLow( String value) {
+    this.low = value;
   }
   public String getHigh() {
     return this.high;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setHigh( String value) {
+    this.high = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setAppliesTo( String value) {
-    this.appliesTo = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getAppliesTo() {
     return this.appliesTo;
   }
-  public void setAge( String value) {
-    this.age = value;
+  public void setAppliesTo( String value) {
+    this.appliesTo = value;
   }
   public String getAge() {
     return this.age;
   }
-  public void setText( String value) {
-    this.text = value;
+  public void setAge( String value) {
+    this.age = value;
   }
   public String getText() {
     return this.text;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setText( String value) {
+    this.text = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("low" + "[" + String.valueOf(this.low) + "]\n"); 
-     builder.append("high" + "[" + String.valueOf(this.high) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("appliesTo" + "[" + String.valueOf(this.appliesTo) + "]\n"); 
-     builder.append("age" + "[" + String.valueOf(this.age) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ObservationReferenceRangeModel]:" + "\n");
+     builder.append("low" + "->" + this.low + "\n"); 
+     builder.append("high" + "->" + this.high + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("appliesTo" + "->" + this.appliesTo + "\n"); 
+     builder.append("age" + "->" + this.age + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ObservationReferenceRangeModel]:" + "\n");
+     builder.append("low" + "->" + this.low + "\n"); 
+     builder.append("high" + "->" + this.high + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("appliesTo" + "->" + this.appliesTo + "\n"); 
+     builder.append("age" + "->" + this.age + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

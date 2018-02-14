@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ConsentData1Model;
 import org.fhir.pojo.ConsentData1;
+import org.fhir.pojo.ConsentData1Helper;
 
 public class ConsentData1DaoImpl implements ConsentData1Dao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ConsentData1DaoImpl implements ConsentData1Dao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConsentData1Model a", ConsentData1Model.class).setMaxResults(maxResult);
       List<ConsentData1Model> models = query.getResultList();
-      return ConsentData1.fromArray(models);
+      return ConsentData1Helper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ConsentData1DaoImpl implements ConsentData1Dao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConsentData1Model a", ConsentData1Model.class);
       List<ConsentData1Model> models = query.getResultList();
-      return ConsentData1.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ConsentData1 create(ConsentData1 e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ConsentData1Model(e));
-      return e;
-  }
-
-  @Transactional
-  public ConsentData1 update(ConsentData1 e) {
-      final EntityManager em = entityManagerProvider.get();
-      ConsentData1Model model = em.merge(new ConsentData1Model(e));
-      return new ConsentData1(model);
+      return ConsentData1Helper.fromArray2Array(models);
   }
 
   @Override

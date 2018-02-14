@@ -32,7 +32,5 @@ public interface SequenceRepositoryService {
 	public SequenceRepository find(String id);
   public List<SequenceRepository> select(int maxResult);
   public List<SequenceRepository> selectAll();
-  public SequenceRepository create(SequenceRepository bean);
-  public SequenceRepository update(SequenceRepository bean);
   public void delete(SequenceRepository bean);
 }

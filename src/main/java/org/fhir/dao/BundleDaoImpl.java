@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.BundleModel;
 import org.fhir.pojo.Bundle;
+import org.fhir.pojo.BundleHelper;
 
 public class BundleDaoImpl implements BundleDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class BundleDaoImpl implements BundleDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BundleModel a", BundleModel.class).setMaxResults(maxResult);
       List<BundleModel> models = query.getResultList();
-      return Bundle.fromArray(models);
+      return BundleHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class BundleDaoImpl implements BundleDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BundleModel a", BundleModel.class);
       List<BundleModel> models = query.getResultList();
-      return Bundle.fromArray(models);
+      return BundleHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class BundleDaoImpl implements BundleDao {
       BundleModel model = em.merge(new BundleModel(e));
       return new Bundle(model);
   }
-
   @Override
   @Transactional
   public void delete(Bundle e) {

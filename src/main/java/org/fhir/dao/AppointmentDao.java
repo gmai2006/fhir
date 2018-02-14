@@ -34,10 +34,8 @@ public interface AppointmentDao {
   public List<Appointment> select(int maxResult);
 
   public List<Appointment> selectAll();
-
   public Appointment create(Appointment e);
 
   public Appointment update(Appointment e);
-
   public void delete(Appointment e);
 }

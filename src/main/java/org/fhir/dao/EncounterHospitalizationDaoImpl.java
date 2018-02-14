@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EncounterHospitalizationModel;
 import org.fhir.pojo.EncounterHospitalization;
+import org.fhir.pojo.EncounterHospitalizationHelper;
 
 public class EncounterHospitalizationDaoImpl implements EncounterHospitalizationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EncounterHospitalizationDaoImpl implements EncounterHospitalization
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterHospitalizationModel a", EncounterHospitalizationModel.class).setMaxResults(maxResult);
       List<EncounterHospitalizationModel> models = query.getResultList();
-      return EncounterHospitalization.fromArray(models);
+      return EncounterHospitalizationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EncounterHospitalizationDaoImpl implements EncounterHospitalization
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterHospitalizationModel a", EncounterHospitalizationModel.class);
       List<EncounterHospitalizationModel> models = query.getResultList();
-      return EncounterHospitalization.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EncounterHospitalization create(EncounterHospitalization e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EncounterHospitalizationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EncounterHospitalization update(EncounterHospitalization e) {
-      final EntityManager em = entityManagerProvider.get();
-      EncounterHospitalizationModel model = em.merge(new EncounterHospitalizationModel(e));
-      return new EncounterHospitalization(model);
+      return EncounterHospitalizationHelper.fromArray2Array(models);
   }
 
   @Override

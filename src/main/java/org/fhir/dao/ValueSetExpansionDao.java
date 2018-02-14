@@ -34,10 +34,5 @@ public interface ValueSetExpansionDao {
   public List<ValueSetExpansion> select(int maxResult);
 
   public List<ValueSetExpansion> selectAll();
-
-  public ValueSetExpansion create(ValueSetExpansion e);
-
-  public ValueSetExpansion update(ValueSetExpansion e);
-
   public void delete(ValueSetExpansion e);
 }

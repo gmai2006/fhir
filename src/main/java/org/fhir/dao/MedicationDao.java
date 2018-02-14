@@ -34,10 +34,8 @@ public interface MedicationDao {
   public List<Medication> select(int maxResult);
 
   public List<Medication> selectAll();
-
   public Medication create(Medication e);
 
   public Medication update(Medication e);
-
   public void delete(Medication e);
 }

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ImagingManifestInstance create(ImagingManifestInstance bean) {
-  	requireNonNull(bean);
-    logger.info("create(ImagingManifestInstance={}) - entered bean ");
-
-    final ImagingManifestInstance result = dao.create(bean);
-
-    logger.info("create(ImagingManifestInstance) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ImagingManifestInstance update(ImagingManifestInstance bean) {
-  	requireNonNull(bean);
-    logger.info("update(ImagingManifestInstance={}) - entered bean ");
-
-    final ImagingManifestInstance result = dao.update(bean);
-
-    logger.info("update(ImagingManifestInstance) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

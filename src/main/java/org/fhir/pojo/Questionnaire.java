@@ -245,6 +245,7 @@ public class Questionnaire  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -296,99 +297,76 @@ public class Questionnaire  {
 
   public Questionnaire(QuestionnaireModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      if (null != o.getUrl()) {
-        this.url = new String(o.getUrl());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getVersion()) {
-        this.version = new String(o.getVersion());
-      }
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getTitle()) {
-        this.title = new String(o.getTitle());
-      }
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getExperimental()) {
-        this.experimental = new Boolean(o.getExperimental());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      if (null != o.getPublisher()) {
-        this.publisher = new String(o.getPublisher());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getPurpose()) {
-        this.purpose = new String(o.getPurpose());
-      }
-
-      if (null != o.getApprovalDate()) {
-        this.approvalDate = new String(o.getApprovalDate());
-      }
-
-      if (null != o.getLastReviewDate()) {
-        this.lastReviewDate = new String(o.getLastReviewDate());
-      }
-
-      this.effectivePeriod = Period.fromJson(o.getEffectivePeriod());
-      this.useContext = UsageContext.fromArray(o.getUseContext());
-
-      this.jurisdiction = CodeableConcept.fromArray(o.getJurisdiction());
-      this.contact = ContactDetail.fromArray(o.getContact());
-
-      if (null != o.getCopyright()) {
-        this.copyright = new String(o.getCopyright());
-      }
-
-      this.code = Coding.fromArray(o.getCode());
-      this.subjectType = org.fhir.utils.JsonUtils.json2Array(o.getSubjectType());
-
-      this.item = QuestionnaireItem.fromArray(o.getItem());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getTitle()) {
+      this.title = o.getTitle();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getExperimental()) {
+      this.experimental = o.getExperimental();
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getPublisher()) {
+      this.publisher = o.getPublisher();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getPurpose()) {
+      this.purpose = o.getPurpose();
+    }
+    if (null != o.getApprovalDate()) {
+      this.approvalDate = o.getApprovalDate();
+    }
+    if (null != o.getLastReviewDate()) {
+      this.lastReviewDate = o.getLastReviewDate();
+    }
+    this.effectivePeriod = PeriodHelper.fromJson(o.getEffectivePeriod());
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
+    }
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact = ContactDetailHelper.fromArray2Array(o.getContact());
+    }
+    if (null != o.getCopyright()) {
+      this.copyright = o.getCopyright();
+    }
+    if (o.getSubjectType() != null) {
+    	this.subjectType = org.fhir.utils.JsonUtils.json2Array(o.getSubjectType());
+    }
+    if (null != o.getItem() && !o.getItem().isEmpty()) {
+    	this.item = QuestionnaireItemHelper.fromArray2Array(o.getItem());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -677,53 +655,54 @@ public class Questionnaire  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("experimental" + "[" + String.valueOf(this.experimental) + "]\n"); 
-     builder.append("_experimental" + "[" + String.valueOf(this._experimental) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("_publisher" + "[" + String.valueOf(this._publisher) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("_purpose" + "[" + String.valueOf(this._purpose) + "]\n"); 
-     builder.append("approvalDate" + "[" + String.valueOf(this.approvalDate) + "]\n"); 
-     builder.append("_approvalDate" + "[" + String.valueOf(this._approvalDate) + "]\n"); 
-     builder.append("lastReviewDate" + "[" + String.valueOf(this.lastReviewDate) + "]\n"); 
-     builder.append("_lastReviewDate" + "[" + String.valueOf(this._lastReviewDate) + "]\n"); 
-     builder.append("effectivePeriod" + "[" + String.valueOf(this.effectivePeriod) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("copyright" + "[" + String.valueOf(this.copyright) + "]\n"); 
-     builder.append("_copyright" + "[" + String.valueOf(this._copyright) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("subjectType" + "[" + String.valueOf(this.subjectType) + "]\n"); 
-     builder.append("_subjectType" + "[" + String.valueOf(this._subjectType) + "]\n"); 
-     builder.append("item" + "[" + String.valueOf(this.item) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Questionnaire]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.experimental != null) builder.append("experimental" + "->" + this.experimental.toString() + "\n"); 
+     if(this._experimental != null) builder.append("_experimental" + "->" + this._experimental.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.publisher != null) builder.append("publisher" + "->" + this.publisher.toString() + "\n"); 
+     if(this._publisher != null) builder.append("_publisher" + "->" + this._publisher.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.purpose != null) builder.append("purpose" + "->" + this.purpose.toString() + "\n"); 
+     if(this._purpose != null) builder.append("_purpose" + "->" + this._purpose.toString() + "\n"); 
+     if(this.approvalDate != null) builder.append("approvalDate" + "->" + this.approvalDate.toString() + "\n"); 
+     if(this._approvalDate != null) builder.append("_approvalDate" + "->" + this._approvalDate.toString() + "\n"); 
+     if(this.lastReviewDate != null) builder.append("lastReviewDate" + "->" + this.lastReviewDate.toString() + "\n"); 
+     if(this._lastReviewDate != null) builder.append("_lastReviewDate" + "->" + this._lastReviewDate.toString() + "\n"); 
+     if(this.effectivePeriod != null) builder.append("effectivePeriod" + "->" + this.effectivePeriod.toString() + "\n"); 
+     if(this.useContext != null) builder.append("useContext" + "->" + this.useContext.toString() + "\n"); 
+     if(this.jurisdiction != null) builder.append("jurisdiction" + "->" + this.jurisdiction.toString() + "\n"); 
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
+     if(this.copyright != null) builder.append("copyright" + "->" + this.copyright.toString() + "\n"); 
+     if(this._copyright != null) builder.append("_copyright" + "->" + this._copyright.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.subjectType != null) builder.append("subjectType" + "->" + this.subjectType.toString() + "\n"); 
+     if(this._subjectType != null) builder.append("_subjectType" + "->" + this._subjectType.toString() + "\n"); 
+     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -757,36 +736,4 @@ public class Questionnaire  {
   	}
   }
 
-  public static java.util.List<Questionnaire> fromArray(java.util.List<QuestionnaireModel> list) {
-    return (java.util.List<Questionnaire>)list.stream()
-      .map(model -> new Questionnaire(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<QuestionnaireModel> toModelArray(java.util.List<Questionnaire> list) {
-    return (java.util.List<QuestionnaireModel>)list.stream()
-      .map(model -> new QuestionnaireModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Questionnaire fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Questionnaire.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Questionnaire o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Questionnaire> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

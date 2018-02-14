@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ObservationRelatedModel;
 import org.fhir.pojo.ObservationRelated;
+import org.fhir.pojo.ObservationRelatedHelper;
 
 public class ObservationRelatedDaoImpl implements ObservationRelatedDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ObservationRelatedDaoImpl implements ObservationRelatedDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ObservationRelatedModel a", ObservationRelatedModel.class).setMaxResults(maxResult);
       List<ObservationRelatedModel> models = query.getResultList();
-      return ObservationRelated.fromArray(models);
+      return ObservationRelatedHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ObservationRelatedDaoImpl implements ObservationRelatedDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ObservationRelatedModel a", ObservationRelatedModel.class);
       List<ObservationRelatedModel> models = query.getResultList();
-      return ObservationRelated.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ObservationRelated create(ObservationRelated e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ObservationRelatedModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ObservationRelated update(ObservationRelated e) {
-      final EntityManager em = entityManagerProvider.get();
-      ObservationRelatedModel model = em.merge(new ObservationRelatedModel(e));
-      return new ObservationRelated(model);
+      return ObservationRelatedHelper.fromArray2Array(models);
   }
 
   @Override

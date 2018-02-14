@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.StructureDefinitionModel;
 import org.fhir.pojo.StructureDefinition;
+import org.fhir.pojo.StructureDefinitionHelper;
 
 public class StructureDefinitionDaoImpl implements StructureDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class StructureDefinitionDaoImpl implements StructureDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from StructureDefinitionModel a", StructureDefinitionModel.class).setMaxResults(maxResult);
       List<StructureDefinitionModel> models = query.getResultList();
-      return StructureDefinition.fromArray(models);
+      return StructureDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class StructureDefinitionDaoImpl implements StructureDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from StructureDefinitionModel a", StructureDefinitionModel.class);
       List<StructureDefinitionModel> models = query.getResultList();
-      return StructureDefinition.fromArray(models);
+      return StructureDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class StructureDefinitionDaoImpl implements StructureDefinitionDao {
       StructureDefinitionModel model = em.merge(new StructureDefinitionModel(e));
       return new StructureDefinition(model);
   }
-
   @Override
   @Transactional
   public void delete(StructureDefinition e) {

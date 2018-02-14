@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DataElementMappingModel;
 import org.fhir.pojo.DataElementMapping;
+import org.fhir.pojo.DataElementMappingHelper;
 
 public class DataElementMappingDaoImpl implements DataElementMappingDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DataElementMappingDaoImpl implements DataElementMappingDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DataElementMappingModel a", DataElementMappingModel.class).setMaxResults(maxResult);
       List<DataElementMappingModel> models = query.getResultList();
-      return DataElementMapping.fromArray(models);
+      return DataElementMappingHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DataElementMappingDaoImpl implements DataElementMappingDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DataElementMappingModel a", DataElementMappingModel.class);
       List<DataElementMappingModel> models = query.getResultList();
-      return DataElementMapping.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DataElementMapping create(DataElementMapping e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DataElementMappingModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DataElementMapping update(DataElementMapping e) {
-      final EntityManager em = entityManagerProvider.get();
-      DataElementMappingModel model = em.merge(new DataElementMappingModel(e));
-      return new DataElementMapping(model);
+      return DataElementMappingHelper.fromArray2Array(models);
   }
 
   @Override

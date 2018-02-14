@@ -34,10 +34,5 @@ public interface NamingSystemUniqueIdDao {
   public List<NamingSystemUniqueId> select(int maxResult);
 
   public List<NamingSystemUniqueId> selectAll();
-
-  public NamingSystemUniqueId create(NamingSystemUniqueId e);
-
-  public NamingSystemUniqueId update(NamingSystemUniqueId e);
-
   public void delete(NamingSystemUniqueId e);
 }

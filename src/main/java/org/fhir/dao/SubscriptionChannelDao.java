@@ -34,10 +34,5 @@ public interface SubscriptionChannelDao {
   public List<SubscriptionChannel> select(int maxResult);
 
   public List<SubscriptionChannel> selectAll();
-
-  public SubscriptionChannel create(SubscriptionChannel e);
-
-  public SubscriptionChannel update(SubscriptionChannel e);
-
   public void delete(SubscriptionChannel e);
 }

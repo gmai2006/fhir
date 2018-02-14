@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DiagnosticReportImage create(DiagnosticReportImage bean) {
-  	requireNonNull(bean);
-    logger.info("create(DiagnosticReportImage={}) - entered bean ");
-
-    final DiagnosticReportImage result = dao.create(bean);
-
-    logger.info("create(DiagnosticReportImage) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DiagnosticReportImage update(DiagnosticReportImage bean) {
-  	requireNonNull(bean);
-    logger.info("update(DiagnosticReportImage={}) - entered bean ");
-
-    final DiagnosticReportImage result = dao.update(bean);
-
-    logger.info("update(DiagnosticReportImage) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

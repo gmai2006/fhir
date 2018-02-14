@@ -64,6 +64,7 @@ public class AccountGuarantor  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -85,22 +86,16 @@ public class AccountGuarantor  {
 
   public AccountGuarantor(AccountGuarantorModel o) {
     this.id = o.getId();
-      if (null != o.getParty()) {
-        this.party = new Reference(o.getParty());
-        this.party.setId(this.getId());
-      }
-
-      if (null != o.getOnHold()) {
-        this.onHold = new Boolean(o.getOnHold());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getParty() && !o.getParty().isEmpty()) {
+      this.party = new Reference(o.getParty().get(0));
+    }
+    if (null != o.getOnHold()) {
+      this.onHold = o.getOnHold();
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setParty( Reference value) {
@@ -155,48 +150,17 @@ public class AccountGuarantor  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("party" + "[" + String.valueOf(this.party) + "]\n"); 
-     builder.append("onHold" + "[" + String.valueOf(this.onHold) + "]\n"); 
-     builder.append("_onHold" + "[" + String.valueOf(this._onHold) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AccountGuarantor]:" + "\n");
+     if(this.party != null) builder.append("party" + "->" + this.party.toString() + "\n"); 
+     if(this.onHold != null) builder.append("onHold" + "->" + this.onHold.toString() + "\n"); 
+     if(this._onHold != null) builder.append("_onHold" + "->" + this._onHold.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<AccountGuarantor> fromArray(java.util.List<AccountGuarantorModel> list) {
-    return (java.util.List<AccountGuarantor>)list.stream()
-      .map(model -> new AccountGuarantor(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AccountGuarantorModel> toModelArray(java.util.List<AccountGuarantor> list) {
-    return (java.util.List<AccountGuarantorModel>)list.stream()
-      .map(model -> new AccountGuarantorModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AccountGuarantor fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AccountGuarantor.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AccountGuarantor o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AccountGuarantor> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

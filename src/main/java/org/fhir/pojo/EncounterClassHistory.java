@@ -54,6 +54,7 @@ public class EncounterClassHistory  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -75,14 +76,11 @@ public class EncounterClassHistory  {
 
   public EncounterClassHistory(EncounterClassHistoryModel o) {
     this.id = o.getId();
-      this.FHIRclass = Coding.fromJson(o.getFHIRclass());
-      this.period = Period.fromJson(o.getPeriod());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.FHIRclass = CodingHelper.fromJson(o.getFHIRclass());
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setFHIRclass( Coding value) {
@@ -125,46 +123,15 @@ public class EncounterClassHistory  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("FHIRclass" + "[" + String.valueOf(this.FHIRclass) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[EncounterClassHistory]:" + "\n");
+     if(this.FHIRclass != null) builder.append("FHIRclass" + "->" + this.FHIRclass.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<EncounterClassHistory> fromArray(java.util.List<EncounterClassHistoryModel> list) {
-    return (java.util.List<EncounterClassHistory>)list.stream()
-      .map(model -> new EncounterClassHistory(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<EncounterClassHistoryModel> toModelArray(java.util.List<EncounterClassHistory> list) {
-    return (java.util.List<EncounterClassHistoryModel>)list.stream()
-      .map(model -> new EncounterClassHistoryModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static EncounterClassHistory fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, EncounterClassHistory.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(EncounterClassHistory o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<EncounterClassHistory> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

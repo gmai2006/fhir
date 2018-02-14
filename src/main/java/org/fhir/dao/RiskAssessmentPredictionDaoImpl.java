@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.RiskAssessmentPredictionModel;
 import org.fhir.pojo.RiskAssessmentPrediction;
+import org.fhir.pojo.RiskAssessmentPredictionHelper;
 
 public class RiskAssessmentPredictionDaoImpl implements RiskAssessmentPredictionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class RiskAssessmentPredictionDaoImpl implements RiskAssessmentPrediction
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RiskAssessmentPredictionModel a", RiskAssessmentPredictionModel.class).setMaxResults(maxResult);
       List<RiskAssessmentPredictionModel> models = query.getResultList();
-      return RiskAssessmentPrediction.fromArray(models);
+      return RiskAssessmentPredictionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class RiskAssessmentPredictionDaoImpl implements RiskAssessmentPrediction
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RiskAssessmentPredictionModel a", RiskAssessmentPredictionModel.class);
       List<RiskAssessmentPredictionModel> models = query.getResultList();
-      return RiskAssessmentPrediction.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public RiskAssessmentPrediction create(RiskAssessmentPrediction e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new RiskAssessmentPredictionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public RiskAssessmentPrediction update(RiskAssessmentPrediction e) {
-      final EntityManager em = entityManagerProvider.get();
-      RiskAssessmentPredictionModel model = em.merge(new RiskAssessmentPredictionModel(e));
-      return new RiskAssessmentPrediction(model);
+      return RiskAssessmentPredictionHelper.fromArray2Array(models);
   }
 
   @Override

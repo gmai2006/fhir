@@ -34,10 +34,5 @@ public interface ValueSetConceptDao {
   public List<ValueSetConcept> select(int maxResult);
 
   public List<ValueSetConcept> selectAll();
-
-  public ValueSetConcept create(ValueSetConcept e);
-
-  public ValueSetConcept update(ValueSetConcept e);
-
   public void delete(ValueSetConcept e);
 }

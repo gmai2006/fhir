@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.LocationPositionModel;
 import org.fhir.pojo.LocationPosition;
+import org.fhir.pojo.LocationPositionHelper;
 
 public class LocationPositionDaoImpl implements LocationPositionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class LocationPositionDaoImpl implements LocationPositionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from LocationPositionModel a", LocationPositionModel.class).setMaxResults(maxResult);
       List<LocationPositionModel> models = query.getResultList();
-      return LocationPosition.fromArray(models);
+      return LocationPositionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class LocationPositionDaoImpl implements LocationPositionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from LocationPositionModel a", LocationPositionModel.class);
       List<LocationPositionModel> models = query.getResultList();
-      return LocationPosition.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public LocationPosition create(LocationPosition e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new LocationPositionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public LocationPosition update(LocationPosition e) {
-      final EntityManager em = entityManagerProvider.get();
-      LocationPositionModel model = em.merge(new LocationPositionModel(e));
-      return new LocationPosition(model);
+      return LocationPositionHelper.fromArray2Array(models);
   }
 
   @Override

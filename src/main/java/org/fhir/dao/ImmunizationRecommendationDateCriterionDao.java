@@ -34,10 +34,5 @@ public interface ImmunizationRecommendationDateCriterionDao {
   public List<ImmunizationRecommendationDateCriterion> select(int maxResult);
 
   public List<ImmunizationRecommendationDateCriterion> selectAll();
-
-  public ImmunizationRecommendationDateCriterion create(ImmunizationRecommendationDateCriterion e);
-
-  public ImmunizationRecommendationDateCriterion update(ImmunizationRecommendationDateCriterion e);
-
   public void delete(ImmunizationRecommendationDateCriterion e);
 }

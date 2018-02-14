@@ -34,10 +34,5 @@ public interface BundleSearchDao {
   public List<BundleSearch> select(int maxResult);
 
   public List<BundleSearch> selectAll();
-
-  public BundleSearch create(BundleSearch e);
-
-  public BundleSearch update(BundleSearch e);
-
   public void delete(BundleSearch e);
 }

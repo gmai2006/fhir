@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
 @Entity
 @Table(name="nutritionordersupplement")
-public class NutritionOrderSupplementModel  {
+public class NutritionOrderSupplementModel  implements Serializable {
+	private static final long serialVersionUID = 151857669648143130L;
   /**
   * Description: "The kind of nutritional supplement product required such as a high protein or pediatric clear liquid supplement."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -55,7 +56,7 @@ public class NutritionOrderSupplementModel  {
 
   /**
   * Description: "The time period and frequency at which the supplement(s) should be given.  The supplement should be given for the combination of all schedules if more than one schedule is present."
-  * Actual type: Array of Timing-> List<Timing>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -64,7 +65,7 @@ public class NutritionOrderSupplementModel  {
 
   /**
   * Description: "The amount of the nutritional supplement to be given."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -81,7 +82,7 @@ public class NutritionOrderSupplementModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -93,6 +94,7 @@ public class NutritionOrderSupplementModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -101,96 +103,116 @@ public class NutritionOrderSupplementModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public NutritionOrderSupplementModel() {
   }
 
-  public NutritionOrderSupplementModel(NutritionOrderSupplement o) {
-    this.id = o.getId();
-      this.type = CodeableConcept.toJson(o.getType());
-      this.productName = o.getProductName();
-
-      this.schedule = Timing.toJson(o.getSchedule());
-      this.quantity = Quantity.toJson(o.getQuantity());
-      this.instruction = o.getInstruction();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public NutritionOrderSupplementModel(NutritionOrderSupplement o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.productName = o.getProductName();
+    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    this.instruction = o.getInstruction();
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setProductName( String value) {
-    this.productName = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getProductName() {
     return this.productName;
   }
-  public void setSchedule( String value) {
-    this.schedule = value;
+  public void setProductName( String value) {
+    this.productName = value;
   }
   public String getSchedule() {
     return this.schedule;
   }
-  public void setQuantity( String value) {
-    this.quantity = value;
+  public void setSchedule( String value) {
+    this.schedule = value;
   }
   public String getQuantity() {
     return this.quantity;
   }
-  public void setInstruction( String value) {
-    this.instruction = value;
+  public void setQuantity( String value) {
+    this.quantity = value;
   }
   public String getInstruction() {
     return this.instruction;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setInstruction( String value) {
+    this.instruction = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("productName" + "[" + String.valueOf(this.productName) + "]\n"); 
-     builder.append("schedule" + "[" + String.valueOf(this.schedule) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("instruction" + "[" + String.valueOf(this.instruction) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[NutritionOrderSupplementModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("productName" + "->" + this.productName + "\n"); 
+     builder.append("schedule" + "->" + this.schedule + "\n"); 
+     builder.append("quantity" + "->" + this.quantity + "\n"); 
+     builder.append("instruction" + "->" + this.instruction + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[NutritionOrderSupplementModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("productName" + "->" + this.productName + "\n"); 
+     builder.append("schedule" + "->" + this.schedule + "\n"); 
+     builder.append("quantity" + "->" + this.quantity + "\n"); 
+     builder.append("instruction" + "->" + this.instruction + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

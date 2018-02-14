@@ -53,6 +53,7 @@ public class NutritionOrderNutrient  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -74,14 +75,11 @@ public class NutritionOrderNutrient  {
 
   public NutritionOrderNutrient(NutritionOrderNutrientModel o) {
     this.id = o.getId();
-      this.modifier = CodeableConcept.fromJson(o.getModifier());
-      this.amount = Quantity.fromJson(o.getAmount());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.modifier = CodeableConceptHelper.fromJson(o.getModifier());
+    this.amount = QuantityHelper.fromJson(o.getAmount());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setModifier( CodeableConcept value) {
@@ -124,46 +122,15 @@ public class NutritionOrderNutrient  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("modifier" + "[" + String.valueOf(this.modifier) + "]\n"); 
-     builder.append("amount" + "[" + String.valueOf(this.amount) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[NutritionOrderNutrient]:" + "\n");
+     if(this.modifier != null) builder.append("modifier" + "->" + this.modifier.toString() + "\n"); 
+     if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<NutritionOrderNutrient> fromArray(java.util.List<NutritionOrderNutrientModel> list) {
-    return (java.util.List<NutritionOrderNutrient>)list.stream()
-      .map(model -> new NutritionOrderNutrient(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<NutritionOrderNutrientModel> toModelArray(java.util.List<NutritionOrderNutrient> list) {
-    return (java.util.List<NutritionOrderNutrientModel>)list.stream()
-      .map(model -> new NutritionOrderNutrientModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static NutritionOrderNutrient fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, NutritionOrderNutrient.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(NutritionOrderNutrient o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<NutritionOrderNutrient> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -32,7 +32,5 @@ public interface ValueSetConceptService {
 	public ValueSetConcept find(String id);
   public List<ValueSetConcept> select(int maxResult);
   public List<ValueSetConcept> selectAll();
-  public ValueSetConcept create(ValueSetConcept bean);
-  public ValueSetConcept update(ValueSetConcept bean);
   public void delete(ValueSetConcept bean);
 }

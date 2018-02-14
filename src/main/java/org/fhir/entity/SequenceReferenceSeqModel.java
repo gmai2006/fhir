@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Raw data describing a biological sequence."
 */
 @Entity
 @Table(name="sequencereferenceseq")
-public class SequenceReferenceSeqModel  {
+public class SequenceReferenceSeqModel  implements Serializable {
+	private static final long serialVersionUID = 151857669695965372L;
   /**
   * Description: "Structural unit composed of a nucleic acid molecule which controls its own replication through the interaction of specific proteins at one or more origins of replication ([SO:0000340](http://www.sequenceontology.org/browser/current_svn/term/SO:0000340))."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -55,7 +56,7 @@ public class SequenceReferenceSeqModel  {
 
   /**
   * Description: "Reference identifier of reference sequence submitted to NCBI. It must match the type in the Sequence.type field. For example, the prefix, “NG_” identifies reference sequence for genes, “NM_” for messenger RNA transcripts, and “NP_” for amino acid sequences."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -69,9 +70,9 @@ public class SequenceReferenceSeqModel  {
   @Column(name="\"referenceseqpointer_id\"")
   private String referenceseqpointer_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`referenceseqpointer_id`", insertable=false, updatable=false)
-  private ReferenceModel referenceSeqPointer;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="referenceseqpointer_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> referenceSeqPointer;
 
   /**
   * Description: "A string like \"ACGT\"."
@@ -107,7 +108,7 @@ public class SequenceReferenceSeqModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -119,6 +120,7 @@ public class SequenceReferenceSeqModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -127,129 +129,146 @@ public class SequenceReferenceSeqModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public SequenceReferenceSeqModel() {
   }
 
-  public SequenceReferenceSeqModel(SequenceReferenceSeq o) {
-    this.id = o.getId();
-      this.chromosome = CodeableConcept.toJson(o.getChromosome());
-      this.genomeBuild = o.getGenomeBuild();
-
-      this.referenceSeqId = CodeableConcept.toJson(o.getReferenceSeqId());
-      if (null != o.getReferenceSeqPointer()) {
-      	this.referenceseqpointer_id = "referenceSeqPointer" + this.getId();
-        this.referenceSeqPointer = new ReferenceModel(o.getReferenceSeqPointer());
-        this.referenceSeqPointer.setId(this.referenceseqpointer_id);
-        this.referenceSeqPointer.parent_id = this.referenceSeqPointer.getId();
-      }
-
-      this.referenceSeqString = o.getReferenceSeqString();
-
-      this.strand = o.getStrand();
-
-      this.windowStart = o.getWindowStart();
-
-      this.windowEnd = o.getWindowEnd();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public SequenceReferenceSeqModel(SequenceReferenceSeq o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.chromosome = CodeableConceptHelper.toJson(o.getChromosome());
+    this.genomeBuild = o.getGenomeBuild();
+    this.referenceSeqId = CodeableConceptHelper.toJson(o.getReferenceSeqId());
+    if (null != o.getReferenceSeqPointer() ) {
+    	this.referenceseqpointer_id = "referenceseqpointer" + this.parent_id;
+    	this.referenceSeqPointer = ReferenceHelper.toModel(o.getReferenceSeqPointer(), this.referenceseqpointer_id);
+    }
+    this.referenceSeqString = o.getReferenceSeqString();
+    this.strand = o.getStrand();
+    this.windowStart = o.getWindowStart();
+    this.windowEnd = o.getWindowEnd();
   }
 
-  public void setChromosome( String value) {
-    this.chromosome = value;
-  }
   public String getChromosome() {
     return this.chromosome;
   }
-  public void setGenomeBuild( String value) {
-    this.genomeBuild = value;
+  public void setChromosome( String value) {
+    this.chromosome = value;
   }
   public String getGenomeBuild() {
     return this.genomeBuild;
   }
-  public void setReferenceSeqId( String value) {
-    this.referenceSeqId = value;
+  public void setGenomeBuild( String value) {
+    this.genomeBuild = value;
   }
   public String getReferenceSeqId() {
     return this.referenceSeqId;
   }
-  public void setReferenceSeqPointer( ReferenceModel value) {
-    this.referenceSeqPointer = value;
+  public void setReferenceSeqId( String value) {
+    this.referenceSeqId = value;
   }
-  public ReferenceModel getReferenceSeqPointer() {
+  public java.util.List<ReferenceModel> getReferenceSeqPointer() {
     return this.referenceSeqPointer;
   }
-  public void setReferenceSeqString( String value) {
-    this.referenceSeqString = value;
+  public void setReferenceSeqPointer( java.util.List<ReferenceModel> value) {
+    this.referenceSeqPointer = value;
   }
   public String getReferenceSeqString() {
     return this.referenceSeqString;
   }
-  public void setStrand( Float value) {
-    this.strand = value;
+  public void setReferenceSeqString( String value) {
+    this.referenceSeqString = value;
   }
   public Float getStrand() {
     return this.strand;
   }
-  public void setWindowStart( Float value) {
-    this.windowStart = value;
+  public void setStrand( Float value) {
+    this.strand = value;
   }
   public Float getWindowStart() {
     return this.windowStart;
   }
-  public void setWindowEnd( Float value) {
-    this.windowEnd = value;
+  public void setWindowStart( Float value) {
+    this.windowStart = value;
   }
   public Float getWindowEnd() {
     return this.windowEnd;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setWindowEnd( Float value) {
+    this.windowEnd = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("chromosome" + "[" + String.valueOf(this.chromosome) + "]\n"); 
-     builder.append("genomeBuild" + "[" + String.valueOf(this.genomeBuild) + "]\n"); 
-     builder.append("referenceSeqId" + "[" + String.valueOf(this.referenceSeqId) + "]\n"); 
-     builder.append("referenceSeqPointer" + "[" + String.valueOf(this.referenceSeqPointer) + "]\n"); 
-     builder.append("referenceSeqString" + "[" + String.valueOf(this.referenceSeqString) + "]\n"); 
-     builder.append("strand" + "[" + String.valueOf(this.strand) + "]\n"); 
-     builder.append("windowStart" + "[" + String.valueOf(this.windowStart) + "]\n"); 
-     builder.append("windowEnd" + "[" + String.valueOf(this.windowEnd) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SequenceReferenceSeqModel]:" + "\n");
+     builder.append("chromosome" + "->" + this.chromosome + "\n"); 
+     builder.append("genomeBuild" + "->" + this.genomeBuild + "\n"); 
+     builder.append("referenceSeqId" + "->" + this.referenceSeqId + "\n"); 
+     builder.append("referenceSeqString" + "->" + this.referenceSeqString + "\n"); 
+     builder.append("strand" + "->" + this.strand + "\n"); 
+     builder.append("windowStart" + "->" + this.windowStart + "\n"); 
+     builder.append("windowEnd" + "->" + this.windowEnd + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[SequenceReferenceSeqModel]:" + "\n");
+     builder.append("chromosome" + "->" + this.chromosome + "\n"); 
+     builder.append("genomeBuild" + "->" + this.genomeBuild + "\n"); 
+     builder.append("referenceSeqId" + "->" + this.referenceSeqId + "\n"); 
+     builder.append("referenceSeqPointer" + "->" + this.referenceSeqPointer + "\n"); 
+     builder.append("referenceSeqString" + "->" + this.referenceSeqString + "\n"); 
+     builder.append("strand" + "->" + this.strand + "\n"); 
+     builder.append("windowStart" + "->" + this.windowStart + "\n"); 
+     builder.append("windowEnd" + "->" + this.windowEnd + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PractitionerModel;
 import org.fhir.pojo.Practitioner;
+import org.fhir.pojo.PractitionerHelper;
 
 public class PractitionerDaoImpl implements PractitionerDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PractitionerDaoImpl implements PractitionerDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PractitionerModel a", PractitionerModel.class).setMaxResults(maxResult);
       List<PractitionerModel> models = query.getResultList();
-      return Practitioner.fromArray(models);
+      return PractitionerHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class PractitionerDaoImpl implements PractitionerDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PractitionerModel a", PractitionerModel.class);
       List<PractitionerModel> models = query.getResultList();
-      return Practitioner.fromArray(models);
+      return PractitionerHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class PractitionerDaoImpl implements PractitionerDao {
       PractitionerModel model = em.merge(new PractitionerModel(e));
       return new Practitioner(model);
   }
-
   @Override
   @Transactional
   public void delete(Practitioner e) {

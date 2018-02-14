@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ContractLegal create(ContractLegal bean) {
-  	requireNonNull(bean);
-    logger.info("create(ContractLegal={}) - entered bean ");
-
-    final ContractLegal result = dao.create(bean);
-
-    logger.info("create(ContractLegal) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ContractLegal update(ContractLegal bean) {
-  	requireNonNull(bean);
-    logger.info("update(ContractLegal={}) - entered bean ");
-
-    final ContractLegal result = dao.update(bean);
-
-    logger.info("update(ContractLegal) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

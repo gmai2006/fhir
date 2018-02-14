@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimInformationModel;
 import org.fhir.pojo.ClaimInformation;
+import org.fhir.pojo.ClaimInformationHelper;
 
 public class ClaimInformationDaoImpl implements ClaimInformationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimInformationDaoImpl implements ClaimInformationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimInformationModel a", ClaimInformationModel.class).setMaxResults(maxResult);
       List<ClaimInformationModel> models = query.getResultList();
-      return ClaimInformation.fromArray(models);
+      return ClaimInformationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimInformationDaoImpl implements ClaimInformationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimInformationModel a", ClaimInformationModel.class);
       List<ClaimInformationModel> models = query.getResultList();
-      return ClaimInformation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimInformation create(ClaimInformation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimInformationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimInformation update(ClaimInformation e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimInformationModel model = em.merge(new ClaimInformationModel(e));
-      return new ClaimInformation(model);
+      return ClaimInformationHelper.fromArray2Array(models);
   }
 
   @Override

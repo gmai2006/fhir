@@ -68,6 +68,7 @@ public class PlanDefinitionTarget  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -89,17 +90,14 @@ public class PlanDefinitionTarget  {
 
   public PlanDefinitionTarget(PlanDefinitionTargetModel o) {
     this.id = o.getId();
-      this.measure = CodeableConcept.fromJson(o.getMeasure());
-      this.detailQuantity = Quantity.fromJson(o.getDetailQuantity());
-      this.detailRange = Range.fromJson(o.getDetailRange());
-      this.detailCodeableConcept = CodeableConcept.fromJson(o.getDetailCodeableConcept());
-      this.due = Duration.fromJson(o.getDue());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.measure = CodeableConceptHelper.fromJson(o.getMeasure());
+    this.detailQuantity = QuantityHelper.fromJson(o.getDetailQuantity());
+    this.detailRange = RangeHelper.fromJson(o.getDetailRange());
+    this.detailCodeableConcept = CodeableConceptHelper.fromJson(o.getDetailCodeableConcept());
+    this.due = DurationHelper.fromJson(o.getDue());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setMeasure( CodeableConcept value) {
@@ -160,49 +158,18 @@ public class PlanDefinitionTarget  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("measure" + "[" + String.valueOf(this.measure) + "]\n"); 
-     builder.append("detailQuantity" + "[" + String.valueOf(this.detailQuantity) + "]\n"); 
-     builder.append("detailRange" + "[" + String.valueOf(this.detailRange) + "]\n"); 
-     builder.append("detailCodeableConcept" + "[" + String.valueOf(this.detailCodeableConcept) + "]\n"); 
-     builder.append("due" + "[" + String.valueOf(this.due) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PlanDefinitionTarget]:" + "\n");
+     if(this.measure != null) builder.append("measure" + "->" + this.measure.toString() + "\n"); 
+     if(this.detailQuantity != null) builder.append("detailQuantity" + "->" + this.detailQuantity.toString() + "\n"); 
+     if(this.detailRange != null) builder.append("detailRange" + "->" + this.detailRange.toString() + "\n"); 
+     if(this.detailCodeableConcept != null) builder.append("detailCodeableConcept" + "->" + this.detailCodeableConcept.toString() + "\n"); 
+     if(this.due != null) builder.append("due" + "->" + this.due.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<PlanDefinitionTarget> fromArray(java.util.List<PlanDefinitionTargetModel> list) {
-    return (java.util.List<PlanDefinitionTarget>)list.stream()
-      .map(model -> new PlanDefinitionTarget(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PlanDefinitionTargetModel> toModelArray(java.util.List<PlanDefinitionTarget> list) {
-    return (java.util.List<PlanDefinitionTargetModel>)list.stream()
-      .map(model -> new PlanDefinitionTargetModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PlanDefinitionTarget fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PlanDefinitionTarget.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PlanDefinitionTarget o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PlanDefinitionTarget> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

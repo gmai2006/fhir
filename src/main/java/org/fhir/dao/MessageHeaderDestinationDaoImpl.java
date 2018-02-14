@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MessageHeaderDestinationModel;
 import org.fhir.pojo.MessageHeaderDestination;
+import org.fhir.pojo.MessageHeaderDestinationHelper;
 
 public class MessageHeaderDestinationDaoImpl implements MessageHeaderDestinationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MessageHeaderDestinationDaoImpl implements MessageHeaderDestination
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageHeaderDestinationModel a", MessageHeaderDestinationModel.class).setMaxResults(maxResult);
       List<MessageHeaderDestinationModel> models = query.getResultList();
-      return MessageHeaderDestination.fromArray(models);
+      return MessageHeaderDestinationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MessageHeaderDestinationDaoImpl implements MessageHeaderDestination
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageHeaderDestinationModel a", MessageHeaderDestinationModel.class);
       List<MessageHeaderDestinationModel> models = query.getResultList();
-      return MessageHeaderDestination.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MessageHeaderDestination create(MessageHeaderDestination e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MessageHeaderDestinationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MessageHeaderDestination update(MessageHeaderDestination e) {
-      final EntityManager em = entityManagerProvider.get();
-      MessageHeaderDestinationModel model = em.merge(new MessageHeaderDestinationModel(e));
-      return new MessageHeaderDestination(model);
+      return MessageHeaderDestinationHelper.fromArray2Array(models);
   }
 
   @Override

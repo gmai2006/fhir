@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public BundleSearch create(BundleSearch bean) {
-  	requireNonNull(bean);
-    logger.info("create(BundleSearch={}) - entered bean ");
-
-    final BundleSearch result = dao.create(bean);
-
-    logger.info("create(BundleSearch) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public BundleSearch update(BundleSearch bean) {
-  	requireNonNull(bean);
-    logger.info("update(BundleSearch={}) - entered bean ");
-
-    final BundleSearch result = dao.update(bean);
-
-    logger.info("update(BundleSearch) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

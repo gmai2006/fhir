@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ProcedureFocalDevice create(ProcedureFocalDevice bean) {
-  	requireNonNull(bean);
-    logger.info("create(ProcedureFocalDevice={}) - entered bean ");
-
-    final ProcedureFocalDevice result = dao.create(bean);
-
-    logger.info("create(ProcedureFocalDevice) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ProcedureFocalDevice update(ProcedureFocalDevice bean) {
-  	requireNonNull(bean);
-    logger.info("update(ProcedureFocalDevice={}) - entered bean ");
-
-    final ProcedureFocalDevice result = dao.update(bean);
-
-    logger.info("update(ProcedureFocalDevice) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

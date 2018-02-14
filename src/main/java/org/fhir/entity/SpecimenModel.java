@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A sample to be used for analysis."
 */
 @Entity
 @Table(name="specimen")
-public class SpecimenModel  {
+public class SpecimenModel  implements Serializable {
+	private static final long serialVersionUID = 15185766969286357L;
   /**
   * Description: "This is a Specimen resource"
   */
@@ -47,7 +48,7 @@ public class SpecimenModel  {
 
   /**
   * Description: "Id for specimen."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -56,7 +57,7 @@ public class SpecimenModel  {
 
   /**
   * Description: "The identifier assigned by the lab when accessioning specimen(s). This is not necessarily the same as the specimen identifier, depending on local lab procedures."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -72,7 +73,7 @@ public class SpecimenModel  {
 
   /**
   * Description: "The kind of material that forms the specimen."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -86,9 +87,9 @@ public class SpecimenModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "Time when specimen was received for processing or testing."
@@ -101,16 +102,24 @@ public class SpecimenModel  {
   /**
   * Description: "Reference to the parent (source) specimen which is used when the specimen was either derived from or a component of another specimen."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> parent = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="parent_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> parent;
 
   /**
   * Description: "Details concerning a test or procedure request that required a specimen to be collected."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> request = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"request_id\"")
+  private String request_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> request;
 
   /**
   * Description: "Details concerning the specimen collection."
@@ -119,27 +128,35 @@ public class SpecimenModel  {
   @Column(name="\"collection_id\"")
   private String collection_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`collection_id`", insertable=false, updatable=false)
-  private SpecimenCollectionModel collection;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="collection_id", insertable=false, updatable=false)
+  private java.util.List<SpecimenCollectionModel> collection;
 
   /**
   * Description: "Details concerning processing and processing steps for the specimen."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<SpecimenProcessingModel> processing = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"processing_id\"")
+  private String processing_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="processing_id", insertable=false, updatable=false)
+  private java.util.List<SpecimenProcessingModel> processing;
 
   /**
   * Description: "The container holding the specimen.  The recursive nature of containers; i.e. blood in tube in tray in rack is not addressed here."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<SpecimenContainerModel> container = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"container_id\"")
+  private String container_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="container_id", insertable=false, updatable=false)
+  private java.util.List<SpecimenContainerModel> container;
 
   /**
   * Description: "To communicate any details or issues about the specimen or during the specimen collection. (for example: broken vial, sent with patient, frozen)."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -154,14 +171,14 @@ public class SpecimenModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -171,7 +188,7 @@ public class SpecimenModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -181,7 +198,7 @@ public class SpecimenModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -193,6 +210,7 @@ public class SpecimenModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -207,9 +225,9 @@ public class SpecimenModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -230,221 +248,223 @@ public class SpecimenModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public SpecimenModel() {
   }
 
   public SpecimenModel(Specimen o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.accessionIdentifier = Identifier.toJson(o.getAccessionIdentifier());
-      this.status = o.getStatus();
-
-      this.type = CodeableConcept.toJson(o.getType());
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      this.receivedTime = o.getReceivedTime();
-
-      this.parent = Reference.toModelArray(o.getParent());
-
-      this.request = Reference.toModelArray(o.getRequest());
-
-      if (null != o.getCollection()) {
-      	this.collection_id = "collection" + this.getId();
-        this.collection = new SpecimenCollectionModel(o.getCollection());
-        this.collection.setId(this.collection_id);
-        this.collection.parent_id = this.collection.getId();
-      }
-
-      this.processing = SpecimenProcessing.toModelArray(o.getProcessing());
-
-      this.container = SpecimenContainer.toModelArray(o.getContainer());
-
-      this.note = Annotation.toJson(o.getNote());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.accessionIdentifier = IdentifierHelper.toJson(o.getAccessionIdentifier());
+    this.status = o.getStatus();
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    this.receivedTime = o.getReceivedTime();
+    if (null != o.getParent() && !o.getParent().isEmpty()) {
+    	this.parent_id = "parent" + this.id;
+    	this.parent = ReferenceHelper.toModelFromArray(o.getParent(), this.parent_id);
+    }
+    if (null != o.getRequest() && !o.getRequest().isEmpty()) {
+    	this.request_id = "request" + this.id;
+    	this.request = ReferenceHelper.toModelFromArray(o.getRequest(), this.request_id);
+    }
+    if (null != o.getCollection() ) {
+    	this.collection_id = "collection" + this.id;
+    	this.collection = SpecimenCollectionHelper.toModel(o.getCollection(), this.collection_id);
+    }
+    if (null != o.getProcessing() && !o.getProcessing().isEmpty()) {
+    	this.processing_id = "processing" + this.id;
+    	this.processing = SpecimenProcessingHelper.toModelFromArray(o.getProcessing(), this.processing_id);
+    }
+    if (null != o.getContainer() && !o.getContainer().isEmpty()) {
+    	this.container_id = "container" + this.id;
+    	this.container = SpecimenContainerHelper.toModelFromArray(o.getContainer(), this.container_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setAccessionIdentifier( String value) {
-    this.accessionIdentifier = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getAccessionIdentifier() {
     return this.accessionIdentifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setAccessionIdentifier( String value) {
+    this.accessionIdentifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setType( String value) {
+    this.type = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setReceivedTime( String value) {
-    this.receivedTime = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
   public String getReceivedTime() {
     return this.receivedTime;
   }
-  public void setParent( java.util.List<ReferenceModel> value) {
-    this.parent = value;
+  public void setReceivedTime( String value) {
+    this.receivedTime = value;
   }
   public java.util.List<ReferenceModel> getParent() {
     return this.parent;
   }
-  public void setRequest( java.util.List<ReferenceModel> value) {
-    this.request = value;
+  public void setParent( java.util.List<ReferenceModel> value) {
+    this.parent = value;
   }
   public java.util.List<ReferenceModel> getRequest() {
     return this.request;
   }
-  public void setCollection( SpecimenCollectionModel value) {
-    this.collection = value;
+  public void setRequest( java.util.List<ReferenceModel> value) {
+    this.request = value;
   }
-  public SpecimenCollectionModel getCollection() {
+  public java.util.List<SpecimenCollectionModel> getCollection() {
     return this.collection;
   }
-  public void setProcessing( java.util.List<SpecimenProcessingModel> value) {
-    this.processing = value;
+  public void setCollection( java.util.List<SpecimenCollectionModel> value) {
+    this.collection = value;
   }
   public java.util.List<SpecimenProcessingModel> getProcessing() {
     return this.processing;
   }
-  public void setContainer( java.util.List<SpecimenContainerModel> value) {
-    this.container = value;
+  public void setProcessing( java.util.List<SpecimenProcessingModel> value) {
+    this.processing = value;
   }
   public java.util.List<SpecimenContainerModel> getContainer() {
     return this.container;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setContainer( java.util.List<SpecimenContainerModel> value) {
+    this.container = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setNote( String value) {
+    this.note = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("accessionIdentifier" + "[" + String.valueOf(this.accessionIdentifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("receivedTime" + "[" + String.valueOf(this.receivedTime) + "]\n"); 
-     builder.append("parent" + "[" + String.valueOf(this.parent) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("collection" + "[" + String.valueOf(this.collection) + "]\n"); 
-     builder.append("processing" + "[" + String.valueOf(this.processing) + "]\n"); 
-     builder.append("container" + "[" + String.valueOf(this.container) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[SpecimenModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("accessionIdentifier" + "->" + this.accessionIdentifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("receivedTime" + "->" + this.receivedTime + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[SpecimenModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("accessionIdentifier" + "->" + this.accessionIdentifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("receivedTime" + "->" + this.receivedTime + "\n"); 
+     builder.append("parent" + "->" + this.parent + "\n"); 
+     builder.append("request" + "->" + this.request + "\n"); 
+     builder.append("collection" + "->" + this.collection + "\n"); 
+     builder.append("processing" + "->" + this.processing + "\n"); 
+     builder.append("container" + "->" + this.container + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

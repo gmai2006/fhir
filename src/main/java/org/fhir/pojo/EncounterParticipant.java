@@ -58,6 +58,7 @@ public class EncounterParticipant  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -79,19 +80,13 @@ public class EncounterParticipant  {
 
   public EncounterParticipant(EncounterParticipantModel o) {
     this.id = o.getId();
-      this.type = CodeableConcept.fromArray(o.getType());
-      this.period = Period.fromJson(o.getPeriod());
-      if (null != o.getIndividual()) {
-        this.individual = new Reference(o.getIndividual());
-        this.individual.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getIndividual() && !o.getIndividual().isEmpty()) {
+      this.individual = new Reference(o.getIndividual().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( java.util.List<CodeableConcept> value) {
@@ -140,47 +135,16 @@ public class EncounterParticipant  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("individual" + "[" + String.valueOf(this.individual) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[EncounterParticipant]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.individual != null) builder.append("individual" + "->" + this.individual.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<EncounterParticipant> fromArray(java.util.List<EncounterParticipantModel> list) {
-    return (java.util.List<EncounterParticipant>)list.stream()
-      .map(model -> new EncounterParticipant(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<EncounterParticipantModel> toModelArray(java.util.List<EncounterParticipant> list) {
-    return (java.util.List<EncounterParticipantModel>)list.stream()
-      .map(model -> new EncounterParticipantModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static EncounterParticipant fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, EncounterParticipant.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(EncounterParticipant o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<EncounterParticipant> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

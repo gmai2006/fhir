@@ -84,6 +84,7 @@ public class CodeSystemFilter  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -105,26 +106,21 @@ public class CodeSystemFilter  {
 
   public CodeSystemFilter(CodeSystemFilterModel o) {
     this.id = o.getId();
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.operator = org.fhir.utils.JsonUtils.json2Array(o.getOperator());
-
-      if (null != o.getValue()) {
-        this.value = new String(o.getValue());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (o.getOperator() != null) {
+    	this.operator = org.fhir.utils.JsonUtils.json2Array(o.getOperator());
+    }
+    if (null != o.getValue()) {
+      this.value = o.getValue();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( String value) {
@@ -203,52 +199,21 @@ public class CodeSystemFilter  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("operator" + "[" + String.valueOf(this.operator) + "]\n"); 
-     builder.append("_operator" + "[" + String.valueOf(this._operator) + "]\n"); 
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("_value" + "[" + String.valueOf(this._value) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CodeSystemFilter]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.operator != null) builder.append("operator" + "->" + this.operator.toString() + "\n"); 
+     if(this._operator != null) builder.append("_operator" + "->" + this._operator.toString() + "\n"); 
+     if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
+     if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CodeSystemFilter> fromArray(java.util.List<CodeSystemFilterModel> list) {
-    return (java.util.List<CodeSystemFilter>)list.stream()
-      .map(model -> new CodeSystemFilter(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CodeSystemFilterModel> toModelArray(java.util.List<CodeSystemFilter> list) {
-    return (java.util.List<CodeSystemFilterModel>)list.stream()
-      .map(model -> new CodeSystemFilterModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CodeSystemFilter fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CodeSystemFilter.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CodeSystemFilter o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CodeSystemFilter> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

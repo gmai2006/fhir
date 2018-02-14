@@ -163,6 +163,7 @@ public class AdverseEvent  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -214,81 +215,64 @@ public class AdverseEvent  {
 
   public AdverseEvent(AdverseEventModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getCategory()) {
-        this.category = new String(o.getCategory());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      this.reaction = Reference.fromArray(o.getReaction());
-
-      if (null != o.getLocation()) {
-        this.location = new Reference(o.getLocation());
-        this.location.setId(this.getId());
-      }
-
-      this.seriousness = CodeableConcept.fromJson(o.getSeriousness());
-      this.outcome = CodeableConcept.fromJson(o.getOutcome());
-      if (null != o.getRecorder()) {
-        this.recorder = new Reference(o.getRecorder());
-        this.recorder.setId(this.getId());
-      }
-
-      if (null != o.getEventParticipant()) {
-        this.eventParticipant = new Reference(o.getEventParticipant());
-        this.eventParticipant.setId(this.getId());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.suspectEntity = AdverseEventSuspectEntity.fromArray(o.getSuspectEntity());
-
-      this.subjectMedicalHistory = Reference.fromArray(o.getSubjectMedicalHistory());
-
-      this.referenceDocument = Reference.fromArray(o.getReferenceDocument());
-
-      this.study = Reference.fromArray(o.getStudy());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getCategory()) {
+      this.category = o.getCategory();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getReaction() && !o.getReaction().isEmpty()) {
+    	this.reaction = ReferenceHelper.fromArray2Array(o.getReaction());
+    }
+    if (null != o.getLocation() && !o.getLocation().isEmpty()) {
+      this.location = new Reference(o.getLocation().get(0));
+    }
+    this.seriousness = CodeableConceptHelper.fromJson(o.getSeriousness());
+    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getRecorder() && !o.getRecorder().isEmpty()) {
+      this.recorder = new Reference(o.getRecorder().get(0));
+    }
+    if (null != o.getEventParticipant() && !o.getEventParticipant().isEmpty()) {
+      this.eventParticipant = new Reference(o.getEventParticipant().get(0));
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getSuspectEntity() && !o.getSuspectEntity().isEmpty()) {
+    	this.suspectEntity = AdverseEventSuspectEntityHelper.fromArray2Array(o.getSuspectEntity());
+    }
+    if (null != o.getSubjectMedicalHistory() && !o.getSubjectMedicalHistory().isEmpty()) {
+    	this.subjectMedicalHistory = ReferenceHelper.fromArray2Array(o.getSubjectMedicalHistory());
+    }
+    if (null != o.getReferenceDocument() && !o.getReferenceDocument().isEmpty()) {
+    	this.referenceDocument = ReferenceHelper.fromArray2Array(o.getReferenceDocument());
+    }
+    if (null != o.getStudy() && !o.getStudy().isEmpty()) {
+    	this.study = ReferenceHelper.fromArray2Array(o.getStudy());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -481,37 +465,38 @@ public class AdverseEvent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("_category" + "[" + String.valueOf(this._category) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("reaction" + "[" + String.valueOf(this.reaction) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("seriousness" + "[" + String.valueOf(this.seriousness) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("recorder" + "[" + String.valueOf(this.recorder) + "]\n"); 
-     builder.append("eventParticipant" + "[" + String.valueOf(this.eventParticipant) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("suspectEntity" + "[" + String.valueOf(this.suspectEntity) + "]\n"); 
-     builder.append("subjectMedicalHistory" + "[" + String.valueOf(this.subjectMedicalHistory) + "]\n"); 
-     builder.append("referenceDocument" + "[" + String.valueOf(this.referenceDocument) + "]\n"); 
-     builder.append("study" + "[" + String.valueOf(this.study) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[AdverseEvent]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this._category != null) builder.append("_category" + "->" + this._category.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.reaction != null) builder.append("reaction" + "->" + this.reaction.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this.seriousness != null) builder.append("seriousness" + "->" + this.seriousness.toString() + "\n"); 
+     if(this.outcome != null) builder.append("outcome" + "->" + this.outcome.toString() + "\n"); 
+     if(this.recorder != null) builder.append("recorder" + "->" + this.recorder.toString() + "\n"); 
+     if(this.eventParticipant != null) builder.append("eventParticipant" + "->" + this.eventParticipant.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.suspectEntity != null) builder.append("suspectEntity" + "->" + this.suspectEntity.toString() + "\n"); 
+     if(this.subjectMedicalHistory != null) builder.append("subjectMedicalHistory" + "->" + this.subjectMedicalHistory.toString() + "\n"); 
+     if(this.referenceDocument != null) builder.append("referenceDocument" + "->" + this.referenceDocument.toString() + "\n"); 
+     if(this.study != null) builder.append("study" + "->" + this.study.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -541,36 +526,4 @@ public class AdverseEvent  {
   	}
   }
 
-  public static java.util.List<AdverseEvent> fromArray(java.util.List<AdverseEventModel> list) {
-    return (java.util.List<AdverseEvent>)list.stream()
-      .map(model -> new AdverseEvent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AdverseEventModel> toModelArray(java.util.List<AdverseEvent> list) {
-    return (java.util.List<AdverseEventModel>)list.stream()
-      .map(model -> new AdverseEventModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AdverseEvent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AdverseEvent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AdverseEvent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AdverseEvent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SupplyRequestRequesterModel;
 import org.fhir.pojo.SupplyRequestRequester;
+import org.fhir.pojo.SupplyRequestRequesterHelper;
 
 public class SupplyRequestRequesterDaoImpl implements SupplyRequestRequesterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SupplyRequestRequesterDaoImpl implements SupplyRequestRequesterDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SupplyRequestRequesterModel a", SupplyRequestRequesterModel.class).setMaxResults(maxResult);
       List<SupplyRequestRequesterModel> models = query.getResultList();
-      return SupplyRequestRequester.fromArray(models);
+      return SupplyRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SupplyRequestRequesterDaoImpl implements SupplyRequestRequesterDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SupplyRequestRequesterModel a", SupplyRequestRequesterModel.class);
       List<SupplyRequestRequesterModel> models = query.getResultList();
-      return SupplyRequestRequester.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SupplyRequestRequester create(SupplyRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SupplyRequestRequesterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SupplyRequestRequester update(SupplyRequestRequester e) {
-      final EntityManager em = entityManagerProvider.get();
-      SupplyRequestRequesterModel model = em.merge(new SupplyRequestRequesterModel(e));
-      return new SupplyRequestRequester(model);
+      return SupplyRequestRequesterHelper.fromArray2Array(models);
   }
 
   @Override

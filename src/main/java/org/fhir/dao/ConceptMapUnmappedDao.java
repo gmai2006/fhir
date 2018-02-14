@@ -34,10 +34,5 @@ public interface ConceptMapUnmappedDao {
   public List<ConceptMapUnmapped> select(int maxResult);
 
   public List<ConceptMapUnmapped> selectAll();
-
-  public ConceptMapUnmapped create(ConceptMapUnmapped e);
-
-  public ConceptMapUnmapped update(ConceptMapUnmapped e);
-
   public void delete(ConceptMapUnmapped e);
 }

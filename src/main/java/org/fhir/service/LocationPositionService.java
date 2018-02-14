@@ -32,7 +32,5 @@ public interface LocationPositionService {
 	public LocationPosition find(String id);
   public List<LocationPosition> select(int maxResult);
   public List<LocationPosition> selectAll();
-  public LocationPosition create(LocationPosition bean);
-  public LocationPosition update(LocationPosition bean);
   public void delete(LocationPosition bean);
 }

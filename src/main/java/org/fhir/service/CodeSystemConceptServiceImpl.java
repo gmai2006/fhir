@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CodeSystemConcept create(CodeSystemConcept bean) {
-  	requireNonNull(bean);
-    logger.info("create(CodeSystemConcept={}) - entered bean ");
-
-    final CodeSystemConcept result = dao.create(bean);
-
-    logger.info("create(CodeSystemConcept) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CodeSystemConcept update(CodeSystemConcept bean) {
-  	requireNonNull(bean);
-    logger.info("update(CodeSystemConcept={}) - entered bean ");
-
-    final CodeSystemConcept result = dao.update(bean);
-
-    logger.info("update(CodeSystemConcept) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

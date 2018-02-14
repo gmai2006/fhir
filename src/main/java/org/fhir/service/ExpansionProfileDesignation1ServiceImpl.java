@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ExpansionProfileDesignation1 create(ExpansionProfileDesignation1 bean) {
-  	requireNonNull(bean);
-    logger.info("create(ExpansionProfileDesignation1={}) - entered bean ");
-
-    final ExpansionProfileDesignation1 result = dao.create(bean);
-
-    logger.info("create(ExpansionProfileDesignation1) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ExpansionProfileDesignation1 update(ExpansionProfileDesignation1 bean) {
-  	requireNonNull(bean);
-    logger.info("update(ExpansionProfileDesignation1={}) - entered bean ");
-
-    final ExpansionProfileDesignation1 result = dao.update(bean);
-
-    logger.info("update(ExpansionProfileDesignation1) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

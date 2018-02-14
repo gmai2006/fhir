@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public MessageDefinitionFocus create(MessageDefinitionFocus bean) {
-  	requireNonNull(bean);
-    logger.info("create(MessageDefinitionFocus={}) - entered bean ");
-
-    final MessageDefinitionFocus result = dao.create(bean);
-
-    logger.info("create(MessageDefinitionFocus) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public MessageDefinitionFocus update(MessageDefinitionFocus bean) {
-  	requireNonNull(bean);
-    logger.info("update(MessageDefinitionFocus={}) - entered bean ");
-
-    final MessageDefinitionFocus result = dao.update(bean);
-
-    logger.info("update(MessageDefinitionFocus) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -34,10 +34,8 @@ public interface GuidanceResponseDao {
   public List<GuidanceResponse> select(int maxResult);
 
   public List<GuidanceResponse> selectAll();
-
   public GuidanceResponse create(GuidanceResponse e);
 
   public GuidanceResponse update(GuidanceResponse e);
-
   public void delete(GuidanceResponse e);
 }

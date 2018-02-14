@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
 @Entity
 @Table(name="valuesetexpansion")
-public class ValueSetExpansionModel  {
+public class ValueSetExpansionModel  implements Serializable {
+	private static final long serialVersionUID = 151857669701458728L;
   /**
   * Description: "An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so."
   */
@@ -70,24 +71,30 @@ public class ValueSetExpansionModel  {
 
   /**
   * Description: "A parameter that controlled the expansion process. These parameters may be used by users of expanded value sets to check whether the expansion is suitable for a particular purpose, or to pick the correct expansion."
-  * Actual type: Array of ValueSetParameter-> List<ValueSetParameter>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"parameter\"", length = 16777215)
-  private String parameter;
+  @Column(name="\"parameter_id\"")
+  private String parameter_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="parameter_id", insertable=false, updatable=false)
+  private java.util.List<ValueSetParameterModel> parameter;
 
   /**
   * Description: "The codes that are contained in the value set expansion."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ValueSetContainsModel> contains = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contains_id\"")
+  private String contains_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contains_id", insertable=false, updatable=false)
+  private java.util.List<ValueSetContainsModel> contains;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -99,6 +106,7 @@ public class ValueSetExpansionModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -107,107 +115,130 @@ public class ValueSetExpansionModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ValueSetExpansionModel() {
   }
 
-  public ValueSetExpansionModel(ValueSetExpansion o) {
-    this.id = o.getId();
-      this.identifier = o.getIdentifier();
-
-      this.timestamp = o.getTimestamp();
-
-      this.total = o.getTotal();
-
-      this.offset = o.getOffset();
-
-      this.parameter = ValueSetParameter.toJson(o.getParameter());
-      this.contains = ValueSetContains.toModelArray(o.getContains());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ValueSetExpansionModel(ValueSetExpansion o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.identifier = o.getIdentifier();
+    this.timestamp = o.getTimestamp();
+    this.total = o.getTotal();
+    this.offset = o.getOffset();
+    if (null != o.getParameter() && !o.getParameter().isEmpty()) {
+    	this.parameter_id = "parameter" + this.parent_id;
+    	this.parameter = ValueSetParameterHelper.toModelFromArray(o.getParameter(), this.parameter_id);
+    }
+    if (null != o.getContains() && !o.getContains().isEmpty()) {
+    	this.contains_id = "contains" + this.parent_id;
+    	this.contains = ValueSetContainsHelper.toModelFromArray(o.getContains(), this.contains_id);
+    }
   }
 
-  public void setIdentifier( String value) {
-    this.identifier = value;
-  }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setTimestamp( String value) {
-    this.timestamp = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getTimestamp() {
     return this.timestamp;
   }
-  public void setTotal( Float value) {
-    this.total = value;
+  public void setTimestamp( String value) {
+    this.timestamp = value;
   }
   public Float getTotal() {
     return this.total;
   }
-  public void setOffset( Float value) {
-    this.offset = value;
+  public void setTotal( Float value) {
+    this.total = value;
   }
   public Float getOffset() {
     return this.offset;
   }
-  public void setParameter( String value) {
-    this.parameter = value;
+  public void setOffset( Float value) {
+    this.offset = value;
   }
-  public String getParameter() {
+  public java.util.List<ValueSetParameterModel> getParameter() {
     return this.parameter;
   }
-  public void setContains( java.util.List<ValueSetContainsModel> value) {
-    this.contains = value;
+  public void setParameter( java.util.List<ValueSetParameterModel> value) {
+    this.parameter = value;
   }
   public java.util.List<ValueSetContainsModel> getContains() {
     return this.contains;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setContains( java.util.List<ValueSetContainsModel> value) {
+    this.contains = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("timestamp" + "[" + String.valueOf(this.timestamp) + "]\n"); 
-     builder.append("total" + "[" + String.valueOf(this.total) + "]\n"); 
-     builder.append("offset" + "[" + String.valueOf(this.offset) + "]\n"); 
-     builder.append("parameter" + "[" + String.valueOf(this.parameter) + "]\n"); 
-     builder.append("contains" + "[" + String.valueOf(this.contains) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ValueSetExpansionModel]:" + "\n");
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("timestamp" + "->" + this.timestamp + "\n"); 
+     builder.append("total" + "->" + this.total + "\n"); 
+     builder.append("offset" + "->" + this.offset + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ValueSetExpansionModel]:" + "\n");
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("timestamp" + "->" + this.timestamp + "\n"); 
+     builder.append("total" + "->" + this.total + "\n"); 
+     builder.append("offset" + "->" + this.offset + "\n"); 
+     builder.append("parameter" + "->" + this.parameter + "\n"); 
+     builder.append("contains" + "->" + this.contains + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

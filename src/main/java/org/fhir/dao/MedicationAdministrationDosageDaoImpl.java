@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MedicationAdministrationDosageModel;
 import org.fhir.pojo.MedicationAdministrationDosage;
+import org.fhir.pojo.MedicationAdministrationDosageHelper;
 
 public class MedicationAdministrationDosageDaoImpl implements MedicationAdministrationDosageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MedicationAdministrationDosageDaoImpl implements MedicationAdminist
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationAdministrationDosageModel a", MedicationAdministrationDosageModel.class).setMaxResults(maxResult);
       List<MedicationAdministrationDosageModel> models = query.getResultList();
-      return MedicationAdministrationDosage.fromArray(models);
+      return MedicationAdministrationDosageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MedicationAdministrationDosageDaoImpl implements MedicationAdminist
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationAdministrationDosageModel a", MedicationAdministrationDosageModel.class);
       List<MedicationAdministrationDosageModel> models = query.getResultList();
-      return MedicationAdministrationDosage.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MedicationAdministrationDosage create(MedicationAdministrationDosage e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MedicationAdministrationDosageModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MedicationAdministrationDosage update(MedicationAdministrationDosage e) {
-      final EntityManager em = entityManagerProvider.get();
-      MedicationAdministrationDosageModel model = em.merge(new MedicationAdministrationDosageModel(e));
-      return new MedicationAdministrationDosage(model);
+      return MedicationAdministrationDosageHelper.fromArray2Array(models);
   }
 
   @Override

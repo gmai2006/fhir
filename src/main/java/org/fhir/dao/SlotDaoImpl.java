@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SlotModel;
 import org.fhir.pojo.Slot;
+import org.fhir.pojo.SlotHelper;
 
 public class SlotDaoImpl implements SlotDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SlotDaoImpl implements SlotDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SlotModel a", SlotModel.class).setMaxResults(maxResult);
       List<SlotModel> models = query.getResultList();
-      return Slot.fromArray(models);
+      return SlotHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class SlotDaoImpl implements SlotDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SlotModel a", SlotModel.class);
       List<SlotModel> models = query.getResultList();
-      return Slot.fromArray(models);
+      return SlotHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class SlotDaoImpl implements SlotDao {
       SlotModel model = em.merge(new SlotModel(e));
       return new Slot(model);
   }
-
   @Override
   @Transactional
   public void delete(Slot e) {

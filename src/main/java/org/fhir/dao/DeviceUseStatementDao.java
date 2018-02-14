@@ -34,10 +34,8 @@ public interface DeviceUseStatementDao {
   public List<DeviceUseStatement> select(int maxResult);
 
   public List<DeviceUseStatement> selectAll();
-
   public DeviceUseStatement create(DeviceUseStatement e);
 
   public DeviceUseStatement update(DeviceUseStatement e);
-
   public void delete(DeviceUseStatement e);
 }

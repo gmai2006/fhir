@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy."
 */
 @Entity
 @Table(name="fhirprocedure")
-public class ProcedureModel  {
+public class ProcedureModel  implements Serializable {
+	private static final long serialVersionUID = 151857669714945061L;
   /**
   * Description: "This is a Procedure resource"
   */
@@ -47,7 +48,7 @@ public class ProcedureModel  {
 
   /**
   * Description: "This records identifiers associated with this procedure that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -57,23 +58,35 @@ public class ProcedureModel  {
   /**
   * Description: "A protocol, guideline, orderset or other definition that was adhered to in whole or in part by this procedure."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> definition = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"definition_id\"")
+  private String definition_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="definition_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> definition;
 
   /**
   * Description: "A reference to a resource that contains details of the request for this procedure."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> basedOn = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"basedon_id\"")
+  private String basedon_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="basedon_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> basedOn;
 
   /**
   * Description: "A larger event of which this particular procedure is a component or step."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> partOf = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"partof_id\"")
+  private String partof_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="partof_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> partOf;
 
   /**
   * Description: "A code specifying the state of the procedure. Generally this will be in-progress or completed state."
@@ -92,7 +105,7 @@ public class ProcedureModel  {
 
   /**
   * Description: "A code indicating why the procedure was not performed."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -101,7 +114,7 @@ public class ProcedureModel  {
 
   /**
   * Description: "A code that classifies the procedure for searching, sorting and display purposes (e.g. \"Surgical Procedure\")."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -110,7 +123,7 @@ public class ProcedureModel  {
 
   /**
   * Description: "The specific procedure that is performed. Use text if the exact nature of the procedure cannot be coded (e.g. \"Laparoscopic Appendectomy\")."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -124,9 +137,9 @@ public class ProcedureModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "The encounter during which the procedure was performed."
@@ -135,9 +148,9 @@ public class ProcedureModel  {
   @Column(name="\"context_id\"")
   private String context_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`context_id`", insertable=false, updatable=false)
-  private ReferenceModel context;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> context;
 
   /**
   * Description: "The date(time)/period over which the procedure was performed. Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured."
@@ -149,7 +162,7 @@ public class ProcedureModel  {
 
   /**
   * Description: "The date(time)/period over which the procedure was performed. Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -159,9 +172,13 @@ public class ProcedureModel  {
   /**
   * Description: "Limited to 'real' people rather than equipment."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ProcedurePerformerModel> performer = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"performer_id\"")
+  private String performer_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performer_id", insertable=false, updatable=false)
+  private java.util.List<ProcedurePerformerModel> performer;
 
   /**
   * Description: "The location where the procedure actually happened.  E.g. a newborn at home, a tracheostomy at a restaurant."
@@ -170,13 +187,13 @@ public class ProcedureModel  {
   @Column(name="\"location_id\"")
   private String location_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`location_id`", insertable=false, updatable=false)
-  private ReferenceModel location;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> location;
 
   /**
   * Description: "The coded reason why the procedure was performed. This may be coded entity of some type, or may simply be present as text."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -186,13 +203,17 @@ public class ProcedureModel  {
   /**
   * Description: "The condition that is the reason why the procedure was performed."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> reasonReference = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"reasonreference_id\"")
+  private String reasonreference_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> reasonReference;
 
   /**
   * Description: "Detailed and structured anatomical location information. Multiple locations are allowed - e.g. multiple punch biopsies of a lesion."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -201,7 +222,7 @@ public class ProcedureModel  {
 
   /**
   * Description: "The outcome of the procedure - did it resolve reasons for the procedure being performed?"
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -211,13 +232,17 @@ public class ProcedureModel  {
   /**
   * Description: "This could be a histology result, pathology report, surgical report, etc.."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> report = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"report_id\"")
+  private String report_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="report_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> report;
 
   /**
   * Description: "Any complications that occurred during the procedure, or in the immediate post-performance period. These are generally tracked separately from the notes, which will typically describe the procedure itself rather than any 'post procedure' issues."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -227,13 +252,17 @@ public class ProcedureModel  {
   /**
   * Description: "Any complications that occurred during the procedure, or in the immediate post-performance period."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> complicationDetail = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"complicationdetail_id\"")
+  private String complicationdetail_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="complicationdetail_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> complicationDetail;
 
   /**
   * Description: "If the procedure required specific follow up - e.g. removal of sutures. The followup may be represented as a simple note, or could potentially be more complex in which case the CarePlan resource can be used."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -242,7 +271,7 @@ public class ProcedureModel  {
 
   /**
   * Description: "Any other notes about the procedure.  E.g. the operative notes."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -252,20 +281,28 @@ public class ProcedureModel  {
   /**
   * Description: "A device that is implanted, removed or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ProcedureFocalDeviceModel> focalDevice = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"focaldevice_id\"")
+  private String focaldevice_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="focaldevice_id", insertable=false, updatable=false)
+  private java.util.List<ProcedureFocalDeviceModel> focalDevice;
 
   /**
   * Description: "Identifies medications, devices and any other substance used as part of the procedure."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> usedReference = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"usedreference_id\"")
+  private String usedreference_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usedreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> usedReference;
 
   /**
   * Description: "Identifies coded items that were used as part of the procedure."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -280,14 +317,14 @@ public class ProcedureModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -297,7 +334,7 @@ public class ProcedureModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -307,7 +344,7 @@ public class ProcedureModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -319,6 +356,7 @@ public class ProcedureModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -333,9 +371,9 @@ public class ProcedureModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -356,353 +394,365 @@ public class ProcedureModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public ProcedureModel() {
   }
 
   public ProcedureModel(Procedure o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.definition = Reference.toModelArray(o.getDefinition());
-
-      this.basedOn = Reference.toModelArray(o.getBasedOn());
-
-      this.partOf = Reference.toModelArray(o.getPartOf());
-
-      this.status = o.getStatus();
-
-      this.notDone = o.getNotDone();
-
-      this.notDoneReason = CodeableConcept.toJson(o.getNotDoneReason());
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.code = CodeableConcept.toJson(o.getCode());
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      if (null != o.getContext()) {
-      	this.context_id = "context" + this.getId();
-        this.context = new ReferenceModel(o.getContext());
-        this.context.setId(this.context_id);
-        this.context.parent_id = this.context.getId();
-      }
-
-      this.performedDateTime = o.getPerformedDateTime();
-
-      this.performedPeriod = Period.toJson(o.getPerformedPeriod());
-      this.performer = ProcedurePerformer.toModelArray(o.getPerformer());
-
-      if (null != o.getLocation()) {
-      	this.location_id = "location" + this.getId();
-        this.location = new ReferenceModel(o.getLocation());
-        this.location.setId(this.location_id);
-        this.location.parent_id = this.location.getId();
-      }
-
-      this.reasonCode = CodeableConcept.toJson(o.getReasonCode());
-      this.reasonReference = Reference.toModelArray(o.getReasonReference());
-
-      this.bodySite = CodeableConcept.toJson(o.getBodySite());
-      this.outcome = CodeableConcept.toJson(o.getOutcome());
-      this.report = Reference.toModelArray(o.getReport());
-
-      this.complication = CodeableConcept.toJson(o.getComplication());
-      this.complicationDetail = Reference.toModelArray(o.getComplicationDetail());
-
-      this.followUp = CodeableConcept.toJson(o.getFollowUp());
-      this.note = Annotation.toJson(o.getNote());
-      this.focalDevice = ProcedureFocalDevice.toModelArray(o.getFocalDevice());
-
-      this.usedReference = Reference.toModelArray(o.getUsedReference());
-
-      this.usedCode = CodeableConcept.toJson(o.getUsedCode());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+    	this.definition_id = "definition" + this.id;
+    	this.definition = ReferenceHelper.toModelFromArray(o.getDefinition(), this.definition_id);
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedon_id = "basedon" + this.id;
+    	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+    	this.partof_id = "partof" + this.id;
+    	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
+    }
+    this.status = o.getStatus();
+    this.notDone = o.getNotDone();
+    this.notDoneReason = CodeableConceptHelper.toJson(o.getNotDoneReason());
+    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.code = CodeableConceptHelper.toJson(o.getCode());
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    if (null != o.getContext() ) {
+    	this.context_id = "context" + this.id;
+    	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
+    }
+    this.performedDateTime = o.getPerformedDateTime();
+    this.performedPeriod = PeriodHelper.toJson(o.getPerformedPeriod());
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+    	this.performer_id = "performer" + this.id;
+    	this.performer = ProcedurePerformerHelper.toModelFromArray(o.getPerformer(), this.performer_id);
+    }
+    if (null != o.getLocation() ) {
+    	this.location_id = "location" + this.id;
+    	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
+    }
+    if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
+    	this.reasonreference_id = "reasonreference" + this.id;
+    	this.reasonReference = ReferenceHelper.toModelFromArray(o.getReasonReference(), this.reasonreference_id);
+    }
+    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    if (null != o.getReport() && !o.getReport().isEmpty()) {
+    	this.report_id = "report" + this.id;
+    	this.report = ReferenceHelper.toModelFromArray(o.getReport(), this.report_id);
+    }
+    if (null != o.getComplicationDetail() && !o.getComplicationDetail().isEmpty()) {
+    	this.complicationdetail_id = "complicationdetail" + this.id;
+    	this.complicationDetail = ReferenceHelper.toModelFromArray(o.getComplicationDetail(), this.complicationdetail_id);
+    }
+    if (null != o.getFocalDevice() && !o.getFocalDevice().isEmpty()) {
+    	this.focaldevice_id = "focaldevice" + this.id;
+    	this.focalDevice = ProcedureFocalDeviceHelper.toModelFromArray(o.getFocalDevice(), this.focaldevice_id);
+    }
+    if (null != o.getUsedReference() && !o.getUsedReference().isEmpty()) {
+    	this.usedreference_id = "usedreference" + this.id;
+    	this.usedReference = ReferenceHelper.toModelFromArray(o.getUsedReference(), this.usedreference_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setDefinition( java.util.List<ReferenceModel> value) {
-    this.definition = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public java.util.List<ReferenceModel> getDefinition() {
     return this.definition;
   }
-  public void setBasedOn( java.util.List<ReferenceModel> value) {
-    this.basedOn = value;
+  public void setDefinition( java.util.List<ReferenceModel> value) {
+    this.definition = value;
   }
   public java.util.List<ReferenceModel> getBasedOn() {
     return this.basedOn;
   }
-  public void setPartOf( java.util.List<ReferenceModel> value) {
-    this.partOf = value;
+  public void setBasedOn( java.util.List<ReferenceModel> value) {
+    this.basedOn = value;
   }
   public java.util.List<ReferenceModel> getPartOf() {
     return this.partOf;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setPartOf( java.util.List<ReferenceModel> value) {
+    this.partOf = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setNotDone( Boolean value) {
-    this.notDone = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public Boolean getNotDone() {
     return this.notDone;
   }
-  public void setNotDoneReason( String value) {
-    this.notDoneReason = value;
+  public void setNotDone( Boolean value) {
+    this.notDone = value;
   }
   public String getNotDoneReason() {
     return this.notDoneReason;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setNotDoneReason( String value) {
+    this.notDoneReason = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setCode( String value) {
-    this.code = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getCode() {
     return this.code;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setCode( String value) {
+    this.code = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setContext( ReferenceModel value) {
-    this.context = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
-  public ReferenceModel getContext() {
+  public java.util.List<ReferenceModel> getContext() {
     return this.context;
   }
-  public void setPerformedDateTime( String value) {
-    this.performedDateTime = value;
+  public void setContext( java.util.List<ReferenceModel> value) {
+    this.context = value;
   }
   public String getPerformedDateTime() {
     return this.performedDateTime;
   }
-  public void setPerformedPeriod( String value) {
-    this.performedPeriod = value;
+  public void setPerformedDateTime( String value) {
+    this.performedDateTime = value;
   }
   public String getPerformedPeriod() {
     return this.performedPeriod;
   }
-  public void setPerformer( java.util.List<ProcedurePerformerModel> value) {
-    this.performer = value;
+  public void setPerformedPeriod( String value) {
+    this.performedPeriod = value;
   }
   public java.util.List<ProcedurePerformerModel> getPerformer() {
     return this.performer;
   }
-  public void setLocation( ReferenceModel value) {
-    this.location = value;
+  public void setPerformer( java.util.List<ProcedurePerformerModel> value) {
+    this.performer = value;
   }
-  public ReferenceModel getLocation() {
+  public java.util.List<ReferenceModel> getLocation() {
     return this.location;
   }
-  public void setReasonCode( String value) {
-    this.reasonCode = value;
+  public void setLocation( java.util.List<ReferenceModel> value) {
+    this.location = value;
   }
   public String getReasonCode() {
     return this.reasonCode;
   }
-  public void setReasonReference( java.util.List<ReferenceModel> value) {
-    this.reasonReference = value;
+  public void setReasonCode( String value) {
+    this.reasonCode = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
     return this.reasonReference;
   }
-  public void setBodySite( String value) {
-    this.bodySite = value;
+  public void setReasonReference( java.util.List<ReferenceModel> value) {
+    this.reasonReference = value;
   }
   public String getBodySite() {
     return this.bodySite;
   }
-  public void setOutcome( String value) {
-    this.outcome = value;
+  public void setBodySite( String value) {
+    this.bodySite = value;
   }
   public String getOutcome() {
     return this.outcome;
   }
-  public void setReport( java.util.List<ReferenceModel> value) {
-    this.report = value;
+  public void setOutcome( String value) {
+    this.outcome = value;
   }
   public java.util.List<ReferenceModel> getReport() {
     return this.report;
   }
-  public void setComplication( String value) {
-    this.complication = value;
+  public void setReport( java.util.List<ReferenceModel> value) {
+    this.report = value;
   }
   public String getComplication() {
     return this.complication;
   }
-  public void setComplicationDetail( java.util.List<ReferenceModel> value) {
-    this.complicationDetail = value;
+  public void setComplication( String value) {
+    this.complication = value;
   }
   public java.util.List<ReferenceModel> getComplicationDetail() {
     return this.complicationDetail;
   }
-  public void setFollowUp( String value) {
-    this.followUp = value;
+  public void setComplicationDetail( java.util.List<ReferenceModel> value) {
+    this.complicationDetail = value;
   }
   public String getFollowUp() {
     return this.followUp;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setFollowUp( String value) {
+    this.followUp = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setFocalDevice( java.util.List<ProcedureFocalDeviceModel> value) {
-    this.focalDevice = value;
+  public void setNote( String value) {
+    this.note = value;
   }
   public java.util.List<ProcedureFocalDeviceModel> getFocalDevice() {
     return this.focalDevice;
   }
-  public void setUsedReference( java.util.List<ReferenceModel> value) {
-    this.usedReference = value;
+  public void setFocalDevice( java.util.List<ProcedureFocalDeviceModel> value) {
+    this.focalDevice = value;
   }
   public java.util.List<ReferenceModel> getUsedReference() {
     return this.usedReference;
   }
-  public void setUsedCode( String value) {
-    this.usedCode = value;
+  public void setUsedReference( java.util.List<ReferenceModel> value) {
+    this.usedReference = value;
   }
   public String getUsedCode() {
     return this.usedCode;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setUsedCode( String value) {
+    this.usedCode = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("notDone" + "[" + String.valueOf(this.notDone) + "]\n"); 
-     builder.append("notDoneReason" + "[" + String.valueOf(this.notDoneReason) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("performedDateTime" + "[" + String.valueOf(this.performedDateTime) + "]\n"); 
-     builder.append("performedPeriod" + "[" + String.valueOf(this.performedPeriod) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("reasonCode" + "[" + String.valueOf(this.reasonCode) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("report" + "[" + String.valueOf(this.report) + "]\n"); 
-     builder.append("complication" + "[" + String.valueOf(this.complication) + "]\n"); 
-     builder.append("complicationDetail" + "[" + String.valueOf(this.complicationDetail) + "]\n"); 
-     builder.append("followUp" + "[" + String.valueOf(this.followUp) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("focalDevice" + "[" + String.valueOf(this.focalDevice) + "]\n"); 
-     builder.append("usedReference" + "[" + String.valueOf(this.usedReference) + "]\n"); 
-     builder.append("usedCode" + "[" + String.valueOf(this.usedCode) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[ProcedureModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("notDone" + "->" + this.notDone + "\n"); 
+     builder.append("notDoneReason" + "->" + this.notDoneReason + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("performedDateTime" + "->" + this.performedDateTime + "\n"); 
+     builder.append("performedPeriod" + "->" + this.performedPeriod + "\n"); 
+     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
+     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
+     builder.append("outcome" + "->" + this.outcome + "\n"); 
+     builder.append("complication" + "->" + this.complication + "\n"); 
+     builder.append("followUp" + "->" + this.followUp + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("usedCode" + "->" + this.usedCode + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ProcedureModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
+     builder.append("partOf" + "->" + this.partOf + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("notDone" + "->" + this.notDone + "\n"); 
+     builder.append("notDoneReason" + "->" + this.notDoneReason + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("context" + "->" + this.context + "\n"); 
+     builder.append("performedDateTime" + "->" + this.performedDateTime + "\n"); 
+     builder.append("performedPeriod" + "->" + this.performedPeriod + "\n"); 
+     builder.append("performer" + "->" + this.performer + "\n"); 
+     builder.append("location" + "->" + this.location + "\n"); 
+     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
+     builder.append("reasonReference" + "->" + this.reasonReference + "\n"); 
+     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
+     builder.append("outcome" + "->" + this.outcome + "\n"); 
+     builder.append("report" + "->" + this.report + "\n"); 
+     builder.append("complication" + "->" + this.complication + "\n"); 
+     builder.append("complicationDetail" + "->" + this.complicationDetail + "\n"); 
+     builder.append("followUp" + "->" + this.followUp + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("focalDevice" + "->" + this.focalDevice + "\n"); 
+     builder.append("usedReference" + "->" + this.usedReference + "\n"); 
+     builder.append("usedCode" + "->" + this.usedCode + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

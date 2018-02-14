@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ConceptMapTargetModel;
 import org.fhir.pojo.ConceptMapTarget;
+import org.fhir.pojo.ConceptMapTargetHelper;
 
 public class ConceptMapTargetDaoImpl implements ConceptMapTargetDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ConceptMapTargetDaoImpl implements ConceptMapTargetDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConceptMapTargetModel a", ConceptMapTargetModel.class).setMaxResults(maxResult);
       List<ConceptMapTargetModel> models = query.getResultList();
-      return ConceptMapTarget.fromArray(models);
+      return ConceptMapTargetHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ConceptMapTargetDaoImpl implements ConceptMapTargetDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConceptMapTargetModel a", ConceptMapTargetModel.class);
       List<ConceptMapTargetModel> models = query.getResultList();
-      return ConceptMapTarget.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ConceptMapTarget create(ConceptMapTarget e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ConceptMapTargetModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ConceptMapTarget update(ConceptMapTarget e) {
-      final EntityManager em = entityManagerProvider.get();
-      ConceptMapTargetModel model = em.merge(new ConceptMapTargetModel(e));
-      return new ConceptMapTarget(model);
+      return ConceptMapTargetHelper.fromArray2Array(models);
   }
 
   @Override

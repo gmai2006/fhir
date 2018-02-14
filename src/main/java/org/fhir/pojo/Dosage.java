@@ -147,6 +147,7 @@ public class Dosage  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -166,41 +167,34 @@ public class Dosage  {
 
   public Dosage(DosageModel o) {
     this.id = o.getId();
-      if (null != o.getSequence()) {
-        this.sequence = new Float(o.getSequence());
-      }
-
-      if (null != o.getText()) {
-        this.text = new String(o.getText());
-      }
-
-      this.additionalInstruction = CodeableConcept.fromArray(o.getAdditionalInstruction());
-      if (null != o.getPatientInstruction()) {
-        this.patientInstruction = new String(o.getPatientInstruction());
-      }
-
-      this.timing = Timing.fromJson(o.getTiming());
-      if (null != o.getAsNeededBoolean()) {
-        this.asNeededBoolean = new Boolean(o.getAsNeededBoolean());
-      }
-
-      this.asNeededCodeableConcept = CodeableConcept.fromJson(o.getAsNeededCodeableConcept());
-      this.site = CodeableConcept.fromJson(o.getSite());
-      this.route = CodeableConcept.fromJson(o.getRoute());
-      this.method = CodeableConcept.fromJson(o.getMethod());
-      this.doseRange = Range.fromJson(o.getDoseRange());
-      this.doseSimpleQuantity = Quantity.fromJson(o.getDoseSimpleQuantity());
-      this.maxDosePerPeriod = Ratio.fromJson(o.getMaxDosePerPeriod());
-      this.maxDosePerAdministration = Quantity.fromJson(o.getMaxDosePerAdministration());
-      this.maxDosePerLifetime = Quantity.fromJson(o.getMaxDosePerLifetime());
-      this.rateRatio = Ratio.fromJson(o.getRateRatio());
-      this.rateRange = Range.fromJson(o.getRateRange());
-      this.rateSimpleQuantity = Quantity.fromJson(o.getRateSimpleQuantity());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSequence()) {
+      this.sequence = o.getSequence();
+    }
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+    if (null != o.getPatientInstruction()) {
+      this.patientInstruction = o.getPatientInstruction();
+    }
+    this.timing = TimingHelper.fromJson(o.getTiming());
+    if (null != o.getAsNeededBoolean()) {
+      this.asNeededBoolean = o.getAsNeededBoolean();
+    }
+    this.asNeededCodeableConcept = CodeableConceptHelper.fromJson(o.getAsNeededCodeableConcept());
+    this.site = CodeableConceptHelper.fromJson(o.getSite());
+    this.route = CodeableConceptHelper.fromJson(o.getRoute());
+    this.method = CodeableConceptHelper.fromJson(o.getMethod());
+    this.doseRange = RangeHelper.fromJson(o.getDoseRange());
+    this.doseSimpleQuantity = QuantityHelper.fromJson(o.getDoseSimpleQuantity());
+    this.maxDosePerPeriod = RatioHelper.fromJson(o.getMaxDosePerPeriod());
+    this.maxDosePerAdministration = QuantityHelper.fromJson(o.getMaxDosePerAdministration());
+    this.maxDosePerLifetime = QuantityHelper.fromJson(o.getMaxDosePerLifetime());
+    this.rateRatio = RatioHelper.fromJson(o.getRateRatio());
+    this.rateRange = RangeHelper.fromJson(o.getRateRange());
+    this.rateSimpleQuantity = QuantityHelper.fromJson(o.getRateSimpleQuantity());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSequence( Float value) {
@@ -357,65 +351,34 @@ public class Dosage  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("_sequence" + "[" + String.valueOf(this._sequence) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("additionalInstruction" + "[" + String.valueOf(this.additionalInstruction) + "]\n"); 
-     builder.append("patientInstruction" + "[" + String.valueOf(this.patientInstruction) + "]\n"); 
-     builder.append("_patientInstruction" + "[" + String.valueOf(this._patientInstruction) + "]\n"); 
-     builder.append("timing" + "[" + String.valueOf(this.timing) + "]\n"); 
-     builder.append("asNeededBoolean" + "[" + String.valueOf(this.asNeededBoolean) + "]\n"); 
-     builder.append("_asNeededBoolean" + "[" + String.valueOf(this._asNeededBoolean) + "]\n"); 
-     builder.append("asNeededCodeableConcept" + "[" + String.valueOf(this.asNeededCodeableConcept) + "]\n"); 
-     builder.append("site" + "[" + String.valueOf(this.site) + "]\n"); 
-     builder.append("route" + "[" + String.valueOf(this.route) + "]\n"); 
-     builder.append("method" + "[" + String.valueOf(this.method) + "]\n"); 
-     builder.append("doseRange" + "[" + String.valueOf(this.doseRange) + "]\n"); 
-     builder.append("doseSimpleQuantity" + "[" + String.valueOf(this.doseSimpleQuantity) + "]\n"); 
-     builder.append("maxDosePerPeriod" + "[" + String.valueOf(this.maxDosePerPeriod) + "]\n"); 
-     builder.append("maxDosePerAdministration" + "[" + String.valueOf(this.maxDosePerAdministration) + "]\n"); 
-     builder.append("maxDosePerLifetime" + "[" + String.valueOf(this.maxDosePerLifetime) + "]\n"); 
-     builder.append("rateRatio" + "[" + String.valueOf(this.rateRatio) + "]\n"); 
-     builder.append("rateRange" + "[" + String.valueOf(this.rateRange) + "]\n"); 
-     builder.append("rateSimpleQuantity" + "[" + String.valueOf(this.rateSimpleQuantity) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Dosage]:" + "\n");
+     if(this.sequence != null) builder.append("sequence" + "->" + this.sequence.toString() + "\n"); 
+     if(this._sequence != null) builder.append("_sequence" + "->" + this._sequence.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.additionalInstruction != null) builder.append("additionalInstruction" + "->" + this.additionalInstruction.toString() + "\n"); 
+     if(this.patientInstruction != null) builder.append("patientInstruction" + "->" + this.patientInstruction.toString() + "\n"); 
+     if(this._patientInstruction != null) builder.append("_patientInstruction" + "->" + this._patientInstruction.toString() + "\n"); 
+     if(this.timing != null) builder.append("timing" + "->" + this.timing.toString() + "\n"); 
+     if(this.asNeededBoolean != null) builder.append("asNeededBoolean" + "->" + this.asNeededBoolean.toString() + "\n"); 
+     if(this._asNeededBoolean != null) builder.append("_asNeededBoolean" + "->" + this._asNeededBoolean.toString() + "\n"); 
+     if(this.asNeededCodeableConcept != null) builder.append("asNeededCodeableConcept" + "->" + this.asNeededCodeableConcept.toString() + "\n"); 
+     if(this.site != null) builder.append("site" + "->" + this.site.toString() + "\n"); 
+     if(this.route != null) builder.append("route" + "->" + this.route.toString() + "\n"); 
+     if(this.method != null) builder.append("method" + "->" + this.method.toString() + "\n"); 
+     if(this.doseRange != null) builder.append("doseRange" + "->" + this.doseRange.toString() + "\n"); 
+     if(this.doseSimpleQuantity != null) builder.append("doseSimpleQuantity" + "->" + this.doseSimpleQuantity.toString() + "\n"); 
+     if(this.maxDosePerPeriod != null) builder.append("maxDosePerPeriod" + "->" + this.maxDosePerPeriod.toString() + "\n"); 
+     if(this.maxDosePerAdministration != null) builder.append("maxDosePerAdministration" + "->" + this.maxDosePerAdministration.toString() + "\n"); 
+     if(this.maxDosePerLifetime != null) builder.append("maxDosePerLifetime" + "->" + this.maxDosePerLifetime.toString() + "\n"); 
+     if(this.rateRatio != null) builder.append("rateRatio" + "->" + this.rateRatio.toString() + "\n"); 
+     if(this.rateRange != null) builder.append("rateRange" + "->" + this.rateRange.toString() + "\n"); 
+     if(this.rateSimpleQuantity != null) builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<Dosage> fromArray(java.util.List<DosageModel> list) {
-    return (java.util.List<Dosage>)list.stream()
-      .map(model -> new Dosage(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DosageModel> toModelArray(java.util.List<Dosage> list) {
-    return (java.util.List<DosageModel>)list.stream()
-      .map(model -> new DosageModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Dosage fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Dosage.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Dosage o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Dosage> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

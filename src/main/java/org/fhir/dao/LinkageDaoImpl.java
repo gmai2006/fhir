@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.LinkageModel;
 import org.fhir.pojo.Linkage;
+import org.fhir.pojo.LinkageHelper;
 
 public class LinkageDaoImpl implements LinkageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class LinkageDaoImpl implements LinkageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from LinkageModel a", LinkageModel.class).setMaxResults(maxResult);
       List<LinkageModel> models = query.getResultList();
-      return Linkage.fromArray(models);
+      return LinkageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class LinkageDaoImpl implements LinkageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from LinkageModel a", LinkageModel.class);
       List<LinkageModel> models = query.getResultList();
-      return Linkage.fromArray(models);
+      return LinkageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class LinkageDaoImpl implements LinkageDao {
       LinkageModel model = em.merge(new LinkageModel(e));
       return new Linkage(model);
   }
-
   @Override
   @Transactional
   public void delete(Linkage e) {

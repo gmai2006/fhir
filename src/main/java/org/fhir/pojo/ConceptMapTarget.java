@@ -94,6 +94,7 @@ public class ConceptMapTarget  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -115,32 +116,27 @@ public class ConceptMapTarget  {
 
   public ConceptMapTarget(ConceptMapTargetModel o) {
     this.id = o.getId();
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getDisplay()) {
-        this.display = new String(o.getDisplay());
-      }
-
-      if (null != o.getEquivalence()) {
-        this.equivalence = new String(o.getEquivalence());
-      }
-
-      if (null != o.getComment()) {
-        this.comment = new String(o.getComment());
-      }
-
-      this.dependsOn = ConceptMapDependsOn.fromArray(o.getDependsOn());
-
-      this.product = ConceptMapDependsOn.fromArray(o.getProduct());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getDisplay()) {
+      this.display = o.getDisplay();
+    }
+    if (null != o.getEquivalence()) {
+      this.equivalence = o.getEquivalence();
+    }
+    if (null != o.getComment()) {
+      this.comment = o.getComment();
+    }
+    if (null != o.getDependsOn() && !o.getDependsOn().isEmpty()) {
+    	this.dependsOn = ConceptMapDependsOnHelper.fromArray2Array(o.getDependsOn());
+    }
+    if (null != o.getProduct() && !o.getProduct().isEmpty()) {
+    	this.product = ConceptMapDependsOnHelper.fromArray2Array(o.getProduct());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( String value) {
@@ -231,20 +227,21 @@ public class ConceptMapTarget  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("_display" + "[" + String.valueOf(this._display) + "]\n"); 
-     builder.append("equivalence" + "[" + String.valueOf(this.equivalence) + "]\n"); 
-     builder.append("_equivalence" + "[" + String.valueOf(this._equivalence) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("_comment" + "[" + String.valueOf(this._comment) + "]\n"); 
-     builder.append("dependsOn" + "[" + String.valueOf(this.dependsOn) + "]\n"); 
-     builder.append("product" + "[" + String.valueOf(this.product) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConceptMapTarget]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
+     if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
+     if(this.equivalence != null) builder.append("equivalence" + "->" + this.equivalence.toString() + "\n"); 
+     if(this._equivalence != null) builder.append("_equivalence" + "->" + this._equivalence.toString() + "\n"); 
+     if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
+     if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
+     if(this.dependsOn != null) builder.append("dependsOn" + "->" + this.dependsOn.toString() + "\n"); 
+     if(this.product != null) builder.append("product" + "->" + this.product.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -278,36 +275,4 @@ public class ConceptMapTarget  {
   	}
   }
 
-  public static java.util.List<ConceptMapTarget> fromArray(java.util.List<ConceptMapTargetModel> list) {
-    return (java.util.List<ConceptMapTarget>)list.stream()
-      .map(model -> new ConceptMapTarget(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConceptMapTargetModel> toModelArray(java.util.List<ConceptMapTarget> list) {
-    return (java.util.List<ConceptMapTargetModel>)list.stream()
-      .map(model -> new ConceptMapTargetModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ConceptMapTarget fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ConceptMapTarget.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ConceptMapTarget o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ConceptMapTarget> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

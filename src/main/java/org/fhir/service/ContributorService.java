@@ -32,7 +32,5 @@ public interface ContributorService {
 	public Contributor find(String id);
   public List<Contributor> select(int maxResult);
   public List<Contributor> selectAll();
-  public Contributor create(Contributor bean);
-  public Contributor update(Contributor bean);
   public void delete(Contributor bean);
 }

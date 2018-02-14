@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public GraphDefinitionCompartment create(GraphDefinitionCompartment bean) {
-  	requireNonNull(bean);
-    logger.info("create(GraphDefinitionCompartment={}) - entered bean ");
-
-    final GraphDefinitionCompartment result = dao.create(bean);
-
-    logger.info("create(GraphDefinitionCompartment) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public GraphDefinitionCompartment update(GraphDefinitionCompartment bean) {
-  	requireNonNull(bean);
-    logger.info("update(GraphDefinitionCompartment={}) - entered bean ");
-
-    final GraphDefinitionCompartment result = dao.update(bean);
-
-    logger.info("update(GraphDefinitionCompartment) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

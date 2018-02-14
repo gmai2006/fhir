@@ -163,6 +163,7 @@ public class CarePlanDetail  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -184,61 +185,49 @@ public class CarePlanDetail  {
 
   public CarePlanDetail(CarePlanDetailModel o) {
     this.id = o.getId();
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      if (null != o.getDefinition()) {
-        this.definition = new Reference(o.getDefinition());
-        this.definition.setId(this.getId());
-      }
-
-      this.code = CodeableConcept.fromJson(o.getCode());
-      this.reasonCode = CodeableConcept.fromArray(o.getReasonCode());
-      this.reasonReference = Reference.fromArray(o.getReasonReference());
-
-      this.goal = Reference.fromArray(o.getGoal());
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getStatusReason()) {
-        this.statusReason = new String(o.getStatusReason());
-      }
-
-      if (null != o.getProhibited()) {
-        this.prohibited = new Boolean(o.getProhibited());
-      }
-
-      this.scheduledTiming = Timing.fromJson(o.getScheduledTiming());
-      this.scheduledPeriod = Period.fromJson(o.getScheduledPeriod());
-      if (null != o.getScheduledString()) {
-        this.scheduledString = new String(o.getScheduledString());
-      }
-
-      if (null != o.getLocation()) {
-        this.location = new Reference(o.getLocation());
-        this.location.setId(this.getId());
-      }
-
-      this.performer = Reference.fromArray(o.getPerformer());
-
-      this.productCodeableConcept = CodeableConcept.fromJson(o.getProductCodeableConcept());
-      if (null != o.getProductReference()) {
-        this.productReference = new Reference(o.getProductReference());
-        this.productReference.setId(this.getId());
-      }
-
-      this.dailyAmount = Quantity.fromJson(o.getDailyAmount());
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+      this.definition = new Reference(o.getDefinition().get(0));
+    }
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
+    	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
+    }
+    if (null != o.getGoal() && !o.getGoal().isEmpty()) {
+    	this.goal = ReferenceHelper.fromArray2Array(o.getGoal());
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getStatusReason()) {
+      this.statusReason = o.getStatusReason();
+    }
+    if (null != o.getProhibited()) {
+      this.prohibited = o.getProhibited();
+    }
+    this.scheduledTiming = TimingHelper.fromJson(o.getScheduledTiming());
+    this.scheduledPeriod = PeriodHelper.fromJson(o.getScheduledPeriod());
+    if (null != o.getScheduledString()) {
+      this.scheduledString = o.getScheduledString();
+    }
+    if (null != o.getLocation() && !o.getLocation().isEmpty()) {
+      this.location = new Reference(o.getLocation().get(0));
+    }
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+    	this.performer = ReferenceHelper.fromArray2Array(o.getPerformer());
+    }
+    this.productCodeableConcept = CodeableConceptHelper.fromJson(o.getProductCodeableConcept());
+    if (null != o.getProductReference() && !o.getProductReference().isEmpty()) {
+      this.productReference = new Reference(o.getProductReference().get(0));
+    }
+    this.dailyAmount = QuantityHelper.fromJson(o.getDailyAmount());
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCategory( CodeableConcept value) {
@@ -413,34 +402,35 @@ public class CarePlanDetail  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("reasonCode" + "[" + String.valueOf(this.reasonCode) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("goal" + "[" + String.valueOf(this.goal) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("statusReason" + "[" + String.valueOf(this.statusReason) + "]\n"); 
-     builder.append("_statusReason" + "[" + String.valueOf(this._statusReason) + "]\n"); 
-     builder.append("prohibited" + "[" + String.valueOf(this.prohibited) + "]\n"); 
-     builder.append("_prohibited" + "[" + String.valueOf(this._prohibited) + "]\n"); 
-     builder.append("scheduledTiming" + "[" + String.valueOf(this.scheduledTiming) + "]\n"); 
-     builder.append("scheduledPeriod" + "[" + String.valueOf(this.scheduledPeriod) + "]\n"); 
-     builder.append("scheduledString" + "[" + String.valueOf(this.scheduledString) + "]\n"); 
-     builder.append("_scheduledString" + "[" + String.valueOf(this._scheduledString) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("productCodeableConcept" + "[" + String.valueOf(this.productCodeableConcept) + "]\n"); 
-     builder.append("productReference" + "[" + String.valueOf(this.productReference) + "]\n"); 
-     builder.append("dailyAmount" + "[" + String.valueOf(this.dailyAmount) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CarePlanDetail]:" + "\n");
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.reasonCode != null) builder.append("reasonCode" + "->" + this.reasonCode.toString() + "\n"); 
+     if(this.reasonReference != null) builder.append("reasonReference" + "->" + this.reasonReference.toString() + "\n"); 
+     if(this.goal != null) builder.append("goal" + "->" + this.goal.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.statusReason != null) builder.append("statusReason" + "->" + this.statusReason.toString() + "\n"); 
+     if(this._statusReason != null) builder.append("_statusReason" + "->" + this._statusReason.toString() + "\n"); 
+     if(this.prohibited != null) builder.append("prohibited" + "->" + this.prohibited.toString() + "\n"); 
+     if(this._prohibited != null) builder.append("_prohibited" + "->" + this._prohibited.toString() + "\n"); 
+     if(this.scheduledTiming != null) builder.append("scheduledTiming" + "->" + this.scheduledTiming.toString() + "\n"); 
+     if(this.scheduledPeriod != null) builder.append("scheduledPeriod" + "->" + this.scheduledPeriod.toString() + "\n"); 
+     if(this.scheduledString != null) builder.append("scheduledString" + "->" + this.scheduledString.toString() + "\n"); 
+     if(this._scheduledString != null) builder.append("_scheduledString" + "->" + this._scheduledString.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
+     if(this.productCodeableConcept != null) builder.append("productCodeableConcept" + "->" + this.productCodeableConcept.toString() + "\n"); 
+     if(this.productReference != null) builder.append("productReference" + "->" + this.productReference.toString() + "\n"); 
+     if(this.dailyAmount != null) builder.append("dailyAmount" + "->" + this.dailyAmount.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -468,36 +458,4 @@ public class CarePlanDetail  {
   	}
   }
 
-  public static java.util.List<CarePlanDetail> fromArray(java.util.List<CarePlanDetailModel> list) {
-    return (java.util.List<CarePlanDetail>)list.stream()
-      .map(model -> new CarePlanDetail(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CarePlanDetailModel> toModelArray(java.util.List<CarePlanDetail> list) {
-    return (java.util.List<CarePlanDetailModel>)list.stream()
-      .map(model -> new CarePlanDetailModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CarePlanDetail fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CarePlanDetail.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CarePlanDetail o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CarePlanDetail> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

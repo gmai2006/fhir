@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ActivityDefinitionModel;
 import org.fhir.pojo.ActivityDefinition;
+import org.fhir.pojo.ActivityDefinitionHelper;
 
 public class ActivityDefinitionDaoImpl implements ActivityDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ActivityDefinitionDaoImpl implements ActivityDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ActivityDefinitionModel a", ActivityDefinitionModel.class).setMaxResults(maxResult);
       List<ActivityDefinitionModel> models = query.getResultList();
-      return ActivityDefinition.fromArray(models);
+      return ActivityDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ActivityDefinitionDaoImpl implements ActivityDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ActivityDefinitionModel a", ActivityDefinitionModel.class);
       List<ActivityDefinitionModel> models = query.getResultList();
-      return ActivityDefinition.fromArray(models);
+      return ActivityDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ActivityDefinitionDaoImpl implements ActivityDefinitionDao {
       ActivityDefinitionModel model = em.merge(new ActivityDefinitionModel(e));
       return new ActivityDefinition(model);
   }
-
   @Override
   @Transactional
   public void delete(ActivityDefinition e) {

@@ -32,7 +32,5 @@ public interface OrganizationContactService {
 	public OrganizationContact find(String id);
   public List<OrganizationContact> select(int maxResult);
   public List<OrganizationContact> selectAll();
-  public OrganizationContact create(OrganizationContact bean);
-  public OrganizationContact update(OrganizationContact bean);
   public void delete(OrganizationContact bean);
 }

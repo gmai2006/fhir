@@ -34,10 +34,5 @@ public interface EligibilityResponseFinancialDao {
   public List<EligibilityResponseFinancial> select(int maxResult);
 
   public List<EligibilityResponseFinancial> selectAll();
-
-  public EligibilityResponseFinancial create(EligibilityResponseFinancial e);
-
-  public EligibilityResponseFinancial update(EligibilityResponseFinancial e);
-
   public void delete(EligibilityResponseFinancial e);
 }

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ClinicalImpressionFinding create(ClinicalImpressionFinding bean) {
-  	requireNonNull(bean);
-    logger.info("create(ClinicalImpressionFinding={}) - entered bean ");
-
-    final ClinicalImpressionFinding result = dao.create(bean);
-
-    logger.info("create(ClinicalImpressionFinding) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ClinicalImpressionFinding update(ClinicalImpressionFinding bean) {
-  	requireNonNull(bean);
-    logger.info("update(ClinicalImpressionFinding={}) - entered bean ");
-
-    final ClinicalImpressionFinding result = dao.update(bean);
-
-    logger.info("update(ClinicalImpressionFinding) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

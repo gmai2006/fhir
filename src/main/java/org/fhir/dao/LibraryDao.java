@@ -34,10 +34,8 @@ public interface LibraryDao {
   public List<Library> select(int maxResult);
 
   public List<Library> selectAll();
-
   public Library create(Library e);
 
   public Library update(Library e);
-
   public void delete(Library e);
 }

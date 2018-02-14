@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ConceptMapGroupModel;
 import org.fhir.pojo.ConceptMapGroup;
+import org.fhir.pojo.ConceptMapGroupHelper;
 
 public class ConceptMapGroupDaoImpl implements ConceptMapGroupDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ConceptMapGroupDaoImpl implements ConceptMapGroupDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConceptMapGroupModel a", ConceptMapGroupModel.class).setMaxResults(maxResult);
       List<ConceptMapGroupModel> models = query.getResultList();
-      return ConceptMapGroup.fromArray(models);
+      return ConceptMapGroupHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ConceptMapGroupDaoImpl implements ConceptMapGroupDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConceptMapGroupModel a", ConceptMapGroupModel.class);
       List<ConceptMapGroupModel> models = query.getResultList();
-      return ConceptMapGroup.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ConceptMapGroup create(ConceptMapGroup e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ConceptMapGroupModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ConceptMapGroup update(ConceptMapGroup e) {
-      final EntityManager em = entityManagerProvider.get();
-      ConceptMapGroupModel model = em.merge(new ConceptMapGroupModel(e));
-      return new ConceptMapGroup(model);
+      return ConceptMapGroupHelper.fromArray2Array(models);
   }
 
   @Override

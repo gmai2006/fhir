@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "The formal description of a single piece of information that can be gathered and reported."
 */
 @Entity
 @Table(name="dataelement")
-public class DataElementModel  {
+public class DataElementModel  implements Serializable {
+	private static final long serialVersionUID = 151857669716655710L;
   /**
   * Description: "This is a DataElement resource"
   */
@@ -54,7 +55,7 @@ public class DataElementModel  {
 
   /**
   * Description: "A formal identifier that is used to identify this data element when it is represented in other formats, or referenced in a specification, model, design or an instance."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -114,20 +115,28 @@ public class DataElementModel  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContactDetailModel> contact = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contact_id\"")
+  private String contact_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  private java.util.List<ContactDetailModel> contact;
 
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate data element instances."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<UsageContextModel> useContext = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"usecontext_id\"")
+  private String usecontext_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
+  private java.util.List<UsageContextModel> useContext;
 
   /**
   * Description: "A legal or geographic region in which the data element is intended to be used."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -151,13 +160,17 @@ public class DataElementModel  {
   /**
   * Description: "Identifies a specification (other than a terminology) that the elements which make up the DataElement have some correspondence with."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<DataElementMappingModel> mapping = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"mapping_id\"")
+  private String mapping_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="mapping_id", insertable=false, updatable=false)
+  private java.util.List<DataElementMappingModel> mapping;
 
   /**
   * Description: "Defines the structure, type, allowed values and other constraining characteristics of the data element."
-  * Actual type: Array of ElementDefinition-> List<ElementDefinition>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -173,14 +186,14 @@ public class DataElementModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -190,7 +203,7 @@ public class DataElementModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -200,7 +213,7 @@ public class DataElementModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -212,6 +225,7 @@ public class DataElementModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -226,9 +240,9 @@ public class DataElementModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -249,248 +263,252 @@ public class DataElementModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public DataElementModel() {
   }
 
   public DataElementModel(DataElement o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.url = o.getUrl();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.version = o.getVersion();
-
-      this.status = o.getStatus();
-
-      this.experimental = o.getExperimental();
-
-      this.date = o.getDate();
-
-      this.publisher = o.getPublisher();
-
-      this.name = o.getName();
-
-      this.title = o.getTitle();
-
-      this.contact = ContactDetail.toModelArray(o.getContact());
-
-      this.useContext = UsageContext.toModelArray(o.getUseContext());
-
-      this.jurisdiction = CodeableConcept.toJson(o.getJurisdiction());
-      this.copyright = o.getCopyright();
-
-      this.stringency = o.getStringency();
-
-      this.mapping = DataElementMapping.toModelArray(o.getMapping());
-
-      this.element = ElementDefinition.toJson(o.getElement());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.url = o.getUrl();
+    this.version = o.getVersion();
+    this.status = o.getStatus();
+    this.experimental = o.getExperimental();
+    this.date = o.getDate();
+    this.publisher = o.getPublisher();
+    this.name = o.getName();
+    this.title = o.getTitle();
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact_id = "contact" + this.id;
+    	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
+    }
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.usecontext_id = "usecontext" + this.id;
+    	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
+    }
+    this.copyright = o.getCopyright();
+    this.stringency = o.getStringency();
+    if (null != o.getMapping() && !o.getMapping().isEmpty()) {
+    	this.mapping_id = "mapping" + this.id;
+    	this.mapping = DataElementMappingHelper.toModelFromArray(o.getMapping(), this.mapping_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setUrl( String value) {
-    this.url = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getUrl() {
     return this.url;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setUrl( String value) {
+    this.url = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setVersion( String value) {
-    this.version = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getVersion() {
     return this.version;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setVersion( String value) {
+    this.version = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setExperimental( Boolean value) {
-    this.experimental = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public Boolean getExperimental() {
     return this.experimental;
   }
-  public void setDate( String value) {
-    this.date = value;
+  public void setExperimental( Boolean value) {
+    this.experimental = value;
   }
   public String getDate() {
     return this.date;
   }
-  public void setPublisher( String value) {
-    this.publisher = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public String getPublisher() {
     return this.publisher;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setPublisher( String value) {
+    this.publisher = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setTitle( String value) {
-    this.title = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getTitle() {
     return this.title;
   }
-  public void setContact( java.util.List<ContactDetailModel> value) {
-    this.contact = value;
+  public void setTitle( String value) {
+    this.title = value;
   }
   public java.util.List<ContactDetailModel> getContact() {
     return this.contact;
   }
-  public void setUseContext( java.util.List<UsageContextModel> value) {
-    this.useContext = value;
+  public void setContact( java.util.List<ContactDetailModel> value) {
+    this.contact = value;
   }
   public java.util.List<UsageContextModel> getUseContext() {
     return this.useContext;
   }
-  public void setJurisdiction( String value) {
-    this.jurisdiction = value;
+  public void setUseContext( java.util.List<UsageContextModel> value) {
+    this.useContext = value;
   }
   public String getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setCopyright( String value) {
-    this.copyright = value;
+  public void setJurisdiction( String value) {
+    this.jurisdiction = value;
   }
   public String getCopyright() {
     return this.copyright;
   }
-  public void setStringency( String value) {
-    this.stringency = value;
+  public void setCopyright( String value) {
+    this.copyright = value;
   }
   public String getStringency() {
     return this.stringency;
   }
-  public void setMapping( java.util.List<DataElementMappingModel> value) {
-    this.mapping = value;
+  public void setStringency( String value) {
+    this.stringency = value;
   }
   public java.util.List<DataElementMappingModel> getMapping() {
     return this.mapping;
   }
-  public void setElement( String value) {
-    this.element = value;
+  public void setMapping( java.util.List<DataElementMappingModel> value) {
+    this.mapping = value;
   }
   public String getElement() {
     return this.element;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setElement( String value) {
+    this.element = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("experimental" + "[" + String.valueOf(this.experimental) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("copyright" + "[" + String.valueOf(this.copyright) + "]\n"); 
-     builder.append("stringency" + "[" + String.valueOf(this.stringency) + "]\n"); 
-     builder.append("mapping" + "[" + String.valueOf(this.mapping) + "]\n"); 
-     builder.append("element" + "[" + String.valueOf(this.element) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[DataElementModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("experimental" + "->" + this.experimental + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("copyright" + "->" + this.copyright + "\n"); 
+     builder.append("stringency" + "->" + this.stringency + "\n"); 
+     builder.append("element" + "->" + this.element + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[DataElementModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("experimental" + "->" + this.experimental + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("contact" + "->" + this.contact + "\n"); 
+     builder.append("useContext" + "->" + this.useContext + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("copyright" + "->" + this.copyright + "\n"); 
+     builder.append("stringency" + "->" + this.stringency + "\n"); 
+     builder.append("mapping" + "->" + this.mapping + "\n"); 
+     builder.append("element" + "->" + this.element + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

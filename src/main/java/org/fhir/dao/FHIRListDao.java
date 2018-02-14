@@ -34,10 +34,8 @@ public interface FHIRListDao {
   public List<FHIRList> select(int maxResult);
 
   public List<FHIRList> selectAll();
-
   public FHIRList create(FHIRList e);
 
   public FHIRList update(FHIRList e);
-
   public void delete(FHIRList e);
 }

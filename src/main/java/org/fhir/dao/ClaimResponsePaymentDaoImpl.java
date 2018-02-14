@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimResponsePaymentModel;
 import org.fhir.pojo.ClaimResponsePayment;
+import org.fhir.pojo.ClaimResponsePaymentHelper;
 
 public class ClaimResponsePaymentDaoImpl implements ClaimResponsePaymentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimResponsePaymentDaoImpl implements ClaimResponsePaymentDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimResponsePaymentModel a", ClaimResponsePaymentModel.class).setMaxResults(maxResult);
       List<ClaimResponsePaymentModel> models = query.getResultList();
-      return ClaimResponsePayment.fromArray(models);
+      return ClaimResponsePaymentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimResponsePaymentDaoImpl implements ClaimResponsePaymentDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimResponsePaymentModel a", ClaimResponsePaymentModel.class);
       List<ClaimResponsePaymentModel> models = query.getResultList();
-      return ClaimResponsePayment.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimResponsePayment create(ClaimResponsePayment e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimResponsePaymentModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimResponsePayment update(ClaimResponsePayment e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimResponsePaymentModel model = em.merge(new ClaimResponsePaymentModel(e));
-      return new ClaimResponsePayment(model);
+      return ClaimResponsePaymentHelper.fromArray2Array(models);
   }
 
   @Override

@@ -34,10 +34,5 @@ public interface MeasureStratifierDao {
   public List<MeasureStratifier> select(int maxResult);
 
   public List<MeasureStratifier> selectAll();
-
-  public MeasureStratifier create(MeasureStratifier e);
-
-  public MeasureStratifier update(MeasureStratifier e);
-
   public void delete(MeasureStratifier e);
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AccountModel;
 import org.fhir.pojo.Account;
+import org.fhir.pojo.AccountHelper;
 
 public class AccountDaoImpl implements AccountDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AccountDaoImpl implements AccountDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AccountModel a", AccountModel.class).setMaxResults(maxResult);
       List<AccountModel> models = query.getResultList();
-      return Account.fromArray(models);
+      return AccountHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class AccountDaoImpl implements AccountDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AccountModel a", AccountModel.class);
       List<AccountModel> models = query.getResultList();
-      return Account.fromArray(models);
+      return AccountHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class AccountDaoImpl implements AccountDao {
       AccountModel model = em.merge(new AccountModel(e));
       return new Account(model);
   }
-
   @Override
   @Transactional
   public void delete(Account e) {

@@ -34,10 +34,5 @@ public interface AdverseEventSuspectEntityDao {
   public List<AdverseEventSuspectEntity> select(int maxResult);
 
   public List<AdverseEventSuspectEntity> selectAll();
-
-  public AdverseEventSuspectEntity create(AdverseEventSuspectEntity e);
-
-  public AdverseEventSuspectEntity update(AdverseEventSuspectEntity e);
-
   public void delete(AdverseEventSuspectEntity e);
 }

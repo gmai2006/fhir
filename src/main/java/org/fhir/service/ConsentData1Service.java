@@ -32,7 +32,5 @@ public interface ConsentData1Service {
 	public ConsentData1 find(String id);
   public List<ConsentData1> select(int maxResult);
   public List<ConsentData1> selectAll();
-  public ConsentData1 create(ConsentData1 bean);
-  public ConsentData1 update(ConsentData1 bean);
   public void delete(ConsentData1 bean);
 }

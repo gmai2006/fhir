@@ -78,6 +78,7 @@ public class BundleEntry  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -99,34 +100,25 @@ public class BundleEntry  {
 
   public BundleEntry(BundleEntryModel o) {
     this.id = o.getId();
-      this.link = BundleLink.fromArray(o.getLink());
-
-      if (null != o.getFullUrl()) {
-        this.fullUrl = new String(o.getFullUrl());
-      }
-
-      this.resource = ResourceList.fromJson(o.getResource());
-      if (null != o.getSearch()) {
-        this.search = new BundleSearch(o.getSearch());
-        this.search.setId(this.getId());
-      }
-
-      if (null != o.getRequest()) {
-        this.request = new BundleRequest(o.getRequest());
-        this.request.setId(this.getId());
-      }
-
-      if (null != o.getResponse()) {
-        this.response = new BundleResponse(o.getResponse());
-        this.response.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getLink() && !o.getLink().isEmpty()) {
+    	this.link = BundleLinkHelper.fromArray2Array(o.getLink());
+    }
+    if (null != o.getFullUrl()) {
+      this.fullUrl = o.getFullUrl();
+    }
+    this.resource = ResourceListHelper.fromJson(o.getResource());
+    if (null != o.getSearch() && !o.getSearch().isEmpty()) {
+      this.search = new BundleSearch(o.getSearch().get(0));
+    }
+    if (null != o.getRequest() && !o.getRequest().isEmpty()) {
+      this.request = new BundleRequest(o.getRequest().get(0));
+    }
+    if (null != o.getResponse() && !o.getResponse().isEmpty()) {
+      this.response = new BundleResponse(o.getResponse().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLink( java.util.List<BundleLink> value) {
@@ -199,51 +191,20 @@ public class BundleEntry  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("link" + "[" + String.valueOf(this.link) + "]\n"); 
-     builder.append("fullUrl" + "[" + String.valueOf(this.fullUrl) + "]\n"); 
-     builder.append("_fullUrl" + "[" + String.valueOf(this._fullUrl) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("search" + "[" + String.valueOf(this.search) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("response" + "[" + String.valueOf(this.response) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[BundleEntry]:" + "\n");
+     if(this.link != null) builder.append("link" + "->" + this.link.toString() + "\n"); 
+     if(this.fullUrl != null) builder.append("fullUrl" + "->" + this.fullUrl.toString() + "\n"); 
+     if(this._fullUrl != null) builder.append("_fullUrl" + "->" + this._fullUrl.toString() + "\n"); 
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
+     if(this.search != null) builder.append("search" + "->" + this.search.toString() + "\n"); 
+     if(this.request != null) builder.append("request" + "->" + this.request.toString() + "\n"); 
+     if(this.response != null) builder.append("response" + "->" + this.response.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<BundleEntry> fromArray(java.util.List<BundleEntryModel> list) {
-    return (java.util.List<BundleEntry>)list.stream()
-      .map(model -> new BundleEntry(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<BundleEntryModel> toModelArray(java.util.List<BundleEntry> list) {
-    return (java.util.List<BundleEntryModel>)list.stream()
-      .map(model -> new BundleEntryModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static BundleEntry fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, BundleEntry.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(BundleEntry o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<BundleEntry> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

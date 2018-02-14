@@ -94,6 +94,7 @@ public class CompositionSection  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -115,32 +116,27 @@ public class CompositionSection  {
 
   public CompositionSection(CompositionSectionModel o) {
     this.id = o.getId();
-      if (null != o.getTitle()) {
-        this.title = new String(o.getTitle());
-      }
-
-      this.code = CodeableConcept.fromJson(o.getCode());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      if (null != o.getMode()) {
-        this.mode = new String(o.getMode());
-      }
-
-      this.orderedBy = CodeableConcept.fromJson(o.getOrderedBy());
-      this.entry = Reference.fromArray(o.getEntry());
-
-      this.emptyReason = CodeableConcept.fromJson(o.getEmptyReason());
-      this.section = CompositionSection.fromArray(o.getSection());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getTitle()) {
+      this.title = o.getTitle();
+    }
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getMode()) {
+      this.mode = o.getMode();
+    }
+    this.orderedBy = CodeableConceptHelper.fromJson(o.getOrderedBy());
+    if (null != o.getEntry() && !o.getEntry().isEmpty()) {
+    	this.entry = ReferenceHelper.fromArray2Array(o.getEntry());
+    }
+    this.emptyReason = CodeableConceptHelper.fromJson(o.getEmptyReason());
+    if (null != o.getSection() && !o.getSection().isEmpty()) {
+    	this.section = CompositionSectionHelper.fromArray2Array(o.getSection());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setTitle( String value) {
@@ -231,54 +227,23 @@ public class CompositionSection  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("orderedBy" + "[" + String.valueOf(this.orderedBy) + "]\n"); 
-     builder.append("entry" + "[" + String.valueOf(this.entry) + "]\n"); 
-     builder.append("emptyReason" + "[" + String.valueOf(this.emptyReason) + "]\n"); 
-     builder.append("section" + "[" + String.valueOf(this.section) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CompositionSection]:" + "\n");
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.orderedBy != null) builder.append("orderedBy" + "->" + this.orderedBy.toString() + "\n"); 
+     if(this.entry != null) builder.append("entry" + "->" + this.entry.toString() + "\n"); 
+     if(this.emptyReason != null) builder.append("emptyReason" + "->" + this.emptyReason.toString() + "\n"); 
+     if(this.section != null) builder.append("section" + "->" + this.section.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CompositionSection> fromArray(java.util.List<CompositionSectionModel> list) {
-    return (java.util.List<CompositionSection>)list.stream()
-      .map(model -> new CompositionSection(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CompositionSectionModel> toModelArray(java.util.List<CompositionSection> list) {
-    return (java.util.List<CompositionSectionModel>)list.stream()
-      .map(model -> new CompositionSectionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CompositionSection fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CompositionSection.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CompositionSection o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CompositionSection> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

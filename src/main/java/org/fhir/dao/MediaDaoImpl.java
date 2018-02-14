@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MediaModel;
 import org.fhir.pojo.Media;
+import org.fhir.pojo.MediaHelper;
 
 public class MediaDaoImpl implements MediaDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MediaDaoImpl implements MediaDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MediaModel a", MediaModel.class).setMaxResults(maxResult);
       List<MediaModel> models = query.getResultList();
-      return Media.fromArray(models);
+      return MediaHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class MediaDaoImpl implements MediaDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MediaModel a", MediaModel.class);
       List<MediaModel> models = query.getResultList();
-      return Media.fromArray(models);
+      return MediaHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class MediaDaoImpl implements MediaDao {
       MediaModel model = em.merge(new MediaModel(e));
       return new Media(model);
   }
-
   @Override
   @Transactional
   public void delete(Media e) {

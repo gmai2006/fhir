@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PractitionerQualificationModel;
 import org.fhir.pojo.PractitionerQualification;
+import org.fhir.pojo.PractitionerQualificationHelper;
 
 public class PractitionerQualificationDaoImpl implements PractitionerQualificationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PractitionerQualificationDaoImpl implements PractitionerQualificati
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PractitionerQualificationModel a", PractitionerQualificationModel.class).setMaxResults(maxResult);
       List<PractitionerQualificationModel> models = query.getResultList();
-      return PractitionerQualification.fromArray(models);
+      return PractitionerQualificationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PractitionerQualificationDaoImpl implements PractitionerQualificati
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PractitionerQualificationModel a", PractitionerQualificationModel.class);
       List<PractitionerQualificationModel> models = query.getResultList();
-      return PractitionerQualification.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PractitionerQualification create(PractitionerQualification e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PractitionerQualificationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PractitionerQualification update(PractitionerQualification e) {
-      final EntityManager em = entityManagerProvider.get();
-      PractitionerQualificationModel model = em.merge(new PractitionerQualificationModel(e));
-      return new PractitionerQualification(model);
+      return PractitionerQualificationHelper.fromArray2Array(models);
   }
 
   @Override

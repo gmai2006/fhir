@@ -34,10 +34,8 @@ public interface ChargeItemDao {
   public List<ChargeItem> select(int maxResult);
 
   public List<ChargeItem> selectAll();
-
   public ChargeItem create(ChargeItem e);
 
   public ChargeItem update(ChargeItem e);
-
   public void delete(ChargeItem e);
 }

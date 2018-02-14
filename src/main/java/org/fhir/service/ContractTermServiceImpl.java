@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ContractTerm create(ContractTerm bean) {
-  	requireNonNull(bean);
-    logger.info("create(ContractTerm={}) - entered bean ");
-
-    final ContractTerm result = dao.create(bean);
-
-    logger.info("create(ContractTerm) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ContractTerm update(ContractTerm bean) {
-  	requireNonNull(bean);
-    logger.info("update(ContractTerm={}) - entered bean ");
-
-    final ContractTerm result = dao.update(bean);
-
-    logger.info("update(ContractTerm) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

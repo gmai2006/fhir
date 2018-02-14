@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SubscriptionChannelModel;
 import org.fhir.pojo.SubscriptionChannel;
+import org.fhir.pojo.SubscriptionChannelHelper;
 
 public class SubscriptionChannelDaoImpl implements SubscriptionChannelDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SubscriptionChannelDaoImpl implements SubscriptionChannelDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SubscriptionChannelModel a", SubscriptionChannelModel.class).setMaxResults(maxResult);
       List<SubscriptionChannelModel> models = query.getResultList();
-      return SubscriptionChannel.fromArray(models);
+      return SubscriptionChannelHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SubscriptionChannelDaoImpl implements SubscriptionChannelDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SubscriptionChannelModel a", SubscriptionChannelModel.class);
       List<SubscriptionChannelModel> models = query.getResultList();
-      return SubscriptionChannel.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SubscriptionChannel create(SubscriptionChannel e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SubscriptionChannelModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SubscriptionChannel update(SubscriptionChannel e) {
-      final EntityManager em = entityManagerProvider.get();
-      SubscriptionChannelModel model = em.merge(new SubscriptionChannelModel(e));
-      return new SubscriptionChannel(model);
+      return SubscriptionChannelHelper.fromArray2Array(models);
   }
 
   @Override

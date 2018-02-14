@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data."
 */
 @Entity
 @Table(name="datarequirementcodefilter")
-public class DataRequirementCodeFilterModel  {
+public class DataRequirementCodeFilterModel  implements Serializable {
+	private static final long serialVersionUID = 151857669677668532L;
   /**
   * Description: "The code-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type code, Coding, or CodeableConcept."
   */
@@ -58,22 +59,20 @@ public class DataRequirementCodeFilterModel  {
   @Column(name="\"valuesetreference_id\"")
   private String valuesetreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuesetreference_id`", insertable=false, updatable=false)
-  private ReferenceModel valueSetReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuesetreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> valueSetReference;
 
   /**
   * Description: "The codes for the code filter. Only one of valueSet, valueCode, valueCoding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified codes."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueCode\"", length = 16777215)
+  @Column(name="\"valueCode\"")
   private String valueCode;
 
   /**
   * Description: "The Codings for the code filter. Only one of valueSet, valueCode, valueConding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified Codings."
-  * Actual type: Array of Coding-> List<Coding>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -82,7 +81,7 @@ public class DataRequirementCodeFilterModel  {
 
   /**
   * Description: "The CodeableConcepts for the code filter. Only one of valueSet, valueCode, valueConding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified CodeableConcepts."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -92,7 +91,7 @@ public class DataRequirementCodeFilterModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -104,6 +103,7 @@ public class DataRequirementCodeFilterModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -112,111 +112,126 @@ public class DataRequirementCodeFilterModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public DataRequirementCodeFilterModel() {
   }
 
-  public DataRequirementCodeFilterModel(DataRequirementCodeFilter o) {
-    this.id = o.getId();
-      this.path = o.getPath();
-
-      this.valueSetString = o.getValueSetString();
-
-      if (null != o.getValueSetReference()) {
-      	this.valuesetreference_id = "valueSetReference" + this.getId();
-        this.valueSetReference = new ReferenceModel(o.getValueSetReference());
-        this.valueSetReference.setId(this.valuesetreference_id);
-        this.valueSetReference.parent_id = this.valueSetReference.getId();
-      }
-
-      this.valueCode = org.fhir.utils.JsonUtils.write2String(o.getValueCode());
-
-      this.valueCoding = Coding.toJson(o.getValueCoding());
-      this.valueCodeableConcept = CodeableConcept.toJson(o.getValueCodeableConcept());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public DataRequirementCodeFilterModel(DataRequirementCodeFilter o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.path = o.getPath();
+    this.valueSetString = o.getValueSetString();
+    if (null != o.getValueSetReference() ) {
+    	this.valuesetreference_id = "valuesetreference" + this.parent_id;
+    	this.valueSetReference = ReferenceHelper.toModel(o.getValueSetReference(), this.valuesetreference_id);
+    }
+    this.valueCode = org.fhir.utils.JsonUtils.write2String(o.getValueCode());
   }
 
-  public void setPath( String value) {
-    this.path = value;
-  }
   public String getPath() {
     return this.path;
   }
-  public void setValueSetString( String value) {
-    this.valueSetString = value;
+  public void setPath( String value) {
+    this.path = value;
   }
   public String getValueSetString() {
     return this.valueSetString;
   }
-  public void setValueSetReference( ReferenceModel value) {
-    this.valueSetReference = value;
+  public void setValueSetString( String value) {
+    this.valueSetString = value;
   }
-  public ReferenceModel getValueSetReference() {
+  public java.util.List<ReferenceModel> getValueSetReference() {
     return this.valueSetReference;
   }
-  public void setValueCode( String value) {
-    this.valueCode = value;
+  public void setValueSetReference( java.util.List<ReferenceModel> value) {
+    this.valueSetReference = value;
   }
   public String getValueCode() {
     return this.valueCode;
   }
-  public void setValueCoding( String value) {
-    this.valueCoding = value;
+  public void setValueCode( String value) {
+    this.valueCode = value;
   }
   public String getValueCoding() {
     return this.valueCoding;
   }
-  public void setValueCodeableConcept( String value) {
-    this.valueCodeableConcept = value;
+  public void setValueCoding( String value) {
+    this.valueCoding = value;
   }
   public String getValueCodeableConcept() {
     return this.valueCodeableConcept;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setValueCodeableConcept( String value) {
+    this.valueCodeableConcept = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("path" + "[" + String.valueOf(this.path) + "]\n"); 
-     builder.append("valueSetString" + "[" + String.valueOf(this.valueSetString) + "]\n"); 
-     builder.append("valueSetReference" + "[" + String.valueOf(this.valueSetReference) + "]\n"); 
-     builder.append("valueCode" + "[" + String.valueOf(this.valueCode) + "]\n"); 
-     builder.append("valueCoding" + "[" + String.valueOf(this.valueCoding) + "]\n"); 
-     builder.append("valueCodeableConcept" + "[" + String.valueOf(this.valueCodeableConcept) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DataRequirementCodeFilterModel]:" + "\n");
+     builder.append("path" + "->" + this.path + "\n"); 
+     builder.append("valueSetString" + "->" + this.valueSetString + "\n"); 
+     builder.append("valueCode" + "->" + this.valueCode + "\n"); 
+     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
+     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[DataRequirementCodeFilterModel]:" + "\n");
+     builder.append("path" + "->" + this.path + "\n"); 
+     builder.append("valueSetString" + "->" + this.valueSetString + "\n"); 
+     builder.append("valueSetReference" + "->" + this.valueSetReference + "\n"); 
+     builder.append("valueCode" + "->" + this.valueCode + "\n"); 
+     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
+     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

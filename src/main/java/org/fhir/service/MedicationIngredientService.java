@@ -32,7 +32,5 @@ public interface MedicationIngredientService {
 	public MedicationIngredient find(String id);
   public List<MedicationIngredient> select(int maxResult);
   public List<MedicationIngredient> selectAll();
-  public MedicationIngredient create(MedicationIngredient bean);
-  public MedicationIngredient update(MedicationIngredient bean);
   public void delete(MedicationIngredient bean);
 }

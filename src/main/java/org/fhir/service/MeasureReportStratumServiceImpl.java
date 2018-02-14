@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public MeasureReportStratum create(MeasureReportStratum bean) {
-  	requireNonNull(bean);
-    logger.info("create(MeasureReportStratum={}) - entered bean ");
-
-    final MeasureReportStratum result = dao.create(bean);
-
-    logger.info("create(MeasureReportStratum) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public MeasureReportStratum update(MeasureReportStratum bean) {
-  	requireNonNull(bean);
-    logger.info("update(MeasureReportStratum={}) - entered bean ");
-
-    final MeasureReportStratum result = dao.update(bean);
-
-    logger.info("update(MeasureReportStratum) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

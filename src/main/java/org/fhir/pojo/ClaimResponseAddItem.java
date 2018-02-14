@@ -98,6 +98,7 @@ public class ClaimResponseAddItem  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -119,25 +120,25 @@ public class ClaimResponseAddItem  {
 
   public ClaimResponseAddItem(ClaimResponseAddItemModel o) {
     this.id = o.getId();
-      this.sequenceLinkId = org.fhir.utils.JsonUtils.json2Array(o.getSequenceLinkId());
-
-      this.revenue = CodeableConcept.fromJson(o.getRevenue());
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      this.service = CodeableConcept.fromJson(o.getService());
-      this.modifier = CodeableConcept.fromArray(o.getModifier());
-      this.fee = Money.fromJson(o.getFee());
-      this.noteNumber = org.fhir.utils.JsonUtils.json2Array(o.getNoteNumber());
-
-      this.adjudication = ClaimResponseAdjudication.fromArray(o.getAdjudication());
-
-      this.detail = ClaimResponseDetail1.fromArray(o.getDetail());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (o.getSequenceLinkId() != null) {
+    	this.sequenceLinkId = org.fhir.utils.JsonUtils.json2Array(o.getSequenceLinkId());
+    }
+    this.revenue = CodeableConceptHelper.fromJson(o.getRevenue());
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    this.service = CodeableConceptHelper.fromJson(o.getService());
+    this.fee = MoneyHelper.fromJson(o.getFee());
+    if (o.getNoteNumber() != null) {
+    	this.noteNumber = org.fhir.utils.JsonUtils.json2Array(o.getNoteNumber());
+    }
+    if (null != o.getAdjudication() && !o.getAdjudication().isEmpty()) {
+    	this.adjudication = ClaimResponseAdjudicationHelper.fromArray2Array(o.getAdjudication());
+    }
+    if (null != o.getDetail() && !o.getDetail().isEmpty()) {
+    	this.detail = ClaimResponseDetail1Helper.fromArray2Array(o.getDetail());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSequenceLinkId( java.util.List<Float> value) {
@@ -234,55 +235,24 @@ public class ClaimResponseAddItem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequenceLinkId" + "[" + String.valueOf(this.sequenceLinkId) + "]\n"); 
-     builder.append("_sequenceLinkId" + "[" + String.valueOf(this._sequenceLinkId) + "]\n"); 
-     builder.append("revenue" + "[" + String.valueOf(this.revenue) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("service" + "[" + String.valueOf(this.service) + "]\n"); 
-     builder.append("modifier" + "[" + String.valueOf(this.modifier) + "]\n"); 
-     builder.append("fee" + "[" + String.valueOf(this.fee) + "]\n"); 
-     builder.append("noteNumber" + "[" + String.valueOf(this.noteNumber) + "]\n"); 
-     builder.append("_noteNumber" + "[" + String.valueOf(this._noteNumber) + "]\n"); 
-     builder.append("adjudication" + "[" + String.valueOf(this.adjudication) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ClaimResponseAddItem]:" + "\n");
+     if(this.sequenceLinkId != null) builder.append("sequenceLinkId" + "->" + this.sequenceLinkId.toString() + "\n"); 
+     if(this._sequenceLinkId != null) builder.append("_sequenceLinkId" + "->" + this._sequenceLinkId.toString() + "\n"); 
+     if(this.revenue != null) builder.append("revenue" + "->" + this.revenue.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.service != null) builder.append("service" + "->" + this.service.toString() + "\n"); 
+     if(this.modifier != null) builder.append("modifier" + "->" + this.modifier.toString() + "\n"); 
+     if(this.fee != null) builder.append("fee" + "->" + this.fee.toString() + "\n"); 
+     if(this.noteNumber != null) builder.append("noteNumber" + "->" + this.noteNumber.toString() + "\n"); 
+     if(this._noteNumber != null) builder.append("_noteNumber" + "->" + this._noteNumber.toString() + "\n"); 
+     if(this.adjudication != null) builder.append("adjudication" + "->" + this.adjudication.toString() + "\n"); 
+     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ClaimResponseAddItem> fromArray(java.util.List<ClaimResponseAddItemModel> list) {
-    return (java.util.List<ClaimResponseAddItem>)list.stream()
-      .map(model -> new ClaimResponseAddItem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ClaimResponseAddItemModel> toModelArray(java.util.List<ClaimResponseAddItem> list) {
-    return (java.util.List<ClaimResponseAddItemModel>)list.stream()
-      .map(model -> new ClaimResponseAddItemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ClaimResponseAddItem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ClaimResponseAddItem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ClaimResponseAddItem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ClaimResponseAddItem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

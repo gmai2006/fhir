@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.GroupMemberModel;
 import org.fhir.pojo.GroupMember;
+import org.fhir.pojo.GroupMemberHelper;
 
 public class GroupMemberDaoImpl implements GroupMemberDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class GroupMemberDaoImpl implements GroupMemberDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GroupMemberModel a", GroupMemberModel.class).setMaxResults(maxResult);
       List<GroupMemberModel> models = query.getResultList();
-      return GroupMember.fromArray(models);
+      return GroupMemberHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class GroupMemberDaoImpl implements GroupMemberDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GroupMemberModel a", GroupMemberModel.class);
       List<GroupMemberModel> models = query.getResultList();
-      return GroupMember.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public GroupMember create(GroupMember e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new GroupMemberModel(e));
-      return e;
-  }
-
-  @Transactional
-  public GroupMember update(GroupMember e) {
-      final EntityManager em = entityManagerProvider.get();
-      GroupMemberModel model = em.merge(new GroupMemberModel(e));
-      return new GroupMember(model);
+      return GroupMemberHelper.fromArray2Array(models);
   }
 
   @Override

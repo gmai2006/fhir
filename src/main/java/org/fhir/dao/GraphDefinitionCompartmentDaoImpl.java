@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.GraphDefinitionCompartmentModel;
 import org.fhir.pojo.GraphDefinitionCompartment;
+import org.fhir.pojo.GraphDefinitionCompartmentHelper;
 
 public class GraphDefinitionCompartmentDaoImpl implements GraphDefinitionCompartmentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class GraphDefinitionCompartmentDaoImpl implements GraphDefinitionCompart
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GraphDefinitionCompartmentModel a", GraphDefinitionCompartmentModel.class).setMaxResults(maxResult);
       List<GraphDefinitionCompartmentModel> models = query.getResultList();
-      return GraphDefinitionCompartment.fromArray(models);
+      return GraphDefinitionCompartmentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class GraphDefinitionCompartmentDaoImpl implements GraphDefinitionCompart
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GraphDefinitionCompartmentModel a", GraphDefinitionCompartmentModel.class);
       List<GraphDefinitionCompartmentModel> models = query.getResultList();
-      return GraphDefinitionCompartment.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public GraphDefinitionCompartment create(GraphDefinitionCompartment e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new GraphDefinitionCompartmentModel(e));
-      return e;
-  }
-
-  @Transactional
-  public GraphDefinitionCompartment update(GraphDefinitionCompartment e) {
-      final EntityManager em = entityManagerProvider.get();
-      GraphDefinitionCompartmentModel model = em.merge(new GraphDefinitionCompartmentModel(e));
-      return new GraphDefinitionCompartment(model);
+      return GraphDefinitionCompartmentHelper.fromArray2Array(models);
   }
 
   @Override

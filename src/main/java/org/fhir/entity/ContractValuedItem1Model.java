@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
 @Entity
 @Table(name="contractvalueditem1")
-public class ContractValuedItem1Model  {
+public class ContractValuedItem1Model  implements Serializable {
+	private static final long serialVersionUID = 151857669651087149L;
   /**
   * Description: "Specific type of Contract Provision Valued Item that may be priced."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -53,13 +54,13 @@ public class ContractValuedItem1Model  {
   @Column(name="\"entityreference_id\"")
   private String entityreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`entityreference_id`", insertable=false, updatable=false)
-  private ReferenceModel entityReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="entityreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> entityReference;
 
   /**
   * Description: "Identifies a Contract Provision Valued Item instance."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -76,7 +77,7 @@ public class ContractValuedItem1Model  {
 
   /**
   * Description: "Specifies the units by which the Contract Provision Valued Item is measured or counted, and quantifies the countable or measurable Contract Term Valued Item instances."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -85,7 +86,7 @@ public class ContractValuedItem1Model  {
 
   /**
   * Description: "A Contract Provision Valued Item unit valuation measure."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -110,7 +111,7 @@ public class ContractValuedItem1Model  {
 
   /**
   * Description: "Expresses the product of the Contract Provision Valued Item unitQuantity and the unitPriceAmt. For example, the formula: unit Quantity * unit Price (Cost per Point) * factor Number  * points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -120,7 +121,7 @@ public class ContractValuedItem1Model  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -132,6 +133,7 @@ public class ContractValuedItem1Model  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -140,135 +142,155 @@ public class ContractValuedItem1Model  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ContractValuedItem1Model() {
   }
 
-  public ContractValuedItem1Model(ContractValuedItem1 o) {
-    this.id = o.getId();
-      this.entityCodeableConcept = CodeableConcept.toJson(o.getEntityCodeableConcept());
-      if (null != o.getEntityReference()) {
-      	this.entityreference_id = "entityReference" + this.getId();
-        this.entityReference = new ReferenceModel(o.getEntityReference());
-        this.entityReference.setId(this.entityreference_id);
-        this.entityReference.parent_id = this.entityReference.getId();
-      }
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.effectiveTime = o.getEffectiveTime();
-
-      this.quantity = Quantity.toJson(o.getQuantity());
-      this.unitPrice = Money.toJson(o.getUnitPrice());
-      this.factor = o.getFactor();
-
-      this.points = o.getPoints();
-
-      this.net = Money.toJson(o.getNet());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ContractValuedItem1Model(ContractValuedItem1 o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.entityCodeableConcept = CodeableConceptHelper.toJson(o.getEntityCodeableConcept());
+    if (null != o.getEntityReference() ) {
+    	this.entityreference_id = "entityreference" + this.parent_id;
+    	this.entityReference = ReferenceHelper.toModel(o.getEntityReference(), this.entityreference_id);
+    }
+    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.effectiveTime = o.getEffectiveTime();
+    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    this.unitPrice = MoneyHelper.toJson(o.getUnitPrice());
+    this.factor = o.getFactor();
+    this.points = o.getPoints();
+    this.net = MoneyHelper.toJson(o.getNet());
   }
 
-  public void setEntityCodeableConcept( String value) {
-    this.entityCodeableConcept = value;
-  }
   public String getEntityCodeableConcept() {
     return this.entityCodeableConcept;
   }
-  public void setEntityReference( ReferenceModel value) {
-    this.entityReference = value;
+  public void setEntityCodeableConcept( String value) {
+    this.entityCodeableConcept = value;
   }
-  public ReferenceModel getEntityReference() {
+  public java.util.List<ReferenceModel> getEntityReference() {
     return this.entityReference;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setEntityReference( java.util.List<ReferenceModel> value) {
+    this.entityReference = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setEffectiveTime( String value) {
-    this.effectiveTime = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getEffectiveTime() {
     return this.effectiveTime;
   }
-  public void setQuantity( String value) {
-    this.quantity = value;
+  public void setEffectiveTime( String value) {
+    this.effectiveTime = value;
   }
   public String getQuantity() {
     return this.quantity;
   }
-  public void setUnitPrice( String value) {
-    this.unitPrice = value;
+  public void setQuantity( String value) {
+    this.quantity = value;
   }
   public String getUnitPrice() {
     return this.unitPrice;
   }
-  public void setFactor( Float value) {
-    this.factor = value;
+  public void setUnitPrice( String value) {
+    this.unitPrice = value;
   }
   public Float getFactor() {
     return this.factor;
   }
-  public void setPoints( Float value) {
-    this.points = value;
+  public void setFactor( Float value) {
+    this.factor = value;
   }
   public Float getPoints() {
     return this.points;
   }
-  public void setNet( String value) {
-    this.net = value;
+  public void setPoints( Float value) {
+    this.points = value;
   }
   public String getNet() {
     return this.net;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setNet( String value) {
+    this.net = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("entityCodeableConcept" + "[" + String.valueOf(this.entityCodeableConcept) + "]\n"); 
-     builder.append("entityReference" + "[" + String.valueOf(this.entityReference) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("effectiveTime" + "[" + String.valueOf(this.effectiveTime) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("unitPrice" + "[" + String.valueOf(this.unitPrice) + "]\n"); 
-     builder.append("factor" + "[" + String.valueOf(this.factor) + "]\n"); 
-     builder.append("points" + "[" + String.valueOf(this.points) + "]\n"); 
-     builder.append("net" + "[" + String.valueOf(this.net) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ContractValuedItem1Model]:" + "\n");
+     builder.append("entityCodeableConcept" + "->" + this.entityCodeableConcept + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("effectiveTime" + "->" + this.effectiveTime + "\n"); 
+     builder.append("quantity" + "->" + this.quantity + "\n"); 
+     builder.append("unitPrice" + "->" + this.unitPrice + "\n"); 
+     builder.append("factor" + "->" + this.factor + "\n"); 
+     builder.append("points" + "->" + this.points + "\n"); 
+     builder.append("net" + "->" + this.net + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ContractValuedItem1Model]:" + "\n");
+     builder.append("entityCodeableConcept" + "->" + this.entityCodeableConcept + "\n"); 
+     builder.append("entityReference" + "->" + this.entityReference + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("effectiveTime" + "->" + this.effectiveTime + "\n"); 
+     builder.append("quantity" + "->" + this.quantity + "\n"); 
+     builder.append("unitPrice" + "->" + this.unitPrice + "\n"); 
+     builder.append("factor" + "->" + this.factor + "\n"); 
+     builder.append("points" + "->" + this.points + "\n"); 
+     builder.append("net" + "->" + this.net + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

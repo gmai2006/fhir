@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CoverageGroupingModel;
 import org.fhir.pojo.CoverageGrouping;
+import org.fhir.pojo.CoverageGroupingHelper;
 
 public class CoverageGroupingDaoImpl implements CoverageGroupingDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CoverageGroupingDaoImpl implements CoverageGroupingDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CoverageGroupingModel a", CoverageGroupingModel.class).setMaxResults(maxResult);
       List<CoverageGroupingModel> models = query.getResultList();
-      return CoverageGrouping.fromArray(models);
+      return CoverageGroupingHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CoverageGroupingDaoImpl implements CoverageGroupingDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CoverageGroupingModel a", CoverageGroupingModel.class);
       List<CoverageGroupingModel> models = query.getResultList();
-      return CoverageGrouping.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CoverageGrouping create(CoverageGrouping e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CoverageGroupingModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CoverageGrouping update(CoverageGrouping e) {
-      final EntityManager em = entityManagerProvider.get();
-      CoverageGroupingModel model = em.merge(new CoverageGroupingModel(e));
-      return new CoverageGrouping(model);
+      return CoverageGroupingHelper.fromArray2Array(models);
   }
 
   @Override

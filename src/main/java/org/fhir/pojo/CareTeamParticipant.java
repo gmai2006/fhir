@@ -63,6 +63,7 @@ public class CareTeamParticipant  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,24 +85,17 @@ public class CareTeamParticipant  {
 
   public CareTeamParticipant(CareTeamParticipantModel o) {
     this.id = o.getId();
-      this.role = CodeableConcept.fromJson(o.getRole());
-      if (null != o.getMember()) {
-        this.member = new Reference(o.getMember());
-        this.member.setId(this.getId());
-      }
-
-      if (null != o.getOnBehalfOf()) {
-        this.onBehalfOf = new Reference(o.getOnBehalfOf());
-        this.onBehalfOf.setId(this.getId());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.role = CodeableConceptHelper.fromJson(o.getRole());
+    if (null != o.getMember() && !o.getMember().isEmpty()) {
+      this.member = new Reference(o.getMember().get(0));
+    }
+    if (null != o.getOnBehalfOf() && !o.getOnBehalfOf().isEmpty()) {
+      this.onBehalfOf = new Reference(o.getOnBehalfOf().get(0));
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setRole( CodeableConcept value) {
@@ -156,48 +150,17 @@ public class CareTeamParticipant  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("member" + "[" + String.valueOf(this.member) + "]\n"); 
-     builder.append("onBehalfOf" + "[" + String.valueOf(this.onBehalfOf) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CareTeamParticipant]:" + "\n");
+     if(this.role != null) builder.append("role" + "->" + this.role.toString() + "\n"); 
+     if(this.member != null) builder.append("member" + "->" + this.member.toString() + "\n"); 
+     if(this.onBehalfOf != null) builder.append("onBehalfOf" + "->" + this.onBehalfOf.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CareTeamParticipant> fromArray(java.util.List<CareTeamParticipantModel> list) {
-    return (java.util.List<CareTeamParticipant>)list.stream()
-      .map(model -> new CareTeamParticipant(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CareTeamParticipantModel> toModelArray(java.util.List<CareTeamParticipant> list) {
-    return (java.util.List<CareTeamParticipantModel>)list.stream()
-      .map(model -> new CareTeamParticipantModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CareTeamParticipant fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CareTeamParticipant.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CareTeamParticipant o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CareTeamParticipant> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

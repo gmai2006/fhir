@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public MessageHeaderSource create(MessageHeaderSource bean) {
-  	requireNonNull(bean);
-    logger.info("create(MessageHeaderSource={}) - entered bean ");
-
-    final MessageHeaderSource result = dao.create(bean);
-
-    logger.info("create(MessageHeaderSource) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public MessageHeaderSource update(MessageHeaderSource bean) {
-  	requireNonNull(bean);
-    logger.info("update(MessageHeaderSource={}) - entered bean ");
-
-    final MessageHeaderSource result = dao.update(bean);
-
-    logger.info("update(MessageHeaderSource) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -32,7 +32,5 @@ public interface MedicationDispensePerformerService {
 	public MedicationDispensePerformer find(String id);
   public List<MedicationDispensePerformer> select(int maxResult);
   public List<MedicationDispensePerformer> selectAll();
-  public MedicationDispensePerformer create(MedicationDispensePerformer bean);
-  public MedicationDispensePerformer update(MedicationDispensePerformer bean);
   public void delete(MedicationDispensePerformer bean);
 }

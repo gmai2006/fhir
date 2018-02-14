@@ -32,7 +32,5 @@ public interface AuditEventNetworkService {
 	public AuditEventNetwork find(String id);
   public List<AuditEventNetwork> select(int maxResult);
   public List<AuditEventNetwork> selectAll();
-  public AuditEventNetwork create(AuditEventNetwork bean);
-  public AuditEventNetwork update(AuditEventNetwork bean);
   public void delete(AuditEventNetwork bean);
 }

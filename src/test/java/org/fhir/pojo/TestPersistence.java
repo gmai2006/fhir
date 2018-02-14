@@ -3,6 +3,7 @@ package org.fhir.pojo;
 import static org.junit.Assert.assertEquals;
 
 import java.nio.charset.Charset;
+import java.util.List;
 
 import org.fhir.GoogleGuiceTest;
 import org.fhir.dao.AccountDao;
@@ -41,21 +42,23 @@ public class TestPersistence extends GoogleGuiceTest {
 		String inputFile = "/media/paul/workspace/fhir-data/examples-json/account-example.json";
 
 		String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
-		Account account = Account.fromJson(json);
+		Account account = AccountHelper.fromJson(json);
 		assertEquals("Expect status", "active", account.getStatus());
 		Coding coding = account.getType().getCoding().get(0);
 		assertEquals("Expect code", "PBILLACCT", coding.getCode());
-
+AccountModel model = new AccountModel(account);
+//System.out.println(account);
+System.out.println(model.debug());
 		Account acct = service.create(account);
 		
 		assertEquals("Expect code", "PBILLACCT", acct.getType().getCoding().get(0).getCode());
 		
-		java.util.List<Account> accts = service.selectAll();
+		List<Account> accts = service.selectAll();
 		
 		assertEquals("Expect status", "active", accts.get(0).getStatus());
 		assertEquals("Expect code", "PBILLACCT", accts.get(0).getType().getCoding().get(0).getCode());
-		//clean the test data
-		service.delete(acct);
+//		clean the test data
+//		service.delete(acct);
 	}
 
 }

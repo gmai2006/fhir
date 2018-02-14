@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ReferenceModel;
 import org.fhir.pojo.Reference;
+import org.fhir.pojo.ReferenceHelper;
 
 public class ReferenceDaoImpl implements ReferenceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ReferenceDaoImpl implements ReferenceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ReferenceModel a", ReferenceModel.class).setMaxResults(maxResult);
       List<ReferenceModel> models = query.getResultList();
-      return Reference.fromArray(models);
+      return ReferenceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ReferenceDaoImpl implements ReferenceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ReferenceModel a", ReferenceModel.class);
       List<ReferenceModel> models = query.getResultList();
-      return Reference.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public Reference create(Reference e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ReferenceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public Reference update(Reference e) {
-      final EntityManager em = entityManagerProvider.get();
-      ReferenceModel model = em.merge(new ReferenceModel(e));
-      return new Reference(model);
+      return ReferenceHelper.fromArray2Array(models);
   }
 
   @Override

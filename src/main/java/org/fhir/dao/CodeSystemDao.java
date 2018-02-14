@@ -34,10 +34,8 @@ public interface CodeSystemDao {
   public List<CodeSystem> select(int maxResult);
 
   public List<CodeSystem> selectAll();
-
   public CodeSystem create(CodeSystem e);
 
   public CodeSystem update(CodeSystem e);
-
   public void delete(CodeSystem e);
 }

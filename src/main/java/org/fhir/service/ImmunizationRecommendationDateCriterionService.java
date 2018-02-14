@@ -32,7 +32,5 @@ public interface ImmunizationRecommendationDateCriterionService {
 	public ImmunizationRecommendationDateCriterion find(String id);
   public List<ImmunizationRecommendationDateCriterion> select(int maxResult);
   public List<ImmunizationRecommendationDateCriterion> selectAll();
-  public ImmunizationRecommendationDateCriterion create(ImmunizationRecommendationDateCriterion bean);
-  public ImmunizationRecommendationDateCriterion update(ImmunizationRecommendationDateCriterion bean);
   public void delete(ImmunizationRecommendationDateCriterion bean);
 }

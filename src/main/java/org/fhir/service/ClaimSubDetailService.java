@@ -32,7 +32,5 @@ public interface ClaimSubDetailService {
 	public ClaimSubDetail find(String id);
   public List<ClaimSubDetail> select(int maxResult);
   public List<ClaimSubDetail> selectAll();
-  public ClaimSubDetail create(ClaimSubDetail bean);
-  public ClaimSubDetail update(ClaimSubDetail bean);
   public void delete(ClaimSubDetail bean);
 }

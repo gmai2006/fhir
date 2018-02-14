@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CodeSystemDesignation create(CodeSystemDesignation bean) {
-  	requireNonNull(bean);
-    logger.info("create(CodeSystemDesignation={}) - entered bean ");
-
-    final CodeSystemDesignation result = dao.create(bean);
-
-    logger.info("create(CodeSystemDesignation) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CodeSystemDesignation update(CodeSystemDesignation bean) {
-  	requireNonNull(bean);
-    logger.info("update(CodeSystemDesignation={}) - entered bean ");
-
-    final CodeSystemDesignation result = dao.update(bean);
-
-    logger.info("update(CodeSystemDesignation) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

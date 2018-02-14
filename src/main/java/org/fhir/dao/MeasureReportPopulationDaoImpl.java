@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MeasureReportPopulationModel;
 import org.fhir.pojo.MeasureReportPopulation;
+import org.fhir.pojo.MeasureReportPopulationHelper;
 
 public class MeasureReportPopulationDaoImpl implements MeasureReportPopulationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MeasureReportPopulationDaoImpl implements MeasureReportPopulationDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureReportPopulationModel a", MeasureReportPopulationModel.class).setMaxResults(maxResult);
       List<MeasureReportPopulationModel> models = query.getResultList();
-      return MeasureReportPopulation.fromArray(models);
+      return MeasureReportPopulationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MeasureReportPopulationDaoImpl implements MeasureReportPopulationDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureReportPopulationModel a", MeasureReportPopulationModel.class);
       List<MeasureReportPopulationModel> models = query.getResultList();
-      return MeasureReportPopulation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MeasureReportPopulation create(MeasureReportPopulation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MeasureReportPopulationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MeasureReportPopulation update(MeasureReportPopulation e) {
-      final EntityManager em = entityManagerProvider.get();
-      MeasureReportPopulationModel model = em.merge(new MeasureReportPopulationModel(e));
-      return new MeasureReportPopulation(model);
+      return MeasureReportPopulationHelper.fromArray2Array(models);
   }
 
   @Override

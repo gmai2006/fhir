@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set."
 */
 @Entity
 @Table(name="graphdefinitiontarget")
-public class GraphDefinitionTargetModel  {
+public class GraphDefinitionTargetModel  implements Serializable {
+	private static final long serialVersionUID = 151857669670526935L;
   /**
   * Description: "Type of resource this link refers to."
   */
@@ -55,21 +56,29 @@ public class GraphDefinitionTargetModel  {
   /**
   * Description: "Compartment Consistency Rules."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<GraphDefinitionCompartmentModel> compartment = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"compartment_id\"")
+  private String compartment_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="compartment_id", insertable=false, updatable=false)
+  private java.util.List<GraphDefinitionCompartmentModel> compartment;
 
   /**
   * Description: "Additional links from target resource."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<GraphDefinitionLinkModel> link = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"link_id\"")
+  private String link_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="link_id", insertable=false, updatable=false)
+  private java.util.List<GraphDefinitionLinkModel> link;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -81,6 +90,7 @@ public class GraphDefinitionTargetModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -89,90 +99,112 @@ public class GraphDefinitionTargetModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public GraphDefinitionTargetModel() {
   }
 
-  public GraphDefinitionTargetModel(GraphDefinitionTarget o) {
-    this.id = o.getId();
-      this.type = o.getType();
-
-      this.profile = o.getProfile();
-
-      this.compartment = GraphDefinitionCompartment.toModelArray(o.getCompartment());
-
-      this.link = GraphDefinitionLink.toModelArray(o.getLink());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public GraphDefinitionTargetModel(GraphDefinitionTarget o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.type = o.getType();
+    this.profile = o.getProfile();
+    if (null != o.getCompartment() && !o.getCompartment().isEmpty()) {
+    	this.compartment_id = "compartment" + this.parent_id;
+    	this.compartment = GraphDefinitionCompartmentHelper.toModelFromArray(o.getCompartment(), this.compartment_id);
+    }
+    if (null != o.getLink() && !o.getLink().isEmpty()) {
+    	this.link_id = "link" + this.parent_id;
+    	this.link = GraphDefinitionLinkHelper.toModelFromArray(o.getLink(), this.link_id);
+    }
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setProfile( String value) {
-    this.profile = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getProfile() {
     return this.profile;
   }
-  public void setCompartment( java.util.List<GraphDefinitionCompartmentModel> value) {
-    this.compartment = value;
+  public void setProfile( String value) {
+    this.profile = value;
   }
   public java.util.List<GraphDefinitionCompartmentModel> getCompartment() {
     return this.compartment;
   }
-  public void setLink( java.util.List<GraphDefinitionLinkModel> value) {
-    this.link = value;
+  public void setCompartment( java.util.List<GraphDefinitionCompartmentModel> value) {
+    this.compartment = value;
   }
   public java.util.List<GraphDefinitionLinkModel> getLink() {
     return this.link;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setLink( java.util.List<GraphDefinitionLinkModel> value) {
+    this.link = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("compartment" + "[" + String.valueOf(this.compartment) + "]\n"); 
-     builder.append("link" + "[" + String.valueOf(this.link) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[GraphDefinitionTargetModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("profile" + "->" + this.profile + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[GraphDefinitionTargetModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("profile" + "->" + this.profile + "\n"); 
+     builder.append("compartment" + "->" + this.compartment + "\n"); 
+     builder.append("link" + "->" + this.link + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

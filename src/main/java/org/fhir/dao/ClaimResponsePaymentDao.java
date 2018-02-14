@@ -34,10 +34,5 @@ public interface ClaimResponsePaymentDao {
   public List<ClaimResponsePayment> select(int maxResult);
 
   public List<ClaimResponsePayment> selectAll();
-
-  public ClaimResponsePayment create(ClaimResponsePayment e);
-
-  public ClaimResponsePayment update(ClaimResponsePayment e);
-
   public void delete(ClaimResponsePayment e);
 }

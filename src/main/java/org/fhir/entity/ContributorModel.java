@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A contributor to the content of a knowledge asset, including authors, editors, reviewers, and endorsers."
 */
 @Entity
 @Table(name="contributor")
-public class ContributorModel  {
+public class ContributorModel  implements Serializable {
+	private static final long serialVersionUID = 151857669687628705L;
   /**
   * Description: "The type of contributor."
   */
@@ -54,14 +55,19 @@ public class ContributorModel  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the contributor."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContactDetailModel> contact = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contact_id\"")
+  private String contact_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  private java.util.List<ContactDetailModel> contact;
 
   /**
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -69,73 +75,93 @@ public class ContributorModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ContributorModel() {
   }
 
-  public ContributorModel(Contributor o) {
-    this.id = o.getId();
-      this.type = o.getType();
-
-      this.name = o.getName();
-
-      this.contact = ContactDetail.toModelArray(o.getContact());
-
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ContributorModel(Contributor o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.type = o.getType();
+    this.name = o.getName();
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact_id = "contact" + this.parent_id;
+    	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
+    }
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setContact( java.util.List<ContactDetailModel> value) {
-    this.contact = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public java.util.List<ContactDetailModel> getContact() {
     return this.contact;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setContact( java.util.List<ContactDetailModel> value) {
+    this.contact = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ContributorModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ContributorModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("contact" + "->" + this.contact + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

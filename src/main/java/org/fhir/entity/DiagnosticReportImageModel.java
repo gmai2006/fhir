@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports."
 */
 @Entity
 @Table(name="diagnosticreportimage")
-public class DiagnosticReportImageModel  {
+public class DiagnosticReportImageModel  implements Serializable {
+	private static final long serialVersionUID = 151857669679661780L;
   /**
   * Description: "A comment about the image. Typically, this is used to provide an explanation for why the image is included, or to draw the viewer's attention to important features."
   */
@@ -51,14 +52,14 @@ public class DiagnosticReportImageModel  {
   @Column(name="\"link_id\"")
   private String link_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`link_id`", insertable=false, updatable=false)
-  private ReferenceModel link;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="link_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> link;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -70,6 +71,7 @@ public class DiagnosticReportImageModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -78,77 +80,92 @@ public class DiagnosticReportImageModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public DiagnosticReportImageModel() {
   }
 
-  public DiagnosticReportImageModel(DiagnosticReportImage o) {
-    this.id = o.getId();
-      this.comment = o.getComment();
-
-      if (null != o.getLink()) {
-      	this.link_id = "link" + this.getId();
-        this.link = new ReferenceModel(o.getLink());
-        this.link.setId(this.link_id);
-        this.link.parent_id = this.link.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public DiagnosticReportImageModel(DiagnosticReportImage o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.comment = o.getComment();
+    if (null != o.getLink() ) {
+    	this.link_id = "link" + this.parent_id;
+    	this.link = ReferenceHelper.toModel(o.getLink(), this.link_id);
+    }
   }
 
-  public void setComment( String value) {
-    this.comment = value;
-  }
   public String getComment() {
     return this.comment;
   }
-  public void setLink( ReferenceModel value) {
-    this.link = value;
+  public void setComment( String value) {
+    this.comment = value;
   }
-  public ReferenceModel getLink() {
+  public java.util.List<ReferenceModel> getLink() {
     return this.link;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setLink( java.util.List<ReferenceModel> value) {
+    this.link = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("link" + "[" + String.valueOf(this.link) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DiagnosticReportImageModel]:" + "\n");
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[DiagnosticReportImageModel]:" + "\n");
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("link" + "->" + this.link + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

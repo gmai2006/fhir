@@ -34,10 +34,8 @@ public interface BodySiteDao {
   public List<BodySite> select(int maxResult);
 
   public List<BodySite> selectAll();
-
   public BodySite create(BodySite e);
 
   public BodySite update(BodySite e);
-
   public void delete(BodySite e);
 }

@@ -84,6 +84,7 @@ public class DataElementMapping  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -105,28 +106,21 @@ public class DataElementMapping  {
 
   public DataElementMapping(DataElementMappingModel o) {
     this.id = o.getId();
-      if (null != o.getIdentity()) {
-        this.identity = new String(o.getIdentity());
-      }
-
-      if (null != o.getUri()) {
-        this.uri = new String(o.getUri());
-      }
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getComment()) {
-        this.comment = new String(o.getComment());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getIdentity()) {
+      this.identity = o.getIdentity();
+    }
+    if (null != o.getUri()) {
+      this.uri = o.getUri();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getComment()) {
+      this.comment = o.getComment();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentity( String value) {
@@ -205,52 +199,21 @@ public class DataElementMapping  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identity" + "[" + String.valueOf(this.identity) + "]\n"); 
-     builder.append("_identity" + "[" + String.valueOf(this._identity) + "]\n"); 
-     builder.append("uri" + "[" + String.valueOf(this.uri) + "]\n"); 
-     builder.append("_uri" + "[" + String.valueOf(this._uri) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("_comment" + "[" + String.valueOf(this._comment) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DataElementMapping]:" + "\n");
+     if(this.identity != null) builder.append("identity" + "->" + this.identity.toString() + "\n"); 
+     if(this._identity != null) builder.append("_identity" + "->" + this._identity.toString() + "\n"); 
+     if(this.uri != null) builder.append("uri" + "->" + this.uri.toString() + "\n"); 
+     if(this._uri != null) builder.append("_uri" + "->" + this._uri.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
+     if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<DataElementMapping> fromArray(java.util.List<DataElementMappingModel> list) {
-    return (java.util.List<DataElementMapping>)list.stream()
-      .map(model -> new DataElementMapping(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DataElementMappingModel> toModelArray(java.util.List<DataElementMapping> list) {
-    return (java.util.List<DataElementMappingModel>)list.stream()
-      .map(model -> new DataElementMappingModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DataElementMapping fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DataElementMapping.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DataElementMapping o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DataElementMapping> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

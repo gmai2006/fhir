@@ -83,6 +83,7 @@ public class PatientContact  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -104,26 +105,18 @@ public class PatientContact  {
 
   public PatientContact(PatientContactModel o) {
     this.id = o.getId();
-      this.relationship = CodeableConcept.fromArray(o.getRelationship());
-      this.name = HumanName.fromJson(o.getName());
-      this.telecom = ContactPoint.fromArray(o.getTelecom());
-      this.address = Address.fromJson(o.getAddress());
-      if (null != o.getGender()) {
-        this.gender = new String(o.getGender());
-      }
-
-      if (null != o.getOrganization()) {
-        this.organization = new Reference(o.getOrganization());
-        this.organization.setId(this.getId());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.name = HumanNameHelper.fromJson(o.getName());
+    this.address = AddressHelper.fromJson(o.getAddress());
+    if (null != o.getGender()) {
+      this.gender = o.getGender();
+    }
+    if (null != o.getOrganization() && !o.getOrganization().isEmpty()) {
+      this.organization = new Reference(o.getOrganization().get(0));
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setRelationship( java.util.List<CodeableConcept> value) {
@@ -202,18 +195,19 @@ public class PatientContact  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("relationship" + "[" + String.valueOf(this.relationship) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("telecom" + "[" + String.valueOf(this.telecom) + "]\n"); 
-     builder.append("address" + "[" + String.valueOf(this.address) + "]\n"); 
-     builder.append("gender" + "[" + String.valueOf(this.gender) + "]\n"); 
-     builder.append("_gender" + "[" + String.valueOf(this._gender) + "]\n"); 
-     builder.append("organization" + "[" + String.valueOf(this.organization) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PatientContact]:" + "\n");
+     if(this.relationship != null) builder.append("relationship" + "->" + this.relationship.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this.telecom != null) builder.append("telecom" + "->" + this.telecom.toString() + "\n"); 
+     if(this.address != null) builder.append("address" + "->" + this.address.toString() + "\n"); 
+     if(this.gender != null) builder.append("gender" + "->" + this.gender.toString() + "\n"); 
+     if(this._gender != null) builder.append("_gender" + "->" + this._gender.toString() + "\n"); 
+     if(this.organization != null) builder.append("organization" + "->" + this.organization.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -235,36 +229,4 @@ public class PatientContact  {
   	}
   }
 
-  public static java.util.List<PatientContact> fromArray(java.util.List<PatientContactModel> list) {
-    return (java.util.List<PatientContact>)list.stream()
-      .map(model -> new PatientContact(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PatientContactModel> toModelArray(java.util.List<PatientContact> list) {
-    return (java.util.List<PatientContactModel>)list.stream()
-      .map(model -> new PatientContactModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PatientContact fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PatientContact.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PatientContact o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PatientContact> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

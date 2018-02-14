@@ -34,10 +34,5 @@ public interface EncounterDiagnosisDao {
   public List<EncounterDiagnosis> select(int maxResult);
 
   public List<EncounterDiagnosis> selectAll();
-
-  public EncounterDiagnosis create(EncounterDiagnosis e);
-
-  public EncounterDiagnosis update(EncounterDiagnosis e);
-
   public void delete(EncounterDiagnosis e);
 }

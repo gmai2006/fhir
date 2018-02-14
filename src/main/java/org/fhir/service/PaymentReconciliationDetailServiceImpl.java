@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public PaymentReconciliationDetail create(PaymentReconciliationDetail bean) {
-  	requireNonNull(bean);
-    logger.info("create(PaymentReconciliationDetail={}) - entered bean ");
-
-    final PaymentReconciliationDetail result = dao.create(bean);
-
-    logger.info("create(PaymentReconciliationDetail) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public PaymentReconciliationDetail update(PaymentReconciliationDetail bean) {
-  	requireNonNull(bean);
-    logger.info("update(PaymentReconciliationDetail={}) - entered bean ");
-
-    final PaymentReconciliationDetail result = dao.update(bean);
-
-    logger.info("update(PaymentReconciliationDetail) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

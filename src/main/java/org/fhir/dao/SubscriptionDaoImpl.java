@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SubscriptionModel;
 import org.fhir.pojo.Subscription;
+import org.fhir.pojo.SubscriptionHelper;
 
 public class SubscriptionDaoImpl implements SubscriptionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SubscriptionModel a", SubscriptionModel.class).setMaxResults(maxResult);
       List<SubscriptionModel> models = query.getResultList();
-      return Subscription.fromArray(models);
+      return SubscriptionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SubscriptionModel a", SubscriptionModel.class);
       List<SubscriptionModel> models = query.getResultList();
-      return Subscription.fromArray(models);
+      return SubscriptionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
       SubscriptionModel model = em.merge(new SubscriptionModel(e));
       return new Subscription(model);
   }
-
   @Override
   @Transactional
   public void delete(Subscription e) {

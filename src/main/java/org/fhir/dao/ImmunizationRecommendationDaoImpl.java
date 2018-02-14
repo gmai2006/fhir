@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImmunizationRecommendationModel;
 import org.fhir.pojo.ImmunizationRecommendation;
+import org.fhir.pojo.ImmunizationRecommendationHelper;
 
 public class ImmunizationRecommendationDaoImpl implements ImmunizationRecommendationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImmunizationRecommendationDaoImpl implements ImmunizationRecommenda
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationRecommendationModel a", ImmunizationRecommendationModel.class).setMaxResults(maxResult);
       List<ImmunizationRecommendationModel> models = query.getResultList();
-      return ImmunizationRecommendation.fromArray(models);
+      return ImmunizationRecommendationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ImmunizationRecommendationDaoImpl implements ImmunizationRecommenda
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationRecommendationModel a", ImmunizationRecommendationModel.class);
       List<ImmunizationRecommendationModel> models = query.getResultList();
-      return ImmunizationRecommendation.fromArray(models);
+      return ImmunizationRecommendationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ImmunizationRecommendationDaoImpl implements ImmunizationRecommenda
       ImmunizationRecommendationModel model = em.merge(new ImmunizationRecommendationModel(e));
       return new ImmunizationRecommendation(model);
   }
-
   @Override
   @Transactional
   public void delete(ImmunizationRecommendation e) {

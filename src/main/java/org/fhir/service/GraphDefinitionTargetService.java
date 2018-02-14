@@ -32,7 +32,5 @@ public interface GraphDefinitionTargetService {
 	public GraphDefinitionTarget find(String id);
   public List<GraphDefinitionTarget> select(int maxResult);
   public List<GraphDefinitionTarget> selectAll();
-  public GraphDefinitionTarget create(GraphDefinitionTarget bean);
-  public GraphDefinitionTarget update(GraphDefinitionTarget bean);
   public void delete(GraphDefinitionTarget bean);
 }

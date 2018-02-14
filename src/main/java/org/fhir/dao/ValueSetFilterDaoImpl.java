@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ValueSetFilterModel;
 import org.fhir.pojo.ValueSetFilter;
+import org.fhir.pojo.ValueSetFilterHelper;
 
 public class ValueSetFilterDaoImpl implements ValueSetFilterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ValueSetFilterDaoImpl implements ValueSetFilterDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetFilterModel a", ValueSetFilterModel.class).setMaxResults(maxResult);
       List<ValueSetFilterModel> models = query.getResultList();
-      return ValueSetFilter.fromArray(models);
+      return ValueSetFilterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ValueSetFilterDaoImpl implements ValueSetFilterDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetFilterModel a", ValueSetFilterModel.class);
       List<ValueSetFilterModel> models = query.getResultList();
-      return ValueSetFilter.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ValueSetFilter create(ValueSetFilter e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ValueSetFilterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ValueSetFilter update(ValueSetFilter e) {
-      final EntityManager em = entityManagerProvider.get();
-      ValueSetFilterModel model = em.merge(new ValueSetFilterModel(e));
-      return new ValueSetFilter(model);
+      return ValueSetFilterHelper.fromArray2Array(models);
   }
 
   @Override

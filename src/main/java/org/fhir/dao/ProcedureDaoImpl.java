@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ProcedureModel;
 import org.fhir.pojo.Procedure;
+import org.fhir.pojo.ProcedureHelper;
 
 public class ProcedureDaoImpl implements ProcedureDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ProcedureDaoImpl implements ProcedureDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProcedureModel a", ProcedureModel.class).setMaxResults(maxResult);
       List<ProcedureModel> models = query.getResultList();
-      return Procedure.fromArray(models);
+      return ProcedureHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ProcedureDaoImpl implements ProcedureDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ProcedureModel a", ProcedureModel.class);
       List<ProcedureModel> models = query.getResultList();
-      return Procedure.fromArray(models);
+      return ProcedureHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ProcedureDaoImpl implements ProcedureDao {
       ProcedureModel model = em.merge(new ProcedureModel(e));
       return new Procedure(model);
   }
-
   @Override
   @Transactional
   public void delete(Procedure e) {

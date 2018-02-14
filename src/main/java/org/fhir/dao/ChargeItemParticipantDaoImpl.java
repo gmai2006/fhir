@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ChargeItemParticipantModel;
 import org.fhir.pojo.ChargeItemParticipant;
+import org.fhir.pojo.ChargeItemParticipantHelper;
 
 public class ChargeItemParticipantDaoImpl implements ChargeItemParticipantDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ChargeItemParticipantDaoImpl implements ChargeItemParticipantDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ChargeItemParticipantModel a", ChargeItemParticipantModel.class).setMaxResults(maxResult);
       List<ChargeItemParticipantModel> models = query.getResultList();
-      return ChargeItemParticipant.fromArray(models);
+      return ChargeItemParticipantHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ChargeItemParticipantDaoImpl implements ChargeItemParticipantDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ChargeItemParticipantModel a", ChargeItemParticipantModel.class);
       List<ChargeItemParticipantModel> models = query.getResultList();
-      return ChargeItemParticipant.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ChargeItemParticipant create(ChargeItemParticipant e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ChargeItemParticipantModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ChargeItemParticipant update(ChargeItemParticipant e) {
-      final EntityManager em = entityManagerProvider.get();
-      ChargeItemParticipantModel model = em.merge(new ChargeItemParticipantModel(e));
-      return new ChargeItemParticipant(model);
+      return ChargeItemParticipantHelper.fromArray2Array(models);
   }
 
   @Override

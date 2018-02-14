@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClinicalImpressionFindingModel;
 import org.fhir.pojo.ClinicalImpressionFinding;
+import org.fhir.pojo.ClinicalImpressionFindingHelper;
 
 public class ClinicalImpressionFindingDaoImpl implements ClinicalImpressionFindingDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClinicalImpressionFindingDaoImpl implements ClinicalImpressionFindi
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClinicalImpressionFindingModel a", ClinicalImpressionFindingModel.class).setMaxResults(maxResult);
       List<ClinicalImpressionFindingModel> models = query.getResultList();
-      return ClinicalImpressionFinding.fromArray(models);
+      return ClinicalImpressionFindingHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClinicalImpressionFindingDaoImpl implements ClinicalImpressionFindi
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClinicalImpressionFindingModel a", ClinicalImpressionFindingModel.class);
       List<ClinicalImpressionFindingModel> models = query.getResultList();
-      return ClinicalImpressionFinding.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClinicalImpressionFinding create(ClinicalImpressionFinding e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClinicalImpressionFindingModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClinicalImpressionFinding update(ClinicalImpressionFinding e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClinicalImpressionFindingModel model = em.merge(new ClinicalImpressionFindingModel(e));
-      return new ClinicalImpressionFinding(model);
+      return ClinicalImpressionFindingHelper.fromArray2Array(models);
   }
 
   @Override

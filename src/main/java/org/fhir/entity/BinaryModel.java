@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A binary resource can contain any content, whether text, image, pdf, zip archive, etc."
 */
 @Entity
 @Table(name="fhirbinary")
-public class BinaryModel  {
+public class BinaryModel  implements Serializable {
+	private static final long serialVersionUID = 151857669664258178L;
   /**
   * Description: "This is a Binary resource"
   */
@@ -60,9 +61,9 @@ public class BinaryModel  {
   @Column(name="\"securitycontext_id\"")
   private String securitycontext_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`securitycontext_id`", insertable=false, updatable=false)
-  private ReferenceModel securityContext;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitycontext_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> securityContext;
 
   /**
   * Description: "The actual content, base64 encoded."
@@ -75,6 +76,7 @@ public class BinaryModel  {
   * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
    derived from Resource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -88,9 +90,9 @@ public class BinaryModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -113,116 +115,114 @@ public class BinaryModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from Resource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-
   public BinaryModel() {
   }
 
   public BinaryModel(Binary o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.contentType = o.getContentType();
-
-      if (null != o.getSecurityContext()) {
-      	this.securitycontext_id = "securityContext" + this.getId();
-        this.securityContext = new ReferenceModel(o.getSecurityContext());
-        this.securityContext.setId(this.securitycontext_id);
-        this.securityContext.parent_id = this.securityContext.getId();
-      }
-
-      this.content = o.getContent();
-
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
-      this.extension = Extension.toJson(o.getExtension());
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.contentType = o.getContentType();
+    if (null != o.getSecurityContext() ) {
+    	this.securitycontext_id = "securitycontext" + this.id;
+    	this.securityContext = ReferenceHelper.toModel(o.getSecurityContext(), this.securitycontext_id);
+    }
+    this.content = o.getContent();
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setContentType( String value) {
-    this.contentType = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getContentType() {
     return this.contentType;
   }
-  public void setSecurityContext( ReferenceModel value) {
-    this.securityContext = value;
+  public void setContentType( String value) {
+    this.contentType = value;
   }
-  public ReferenceModel getSecurityContext() {
+  public java.util.List<ReferenceModel> getSecurityContext() {
     return this.securityContext;
   }
-  public void setContent( String value) {
-    this.content = value;
+  public void setSecurityContext( java.util.List<ReferenceModel> value) {
+    this.securityContext = value;
   }
   public String getContent() {
     return this.content;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setContent( String value) {
+    this.content = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setLanguage( String value) {
+    this.language = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("contentType" + "[" + String.valueOf(this.contentType) + "]\n"); 
-     builder.append("securityContext" + "[" + String.valueOf(this.securityContext) + "]\n"); 
-     builder.append("content" + "[" + String.valueOf(this.content) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[BinaryModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("contentType" + "->" + this.contentType + "\n"); 
+     builder.append("content" + "->" + this.content + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[BinaryModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("contentType" + "->" + this.contentType + "\n"); 
+     builder.append("securityContext" + "->" + this.securityContext + "\n"); 
+     builder.append("content" + "->" + this.content + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); ;
     return builder.toString();
   }
 }

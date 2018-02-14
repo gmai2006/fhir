@@ -64,6 +64,7 @@ public class AuditEventSource  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -85,18 +86,13 @@ public class AuditEventSource  {
 
   public AuditEventSource(AuditEventSourceModel o) {
     this.id = o.getId();
-      if (null != o.getSite()) {
-        this.site = new String(o.getSite());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      this.type = Coding.fromArray(o.getType());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSite()) {
+      this.site = o.getSite();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSite( String value) {
@@ -151,48 +147,17 @@ public class AuditEventSource  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("site" + "[" + String.valueOf(this.site) + "]\n"); 
-     builder.append("_site" + "[" + String.valueOf(this._site) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AuditEventSource]:" + "\n");
+     if(this.site != null) builder.append("site" + "->" + this.site.toString() + "\n"); 
+     if(this._site != null) builder.append("_site" + "->" + this._site.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<AuditEventSource> fromArray(java.util.List<AuditEventSourceModel> list) {
-    return (java.util.List<AuditEventSource>)list.stream()
-      .map(model -> new AuditEventSource(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AuditEventSourceModel> toModelArray(java.util.List<AuditEventSource> list) {
-    return (java.util.List<AuditEventSourceModel>)list.stream()
-      .map(model -> new AuditEventSourceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AuditEventSource fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AuditEventSource.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AuditEventSource o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AuditEventSource> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

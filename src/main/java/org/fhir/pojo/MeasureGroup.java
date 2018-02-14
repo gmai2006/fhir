@@ -79,6 +79,7 @@ public class MeasureGroup  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -100,25 +101,22 @@ public class MeasureGroup  {
 
   public MeasureGroup(MeasureGroupModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.population = MeasurePopulation.fromArray(o.getPopulation());
-
-      this.stratifier = MeasureStratifier.fromArray(o.getStratifier());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getPopulation() && !o.getPopulation().isEmpty()) {
+    	this.population = MeasurePopulationHelper.fromArray2Array(o.getPopulation());
+    }
+    if (null != o.getStratifier() && !o.getStratifier().isEmpty()) {
+    	this.stratifier = MeasureStratifierHelper.fromArray2Array(o.getStratifier());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( Identifier value) {
@@ -191,51 +189,20 @@ public class MeasureGroup  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("population" + "[" + String.valueOf(this.population) + "]\n"); 
-     builder.append("stratifier" + "[" + String.valueOf(this.stratifier) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MeasureGroup]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.population != null) builder.append("population" + "->" + this.population.toString() + "\n"); 
+     if(this.stratifier != null) builder.append("stratifier" + "->" + this.stratifier.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MeasureGroup> fromArray(java.util.List<MeasureGroupModel> list) {
-    return (java.util.List<MeasureGroup>)list.stream()
-      .map(model -> new MeasureGroup(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MeasureGroupModel> toModelArray(java.util.List<MeasureGroup> list) {
-    return (java.util.List<MeasureGroupModel>)list.stream()
-      .map(model -> new MeasureGroupModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MeasureGroup fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MeasureGroup.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MeasureGroup o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MeasureGroup> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

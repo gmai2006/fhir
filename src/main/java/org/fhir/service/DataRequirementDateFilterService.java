@@ -32,7 +32,5 @@ public interface DataRequirementDateFilterService {
 	public DataRequirementDateFilter find(String id);
   public List<DataRequirementDateFilter> select(int maxResult);
   public List<DataRequirementDateFilter> selectAll();
-  public DataRequirementDateFilter create(DataRequirementDateFilter bean);
-  public DataRequirementDateFilter update(DataRequirementDateFilter bean);
   public void delete(DataRequirementDateFilter bean);
 }

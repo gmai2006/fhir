@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ProcedureRequestRequester create(ProcedureRequestRequester bean) {
-  	requireNonNull(bean);
-    logger.info("create(ProcedureRequestRequester={}) - entered bean ");
-
-    final ProcedureRequestRequester result = dao.create(bean);
-
-    logger.info("create(ProcedureRequestRequester) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ProcedureRequestRequester update(ProcedureRequestRequester bean) {
-  	requireNonNull(bean);
-    logger.info("update(ProcedureRequestRequester={}) - entered bean ");
-
-    final ProcedureRequestRequester result = dao.update(bean);
-
-    logger.info("update(ProcedureRequestRequester) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

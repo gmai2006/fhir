@@ -79,6 +79,7 @@ public class SpecimenCollection  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -100,25 +101,19 @@ public class SpecimenCollection  {
 
   public SpecimenCollection(SpecimenCollectionModel o) {
     this.id = o.getId();
-      if (null != o.getCollector()) {
-        this.collector = new Reference(o.getCollector());
-        this.collector.setId(this.getId());
-      }
-
-      if (null != o.getCollectedDateTime()) {
-        this.collectedDateTime = new String(o.getCollectedDateTime());
-      }
-
-      this.collectedPeriod = Period.fromJson(o.getCollectedPeriod());
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      this.method = CodeableConcept.fromJson(o.getMethod());
-      this.bodySite = CodeableConcept.fromJson(o.getBodySite());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCollector() && !o.getCollector().isEmpty()) {
+      this.collector = new Reference(o.getCollector().get(0));
+    }
+    if (null != o.getCollectedDateTime()) {
+      this.collectedDateTime = o.getCollectedDateTime();
+    }
+    this.collectedPeriod = PeriodHelper.fromJson(o.getCollectedPeriod());
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    this.method = CodeableConceptHelper.fromJson(o.getMethod());
+    this.bodySite = CodeableConceptHelper.fromJson(o.getBodySite());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCollector( Reference value) {
@@ -191,51 +186,20 @@ public class SpecimenCollection  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("collector" + "[" + String.valueOf(this.collector) + "]\n"); 
-     builder.append("collectedDateTime" + "[" + String.valueOf(this.collectedDateTime) + "]\n"); 
-     builder.append("_collectedDateTime" + "[" + String.valueOf(this._collectedDateTime) + "]\n"); 
-     builder.append("collectedPeriod" + "[" + String.valueOf(this.collectedPeriod) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("method" + "[" + String.valueOf(this.method) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SpecimenCollection]:" + "\n");
+     if(this.collector != null) builder.append("collector" + "->" + this.collector.toString() + "\n"); 
+     if(this.collectedDateTime != null) builder.append("collectedDateTime" + "->" + this.collectedDateTime.toString() + "\n"); 
+     if(this._collectedDateTime != null) builder.append("_collectedDateTime" + "->" + this._collectedDateTime.toString() + "\n"); 
+     if(this.collectedPeriod != null) builder.append("collectedPeriod" + "->" + this.collectedPeriod.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.method != null) builder.append("method" + "->" + this.method.toString() + "\n"); 
+     if(this.bodySite != null) builder.append("bodySite" + "->" + this.bodySite.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<SpecimenCollection> fromArray(java.util.List<SpecimenCollectionModel> list) {
-    return (java.util.List<SpecimenCollection>)list.stream()
-      .map(model -> new SpecimenCollection(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SpecimenCollectionModel> toModelArray(java.util.List<SpecimenCollection> list) {
-    return (java.util.List<SpecimenCollectionModel>)list.stream()
-      .map(model -> new SpecimenCollectionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SpecimenCollection fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SpecimenCollection.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SpecimenCollection o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SpecimenCollection> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

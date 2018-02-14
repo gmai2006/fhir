@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ProvenanceEntity create(ProvenanceEntity bean) {
-  	requireNonNull(bean);
-    logger.info("create(ProvenanceEntity={}) - entered bean ");
-
-    final ProvenanceEntity result = dao.create(bean);
-
-    logger.info("create(ProvenanceEntity) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ProvenanceEntity update(ProvenanceEntity bean) {
-  	requireNonNull(bean);
-    logger.info("update(ProvenanceEntity={}) - entered bean ");
-
-    final ProvenanceEntity result = dao.update(bean);
-
-    logger.info("update(ProvenanceEntity) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

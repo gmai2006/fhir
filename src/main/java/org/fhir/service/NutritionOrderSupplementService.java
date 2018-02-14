@@ -32,7 +32,5 @@ public interface NutritionOrderSupplementService {
 	public NutritionOrderSupplement find(String id);
   public List<NutritionOrderSupplement> select(int maxResult);
   public List<NutritionOrderSupplement> selectAll();
-  public NutritionOrderSupplement create(NutritionOrderSupplement bean);
-  public NutritionOrderSupplement update(NutritionOrderSupplement bean);
   public void delete(NutritionOrderSupplement bean);
 }

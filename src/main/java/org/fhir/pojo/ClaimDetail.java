@@ -115,6 +115,7 @@ public class ClaimDetail  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -136,32 +137,27 @@ public class ClaimDetail  {
 
   public ClaimDetail(ClaimDetailModel o) {
     this.id = o.getId();
-      if (null != o.getSequence()) {
-        this.sequence = new Float(o.getSequence());
-      }
-
-      this.revenue = CodeableConcept.fromJson(o.getRevenue());
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      this.service = CodeableConcept.fromJson(o.getService());
-      this.modifier = CodeableConcept.fromArray(o.getModifier());
-      this.programCode = CodeableConcept.fromArray(o.getProgramCode());
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      this.unitPrice = Money.fromJson(o.getUnitPrice());
-      if (null != o.getFactor()) {
-        this.factor = new Float(o.getFactor());
-      }
-
-      this.net = Money.fromJson(o.getNet());
-      this.udi = Reference.fromArray(o.getUdi());
-
-      this.subDetail = ClaimSubDetail.fromArray(o.getSubDetail());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSequence()) {
+      this.sequence = o.getSequence();
+    }
+    this.revenue = CodeableConceptHelper.fromJson(o.getRevenue());
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    this.service = CodeableConceptHelper.fromJson(o.getService());
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    this.unitPrice = MoneyHelper.fromJson(o.getUnitPrice());
+    if (null != o.getFactor()) {
+      this.factor = o.getFactor();
+    }
+    this.net = MoneyHelper.fromJson(o.getNet());
+    if (null != o.getUdi() && !o.getUdi().isEmpty()) {
+    	this.udi = ReferenceHelper.fromArray2Array(o.getUdi());
+    }
+    if (null != o.getSubDetail() && !o.getSubDetail().isEmpty()) {
+    	this.subDetail = ClaimSubDetailHelper.fromArray2Array(o.getSubDetail());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSequence( Float value) {
@@ -276,58 +272,27 @@ public class ClaimDetail  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("_sequence" + "[" + String.valueOf(this._sequence) + "]\n"); 
-     builder.append("revenue" + "[" + String.valueOf(this.revenue) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("service" + "[" + String.valueOf(this.service) + "]\n"); 
-     builder.append("modifier" + "[" + String.valueOf(this.modifier) + "]\n"); 
-     builder.append("programCode" + "[" + String.valueOf(this.programCode) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("unitPrice" + "[" + String.valueOf(this.unitPrice) + "]\n"); 
-     builder.append("factor" + "[" + String.valueOf(this.factor) + "]\n"); 
-     builder.append("_factor" + "[" + String.valueOf(this._factor) + "]\n"); 
-     builder.append("net" + "[" + String.valueOf(this.net) + "]\n"); 
-     builder.append("udi" + "[" + String.valueOf(this.udi) + "]\n"); 
-     builder.append("subDetail" + "[" + String.valueOf(this.subDetail) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ClaimDetail]:" + "\n");
+     if(this.sequence != null) builder.append("sequence" + "->" + this.sequence.toString() + "\n"); 
+     if(this._sequence != null) builder.append("_sequence" + "->" + this._sequence.toString() + "\n"); 
+     if(this.revenue != null) builder.append("revenue" + "->" + this.revenue.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.service != null) builder.append("service" + "->" + this.service.toString() + "\n"); 
+     if(this.modifier != null) builder.append("modifier" + "->" + this.modifier.toString() + "\n"); 
+     if(this.programCode != null) builder.append("programCode" + "->" + this.programCode.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.unitPrice != null) builder.append("unitPrice" + "->" + this.unitPrice.toString() + "\n"); 
+     if(this.factor != null) builder.append("factor" + "->" + this.factor.toString() + "\n"); 
+     if(this._factor != null) builder.append("_factor" + "->" + this._factor.toString() + "\n"); 
+     if(this.net != null) builder.append("net" + "->" + this.net.toString() + "\n"); 
+     if(this.udi != null) builder.append("udi" + "->" + this.udi.toString() + "\n"); 
+     if(this.subDetail != null) builder.append("subDetail" + "->" + this.subDetail.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ClaimDetail> fromArray(java.util.List<ClaimDetailModel> list) {
-    return (java.util.List<ClaimDetail>)list.stream()
-      .map(model -> new ClaimDetail(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ClaimDetailModel> toModelArray(java.util.List<ClaimDetail> list) {
-    return (java.util.List<ClaimDetailModel>)list.stream()
-      .map(model -> new ClaimDetailModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ClaimDetail fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ClaimDetail.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ClaimDetail o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ClaimDetail> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

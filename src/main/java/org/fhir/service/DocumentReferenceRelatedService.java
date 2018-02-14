@@ -32,7 +32,5 @@ public interface DocumentReferenceRelatedService {
 	public DocumentReferenceRelated find(String id);
   public List<DocumentReferenceRelated> select(int maxResult);
   public List<DocumentReferenceRelated> selectAll();
-  public DocumentReferenceRelated create(DocumentReferenceRelated bean);
-  public DocumentReferenceRelated update(DocumentReferenceRelated bean);
   public void delete(DocumentReferenceRelated bean);
 }

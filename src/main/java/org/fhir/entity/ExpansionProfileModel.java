@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
 */
 @Entity
 @Table(name="expansionprofile")
-public class ExpansionProfileModel  {
+public class ExpansionProfileModel  implements Serializable {
+	private static final long serialVersionUID = 151857669713734530L;
   /**
   * Description: "This is a ExpansionProfile resource"
   */
@@ -54,7 +55,7 @@ public class ExpansionProfileModel  {
 
   /**
   * Description: "A formal identifier that is used to identify this expansion profile when it is represented in other formats, or referenced in a specification, model, design or an instance."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -107,9 +108,13 @@ public class ExpansionProfileModel  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContactDetailModel> contact = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contact_id\"")
+  private String contact_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  private java.util.List<ContactDetailModel> contact;
 
   /**
   * Description: "A free text natural language description of the expansion profile from a consumer's perspective."
@@ -121,13 +126,17 @@ public class ExpansionProfileModel  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate expansion profile instances."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<UsageContextModel> useContext = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"usecontext_id\"")
+  private String usecontext_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
+  private java.util.List<UsageContextModel> useContext;
 
   /**
   * Description: "A legal or geographic region in which the expansion profile is intended to be used."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -137,9 +146,13 @@ public class ExpansionProfileModel  {
   /**
   * Description: "Fix use of a particular code system to a particular version."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ExpansionProfileFixedVersionModel> fixedVersion = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"fixedversion_id\"")
+  private String fixedversion_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fixedversion_id", insertable=false, updatable=false)
+  private java.util.List<ExpansionProfileFixedVersionModel> fixedVersion;
 
   /**
   * Description: "Code system, or a particular version of a code system to be excluded from value set expansions."
@@ -148,9 +161,9 @@ public class ExpansionProfileModel  {
   @Column(name="\"excludedsystem_id\"")
   private String excludedsystem_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`excludedsystem_id`", insertable=false, updatable=false)
-  private ExpansionProfileExcludedSystemModel excludedSystem;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="excludedsystem_id", insertable=false, updatable=false)
+  private java.util.List<ExpansionProfileExcludedSystemModel> excludedSystem;
 
   /**
   * Description: "Controls whether concept designations are to be included or excluded in value set expansions."
@@ -166,9 +179,9 @@ public class ExpansionProfileModel  {
   @Column(name="\"designation_id\"")
   private String designation_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`designation_id`", insertable=false, updatable=false)
-  private ExpansionProfileDesignationModel designation;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="designation_id", insertable=false, updatable=false)
+  private java.util.List<ExpansionProfileDesignationModel> designation;
 
   /**
   * Description: "Controls whether the value set definition is included or excluded in value set expansions."
@@ -228,14 +241,14 @@ public class ExpansionProfileModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -245,7 +258,7 @@ public class ExpansionProfileModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -255,7 +268,7 @@ public class ExpansionProfileModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -267,6 +280,7 @@ public class ExpansionProfileModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -281,9 +295,9 @@ public class ExpansionProfileModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -304,322 +318,321 @@ public class ExpansionProfileModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public ExpansionProfileModel() {
   }
 
   public ExpansionProfileModel(ExpansionProfile o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.url = o.getUrl();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.version = o.getVersion();
-
-      this.name = o.getName();
-
-      this.status = o.getStatus();
-
-      this.experimental = o.getExperimental();
-
-      this.date = o.getDate();
-
-      this.publisher = o.getPublisher();
-
-      this.contact = ContactDetail.toModelArray(o.getContact());
-
-      this.description = o.getDescription();
-
-      this.useContext = UsageContext.toModelArray(o.getUseContext());
-
-      this.jurisdiction = CodeableConcept.toJson(o.getJurisdiction());
-      this.fixedVersion = ExpansionProfileFixedVersion.toModelArray(o.getFixedVersion());
-
-      if (null != o.getExcludedSystem()) {
-      	this.excludedsystem_id = "excludedSystem" + this.getId();
-        this.excludedSystem = new ExpansionProfileExcludedSystemModel(o.getExcludedSystem());
-        this.excludedSystem.setId(this.excludedsystem_id);
-        this.excludedSystem.parent_id = this.excludedSystem.getId();
-      }
-
-      this.includeDesignations = o.getIncludeDesignations();
-
-      if (null != o.getDesignation()) {
-      	this.designation_id = "designation" + this.getId();
-        this.designation = new ExpansionProfileDesignationModel(o.getDesignation());
-        this.designation.setId(this.designation_id);
-        this.designation.parent_id = this.designation.getId();
-      }
-
-      this.includeDefinition = o.getIncludeDefinition();
-
-      this.activeOnly = o.getActiveOnly();
-
-      this.excludeNested = o.getExcludeNested();
-
-      this.excludeNotForUI = o.getExcludeNotForUI();
-
-      this.excludePostCoordinated = o.getExcludePostCoordinated();
-
-      this.displayLanguage = o.getDisplayLanguage();
-
-      this.limitedExpansion = o.getLimitedExpansion();
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.url = o.getUrl();
+    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.version = o.getVersion();
+    this.name = o.getName();
+    this.status = o.getStatus();
+    this.experimental = o.getExperimental();
+    this.date = o.getDate();
+    this.publisher = o.getPublisher();
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact_id = "contact" + this.id;
+    	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
+    }
+    this.description = o.getDescription();
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.usecontext_id = "usecontext" + this.id;
+    	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
+    }
+    if (null != o.getFixedVersion() && !o.getFixedVersion().isEmpty()) {
+    	this.fixedversion_id = "fixedversion" + this.id;
+    	this.fixedVersion = ExpansionProfileFixedVersionHelper.toModelFromArray(o.getFixedVersion(), this.fixedversion_id);
+    }
+    if (null != o.getExcludedSystem() ) {
+    	this.excludedsystem_id = "excludedsystem" + this.id;
+    	this.excludedSystem = ExpansionProfileExcludedSystemHelper.toModel(o.getExcludedSystem(), this.excludedsystem_id);
+    }
+    this.includeDesignations = o.getIncludeDesignations();
+    if (null != o.getDesignation() ) {
+    	this.designation_id = "designation" + this.id;
+    	this.designation = ExpansionProfileDesignationHelper.toModel(o.getDesignation(), this.designation_id);
+    }
+    this.includeDefinition = o.getIncludeDefinition();
+    this.activeOnly = o.getActiveOnly();
+    this.excludeNested = o.getExcludeNested();
+    this.excludeNotForUI = o.getExcludeNotForUI();
+    this.excludePostCoordinated = o.getExcludePostCoordinated();
+    this.displayLanguage = o.getDisplayLanguage();
+    this.limitedExpansion = o.getLimitedExpansion();
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setUrl( String value) {
-    this.url = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getUrl() {
     return this.url;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setUrl( String value) {
+    this.url = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setVersion( String value) {
-    this.version = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getVersion() {
     return this.version;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setVersion( String value) {
+    this.version = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setExperimental( Boolean value) {
-    this.experimental = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public Boolean getExperimental() {
     return this.experimental;
   }
-  public void setDate( String value) {
-    this.date = value;
+  public void setExperimental( Boolean value) {
+    this.experimental = value;
   }
   public String getDate() {
     return this.date;
   }
-  public void setPublisher( String value) {
-    this.publisher = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public String getPublisher() {
     return this.publisher;
   }
-  public void setContact( java.util.List<ContactDetailModel> value) {
-    this.contact = value;
+  public void setPublisher( String value) {
+    this.publisher = value;
   }
   public java.util.List<ContactDetailModel> getContact() {
     return this.contact;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setContact( java.util.List<ContactDetailModel> value) {
+    this.contact = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setUseContext( java.util.List<UsageContextModel> value) {
-    this.useContext = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public java.util.List<UsageContextModel> getUseContext() {
     return this.useContext;
   }
-  public void setJurisdiction( String value) {
-    this.jurisdiction = value;
+  public void setUseContext( java.util.List<UsageContextModel> value) {
+    this.useContext = value;
   }
   public String getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setFixedVersion( java.util.List<ExpansionProfileFixedVersionModel> value) {
-    this.fixedVersion = value;
+  public void setJurisdiction( String value) {
+    this.jurisdiction = value;
   }
   public java.util.List<ExpansionProfileFixedVersionModel> getFixedVersion() {
     return this.fixedVersion;
   }
-  public void setExcludedSystem( ExpansionProfileExcludedSystemModel value) {
-    this.excludedSystem = value;
+  public void setFixedVersion( java.util.List<ExpansionProfileFixedVersionModel> value) {
+    this.fixedVersion = value;
   }
-  public ExpansionProfileExcludedSystemModel getExcludedSystem() {
+  public java.util.List<ExpansionProfileExcludedSystemModel> getExcludedSystem() {
     return this.excludedSystem;
   }
-  public void setIncludeDesignations( Boolean value) {
-    this.includeDesignations = value;
+  public void setExcludedSystem( java.util.List<ExpansionProfileExcludedSystemModel> value) {
+    this.excludedSystem = value;
   }
   public Boolean getIncludeDesignations() {
     return this.includeDesignations;
   }
-  public void setDesignation( ExpansionProfileDesignationModel value) {
-    this.designation = value;
+  public void setIncludeDesignations( Boolean value) {
+    this.includeDesignations = value;
   }
-  public ExpansionProfileDesignationModel getDesignation() {
+  public java.util.List<ExpansionProfileDesignationModel> getDesignation() {
     return this.designation;
   }
-  public void setIncludeDefinition( Boolean value) {
-    this.includeDefinition = value;
+  public void setDesignation( java.util.List<ExpansionProfileDesignationModel> value) {
+    this.designation = value;
   }
   public Boolean getIncludeDefinition() {
     return this.includeDefinition;
   }
-  public void setActiveOnly( Boolean value) {
-    this.activeOnly = value;
+  public void setIncludeDefinition( Boolean value) {
+    this.includeDefinition = value;
   }
   public Boolean getActiveOnly() {
     return this.activeOnly;
   }
-  public void setExcludeNested( Boolean value) {
-    this.excludeNested = value;
+  public void setActiveOnly( Boolean value) {
+    this.activeOnly = value;
   }
   public Boolean getExcludeNested() {
     return this.excludeNested;
   }
-  public void setExcludeNotForUI( Boolean value) {
-    this.excludeNotForUI = value;
+  public void setExcludeNested( Boolean value) {
+    this.excludeNested = value;
   }
   public Boolean getExcludeNotForUI() {
     return this.excludeNotForUI;
   }
-  public void setExcludePostCoordinated( Boolean value) {
-    this.excludePostCoordinated = value;
+  public void setExcludeNotForUI( Boolean value) {
+    this.excludeNotForUI = value;
   }
   public Boolean getExcludePostCoordinated() {
     return this.excludePostCoordinated;
   }
-  public void setDisplayLanguage( String value) {
-    this.displayLanguage = value;
+  public void setExcludePostCoordinated( Boolean value) {
+    this.excludePostCoordinated = value;
   }
   public String getDisplayLanguage() {
     return this.displayLanguage;
   }
-  public void setLimitedExpansion( Boolean value) {
-    this.limitedExpansion = value;
+  public void setDisplayLanguage( String value) {
+    this.displayLanguage = value;
   }
   public Boolean getLimitedExpansion() {
     return this.limitedExpansion;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setLimitedExpansion( Boolean value) {
+    this.limitedExpansion = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("experimental" + "[" + String.valueOf(this.experimental) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("fixedVersion" + "[" + String.valueOf(this.fixedVersion) + "]\n"); 
-     builder.append("excludedSystem" + "[" + String.valueOf(this.excludedSystem) + "]\n"); 
-     builder.append("includeDesignations" + "[" + String.valueOf(this.includeDesignations) + "]\n"); 
-     builder.append("designation" + "[" + String.valueOf(this.designation) + "]\n"); 
-     builder.append("includeDefinition" + "[" + String.valueOf(this.includeDefinition) + "]\n"); 
-     builder.append("activeOnly" + "[" + String.valueOf(this.activeOnly) + "]\n"); 
-     builder.append("excludeNested" + "[" + String.valueOf(this.excludeNested) + "]\n"); 
-     builder.append("excludeNotForUI" + "[" + String.valueOf(this.excludeNotForUI) + "]\n"); 
-     builder.append("excludePostCoordinated" + "[" + String.valueOf(this.excludePostCoordinated) + "]\n"); 
-     builder.append("displayLanguage" + "[" + String.valueOf(this.displayLanguage) + "]\n"); 
-     builder.append("limitedExpansion" + "[" + String.valueOf(this.limitedExpansion) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[ExpansionProfileModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("experimental" + "->" + this.experimental + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("includeDesignations" + "->" + this.includeDesignations + "\n"); 
+     builder.append("includeDefinition" + "->" + this.includeDefinition + "\n"); 
+     builder.append("activeOnly" + "->" + this.activeOnly + "\n"); 
+     builder.append("excludeNested" + "->" + this.excludeNested + "\n"); 
+     builder.append("excludeNotForUI" + "->" + this.excludeNotForUI + "\n"); 
+     builder.append("excludePostCoordinated" + "->" + this.excludePostCoordinated + "\n"); 
+     builder.append("displayLanguage" + "->" + this.displayLanguage + "\n"); 
+     builder.append("limitedExpansion" + "->" + this.limitedExpansion + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ExpansionProfileModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("experimental" + "->" + this.experimental + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("contact" + "->" + this.contact + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("useContext" + "->" + this.useContext + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("fixedVersion" + "->" + this.fixedVersion + "\n"); 
+     builder.append("excludedSystem" + "->" + this.excludedSystem + "\n"); 
+     builder.append("includeDesignations" + "->" + this.includeDesignations + "\n"); 
+     builder.append("designation" + "->" + this.designation + "\n"); 
+     builder.append("includeDefinition" + "->" + this.includeDefinition + "\n"); 
+     builder.append("activeOnly" + "->" + this.activeOnly + "\n"); 
+     builder.append("excludeNested" + "->" + this.excludeNested + "\n"); 
+     builder.append("excludeNotForUI" + "->" + this.excludeNotForUI + "\n"); 
+     builder.append("excludePostCoordinated" + "->" + this.excludePostCoordinated + "\n"); 
+     builder.append("displayLanguage" + "->" + this.displayLanguage + "\n"); 
+     builder.append("limitedExpansion" + "->" + this.limitedExpansion + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

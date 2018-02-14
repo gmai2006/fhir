@@ -34,10 +34,5 @@ public interface SubstanceIngredientDao {
   public List<SubstanceIngredient> select(int maxResult);
 
   public List<SubstanceIngredient> selectAll();
-
-  public SubstanceIngredient create(SubstanceIngredient e);
-
-  public SubstanceIngredient update(SubstanceIngredient e);
-
   public void delete(SubstanceIngredient e);
 }

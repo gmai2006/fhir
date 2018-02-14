@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
 @Entity
 @Table(name="contractfriendly")
-public class ContractFriendlyModel  {
+public class ContractFriendlyModel  implements Serializable {
+	private static final long serialVersionUID = 151857669671714494L;
   /**
   * Description: "Human readable rendering of this Contract in a format and representation intended to enhance comprehension and ensure understandability."
-  * Actual type: Attachment
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -53,14 +54,14 @@ public class ContractFriendlyModel  {
   @Column(name="\"contentreference_id\"")
   private String contentreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`contentreference_id`", insertable=false, updatable=false)
-  private ReferenceModel contentReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contentreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> contentReference;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -72,6 +73,7 @@ public class ContractFriendlyModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -80,76 +82,92 @@ public class ContractFriendlyModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ContractFriendlyModel() {
   }
 
-  public ContractFriendlyModel(ContractFriendly o) {
-    this.id = o.getId();
-      this.contentAttachment = Attachment.toJson(o.getContentAttachment());
-      if (null != o.getContentReference()) {
-      	this.contentreference_id = "contentReference" + this.getId();
-        this.contentReference = new ReferenceModel(o.getContentReference());
-        this.contentReference.setId(this.contentreference_id);
-        this.contentReference.parent_id = this.contentReference.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ContractFriendlyModel(ContractFriendly o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.contentAttachment = AttachmentHelper.toJson(o.getContentAttachment());
+    if (null != o.getContentReference() ) {
+    	this.contentreference_id = "contentreference" + this.parent_id;
+    	this.contentReference = ReferenceHelper.toModel(o.getContentReference(), this.contentreference_id);
+    }
   }
 
-  public void setContentAttachment( String value) {
-    this.contentAttachment = value;
-  }
   public String getContentAttachment() {
     return this.contentAttachment;
   }
-  public void setContentReference( ReferenceModel value) {
-    this.contentReference = value;
+  public void setContentAttachment( String value) {
+    this.contentAttachment = value;
   }
-  public ReferenceModel getContentReference() {
+  public java.util.List<ReferenceModel> getContentReference() {
     return this.contentReference;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setContentReference( java.util.List<ReferenceModel> value) {
+    this.contentReference = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("contentAttachment" + "[" + String.valueOf(this.contentAttachment) + "]\n"); 
-     builder.append("contentReference" + "[" + String.valueOf(this.contentReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ContractFriendlyModel]:" + "\n");
+     builder.append("contentAttachment" + "->" + this.contentAttachment + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ContractFriendlyModel]:" + "\n");
+     builder.append("contentAttachment" + "->" + this.contentAttachment + "\n"); 
+     builder.append("contentReference" + "->" + this.contentReference + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

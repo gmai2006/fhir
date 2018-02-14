@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ContactDetailModel;
 import org.fhir.pojo.ContactDetail;
+import org.fhir.pojo.ContactDetailHelper;
 
 public class ContactDetailDaoImpl implements ContactDetailDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ContactDetailDaoImpl implements ContactDetailDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContactDetailModel a", ContactDetailModel.class).setMaxResults(maxResult);
       List<ContactDetailModel> models = query.getResultList();
-      return ContactDetail.fromArray(models);
+      return ContactDetailHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ContactDetailDaoImpl implements ContactDetailDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContactDetailModel a", ContactDetailModel.class);
       List<ContactDetailModel> models = query.getResultList();
-      return ContactDetail.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ContactDetail create(ContactDetail e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ContactDetailModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ContactDetail update(ContactDetail e) {
-      final EntityManager em = entityManagerProvider.get();
-      ContactDetailModel model = em.merge(new ContactDetailModel(e));
-      return new ContactDetail(model);
+      return ContactDetailHelper.fromArray2Array(models);
   }
 
   @Override

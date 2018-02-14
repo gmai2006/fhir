@@ -34,10 +34,5 @@ public interface RiskAssessmentPredictionDao {
   public List<RiskAssessmentPrediction> select(int maxResult);
 
   public List<RiskAssessmentPrediction> selectAll();
-
-  public RiskAssessmentPrediction create(RiskAssessmentPrediction e);
-
-  public RiskAssessmentPrediction update(RiskAssessmentPrediction e);
-
   public void delete(RiskAssessmentPrediction e);
 }

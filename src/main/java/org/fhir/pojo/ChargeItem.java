@@ -227,6 +227,7 @@ public class ChargeItem  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -278,101 +279,78 @@ public class ChargeItem  {
 
   public ChargeItem(ChargeItemModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      this.definition = org.fhir.utils.JsonUtils.json2Array(o.getDefinition());
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.partOf = Reference.fromArray(o.getPartOf());
-
-      this.code = CodeableConcept.fromJson(o.getCode());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getOccurrenceDateTime()) {
-        this.occurrenceDateTime = new String(o.getOccurrenceDateTime());
-      }
-
-      this.occurrencePeriod = Period.fromJson(o.getOccurrencePeriod());
-      this.occurrenceTiming = Timing.fromJson(o.getOccurrenceTiming());
-      this.participant = ChargeItemParticipant.fromArray(o.getParticipant());
-
-      if (null != o.getPerformingOrganization()) {
-        this.performingOrganization = new Reference(o.getPerformingOrganization());
-        this.performingOrganization.setId(this.getId());
-      }
-
-      if (null != o.getRequestingOrganization()) {
-        this.requestingOrganization = new Reference(o.getRequestingOrganization());
-        this.requestingOrganization.setId(this.getId());
-      }
-
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      this.bodysite = CodeableConcept.fromArray(o.getBodysite());
-      if (null != o.getFactorOverride()) {
-        this.factorOverride = new Float(o.getFactorOverride());
-      }
-
-      this.priceOverride = Money.fromJson(o.getPriceOverride());
-      if (null != o.getOverrideReason()) {
-        this.overrideReason = new String(o.getOverrideReason());
-      }
-
-      if (null != o.getEnterer()) {
-        this.enterer = new Reference(o.getEnterer());
-        this.enterer.setId(this.getId());
-      }
-
-      if (null != o.getEnteredDate()) {
-        this.enteredDate = new String(o.getEnteredDate());
-      }
-
-      this.reason = CodeableConcept.fromArray(o.getReason());
-      this.service = Reference.fromArray(o.getService());
-
-      this.account = Reference.fromArray(o.getAccount());
-
-      this.note = Annotation.fromArray(o.getNote());
-      this.supportingInformation = Reference.fromArray(o.getSupportingInformation());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (o.getDefinition() != null) {
+    	this.definition = org.fhir.utils.JsonUtils.json2Array(o.getDefinition());
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+    	this.partOf = ReferenceHelper.fromArray2Array(o.getPartOf());
+    }
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getOccurrenceDateTime()) {
+      this.occurrenceDateTime = o.getOccurrenceDateTime();
+    }
+    this.occurrencePeriod = PeriodHelper.fromJson(o.getOccurrencePeriod());
+    this.occurrenceTiming = TimingHelper.fromJson(o.getOccurrenceTiming());
+    if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
+    	this.participant = ChargeItemParticipantHelper.fromArray2Array(o.getParticipant());
+    }
+    if (null != o.getPerformingOrganization() && !o.getPerformingOrganization().isEmpty()) {
+      this.performingOrganization = new Reference(o.getPerformingOrganization().get(0));
+    }
+    if (null != o.getRequestingOrganization() && !o.getRequestingOrganization().isEmpty()) {
+      this.requestingOrganization = new Reference(o.getRequestingOrganization().get(0));
+    }
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    if (null != o.getFactorOverride()) {
+      this.factorOverride = o.getFactorOverride();
+    }
+    this.priceOverride = MoneyHelper.fromJson(o.getPriceOverride());
+    if (null != o.getOverrideReason()) {
+      this.overrideReason = o.getOverrideReason();
+    }
+    if (null != o.getEnterer() && !o.getEnterer().isEmpty()) {
+      this.enterer = new Reference(o.getEnterer().get(0));
+    }
+    if (null != o.getEnteredDate()) {
+      this.enteredDate = o.getEnteredDate();
+    }
+    if (null != o.getService() && !o.getService().isEmpty()) {
+    	this.service = ReferenceHelper.fromArray2Array(o.getService());
+    }
+    if (null != o.getAccount() && !o.getAccount().isEmpty()) {
+    	this.account = ReferenceHelper.fromArray2Array(o.getAccount());
+    }
+    if (null != o.getSupportingInformation() && !o.getSupportingInformation().isEmpty()) {
+    	this.supportingInformation = ReferenceHelper.fromArray2Array(o.getSupportingInformation());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -637,49 +615,50 @@ public class ChargeItem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("_definition" + "[" + String.valueOf(this._definition) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("occurrenceDateTime" + "[" + String.valueOf(this.occurrenceDateTime) + "]\n"); 
-     builder.append("_occurrenceDateTime" + "[" + String.valueOf(this._occurrenceDateTime) + "]\n"); 
-     builder.append("occurrencePeriod" + "[" + String.valueOf(this.occurrencePeriod) + "]\n"); 
-     builder.append("occurrenceTiming" + "[" + String.valueOf(this.occurrenceTiming) + "]\n"); 
-     builder.append("participant" + "[" + String.valueOf(this.participant) + "]\n"); 
-     builder.append("performingOrganization" + "[" + String.valueOf(this.performingOrganization) + "]\n"); 
-     builder.append("requestingOrganization" + "[" + String.valueOf(this.requestingOrganization) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("bodysite" + "[" + String.valueOf(this.bodysite) + "]\n"); 
-     builder.append("factorOverride" + "[" + String.valueOf(this.factorOverride) + "]\n"); 
-     builder.append("_factorOverride" + "[" + String.valueOf(this._factorOverride) + "]\n"); 
-     builder.append("priceOverride" + "[" + String.valueOf(this.priceOverride) + "]\n"); 
-     builder.append("overrideReason" + "[" + String.valueOf(this.overrideReason) + "]\n"); 
-     builder.append("_overrideReason" + "[" + String.valueOf(this._overrideReason) + "]\n"); 
-     builder.append("enterer" + "[" + String.valueOf(this.enterer) + "]\n"); 
-     builder.append("enteredDate" + "[" + String.valueOf(this.enteredDate) + "]\n"); 
-     builder.append("_enteredDate" + "[" + String.valueOf(this._enteredDate) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("service" + "[" + String.valueOf(this.service) + "]\n"); 
-     builder.append("account" + "[" + String.valueOf(this.account) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("supportingInformation" + "[" + String.valueOf(this.supportingInformation) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[ChargeItem]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this._definition != null) builder.append("_definition" + "->" + this._definition.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.partOf != null) builder.append("partOf" + "->" + this.partOf.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.occurrenceDateTime != null) builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime.toString() + "\n"); 
+     if(this._occurrenceDateTime != null) builder.append("_occurrenceDateTime" + "->" + this._occurrenceDateTime.toString() + "\n"); 
+     if(this.occurrencePeriod != null) builder.append("occurrencePeriod" + "->" + this.occurrencePeriod.toString() + "\n"); 
+     if(this.occurrenceTiming != null) builder.append("occurrenceTiming" + "->" + this.occurrenceTiming.toString() + "\n"); 
+     if(this.participant != null) builder.append("participant" + "->" + this.participant.toString() + "\n"); 
+     if(this.performingOrganization != null) builder.append("performingOrganization" + "->" + this.performingOrganization.toString() + "\n"); 
+     if(this.requestingOrganization != null) builder.append("requestingOrganization" + "->" + this.requestingOrganization.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.bodysite != null) builder.append("bodysite" + "->" + this.bodysite.toString() + "\n"); 
+     if(this.factorOverride != null) builder.append("factorOverride" + "->" + this.factorOverride.toString() + "\n"); 
+     if(this._factorOverride != null) builder.append("_factorOverride" + "->" + this._factorOverride.toString() + "\n"); 
+     if(this.priceOverride != null) builder.append("priceOverride" + "->" + this.priceOverride.toString() + "\n"); 
+     if(this.overrideReason != null) builder.append("overrideReason" + "->" + this.overrideReason.toString() + "\n"); 
+     if(this._overrideReason != null) builder.append("_overrideReason" + "->" + this._overrideReason.toString() + "\n"); 
+     if(this.enterer != null) builder.append("enterer" + "->" + this.enterer.toString() + "\n"); 
+     if(this.enteredDate != null) builder.append("enteredDate" + "->" + this.enteredDate.toString() + "\n"); 
+     if(this._enteredDate != null) builder.append("_enteredDate" + "->" + this._enteredDate.toString() + "\n"); 
+     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); 
+     if(this.service != null) builder.append("service" + "->" + this.service.toString() + "\n"); 
+     if(this.account != null) builder.append("account" + "->" + this.account.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.supportingInformation != null) builder.append("supportingInformation" + "->" + this.supportingInformation.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -719,36 +698,4 @@ public class ChargeItem  {
   	}
   }
 
-  public static java.util.List<ChargeItem> fromArray(java.util.List<ChargeItemModel> list) {
-    return (java.util.List<ChargeItem>)list.stream()
-      .map(model -> new ChargeItem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ChargeItemModel> toModelArray(java.util.List<ChargeItem> list) {
-    return (java.util.List<ChargeItemModel>)list.stream()
-      .map(model -> new ChargeItemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ChargeItem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ChargeItem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ChargeItem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ChargeItem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AccountCoverageModel;
 import org.fhir.pojo.AccountCoverage;
+import org.fhir.pojo.AccountCoverageHelper;
 
 public class AccountCoverageDaoImpl implements AccountCoverageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AccountCoverageDaoImpl implements AccountCoverageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AccountCoverageModel a", AccountCoverageModel.class).setMaxResults(maxResult);
       List<AccountCoverageModel> models = query.getResultList();
-      return AccountCoverage.fromArray(models);
+      return AccountCoverageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class AccountCoverageDaoImpl implements AccountCoverageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AccountCoverageModel a", AccountCoverageModel.class);
       List<AccountCoverageModel> models = query.getResultList();
-      return AccountCoverage.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public AccountCoverage create(AccountCoverage e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new AccountCoverageModel(e));
-      return e;
-  }
-
-  @Transactional
-  public AccountCoverage update(AccountCoverage e) {
-      final EntityManager em = entityManagerProvider.get();
-      AccountCoverageModel model = em.merge(new AccountCoverageModel(e));
-      return new AccountCoverage(model);
+      return AccountCoverageHelper.fromArray2Array(models);
   }
 
   @Override

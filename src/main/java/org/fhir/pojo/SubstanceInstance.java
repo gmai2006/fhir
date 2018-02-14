@@ -64,6 +64,7 @@ public class SubstanceInstance  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -85,18 +86,14 @@ public class SubstanceInstance  {
 
   public SubstanceInstance(SubstanceInstanceModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getExpiry()) {
-        this.expiry = new String(o.getExpiry());
-      }
-
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getExpiry()) {
+      this.expiry = o.getExpiry();
+    }
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( Identifier value) {
@@ -151,48 +148,17 @@ public class SubstanceInstance  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("expiry" + "[" + String.valueOf(this.expiry) + "]\n"); 
-     builder.append("_expiry" + "[" + String.valueOf(this._expiry) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SubstanceInstance]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.expiry != null) builder.append("expiry" + "->" + this.expiry.toString() + "\n"); 
+     if(this._expiry != null) builder.append("_expiry" + "->" + this._expiry.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<SubstanceInstance> fromArray(java.util.List<SubstanceInstanceModel> list) {
-    return (java.util.List<SubstanceInstance>)list.stream()
-      .map(model -> new SubstanceInstance(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SubstanceInstanceModel> toModelArray(java.util.List<SubstanceInstance> list) {
-    return (java.util.List<SubstanceInstanceModel>)list.stream()
-      .map(model -> new SubstanceInstanceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SubstanceInstance fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SubstanceInstance.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SubstanceInstance o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SubstanceInstance> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

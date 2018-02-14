@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PlanDefinitionConditionModel;
 import org.fhir.pojo.PlanDefinitionCondition;
+import org.fhir.pojo.PlanDefinitionConditionHelper;
 
 public class PlanDefinitionConditionDaoImpl implements PlanDefinitionConditionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PlanDefinitionConditionDaoImpl implements PlanDefinitionConditionDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PlanDefinitionConditionModel a", PlanDefinitionConditionModel.class).setMaxResults(maxResult);
       List<PlanDefinitionConditionModel> models = query.getResultList();
-      return PlanDefinitionCondition.fromArray(models);
+      return PlanDefinitionConditionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PlanDefinitionConditionDaoImpl implements PlanDefinitionConditionDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PlanDefinitionConditionModel a", PlanDefinitionConditionModel.class);
       List<PlanDefinitionConditionModel> models = query.getResultList();
-      return PlanDefinitionCondition.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PlanDefinitionCondition create(PlanDefinitionCondition e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PlanDefinitionConditionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PlanDefinitionCondition update(PlanDefinitionCondition e) {
-      final EntityManager em = entityManagerProvider.get();
-      PlanDefinitionConditionModel model = em.merge(new PlanDefinitionConditionModel(e));
-      return new PlanDefinitionCondition(model);
+      return PlanDefinitionConditionHelper.fromArray2Array(models);
   }
 
   @Override

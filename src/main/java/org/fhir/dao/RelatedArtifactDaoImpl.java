@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.RelatedArtifactModel;
 import org.fhir.pojo.RelatedArtifact;
+import org.fhir.pojo.RelatedArtifactHelper;
 
 public class RelatedArtifactDaoImpl implements RelatedArtifactDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class RelatedArtifactDaoImpl implements RelatedArtifactDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RelatedArtifactModel a", RelatedArtifactModel.class).setMaxResults(maxResult);
       List<RelatedArtifactModel> models = query.getResultList();
-      return RelatedArtifact.fromArray(models);
+      return RelatedArtifactHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class RelatedArtifactDaoImpl implements RelatedArtifactDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RelatedArtifactModel a", RelatedArtifactModel.class);
       List<RelatedArtifactModel> models = query.getResultList();
-      return RelatedArtifact.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public RelatedArtifact create(RelatedArtifact e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new RelatedArtifactModel(e));
-      return e;
-  }
-
-  @Transactional
-  public RelatedArtifact update(RelatedArtifact e) {
-      final EntityManager em = entityManagerProvider.get();
-      RelatedArtifactModel model = em.merge(new RelatedArtifactModel(e));
-      return new RelatedArtifact(model);
+      return RelatedArtifactHelper.fromArray2Array(models);
   }
 
   @Override

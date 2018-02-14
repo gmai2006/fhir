@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A person who is directly or indirectly involved in the provisioning of healthcare."
 */
 @Entity
 @Table(name="practitioner")
-public class PractitionerModel  {
+public class PractitionerModel  implements Serializable {
+	private static final long serialVersionUID = 151857669710153932L;
   /**
   * Description: "This is a Practitioner resource"
   */
@@ -47,7 +48,7 @@ public class PractitionerModel  {
 
   /**
   * Description: "An identifier that applies to this person in this role."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -63,7 +64,7 @@ public class PractitionerModel  {
 
   /**
   * Description: "The name(s) associated with the practitioner."
-  * Actual type: Array of HumanName-> List<HumanName>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -72,7 +73,7 @@ public class PractitionerModel  {
 
   /**
   * Description: "A contact detail for the practitioner, e.g. a telephone number or an email address."
-  * Actual type: Array of ContactPoint-> List<ContactPoint>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -81,7 +82,7 @@ public class PractitionerModel  {
 
   /**
   * Description: "Address(es) of the practitioner that are not role specific (typically home address). \rWork addresses are not typically entered in this property as they are usually role dependent."
-  * Actual type: Array of Address-> List<Address>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -105,7 +106,7 @@ public class PractitionerModel  {
 
   /**
   * Description: "Image of the person."
-  * Actual type: Array of Attachment-> List<Attachment>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -115,13 +116,17 @@ public class PractitionerModel  {
   /**
   * Description: "Qualifications obtained by training and certification."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<PractitionerQualificationModel> qualification = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"qualification_id\"")
+  private String qualification_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="qualification_id", insertable=false, updatable=false)
+  private java.util.List<PractitionerQualificationModel> qualification;
 
   /**
   * Description: "A language the practitioner is able to use in patient communication."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -136,14 +141,14 @@ public class PractitionerModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -153,7 +158,7 @@ public class PractitionerModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -163,7 +168,7 @@ public class PractitionerModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -175,6 +180,7 @@ public class PractitionerModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -189,9 +195,9 @@ public class PractitionerModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -212,191 +218,191 @@ public class PractitionerModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public PractitionerModel() {
   }
 
   public PractitionerModel(Practitioner o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.active = o.getActive();
-
-      this.name = HumanName.toJson(o.getName());
-      this.telecom = ContactPoint.toJson(o.getTelecom());
-      this.address = Address.toJson(o.getAddress());
-      this.gender = o.getGender();
-
-      this.birthDate = o.getBirthDate();
-
-      this.photo = Attachment.toJson(o.getPhoto());
-      this.qualification = PractitionerQualification.toModelArray(o.getQualification());
-
-      this.communication = CodeableConcept.toJson(o.getCommunication());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.active = o.getActive();
+    this.gender = o.getGender();
+    this.birthDate = o.getBirthDate();
+    if (null != o.getQualification() && !o.getQualification().isEmpty()) {
+    	this.qualification_id = "qualification" + this.id;
+    	this.qualification = PractitionerQualificationHelper.toModelFromArray(o.getQualification(), this.qualification_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setActive( Boolean value) {
-    this.active = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public Boolean getActive() {
     return this.active;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setActive( Boolean value) {
+    this.active = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setTelecom( String value) {
-    this.telecom = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getTelecom() {
     return this.telecom;
   }
-  public void setAddress( String value) {
-    this.address = value;
+  public void setTelecom( String value) {
+    this.telecom = value;
   }
   public String getAddress() {
     return this.address;
   }
-  public void setGender( String value) {
-    this.gender = value;
+  public void setAddress( String value) {
+    this.address = value;
   }
   public String getGender() {
     return this.gender;
   }
-  public void setBirthDate( String value) {
-    this.birthDate = value;
+  public void setGender( String value) {
+    this.gender = value;
   }
   public String getBirthDate() {
     return this.birthDate;
   }
-  public void setPhoto( String value) {
-    this.photo = value;
+  public void setBirthDate( String value) {
+    this.birthDate = value;
   }
   public String getPhoto() {
     return this.photo;
   }
-  public void setQualification( java.util.List<PractitionerQualificationModel> value) {
-    this.qualification = value;
+  public void setPhoto( String value) {
+    this.photo = value;
   }
   public java.util.List<PractitionerQualificationModel> getQualification() {
     return this.qualification;
   }
-  public void setCommunication( String value) {
-    this.communication = value;
+  public void setQualification( java.util.List<PractitionerQualificationModel> value) {
+    this.qualification = value;
   }
   public String getCommunication() {
     return this.communication;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setCommunication( String value) {
+    this.communication = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("active" + "[" + String.valueOf(this.active) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("telecom" + "[" + String.valueOf(this.telecom) + "]\n"); 
-     builder.append("address" + "[" + String.valueOf(this.address) + "]\n"); 
-     builder.append("gender" + "[" + String.valueOf(this.gender) + "]\n"); 
-     builder.append("birthDate" + "[" + String.valueOf(this.birthDate) + "]\n"); 
-     builder.append("photo" + "[" + String.valueOf(this.photo) + "]\n"); 
-     builder.append("qualification" + "[" + String.valueOf(this.qualification) + "]\n"); 
-     builder.append("communication" + "[" + String.valueOf(this.communication) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[PractitionerModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("active" + "->" + this.active + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("telecom" + "->" + this.telecom + "\n"); 
+     builder.append("address" + "->" + this.address + "\n"); 
+     builder.append("gender" + "->" + this.gender + "\n"); 
+     builder.append("birthDate" + "->" + this.birthDate + "\n"); 
+     builder.append("photo" + "->" + this.photo + "\n"); 
+     builder.append("communication" + "->" + this.communication + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[PractitionerModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("active" + "->" + this.active + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("telecom" + "->" + this.telecom + "\n"); 
+     builder.append("address" + "->" + this.address + "\n"); 
+     builder.append("gender" + "->" + this.gender + "\n"); 
+     builder.append("birthDate" + "->" + this.birthDate + "\n"); 
+     builder.append("photo" + "->" + this.photo + "\n"); 
+     builder.append("qualification" + "->" + this.qualification + "\n"); 
+     builder.append("communication" + "->" + this.communication + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

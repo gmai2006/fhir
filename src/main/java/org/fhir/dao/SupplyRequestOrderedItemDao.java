@@ -34,10 +34,5 @@ public interface SupplyRequestOrderedItemDao {
   public List<SupplyRequestOrderedItem> select(int maxResult);
 
   public List<SupplyRequestOrderedItem> selectAll();
-
-  public SupplyRequestOrderedItem create(SupplyRequestOrderedItem e);
-
-  public SupplyRequestOrderedItem update(SupplyRequestOrderedItem e);
-
   public void delete(SupplyRequestOrderedItem e);
 }

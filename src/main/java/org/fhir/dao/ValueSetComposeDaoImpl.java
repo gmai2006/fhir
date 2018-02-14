@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ValueSetComposeModel;
 import org.fhir.pojo.ValueSetCompose;
+import org.fhir.pojo.ValueSetComposeHelper;
 
 public class ValueSetComposeDaoImpl implements ValueSetComposeDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ValueSetComposeDaoImpl implements ValueSetComposeDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetComposeModel a", ValueSetComposeModel.class).setMaxResults(maxResult);
       List<ValueSetComposeModel> models = query.getResultList();
-      return ValueSetCompose.fromArray(models);
+      return ValueSetComposeHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ValueSetComposeDaoImpl implements ValueSetComposeDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetComposeModel a", ValueSetComposeModel.class);
       List<ValueSetComposeModel> models = query.getResultList();
-      return ValueSetCompose.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ValueSetCompose create(ValueSetCompose e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ValueSetComposeModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ValueSetCompose update(ValueSetCompose e) {
-      final EntityManager em = entityManagerProvider.get();
-      ValueSetComposeModel model = em.merge(new ValueSetComposeModel(e));
-      return new ValueSetCompose(model);
+      return ValueSetComposeHelper.fromArray2Array(models);
   }
 
   @Override

@@ -32,7 +32,5 @@ public interface MedicationAdministrationPerformerService {
 	public MedicationAdministrationPerformer find(String id);
   public List<MedicationAdministrationPerformer> select(int maxResult);
   public List<MedicationAdministrationPerformer> selectAll();
-  public MedicationAdministrationPerformer create(MedicationAdministrationPerformer bean);
-  public MedicationAdministrationPerformer update(MedicationAdministrationPerformer bean);
   public void delete(MedicationAdministrationPerformer bean);
 }

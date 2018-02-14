@@ -88,6 +88,7 @@ public class EncounterHospitalization  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -109,29 +110,19 @@ public class EncounterHospitalization  {
 
   public EncounterHospitalization(EncounterHospitalizationModel o) {
     this.id = o.getId();
-      this.preAdmissionIdentifier = Identifier.fromJson(o.getPreAdmissionIdentifier());
-      if (null != o.getOrigin()) {
-        this.origin = new Reference(o.getOrigin());
-        this.origin.setId(this.getId());
-      }
-
-      this.admitSource = CodeableConcept.fromJson(o.getAdmitSource());
-      this.reAdmission = CodeableConcept.fromJson(o.getReAdmission());
-      this.dietPreference = CodeableConcept.fromArray(o.getDietPreference());
-      this.specialCourtesy = CodeableConcept.fromArray(o.getSpecialCourtesy());
-      this.specialArrangement = CodeableConcept.fromArray(o.getSpecialArrangement());
-      if (null != o.getDestination()) {
-        this.destination = new Reference(o.getDestination());
-        this.destination.setId(this.getId());
-      }
-
-      this.dischargeDisposition = CodeableConcept.fromJson(o.getDischargeDisposition());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.preAdmissionIdentifier = IdentifierHelper.fromJson(o.getPreAdmissionIdentifier());
+    if (null != o.getOrigin() && !o.getOrigin().isEmpty()) {
+      this.origin = new Reference(o.getOrigin().get(0));
+    }
+    this.admitSource = CodeableConceptHelper.fromJson(o.getAdmitSource());
+    this.reAdmission = CodeableConceptHelper.fromJson(o.getReAdmission());
+    if (null != o.getDestination() && !o.getDestination().isEmpty()) {
+      this.destination = new Reference(o.getDestination().get(0));
+    }
+    this.dischargeDisposition = CodeableConceptHelper.fromJson(o.getDischargeDisposition());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setPreAdmissionIdentifier( Identifier value) {
@@ -216,53 +207,22 @@ public class EncounterHospitalization  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("preAdmissionIdentifier" + "[" + String.valueOf(this.preAdmissionIdentifier) + "]\n"); 
-     builder.append("origin" + "[" + String.valueOf(this.origin) + "]\n"); 
-     builder.append("admitSource" + "[" + String.valueOf(this.admitSource) + "]\n"); 
-     builder.append("reAdmission" + "[" + String.valueOf(this.reAdmission) + "]\n"); 
-     builder.append("dietPreference" + "[" + String.valueOf(this.dietPreference) + "]\n"); 
-     builder.append("specialCourtesy" + "[" + String.valueOf(this.specialCourtesy) + "]\n"); 
-     builder.append("specialArrangement" + "[" + String.valueOf(this.specialArrangement) + "]\n"); 
-     builder.append("destination" + "[" + String.valueOf(this.destination) + "]\n"); 
-     builder.append("dischargeDisposition" + "[" + String.valueOf(this.dischargeDisposition) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[EncounterHospitalization]:" + "\n");
+     if(this.preAdmissionIdentifier != null) builder.append("preAdmissionIdentifier" + "->" + this.preAdmissionIdentifier.toString() + "\n"); 
+     if(this.origin != null) builder.append("origin" + "->" + this.origin.toString() + "\n"); 
+     if(this.admitSource != null) builder.append("admitSource" + "->" + this.admitSource.toString() + "\n"); 
+     if(this.reAdmission != null) builder.append("reAdmission" + "->" + this.reAdmission.toString() + "\n"); 
+     if(this.dietPreference != null) builder.append("dietPreference" + "->" + this.dietPreference.toString() + "\n"); 
+     if(this.specialCourtesy != null) builder.append("specialCourtesy" + "->" + this.specialCourtesy.toString() + "\n"); 
+     if(this.specialArrangement != null) builder.append("specialArrangement" + "->" + this.specialArrangement.toString() + "\n"); 
+     if(this.destination != null) builder.append("destination" + "->" + this.destination.toString() + "\n"); 
+     if(this.dischargeDisposition != null) builder.append("dischargeDisposition" + "->" + this.dischargeDisposition.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<EncounterHospitalization> fromArray(java.util.List<EncounterHospitalizationModel> list) {
-    return (java.util.List<EncounterHospitalization>)list.stream()
-      .map(model -> new EncounterHospitalization(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<EncounterHospitalizationModel> toModelArray(java.util.List<EncounterHospitalization> list) {
-    return (java.util.List<EncounterHospitalizationModel>)list.stream()
-      .map(model -> new EncounterHospitalizationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static EncounterHospitalization fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, EncounterHospitalization.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(EncounterHospitalization o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<EncounterHospitalization> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

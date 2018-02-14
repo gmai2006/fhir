@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.LinkageItemModel;
 import org.fhir.pojo.LinkageItem;
+import org.fhir.pojo.LinkageItemHelper;
 
 public class LinkageItemDaoImpl implements LinkageItemDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class LinkageItemDaoImpl implements LinkageItemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from LinkageItemModel a", LinkageItemModel.class).setMaxResults(maxResult);
       List<LinkageItemModel> models = query.getResultList();
-      return LinkageItem.fromArray(models);
+      return LinkageItemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class LinkageItemDaoImpl implements LinkageItemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from LinkageItemModel a", LinkageItemModel.class);
       List<LinkageItemModel> models = query.getResultList();
-      return LinkageItem.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public LinkageItem create(LinkageItem e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new LinkageItemModel(e));
-      return e;
-  }
-
-  @Transactional
-  public LinkageItem update(LinkageItem e) {
-      final EntityManager em = entityManagerProvider.get();
-      LinkageItemModel model = em.merge(new LinkageItemModel(e));
-      return new LinkageItem(model);
+      return LinkageItemHelper.fromArray2Array(models);
   }
 
   @Override

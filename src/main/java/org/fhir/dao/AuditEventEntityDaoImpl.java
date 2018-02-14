@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AuditEventEntityModel;
 import org.fhir.pojo.AuditEventEntity;
+import org.fhir.pojo.AuditEventEntityHelper;
 
 public class AuditEventEntityDaoImpl implements AuditEventEntityDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AuditEventEntityDaoImpl implements AuditEventEntityDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AuditEventEntityModel a", AuditEventEntityModel.class).setMaxResults(maxResult);
       List<AuditEventEntityModel> models = query.getResultList();
-      return AuditEventEntity.fromArray(models);
+      return AuditEventEntityHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class AuditEventEntityDaoImpl implements AuditEventEntityDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AuditEventEntityModel a", AuditEventEntityModel.class);
       List<AuditEventEntityModel> models = query.getResultList();
-      return AuditEventEntity.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public AuditEventEntity create(AuditEventEntity e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new AuditEventEntityModel(e));
-      return e;
-  }
-
-  @Transactional
-  public AuditEventEntity update(AuditEventEntity e) {
-      final EntityManager em = entityManagerProvider.get();
-      AuditEventEntityModel model = em.merge(new AuditEventEntityModel(e));
-      return new AuditEventEntity(model);
+      return AuditEventEntityHelper.fromArray2Array(models);
   }
 
   @Override

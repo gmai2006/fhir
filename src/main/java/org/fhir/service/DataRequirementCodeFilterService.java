@@ -32,7 +32,5 @@ public interface DataRequirementCodeFilterService {
 	public DataRequirementCodeFilter find(String id);
   public List<DataRequirementCodeFilter> select(int maxResult);
   public List<DataRequirementCodeFilter> selectAll();
-  public DataRequirementCodeFilter create(DataRequirementCodeFilter bean);
-  public DataRequirementCodeFilter update(DataRequirementCodeFilter bean);
   public void delete(DataRequirementCodeFilter bean);
 }

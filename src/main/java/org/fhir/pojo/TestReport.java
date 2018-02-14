@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.TestReportModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -159,6 +160,7 @@ public class TestReport  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -205,7 +207,64 @@ public class TestReport  {
   */
   private transient Element _language;
 
-  public TestReport() {}
+  public TestReport() {
+  }
+
+  public TestReport(TestReportModel o) {
+    this.id = o.getId();
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getTestScript() && !o.getTestScript().isEmpty()) {
+      this.testScript = new Reference(o.getTestScript().get(0));
+    }
+    if (null != o.getResult()) {
+      this.result = o.getResult();
+    }
+    if (null != o.getScore()) {
+      this.score = o.getScore();
+    }
+    if (null != o.getTester()) {
+      this.tester = o.getTester();
+    }
+    if (null != o.getIssued()) {
+      this.issued = o.getIssued();
+    }
+    if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
+    	this.participant = TestReportParticipantHelper.fromArray2Array(o.getParticipant());
+    }
+    if (null != o.getSetup() && !o.getSetup().isEmpty()) {
+      this.setup = new TestReportSetup(o.getSetup().get(0));
+    }
+    if (null != o.getTest() && !o.getTest().isEmpty()) {
+    	this.test = TestReportTestHelper.fromArray2Array(o.getTest());
+    }
+    if (null != o.getTeardown() && !o.getTeardown().isEmpty()) {
+      this.teardown = new TestReportTeardown(o.getTeardown().get(0));
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
+  }
 
   public void setResourceType( String value) {
     this.resourceType = ResourceTypeEnum.fromCode(value);
@@ -391,57 +450,38 @@ public class TestReport  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("testScript" + "[" + String.valueOf(this.testScript) + "]\n"); 
-     builder.append("result" + "[" + String.valueOf(this.result) + "]\n"); 
-     builder.append("_result" + "[" + String.valueOf(this._result) + "]\n"); 
-     builder.append("score" + "[" + String.valueOf(this.score) + "]\n"); 
-     builder.append("_score" + "[" + String.valueOf(this._score) + "]\n"); 
-     builder.append("tester" + "[" + String.valueOf(this.tester) + "]\n"); 
-     builder.append("_tester" + "[" + String.valueOf(this._tester) + "]\n"); 
-     builder.append("issued" + "[" + String.valueOf(this.issued) + "]\n"); 
-     builder.append("_issued" + "[" + String.valueOf(this._issued) + "]\n"); 
-     builder.append("participant" + "[" + String.valueOf(this.participant) + "]\n"); 
-     builder.append("setup" + "[" + String.valueOf(this.setup) + "]\n"); 
-     builder.append("test" + "[" + String.valueOf(this.test) + "]\n"); 
-     builder.append("teardown" + "[" + String.valueOf(this.teardown) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[TestReport]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.testScript != null) builder.append("testScript" + "->" + this.testScript.toString() + "\n"); 
+     if(this.result != null) builder.append("result" + "->" + this.result.toString() + "\n"); 
+     if(this._result != null) builder.append("_result" + "->" + this._result.toString() + "\n"); 
+     if(this.score != null) builder.append("score" + "->" + this.score.toString() + "\n"); 
+     if(this._score != null) builder.append("_score" + "->" + this._score.toString() + "\n"); 
+     if(this.tester != null) builder.append("tester" + "->" + this.tester.toString() + "\n"); 
+     if(this._tester != null) builder.append("_tester" + "->" + this._tester.toString() + "\n"); 
+     if(this.issued != null) builder.append("issued" + "->" + this.issued.toString() + "\n"); 
+     if(this._issued != null) builder.append("_issued" + "->" + this._issued.toString() + "\n"); 
+     if(this.participant != null) builder.append("participant" + "->" + this.participant.toString() + "\n"); 
+     if(this.setup != null) builder.append("setup" + "->" + this.setup.toString() + "\n"); 
+     if(this.test != null) builder.append("test" + "->" + this.test.toString() + "\n"); 
+     if(this.teardown != null) builder.append("teardown" + "->" + this.teardown.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static TestReport fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TestReport.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TestReport o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TestReport> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum ResourceTypeEnum {
@@ -454,7 +494,9 @@ public class TestReport  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum StatusEnum {
+  }
+
+  public enum StatusEnum {
   	completed,
   	inprogress,
   	waiting,
@@ -472,7 +514,9 @@ public class TestReport  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum ResultEnum {
+  }
+
+  public enum ResultEnum {
   	pass,
   	fail,
   	pending,
@@ -487,4 +531,5 @@ public class TestReport  {
   		}
   	}
   }
+
 }

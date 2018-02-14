@@ -34,10 +34,5 @@ public interface ReferralRequestRequesterDao {
   public List<ReferralRequestRequester> select(int maxResult);
 
   public List<ReferralRequestRequester> selectAll();
-
-  public ReferralRequestRequester create(ReferralRequestRequester e);
-
-  public ReferralRequestRequester update(ReferralRequestRequester e);
-
   public void delete(ReferralRequestRequester e);
 }

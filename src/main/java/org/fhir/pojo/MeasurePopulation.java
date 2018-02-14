@@ -83,6 +83,7 @@ public class MeasurePopulation  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -104,26 +105,20 @@ public class MeasurePopulation  {
 
   public MeasurePopulation(MeasurePopulationModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      this.code = CodeableConcept.fromJson(o.getCode());
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getCriteria()) {
-        this.criteria = new String(o.getCriteria());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getCriteria()) {
+      this.criteria = o.getCriteria();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( Identifier value) {
@@ -202,52 +197,21 @@ public class MeasurePopulation  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("criteria" + "[" + String.valueOf(this.criteria) + "]\n"); 
-     builder.append("_criteria" + "[" + String.valueOf(this._criteria) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MeasurePopulation]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.criteria != null) builder.append("criteria" + "->" + this.criteria.toString() + "\n"); 
+     if(this._criteria != null) builder.append("_criteria" + "->" + this._criteria.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MeasurePopulation> fromArray(java.util.List<MeasurePopulationModel> list) {
-    return (java.util.List<MeasurePopulation>)list.stream()
-      .map(model -> new MeasurePopulation(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MeasurePopulationModel> toModelArray(java.util.List<MeasurePopulation> list) {
-    return (java.util.List<MeasurePopulationModel>)list.stream()
-      .map(model -> new MeasurePopulationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MeasurePopulation fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MeasurePopulation.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MeasurePopulation o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MeasurePopulation> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

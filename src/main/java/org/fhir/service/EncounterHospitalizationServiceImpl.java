@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public EncounterHospitalization create(EncounterHospitalization bean) {
-  	requireNonNull(bean);
-    logger.info("create(EncounterHospitalization={}) - entered bean ");
-
-    final EncounterHospitalization result = dao.create(bean);
-
-    logger.info("create(EncounterHospitalization) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public EncounterHospitalization update(EncounterHospitalization bean) {
-  	requireNonNull(bean);
-    logger.info("update(EncounterHospitalization={}) - entered bean ");
-
-    final EncounterHospitalization result = dao.update(bean);
-
-    logger.info("update(EncounterHospitalization) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

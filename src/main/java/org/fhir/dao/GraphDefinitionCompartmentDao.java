@@ -34,10 +34,5 @@ public interface GraphDefinitionCompartmentDao {
   public List<GraphDefinitionCompartment> select(int maxResult);
 
   public List<GraphDefinitionCompartment> selectAll();
-
-  public GraphDefinitionCompartment create(GraphDefinitionCompartment e);
-
-  public GraphDefinitionCompartment update(GraphDefinitionCompartment e);
-
   public void delete(GraphDefinitionCompartment e);
 }

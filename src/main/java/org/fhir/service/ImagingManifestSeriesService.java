@@ -32,7 +32,5 @@ public interface ImagingManifestSeriesService {
 	public ImagingManifestSeries find(String id);
   public List<ImagingManifestSeries> select(int maxResult);
   public List<ImagingManifestSeries> selectAll();
-  public ImagingManifestSeries create(ImagingManifestSeries bean);
-  public ImagingManifestSeries update(ImagingManifestSeries bean);
   public void delete(ImagingManifestSeries bean);
 }

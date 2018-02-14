@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SubstanceIngredientModel;
 import org.fhir.pojo.SubstanceIngredient;
+import org.fhir.pojo.SubstanceIngredientHelper;
 
 public class SubstanceIngredientDaoImpl implements SubstanceIngredientDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SubstanceIngredientDaoImpl implements SubstanceIngredientDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SubstanceIngredientModel a", SubstanceIngredientModel.class).setMaxResults(maxResult);
       List<SubstanceIngredientModel> models = query.getResultList();
-      return SubstanceIngredient.fromArray(models);
+      return SubstanceIngredientHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SubstanceIngredientDaoImpl implements SubstanceIngredientDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SubstanceIngredientModel a", SubstanceIngredientModel.class);
       List<SubstanceIngredientModel> models = query.getResultList();
-      return SubstanceIngredient.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SubstanceIngredient create(SubstanceIngredient e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SubstanceIngredientModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SubstanceIngredient update(SubstanceIngredient e) {
-      final EntityManager em = entityManagerProvider.get();
-      SubstanceIngredientModel model = em.merge(new SubstanceIngredientModel(e));
-      return new SubstanceIngredient(model);
+      return SubstanceIngredientHelper.fromArray2Array(models);
   }
 
   @Override

@@ -34,10 +34,5 @@ public interface NutritionOrderEnteralFormulaDao {
   public List<NutritionOrderEnteralFormula> select(int maxResult);
 
   public List<NutritionOrderEnteralFormula> selectAll();
-
-  public NutritionOrderEnteralFormula create(NutritionOrderEnteralFormula e);
-
-  public NutritionOrderEnteralFormula update(NutritionOrderEnteralFormula e);
-
   public void delete(NutritionOrderEnteralFormula e);
 }

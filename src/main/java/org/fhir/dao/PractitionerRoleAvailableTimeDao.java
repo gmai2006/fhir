@@ -34,10 +34,5 @@ public interface PractitionerRoleAvailableTimeDao {
   public List<PractitionerRoleAvailableTime> select(int maxResult);
 
   public List<PractitionerRoleAvailableTime> selectAll();
-
-  public PractitionerRoleAvailableTime create(PractitionerRoleAvailableTime e);
-
-  public PractitionerRoleAvailableTime update(PractitionerRoleAvailableTime e);
-
   public void delete(PractitionerRoleAvailableTime e);
 }

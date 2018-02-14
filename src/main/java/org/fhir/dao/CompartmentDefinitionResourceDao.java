@@ -34,10 +34,5 @@ public interface CompartmentDefinitionResourceDao {
   public List<CompartmentDefinitionResource> select(int maxResult);
 
   public List<CompartmentDefinitionResource> selectAll();
-
-  public CompartmentDefinitionResource create(CompartmentDefinitionResource e);
-
-  public CompartmentDefinitionResource update(CompartmentDefinitionResource e);
-
   public void delete(CompartmentDefinitionResource e);
 }

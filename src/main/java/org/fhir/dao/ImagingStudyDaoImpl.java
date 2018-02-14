@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImagingStudyModel;
 import org.fhir.pojo.ImagingStudy;
+import org.fhir.pojo.ImagingStudyHelper;
 
 public class ImagingStudyDaoImpl implements ImagingStudyDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImagingStudyDaoImpl implements ImagingStudyDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImagingStudyModel a", ImagingStudyModel.class).setMaxResults(maxResult);
       List<ImagingStudyModel> models = query.getResultList();
-      return ImagingStudy.fromArray(models);
+      return ImagingStudyHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ImagingStudyDaoImpl implements ImagingStudyDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImagingStudyModel a", ImagingStudyModel.class);
       List<ImagingStudyModel> models = query.getResultList();
-      return ImagingStudy.fromArray(models);
+      return ImagingStudyHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ImagingStudyDaoImpl implements ImagingStudyDao {
       ImagingStudyModel model = em.merge(new ImagingStudyModel(e));
       return new ImagingStudy(model);
   }
-
   @Override
   @Transactional
   public void delete(ImagingStudy e) {

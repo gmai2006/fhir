@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PaymentReconciliationModel;
 import org.fhir.pojo.PaymentReconciliation;
+import org.fhir.pojo.PaymentReconciliationHelper;
 
 public class PaymentReconciliationDaoImpl implements PaymentReconciliationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PaymentReconciliationDaoImpl implements PaymentReconciliationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PaymentReconciliationModel a", PaymentReconciliationModel.class).setMaxResults(maxResult);
       List<PaymentReconciliationModel> models = query.getResultList();
-      return PaymentReconciliation.fromArray(models);
+      return PaymentReconciliationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class PaymentReconciliationDaoImpl implements PaymentReconciliationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PaymentReconciliationModel a", PaymentReconciliationModel.class);
       List<PaymentReconciliationModel> models = query.getResultList();
-      return PaymentReconciliation.fromArray(models);
+      return PaymentReconciliationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class PaymentReconciliationDaoImpl implements PaymentReconciliationDao {
       PaymentReconciliationModel model = em.merge(new PaymentReconciliationModel(e));
       return new PaymentReconciliation(model);
   }
-
   @Override
   @Transactional
   public void delete(PaymentReconciliation e) {

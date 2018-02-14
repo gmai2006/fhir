@@ -57,6 +57,7 @@ public class UsageContext  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -76,15 +77,13 @@ public class UsageContext  {
 
   public UsageContext(UsageContextModel o) {
     this.id = o.getId();
-      this.code = Coding.fromJson(o.getCode());
-      this.valueCodeableConcept = CodeableConcept.fromJson(o.getValueCodeableConcept());
-      this.valueQuantity = Quantity.fromJson(o.getValueQuantity());
-      this.valueRange = Range.fromJson(o.getValueRange());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.code = CodingHelper.fromJson(o.getCode());
+    this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
+    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    this.valueRange = RangeHelper.fromJson(o.getValueRange());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( Coding value) {
@@ -133,47 +132,16 @@ public class UsageContext  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("valueCodeableConcept" + "[" + String.valueOf(this.valueCodeableConcept) + "]\n"); 
-     builder.append("valueQuantity" + "[" + String.valueOf(this.valueQuantity) + "]\n"); 
-     builder.append("valueRange" + "[" + String.valueOf(this.valueRange) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[UsageContext]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.valueCodeableConcept != null) builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept.toString() + "\n"); 
+     if(this.valueQuantity != null) builder.append("valueQuantity" + "->" + this.valueQuantity.toString() + "\n"); 
+     if(this.valueRange != null) builder.append("valueRange" + "->" + this.valueRange.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<UsageContext> fromArray(java.util.List<UsageContextModel> list) {
-    return (java.util.List<UsageContext>)list.stream()
-      .map(model -> new UsageContext(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<UsageContextModel> toModelArray(java.util.List<UsageContext> list) {
-    return (java.util.List<UsageContextModel>)list.stream()
-      .map(model -> new UsageContextModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static UsageContext fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, UsageContext.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(UsageContext o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<UsageContext> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -34,10 +34,5 @@ public interface ValueSetIncludeDao {
   public List<ValueSetInclude> select(int maxResult);
 
   public List<ValueSetInclude> selectAll();
-
-  public ValueSetInclude create(ValueSetInclude e);
-
-  public ValueSetInclude update(ValueSetInclude e);
-
   public void delete(ValueSetInclude e);
 }

@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A sample to be used for analysis."
 */
 @Entity
 @Table(name="specimencollection")
-public class SpecimenCollectionModel  {
+public class SpecimenCollectionModel  implements Serializable {
+	private static final long serialVersionUID = 151857669663045695L;
   /**
   * Description: "Person who collected the specimen."
   */
@@ -44,9 +45,9 @@ public class SpecimenCollectionModel  {
   @Column(name="\"collector_id\"")
   private String collector_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`collector_id`", insertable=false, updatable=false)
-  private ReferenceModel collector;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="collector_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> collector;
 
   /**
   * Description: "Time when specimen was collected from subject - the physiologically relevant time."
@@ -58,7 +59,7 @@ public class SpecimenCollectionModel  {
 
   /**
   * Description: "Time when specimen was collected from subject - the physiologically relevant time."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -67,7 +68,7 @@ public class SpecimenCollectionModel  {
 
   /**
   * Description: "The quantity of specimen collected; for instance the volume of a blood sample, or the physical measurement of an anatomic pathology sample."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -76,7 +77,7 @@ public class SpecimenCollectionModel  {
 
   /**
   * Description: "A coded value specifying the technique that is used to perform the procedure."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -85,7 +86,7 @@ public class SpecimenCollectionModel  {
 
   /**
   * Description: "Anatomical location from which the specimen was collected (if subject is a patient). This is the target site.  This element is not used for environmental specimens."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -95,7 +96,7 @@ public class SpecimenCollectionModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -107,6 +108,7 @@ public class SpecimenCollectionModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -115,109 +117,128 @@ public class SpecimenCollectionModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public SpecimenCollectionModel() {
   }
 
-  public SpecimenCollectionModel(SpecimenCollection o) {
-    this.id = o.getId();
-      if (null != o.getCollector()) {
-      	this.collector_id = "collector" + this.getId();
-        this.collector = new ReferenceModel(o.getCollector());
-        this.collector.setId(this.collector_id);
-        this.collector.parent_id = this.collector.getId();
-      }
-
-      this.collectedDateTime = o.getCollectedDateTime();
-
-      this.collectedPeriod = Period.toJson(o.getCollectedPeriod());
-      this.quantity = Quantity.toJson(o.getQuantity());
-      this.method = CodeableConcept.toJson(o.getMethod());
-      this.bodySite = CodeableConcept.toJson(o.getBodySite());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public SpecimenCollectionModel(SpecimenCollection o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    if (null != o.getCollector() ) {
+    	this.collector_id = "collector" + this.parent_id;
+    	this.collector = ReferenceHelper.toModel(o.getCollector(), this.collector_id);
+    }
+    this.collectedDateTime = o.getCollectedDateTime();
+    this.collectedPeriod = PeriodHelper.toJson(o.getCollectedPeriod());
+    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    this.method = CodeableConceptHelper.toJson(o.getMethod());
+    this.bodySite = CodeableConceptHelper.toJson(o.getBodySite());
   }
 
-  public void setCollector( ReferenceModel value) {
-    this.collector = value;
-  }
-  public ReferenceModel getCollector() {
+  public java.util.List<ReferenceModel> getCollector() {
     return this.collector;
   }
-  public void setCollectedDateTime( String value) {
-    this.collectedDateTime = value;
+  public void setCollector( java.util.List<ReferenceModel> value) {
+    this.collector = value;
   }
   public String getCollectedDateTime() {
     return this.collectedDateTime;
   }
-  public void setCollectedPeriod( String value) {
-    this.collectedPeriod = value;
+  public void setCollectedDateTime( String value) {
+    this.collectedDateTime = value;
   }
   public String getCollectedPeriod() {
     return this.collectedPeriod;
   }
-  public void setQuantity( String value) {
-    this.quantity = value;
+  public void setCollectedPeriod( String value) {
+    this.collectedPeriod = value;
   }
   public String getQuantity() {
     return this.quantity;
   }
-  public void setMethod( String value) {
-    this.method = value;
+  public void setQuantity( String value) {
+    this.quantity = value;
   }
   public String getMethod() {
     return this.method;
   }
-  public void setBodySite( String value) {
-    this.bodySite = value;
+  public void setMethod( String value) {
+    this.method = value;
   }
   public String getBodySite() {
     return this.bodySite;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setBodySite( String value) {
+    this.bodySite = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("collector" + "[" + String.valueOf(this.collector) + "]\n"); 
-     builder.append("collectedDateTime" + "[" + String.valueOf(this.collectedDateTime) + "]\n"); 
-     builder.append("collectedPeriod" + "[" + String.valueOf(this.collectedPeriod) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("method" + "[" + String.valueOf(this.method) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SpecimenCollectionModel]:" + "\n");
+     builder.append("collectedDateTime" + "->" + this.collectedDateTime + "\n"); 
+     builder.append("collectedPeriod" + "->" + this.collectedPeriod + "\n"); 
+     builder.append("quantity" + "->" + this.quantity + "\n"); 
+     builder.append("method" + "->" + this.method + "\n"); 
+     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[SpecimenCollectionModel]:" + "\n");
+     builder.append("collector" + "->" + this.collector + "\n"); 
+     builder.append("collectedDateTime" + "->" + this.collectedDateTime + "\n"); 
+     builder.append("collectedPeriod" + "->" + this.collectedPeriod + "\n"); 
+     builder.append("quantity" + "->" + this.quantity + "\n"); 
+     builder.append("method" + "->" + this.method + "\n"); 
+     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -79,6 +79,7 @@ public class ExplanationOfBenefitPayment  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -100,21 +101,17 @@ public class ExplanationOfBenefitPayment  {
 
   public ExplanationOfBenefitPayment(ExplanationOfBenefitPaymentModel o) {
     this.id = o.getId();
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.adjustment = Money.fromJson(o.getAdjustment());
-      this.adjustmentReason = CodeableConcept.fromJson(o.getAdjustmentReason());
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      this.amount = Money.fromJson(o.getAmount());
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    this.adjustment = MoneyHelper.fromJson(o.getAdjustment());
+    this.adjustmentReason = CodeableConceptHelper.fromJson(o.getAdjustmentReason());
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    this.amount = MoneyHelper.fromJson(o.getAmount());
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( CodeableConcept value) {
@@ -187,51 +184,20 @@ public class ExplanationOfBenefitPayment  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("adjustment" + "[" + String.valueOf(this.adjustment) + "]\n"); 
-     builder.append("adjustmentReason" + "[" + String.valueOf(this.adjustmentReason) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("amount" + "[" + String.valueOf(this.amount) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitPayment]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.adjustment != null) builder.append("adjustment" + "->" + this.adjustment.toString() + "\n"); 
+     if(this.adjustmentReason != null) builder.append("adjustmentReason" + "->" + this.adjustmentReason.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExplanationOfBenefitPayment> fromArray(java.util.List<ExplanationOfBenefitPaymentModel> list) {
-    return (java.util.List<ExplanationOfBenefitPayment>)list.stream()
-      .map(model -> new ExplanationOfBenefitPayment(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExplanationOfBenefitPaymentModel> toModelArray(java.util.List<ExplanationOfBenefitPayment> list) {
-    return (java.util.List<ExplanationOfBenefitPaymentModel>)list.stream()
-      .map(model -> new ExplanationOfBenefitPaymentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExplanationOfBenefitPayment fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExplanationOfBenefitPayment.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExplanationOfBenefitPayment o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExplanationOfBenefitPayment> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

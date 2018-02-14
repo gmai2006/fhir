@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
 */
 @Entity
 @Table(name="immunization")
-public class ImmunizationModel  {
+public class ImmunizationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669688985097L;
   /**
   * Description: "This is a Immunization resource"
   */
@@ -47,7 +48,7 @@ public class ImmunizationModel  {
 
   /**
   * Description: "A unique identifier assigned to this immunization record."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -71,7 +72,7 @@ public class ImmunizationModel  {
 
   /**
   * Description: "Vaccine that was administered or was to be administered."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -86,9 +87,9 @@ public class ImmunizationModel  {
   @Column(name="\"patient_id\"")
   private String patient_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`patient_id`", insertable=false, updatable=false)
-  private ReferenceModel patient;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> patient;
 
   /**
   * Description: "The visit or admission or other contact between patient and health care provider the immunization was performed as part of."
@@ -97,9 +98,9 @@ public class ImmunizationModel  {
   @Column(name="\"encounter_id\"")
   private String encounter_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`encounter_id`", insertable=false, updatable=false)
-  private ReferenceModel encounter;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> encounter;
 
   /**
   * Description: "Date vaccine administered or was to be administered."
@@ -118,7 +119,7 @@ public class ImmunizationModel  {
 
   /**
   * Description: "The source of the data when the report of the immunization event is not based on information from the person who administered the vaccine."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -132,9 +133,9 @@ public class ImmunizationModel  {
   @Column(name="\"location_id\"")
   private String location_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`location_id`", insertable=false, updatable=false)
-  private ReferenceModel location;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="location_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> location;
 
   /**
   * Description: "Name of vaccine manufacturer."
@@ -143,9 +144,9 @@ public class ImmunizationModel  {
   @Column(name="\"manufacturer_id\"")
   private String manufacturer_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`manufacturer_id`", insertable=false, updatable=false)
-  private ReferenceModel manufacturer;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="manufacturer_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> manufacturer;
 
   /**
   * Description: "Lot number of the  vaccine product."
@@ -164,7 +165,7 @@ public class ImmunizationModel  {
 
   /**
   * Description: "Body site where vaccine was administered."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -173,7 +174,7 @@ public class ImmunizationModel  {
 
   /**
   * Description: "The path by which the vaccine product is taken into the body."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -182,7 +183,7 @@ public class ImmunizationModel  {
 
   /**
   * Description: "The quantity of vaccine product that was administered."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -192,13 +193,17 @@ public class ImmunizationModel  {
   /**
   * Description: "Indicates who or what performed the event."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ImmunizationPractitionerModel> practitioner = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"practitioner_id\"")
+  private String practitioner_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="practitioner_id", insertable=false, updatable=false)
+  private java.util.List<ImmunizationPractitionerModel> practitioner;
 
   /**
   * Description: "Extra information about the immunization that is not conveyed by the other attributes."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -212,23 +217,31 @@ public class ImmunizationModel  {
   @Column(name="\"explanation_id\"")
   private String explanation_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`explanation_id`", insertable=false, updatable=false)
-  private ImmunizationExplanationModel explanation;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="explanation_id", insertable=false, updatable=false)
+  private java.util.List<ImmunizationExplanationModel> explanation;
 
   /**
   * Description: "Categorical data indicating that an adverse event is associated in time to an immunization."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ImmunizationReactionModel> reaction = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"reaction_id\"")
+  private String reaction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reaction_id", insertable=false, updatable=false)
+  private java.util.List<ImmunizationReactionModel> reaction;
 
   /**
   * Description: "Contains information about the protocol(s) under which the vaccine was administered."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ImmunizationVaccinationProtocolModel> vaccinationProtocol = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"vaccinationprotocol_id\"")
+  private String vaccinationprotocol_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="vaccinationprotocol_id", insertable=false, updatable=false)
+  private java.util.List<ImmunizationVaccinationProtocolModel> vaccinationProtocol;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -238,14 +251,14 @@ public class ImmunizationModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -255,7 +268,7 @@ public class ImmunizationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -265,7 +278,7 @@ public class ImmunizationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -277,6 +290,7 @@ public class ImmunizationModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -291,9 +305,9 @@ public class ImmunizationModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -314,314 +328,308 @@ public class ImmunizationModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public ImmunizationModel() {
   }
 
   public ImmunizationModel(Immunization o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.status = o.getStatus();
-
-      this.notGiven = o.getNotGiven();
-
-      this.vaccineCode = CodeableConcept.toJson(o.getVaccineCode());
-      if (null != o.getPatient()) {
-      	this.patient_id = "patient" + this.getId();
-        this.patient = new ReferenceModel(o.getPatient());
-        this.patient.setId(this.patient_id);
-        this.patient.parent_id = this.patient.getId();
-      }
-
-      if (null != o.getEncounter()) {
-      	this.encounter_id = "encounter" + this.getId();
-        this.encounter = new ReferenceModel(o.getEncounter());
-        this.encounter.setId(this.encounter_id);
-        this.encounter.parent_id = this.encounter.getId();
-      }
-
-      this.date = o.getDate();
-
-      this.primarySource = o.getPrimarySource();
-
-      this.reportOrigin = CodeableConcept.toJson(o.getReportOrigin());
-      if (null != o.getLocation()) {
-      	this.location_id = "location" + this.getId();
-        this.location = new ReferenceModel(o.getLocation());
-        this.location.setId(this.location_id);
-        this.location.parent_id = this.location.getId();
-      }
-
-      if (null != o.getManufacturer()) {
-      	this.manufacturer_id = "manufacturer" + this.getId();
-        this.manufacturer = new ReferenceModel(o.getManufacturer());
-        this.manufacturer.setId(this.manufacturer_id);
-        this.manufacturer.parent_id = this.manufacturer.getId();
-      }
-
-      this.lotNumber = o.getLotNumber();
-
-      this.expirationDate = o.getExpirationDate();
-
-      this.site = CodeableConcept.toJson(o.getSite());
-      this.route = CodeableConcept.toJson(o.getRoute());
-      this.doseQuantity = Quantity.toJson(o.getDoseQuantity());
-      this.practitioner = ImmunizationPractitioner.toModelArray(o.getPractitioner());
-
-      this.note = Annotation.toJson(o.getNote());
-      if (null != o.getExplanation()) {
-      	this.explanation_id = "explanation" + this.getId();
-        this.explanation = new ImmunizationExplanationModel(o.getExplanation());
-        this.explanation.setId(this.explanation_id);
-        this.explanation.parent_id = this.explanation.getId();
-      }
-
-      this.reaction = ImmunizationReaction.toModelArray(o.getReaction());
-
-      this.vaccinationProtocol = ImmunizationVaccinationProtocol.toModelArray(o.getVaccinationProtocol());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.status = o.getStatus();
+    this.notGiven = o.getNotGiven();
+    this.vaccineCode = CodeableConceptHelper.toJson(o.getVaccineCode());
+    if (null != o.getPatient() ) {
+    	this.patient_id = "patient" + this.id;
+    	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
+    }
+    if (null != o.getEncounter() ) {
+    	this.encounter_id = "encounter" + this.id;
+    	this.encounter = ReferenceHelper.toModel(o.getEncounter(), this.encounter_id);
+    }
+    this.date = o.getDate();
+    this.primarySource = o.getPrimarySource();
+    this.reportOrigin = CodeableConceptHelper.toJson(o.getReportOrigin());
+    if (null != o.getLocation() ) {
+    	this.location_id = "location" + this.id;
+    	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
+    }
+    if (null != o.getManufacturer() ) {
+    	this.manufacturer_id = "manufacturer" + this.id;
+    	this.manufacturer = ReferenceHelper.toModel(o.getManufacturer(), this.manufacturer_id);
+    }
+    this.lotNumber = o.getLotNumber();
+    this.expirationDate = o.getExpirationDate();
+    this.site = CodeableConceptHelper.toJson(o.getSite());
+    this.route = CodeableConceptHelper.toJson(o.getRoute());
+    this.doseQuantity = QuantityHelper.toJson(o.getDoseQuantity());
+    if (null != o.getPractitioner() && !o.getPractitioner().isEmpty()) {
+    	this.practitioner_id = "practitioner" + this.id;
+    	this.practitioner = ImmunizationPractitionerHelper.toModelFromArray(o.getPractitioner(), this.practitioner_id);
+    }
+    if (null != o.getExplanation() ) {
+    	this.explanation_id = "explanation" + this.id;
+    	this.explanation = ImmunizationExplanationHelper.toModel(o.getExplanation(), this.explanation_id);
+    }
+    if (null != o.getReaction() && !o.getReaction().isEmpty()) {
+    	this.reaction_id = "reaction" + this.id;
+    	this.reaction = ImmunizationReactionHelper.toModelFromArray(o.getReaction(), this.reaction_id);
+    }
+    if (null != o.getVaccinationProtocol() && !o.getVaccinationProtocol().isEmpty()) {
+    	this.vaccinationprotocol_id = "vaccinationprotocol" + this.id;
+    	this.vaccinationProtocol = ImmunizationVaccinationProtocolHelper.toModelFromArray(o.getVaccinationProtocol(), this.vaccinationprotocol_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setNotGiven( Boolean value) {
-    this.notGiven = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public Boolean getNotGiven() {
     return this.notGiven;
   }
-  public void setVaccineCode( String value) {
-    this.vaccineCode = value;
+  public void setNotGiven( Boolean value) {
+    this.notGiven = value;
   }
   public String getVaccineCode() {
     return this.vaccineCode;
   }
-  public void setPatient( ReferenceModel value) {
-    this.patient = value;
+  public void setVaccineCode( String value) {
+    this.vaccineCode = value;
   }
-  public ReferenceModel getPatient() {
+  public java.util.List<ReferenceModel> getPatient() {
     return this.patient;
   }
-  public void setEncounter( ReferenceModel value) {
-    this.encounter = value;
+  public void setPatient( java.util.List<ReferenceModel> value) {
+    this.patient = value;
   }
-  public ReferenceModel getEncounter() {
+  public java.util.List<ReferenceModel> getEncounter() {
     return this.encounter;
   }
-  public void setDate( String value) {
-    this.date = value;
+  public void setEncounter( java.util.List<ReferenceModel> value) {
+    this.encounter = value;
   }
   public String getDate() {
     return this.date;
   }
-  public void setPrimarySource( Boolean value) {
-    this.primarySource = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public Boolean getPrimarySource() {
     return this.primarySource;
   }
-  public void setReportOrigin( String value) {
-    this.reportOrigin = value;
+  public void setPrimarySource( Boolean value) {
+    this.primarySource = value;
   }
   public String getReportOrigin() {
     return this.reportOrigin;
   }
-  public void setLocation( ReferenceModel value) {
-    this.location = value;
+  public void setReportOrigin( String value) {
+    this.reportOrigin = value;
   }
-  public ReferenceModel getLocation() {
+  public java.util.List<ReferenceModel> getLocation() {
     return this.location;
   }
-  public void setManufacturer( ReferenceModel value) {
-    this.manufacturer = value;
+  public void setLocation( java.util.List<ReferenceModel> value) {
+    this.location = value;
   }
-  public ReferenceModel getManufacturer() {
+  public java.util.List<ReferenceModel> getManufacturer() {
     return this.manufacturer;
   }
-  public void setLotNumber( String value) {
-    this.lotNumber = value;
+  public void setManufacturer( java.util.List<ReferenceModel> value) {
+    this.manufacturer = value;
   }
   public String getLotNumber() {
     return this.lotNumber;
   }
-  public void setExpirationDate( String value) {
-    this.expirationDate = value;
+  public void setLotNumber( String value) {
+    this.lotNumber = value;
   }
   public String getExpirationDate() {
     return this.expirationDate;
   }
-  public void setSite( String value) {
-    this.site = value;
+  public void setExpirationDate( String value) {
+    this.expirationDate = value;
   }
   public String getSite() {
     return this.site;
   }
-  public void setRoute( String value) {
-    this.route = value;
+  public void setSite( String value) {
+    this.site = value;
   }
   public String getRoute() {
     return this.route;
   }
-  public void setDoseQuantity( String value) {
-    this.doseQuantity = value;
+  public void setRoute( String value) {
+    this.route = value;
   }
   public String getDoseQuantity() {
     return this.doseQuantity;
   }
-  public void setPractitioner( java.util.List<ImmunizationPractitionerModel> value) {
-    this.practitioner = value;
+  public void setDoseQuantity( String value) {
+    this.doseQuantity = value;
   }
   public java.util.List<ImmunizationPractitionerModel> getPractitioner() {
     return this.practitioner;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setPractitioner( java.util.List<ImmunizationPractitionerModel> value) {
+    this.practitioner = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setExplanation( ImmunizationExplanationModel value) {
-    this.explanation = value;
+  public void setNote( String value) {
+    this.note = value;
   }
-  public ImmunizationExplanationModel getExplanation() {
+  public java.util.List<ImmunizationExplanationModel> getExplanation() {
     return this.explanation;
   }
-  public void setReaction( java.util.List<ImmunizationReactionModel> value) {
-    this.reaction = value;
+  public void setExplanation( java.util.List<ImmunizationExplanationModel> value) {
+    this.explanation = value;
   }
   public java.util.List<ImmunizationReactionModel> getReaction() {
     return this.reaction;
   }
-  public void setVaccinationProtocol( java.util.List<ImmunizationVaccinationProtocolModel> value) {
-    this.vaccinationProtocol = value;
+  public void setReaction( java.util.List<ImmunizationReactionModel> value) {
+    this.reaction = value;
   }
   public java.util.List<ImmunizationVaccinationProtocolModel> getVaccinationProtocol() {
     return this.vaccinationProtocol;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setVaccinationProtocol( java.util.List<ImmunizationVaccinationProtocolModel> value) {
+    this.vaccinationProtocol = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("notGiven" + "[" + String.valueOf(this.notGiven) + "]\n"); 
-     builder.append("vaccineCode" + "[" + String.valueOf(this.vaccineCode) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("encounter" + "[" + String.valueOf(this.encounter) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("primarySource" + "[" + String.valueOf(this.primarySource) + "]\n"); 
-     builder.append("reportOrigin" + "[" + String.valueOf(this.reportOrigin) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("manufacturer" + "[" + String.valueOf(this.manufacturer) + "]\n"); 
-     builder.append("lotNumber" + "[" + String.valueOf(this.lotNumber) + "]\n"); 
-     builder.append("expirationDate" + "[" + String.valueOf(this.expirationDate) + "]\n"); 
-     builder.append("site" + "[" + String.valueOf(this.site) + "]\n"); 
-     builder.append("route" + "[" + String.valueOf(this.route) + "]\n"); 
-     builder.append("doseQuantity" + "[" + String.valueOf(this.doseQuantity) + "]\n"); 
-     builder.append("practitioner" + "[" + String.valueOf(this.practitioner) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("explanation" + "[" + String.valueOf(this.explanation) + "]\n"); 
-     builder.append("reaction" + "[" + String.valueOf(this.reaction) + "]\n"); 
-     builder.append("vaccinationProtocol" + "[" + String.valueOf(this.vaccinationProtocol) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[ImmunizationModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("notGiven" + "->" + this.notGiven + "\n"); 
+     builder.append("vaccineCode" + "->" + this.vaccineCode + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("primarySource" + "->" + this.primarySource + "\n"); 
+     builder.append("reportOrigin" + "->" + this.reportOrigin + "\n"); 
+     builder.append("lotNumber" + "->" + this.lotNumber + "\n"); 
+     builder.append("expirationDate" + "->" + this.expirationDate + "\n"); 
+     builder.append("site" + "->" + this.site + "\n"); 
+     builder.append("route" + "->" + this.route + "\n"); 
+     builder.append("doseQuantity" + "->" + this.doseQuantity + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ImmunizationModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("notGiven" + "->" + this.notGiven + "\n"); 
+     builder.append("vaccineCode" + "->" + this.vaccineCode + "\n"); 
+     builder.append("patient" + "->" + this.patient + "\n"); 
+     builder.append("encounter" + "->" + this.encounter + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("primarySource" + "->" + this.primarySource + "\n"); 
+     builder.append("reportOrigin" + "->" + this.reportOrigin + "\n"); 
+     builder.append("location" + "->" + this.location + "\n"); 
+     builder.append("manufacturer" + "->" + this.manufacturer + "\n"); 
+     builder.append("lotNumber" + "->" + this.lotNumber + "\n"); 
+     builder.append("expirationDate" + "->" + this.expirationDate + "\n"); 
+     builder.append("site" + "->" + this.site + "\n"); 
+     builder.append("route" + "->" + this.route + "\n"); 
+     builder.append("doseQuantity" + "->" + this.doseQuantity + "\n"); 
+     builder.append("practitioner" + "->" + this.practitioner + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("explanation" + "->" + this.explanation + "\n"); 
+     builder.append("reaction" + "->" + this.reaction + "\n"); 
+     builder.append("vaccinationProtocol" + "->" + this.vaccinationProtocol + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

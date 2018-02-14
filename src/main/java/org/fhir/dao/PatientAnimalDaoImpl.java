@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PatientAnimalModel;
 import org.fhir.pojo.PatientAnimal;
+import org.fhir.pojo.PatientAnimalHelper;
 
 public class PatientAnimalDaoImpl implements PatientAnimalDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PatientAnimalDaoImpl implements PatientAnimalDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PatientAnimalModel a", PatientAnimalModel.class).setMaxResults(maxResult);
       List<PatientAnimalModel> models = query.getResultList();
-      return PatientAnimal.fromArray(models);
+      return PatientAnimalHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PatientAnimalDaoImpl implements PatientAnimalDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PatientAnimalModel a", PatientAnimalModel.class);
       List<PatientAnimalModel> models = query.getResultList();
-      return PatientAnimal.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PatientAnimal create(PatientAnimal e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PatientAnimalModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PatientAnimal update(PatientAnimal e) {
-      final EntityManager em = entityManagerProvider.get();
-      PatientAnimalModel model = em.merge(new PatientAnimalModel(e));
-      return new PatientAnimal(model);
+      return PatientAnimalHelper.fromArray2Array(models);
   }
 
   @Override

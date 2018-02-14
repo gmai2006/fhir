@@ -34,10 +34,5 @@ public interface GraphDefinitionTargetDao {
   public List<GraphDefinitionTarget> select(int maxResult);
 
   public List<GraphDefinitionTarget> selectAll();
-
-  public GraphDefinitionTarget create(GraphDefinitionTarget e);
-
-  public GraphDefinitionTarget update(GraphDefinitionTarget e);
-
   public void delete(GraphDefinitionTarget e);
 }

@@ -32,7 +32,5 @@ public interface ImplementationGuideDependencyService {
 	public ImplementationGuideDependency find(String id);
   public List<ImplementationGuideDependency> select(int maxResult);
   public List<ImplementationGuideDependency> selectAll();
-  public ImplementationGuideDependency create(ImplementationGuideDependency bean);
-  public ImplementationGuideDependency update(ImplementationGuideDependency bean);
   public void delete(ImplementationGuideDependency bean);
 }

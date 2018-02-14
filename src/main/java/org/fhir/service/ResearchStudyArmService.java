@@ -32,7 +32,5 @@ public interface ResearchStudyArmService {
 	public ResearchStudyArm find(String id);
   public List<ResearchStudyArm> select(int maxResult);
   public List<ResearchStudyArm> selectAll();
-  public ResearchStudyArm create(ResearchStudyArm bean);
-  public ResearchStudyArm update(ResearchStudyArm bean);
   public void delete(ResearchStudyArm bean);
 }

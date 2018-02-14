@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public SpecimenProcessing create(SpecimenProcessing bean) {
-  	requireNonNull(bean);
-    logger.info("create(SpecimenProcessing={}) - entered bean ");
-
-    final SpecimenProcessing result = dao.create(bean);
-
-    logger.info("create(SpecimenProcessing) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public SpecimenProcessing update(SpecimenProcessing bean) {
-  	requireNonNull(bean);
-    logger.info("update(SpecimenProcessing={}) - entered bean ");
-
-    final SpecimenProcessing result = dao.update(bean);
-
-    logger.info("update(SpecimenProcessing) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

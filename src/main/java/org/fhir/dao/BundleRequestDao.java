@@ -34,10 +34,5 @@ public interface BundleRequestDao {
   public List<BundleRequest> select(int maxResult);
 
   public List<BundleRequest> selectAll();
-
-  public BundleRequest create(BundleRequest e);
-
-  public BundleRequest update(BundleRequest e);
-
   public void delete(BundleRequest e);
 }

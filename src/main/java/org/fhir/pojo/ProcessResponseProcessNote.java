@@ -58,6 +58,7 @@ public class ProcessResponseProcessNote  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -79,17 +80,13 @@ public class ProcessResponseProcessNote  {
 
   public ProcessResponseProcessNote(ProcessResponseProcessNoteModel o) {
     this.id = o.getId();
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getText()) {
-        this.text = new String(o.getText());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( CodeableConcept value) {
@@ -138,47 +135,16 @@ public class ProcessResponseProcessNote  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ProcessResponseProcessNote]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ProcessResponseProcessNote> fromArray(java.util.List<ProcessResponseProcessNoteModel> list) {
-    return (java.util.List<ProcessResponseProcessNote>)list.stream()
-      .map(model -> new ProcessResponseProcessNote(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ProcessResponseProcessNoteModel> toModelArray(java.util.List<ProcessResponseProcessNote> list) {
-    return (java.util.List<ProcessResponseProcessNoteModel>)list.stream()
-      .map(model -> new ProcessResponseProcessNoteModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ProcessResponseProcessNote fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ProcessResponseProcessNote.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ProcessResponseProcessNote o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ProcessResponseProcessNote> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc."
 */
 @Entity
 @Table(name="organizationcontact")
-public class OrganizationContactModel  {
+public class OrganizationContactModel  implements Serializable {
+	private static final long serialVersionUID = 151857669704944996L;
   /**
   * Description: "Indicates a purpose for which the contact can be reached."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -48,7 +49,7 @@ public class OrganizationContactModel  {
 
   /**
   * Description: "A name associated with the contact."
-  * Actual type: HumanName
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -57,7 +58,7 @@ public class OrganizationContactModel  {
 
   /**
   * Description: "A contact detail (e.g. a telephone number or an email address) by which the party may be contacted."
-  * Actual type: Array of ContactPoint-> List<ContactPoint>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -66,7 +67,7 @@ public class OrganizationContactModel  {
 
   /**
   * Description: "Visiting or postal addresses for the contact."
-  * Actual type: Address
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -76,7 +77,7 @@ public class OrganizationContactModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -88,6 +89,7 @@ public class OrganizationContactModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -96,86 +98,107 @@ public class OrganizationContactModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public OrganizationContactModel() {
   }
 
-  public OrganizationContactModel(OrganizationContact o) {
-    this.id = o.getId();
-      this.purpose = CodeableConcept.toJson(o.getPurpose());
-      this.name = HumanName.toJson(o.getName());
-      this.telecom = ContactPoint.toJson(o.getTelecom());
-      this.address = Address.toJson(o.getAddress());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public OrganizationContactModel(OrganizationContact o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.purpose = CodeableConceptHelper.toJson(o.getPurpose());
+    this.name = HumanNameHelper.toJson(o.getName());
+    this.address = AddressHelper.toJson(o.getAddress());
   }
 
-  public void setPurpose( String value) {
-    this.purpose = value;
-  }
   public String getPurpose() {
     return this.purpose;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setPurpose( String value) {
+    this.purpose = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setTelecom( String value) {
-    this.telecom = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getTelecom() {
     return this.telecom;
   }
-  public void setAddress( String value) {
-    this.address = value;
+  public void setTelecom( String value) {
+    this.telecom = value;
   }
   public String getAddress() {
     return this.address;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setAddress( String value) {
+    this.address = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("telecom" + "[" + String.valueOf(this.telecom) + "]\n"); 
-     builder.append("address" + "[" + String.valueOf(this.address) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[OrganizationContactModel]:" + "\n");
+     builder.append("purpose" + "->" + this.purpose + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("telecom" + "->" + this.telecom + "\n"); 
+     builder.append("address" + "->" + this.address + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[OrganizationContactModel]:" + "\n");
+     builder.append("purpose" + "->" + this.purpose + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("telecom" + "->" + this.telecom + "\n"); 
+     builder.append("address" + "->" + this.address + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

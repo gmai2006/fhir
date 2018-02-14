@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Significant health events and conditions for a person related to the patient relevant in the context of care for the patient."
 */
 @Entity
 @Table(name="familymemberhistorycondition")
-public class FamilyMemberHistoryConditionModel  {
+public class FamilyMemberHistoryConditionModel  implements Serializable {
+	private static final long serialVersionUID = 151857669691058574L;
   /**
   * Description: "The actual condition specified. Could be a coded condition (like MI or Diabetes) or a less specific string like 'cancer' depending on how much is known about the condition and the capabilities of the creating system."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -49,7 +50,7 @@ public class FamilyMemberHistoryConditionModel  {
 
   /**
   * Description: "Indicates what happened as a result of this condition.  If the condition resulted in death, deceased date is captured on the relation."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -58,7 +59,7 @@ public class FamilyMemberHistoryConditionModel  {
 
   /**
   * Description: "Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence."
-  * Actual type: Age
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -67,7 +68,7 @@ public class FamilyMemberHistoryConditionModel  {
 
   /**
   * Description: "Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence."
-  * Actual type: Range
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -76,7 +77,7 @@ public class FamilyMemberHistoryConditionModel  {
 
   /**
   * Description: "Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -92,7 +93,7 @@ public class FamilyMemberHistoryConditionModel  {
 
   /**
   * Description: "An area where general notes can be placed about this specific condition."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -102,7 +103,7 @@ public class FamilyMemberHistoryConditionModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -114,6 +115,7 @@ public class FamilyMemberHistoryConditionModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -122,111 +124,134 @@ public class FamilyMemberHistoryConditionModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public FamilyMemberHistoryConditionModel() {
   }
 
-  public FamilyMemberHistoryConditionModel(FamilyMemberHistoryCondition o) {
-    this.id = o.getId();
-      this.code = CodeableConcept.toJson(o.getCode());
-      this.outcome = CodeableConcept.toJson(o.getOutcome());
-      this.onsetAge = Age.toJson(o.getOnsetAge());
-      this.onsetRange = Range.toJson(o.getOnsetRange());
-      this.onsetPeriod = Period.toJson(o.getOnsetPeriod());
-      this.onsetString = o.getOnsetString();
-
-      this.note = Annotation.toJson(o.getNote());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public FamilyMemberHistoryConditionModel(FamilyMemberHistoryCondition o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.onsetAge = AgeHelper.toJson(o.getOnsetAge());
+    this.onsetRange = RangeHelper.toJson(o.getOnsetRange());
+    this.onsetPeriod = PeriodHelper.toJson(o.getOnsetPeriod());
+    this.onsetString = o.getOnsetString();
   }
 
-  public void setCode( String value) {
-    this.code = value;
-  }
   public String getCode() {
     return this.code;
   }
-  public void setOutcome( String value) {
-    this.outcome = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public String getOutcome() {
     return this.outcome;
   }
-  public void setOnsetAge( String value) {
-    this.onsetAge = value;
+  public void setOutcome( String value) {
+    this.outcome = value;
   }
   public String getOnsetAge() {
     return this.onsetAge;
   }
-  public void setOnsetRange( String value) {
-    this.onsetRange = value;
+  public void setOnsetAge( String value) {
+    this.onsetAge = value;
   }
   public String getOnsetRange() {
     return this.onsetRange;
   }
-  public void setOnsetPeriod( String value) {
-    this.onsetPeriod = value;
+  public void setOnsetRange( String value) {
+    this.onsetRange = value;
   }
   public String getOnsetPeriod() {
     return this.onsetPeriod;
   }
-  public void setOnsetString( String value) {
-    this.onsetString = value;
+  public void setOnsetPeriod( String value) {
+    this.onsetPeriod = value;
   }
   public String getOnsetString() {
     return this.onsetString;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setOnsetString( String value) {
+    this.onsetString = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setNote( String value) {
+    this.note = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("onsetAge" + "[" + String.valueOf(this.onsetAge) + "]\n"); 
-     builder.append("onsetRange" + "[" + String.valueOf(this.onsetRange) + "]\n"); 
-     builder.append("onsetPeriod" + "[" + String.valueOf(this.onsetPeriod) + "]\n"); 
-     builder.append("onsetString" + "[" + String.valueOf(this.onsetString) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[FamilyMemberHistoryConditionModel]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("outcome" + "->" + this.outcome + "\n"); 
+     builder.append("onsetAge" + "->" + this.onsetAge + "\n"); 
+     builder.append("onsetRange" + "->" + this.onsetRange + "\n"); 
+     builder.append("onsetPeriod" + "->" + this.onsetPeriod + "\n"); 
+     builder.append("onsetString" + "->" + this.onsetString + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[FamilyMemberHistoryConditionModel]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("outcome" + "->" + this.outcome + "\n"); 
+     builder.append("onsetAge" + "->" + this.onsetAge + "\n"); 
+     builder.append("onsetRange" + "->" + this.onsetRange + "\n"); 
+     builder.append("onsetPeriod" + "->" + this.onsetPeriod + "\n"); 
+     builder.append("onsetString" + "->" + this.onsetString + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

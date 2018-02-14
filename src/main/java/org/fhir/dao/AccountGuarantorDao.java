@@ -34,10 +34,5 @@ public interface AccountGuarantorDao {
   public List<AccountGuarantor> select(int maxResult);
 
   public List<AccountGuarantor> selectAll();
-
-  public AccountGuarantor create(AccountGuarantor e);
-
-  public AccountGuarantor update(AccountGuarantor e);
-
   public void delete(AccountGuarantor e);
 }

@@ -63,6 +63,7 @@ public class ImplementationGuideDependency  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,20 +85,15 @@ public class ImplementationGuideDependency  {
 
   public ImplementationGuideDependency(ImplementationGuideDependencyModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getUri()) {
-        this.uri = new String(o.getUri());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getUri()) {
+      this.uri = o.getUri();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -152,14 +148,15 @@ public class ImplementationGuideDependency  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("uri" + "[" + String.valueOf(this.uri) + "]\n"); 
-     builder.append("_uri" + "[" + String.valueOf(this._uri) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImplementationGuideDependency]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.uri != null) builder.append("uri" + "->" + this.uri.toString() + "\n"); 
+     if(this._uri != null) builder.append("_uri" + "->" + this._uri.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -177,36 +174,4 @@ public class ImplementationGuideDependency  {
   	}
   }
 
-  public static java.util.List<ImplementationGuideDependency> fromArray(java.util.List<ImplementationGuideDependencyModel> list) {
-    return (java.util.List<ImplementationGuideDependency>)list.stream()
-      .map(model -> new ImplementationGuideDependency(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImplementationGuideDependencyModel> toModelArray(java.util.List<ImplementationGuideDependency> list) {
-    return (java.util.List<ImplementationGuideDependencyModel>)list.stream()
-      .map(model -> new ImplementationGuideDependencyModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImplementationGuideDependency fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImplementationGuideDependency.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImplementationGuideDependency o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImplementationGuideDependency> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

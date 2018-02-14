@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.FHIRListModel;
 import org.fhir.pojo.FHIRList;
+import org.fhir.pojo.FHIRListHelper;
 
 public class FHIRListDaoImpl implements FHIRListDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class FHIRListDaoImpl implements FHIRListDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from FHIRListModel a", FHIRListModel.class).setMaxResults(maxResult);
       List<FHIRListModel> models = query.getResultList();
-      return FHIRList.fromArray(models);
+      return FHIRListHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class FHIRListDaoImpl implements FHIRListDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from FHIRListModel a", FHIRListModel.class);
       List<FHIRListModel> models = query.getResultList();
-      return FHIRList.fromArray(models);
+      return FHIRListHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class FHIRListDaoImpl implements FHIRListDao {
       FHIRListModel model = em.merge(new FHIRListModel(e));
       return new FHIRList(model);
   }
-
   @Override
   @Transactional
   public void delete(FHIRList e) {

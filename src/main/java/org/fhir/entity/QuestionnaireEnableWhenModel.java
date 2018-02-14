@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
 */
 @Entity
 @Table(name="questionnaireenablewhen")
-public class QuestionnaireEnableWhenModel  {
+public class QuestionnaireEnableWhenModel  implements Serializable {
+	private static final long serialVersionUID = 151857669715978064L;
   /**
   * Description: "The linkId for the question whose answer (or lack of answer) governs whether this item is enabled."
   */
@@ -114,7 +115,7 @@ public class QuestionnaireEnableWhenModel  {
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
-  * Actual type: Attachment
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -123,7 +124,7 @@ public class QuestionnaireEnableWhenModel  {
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -132,7 +133,7 @@ public class QuestionnaireEnableWhenModel  {
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -146,14 +147,14 @@ public class QuestionnaireEnableWhenModel  {
   @Column(name="\"answerreference_id\"")
   private String answerreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`answerreference_id`", insertable=false, updatable=false)
-  private ReferenceModel answerReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="answerreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> answerReference;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -165,6 +166,7 @@ public class QuestionnaireEnableWhenModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -173,182 +175,200 @@ public class QuestionnaireEnableWhenModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public QuestionnaireEnableWhenModel() {
   }
 
-  public QuestionnaireEnableWhenModel(QuestionnaireEnableWhen o) {
-    this.id = o.getId();
-      this.question = o.getQuestion();
-
-      this.hasAnswer = o.getHasAnswer();
-
-      this.answerBoolean = o.getAnswerBoolean();
-
-      this.answerDecimal = o.getAnswerDecimal();
-
-      this.answerInteger = o.getAnswerInteger();
-
-      this.answerDate = o.getAnswerDate();
-
-      this.answerDateTime = o.getAnswerDateTime();
-
-      this.answerTime = o.getAnswerTime();
-
-      this.answerString = o.getAnswerString();
-
-      this.answerUri = o.getAnswerUri();
-
-      this.answerAttachment = Attachment.toJson(o.getAnswerAttachment());
-      this.answerCoding = Coding.toJson(o.getAnswerCoding());
-      this.answerQuantity = Quantity.toJson(o.getAnswerQuantity());
-      if (null != o.getAnswerReference()) {
-      	this.answerreference_id = "answerReference" + this.getId();
-        this.answerReference = new ReferenceModel(o.getAnswerReference());
-        this.answerReference.setId(this.answerreference_id);
-        this.answerReference.parent_id = this.answerReference.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public QuestionnaireEnableWhenModel(QuestionnaireEnableWhen o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.question = o.getQuestion();
+    this.hasAnswer = o.getHasAnswer();
+    this.answerBoolean = o.getAnswerBoolean();
+    this.answerDecimal = o.getAnswerDecimal();
+    this.answerInteger = o.getAnswerInteger();
+    this.answerDate = o.getAnswerDate();
+    this.answerDateTime = o.getAnswerDateTime();
+    this.answerTime = o.getAnswerTime();
+    this.answerString = o.getAnswerString();
+    this.answerUri = o.getAnswerUri();
+    this.answerAttachment = AttachmentHelper.toJson(o.getAnswerAttachment());
+    this.answerCoding = CodingHelper.toJson(o.getAnswerCoding());
+    this.answerQuantity = QuantityHelper.toJson(o.getAnswerQuantity());
+    if (null != o.getAnswerReference() ) {
+    	this.answerreference_id = "answerreference" + this.parent_id;
+    	this.answerReference = ReferenceHelper.toModel(o.getAnswerReference(), this.answerreference_id);
+    }
   }
 
-  public void setQuestion( String value) {
-    this.question = value;
-  }
   public String getQuestion() {
     return this.question;
   }
-  public void setHasAnswer( Boolean value) {
-    this.hasAnswer = value;
+  public void setQuestion( String value) {
+    this.question = value;
   }
   public Boolean getHasAnswer() {
     return this.hasAnswer;
   }
-  public void setAnswerBoolean( Boolean value) {
-    this.answerBoolean = value;
+  public void setHasAnswer( Boolean value) {
+    this.hasAnswer = value;
   }
   public Boolean getAnswerBoolean() {
     return this.answerBoolean;
   }
-  public void setAnswerDecimal( Float value) {
-    this.answerDecimal = value;
+  public void setAnswerBoolean( Boolean value) {
+    this.answerBoolean = value;
   }
   public Float getAnswerDecimal() {
     return this.answerDecimal;
   }
-  public void setAnswerInteger( Float value) {
-    this.answerInteger = value;
+  public void setAnswerDecimal( Float value) {
+    this.answerDecimal = value;
   }
   public Float getAnswerInteger() {
     return this.answerInteger;
   }
-  public void setAnswerDate( String value) {
-    this.answerDate = value;
+  public void setAnswerInteger( Float value) {
+    this.answerInteger = value;
   }
   public String getAnswerDate() {
     return this.answerDate;
   }
-  public void setAnswerDateTime( String value) {
-    this.answerDateTime = value;
+  public void setAnswerDate( String value) {
+    this.answerDate = value;
   }
   public String getAnswerDateTime() {
     return this.answerDateTime;
   }
-  public void setAnswerTime( String value) {
-    this.answerTime = value;
+  public void setAnswerDateTime( String value) {
+    this.answerDateTime = value;
   }
   public String getAnswerTime() {
     return this.answerTime;
   }
-  public void setAnswerString( String value) {
-    this.answerString = value;
+  public void setAnswerTime( String value) {
+    this.answerTime = value;
   }
   public String getAnswerString() {
     return this.answerString;
   }
-  public void setAnswerUri( String value) {
-    this.answerUri = value;
+  public void setAnswerString( String value) {
+    this.answerString = value;
   }
   public String getAnswerUri() {
     return this.answerUri;
   }
-  public void setAnswerAttachment( String value) {
-    this.answerAttachment = value;
+  public void setAnswerUri( String value) {
+    this.answerUri = value;
   }
   public String getAnswerAttachment() {
     return this.answerAttachment;
   }
-  public void setAnswerCoding( String value) {
-    this.answerCoding = value;
+  public void setAnswerAttachment( String value) {
+    this.answerAttachment = value;
   }
   public String getAnswerCoding() {
     return this.answerCoding;
   }
-  public void setAnswerQuantity( String value) {
-    this.answerQuantity = value;
+  public void setAnswerCoding( String value) {
+    this.answerCoding = value;
   }
   public String getAnswerQuantity() {
     return this.answerQuantity;
   }
-  public void setAnswerReference( ReferenceModel value) {
-    this.answerReference = value;
+  public void setAnswerQuantity( String value) {
+    this.answerQuantity = value;
   }
-  public ReferenceModel getAnswerReference() {
+  public java.util.List<ReferenceModel> getAnswerReference() {
     return this.answerReference;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setAnswerReference( java.util.List<ReferenceModel> value) {
+    this.answerReference = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("question" + "[" + String.valueOf(this.question) + "]\n"); 
-     builder.append("hasAnswer" + "[" + String.valueOf(this.hasAnswer) + "]\n"); 
-     builder.append("answerBoolean" + "[" + String.valueOf(this.answerBoolean) + "]\n"); 
-     builder.append("answerDecimal" + "[" + String.valueOf(this.answerDecimal) + "]\n"); 
-     builder.append("answerInteger" + "[" + String.valueOf(this.answerInteger) + "]\n"); 
-     builder.append("answerDate" + "[" + String.valueOf(this.answerDate) + "]\n"); 
-     builder.append("answerDateTime" + "[" + String.valueOf(this.answerDateTime) + "]\n"); 
-     builder.append("answerTime" + "[" + String.valueOf(this.answerTime) + "]\n"); 
-     builder.append("answerString" + "[" + String.valueOf(this.answerString) + "]\n"); 
-     builder.append("answerUri" + "[" + String.valueOf(this.answerUri) + "]\n"); 
-     builder.append("answerAttachment" + "[" + String.valueOf(this.answerAttachment) + "]\n"); 
-     builder.append("answerCoding" + "[" + String.valueOf(this.answerCoding) + "]\n"); 
-     builder.append("answerQuantity" + "[" + String.valueOf(this.answerQuantity) + "]\n"); 
-     builder.append("answerReference" + "[" + String.valueOf(this.answerReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[QuestionnaireEnableWhenModel]:" + "\n");
+     builder.append("question" + "->" + this.question + "\n"); 
+     builder.append("hasAnswer" + "->" + this.hasAnswer + "\n"); 
+     builder.append("answerBoolean" + "->" + this.answerBoolean + "\n"); 
+     builder.append("answerDecimal" + "->" + this.answerDecimal + "\n"); 
+     builder.append("answerInteger" + "->" + this.answerInteger + "\n"); 
+     builder.append("answerDate" + "->" + this.answerDate + "\n"); 
+     builder.append("answerDateTime" + "->" + this.answerDateTime + "\n"); 
+     builder.append("answerTime" + "->" + this.answerTime + "\n"); 
+     builder.append("answerString" + "->" + this.answerString + "\n"); 
+     builder.append("answerUri" + "->" + this.answerUri + "\n"); 
+     builder.append("answerAttachment" + "->" + this.answerAttachment + "\n"); 
+     builder.append("answerCoding" + "->" + this.answerCoding + "\n"); 
+     builder.append("answerQuantity" + "->" + this.answerQuantity + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[QuestionnaireEnableWhenModel]:" + "\n");
+     builder.append("question" + "->" + this.question + "\n"); 
+     builder.append("hasAnswer" + "->" + this.hasAnswer + "\n"); 
+     builder.append("answerBoolean" + "->" + this.answerBoolean + "\n"); 
+     builder.append("answerDecimal" + "->" + this.answerDecimal + "\n"); 
+     builder.append("answerInteger" + "->" + this.answerInteger + "\n"); 
+     builder.append("answerDate" + "->" + this.answerDate + "\n"); 
+     builder.append("answerDateTime" + "->" + this.answerDateTime + "\n"); 
+     builder.append("answerTime" + "->" + this.answerTime + "\n"); 
+     builder.append("answerString" + "->" + this.answerString + "\n"); 
+     builder.append("answerUri" + "->" + this.answerUri + "\n"); 
+     builder.append("answerAttachment" + "->" + this.answerAttachment + "\n"); 
+     builder.append("answerCoding" + "->" + this.answerCoding + "\n"); 
+     builder.append("answerQuantity" + "->" + this.answerQuantity + "\n"); 
+     builder.append("answerReference" + "->" + this.answerReference + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

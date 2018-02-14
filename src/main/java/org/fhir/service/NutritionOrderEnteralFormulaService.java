@@ -32,7 +32,5 @@ public interface NutritionOrderEnteralFormulaService {
 	public NutritionOrderEnteralFormula find(String id);
   public List<NutritionOrderEnteralFormula> select(int maxResult);
   public List<NutritionOrderEnteralFormula> selectAll();
-  public NutritionOrderEnteralFormula create(NutritionOrderEnteralFormula bean);
-  public NutritionOrderEnteralFormula update(NutritionOrderEnteralFormula bean);
   public void delete(NutritionOrderEnteralFormula bean);
 }

@@ -32,7 +32,5 @@ public interface DeviceUdiService {
 	public DeviceUdi find(String id);
   public List<DeviceUdi> select(int maxResult);
   public List<DeviceUdi> selectAll();
-  public DeviceUdi create(DeviceUdi bean);
-  public DeviceUdi update(DeviceUdi bean);
   public void delete(DeviceUdi bean);
 }

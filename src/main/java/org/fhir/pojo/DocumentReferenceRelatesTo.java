@@ -59,6 +59,7 @@ public class DocumentReferenceRelatesTo  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,21 +81,15 @@ public class DocumentReferenceRelatesTo  {
 
   public DocumentReferenceRelatesTo(DocumentReferenceRelatesToModel o) {
     this.id = o.getId();
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getTarget()) {
-        this.target = new Reference(o.getTarget());
-        this.target.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+      this.target = new Reference(o.getTarget().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( String value) {
@@ -143,13 +138,14 @@ public class DocumentReferenceRelatesTo  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DocumentReferenceRelatesTo]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -171,36 +167,4 @@ public class DocumentReferenceRelatesTo  {
   	}
   }
 
-  public static java.util.List<DocumentReferenceRelatesTo> fromArray(java.util.List<DocumentReferenceRelatesToModel> list) {
-    return (java.util.List<DocumentReferenceRelatesTo>)list.stream()
-      .map(model -> new DocumentReferenceRelatesTo(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DocumentReferenceRelatesToModel> toModelArray(java.util.List<DocumentReferenceRelatesTo> list) {
-    return (java.util.List<DocumentReferenceRelatesToModel>)list.stream()
-      .map(model -> new DocumentReferenceRelatesToModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DocumentReferenceRelatesTo fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DocumentReferenceRelatesTo.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DocumentReferenceRelatesTo o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DocumentReferenceRelatesTo> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

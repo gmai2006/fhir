@@ -58,6 +58,7 @@ public class MedicationPackage  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -79,17 +80,16 @@ public class MedicationPackage  {
 
   public MedicationPackage(MedicationPackageModel o) {
     this.id = o.getId();
-      this.container = CodeableConcept.fromJson(o.getContainer());
-      this.content = MedicationContent.fromArray(o.getContent());
-
-      this.batch = MedicationBatch.fromArray(o.getBatch());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.container = CodeableConceptHelper.fromJson(o.getContainer());
+    if (null != o.getContent() && !o.getContent().isEmpty()) {
+    	this.content = MedicationContentHelper.fromArray2Array(o.getContent());
+    }
+    if (null != o.getBatch() && !o.getBatch().isEmpty()) {
+    	this.batch = MedicationBatchHelper.fromArray2Array(o.getBatch());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setContainer( CodeableConcept value) {
@@ -138,47 +138,16 @@ public class MedicationPackage  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("container" + "[" + String.valueOf(this.container) + "]\n"); 
-     builder.append("content" + "[" + String.valueOf(this.content) + "]\n"); 
-     builder.append("batch" + "[" + String.valueOf(this.batch) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MedicationPackage]:" + "\n");
+     if(this.container != null) builder.append("container" + "->" + this.container.toString() + "\n"); 
+     if(this.content != null) builder.append("content" + "->" + this.content.toString() + "\n"); 
+     if(this.batch != null) builder.append("batch" + "->" + this.batch.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MedicationPackage> fromArray(java.util.List<MedicationPackageModel> list) {
-    return (java.util.List<MedicationPackage>)list.stream()
-      .map(model -> new MedicationPackage(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MedicationPackageModel> toModelArray(java.util.List<MedicationPackage> list) {
-    return (java.util.List<MedicationPackageModel>)list.stream()
-      .map(model -> new MedicationPackageModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MedicationPackage fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MedicationPackage.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MedicationPackage o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MedicationPackage> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

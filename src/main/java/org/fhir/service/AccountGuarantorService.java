@@ -32,7 +32,5 @@ public interface AccountGuarantorService {
 	public AccountGuarantor find(String id);
   public List<AccountGuarantor> select(int maxResult);
   public List<AccountGuarantor> selectAll();
-  public AccountGuarantor create(AccountGuarantor bean);
-  public AccountGuarantor update(AccountGuarantor bean);
   public void delete(AccountGuarantor bean);
 }

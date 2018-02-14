@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.TaskModel;
 import org.fhir.pojo.Task;
+import org.fhir.pojo.TaskHelper;
 
 public class TaskDaoImpl implements TaskDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class TaskDaoImpl implements TaskDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TaskModel a", TaskModel.class).setMaxResults(maxResult);
       List<TaskModel> models = query.getResultList();
-      return Task.fromArray(models);
+      return TaskHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class TaskDaoImpl implements TaskDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TaskModel a", TaskModel.class);
       List<TaskModel> models = query.getResultList();
-      return Task.fromArray(models);
+      return TaskHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class TaskDaoImpl implements TaskDao {
       TaskModel model = em.merge(new TaskModel(e));
       return new Task(model);
   }
-
   @Override
   @Transactional
   public void delete(Task e) {

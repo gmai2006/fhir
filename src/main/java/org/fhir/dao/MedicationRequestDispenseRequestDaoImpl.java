@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MedicationRequestDispenseRequestModel;
 import org.fhir.pojo.MedicationRequestDispenseRequest;
+import org.fhir.pojo.MedicationRequestDispenseRequestHelper;
 
 public class MedicationRequestDispenseRequestDaoImpl implements MedicationRequestDispenseRequestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MedicationRequestDispenseRequestDaoImpl implements MedicationReques
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationRequestDispenseRequestModel a", MedicationRequestDispenseRequestModel.class).setMaxResults(maxResult);
       List<MedicationRequestDispenseRequestModel> models = query.getResultList();
-      return MedicationRequestDispenseRequest.fromArray(models);
+      return MedicationRequestDispenseRequestHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MedicationRequestDispenseRequestDaoImpl implements MedicationReques
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationRequestDispenseRequestModel a", MedicationRequestDispenseRequestModel.class);
       List<MedicationRequestDispenseRequestModel> models = query.getResultList();
-      return MedicationRequestDispenseRequest.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MedicationRequestDispenseRequest create(MedicationRequestDispenseRequest e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MedicationRequestDispenseRequestModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MedicationRequestDispenseRequest update(MedicationRequestDispenseRequest e) {
-      final EntityManager em = entityManagerProvider.get();
-      MedicationRequestDispenseRequestModel model = em.merge(new MedicationRequestDispenseRequestModel(e));
-      return new MedicationRequestDispenseRequest(model);
+      return MedicationRequestDispenseRequestHelper.fromArray2Array(models);
   }
 
   @Override

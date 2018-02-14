@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImmunizationRecommendationDateCriterionModel;
 import org.fhir.pojo.ImmunizationRecommendationDateCriterion;
+import org.fhir.pojo.ImmunizationRecommendationDateCriterionHelper;
 
 public class ImmunizationRecommendationDateCriterionDaoImpl implements ImmunizationRecommendationDateCriterionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImmunizationRecommendationDateCriterionDaoImpl implements Immunizat
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationRecommendationDateCriterionModel a", ImmunizationRecommendationDateCriterionModel.class).setMaxResults(maxResult);
       List<ImmunizationRecommendationDateCriterionModel> models = query.getResultList();
-      return ImmunizationRecommendationDateCriterion.fromArray(models);
+      return ImmunizationRecommendationDateCriterionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImmunizationRecommendationDateCriterionDaoImpl implements Immunizat
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationRecommendationDateCriterionModel a", ImmunizationRecommendationDateCriterionModel.class);
       List<ImmunizationRecommendationDateCriterionModel> models = query.getResultList();
-      return ImmunizationRecommendationDateCriterion.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImmunizationRecommendationDateCriterion create(ImmunizationRecommendationDateCriterion e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImmunizationRecommendationDateCriterionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImmunizationRecommendationDateCriterion update(ImmunizationRecommendationDateCriterion e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImmunizationRecommendationDateCriterionModel model = em.merge(new ImmunizationRecommendationDateCriterionModel(e));
-      return new ImmunizationRecommendationDateCriterion(model);
+      return ImmunizationRecommendationDateCriterionHelper.fromArray2Array(models);
   }
 
   @Override

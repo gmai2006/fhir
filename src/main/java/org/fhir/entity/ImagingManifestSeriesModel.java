@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A text description of the DICOM SOP instances selected in the ImagingManifest; or the reason for, or significance of, the selection."
 */
 @Entity
 @Table(name="imagingmanifestseries")
-public class ImagingManifestSeriesModel  {
+public class ImagingManifestSeriesModel  implements Serializable {
+	private static final long serialVersionUID = 15185766968023760L;
   /**
   * Description: "Series instance UID of the SOP instances in the selection."
   */
@@ -48,21 +49,29 @@ public class ImagingManifestSeriesModel  {
   /**
   * Description: "The network service providing access (e.g., query, view, or retrieval) for this series. See implementation notes for information about using DICOM endpoints. A series-level endpoint, if present, has precedence over a study-level endpoint with the same Endpoint.type."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> endpoint = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"endpoint_id\"")
+  private String endpoint_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> endpoint;
 
   /**
   * Description: "Identity and locating information of the selected DICOM SOP instances."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ImagingManifestInstanceModel> instance = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"instance_id\"")
+  private String instance_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="instance_id", insertable=false, updatable=false)
+  private java.util.List<ImagingManifestInstanceModel> instance;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -74,6 +83,7 @@ public class ImagingManifestSeriesModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -82,81 +92,103 @@ public class ImagingManifestSeriesModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ImagingManifestSeriesModel() {
   }
 
-  public ImagingManifestSeriesModel(ImagingManifestSeries o) {
-    this.id = o.getId();
-      this.uid = o.getUid();
-
-      this.endpoint = Reference.toModelArray(o.getEndpoint());
-
-      this.instance = ImagingManifestInstance.toModelArray(o.getInstance());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ImagingManifestSeriesModel(ImagingManifestSeries o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.uid = o.getUid();
+    if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
+    	this.endpoint_id = "endpoint" + this.parent_id;
+    	this.endpoint = ReferenceHelper.toModelFromArray(o.getEndpoint(), this.endpoint_id);
+    }
+    if (null != o.getInstance() && !o.getInstance().isEmpty()) {
+    	this.instance_id = "instance" + this.parent_id;
+    	this.instance = ImagingManifestInstanceHelper.toModelFromArray(o.getInstance(), this.instance_id);
+    }
   }
 
-  public void setUid( String value) {
-    this.uid = value;
-  }
   public String getUid() {
     return this.uid;
   }
-  public void setEndpoint( java.util.List<ReferenceModel> value) {
-    this.endpoint = value;
+  public void setUid( String value) {
+    this.uid = value;
   }
   public java.util.List<ReferenceModel> getEndpoint() {
     return this.endpoint;
   }
-  public void setInstance( java.util.List<ImagingManifestInstanceModel> value) {
-    this.instance = value;
+  public void setEndpoint( java.util.List<ReferenceModel> value) {
+    this.endpoint = value;
   }
   public java.util.List<ImagingManifestInstanceModel> getInstance() {
     return this.instance;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setInstance( java.util.List<ImagingManifestInstanceModel> value) {
+    this.instance = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("uid" + "[" + String.valueOf(this.uid) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("instance" + "[" + String.valueOf(this.instance) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImagingManifestSeriesModel]:" + "\n");
+     builder.append("uid" + "->" + this.uid + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ImagingManifestSeriesModel]:" + "\n");
+     builder.append("uid" + "->" + this.uid + "\n"); 
+     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
+     builder.append("instance" + "->" + this.instance + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

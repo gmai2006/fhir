@@ -32,7 +32,5 @@ public interface ContractAgent1Service {
 	public ContractAgent1 find(String id);
   public List<ContractAgent1> select(int maxResult);
   public List<ContractAgent1> selectAll();
-  public ContractAgent1 create(ContractAgent1 bean);
-  public ContractAgent1 update(ContractAgent1 bean);
   public void delete(ContractAgent1 bean);
 }

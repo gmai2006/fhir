@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a \"System\" used within the Identifier and Coding data types."
 */
 @Entity
 @Table(name="namingsystem")
-public class NamingSystemModel  {
+public class NamingSystemModel  implements Serializable {
+	private static final long serialVersionUID = 151857669693874882L;
   /**
   * Description: "This is a NamingSystem resource"
   */
@@ -84,9 +85,13 @@ public class NamingSystemModel  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContactDetailModel> contact = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contact_id\"")
+  private String contact_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  private java.util.List<ContactDetailModel> contact;
 
   /**
   * Description: "The name of the organization that is responsible for issuing identifiers or codes for this namespace and ensuring their non-collision."
@@ -97,7 +102,7 @@ public class NamingSystemModel  {
 
   /**
   * Description: "Categorizes a naming system for easier search by grouping related naming systems."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -114,13 +119,17 @@ public class NamingSystemModel  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate naming system instances."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<UsageContextModel> useContext = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"usecontext_id\"")
+  private String usecontext_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
+  private java.util.List<UsageContextModel> useContext;
 
   /**
   * Description: "A legal or geographic region in which the naming system is intended to be used."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -137,9 +146,13 @@ public class NamingSystemModel  {
   /**
   * Description: "Indicates how the system may be identified when referenced in electronic exchange."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<NamingSystemUniqueIdModel> uniqueId = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"uniqueid_id\"")
+  private String uniqueid_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="uniqueid_id", insertable=false, updatable=false)
+  private java.util.List<NamingSystemUniqueIdModel> uniqueId;
 
   /**
   * Description: "For naming systems that are retired, indicates the naming system that should be used in their place (if any)."
@@ -148,9 +161,9 @@ public class NamingSystemModel  {
   @Column(name="\"replacedby_id\"")
   private String replacedby_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`replacedby_id`", insertable=false, updatable=false)
-  private ReferenceModel replacedBy;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="replacedby_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> replacedBy;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -160,14 +173,14 @@ public class NamingSystemModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -177,7 +190,7 @@ public class NamingSystemModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -187,7 +200,7 @@ public class NamingSystemModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -199,6 +212,7 @@ public class NamingSystemModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -213,9 +227,9 @@ public class NamingSystemModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -236,236 +250,238 @@ public class NamingSystemModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public NamingSystemModel() {
   }
 
   public NamingSystemModel(NamingSystem o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.name = o.getName();
-
-      this.status = o.getStatus();
-
-      this.kind = o.getKind();
-
-      this.date = o.getDate();
-
-      this.publisher = o.getPublisher();
-
-      this.contact = ContactDetail.toModelArray(o.getContact());
-
-      this.responsible = o.getResponsible();
-
-      this.type = CodeableConcept.toJson(o.getType());
-      this.description = o.getDescription();
-
-      this.useContext = UsageContext.toModelArray(o.getUseContext());
-
-      this.jurisdiction = CodeableConcept.toJson(o.getJurisdiction());
-      this.usage = o.getUsage();
-
-      this.uniqueId = NamingSystemUniqueId.toModelArray(o.getUniqueId());
-
-      if (null != o.getReplacedBy()) {
-      	this.replacedby_id = "replacedBy" + this.getId();
-        this.replacedBy = new ReferenceModel(o.getReplacedBy());
-        this.replacedBy.setId(this.replacedby_id);
-        this.replacedBy.parent_id = this.replacedBy.getId();
-      }
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.name = o.getName();
+    this.status = o.getStatus();
+    this.kind = o.getKind();
+    this.date = o.getDate();
+    this.publisher = o.getPublisher();
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact_id = "contact" + this.id;
+    	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
+    }
+    this.responsible = o.getResponsible();
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.description = o.getDescription();
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.usecontext_id = "usecontext" + this.id;
+    	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
+    }
+    this.usage = o.getUsage();
+    if (null != o.getUniqueId() && !o.getUniqueId().isEmpty()) {
+    	this.uniqueid_id = "uniqueid" + this.id;
+    	this.uniqueId = NamingSystemUniqueIdHelper.toModelFromArray(o.getUniqueId(), this.uniqueid_id);
+    }
+    if (null != o.getReplacedBy() ) {
+    	this.replacedby_id = "replacedby" + this.id;
+    	this.replacedBy = ReferenceHelper.toModel(o.getReplacedBy(), this.replacedby_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setKind( String value) {
-    this.kind = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getKind() {
     return this.kind;
   }
-  public void setDate( String value) {
-    this.date = value;
+  public void setKind( String value) {
+    this.kind = value;
   }
   public String getDate() {
     return this.date;
   }
-  public void setPublisher( String value) {
-    this.publisher = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public String getPublisher() {
     return this.publisher;
   }
-  public void setContact( java.util.List<ContactDetailModel> value) {
-    this.contact = value;
+  public void setPublisher( String value) {
+    this.publisher = value;
   }
   public java.util.List<ContactDetailModel> getContact() {
     return this.contact;
   }
-  public void setResponsible( String value) {
-    this.responsible = value;
+  public void setContact( java.util.List<ContactDetailModel> value) {
+    this.contact = value;
   }
   public String getResponsible() {
     return this.responsible;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setResponsible( String value) {
+    this.responsible = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setUseContext( java.util.List<UsageContextModel> value) {
-    this.useContext = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public java.util.List<UsageContextModel> getUseContext() {
     return this.useContext;
   }
-  public void setJurisdiction( String value) {
-    this.jurisdiction = value;
+  public void setUseContext( java.util.List<UsageContextModel> value) {
+    this.useContext = value;
   }
   public String getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setUsage( String value) {
-    this.usage = value;
+  public void setJurisdiction( String value) {
+    this.jurisdiction = value;
   }
   public String getUsage() {
     return this.usage;
   }
-  public void setUniqueId( java.util.List<NamingSystemUniqueIdModel> value) {
-    this.uniqueId = value;
+  public void setUsage( String value) {
+    this.usage = value;
   }
   public java.util.List<NamingSystemUniqueIdModel> getUniqueId() {
     return this.uniqueId;
   }
-  public void setReplacedBy( ReferenceModel value) {
-    this.replacedBy = value;
+  public void setUniqueId( java.util.List<NamingSystemUniqueIdModel> value) {
+    this.uniqueId = value;
   }
-  public ReferenceModel getReplacedBy() {
+  public java.util.List<ReferenceModel> getReplacedBy() {
     return this.replacedBy;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setReplacedBy( java.util.List<ReferenceModel> value) {
+    this.replacedBy = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("kind" + "[" + String.valueOf(this.kind) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("responsible" + "[" + String.valueOf(this.responsible) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("usage" + "[" + String.valueOf(this.usage) + "]\n"); 
-     builder.append("uniqueId" + "[" + String.valueOf(this.uniqueId) + "]\n"); 
-     builder.append("replacedBy" + "[" + String.valueOf(this.replacedBy) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[NamingSystemModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("kind" + "->" + this.kind + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("responsible" + "->" + this.responsible + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("usage" + "->" + this.usage + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[NamingSystemModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("kind" + "->" + this.kind + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("contact" + "->" + this.contact + "\n"); 
+     builder.append("responsible" + "->" + this.responsible + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("useContext" + "->" + this.useContext + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("usage" + "->" + this.usage + "\n"); 
+     builder.append("uniqueId" + "->" + this.uniqueId + "\n"); 
+     builder.append("replacedBy" + "->" + this.replacedBy + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

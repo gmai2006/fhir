@@ -84,6 +84,7 @@ public class GraphDefinitionCompartment  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -105,28 +106,21 @@ public class GraphDefinitionCompartment  {
 
   public GraphDefinitionCompartment(GraphDefinitionCompartmentModel o) {
     this.id = o.getId();
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getRule()) {
-        this.rule = new String(o.getRule());
-      }
-
-      if (null != o.getExpression()) {
-        this.expression = new String(o.getExpression());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getRule()) {
+      this.rule = o.getRule();
+    }
+    if (null != o.getExpression()) {
+      this.expression = o.getExpression();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( String value) {
@@ -205,18 +199,19 @@ public class GraphDefinitionCompartment  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("rule" + "[" + String.valueOf(this.rule) + "]\n"); 
-     builder.append("_rule" + "[" + String.valueOf(this._rule) + "]\n"); 
-     builder.append("expression" + "[" + String.valueOf(this.expression) + "]\n"); 
-     builder.append("_expression" + "[" + String.valueOf(this._expression) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[GraphDefinitionCompartment]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.rule != null) builder.append("rule" + "->" + this.rule.toString() + "\n"); 
+     if(this._rule != null) builder.append("_rule" + "->" + this._rule.toString() + "\n"); 
+     if(this.expression != null) builder.append("expression" + "->" + this.expression.toString() + "\n"); 
+     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -238,36 +233,4 @@ public class GraphDefinitionCompartment  {
   	}
   }
 
-  public static java.util.List<GraphDefinitionCompartment> fromArray(java.util.List<GraphDefinitionCompartmentModel> list) {
-    return (java.util.List<GraphDefinitionCompartment>)list.stream()
-      .map(model -> new GraphDefinitionCompartment(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<GraphDefinitionCompartmentModel> toModelArray(java.util.List<GraphDefinitionCompartment> list) {
-    return (java.util.List<GraphDefinitionCompartmentModel>)list.stream()
-      .map(model -> new GraphDefinitionCompartmentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static GraphDefinitionCompartment fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, GraphDefinitionCompartment.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(GraphDefinitionCompartment o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<GraphDefinitionCompartment> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

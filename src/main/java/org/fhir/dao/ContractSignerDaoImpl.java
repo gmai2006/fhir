@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ContractSignerModel;
 import org.fhir.pojo.ContractSigner;
+import org.fhir.pojo.ContractSignerHelper;
 
 public class ContractSignerDaoImpl implements ContractSignerDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ContractSignerDaoImpl implements ContractSignerDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContractSignerModel a", ContractSignerModel.class).setMaxResults(maxResult);
       List<ContractSignerModel> models = query.getResultList();
-      return ContractSigner.fromArray(models);
+      return ContractSignerHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ContractSignerDaoImpl implements ContractSignerDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContractSignerModel a", ContractSignerModel.class);
       List<ContractSignerModel> models = query.getResultList();
-      return ContractSigner.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ContractSigner create(ContractSigner e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ContractSignerModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ContractSigner update(ContractSigner e) {
-      final EntityManager em = entityManagerProvider.get();
-      ContractSignerModel model = em.merge(new ContractSignerModel(e));
-      return new ContractSigner(model);
+      return ContractSignerHelper.fromArray2Array(models);
   }
 
   @Override

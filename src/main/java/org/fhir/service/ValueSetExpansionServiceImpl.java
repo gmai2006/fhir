@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ValueSetExpansion create(ValueSetExpansion bean) {
-  	requireNonNull(bean);
-    logger.info("create(ValueSetExpansion={}) - entered bean ");
-
-    final ValueSetExpansion result = dao.create(bean);
-
-    logger.info("create(ValueSetExpansion) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ValueSetExpansion update(ValueSetExpansion bean) {
-  	requireNonNull(bean);
-    logger.info("update(ValueSetExpansion={}) - entered bean ");
-
-    final ValueSetExpansion result = dao.update(bean);
-
-    logger.info("update(ValueSetExpansion) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

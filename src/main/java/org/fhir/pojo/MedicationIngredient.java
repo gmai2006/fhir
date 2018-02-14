@@ -68,6 +68,7 @@ public class MedicationIngredient  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -89,23 +90,17 @@ public class MedicationIngredient  {
 
   public MedicationIngredient(MedicationIngredientModel o) {
     this.id = o.getId();
-      this.itemCodeableConcept = CodeableConcept.fromJson(o.getItemCodeableConcept());
-      if (null != o.getItemReference()) {
-        this.itemReference = new Reference(o.getItemReference());
-        this.itemReference.setId(this.getId());
-      }
-
-      if (null != o.getIsActive()) {
-        this.isActive = new Boolean(o.getIsActive());
-      }
-
-      this.amount = Ratio.fromJson(o.getAmount());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.itemCodeableConcept = CodeableConceptHelper.fromJson(o.getItemCodeableConcept());
+    if (null != o.getItemReference() && !o.getItemReference().isEmpty()) {
+      this.itemReference = new Reference(o.getItemReference().get(0));
+    }
+    if (null != o.getIsActive()) {
+      this.isActive = o.getIsActive();
+    }
+    this.amount = RatioHelper.fromJson(o.getAmount());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setItemCodeableConcept( CodeableConcept value) {
@@ -166,49 +161,18 @@ public class MedicationIngredient  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("itemCodeableConcept" + "[" + String.valueOf(this.itemCodeableConcept) + "]\n"); 
-     builder.append("itemReference" + "[" + String.valueOf(this.itemReference) + "]\n"); 
-     builder.append("isActive" + "[" + String.valueOf(this.isActive) + "]\n"); 
-     builder.append("_isActive" + "[" + String.valueOf(this._isActive) + "]\n"); 
-     builder.append("amount" + "[" + String.valueOf(this.amount) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MedicationIngredient]:" + "\n");
+     if(this.itemCodeableConcept != null) builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept.toString() + "\n"); 
+     if(this.itemReference != null) builder.append("itemReference" + "->" + this.itemReference.toString() + "\n"); 
+     if(this.isActive != null) builder.append("isActive" + "->" + this.isActive.toString() + "\n"); 
+     if(this._isActive != null) builder.append("_isActive" + "->" + this._isActive.toString() + "\n"); 
+     if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MedicationIngredient> fromArray(java.util.List<MedicationIngredientModel> list) {
-    return (java.util.List<MedicationIngredient>)list.stream()
-      .map(model -> new MedicationIngredient(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MedicationIngredientModel> toModelArray(java.util.List<MedicationIngredient> list) {
-    return (java.util.List<MedicationIngredientModel>)list.stream()
-      .map(model -> new MedicationIngredientModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MedicationIngredient fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MedicationIngredient.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MedicationIngredient o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MedicationIngredient> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

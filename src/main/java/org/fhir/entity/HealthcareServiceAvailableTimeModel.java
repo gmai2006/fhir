@@ -30,20 +30,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "The details of a healthcare service available at a location."
 */
 @Entity
 @Table(name="healthcareserviceavailabletime")
-public class HealthcareServiceAvailableTimeModel  {
+public class HealthcareServiceAvailableTimeModel  implements Serializable {
+	private static final long serialVersionUID = 151857669709358028L;
   /**
   * Description: "Indicates which days of the week are available between the start and end Times."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"daysOfWeek\"", length = 16777215)
+  @Column(name="\"daysOfWeek\"")
   private String daysOfWeek;
 
   /**
@@ -72,7 +71,7 @@ public class HealthcareServiceAvailableTimeModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -84,6 +83,7 @@ public class HealthcareServiceAvailableTimeModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -92,90 +92,108 @@ public class HealthcareServiceAvailableTimeModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public HealthcareServiceAvailableTimeModel() {
   }
 
-  public HealthcareServiceAvailableTimeModel(HealthcareServiceAvailableTime o) {
-    this.id = o.getId();
-      this.daysOfWeek = org.fhir.utils.JsonUtils.write2String(o.getDaysOfWeek());
-
-      this.allDay = o.getAllDay();
-
-      this.availableStartTime = o.getAvailableStartTime();
-
-      this.availableEndTime = o.getAvailableEndTime();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public HealthcareServiceAvailableTimeModel(HealthcareServiceAvailableTime o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.daysOfWeek = org.fhir.utils.JsonUtils.write2String(o.getDaysOfWeek());
+    this.allDay = o.getAllDay();
+    this.availableStartTime = o.getAvailableStartTime();
+    this.availableEndTime = o.getAvailableEndTime();
   }
 
-  public void setDaysOfWeek( String value) {
-    this.daysOfWeek = value;
-  }
   public String getDaysOfWeek() {
     return this.daysOfWeek;
   }
-  public void setAllDay( Boolean value) {
-    this.allDay = value;
+  public void setDaysOfWeek( String value) {
+    this.daysOfWeek = value;
   }
   public Boolean getAllDay() {
     return this.allDay;
   }
-  public void setAvailableStartTime( String value) {
-    this.availableStartTime = value;
+  public void setAllDay( Boolean value) {
+    this.allDay = value;
   }
   public String getAvailableStartTime() {
     return this.availableStartTime;
   }
-  public void setAvailableEndTime( String value) {
-    this.availableEndTime = value;
+  public void setAvailableStartTime( String value) {
+    this.availableStartTime = value;
   }
   public String getAvailableEndTime() {
     return this.availableEndTime;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setAvailableEndTime( String value) {
+    this.availableEndTime = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("daysOfWeek" + "[" + String.valueOf(this.daysOfWeek) + "]\n"); 
-     builder.append("allDay" + "[" + String.valueOf(this.allDay) + "]\n"); 
-     builder.append("availableStartTime" + "[" + String.valueOf(this.availableStartTime) + "]\n"); 
-     builder.append("availableEndTime" + "[" + String.valueOf(this.availableEndTime) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[HealthcareServiceAvailableTimeModel]:" + "\n");
+     builder.append("daysOfWeek" + "->" + this.daysOfWeek + "\n"); 
+     builder.append("allDay" + "->" + this.allDay + "\n"); 
+     builder.append("availableStartTime" + "->" + this.availableStartTime + "\n"); 
+     builder.append("availableEndTime" + "->" + this.availableEndTime + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[HealthcareServiceAvailableTimeModel]:" + "\n");
+     builder.append("daysOfWeek" + "->" + this.daysOfWeek + "\n"); 
+     builder.append("allDay" + "->" + this.allDay + "\n"); 
+     builder.append("availableStartTime" + "->" + this.availableStartTime + "\n"); 
+     builder.append("availableEndTime" + "->" + this.availableEndTime + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

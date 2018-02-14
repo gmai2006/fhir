@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MessageHeaderSourceModel;
 import org.fhir.pojo.MessageHeaderSource;
+import org.fhir.pojo.MessageHeaderSourceHelper;
 
 public class MessageHeaderSourceDaoImpl implements MessageHeaderSourceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MessageHeaderSourceDaoImpl implements MessageHeaderSourceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageHeaderSourceModel a", MessageHeaderSourceModel.class).setMaxResults(maxResult);
       List<MessageHeaderSourceModel> models = query.getResultList();
-      return MessageHeaderSource.fromArray(models);
+      return MessageHeaderSourceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MessageHeaderSourceDaoImpl implements MessageHeaderSourceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageHeaderSourceModel a", MessageHeaderSourceModel.class);
       List<MessageHeaderSourceModel> models = query.getResultList();
-      return MessageHeaderSource.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MessageHeaderSource create(MessageHeaderSource e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MessageHeaderSourceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MessageHeaderSource update(MessageHeaderSource e) {
-      final EntityManager em = entityManagerProvider.get();
-      MessageHeaderSourceModel model = em.merge(new MessageHeaderSourceModel(e));
-      return new MessageHeaderSource(model);
+      return MessageHeaderSourceHelper.fromArray2Array(models);
   }
 
   @Override

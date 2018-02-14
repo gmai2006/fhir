@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc."
 */
 @Entity
 @Table(name="deviceudi")
-public class DeviceUdiModel  {
+public class DeviceUdiModel  implements Serializable {
+	private static final long serialVersionUID = 1518576696809715L;
   /**
   * Description: "The device identifier (DI) is a mandatory, fixed portion of a UDI that identifies the labeler and the specific version or model of a device."
   */
@@ -89,7 +90,7 @@ public class DeviceUdiModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -101,6 +102,7 @@ public class DeviceUdiModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -109,117 +111,135 @@ public class DeviceUdiModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public DeviceUdiModel() {
   }
 
-  public DeviceUdiModel(DeviceUdi o) {
-    this.id = o.getId();
-      this.deviceIdentifier = o.getDeviceIdentifier();
-
-      this.name = o.getName();
-
-      this.jurisdiction = o.getJurisdiction();
-
-      this.carrierHRF = o.getCarrierHRF();
-
-      this.carrierAIDC = o.getCarrierAIDC();
-
-      this.issuer = o.getIssuer();
-
-      this.entryType = o.getEntryType();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public DeviceUdiModel(DeviceUdi o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.deviceIdentifier = o.getDeviceIdentifier();
+    this.name = o.getName();
+    this.jurisdiction = o.getJurisdiction();
+    this.carrierHRF = o.getCarrierHRF();
+    this.carrierAIDC = o.getCarrierAIDC();
+    this.issuer = o.getIssuer();
+    this.entryType = o.getEntryType();
   }
 
-  public void setDeviceIdentifier( String value) {
-    this.deviceIdentifier = value;
-  }
   public String getDeviceIdentifier() {
     return this.deviceIdentifier;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setDeviceIdentifier( String value) {
+    this.deviceIdentifier = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setJurisdiction( String value) {
-    this.jurisdiction = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setCarrierHRF( String value) {
-    this.carrierHRF = value;
+  public void setJurisdiction( String value) {
+    this.jurisdiction = value;
   }
   public String getCarrierHRF() {
     return this.carrierHRF;
   }
-  public void setCarrierAIDC( String value) {
-    this.carrierAIDC = value;
+  public void setCarrierHRF( String value) {
+    this.carrierHRF = value;
   }
   public String getCarrierAIDC() {
     return this.carrierAIDC;
   }
-  public void setIssuer( String value) {
-    this.issuer = value;
+  public void setCarrierAIDC( String value) {
+    this.carrierAIDC = value;
   }
   public String getIssuer() {
     return this.issuer;
   }
-  public void setEntryType( String value) {
-    this.entryType = value;
+  public void setIssuer( String value) {
+    this.issuer = value;
   }
   public String getEntryType() {
     return this.entryType;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setEntryType( String value) {
+    this.entryType = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("deviceIdentifier" + "[" + String.valueOf(this.deviceIdentifier) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("carrierHRF" + "[" + String.valueOf(this.carrierHRF) + "]\n"); 
-     builder.append("carrierAIDC" + "[" + String.valueOf(this.carrierAIDC) + "]\n"); 
-     builder.append("issuer" + "[" + String.valueOf(this.issuer) + "]\n"); 
-     builder.append("entryType" + "[" + String.valueOf(this.entryType) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DeviceUdiModel]:" + "\n");
+     builder.append("deviceIdentifier" + "->" + this.deviceIdentifier + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("carrierHRF" + "->" + this.carrierHRF + "\n"); 
+     builder.append("carrierAIDC" + "->" + this.carrierAIDC + "\n"); 
+     builder.append("issuer" + "->" + this.issuer + "\n"); 
+     builder.append("entryType" + "->" + this.entryType + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[DeviceUdiModel]:" + "\n");
+     builder.append("deviceIdentifier" + "->" + this.deviceIdentifier + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("carrierHRF" + "->" + this.carrierHRF + "\n"); 
+     builder.append("carrierAIDC" + "->" + this.carrierAIDC + "\n"); 
+     builder.append("issuer" + "->" + this.issuer + "\n"); 
+     builder.append("entryType" + "->" + this.entryType + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

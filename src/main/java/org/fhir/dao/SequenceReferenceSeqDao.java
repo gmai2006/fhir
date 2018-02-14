@@ -34,10 +34,5 @@ public interface SequenceReferenceSeqDao {
   public List<SequenceReferenceSeq> select(int maxResult);
 
   public List<SequenceReferenceSeq> selectAll();
-
-  public SequenceReferenceSeq create(SequenceReferenceSeq e);
-
-  public SequenceReferenceSeq update(SequenceReferenceSeq e);
-
   public void delete(SequenceReferenceSeq e);
 }

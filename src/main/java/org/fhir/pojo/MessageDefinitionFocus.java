@@ -80,6 +80,7 @@ public class MessageDefinitionFocus  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -101,29 +102,21 @@ public class MessageDefinitionFocus  {
 
   public MessageDefinitionFocus(MessageDefinitionFocusModel o) {
     this.id = o.getId();
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getProfile()) {
-        this.profile = new Reference(o.getProfile());
-        this.profile.setId(this.getId());
-      }
-
-      if (null != o.getMin()) {
-        this.min = new Float(o.getMin());
-      }
-
-      if (null != o.getMax()) {
-        this.max = new String(o.getMax());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getProfile() && !o.getProfile().isEmpty()) {
+      this.profile = new Reference(o.getProfile().get(0));
+    }
+    if (null != o.getMin()) {
+      this.min = o.getMin();
+    }
+    if (null != o.getMax()) {
+      this.max = o.getMax();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( String value) {
@@ -196,51 +189,20 @@ public class MessageDefinitionFocus  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("min" + "[" + String.valueOf(this.min) + "]\n"); 
-     builder.append("_min" + "[" + String.valueOf(this._min) + "]\n"); 
-     builder.append("max" + "[" + String.valueOf(this.max) + "]\n"); 
-     builder.append("_max" + "[" + String.valueOf(this._max) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MessageDefinitionFocus]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this.min != null) builder.append("min" + "->" + this.min.toString() + "\n"); 
+     if(this._min != null) builder.append("_min" + "->" + this._min.toString() + "\n"); 
+     if(this.max != null) builder.append("max" + "->" + this.max.toString() + "\n"); 
+     if(this._max != null) builder.append("_max" + "->" + this._max.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MessageDefinitionFocus> fromArray(java.util.List<MessageDefinitionFocusModel> list) {
-    return (java.util.List<MessageDefinitionFocus>)list.stream()
-      .map(model -> new MessageDefinitionFocus(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MessageDefinitionFocusModel> toModelArray(java.util.List<MessageDefinitionFocus> list) {
-    return (java.util.List<MessageDefinitionFocusModel>)list.stream()
-      .map(model -> new MessageDefinitionFocusModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MessageDefinitionFocus fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MessageDefinitionFocus.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MessageDefinitionFocus o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MessageDefinitionFocus> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

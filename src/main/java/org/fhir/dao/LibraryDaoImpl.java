@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.LibraryModel;
 import org.fhir.pojo.Library;
+import org.fhir.pojo.LibraryHelper;
 
 public class LibraryDaoImpl implements LibraryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class LibraryDaoImpl implements LibraryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from LibraryModel a", LibraryModel.class).setMaxResults(maxResult);
       List<LibraryModel> models = query.getResultList();
-      return Library.fromArray(models);
+      return LibraryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class LibraryDaoImpl implements LibraryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from LibraryModel a", LibraryModel.class);
       List<LibraryModel> models = query.getResultList();
-      return Library.fromArray(models);
+      return LibraryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class LibraryDaoImpl implements LibraryDao {
       LibraryModel model = em.merge(new LibraryModel(e));
       return new Library(model);
   }
-
   @Override
   @Transactional
   public void delete(Library e) {

@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.TestReportAction2Model;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -48,6 +49,7 @@ public class TestReportAction2  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -64,7 +66,18 @@ public class TestReportAction2  {
   */
   private java.util.List<Extension> extension = new java.util.ArrayList<>();
 
-  public TestReportAction2() {}
+  public TestReportAction2() {
+  }
+
+  public TestReportAction2(TestReportAction2Model o) {
+    this.id = o.getId();
+    if (null != o.getOperation() && !o.getOperation().isEmpty()) {
+      this.operation = new TestReportOperation(o.getOperation().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+  }
 
   public void setOperation( TestReportOperation value) {
     this.operation = value;
@@ -100,32 +113,14 @@ public class TestReportAction2  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("operation" + "[" + String.valueOf(this.operation) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TestReportAction2]:" + "\n");
+     if(this.operation != null) builder.append("operation" + "->" + this.operation.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
-  public static TestReportAction2 fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TestReportAction2.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TestReportAction2 o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TestReportAction2> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 
 }

@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A definition of a FHIR structure. This resource is used to describe the underlying resources, data types defined in FHIR, and also for describing extensions and constraints on resources and data types."
 */
 @Entity
 @Table(name="structuredefinition")
-public class StructureDefinitionModel  {
+public class StructureDefinitionModel  implements Serializable {
+	private static final long serialVersionUID = 151857669686514556L;
   /**
   * Description: "This is a StructureDefinition resource"
   */
@@ -54,7 +55,7 @@ public class StructureDefinitionModel  {
 
   /**
   * Description: "A formal identifier that is used to identify this structure definition when it is represented in other formats, or referenced in a specification, model, design or an instance."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -114,9 +115,13 @@ public class StructureDefinitionModel  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContactDetailModel> contact = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contact_id\"")
+  private String contact_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  private java.util.List<ContactDetailModel> contact;
 
   /**
   * Description: "A free text natural language description of the structure definition from a consumer's perspective."
@@ -128,13 +133,17 @@ public class StructureDefinitionModel  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate structure definition instances."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<UsageContextModel> useContext = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"usecontext_id\"")
+  private String usecontext_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
+  private java.util.List<UsageContextModel> useContext;
 
   /**
   * Description: "A legal or geographic region in which the structure definition is intended to be used."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -157,7 +166,7 @@ public class StructureDefinitionModel  {
 
   /**
   * Description: "A set of key words or terms from external terminologies that may be used to assist with indexing and searching of templates."
-  * Actual type: Array of Coding-> List<Coding>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -174,7 +183,7 @@ public class StructureDefinitionModel  {
 
   /**
   * Description: "An external specification that the content is mapped to."
-  * Actual type: Array of StructureDefinitionMapping-> List<StructureDefinitionMapping>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -204,20 +213,16 @@ public class StructureDefinitionModel  {
 
   /**
   * Description: "Identifies the types of resource or data type elements to which the extension can be applied."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"context\"", length = 16777215)
+  @Column(name="\"context\"")
   private String context;
 
   /**
   * Description: "A set of rules as Fluent Invariants about when the extension can be used (e.g. co-occurrence variants for the extension)."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"contextInvariant\"", length = 16777215)
+  @Column(name="\"contextInvariant\"")
   private String contextInvariant;
 
   /**
@@ -244,7 +249,7 @@ public class StructureDefinitionModel  {
 
   /**
   * Description: "A snapshot view is expressed in a stand alone form that can be used and interpreted without considering the base StructureDefinition."
-  * Actual type: StructureDefinitionSnapshot
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -253,7 +258,7 @@ public class StructureDefinitionModel  {
 
   /**
   * Description: "A differential view is expressed relative to the base StructureDefinition - a statement of differences that it applies."
-  * Actual type: StructureDefinitionDifferential
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -268,14 +273,14 @@ public class StructureDefinitionModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -285,7 +290,7 @@ public class StructureDefinitionModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -295,7 +300,7 @@ public class StructureDefinitionModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -307,6 +312,7 @@ public class StructureDefinitionModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -321,9 +327,9 @@ public class StructureDefinitionModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -344,353 +350,357 @@ public class StructureDefinitionModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public StructureDefinitionModel() {
   }
 
   public StructureDefinitionModel(StructureDefinition o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.url = o.getUrl();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.version = o.getVersion();
-
-      this.name = o.getName();
-
-      this.title = o.getTitle();
-
-      this.status = o.getStatus();
-
-      this.experimental = o.getExperimental();
-
-      this.date = o.getDate();
-
-      this.publisher = o.getPublisher();
-
-      this.contact = ContactDetail.toModelArray(o.getContact());
-
-      this.description = o.getDescription();
-
-      this.useContext = UsageContext.toModelArray(o.getUseContext());
-
-      this.jurisdiction = CodeableConcept.toJson(o.getJurisdiction());
-      this.purpose = o.getPurpose();
-
-      this.copyright = o.getCopyright();
-
-      this.keyword = Coding.toJson(o.getKeyword());
-      this.fhirVersion = o.getFhirVersion();
-
-      this.mapping = StructureDefinitionMapping.toJson(o.getMapping());
-      this.kind = o.getKind();
-
-      this.FHIRabstract = o.getFHIRabstract();
-
-      this.contextType = o.getContextType();
-
-      this.context = org.fhir.utils.JsonUtils.write2String(o.getContext());
-
-      this.contextInvariant = org.fhir.utils.JsonUtils.write2String(o.getContextInvariant());
-
-      this.type = o.getType();
-
-      this.baseDefinition = o.getBaseDefinition();
-
-      this.derivation = o.getDerivation();
-
-      this.snapshot = StructureDefinitionSnapshot.toJson(o.getSnapshot());
-      this.differential = StructureDefinitionDifferential.toJson(o.getDifferential());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.url = o.getUrl();
+    this.version = o.getVersion();
+    this.name = o.getName();
+    this.title = o.getTitle();
+    this.status = o.getStatus();
+    this.experimental = o.getExperimental();
+    this.date = o.getDate();
+    this.publisher = o.getPublisher();
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact_id = "contact" + this.id;
+    	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
+    }
+    this.description = o.getDescription();
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.usecontext_id = "usecontext" + this.id;
+    	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
+    }
+    this.purpose = o.getPurpose();
+    this.copyright = o.getCopyright();
+    this.fhirVersion = o.getFhirVersion();
+    this.kind = o.getKind();
+    this.FHIRabstract = o.getFHIRabstract();
+    this.contextType = o.getContextType();
+    this.context = org.fhir.utils.JsonUtils.write2String(o.getContext());
+    this.contextInvariant = org.fhir.utils.JsonUtils.write2String(o.getContextInvariant());
+    this.type = o.getType();
+    this.baseDefinition = o.getBaseDefinition();
+    this.derivation = o.getDerivation();
+    this.snapshot = StructureDefinitionSnapshotHelper.toJson(o.getSnapshot());
+    this.differential = StructureDefinitionDifferentialHelper.toJson(o.getDifferential());
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setUrl( String value) {
-    this.url = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getUrl() {
     return this.url;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setUrl( String value) {
+    this.url = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setVersion( String value) {
-    this.version = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getVersion() {
     return this.version;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setVersion( String value) {
+    this.version = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setTitle( String value) {
-    this.title = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getTitle() {
     return this.title;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setTitle( String value) {
+    this.title = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setExperimental( Boolean value) {
-    this.experimental = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public Boolean getExperimental() {
     return this.experimental;
   }
-  public void setDate( String value) {
-    this.date = value;
+  public void setExperimental( Boolean value) {
+    this.experimental = value;
   }
   public String getDate() {
     return this.date;
   }
-  public void setPublisher( String value) {
-    this.publisher = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public String getPublisher() {
     return this.publisher;
   }
-  public void setContact( java.util.List<ContactDetailModel> value) {
-    this.contact = value;
+  public void setPublisher( String value) {
+    this.publisher = value;
   }
   public java.util.List<ContactDetailModel> getContact() {
     return this.contact;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setContact( java.util.List<ContactDetailModel> value) {
+    this.contact = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setUseContext( java.util.List<UsageContextModel> value) {
-    this.useContext = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public java.util.List<UsageContextModel> getUseContext() {
     return this.useContext;
   }
-  public void setJurisdiction( String value) {
-    this.jurisdiction = value;
+  public void setUseContext( java.util.List<UsageContextModel> value) {
+    this.useContext = value;
   }
   public String getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setPurpose( String value) {
-    this.purpose = value;
+  public void setJurisdiction( String value) {
+    this.jurisdiction = value;
   }
   public String getPurpose() {
     return this.purpose;
   }
-  public void setCopyright( String value) {
-    this.copyright = value;
+  public void setPurpose( String value) {
+    this.purpose = value;
   }
   public String getCopyright() {
     return this.copyright;
   }
-  public void setKeyword( String value) {
-    this.keyword = value;
+  public void setCopyright( String value) {
+    this.copyright = value;
   }
   public String getKeyword() {
     return this.keyword;
   }
-  public void setFhirVersion( String value) {
-    this.fhirVersion = value;
+  public void setKeyword( String value) {
+    this.keyword = value;
   }
   public String getFhirVersion() {
     return this.fhirVersion;
   }
-  public void setMapping( String value) {
-    this.mapping = value;
+  public void setFhirVersion( String value) {
+    this.fhirVersion = value;
   }
   public String getMapping() {
     return this.mapping;
   }
-  public void setKind( String value) {
-    this.kind = value;
+  public void setMapping( String value) {
+    this.mapping = value;
   }
   public String getKind() {
     return this.kind;
   }
-  public void setFHIRabstract( Boolean value) {
-    this.FHIRabstract = value;
+  public void setKind( String value) {
+    this.kind = value;
   }
   public Boolean getFHIRabstract() {
     return this.FHIRabstract;
   }
-  public void setContextType( String value) {
-    this.contextType = value;
+  public void setFHIRabstract( Boolean value) {
+    this.FHIRabstract = value;
   }
   public String getContextType() {
     return this.contextType;
   }
-  public void setContext( String value) {
-    this.context = value;
+  public void setContextType( String value) {
+    this.contextType = value;
   }
   public String getContext() {
     return this.context;
   }
-  public void setContextInvariant( String value) {
-    this.contextInvariant = value;
+  public void setContext( String value) {
+    this.context = value;
   }
   public String getContextInvariant() {
     return this.contextInvariant;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setContextInvariant( String value) {
+    this.contextInvariant = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setBaseDefinition( String value) {
-    this.baseDefinition = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getBaseDefinition() {
     return this.baseDefinition;
   }
-  public void setDerivation( String value) {
-    this.derivation = value;
+  public void setBaseDefinition( String value) {
+    this.baseDefinition = value;
   }
   public String getDerivation() {
     return this.derivation;
   }
-  public void setSnapshot( String value) {
-    this.snapshot = value;
+  public void setDerivation( String value) {
+    this.derivation = value;
   }
   public String getSnapshot() {
     return this.snapshot;
   }
-  public void setDifferential( String value) {
-    this.differential = value;
+  public void setSnapshot( String value) {
+    this.snapshot = value;
   }
   public String getDifferential() {
     return this.differential;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setDifferential( String value) {
+    this.differential = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("experimental" + "[" + String.valueOf(this.experimental) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("copyright" + "[" + String.valueOf(this.copyright) + "]\n"); 
-     builder.append("keyword" + "[" + String.valueOf(this.keyword) + "]\n"); 
-     builder.append("fhirVersion" + "[" + String.valueOf(this.fhirVersion) + "]\n"); 
-     builder.append("mapping" + "[" + String.valueOf(this.mapping) + "]\n"); 
-     builder.append("kind" + "[" + String.valueOf(this.kind) + "]\n"); 
-     builder.append("FHIRabstract" + "[" + String.valueOf(this.FHIRabstract) + "]\n"); 
-     builder.append("contextType" + "[" + String.valueOf(this.contextType) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("contextInvariant" + "[" + String.valueOf(this.contextInvariant) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("baseDefinition" + "[" + String.valueOf(this.baseDefinition) + "]\n"); 
-     builder.append("derivation" + "[" + String.valueOf(this.derivation) + "]\n"); 
-     builder.append("snapshot" + "[" + String.valueOf(this.snapshot) + "]\n"); 
-     builder.append("differential" + "[" + String.valueOf(this.differential) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[StructureDefinitionModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("experimental" + "->" + this.experimental + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("purpose" + "->" + this.purpose + "\n"); 
+     builder.append("copyright" + "->" + this.copyright + "\n"); 
+     builder.append("keyword" + "->" + this.keyword + "\n"); 
+     builder.append("fhirVersion" + "->" + this.fhirVersion + "\n"); 
+     builder.append("mapping" + "->" + this.mapping + "\n"); 
+     builder.append("kind" + "->" + this.kind + "\n"); 
+     builder.append("FHIRabstract" + "->" + this.FHIRabstract + "\n"); 
+     builder.append("contextType" + "->" + this.contextType + "\n"); 
+     builder.append("context" + "->" + this.context + "\n"); 
+     builder.append("contextInvariant" + "->" + this.contextInvariant + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("baseDefinition" + "->" + this.baseDefinition + "\n"); 
+     builder.append("derivation" + "->" + this.derivation + "\n"); 
+     builder.append("snapshot" + "->" + this.snapshot + "\n"); 
+     builder.append("differential" + "->" + this.differential + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[StructureDefinitionModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("experimental" + "->" + this.experimental + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("contact" + "->" + this.contact + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("useContext" + "->" + this.useContext + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("purpose" + "->" + this.purpose + "\n"); 
+     builder.append("copyright" + "->" + this.copyright + "\n"); 
+     builder.append("keyword" + "->" + this.keyword + "\n"); 
+     builder.append("fhirVersion" + "->" + this.fhirVersion + "\n"); 
+     builder.append("mapping" + "->" + this.mapping + "\n"); 
+     builder.append("kind" + "->" + this.kind + "\n"); 
+     builder.append("FHIRabstract" + "->" + this.FHIRabstract + "\n"); 
+     builder.append("contextType" + "->" + this.contextType + "\n"); 
+     builder.append("context" + "->" + this.context + "\n"); 
+     builder.append("contextInvariant" + "->" + this.contextInvariant + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("baseDefinition" + "->" + this.baseDefinition + "\n"); 
+     builder.append("derivation" + "->" + this.derivation + "\n"); 
+     builder.append("snapshot" + "->" + this.snapshot + "\n"); 
+     builder.append("differential" + "->" + this.differential + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

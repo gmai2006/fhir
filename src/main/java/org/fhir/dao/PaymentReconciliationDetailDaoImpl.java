@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PaymentReconciliationDetailModel;
 import org.fhir.pojo.PaymentReconciliationDetail;
+import org.fhir.pojo.PaymentReconciliationDetailHelper;
 
 public class PaymentReconciliationDetailDaoImpl implements PaymentReconciliationDetailDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PaymentReconciliationDetailDaoImpl implements PaymentReconciliation
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PaymentReconciliationDetailModel a", PaymentReconciliationDetailModel.class).setMaxResults(maxResult);
       List<PaymentReconciliationDetailModel> models = query.getResultList();
-      return PaymentReconciliationDetail.fromArray(models);
+      return PaymentReconciliationDetailHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PaymentReconciliationDetailDaoImpl implements PaymentReconciliation
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PaymentReconciliationDetailModel a", PaymentReconciliationDetailModel.class);
       List<PaymentReconciliationDetailModel> models = query.getResultList();
-      return PaymentReconciliationDetail.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PaymentReconciliationDetail create(PaymentReconciliationDetail e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PaymentReconciliationDetailModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PaymentReconciliationDetail update(PaymentReconciliationDetail e) {
-      final EntityManager em = entityManagerProvider.get();
-      PaymentReconciliationDetailModel model = em.merge(new PaymentReconciliationDetailModel(e));
-      return new PaymentReconciliationDetail(model);
+      return PaymentReconciliationDetailHelper.fromArray2Array(models);
   }
 
   @Override

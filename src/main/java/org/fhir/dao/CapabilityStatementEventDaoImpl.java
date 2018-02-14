@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementEventModel;
 import org.fhir.pojo.CapabilityStatementEvent;
+import org.fhir.pojo.CapabilityStatementEventHelper;
 
 public class CapabilityStatementEventDaoImpl implements CapabilityStatementEventDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementEventDaoImpl implements CapabilityStatementEvent
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementEventModel a", CapabilityStatementEventModel.class).setMaxResults(maxResult);
       List<CapabilityStatementEventModel> models = query.getResultList();
-      return CapabilityStatementEvent.fromArray(models);
+      return CapabilityStatementEventHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CapabilityStatementEventDaoImpl implements CapabilityStatementEvent
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementEventModel a", CapabilityStatementEventModel.class);
       List<CapabilityStatementEventModel> models = query.getResultList();
-      return CapabilityStatementEvent.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementEvent create(CapabilityStatementEvent e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CapabilityStatementEventModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CapabilityStatementEvent update(CapabilityStatementEvent e) {
-      final EntityManager em = entityManagerProvider.get();
-      CapabilityStatementEventModel model = em.merge(new CapabilityStatementEventModel(e));
-      return new CapabilityStatementEvent(model);
+      return CapabilityStatementEventHelper.fromArray2Array(models);
   }
 
   @Override

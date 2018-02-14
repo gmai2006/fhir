@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.OperationDefinitionModel;
 import org.fhir.pojo.OperationDefinition;
+import org.fhir.pojo.OperationDefinitionHelper;
 
 public class OperationDefinitionDaoImpl implements OperationDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class OperationDefinitionDaoImpl implements OperationDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OperationDefinitionModel a", OperationDefinitionModel.class).setMaxResults(maxResult);
       List<OperationDefinitionModel> models = query.getResultList();
-      return OperationDefinition.fromArray(models);
+      return OperationDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class OperationDefinitionDaoImpl implements OperationDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OperationDefinitionModel a", OperationDefinitionModel.class);
       List<OperationDefinitionModel> models = query.getResultList();
-      return OperationDefinition.fromArray(models);
+      return OperationDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class OperationDefinitionDaoImpl implements OperationDefinitionDao {
       OperationDefinitionModel model = em.merge(new OperationDefinitionModel(e));
       return new OperationDefinition(model);
   }
-
   @Override
   @Transactional
   public void delete(OperationDefinition e) {

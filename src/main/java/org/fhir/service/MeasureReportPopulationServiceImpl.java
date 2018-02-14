@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public MeasureReportPopulation create(MeasureReportPopulation bean) {
-  	requireNonNull(bean);
-    logger.info("create(MeasureReportPopulation={}) - entered bean ");
-
-    final MeasureReportPopulation result = dao.create(bean);
-
-    logger.info("create(MeasureReportPopulation) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public MeasureReportPopulation update(MeasureReportPopulation bean) {
-  	requireNonNull(bean);
-    logger.info("update(MeasureReportPopulation={}) - entered bean ");
-
-    final MeasureReportPopulation result = dao.update(bean);
-
-    logger.info("update(MeasureReportPopulation) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

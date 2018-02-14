@@ -34,10 +34,5 @@ public interface ClaimResponseProcessNoteDao {
   public List<ClaimResponseProcessNote> select(int maxResult);
 
   public List<ClaimResponseProcessNote> selectAll();
-
-  public ClaimResponseProcessNote create(ClaimResponseProcessNote e);
-
-  public ClaimResponseProcessNote update(ClaimResponseProcessNote e);
-
   public void delete(ClaimResponseProcessNote e);
 }

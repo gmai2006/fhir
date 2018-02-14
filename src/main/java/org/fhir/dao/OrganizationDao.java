@@ -34,10 +34,8 @@ public interface OrganizationDao {
   public List<Organization> select(int maxResult);
 
   public List<Organization> selectAll();
-
   public Organization create(Organization e);
 
   public Organization update(Organization e);
-
   public void delete(Organization e);
 }

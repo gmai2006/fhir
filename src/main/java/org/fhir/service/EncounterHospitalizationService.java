@@ -32,7 +32,5 @@ public interface EncounterHospitalizationService {
 	public EncounterHospitalization find(String id);
   public List<EncounterHospitalization> select(int maxResult);
   public List<EncounterHospitalization> selectAll();
-  public EncounterHospitalization create(EncounterHospitalization bean);
-  public EncounterHospitalization update(EncounterHospitalization bean);
   public void delete(EncounterHospitalization bean);
 }

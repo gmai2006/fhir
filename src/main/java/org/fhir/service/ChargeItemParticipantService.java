@@ -32,7 +32,5 @@ public interface ChargeItemParticipantService {
 	public ChargeItemParticipant find(String id);
   public List<ChargeItemParticipant> select(int maxResult);
   public List<ChargeItemParticipant> selectAll();
-  public ChargeItemParticipant create(ChargeItemParticipant bean);
-  public ChargeItemParticipant update(ChargeItemParticipant bean);
   public void delete(ChargeItemParticipant bean);
 }

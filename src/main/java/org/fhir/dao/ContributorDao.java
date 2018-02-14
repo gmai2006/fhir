@@ -34,10 +34,5 @@ public interface ContributorDao {
   public List<Contributor> select(int maxResult);
 
   public List<Contributor> selectAll();
-
-  public Contributor create(Contributor e);
-
-  public Contributor update(Contributor e);
-
   public void delete(Contributor e);
 }

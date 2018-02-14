@@ -75,6 +75,7 @@ public class ValueSetFilter  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -96,24 +97,18 @@ public class ValueSetFilter  {
 
   public ValueSetFilter(ValueSetFilterModel o) {
     this.id = o.getId();
-      if (null != o.getProperty()) {
-        this.property = new String(o.getProperty());
-      }
-
-      if (null != o.getOp()) {
-        this.op = new String(o.getOp());
-      }
-
-      if (null != o.getValue()) {
-        this.value = new String(o.getValue());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getProperty()) {
+      this.property = o.getProperty();
+    }
+    if (null != o.getOp()) {
+      this.op = o.getOp();
+    }
+    if (null != o.getValue()) {
+      this.value = o.getValue();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setProperty( String value) {
@@ -180,16 +175,17 @@ public class ValueSetFilter  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("property" + "[" + String.valueOf(this.property) + "]\n"); 
-     builder.append("_property" + "[" + String.valueOf(this._property) + "]\n"); 
-     builder.append("op" + "[" + String.valueOf(this.op) + "]\n"); 
-     builder.append("_op" + "[" + String.valueOf(this._op) + "]\n"); 
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("_value" + "[" + String.valueOf(this._value) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ValueSetFilter]:" + "\n");
+     if(this.property != null) builder.append("property" + "->" + this.property.toString() + "\n"); 
+     if(this._property != null) builder.append("_property" + "->" + this._property.toString() + "\n"); 
+     if(this.op != null) builder.append("op" + "->" + this.op.toString() + "\n"); 
+     if(this._op != null) builder.append("_op" + "->" + this._op.toString() + "\n"); 
+     if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
+     if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -221,36 +217,4 @@ public class ValueSetFilter  {
   	}
   }
 
-  public static java.util.List<ValueSetFilter> fromArray(java.util.List<ValueSetFilterModel> list) {
-    return (java.util.List<ValueSetFilter>)list.stream()
-      .map(model -> new ValueSetFilter(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ValueSetFilterModel> toModelArray(java.util.List<ValueSetFilter> list) {
-    return (java.util.List<ValueSetFilterModel>)list.stream()
-      .map(model -> new ValueSetFilterModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ValueSetFilter fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ValueSetFilter.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ValueSetFilter o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ValueSetFilter> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

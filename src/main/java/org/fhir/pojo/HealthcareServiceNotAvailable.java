@@ -58,6 +58,7 @@ public class HealthcareServiceNotAvailable  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -79,17 +80,13 @@ public class HealthcareServiceNotAvailable  {
 
   public HealthcareServiceNotAvailable(HealthcareServiceNotAvailableModel o) {
     this.id = o.getId();
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.during = Period.fromJson(o.getDuring());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    this.during = PeriodHelper.fromJson(o.getDuring());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setDescription( String value) {
@@ -138,47 +135,16 @@ public class HealthcareServiceNotAvailable  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("during" + "[" + String.valueOf(this.during) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[HealthcareServiceNotAvailable]:" + "\n");
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.during != null) builder.append("during" + "->" + this.during.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<HealthcareServiceNotAvailable> fromArray(java.util.List<HealthcareServiceNotAvailableModel> list) {
-    return (java.util.List<HealthcareServiceNotAvailable>)list.stream()
-      .map(model -> new HealthcareServiceNotAvailable(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<HealthcareServiceNotAvailableModel> toModelArray(java.util.List<HealthcareServiceNotAvailable> list) {
-    return (java.util.List<HealthcareServiceNotAvailableModel>)list.stream()
-      .map(model -> new HealthcareServiceNotAvailableModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static HealthcareServiceNotAvailable fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, HealthcareServiceNotAvailable.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(HealthcareServiceNotAvailable o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<HealthcareServiceNotAvailable> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

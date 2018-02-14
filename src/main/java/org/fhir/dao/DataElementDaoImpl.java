@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DataElementModel;
 import org.fhir.pojo.DataElement;
+import org.fhir.pojo.DataElementHelper;
 
 public class DataElementDaoImpl implements DataElementDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DataElementDaoImpl implements DataElementDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DataElementModel a", DataElementModel.class).setMaxResults(maxResult);
       List<DataElementModel> models = query.getResultList();
-      return DataElement.fromArray(models);
+      return DataElementHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class DataElementDaoImpl implements DataElementDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DataElementModel a", DataElementModel.class);
       List<DataElementModel> models = query.getResultList();
-      return DataElement.fromArray(models);
+      return DataElementHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class DataElementDaoImpl implements DataElementDao {
       DataElementModel model = em.merge(new DataElementModel(e));
       return new DataElement(model);
   }
-
   @Override
   @Transactional
   public void delete(DataElement e) {

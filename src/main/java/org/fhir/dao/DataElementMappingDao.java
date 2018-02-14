@@ -34,10 +34,5 @@ public interface DataElementMappingDao {
   public List<DataElementMapping> select(int maxResult);
 
   public List<DataElementMapping> selectAll();
-
-  public DataElementMapping create(DataElementMapping e);
-
-  public DataElementMapping update(DataElementMapping e);
-
   public void delete(DataElementMapping e);
 }

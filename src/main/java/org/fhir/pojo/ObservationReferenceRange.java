@@ -78,6 +78,7 @@ public class ObservationReferenceRange  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -99,21 +100,16 @@ public class ObservationReferenceRange  {
 
   public ObservationReferenceRange(ObservationReferenceRangeModel o) {
     this.id = o.getId();
-      this.low = Quantity.fromJson(o.getLow());
-      this.high = Quantity.fromJson(o.getHigh());
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.appliesTo = CodeableConcept.fromArray(o.getAppliesTo());
-      this.age = Range.fromJson(o.getAge());
-      if (null != o.getText()) {
-        this.text = new String(o.getText());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.low = QuantityHelper.fromJson(o.getLow());
+    this.high = QuantityHelper.fromJson(o.getHigh());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    this.age = RangeHelper.fromJson(o.getAge());
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLow( Quantity value) {
@@ -186,51 +182,20 @@ public class ObservationReferenceRange  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("low" + "[" + String.valueOf(this.low) + "]\n"); 
-     builder.append("high" + "[" + String.valueOf(this.high) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("appliesTo" + "[" + String.valueOf(this.appliesTo) + "]\n"); 
-     builder.append("age" + "[" + String.valueOf(this.age) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ObservationReferenceRange]:" + "\n");
+     if(this.low != null) builder.append("low" + "->" + this.low.toString() + "\n"); 
+     if(this.high != null) builder.append("high" + "->" + this.high.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.appliesTo != null) builder.append("appliesTo" + "->" + this.appliesTo.toString() + "\n"); 
+     if(this.age != null) builder.append("age" + "->" + this.age.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ObservationReferenceRange> fromArray(java.util.List<ObservationReferenceRangeModel> list) {
-    return (java.util.List<ObservationReferenceRange>)list.stream()
-      .map(model -> new ObservationReferenceRange(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ObservationReferenceRangeModel> toModelArray(java.util.List<ObservationReferenceRange> list) {
-    return (java.util.List<ObservationReferenceRangeModel>)list.stream()
-      .map(model -> new ObservationReferenceRangeModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ObservationReferenceRange fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ObservationReferenceRange.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ObservationReferenceRange o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ObservationReferenceRange> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

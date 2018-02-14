@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ValueSetFilter create(ValueSetFilter bean) {
-  	requireNonNull(bean);
-    logger.info("create(ValueSetFilter={}) - entered bean ");
-
-    final ValueSetFilter result = dao.create(bean);
-
-    logger.info("create(ValueSetFilter) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ValueSetFilter update(ValueSetFilter bean) {
-  	requireNonNull(bean);
-    logger.info("update(ValueSetFilter={}) - entered bean ");
-
-    final ValueSetFilter result = dao.update(bean);
-
-    logger.info("update(ValueSetFilter) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MedicationContentModel;
 import org.fhir.pojo.MedicationContent;
+import org.fhir.pojo.MedicationContentHelper;
 
 public class MedicationContentDaoImpl implements MedicationContentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MedicationContentDaoImpl implements MedicationContentDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationContentModel a", MedicationContentModel.class).setMaxResults(maxResult);
       List<MedicationContentModel> models = query.getResultList();
-      return MedicationContent.fromArray(models);
+      return MedicationContentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MedicationContentDaoImpl implements MedicationContentDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationContentModel a", MedicationContentModel.class);
       List<MedicationContentModel> models = query.getResultList();
-      return MedicationContent.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MedicationContent create(MedicationContent e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MedicationContentModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MedicationContent update(MedicationContent e) {
-      final EntityManager em = entityManagerProvider.get();
-      MedicationContentModel model = em.merge(new MedicationContentModel(e));
-      return new MedicationContent(model);
+      return MedicationContentHelper.fromArray2Array(models);
   }
 
   @Override

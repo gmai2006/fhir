@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
 */
 @Entity
 @Table(name="codesystemproperty1")
-public class CodeSystemProperty1Model  {
+public class CodeSystemProperty1Model  implements Serializable {
+	private static final long serialVersionUID = 151857669682753388L;
   /**
   * Description: "A code that is a reference to CodeSystem.property.code."
   */
@@ -55,7 +56,7 @@ public class CodeSystemProperty1Model  {
 
   /**
   * Description: "The value of this property."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -95,7 +96,7 @@ public class CodeSystemProperty1Model  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -107,6 +108,7 @@ public class CodeSystemProperty1Model  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -115,116 +117,135 @@ public class CodeSystemProperty1Model  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public CodeSystemProperty1Model() {
   }
 
-  public CodeSystemProperty1Model(CodeSystemProperty1 o) {
-    this.id = o.getId();
-      this.code = o.getCode();
-
-      this.valueCode = o.getValueCode();
-
-      this.valueCoding = Coding.toJson(o.getValueCoding());
-      this.valueString = o.getValueString();
-
-      this.valueInteger = o.getValueInteger();
-
-      this.valueBoolean = o.getValueBoolean();
-
-      this.valueDateTime = o.getValueDateTime();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public CodeSystemProperty1Model(CodeSystemProperty1 o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.code = o.getCode();
+    this.valueCode = o.getValueCode();
+    this.valueCoding = CodingHelper.toJson(o.getValueCoding());
+    this.valueString = o.getValueString();
+    this.valueInteger = o.getValueInteger();
+    this.valueBoolean = o.getValueBoolean();
+    this.valueDateTime = o.getValueDateTime();
   }
 
-  public void setCode( String value) {
-    this.code = value;
-  }
   public String getCode() {
     return this.code;
   }
-  public void setValueCode( String value) {
-    this.valueCode = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public String getValueCode() {
     return this.valueCode;
   }
-  public void setValueCoding( String value) {
-    this.valueCoding = value;
+  public void setValueCode( String value) {
+    this.valueCode = value;
   }
   public String getValueCoding() {
     return this.valueCoding;
   }
-  public void setValueString( String value) {
-    this.valueString = value;
+  public void setValueCoding( String value) {
+    this.valueCoding = value;
   }
   public String getValueString() {
     return this.valueString;
   }
-  public void setValueInteger( Float value) {
-    this.valueInteger = value;
+  public void setValueString( String value) {
+    this.valueString = value;
   }
   public Float getValueInteger() {
     return this.valueInteger;
   }
-  public void setValueBoolean( Boolean value) {
-    this.valueBoolean = value;
+  public void setValueInteger( Float value) {
+    this.valueInteger = value;
   }
   public Boolean getValueBoolean() {
     return this.valueBoolean;
   }
-  public void setValueDateTime( String value) {
-    this.valueDateTime = value;
+  public void setValueBoolean( Boolean value) {
+    this.valueBoolean = value;
   }
   public String getValueDateTime() {
     return this.valueDateTime;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setValueDateTime( String value) {
+    this.valueDateTime = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("valueCode" + "[" + String.valueOf(this.valueCode) + "]\n"); 
-     builder.append("valueCoding" + "[" + String.valueOf(this.valueCoding) + "]\n"); 
-     builder.append("valueString" + "[" + String.valueOf(this.valueString) + "]\n"); 
-     builder.append("valueInteger" + "[" + String.valueOf(this.valueInteger) + "]\n"); 
-     builder.append("valueBoolean" + "[" + String.valueOf(this.valueBoolean) + "]\n"); 
-     builder.append("valueDateTime" + "[" + String.valueOf(this.valueDateTime) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CodeSystemProperty1Model]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("valueCode" + "->" + this.valueCode + "\n"); 
+     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
+     builder.append("valueString" + "->" + this.valueString + "\n"); 
+     builder.append("valueInteger" + "->" + this.valueInteger + "\n"); 
+     builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 
+     builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[CodeSystemProperty1Model]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("valueCode" + "->" + this.valueCode + "\n"); 
+     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
+     builder.append("valueString" + "->" + this.valueString + "\n"); 
+     builder.append("valueInteger" + "->" + this.valueInteger + "\n"); 
+     builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 
+     builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -38,28 +38,9 @@ public class ResourceList  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
+    builder.append("[ResourceList]:" + "\n");
   ;
     return builder.toString();
-  }
-
-  public static ResourceList fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ResourceList.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ResourceList o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ResourceList> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

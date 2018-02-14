@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CarePlanActivity create(CarePlanActivity bean) {
-  	requireNonNull(bean);
-    logger.info("create(CarePlanActivity={}) - entered bean ");
-
-    final CarePlanActivity result = dao.create(bean);
-
-    logger.info("create(CarePlanActivity) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CarePlanActivity update(CarePlanActivity bean) {
-  	requireNonNull(bean);
-    logger.info("update(CarePlanActivity={}) - entered bean ");
-
-    final CarePlanActivity result = dao.update(bean);
-
-    logger.info("update(CarePlanActivity) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

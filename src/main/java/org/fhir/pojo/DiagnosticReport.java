@@ -179,6 +179,7 @@ public class DiagnosticReport  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -230,79 +231,63 @@ public class DiagnosticReport  {
 
   public DiagnosticReport(DiagnosticReportModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.basedOn = Reference.fromArray(o.getBasedOn());
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      this.code = CodeableConcept.fromJson(o.getCode());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getEffectiveDateTime()) {
-        this.effectiveDateTime = new String(o.getEffectiveDateTime());
-      }
-
-      this.effectivePeriod = Period.fromJson(o.getEffectivePeriod());
-      if (null != o.getIssued()) {
-        this.issued = new String(o.getIssued());
-      }
-
-      this.performer = DiagnosticReportPerformer.fromArray(o.getPerformer());
-
-      this.specimen = Reference.fromArray(o.getSpecimen());
-
-      this.result = Reference.fromArray(o.getResult());
-
-      this.imagingStudy = Reference.fromArray(o.getImagingStudy());
-
-      this.image = DiagnosticReportImage.fromArray(o.getImage());
-
-      if (null != o.getConclusion()) {
-        this.conclusion = new String(o.getConclusion());
-      }
-
-      this.codedDiagnosis = CodeableConcept.fromArray(o.getCodedDiagnosis());
-      this.presentedForm = Attachment.fromArray(o.getPresentedForm());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedOn = ReferenceHelper.fromArray2Array(o.getBasedOn());
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getEffectiveDateTime()) {
+      this.effectiveDateTime = o.getEffectiveDateTime();
+    }
+    this.effectivePeriod = PeriodHelper.fromJson(o.getEffectivePeriod());
+    if (null != o.getIssued()) {
+      this.issued = o.getIssued();
+    }
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+    	this.performer = DiagnosticReportPerformerHelper.fromArray2Array(o.getPerformer());
+    }
+    if (null != o.getSpecimen() && !o.getSpecimen().isEmpty()) {
+    	this.specimen = ReferenceHelper.fromArray2Array(o.getSpecimen());
+    }
+    if (null != o.getResult() && !o.getResult().isEmpty()) {
+    	this.result = ReferenceHelper.fromArray2Array(o.getResult());
+    }
+    if (null != o.getImagingStudy() && !o.getImagingStudy().isEmpty()) {
+    	this.imagingStudy = ReferenceHelper.fromArray2Array(o.getImagingStudy());
+    }
+    if (null != o.getImage() && !o.getImage().isEmpty()) {
+    	this.image = DiagnosticReportImageHelper.fromArray2Array(o.getImage());
+    }
+    if (null != o.getConclusion()) {
+      this.conclusion = o.getConclusion();
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -513,40 +498,41 @@ public class DiagnosticReport  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("effectiveDateTime" + "[" + String.valueOf(this.effectiveDateTime) + "]\n"); 
-     builder.append("_effectiveDateTime" + "[" + String.valueOf(this._effectiveDateTime) + "]\n"); 
-     builder.append("effectivePeriod" + "[" + String.valueOf(this.effectivePeriod) + "]\n"); 
-     builder.append("issued" + "[" + String.valueOf(this.issued) + "]\n"); 
-     builder.append("_issued" + "[" + String.valueOf(this._issued) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("specimen" + "[" + String.valueOf(this.specimen) + "]\n"); 
-     builder.append("result" + "[" + String.valueOf(this.result) + "]\n"); 
-     builder.append("imagingStudy" + "[" + String.valueOf(this.imagingStudy) + "]\n"); 
-     builder.append("image" + "[" + String.valueOf(this.image) + "]\n"); 
-     builder.append("conclusion" + "[" + String.valueOf(this.conclusion) + "]\n"); 
-     builder.append("_conclusion" + "[" + String.valueOf(this._conclusion) + "]\n"); 
-     builder.append("codedDiagnosis" + "[" + String.valueOf(this.codedDiagnosis) + "]\n"); 
-     builder.append("presentedForm" + "[" + String.valueOf(this.presentedForm) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[DiagnosticReport]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.basedOn != null) builder.append("basedOn" + "->" + this.basedOn.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.effectiveDateTime != null) builder.append("effectiveDateTime" + "->" + this.effectiveDateTime.toString() + "\n"); 
+     if(this._effectiveDateTime != null) builder.append("_effectiveDateTime" + "->" + this._effectiveDateTime.toString() + "\n"); 
+     if(this.effectivePeriod != null) builder.append("effectivePeriod" + "->" + this.effectivePeriod.toString() + "\n"); 
+     if(this.issued != null) builder.append("issued" + "->" + this.issued.toString() + "\n"); 
+     if(this._issued != null) builder.append("_issued" + "->" + this._issued.toString() + "\n"); 
+     if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
+     if(this.specimen != null) builder.append("specimen" + "->" + this.specimen.toString() + "\n"); 
+     if(this.result != null) builder.append("result" + "->" + this.result.toString() + "\n"); 
+     if(this.imagingStudy != null) builder.append("imagingStudy" + "->" + this.imagingStudy.toString() + "\n"); 
+     if(this.image != null) builder.append("image" + "->" + this.image.toString() + "\n"); 
+     if(this.conclusion != null) builder.append("conclusion" + "->" + this.conclusion.toString() + "\n"); 
+     if(this._conclusion != null) builder.append("_conclusion" + "->" + this._conclusion.toString() + "\n"); 
+     if(this.codedDiagnosis != null) builder.append("codedDiagnosis" + "->" + this.codedDiagnosis.toString() + "\n"); 
+     if(this.presentedForm != null) builder.append("presentedForm" + "->" + this.presentedForm.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -592,36 +578,4 @@ public class DiagnosticReport  {
   	}
   }
 
-  public static java.util.List<DiagnosticReport> fromArray(java.util.List<DiagnosticReportModel> list) {
-    return (java.util.List<DiagnosticReport>)list.stream()
-      .map(model -> new DiagnosticReport(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DiagnosticReportModel> toModelArray(java.util.List<DiagnosticReport> list) {
-    return (java.util.List<DiagnosticReportModel>)list.stream()
-      .map(model -> new DiagnosticReportModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DiagnosticReport fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DiagnosticReport.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DiagnosticReport o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DiagnosticReport> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

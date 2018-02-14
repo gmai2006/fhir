@@ -51,6 +51,7 @@ public class ContactDetail  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -70,16 +71,12 @@ public class ContactDetail  {
 
   public ContactDetail(ContactDetailModel o) {
     this.id = o.getId();
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      this.telecom = ContactPoint.fromArray(o.getTelecom());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setName( String value) {
@@ -122,46 +119,15 @@ public class ContactDetail  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("telecom" + "[" + String.valueOf(this.telecom) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ContactDetail]:" + "\n");
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.telecom != null) builder.append("telecom" + "->" + this.telecom.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ContactDetail> fromArray(java.util.List<ContactDetailModel> list) {
-    return (java.util.List<ContactDetail>)list.stream()
-      .map(model -> new ContactDetail(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ContactDetailModel> toModelArray(java.util.List<ContactDetail> list) {
-    return (java.util.List<ContactDetailModel>)list.stream()
-      .map(model -> new ContactDetailModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ContactDetail fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ContactDetail.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ContactDetail o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ContactDetail> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

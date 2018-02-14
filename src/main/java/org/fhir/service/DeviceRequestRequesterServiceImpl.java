@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DeviceRequestRequester create(DeviceRequestRequester bean) {
-  	requireNonNull(bean);
-    logger.info("create(DeviceRequestRequester={}) - entered bean ");
-
-    final DeviceRequestRequester result = dao.create(bean);
-
-    logger.info("create(DeviceRequestRequester) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DeviceRequestRequester update(DeviceRequestRequester bean) {
-  	requireNonNull(bean);
-    logger.info("update(DeviceRequestRequester={}) - entered bean ");
-
-    final DeviceRequestRequester result = dao.update(bean);
-
-    logger.info("update(DeviceRequestRequester) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

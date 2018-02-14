@@ -34,10 +34,8 @@ public interface DetectedIssueDao {
   public List<DetectedIssue> select(int maxResult);
 
   public List<DetectedIssue> selectAll();
-
   public DetectedIssue create(DetectedIssue e);
 
   public DetectedIssue update(DetectedIssue e);
-
   public void delete(DetectedIssue e);
 }

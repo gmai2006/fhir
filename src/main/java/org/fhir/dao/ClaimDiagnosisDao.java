@@ -34,10 +34,5 @@ public interface ClaimDiagnosisDao {
   public List<ClaimDiagnosis> select(int maxResult);
 
   public List<ClaimDiagnosis> selectAll();
-
-  public ClaimDiagnosis create(ClaimDiagnosis e);
-
-  public ClaimDiagnosis update(ClaimDiagnosis e);
-
   public void delete(ClaimDiagnosis e);
 }

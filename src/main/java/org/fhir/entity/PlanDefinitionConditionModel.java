@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinitioncondition")
-public class PlanDefinitionConditionModel  {
+public class PlanDefinitionConditionModel  implements Serializable {
+	private static final long serialVersionUID = 151857669672977686L;
   /**
   * Description: "The kind of condition."
   */
@@ -68,7 +69,7 @@ public class PlanDefinitionConditionModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -80,6 +81,7 @@ public class PlanDefinitionConditionModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -88,90 +90,108 @@ public class PlanDefinitionConditionModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public PlanDefinitionConditionModel() {
   }
 
-  public PlanDefinitionConditionModel(PlanDefinitionCondition o) {
-    this.id = o.getId();
-      this.kind = o.getKind();
-
-      this.description = o.getDescription();
-
-      this.language = o.getLanguage();
-
-      this.expression = o.getExpression();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public PlanDefinitionConditionModel(PlanDefinitionCondition o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.kind = o.getKind();
+    this.description = o.getDescription();
+    this.language = o.getLanguage();
+    this.expression = o.getExpression();
   }
 
-  public void setKind( String value) {
-    this.kind = value;
-  }
   public String getKind() {
     return this.kind;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setKind( String value) {
+    this.kind = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public String getLanguage() {
     return this.language;
   }
-  public void setExpression( String value) {
-    this.expression = value;
+  public void setLanguage( String value) {
+    this.language = value;
   }
   public String getExpression() {
     return this.expression;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExpression( String value) {
+    this.expression = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("kind" + "[" + String.valueOf(this.kind) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("expression" + "[" + String.valueOf(this.expression) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PlanDefinitionConditionModel]:" + "\n");
+     builder.append("kind" + "->" + this.kind + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); 
+     builder.append("expression" + "->" + this.expression + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[PlanDefinitionConditionModel]:" + "\n");
+     builder.append("kind" + "->" + this.kind + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); 
+     builder.append("expression" + "->" + this.expression + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

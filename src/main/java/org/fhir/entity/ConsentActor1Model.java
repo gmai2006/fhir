@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
 */
 @Entity
 @Table(name="consentactor1")
-public class ConsentActor1Model  {
+public class ConsentActor1Model  implements Serializable {
+	private static final long serialVersionUID = 15185766967037081L;
   /**
   * Description: "How the individual is involved in the resources content that is described in the exception."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -54,14 +55,14 @@ public class ConsentActor1Model  {
   @Column(name="\"reference_id\"")
   private String reference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`reference_id`", insertable=false, updatable=false)
-  private ReferenceModel reference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> reference;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -73,6 +74,7 @@ public class ConsentActor1Model  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -81,76 +83,92 @@ public class ConsentActor1Model  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ConsentActor1Model() {
   }
 
-  public ConsentActor1Model(ConsentActor1 o) {
-    this.id = o.getId();
-      this.role = CodeableConcept.toJson(o.getRole());
-      if (null != o.getReference()) {
-      	this.reference_id = "reference" + this.getId();
-        this.reference = new ReferenceModel(o.getReference());
-        this.reference.setId(this.reference_id);
-        this.reference.parent_id = this.reference.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ConsentActor1Model(ConsentActor1 o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.role = CodeableConceptHelper.toJson(o.getRole());
+    if (null != o.getReference() ) {
+    	this.reference_id = "reference" + this.parent_id;
+    	this.reference = ReferenceHelper.toModel(o.getReference(), this.reference_id);
+    }
   }
 
-  public void setRole( String value) {
-    this.role = value;
-  }
   public String getRole() {
     return this.role;
   }
-  public void setReference( ReferenceModel value) {
-    this.reference = value;
+  public void setRole( String value) {
+    this.role = value;
   }
-  public ReferenceModel getReference() {
+  public java.util.List<ReferenceModel> getReference() {
     return this.reference;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setReference( java.util.List<ReferenceModel> value) {
+    this.reference = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConsentActor1Model]:" + "\n");
+     builder.append("role" + "->" + this.role + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ConsentActor1Model]:" + "\n");
+     builder.append("role" + "->" + this.role + "\n"); 
+     builder.append("reference" + "->" + this.reference + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

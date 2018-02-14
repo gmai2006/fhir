@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public SequenceQuality create(SequenceQuality bean) {
-  	requireNonNull(bean);
-    logger.info("create(SequenceQuality={}) - entered bean ");
-
-    final SequenceQuality result = dao.create(bean);
-
-    logger.info("create(SequenceQuality) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public SequenceQuality update(SequenceQuality bean) {
-  	requireNonNull(bean);
-    logger.info("update(SequenceQuality={}) - entered bean ");
-
-    final SequenceQuality result = dao.update(bean);
-
-    logger.info("update(SequenceQuality) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

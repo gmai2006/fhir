@@ -83,6 +83,7 @@ public class MedicationAdministrationDosage  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -104,22 +105,18 @@ public class MedicationAdministrationDosage  {
 
   public MedicationAdministrationDosage(MedicationAdministrationDosageModel o) {
     this.id = o.getId();
-      if (null != o.getText()) {
-        this.text = new String(o.getText());
-      }
-
-      this.site = CodeableConcept.fromJson(o.getSite());
-      this.route = CodeableConcept.fromJson(o.getRoute());
-      this.method = CodeableConcept.fromJson(o.getMethod());
-      this.dose = Quantity.fromJson(o.getDose());
-      this.rateRatio = Ratio.fromJson(o.getRateRatio());
-      this.rateSimpleQuantity = Quantity.fromJson(o.getRateSimpleQuantity());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+    this.site = CodeableConceptHelper.fromJson(o.getSite());
+    this.route = CodeableConceptHelper.fromJson(o.getRoute());
+    this.method = CodeableConceptHelper.fromJson(o.getMethod());
+    this.dose = QuantityHelper.fromJson(o.getDose());
+    this.rateRatio = RatioHelper.fromJson(o.getRateRatio());
+    this.rateSimpleQuantity = QuantityHelper.fromJson(o.getRateSimpleQuantity());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setText( String value) {
@@ -198,52 +195,21 @@ public class MedicationAdministrationDosage  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("site" + "[" + String.valueOf(this.site) + "]\n"); 
-     builder.append("route" + "[" + String.valueOf(this.route) + "]\n"); 
-     builder.append("method" + "[" + String.valueOf(this.method) + "]\n"); 
-     builder.append("dose" + "[" + String.valueOf(this.dose) + "]\n"); 
-     builder.append("rateRatio" + "[" + String.valueOf(this.rateRatio) + "]\n"); 
-     builder.append("rateSimpleQuantity" + "[" + String.valueOf(this.rateSimpleQuantity) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MedicationAdministrationDosage]:" + "\n");
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.site != null) builder.append("site" + "->" + this.site.toString() + "\n"); 
+     if(this.route != null) builder.append("route" + "->" + this.route.toString() + "\n"); 
+     if(this.method != null) builder.append("method" + "->" + this.method.toString() + "\n"); 
+     if(this.dose != null) builder.append("dose" + "->" + this.dose.toString() + "\n"); 
+     if(this.rateRatio != null) builder.append("rateRatio" + "->" + this.rateRatio.toString() + "\n"); 
+     if(this.rateSimpleQuantity != null) builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MedicationAdministrationDosage> fromArray(java.util.List<MedicationAdministrationDosageModel> list) {
-    return (java.util.List<MedicationAdministrationDosage>)list.stream()
-      .map(model -> new MedicationAdministrationDosage(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MedicationAdministrationDosageModel> toModelArray(java.util.List<MedicationAdministrationDosage> list) {
-    return (java.util.List<MedicationAdministrationDosageModel>)list.stream()
-      .map(model -> new MedicationAdministrationDosageModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MedicationAdministrationDosage fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MedicationAdministrationDosage.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MedicationAdministrationDosage o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MedicationAdministrationDosage> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

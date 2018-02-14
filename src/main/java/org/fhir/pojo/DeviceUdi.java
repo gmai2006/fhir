@@ -113,6 +113,7 @@ public class DeviceUdi  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -134,40 +135,30 @@ public class DeviceUdi  {
 
   public DeviceUdi(DeviceUdiModel o) {
     this.id = o.getId();
-      if (null != o.getDeviceIdentifier()) {
-        this.deviceIdentifier = new String(o.getDeviceIdentifier());
-      }
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getJurisdiction()) {
-        this.jurisdiction = new String(o.getJurisdiction());
-      }
-
-      if (null != o.getCarrierHRF()) {
-        this.carrierHRF = new String(o.getCarrierHRF());
-      }
-
-      if (null != o.getCarrierAIDC()) {
-        this.carrierAIDC = new String(o.getCarrierAIDC());
-      }
-
-      if (null != o.getIssuer()) {
-        this.issuer = new String(o.getIssuer());
-      }
-
-      if (null != o.getEntryType()) {
-        this.entryType = new String(o.getEntryType());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getDeviceIdentifier()) {
+      this.deviceIdentifier = o.getDeviceIdentifier();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getJurisdiction()) {
+      this.jurisdiction = o.getJurisdiction();
+    }
+    if (null != o.getCarrierHRF()) {
+      this.carrierHRF = o.getCarrierHRF();
+    }
+    if (null != o.getCarrierAIDC()) {
+      this.carrierAIDC = o.getCarrierAIDC();
+    }
+    if (null != o.getIssuer()) {
+      this.issuer = o.getIssuer();
+    }
+    if (null != o.getEntryType()) {
+      this.entryType = o.getEntryType();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setDeviceIdentifier( String value) {
@@ -282,24 +273,25 @@ public class DeviceUdi  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("deviceIdentifier" + "[" + String.valueOf(this.deviceIdentifier) + "]\n"); 
-     builder.append("_deviceIdentifier" + "[" + String.valueOf(this._deviceIdentifier) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("_jurisdiction" + "[" + String.valueOf(this._jurisdiction) + "]\n"); 
-     builder.append("carrierHRF" + "[" + String.valueOf(this.carrierHRF) + "]\n"); 
-     builder.append("_carrierHRF" + "[" + String.valueOf(this._carrierHRF) + "]\n"); 
-     builder.append("carrierAIDC" + "[" + String.valueOf(this.carrierAIDC) + "]\n"); 
-     builder.append("_carrierAIDC" + "[" + String.valueOf(this._carrierAIDC) + "]\n"); 
-     builder.append("issuer" + "[" + String.valueOf(this.issuer) + "]\n"); 
-     builder.append("_issuer" + "[" + String.valueOf(this._issuer) + "]\n"); 
-     builder.append("entryType" + "[" + String.valueOf(this.entryType) + "]\n"); 
-     builder.append("_entryType" + "[" + String.valueOf(this._entryType) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DeviceUdi]:" + "\n");
+     if(this.deviceIdentifier != null) builder.append("deviceIdentifier" + "->" + this.deviceIdentifier.toString() + "\n"); 
+     if(this._deviceIdentifier != null) builder.append("_deviceIdentifier" + "->" + this._deviceIdentifier.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.jurisdiction != null) builder.append("jurisdiction" + "->" + this.jurisdiction.toString() + "\n"); 
+     if(this._jurisdiction != null) builder.append("_jurisdiction" + "->" + this._jurisdiction.toString() + "\n"); 
+     if(this.carrierHRF != null) builder.append("carrierHRF" + "->" + this.carrierHRF.toString() + "\n"); 
+     if(this._carrierHRF != null) builder.append("_carrierHRF" + "->" + this._carrierHRF.toString() + "\n"); 
+     if(this.carrierAIDC != null) builder.append("carrierAIDC" + "->" + this.carrierAIDC.toString() + "\n"); 
+     if(this._carrierAIDC != null) builder.append("_carrierAIDC" + "->" + this._carrierAIDC.toString() + "\n"); 
+     if(this.issuer != null) builder.append("issuer" + "->" + this.issuer.toString() + "\n"); 
+     if(this._issuer != null) builder.append("_issuer" + "->" + this._issuer.toString() + "\n"); 
+     if(this.entryType != null) builder.append("entryType" + "->" + this.entryType.toString() + "\n"); 
+     if(this._entryType != null) builder.append("_entryType" + "->" + this._entryType.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -325,36 +317,4 @@ public class DeviceUdi  {
   	}
   }
 
-  public static java.util.List<DeviceUdi> fromArray(java.util.List<DeviceUdiModel> list) {
-    return (java.util.List<DeviceUdi>)list.stream()
-      .map(model -> new DeviceUdi(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DeviceUdiModel> toModelArray(java.util.List<DeviceUdi> list) {
-    return (java.util.List<DeviceUdiModel>)list.stream()
-      .map(model -> new DeviceUdiModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DeviceUdi fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DeviceUdi.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DeviceUdi o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DeviceUdi> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

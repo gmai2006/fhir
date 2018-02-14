@@ -32,7 +32,5 @@ public interface ClaimResponseAdjudicationService {
 	public ClaimResponseAdjudication find(String id);
   public List<ClaimResponseAdjudication> select(int maxResult);
   public List<ClaimResponseAdjudication> selectAll();
-  public ClaimResponseAdjudication create(ClaimResponseAdjudication bean);
-  public ClaimResponseAdjudication update(ClaimResponseAdjudication bean);
   public void delete(ClaimResponseAdjudication bean);
 }

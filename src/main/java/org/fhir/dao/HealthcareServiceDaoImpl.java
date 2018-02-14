@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.HealthcareServiceModel;
 import org.fhir.pojo.HealthcareService;
+import org.fhir.pojo.HealthcareServiceHelper;
 
 public class HealthcareServiceDaoImpl implements HealthcareServiceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class HealthcareServiceDaoImpl implements HealthcareServiceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from HealthcareServiceModel a", HealthcareServiceModel.class).setMaxResults(maxResult);
       List<HealthcareServiceModel> models = query.getResultList();
-      return HealthcareService.fromArray(models);
+      return HealthcareServiceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class HealthcareServiceDaoImpl implements HealthcareServiceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from HealthcareServiceModel a", HealthcareServiceModel.class);
       List<HealthcareServiceModel> models = query.getResultList();
-      return HealthcareService.fromArray(models);
+      return HealthcareServiceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class HealthcareServiceDaoImpl implements HealthcareServiceDao {
       HealthcareServiceModel model = em.merge(new HealthcareServiceModel(e));
       return new HealthcareService(model);
   }
-
   @Override
   @Transactional
   public void delete(HealthcareService e) {

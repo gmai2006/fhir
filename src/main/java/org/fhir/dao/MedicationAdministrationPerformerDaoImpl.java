@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MedicationAdministrationPerformerModel;
 import org.fhir.pojo.MedicationAdministrationPerformer;
+import org.fhir.pojo.MedicationAdministrationPerformerHelper;
 
 public class MedicationAdministrationPerformerDaoImpl implements MedicationAdministrationPerformerDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MedicationAdministrationPerformerDaoImpl implements MedicationAdmin
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationAdministrationPerformerModel a", MedicationAdministrationPerformerModel.class).setMaxResults(maxResult);
       List<MedicationAdministrationPerformerModel> models = query.getResultList();
-      return MedicationAdministrationPerformer.fromArray(models);
+      return MedicationAdministrationPerformerHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MedicationAdministrationPerformerDaoImpl implements MedicationAdmin
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationAdministrationPerformerModel a", MedicationAdministrationPerformerModel.class);
       List<MedicationAdministrationPerformerModel> models = query.getResultList();
-      return MedicationAdministrationPerformer.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MedicationAdministrationPerformer create(MedicationAdministrationPerformer e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MedicationAdministrationPerformerModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MedicationAdministrationPerformer update(MedicationAdministrationPerformer e) {
-      final EntityManager em = entityManagerProvider.get();
-      MedicationAdministrationPerformerModel model = em.merge(new MedicationAdministrationPerformerModel(e));
-      return new MedicationAdministrationPerformer(model);
+      return MedicationAdministrationPerformerHelper.fromArray2Array(models);
   }
 
   @Override

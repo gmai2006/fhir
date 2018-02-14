@@ -34,10 +34,8 @@ public interface QuestionnaireDao {
   public List<Questionnaire> select(int maxResult);
 
   public List<Questionnaire> selectAll();
-
   public Questionnaire create(Questionnaire e);
 
   public Questionnaire update(Questionnaire e);
-
   public void delete(Questionnaire e);
 }

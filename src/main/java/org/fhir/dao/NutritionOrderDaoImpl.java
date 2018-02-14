@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.NutritionOrderModel;
 import org.fhir.pojo.NutritionOrder;
+import org.fhir.pojo.NutritionOrderHelper;
 
 public class NutritionOrderDaoImpl implements NutritionOrderDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class NutritionOrderDaoImpl implements NutritionOrderDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NutritionOrderModel a", NutritionOrderModel.class).setMaxResults(maxResult);
       List<NutritionOrderModel> models = query.getResultList();
-      return NutritionOrder.fromArray(models);
+      return NutritionOrderHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class NutritionOrderDaoImpl implements NutritionOrderDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NutritionOrderModel a", NutritionOrderModel.class);
       List<NutritionOrderModel> models = query.getResultList();
-      return NutritionOrder.fromArray(models);
+      return NutritionOrderHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class NutritionOrderDaoImpl implements NutritionOrderDao {
       NutritionOrderModel model = em.merge(new NutritionOrderModel(e));
       return new NutritionOrder(model);
   }
-
   @Override
   @Transactional
   public void delete(NutritionOrder e) {

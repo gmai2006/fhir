@@ -32,7 +32,5 @@ public interface MeasureReportStratumService {
 	public MeasureReportStratum find(String id);
   public List<MeasureReportStratum> select(int maxResult);
   public List<MeasureReportStratum> selectAll();
-  public MeasureReportStratum create(MeasureReportStratum bean);
-  public MeasureReportStratum update(MeasureReportStratum bean);
   public void delete(MeasureReportStratum bean);
 }

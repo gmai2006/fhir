@@ -32,7 +32,5 @@ public interface MeasureSupplementalDataService {
 	public MeasureSupplementalData find(String id);
   public List<MeasureSupplementalData> select(int maxResult);
   public List<MeasureSupplementalData> selectAll();
-  public MeasureSupplementalData create(MeasureSupplementalData bean);
-  public MeasureSupplementalData update(MeasureSupplementalData bean);
   public void delete(MeasureSupplementalData bean);
 }

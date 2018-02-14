@@ -34,10 +34,8 @@ public interface ProcessResponseDao {
   public List<ProcessResponse> select(int maxResult);
 
   public List<ProcessResponse> selectAll();
-
   public ProcessResponse create(ProcessResponse e);
 
   public ProcessResponse update(ProcessResponse e);
-
   public void delete(ProcessResponse e);
 }

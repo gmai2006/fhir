@@ -53,6 +53,7 @@ public class ImmunizationExplanation  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -74,14 +75,9 @@ public class ImmunizationExplanation  {
 
   public ImmunizationExplanation(ImmunizationExplanationModel o) {
     this.id = o.getId();
-      this.reason = CodeableConcept.fromArray(o.getReason());
-      this.reasonNotGiven = CodeableConcept.fromArray(o.getReasonNotGiven());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setReason( java.util.List<CodeableConcept> value) {
@@ -124,46 +120,15 @@ public class ImmunizationExplanation  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("reasonNotGiven" + "[" + String.valueOf(this.reasonNotGiven) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImmunizationExplanation]:" + "\n");
+     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); 
+     if(this.reasonNotGiven != null) builder.append("reasonNotGiven" + "->" + this.reasonNotGiven.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ImmunizationExplanation> fromArray(java.util.List<ImmunizationExplanationModel> list) {
-    return (java.util.List<ImmunizationExplanation>)list.stream()
-      .map(model -> new ImmunizationExplanation(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImmunizationExplanationModel> toModelArray(java.util.List<ImmunizationExplanation> list) {
-    return (java.util.List<ImmunizationExplanationModel>)list.stream()
-      .map(model -> new ImmunizationExplanationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImmunizationExplanation fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImmunizationExplanation.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImmunizationExplanation o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImmunizationExplanation> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

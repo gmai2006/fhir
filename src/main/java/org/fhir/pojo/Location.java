@@ -167,6 +167,7 @@ public class Location  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -218,76 +219,55 @@ public class Location  {
 
   public Location(LocationModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.operationalStatus = Coding.fromJson(o.getOperationalStatus());
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      this.alias = org.fhir.utils.JsonUtils.json2Array(o.getAlias());
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getMode()) {
-        this.mode = new String(o.getMode());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.telecom = ContactPoint.fromArray(o.getTelecom());
-      this.address = Address.fromJson(o.getAddress());
-      this.physicalType = CodeableConcept.fromJson(o.getPhysicalType());
-      if (null != o.getPosition()) {
-        this.position = new LocationPosition(o.getPosition());
-        this.position.setId(this.getId());
-      }
-
-      if (null != o.getManagingOrganization()) {
-        this.managingOrganization = new Reference(o.getManagingOrganization());
-        this.managingOrganization.setId(this.getId());
-      }
-
-      if (null != o.getPartOf()) {
-        this.partOf = new Reference(o.getPartOf());
-        this.partOf.setId(this.getId());
-      }
-
-      this.endpoint = Reference.fromArray(o.getEndpoint());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.operationalStatus = CodingHelper.fromJson(o.getOperationalStatus());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (o.getAlias() != null) {
+    	this.alias = org.fhir.utils.JsonUtils.json2Array(o.getAlias());
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getMode()) {
+      this.mode = o.getMode();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    this.address = AddressHelper.fromJson(o.getAddress());
+    this.physicalType = CodeableConceptHelper.fromJson(o.getPhysicalType());
+    if (null != o.getPosition() && !o.getPosition().isEmpty()) {
+      this.position = new LocationPosition(o.getPosition().get(0));
+    }
+    if (null != o.getManagingOrganization() && !o.getManagingOrganization().isEmpty()) {
+      this.managingOrganization = new Reference(o.getManagingOrganization().get(0));
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+      this.partOf = new Reference(o.getPartOf().get(0));
+    }
+    if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
+    	this.endpoint = ReferenceHelper.fromArray2Array(o.getEndpoint());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -486,38 +466,39 @@ public class Location  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("operationalStatus" + "[" + String.valueOf(this.operationalStatus) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("alias" + "[" + String.valueOf(this.alias) + "]\n"); 
-     builder.append("_alias" + "[" + String.valueOf(this._alias) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("telecom" + "[" + String.valueOf(this.telecom) + "]\n"); 
-     builder.append("address" + "[" + String.valueOf(this.address) + "]\n"); 
-     builder.append("physicalType" + "[" + String.valueOf(this.physicalType) + "]\n"); 
-     builder.append("position" + "[" + String.valueOf(this.position) + "]\n"); 
-     builder.append("managingOrganization" + "[" + String.valueOf(this.managingOrganization) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Location]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.operationalStatus != null) builder.append("operationalStatus" + "->" + this.operationalStatus.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.alias != null) builder.append("alias" + "->" + this.alias.toString() + "\n"); 
+     if(this._alias != null) builder.append("_alias" + "->" + this._alias.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.telecom != null) builder.append("telecom" + "->" + this.telecom.toString() + "\n"); 
+     if(this.address != null) builder.append("address" + "->" + this.address.toString() + "\n"); 
+     if(this.physicalType != null) builder.append("physicalType" + "->" + this.physicalType.toString() + "\n"); 
+     if(this.position != null) builder.append("position" + "->" + this.position.toString() + "\n"); 
+     if(this.managingOrganization != null) builder.append("managingOrganization" + "->" + this.managingOrganization.toString() + "\n"); 
+     if(this.partOf != null) builder.append("partOf" + "->" + this.partOf.toString() + "\n"); 
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -563,36 +544,4 @@ public class Location  {
   	}
   }
 
-  public static java.util.List<Location> fromArray(java.util.List<LocationModel> list) {
-    return (java.util.List<Location>)list.stream()
-      .map(model -> new Location(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<LocationModel> toModelArray(java.util.List<Location> list) {
-    return (java.util.List<LocationModel>)list.stream()
-      .map(model -> new LocationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Location fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Location.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Location o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Location> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

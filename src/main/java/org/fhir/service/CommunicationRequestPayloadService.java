@@ -32,7 +32,5 @@ public interface CommunicationRequestPayloadService {
 	public CommunicationRequestPayload find(String id);
   public List<CommunicationRequestPayload> select(int maxResult);
   public List<CommunicationRequestPayload> selectAll();
-  public CommunicationRequestPayload create(CommunicationRequestPayload bean);
-  public CommunicationRequestPayload update(CommunicationRequestPayload bean);
   public void delete(CommunicationRequestPayload bean);
 }

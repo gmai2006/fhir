@@ -34,10 +34,5 @@ public interface ClaimPayeeDao {
   public List<ClaimPayee> select(int maxResult);
 
   public List<ClaimPayee> selectAll();
-
-  public ClaimPayee create(ClaimPayee e);
-
-  public ClaimPayee update(ClaimPayee e);
-
   public void delete(ClaimPayee e);
 }

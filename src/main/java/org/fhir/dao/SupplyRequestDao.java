@@ -34,10 +34,8 @@ public interface SupplyRequestDao {
   public List<SupplyRequest> select(int maxResult);
 
   public List<SupplyRequest> selectAll();
-
   public SupplyRequest create(SupplyRequest e);
 
   public SupplyRequest update(SupplyRequest e);
-
   public void delete(SupplyRequest e);
 }

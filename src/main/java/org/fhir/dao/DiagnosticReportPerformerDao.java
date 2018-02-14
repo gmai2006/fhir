@@ -34,10 +34,5 @@ public interface DiagnosticReportPerformerDao {
   public List<DiagnosticReportPerformer> select(int maxResult);
 
   public List<DiagnosticReportPerformer> selectAll();
-
-  public DiagnosticReportPerformer create(DiagnosticReportPerformer e);
-
-  public DiagnosticReportPerformer update(DiagnosticReportPerformer e);
-
   public void delete(DiagnosticReportPerformer e);
 }

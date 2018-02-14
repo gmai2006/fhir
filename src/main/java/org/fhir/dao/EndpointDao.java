@@ -34,10 +34,8 @@ public interface EndpointDao {
   public List<Endpoint> select(int maxResult);
 
   public List<Endpoint> selectAll();
-
   public Endpoint create(Endpoint e);
 
   public Endpoint update(Endpoint e);
-
   public void delete(Endpoint e);
 }

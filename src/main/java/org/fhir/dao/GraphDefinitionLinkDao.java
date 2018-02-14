@@ -34,10 +34,5 @@ public interface GraphDefinitionLinkDao {
   public List<GraphDefinitionLink> select(int maxResult);
 
   public List<GraphDefinitionLink> selectAll();
-
-  public GraphDefinitionLink create(GraphDefinitionLink e);
-
-  public GraphDefinitionLink update(GraphDefinitionLink e);
-
   public void delete(GraphDefinitionLink e);
 }

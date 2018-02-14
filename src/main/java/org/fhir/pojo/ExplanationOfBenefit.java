@@ -284,6 +284,7 @@ public class ExplanationOfBenefit  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -335,155 +336,117 @@ public class ExplanationOfBenefit  {
 
   public ExplanationOfBenefit(ExplanationOfBenefitModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.subType = CodeableConcept.fromArray(o.getSubType());
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      this.billablePeriod = Period.fromJson(o.getBillablePeriod());
-      if (null != o.getCreated()) {
-        this.created = new String(o.getCreated());
-      }
-
-      if (null != o.getEnterer()) {
-        this.enterer = new Reference(o.getEnterer());
-        this.enterer.setId(this.getId());
-      }
-
-      if (null != o.getInsurer()) {
-        this.insurer = new Reference(o.getInsurer());
-        this.insurer.setId(this.getId());
-      }
-
-      if (null != o.getProvider()) {
-        this.provider = new Reference(o.getProvider());
-        this.provider.setId(this.getId());
-      }
-
-      if (null != o.getOrganization()) {
-        this.organization = new Reference(o.getOrganization());
-        this.organization.setId(this.getId());
-      }
-
-      if (null != o.getReferral()) {
-        this.referral = new Reference(o.getReferral());
-        this.referral.setId(this.getId());
-      }
-
-      if (null != o.getFacility()) {
-        this.facility = new Reference(o.getFacility());
-        this.facility.setId(this.getId());
-      }
-
-      if (null != o.getClaim()) {
-        this.claim = new Reference(o.getClaim());
-        this.claim.setId(this.getId());
-      }
-
-      if (null != o.getClaimResponse()) {
-        this.claimResponse = new Reference(o.getClaimResponse());
-        this.claimResponse.setId(this.getId());
-      }
-
-      this.outcome = CodeableConcept.fromJson(o.getOutcome());
-      if (null != o.getDisposition()) {
-        this.disposition = new String(o.getDisposition());
-      }
-
-      this.related = ExplanationOfBenefitRelated.fromArray(o.getRelated());
-
-      if (null != o.getPrescription()) {
-        this.prescription = new Reference(o.getPrescription());
-        this.prescription.setId(this.getId());
-      }
-
-      if (null != o.getOriginalPrescription()) {
-        this.originalPrescription = new Reference(o.getOriginalPrescription());
-        this.originalPrescription.setId(this.getId());
-      }
-
-      if (null != o.getPayee()) {
-        this.payee = new ExplanationOfBenefitPayee(o.getPayee());
-        this.payee.setId(this.getId());
-      }
-
-      this.information = ExplanationOfBenefitInformation.fromArray(o.getInformation());
-
-      this.careTeam = ExplanationOfBenefitCareTeam.fromArray(o.getCareTeam());
-
-      this.diagnosis = ExplanationOfBenefitDiagnosis.fromArray(o.getDiagnosis());
-
-      this.procedure = ExplanationOfBenefitProcedure.fromArray(o.getProcedure());
-
-      if (null != o.getPrecedence()) {
-        this.precedence = new Float(o.getPrecedence());
-      }
-
-      if (null != o.getInsurance()) {
-        this.insurance = new ExplanationOfBenefitInsurance(o.getInsurance());
-        this.insurance.setId(this.getId());
-      }
-
-      if (null != o.getAccident()) {
-        this.accident = new ExplanationOfBenefitAccident(o.getAccident());
-        this.accident.setId(this.getId());
-      }
-
-      this.employmentImpacted = Period.fromJson(o.getEmploymentImpacted());
-      this.hospitalization = Period.fromJson(o.getHospitalization());
-      this.item = ExplanationOfBenefitItem.fromArray(o.getItem());
-
-      this.addItem = ExplanationOfBenefitAddItem.fromArray(o.getAddItem());
-
-      this.totalCost = Money.fromJson(o.getTotalCost());
-      this.unallocDeductable = Money.fromJson(o.getUnallocDeductable());
-      this.totalBenefit = Money.fromJson(o.getTotalBenefit());
-      if (null != o.getPayment()) {
-        this.payment = new ExplanationOfBenefitPayment(o.getPayment());
-        this.payment.setId(this.getId());
-      }
-
-      this.form = CodeableConcept.fromJson(o.getForm());
-      this.processNote = ExplanationOfBenefitProcessNote.fromArray(o.getProcessNote());
-
-      this.benefitBalance = ExplanationOfBenefitBenefitBalance.fromArray(o.getBenefitBalance());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    this.billablePeriod = PeriodHelper.fromJson(o.getBillablePeriod());
+    if (null != o.getCreated()) {
+      this.created = o.getCreated();
+    }
+    if (null != o.getEnterer() && !o.getEnterer().isEmpty()) {
+      this.enterer = new Reference(o.getEnterer().get(0));
+    }
+    if (null != o.getInsurer() && !o.getInsurer().isEmpty()) {
+      this.insurer = new Reference(o.getInsurer().get(0));
+    }
+    if (null != o.getProvider() && !o.getProvider().isEmpty()) {
+      this.provider = new Reference(o.getProvider().get(0));
+    }
+    if (null != o.getOrganization() && !o.getOrganization().isEmpty()) {
+      this.organization = new Reference(o.getOrganization().get(0));
+    }
+    if (null != o.getReferral() && !o.getReferral().isEmpty()) {
+      this.referral = new Reference(o.getReferral().get(0));
+    }
+    if (null != o.getFacility() && !o.getFacility().isEmpty()) {
+      this.facility = new Reference(o.getFacility().get(0));
+    }
+    if (null != o.getClaim() && !o.getClaim().isEmpty()) {
+      this.claim = new Reference(o.getClaim().get(0));
+    }
+    if (null != o.getClaimResponse() && !o.getClaimResponse().isEmpty()) {
+      this.claimResponse = new Reference(o.getClaimResponse().get(0));
+    }
+    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getDisposition()) {
+      this.disposition = o.getDisposition();
+    }
+    if (null != o.getRelated() && !o.getRelated().isEmpty()) {
+    	this.related = ExplanationOfBenefitRelatedHelper.fromArray2Array(o.getRelated());
+    }
+    if (null != o.getPrescription() && !o.getPrescription().isEmpty()) {
+      this.prescription = new Reference(o.getPrescription().get(0));
+    }
+    if (null != o.getOriginalPrescription() && !o.getOriginalPrescription().isEmpty()) {
+      this.originalPrescription = new Reference(o.getOriginalPrescription().get(0));
+    }
+    if (null != o.getPayee() && !o.getPayee().isEmpty()) {
+      this.payee = new ExplanationOfBenefitPayee(o.getPayee().get(0));
+    }
+    if (null != o.getInformation() && !o.getInformation().isEmpty()) {
+    	this.information = ExplanationOfBenefitInformationHelper.fromArray2Array(o.getInformation());
+    }
+    if (null != o.getCareTeam() && !o.getCareTeam().isEmpty()) {
+    	this.careTeam = ExplanationOfBenefitCareTeamHelper.fromArray2Array(o.getCareTeam());
+    }
+    if (null != o.getDiagnosis() && !o.getDiagnosis().isEmpty()) {
+    	this.diagnosis = ExplanationOfBenefitDiagnosisHelper.fromArray2Array(o.getDiagnosis());
+    }
+    if (null != o.getProcedure() && !o.getProcedure().isEmpty()) {
+    	this.procedure = ExplanationOfBenefitProcedureHelper.fromArray2Array(o.getProcedure());
+    }
+    if (null != o.getPrecedence()) {
+      this.precedence = o.getPrecedence();
+    }
+    if (null != o.getInsurance() && !o.getInsurance().isEmpty()) {
+      this.insurance = new ExplanationOfBenefitInsurance(o.getInsurance().get(0));
+    }
+    if (null != o.getAccident() && !o.getAccident().isEmpty()) {
+      this.accident = new ExplanationOfBenefitAccident(o.getAccident().get(0));
+    }
+    this.employmentImpacted = PeriodHelper.fromJson(o.getEmploymentImpacted());
+    this.hospitalization = PeriodHelper.fromJson(o.getHospitalization());
+    if (null != o.getItem() && !o.getItem().isEmpty()) {
+    	this.item = ExplanationOfBenefitItemHelper.fromArray2Array(o.getItem());
+    }
+    if (null != o.getAddItem() && !o.getAddItem().isEmpty()) {
+    	this.addItem = ExplanationOfBenefitAddItemHelper.fromArray2Array(o.getAddItem());
+    }
+    this.totalCost = MoneyHelper.fromJson(o.getTotalCost());
+    this.unallocDeductable = MoneyHelper.fromJson(o.getUnallocDeductable());
+    this.totalBenefit = MoneyHelper.fromJson(o.getTotalBenefit());
+    if (null != o.getPayment() && !o.getPayment().isEmpty()) {
+      this.payment = new ExplanationOfBenefitPayment(o.getPayment().get(0));
+    }
+    this.form = CodeableConceptHelper.fromJson(o.getForm());
+    if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
+    	this.processNote = ExplanationOfBenefitProcessNoteHelper.fromArray2Array(o.getProcessNote());
+    }
+    if (null != o.getBenefitBalance() && !o.getBenefitBalance().isEmpty()) {
+    	this.benefitBalance = ExplanationOfBenefitBenefitBalanceHelper.fromArray2Array(o.getBenefitBalance());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -820,61 +783,62 @@ public class ExplanationOfBenefit  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("subType" + "[" + String.valueOf(this.subType) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("billablePeriod" + "[" + String.valueOf(this.billablePeriod) + "]\n"); 
-     builder.append("created" + "[" + String.valueOf(this.created) + "]\n"); 
-     builder.append("_created" + "[" + String.valueOf(this._created) + "]\n"); 
-     builder.append("enterer" + "[" + String.valueOf(this.enterer) + "]\n"); 
-     builder.append("insurer" + "[" + String.valueOf(this.insurer) + "]\n"); 
-     builder.append("provider" + "[" + String.valueOf(this.provider) + "]\n"); 
-     builder.append("organization" + "[" + String.valueOf(this.organization) + "]\n"); 
-     builder.append("referral" + "[" + String.valueOf(this.referral) + "]\n"); 
-     builder.append("facility" + "[" + String.valueOf(this.facility) + "]\n"); 
-     builder.append("claim" + "[" + String.valueOf(this.claim) + "]\n"); 
-     builder.append("claimResponse" + "[" + String.valueOf(this.claimResponse) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("disposition" + "[" + String.valueOf(this.disposition) + "]\n"); 
-     builder.append("_disposition" + "[" + String.valueOf(this._disposition) + "]\n"); 
-     builder.append("related" + "[" + String.valueOf(this.related) + "]\n"); 
-     builder.append("prescription" + "[" + String.valueOf(this.prescription) + "]\n"); 
-     builder.append("originalPrescription" + "[" + String.valueOf(this.originalPrescription) + "]\n"); 
-     builder.append("payee" + "[" + String.valueOf(this.payee) + "]\n"); 
-     builder.append("information" + "[" + String.valueOf(this.information) + "]\n"); 
-     builder.append("careTeam" + "[" + String.valueOf(this.careTeam) + "]\n"); 
-     builder.append("diagnosis" + "[" + String.valueOf(this.diagnosis) + "]\n"); 
-     builder.append("procedure" + "[" + String.valueOf(this.procedure) + "]\n"); 
-     builder.append("precedence" + "[" + String.valueOf(this.precedence) + "]\n"); 
-     builder.append("_precedence" + "[" + String.valueOf(this._precedence) + "]\n"); 
-     builder.append("insurance" + "[" + String.valueOf(this.insurance) + "]\n"); 
-     builder.append("accident" + "[" + String.valueOf(this.accident) + "]\n"); 
-     builder.append("employmentImpacted" + "[" + String.valueOf(this.employmentImpacted) + "]\n"); 
-     builder.append("hospitalization" + "[" + String.valueOf(this.hospitalization) + "]\n"); 
-     builder.append("item" + "[" + String.valueOf(this.item) + "]\n"); 
-     builder.append("addItem" + "[" + String.valueOf(this.addItem) + "]\n"); 
-     builder.append("totalCost" + "[" + String.valueOf(this.totalCost) + "]\n"); 
-     builder.append("unallocDeductable" + "[" + String.valueOf(this.unallocDeductable) + "]\n"); 
-     builder.append("totalBenefit" + "[" + String.valueOf(this.totalBenefit) + "]\n"); 
-     builder.append("payment" + "[" + String.valueOf(this.payment) + "]\n"); 
-     builder.append("form" + "[" + String.valueOf(this.form) + "]\n"); 
-     builder.append("processNote" + "[" + String.valueOf(this.processNote) + "]\n"); 
-     builder.append("benefitBalance" + "[" + String.valueOf(this.benefitBalance) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[ExplanationOfBenefit]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.subType != null) builder.append("subType" + "->" + this.subType.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.billablePeriod != null) builder.append("billablePeriod" + "->" + this.billablePeriod.toString() + "\n"); 
+     if(this.created != null) builder.append("created" + "->" + this.created.toString() + "\n"); 
+     if(this._created != null) builder.append("_created" + "->" + this._created.toString() + "\n"); 
+     if(this.enterer != null) builder.append("enterer" + "->" + this.enterer.toString() + "\n"); 
+     if(this.insurer != null) builder.append("insurer" + "->" + this.insurer.toString() + "\n"); 
+     if(this.provider != null) builder.append("provider" + "->" + this.provider.toString() + "\n"); 
+     if(this.organization != null) builder.append("organization" + "->" + this.organization.toString() + "\n"); 
+     if(this.referral != null) builder.append("referral" + "->" + this.referral.toString() + "\n"); 
+     if(this.facility != null) builder.append("facility" + "->" + this.facility.toString() + "\n"); 
+     if(this.claim != null) builder.append("claim" + "->" + this.claim.toString() + "\n"); 
+     if(this.claimResponse != null) builder.append("claimResponse" + "->" + this.claimResponse.toString() + "\n"); 
+     if(this.outcome != null) builder.append("outcome" + "->" + this.outcome.toString() + "\n"); 
+     if(this.disposition != null) builder.append("disposition" + "->" + this.disposition.toString() + "\n"); 
+     if(this._disposition != null) builder.append("_disposition" + "->" + this._disposition.toString() + "\n"); 
+     if(this.related != null) builder.append("related" + "->" + this.related.toString() + "\n"); 
+     if(this.prescription != null) builder.append("prescription" + "->" + this.prescription.toString() + "\n"); 
+     if(this.originalPrescription != null) builder.append("originalPrescription" + "->" + this.originalPrescription.toString() + "\n"); 
+     if(this.payee != null) builder.append("payee" + "->" + this.payee.toString() + "\n"); 
+     if(this.information != null) builder.append("information" + "->" + this.information.toString() + "\n"); 
+     if(this.careTeam != null) builder.append("careTeam" + "->" + this.careTeam.toString() + "\n"); 
+     if(this.diagnosis != null) builder.append("diagnosis" + "->" + this.diagnosis.toString() + "\n"); 
+     if(this.procedure != null) builder.append("procedure" + "->" + this.procedure.toString() + "\n"); 
+     if(this.precedence != null) builder.append("precedence" + "->" + this.precedence.toString() + "\n"); 
+     if(this._precedence != null) builder.append("_precedence" + "->" + this._precedence.toString() + "\n"); 
+     if(this.insurance != null) builder.append("insurance" + "->" + this.insurance.toString() + "\n"); 
+     if(this.accident != null) builder.append("accident" + "->" + this.accident.toString() + "\n"); 
+     if(this.employmentImpacted != null) builder.append("employmentImpacted" + "->" + this.employmentImpacted.toString() + "\n"); 
+     if(this.hospitalization != null) builder.append("hospitalization" + "->" + this.hospitalization.toString() + "\n"); 
+     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); 
+     if(this.addItem != null) builder.append("addItem" + "->" + this.addItem.toString() + "\n"); 
+     if(this.totalCost != null) builder.append("totalCost" + "->" + this.totalCost.toString() + "\n"); 
+     if(this.unallocDeductable != null) builder.append("unallocDeductable" + "->" + this.unallocDeductable.toString() + "\n"); 
+     if(this.totalBenefit != null) builder.append("totalBenefit" + "->" + this.totalBenefit.toString() + "\n"); 
+     if(this.payment != null) builder.append("payment" + "->" + this.payment.toString() + "\n"); 
+     if(this.form != null) builder.append("form" + "->" + this.form.toString() + "\n"); 
+     if(this.processNote != null) builder.append("processNote" + "->" + this.processNote.toString() + "\n"); 
+     if(this.benefitBalance != null) builder.append("benefitBalance" + "->" + this.benefitBalance.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -908,36 +872,4 @@ public class ExplanationOfBenefit  {
   	}
   }
 
-  public static java.util.List<ExplanationOfBenefit> fromArray(java.util.List<ExplanationOfBenefitModel> list) {
-    return (java.util.List<ExplanationOfBenefit>)list.stream()
-      .map(model -> new ExplanationOfBenefit(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExplanationOfBenefitModel> toModelArray(java.util.List<ExplanationOfBenefit> list) {
-    return (java.util.List<ExplanationOfBenefitModel>)list.stream()
-      .map(model -> new ExplanationOfBenefitModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExplanationOfBenefit fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExplanationOfBenefit.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExplanationOfBenefit o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExplanationOfBenefit> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementRestModel;
 import org.fhir.pojo.CapabilityStatementRest;
+import org.fhir.pojo.CapabilityStatementRestHelper;
 
 public class CapabilityStatementRestDaoImpl implements CapabilityStatementRestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementRestDaoImpl implements CapabilityStatementRestDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementRestModel a", CapabilityStatementRestModel.class).setMaxResults(maxResult);
       List<CapabilityStatementRestModel> models = query.getResultList();
-      return CapabilityStatementRest.fromArray(models);
+      return CapabilityStatementRestHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CapabilityStatementRestDaoImpl implements CapabilityStatementRestDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementRestModel a", CapabilityStatementRestModel.class);
       List<CapabilityStatementRestModel> models = query.getResultList();
-      return CapabilityStatementRest.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementRest create(CapabilityStatementRest e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CapabilityStatementRestModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CapabilityStatementRest update(CapabilityStatementRest e) {
-      final EntityManager em = entityManagerProvider.get();
-      CapabilityStatementRestModel model = em.merge(new CapabilityStatementRestModel(e));
-      return new CapabilityStatementRest(model);
+      return CapabilityStatementRestHelper.fromArray2Array(models);
   }
 
   @Override

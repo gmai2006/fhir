@@ -184,6 +184,7 @@ public class Consent  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -235,78 +236,62 @@ public class Consent  {
 
   public Consent(ConsentModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.category = CodeableConcept.fromArray(o.getCategory());
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      if (null != o.getDateTime()) {
-        this.dateTime = new String(o.getDateTime());
-      }
-
-      this.consentingParty = Reference.fromArray(o.getConsentingParty());
-
-      this.actor = ConsentActor.fromArray(o.getActor());
-
-      this.action = CodeableConcept.fromArray(o.getAction());
-      this.organization = Reference.fromArray(o.getOrganization());
-
-      this.sourceAttachment = Attachment.fromJson(o.getSourceAttachment());
-      this.sourceIdentifier = Identifier.fromJson(o.getSourceIdentifier());
-      if (null != o.getSourceReference()) {
-        this.sourceReference = new Reference(o.getSourceReference());
-        this.sourceReference.setId(this.getId());
-      }
-
-      this.policy = ConsentPolicy.fromArray(o.getPolicy());
-
-      if (null != o.getPolicyRule()) {
-        this.policyRule = new String(o.getPolicyRule());
-      }
-
-      this.securityLabel = Coding.fromArray(o.getSecurityLabel());
-      this.purpose = Coding.fromArray(o.getPurpose());
-      this.dataPeriod = Period.fromJson(o.getDataPeriod());
-      this.data = ConsentData.fromArray(o.getData());
-
-      this.except = ConsentExcept.fromArray(o.getExcept());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getDateTime()) {
+      this.dateTime = o.getDateTime();
+    }
+    if (null != o.getConsentingParty() && !o.getConsentingParty().isEmpty()) {
+    	this.consentingParty = ReferenceHelper.fromArray2Array(o.getConsentingParty());
+    }
+    if (null != o.getActor() && !o.getActor().isEmpty()) {
+    	this.actor = ConsentActorHelper.fromArray2Array(o.getActor());
+    }
+    if (null != o.getOrganization() && !o.getOrganization().isEmpty()) {
+    	this.organization = ReferenceHelper.fromArray2Array(o.getOrganization());
+    }
+    this.sourceAttachment = AttachmentHelper.fromJson(o.getSourceAttachment());
+    this.sourceIdentifier = IdentifierHelper.fromJson(o.getSourceIdentifier());
+    if (null != o.getSourceReference() && !o.getSourceReference().isEmpty()) {
+      this.sourceReference = new Reference(o.getSourceReference().get(0));
+    }
+    if (null != o.getPolicy() && !o.getPolicy().isEmpty()) {
+    	this.policy = ConsentPolicyHelper.fromArray2Array(o.getPolicy());
+    }
+    if (null != o.getPolicyRule()) {
+      this.policyRule = o.getPolicyRule();
+    }
+    this.dataPeriod = PeriodHelper.fromJson(o.getDataPeriod());
+    if (null != o.getData() && !o.getData().isEmpty()) {
+    	this.data = ConsentDataHelper.fromArray2Array(o.getData());
+    }
+    if (null != o.getExcept() && !o.getExcept().isEmpty()) {
+    	this.except = ConsentExceptHelper.fromArray2Array(o.getExcept());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -523,41 +508,42 @@ public class Consent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("dateTime" + "[" + String.valueOf(this.dateTime) + "]\n"); 
-     builder.append("_dateTime" + "[" + String.valueOf(this._dateTime) + "]\n"); 
-     builder.append("consentingParty" + "[" + String.valueOf(this.consentingParty) + "]\n"); 
-     builder.append("actor" + "[" + String.valueOf(this.actor) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("organization" + "[" + String.valueOf(this.organization) + "]\n"); 
-     builder.append("sourceAttachment" + "[" + String.valueOf(this.sourceAttachment) + "]\n"); 
-     builder.append("sourceIdentifier" + "[" + String.valueOf(this.sourceIdentifier) + "]\n"); 
-     builder.append("sourceReference" + "[" + String.valueOf(this.sourceReference) + "]\n"); 
-     builder.append("policy" + "[" + String.valueOf(this.policy) + "]\n"); 
-     builder.append("policyRule" + "[" + String.valueOf(this.policyRule) + "]\n"); 
-     builder.append("_policyRule" + "[" + String.valueOf(this._policyRule) + "]\n"); 
-     builder.append("securityLabel" + "[" + String.valueOf(this.securityLabel) + "]\n"); 
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("dataPeriod" + "[" + String.valueOf(this.dataPeriod) + "]\n"); 
-     builder.append("data" + "[" + String.valueOf(this.data) + "]\n"); 
-     builder.append("except" + "[" + String.valueOf(this.except) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Consent]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.dateTime != null) builder.append("dateTime" + "->" + this.dateTime.toString() + "\n"); 
+     if(this._dateTime != null) builder.append("_dateTime" + "->" + this._dateTime.toString() + "\n"); 
+     if(this.consentingParty != null) builder.append("consentingParty" + "->" + this.consentingParty.toString() + "\n"); 
+     if(this.actor != null) builder.append("actor" + "->" + this.actor.toString() + "\n"); 
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
+     if(this.organization != null) builder.append("organization" + "->" + this.organization.toString() + "\n"); 
+     if(this.sourceAttachment != null) builder.append("sourceAttachment" + "->" + this.sourceAttachment.toString() + "\n"); 
+     if(this.sourceIdentifier != null) builder.append("sourceIdentifier" + "->" + this.sourceIdentifier.toString() + "\n"); 
+     if(this.sourceReference != null) builder.append("sourceReference" + "->" + this.sourceReference.toString() + "\n"); 
+     if(this.policy != null) builder.append("policy" + "->" + this.policy.toString() + "\n"); 
+     if(this.policyRule != null) builder.append("policyRule" + "->" + this.policyRule.toString() + "\n"); 
+     if(this._policyRule != null) builder.append("_policyRule" + "->" + this._policyRule.toString() + "\n"); 
+     if(this.securityLabel != null) builder.append("securityLabel" + "->" + this.securityLabel.toString() + "\n"); 
+     if(this.purpose != null) builder.append("purpose" + "->" + this.purpose.toString() + "\n"); 
+     if(this.dataPeriod != null) builder.append("dataPeriod" + "->" + this.dataPeriod.toString() + "\n"); 
+     if(this.data != null) builder.append("data" + "->" + this.data.toString() + "\n"); 
+     if(this.except != null) builder.append("except" + "->" + this.except.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -595,36 +581,4 @@ public class Consent  {
   	}
   }
 
-  public static java.util.List<Consent> fromArray(java.util.List<ConsentModel> list) {
-    return (java.util.List<Consent>)list.stream()
-      .map(model -> new Consent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConsentModel> toModelArray(java.util.List<Consent> list) {
-    return (java.util.List<ConsentModel>)list.stream()
-      .map(model -> new ConsentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Consent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Consent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Consent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Consent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

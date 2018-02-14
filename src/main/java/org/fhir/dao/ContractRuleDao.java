@@ -34,10 +34,5 @@ public interface ContractRuleDao {
   public List<ContractRule> select(int maxResult);
 
   public List<ContractRule> selectAll();
-
-  public ContractRule create(ContractRule e);
-
-  public ContractRule update(ContractRule e);
-
   public void delete(ContractRule e);
 }

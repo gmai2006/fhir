@@ -74,6 +74,7 @@ public class DataRequirementDateFilter  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -95,22 +96,17 @@ public class DataRequirementDateFilter  {
 
   public DataRequirementDateFilter(DataRequirementDateFilterModel o) {
     this.id = o.getId();
-      if (null != o.getPath()) {
-        this.path = new String(o.getPath());
-      }
-
-      if (null != o.getValueDateTime()) {
-        this.valueDateTime = new String(o.getValueDateTime());
-      }
-
-      this.valuePeriod = Period.fromJson(o.getValuePeriod());
-      this.valueDuration = Duration.fromJson(o.getValueDuration());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getPath()) {
+      this.path = o.getPath();
+    }
+    if (null != o.getValueDateTime()) {
+      this.valueDateTime = o.getValueDateTime();
+    }
+    this.valuePeriod = PeriodHelper.fromJson(o.getValuePeriod());
+    this.valueDuration = DurationHelper.fromJson(o.getValueDuration());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setPath( String value) {
@@ -177,50 +173,19 @@ public class DataRequirementDateFilter  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("path" + "[" + String.valueOf(this.path) + "]\n"); 
-     builder.append("_path" + "[" + String.valueOf(this._path) + "]\n"); 
-     builder.append("valueDateTime" + "[" + String.valueOf(this.valueDateTime) + "]\n"); 
-     builder.append("_valueDateTime" + "[" + String.valueOf(this._valueDateTime) + "]\n"); 
-     builder.append("valuePeriod" + "[" + String.valueOf(this.valuePeriod) + "]\n"); 
-     builder.append("valueDuration" + "[" + String.valueOf(this.valueDuration) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DataRequirementDateFilter]:" + "\n");
+     if(this.path != null) builder.append("path" + "->" + this.path.toString() + "\n"); 
+     if(this._path != null) builder.append("_path" + "->" + this._path.toString() + "\n"); 
+     if(this.valueDateTime != null) builder.append("valueDateTime" + "->" + this.valueDateTime.toString() + "\n"); 
+     if(this._valueDateTime != null) builder.append("_valueDateTime" + "->" + this._valueDateTime.toString() + "\n"); 
+     if(this.valuePeriod != null) builder.append("valuePeriod" + "->" + this.valuePeriod.toString() + "\n"); 
+     if(this.valueDuration != null) builder.append("valueDuration" + "->" + this.valueDuration.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<DataRequirementDateFilter> fromArray(java.util.List<DataRequirementDateFilterModel> list) {
-    return (java.util.List<DataRequirementDateFilter>)list.stream()
-      .map(model -> new DataRequirementDateFilter(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DataRequirementDateFilterModel> toModelArray(java.util.List<DataRequirementDateFilter> list) {
-    return (java.util.List<DataRequirementDateFilterModel>)list.stream()
-      .map(model -> new DataRequirementDateFilterModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DataRequirementDateFilter fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DataRequirementDateFilter.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DataRequirementDateFilter o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DataRequirementDateFilter> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

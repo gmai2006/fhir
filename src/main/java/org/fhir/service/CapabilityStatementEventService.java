@@ -32,7 +32,5 @@ public interface CapabilityStatementEventService {
 	public CapabilityStatementEvent find(String id);
   public List<CapabilityStatementEvent> select(int maxResult);
   public List<CapabilityStatementEvent> selectAll();
-  public CapabilityStatementEvent create(CapabilityStatementEvent bean);
-  public CapabilityStatementEvent update(CapabilityStatementEvent bean);
   public void delete(CapabilityStatementEvent bean);
 }

@@ -78,6 +78,7 @@ public class DocumentReferenceContext  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -99,28 +100,21 @@ public class DocumentReferenceContext  {
 
   public DocumentReferenceContext(DocumentReferenceContextModel o) {
     this.id = o.getId();
-      if (null != o.getEncounter()) {
-        this.encounter = new Reference(o.getEncounter());
-        this.encounter.setId(this.getId());
-      }
-
-      this.event = CodeableConcept.fromArray(o.getEvent());
-      this.period = Period.fromJson(o.getPeriod());
-      this.facilityType = CodeableConcept.fromJson(o.getFacilityType());
-      this.practiceSetting = CodeableConcept.fromJson(o.getPracticeSetting());
-      if (null != o.getSourcePatientInfo()) {
-        this.sourcePatientInfo = new Reference(o.getSourcePatientInfo());
-        this.sourcePatientInfo.setId(this.getId());
-      }
-
-      this.related = DocumentReferenceRelated.fromArray(o.getRelated());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getEncounter() && !o.getEncounter().isEmpty()) {
+      this.encounter = new Reference(o.getEncounter().get(0));
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    this.facilityType = CodeableConceptHelper.fromJson(o.getFacilityType());
+    this.practiceSetting = CodeableConceptHelper.fromJson(o.getPracticeSetting());
+    if (null != o.getSourcePatientInfo() && !o.getSourcePatientInfo().isEmpty()) {
+      this.sourcePatientInfo = new Reference(o.getSourcePatientInfo().get(0));
+    }
+    if (null != o.getRelated() && !o.getRelated().isEmpty()) {
+    	this.related = DocumentReferenceRelatedHelper.fromArray2Array(o.getRelated());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setEncounter( Reference value) {
@@ -193,51 +187,20 @@ public class DocumentReferenceContext  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("encounter" + "[" + String.valueOf(this.encounter) + "]\n"); 
-     builder.append("event" + "[" + String.valueOf(this.event) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("facilityType" + "[" + String.valueOf(this.facilityType) + "]\n"); 
-     builder.append("practiceSetting" + "[" + String.valueOf(this.practiceSetting) + "]\n"); 
-     builder.append("sourcePatientInfo" + "[" + String.valueOf(this.sourcePatientInfo) + "]\n"); 
-     builder.append("related" + "[" + String.valueOf(this.related) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DocumentReferenceContext]:" + "\n");
+     if(this.encounter != null) builder.append("encounter" + "->" + this.encounter.toString() + "\n"); 
+     if(this.event != null) builder.append("event" + "->" + this.event.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.facilityType != null) builder.append("facilityType" + "->" + this.facilityType.toString() + "\n"); 
+     if(this.practiceSetting != null) builder.append("practiceSetting" + "->" + this.practiceSetting.toString() + "\n"); 
+     if(this.sourcePatientInfo != null) builder.append("sourcePatientInfo" + "->" + this.sourcePatientInfo.toString() + "\n"); 
+     if(this.related != null) builder.append("related" + "->" + this.related.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<DocumentReferenceContext> fromArray(java.util.List<DocumentReferenceContextModel> list) {
-    return (java.util.List<DocumentReferenceContext>)list.stream()
-      .map(model -> new DocumentReferenceContext(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DocumentReferenceContextModel> toModelArray(java.util.List<DocumentReferenceContext> list) {
-    return (java.util.List<DocumentReferenceContextModel>)list.stream()
-      .map(model -> new DocumentReferenceContextModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DocumentReferenceContext fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DocumentReferenceContext.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DocumentReferenceContext o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DocumentReferenceContext> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

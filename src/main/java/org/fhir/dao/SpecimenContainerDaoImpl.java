@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SpecimenContainerModel;
 import org.fhir.pojo.SpecimenContainer;
+import org.fhir.pojo.SpecimenContainerHelper;
 
 public class SpecimenContainerDaoImpl implements SpecimenContainerDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SpecimenContainerDaoImpl implements SpecimenContainerDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SpecimenContainerModel a", SpecimenContainerModel.class).setMaxResults(maxResult);
       List<SpecimenContainerModel> models = query.getResultList();
-      return SpecimenContainer.fromArray(models);
+      return SpecimenContainerHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SpecimenContainerDaoImpl implements SpecimenContainerDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SpecimenContainerModel a", SpecimenContainerModel.class);
       List<SpecimenContainerModel> models = query.getResultList();
-      return SpecimenContainer.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SpecimenContainer create(SpecimenContainer e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SpecimenContainerModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SpecimenContainer update(SpecimenContainer e) {
-      final EntityManager em = entityManagerProvider.get();
-      SpecimenContainerModel model = em.merge(new SpecimenContainerModel(e));
-      return new SpecimenContainer(model);
+      return SpecimenContainerHelper.fromArray2Array(models);
   }
 
   @Override

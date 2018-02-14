@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementSupportedMessageModel;
 import org.fhir.pojo.CapabilityStatementSupportedMessage;
+import org.fhir.pojo.CapabilityStatementSupportedMessageHelper;
 
 public class CapabilityStatementSupportedMessageDaoImpl implements CapabilityStatementSupportedMessageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementSupportedMessageDaoImpl implements CapabilitySta
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementSupportedMessageModel a", CapabilityStatementSupportedMessageModel.class).setMaxResults(maxResult);
       List<CapabilityStatementSupportedMessageModel> models = query.getResultList();
-      return CapabilityStatementSupportedMessage.fromArray(models);
+      return CapabilityStatementSupportedMessageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CapabilityStatementSupportedMessageDaoImpl implements CapabilitySta
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementSupportedMessageModel a", CapabilityStatementSupportedMessageModel.class);
       List<CapabilityStatementSupportedMessageModel> models = query.getResultList();
-      return CapabilityStatementSupportedMessage.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementSupportedMessage create(CapabilityStatementSupportedMessage e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CapabilityStatementSupportedMessageModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CapabilityStatementSupportedMessage update(CapabilityStatementSupportedMessage e) {
-      final EntityManager em = entityManagerProvider.get();
-      CapabilityStatementSupportedMessageModel model = em.merge(new CapabilityStatementSupportedMessageModel(e));
-      return new CapabilityStatementSupportedMessage(model);
+      return CapabilityStatementSupportedMessageHelper.fromArray2Array(models);
   }
 
   @Override

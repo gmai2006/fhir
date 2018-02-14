@@ -34,10 +34,5 @@ public interface CoverageGroupingDao {
   public List<CoverageGrouping> select(int maxResult);
 
   public List<CoverageGrouping> selectAll();
-
-  public CoverageGrouping create(CoverageGrouping e);
-
-  public CoverageGrouping update(CoverageGrouping e);
-
   public void delete(CoverageGrouping e);
 }

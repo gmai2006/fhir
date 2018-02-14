@@ -32,7 +32,5 @@ public interface SequenceVariantService {
 	public SequenceVariant find(String id);
   public List<SequenceVariant> select(int maxResult);
   public List<SequenceVariant> selectAll();
-  public SequenceVariant create(SequenceVariant bean);
-  public SequenceVariant update(SequenceVariant bean);
   public void delete(SequenceVariant bean);
 }

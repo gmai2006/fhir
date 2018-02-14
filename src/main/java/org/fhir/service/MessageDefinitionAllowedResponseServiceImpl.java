@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public MessageDefinitionAllowedResponse create(MessageDefinitionAllowedResponse bean) {
-  	requireNonNull(bean);
-    logger.info("create(MessageDefinitionAllowedResponse={}) - entered bean ");
-
-    final MessageDefinitionAllowedResponse result = dao.create(bean);
-
-    logger.info("create(MessageDefinitionAllowedResponse) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public MessageDefinitionAllowedResponse update(MessageDefinitionAllowedResponse bean) {
-  	requireNonNull(bean);
-    logger.info("update(MessageDefinitionAllowedResponse={}) - entered bean ");
-
-    final MessageDefinitionAllowedResponse result = dao.update(bean);
-
-    logger.info("update(MessageDefinitionAllowedResponse) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

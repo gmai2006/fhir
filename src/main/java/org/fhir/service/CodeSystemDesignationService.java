@@ -32,7 +32,5 @@ public interface CodeSystemDesignationService {
 	public CodeSystemDesignation find(String id);
   public List<CodeSystemDesignation> select(int maxResult);
   public List<CodeSystemDesignation> selectAll();
-  public CodeSystemDesignation create(CodeSystemDesignation bean);
-  public CodeSystemDesignation update(CodeSystemDesignation bean);
   public void delete(CodeSystemDesignation bean);
 }

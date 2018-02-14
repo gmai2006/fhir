@@ -34,10 +34,5 @@ public interface ImagingManifestSeriesDao {
   public List<ImagingManifestSeries> select(int maxResult);
 
   public List<ImagingManifestSeries> selectAll();
-
-  public ImagingManifestSeries create(ImagingManifestSeries e);
-
-  public ImagingManifestSeries update(ImagingManifestSeries e);
-
   public void delete(ImagingManifestSeries e);
 }

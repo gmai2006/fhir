@@ -108,6 +108,7 @@ public class ImplementationGuidePage  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -232,44 +233,25 @@ public class ImplementationGuidePage  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("_source" + "[" + String.valueOf(this._source) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("kind" + "[" + String.valueOf(this.kind) + "]\n"); 
-     builder.append("_kind" + "[" + String.valueOf(this._kind) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("FHIRpackage" + "[" + String.valueOf(this.FHIRpackage) + "]\n"); 
-     builder.append("_package" + "[" + String.valueOf(this._package) + "]\n"); 
-     builder.append("format" + "[" + String.valueOf(this.format) + "]\n"); 
-     builder.append("_format" + "[" + String.valueOf(this._format) + "]\n"); 
-     builder.append("page" + "[" + String.valueOf(this.page) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImplementationGuidePage]:" + "\n");
+     if(this.source != null) builder.append("source" + "->" + this.source.toString() + "\n"); 
+     if(this._source != null) builder.append("_source" + "->" + this._source.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.kind != null) builder.append("kind" + "->" + this.kind.toString() + "\n"); 
+     if(this._kind != null) builder.append("_kind" + "->" + this._kind.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.FHIRpackage != null) builder.append("FHIRpackage" + "->" + this.FHIRpackage.toString() + "\n"); 
+     if(this._package != null) builder.append("_package" + "->" + this._package.toString() + "\n"); 
+     if(this.format != null) builder.append("format" + "->" + this.format.toString() + "\n"); 
+     if(this._format != null) builder.append("_format" + "->" + this._format.toString() + "\n"); 
+     if(this.page != null) builder.append("page" + "->" + this.page.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static ImplementationGuidePage fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImplementationGuidePage.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImplementationGuidePage o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImplementationGuidePage> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum KindEnum {

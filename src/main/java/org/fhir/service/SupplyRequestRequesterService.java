@@ -32,7 +32,5 @@ public interface SupplyRequestRequesterService {
 	public SupplyRequestRequester find(String id);
   public List<SupplyRequestRequester> select(int maxResult);
   public List<SupplyRequestRequester> selectAll();
-  public SupplyRequestRequester create(SupplyRequestRequester bean);
-  public SupplyRequestRequester update(SupplyRequestRequester bean);
   public void delete(SupplyRequestRequester bean);
 }

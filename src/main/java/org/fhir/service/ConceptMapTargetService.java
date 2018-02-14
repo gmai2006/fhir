@@ -32,7 +32,5 @@ public interface ConceptMapTargetService {
 	public ConceptMapTarget find(String id);
   public List<ConceptMapTarget> select(int maxResult);
   public List<ConceptMapTarget> selectAll();
-  public ConceptMapTarget create(ConceptMapTarget bean);
-  public ConceptMapTarget update(ConceptMapTarget bean);
   public void delete(ConceptMapTarget bean);
 }

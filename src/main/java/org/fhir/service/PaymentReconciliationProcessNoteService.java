@@ -32,7 +32,5 @@ public interface PaymentReconciliationProcessNoteService {
 	public PaymentReconciliationProcessNote find(String id);
   public List<PaymentReconciliationProcessNote> select(int maxResult);
   public List<PaymentReconciliationProcessNote> selectAll();
-  public PaymentReconciliationProcessNote create(PaymentReconciliationProcessNote bean);
-  public PaymentReconciliationProcessNote update(PaymentReconciliationProcessNote bean);
   public void delete(PaymentReconciliationProcessNote bean);
 }

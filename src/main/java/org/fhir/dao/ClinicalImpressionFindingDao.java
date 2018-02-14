@@ -34,10 +34,5 @@ public interface ClinicalImpressionFindingDao {
   public List<ClinicalImpressionFinding> select(int maxResult);
 
   public List<ClinicalImpressionFinding> selectAll();
-
-  public ClinicalImpressionFinding create(ClinicalImpressionFinding e);
-
-  public ClinicalImpressionFinding update(ClinicalImpressionFinding e);
-
   public void delete(ClinicalImpressionFinding e);
 }

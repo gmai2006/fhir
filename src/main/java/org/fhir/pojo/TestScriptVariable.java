@@ -123,6 +123,7 @@ public class TestScriptVariable  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -265,47 +266,28 @@ public class TestScriptVariable  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("defaultValue" + "[" + String.valueOf(this.defaultValue) + "]\n"); 
-     builder.append("_defaultValue" + "[" + String.valueOf(this._defaultValue) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("expression" + "[" + String.valueOf(this.expression) + "]\n"); 
-     builder.append("_expression" + "[" + String.valueOf(this._expression) + "]\n"); 
-     builder.append("headerField" + "[" + String.valueOf(this.headerField) + "]\n"); 
-     builder.append("_headerField" + "[" + String.valueOf(this._headerField) + "]\n"); 
-     builder.append("hint" + "[" + String.valueOf(this.hint) + "]\n"); 
-     builder.append("_hint" + "[" + String.valueOf(this._hint) + "]\n"); 
-     builder.append("path" + "[" + String.valueOf(this.path) + "]\n"); 
-     builder.append("_path" + "[" + String.valueOf(this._path) + "]\n"); 
-     builder.append("sourceId" + "[" + String.valueOf(this.sourceId) + "]\n"); 
-     builder.append("_sourceId" + "[" + String.valueOf(this._sourceId) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TestScriptVariable]:" + "\n");
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.defaultValue != null) builder.append("defaultValue" + "->" + this.defaultValue.toString() + "\n"); 
+     if(this._defaultValue != null) builder.append("_defaultValue" + "->" + this._defaultValue.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.expression != null) builder.append("expression" + "->" + this.expression.toString() + "\n"); 
+     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); 
+     if(this.headerField != null) builder.append("headerField" + "->" + this.headerField.toString() + "\n"); 
+     if(this._headerField != null) builder.append("_headerField" + "->" + this._headerField.toString() + "\n"); 
+     if(this.hint != null) builder.append("hint" + "->" + this.hint.toString() + "\n"); 
+     if(this._hint != null) builder.append("_hint" + "->" + this._hint.toString() + "\n"); 
+     if(this.path != null) builder.append("path" + "->" + this.path.toString() + "\n"); 
+     if(this._path != null) builder.append("_path" + "->" + this._path.toString() + "\n"); 
+     if(this.sourceId != null) builder.append("sourceId" + "->" + this.sourceId.toString() + "\n"); 
+     if(this._sourceId != null) builder.append("_sourceId" + "->" + this._sourceId.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static TestScriptVariable fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TestScriptVariable.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TestScriptVariable o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TestScriptVariable> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

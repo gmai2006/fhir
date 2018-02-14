@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MessageDefinitionModel;
 import org.fhir.pojo.MessageDefinition;
+import org.fhir.pojo.MessageDefinitionHelper;
 
 public class MessageDefinitionDaoImpl implements MessageDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MessageDefinitionDaoImpl implements MessageDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageDefinitionModel a", MessageDefinitionModel.class).setMaxResults(maxResult);
       List<MessageDefinitionModel> models = query.getResultList();
-      return MessageDefinition.fromArray(models);
+      return MessageDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class MessageDefinitionDaoImpl implements MessageDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MessageDefinitionModel a", MessageDefinitionModel.class);
       List<MessageDefinitionModel> models = query.getResultList();
-      return MessageDefinition.fromArray(models);
+      return MessageDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class MessageDefinitionDaoImpl implements MessageDefinitionDao {
       MessageDefinitionModel model = em.merge(new MessageDefinitionModel(e));
       return new MessageDefinition(model);
   }
-
   @Override
   @Transactional
   public void delete(MessageDefinition e) {

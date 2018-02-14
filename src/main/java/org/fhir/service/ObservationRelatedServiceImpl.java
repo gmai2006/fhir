@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ObservationRelated create(ObservationRelated bean) {
-  	requireNonNull(bean);
-    logger.info("create(ObservationRelated={}) - entered bean ");
-
-    final ObservationRelated result = dao.create(bean);
-
-    logger.info("create(ObservationRelated) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ObservationRelated update(ObservationRelated bean) {
-  	requireNonNull(bean);
-    logger.info("update(ObservationRelated={}) - entered bean ");
-
-    final ObservationRelated result = dao.update(bean);
-
-    logger.info("update(ObservationRelated) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

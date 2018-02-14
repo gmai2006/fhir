@@ -54,6 +54,7 @@ public class DocumentReferenceContent  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -75,14 +76,11 @@ public class DocumentReferenceContent  {
 
   public DocumentReferenceContent(DocumentReferenceContentModel o) {
     this.id = o.getId();
-      this.attachment = Attachment.fromJson(o.getAttachment());
-      this.format = Coding.fromJson(o.getFormat());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.attachment = AttachmentHelper.fromJson(o.getAttachment());
+    this.format = CodingHelper.fromJson(o.getFormat());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setAttachment( Attachment value) {
@@ -125,46 +123,15 @@ public class DocumentReferenceContent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("attachment" + "[" + String.valueOf(this.attachment) + "]\n"); 
-     builder.append("format" + "[" + String.valueOf(this.format) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DocumentReferenceContent]:" + "\n");
+     if(this.attachment != null) builder.append("attachment" + "->" + this.attachment.toString() + "\n"); 
+     if(this.format != null) builder.append("format" + "->" + this.format.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<DocumentReferenceContent> fromArray(java.util.List<DocumentReferenceContentModel> list) {
-    return (java.util.List<DocumentReferenceContent>)list.stream()
-      .map(model -> new DocumentReferenceContent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DocumentReferenceContentModel> toModelArray(java.util.List<DocumentReferenceContent> list) {
-    return (java.util.List<DocumentReferenceContentModel>)list.stream()
-      .map(model -> new DocumentReferenceContentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DocumentReferenceContent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DocumentReferenceContent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DocumentReferenceContent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DocumentReferenceContent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -41,8 +41,6 @@ public class JsonUtils {
 	
 	public static java.util.List json2Array(String json) {
 		if ( "[]".equals(json)) return new ArrayList<>();
-		
-		System.out.println("input json " + json);
 		return getGson().fromJson(json, java.util.List.class);
 	}
 }

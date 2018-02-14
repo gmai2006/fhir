@@ -34,10 +34,5 @@ public interface HealthcareServiceAvailableTimeDao {
   public List<HealthcareServiceAvailableTime> select(int maxResult);
 
   public List<HealthcareServiceAvailableTime> selectAll();
-
-  public HealthcareServiceAvailableTime create(HealthcareServiceAvailableTime e);
-
-  public HealthcareServiceAvailableTime update(HealthcareServiceAvailableTime e);
-
   public void delete(HealthcareServiceAvailableTime e);
 }

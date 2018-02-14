@@ -34,10 +34,5 @@ public interface CodeSystemPropertyDao {
   public List<CodeSystemProperty> select(int maxResult);
 
   public List<CodeSystemProperty> selectAll();
-
-  public CodeSystemProperty create(CodeSystemProperty e);
-
-  public CodeSystemProperty update(CodeSystemProperty e);
-
   public void delete(CodeSystemProperty e);
 }

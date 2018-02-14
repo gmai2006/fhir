@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ValueSetConceptModel;
 import org.fhir.pojo.ValueSetConcept;
+import org.fhir.pojo.ValueSetConceptHelper;
 
 public class ValueSetConceptDaoImpl implements ValueSetConceptDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ValueSetConceptDaoImpl implements ValueSetConceptDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetConceptModel a", ValueSetConceptModel.class).setMaxResults(maxResult);
       List<ValueSetConceptModel> models = query.getResultList();
-      return ValueSetConcept.fromArray(models);
+      return ValueSetConceptHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ValueSetConceptDaoImpl implements ValueSetConceptDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetConceptModel a", ValueSetConceptModel.class);
       List<ValueSetConceptModel> models = query.getResultList();
-      return ValueSetConcept.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ValueSetConcept create(ValueSetConcept e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ValueSetConceptModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ValueSetConcept update(ValueSetConcept e) {
-      final EntityManager em = entityManagerProvider.get();
-      ValueSetConceptModel model = em.merge(new ValueSetConceptModel(e));
-      return new ValueSetConcept(model);
+      return ValueSetConceptHelper.fromArray2Array(models);
   }
 
   @Override

@@ -32,7 +32,5 @@ public interface VisionPrescriptionDispenseService {
 	public VisionPrescriptionDispense find(String id);
   public List<VisionPrescriptionDispense> select(int maxResult);
   public List<VisionPrescriptionDispense> selectAll();
-  public VisionPrescriptionDispense create(VisionPrescriptionDispense bean);
-  public VisionPrescriptionDispense update(VisionPrescriptionDispense bean);
   public void delete(VisionPrescriptionDispense bean);
 }

@@ -34,10 +34,8 @@ public interface CoverageDao {
   public List<Coverage> select(int maxResult);
 
   public List<Coverage> selectAll();
-
   public Coverage create(Coverage e);
 
   public Coverage update(Coverage e);
-
   public void delete(Coverage e);
 }

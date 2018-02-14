@@ -34,10 +34,5 @@ public interface ContractSignerDao {
   public List<ContractSigner> select(int maxResult);
 
   public List<ContractSigner> selectAll();
-
-  public ContractSigner create(ContractSigner e);
-
-  public ContractSigner update(ContractSigner e);
-
   public void delete(ContractSigner e);
 }

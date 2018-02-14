@@ -34,10 +34,5 @@ public interface ConsentActorDao {
   public List<ConsentActor> select(int maxResult);
 
   public List<ConsentActor> selectAll();
-
-  public ConsentActor create(ConsentActor e);
-
-  public ConsentActor update(ConsentActor e);
-
   public void delete(ConsentActor e);
 }

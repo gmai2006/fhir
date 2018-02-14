@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ListEntryModel;
 import org.fhir.pojo.ListEntry;
+import org.fhir.pojo.ListEntryHelper;
 
 public class ListEntryDaoImpl implements ListEntryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ListEntryDaoImpl implements ListEntryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ListEntryModel a", ListEntryModel.class).setMaxResults(maxResult);
       List<ListEntryModel> models = query.getResultList();
-      return ListEntry.fromArray(models);
+      return ListEntryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ListEntryDaoImpl implements ListEntryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ListEntryModel a", ListEntryModel.class);
       List<ListEntryModel> models = query.getResultList();
-      return ListEntry.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ListEntry create(ListEntry e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ListEntryModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ListEntry update(ListEntry e) {
-      final EntityManager em = entityManagerProvider.get();
-      ListEntryModel model = em.merge(new ListEntryModel(e));
-      return new ListEntry(model);
+      return ListEntryHelper.fromArray2Array(models);
   }
 
   @Override

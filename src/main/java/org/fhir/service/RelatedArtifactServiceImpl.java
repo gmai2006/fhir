@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public RelatedArtifact create(RelatedArtifact bean) {
-  	requireNonNull(bean);
-    logger.info("create(RelatedArtifact={}) - entered bean ");
-
-    final RelatedArtifact result = dao.create(bean);
-
-    logger.info("create(RelatedArtifact) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public RelatedArtifact update(RelatedArtifact bean) {
-  	requireNonNull(bean);
-    logger.info("update(RelatedArtifact={}) - entered bean ");
-
-    final RelatedArtifact result = dao.update(bean);
-
-    logger.info("update(RelatedArtifact) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

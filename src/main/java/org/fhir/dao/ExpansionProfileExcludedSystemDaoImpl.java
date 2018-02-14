@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExpansionProfileExcludedSystemModel;
 import org.fhir.pojo.ExpansionProfileExcludedSystem;
+import org.fhir.pojo.ExpansionProfileExcludedSystemHelper;
 
 public class ExpansionProfileExcludedSystemDaoImpl implements ExpansionProfileExcludedSystemDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExpansionProfileExcludedSystemDaoImpl implements ExpansionProfileEx
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExpansionProfileExcludedSystemModel a", ExpansionProfileExcludedSystemModel.class).setMaxResults(maxResult);
       List<ExpansionProfileExcludedSystemModel> models = query.getResultList();
-      return ExpansionProfileExcludedSystem.fromArray(models);
+      return ExpansionProfileExcludedSystemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ExpansionProfileExcludedSystemDaoImpl implements ExpansionProfileEx
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExpansionProfileExcludedSystemModel a", ExpansionProfileExcludedSystemModel.class);
       List<ExpansionProfileExcludedSystemModel> models = query.getResultList();
-      return ExpansionProfileExcludedSystem.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ExpansionProfileExcludedSystem create(ExpansionProfileExcludedSystem e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ExpansionProfileExcludedSystemModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ExpansionProfileExcludedSystem update(ExpansionProfileExcludedSystem e) {
-      final EntityManager em = entityManagerProvider.get();
-      ExpansionProfileExcludedSystemModel model = em.merge(new ExpansionProfileExcludedSystemModel(e));
-      return new ExpansionProfileExcludedSystem(model);
+      return ExpansionProfileExcludedSystemHelper.fromArray2Array(models);
   }
 
   @Override

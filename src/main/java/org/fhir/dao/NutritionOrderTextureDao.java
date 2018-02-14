@@ -34,10 +34,5 @@ public interface NutritionOrderTextureDao {
   public List<NutritionOrderTexture> select(int maxResult);
 
   public List<NutritionOrderTexture> selectAll();
-
-  public NutritionOrderTexture create(NutritionOrderTexture e);
-
-  public NutritionOrderTexture update(NutritionOrderTexture e);
-
   public void delete(NutritionOrderTexture e);
 }

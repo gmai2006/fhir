@@ -34,10 +34,5 @@ public interface ImagingManifestStudyDao {
   public List<ImagingManifestStudy> select(int maxResult);
 
   public List<ImagingManifestStudy> selectAll();
-
-  public ImagingManifestStudy create(ImagingManifestStudy e);
-
-  public ImagingManifestStudy update(ImagingManifestStudy e);
-
   public void delete(ImagingManifestStudy e);
 }

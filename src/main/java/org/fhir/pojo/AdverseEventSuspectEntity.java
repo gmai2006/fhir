@@ -89,6 +89,7 @@ public class AdverseEventSuspectEntity  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -110,33 +111,24 @@ public class AdverseEventSuspectEntity  {
 
   public AdverseEventSuspectEntity(AdverseEventSuspectEntityModel o) {
     this.id = o.getId();
-      if (null != o.getInstance()) {
-        this.instance = new Reference(o.getInstance());
-        this.instance.setId(this.getId());
-      }
-
-      if (null != o.getCausality()) {
-        this.causality = new String(o.getCausality());
-      }
-
-      this.causalityAssessment = CodeableConcept.fromJson(o.getCausalityAssessment());
-      if (null != o.getCausalityProductRelatedness()) {
-        this.causalityProductRelatedness = new String(o.getCausalityProductRelatedness());
-      }
-
-      this.causalityMethod = CodeableConcept.fromJson(o.getCausalityMethod());
-      if (null != o.getCausalityAuthor()) {
-        this.causalityAuthor = new Reference(o.getCausalityAuthor());
-        this.causalityAuthor.setId(this.getId());
-      }
-
-      this.causalityResult = CodeableConcept.fromJson(o.getCausalityResult());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getInstance() && !o.getInstance().isEmpty()) {
+      this.instance = new Reference(o.getInstance().get(0));
+    }
+    if (null != o.getCausality()) {
+      this.causality = o.getCausality();
+    }
+    this.causalityAssessment = CodeableConceptHelper.fromJson(o.getCausalityAssessment());
+    if (null != o.getCausalityProductRelatedness()) {
+      this.causalityProductRelatedness = o.getCausalityProductRelatedness();
+    }
+    this.causalityMethod = CodeableConceptHelper.fromJson(o.getCausalityMethod());
+    if (null != o.getCausalityAuthor() && !o.getCausalityAuthor().isEmpty()) {
+      this.causalityAuthor = new Reference(o.getCausalityAuthor().get(0));
+    }
+    this.causalityResult = CodeableConceptHelper.fromJson(o.getCausalityResult());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setInstance( Reference value) {
@@ -221,19 +213,20 @@ public class AdverseEventSuspectEntity  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("instance" + "[" + String.valueOf(this.instance) + "]\n"); 
-     builder.append("causality" + "[" + String.valueOf(this.causality) + "]\n"); 
-     builder.append("_causality" + "[" + String.valueOf(this._causality) + "]\n"); 
-     builder.append("causalityAssessment" + "[" + String.valueOf(this.causalityAssessment) + "]\n"); 
-     builder.append("causalityProductRelatedness" + "[" + String.valueOf(this.causalityProductRelatedness) + "]\n"); 
-     builder.append("_causalityProductRelatedness" + "[" + String.valueOf(this._causalityProductRelatedness) + "]\n"); 
-     builder.append("causalityMethod" + "[" + String.valueOf(this.causalityMethod) + "]\n"); 
-     builder.append("causalityAuthor" + "[" + String.valueOf(this.causalityAuthor) + "]\n"); 
-     builder.append("causalityResult" + "[" + String.valueOf(this.causalityResult) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AdverseEventSuspectEntity]:" + "\n");
+     if(this.instance != null) builder.append("instance" + "->" + this.instance.toString() + "\n"); 
+     if(this.causality != null) builder.append("causality" + "->" + this.causality.toString() + "\n"); 
+     if(this._causality != null) builder.append("_causality" + "->" + this._causality.toString() + "\n"); 
+     if(this.causalityAssessment != null) builder.append("causalityAssessment" + "->" + this.causalityAssessment.toString() + "\n"); 
+     if(this.causalityProductRelatedness != null) builder.append("causalityProductRelatedness" + "->" + this.causalityProductRelatedness.toString() + "\n"); 
+     if(this._causalityProductRelatedness != null) builder.append("_causalityProductRelatedness" + "->" + this._causalityProductRelatedness.toString() + "\n"); 
+     if(this.causalityMethod != null) builder.append("causalityMethod" + "->" + this.causalityMethod.toString() + "\n"); 
+     if(this.causalityAuthor != null) builder.append("causalityAuthor" + "->" + this.causalityAuthor.toString() + "\n"); 
+     if(this.causalityResult != null) builder.append("causalityResult" + "->" + this.causalityResult.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -251,36 +244,4 @@ public class AdverseEventSuspectEntity  {
   	}
   }
 
-  public static java.util.List<AdverseEventSuspectEntity> fromArray(java.util.List<AdverseEventSuspectEntityModel> list) {
-    return (java.util.List<AdverseEventSuspectEntity>)list.stream()
-      .map(model -> new AdverseEventSuspectEntity(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AdverseEventSuspectEntityModel> toModelArray(java.util.List<AdverseEventSuspectEntity> list) {
-    return (java.util.List<AdverseEventSuspectEntityModel>)list.stream()
-      .map(model -> new AdverseEventSuspectEntityModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AdverseEventSuspectEntity fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AdverseEventSuspectEntity.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AdverseEventSuspectEntity o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AdverseEventSuspectEntity> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

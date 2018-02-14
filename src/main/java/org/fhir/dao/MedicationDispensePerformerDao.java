@@ -34,10 +34,5 @@ public interface MedicationDispensePerformerDao {
   public List<MedicationDispensePerformer> select(int maxResult);
 
   public List<MedicationDispensePerformer> selectAll();
-
-  public MedicationDispensePerformer create(MedicationDispensePerformer e);
-
-  public MedicationDispensePerformer update(MedicationDispensePerformer e);
-
   public void delete(MedicationDispensePerformer e);
 }

@@ -73,6 +73,7 @@ public class ElementDefinitionBase  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -155,37 +156,18 @@ public class ElementDefinitionBase  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("path" + "[" + String.valueOf(this.path) + "]\n"); 
-     builder.append("_path" + "[" + String.valueOf(this._path) + "]\n"); 
-     builder.append("min" + "[" + String.valueOf(this.min) + "]\n"); 
-     builder.append("_min" + "[" + String.valueOf(this._min) + "]\n"); 
-     builder.append("max" + "[" + String.valueOf(this.max) + "]\n"); 
-     builder.append("_max" + "[" + String.valueOf(this._max) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ElementDefinitionBase]:" + "\n");
+     if(this.path != null) builder.append("path" + "->" + this.path.toString() + "\n"); 
+     if(this._path != null) builder.append("_path" + "->" + this._path.toString() + "\n"); 
+     if(this.min != null) builder.append("min" + "->" + this.min.toString() + "\n"); 
+     if(this._min != null) builder.append("_min" + "->" + this._min.toString() + "\n"); 
+     if(this.max != null) builder.append("max" + "->" + this.max.toString() + "\n"); 
+     if(this._max != null) builder.append("_max" + "->" + this._max.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static ElementDefinitionBase fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ElementDefinitionBase.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ElementDefinitionBase o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ElementDefinitionBase> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

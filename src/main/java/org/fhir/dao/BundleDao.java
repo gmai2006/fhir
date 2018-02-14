@@ -34,10 +34,8 @@ public interface BundleDao {
   public List<Bundle> select(int maxResult);
 
   public List<Bundle> selectAll();
-
   public Bundle create(Bundle e);
 
   public Bundle update(Bundle e);
-
   public void delete(Bundle e);
 }

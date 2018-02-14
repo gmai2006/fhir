@@ -34,10 +34,5 @@ public interface CarePlanDetailDao {
   public List<CarePlanDetail> select(int maxResult);
 
   public List<CarePlanDetail> selectAll();
-
-  public CarePlanDetail create(CarePlanDetail e);
-
-  public CarePlanDetail update(CarePlanDetail e);
-
   public void delete(CarePlanDetail e);
 }

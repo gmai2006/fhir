@@ -34,10 +34,8 @@ public interface AdverseEventDao {
   public List<AdverseEvent> select(int maxResult);
 
   public List<AdverseEvent> selectAll();
-
   public AdverseEvent create(AdverseEvent e);
 
   public AdverseEvent update(AdverseEvent e);
-
   public void delete(AdverseEvent e);
 }

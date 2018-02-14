@@ -34,10 +34,8 @@ public interface TaskDao {
   public List<Task> select(int maxResult);
 
   public List<Task> selectAll();
-
   public Task create(Task e);
 
   public Task update(Task e);
-
   public void delete(Task e);
 }

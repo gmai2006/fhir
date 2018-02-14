@@ -65,6 +65,7 @@ public class ImagingManifestInstance  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -86,20 +87,15 @@ public class ImagingManifestInstance  {
 
   public ImagingManifestInstance(ImagingManifestInstanceModel o) {
     this.id = o.getId();
-      if (null != o.getSopClass()) {
-        this.sopClass = new String(o.getSopClass());
-      }
-
-      if (null != o.getUid()) {
-        this.uid = new String(o.getUid());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSopClass()) {
+      this.sopClass = o.getSopClass();
+    }
+    if (null != o.getUid()) {
+      this.uid = o.getUid();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSopClass( String value) {
@@ -154,48 +150,17 @@ public class ImagingManifestInstance  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sopClass" + "[" + String.valueOf(this.sopClass) + "]\n"); 
-     builder.append("_sopClass" + "[" + String.valueOf(this._sopClass) + "]\n"); 
-     builder.append("uid" + "[" + String.valueOf(this.uid) + "]\n"); 
-     builder.append("_uid" + "[" + String.valueOf(this._uid) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImagingManifestInstance]:" + "\n");
+     if(this.sopClass != null) builder.append("sopClass" + "->" + this.sopClass.toString() + "\n"); 
+     if(this._sopClass != null) builder.append("_sopClass" + "->" + this._sopClass.toString() + "\n"); 
+     if(this.uid != null) builder.append("uid" + "->" + this.uid.toString() + "\n"); 
+     if(this._uid != null) builder.append("_uid" + "->" + this._uid.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ImagingManifestInstance> fromArray(java.util.List<ImagingManifestInstanceModel> list) {
-    return (java.util.List<ImagingManifestInstance>)list.stream()
-      .map(model -> new ImagingManifestInstance(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImagingManifestInstanceModel> toModelArray(java.util.List<ImagingManifestInstance> list) {
-    return (java.util.List<ImagingManifestInstanceModel>)list.stream()
-      .map(model -> new ImagingManifestInstanceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImagingManifestInstance fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImagingManifestInstance.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImagingManifestInstance o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImagingManifestInstance> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

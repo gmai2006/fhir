@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinitionaction")
-public class PlanDefinitionActionModel  {
+public class PlanDefinitionActionModel  implements Serializable {
+	private static final long serialVersionUID = 151857669645525114L;
   /**
   * Description: "A user-visible label for the action."
   */
@@ -67,7 +68,7 @@ public class PlanDefinitionActionModel  {
 
   /**
   * Description: "A code that provides meaning for the action or action group. For example, a section may have a LOINC code for a the section of a documentation template."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -76,7 +77,7 @@ public class PlanDefinitionActionModel  {
 
   /**
   * Description: "A description of why this action is necessary or appropriate."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -86,53 +87,75 @@ public class PlanDefinitionActionModel  {
   /**
   * Description: "Didactic or other informational resources associated with the action that can be provided to the CDS recipient. Information resources can include inline text commentary and links to web resources."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<RelatedArtifactModel> documentation = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"documentation_id\"")
+  private String documentation_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="documentation_id", insertable=false, updatable=false)
+  private java.util.List<RelatedArtifactModel> documentation;
 
   /**
   * Description: "Identifies goals that this action supports. The reference must be to a goal element defined within this plan definition."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"goalId\"", length = 16777215)
+  @Column(name="\"goalId\"")
   private String goalId;
 
   /**
   * Description: "A description of when the action should be triggered."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<TriggerDefinitionModel> triggerDefinition = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"triggerdefinition_id\"")
+  private String triggerdefinition_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="triggerdefinition_id", insertable=false, updatable=false)
+  private java.util.List<TriggerDefinitionModel> triggerDefinition;
 
   /**
   * Description: "An expression that describes applicability criteria, or start/stop conditions for the action."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<PlanDefinitionConditionModel> condition = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"condition_id\"")
+  private String condition_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="condition_id", insertable=false, updatable=false)
+  private java.util.List<PlanDefinitionConditionModel> condition;
 
   /**
   * Description: "Defines input data requirements for the action."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<DataRequirementModel> input = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"input_id\"")
+  private String input_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="input_id", insertable=false, updatable=false)
+  private java.util.List<DataRequirementModel> input;
 
   /**
   * Description: "Defines the outputs of the action, if any."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<DataRequirementModel> output = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"output_id\"")
+  private String output_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="output_id", insertable=false, updatable=false)
+  private java.util.List<DataRequirementModel> output;
 
   /**
   * Description: "A relationship to another action such as \"before\" or \"30-60 minutes after start of\"."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<PlanDefinitionRelatedActionModel> relatedAction = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"relatedaction_id\"")
+  private String relatedaction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatedaction_id", insertable=false, updatable=false)
+  private java.util.List<PlanDefinitionRelatedActionModel> relatedAction;
 
   /**
   * Description: "An optional value describing when the action should be performed."
@@ -144,7 +167,7 @@ public class PlanDefinitionActionModel  {
 
   /**
   * Description: "An optional value describing when the action should be performed."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -153,7 +176,7 @@ public class PlanDefinitionActionModel  {
 
   /**
   * Description: "An optional value describing when the action should be performed."
-  * Actual type: Duration
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -162,7 +185,7 @@ public class PlanDefinitionActionModel  {
 
   /**
   * Description: "An optional value describing when the action should be performed."
-  * Actual type: Range
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -171,7 +194,7 @@ public class PlanDefinitionActionModel  {
 
   /**
   * Description: "An optional value describing when the action should be performed."
-  * Actual type: Timing
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -181,13 +204,17 @@ public class PlanDefinitionActionModel  {
   /**
   * Description: "Indicates who should participate in performing the action described."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<PlanDefinitionParticipantModel> participant = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"participant_id\"")
+  private String participant_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="participant_id", insertable=false, updatable=false)
+  private java.util.List<PlanDefinitionParticipantModel> participant;
 
   /**
   * Description: "The type of action to perform (create, update, remove)."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -236,9 +263,9 @@ public class PlanDefinitionActionModel  {
   @Column(name="\"definition_id\"")
   private String definition_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`definition_id`", insertable=false, updatable=false)
-  private ReferenceModel definition;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="definition_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> definition;
 
   /**
   * Description: "A reference to a StructureMap resource that defines a transform that can be executed to produce the intent resource using the ActivityDefinition instance as the input."
@@ -247,28 +274,36 @@ public class PlanDefinitionActionModel  {
   @Column(name="\"transform_id\"")
   private String transform_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`transform_id`", insertable=false, updatable=false)
-  private ReferenceModel transform;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="transform_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> transform;
 
   /**
   * Description: "Customizations that should be applied to the statically defined resource. For example, if the dosage of a medication must be computed based on the patient's weight, a customization would be used to specify an expression that calculated the weight, and the path on the resource that would contain the result."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<PlanDefinitionDynamicValueModel> dynamicValue = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"dynamicvalue_id\"")
+  private String dynamicvalue_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dynamicvalue_id", insertable=false, updatable=false)
+  private java.util.List<PlanDefinitionDynamicValueModel> dynamicValue;
 
   /**
   * Description: "Sub actions that are contained within the action. The behavior of this action determines the functionality of the sub-actions. For example, a selection behavior of at-most-one indicates that of the sub-actions, at most one may be chosen as part of realizing the action definition."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<PlanDefinitionActionModel> action = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"action_id\"")
+  private String action_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  private java.util.List<PlanDefinitionActionModel> action;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -280,6 +315,7 @@ public class PlanDefinitionActionModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -288,318 +324,353 @@ public class PlanDefinitionActionModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public PlanDefinitionActionModel() {
   }
 
-  public PlanDefinitionActionModel(PlanDefinitionAction o) {
-    this.id = o.getId();
-      this.label = o.getLabel();
-
-      this.title = o.getTitle();
-
-      this.description = o.getDescription();
-
-      this.textEquivalent = o.getTextEquivalent();
-
-      this.code = CodeableConcept.toJson(o.getCode());
-      this.reason = CodeableConcept.toJson(o.getReason());
-      this.documentation = RelatedArtifact.toModelArray(o.getDocumentation());
-
-      this.goalId = org.fhir.utils.JsonUtils.write2String(o.getGoalId());
-
-      this.triggerDefinition = TriggerDefinition.toModelArray(o.getTriggerDefinition());
-
-      this.condition = PlanDefinitionCondition.toModelArray(o.getCondition());
-
-      this.input = DataRequirement.toModelArray(o.getInput());
-
-      this.output = DataRequirement.toModelArray(o.getOutput());
-
-      this.relatedAction = PlanDefinitionRelatedAction.toModelArray(o.getRelatedAction());
-
-      this.timingDateTime = o.getTimingDateTime();
-
-      this.timingPeriod = Period.toJson(o.getTimingPeriod());
-      this.timingDuration = Duration.toJson(o.getTimingDuration());
-      this.timingRange = Range.toJson(o.getTimingRange());
-      this.timingTiming = Timing.toJson(o.getTimingTiming());
-      this.participant = PlanDefinitionParticipant.toModelArray(o.getParticipant());
-
-      this.type = Coding.toJson(o.getType());
-      this.groupingBehavior = o.getGroupingBehavior();
-
-      this.selectionBehavior = o.getSelectionBehavior();
-
-      this.requiredBehavior = o.getRequiredBehavior();
-
-      this.precheckBehavior = o.getPrecheckBehavior();
-
-      this.cardinalityBehavior = o.getCardinalityBehavior();
-
-      if (null != o.getDefinition()) {
-      	this.definition_id = "definition" + this.getId();
-        this.definition = new ReferenceModel(o.getDefinition());
-        this.definition.setId(this.definition_id);
-        this.definition.parent_id = this.definition.getId();
-      }
-
-      if (null != o.getTransform()) {
-      	this.transform_id = "transform" + this.getId();
-        this.transform = new ReferenceModel(o.getTransform());
-        this.transform.setId(this.transform_id);
-        this.transform.parent_id = this.transform.getId();
-      }
-
-      this.dynamicValue = PlanDefinitionDynamicValue.toModelArray(o.getDynamicValue());
-
-      this.action = PlanDefinitionAction.toModelArray(o.getAction());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public PlanDefinitionActionModel(PlanDefinitionAction o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.label = o.getLabel();
+    this.title = o.getTitle();
+    this.description = o.getDescription();
+    this.textEquivalent = o.getTextEquivalent();
+    if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
+    	this.documentation_id = "documentation" + this.parent_id;
+    	this.documentation = RelatedArtifactHelper.toModelFromArray(o.getDocumentation(), this.documentation_id);
+    }
+    this.goalId = org.fhir.utils.JsonUtils.write2String(o.getGoalId());
+    if (null != o.getTriggerDefinition() && !o.getTriggerDefinition().isEmpty()) {
+    	this.triggerdefinition_id = "triggerdefinition" + this.parent_id;
+    	this.triggerDefinition = TriggerDefinitionHelper.toModelFromArray(o.getTriggerDefinition(), this.triggerdefinition_id);
+    }
+    if (null != o.getCondition() && !o.getCondition().isEmpty()) {
+    	this.condition_id = "condition" + this.parent_id;
+    	this.condition = PlanDefinitionConditionHelper.toModelFromArray(o.getCondition(), this.condition_id);
+    }
+    if (null != o.getInput() && !o.getInput().isEmpty()) {
+    	this.input_id = "input" + this.parent_id;
+    	this.input = DataRequirementHelper.toModelFromArray(o.getInput(), this.input_id);
+    }
+    if (null != o.getOutput() && !o.getOutput().isEmpty()) {
+    	this.output_id = "output" + this.parent_id;
+    	this.output = DataRequirementHelper.toModelFromArray(o.getOutput(), this.output_id);
+    }
+    if (null != o.getRelatedAction() && !o.getRelatedAction().isEmpty()) {
+    	this.relatedaction_id = "relatedaction" + this.parent_id;
+    	this.relatedAction = PlanDefinitionRelatedActionHelper.toModelFromArray(o.getRelatedAction(), this.relatedaction_id);
+    }
+    this.timingDateTime = o.getTimingDateTime();
+    this.timingPeriod = PeriodHelper.toJson(o.getTimingPeriod());
+    this.timingDuration = DurationHelper.toJson(o.getTimingDuration());
+    this.timingRange = RangeHelper.toJson(o.getTimingRange());
+    this.timingTiming = TimingHelper.toJson(o.getTimingTiming());
+    if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
+    	this.participant_id = "participant" + this.parent_id;
+    	this.participant = PlanDefinitionParticipantHelper.toModelFromArray(o.getParticipant(), this.participant_id);
+    }
+    this.type = CodingHelper.toJson(o.getType());
+    this.groupingBehavior = o.getGroupingBehavior();
+    this.selectionBehavior = o.getSelectionBehavior();
+    this.requiredBehavior = o.getRequiredBehavior();
+    this.precheckBehavior = o.getPrecheckBehavior();
+    this.cardinalityBehavior = o.getCardinalityBehavior();
+    if (null != o.getDefinition() ) {
+    	this.definition_id = "definition" + this.parent_id;
+    	this.definition = ReferenceHelper.toModel(o.getDefinition(), this.definition_id);
+    }
+    if (null != o.getTransform() ) {
+    	this.transform_id = "transform" + this.parent_id;
+    	this.transform = ReferenceHelper.toModel(o.getTransform(), this.transform_id);
+    }
+    if (null != o.getDynamicValue() && !o.getDynamicValue().isEmpty()) {
+    	this.dynamicvalue_id = "dynamicvalue" + this.parent_id;
+    	this.dynamicValue = PlanDefinitionDynamicValueHelper.toModelFromArray(o.getDynamicValue(), this.dynamicvalue_id);
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action_id = "action" + this.parent_id;
+    	this.action = PlanDefinitionActionHelper.toModelFromArray(o.getAction(), this.action_id);
+    }
   }
 
-  public void setLabel( String value) {
-    this.label = value;
-  }
   public String getLabel() {
     return this.label;
   }
-  public void setTitle( String value) {
-    this.title = value;
+  public void setLabel( String value) {
+    this.label = value;
   }
   public String getTitle() {
     return this.title;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setTitle( String value) {
+    this.title = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setTextEquivalent( String value) {
-    this.textEquivalent = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public String getTextEquivalent() {
     return this.textEquivalent;
   }
-  public void setCode( String value) {
-    this.code = value;
+  public void setTextEquivalent( String value) {
+    this.textEquivalent = value;
   }
   public String getCode() {
     return this.code;
   }
-  public void setReason( String value) {
-    this.reason = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public String getReason() {
     return this.reason;
   }
-  public void setDocumentation( java.util.List<RelatedArtifactModel> value) {
-    this.documentation = value;
+  public void setReason( String value) {
+    this.reason = value;
   }
   public java.util.List<RelatedArtifactModel> getDocumentation() {
     return this.documentation;
   }
-  public void setGoalId( String value) {
-    this.goalId = value;
+  public void setDocumentation( java.util.List<RelatedArtifactModel> value) {
+    this.documentation = value;
   }
   public String getGoalId() {
     return this.goalId;
   }
-  public void setTriggerDefinition( java.util.List<TriggerDefinitionModel> value) {
-    this.triggerDefinition = value;
+  public void setGoalId( String value) {
+    this.goalId = value;
   }
   public java.util.List<TriggerDefinitionModel> getTriggerDefinition() {
     return this.triggerDefinition;
   }
-  public void setCondition( java.util.List<PlanDefinitionConditionModel> value) {
-    this.condition = value;
+  public void setTriggerDefinition( java.util.List<TriggerDefinitionModel> value) {
+    this.triggerDefinition = value;
   }
   public java.util.List<PlanDefinitionConditionModel> getCondition() {
     return this.condition;
   }
-  public void setInput( java.util.List<DataRequirementModel> value) {
-    this.input = value;
+  public void setCondition( java.util.List<PlanDefinitionConditionModel> value) {
+    this.condition = value;
   }
   public java.util.List<DataRequirementModel> getInput() {
     return this.input;
   }
-  public void setOutput( java.util.List<DataRequirementModel> value) {
-    this.output = value;
+  public void setInput( java.util.List<DataRequirementModel> value) {
+    this.input = value;
   }
   public java.util.List<DataRequirementModel> getOutput() {
     return this.output;
   }
-  public void setRelatedAction( java.util.List<PlanDefinitionRelatedActionModel> value) {
-    this.relatedAction = value;
+  public void setOutput( java.util.List<DataRequirementModel> value) {
+    this.output = value;
   }
   public java.util.List<PlanDefinitionRelatedActionModel> getRelatedAction() {
     return this.relatedAction;
   }
-  public void setTimingDateTime( String value) {
-    this.timingDateTime = value;
+  public void setRelatedAction( java.util.List<PlanDefinitionRelatedActionModel> value) {
+    this.relatedAction = value;
   }
   public String getTimingDateTime() {
     return this.timingDateTime;
   }
-  public void setTimingPeriod( String value) {
-    this.timingPeriod = value;
+  public void setTimingDateTime( String value) {
+    this.timingDateTime = value;
   }
   public String getTimingPeriod() {
     return this.timingPeriod;
   }
-  public void setTimingDuration( String value) {
-    this.timingDuration = value;
+  public void setTimingPeriod( String value) {
+    this.timingPeriod = value;
   }
   public String getTimingDuration() {
     return this.timingDuration;
   }
-  public void setTimingRange( String value) {
-    this.timingRange = value;
+  public void setTimingDuration( String value) {
+    this.timingDuration = value;
   }
   public String getTimingRange() {
     return this.timingRange;
   }
-  public void setTimingTiming( String value) {
-    this.timingTiming = value;
+  public void setTimingRange( String value) {
+    this.timingRange = value;
   }
   public String getTimingTiming() {
     return this.timingTiming;
   }
-  public void setParticipant( java.util.List<PlanDefinitionParticipantModel> value) {
-    this.participant = value;
+  public void setTimingTiming( String value) {
+    this.timingTiming = value;
   }
   public java.util.List<PlanDefinitionParticipantModel> getParticipant() {
     return this.participant;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setParticipant( java.util.List<PlanDefinitionParticipantModel> value) {
+    this.participant = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setGroupingBehavior( String value) {
-    this.groupingBehavior = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getGroupingBehavior() {
     return this.groupingBehavior;
   }
-  public void setSelectionBehavior( String value) {
-    this.selectionBehavior = value;
+  public void setGroupingBehavior( String value) {
+    this.groupingBehavior = value;
   }
   public String getSelectionBehavior() {
     return this.selectionBehavior;
   }
-  public void setRequiredBehavior( String value) {
-    this.requiredBehavior = value;
+  public void setSelectionBehavior( String value) {
+    this.selectionBehavior = value;
   }
   public String getRequiredBehavior() {
     return this.requiredBehavior;
   }
-  public void setPrecheckBehavior( String value) {
-    this.precheckBehavior = value;
+  public void setRequiredBehavior( String value) {
+    this.requiredBehavior = value;
   }
   public String getPrecheckBehavior() {
     return this.precheckBehavior;
   }
-  public void setCardinalityBehavior( String value) {
-    this.cardinalityBehavior = value;
+  public void setPrecheckBehavior( String value) {
+    this.precheckBehavior = value;
   }
   public String getCardinalityBehavior() {
     return this.cardinalityBehavior;
   }
-  public void setDefinition( ReferenceModel value) {
-    this.definition = value;
+  public void setCardinalityBehavior( String value) {
+    this.cardinalityBehavior = value;
   }
-  public ReferenceModel getDefinition() {
+  public java.util.List<ReferenceModel> getDefinition() {
     return this.definition;
   }
-  public void setTransform( ReferenceModel value) {
-    this.transform = value;
+  public void setDefinition( java.util.List<ReferenceModel> value) {
+    this.definition = value;
   }
-  public ReferenceModel getTransform() {
+  public java.util.List<ReferenceModel> getTransform() {
     return this.transform;
   }
-  public void setDynamicValue( java.util.List<PlanDefinitionDynamicValueModel> value) {
-    this.dynamicValue = value;
+  public void setTransform( java.util.List<ReferenceModel> value) {
+    this.transform = value;
   }
   public java.util.List<PlanDefinitionDynamicValueModel> getDynamicValue() {
     return this.dynamicValue;
   }
-  public void setAction( java.util.List<PlanDefinitionActionModel> value) {
-    this.action = value;
+  public void setDynamicValue( java.util.List<PlanDefinitionDynamicValueModel> value) {
+    this.dynamicValue = value;
   }
   public java.util.List<PlanDefinitionActionModel> getAction() {
     return this.action;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setAction( java.util.List<PlanDefinitionActionModel> value) {
+    this.action = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("label" + "[" + String.valueOf(this.label) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("textEquivalent" + "[" + String.valueOf(this.textEquivalent) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("goalId" + "[" + String.valueOf(this.goalId) + "]\n"); 
-     builder.append("triggerDefinition" + "[" + String.valueOf(this.triggerDefinition) + "]\n"); 
-     builder.append("condition" + "[" + String.valueOf(this.condition) + "]\n"); 
-     builder.append("input" + "[" + String.valueOf(this.input) + "]\n"); 
-     builder.append("output" + "[" + String.valueOf(this.output) + "]\n"); 
-     builder.append("relatedAction" + "[" + String.valueOf(this.relatedAction) + "]\n"); 
-     builder.append("timingDateTime" + "[" + String.valueOf(this.timingDateTime) + "]\n"); 
-     builder.append("timingPeriod" + "[" + String.valueOf(this.timingPeriod) + "]\n"); 
-     builder.append("timingDuration" + "[" + String.valueOf(this.timingDuration) + "]\n"); 
-     builder.append("timingRange" + "[" + String.valueOf(this.timingRange) + "]\n"); 
-     builder.append("timingTiming" + "[" + String.valueOf(this.timingTiming) + "]\n"); 
-     builder.append("participant" + "[" + String.valueOf(this.participant) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("groupingBehavior" + "[" + String.valueOf(this.groupingBehavior) + "]\n"); 
-     builder.append("selectionBehavior" + "[" + String.valueOf(this.selectionBehavior) + "]\n"); 
-     builder.append("requiredBehavior" + "[" + String.valueOf(this.requiredBehavior) + "]\n"); 
-     builder.append("precheckBehavior" + "[" + String.valueOf(this.precheckBehavior) + "]\n"); 
-     builder.append("cardinalityBehavior" + "[" + String.valueOf(this.cardinalityBehavior) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("transform" + "[" + String.valueOf(this.transform) + "]\n"); 
-     builder.append("dynamicValue" + "[" + String.valueOf(this.dynamicValue) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PlanDefinitionActionModel]:" + "\n");
+     builder.append("label" + "->" + this.label + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("textEquivalent" + "->" + this.textEquivalent + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("reason" + "->" + this.reason + "\n"); 
+     builder.append("goalId" + "->" + this.goalId + "\n"); 
+     builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
+     builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
+     builder.append("timingDuration" + "->" + this.timingDuration + "\n"); 
+     builder.append("timingRange" + "->" + this.timingRange + "\n"); 
+     builder.append("timingTiming" + "->" + this.timingTiming + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("groupingBehavior" + "->" + this.groupingBehavior + "\n"); 
+     builder.append("selectionBehavior" + "->" + this.selectionBehavior + "\n"); 
+     builder.append("requiredBehavior" + "->" + this.requiredBehavior + "\n"); 
+     builder.append("precheckBehavior" + "->" + this.precheckBehavior + "\n"); 
+     builder.append("cardinalityBehavior" + "->" + this.cardinalityBehavior + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[PlanDefinitionActionModel]:" + "\n");
+     builder.append("label" + "->" + this.label + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("textEquivalent" + "->" + this.textEquivalent + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("reason" + "->" + this.reason + "\n"); 
+     builder.append("documentation" + "->" + this.documentation + "\n"); 
+     builder.append("goalId" + "->" + this.goalId + "\n"); 
+     builder.append("triggerDefinition" + "->" + this.triggerDefinition + "\n"); 
+     builder.append("condition" + "->" + this.condition + "\n"); 
+     builder.append("input" + "->" + this.input + "\n"); 
+     builder.append("output" + "->" + this.output + "\n"); 
+     builder.append("relatedAction" + "->" + this.relatedAction + "\n"); 
+     builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
+     builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
+     builder.append("timingDuration" + "->" + this.timingDuration + "\n"); 
+     builder.append("timingRange" + "->" + this.timingRange + "\n"); 
+     builder.append("timingTiming" + "->" + this.timingTiming + "\n"); 
+     builder.append("participant" + "->" + this.participant + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("groupingBehavior" + "->" + this.groupingBehavior + "\n"); 
+     builder.append("selectionBehavior" + "->" + this.selectionBehavior + "\n"); 
+     builder.append("requiredBehavior" + "->" + this.requiredBehavior + "\n"); 
+     builder.append("precheckBehavior" + "->" + this.precheckBehavior + "\n"); 
+     builder.append("cardinalityBehavior" + "->" + this.cardinalityBehavior + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("transform" + "->" + this.transform + "\n"); 
+     builder.append("dynamicValue" + "->" + this.dynamicValue + "\n"); 
+     builder.append("action" + "->" + this.action + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

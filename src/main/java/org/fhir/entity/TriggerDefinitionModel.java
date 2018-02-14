@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A description of a triggering event."
 */
 @Entity
 @Table(name="triggerdefinition")
-public class TriggerDefinitionModel  {
+public class TriggerDefinitionModel  implements Serializable {
+	private static final long serialVersionUID = 151857669687776935L;
   /**
   * Description: "The type of triggering event."
   */
@@ -53,7 +54,7 @@ public class TriggerDefinitionModel  {
 
   /**
   * Description: "The timing of the event (if this is a period trigger)."
-  * Actual type: Timing
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -67,9 +68,9 @@ public class TriggerDefinitionModel  {
   @Column(name="\"eventtimingreference_id\"")
   private String eventtimingreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`eventtimingreference_id`", insertable=false, updatable=false)
-  private ReferenceModel eventTimingReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="eventtimingreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> eventTimingReference;
 
   /**
   * Description: "The timing of the event (if this is a period trigger)."
@@ -94,14 +95,15 @@ public class TriggerDefinitionModel  {
   @Column(name="\"eventdata_id\"")
   private String eventdata_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`eventdata_id`", insertable=false, updatable=false)
-  private DataRequirementModel eventData;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="eventdata_id", insertable=false, updatable=false)
+  private java.util.List<DataRequirementModel> eventData;
 
   /**
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -109,118 +111,131 @@ public class TriggerDefinitionModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public TriggerDefinitionModel() {
   }
 
-  public TriggerDefinitionModel(TriggerDefinition o) {
-    this.id = o.getId();
-      this.type = o.getType();
-
-      this.eventName = o.getEventName();
-
-      this.eventTimingTiming = Timing.toJson(o.getEventTimingTiming());
-      if (null != o.getEventTimingReference()) {
-      	this.eventtimingreference_id = "eventTimingReference" + this.getId();
-        this.eventTimingReference = new ReferenceModel(o.getEventTimingReference());
-        this.eventTimingReference.setId(this.eventtimingreference_id);
-        this.eventTimingReference.parent_id = this.eventTimingReference.getId();
-      }
-
-      this.eventTimingDate = o.getEventTimingDate();
-
-      this.eventTimingDateTime = o.getEventTimingDateTime();
-
-      if (null != o.getEventData()) {
-      	this.eventdata_id = "eventData" + this.getId();
-        this.eventData = new DataRequirementModel(o.getEventData());
-        this.eventData.setId(this.eventdata_id);
-        this.eventData.parent_id = this.eventData.getId();
-      }
-
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public TriggerDefinitionModel(TriggerDefinition o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.type = o.getType();
+    this.eventName = o.getEventName();
+    this.eventTimingTiming = TimingHelper.toJson(o.getEventTimingTiming());
+    if (null != o.getEventTimingReference() ) {
+    	this.eventtimingreference_id = "eventtimingreference" + this.parent_id;
+    	this.eventTimingReference = ReferenceHelper.toModel(o.getEventTimingReference(), this.eventtimingreference_id);
+    }
+    this.eventTimingDate = o.getEventTimingDate();
+    this.eventTimingDateTime = o.getEventTimingDateTime();
+    if (null != o.getEventData() ) {
+    	this.eventdata_id = "eventdata" + this.parent_id;
+    	this.eventData = DataRequirementHelper.toModel(o.getEventData(), this.eventdata_id);
+    }
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setEventName( String value) {
-    this.eventName = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getEventName() {
     return this.eventName;
   }
-  public void setEventTimingTiming( String value) {
-    this.eventTimingTiming = value;
+  public void setEventName( String value) {
+    this.eventName = value;
   }
   public String getEventTimingTiming() {
     return this.eventTimingTiming;
   }
-  public void setEventTimingReference( ReferenceModel value) {
-    this.eventTimingReference = value;
+  public void setEventTimingTiming( String value) {
+    this.eventTimingTiming = value;
   }
-  public ReferenceModel getEventTimingReference() {
+  public java.util.List<ReferenceModel> getEventTimingReference() {
     return this.eventTimingReference;
   }
-  public void setEventTimingDate( String value) {
-    this.eventTimingDate = value;
+  public void setEventTimingReference( java.util.List<ReferenceModel> value) {
+    this.eventTimingReference = value;
   }
   public String getEventTimingDate() {
     return this.eventTimingDate;
   }
-  public void setEventTimingDateTime( String value) {
-    this.eventTimingDateTime = value;
+  public void setEventTimingDate( String value) {
+    this.eventTimingDate = value;
   }
   public String getEventTimingDateTime() {
     return this.eventTimingDateTime;
   }
-  public void setEventData( DataRequirementModel value) {
-    this.eventData = value;
+  public void setEventTimingDateTime( String value) {
+    this.eventTimingDateTime = value;
   }
-  public DataRequirementModel getEventData() {
+  public java.util.List<DataRequirementModel> getEventData() {
     return this.eventData;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setEventData( java.util.List<DataRequirementModel> value) {
+    this.eventData = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("eventName" + "[" + String.valueOf(this.eventName) + "]\n"); 
-     builder.append("eventTimingTiming" + "[" + String.valueOf(this.eventTimingTiming) + "]\n"); 
-     builder.append("eventTimingReference" + "[" + String.valueOf(this.eventTimingReference) + "]\n"); 
-     builder.append("eventTimingDate" + "[" + String.valueOf(this.eventTimingDate) + "]\n"); 
-     builder.append("eventTimingDateTime" + "[" + String.valueOf(this.eventTimingDateTime) + "]\n"); 
-     builder.append("eventData" + "[" + String.valueOf(this.eventData) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TriggerDefinitionModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("eventName" + "->" + this.eventName + "\n"); 
+     builder.append("eventTimingTiming" + "->" + this.eventTimingTiming + "\n"); 
+     builder.append("eventTimingDate" + "->" + this.eventTimingDate + "\n"); 
+     builder.append("eventTimingDateTime" + "->" + this.eventTimingDateTime + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[TriggerDefinitionModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("eventName" + "->" + this.eventName + "\n"); 
+     builder.append("eventTimingTiming" + "->" + this.eventTimingTiming + "\n"); 
+     builder.append("eventTimingReference" + "->" + this.eventTimingReference + "\n"); 
+     builder.append("eventTimingDate" + "->" + this.eventTimingDate + "\n"); 
+     builder.append("eventTimingDateTime" + "->" + this.eventTimingDateTime + "\n"); 
+     builder.append("eventData" + "->" + this.eventData + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

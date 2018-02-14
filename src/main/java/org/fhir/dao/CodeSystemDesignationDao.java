@@ -34,10 +34,5 @@ public interface CodeSystemDesignationDao {
   public List<CodeSystemDesignation> select(int maxResult);
 
   public List<CodeSystemDesignation> selectAll();
-
-  public CodeSystemDesignation create(CodeSystemDesignation e);
-
-  public CodeSystemDesignation update(CodeSystemDesignation e);
-
   public void delete(CodeSystemDesignation e);
 }

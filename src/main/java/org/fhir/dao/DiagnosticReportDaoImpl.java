@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DiagnosticReportModel;
 import org.fhir.pojo.DiagnosticReport;
+import org.fhir.pojo.DiagnosticReportHelper;
 
 public class DiagnosticReportDaoImpl implements DiagnosticReportDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DiagnosticReportDaoImpl implements DiagnosticReportDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DiagnosticReportModel a", DiagnosticReportModel.class).setMaxResults(maxResult);
       List<DiagnosticReportModel> models = query.getResultList();
-      return DiagnosticReport.fromArray(models);
+      return DiagnosticReportHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class DiagnosticReportDaoImpl implements DiagnosticReportDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DiagnosticReportModel a", DiagnosticReportModel.class);
       List<DiagnosticReportModel> models = query.getResultList();
-      return DiagnosticReport.fromArray(models);
+      return DiagnosticReportHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class DiagnosticReportDaoImpl implements DiagnosticReportDao {
       DiagnosticReportModel model = em.merge(new DiagnosticReportModel(e));
       return new DiagnosticReport(model);
   }
-
   @Override
   @Transactional
   public void delete(DiagnosticReport e) {

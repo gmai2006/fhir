@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
 @Entity
 @Table(name="capabilitystatementrest")
-public class CapabilityStatementRestModel  {
+public class CapabilityStatementRestModel  implements Serializable {
+	private static final long serialVersionUID = 151857669705642435L;
   /**
   * Description: "Identifies whether this portion of the statement is describing the ability to initiate or receive restful operations."
   */
@@ -58,51 +59,65 @@ public class CapabilityStatementRestModel  {
   @Column(name="\"security_id\"")
   private String security_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`security_id`", insertable=false, updatable=false)
-  private CapabilityStatementSecurityModel security;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="security_id", insertable=false, updatable=false)
+  private java.util.List<CapabilityStatementSecurityModel> security;
 
   /**
   * Description: "A specification of the restful capabilities of the solution for a specific resource type."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<CapabilityStatementResourceModel> resource = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"resource_id\"")
+  private String resource_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="resource_id", insertable=false, updatable=false)
+  private java.util.List<CapabilityStatementResourceModel> resource;
 
   /**
   * Description: "A specification of restful operations supported by the system."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<CapabilityStatementInteraction1Model> interaction = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"interaction_id\"")
+  private String interaction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="interaction_id", insertable=false, updatable=false)
+  private java.util.List<CapabilityStatementInteraction1Model> interaction;
 
   /**
   * Description: "Search parameters that are supported for searching all resources for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<CapabilityStatementSearchParamModel> searchParam = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"searchparam_id\"")
+  private String searchparam_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="searchparam_id", insertable=false, updatable=false)
+  private java.util.List<CapabilityStatementSearchParamModel> searchParam;
 
   /**
   * Description: "Definition of an operation or a named query together with its parameters and their meaning and type."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<CapabilityStatementOperationModel> operation = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"operation_id\"")
+  private String operation_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="operation_id", insertable=false, updatable=false)
+  private java.util.List<CapabilityStatementOperationModel> operation;
 
   /**
   * Description: "An absolute URI which is a reference to the definition of a compartment that the system supports. The reference is to a CompartmentDefinition resource by its canonical URL ."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"compartment\"", length = 16777215)
+  @Column(name="\"compartment\"")
   private String compartment;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -114,6 +129,7 @@ public class CapabilityStatementRestModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -122,131 +138,154 @@ public class CapabilityStatementRestModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public CapabilityStatementRestModel() {
   }
 
-  public CapabilityStatementRestModel(CapabilityStatementRest o) {
-    this.id = o.getId();
-      this.mode = o.getMode();
-
-      this.documentation = o.getDocumentation();
-
-      if (null != o.getSecurity()) {
-      	this.security_id = "security" + this.getId();
-        this.security = new CapabilityStatementSecurityModel(o.getSecurity());
-        this.security.setId(this.security_id);
-        this.security.parent_id = this.security.getId();
-      }
-
-      this.resource = CapabilityStatementResource.toModelArray(o.getResource());
-
-      this.interaction = CapabilityStatementInteraction1.toModelArray(o.getInteraction());
-
-      this.searchParam = CapabilityStatementSearchParam.toModelArray(o.getSearchParam());
-
-      this.operation = CapabilityStatementOperation.toModelArray(o.getOperation());
-
-      this.compartment = org.fhir.utils.JsonUtils.write2String(o.getCompartment());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public CapabilityStatementRestModel(CapabilityStatementRest o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.mode = o.getMode();
+    this.documentation = o.getDocumentation();
+    if (null != o.getSecurity() ) {
+    	this.security_id = "security" + this.parent_id;
+    	this.security = CapabilityStatementSecurityHelper.toModel(o.getSecurity(), this.security_id);
+    }
+    if (null != o.getResource() && !o.getResource().isEmpty()) {
+    	this.resource_id = "resource" + this.parent_id;
+    	this.resource = CapabilityStatementResourceHelper.toModelFromArray(o.getResource(), this.resource_id);
+    }
+    if (null != o.getInteraction() && !o.getInteraction().isEmpty()) {
+    	this.interaction_id = "interaction" + this.parent_id;
+    	this.interaction = CapabilityStatementInteraction1Helper.toModelFromArray(o.getInteraction(), this.interaction_id);
+    }
+    if (null != o.getSearchParam() && !o.getSearchParam().isEmpty()) {
+    	this.searchparam_id = "searchparam" + this.parent_id;
+    	this.searchParam = CapabilityStatementSearchParamHelper.toModelFromArray(o.getSearchParam(), this.searchparam_id);
+    }
+    if (null != o.getOperation() && !o.getOperation().isEmpty()) {
+    	this.operation_id = "operation" + this.parent_id;
+    	this.operation = CapabilityStatementOperationHelper.toModelFromArray(o.getOperation(), this.operation_id);
+    }
+    this.compartment = org.fhir.utils.JsonUtils.write2String(o.getCompartment());
   }
 
-  public void setMode( String value) {
-    this.mode = value;
-  }
   public String getMode() {
     return this.mode;
   }
-  public void setDocumentation( String value) {
-    this.documentation = value;
+  public void setMode( String value) {
+    this.mode = value;
   }
   public String getDocumentation() {
     return this.documentation;
   }
-  public void setSecurity( CapabilityStatementSecurityModel value) {
-    this.security = value;
+  public void setDocumentation( String value) {
+    this.documentation = value;
   }
-  public CapabilityStatementSecurityModel getSecurity() {
+  public java.util.List<CapabilityStatementSecurityModel> getSecurity() {
     return this.security;
   }
-  public void setResource( java.util.List<CapabilityStatementResourceModel> value) {
-    this.resource = value;
+  public void setSecurity( java.util.List<CapabilityStatementSecurityModel> value) {
+    this.security = value;
   }
   public java.util.List<CapabilityStatementResourceModel> getResource() {
     return this.resource;
   }
-  public void setInteraction( java.util.List<CapabilityStatementInteraction1Model> value) {
-    this.interaction = value;
+  public void setResource( java.util.List<CapabilityStatementResourceModel> value) {
+    this.resource = value;
   }
   public java.util.List<CapabilityStatementInteraction1Model> getInteraction() {
     return this.interaction;
   }
-  public void setSearchParam( java.util.List<CapabilityStatementSearchParamModel> value) {
-    this.searchParam = value;
+  public void setInteraction( java.util.List<CapabilityStatementInteraction1Model> value) {
+    this.interaction = value;
   }
   public java.util.List<CapabilityStatementSearchParamModel> getSearchParam() {
     return this.searchParam;
   }
-  public void setOperation( java.util.List<CapabilityStatementOperationModel> value) {
-    this.operation = value;
+  public void setSearchParam( java.util.List<CapabilityStatementSearchParamModel> value) {
+    this.searchParam = value;
   }
   public java.util.List<CapabilityStatementOperationModel> getOperation() {
     return this.operation;
   }
-  public void setCompartment( String value) {
-    this.compartment = value;
+  public void setOperation( java.util.List<CapabilityStatementOperationModel> value) {
+    this.operation = value;
   }
   public String getCompartment() {
     return this.compartment;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setCompartment( String value) {
+    this.compartment = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("security" + "[" + String.valueOf(this.security) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("interaction" + "[" + String.valueOf(this.interaction) + "]\n"); 
-     builder.append("searchParam" + "[" + String.valueOf(this.searchParam) + "]\n"); 
-     builder.append("operation" + "[" + String.valueOf(this.operation) + "]\n"); 
-     builder.append("compartment" + "[" + String.valueOf(this.compartment) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementRestModel]:" + "\n");
+     builder.append("mode" + "->" + this.mode + "\n"); 
+     builder.append("documentation" + "->" + this.documentation + "\n"); 
+     builder.append("compartment" + "->" + this.compartment + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[CapabilityStatementRestModel]:" + "\n");
+     builder.append("mode" + "->" + this.mode + "\n"); 
+     builder.append("documentation" + "->" + this.documentation + "\n"); 
+     builder.append("security" + "->" + this.security + "\n"); 
+     builder.append("resource" + "->" + this.resource + "\n"); 
+     builder.append("interaction" + "->" + this.interaction + "\n"); 
+     builder.append("searchParam" + "->" + this.searchParam + "\n"); 
+     builder.append("operation" + "->" + this.operation + "\n"); 
+     builder.append("compartment" + "->" + this.compartment + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

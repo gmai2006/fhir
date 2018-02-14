@@ -84,6 +84,7 @@ public class FamilyMemberHistoryCondition  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -105,22 +106,17 @@ public class FamilyMemberHistoryCondition  {
 
   public FamilyMemberHistoryCondition(FamilyMemberHistoryConditionModel o) {
     this.id = o.getId();
-      this.code = CodeableConcept.fromJson(o.getCode());
-      this.outcome = CodeableConcept.fromJson(o.getOutcome());
-      this.onsetAge = Age.fromJson(o.getOnsetAge());
-      this.onsetRange = Range.fromJson(o.getOnsetRange());
-      this.onsetPeriod = Period.fromJson(o.getOnsetPeriod());
-      if (null != o.getOnsetString()) {
-        this.onsetString = new String(o.getOnsetString());
-      }
-
-      this.note = Annotation.fromArray(o.getNote());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    this.onsetAge = AgeHelper.fromJson(o.getOnsetAge());
+    this.onsetRange = RangeHelper.fromJson(o.getOnsetRange());
+    this.onsetPeriod = PeriodHelper.fromJson(o.getOnsetPeriod());
+    if (null != o.getOnsetString()) {
+      this.onsetString = o.getOnsetString();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( CodeableConcept value) {
@@ -199,52 +195,21 @@ public class FamilyMemberHistoryCondition  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("onsetAge" + "[" + String.valueOf(this.onsetAge) + "]\n"); 
-     builder.append("onsetRange" + "[" + String.valueOf(this.onsetRange) + "]\n"); 
-     builder.append("onsetPeriod" + "[" + String.valueOf(this.onsetPeriod) + "]\n"); 
-     builder.append("onsetString" + "[" + String.valueOf(this.onsetString) + "]\n"); 
-     builder.append("_onsetString" + "[" + String.valueOf(this._onsetString) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[FamilyMemberHistoryCondition]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.outcome != null) builder.append("outcome" + "->" + this.outcome.toString() + "\n"); 
+     if(this.onsetAge != null) builder.append("onsetAge" + "->" + this.onsetAge.toString() + "\n"); 
+     if(this.onsetRange != null) builder.append("onsetRange" + "->" + this.onsetRange.toString() + "\n"); 
+     if(this.onsetPeriod != null) builder.append("onsetPeriod" + "->" + this.onsetPeriod.toString() + "\n"); 
+     if(this.onsetString != null) builder.append("onsetString" + "->" + this.onsetString.toString() + "\n"); 
+     if(this._onsetString != null) builder.append("_onsetString" + "->" + this._onsetString.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<FamilyMemberHistoryCondition> fromArray(java.util.List<FamilyMemberHistoryConditionModel> list) {
-    return (java.util.List<FamilyMemberHistoryCondition>)list.stream()
-      .map(model -> new FamilyMemberHistoryCondition(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<FamilyMemberHistoryConditionModel> toModelArray(java.util.List<FamilyMemberHistoryCondition> list) {
-    return (java.util.List<FamilyMemberHistoryConditionModel>)list.stream()
-      .map(model -> new FamilyMemberHistoryConditionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static FamilyMemberHistoryCondition fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, FamilyMemberHistoryCondition.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(FamilyMemberHistoryCondition o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<FamilyMemberHistoryCondition> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

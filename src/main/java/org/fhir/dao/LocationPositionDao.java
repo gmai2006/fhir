@@ -34,10 +34,5 @@ public interface LocationPositionDao {
   public List<LocationPosition> select(int maxResult);
 
   public List<LocationPosition> selectAll();
-
-  public LocationPosition create(LocationPosition e);
-
-  public LocationPosition update(LocationPosition e);
-
   public void delete(LocationPosition e);
 }

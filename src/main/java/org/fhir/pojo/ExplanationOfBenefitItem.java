@@ -216,6 +216,7 @@ public class ExplanationOfBenefitItem  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -237,60 +238,58 @@ public class ExplanationOfBenefitItem  {
 
   public ExplanationOfBenefitItem(ExplanationOfBenefitItemModel o) {
     this.id = o.getId();
-      if (null != o.getSequence()) {
-        this.sequence = new Float(o.getSequence());
-      }
-
-      this.careTeamLinkId = org.fhir.utils.JsonUtils.json2Array(o.getCareTeamLinkId());
-
-      this.diagnosisLinkId = org.fhir.utils.JsonUtils.json2Array(o.getDiagnosisLinkId());
-
-      this.procedureLinkId = org.fhir.utils.JsonUtils.json2Array(o.getProcedureLinkId());
-
-      this.informationLinkId = org.fhir.utils.JsonUtils.json2Array(o.getInformationLinkId());
-
-      this.revenue = CodeableConcept.fromJson(o.getRevenue());
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      this.service = CodeableConcept.fromJson(o.getService());
-      this.modifier = CodeableConcept.fromArray(o.getModifier());
-      this.programCode = CodeableConcept.fromArray(o.getProgramCode());
-      if (null != o.getServicedDate()) {
-        this.servicedDate = new String(o.getServicedDate());
-      }
-
-      this.servicedPeriod = Period.fromJson(o.getServicedPeriod());
-      this.locationCodeableConcept = CodeableConcept.fromJson(o.getLocationCodeableConcept());
-      this.locationAddress = Address.fromJson(o.getLocationAddress());
-      if (null != o.getLocationReference()) {
-        this.locationReference = new Reference(o.getLocationReference());
-        this.locationReference.setId(this.getId());
-      }
-
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      this.unitPrice = Money.fromJson(o.getUnitPrice());
-      if (null != o.getFactor()) {
-        this.factor = new Float(o.getFactor());
-      }
-
-      this.net = Money.fromJson(o.getNet());
-      this.udi = Reference.fromArray(o.getUdi());
-
-      this.bodySite = CodeableConcept.fromJson(o.getBodySite());
-      this.subSite = CodeableConcept.fromArray(o.getSubSite());
-      this.encounter = Reference.fromArray(o.getEncounter());
-
-      this.noteNumber = org.fhir.utils.JsonUtils.json2Array(o.getNoteNumber());
-
-      this.adjudication = ExplanationOfBenefitAdjudication.fromArray(o.getAdjudication());
-
-      this.detail = ExplanationOfBenefitDetail.fromArray(o.getDetail());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSequence()) {
+      this.sequence = o.getSequence();
+    }
+    if (o.getCareTeamLinkId() != null) {
+    	this.careTeamLinkId = org.fhir.utils.JsonUtils.json2Array(o.getCareTeamLinkId());
+    }
+    if (o.getDiagnosisLinkId() != null) {
+    	this.diagnosisLinkId = org.fhir.utils.JsonUtils.json2Array(o.getDiagnosisLinkId());
+    }
+    if (o.getProcedureLinkId() != null) {
+    	this.procedureLinkId = org.fhir.utils.JsonUtils.json2Array(o.getProcedureLinkId());
+    }
+    if (o.getInformationLinkId() != null) {
+    	this.informationLinkId = org.fhir.utils.JsonUtils.json2Array(o.getInformationLinkId());
+    }
+    this.revenue = CodeableConceptHelper.fromJson(o.getRevenue());
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    this.service = CodeableConceptHelper.fromJson(o.getService());
+    if (null != o.getServicedDate()) {
+      this.servicedDate = o.getServicedDate();
+    }
+    this.servicedPeriod = PeriodHelper.fromJson(o.getServicedPeriod());
+    this.locationCodeableConcept = CodeableConceptHelper.fromJson(o.getLocationCodeableConcept());
+    this.locationAddress = AddressHelper.fromJson(o.getLocationAddress());
+    if (null != o.getLocationReference() && !o.getLocationReference().isEmpty()) {
+      this.locationReference = new Reference(o.getLocationReference().get(0));
+    }
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    this.unitPrice = MoneyHelper.fromJson(o.getUnitPrice());
+    if (null != o.getFactor()) {
+      this.factor = o.getFactor();
+    }
+    this.net = MoneyHelper.fromJson(o.getNet());
+    if (null != o.getUdi() && !o.getUdi().isEmpty()) {
+    	this.udi = ReferenceHelper.fromArray2Array(o.getUdi());
+    }
+    this.bodySite = CodeableConceptHelper.fromJson(o.getBodySite());
+    if (null != o.getEncounter() && !o.getEncounter().isEmpty()) {
+    	this.encounter = ReferenceHelper.fromArray2Array(o.getEncounter());
+    }
+    if (o.getNoteNumber() != null) {
+    	this.noteNumber = org.fhir.utils.JsonUtils.json2Array(o.getNoteNumber());
+    }
+    if (null != o.getAdjudication() && !o.getAdjudication().isEmpty()) {
+    	this.adjudication = ExplanationOfBenefitAdjudicationHelper.fromArray2Array(o.getAdjudication());
+    }
+    if (null != o.getDetail() && !o.getDetail().isEmpty()) {
+    	this.detail = ExplanationOfBenefitDetailHelper.fromArray2Array(o.getDetail());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSequence( Float value) {
@@ -525,78 +524,47 @@ public class ExplanationOfBenefitItem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("_sequence" + "[" + String.valueOf(this._sequence) + "]\n"); 
-     builder.append("careTeamLinkId" + "[" + String.valueOf(this.careTeamLinkId) + "]\n"); 
-     builder.append("_careTeamLinkId" + "[" + String.valueOf(this._careTeamLinkId) + "]\n"); 
-     builder.append("diagnosisLinkId" + "[" + String.valueOf(this.diagnosisLinkId) + "]\n"); 
-     builder.append("_diagnosisLinkId" + "[" + String.valueOf(this._diagnosisLinkId) + "]\n"); 
-     builder.append("procedureLinkId" + "[" + String.valueOf(this.procedureLinkId) + "]\n"); 
-     builder.append("_procedureLinkId" + "[" + String.valueOf(this._procedureLinkId) + "]\n"); 
-     builder.append("informationLinkId" + "[" + String.valueOf(this.informationLinkId) + "]\n"); 
-     builder.append("_informationLinkId" + "[" + String.valueOf(this._informationLinkId) + "]\n"); 
-     builder.append("revenue" + "[" + String.valueOf(this.revenue) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("service" + "[" + String.valueOf(this.service) + "]\n"); 
-     builder.append("modifier" + "[" + String.valueOf(this.modifier) + "]\n"); 
-     builder.append("programCode" + "[" + String.valueOf(this.programCode) + "]\n"); 
-     builder.append("servicedDate" + "[" + String.valueOf(this.servicedDate) + "]\n"); 
-     builder.append("_servicedDate" + "[" + String.valueOf(this._servicedDate) + "]\n"); 
-     builder.append("servicedPeriod" + "[" + String.valueOf(this.servicedPeriod) + "]\n"); 
-     builder.append("locationCodeableConcept" + "[" + String.valueOf(this.locationCodeableConcept) + "]\n"); 
-     builder.append("locationAddress" + "[" + String.valueOf(this.locationAddress) + "]\n"); 
-     builder.append("locationReference" + "[" + String.valueOf(this.locationReference) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("unitPrice" + "[" + String.valueOf(this.unitPrice) + "]\n"); 
-     builder.append("factor" + "[" + String.valueOf(this.factor) + "]\n"); 
-     builder.append("_factor" + "[" + String.valueOf(this._factor) + "]\n"); 
-     builder.append("net" + "[" + String.valueOf(this.net) + "]\n"); 
-     builder.append("udi" + "[" + String.valueOf(this.udi) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("subSite" + "[" + String.valueOf(this.subSite) + "]\n"); 
-     builder.append("encounter" + "[" + String.valueOf(this.encounter) + "]\n"); 
-     builder.append("noteNumber" + "[" + String.valueOf(this.noteNumber) + "]\n"); 
-     builder.append("_noteNumber" + "[" + String.valueOf(this._noteNumber) + "]\n"); 
-     builder.append("adjudication" + "[" + String.valueOf(this.adjudication) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitItem]:" + "\n");
+     if(this.sequence != null) builder.append("sequence" + "->" + this.sequence.toString() + "\n"); 
+     if(this._sequence != null) builder.append("_sequence" + "->" + this._sequence.toString() + "\n"); 
+     if(this.careTeamLinkId != null) builder.append("careTeamLinkId" + "->" + this.careTeamLinkId.toString() + "\n"); 
+     if(this._careTeamLinkId != null) builder.append("_careTeamLinkId" + "->" + this._careTeamLinkId.toString() + "\n"); 
+     if(this.diagnosisLinkId != null) builder.append("diagnosisLinkId" + "->" + this.diagnosisLinkId.toString() + "\n"); 
+     if(this._diagnosisLinkId != null) builder.append("_diagnosisLinkId" + "->" + this._diagnosisLinkId.toString() + "\n"); 
+     if(this.procedureLinkId != null) builder.append("procedureLinkId" + "->" + this.procedureLinkId.toString() + "\n"); 
+     if(this._procedureLinkId != null) builder.append("_procedureLinkId" + "->" + this._procedureLinkId.toString() + "\n"); 
+     if(this.informationLinkId != null) builder.append("informationLinkId" + "->" + this.informationLinkId.toString() + "\n"); 
+     if(this._informationLinkId != null) builder.append("_informationLinkId" + "->" + this._informationLinkId.toString() + "\n"); 
+     if(this.revenue != null) builder.append("revenue" + "->" + this.revenue.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.service != null) builder.append("service" + "->" + this.service.toString() + "\n"); 
+     if(this.modifier != null) builder.append("modifier" + "->" + this.modifier.toString() + "\n"); 
+     if(this.programCode != null) builder.append("programCode" + "->" + this.programCode.toString() + "\n"); 
+     if(this.servicedDate != null) builder.append("servicedDate" + "->" + this.servicedDate.toString() + "\n"); 
+     if(this._servicedDate != null) builder.append("_servicedDate" + "->" + this._servicedDate.toString() + "\n"); 
+     if(this.servicedPeriod != null) builder.append("servicedPeriod" + "->" + this.servicedPeriod.toString() + "\n"); 
+     if(this.locationCodeableConcept != null) builder.append("locationCodeableConcept" + "->" + this.locationCodeableConcept.toString() + "\n"); 
+     if(this.locationAddress != null) builder.append("locationAddress" + "->" + this.locationAddress.toString() + "\n"); 
+     if(this.locationReference != null) builder.append("locationReference" + "->" + this.locationReference.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.unitPrice != null) builder.append("unitPrice" + "->" + this.unitPrice.toString() + "\n"); 
+     if(this.factor != null) builder.append("factor" + "->" + this.factor.toString() + "\n"); 
+     if(this._factor != null) builder.append("_factor" + "->" + this._factor.toString() + "\n"); 
+     if(this.net != null) builder.append("net" + "->" + this.net.toString() + "\n"); 
+     if(this.udi != null) builder.append("udi" + "->" + this.udi.toString() + "\n"); 
+     if(this.bodySite != null) builder.append("bodySite" + "->" + this.bodySite.toString() + "\n"); 
+     if(this.subSite != null) builder.append("subSite" + "->" + this.subSite.toString() + "\n"); 
+     if(this.encounter != null) builder.append("encounter" + "->" + this.encounter.toString() + "\n"); 
+     if(this.noteNumber != null) builder.append("noteNumber" + "->" + this.noteNumber.toString() + "\n"); 
+     if(this._noteNumber != null) builder.append("_noteNumber" + "->" + this._noteNumber.toString() + "\n"); 
+     if(this.adjudication != null) builder.append("adjudication" + "->" + this.adjudication.toString() + "\n"); 
+     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExplanationOfBenefitItem> fromArray(java.util.List<ExplanationOfBenefitItemModel> list) {
-    return (java.util.List<ExplanationOfBenefitItem>)list.stream()
-      .map(model -> new ExplanationOfBenefitItem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExplanationOfBenefitItemModel> toModelArray(java.util.List<ExplanationOfBenefitItem> list) {
-    return (java.util.List<ExplanationOfBenefitItemModel>)list.stream()
-      .map(model -> new ExplanationOfBenefitItemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExplanationOfBenefitItem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExplanationOfBenefitItem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExplanationOfBenefitItem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExplanationOfBenefitItem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

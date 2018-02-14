@@ -32,7 +32,5 @@ public interface TimingRepeatService {
 	public TimingRepeat find(String id);
   public List<TimingRepeat> select(int maxResult);
   public List<TimingRepeat> selectAll();
-  public TimingRepeat create(TimingRepeat bean);
-  public TimingRepeat update(TimingRepeat bean);
   public void delete(TimingRepeat bean);
 }

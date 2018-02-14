@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PaymentNoticeModel;
 import org.fhir.pojo.PaymentNotice;
+import org.fhir.pojo.PaymentNoticeHelper;
 
 public class PaymentNoticeDaoImpl implements PaymentNoticeDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PaymentNoticeDaoImpl implements PaymentNoticeDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PaymentNoticeModel a", PaymentNoticeModel.class).setMaxResults(maxResult);
       List<PaymentNoticeModel> models = query.getResultList();
-      return PaymentNotice.fromArray(models);
+      return PaymentNoticeHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class PaymentNoticeDaoImpl implements PaymentNoticeDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PaymentNoticeModel a", PaymentNoticeModel.class);
       List<PaymentNoticeModel> models = query.getResultList();
-      return PaymentNotice.fromArray(models);
+      return PaymentNoticeHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class PaymentNoticeDaoImpl implements PaymentNoticeDao {
       PaymentNoticeModel model = em.merge(new PaymentNoticeModel(e));
       return new PaymentNotice(model);
   }
-
   @Override
   @Transactional
   public void delete(PaymentNotice e) {

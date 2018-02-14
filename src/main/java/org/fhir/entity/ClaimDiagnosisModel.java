@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
 @Entity
 @Table(name="claimdiagnosis")
-public class ClaimDiagnosisModel  {
+public class ClaimDiagnosisModel  implements Serializable {
+	private static final long serialVersionUID = 151857669708575569L;
   /**
   * Description: "Sequence of diagnosis which serves to provide a link."
   */
@@ -47,7 +48,7 @@ public class ClaimDiagnosisModel  {
 
   /**
   * Description: "The diagnosis."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -61,13 +62,13 @@ public class ClaimDiagnosisModel  {
   @Column(name="\"diagnosisreference_id\"")
   private String diagnosisreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`diagnosisreference_id`", insertable=false, updatable=false)
-  private ReferenceModel diagnosisReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="diagnosisreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> diagnosisReference;
 
   /**
   * Description: "The type of the Diagnosis, for example: admitting, primary, secondary, discharge."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -76,7 +77,7 @@ public class ClaimDiagnosisModel  {
 
   /**
   * Description: "The package billing code, for example DRG, based on the assigned grouping code system."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -86,7 +87,7 @@ public class ClaimDiagnosisModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -98,6 +99,7 @@ public class ClaimDiagnosisModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -106,101 +108,118 @@ public class ClaimDiagnosisModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ClaimDiagnosisModel() {
   }
 
-  public ClaimDiagnosisModel(ClaimDiagnosis o) {
-    this.id = o.getId();
-      this.sequence = o.getSequence();
-
-      this.diagnosisCodeableConcept = CodeableConcept.toJson(o.getDiagnosisCodeableConcept());
-      if (null != o.getDiagnosisReference()) {
-      	this.diagnosisreference_id = "diagnosisReference" + this.getId();
-        this.diagnosisReference = new ReferenceModel(o.getDiagnosisReference());
-        this.diagnosisReference.setId(this.diagnosisreference_id);
-        this.diagnosisReference.parent_id = this.diagnosisReference.getId();
-      }
-
-      this.type = CodeableConcept.toJson(o.getType());
-      this.packageCode = CodeableConcept.toJson(o.getPackageCode());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ClaimDiagnosisModel(ClaimDiagnosis o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.sequence = o.getSequence();
+    this.diagnosisCodeableConcept = CodeableConceptHelper.toJson(o.getDiagnosisCodeableConcept());
+    if (null != o.getDiagnosisReference() ) {
+    	this.diagnosisreference_id = "diagnosisreference" + this.parent_id;
+    	this.diagnosisReference = ReferenceHelper.toModel(o.getDiagnosisReference(), this.diagnosisreference_id);
+    }
+    this.packageCode = CodeableConceptHelper.toJson(o.getPackageCode());
   }
 
-  public void setSequence( Float value) {
-    this.sequence = value;
-  }
   public Float getSequence() {
     return this.sequence;
   }
-  public void setDiagnosisCodeableConcept( String value) {
-    this.diagnosisCodeableConcept = value;
+  public void setSequence( Float value) {
+    this.sequence = value;
   }
   public String getDiagnosisCodeableConcept() {
     return this.diagnosisCodeableConcept;
   }
-  public void setDiagnosisReference( ReferenceModel value) {
-    this.diagnosisReference = value;
+  public void setDiagnosisCodeableConcept( String value) {
+    this.diagnosisCodeableConcept = value;
   }
-  public ReferenceModel getDiagnosisReference() {
+  public java.util.List<ReferenceModel> getDiagnosisReference() {
     return this.diagnosisReference;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setDiagnosisReference( java.util.List<ReferenceModel> value) {
+    this.diagnosisReference = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setPackageCode( String value) {
-    this.packageCode = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getPackageCode() {
     return this.packageCode;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setPackageCode( String value) {
+    this.packageCode = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("diagnosisCodeableConcept" + "[" + String.valueOf(this.diagnosisCodeableConcept) + "]\n"); 
-     builder.append("diagnosisReference" + "[" + String.valueOf(this.diagnosisReference) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("packageCode" + "[" + String.valueOf(this.packageCode) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ClaimDiagnosisModel]:" + "\n");
+     builder.append("sequence" + "->" + this.sequence + "\n"); 
+     builder.append("diagnosisCodeableConcept" + "->" + this.diagnosisCodeableConcept + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("packageCode" + "->" + this.packageCode + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ClaimDiagnosisModel]:" + "\n");
+     builder.append("sequence" + "->" + this.sequence + "\n"); 
+     builder.append("diagnosisCodeableConcept" + "->" + this.diagnosisCodeableConcept + "\n"); 
+     builder.append("diagnosisReference" + "->" + this.diagnosisReference + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("packageCode" + "->" + this.packageCode + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

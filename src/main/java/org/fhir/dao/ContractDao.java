@@ -34,10 +34,8 @@ public interface ContractDao {
   public List<Contract> select(int maxResult);
 
   public List<Contract> selectAll();
-
   public Contract create(Contract e);
 
   public Contract update(Contract e);
-
   public void delete(Contract e);
 }

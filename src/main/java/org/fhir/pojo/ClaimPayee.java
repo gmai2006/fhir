@@ -59,6 +59,7 @@ public class ClaimPayee  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,19 +81,14 @@ public class ClaimPayee  {
 
   public ClaimPayee(ClaimPayeeModel o) {
     this.id = o.getId();
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.resourceType = Coding.fromJson(o.getResourceType());
-      if (null != o.getParty()) {
-        this.party = new Reference(o.getParty());
-        this.party.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    this.resourceType = CodingHelper.fromJson(o.getResourceType());
+    if (null != o.getParty() && !o.getParty().isEmpty()) {
+      this.party = new Reference(o.getParty().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( CodeableConcept value) {
@@ -141,47 +137,16 @@ public class ClaimPayee  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("party" + "[" + String.valueOf(this.party) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ClaimPayee]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.party != null) builder.append("party" + "->" + this.party.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ClaimPayee> fromArray(java.util.List<ClaimPayeeModel> list) {
-    return (java.util.List<ClaimPayee>)list.stream()
-      .map(model -> new ClaimPayee(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ClaimPayeeModel> toModelArray(java.util.List<ClaimPayee> list) {
-    return (java.util.List<ClaimPayeeModel>)list.stream()
-      .map(model -> new ClaimPayeeModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ClaimPayee fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ClaimPayee.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ClaimPayee o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ClaimPayee> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

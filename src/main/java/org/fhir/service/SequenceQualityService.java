@@ -32,7 +32,5 @@ public interface SequenceQualityService {
 	public SequenceQuality find(String id);
   public List<SequenceQuality> select(int maxResult);
   public List<SequenceQuality> selectAll();
-  public SequenceQuality create(SequenceQuality bean);
-  public SequenceQuality update(SequenceQuality bean);
   public void delete(SequenceQuality bean);
 }

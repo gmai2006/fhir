@@ -140,6 +140,7 @@ public class AuditEvent  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -191,63 +192,46 @@ public class AuditEvent  {
 
   public AuditEvent(AuditEventModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.type = Coding.fromJson(o.getType());
-      this.subtype = Coding.fromArray(o.getSubtype());
-      if (null != o.getAction()) {
-        this.action = new String(o.getAction());
-      }
-
-      if (null != o.getRecorded()) {
-        this.recorded = new String(o.getRecorded());
-      }
-
-      if (null != o.getOutcome()) {
-        this.outcome = new String(o.getOutcome());
-      }
-
-      if (null != o.getOutcomeDesc()) {
-        this.outcomeDesc = new String(o.getOutcomeDesc());
-      }
-
-      this.purposeOfEvent = CodeableConcept.fromArray(o.getPurposeOfEvent());
-      this.agent = AuditEventAgent.fromArray(o.getAgent());
-
-      if (null != o.getSource()) {
-        this.source = new AuditEventSource(o.getSource());
-        this.source.setId(this.getId());
-      }
-
-      this.entity = AuditEventEntity.fromArray(o.getEntity());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.type = CodingHelper.fromJson(o.getType());
+    if (null != o.getAction()) {
+      this.action = o.getAction();
+    }
+    if (null != o.getRecorded()) {
+      this.recorded = o.getRecorded();
+    }
+    if (null != o.getOutcome()) {
+      this.outcome = o.getOutcome();
+    }
+    if (null != o.getOutcomeDesc()) {
+      this.outcomeDesc = o.getOutcomeDesc();
+    }
+    if (null != o.getAgent() && !o.getAgent().isEmpty()) {
+    	this.agent = AuditEventAgentHelper.fromArray2Array(o.getAgent());
+    }
+    if (null != o.getSource() && !o.getSource().isEmpty()) {
+      this.source = new AuditEventSource(o.getSource().get(0));
+    }
+    if (null != o.getEntity() && !o.getEntity().isEmpty()) {
+    	this.entity = AuditEventEntityHelper.fromArray2Array(o.getEntity());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -410,32 +394,33 @@ public class AuditEvent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("subtype" + "[" + String.valueOf(this.subtype) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("_action" + "[" + String.valueOf(this._action) + "]\n"); 
-     builder.append("recorded" + "[" + String.valueOf(this.recorded) + "]\n"); 
-     builder.append("_recorded" + "[" + String.valueOf(this._recorded) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("_outcome" + "[" + String.valueOf(this._outcome) + "]\n"); 
-     builder.append("outcomeDesc" + "[" + String.valueOf(this.outcomeDesc) + "]\n"); 
-     builder.append("_outcomeDesc" + "[" + String.valueOf(this._outcomeDesc) + "]\n"); 
-     builder.append("purposeOfEvent" + "[" + String.valueOf(this.purposeOfEvent) + "]\n"); 
-     builder.append("agent" + "[" + String.valueOf(this.agent) + "]\n"); 
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("entity" + "[" + String.valueOf(this.entity) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[AuditEvent]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.subtype != null) builder.append("subtype" + "->" + this.subtype.toString() + "\n"); 
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
+     if(this._action != null) builder.append("_action" + "->" + this._action.toString() + "\n"); 
+     if(this.recorded != null) builder.append("recorded" + "->" + this.recorded.toString() + "\n"); 
+     if(this._recorded != null) builder.append("_recorded" + "->" + this._recorded.toString() + "\n"); 
+     if(this.outcome != null) builder.append("outcome" + "->" + this.outcome.toString() + "\n"); 
+     if(this._outcome != null) builder.append("_outcome" + "->" + this._outcome.toString() + "\n"); 
+     if(this.outcomeDesc != null) builder.append("outcomeDesc" + "->" + this.outcomeDesc.toString() + "\n"); 
+     if(this._outcomeDesc != null) builder.append("_outcomeDesc" + "->" + this._outcomeDesc.toString() + "\n"); 
+     if(this.purposeOfEvent != null) builder.append("purposeOfEvent" + "->" + this.purposeOfEvent.toString() + "\n"); 
+     if(this.agent != null) builder.append("agent" + "->" + this.agent.toString() + "\n"); 
+     if(this.source != null) builder.append("source" + "->" + this.source.toString() + "\n"); 
+     if(this.entity != null) builder.append("entity" + "->" + this.entity.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -489,36 +474,4 @@ public class AuditEvent  {
   	}
   }
 
-  public static java.util.List<AuditEvent> fromArray(java.util.List<AuditEventModel> list) {
-    return (java.util.List<AuditEvent>)list.stream()
-      .map(model -> new AuditEvent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AuditEventModel> toModelArray(java.util.List<AuditEvent> list) {
-    return (java.util.List<AuditEventModel>)list.stream()
-      .map(model -> new AuditEventModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AuditEvent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AuditEvent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AuditEvent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AuditEvent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

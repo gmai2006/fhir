@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DocumentReferenceContextModel;
 import org.fhir.pojo.DocumentReferenceContext;
+import org.fhir.pojo.DocumentReferenceContextHelper;
 
 public class DocumentReferenceContextDaoImpl implements DocumentReferenceContextDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DocumentReferenceContextDaoImpl implements DocumentReferenceContext
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentReferenceContextModel a", DocumentReferenceContextModel.class).setMaxResults(maxResult);
       List<DocumentReferenceContextModel> models = query.getResultList();
-      return DocumentReferenceContext.fromArray(models);
+      return DocumentReferenceContextHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DocumentReferenceContextDaoImpl implements DocumentReferenceContext
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentReferenceContextModel a", DocumentReferenceContextModel.class);
       List<DocumentReferenceContextModel> models = query.getResultList();
-      return DocumentReferenceContext.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DocumentReferenceContext create(DocumentReferenceContext e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DocumentReferenceContextModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DocumentReferenceContext update(DocumentReferenceContext e) {
-      final EntityManager em = entityManagerProvider.get();
-      DocumentReferenceContextModel model = em.merge(new DocumentReferenceContextModel(e));
-      return new DocumentReferenceContext(model);
+      return DocumentReferenceContextHelper.fromArray2Array(models);
   }
 
   @Override

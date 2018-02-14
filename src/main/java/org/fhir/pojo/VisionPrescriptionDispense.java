@@ -186,6 +186,7 @@ public class VisionPrescriptionDispense  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -207,63 +208,47 @@ public class VisionPrescriptionDispense  {
 
   public VisionPrescriptionDispense(VisionPrescriptionDispenseModel o) {
     this.id = o.getId();
-      this.product = CodeableConcept.fromJson(o.getProduct());
-      if (null != o.getEye()) {
-        this.eye = new String(o.getEye());
-      }
-
-      if (null != o.getSphere()) {
-        this.sphere = new Float(o.getSphere());
-      }
-
-      if (null != o.getCylinder()) {
-        this.cylinder = new Float(o.getCylinder());
-      }
-
-      if (null != o.getAxis()) {
-        this.axis = new Float(o.getAxis());
-      }
-
-      if (null != o.getPrism()) {
-        this.prism = new Float(o.getPrism());
-      }
-
-      if (null != o.getBase()) {
-        this.base = new String(o.getBase());
-      }
-
-      if (null != o.getAdd()) {
-        this.add = new Float(o.getAdd());
-      }
-
-      if (null != o.getPower()) {
-        this.power = new Float(o.getPower());
-      }
-
-      if (null != o.getBackCurve()) {
-        this.backCurve = new Float(o.getBackCurve());
-      }
-
-      if (null != o.getDiameter()) {
-        this.diameter = new Float(o.getDiameter());
-      }
-
-      this.duration = Quantity.fromJson(o.getDuration());
-      if (null != o.getColor()) {
-        this.color = new String(o.getColor());
-      }
-
-      if (null != o.getBrand()) {
-        this.brand = new String(o.getBrand());
-      }
-
-      this.note = Annotation.fromArray(o.getNote());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.product = CodeableConceptHelper.fromJson(o.getProduct());
+    if (null != o.getEye()) {
+      this.eye = o.getEye();
+    }
+    if (null != o.getSphere()) {
+      this.sphere = o.getSphere();
+    }
+    if (null != o.getCylinder()) {
+      this.cylinder = o.getCylinder();
+    }
+    if (null != o.getAxis()) {
+      this.axis = o.getAxis();
+    }
+    if (null != o.getPrism()) {
+      this.prism = o.getPrism();
+    }
+    if (null != o.getBase()) {
+      this.base = o.getBase();
+    }
+    if (null != o.getAdd()) {
+      this.add = o.getAdd();
+    }
+    if (null != o.getPower()) {
+      this.power = o.getPower();
+    }
+    if (null != o.getBackCurve()) {
+      this.backCurve = o.getBackCurve();
+    }
+    if (null != o.getDiameter()) {
+      this.diameter = o.getDiameter();
+    }
+    this.duration = QuantityHelper.fromJson(o.getDuration());
+    if (null != o.getColor()) {
+      this.color = o.getColor();
+    }
+    if (null != o.getBrand()) {
+      this.brand = o.getBrand();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setProduct( CodeableConcept value) {
@@ -456,37 +441,38 @@ public class VisionPrescriptionDispense  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("product" + "[" + String.valueOf(this.product) + "]\n"); 
-     builder.append("eye" + "[" + String.valueOf(this.eye) + "]\n"); 
-     builder.append("_eye" + "[" + String.valueOf(this._eye) + "]\n"); 
-     builder.append("sphere" + "[" + String.valueOf(this.sphere) + "]\n"); 
-     builder.append("_sphere" + "[" + String.valueOf(this._sphere) + "]\n"); 
-     builder.append("cylinder" + "[" + String.valueOf(this.cylinder) + "]\n"); 
-     builder.append("_cylinder" + "[" + String.valueOf(this._cylinder) + "]\n"); 
-     builder.append("axis" + "[" + String.valueOf(this.axis) + "]\n"); 
-     builder.append("_axis" + "[" + String.valueOf(this._axis) + "]\n"); 
-     builder.append("prism" + "[" + String.valueOf(this.prism) + "]\n"); 
-     builder.append("_prism" + "[" + String.valueOf(this._prism) + "]\n"); 
-     builder.append("base" + "[" + String.valueOf(this.base) + "]\n"); 
-     builder.append("_base" + "[" + String.valueOf(this._base) + "]\n"); 
-     builder.append("add" + "[" + String.valueOf(this.add) + "]\n"); 
-     builder.append("_add" + "[" + String.valueOf(this._add) + "]\n"); 
-     builder.append("power" + "[" + String.valueOf(this.power) + "]\n"); 
-     builder.append("_power" + "[" + String.valueOf(this._power) + "]\n"); 
-     builder.append("backCurve" + "[" + String.valueOf(this.backCurve) + "]\n"); 
-     builder.append("_backCurve" + "[" + String.valueOf(this._backCurve) + "]\n"); 
-     builder.append("diameter" + "[" + String.valueOf(this.diameter) + "]\n"); 
-     builder.append("_diameter" + "[" + String.valueOf(this._diameter) + "]\n"); 
-     builder.append("duration" + "[" + String.valueOf(this.duration) + "]\n"); 
-     builder.append("color" + "[" + String.valueOf(this.color) + "]\n"); 
-     builder.append("_color" + "[" + String.valueOf(this._color) + "]\n"); 
-     builder.append("brand" + "[" + String.valueOf(this.brand) + "]\n"); 
-     builder.append("_brand" + "[" + String.valueOf(this._brand) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[VisionPrescriptionDispense]:" + "\n");
+     if(this.product != null) builder.append("product" + "->" + this.product.toString() + "\n"); 
+     if(this.eye != null) builder.append("eye" + "->" + this.eye.toString() + "\n"); 
+     if(this._eye != null) builder.append("_eye" + "->" + this._eye.toString() + "\n"); 
+     if(this.sphere != null) builder.append("sphere" + "->" + this.sphere.toString() + "\n"); 
+     if(this._sphere != null) builder.append("_sphere" + "->" + this._sphere.toString() + "\n"); 
+     if(this.cylinder != null) builder.append("cylinder" + "->" + this.cylinder.toString() + "\n"); 
+     if(this._cylinder != null) builder.append("_cylinder" + "->" + this._cylinder.toString() + "\n"); 
+     if(this.axis != null) builder.append("axis" + "->" + this.axis.toString() + "\n"); 
+     if(this._axis != null) builder.append("_axis" + "->" + this._axis.toString() + "\n"); 
+     if(this.prism != null) builder.append("prism" + "->" + this.prism.toString() + "\n"); 
+     if(this._prism != null) builder.append("_prism" + "->" + this._prism.toString() + "\n"); 
+     if(this.base != null) builder.append("base" + "->" + this.base.toString() + "\n"); 
+     if(this._base != null) builder.append("_base" + "->" + this._base.toString() + "\n"); 
+     if(this.add != null) builder.append("add" + "->" + this.add.toString() + "\n"); 
+     if(this._add != null) builder.append("_add" + "->" + this._add.toString() + "\n"); 
+     if(this.power != null) builder.append("power" + "->" + this.power.toString() + "\n"); 
+     if(this._power != null) builder.append("_power" + "->" + this._power.toString() + "\n"); 
+     if(this.backCurve != null) builder.append("backCurve" + "->" + this.backCurve.toString() + "\n"); 
+     if(this._backCurve != null) builder.append("_backCurve" + "->" + this._backCurve.toString() + "\n"); 
+     if(this.diameter != null) builder.append("diameter" + "->" + this.diameter.toString() + "\n"); 
+     if(this._diameter != null) builder.append("_diameter" + "->" + this._diameter.toString() + "\n"); 
+     if(this.duration != null) builder.append("duration" + "->" + this.duration.toString() + "\n"); 
+     if(this.color != null) builder.append("color" + "->" + this.color.toString() + "\n"); 
+     if(this._color != null) builder.append("_color" + "->" + this._color.toString() + "\n"); 
+     if(this.brand != null) builder.append("brand" + "->" + this.brand.toString() + "\n"); 
+     if(this._brand != null) builder.append("_brand" + "->" + this._brand.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -522,36 +508,4 @@ public class VisionPrescriptionDispense  {
   	}
   }
 
-  public static java.util.List<VisionPrescriptionDispense> fromArray(java.util.List<VisionPrescriptionDispenseModel> list) {
-    return (java.util.List<VisionPrescriptionDispense>)list.stream()
-      .map(model -> new VisionPrescriptionDispense(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<VisionPrescriptionDispenseModel> toModelArray(java.util.List<VisionPrescriptionDispense> list) {
-    return (java.util.List<VisionPrescriptionDispenseModel>)list.stream()
-      .map(model -> new VisionPrescriptionDispenseModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static VisionPrescriptionDispense fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, VisionPrescriptionDispense.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(VisionPrescriptionDispense o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<VisionPrescriptionDispense> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

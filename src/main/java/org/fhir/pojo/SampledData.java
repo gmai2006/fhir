@@ -106,6 +106,7 @@ public class SampledData  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -222,43 +223,24 @@ public class SampledData  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("origin" + "[" + String.valueOf(this.origin) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("_period" + "[" + String.valueOf(this._period) + "]\n"); 
-     builder.append("factor" + "[" + String.valueOf(this.factor) + "]\n"); 
-     builder.append("_factor" + "[" + String.valueOf(this._factor) + "]\n"); 
-     builder.append("lowerLimit" + "[" + String.valueOf(this.lowerLimit) + "]\n"); 
-     builder.append("_lowerLimit" + "[" + String.valueOf(this._lowerLimit) + "]\n"); 
-     builder.append("upperLimit" + "[" + String.valueOf(this.upperLimit) + "]\n"); 
-     builder.append("_upperLimit" + "[" + String.valueOf(this._upperLimit) + "]\n"); 
-     builder.append("dimensions" + "[" + String.valueOf(this.dimensions) + "]\n"); 
-     builder.append("_dimensions" + "[" + String.valueOf(this._dimensions) + "]\n"); 
-     builder.append("data" + "[" + String.valueOf(this.data) + "]\n"); 
-     builder.append("_data" + "[" + String.valueOf(this._data) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SampledData]:" + "\n");
+     if(this.origin != null) builder.append("origin" + "->" + this.origin.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this._period != null) builder.append("_period" + "->" + this._period.toString() + "\n"); 
+     if(this.factor != null) builder.append("factor" + "->" + this.factor.toString() + "\n"); 
+     if(this._factor != null) builder.append("_factor" + "->" + this._factor.toString() + "\n"); 
+     if(this.lowerLimit != null) builder.append("lowerLimit" + "->" + this.lowerLimit.toString() + "\n"); 
+     if(this._lowerLimit != null) builder.append("_lowerLimit" + "->" + this._lowerLimit.toString() + "\n"); 
+     if(this.upperLimit != null) builder.append("upperLimit" + "->" + this.upperLimit.toString() + "\n"); 
+     if(this._upperLimit != null) builder.append("_upperLimit" + "->" + this._upperLimit.toString() + "\n"); 
+     if(this.dimensions != null) builder.append("dimensions" + "->" + this.dimensions.toString() + "\n"); 
+     if(this._dimensions != null) builder.append("_dimensions" + "->" + this._dimensions.toString() + "\n"); 
+     if(this.data != null) builder.append("data" + "->" + this.data.toString() + "\n"); 
+     if(this._data != null) builder.append("_data" + "->" + this._data.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static SampledData fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SampledData.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SampledData o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SampledData> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

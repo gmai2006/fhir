@@ -32,7 +32,5 @@ public interface ClaimCareTeamService {
 	public ClaimCareTeam find(String id);
   public List<ClaimCareTeam> select(int maxResult);
   public List<ClaimCareTeam> selectAll();
-  public ClaimCareTeam create(ClaimCareTeam bean);
-  public ClaimCareTeam update(ClaimCareTeam bean);
   public void delete(ClaimCareTeam bean);
 }

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DataRequirement create(DataRequirement bean) {
-  	requireNonNull(bean);
-    logger.info("create(DataRequirement={}) - entered bean ");
-
-    final DataRequirement result = dao.create(bean);
-
-    logger.info("create(DataRequirement) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DataRequirement update(DataRequirement bean) {
-  	requireNonNull(bean);
-    logger.info("update(DataRequirement={}) - entered bean ");
-
-    final DataRequirement result = dao.update(bean);
-
-    logger.info("update(DataRequirement) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

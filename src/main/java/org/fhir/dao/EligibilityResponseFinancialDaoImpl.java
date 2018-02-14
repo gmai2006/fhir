@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EligibilityResponseFinancialModel;
 import org.fhir.pojo.EligibilityResponseFinancial;
+import org.fhir.pojo.EligibilityResponseFinancialHelper;
 
 public class EligibilityResponseFinancialDaoImpl implements EligibilityResponseFinancialDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EligibilityResponseFinancialDaoImpl implements EligibilityResponseF
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EligibilityResponseFinancialModel a", EligibilityResponseFinancialModel.class).setMaxResults(maxResult);
       List<EligibilityResponseFinancialModel> models = query.getResultList();
-      return EligibilityResponseFinancial.fromArray(models);
+      return EligibilityResponseFinancialHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EligibilityResponseFinancialDaoImpl implements EligibilityResponseF
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EligibilityResponseFinancialModel a", EligibilityResponseFinancialModel.class);
       List<EligibilityResponseFinancialModel> models = query.getResultList();
-      return EligibilityResponseFinancial.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EligibilityResponseFinancial create(EligibilityResponseFinancial e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EligibilityResponseFinancialModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EligibilityResponseFinancial update(EligibilityResponseFinancial e) {
-      final EntityManager em = entityManagerProvider.get();
-      EligibilityResponseFinancialModel model = em.merge(new EligibilityResponseFinancialModel(e));
-      return new EligibilityResponseFinancial(model);
+      return EligibilityResponseFinancialHelper.fromArray2Array(models);
   }
 
   @Override

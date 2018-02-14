@@ -113,6 +113,7 @@ public class ElementDefinitionConstraint  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -243,45 +244,26 @@ public class ElementDefinitionConstraint  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("key" + "[" + String.valueOf(this.key) + "]\n"); 
-     builder.append("_key" + "[" + String.valueOf(this._key) + "]\n"); 
-     builder.append("requirements" + "[" + String.valueOf(this.requirements) + "]\n"); 
-     builder.append("_requirements" + "[" + String.valueOf(this._requirements) + "]\n"); 
-     builder.append("severity" + "[" + String.valueOf(this.severity) + "]\n"); 
-     builder.append("_severity" + "[" + String.valueOf(this._severity) + "]\n"); 
-     builder.append("human" + "[" + String.valueOf(this.human) + "]\n"); 
-     builder.append("_human" + "[" + String.valueOf(this._human) + "]\n"); 
-     builder.append("expression" + "[" + String.valueOf(this.expression) + "]\n"); 
-     builder.append("_expression" + "[" + String.valueOf(this._expression) + "]\n"); 
-     builder.append("xpath" + "[" + String.valueOf(this.xpath) + "]\n"); 
-     builder.append("_xpath" + "[" + String.valueOf(this._xpath) + "]\n"); 
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("_source" + "[" + String.valueOf(this._source) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ElementDefinitionConstraint]:" + "\n");
+     if(this.key != null) builder.append("key" + "->" + this.key.toString() + "\n"); 
+     if(this._key != null) builder.append("_key" + "->" + this._key.toString() + "\n"); 
+     if(this.requirements != null) builder.append("requirements" + "->" + this.requirements.toString() + "\n"); 
+     if(this._requirements != null) builder.append("_requirements" + "->" + this._requirements.toString() + "\n"); 
+     if(this.severity != null) builder.append("severity" + "->" + this.severity.toString() + "\n"); 
+     if(this._severity != null) builder.append("_severity" + "->" + this._severity.toString() + "\n"); 
+     if(this.human != null) builder.append("human" + "->" + this.human.toString() + "\n"); 
+     if(this._human != null) builder.append("_human" + "->" + this._human.toString() + "\n"); 
+     if(this.expression != null) builder.append("expression" + "->" + this.expression.toString() + "\n"); 
+     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); 
+     if(this.xpath != null) builder.append("xpath" + "->" + this.xpath.toString() + "\n"); 
+     if(this._xpath != null) builder.append("_xpath" + "->" + this._xpath.toString() + "\n"); 
+     if(this.source != null) builder.append("source" + "->" + this.source.toString() + "\n"); 
+     if(this._source != null) builder.append("_source" + "->" + this._source.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static ElementDefinitionConstraint fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ElementDefinitionConstraint.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ElementDefinitionConstraint o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ElementDefinitionConstraint> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum SeverityEnum {

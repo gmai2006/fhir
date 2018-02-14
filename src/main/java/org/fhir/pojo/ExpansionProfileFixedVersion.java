@@ -73,6 +73,7 @@ public class ExpansionProfileFixedVersion  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -94,24 +95,18 @@ public class ExpansionProfileFixedVersion  {
 
   public ExpansionProfileFixedVersion(ExpansionProfileFixedVersionModel o) {
     this.id = o.getId();
-      if (null != o.getSystem()) {
-        this.system = new String(o.getSystem());
-      }
-
-      if (null != o.getVersion()) {
-        this.version = new String(o.getVersion());
-      }
-
-      if (null != o.getMode()) {
-        this.mode = new String(o.getMode());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSystem()) {
+      this.system = o.getSystem();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getMode()) {
+      this.mode = o.getMode();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSystem( String value) {
@@ -178,16 +173,17 @@ public class ExpansionProfileFixedVersion  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("system" + "[" + String.valueOf(this.system) + "]\n"); 
-     builder.append("_system" + "[" + String.valueOf(this._system) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExpansionProfileFixedVersion]:" + "\n");
+     if(this.system != null) builder.append("system" + "->" + this.system.toString() + "\n"); 
+     if(this._system != null) builder.append("_system" + "->" + this._system.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -207,36 +203,4 @@ public class ExpansionProfileFixedVersion  {
   	}
   }
 
-  public static java.util.List<ExpansionProfileFixedVersion> fromArray(java.util.List<ExpansionProfileFixedVersionModel> list) {
-    return (java.util.List<ExpansionProfileFixedVersion>)list.stream()
-      .map(model -> new ExpansionProfileFixedVersion(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExpansionProfileFixedVersionModel> toModelArray(java.util.List<ExpansionProfileFixedVersion> list) {
-    return (java.util.List<ExpansionProfileFixedVersionModel>)list.stream()
-      .map(model -> new ExpansionProfileFixedVersionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExpansionProfileFixedVersion fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExpansionProfileFixedVersion.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExpansionProfileFixedVersion o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExpansionProfileFixedVersion> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

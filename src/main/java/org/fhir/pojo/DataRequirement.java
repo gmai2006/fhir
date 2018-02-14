@@ -77,6 +77,7 @@ public class DataRequirement  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -96,23 +97,24 @@ public class DataRequirement  {
 
   public DataRequirement(DataRequirementModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      this.profile = org.fhir.utils.JsonUtils.json2Array(o.getProfile());
-
-      this.mustSupport = org.fhir.utils.JsonUtils.json2Array(o.getMustSupport());
-
-      this.codeFilter = DataRequirementCodeFilter.fromArray(o.getCodeFilter());
-
-      this.dateFilter = DataRequirementDateFilter.fromArray(o.getDateFilter());
-
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (o.getProfile() != null) {
+    	this.profile = org.fhir.utils.JsonUtils.json2Array(o.getProfile());
+    }
+    if (o.getMustSupport() != null) {
+    	this.mustSupport = org.fhir.utils.JsonUtils.json2Array(o.getMustSupport());
+    }
+    if (null != o.getCodeFilter() && !o.getCodeFilter().isEmpty()) {
+    	this.codeFilter = DataRequirementCodeFilterHelper.fromArray2Array(o.getCodeFilter());
+    }
+    if (null != o.getDateFilter() && !o.getDateFilter().isEmpty()) {
+    	this.dateFilter = DataRequirementDateFilterHelper.fromArray2Array(o.getDateFilter());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -185,51 +187,20 @@ public class DataRequirement  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("_profile" + "[" + String.valueOf(this._profile) + "]\n"); 
-     builder.append("mustSupport" + "[" + String.valueOf(this.mustSupport) + "]\n"); 
-     builder.append("_mustSupport" + "[" + String.valueOf(this._mustSupport) + "]\n"); 
-     builder.append("codeFilter" + "[" + String.valueOf(this.codeFilter) + "]\n"); 
-     builder.append("dateFilter" + "[" + String.valueOf(this.dateFilter) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DataRequirement]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this._profile != null) builder.append("_profile" + "->" + this._profile.toString() + "\n"); 
+     if(this.mustSupport != null) builder.append("mustSupport" + "->" + this.mustSupport.toString() + "\n"); 
+     if(this._mustSupport != null) builder.append("_mustSupport" + "->" + this._mustSupport.toString() + "\n"); 
+     if(this.codeFilter != null) builder.append("codeFilter" + "->" + this.codeFilter.toString() + "\n"); 
+     if(this.dateFilter != null) builder.append("dateFilter" + "->" + this.dateFilter.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<DataRequirement> fromArray(java.util.List<DataRequirementModel> list) {
-    return (java.util.List<DataRequirement>)list.stream()
-      .map(model -> new DataRequirement(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DataRequirementModel> toModelArray(java.util.List<DataRequirement> list) {
-    return (java.util.List<DataRequirementModel>)list.stream()
-      .map(model -> new DataRequirementModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DataRequirement fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DataRequirement.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DataRequirement o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DataRequirement> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

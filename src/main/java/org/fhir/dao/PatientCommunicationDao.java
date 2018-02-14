@@ -34,10 +34,5 @@ public interface PatientCommunicationDao {
   public List<PatientCommunication> select(int maxResult);
 
   public List<PatientCommunication> selectAll();
-
-  public PatientCommunication create(PatientCommunication e);
-
-  public PatientCommunication update(PatientCommunication e);
-
   public void delete(PatientCommunication e);
 }

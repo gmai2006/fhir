@@ -32,7 +32,5 @@ public interface DetectedIssueMitigationService {
 	public DetectedIssueMitigation find(String id);
   public List<DetectedIssueMitigation> select(int maxResult);
   public List<DetectedIssueMitigation> selectAll();
-  public DetectedIssueMitigation create(DetectedIssueMitigation bean);
-  public DetectedIssueMitigation update(DetectedIssueMitigation bean);
   public void delete(DetectedIssueMitigation bean);
 }

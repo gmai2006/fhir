@@ -73,6 +73,7 @@ public class AppointmentParticipant  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -94,26 +95,18 @@ public class AppointmentParticipant  {
 
   public AppointmentParticipant(AppointmentParticipantModel o) {
     this.id = o.getId();
-      this.type = CodeableConcept.fromArray(o.getType());
-      if (null != o.getActor()) {
-        this.actor = new Reference(o.getActor());
-        this.actor.setId(this.getId());
-      }
-
-      if (null != o.getRequired()) {
-        this.required = new String(o.getRequired());
-      }
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getActor() && !o.getActor().isEmpty()) {
+      this.actor = new Reference(o.getActor().get(0));
+    }
+    if (null != o.getRequired()) {
+      this.required = o.getRequired();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( java.util.List<CodeableConcept> value) {
@@ -180,16 +173,17 @@ public class AppointmentParticipant  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("actor" + "[" + String.valueOf(this.actor) + "]\n"); 
-     builder.append("required" + "[" + String.valueOf(this.required) + "]\n"); 
-     builder.append("_required" + "[" + String.valueOf(this._required) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AppointmentParticipant]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.actor != null) builder.append("actor" + "->" + this.actor.toString() + "\n"); 
+     if(this.required != null) builder.append("required" + "->" + this.required.toString() + "\n"); 
+     if(this._required != null) builder.append("_required" + "->" + this._required.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -227,36 +221,4 @@ public class AppointmentParticipant  {
   	}
   }
 
-  public static java.util.List<AppointmentParticipant> fromArray(java.util.List<AppointmentParticipantModel> list) {
-    return (java.util.List<AppointmentParticipant>)list.stream()
-      .map(model -> new AppointmentParticipant(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AppointmentParticipantModel> toModelArray(java.util.List<AppointmentParticipant> list) {
-    return (java.util.List<AppointmentParticipantModel>)list.stream()
-      .map(model -> new AppointmentParticipantModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AppointmentParticipant fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AppointmentParticipant.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AppointmentParticipant o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AppointmentParticipant> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

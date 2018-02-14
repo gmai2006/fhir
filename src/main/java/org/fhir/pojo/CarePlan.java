@@ -188,6 +188,7 @@ public class CarePlan  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -239,85 +240,73 @@ public class CarePlan  {
 
   public CarePlan(CarePlanModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.definition = Reference.fromArray(o.getDefinition());
-
-      this.basedOn = Reference.fromArray(o.getBasedOn());
-
-      this.replaces = Reference.fromArray(o.getReplaces());
-
-      this.partOf = Reference.fromArray(o.getPartOf());
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getIntent()) {
-        this.intent = new String(o.getIntent());
-      }
-
-      this.category = CodeableConcept.fromArray(o.getCategory());
-      if (null != o.getTitle()) {
-        this.title = new String(o.getTitle());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.author = Reference.fromArray(o.getAuthor());
-
-      this.careTeam = Reference.fromArray(o.getCareTeam());
-
-      this.addresses = Reference.fromArray(o.getAddresses());
-
-      this.supportingInfo = Reference.fromArray(o.getSupportingInfo());
-
-      this.goal = Reference.fromArray(o.getGoal());
-
-      this.activity = CarePlanActivity.fromArray(o.getActivity());
-
-      this.note = Annotation.fromArray(o.getNote());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+    	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedOn = ReferenceHelper.fromArray2Array(o.getBasedOn());
+    }
+    if (null != o.getReplaces() && !o.getReplaces().isEmpty()) {
+    	this.replaces = ReferenceHelper.fromArray2Array(o.getReplaces());
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+    	this.partOf = ReferenceHelper.fromArray2Array(o.getPartOf());
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getIntent()) {
+      this.intent = o.getIntent();
+    }
+    if (null != o.getTitle()) {
+      this.title = o.getTitle();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getAuthor() && !o.getAuthor().isEmpty()) {
+    	this.author = ReferenceHelper.fromArray2Array(o.getAuthor());
+    }
+    if (null != o.getCareTeam() && !o.getCareTeam().isEmpty()) {
+    	this.careTeam = ReferenceHelper.fromArray2Array(o.getCareTeam());
+    }
+    if (null != o.getAddresses() && !o.getAddresses().isEmpty()) {
+    	this.addresses = ReferenceHelper.fromArray2Array(o.getAddresses());
+    }
+    if (null != o.getSupportingInfo() && !o.getSupportingInfo().isEmpty()) {
+    	this.supportingInfo = ReferenceHelper.fromArray2Array(o.getSupportingInfo());
+    }
+    if (null != o.getGoal() && !o.getGoal().isEmpty()) {
+    	this.goal = ReferenceHelper.fromArray2Array(o.getGoal());
+    }
+    if (null != o.getActivity() && !o.getActivity().isEmpty()) {
+    	this.activity = CarePlanActivityHelper.fromArray2Array(o.getActivity());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -540,42 +529,43 @@ public class CarePlan  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("replaces" + "[" + String.valueOf(this.replaces) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("intent" + "[" + String.valueOf(this.intent) + "]\n"); 
-     builder.append("_intent" + "[" + String.valueOf(this._intent) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("author" + "[" + String.valueOf(this.author) + "]\n"); 
-     builder.append("careTeam" + "[" + String.valueOf(this.careTeam) + "]\n"); 
-     builder.append("addresses" + "[" + String.valueOf(this.addresses) + "]\n"); 
-     builder.append("supportingInfo" + "[" + String.valueOf(this.supportingInfo) + "]\n"); 
-     builder.append("goal" + "[" + String.valueOf(this.goal) + "]\n"); 
-     builder.append("activity" + "[" + String.valueOf(this.activity) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[CarePlan]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this.basedOn != null) builder.append("basedOn" + "->" + this.basedOn.toString() + "\n"); 
+     if(this.replaces != null) builder.append("replaces" + "->" + this.replaces.toString() + "\n"); 
+     if(this.partOf != null) builder.append("partOf" + "->" + this.partOf.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.intent != null) builder.append("intent" + "->" + this.intent.toString() + "\n"); 
+     if(this._intent != null) builder.append("_intent" + "->" + this._intent.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.author != null) builder.append("author" + "->" + this.author.toString() + "\n"); 
+     if(this.careTeam != null) builder.append("careTeam" + "->" + this.careTeam.toString() + "\n"); 
+     if(this.addresses != null) builder.append("addresses" + "->" + this.addresses.toString() + "\n"); 
+     if(this.supportingInfo != null) builder.append("supportingInfo" + "->" + this.supportingInfo.toString() + "\n"); 
+     if(this.goal != null) builder.append("goal" + "->" + this.goal.toString() + "\n"); 
+     if(this.activity != null) builder.append("activity" + "->" + this.activity.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -633,36 +623,4 @@ public class CarePlan  {
   	}
   }
 
-  public static java.util.List<CarePlan> fromArray(java.util.List<CarePlanModel> list) {
-    return (java.util.List<CarePlan>)list.stream()
-      .map(model -> new CarePlan(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CarePlanModel> toModelArray(java.util.List<CarePlan> list) {
-    return (java.util.List<CarePlanModel>)list.stream()
-      .map(model -> new CarePlanModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CarePlan fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CarePlan.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CarePlan o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CarePlan> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

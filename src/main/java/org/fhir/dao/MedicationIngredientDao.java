@@ -34,10 +34,5 @@ public interface MedicationIngredientDao {
   public List<MedicationIngredient> select(int maxResult);
 
   public List<MedicationIngredient> selectAll();
-
-  public MedicationIngredient create(MedicationIngredient e);
-
-  public MedicationIngredient update(MedicationIngredient e);
-
   public void delete(MedicationIngredient e);
 }

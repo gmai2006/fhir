@@ -32,7 +32,5 @@ public interface EpisodeOfCareDiagnosisService {
 	public EpisodeOfCareDiagnosis find(String id);
   public List<EpisodeOfCareDiagnosis> select(int maxResult);
   public List<EpisodeOfCareDiagnosis> selectAll();
-  public EpisodeOfCareDiagnosis create(EpisodeOfCareDiagnosis bean);
-  public EpisodeOfCareDiagnosis update(EpisodeOfCareDiagnosis bean);
   public void delete(EpisodeOfCareDiagnosis bean);
 }

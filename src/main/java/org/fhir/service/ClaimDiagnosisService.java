@@ -32,7 +32,5 @@ public interface ClaimDiagnosisService {
 	public ClaimDiagnosis find(String id);
   public List<ClaimDiagnosis> select(int maxResult);
   public List<ClaimDiagnosis> selectAll();
-  public ClaimDiagnosis create(ClaimDiagnosis bean);
-  public ClaimDiagnosis update(ClaimDiagnosis bean);
   public void delete(ClaimDiagnosis bean);
 }

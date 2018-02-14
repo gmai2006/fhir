@@ -34,10 +34,5 @@ public interface DosageDao {
   public List<Dosage> select(int maxResult);
 
   public List<Dosage> selectAll();
-
-  public Dosage create(Dosage e);
-
-  public Dosage update(Dosage e);
-
   public void delete(Dosage e);
 }

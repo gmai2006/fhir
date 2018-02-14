@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImmunizationRecommendationProtocolModel;
 import org.fhir.pojo.ImmunizationRecommendationProtocol;
+import org.fhir.pojo.ImmunizationRecommendationProtocolHelper;
 
 public class ImmunizationRecommendationProtocolDaoImpl implements ImmunizationRecommendationProtocolDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImmunizationRecommendationProtocolDaoImpl implements ImmunizationRe
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationRecommendationProtocolModel a", ImmunizationRecommendationProtocolModel.class).setMaxResults(maxResult);
       List<ImmunizationRecommendationProtocolModel> models = query.getResultList();
-      return ImmunizationRecommendationProtocol.fromArray(models);
+      return ImmunizationRecommendationProtocolHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImmunizationRecommendationProtocolDaoImpl implements ImmunizationRe
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationRecommendationProtocolModel a", ImmunizationRecommendationProtocolModel.class);
       List<ImmunizationRecommendationProtocolModel> models = query.getResultList();
-      return ImmunizationRecommendationProtocol.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImmunizationRecommendationProtocol create(ImmunizationRecommendationProtocol e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImmunizationRecommendationProtocolModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImmunizationRecommendationProtocol update(ImmunizationRecommendationProtocol e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImmunizationRecommendationProtocolModel model = em.merge(new ImmunizationRecommendationProtocolModel(e));
-      return new ImmunizationRecommendationProtocol(model);
+      return ImmunizationRecommendationProtocolHelper.fromArray2Array(models);
   }
 
   @Override

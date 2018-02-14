@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PatientLinkModel;
 import org.fhir.pojo.PatientLink;
+import org.fhir.pojo.PatientLinkHelper;
 
 public class PatientLinkDaoImpl implements PatientLinkDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PatientLinkDaoImpl implements PatientLinkDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PatientLinkModel a", PatientLinkModel.class).setMaxResults(maxResult);
       List<PatientLinkModel> models = query.getResultList();
-      return PatientLink.fromArray(models);
+      return PatientLinkHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PatientLinkDaoImpl implements PatientLinkDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PatientLinkModel a", PatientLinkModel.class);
       List<PatientLinkModel> models = query.getResultList();
-      return PatientLink.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PatientLink create(PatientLink e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PatientLinkModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PatientLink update(PatientLink e) {
-      final EntityManager em = entityManagerProvider.get();
-      PatientLinkModel model = em.merge(new PatientLinkModel(e));
-      return new PatientLink(model);
+      return PatientLinkHelper.fromArray2Array(models);
   }
 
   @Override

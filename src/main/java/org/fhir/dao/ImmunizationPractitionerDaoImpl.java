@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImmunizationPractitionerModel;
 import org.fhir.pojo.ImmunizationPractitioner;
+import org.fhir.pojo.ImmunizationPractitionerHelper;
 
 public class ImmunizationPractitionerDaoImpl implements ImmunizationPractitionerDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImmunizationPractitionerDaoImpl implements ImmunizationPractitioner
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationPractitionerModel a", ImmunizationPractitionerModel.class).setMaxResults(maxResult);
       List<ImmunizationPractitionerModel> models = query.getResultList();
-      return ImmunizationPractitioner.fromArray(models);
+      return ImmunizationPractitionerHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImmunizationPractitionerDaoImpl implements ImmunizationPractitioner
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationPractitionerModel a", ImmunizationPractitionerModel.class);
       List<ImmunizationPractitionerModel> models = query.getResultList();
-      return ImmunizationPractitioner.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImmunizationPractitioner create(ImmunizationPractitioner e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImmunizationPractitionerModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImmunizationPractitioner update(ImmunizationPractitioner e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImmunizationPractitionerModel model = em.merge(new ImmunizationPractitionerModel(e));
-      return new ImmunizationPractitioner(model);
+      return ImmunizationPractitionerHelper.fromArray2Array(models);
   }
 
   @Override

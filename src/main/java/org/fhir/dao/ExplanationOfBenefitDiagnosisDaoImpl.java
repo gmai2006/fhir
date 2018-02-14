@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExplanationOfBenefitDiagnosisModel;
 import org.fhir.pojo.ExplanationOfBenefitDiagnosis;
+import org.fhir.pojo.ExplanationOfBenefitDiagnosisHelper;
 
 public class ExplanationOfBenefitDiagnosisDaoImpl implements ExplanationOfBenefitDiagnosisDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExplanationOfBenefitDiagnosisDaoImpl implements ExplanationOfBenefi
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitDiagnosisModel a", ExplanationOfBenefitDiagnosisModel.class).setMaxResults(maxResult);
       List<ExplanationOfBenefitDiagnosisModel> models = query.getResultList();
-      return ExplanationOfBenefitDiagnosis.fromArray(models);
+      return ExplanationOfBenefitDiagnosisHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ExplanationOfBenefitDiagnosisDaoImpl implements ExplanationOfBenefi
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitDiagnosisModel a", ExplanationOfBenefitDiagnosisModel.class);
       List<ExplanationOfBenefitDiagnosisModel> models = query.getResultList();
-      return ExplanationOfBenefitDiagnosis.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ExplanationOfBenefitDiagnosis create(ExplanationOfBenefitDiagnosis e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ExplanationOfBenefitDiagnosisModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ExplanationOfBenefitDiagnosis update(ExplanationOfBenefitDiagnosis e) {
-      final EntityManager em = entityManagerProvider.get();
-      ExplanationOfBenefitDiagnosisModel model = em.merge(new ExplanationOfBenefitDiagnosisModel(e));
-      return new ExplanationOfBenefitDiagnosis(model);
+      return ExplanationOfBenefitDiagnosisHelper.fromArray2Array(models);
   }
 
   @Override

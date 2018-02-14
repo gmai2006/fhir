@@ -34,10 +34,5 @@ public interface OperationDefinitionBindingDao {
   public List<OperationDefinitionBinding> select(int maxResult);
 
   public List<OperationDefinitionBinding> selectAll();
-
-  public OperationDefinitionBinding create(OperationDefinitionBinding e);
-
-  public OperationDefinitionBinding update(OperationDefinitionBinding e);
-
   public void delete(OperationDefinitionBinding e);
 }

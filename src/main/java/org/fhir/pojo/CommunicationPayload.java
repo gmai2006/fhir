@@ -63,6 +63,7 @@ public class CommunicationPayload  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,22 +85,16 @@ public class CommunicationPayload  {
 
   public CommunicationPayload(CommunicationPayloadModel o) {
     this.id = o.getId();
-      if (null != o.getContentString()) {
-        this.contentString = new String(o.getContentString());
-      }
-
-      this.contentAttachment = Attachment.fromJson(o.getContentAttachment());
-      if (null != o.getContentReference()) {
-        this.contentReference = new Reference(o.getContentReference());
-        this.contentReference.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getContentString()) {
+      this.contentString = o.getContentString();
+    }
+    this.contentAttachment = AttachmentHelper.fromJson(o.getContentAttachment());
+    if (null != o.getContentReference() && !o.getContentReference().isEmpty()) {
+      this.contentReference = new Reference(o.getContentReference().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setContentString( String value) {
@@ -154,48 +149,17 @@ public class CommunicationPayload  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("contentString" + "[" + String.valueOf(this.contentString) + "]\n"); 
-     builder.append("_contentString" + "[" + String.valueOf(this._contentString) + "]\n"); 
-     builder.append("contentAttachment" + "[" + String.valueOf(this.contentAttachment) + "]\n"); 
-     builder.append("contentReference" + "[" + String.valueOf(this.contentReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CommunicationPayload]:" + "\n");
+     if(this.contentString != null) builder.append("contentString" + "->" + this.contentString.toString() + "\n"); 
+     if(this._contentString != null) builder.append("_contentString" + "->" + this._contentString.toString() + "\n"); 
+     if(this.contentAttachment != null) builder.append("contentAttachment" + "->" + this.contentAttachment.toString() + "\n"); 
+     if(this.contentReference != null) builder.append("contentReference" + "->" + this.contentReference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CommunicationPayload> fromArray(java.util.List<CommunicationPayloadModel> list) {
-    return (java.util.List<CommunicationPayload>)list.stream()
-      .map(model -> new CommunicationPayload(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CommunicationPayloadModel> toModelArray(java.util.List<CommunicationPayload> list) {
-    return (java.util.List<CommunicationPayloadModel>)list.stream()
-      .map(model -> new CommunicationPayloadModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CommunicationPayload fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CommunicationPayload.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CommunicationPayload o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CommunicationPayload> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

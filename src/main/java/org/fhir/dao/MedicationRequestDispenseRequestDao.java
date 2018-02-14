@@ -34,10 +34,5 @@ public interface MedicationRequestDispenseRequestDao {
   public List<MedicationRequestDispenseRequest> select(int maxResult);
 
   public List<MedicationRequestDispenseRequest> selectAll();
-
-  public MedicationRequestDispenseRequest create(MedicationRequestDispenseRequest e);
-
-  public MedicationRequestDispenseRequest update(MedicationRequestDispenseRequest e);
-
   public void delete(MedicationRequestDispenseRequest e);
 }

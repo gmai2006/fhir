@@ -83,6 +83,7 @@ public class StructureDefinitionMapping  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -177,39 +178,20 @@ public class StructureDefinitionMapping  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identity" + "[" + String.valueOf(this.identity) + "]\n"); 
-     builder.append("_identity" + "[" + String.valueOf(this._identity) + "]\n"); 
-     builder.append("uri" + "[" + String.valueOf(this.uri) + "]\n"); 
-     builder.append("_uri" + "[" + String.valueOf(this._uri) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("_comment" + "[" + String.valueOf(this._comment) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[StructureDefinitionMapping]:" + "\n");
+     if(this.identity != null) builder.append("identity" + "->" + this.identity.toString() + "\n"); 
+     if(this._identity != null) builder.append("_identity" + "->" + this._identity.toString() + "\n"); 
+     if(this.uri != null) builder.append("uri" + "->" + this.uri.toString() + "\n"); 
+     if(this._uri != null) builder.append("_uri" + "->" + this._uri.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
+     if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static StructureDefinitionMapping fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, StructureDefinitionMapping.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(StructureDefinitionMapping o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<StructureDefinitionMapping> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

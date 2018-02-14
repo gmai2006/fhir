@@ -34,10 +34,5 @@ public interface PatientLinkDao {
   public List<PatientLink> select(int maxResult);
 
   public List<PatientLink> selectAll();
-
-  public PatientLink create(PatientLink e);
-
-  public PatientLink update(PatientLink e);
-
   public void delete(PatientLink e);
 }

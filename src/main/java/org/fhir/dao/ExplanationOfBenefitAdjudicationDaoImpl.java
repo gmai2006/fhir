@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExplanationOfBenefitAdjudicationModel;
 import org.fhir.pojo.ExplanationOfBenefitAdjudication;
+import org.fhir.pojo.ExplanationOfBenefitAdjudicationHelper;
 
 public class ExplanationOfBenefitAdjudicationDaoImpl implements ExplanationOfBenefitAdjudicationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExplanationOfBenefitAdjudicationDaoImpl implements ExplanationOfBen
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitAdjudicationModel a", ExplanationOfBenefitAdjudicationModel.class).setMaxResults(maxResult);
       List<ExplanationOfBenefitAdjudicationModel> models = query.getResultList();
-      return ExplanationOfBenefitAdjudication.fromArray(models);
+      return ExplanationOfBenefitAdjudicationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ExplanationOfBenefitAdjudicationDaoImpl implements ExplanationOfBen
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitAdjudicationModel a", ExplanationOfBenefitAdjudicationModel.class);
       List<ExplanationOfBenefitAdjudicationModel> models = query.getResultList();
-      return ExplanationOfBenefitAdjudication.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ExplanationOfBenefitAdjudication create(ExplanationOfBenefitAdjudication e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ExplanationOfBenefitAdjudicationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ExplanationOfBenefitAdjudication update(ExplanationOfBenefitAdjudication e) {
-      final EntityManager em = entityManagerProvider.get();
-      ExplanationOfBenefitAdjudicationModel model = em.merge(new ExplanationOfBenefitAdjudicationModel(e));
-      return new ExplanationOfBenefitAdjudication(model);
+      return ExplanationOfBenefitAdjudicationHelper.fromArray2Array(models);
   }
 
   @Override

@@ -68,6 +68,7 @@ public class MessageHeaderDestination  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -89,25 +90,18 @@ public class MessageHeaderDestination  {
 
   public MessageHeaderDestination(MessageHeaderDestinationModel o) {
     this.id = o.getId();
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getTarget()) {
-        this.target = new Reference(o.getTarget());
-        this.target.setId(this.getId());
-      }
-
-      if (null != o.getEndpoint()) {
-        this.endpoint = new String(o.getEndpoint());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+      this.target = new Reference(o.getTarget().get(0));
+    }
+    if (null != o.getEndpoint()) {
+      this.endpoint = o.getEndpoint();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setName( String value) {
@@ -168,49 +162,18 @@ public class MessageHeaderDestination  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("_endpoint" + "[" + String.valueOf(this._endpoint) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MessageHeaderDestination]:" + "\n");
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
+     if(this._endpoint != null) builder.append("_endpoint" + "->" + this._endpoint.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MessageHeaderDestination> fromArray(java.util.List<MessageHeaderDestinationModel> list) {
-    return (java.util.List<MessageHeaderDestination>)list.stream()
-      .map(model -> new MessageHeaderDestination(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MessageHeaderDestinationModel> toModelArray(java.util.List<MessageHeaderDestination> list) {
-    return (java.util.List<MessageHeaderDestinationModel>)list.stream()
-      .map(model -> new MessageHeaderDestinationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MessageHeaderDestination fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MessageHeaderDestination.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MessageHeaderDestination o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MessageHeaderDestination> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

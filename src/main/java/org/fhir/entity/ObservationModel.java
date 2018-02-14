@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
 @Entity
 @Table(name="observation")
-public class ObservationModel  {
+public class ObservationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669677925127L;
   /**
   * Description: "This is a Observation resource"
   */
@@ -47,7 +48,7 @@ public class ObservationModel  {
 
   /**
   * Description: "A unique identifier assigned to this observation."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -57,9 +58,13 @@ public class ObservationModel  {
   /**
   * Description: "A plan, proposal or order that is fulfilled in whole or in part by this event."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> basedOn = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"basedon_id\"")
+  private String basedon_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="basedon_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> basedOn;
 
   /**
   * Description: "The status of the result value."
@@ -70,7 +75,7 @@ public class ObservationModel  {
 
   /**
   * Description: "A code that classifies the general type of observation being made."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -79,7 +84,7 @@ public class ObservationModel  {
 
   /**
   * Description: "Describes what was observed. Sometimes this is called the observation \"name\"."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -94,9 +99,9 @@ public class ObservationModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "The healthcare event  (e.g. a patient and healthcare provider interaction) during which this observation is made."
@@ -105,9 +110,9 @@ public class ObservationModel  {
   @Column(name="\"context_id\"")
   private String context_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`context_id`", insertable=false, updatable=false)
-  private ReferenceModel context;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> context;
 
   /**
   * Description: "The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself."
@@ -119,7 +124,7 @@ public class ObservationModel  {
 
   /**
   * Description: "The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -136,13 +141,17 @@ public class ObservationModel  {
   /**
   * Description: "Who was responsible for asserting the observed value as \"true\"."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> performer = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"performer_id\"")
+  private String performer_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performer_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> performer;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -151,7 +160,7 @@ public class ObservationModel  {
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -174,7 +183,7 @@ public class ObservationModel  {
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
-  * Actual type: Range
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -183,7 +192,7 @@ public class ObservationModel  {
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
-  * Actual type: Ratio
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -192,7 +201,7 @@ public class ObservationModel  {
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
-  * Actual type: SampledData
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -201,7 +210,7 @@ public class ObservationModel  {
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
-  * Actual type: Attachment
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -226,7 +235,7 @@ public class ObservationModel  {
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -235,7 +244,7 @@ public class ObservationModel  {
 
   /**
   * Description: "Provides a reason why the expected value in the element Observation.value[x] is missing."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -244,7 +253,7 @@ public class ObservationModel  {
 
   /**
   * Description: "The assessment made based on the result of the observation.  Intended as a simple compact code often placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status of the result. Otherwise known as abnormal flag."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -260,7 +269,7 @@ public class ObservationModel  {
 
   /**
   * Description: "Indicates the site on the subject's body where the observation was made (i.e. the target site)."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -269,7 +278,7 @@ public class ObservationModel  {
 
   /**
   * Description: "Indicates the mechanism used to perform the observation."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -283,9 +292,9 @@ public class ObservationModel  {
   @Column(name="\"specimen_id\"")
   private String specimen_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`specimen_id`", insertable=false, updatable=false)
-  private ReferenceModel specimen;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specimen_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> specimen;
 
   /**
   * Description: "The device used to generate the observation data."
@@ -294,30 +303,42 @@ public class ObservationModel  {
   @Column(name="\"device_id\"")
   private String device_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`device_id`", insertable=false, updatable=false)
-  private ReferenceModel device;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="device_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> device;
 
   /**
   * Description: "Guidance on how to interpret the value by comparison to a normal or recommended range."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ObservationReferenceRangeModel> referenceRange = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"referencerange_id\"")
+  private String referencerange_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="referencerange_id", insertable=false, updatable=false)
+  private java.util.List<ObservationReferenceRangeModel> referenceRange;
 
   /**
   * Description: "A  reference to another resource (usually another Observation) whose relationship is defined by the relationship type code."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ObservationRelatedModel> related = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"related_id\"")
+  private String related_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="related_id", insertable=false, updatable=false)
+  private java.util.List<ObservationRelatedModel> related;
 
   /**
   * Description: "Some observations have multiple component observations.  These component observations are expressed as separate code value pairs that share the same attributes.  Examples include systolic and diastolic component observations for blood pressure measurement and multiple component observations for genetics observations."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ObservationComponentModel> component = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"component_id\"")
+  private String component_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="component_id", insertable=false, updatable=false)
+  private java.util.List<ObservationComponentModel> component;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -327,14 +348,14 @@ public class ObservationModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -344,7 +365,7 @@ public class ObservationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -354,7 +375,7 @@ public class ObservationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -366,6 +387,7 @@ public class ObservationModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -380,9 +402,9 @@ public class ObservationModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -403,400 +425,409 @@ public class ObservationModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public ObservationModel() {
   }
 
   public ObservationModel(Observation o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.basedOn = Reference.toModelArray(o.getBasedOn());
-
-      this.status = o.getStatus();
-
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.code = CodeableConcept.toJson(o.getCode());
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      if (null != o.getContext()) {
-      	this.context_id = "context" + this.getId();
-        this.context = new ReferenceModel(o.getContext());
-        this.context.setId(this.context_id);
-        this.context.parent_id = this.context.getId();
-      }
-
-      this.effectiveDateTime = o.getEffectiveDateTime();
-
-      this.effectivePeriod = Period.toJson(o.getEffectivePeriod());
-      this.issued = o.getIssued();
-
-      this.performer = Reference.toModelArray(o.getPerformer());
-
-      this.valueQuantity = Quantity.toJson(o.getValueQuantity());
-      this.valueCodeableConcept = CodeableConcept.toJson(o.getValueCodeableConcept());
-      this.valueString = o.getValueString();
-
-      this.valueBoolean = o.getValueBoolean();
-
-      this.valueRange = Range.toJson(o.getValueRange());
-      this.valueRatio = Ratio.toJson(o.getValueRatio());
-      this.valueSampledData = SampledData.toJson(o.getValueSampledData());
-      this.valueAttachment = Attachment.toJson(o.getValueAttachment());
-      this.valueTime = o.getValueTime();
-
-      this.valueDateTime = o.getValueDateTime();
-
-      this.valuePeriod = Period.toJson(o.getValuePeriod());
-      this.dataAbsentReason = CodeableConcept.toJson(o.getDataAbsentReason());
-      this.interpretation = CodeableConcept.toJson(o.getInterpretation());
-      this.comment = o.getComment();
-
-      this.bodySite = CodeableConcept.toJson(o.getBodySite());
-      this.method = CodeableConcept.toJson(o.getMethod());
-      if (null != o.getSpecimen()) {
-      	this.specimen_id = "specimen" + this.getId();
-        this.specimen = new ReferenceModel(o.getSpecimen());
-        this.specimen.setId(this.specimen_id);
-        this.specimen.parent_id = this.specimen.getId();
-      }
-
-      if (null != o.getDevice()) {
-      	this.device_id = "device" + this.getId();
-        this.device = new ReferenceModel(o.getDevice());
-        this.device.setId(this.device_id);
-        this.device.parent_id = this.device.getId();
-      }
-
-      this.referenceRange = ObservationReferenceRange.toModelArray(o.getReferenceRange());
-
-      this.related = ObservationRelated.toModelArray(o.getRelated());
-
-      this.component = ObservationComponent.toModelArray(o.getComponent());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedon_id = "basedon" + this.id;
+    	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
+    }
+    this.status = o.getStatus();
+    this.code = CodeableConceptHelper.toJson(o.getCode());
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    if (null != o.getContext() ) {
+    	this.context_id = "context" + this.id;
+    	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
+    }
+    this.effectiveDateTime = o.getEffectiveDateTime();
+    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.issued = o.getIssued();
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+    	this.performer_id = "performer" + this.id;
+    	this.performer = ReferenceHelper.toModelFromArray(o.getPerformer(), this.performer_id);
+    }
+    this.valueQuantity = QuantityHelper.toJson(o.getValueQuantity());
+    this.valueCodeableConcept = CodeableConceptHelper.toJson(o.getValueCodeableConcept());
+    this.valueString = o.getValueString();
+    this.valueBoolean = o.getValueBoolean();
+    this.valueRange = RangeHelper.toJson(o.getValueRange());
+    this.valueRatio = RatioHelper.toJson(o.getValueRatio());
+    this.valueSampledData = SampledDataHelper.toJson(o.getValueSampledData());
+    this.valueAttachment = AttachmentHelper.toJson(o.getValueAttachment());
+    this.valueTime = o.getValueTime();
+    this.valueDateTime = o.getValueDateTime();
+    this.valuePeriod = PeriodHelper.toJson(o.getValuePeriod());
+    this.dataAbsentReason = CodeableConceptHelper.toJson(o.getDataAbsentReason());
+    this.interpretation = CodeableConceptHelper.toJson(o.getInterpretation());
+    this.comment = o.getComment();
+    this.bodySite = CodeableConceptHelper.toJson(o.getBodySite());
+    this.method = CodeableConceptHelper.toJson(o.getMethod());
+    if (null != o.getSpecimen() ) {
+    	this.specimen_id = "specimen" + this.id;
+    	this.specimen = ReferenceHelper.toModel(o.getSpecimen(), this.specimen_id);
+    }
+    if (null != o.getDevice() ) {
+    	this.device_id = "device" + this.id;
+    	this.device = ReferenceHelper.toModel(o.getDevice(), this.device_id);
+    }
+    if (null != o.getReferenceRange() && !o.getReferenceRange().isEmpty()) {
+    	this.referencerange_id = "referencerange" + this.id;
+    	this.referenceRange = ObservationReferenceRangeHelper.toModelFromArray(o.getReferenceRange(), this.referencerange_id);
+    }
+    if (null != o.getRelated() && !o.getRelated().isEmpty()) {
+    	this.related_id = "related" + this.id;
+    	this.related = ObservationRelatedHelper.toModelFromArray(o.getRelated(), this.related_id);
+    }
+    if (null != o.getComponent() && !o.getComponent().isEmpty()) {
+    	this.component_id = "component" + this.id;
+    	this.component = ObservationComponentHelper.toModelFromArray(o.getComponent(), this.component_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setBasedOn( java.util.List<ReferenceModel> value) {
-    this.basedOn = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public java.util.List<ReferenceModel> getBasedOn() {
     return this.basedOn;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setBasedOn( java.util.List<ReferenceModel> value) {
+    this.basedOn = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setCode( String value) {
-    this.code = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getCode() {
     return this.code;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setCode( String value) {
+    this.code = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setContext( ReferenceModel value) {
-    this.context = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
-  public ReferenceModel getContext() {
+  public java.util.List<ReferenceModel> getContext() {
     return this.context;
   }
-  public void setEffectiveDateTime( String value) {
-    this.effectiveDateTime = value;
+  public void setContext( java.util.List<ReferenceModel> value) {
+    this.context = value;
   }
   public String getEffectiveDateTime() {
     return this.effectiveDateTime;
   }
-  public void setEffectivePeriod( String value) {
-    this.effectivePeriod = value;
+  public void setEffectiveDateTime( String value) {
+    this.effectiveDateTime = value;
   }
   public String getEffectivePeriod() {
     return this.effectivePeriod;
   }
-  public void setIssued( String value) {
-    this.issued = value;
+  public void setEffectivePeriod( String value) {
+    this.effectivePeriod = value;
   }
   public String getIssued() {
     return this.issued;
   }
-  public void setPerformer( java.util.List<ReferenceModel> value) {
-    this.performer = value;
+  public void setIssued( String value) {
+    this.issued = value;
   }
   public java.util.List<ReferenceModel> getPerformer() {
     return this.performer;
   }
-  public void setValueQuantity( String value) {
-    this.valueQuantity = value;
+  public void setPerformer( java.util.List<ReferenceModel> value) {
+    this.performer = value;
   }
   public String getValueQuantity() {
     return this.valueQuantity;
   }
-  public void setValueCodeableConcept( String value) {
-    this.valueCodeableConcept = value;
+  public void setValueQuantity( String value) {
+    this.valueQuantity = value;
   }
   public String getValueCodeableConcept() {
     return this.valueCodeableConcept;
   }
-  public void setValueString( String value) {
-    this.valueString = value;
+  public void setValueCodeableConcept( String value) {
+    this.valueCodeableConcept = value;
   }
   public String getValueString() {
     return this.valueString;
   }
-  public void setValueBoolean( Boolean value) {
-    this.valueBoolean = value;
+  public void setValueString( String value) {
+    this.valueString = value;
   }
   public Boolean getValueBoolean() {
     return this.valueBoolean;
   }
-  public void setValueRange( String value) {
-    this.valueRange = value;
+  public void setValueBoolean( Boolean value) {
+    this.valueBoolean = value;
   }
   public String getValueRange() {
     return this.valueRange;
   }
-  public void setValueRatio( String value) {
-    this.valueRatio = value;
+  public void setValueRange( String value) {
+    this.valueRange = value;
   }
   public String getValueRatio() {
     return this.valueRatio;
   }
-  public void setValueSampledData( String value) {
-    this.valueSampledData = value;
+  public void setValueRatio( String value) {
+    this.valueRatio = value;
   }
   public String getValueSampledData() {
     return this.valueSampledData;
   }
-  public void setValueAttachment( String value) {
-    this.valueAttachment = value;
+  public void setValueSampledData( String value) {
+    this.valueSampledData = value;
   }
   public String getValueAttachment() {
     return this.valueAttachment;
   }
-  public void setValueTime( String value) {
-    this.valueTime = value;
+  public void setValueAttachment( String value) {
+    this.valueAttachment = value;
   }
   public String getValueTime() {
     return this.valueTime;
   }
-  public void setValueDateTime( String value) {
-    this.valueDateTime = value;
+  public void setValueTime( String value) {
+    this.valueTime = value;
   }
   public String getValueDateTime() {
     return this.valueDateTime;
   }
-  public void setValuePeriod( String value) {
-    this.valuePeriod = value;
+  public void setValueDateTime( String value) {
+    this.valueDateTime = value;
   }
   public String getValuePeriod() {
     return this.valuePeriod;
   }
-  public void setDataAbsentReason( String value) {
-    this.dataAbsentReason = value;
+  public void setValuePeriod( String value) {
+    this.valuePeriod = value;
   }
   public String getDataAbsentReason() {
     return this.dataAbsentReason;
   }
-  public void setInterpretation( String value) {
-    this.interpretation = value;
+  public void setDataAbsentReason( String value) {
+    this.dataAbsentReason = value;
   }
   public String getInterpretation() {
     return this.interpretation;
   }
-  public void setComment( String value) {
-    this.comment = value;
+  public void setInterpretation( String value) {
+    this.interpretation = value;
   }
   public String getComment() {
     return this.comment;
   }
-  public void setBodySite( String value) {
-    this.bodySite = value;
+  public void setComment( String value) {
+    this.comment = value;
   }
   public String getBodySite() {
     return this.bodySite;
   }
-  public void setMethod( String value) {
-    this.method = value;
+  public void setBodySite( String value) {
+    this.bodySite = value;
   }
   public String getMethod() {
     return this.method;
   }
-  public void setSpecimen( ReferenceModel value) {
-    this.specimen = value;
+  public void setMethod( String value) {
+    this.method = value;
   }
-  public ReferenceModel getSpecimen() {
+  public java.util.List<ReferenceModel> getSpecimen() {
     return this.specimen;
   }
-  public void setDevice( ReferenceModel value) {
-    this.device = value;
+  public void setSpecimen( java.util.List<ReferenceModel> value) {
+    this.specimen = value;
   }
-  public ReferenceModel getDevice() {
+  public java.util.List<ReferenceModel> getDevice() {
     return this.device;
   }
-  public void setReferenceRange( java.util.List<ObservationReferenceRangeModel> value) {
-    this.referenceRange = value;
+  public void setDevice( java.util.List<ReferenceModel> value) {
+    this.device = value;
   }
   public java.util.List<ObservationReferenceRangeModel> getReferenceRange() {
     return this.referenceRange;
   }
-  public void setRelated( java.util.List<ObservationRelatedModel> value) {
-    this.related = value;
+  public void setReferenceRange( java.util.List<ObservationReferenceRangeModel> value) {
+    this.referenceRange = value;
   }
   public java.util.List<ObservationRelatedModel> getRelated() {
     return this.related;
   }
-  public void setComponent( java.util.List<ObservationComponentModel> value) {
-    this.component = value;
+  public void setRelated( java.util.List<ObservationRelatedModel> value) {
+    this.related = value;
   }
   public java.util.List<ObservationComponentModel> getComponent() {
     return this.component;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setComponent( java.util.List<ObservationComponentModel> value) {
+    this.component = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("effectiveDateTime" + "[" + String.valueOf(this.effectiveDateTime) + "]\n"); 
-     builder.append("effectivePeriod" + "[" + String.valueOf(this.effectivePeriod) + "]\n"); 
-     builder.append("issued" + "[" + String.valueOf(this.issued) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("valueQuantity" + "[" + String.valueOf(this.valueQuantity) + "]\n"); 
-     builder.append("valueCodeableConcept" + "[" + String.valueOf(this.valueCodeableConcept) + "]\n"); 
-     builder.append("valueString" + "[" + String.valueOf(this.valueString) + "]\n"); 
-     builder.append("valueBoolean" + "[" + String.valueOf(this.valueBoolean) + "]\n"); 
-     builder.append("valueRange" + "[" + String.valueOf(this.valueRange) + "]\n"); 
-     builder.append("valueRatio" + "[" + String.valueOf(this.valueRatio) + "]\n"); 
-     builder.append("valueSampledData" + "[" + String.valueOf(this.valueSampledData) + "]\n"); 
-     builder.append("valueAttachment" + "[" + String.valueOf(this.valueAttachment) + "]\n"); 
-     builder.append("valueTime" + "[" + String.valueOf(this.valueTime) + "]\n"); 
-     builder.append("valueDateTime" + "[" + String.valueOf(this.valueDateTime) + "]\n"); 
-     builder.append("valuePeriod" + "[" + String.valueOf(this.valuePeriod) + "]\n"); 
-     builder.append("dataAbsentReason" + "[" + String.valueOf(this.dataAbsentReason) + "]\n"); 
-     builder.append("interpretation" + "[" + String.valueOf(this.interpretation) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("method" + "[" + String.valueOf(this.method) + "]\n"); 
-     builder.append("specimen" + "[" + String.valueOf(this.specimen) + "]\n"); 
-     builder.append("device" + "[" + String.valueOf(this.device) + "]\n"); 
-     builder.append("referenceRange" + "[" + String.valueOf(this.referenceRange) + "]\n"); 
-     builder.append("related" + "[" + String.valueOf(this.related) + "]\n"); 
-     builder.append("component" + "[" + String.valueOf(this.component) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[ObservationModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
+     builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
+     builder.append("issued" + "->" + this.issued + "\n"); 
+     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
+     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
+     builder.append("valueString" + "->" + this.valueString + "\n"); 
+     builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 
+     builder.append("valueRange" + "->" + this.valueRange + "\n"); 
+     builder.append("valueRatio" + "->" + this.valueRatio + "\n"); 
+     builder.append("valueSampledData" + "->" + this.valueSampledData + "\n"); 
+     builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
+     builder.append("valueTime" + "->" + this.valueTime + "\n"); 
+     builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
+     builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
+     builder.append("dataAbsentReason" + "->" + this.dataAbsentReason + "\n"); 
+     builder.append("interpretation" + "->" + this.interpretation + "\n"); 
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
+     builder.append("method" + "->" + this.method + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ObservationModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("context" + "->" + this.context + "\n"); 
+     builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
+     builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
+     builder.append("issued" + "->" + this.issued + "\n"); 
+     builder.append("performer" + "->" + this.performer + "\n"); 
+     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
+     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
+     builder.append("valueString" + "->" + this.valueString + "\n"); 
+     builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 
+     builder.append("valueRange" + "->" + this.valueRange + "\n"); 
+     builder.append("valueRatio" + "->" + this.valueRatio + "\n"); 
+     builder.append("valueSampledData" + "->" + this.valueSampledData + "\n"); 
+     builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
+     builder.append("valueTime" + "->" + this.valueTime + "\n"); 
+     builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
+     builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
+     builder.append("dataAbsentReason" + "->" + this.dataAbsentReason + "\n"); 
+     builder.append("interpretation" + "->" + this.interpretation + "\n"); 
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
+     builder.append("method" + "->" + this.method + "\n"); 
+     builder.append("specimen" + "->" + this.specimen + "\n"); 
+     builder.append("device" + "->" + this.device + "\n"); 
+     builder.append("referenceRange" + "->" + this.referenceRange + "\n"); 
+     builder.append("related" + "->" + this.related + "\n"); 
+     builder.append("component" + "->" + this.component + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

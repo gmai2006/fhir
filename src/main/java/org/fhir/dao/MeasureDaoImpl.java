@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MeasureModel;
 import org.fhir.pojo.Measure;
+import org.fhir.pojo.MeasureHelper;
 
 public class MeasureDaoImpl implements MeasureDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MeasureDaoImpl implements MeasureDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureModel a", MeasureModel.class).setMaxResults(maxResult);
       List<MeasureModel> models = query.getResultList();
-      return Measure.fromArray(models);
+      return MeasureHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class MeasureDaoImpl implements MeasureDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureModel a", MeasureModel.class);
       List<MeasureModel> models = query.getResultList();
-      return Measure.fromArray(models);
+      return MeasureHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class MeasureDaoImpl implements MeasureDao {
       MeasureModel model = em.merge(new MeasureModel(e));
       return new Measure(model);
   }
-
   @Override
   @Transactional
   public void delete(Measure e) {

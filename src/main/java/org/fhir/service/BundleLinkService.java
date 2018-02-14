@@ -32,7 +32,5 @@ public interface BundleLinkService {
 	public BundleLink find(String id);
   public List<BundleLink> select(int maxResult);
   public List<BundleLink> selectAll();
-  public BundleLink create(BundleLink bean);
-  public BundleLink update(BundleLink bean);
   public void delete(BundleLink bean);
 }

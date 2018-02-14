@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PlanDefinitionParticipantModel;
 import org.fhir.pojo.PlanDefinitionParticipant;
+import org.fhir.pojo.PlanDefinitionParticipantHelper;
 
 public class PlanDefinitionParticipantDaoImpl implements PlanDefinitionParticipantDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PlanDefinitionParticipantDaoImpl implements PlanDefinitionParticipa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PlanDefinitionParticipantModel a", PlanDefinitionParticipantModel.class).setMaxResults(maxResult);
       List<PlanDefinitionParticipantModel> models = query.getResultList();
-      return PlanDefinitionParticipant.fromArray(models);
+      return PlanDefinitionParticipantHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PlanDefinitionParticipantDaoImpl implements PlanDefinitionParticipa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PlanDefinitionParticipantModel a", PlanDefinitionParticipantModel.class);
       List<PlanDefinitionParticipantModel> models = query.getResultList();
-      return PlanDefinitionParticipant.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PlanDefinitionParticipant create(PlanDefinitionParticipant e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PlanDefinitionParticipantModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PlanDefinitionParticipant update(PlanDefinitionParticipant e) {
-      final EntityManager em = entityManagerProvider.get();
-      PlanDefinitionParticipantModel model = em.merge(new PlanDefinitionParticipantModel(e));
-      return new PlanDefinitionParticipant(model);
+      return PlanDefinitionParticipantHelper.fromArray2Array(models);
   }
 
   @Override

@@ -34,10 +34,5 @@ public interface ExpansionProfileFixedVersionDao {
   public List<ExpansionProfileFixedVersion> select(int maxResult);
 
   public List<ExpansionProfileFixedVersion> selectAll();
-
-  public ExpansionProfileFixedVersion create(ExpansionProfileFixedVersion e);
-
-  public ExpansionProfileFixedVersion update(ExpansionProfileFixedVersion e);
-
   public void delete(ExpansionProfileFixedVersion e);
 }

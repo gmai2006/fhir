@@ -34,10 +34,5 @@ public interface MetaDao {
   public List<Meta> select(int maxResult);
 
   public List<Meta> selectAll();
-
-  public Meta create(Meta e);
-
-  public Meta update(Meta e);
-
   public void delete(Meta e);
 }

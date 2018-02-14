@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementInteraction1Model;
 import org.fhir.pojo.CapabilityStatementInteraction1;
+import org.fhir.pojo.CapabilityStatementInteraction1Helper;
 
 public class CapabilityStatementInteraction1DaoImpl implements CapabilityStatementInteraction1Dao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementInteraction1DaoImpl implements CapabilityStateme
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementInteraction1Model a", CapabilityStatementInteraction1Model.class).setMaxResults(maxResult);
       List<CapabilityStatementInteraction1Model> models = query.getResultList();
-      return CapabilityStatementInteraction1.fromArray(models);
+      return CapabilityStatementInteraction1Helper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CapabilityStatementInteraction1DaoImpl implements CapabilityStateme
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementInteraction1Model a", CapabilityStatementInteraction1Model.class);
       List<CapabilityStatementInteraction1Model> models = query.getResultList();
-      return CapabilityStatementInteraction1.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementInteraction1 create(CapabilityStatementInteraction1 e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CapabilityStatementInteraction1Model(e));
-      return e;
-  }
-
-  @Transactional
-  public CapabilityStatementInteraction1 update(CapabilityStatementInteraction1 e) {
-      final EntityManager em = entityManagerProvider.get();
-      CapabilityStatementInteraction1Model model = em.merge(new CapabilityStatementInteraction1Model(e));
-      return new CapabilityStatementInteraction1(model);
+      return CapabilityStatementInteraction1Helper.fromArray2Array(models);
   }
 
   @Override

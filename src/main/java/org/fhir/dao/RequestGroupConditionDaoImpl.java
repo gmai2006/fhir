@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.RequestGroupConditionModel;
 import org.fhir.pojo.RequestGroupCondition;
+import org.fhir.pojo.RequestGroupConditionHelper;
 
 public class RequestGroupConditionDaoImpl implements RequestGroupConditionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class RequestGroupConditionDaoImpl implements RequestGroupConditionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RequestGroupConditionModel a", RequestGroupConditionModel.class).setMaxResults(maxResult);
       List<RequestGroupConditionModel> models = query.getResultList();
-      return RequestGroupCondition.fromArray(models);
+      return RequestGroupConditionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class RequestGroupConditionDaoImpl implements RequestGroupConditionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RequestGroupConditionModel a", RequestGroupConditionModel.class);
       List<RequestGroupConditionModel> models = query.getResultList();
-      return RequestGroupCondition.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public RequestGroupCondition create(RequestGroupCondition e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new RequestGroupConditionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public RequestGroupCondition update(RequestGroupCondition e) {
-      final EntityManager em = entityManagerProvider.get();
-      RequestGroupConditionModel model = em.merge(new RequestGroupConditionModel(e));
-      return new RequestGroupCondition(model);
+      return RequestGroupConditionHelper.fromArray2Array(models);
   }
 
   @Override

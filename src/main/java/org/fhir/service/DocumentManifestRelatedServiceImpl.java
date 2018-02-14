@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DocumentManifestRelated create(DocumentManifestRelated bean) {
-  	requireNonNull(bean);
-    logger.info("create(DocumentManifestRelated={}) - entered bean ");
-
-    final DocumentManifestRelated result = dao.create(bean);
-
-    logger.info("create(DocumentManifestRelated) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DocumentManifestRelated update(DocumentManifestRelated bean) {
-  	requireNonNull(bean);
-    logger.info("update(DocumentManifestRelated={}) - entered bean ");
-
-    final DocumentManifestRelated result = dao.update(bean);
-
-    logger.info("update(DocumentManifestRelated) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

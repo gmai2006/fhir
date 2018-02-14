@@ -85,6 +85,7 @@ public class PaymentReconciliationDetail  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -106,38 +107,26 @@ public class PaymentReconciliationDetail  {
 
   public PaymentReconciliationDetail(PaymentReconciliationDetailModel o) {
     this.id = o.getId();
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getRequest()) {
-        this.request = new Reference(o.getRequest());
-        this.request.setId(this.getId());
-      }
-
-      if (null != o.getResponse()) {
-        this.response = new Reference(o.getResponse());
-        this.response.setId(this.getId());
-      }
-
-      if (null != o.getSubmitter()) {
-        this.submitter = new Reference(o.getSubmitter());
-        this.submitter.setId(this.getId());
-      }
-
-      if (null != o.getPayee()) {
-        this.payee = new Reference(o.getPayee());
-        this.payee.setId(this.getId());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      this.amount = Money.fromJson(o.getAmount());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getRequest() && !o.getRequest().isEmpty()) {
+      this.request = new Reference(o.getRequest().get(0));
+    }
+    if (null != o.getResponse() && !o.getResponse().isEmpty()) {
+      this.response = new Reference(o.getResponse().get(0));
+    }
+    if (null != o.getSubmitter() && !o.getSubmitter().isEmpty()) {
+      this.submitter = new Reference(o.getSubmitter().get(0));
+    }
+    if (null != o.getPayee() && !o.getPayee().isEmpty()) {
+      this.payee = new Reference(o.getPayee().get(0));
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    this.amount = MoneyHelper.fromJson(o.getAmount());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( CodeableConcept value) {
@@ -216,52 +205,21 @@ public class PaymentReconciliationDetail  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("response" + "[" + String.valueOf(this.response) + "]\n"); 
-     builder.append("submitter" + "[" + String.valueOf(this.submitter) + "]\n"); 
-     builder.append("payee" + "[" + String.valueOf(this.payee) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("amount" + "[" + String.valueOf(this.amount) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PaymentReconciliationDetail]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.request != null) builder.append("request" + "->" + this.request.toString() + "\n"); 
+     if(this.response != null) builder.append("response" + "->" + this.response.toString() + "\n"); 
+     if(this.submitter != null) builder.append("submitter" + "->" + this.submitter.toString() + "\n"); 
+     if(this.payee != null) builder.append("payee" + "->" + this.payee.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<PaymentReconciliationDetail> fromArray(java.util.List<PaymentReconciliationDetailModel> list) {
-    return (java.util.List<PaymentReconciliationDetail>)list.stream()
-      .map(model -> new PaymentReconciliationDetail(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PaymentReconciliationDetailModel> toModelArray(java.util.List<PaymentReconciliationDetail> list) {
-    return (java.util.List<PaymentReconciliationDetailModel>)list.stream()
-      .map(model -> new PaymentReconciliationDetailModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PaymentReconciliationDetail fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PaymentReconciliationDetail.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PaymentReconciliationDetail o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PaymentReconciliationDetail> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

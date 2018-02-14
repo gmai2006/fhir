@@ -34,10 +34,5 @@ public interface MessageHeaderDestinationDao {
   public List<MessageHeaderDestination> select(int maxResult);
 
   public List<MessageHeaderDestination> selectAll();
-
-  public MessageHeaderDestination create(MessageHeaderDestination e);
-
-  public MessageHeaderDestination update(MessageHeaderDestination e);
-
   public void delete(MessageHeaderDestination e);
 }

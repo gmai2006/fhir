@@ -32,7 +32,5 @@ public interface ImmunizationRecommendationRecommendationService {
 	public ImmunizationRecommendationRecommendation find(String id);
   public List<ImmunizationRecommendationRecommendation> select(int maxResult);
   public List<ImmunizationRecommendationRecommendation> selectAll();
-  public ImmunizationRecommendationRecommendation create(ImmunizationRecommendationRecommendation bean);
-  public ImmunizationRecommendationRecommendation update(ImmunizationRecommendationRecommendation bean);
   public void delete(ImmunizationRecommendationRecommendation bean);
 }

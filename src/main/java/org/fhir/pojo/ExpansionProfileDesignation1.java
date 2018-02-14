@@ -59,6 +59,7 @@ public class ExpansionProfileDesignation1  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,17 +81,13 @@ public class ExpansionProfileDesignation1  {
 
   public ExpansionProfileDesignation1(ExpansionProfileDesignation1Model o) {
     this.id = o.getId();
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
-      this.use = Coding.fromJson(o.getUse());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
+    this.use = CodingHelper.fromJson(o.getUse());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLanguage( String value) {
@@ -139,47 +136,16 @@ public class ExpansionProfileDesignation1  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); 
-     builder.append("use" + "[" + String.valueOf(this.use) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExpansionProfileDesignation1]:" + "\n");
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); 
+     if(this.use != null) builder.append("use" + "->" + this.use.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExpansionProfileDesignation1> fromArray(java.util.List<ExpansionProfileDesignation1Model> list) {
-    return (java.util.List<ExpansionProfileDesignation1>)list.stream()
-      .map(model -> new ExpansionProfileDesignation1(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExpansionProfileDesignation1Model> toModelArray(java.util.List<ExpansionProfileDesignation1> list) {
-    return (java.util.List<ExpansionProfileDesignation1Model>)list.stream()
-      .map(model -> new ExpansionProfileDesignation1Model(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExpansionProfileDesignation1 fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExpansionProfileDesignation1.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExpansionProfileDesignation1 o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExpansionProfileDesignation1> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

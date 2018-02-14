@@ -32,7 +32,5 @@ public interface ClaimResponseInsuranceService {
 	public ClaimResponseInsurance find(String id);
   public List<ClaimResponseInsurance> select(int maxResult);
   public List<ClaimResponseInsurance> selectAll();
-  public ClaimResponseInsurance create(ClaimResponseInsurance bean);
-  public ClaimResponseInsurance update(ClaimResponseInsurance bean);
   public void delete(ClaimResponseInsurance bean);
 }

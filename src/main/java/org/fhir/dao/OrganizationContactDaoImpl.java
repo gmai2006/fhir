@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.OrganizationContactModel;
 import org.fhir.pojo.OrganizationContact;
+import org.fhir.pojo.OrganizationContactHelper;
 
 public class OrganizationContactDaoImpl implements OrganizationContactDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class OrganizationContactDaoImpl implements OrganizationContactDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OrganizationContactModel a", OrganizationContactModel.class).setMaxResults(maxResult);
       List<OrganizationContactModel> models = query.getResultList();
-      return OrganizationContact.fromArray(models);
+      return OrganizationContactHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class OrganizationContactDaoImpl implements OrganizationContactDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OrganizationContactModel a", OrganizationContactModel.class);
       List<OrganizationContactModel> models = query.getResultList();
-      return OrganizationContact.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public OrganizationContact create(OrganizationContact e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new OrganizationContactModel(e));
-      return e;
-  }
-
-  @Transactional
-  public OrganizationContact update(OrganizationContact e) {
-      final EntityManager em = entityManagerProvider.get();
-      OrganizationContactModel model = em.merge(new OrganizationContactModel(e));
-      return new OrganizationContact(model);
+      return OrganizationContactHelper.fromArray2Array(models);
   }
 
   @Override

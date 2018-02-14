@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimResponseErrorModel;
 import org.fhir.pojo.ClaimResponseError;
+import org.fhir.pojo.ClaimResponseErrorHelper;
 
 public class ClaimResponseErrorDaoImpl implements ClaimResponseErrorDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimResponseErrorDaoImpl implements ClaimResponseErrorDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimResponseErrorModel a", ClaimResponseErrorModel.class).setMaxResults(maxResult);
       List<ClaimResponseErrorModel> models = query.getResultList();
-      return ClaimResponseError.fromArray(models);
+      return ClaimResponseErrorHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimResponseErrorDaoImpl implements ClaimResponseErrorDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimResponseErrorModel a", ClaimResponseErrorModel.class);
       List<ClaimResponseErrorModel> models = query.getResultList();
-      return ClaimResponseError.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimResponseError create(ClaimResponseError e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimResponseErrorModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimResponseError update(ClaimResponseError e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimResponseErrorModel model = em.merge(new ClaimResponseErrorModel(e));
-      return new ClaimResponseError(model);
+      return ClaimResponseErrorHelper.fromArray2Array(models);
   }
 
   @Override

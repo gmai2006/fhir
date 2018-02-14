@@ -103,6 +103,7 @@ public class ImplementationGuideResource  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -124,42 +125,30 @@ public class ImplementationGuideResource  {
 
   public ImplementationGuideResource(ImplementationGuideResourceModel o) {
     this.id = o.getId();
-      if (null != o.getExample()) {
-        this.example = new Boolean(o.getExample());
-      }
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getAcronym()) {
-        this.acronym = new String(o.getAcronym());
-      }
-
-      if (null != o.getSourceUri()) {
-        this.sourceUri = new String(o.getSourceUri());
-      }
-
-      if (null != o.getSourceReference()) {
-        this.sourceReference = new Reference(o.getSourceReference());
-        this.sourceReference.setId(this.getId());
-      }
-
-      if (null != o.getExampleFor()) {
-        this.exampleFor = new Reference(o.getExampleFor());
-        this.exampleFor.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getExample()) {
+      this.example = o.getExample();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getAcronym()) {
+      this.acronym = o.getAcronym();
+    }
+    if (null != o.getSourceUri()) {
+      this.sourceUri = o.getSourceUri();
+    }
+    if (null != o.getSourceReference() && !o.getSourceReference().isEmpty()) {
+      this.sourceReference = new Reference(o.getSourceReference().get(0));
+    }
+    if (null != o.getExampleFor() && !o.getExampleFor().isEmpty()) {
+      this.exampleFor = new Reference(o.getExampleFor().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setExample( Boolean value) {
@@ -262,56 +251,25 @@ public class ImplementationGuideResource  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("example" + "[" + String.valueOf(this.example) + "]\n"); 
-     builder.append("_example" + "[" + String.valueOf(this._example) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("acronym" + "[" + String.valueOf(this.acronym) + "]\n"); 
-     builder.append("_acronym" + "[" + String.valueOf(this._acronym) + "]\n"); 
-     builder.append("sourceUri" + "[" + String.valueOf(this.sourceUri) + "]\n"); 
-     builder.append("_sourceUri" + "[" + String.valueOf(this._sourceUri) + "]\n"); 
-     builder.append("sourceReference" + "[" + String.valueOf(this.sourceReference) + "]\n"); 
-     builder.append("exampleFor" + "[" + String.valueOf(this.exampleFor) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImplementationGuideResource]:" + "\n");
+     if(this.example != null) builder.append("example" + "->" + this.example.toString() + "\n"); 
+     if(this._example != null) builder.append("_example" + "->" + this._example.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.acronym != null) builder.append("acronym" + "->" + this.acronym.toString() + "\n"); 
+     if(this._acronym != null) builder.append("_acronym" + "->" + this._acronym.toString() + "\n"); 
+     if(this.sourceUri != null) builder.append("sourceUri" + "->" + this.sourceUri.toString() + "\n"); 
+     if(this._sourceUri != null) builder.append("_sourceUri" + "->" + this._sourceUri.toString() + "\n"); 
+     if(this.sourceReference != null) builder.append("sourceReference" + "->" + this.sourceReference.toString() + "\n"); 
+     if(this.exampleFor != null) builder.append("exampleFor" + "->" + this.exampleFor.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ImplementationGuideResource> fromArray(java.util.List<ImplementationGuideResourceModel> list) {
-    return (java.util.List<ImplementationGuideResource>)list.stream()
-      .map(model -> new ImplementationGuideResource(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImplementationGuideResourceModel> toModelArray(java.util.List<ImplementationGuideResource> list) {
-    return (java.util.List<ImplementationGuideResourceModel>)list.stream()
-      .map(model -> new ImplementationGuideResourceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImplementationGuideResource fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImplementationGuideResource.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImplementationGuideResource o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImplementationGuideResource> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

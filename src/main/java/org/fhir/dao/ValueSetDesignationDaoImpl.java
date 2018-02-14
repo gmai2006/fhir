@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ValueSetDesignationModel;
 import org.fhir.pojo.ValueSetDesignation;
+import org.fhir.pojo.ValueSetDesignationHelper;
 
 public class ValueSetDesignationDaoImpl implements ValueSetDesignationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ValueSetDesignationDaoImpl implements ValueSetDesignationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetDesignationModel a", ValueSetDesignationModel.class).setMaxResults(maxResult);
       List<ValueSetDesignationModel> models = query.getResultList();
-      return ValueSetDesignation.fromArray(models);
+      return ValueSetDesignationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ValueSetDesignationDaoImpl implements ValueSetDesignationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetDesignationModel a", ValueSetDesignationModel.class);
       List<ValueSetDesignationModel> models = query.getResultList();
-      return ValueSetDesignation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ValueSetDesignation create(ValueSetDesignation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ValueSetDesignationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ValueSetDesignation update(ValueSetDesignation e) {
-      final EntityManager em = entityManagerProvider.get();
-      ValueSetDesignationModel model = em.merge(new ValueSetDesignationModel(e));
-      return new ValueSetDesignation(model);
+      return ValueSetDesignationHelper.fromArray2Array(models);
   }
 
   @Override

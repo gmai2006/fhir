@@ -32,7 +32,5 @@ public interface ImagingManifestStudyService {
 	public ImagingManifestStudy find(String id);
   public List<ImagingManifestStudy> select(int maxResult);
   public List<ImagingManifestStudy> selectAll();
-  public ImagingManifestStudy create(ImagingManifestStudy bean);
-  public ImagingManifestStudy update(ImagingManifestStudy bean);
   public void delete(ImagingManifestStudy bean);
 }

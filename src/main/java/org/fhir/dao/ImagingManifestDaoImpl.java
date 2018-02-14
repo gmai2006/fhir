@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImagingManifestModel;
 import org.fhir.pojo.ImagingManifest;
+import org.fhir.pojo.ImagingManifestHelper;
 
 public class ImagingManifestDaoImpl implements ImagingManifestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImagingManifestDaoImpl implements ImagingManifestDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImagingManifestModel a", ImagingManifestModel.class).setMaxResults(maxResult);
       List<ImagingManifestModel> models = query.getResultList();
-      return ImagingManifest.fromArray(models);
+      return ImagingManifestHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ImagingManifestDaoImpl implements ImagingManifestDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImagingManifestModel a", ImagingManifestModel.class);
       List<ImagingManifestModel> models = query.getResultList();
-      return ImagingManifest.fromArray(models);
+      return ImagingManifestHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ImagingManifestDaoImpl implements ImagingManifestDao {
       ImagingManifestModel model = em.merge(new ImagingManifestModel(e));
       return new ImagingManifest(model);
   }
-
   @Override
   @Transactional
   public void delete(ImagingManifest e) {

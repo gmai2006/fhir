@@ -32,7 +32,5 @@ public interface PatientCommunicationService {
 	public PatientCommunication find(String id);
   public List<PatientCommunication> select(int maxResult);
   public List<PatientCommunication> selectAll();
-  public PatientCommunication create(PatientCommunication bean);
-  public PatientCommunication update(PatientCommunication bean);
   public void delete(PatientCommunication bean);
 }

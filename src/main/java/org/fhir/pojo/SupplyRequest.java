@@ -165,6 +165,7 @@ public class SupplyRequest  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -216,83 +217,59 @@ public class SupplyRequest  {
 
   public SupplyRequest(SupplyRequestModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      if (null != o.getPriority()) {
-        this.priority = new String(o.getPriority());
-      }
-
-      if (null != o.getOrderedItem()) {
-        this.orderedItem = new SupplyRequestOrderedItem(o.getOrderedItem());
-        this.orderedItem.setId(this.getId());
-      }
-
-      if (null != o.getOccurrenceDateTime()) {
-        this.occurrenceDateTime = new String(o.getOccurrenceDateTime());
-      }
-
-      this.occurrencePeriod = Period.fromJson(o.getOccurrencePeriod());
-      this.occurrenceTiming = Timing.fromJson(o.getOccurrenceTiming());
-      if (null != o.getAuthoredOn()) {
-        this.authoredOn = new String(o.getAuthoredOn());
-      }
-
-      if (null != o.getRequester()) {
-        this.requester = new SupplyRequestRequester(o.getRequester());
-        this.requester.setId(this.getId());
-      }
-
-      this.supplier = Reference.fromArray(o.getSupplier());
-
-      this.reasonCodeableConcept = CodeableConcept.fromJson(o.getReasonCodeableConcept());
-      if (null != o.getReasonReference()) {
-        this.reasonReference = new Reference(o.getReasonReference());
-        this.reasonReference.setId(this.getId());
-      }
-
-      if (null != o.getDeliverFrom()) {
-        this.deliverFrom = new Reference(o.getDeliverFrom());
-        this.deliverFrom.setId(this.getId());
-      }
-
-      if (null != o.getDeliverTo()) {
-        this.deliverTo = new Reference(o.getDeliverTo());
-        this.deliverTo.setId(this.getId());
-      }
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    if (null != o.getPriority()) {
+      this.priority = o.getPriority();
+    }
+    if (null != o.getOrderedItem() && !o.getOrderedItem().isEmpty()) {
+      this.orderedItem = new SupplyRequestOrderedItem(o.getOrderedItem().get(0));
+    }
+    if (null != o.getOccurrenceDateTime()) {
+      this.occurrenceDateTime = o.getOccurrenceDateTime();
+    }
+    this.occurrencePeriod = PeriodHelper.fromJson(o.getOccurrencePeriod());
+    this.occurrenceTiming = TimingHelper.fromJson(o.getOccurrenceTiming());
+    if (null != o.getAuthoredOn()) {
+      this.authoredOn = o.getAuthoredOn();
+    }
+    if (null != o.getRequester() && !o.getRequester().isEmpty()) {
+      this.requester = new SupplyRequestRequester(o.getRequester().get(0));
+    }
+    if (null != o.getSupplier() && !o.getSupplier().isEmpty()) {
+    	this.supplier = ReferenceHelper.fromArray2Array(o.getSupplier());
+    }
+    this.reasonCodeableConcept = CodeableConceptHelper.fromJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
+      this.reasonReference = new Reference(o.getReasonReference().get(0));
+    }
+    if (null != o.getDeliverFrom() && !o.getDeliverFrom().isEmpty()) {
+      this.deliverFrom = new Reference(o.getDeliverFrom().get(0));
+    }
+    if (null != o.getDeliverTo() && !o.getDeliverTo().isEmpty()) {
+      this.deliverTo = new Reference(o.getDeliverTo().get(0));
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -485,37 +462,38 @@ public class SupplyRequest  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("priority" + "[" + String.valueOf(this.priority) + "]\n"); 
-     builder.append("_priority" + "[" + String.valueOf(this._priority) + "]\n"); 
-     builder.append("orderedItem" + "[" + String.valueOf(this.orderedItem) + "]\n"); 
-     builder.append("occurrenceDateTime" + "[" + String.valueOf(this.occurrenceDateTime) + "]\n"); 
-     builder.append("_occurrenceDateTime" + "[" + String.valueOf(this._occurrenceDateTime) + "]\n"); 
-     builder.append("occurrencePeriod" + "[" + String.valueOf(this.occurrencePeriod) + "]\n"); 
-     builder.append("occurrenceTiming" + "[" + String.valueOf(this.occurrenceTiming) + "]\n"); 
-     builder.append("authoredOn" + "[" + String.valueOf(this.authoredOn) + "]\n"); 
-     builder.append("_authoredOn" + "[" + String.valueOf(this._authoredOn) + "]\n"); 
-     builder.append("requester" + "[" + String.valueOf(this.requester) + "]\n"); 
-     builder.append("supplier" + "[" + String.valueOf(this.supplier) + "]\n"); 
-     builder.append("reasonCodeableConcept" + "[" + String.valueOf(this.reasonCodeableConcept) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("deliverFrom" + "[" + String.valueOf(this.deliverFrom) + "]\n"); 
-     builder.append("deliverTo" + "[" + String.valueOf(this.deliverTo) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[SupplyRequest]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.priority != null) builder.append("priority" + "->" + this.priority.toString() + "\n"); 
+     if(this._priority != null) builder.append("_priority" + "->" + this._priority.toString() + "\n"); 
+     if(this.orderedItem != null) builder.append("orderedItem" + "->" + this.orderedItem.toString() + "\n"); 
+     if(this.occurrenceDateTime != null) builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime.toString() + "\n"); 
+     if(this._occurrenceDateTime != null) builder.append("_occurrenceDateTime" + "->" + this._occurrenceDateTime.toString() + "\n"); 
+     if(this.occurrencePeriod != null) builder.append("occurrencePeriod" + "->" + this.occurrencePeriod.toString() + "\n"); 
+     if(this.occurrenceTiming != null) builder.append("occurrenceTiming" + "->" + this.occurrenceTiming.toString() + "\n"); 
+     if(this.authoredOn != null) builder.append("authoredOn" + "->" + this.authoredOn.toString() + "\n"); 
+     if(this._authoredOn != null) builder.append("_authoredOn" + "->" + this._authoredOn.toString() + "\n"); 
+     if(this.requester != null) builder.append("requester" + "->" + this.requester.toString() + "\n"); 
+     if(this.supplier != null) builder.append("supplier" + "->" + this.supplier.toString() + "\n"); 
+     if(this.reasonCodeableConcept != null) builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept.toString() + "\n"); 
+     if(this.reasonReference != null) builder.append("reasonReference" + "->" + this.reasonReference.toString() + "\n"); 
+     if(this.deliverFrom != null) builder.append("deliverFrom" + "->" + this.deliverFrom.toString() + "\n"); 
+     if(this.deliverTo != null) builder.append("deliverTo" + "->" + this.deliverTo.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -555,36 +533,4 @@ public class SupplyRequest  {
   	}
   }
 
-  public static java.util.List<SupplyRequest> fromArray(java.util.List<SupplyRequestModel> list) {
-    return (java.util.List<SupplyRequest>)list.stream()
-      .map(model -> new SupplyRequest(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SupplyRequestModel> toModelArray(java.util.List<SupplyRequest> list) {
-    return (java.util.List<SupplyRequestModel>)list.stream()
-      .map(model -> new SupplyRequestModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SupplyRequest fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SupplyRequest.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SupplyRequest o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SupplyRequest> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

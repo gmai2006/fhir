@@ -409,6 +409,7 @@ public class TaskInput  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -881,102 +882,83 @@ public class TaskInput  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("valueBoolean" + "[" + String.valueOf(this.valueBoolean) + "]\n"); 
-     builder.append("_valueBoolean" + "[" + String.valueOf(this._valueBoolean) + "]\n"); 
-     builder.append("valueInteger" + "[" + String.valueOf(this.valueInteger) + "]\n"); 
-     builder.append("_valueInteger" + "[" + String.valueOf(this._valueInteger) + "]\n"); 
-     builder.append("valueDecimal" + "[" + String.valueOf(this.valueDecimal) + "]\n"); 
-     builder.append("_valueDecimal" + "[" + String.valueOf(this._valueDecimal) + "]\n"); 
-     builder.append("valueBase64Binary" + "[" + String.valueOf(this.valueBase64Binary) + "]\n"); 
-     builder.append("_valueBase64Binary" + "[" + String.valueOf(this._valueBase64Binary) + "]\n"); 
-     builder.append("valueInstant" + "[" + String.valueOf(this.valueInstant) + "]\n"); 
-     builder.append("_valueInstant" + "[" + String.valueOf(this._valueInstant) + "]\n"); 
-     builder.append("valueString" + "[" + String.valueOf(this.valueString) + "]\n"); 
-     builder.append("_valueString" + "[" + String.valueOf(this._valueString) + "]\n"); 
-     builder.append("valueUri" + "[" + String.valueOf(this.valueUri) + "]\n"); 
-     builder.append("_valueUri" + "[" + String.valueOf(this._valueUri) + "]\n"); 
-     builder.append("valueDate" + "[" + String.valueOf(this.valueDate) + "]\n"); 
-     builder.append("_valueDate" + "[" + String.valueOf(this._valueDate) + "]\n"); 
-     builder.append("valueDateTime" + "[" + String.valueOf(this.valueDateTime) + "]\n"); 
-     builder.append("_valueDateTime" + "[" + String.valueOf(this._valueDateTime) + "]\n"); 
-     builder.append("valueTime" + "[" + String.valueOf(this.valueTime) + "]\n"); 
-     builder.append("_valueTime" + "[" + String.valueOf(this._valueTime) + "]\n"); 
-     builder.append("valueCode" + "[" + String.valueOf(this.valueCode) + "]\n"); 
-     builder.append("_valueCode" + "[" + String.valueOf(this._valueCode) + "]\n"); 
-     builder.append("valueOid" + "[" + String.valueOf(this.valueOid) + "]\n"); 
-     builder.append("_valueOid" + "[" + String.valueOf(this._valueOid) + "]\n"); 
-     builder.append("valueUuid" + "[" + String.valueOf(this.valueUuid) + "]\n"); 
-     builder.append("_valueUuid" + "[" + String.valueOf(this._valueUuid) + "]\n"); 
-     builder.append("valueId" + "[" + String.valueOf(this.valueId) + "]\n"); 
-     builder.append("_valueId" + "[" + String.valueOf(this._valueId) + "]\n"); 
-     builder.append("valueUnsignedInt" + "[" + String.valueOf(this.valueUnsignedInt) + "]\n"); 
-     builder.append("_valueUnsignedInt" + "[" + String.valueOf(this._valueUnsignedInt) + "]\n"); 
-     builder.append("valuePositiveInt" + "[" + String.valueOf(this.valuePositiveInt) + "]\n"); 
-     builder.append("_valuePositiveInt" + "[" + String.valueOf(this._valuePositiveInt) + "]\n"); 
-     builder.append("valueMarkdown" + "[" + String.valueOf(this.valueMarkdown) + "]\n"); 
-     builder.append("_valueMarkdown" + "[" + String.valueOf(this._valueMarkdown) + "]\n"); 
-     builder.append("valueElement" + "[" + String.valueOf(this.valueElement) + "]\n"); 
-     builder.append("valueExtension" + "[" + String.valueOf(this.valueExtension) + "]\n"); 
-     builder.append("valueBackboneElement" + "[" + String.valueOf(this.valueBackboneElement) + "]\n"); 
-     builder.append("valueNarrative" + "[" + String.valueOf(this.valueNarrative) + "]\n"); 
-     builder.append("valueAnnotation" + "[" + String.valueOf(this.valueAnnotation) + "]\n"); 
-     builder.append("valueAttachment" + "[" + String.valueOf(this.valueAttachment) + "]\n"); 
-     builder.append("valueIdentifier" + "[" + String.valueOf(this.valueIdentifier) + "]\n"); 
-     builder.append("valueCodeableConcept" + "[" + String.valueOf(this.valueCodeableConcept) + "]\n"); 
-     builder.append("valueCoding" + "[" + String.valueOf(this.valueCoding) + "]\n"); 
-     builder.append("valueQuantity" + "[" + String.valueOf(this.valueQuantity) + "]\n"); 
-     builder.append("valueDuration" + "[" + String.valueOf(this.valueDuration) + "]\n"); 
-     builder.append("valueSimpleQuantity" + "[" + String.valueOf(this.valueSimpleQuantity) + "]\n"); 
-     builder.append("valueDistance" + "[" + String.valueOf(this.valueDistance) + "]\n"); 
-     builder.append("valueCount" + "[" + String.valueOf(this.valueCount) + "]\n"); 
-     builder.append("valueMoney" + "[" + String.valueOf(this.valueMoney) + "]\n"); 
-     builder.append("valueAge" + "[" + String.valueOf(this.valueAge) + "]\n"); 
-     builder.append("valueRange" + "[" + String.valueOf(this.valueRange) + "]\n"); 
-     builder.append("valuePeriod" + "[" + String.valueOf(this.valuePeriod) + "]\n"); 
-     builder.append("valueRatio" + "[" + String.valueOf(this.valueRatio) + "]\n"); 
-     builder.append("valueReference" + "[" + String.valueOf(this.valueReference) + "]\n"); 
-     builder.append("valueSampledData" + "[" + String.valueOf(this.valueSampledData) + "]\n"); 
-     builder.append("valueSignature" + "[" + String.valueOf(this.valueSignature) + "]\n"); 
-     builder.append("valueHumanName" + "[" + String.valueOf(this.valueHumanName) + "]\n"); 
-     builder.append("valueAddress" + "[" + String.valueOf(this.valueAddress) + "]\n"); 
-     builder.append("valueContactPoint" + "[" + String.valueOf(this.valueContactPoint) + "]\n"); 
-     builder.append("valueTiming" + "[" + String.valueOf(this.valueTiming) + "]\n"); 
-     builder.append("valueMeta" + "[" + String.valueOf(this.valueMeta) + "]\n"); 
-     builder.append("valueElementDefinition" + "[" + String.valueOf(this.valueElementDefinition) + "]\n"); 
-     builder.append("valueContactDetail" + "[" + String.valueOf(this.valueContactDetail) + "]\n"); 
-     builder.append("valueContributor" + "[" + String.valueOf(this.valueContributor) + "]\n"); 
-     builder.append("valueDosage" + "[" + String.valueOf(this.valueDosage) + "]\n"); 
-     builder.append("valueRelatedArtifact" + "[" + String.valueOf(this.valueRelatedArtifact) + "]\n"); 
-     builder.append("valueUsageContext" + "[" + String.valueOf(this.valueUsageContext) + "]\n"); 
-     builder.append("valueDataRequirement" + "[" + String.valueOf(this.valueDataRequirement) + "]\n"); 
-     builder.append("valueParameterDefinition" + "[" + String.valueOf(this.valueParameterDefinition) + "]\n"); 
-     builder.append("valueTriggerDefinition" + "[" + String.valueOf(this.valueTriggerDefinition) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TaskInput]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.valueBoolean != null) builder.append("valueBoolean" + "->" + this.valueBoolean.toString() + "\n"); 
+     if(this._valueBoolean != null) builder.append("_valueBoolean" + "->" + this._valueBoolean.toString() + "\n"); 
+     if(this.valueInteger != null) builder.append("valueInteger" + "->" + this.valueInteger.toString() + "\n"); 
+     if(this._valueInteger != null) builder.append("_valueInteger" + "->" + this._valueInteger.toString() + "\n"); 
+     if(this.valueDecimal != null) builder.append("valueDecimal" + "->" + this.valueDecimal.toString() + "\n"); 
+     if(this._valueDecimal != null) builder.append("_valueDecimal" + "->" + this._valueDecimal.toString() + "\n"); 
+     if(this.valueBase64Binary != null) builder.append("valueBase64Binary" + "->" + this.valueBase64Binary.toString() + "\n"); 
+     if(this._valueBase64Binary != null) builder.append("_valueBase64Binary" + "->" + this._valueBase64Binary.toString() + "\n"); 
+     if(this.valueInstant != null) builder.append("valueInstant" + "->" + this.valueInstant.toString() + "\n"); 
+     if(this._valueInstant != null) builder.append("_valueInstant" + "->" + this._valueInstant.toString() + "\n"); 
+     if(this.valueString != null) builder.append("valueString" + "->" + this.valueString.toString() + "\n"); 
+     if(this._valueString != null) builder.append("_valueString" + "->" + this._valueString.toString() + "\n"); 
+     if(this.valueUri != null) builder.append("valueUri" + "->" + this.valueUri.toString() + "\n"); 
+     if(this._valueUri != null) builder.append("_valueUri" + "->" + this._valueUri.toString() + "\n"); 
+     if(this.valueDate != null) builder.append("valueDate" + "->" + this.valueDate.toString() + "\n"); 
+     if(this._valueDate != null) builder.append("_valueDate" + "->" + this._valueDate.toString() + "\n"); 
+     if(this.valueDateTime != null) builder.append("valueDateTime" + "->" + this.valueDateTime.toString() + "\n"); 
+     if(this._valueDateTime != null) builder.append("_valueDateTime" + "->" + this._valueDateTime.toString() + "\n"); 
+     if(this.valueTime != null) builder.append("valueTime" + "->" + this.valueTime.toString() + "\n"); 
+     if(this._valueTime != null) builder.append("_valueTime" + "->" + this._valueTime.toString() + "\n"); 
+     if(this.valueCode != null) builder.append("valueCode" + "->" + this.valueCode.toString() + "\n"); 
+     if(this._valueCode != null) builder.append("_valueCode" + "->" + this._valueCode.toString() + "\n"); 
+     if(this.valueOid != null) builder.append("valueOid" + "->" + this.valueOid.toString() + "\n"); 
+     if(this._valueOid != null) builder.append("_valueOid" + "->" + this._valueOid.toString() + "\n"); 
+     if(this.valueUuid != null) builder.append("valueUuid" + "->" + this.valueUuid.toString() + "\n"); 
+     if(this._valueUuid != null) builder.append("_valueUuid" + "->" + this._valueUuid.toString() + "\n"); 
+     if(this.valueId != null) builder.append("valueId" + "->" + this.valueId.toString() + "\n"); 
+     if(this._valueId != null) builder.append("_valueId" + "->" + this._valueId.toString() + "\n"); 
+     if(this.valueUnsignedInt != null) builder.append("valueUnsignedInt" + "->" + this.valueUnsignedInt.toString() + "\n"); 
+     if(this._valueUnsignedInt != null) builder.append("_valueUnsignedInt" + "->" + this._valueUnsignedInt.toString() + "\n"); 
+     if(this.valuePositiveInt != null) builder.append("valuePositiveInt" + "->" + this.valuePositiveInt.toString() + "\n"); 
+     if(this._valuePositiveInt != null) builder.append("_valuePositiveInt" + "->" + this._valuePositiveInt.toString() + "\n"); 
+     if(this.valueMarkdown != null) builder.append("valueMarkdown" + "->" + this.valueMarkdown.toString() + "\n"); 
+     if(this._valueMarkdown != null) builder.append("_valueMarkdown" + "->" + this._valueMarkdown.toString() + "\n"); 
+     if(this.valueElement != null) builder.append("valueElement" + "->" + this.valueElement.toString() + "\n"); 
+     if(this.valueExtension != null) builder.append("valueExtension" + "->" + this.valueExtension.toString() + "\n"); 
+     if(this.valueBackboneElement != null) builder.append("valueBackboneElement" + "->" + this.valueBackboneElement.toString() + "\n"); 
+     if(this.valueNarrative != null) builder.append("valueNarrative" + "->" + this.valueNarrative.toString() + "\n"); 
+     if(this.valueAnnotation != null) builder.append("valueAnnotation" + "->" + this.valueAnnotation.toString() + "\n"); 
+     if(this.valueAttachment != null) builder.append("valueAttachment" + "->" + this.valueAttachment.toString() + "\n"); 
+     if(this.valueIdentifier != null) builder.append("valueIdentifier" + "->" + this.valueIdentifier.toString() + "\n"); 
+     if(this.valueCodeableConcept != null) builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept.toString() + "\n"); 
+     if(this.valueCoding != null) builder.append("valueCoding" + "->" + this.valueCoding.toString() + "\n"); 
+     if(this.valueQuantity != null) builder.append("valueQuantity" + "->" + this.valueQuantity.toString() + "\n"); 
+     if(this.valueDuration != null) builder.append("valueDuration" + "->" + this.valueDuration.toString() + "\n"); 
+     if(this.valueSimpleQuantity != null) builder.append("valueSimpleQuantity" + "->" + this.valueSimpleQuantity.toString() + "\n"); 
+     if(this.valueDistance != null) builder.append("valueDistance" + "->" + this.valueDistance.toString() + "\n"); 
+     if(this.valueCount != null) builder.append("valueCount" + "->" + this.valueCount.toString() + "\n"); 
+     if(this.valueMoney != null) builder.append("valueMoney" + "->" + this.valueMoney.toString() + "\n"); 
+     if(this.valueAge != null) builder.append("valueAge" + "->" + this.valueAge.toString() + "\n"); 
+     if(this.valueRange != null) builder.append("valueRange" + "->" + this.valueRange.toString() + "\n"); 
+     if(this.valuePeriod != null) builder.append("valuePeriod" + "->" + this.valuePeriod.toString() + "\n"); 
+     if(this.valueRatio != null) builder.append("valueRatio" + "->" + this.valueRatio.toString() + "\n"); 
+     if(this.valueReference != null) builder.append("valueReference" + "->" + this.valueReference.toString() + "\n"); 
+     if(this.valueSampledData != null) builder.append("valueSampledData" + "->" + this.valueSampledData.toString() + "\n"); 
+     if(this.valueSignature != null) builder.append("valueSignature" + "->" + this.valueSignature.toString() + "\n"); 
+     if(this.valueHumanName != null) builder.append("valueHumanName" + "->" + this.valueHumanName.toString() + "\n"); 
+     if(this.valueAddress != null) builder.append("valueAddress" + "->" + this.valueAddress.toString() + "\n"); 
+     if(this.valueContactPoint != null) builder.append("valueContactPoint" + "->" + this.valueContactPoint.toString() + "\n"); 
+     if(this.valueTiming != null) builder.append("valueTiming" + "->" + this.valueTiming.toString() + "\n"); 
+     if(this.valueMeta != null) builder.append("valueMeta" + "->" + this.valueMeta.toString() + "\n"); 
+     if(this.valueElementDefinition != null) builder.append("valueElementDefinition" + "->" + this.valueElementDefinition.toString() + "\n"); 
+     if(this.valueContactDetail != null) builder.append("valueContactDetail" + "->" + this.valueContactDetail.toString() + "\n"); 
+     if(this.valueContributor != null) builder.append("valueContributor" + "->" + this.valueContributor.toString() + "\n"); 
+     if(this.valueDosage != null) builder.append("valueDosage" + "->" + this.valueDosage.toString() + "\n"); 
+     if(this.valueRelatedArtifact != null) builder.append("valueRelatedArtifact" + "->" + this.valueRelatedArtifact.toString() + "\n"); 
+     if(this.valueUsageContext != null) builder.append("valueUsageContext" + "->" + this.valueUsageContext.toString() + "\n"); 
+     if(this.valueDataRequirement != null) builder.append("valueDataRequirement" + "->" + this.valueDataRequirement.toString() + "\n"); 
+     if(this.valueParameterDefinition != null) builder.append("valueParameterDefinition" + "->" + this.valueParameterDefinition.toString() + "\n"); 
+     if(this.valueTriggerDefinition != null) builder.append("valueTriggerDefinition" + "->" + this.valueTriggerDefinition.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static TaskInput fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TaskInput.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TaskInput o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TaskInput> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CompartmentDefinitionResource create(CompartmentDefinitionResource bean) {
-  	requireNonNull(bean);
-    logger.info("create(CompartmentDefinitionResource={}) - entered bean ");
-
-    final CompartmentDefinitionResource result = dao.create(bean);
-
-    logger.info("create(CompartmentDefinitionResource) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CompartmentDefinitionResource update(CompartmentDefinitionResource bean) {
-  	requireNonNull(bean);
-    logger.info("update(CompartmentDefinitionResource={}) - entered bean ");
-
-    final CompartmentDefinitionResource result = dao.update(bean);
-
-    logger.info("update(CompartmentDefinitionResource) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

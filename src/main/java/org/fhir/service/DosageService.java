@@ -32,7 +32,5 @@ public interface DosageService {
 	public Dosage find(String id);
   public List<Dosage> select(int maxResult);
   public List<Dosage> selectAll();
-  public Dosage create(Dosage bean);
-  public Dosage update(Dosage bean);
   public void delete(Dosage bean);
 }

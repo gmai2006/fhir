@@ -34,10 +34,8 @@ public interface AccountDao {
   public List<Account> select(int maxResult);
 
   public List<Account> selectAll();
-
   public Account create(Account e);
 
   public Account update(Account e);
-
   public void delete(Account e);
 }

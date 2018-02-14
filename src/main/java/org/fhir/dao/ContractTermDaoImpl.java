@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ContractTermModel;
 import org.fhir.pojo.ContractTerm;
+import org.fhir.pojo.ContractTermHelper;
 
 public class ContractTermDaoImpl implements ContractTermDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ContractTermDaoImpl implements ContractTermDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContractTermModel a", ContractTermModel.class).setMaxResults(maxResult);
       List<ContractTermModel> models = query.getResultList();
-      return ContractTerm.fromArray(models);
+      return ContractTermHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ContractTermDaoImpl implements ContractTermDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContractTermModel a", ContractTermModel.class);
       List<ContractTermModel> models = query.getResultList();
-      return ContractTerm.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ContractTerm create(ContractTerm e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ContractTermModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ContractTerm update(ContractTerm e) {
-      final EntityManager em = entityManagerProvider.get();
-      ContractTermModel model = em.merge(new ContractTermModel(e));
-      return new ContractTerm(model);
+      return ContractTermHelper.fromArray2Array(models);
   }
 
   @Override

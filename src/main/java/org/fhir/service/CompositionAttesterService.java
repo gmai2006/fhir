@@ -32,7 +32,5 @@ public interface CompositionAttesterService {
 	public CompositionAttester find(String id);
   public List<CompositionAttester> select(int maxResult);
   public List<CompositionAttester> selectAll();
-  public CompositionAttester create(CompositionAttester bean);
-  public CompositionAttester update(CompositionAttester bean);
   public void delete(CompositionAttester bean);
 }

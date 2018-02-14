@@ -34,10 +34,5 @@ public interface TimingRepeatDao {
   public List<TimingRepeat> select(int maxResult);
 
   public List<TimingRepeat> selectAll();
-
-  public TimingRepeat create(TimingRepeat e);
-
-  public TimingRepeat update(TimingRepeat e);
-
   public void delete(TimingRepeat e);
 }

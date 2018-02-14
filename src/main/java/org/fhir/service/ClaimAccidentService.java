@@ -32,7 +32,5 @@ public interface ClaimAccidentService {
 	public ClaimAccident find(String id);
   public List<ClaimAccident> select(int maxResult);
   public List<ClaimAccident> selectAll();
-  public ClaimAccident create(ClaimAccident bean);
-  public ClaimAccident update(ClaimAccident bean);
   public void delete(ClaimAccident bean);
 }

@@ -34,10 +34,5 @@ public interface ConceptMapGroupDao {
   public List<ConceptMapGroup> select(int maxResult);
 
   public List<ConceptMapGroup> selectAll();
-
-  public ConceptMapGroup create(ConceptMapGroup e);
-
-  public ConceptMapGroup update(ConceptMapGroup e);
-
   public void delete(ConceptMapGroup e);
 }

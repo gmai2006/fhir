@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ConditionStageModel;
 import org.fhir.pojo.ConditionStage;
+import org.fhir.pojo.ConditionStageHelper;
 
 public class ConditionStageDaoImpl implements ConditionStageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ConditionStageDaoImpl implements ConditionStageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConditionStageModel a", ConditionStageModel.class).setMaxResults(maxResult);
       List<ConditionStageModel> models = query.getResultList();
-      return ConditionStage.fromArray(models);
+      return ConditionStageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ConditionStageDaoImpl implements ConditionStageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConditionStageModel a", ConditionStageModel.class);
       List<ConditionStageModel> models = query.getResultList();
-      return ConditionStage.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ConditionStage create(ConditionStage e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ConditionStageModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ConditionStage update(ConditionStage e) {
-      final EntityManager em = entityManagerProvider.get();
-      ConditionStageModel model = em.merge(new ConditionStageModel(e));
-      return new ConditionStage(model);
+      return ConditionStageHelper.fromArray2Array(models);
   }
 
   @Override

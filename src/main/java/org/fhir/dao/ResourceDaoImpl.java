@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ResourceModel;
 import org.fhir.pojo.Resource;
+import org.fhir.pojo.ResourceHelper;
 
 public class ResourceDaoImpl implements ResourceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ResourceDaoImpl implements ResourceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ResourceModel a", ResourceModel.class).setMaxResults(maxResult);
       List<ResourceModel> models = query.getResultList();
-      return Resource.fromArray(models);
+      return ResourceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ResourceDaoImpl implements ResourceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ResourceModel a", ResourceModel.class);
       List<ResourceModel> models = query.getResultList();
-      return Resource.fromArray(models);
+      return ResourceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ResourceDaoImpl implements ResourceDao {
       ResourceModel model = em.merge(new ResourceModel(e));
       return new Resource(model);
   }
-
   @Override
   @Transactional
   public void delete(Resource e) {

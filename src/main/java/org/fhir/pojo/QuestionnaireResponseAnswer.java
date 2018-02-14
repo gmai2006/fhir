@@ -153,6 +153,7 @@ public class QuestionnaireResponseAnswer  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -174,54 +175,42 @@ public class QuestionnaireResponseAnswer  {
 
   public QuestionnaireResponseAnswer(QuestionnaireResponseAnswerModel o) {
     this.id = o.getId();
-      if (null != o.getValueBoolean()) {
-        this.valueBoolean = new Boolean(o.getValueBoolean());
-      }
-
-      if (null != o.getValueDecimal()) {
-        this.valueDecimal = new Float(o.getValueDecimal());
-      }
-
-      if (null != o.getValueInteger()) {
-        this.valueInteger = new Float(o.getValueInteger());
-      }
-
-      if (null != o.getValueDate()) {
-        this.valueDate = new String(o.getValueDate());
-      }
-
-      if (null != o.getValueDateTime()) {
-        this.valueDateTime = new String(o.getValueDateTime());
-      }
-
-      if (null != o.getValueTime()) {
-        this.valueTime = new String(o.getValueTime());
-      }
-
-      if (null != o.getValueString()) {
-        this.valueString = new String(o.getValueString());
-      }
-
-      if (null != o.getValueUri()) {
-        this.valueUri = new String(o.getValueUri());
-      }
-
-      this.valueAttachment = Attachment.fromJson(o.getValueAttachment());
-      this.valueCoding = Coding.fromJson(o.getValueCoding());
-      this.valueQuantity = Quantity.fromJson(o.getValueQuantity());
-      if (null != o.getValueReference()) {
-        this.valueReference = new Reference(o.getValueReference());
-        this.valueReference.setId(this.getId());
-      }
-
-      this.item = QuestionnaireResponseItem.fromArray(o.getItem());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getValueBoolean()) {
+      this.valueBoolean = o.getValueBoolean();
+    }
+    if (null != o.getValueDecimal()) {
+      this.valueDecimal = o.getValueDecimal();
+    }
+    if (null != o.getValueInteger()) {
+      this.valueInteger = o.getValueInteger();
+    }
+    if (null != o.getValueDate()) {
+      this.valueDate = o.getValueDate();
+    }
+    if (null != o.getValueDateTime()) {
+      this.valueDateTime = o.getValueDateTime();
+    }
+    if (null != o.getValueTime()) {
+      this.valueTime = o.getValueTime();
+    }
+    if (null != o.getValueString()) {
+      this.valueString = o.getValueString();
+    }
+    if (null != o.getValueUri()) {
+      this.valueUri = o.getValueUri();
+    }
+    this.valueAttachment = AttachmentHelper.fromJson(o.getValueAttachment());
+    this.valueCoding = CodingHelper.fromJson(o.getValueCoding());
+    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    if (null != o.getValueReference() && !o.getValueReference().isEmpty()) {
+      this.valueReference = new Reference(o.getValueReference().get(0));
+    }
+    if (null != o.getItem() && !o.getItem().isEmpty()) {
+    	this.item = QuestionnaireResponseItemHelper.fromArray2Array(o.getItem());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setValueBoolean( Boolean value) {
@@ -378,65 +367,34 @@ public class QuestionnaireResponseAnswer  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("valueBoolean" + "[" + String.valueOf(this.valueBoolean) + "]\n"); 
-     builder.append("_valueBoolean" + "[" + String.valueOf(this._valueBoolean) + "]\n"); 
-     builder.append("valueDecimal" + "[" + String.valueOf(this.valueDecimal) + "]\n"); 
-     builder.append("_valueDecimal" + "[" + String.valueOf(this._valueDecimal) + "]\n"); 
-     builder.append("valueInteger" + "[" + String.valueOf(this.valueInteger) + "]\n"); 
-     builder.append("_valueInteger" + "[" + String.valueOf(this._valueInteger) + "]\n"); 
-     builder.append("valueDate" + "[" + String.valueOf(this.valueDate) + "]\n"); 
-     builder.append("_valueDate" + "[" + String.valueOf(this._valueDate) + "]\n"); 
-     builder.append("valueDateTime" + "[" + String.valueOf(this.valueDateTime) + "]\n"); 
-     builder.append("_valueDateTime" + "[" + String.valueOf(this._valueDateTime) + "]\n"); 
-     builder.append("valueTime" + "[" + String.valueOf(this.valueTime) + "]\n"); 
-     builder.append("_valueTime" + "[" + String.valueOf(this._valueTime) + "]\n"); 
-     builder.append("valueString" + "[" + String.valueOf(this.valueString) + "]\n"); 
-     builder.append("_valueString" + "[" + String.valueOf(this._valueString) + "]\n"); 
-     builder.append("valueUri" + "[" + String.valueOf(this.valueUri) + "]\n"); 
-     builder.append("_valueUri" + "[" + String.valueOf(this._valueUri) + "]\n"); 
-     builder.append("valueAttachment" + "[" + String.valueOf(this.valueAttachment) + "]\n"); 
-     builder.append("valueCoding" + "[" + String.valueOf(this.valueCoding) + "]\n"); 
-     builder.append("valueQuantity" + "[" + String.valueOf(this.valueQuantity) + "]\n"); 
-     builder.append("valueReference" + "[" + String.valueOf(this.valueReference) + "]\n"); 
-     builder.append("item" + "[" + String.valueOf(this.item) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[QuestionnaireResponseAnswer]:" + "\n");
+     if(this.valueBoolean != null) builder.append("valueBoolean" + "->" + this.valueBoolean.toString() + "\n"); 
+     if(this._valueBoolean != null) builder.append("_valueBoolean" + "->" + this._valueBoolean.toString() + "\n"); 
+     if(this.valueDecimal != null) builder.append("valueDecimal" + "->" + this.valueDecimal.toString() + "\n"); 
+     if(this._valueDecimal != null) builder.append("_valueDecimal" + "->" + this._valueDecimal.toString() + "\n"); 
+     if(this.valueInteger != null) builder.append("valueInteger" + "->" + this.valueInteger.toString() + "\n"); 
+     if(this._valueInteger != null) builder.append("_valueInteger" + "->" + this._valueInteger.toString() + "\n"); 
+     if(this.valueDate != null) builder.append("valueDate" + "->" + this.valueDate.toString() + "\n"); 
+     if(this._valueDate != null) builder.append("_valueDate" + "->" + this._valueDate.toString() + "\n"); 
+     if(this.valueDateTime != null) builder.append("valueDateTime" + "->" + this.valueDateTime.toString() + "\n"); 
+     if(this._valueDateTime != null) builder.append("_valueDateTime" + "->" + this._valueDateTime.toString() + "\n"); 
+     if(this.valueTime != null) builder.append("valueTime" + "->" + this.valueTime.toString() + "\n"); 
+     if(this._valueTime != null) builder.append("_valueTime" + "->" + this._valueTime.toString() + "\n"); 
+     if(this.valueString != null) builder.append("valueString" + "->" + this.valueString.toString() + "\n"); 
+     if(this._valueString != null) builder.append("_valueString" + "->" + this._valueString.toString() + "\n"); 
+     if(this.valueUri != null) builder.append("valueUri" + "->" + this.valueUri.toString() + "\n"); 
+     if(this._valueUri != null) builder.append("_valueUri" + "->" + this._valueUri.toString() + "\n"); 
+     if(this.valueAttachment != null) builder.append("valueAttachment" + "->" + this.valueAttachment.toString() + "\n"); 
+     if(this.valueCoding != null) builder.append("valueCoding" + "->" + this.valueCoding.toString() + "\n"); 
+     if(this.valueQuantity != null) builder.append("valueQuantity" + "->" + this.valueQuantity.toString() + "\n"); 
+     if(this.valueReference != null) builder.append("valueReference" + "->" + this.valueReference.toString() + "\n"); 
+     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<QuestionnaireResponseAnswer> fromArray(java.util.List<QuestionnaireResponseAnswerModel> list) {
-    return (java.util.List<QuestionnaireResponseAnswer>)list.stream()
-      .map(model -> new QuestionnaireResponseAnswer(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<QuestionnaireResponseAnswerModel> toModelArray(java.util.List<QuestionnaireResponseAnswer> list) {
-    return (java.util.List<QuestionnaireResponseAnswerModel>)list.stream()
-      .map(model -> new QuestionnaireResponseAnswerModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static QuestionnaireResponseAnswer fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, QuestionnaireResponseAnswer.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(QuestionnaireResponseAnswer o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<QuestionnaireResponseAnswer> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

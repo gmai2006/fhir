@@ -88,6 +88,7 @@ public class QuestionnaireResponseItem  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -109,33 +110,27 @@ public class QuestionnaireResponseItem  {
 
   public QuestionnaireResponseItem(QuestionnaireResponseItemModel o) {
     this.id = o.getId();
-      if (null != o.getLinkId()) {
-        this.linkId = new String(o.getLinkId());
-      }
-
-      if (null != o.getDefinition()) {
-        this.definition = new String(o.getDefinition());
-      }
-
-      if (null != o.getText()) {
-        this.text = new String(o.getText());
-      }
-
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      this.answer = QuestionnaireResponseAnswer.fromArray(o.getAnswer());
-
-      this.item = QuestionnaireResponseItem.fromArray(o.getItem());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getLinkId()) {
+      this.linkId = o.getLinkId();
+    }
+    if (null != o.getDefinition()) {
+      this.definition = o.getDefinition();
+    }
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getAnswer() && !o.getAnswer().isEmpty()) {
+    	this.answer = QuestionnaireResponseAnswerHelper.fromArray2Array(o.getAnswer());
+    }
+    if (null != o.getItem() && !o.getItem().isEmpty()) {
+    	this.item = QuestionnaireResponseItemHelper.fromArray2Array(o.getItem());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLinkId( String value) {
@@ -220,53 +215,22 @@ public class QuestionnaireResponseItem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("linkId" + "[" + String.valueOf(this.linkId) + "]\n"); 
-     builder.append("_linkId" + "[" + String.valueOf(this._linkId) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("_definition" + "[" + String.valueOf(this._definition) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("answer" + "[" + String.valueOf(this.answer) + "]\n"); 
-     builder.append("item" + "[" + String.valueOf(this.item) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[QuestionnaireResponseItem]:" + "\n");
+     if(this.linkId != null) builder.append("linkId" + "->" + this.linkId.toString() + "\n"); 
+     if(this._linkId != null) builder.append("_linkId" + "->" + this._linkId.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this._definition != null) builder.append("_definition" + "->" + this._definition.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.answer != null) builder.append("answer" + "->" + this.answer.toString() + "\n"); 
+     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<QuestionnaireResponseItem> fromArray(java.util.List<QuestionnaireResponseItemModel> list) {
-    return (java.util.List<QuestionnaireResponseItem>)list.stream()
-      .map(model -> new QuestionnaireResponseItem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<QuestionnaireResponseItemModel> toModelArray(java.util.List<QuestionnaireResponseItem> list) {
-    return (java.util.List<QuestionnaireResponseItemModel>)list.stream()
-      .map(model -> new QuestionnaireResponseItemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static QuestionnaireResponseItem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, QuestionnaireResponseItem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(QuestionnaireResponseItem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<QuestionnaireResponseItem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

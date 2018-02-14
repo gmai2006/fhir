@@ -65,6 +65,7 @@ public class ImagingManifestSeries  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -86,20 +87,18 @@ public class ImagingManifestSeries  {
 
   public ImagingManifestSeries(ImagingManifestSeriesModel o) {
     this.id = o.getId();
-      if (null != o.getUid()) {
-        this.uid = new String(o.getUid());
-      }
-
-      this.endpoint = Reference.fromArray(o.getEndpoint());
-
-      this.instance = ImagingManifestInstance.fromArray(o.getInstance());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getUid()) {
+      this.uid = o.getUid();
+    }
+    if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
+    	this.endpoint = ReferenceHelper.fromArray2Array(o.getEndpoint());
+    }
+    if (null != o.getInstance() && !o.getInstance().isEmpty()) {
+    	this.instance = ImagingManifestInstanceHelper.fromArray2Array(o.getInstance());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setUid( String value) {
@@ -154,48 +153,17 @@ public class ImagingManifestSeries  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("uid" + "[" + String.valueOf(this.uid) + "]\n"); 
-     builder.append("_uid" + "[" + String.valueOf(this._uid) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("instance" + "[" + String.valueOf(this.instance) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImagingManifestSeries]:" + "\n");
+     if(this.uid != null) builder.append("uid" + "->" + this.uid.toString() + "\n"); 
+     if(this._uid != null) builder.append("_uid" + "->" + this._uid.toString() + "\n"); 
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
+     if(this.instance != null) builder.append("instance" + "->" + this.instance.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ImagingManifestSeries> fromArray(java.util.List<ImagingManifestSeriesModel> list) {
-    return (java.util.List<ImagingManifestSeries>)list.stream()
-      .map(model -> new ImagingManifestSeries(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImagingManifestSeriesModel> toModelArray(java.util.List<ImagingManifestSeries> list) {
-    return (java.util.List<ImagingManifestSeriesModel>)list.stream()
-      .map(model -> new ImagingManifestSeriesModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImagingManifestSeries fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImagingManifestSeries.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImagingManifestSeries o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImagingManifestSeries> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

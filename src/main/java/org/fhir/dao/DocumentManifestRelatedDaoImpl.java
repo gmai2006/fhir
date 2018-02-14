@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DocumentManifestRelatedModel;
 import org.fhir.pojo.DocumentManifestRelated;
+import org.fhir.pojo.DocumentManifestRelatedHelper;
 
 public class DocumentManifestRelatedDaoImpl implements DocumentManifestRelatedDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DocumentManifestRelatedDaoImpl implements DocumentManifestRelatedDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentManifestRelatedModel a", DocumentManifestRelatedModel.class).setMaxResults(maxResult);
       List<DocumentManifestRelatedModel> models = query.getResultList();
-      return DocumentManifestRelated.fromArray(models);
+      return DocumentManifestRelatedHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DocumentManifestRelatedDaoImpl implements DocumentManifestRelatedDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentManifestRelatedModel a", DocumentManifestRelatedModel.class);
       List<DocumentManifestRelatedModel> models = query.getResultList();
-      return DocumentManifestRelated.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DocumentManifestRelated create(DocumentManifestRelated e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DocumentManifestRelatedModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DocumentManifestRelated update(DocumentManifestRelated e) {
-      final EntityManager em = entityManagerProvider.get();
-      DocumentManifestRelatedModel model = em.merge(new DocumentManifestRelatedModel(e));
-      return new DocumentManifestRelated(model);
+      return DocumentManifestRelatedHelper.fromArray2Array(models);
   }
 
   @Override

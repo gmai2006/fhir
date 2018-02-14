@@ -119,6 +119,7 @@ public class Attachment  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -253,46 +254,27 @@ public class Attachment  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("contentType" + "[" + String.valueOf(this.contentType) + "]\n"); 
-     builder.append("_contentType" + "[" + String.valueOf(this._contentType) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); 
-     builder.append("data" + "[" + String.valueOf(this.data) + "]\n"); 
-     builder.append("_data" + "[" + String.valueOf(this._data) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("size" + "[" + String.valueOf(this.size) + "]\n"); 
-     builder.append("_size" + "[" + String.valueOf(this._size) + "]\n"); 
-     builder.append("hash" + "[" + String.valueOf(this.hash) + "]\n"); 
-     builder.append("_hash" + "[" + String.valueOf(this._hash) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("creation" + "[" + String.valueOf(this.creation) + "]\n"); 
-     builder.append("_creation" + "[" + String.valueOf(this._creation) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Attachment]:" + "\n");
+     if(this.contentType != null) builder.append("contentType" + "->" + this.contentType.toString() + "\n"); 
+     if(this._contentType != null) builder.append("_contentType" + "->" + this._contentType.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); 
+     if(this.data != null) builder.append("data" + "->" + this.data.toString() + "\n"); 
+     if(this._data != null) builder.append("_data" + "->" + this._data.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.size != null) builder.append("size" + "->" + this.size.toString() + "\n"); 
+     if(this._size != null) builder.append("_size" + "->" + this._size.toString() + "\n"); 
+     if(this.hash != null) builder.append("hash" + "->" + this.hash.toString() + "\n"); 
+     if(this._hash != null) builder.append("_hash" + "->" + this._hash.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.creation != null) builder.append("creation" + "->" + this.creation.toString() + "\n"); 
+     if(this._creation != null) builder.append("_creation" + "->" + this._creation.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static Attachment fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Attachment.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Attachment o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Attachment> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

@@ -32,7 +32,5 @@ public interface DistanceService {
 	public Distance find(String id);
   public List<Distance> select(int maxResult);
   public List<Distance> selectAll();
-  public Distance create(Distance bean);
-  public Distance update(Distance bean);
   public void delete(Distance bean);
 }

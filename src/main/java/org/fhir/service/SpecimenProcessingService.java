@@ -32,7 +32,5 @@ public interface SpecimenProcessingService {
 	public SpecimenProcessing find(String id);
   public List<SpecimenProcessing> select(int maxResult);
   public List<SpecimenProcessing> selectAll();
-  public SpecimenProcessing create(SpecimenProcessing bean);
-  public SpecimenProcessing update(SpecimenProcessing bean);
   public void delete(SpecimenProcessing bean);
 }

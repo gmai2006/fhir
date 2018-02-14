@@ -73,6 +73,7 @@ public class MeasureSupplementalData  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -94,22 +95,16 @@ public class MeasureSupplementalData  {
 
   public MeasureSupplementalData(MeasureSupplementalDataModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      this.usage = CodeableConcept.fromArray(o.getUsage());
-      if (null != o.getCriteria()) {
-        this.criteria = new String(o.getCriteria());
-      }
-
-      if (null != o.getPath()) {
-        this.path = new String(o.getPath());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getCriteria()) {
+      this.criteria = o.getCriteria();
+    }
+    if (null != o.getPath()) {
+      this.path = o.getPath();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( Identifier value) {
@@ -176,50 +171,19 @@ public class MeasureSupplementalData  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("usage" + "[" + String.valueOf(this.usage) + "]\n"); 
-     builder.append("criteria" + "[" + String.valueOf(this.criteria) + "]\n"); 
-     builder.append("_criteria" + "[" + String.valueOf(this._criteria) + "]\n"); 
-     builder.append("path" + "[" + String.valueOf(this.path) + "]\n"); 
-     builder.append("_path" + "[" + String.valueOf(this._path) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MeasureSupplementalData]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.usage != null) builder.append("usage" + "->" + this.usage.toString() + "\n"); 
+     if(this.criteria != null) builder.append("criteria" + "->" + this.criteria.toString() + "\n"); 
+     if(this._criteria != null) builder.append("_criteria" + "->" + this._criteria.toString() + "\n"); 
+     if(this.path != null) builder.append("path" + "->" + this.path.toString() + "\n"); 
+     if(this._path != null) builder.append("_path" + "->" + this._path.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MeasureSupplementalData> fromArray(java.util.List<MeasureSupplementalDataModel> list) {
-    return (java.util.List<MeasureSupplementalData>)list.stream()
-      .map(model -> new MeasureSupplementalData(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MeasureSupplementalDataModel> toModelArray(java.util.List<MeasureSupplementalData> list) {
-    return (java.util.List<MeasureSupplementalDataModel>)list.stream()
-      .map(model -> new MeasureSupplementalDataModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MeasureSupplementalData fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MeasureSupplementalData.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MeasureSupplementalData o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MeasureSupplementalData> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CoverageGrouping create(CoverageGrouping bean) {
-  	requireNonNull(bean);
-    logger.info("create(CoverageGrouping={}) - entered bean ");
-
-    final CoverageGrouping result = dao.create(bean);
-
-    logger.info("create(CoverageGrouping) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CoverageGrouping update(CoverageGrouping bean) {
-  	requireNonNull(bean);
-    logger.info("update(CoverageGrouping={}) - entered bean ");
-
-    final CoverageGrouping result = dao.update(bean);
-
-    logger.info("update(CoverageGrouping) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

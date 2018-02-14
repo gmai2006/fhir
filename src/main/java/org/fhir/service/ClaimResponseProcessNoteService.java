@@ -32,7 +32,5 @@ public interface ClaimResponseProcessNoteService {
 	public ClaimResponseProcessNote find(String id);
   public List<ClaimResponseProcessNote> select(int maxResult);
   public List<ClaimResponseProcessNote> selectAll();
-  public ClaimResponseProcessNote create(ClaimResponseProcessNote bean);
-  public ClaimResponseProcessNote update(ClaimResponseProcessNote bean);
   public void delete(ClaimResponseProcessNote bean);
 }

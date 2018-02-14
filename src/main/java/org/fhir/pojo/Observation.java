@@ -271,6 +271,7 @@ public class Observation  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -322,112 +323,88 @@ public class Observation  {
 
   public Observation(ObservationModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.basedOn = Reference.fromArray(o.getBasedOn());
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.category = CodeableConcept.fromArray(o.getCategory());
-      this.code = CodeableConcept.fromJson(o.getCode());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getEffectiveDateTime()) {
-        this.effectiveDateTime = new String(o.getEffectiveDateTime());
-      }
-
-      this.effectivePeriod = Period.fromJson(o.getEffectivePeriod());
-      if (null != o.getIssued()) {
-        this.issued = new String(o.getIssued());
-      }
-
-      this.performer = Reference.fromArray(o.getPerformer());
-
-      this.valueQuantity = Quantity.fromJson(o.getValueQuantity());
-      this.valueCodeableConcept = CodeableConcept.fromJson(o.getValueCodeableConcept());
-      if (null != o.getValueString()) {
-        this.valueString = new String(o.getValueString());
-      }
-
-      if (null != o.getValueBoolean()) {
-        this.valueBoolean = new Boolean(o.getValueBoolean());
-      }
-
-      this.valueRange = Range.fromJson(o.getValueRange());
-      this.valueRatio = Ratio.fromJson(o.getValueRatio());
-      this.valueSampledData = SampledData.fromJson(o.getValueSampledData());
-      this.valueAttachment = Attachment.fromJson(o.getValueAttachment());
-      if (null != o.getValueTime()) {
-        this.valueTime = new String(o.getValueTime());
-      }
-
-      if (null != o.getValueDateTime()) {
-        this.valueDateTime = new String(o.getValueDateTime());
-      }
-
-      this.valuePeriod = Period.fromJson(o.getValuePeriod());
-      this.dataAbsentReason = CodeableConcept.fromJson(o.getDataAbsentReason());
-      this.interpretation = CodeableConcept.fromJson(o.getInterpretation());
-      if (null != o.getComment()) {
-        this.comment = new String(o.getComment());
-      }
-
-      this.bodySite = CodeableConcept.fromJson(o.getBodySite());
-      this.method = CodeableConcept.fromJson(o.getMethod());
-      if (null != o.getSpecimen()) {
-        this.specimen = new Reference(o.getSpecimen());
-        this.specimen.setId(this.getId());
-      }
-
-      if (null != o.getDevice()) {
-        this.device = new Reference(o.getDevice());
-        this.device.setId(this.getId());
-      }
-
-      this.referenceRange = ObservationReferenceRange.fromArray(o.getReferenceRange());
-
-      this.related = ObservationRelated.fromArray(o.getRelated());
-
-      this.component = ObservationComponent.fromArray(o.getComponent());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedOn = ReferenceHelper.fromArray2Array(o.getBasedOn());
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getEffectiveDateTime()) {
+      this.effectiveDateTime = o.getEffectiveDateTime();
+    }
+    this.effectivePeriod = PeriodHelper.fromJson(o.getEffectivePeriod());
+    if (null != o.getIssued()) {
+      this.issued = o.getIssued();
+    }
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+    	this.performer = ReferenceHelper.fromArray2Array(o.getPerformer());
+    }
+    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
+    if (null != o.getValueString()) {
+      this.valueString = o.getValueString();
+    }
+    if (null != o.getValueBoolean()) {
+      this.valueBoolean = o.getValueBoolean();
+    }
+    this.valueRange = RangeHelper.fromJson(o.getValueRange());
+    this.valueRatio = RatioHelper.fromJson(o.getValueRatio());
+    this.valueSampledData = SampledDataHelper.fromJson(o.getValueSampledData());
+    this.valueAttachment = AttachmentHelper.fromJson(o.getValueAttachment());
+    if (null != o.getValueTime()) {
+      this.valueTime = o.getValueTime();
+    }
+    if (null != o.getValueDateTime()) {
+      this.valueDateTime = o.getValueDateTime();
+    }
+    this.valuePeriod = PeriodHelper.fromJson(o.getValuePeriod());
+    this.dataAbsentReason = CodeableConceptHelper.fromJson(o.getDataAbsentReason());
+    this.interpretation = CodeableConceptHelper.fromJson(o.getInterpretation());
+    if (null != o.getComment()) {
+      this.comment = o.getComment();
+    }
+    this.bodySite = CodeableConceptHelper.fromJson(o.getBodySite());
+    this.method = CodeableConceptHelper.fromJson(o.getMethod());
+    if (null != o.getSpecimen() && !o.getSpecimen().isEmpty()) {
+      this.specimen = new Reference(o.getSpecimen().get(0));
+    }
+    if (null != o.getDevice() && !o.getDevice().isEmpty()) {
+      this.device = new Reference(o.getDevice().get(0));
+    }
+    if (null != o.getReferenceRange() && !o.getReferenceRange().isEmpty()) {
+    	this.referenceRange = ObservationReferenceRangeHelper.fromArray2Array(o.getReferenceRange());
+    }
+    if (null != o.getRelated() && !o.getRelated().isEmpty()) {
+    	this.related = ObservationRelatedHelper.fromArray2Array(o.getRelated());
+    }
+    if (null != o.getComponent() && !o.getComponent().isEmpty()) {
+    	this.component = ObservationComponentHelper.fromArray2Array(o.getComponent());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -746,58 +723,59 @@ public class Observation  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("effectiveDateTime" + "[" + String.valueOf(this.effectiveDateTime) + "]\n"); 
-     builder.append("_effectiveDateTime" + "[" + String.valueOf(this._effectiveDateTime) + "]\n"); 
-     builder.append("effectivePeriod" + "[" + String.valueOf(this.effectivePeriod) + "]\n"); 
-     builder.append("issued" + "[" + String.valueOf(this.issued) + "]\n"); 
-     builder.append("_issued" + "[" + String.valueOf(this._issued) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("valueQuantity" + "[" + String.valueOf(this.valueQuantity) + "]\n"); 
-     builder.append("valueCodeableConcept" + "[" + String.valueOf(this.valueCodeableConcept) + "]\n"); 
-     builder.append("valueString" + "[" + String.valueOf(this.valueString) + "]\n"); 
-     builder.append("_valueString" + "[" + String.valueOf(this._valueString) + "]\n"); 
-     builder.append("valueBoolean" + "[" + String.valueOf(this.valueBoolean) + "]\n"); 
-     builder.append("_valueBoolean" + "[" + String.valueOf(this._valueBoolean) + "]\n"); 
-     builder.append("valueRange" + "[" + String.valueOf(this.valueRange) + "]\n"); 
-     builder.append("valueRatio" + "[" + String.valueOf(this.valueRatio) + "]\n"); 
-     builder.append("valueSampledData" + "[" + String.valueOf(this.valueSampledData) + "]\n"); 
-     builder.append("valueAttachment" + "[" + String.valueOf(this.valueAttachment) + "]\n"); 
-     builder.append("valueTime" + "[" + String.valueOf(this.valueTime) + "]\n"); 
-     builder.append("_valueTime" + "[" + String.valueOf(this._valueTime) + "]\n"); 
-     builder.append("valueDateTime" + "[" + String.valueOf(this.valueDateTime) + "]\n"); 
-     builder.append("_valueDateTime" + "[" + String.valueOf(this._valueDateTime) + "]\n"); 
-     builder.append("valuePeriod" + "[" + String.valueOf(this.valuePeriod) + "]\n"); 
-     builder.append("dataAbsentReason" + "[" + String.valueOf(this.dataAbsentReason) + "]\n"); 
-     builder.append("interpretation" + "[" + String.valueOf(this.interpretation) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("_comment" + "[" + String.valueOf(this._comment) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("method" + "[" + String.valueOf(this.method) + "]\n"); 
-     builder.append("specimen" + "[" + String.valueOf(this.specimen) + "]\n"); 
-     builder.append("device" + "[" + String.valueOf(this.device) + "]\n"); 
-     builder.append("referenceRange" + "[" + String.valueOf(this.referenceRange) + "]\n"); 
-     builder.append("related" + "[" + String.valueOf(this.related) + "]\n"); 
-     builder.append("component" + "[" + String.valueOf(this.component) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Observation]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.basedOn != null) builder.append("basedOn" + "->" + this.basedOn.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.effectiveDateTime != null) builder.append("effectiveDateTime" + "->" + this.effectiveDateTime.toString() + "\n"); 
+     if(this._effectiveDateTime != null) builder.append("_effectiveDateTime" + "->" + this._effectiveDateTime.toString() + "\n"); 
+     if(this.effectivePeriod != null) builder.append("effectivePeriod" + "->" + this.effectivePeriod.toString() + "\n"); 
+     if(this.issued != null) builder.append("issued" + "->" + this.issued.toString() + "\n"); 
+     if(this._issued != null) builder.append("_issued" + "->" + this._issued.toString() + "\n"); 
+     if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
+     if(this.valueQuantity != null) builder.append("valueQuantity" + "->" + this.valueQuantity.toString() + "\n"); 
+     if(this.valueCodeableConcept != null) builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept.toString() + "\n"); 
+     if(this.valueString != null) builder.append("valueString" + "->" + this.valueString.toString() + "\n"); 
+     if(this._valueString != null) builder.append("_valueString" + "->" + this._valueString.toString() + "\n"); 
+     if(this.valueBoolean != null) builder.append("valueBoolean" + "->" + this.valueBoolean.toString() + "\n"); 
+     if(this._valueBoolean != null) builder.append("_valueBoolean" + "->" + this._valueBoolean.toString() + "\n"); 
+     if(this.valueRange != null) builder.append("valueRange" + "->" + this.valueRange.toString() + "\n"); 
+     if(this.valueRatio != null) builder.append("valueRatio" + "->" + this.valueRatio.toString() + "\n"); 
+     if(this.valueSampledData != null) builder.append("valueSampledData" + "->" + this.valueSampledData.toString() + "\n"); 
+     if(this.valueAttachment != null) builder.append("valueAttachment" + "->" + this.valueAttachment.toString() + "\n"); 
+     if(this.valueTime != null) builder.append("valueTime" + "->" + this.valueTime.toString() + "\n"); 
+     if(this._valueTime != null) builder.append("_valueTime" + "->" + this._valueTime.toString() + "\n"); 
+     if(this.valueDateTime != null) builder.append("valueDateTime" + "->" + this.valueDateTime.toString() + "\n"); 
+     if(this._valueDateTime != null) builder.append("_valueDateTime" + "->" + this._valueDateTime.toString() + "\n"); 
+     if(this.valuePeriod != null) builder.append("valuePeriod" + "->" + this.valuePeriod.toString() + "\n"); 
+     if(this.dataAbsentReason != null) builder.append("dataAbsentReason" + "->" + this.dataAbsentReason.toString() + "\n"); 
+     if(this.interpretation != null) builder.append("interpretation" + "->" + this.interpretation.toString() + "\n"); 
+     if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
+     if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
+     if(this.bodySite != null) builder.append("bodySite" + "->" + this.bodySite.toString() + "\n"); 
+     if(this.method != null) builder.append("method" + "->" + this.method.toString() + "\n"); 
+     if(this.specimen != null) builder.append("specimen" + "->" + this.specimen.toString() + "\n"); 
+     if(this.device != null) builder.append("device" + "->" + this.device.toString() + "\n"); 
+     if(this.referenceRange != null) builder.append("referenceRange" + "->" + this.referenceRange.toString() + "\n"); 
+     if(this.related != null) builder.append("related" + "->" + this.related.toString() + "\n"); 
+     if(this.component != null) builder.append("component" + "->" + this.component.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -839,36 +817,4 @@ public class Observation  {
   	}
   }
 
-  public static java.util.List<Observation> fromArray(java.util.List<ObservationModel> list) {
-    return (java.util.List<Observation>)list.stream()
-      .map(model -> new Observation(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ObservationModel> toModelArray(java.util.List<Observation> list) {
-    return (java.util.List<ObservationModel>)list.stream()
-      .map(model -> new ObservationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Observation fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Observation.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Observation o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Observation> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MedicationRequestSubstitutionModel;
 import org.fhir.pojo.MedicationRequestSubstitution;
+import org.fhir.pojo.MedicationRequestSubstitutionHelper;
 
 public class MedicationRequestSubstitutionDaoImpl implements MedicationRequestSubstitutionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MedicationRequestSubstitutionDaoImpl implements MedicationRequestSu
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationRequestSubstitutionModel a", MedicationRequestSubstitutionModel.class).setMaxResults(maxResult);
       List<MedicationRequestSubstitutionModel> models = query.getResultList();
-      return MedicationRequestSubstitution.fromArray(models);
+      return MedicationRequestSubstitutionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MedicationRequestSubstitutionDaoImpl implements MedicationRequestSu
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationRequestSubstitutionModel a", MedicationRequestSubstitutionModel.class);
       List<MedicationRequestSubstitutionModel> models = query.getResultList();
-      return MedicationRequestSubstitution.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MedicationRequestSubstitution create(MedicationRequestSubstitution e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MedicationRequestSubstitutionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MedicationRequestSubstitution update(MedicationRequestSubstitution e) {
-      final EntityManager em = entityManagerProvider.get();
-      MedicationRequestSubstitutionModel model = em.merge(new MedicationRequestSubstitutionModel(e));
-      return new MedicationRequestSubstitution(model);
+      return MedicationRequestSubstitutionHelper.fromArray2Array(models);
   }
 
   @Override

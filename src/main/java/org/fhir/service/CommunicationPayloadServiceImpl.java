@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CommunicationPayload create(CommunicationPayload bean) {
-  	requireNonNull(bean);
-    logger.info("create(CommunicationPayload={}) - entered bean ");
-
-    final CommunicationPayload result = dao.create(bean);
-
-    logger.info("create(CommunicationPayload) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CommunicationPayload update(CommunicationPayload bean) {
-  	requireNonNull(bean);
-    logger.info("update(CommunicationPayload={}) - entered bean ");
-
-    final CommunicationPayload result = dao.update(bean);
-
-    logger.info("update(CommunicationPayload) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

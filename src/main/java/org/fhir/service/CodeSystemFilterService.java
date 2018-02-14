@@ -32,7 +32,5 @@ public interface CodeSystemFilterService {
 	public CodeSystemFilter find(String id);
   public List<CodeSystemFilter> select(int maxResult);
   public List<CodeSystemFilter> selectAll();
-  public CodeSystemFilter create(CodeSystemFilter bean);
-  public CodeSystemFilter update(CodeSystemFilter bean);
   public void delete(CodeSystemFilter bean);
 }

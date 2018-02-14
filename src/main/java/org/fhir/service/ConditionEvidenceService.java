@@ -32,7 +32,5 @@ public interface ConditionEvidenceService {
 	public ConditionEvidence find(String id);
   public List<ConditionEvidence> select(int maxResult);
   public List<ConditionEvidence> selectAll();
-  public ConditionEvidence create(ConditionEvidence bean);
-  public ConditionEvidence update(ConditionEvidence bean);
   public void delete(ConditionEvidence bean);
 }

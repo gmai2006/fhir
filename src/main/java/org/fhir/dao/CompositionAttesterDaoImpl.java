@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CompositionAttesterModel;
 import org.fhir.pojo.CompositionAttester;
+import org.fhir.pojo.CompositionAttesterHelper;
 
 public class CompositionAttesterDaoImpl implements CompositionAttesterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CompositionAttesterDaoImpl implements CompositionAttesterDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompositionAttesterModel a", CompositionAttesterModel.class).setMaxResults(maxResult);
       List<CompositionAttesterModel> models = query.getResultList();
-      return CompositionAttester.fromArray(models);
+      return CompositionAttesterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CompositionAttesterDaoImpl implements CompositionAttesterDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompositionAttesterModel a", CompositionAttesterModel.class);
       List<CompositionAttesterModel> models = query.getResultList();
-      return CompositionAttester.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CompositionAttester create(CompositionAttester e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CompositionAttesterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CompositionAttester update(CompositionAttester e) {
-      final EntityManager em = entityManagerProvider.get();
-      CompositionAttesterModel model = em.merge(new CompositionAttesterModel(e));
-      return new CompositionAttester(model);
+      return CompositionAttesterHelper.fromArray2Array(models);
   }
 
   @Override

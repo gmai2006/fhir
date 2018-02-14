@@ -34,10 +34,5 @@ public interface DetectedIssueMitigationDao {
   public List<DetectedIssueMitigation> select(int maxResult);
 
   public List<DetectedIssueMitigation> selectAll();
-
-  public DetectedIssueMitigation create(DetectedIssueMitigation e);
-
-  public DetectedIssueMitigation update(DetectedIssueMitigation e);
-
   public void delete(DetectedIssueMitigation e);
 }

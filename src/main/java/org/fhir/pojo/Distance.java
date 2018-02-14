@@ -99,6 +99,7 @@ public class Distance  {
    derived from Element
    derived from Quantity
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -120,31 +121,24 @@ public class Distance  {
 
   public Distance(DistanceModel o) {
     this.id = o.getId();
-      if (null != o.getValue()) {
-        this.value = new Float(o.getValue());
-      }
-
-      if (null != o.getComparator()) {
-        this.comparator = new String(o.getComparator());
-      }
-
-      if (null != o.getUnit()) {
-        this.unit = new String(o.getUnit());
-      }
-
-      if (null != o.getSystem()) {
-        this.system = new String(o.getSystem());
-      }
-
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getValue()) {
+      this.value = o.getValue();
+    }
+    if (null != o.getComparator()) {
+      this.comparator = o.getComparator();
+    }
+    if (null != o.getUnit()) {
+      this.unit = o.getUnit();
+    }
+    if (null != o.getSystem()) {
+      this.system = o.getSystem();
+    }
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setValue( Float value) {
@@ -229,19 +223,20 @@ public class Distance  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("_value" + "[" + String.valueOf(this._value) + "]\n"); 
-     builder.append("comparator" + "[" + String.valueOf(this.comparator) + "]\n"); 
-     builder.append("_comparator" + "[" + String.valueOf(this._comparator) + "]\n"); 
-     builder.append("unit" + "[" + String.valueOf(this.unit) + "]\n"); 
-     builder.append("_unit" + "[" + String.valueOf(this._unit) + "]\n"); 
-     builder.append("system" + "[" + String.valueOf(this.system) + "]\n"); 
-     builder.append("_system" + "[" + String.valueOf(this._system) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Distance]:" + "\n");
+     if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
+     if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
+     if(this.comparator != null) builder.append("comparator" + "->" + this.comparator.toString() + "\n"); 
+     if(this._comparator != null) builder.append("_comparator" + "->" + this._comparator.toString() + "\n"); 
+     if(this.unit != null) builder.append("unit" + "->" + this.unit.toString() + "\n"); 
+     if(this._unit != null) builder.append("_unit" + "->" + this._unit.toString() + "\n"); 
+     if(this.system != null) builder.append("system" + "->" + this.system.toString() + "\n"); 
+     if(this._system != null) builder.append("_system" + "->" + this._system.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -263,36 +258,4 @@ public class Distance  {
   	}
   }
 
-  public static java.util.List<Distance> fromArray(java.util.List<DistanceModel> list) {
-    return (java.util.List<Distance>)list.stream()
-      .map(model -> new Distance(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DistanceModel> toModelArray(java.util.List<Distance> list) {
-    return (java.util.List<DistanceModel>)list.stream()
-      .map(model -> new DistanceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Distance fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Distance.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Distance o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Distance> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

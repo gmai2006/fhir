@@ -32,7 +32,5 @@ public interface ExplanationOfBenefitRelatedService {
 	public ExplanationOfBenefitRelated find(String id);
   public List<ExplanationOfBenefitRelated> select(int maxResult);
   public List<ExplanationOfBenefitRelated> selectAll();
-  public ExplanationOfBenefitRelated create(ExplanationOfBenefitRelated bean);
-  public ExplanationOfBenefitRelated update(ExplanationOfBenefitRelated bean);
   public void delete(ExplanationOfBenefitRelated bean);
 }

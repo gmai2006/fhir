@@ -34,10 +34,5 @@ public interface DocumentReferenceContextDao {
   public List<DocumentReferenceContext> select(int maxResult);
 
   public List<DocumentReferenceContext> selectAll();
-
-  public DocumentReferenceContext create(DocumentReferenceContext e);
-
-  public DocumentReferenceContext update(DocumentReferenceContext e);
-
   public void delete(DocumentReferenceContext e);
 }

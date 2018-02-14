@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitaccident")
-public class ExplanationOfBenefitAccidentModel  {
+public class ExplanationOfBenefitAccidentModel  implements Serializable {
+	private static final long serialVersionUID = 151857669703025290L;
   /**
   * Description: "Date of an accident which these services are addressing."
   */
@@ -47,7 +48,7 @@ public class ExplanationOfBenefitAccidentModel  {
 
   /**
   * Description: "Type of accident: work, auto, etc."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -56,7 +57,7 @@ public class ExplanationOfBenefitAccidentModel  {
 
   /**
   * Description: "Where the accident occurred."
-  * Actual type: Address
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -70,14 +71,14 @@ public class ExplanationOfBenefitAccidentModel  {
   @Column(name="\"locationreference_id\"")
   private String locationreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`locationreference_id`", insertable=false, updatable=false)
-  private ReferenceModel locationReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="locationreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> locationReference;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -89,6 +90,7 @@ public class ExplanationOfBenefitAccidentModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -97,93 +99,110 @@ public class ExplanationOfBenefitAccidentModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ExplanationOfBenefitAccidentModel() {
   }
 
-  public ExplanationOfBenefitAccidentModel(ExplanationOfBenefitAccident o) {
-    this.id = o.getId();
-      this.date = o.getDate();
-
-      this.type = CodeableConcept.toJson(o.getType());
-      this.locationAddress = Address.toJson(o.getLocationAddress());
-      if (null != o.getLocationReference()) {
-      	this.locationreference_id = "locationReference" + this.getId();
-        this.locationReference = new ReferenceModel(o.getLocationReference());
-        this.locationReference.setId(this.locationreference_id);
-        this.locationReference.parent_id = this.locationReference.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ExplanationOfBenefitAccidentModel(ExplanationOfBenefitAccident o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.date = o.getDate();
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.locationAddress = AddressHelper.toJson(o.getLocationAddress());
+    if (null != o.getLocationReference() ) {
+    	this.locationreference_id = "locationreference" + this.parent_id;
+    	this.locationReference = ReferenceHelper.toModel(o.getLocationReference(), this.locationreference_id);
+    }
   }
 
-  public void setDate( String value) {
-    this.date = value;
-  }
   public String getDate() {
     return this.date;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setLocationAddress( String value) {
-    this.locationAddress = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getLocationAddress() {
     return this.locationAddress;
   }
-  public void setLocationReference( ReferenceModel value) {
-    this.locationReference = value;
+  public void setLocationAddress( String value) {
+    this.locationAddress = value;
   }
-  public ReferenceModel getLocationReference() {
+  public java.util.List<ReferenceModel> getLocationReference() {
     return this.locationReference;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setLocationReference( java.util.List<ReferenceModel> value) {
+    this.locationReference = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("locationAddress" + "[" + String.valueOf(this.locationAddress) + "]\n"); 
-     builder.append("locationReference" + "[" + String.valueOf(this.locationReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitAccidentModel]:" + "\n");
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("locationAddress" + "->" + this.locationAddress + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ExplanationOfBenefitAccidentModel]:" + "\n");
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("locationAddress" + "->" + this.locationAddress + "\n"); 
+     builder.append("locationReference" + "->" + this.locationReference + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

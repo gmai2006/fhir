@@ -32,7 +32,5 @@ public interface ProvenanceAgentService {
 	public ProvenanceAgent find(String id);
   public List<ProvenanceAgent> select(int maxResult);
   public List<ProvenanceAgent> selectAll();
-  public ProvenanceAgent create(ProvenanceAgent bean);
-  public ProvenanceAgent update(ProvenanceAgent bean);
   public void delete(ProvenanceAgent bean);
 }

@@ -32,7 +32,5 @@ public interface DeviceComponentProductionSpecificationService {
 	public DeviceComponentProductionSpecification find(String id);
   public List<DeviceComponentProductionSpecification> select(int maxResult);
   public List<DeviceComponentProductionSpecification> selectAll();
-  public DeviceComponentProductionSpecification create(DeviceComponentProductionSpecification bean);
-  public DeviceComponentProductionSpecification update(DeviceComponentProductionSpecification bean);
   public void delete(DeviceComponentProductionSpecification bean);
 }

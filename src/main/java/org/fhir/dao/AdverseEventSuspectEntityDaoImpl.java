@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AdverseEventSuspectEntityModel;
 import org.fhir.pojo.AdverseEventSuspectEntity;
+import org.fhir.pojo.AdverseEventSuspectEntityHelper;
 
 public class AdverseEventSuspectEntityDaoImpl implements AdverseEventSuspectEntityDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AdverseEventSuspectEntityDaoImpl implements AdverseEventSuspectEnti
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AdverseEventSuspectEntityModel a", AdverseEventSuspectEntityModel.class).setMaxResults(maxResult);
       List<AdverseEventSuspectEntityModel> models = query.getResultList();
-      return AdverseEventSuspectEntity.fromArray(models);
+      return AdverseEventSuspectEntityHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class AdverseEventSuspectEntityDaoImpl implements AdverseEventSuspectEnti
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AdverseEventSuspectEntityModel a", AdverseEventSuspectEntityModel.class);
       List<AdverseEventSuspectEntityModel> models = query.getResultList();
-      return AdverseEventSuspectEntity.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public AdverseEventSuspectEntity create(AdverseEventSuspectEntity e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new AdverseEventSuspectEntityModel(e));
-      return e;
-  }
-
-  @Transactional
-  public AdverseEventSuspectEntity update(AdverseEventSuspectEntity e) {
-      final EntityManager em = entityManagerProvider.get();
-      AdverseEventSuspectEntityModel model = em.merge(new AdverseEventSuspectEntityModel(e));
-      return new AdverseEventSuspectEntity(model);
+      return AdverseEventSuspectEntityHelper.fromArray2Array(models);
   }
 
   @Override

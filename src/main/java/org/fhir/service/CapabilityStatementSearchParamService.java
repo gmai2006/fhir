@@ -32,7 +32,5 @@ public interface CapabilityStatementSearchParamService {
 	public CapabilityStatementSearchParam find(String id);
   public List<CapabilityStatementSearchParam> select(int maxResult);
   public List<CapabilityStatementSearchParam> selectAll();
-  public CapabilityStatementSearchParam create(CapabilityStatementSearchParam bean);
-  public CapabilityStatementSearchParam update(CapabilityStatementSearchParam bean);
   public void delete(CapabilityStatementSearchParam bean);
 }

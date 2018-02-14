@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SequenceRepositoryModel;
 import org.fhir.pojo.SequenceRepository;
+import org.fhir.pojo.SequenceRepositoryHelper;
 
 public class SequenceRepositoryDaoImpl implements SequenceRepositoryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SequenceRepositoryDaoImpl implements SequenceRepositoryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SequenceRepositoryModel a", SequenceRepositoryModel.class).setMaxResults(maxResult);
       List<SequenceRepositoryModel> models = query.getResultList();
-      return SequenceRepository.fromArray(models);
+      return SequenceRepositoryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SequenceRepositoryDaoImpl implements SequenceRepositoryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SequenceRepositoryModel a", SequenceRepositoryModel.class);
       List<SequenceRepositoryModel> models = query.getResultList();
-      return SequenceRepository.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SequenceRepository create(SequenceRepository e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SequenceRepositoryModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SequenceRepository update(SequenceRepository e) {
-      final EntityManager em = entityManagerProvider.get();
-      SequenceRepositoryModel model = em.merge(new SequenceRepositoryModel(e));
-      return new SequenceRepository(model);
+      return SequenceRepositoryHelper.fromArray2Array(models);
   }
 
   @Override

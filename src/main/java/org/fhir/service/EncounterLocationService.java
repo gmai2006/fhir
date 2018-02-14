@@ -32,7 +32,5 @@ public interface EncounterLocationService {
 	public EncounterLocation find(String id);
   public List<EncounterLocation> select(int maxResult);
   public List<EncounterLocation> selectAll();
-  public EncounterLocation create(EncounterLocation bean);
-  public EncounterLocation update(EncounterLocation bean);
   public void delete(EncounterLocation bean);
 }

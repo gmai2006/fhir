@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc."
 */
 @Entity
 @Table(name="accountcoverage")
-public class AccountCoverageModel  {
+public class AccountCoverageModel  implements Serializable {
+	private static final long serialVersionUID = 151857669717247522L;
   /**
   * Description: "The party(s) that are responsible for payment (or part of) of charges applied to this account (including self-pay).\n\nA coverage may only be resposible for specific types of charges, and the sequence of the coverages in the account could be important when processing billing."
   */
@@ -44,9 +45,9 @@ public class AccountCoverageModel  {
   @Column(name="\"coverage_id\"")
   private String coverage_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`coverage_id`", insertable=false, updatable=false)
-  private ReferenceModel coverage;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="coverage_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> coverage;
 
   /**
   * Description: "The priority of the coverage in the context of this account."
@@ -59,7 +60,7 @@ public class AccountCoverageModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -71,6 +72,7 @@ public class AccountCoverageModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -79,77 +81,92 @@ public class AccountCoverageModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public AccountCoverageModel() {
   }
 
-  public AccountCoverageModel(AccountCoverage o) {
-    this.id = o.getId();
-      if (null != o.getCoverage()) {
-      	this.coverage_id = "coverage" + this.getId();
-        this.coverage = new ReferenceModel(o.getCoverage());
-        this.coverage.setId(this.coverage_id);
-        this.coverage.parent_id = this.coverage.getId();
-      }
-
-      this.priority = o.getPriority();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public AccountCoverageModel(AccountCoverage o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    if (null != o.getCoverage() ) {
+    	this.coverage_id = "coverage" + this.parent_id;
+    	this.coverage = ReferenceHelper.toModel(o.getCoverage(), this.coverage_id);
+    }
+    this.priority = o.getPriority();
   }
 
-  public void setCoverage( ReferenceModel value) {
-    this.coverage = value;
-  }
-  public ReferenceModel getCoverage() {
+  public java.util.List<ReferenceModel> getCoverage() {
     return this.coverage;
   }
-  public void setPriority( Float value) {
-    this.priority = value;
+  public void setCoverage( java.util.List<ReferenceModel> value) {
+    this.coverage = value;
   }
   public Float getPriority() {
     return this.priority;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setPriority( Float value) {
+    this.priority = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("coverage" + "[" + String.valueOf(this.coverage) + "]\n"); 
-     builder.append("priority" + "[" + String.valueOf(this.priority) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AccountCoverageModel]:" + "\n");
+     builder.append("priority" + "->" + this.priority + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[AccountCoverageModel]:" + "\n");
+     builder.append("coverage" + "->" + this.coverage + "\n"); 
+     builder.append("priority" + "->" + this.priority + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

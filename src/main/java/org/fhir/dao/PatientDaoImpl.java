@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PatientModel;
 import org.fhir.pojo.Patient;
+import org.fhir.pojo.PatientHelper;
 
 public class PatientDaoImpl implements PatientDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PatientDaoImpl implements PatientDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PatientModel a", PatientModel.class).setMaxResults(maxResult);
       List<PatientModel> models = query.getResultList();
-      return Patient.fromArray(models);
+      return PatientHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class PatientDaoImpl implements PatientDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PatientModel a", PatientModel.class);
       List<PatientModel> models = query.getResultList();
-      return Patient.fromArray(models);
+      return PatientHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class PatientDaoImpl implements PatientDao {
       PatientModel model = em.merge(new PatientModel(e));
       return new Patient(model);
   }
-
   @Override
   @Transactional
   public void delete(Patient e) {

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SpecimenModel;
 import org.fhir.pojo.Specimen;
+import org.fhir.pojo.SpecimenHelper;
 
 public class SpecimenDaoImpl implements SpecimenDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SpecimenDaoImpl implements SpecimenDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SpecimenModel a", SpecimenModel.class).setMaxResults(maxResult);
       List<SpecimenModel> models = query.getResultList();
-      return Specimen.fromArray(models);
+      return SpecimenHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class SpecimenDaoImpl implements SpecimenDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SpecimenModel a", SpecimenModel.class);
       List<SpecimenModel> models = query.getResultList();
-      return Specimen.fromArray(models);
+      return SpecimenHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class SpecimenDaoImpl implements SpecimenDao {
       SpecimenModel model = em.merge(new SpecimenModel(e));
       return new Specimen(model);
   }
-
   @Override
   @Transactional
   public void delete(Specimen e) {

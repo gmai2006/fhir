@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DataRequirementModel;
 import org.fhir.pojo.DataRequirement;
+import org.fhir.pojo.DataRequirementHelper;
 
 public class DataRequirementDaoImpl implements DataRequirementDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DataRequirementDaoImpl implements DataRequirementDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DataRequirementModel a", DataRequirementModel.class).setMaxResults(maxResult);
       List<DataRequirementModel> models = query.getResultList();
-      return DataRequirement.fromArray(models);
+      return DataRequirementHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DataRequirementDaoImpl implements DataRequirementDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DataRequirementModel a", DataRequirementModel.class);
       List<DataRequirementModel> models = query.getResultList();
-      return DataRequirement.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DataRequirement create(DataRequirement e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DataRequirementModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DataRequirement update(DataRequirement e) {
-      final EntityManager em = entityManagerProvider.get();
-      DataRequirementModel model = em.merge(new DataRequirementModel(e));
-      return new DataRequirement(model);
+      return DataRequirementHelper.fromArray2Array(models);
   }
 
   @Override

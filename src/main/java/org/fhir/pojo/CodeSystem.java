@@ -284,6 +284,7 @@ public class CodeSystem  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -335,119 +336,94 @@ public class CodeSystem  {
 
   public CodeSystem(CodeSystemModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      if (null != o.getUrl()) {
-        this.url = new String(o.getUrl());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getVersion()) {
-        this.version = new String(o.getVersion());
-      }
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getTitle()) {
-        this.title = new String(o.getTitle());
-      }
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getExperimental()) {
-        this.experimental = new Boolean(o.getExperimental());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      if (null != o.getPublisher()) {
-        this.publisher = new String(o.getPublisher());
-      }
-
-      this.contact = ContactDetail.fromArray(o.getContact());
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.useContext = UsageContext.fromArray(o.getUseContext());
-
-      this.jurisdiction = CodeableConcept.fromArray(o.getJurisdiction());
-      if (null != o.getPurpose()) {
-        this.purpose = new String(o.getPurpose());
-      }
-
-      if (null != o.getCopyright()) {
-        this.copyright = new String(o.getCopyright());
-      }
-
-      if (null != o.getCaseSensitive()) {
-        this.caseSensitive = new Boolean(o.getCaseSensitive());
-      }
-
-      if (null != o.getValueSet()) {
-        this.valueSet = new String(o.getValueSet());
-      }
-
-      if (null != o.getHierarchyMeaning()) {
-        this.hierarchyMeaning = new String(o.getHierarchyMeaning());
-      }
-
-      if (null != o.getCompositional()) {
-        this.compositional = new Boolean(o.getCompositional());
-      }
-
-      if (null != o.getVersionNeeded()) {
-        this.versionNeeded = new Boolean(o.getVersionNeeded());
-      }
-
-      if (null != o.getContent()) {
-        this.content = new String(o.getContent());
-      }
-
-      if (null != o.getCount()) {
-        this.count = new Float(o.getCount());
-      }
-
-      this.filter = CodeSystemFilter.fromArray(o.getFilter());
-
-      this.property = CodeSystemProperty.fromArray(o.getProperty());
-
-      this.concept = CodeSystemConcept.fromArray(o.getConcept());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getTitle()) {
+      this.title = o.getTitle();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getExperimental()) {
+      this.experimental = o.getExperimental();
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getPublisher()) {
+      this.publisher = o.getPublisher();
+    }
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact = ContactDetailHelper.fromArray2Array(o.getContact());
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
+    }
+    if (null != o.getPurpose()) {
+      this.purpose = o.getPurpose();
+    }
+    if (null != o.getCopyright()) {
+      this.copyright = o.getCopyright();
+    }
+    if (null != o.getCaseSensitive()) {
+      this.caseSensitive = o.getCaseSensitive();
+    }
+    if (null != o.getValueSet()) {
+      this.valueSet = o.getValueSet();
+    }
+    if (null != o.getHierarchyMeaning()) {
+      this.hierarchyMeaning = o.getHierarchyMeaning();
+    }
+    if (null != o.getCompositional()) {
+      this.compositional = o.getCompositional();
+    }
+    if (null != o.getVersionNeeded()) {
+      this.versionNeeded = o.getVersionNeeded();
+    }
+    if (null != o.getContent()) {
+      this.content = o.getContent();
+    }
+    if (null != o.getCount()) {
+      this.count = o.getCount();
+    }
+    if (null != o.getFilter() && !o.getFilter().isEmpty()) {
+    	this.filter = CodeSystemFilterHelper.fromArray2Array(o.getFilter());
+    }
+    if (null != o.getProperty() && !o.getProperty().isEmpty()) {
+    	this.property = CodeSystemPropertyHelper.fromArray2Array(o.getProperty());
+    }
+    if (null != o.getConcept() && !o.getConcept().isEmpty()) {
+    	this.concept = CodeSystemConceptHelper.fromArray2Array(o.getConcept());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -784,61 +760,62 @@ public class CodeSystem  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("experimental" + "[" + String.valueOf(this.experimental) + "]\n"); 
-     builder.append("_experimental" + "[" + String.valueOf(this._experimental) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("_publisher" + "[" + String.valueOf(this._publisher) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("_purpose" + "[" + String.valueOf(this._purpose) + "]\n"); 
-     builder.append("copyright" + "[" + String.valueOf(this.copyright) + "]\n"); 
-     builder.append("_copyright" + "[" + String.valueOf(this._copyright) + "]\n"); 
-     builder.append("caseSensitive" + "[" + String.valueOf(this.caseSensitive) + "]\n"); 
-     builder.append("_caseSensitive" + "[" + String.valueOf(this._caseSensitive) + "]\n"); 
-     builder.append("valueSet" + "[" + String.valueOf(this.valueSet) + "]\n"); 
-     builder.append("_valueSet" + "[" + String.valueOf(this._valueSet) + "]\n"); 
-     builder.append("hierarchyMeaning" + "[" + String.valueOf(this.hierarchyMeaning) + "]\n"); 
-     builder.append("_hierarchyMeaning" + "[" + String.valueOf(this._hierarchyMeaning) + "]\n"); 
-     builder.append("compositional" + "[" + String.valueOf(this.compositional) + "]\n"); 
-     builder.append("_compositional" + "[" + String.valueOf(this._compositional) + "]\n"); 
-     builder.append("versionNeeded" + "[" + String.valueOf(this.versionNeeded) + "]\n"); 
-     builder.append("_versionNeeded" + "[" + String.valueOf(this._versionNeeded) + "]\n"); 
-     builder.append("content" + "[" + String.valueOf(this.content) + "]\n"); 
-     builder.append("_content" + "[" + String.valueOf(this._content) + "]\n"); 
-     builder.append("count" + "[" + String.valueOf(this.count) + "]\n"); 
-     builder.append("_count" + "[" + String.valueOf(this._count) + "]\n"); 
-     builder.append("filter" + "[" + String.valueOf(this.filter) + "]\n"); 
-     builder.append("property" + "[" + String.valueOf(this.property) + "]\n"); 
-     builder.append("concept" + "[" + String.valueOf(this.concept) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[CodeSystem]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.experimental != null) builder.append("experimental" + "->" + this.experimental.toString() + "\n"); 
+     if(this._experimental != null) builder.append("_experimental" + "->" + this._experimental.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.publisher != null) builder.append("publisher" + "->" + this.publisher.toString() + "\n"); 
+     if(this._publisher != null) builder.append("_publisher" + "->" + this._publisher.toString() + "\n"); 
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.useContext != null) builder.append("useContext" + "->" + this.useContext.toString() + "\n"); 
+     if(this.jurisdiction != null) builder.append("jurisdiction" + "->" + this.jurisdiction.toString() + "\n"); 
+     if(this.purpose != null) builder.append("purpose" + "->" + this.purpose.toString() + "\n"); 
+     if(this._purpose != null) builder.append("_purpose" + "->" + this._purpose.toString() + "\n"); 
+     if(this.copyright != null) builder.append("copyright" + "->" + this.copyright.toString() + "\n"); 
+     if(this._copyright != null) builder.append("_copyright" + "->" + this._copyright.toString() + "\n"); 
+     if(this.caseSensitive != null) builder.append("caseSensitive" + "->" + this.caseSensitive.toString() + "\n"); 
+     if(this._caseSensitive != null) builder.append("_caseSensitive" + "->" + this._caseSensitive.toString() + "\n"); 
+     if(this.valueSet != null) builder.append("valueSet" + "->" + this.valueSet.toString() + "\n"); 
+     if(this._valueSet != null) builder.append("_valueSet" + "->" + this._valueSet.toString() + "\n"); 
+     if(this.hierarchyMeaning != null) builder.append("hierarchyMeaning" + "->" + this.hierarchyMeaning.toString() + "\n"); 
+     if(this._hierarchyMeaning != null) builder.append("_hierarchyMeaning" + "->" + this._hierarchyMeaning.toString() + "\n"); 
+     if(this.compositional != null) builder.append("compositional" + "->" + this.compositional.toString() + "\n"); 
+     if(this._compositional != null) builder.append("_compositional" + "->" + this._compositional.toString() + "\n"); 
+     if(this.versionNeeded != null) builder.append("versionNeeded" + "->" + this.versionNeeded.toString() + "\n"); 
+     if(this._versionNeeded != null) builder.append("_versionNeeded" + "->" + this._versionNeeded.toString() + "\n"); 
+     if(this.content != null) builder.append("content" + "->" + this.content.toString() + "\n"); 
+     if(this._content != null) builder.append("_content" + "->" + this._content.toString() + "\n"); 
+     if(this.count != null) builder.append("count" + "->" + this.count.toString() + "\n"); 
+     if(this._count != null) builder.append("_count" + "->" + this._count.toString() + "\n"); 
+     if(this.filter != null) builder.append("filter" + "->" + this.filter.toString() + "\n"); 
+     if(this.property != null) builder.append("property" + "->" + this.property.toString() + "\n"); 
+     if(this.concept != null) builder.append("concept" + "->" + this.concept.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -908,36 +885,4 @@ public class CodeSystem  {
   	}
   }
 
-  public static java.util.List<CodeSystem> fromArray(java.util.List<CodeSystemModel> list) {
-    return (java.util.List<CodeSystem>)list.stream()
-      .map(model -> new CodeSystem(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CodeSystemModel> toModelArray(java.util.List<CodeSystem> list) {
-    return (java.util.List<CodeSystemModel>)list.stream()
-      .map(model -> new CodeSystemModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CodeSystem fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CodeSystem.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CodeSystem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CodeSystem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -32,7 +32,5 @@ public interface PlanDefinitionConditionService {
 	public PlanDefinitionCondition find(String id);
   public List<PlanDefinitionCondition> select(int maxResult);
   public List<PlanDefinitionCondition> selectAll();
-  public PlanDefinitionCondition create(PlanDefinitionCondition bean);
-  public PlanDefinitionCondition update(PlanDefinitionCondition bean);
   public void delete(PlanDefinitionCondition bean);
 }

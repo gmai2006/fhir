@@ -149,6 +149,7 @@ public class DetectedIssue  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -200,71 +201,53 @@ public class DetectedIssue  {
 
   public DetectedIssue(DetectedIssueModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      if (null != o.getSeverity()) {
-        this.severity = new String(o.getSeverity());
-      }
-
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      if (null != o.getAuthor()) {
-        this.author = new Reference(o.getAuthor());
-        this.author.setId(this.getId());
-      }
-
-      this.implicated = Reference.fromArray(o.getImplicated());
-
-      if (null != o.getDetail()) {
-        this.detail = new String(o.getDetail());
-      }
-
-      if (null != o.getReference()) {
-        this.reference = new String(o.getReference());
-      }
-
-      this.mitigation = DetectedIssueMitigation.fromArray(o.getMitigation());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    if (null != o.getSeverity()) {
+      this.severity = o.getSeverity();
+    }
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getAuthor() && !o.getAuthor().isEmpty()) {
+      this.author = new Reference(o.getAuthor().get(0));
+    }
+    if (null != o.getImplicated() && !o.getImplicated().isEmpty()) {
+    	this.implicated = ReferenceHelper.fromArray2Array(o.getImplicated());
+    }
+    if (null != o.getDetail()) {
+      this.detail = o.getDetail();
+    }
+    if (null != o.getReference()) {
+      this.reference = o.getReference();
+    }
+    if (null != o.getMitigation() && !o.getMitigation().isEmpty()) {
+    	this.mitigation = DetectedIssueMitigationHelper.fromArray2Array(o.getMitigation());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -439,34 +422,35 @@ public class DetectedIssue  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("severity" + "[" + String.valueOf(this.severity) + "]\n"); 
-     builder.append("_severity" + "[" + String.valueOf(this._severity) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("author" + "[" + String.valueOf(this.author) + "]\n"); 
-     builder.append("implicated" + "[" + String.valueOf(this.implicated) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("_detail" + "[" + String.valueOf(this._detail) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("_reference" + "[" + String.valueOf(this._reference) + "]\n"); 
-     builder.append("mitigation" + "[" + String.valueOf(this.mitigation) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[DetectedIssue]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.severity != null) builder.append("severity" + "->" + this.severity.toString() + "\n"); 
+     if(this._severity != null) builder.append("_severity" + "->" + this._severity.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.author != null) builder.append("author" + "->" + this.author.toString() + "\n"); 
+     if(this.implicated != null) builder.append("implicated" + "->" + this.implicated.toString() + "\n"); 
+     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); 
+     if(this._detail != null) builder.append("_detail" + "->" + this._detail.toString() + "\n"); 
+     if(this.reference != null) builder.append("reference" + "->" + this.reference.toString() + "\n"); 
+     if(this._reference != null) builder.append("_reference" + "->" + this._reference.toString() + "\n"); 
+     if(this.mitigation != null) builder.append("mitigation" + "->" + this.mitigation.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -498,36 +482,4 @@ public class DetectedIssue  {
   	}
   }
 
-  public static java.util.List<DetectedIssue> fromArray(java.util.List<DetectedIssueModel> list) {
-    return (java.util.List<DetectedIssue>)list.stream()
-      .map(model -> new DetectedIssue(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DetectedIssueModel> toModelArray(java.util.List<DetectedIssue> list) {
-    return (java.util.List<DetectedIssueModel>)list.stream()
-      .map(model -> new DetectedIssueModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DetectedIssue fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DetectedIssue.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DetectedIssue o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DetectedIssue> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

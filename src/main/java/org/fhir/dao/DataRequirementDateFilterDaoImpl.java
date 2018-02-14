@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DataRequirementDateFilterModel;
 import org.fhir.pojo.DataRequirementDateFilter;
+import org.fhir.pojo.DataRequirementDateFilterHelper;
 
 public class DataRequirementDateFilterDaoImpl implements DataRequirementDateFilterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DataRequirementDateFilterDaoImpl implements DataRequirementDateFilt
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DataRequirementDateFilterModel a", DataRequirementDateFilterModel.class).setMaxResults(maxResult);
       List<DataRequirementDateFilterModel> models = query.getResultList();
-      return DataRequirementDateFilter.fromArray(models);
+      return DataRequirementDateFilterHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DataRequirementDateFilterDaoImpl implements DataRequirementDateFilt
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DataRequirementDateFilterModel a", DataRequirementDateFilterModel.class);
       List<DataRequirementDateFilterModel> models = query.getResultList();
-      return DataRequirementDateFilter.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DataRequirementDateFilter create(DataRequirementDateFilter e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DataRequirementDateFilterModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DataRequirementDateFilter update(DataRequirementDateFilter e) {
-      final EntityManager em = entityManagerProvider.get();
-      DataRequirementDateFilterModel model = em.merge(new DataRequirementDateFilterModel(e));
-      return new DataRequirementDateFilter(model);
+      return DataRequirementDateFilterHelper.fromArray2Array(models);
   }
 
   @Override

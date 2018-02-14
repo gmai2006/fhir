@@ -83,6 +83,7 @@ public class Bundle  {
   * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
    derived from Resource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -135,42 +136,35 @@ public class Bundle  {
 
   public Bundle(BundleModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getTotal()) {
-        this.total = new Float(o.getTotal());
-      }
-
-      this.link = BundleLink.fromArray(o.getLink());
-
-      this.entry = BundleEntry.fromArray(o.getEntry());
-
-      this.signature = Signature.fromJson(o.getSignature());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getTotal()) {
+      this.total = o.getTotal();
+    }
+    if (null != o.getLink() && !o.getLink().isEmpty()) {
+    	this.link = BundleLinkHelper.fromArray2Array(o.getLink());
+    }
+    if (null != o.getEntry() && !o.getEntry().isEmpty()) {
+    	this.entry = BundleEntryHelper.fromArray2Array(o.getEntry());
+    }
+    this.signature = SignatureHelper.fromJson(o.getSignature());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -279,23 +273,24 @@ public class Bundle  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("total" + "[" + String.valueOf(this.total) + "]\n"); 
-     builder.append("_total" + "[" + String.valueOf(this._total) + "]\n"); 
-     builder.append("link" + "[" + String.valueOf(this.link) + "]\n"); 
-     builder.append("entry" + "[" + String.valueOf(this.entry) + "]\n"); 
-     builder.append("signature" + "[" + String.valueOf(this.signature) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Bundle]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.total != null) builder.append("total" + "->" + this.total.toString() + "\n"); 
+     if(this._total != null) builder.append("_total" + "->" + this._total.toString() + "\n"); 
+     if(this.link != null) builder.append("link" + "->" + this.link.toString() + "\n"); 
+     if(this.entry != null) builder.append("entry" + "->" + this.entry.toString() + "\n"); 
+     if(this.signature != null) builder.append("signature" + "->" + this.signature.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -339,36 +334,4 @@ public class Bundle  {
   	}
   }
 
-  public static java.util.List<Bundle> fromArray(java.util.List<BundleModel> list) {
-    return (java.util.List<Bundle>)list.stream()
-      .map(model -> new Bundle(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<BundleModel> toModelArray(java.util.List<Bundle> list) {
-    return (java.util.List<BundleModel>)list.stream()
-      .map(model -> new BundleModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Bundle fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Bundle.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Bundle o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Bundle> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

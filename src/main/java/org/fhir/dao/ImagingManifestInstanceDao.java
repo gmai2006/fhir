@@ -34,10 +34,5 @@ public interface ImagingManifestInstanceDao {
   public List<ImagingManifestInstance> select(int maxResult);
 
   public List<ImagingManifestInstance> selectAll();
-
-  public ImagingManifestInstance create(ImagingManifestInstance e);
-
-  public ImagingManifestInstance update(ImagingManifestInstance e);
-
   public void delete(ImagingManifestInstance e);
 }

@@ -32,7 +32,5 @@ public interface ProvenanceEntityService {
 	public ProvenanceEntity find(String id);
   public List<ProvenanceEntity> select(int maxResult);
   public List<ProvenanceEntity> selectAll();
-  public ProvenanceEntity create(ProvenanceEntity bean);
-  public ProvenanceEntity update(ProvenanceEntity bean);
   public void delete(ProvenanceEntity bean);
 }

@@ -45,6 +45,7 @@ public class Ratio  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -95,32 +96,13 @@ public class Ratio  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("numerator" + "[" + String.valueOf(this.numerator) + "]\n"); 
-     builder.append("denominator" + "[" + String.valueOf(this.denominator) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Ratio]:" + "\n");
+     if(this.numerator != null) builder.append("numerator" + "->" + this.numerator.toString() + "\n"); 
+     if(this.denominator != null) builder.append("denominator" + "->" + this.denominator.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static Ratio fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Ratio.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Ratio o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Ratio> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

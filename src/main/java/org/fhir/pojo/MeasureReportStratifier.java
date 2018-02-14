@@ -53,6 +53,7 @@ public class MeasureReportStratifier  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -74,15 +75,13 @@ public class MeasureReportStratifier  {
 
   public MeasureReportStratifier(MeasureReportStratifierModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      this.stratum = MeasureReportStratum.fromArray(o.getStratum());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getStratum() && !o.getStratum().isEmpty()) {
+    	this.stratum = MeasureReportStratumHelper.fromArray2Array(o.getStratum());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( Identifier value) {
@@ -125,46 +124,15 @@ public class MeasureReportStratifier  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("stratum" + "[" + String.valueOf(this.stratum) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MeasureReportStratifier]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.stratum != null) builder.append("stratum" + "->" + this.stratum.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MeasureReportStratifier> fromArray(java.util.List<MeasureReportStratifierModel> list) {
-    return (java.util.List<MeasureReportStratifier>)list.stream()
-      .map(model -> new MeasureReportStratifier(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MeasureReportStratifierModel> toModelArray(java.util.List<MeasureReportStratifier> list) {
-    return (java.util.List<MeasureReportStratifierModel>)list.stream()
-      .map(model -> new MeasureReportStratifierModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MeasureReportStratifier fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MeasureReportStratifier.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MeasureReportStratifier o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MeasureReportStratifier> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -34,10 +34,5 @@ public interface ObservationRelatedDao {
   public List<ObservationRelated> select(int maxResult);
 
   public List<ObservationRelated> selectAll();
-
-  public ObservationRelated create(ObservationRelated e);
-
-  public ObservationRelated update(ObservationRelated e);
-
   public void delete(ObservationRelated e);
 }

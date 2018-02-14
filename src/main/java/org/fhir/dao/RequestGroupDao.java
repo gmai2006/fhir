@@ -34,10 +34,8 @@ public interface RequestGroupDao {
   public List<RequestGroup> select(int maxResult);
 
   public List<RequestGroup> selectAll();
-
   public RequestGroup create(RequestGroup e);
 
   public RequestGroup update(RequestGroup e);
-
   public void delete(RequestGroup e);
 }

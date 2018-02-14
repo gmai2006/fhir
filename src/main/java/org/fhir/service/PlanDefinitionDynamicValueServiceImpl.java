@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public PlanDefinitionDynamicValue create(PlanDefinitionDynamicValue bean) {
-  	requireNonNull(bean);
-    logger.info("create(PlanDefinitionDynamicValue={}) - entered bean ");
-
-    final PlanDefinitionDynamicValue result = dao.create(bean);
-
-    logger.info("create(PlanDefinitionDynamicValue) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public PlanDefinitionDynamicValue update(PlanDefinitionDynamicValue bean) {
-  	requireNonNull(bean);
-    logger.info("update(PlanDefinitionDynamicValue={}) - entered bean ");
-
-    final PlanDefinitionDynamicValue result = dao.update(bean);
-
-    logger.info("update(PlanDefinitionDynamicValue) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

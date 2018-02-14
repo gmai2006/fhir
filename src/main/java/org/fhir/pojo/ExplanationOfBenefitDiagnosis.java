@@ -74,6 +74,7 @@ public class ExplanationOfBenefitDiagnosis  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -95,24 +96,17 @@ public class ExplanationOfBenefitDiagnosis  {
 
   public ExplanationOfBenefitDiagnosis(ExplanationOfBenefitDiagnosisModel o) {
     this.id = o.getId();
-      if (null != o.getSequence()) {
-        this.sequence = new Float(o.getSequence());
-      }
-
-      this.diagnosisCodeableConcept = CodeableConcept.fromJson(o.getDiagnosisCodeableConcept());
-      if (null != o.getDiagnosisReference()) {
-        this.diagnosisReference = new Reference(o.getDiagnosisReference());
-        this.diagnosisReference.setId(this.getId());
-      }
-
-      this.type = CodeableConcept.fromArray(o.getType());
-      this.packageCode = CodeableConcept.fromJson(o.getPackageCode());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSequence()) {
+      this.sequence = o.getSequence();
+    }
+    this.diagnosisCodeableConcept = CodeableConceptHelper.fromJson(o.getDiagnosisCodeableConcept());
+    if (null != o.getDiagnosisReference() && !o.getDiagnosisReference().isEmpty()) {
+      this.diagnosisReference = new Reference(o.getDiagnosisReference().get(0));
+    }
+    this.packageCode = CodeableConceptHelper.fromJson(o.getPackageCode());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSequence( Float value) {
@@ -179,50 +173,19 @@ public class ExplanationOfBenefitDiagnosis  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("_sequence" + "[" + String.valueOf(this._sequence) + "]\n"); 
-     builder.append("diagnosisCodeableConcept" + "[" + String.valueOf(this.diagnosisCodeableConcept) + "]\n"); 
-     builder.append("diagnosisReference" + "[" + String.valueOf(this.diagnosisReference) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("packageCode" + "[" + String.valueOf(this.packageCode) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitDiagnosis]:" + "\n");
+     if(this.sequence != null) builder.append("sequence" + "->" + this.sequence.toString() + "\n"); 
+     if(this._sequence != null) builder.append("_sequence" + "->" + this._sequence.toString() + "\n"); 
+     if(this.diagnosisCodeableConcept != null) builder.append("diagnosisCodeableConcept" + "->" + this.diagnosisCodeableConcept.toString() + "\n"); 
+     if(this.diagnosisReference != null) builder.append("diagnosisReference" + "->" + this.diagnosisReference.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.packageCode != null) builder.append("packageCode" + "->" + this.packageCode.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExplanationOfBenefitDiagnosis> fromArray(java.util.List<ExplanationOfBenefitDiagnosisModel> list) {
-    return (java.util.List<ExplanationOfBenefitDiagnosis>)list.stream()
-      .map(model -> new ExplanationOfBenefitDiagnosis(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExplanationOfBenefitDiagnosisModel> toModelArray(java.util.List<ExplanationOfBenefitDiagnosis> list) {
-    return (java.util.List<ExplanationOfBenefitDiagnosisModel>)list.stream()
-      .map(model -> new ExplanationOfBenefitDiagnosisModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExplanationOfBenefitDiagnosis fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExplanationOfBenefitDiagnosis.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExplanationOfBenefitDiagnosis o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExplanationOfBenefitDiagnosis> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -34,10 +34,5 @@ public interface CareTeamParticipantDao {
   public List<CareTeamParticipant> select(int maxResult);
 
   public List<CareTeamParticipant> selectAll();
-
-  public CareTeamParticipant create(CareTeamParticipant e);
-
-  public CareTeamParticipant update(CareTeamParticipant e);
-
   public void delete(CareTeamParticipant e);
 }

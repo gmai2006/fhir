@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DetectedIssueMitigation create(DetectedIssueMitigation bean) {
-  	requireNonNull(bean);
-    logger.info("create(DetectedIssueMitigation={}) - entered bean ");
-
-    final DetectedIssueMitigation result = dao.create(bean);
-
-    logger.info("create(DetectedIssueMitigation) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DetectedIssueMitigation update(DetectedIssueMitigation bean) {
-  	requireNonNull(bean);
-    logger.info("update(DetectedIssueMitigation={}) - entered bean ");
-
-    final DetectedIssueMitigation result = dao.update(bean);
-
-    logger.info("update(DetectedIssueMitigation) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

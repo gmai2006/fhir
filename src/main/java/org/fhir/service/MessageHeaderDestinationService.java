@@ -32,7 +32,5 @@ public interface MessageHeaderDestinationService {
 	public MessageHeaderDestination find(String id);
   public List<MessageHeaderDestination> select(int maxResult);
   public List<MessageHeaderDestination> selectAll();
-  public MessageHeaderDestination create(MessageHeaderDestination bean);
-  public MessageHeaderDestination update(MessageHeaderDestination bean);
   public void delete(MessageHeaderDestination bean);
 }

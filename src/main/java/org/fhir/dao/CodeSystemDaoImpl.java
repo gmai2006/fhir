@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CodeSystemModel;
 import org.fhir.pojo.CodeSystem;
+import org.fhir.pojo.CodeSystemHelper;
 
 public class CodeSystemDaoImpl implements CodeSystemDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CodeSystemDaoImpl implements CodeSystemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CodeSystemModel a", CodeSystemModel.class).setMaxResults(maxResult);
       List<CodeSystemModel> models = query.getResultList();
-      return CodeSystem.fromArray(models);
+      return CodeSystemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class CodeSystemDaoImpl implements CodeSystemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CodeSystemModel a", CodeSystemModel.class);
       List<CodeSystemModel> models = query.getResultList();
-      return CodeSystem.fromArray(models);
+      return CodeSystemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class CodeSystemDaoImpl implements CodeSystemDao {
       CodeSystemModel model = em.merge(new CodeSystemModel(e));
       return new CodeSystem(model);
   }
-
   @Override
   @Transactional
   public void delete(CodeSystem e) {

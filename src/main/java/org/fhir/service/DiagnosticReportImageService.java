@@ -32,7 +32,5 @@ public interface DiagnosticReportImageService {
 	public DiagnosticReportImage find(String id);
   public List<DiagnosticReportImage> select(int maxResult);
   public List<DiagnosticReportImage> selectAll();
-  public DiagnosticReportImage create(DiagnosticReportImage bean);
-  public DiagnosticReportImage update(DiagnosticReportImage bean);
   public void delete(DiagnosticReportImage bean);
 }

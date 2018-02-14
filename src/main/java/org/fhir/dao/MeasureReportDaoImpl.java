@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MeasureReportModel;
 import org.fhir.pojo.MeasureReport;
+import org.fhir.pojo.MeasureReportHelper;
 
 public class MeasureReportDaoImpl implements MeasureReportDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MeasureReportDaoImpl implements MeasureReportDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureReportModel a", MeasureReportModel.class).setMaxResults(maxResult);
       List<MeasureReportModel> models = query.getResultList();
-      return MeasureReport.fromArray(models);
+      return MeasureReportHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class MeasureReportDaoImpl implements MeasureReportDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureReportModel a", MeasureReportModel.class);
       List<MeasureReportModel> models = query.getResultList();
-      return MeasureReport.fromArray(models);
+      return MeasureReportHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class MeasureReportDaoImpl implements MeasureReportDao {
       MeasureReportModel model = em.merge(new MeasureReportModel(e));
       return new MeasureReport(model);
   }
-
   @Override
   @Transactional
   public void delete(MeasureReport e) {

@@ -34,10 +34,8 @@ public interface AllergyIntoleranceDao {
   public List<AllergyIntolerance> select(int maxResult);
 
   public List<AllergyIntolerance> selectAll();
-
   public AllergyIntolerance create(AllergyIntolerance e);
 
   public AllergyIntolerance update(AllergyIntolerance e);
-
   public void delete(AllergyIntolerance e);
 }

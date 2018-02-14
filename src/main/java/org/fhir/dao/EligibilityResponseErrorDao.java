@@ -34,10 +34,5 @@ public interface EligibilityResponseErrorDao {
   public List<EligibilityResponseError> select(int maxResult);
 
   public List<EligibilityResponseError> selectAll();
-
-  public EligibilityResponseError create(EligibilityResponseError e);
-
-  public EligibilityResponseError update(EligibilityResponseError e);
-
   public void delete(EligibilityResponseError e);
 }

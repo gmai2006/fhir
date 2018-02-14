@@ -32,7 +32,5 @@ public interface PractitionerQualificationService {
 	public PractitionerQualification find(String id);
   public List<PractitionerQualification> select(int maxResult);
   public List<PractitionerQualification> selectAll();
-  public PractitionerQualification create(PractitionerQualification bean);
-  public PractitionerQualification update(PractitionerQualification bean);
   public void delete(PractitionerQualification bean);
 }

@@ -32,7 +32,5 @@ public interface MessageDefinitionFocusService {
 	public MessageDefinitionFocus find(String id);
   public List<MessageDefinitionFocus> select(int maxResult);
   public List<MessageDefinitionFocus> selectAll();
-  public MessageDefinitionFocus create(MessageDefinitionFocus bean);
-  public MessageDefinitionFocus update(MessageDefinitionFocus bean);
   public void delete(MessageDefinitionFocus bean);
 }

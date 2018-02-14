@@ -32,7 +32,5 @@ public interface EpisodeOfCareStatusHistoryService {
 	public EpisodeOfCareStatusHistory find(String id);
   public List<EpisodeOfCareStatusHistory> select(int maxResult);
   public List<EpisodeOfCareStatusHistory> selectAll();
-  public EpisodeOfCareStatusHistory create(EpisodeOfCareStatusHistory bean);
-  public EpisodeOfCareStatusHistory update(EpisodeOfCareStatusHistory bean);
   public void delete(EpisodeOfCareStatusHistory bean);
 }

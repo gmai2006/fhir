@@ -32,7 +32,5 @@ public interface DeviceMetricCalibrationService {
 	public DeviceMetricCalibration find(String id);
   public List<DeviceMetricCalibration> select(int maxResult);
   public List<DeviceMetricCalibration> selectAll();
-  public DeviceMetricCalibration create(DeviceMetricCalibration bean);
-  public DeviceMetricCalibration update(DeviceMetricCalibration bean);
   public void delete(DeviceMetricCalibration bean);
 }

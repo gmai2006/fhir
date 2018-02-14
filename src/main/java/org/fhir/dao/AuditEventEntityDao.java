@@ -34,10 +34,5 @@ public interface AuditEventEntityDao {
   public List<AuditEventEntity> select(int maxResult);
 
   public List<AuditEventEntity> selectAll();
-
-  public AuditEventEntity create(AuditEventEntity e);
-
-  public AuditEventEntity update(AuditEventEntity e);
-
   public void delete(AuditEventEntity e);
 }

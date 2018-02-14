@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CoverageModel;
 import org.fhir.pojo.Coverage;
+import org.fhir.pojo.CoverageHelper;
 
 public class CoverageDaoImpl implements CoverageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CoverageDaoImpl implements CoverageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CoverageModel a", CoverageModel.class).setMaxResults(maxResult);
       List<CoverageModel> models = query.getResultList();
-      return Coverage.fromArray(models);
+      return CoverageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class CoverageDaoImpl implements CoverageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CoverageModel a", CoverageModel.class);
       List<CoverageModel> models = query.getResultList();
-      return Coverage.fromArray(models);
+      return CoverageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class CoverageDaoImpl implements CoverageDao {
       CoverageModel model = em.merge(new CoverageModel(e));
       return new Coverage(model);
   }
-
   @Override
   @Transactional
   public void delete(Coverage e) {

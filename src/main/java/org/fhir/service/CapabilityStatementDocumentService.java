@@ -32,7 +32,5 @@ public interface CapabilityStatementDocumentService {
 	public CapabilityStatementDocument find(String id);
   public List<CapabilityStatementDocument> select(int maxResult);
   public List<CapabilityStatementDocument> selectAll();
-  public CapabilityStatementDocument create(CapabilityStatementDocument bean);
-  public CapabilityStatementDocument update(CapabilityStatementDocument bean);
   public void delete(CapabilityStatementDocument bean);
 }

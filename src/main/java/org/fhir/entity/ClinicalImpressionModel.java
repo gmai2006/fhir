@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called \"ClinicalImpression\" rather than \"ClinicalAssessment\" to avoid confusion with the recording of assessment tools such as Apgar score."
 */
 @Entity
 @Table(name="clinicalimpression")
-public class ClinicalImpressionModel  {
+public class ClinicalImpressionModel  implements Serializable {
+	private static final long serialVersionUID = 151857669661652666L;
   /**
   * Description: "This is a ClinicalImpression resource"
   */
@@ -47,7 +48,7 @@ public class ClinicalImpressionModel  {
 
   /**
   * Description: "A unique identifier assigned to the clinical impression that remains consistent regardless of what server the impression is stored on."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -63,7 +64,7 @@ public class ClinicalImpressionModel  {
 
   /**
   * Description: "Categorizes the type of clinical assessment performed."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -84,9 +85,9 @@ public class ClinicalImpressionModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "The encounter or episode of care this impression was created as part of."
@@ -95,9 +96,9 @@ public class ClinicalImpressionModel  {
   @Column(name="\"context_id\"")
   private String context_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`context_id`", insertable=false, updatable=false)
-  private ReferenceModel context;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> context;
 
   /**
   * Description: "The point in time or period over which the subject was assessed."
@@ -109,7 +110,7 @@ public class ClinicalImpressionModel  {
 
   /**
   * Description: "The point in time or period over which the subject was assessed."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -131,9 +132,9 @@ public class ClinicalImpressionModel  {
   @Column(name="\"assessor_id\"")
   private String assessor_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`assessor_id`", insertable=false, updatable=false)
-  private ReferenceModel assessor;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="assessor_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> assessor;
 
   /**
   * Description: "A reference to the last assesment that was conducted bon this patient. Assessments are often/usually ongoing in nature; a care provider (practitioner or team) will make new assessments on an ongoing basis as new data arises or the patient's conditions changes."
@@ -142,31 +143,37 @@ public class ClinicalImpressionModel  {
   @Column(name="\"previous_id\"")
   private String previous_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`previous_id`", insertable=false, updatable=false)
-  private ReferenceModel previous;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="previous_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> previous;
 
   /**
   * Description: "This a list of the relevant problems/conditions for a patient."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> problem = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"problem_id\"")
+  private String problem_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="problem_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> problem;
 
   /**
   * Description: "One or more sets of investigations (signs, symptions, etc.). The actual grouping of investigations vary greatly depending on the type and context of the assessment. These investigations may include data generated during the assessment process, or data previously generated and recorded that is pertinent to the outcomes."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ClinicalImpressionInvestigationModel> investigation = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"investigation_id\"")
+  private String investigation_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="investigation_id", insertable=false, updatable=false)
+  private java.util.List<ClinicalImpressionInvestigationModel> investigation;
 
   /**
   * Description: "Reference to a specific published clinical protocol that was followed during this assessment, and/or that provides evidence in support of the diagnosis."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"protocol\"", length = 16777215)
+  @Column(name="\"protocol\"")
   private String protocol;
 
   /**
@@ -179,13 +186,17 @@ public class ClinicalImpressionModel  {
   /**
   * Description: "Specific findings or diagnoses that was considered likely or relevant to ongoing treatment."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ClinicalImpressionFindingModel> finding = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"finding_id\"")
+  private String finding_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="finding_id", insertable=false, updatable=false)
+  private java.util.List<ClinicalImpressionFindingModel> finding;
 
   /**
   * Description: "Estimate of likely outcome."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -195,20 +206,28 @@ public class ClinicalImpressionModel  {
   /**
   * Description: "RiskAssessment expressing likely outcome."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> prognosisReference = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"prognosisreference_id\"")
+  private String prognosisreference_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="prognosisreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> prognosisReference;
 
   /**
   * Description: "Action taken as part of assessment procedure."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> action = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"action_id\"")
+  private String action_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> action;
 
   /**
   * Description: "Commentary about the impression, typically recorded after the impression itself was made, though supplemental notes by the original author could also appear."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -223,14 +242,14 @@ public class ClinicalImpressionModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -240,7 +259,7 @@ public class ClinicalImpressionModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -250,7 +269,7 @@ public class ClinicalImpressionModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -262,6 +281,7 @@ public class ClinicalImpressionModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -276,9 +296,9 @@ public class ClinicalImpressionModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -299,302 +319,300 @@ public class ClinicalImpressionModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public ClinicalImpressionModel() {
   }
 
   public ClinicalImpressionModel(ClinicalImpression o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.status = o.getStatus();
-
-      this.code = CodeableConcept.toJson(o.getCode());
-      this.description = o.getDescription();
-
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      if (null != o.getContext()) {
-      	this.context_id = "context" + this.getId();
-        this.context = new ReferenceModel(o.getContext());
-        this.context.setId(this.context_id);
-        this.context.parent_id = this.context.getId();
-      }
-
-      this.effectiveDateTime = o.getEffectiveDateTime();
-
-      this.effectivePeriod = Period.toJson(o.getEffectivePeriod());
-      this.date = o.getDate();
-
-      if (null != o.getAssessor()) {
-      	this.assessor_id = "assessor" + this.getId();
-        this.assessor = new ReferenceModel(o.getAssessor());
-        this.assessor.setId(this.assessor_id);
-        this.assessor.parent_id = this.assessor.getId();
-      }
-
-      if (null != o.getPrevious()) {
-      	this.previous_id = "previous" + this.getId();
-        this.previous = new ReferenceModel(o.getPrevious());
-        this.previous.setId(this.previous_id);
-        this.previous.parent_id = this.previous.getId();
-      }
-
-      this.problem = Reference.toModelArray(o.getProblem());
-
-      this.investigation = ClinicalImpressionInvestigation.toModelArray(o.getInvestigation());
-
-      this.protocol = org.fhir.utils.JsonUtils.write2String(o.getProtocol());
-
-      this.summary = o.getSummary();
-
-      this.finding = ClinicalImpressionFinding.toModelArray(o.getFinding());
-
-      this.prognosisCodeableConcept = CodeableConcept.toJson(o.getPrognosisCodeableConcept());
-      this.prognosisReference = Reference.toModelArray(o.getPrognosisReference());
-
-      this.action = Reference.toModelArray(o.getAction());
-
-      this.note = Annotation.toJson(o.getNote());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.status = o.getStatus();
+    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.description = o.getDescription();
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    if (null != o.getContext() ) {
+    	this.context_id = "context" + this.id;
+    	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
+    }
+    this.effectiveDateTime = o.getEffectiveDateTime();
+    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.date = o.getDate();
+    if (null != o.getAssessor() ) {
+    	this.assessor_id = "assessor" + this.id;
+    	this.assessor = ReferenceHelper.toModel(o.getAssessor(), this.assessor_id);
+    }
+    if (null != o.getPrevious() ) {
+    	this.previous_id = "previous" + this.id;
+    	this.previous = ReferenceHelper.toModel(o.getPrevious(), this.previous_id);
+    }
+    if (null != o.getProblem() && !o.getProblem().isEmpty()) {
+    	this.problem_id = "problem" + this.id;
+    	this.problem = ReferenceHelper.toModelFromArray(o.getProblem(), this.problem_id);
+    }
+    if (null != o.getInvestigation() && !o.getInvestigation().isEmpty()) {
+    	this.investigation_id = "investigation" + this.id;
+    	this.investigation = ClinicalImpressionInvestigationHelper.toModelFromArray(o.getInvestigation(), this.investigation_id);
+    }
+    this.protocol = org.fhir.utils.JsonUtils.write2String(o.getProtocol());
+    this.summary = o.getSummary();
+    if (null != o.getFinding() && !o.getFinding().isEmpty()) {
+    	this.finding_id = "finding" + this.id;
+    	this.finding = ClinicalImpressionFindingHelper.toModelFromArray(o.getFinding(), this.finding_id);
+    }
+    if (null != o.getPrognosisReference() && !o.getPrognosisReference().isEmpty()) {
+    	this.prognosisreference_id = "prognosisreference" + this.id;
+    	this.prognosisReference = ReferenceHelper.toModelFromArray(o.getPrognosisReference(), this.prognosisreference_id);
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action_id = "action" + this.id;
+    	this.action = ReferenceHelper.toModelFromArray(o.getAction(), this.action_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setCode( String value) {
-    this.code = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getCode() {
     return this.code;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setContext( ReferenceModel value) {
-    this.context = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
-  public ReferenceModel getContext() {
+  public java.util.List<ReferenceModel> getContext() {
     return this.context;
   }
-  public void setEffectiveDateTime( String value) {
-    this.effectiveDateTime = value;
+  public void setContext( java.util.List<ReferenceModel> value) {
+    this.context = value;
   }
   public String getEffectiveDateTime() {
     return this.effectiveDateTime;
   }
-  public void setEffectivePeriod( String value) {
-    this.effectivePeriod = value;
+  public void setEffectiveDateTime( String value) {
+    this.effectiveDateTime = value;
   }
   public String getEffectivePeriod() {
     return this.effectivePeriod;
   }
-  public void setDate( String value) {
-    this.date = value;
+  public void setEffectivePeriod( String value) {
+    this.effectivePeriod = value;
   }
   public String getDate() {
     return this.date;
   }
-  public void setAssessor( ReferenceModel value) {
-    this.assessor = value;
+  public void setDate( String value) {
+    this.date = value;
   }
-  public ReferenceModel getAssessor() {
+  public java.util.List<ReferenceModel> getAssessor() {
     return this.assessor;
   }
-  public void setPrevious( ReferenceModel value) {
-    this.previous = value;
+  public void setAssessor( java.util.List<ReferenceModel> value) {
+    this.assessor = value;
   }
-  public ReferenceModel getPrevious() {
+  public java.util.List<ReferenceModel> getPrevious() {
     return this.previous;
   }
-  public void setProblem( java.util.List<ReferenceModel> value) {
-    this.problem = value;
+  public void setPrevious( java.util.List<ReferenceModel> value) {
+    this.previous = value;
   }
   public java.util.List<ReferenceModel> getProblem() {
     return this.problem;
   }
-  public void setInvestigation( java.util.List<ClinicalImpressionInvestigationModel> value) {
-    this.investigation = value;
+  public void setProblem( java.util.List<ReferenceModel> value) {
+    this.problem = value;
   }
   public java.util.List<ClinicalImpressionInvestigationModel> getInvestigation() {
     return this.investigation;
   }
-  public void setProtocol( String value) {
-    this.protocol = value;
+  public void setInvestigation( java.util.List<ClinicalImpressionInvestigationModel> value) {
+    this.investigation = value;
   }
   public String getProtocol() {
     return this.protocol;
   }
-  public void setSummary( String value) {
-    this.summary = value;
+  public void setProtocol( String value) {
+    this.protocol = value;
   }
   public String getSummary() {
     return this.summary;
   }
-  public void setFinding( java.util.List<ClinicalImpressionFindingModel> value) {
-    this.finding = value;
+  public void setSummary( String value) {
+    this.summary = value;
   }
   public java.util.List<ClinicalImpressionFindingModel> getFinding() {
     return this.finding;
   }
-  public void setPrognosisCodeableConcept( String value) {
-    this.prognosisCodeableConcept = value;
+  public void setFinding( java.util.List<ClinicalImpressionFindingModel> value) {
+    this.finding = value;
   }
   public String getPrognosisCodeableConcept() {
     return this.prognosisCodeableConcept;
   }
-  public void setPrognosisReference( java.util.List<ReferenceModel> value) {
-    this.prognosisReference = value;
+  public void setPrognosisCodeableConcept( String value) {
+    this.prognosisCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getPrognosisReference() {
     return this.prognosisReference;
   }
-  public void setAction( java.util.List<ReferenceModel> value) {
-    this.action = value;
+  public void setPrognosisReference( java.util.List<ReferenceModel> value) {
+    this.prognosisReference = value;
   }
   public java.util.List<ReferenceModel> getAction() {
     return this.action;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setAction( java.util.List<ReferenceModel> value) {
+    this.action = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setNote( String value) {
+    this.note = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("effectiveDateTime" + "[" + String.valueOf(this.effectiveDateTime) + "]\n"); 
-     builder.append("effectivePeriod" + "[" + String.valueOf(this.effectivePeriod) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("assessor" + "[" + String.valueOf(this.assessor) + "]\n"); 
-     builder.append("previous" + "[" + String.valueOf(this.previous) + "]\n"); 
-     builder.append("problem" + "[" + String.valueOf(this.problem) + "]\n"); 
-     builder.append("investigation" + "[" + String.valueOf(this.investigation) + "]\n"); 
-     builder.append("protocol" + "[" + String.valueOf(this.protocol) + "]\n"); 
-     builder.append("summary" + "[" + String.valueOf(this.summary) + "]\n"); 
-     builder.append("finding" + "[" + String.valueOf(this.finding) + "]\n"); 
-     builder.append("prognosisCodeableConcept" + "[" + String.valueOf(this.prognosisCodeableConcept) + "]\n"); 
-     builder.append("prognosisReference" + "[" + String.valueOf(this.prognosisReference) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[ClinicalImpressionModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
+     builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("protocol" + "->" + this.protocol + "\n"); 
+     builder.append("summary" + "->" + this.summary + "\n"); 
+     builder.append("prognosisCodeableConcept" + "->" + this.prognosisCodeableConcept + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ClinicalImpressionModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("context" + "->" + this.context + "\n"); 
+     builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
+     builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("assessor" + "->" + this.assessor + "\n"); 
+     builder.append("previous" + "->" + this.previous + "\n"); 
+     builder.append("problem" + "->" + this.problem + "\n"); 
+     builder.append("investigation" + "->" + this.investigation + "\n"); 
+     builder.append("protocol" + "->" + this.protocol + "\n"); 
+     builder.append("summary" + "->" + this.summary + "\n"); 
+     builder.append("finding" + "->" + this.finding + "\n"); 
+     builder.append("prognosisCodeableConcept" + "->" + this.prognosisCodeableConcept + "\n"); 
+     builder.append("prognosisReference" + "->" + this.prognosisReference + "\n"); 
+     builder.append("action" + "->" + this.action + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

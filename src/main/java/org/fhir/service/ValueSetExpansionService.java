@@ -32,7 +32,5 @@ public interface ValueSetExpansionService {
 	public ValueSetExpansion find(String id);
   public List<ValueSetExpansion> select(int maxResult);
   public List<ValueSetExpansion> selectAll();
-  public ValueSetExpansion create(ValueSetExpansion bean);
-  public ValueSetExpansion update(ValueSetExpansion bean);
   public void delete(ValueSetExpansion bean);
 }

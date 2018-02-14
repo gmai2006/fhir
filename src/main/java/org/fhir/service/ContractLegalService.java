@@ -32,7 +32,5 @@ public interface ContractLegalService {
 	public ContractLegal find(String id);
   public List<ContractLegal> select(int maxResult);
   public List<ContractLegal> selectAll();
-  public ContractLegal create(ContractLegal bean);
-  public ContractLegal update(ContractLegal bean);
   public void delete(ContractLegal bean);
 }

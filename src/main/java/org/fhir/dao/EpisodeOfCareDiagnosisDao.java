@@ -34,10 +34,5 @@ public interface EpisodeOfCareDiagnosisDao {
   public List<EpisodeOfCareDiagnosis> select(int maxResult);
 
   public List<EpisodeOfCareDiagnosis> selectAll();
-
-  public EpisodeOfCareDiagnosis create(EpisodeOfCareDiagnosis e);
-
-  public EpisodeOfCareDiagnosis update(EpisodeOfCareDiagnosis e);
-
   public void delete(EpisodeOfCareDiagnosis e);
 }

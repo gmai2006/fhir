@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public PatientContact create(PatientContact bean) {
-  	requireNonNull(bean);
-    logger.info("create(PatientContact={}) - entered bean ");
-
-    final PatientContact result = dao.create(bean);
-
-    logger.info("create(PatientContact) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public PatientContact update(PatientContact bean) {
-  	requireNonNull(bean);
-    logger.info("update(PatientContact={}) - entered bean ");
-
-    final PatientContact result = dao.update(bean);
-
-    logger.info("update(PatientContact) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

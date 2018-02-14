@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.TriggerDefinitionModel;
 import org.fhir.pojo.TriggerDefinition;
+import org.fhir.pojo.TriggerDefinitionHelper;
 
 public class TriggerDefinitionDaoImpl implements TriggerDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class TriggerDefinitionDaoImpl implements TriggerDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TriggerDefinitionModel a", TriggerDefinitionModel.class).setMaxResults(maxResult);
       List<TriggerDefinitionModel> models = query.getResultList();
-      return TriggerDefinition.fromArray(models);
+      return TriggerDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class TriggerDefinitionDaoImpl implements TriggerDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TriggerDefinitionModel a", TriggerDefinitionModel.class);
       List<TriggerDefinitionModel> models = query.getResultList();
-      return TriggerDefinition.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public TriggerDefinition create(TriggerDefinition e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new TriggerDefinitionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public TriggerDefinition update(TriggerDefinition e) {
-      final EntityManager em = entityManagerProvider.get();
-      TriggerDefinitionModel model = em.merge(new TriggerDefinitionModel(e));
-      return new TriggerDefinition(model);
+      return TriggerDefinitionHelper.fromArray2Array(models);
   }
 
   @Override

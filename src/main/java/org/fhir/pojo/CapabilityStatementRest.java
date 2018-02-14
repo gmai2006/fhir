@@ -98,6 +98,7 @@ public class CapabilityStatementRest  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -119,35 +120,33 @@ public class CapabilityStatementRest  {
 
   public CapabilityStatementRest(CapabilityStatementRestModel o) {
     this.id = o.getId();
-      if (null != o.getMode()) {
-        this.mode = new String(o.getMode());
-      }
-
-      if (null != o.getDocumentation()) {
-        this.documentation = new String(o.getDocumentation());
-      }
-
-      if (null != o.getSecurity()) {
-        this.security = new CapabilityStatementSecurity(o.getSecurity());
-        this.security.setId(this.getId());
-      }
-
-      this.resource = CapabilityStatementResource.fromArray(o.getResource());
-
-      this.interaction = CapabilityStatementInteraction1.fromArray(o.getInteraction());
-
-      this.searchParam = CapabilityStatementSearchParam.fromArray(o.getSearchParam());
-
-      this.operation = CapabilityStatementOperation.fromArray(o.getOperation());
-
-      this.compartment = org.fhir.utils.JsonUtils.json2Array(o.getCompartment());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getMode()) {
+      this.mode = o.getMode();
+    }
+    if (null != o.getDocumentation()) {
+      this.documentation = o.getDocumentation();
+    }
+    if (null != o.getSecurity() && !o.getSecurity().isEmpty()) {
+      this.security = new CapabilityStatementSecurity(o.getSecurity().get(0));
+    }
+    if (null != o.getResource() && !o.getResource().isEmpty()) {
+    	this.resource = CapabilityStatementResourceHelper.fromArray2Array(o.getResource());
+    }
+    if (null != o.getInteraction() && !o.getInteraction().isEmpty()) {
+    	this.interaction = CapabilityStatementInteraction1Helper.fromArray2Array(o.getInteraction());
+    }
+    if (null != o.getSearchParam() && !o.getSearchParam().isEmpty()) {
+    	this.searchParam = CapabilityStatementSearchParamHelper.fromArray2Array(o.getSearchParam());
+    }
+    if (null != o.getOperation() && !o.getOperation().isEmpty()) {
+    	this.operation = CapabilityStatementOperationHelper.fromArray2Array(o.getOperation());
+    }
+    if (o.getCompartment() != null) {
+    	this.compartment = org.fhir.utils.JsonUtils.json2Array(o.getCompartment());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setMode( String value) {
@@ -244,21 +243,22 @@ public class CapabilityStatementRest  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("_documentation" + "[" + String.valueOf(this._documentation) + "]\n"); 
-     builder.append("security" + "[" + String.valueOf(this.security) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("interaction" + "[" + String.valueOf(this.interaction) + "]\n"); 
-     builder.append("searchParam" + "[" + String.valueOf(this.searchParam) + "]\n"); 
-     builder.append("operation" + "[" + String.valueOf(this.operation) + "]\n"); 
-     builder.append("compartment" + "[" + String.valueOf(this.compartment) + "]\n"); 
-     builder.append("_compartment" + "[" + String.valueOf(this._compartment) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementRest]:" + "\n");
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
+     if(this.security != null) builder.append("security" + "->" + this.security.toString() + "\n"); 
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
+     if(this.interaction != null) builder.append("interaction" + "->" + this.interaction.toString() + "\n"); 
+     if(this.searchParam != null) builder.append("searchParam" + "->" + this.searchParam.toString() + "\n"); 
+     if(this.operation != null) builder.append("operation" + "->" + this.operation.toString() + "\n"); 
+     if(this.compartment != null) builder.append("compartment" + "->" + this.compartment.toString() + "\n"); 
+     if(this._compartment != null) builder.append("_compartment" + "->" + this._compartment.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -276,36 +276,4 @@ public class CapabilityStatementRest  {
   	}
   }
 
-  public static java.util.List<CapabilityStatementRest> fromArray(java.util.List<CapabilityStatementRestModel> list) {
-    return (java.util.List<CapabilityStatementRest>)list.stream()
-      .map(model -> new CapabilityStatementRest(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementRestModel> toModelArray(java.util.List<CapabilityStatementRest> list) {
-    return (java.util.List<CapabilityStatementRestModel>)list.stream()
-      .map(model -> new CapabilityStatementRestModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatementRest fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatementRest.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementRest o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementRest> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

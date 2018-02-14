@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.UsageContextModel;
 import org.fhir.pojo.UsageContext;
+import org.fhir.pojo.UsageContextHelper;
 
 public class UsageContextDaoImpl implements UsageContextDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class UsageContextDaoImpl implements UsageContextDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from UsageContextModel a", UsageContextModel.class).setMaxResults(maxResult);
       List<UsageContextModel> models = query.getResultList();
-      return UsageContext.fromArray(models);
+      return UsageContextHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class UsageContextDaoImpl implements UsageContextDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from UsageContextModel a", UsageContextModel.class);
       List<UsageContextModel> models = query.getResultList();
-      return UsageContext.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public UsageContext create(UsageContext e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new UsageContextModel(e));
-      return e;
-  }
-
-  @Transactional
-  public UsageContext update(UsageContext e) {
-      final EntityManager em = entityManagerProvider.get();
-      UsageContextModel model = em.merge(new UsageContextModel(e));
-      return new UsageContext(model);
+      return UsageContextHelper.fromArray2Array(models);
   }
 
   @Override

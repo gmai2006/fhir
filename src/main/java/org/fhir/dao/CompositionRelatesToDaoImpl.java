@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CompositionRelatesToModel;
 import org.fhir.pojo.CompositionRelatesTo;
+import org.fhir.pojo.CompositionRelatesToHelper;
 
 public class CompositionRelatesToDaoImpl implements CompositionRelatesToDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CompositionRelatesToDaoImpl implements CompositionRelatesToDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompositionRelatesToModel a", CompositionRelatesToModel.class).setMaxResults(maxResult);
       List<CompositionRelatesToModel> models = query.getResultList();
-      return CompositionRelatesTo.fromArray(models);
+      return CompositionRelatesToHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CompositionRelatesToDaoImpl implements CompositionRelatesToDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CompositionRelatesToModel a", CompositionRelatesToModel.class);
       List<CompositionRelatesToModel> models = query.getResultList();
-      return CompositionRelatesTo.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CompositionRelatesTo create(CompositionRelatesTo e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CompositionRelatesToModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CompositionRelatesTo update(CompositionRelatesTo e) {
-      final EntityManager em = entityManagerProvider.get();
-      CompositionRelatesToModel model = em.merge(new CompositionRelatesToModel(e));
-      return new CompositionRelatesTo(model);
+      return CompositionRelatesToHelper.fromArray2Array(models);
   }
 
   @Override

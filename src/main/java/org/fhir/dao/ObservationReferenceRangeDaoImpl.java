@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ObservationReferenceRangeModel;
 import org.fhir.pojo.ObservationReferenceRange;
+import org.fhir.pojo.ObservationReferenceRangeHelper;
 
 public class ObservationReferenceRangeDaoImpl implements ObservationReferenceRangeDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ObservationReferenceRangeDaoImpl implements ObservationReferenceRan
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ObservationReferenceRangeModel a", ObservationReferenceRangeModel.class).setMaxResults(maxResult);
       List<ObservationReferenceRangeModel> models = query.getResultList();
-      return ObservationReferenceRange.fromArray(models);
+      return ObservationReferenceRangeHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ObservationReferenceRangeDaoImpl implements ObservationReferenceRan
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ObservationReferenceRangeModel a", ObservationReferenceRangeModel.class);
       List<ObservationReferenceRangeModel> models = query.getResultList();
-      return ObservationReferenceRange.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ObservationReferenceRange create(ObservationReferenceRange e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ObservationReferenceRangeModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ObservationReferenceRange update(ObservationReferenceRange e) {
-      final EntityManager em = entityManagerProvider.get();
-      ObservationReferenceRangeModel model = em.merge(new ObservationReferenceRangeModel(e));
-      return new ObservationReferenceRange(model);
+      return ObservationReferenceRangeHelper.fromArray2Array(models);
   }
 
   @Override

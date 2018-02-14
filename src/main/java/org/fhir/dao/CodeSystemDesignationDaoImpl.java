@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CodeSystemDesignationModel;
 import org.fhir.pojo.CodeSystemDesignation;
+import org.fhir.pojo.CodeSystemDesignationHelper;
 
 public class CodeSystemDesignationDaoImpl implements CodeSystemDesignationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CodeSystemDesignationDaoImpl implements CodeSystemDesignationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CodeSystemDesignationModel a", CodeSystemDesignationModel.class).setMaxResults(maxResult);
       List<CodeSystemDesignationModel> models = query.getResultList();
-      return CodeSystemDesignation.fromArray(models);
+      return CodeSystemDesignationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CodeSystemDesignationDaoImpl implements CodeSystemDesignationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CodeSystemDesignationModel a", CodeSystemDesignationModel.class);
       List<CodeSystemDesignationModel> models = query.getResultList();
-      return CodeSystemDesignation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CodeSystemDesignation create(CodeSystemDesignation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CodeSystemDesignationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CodeSystemDesignation update(CodeSystemDesignation e) {
-      final EntityManager em = entityManagerProvider.get();
-      CodeSystemDesignationModel model = em.merge(new CodeSystemDesignationModel(e));
-      return new CodeSystemDesignation(model);
+      return CodeSystemDesignationHelper.fromArray2Array(models);
   }
 
   @Override

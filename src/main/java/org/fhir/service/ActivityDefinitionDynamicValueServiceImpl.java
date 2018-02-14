@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ActivityDefinitionDynamicValue create(ActivityDefinitionDynamicValue bean) {
-  	requireNonNull(bean);
-    logger.info("create(ActivityDefinitionDynamicValue={}) - entered bean ");
-
-    final ActivityDefinitionDynamicValue result = dao.create(bean);
-
-    logger.info("create(ActivityDefinitionDynamicValue) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ActivityDefinitionDynamicValue update(ActivityDefinitionDynamicValue bean) {
-  	requireNonNull(bean);
-    logger.info("update(ActivityDefinitionDynamicValue={}) - entered bean ");
-
-    final ActivityDefinitionDynamicValue result = dao.update(bean);
-
-    logger.info("update(ActivityDefinitionDynamicValue) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

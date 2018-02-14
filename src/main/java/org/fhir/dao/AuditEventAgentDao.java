@@ -34,10 +34,5 @@ public interface AuditEventAgentDao {
   public List<AuditEventAgent> select(int maxResult);
 
   public List<AuditEventAgent> selectAll();
-
-  public AuditEventAgent create(AuditEventAgent e);
-
-  public AuditEventAgent update(AuditEventAgent e);
-
   public void delete(AuditEventAgent e);
 }

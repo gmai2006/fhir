@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ProvenanceAgent create(ProvenanceAgent bean) {
-  	requireNonNull(bean);
-    logger.info("create(ProvenanceAgent={}) - entered bean ");
-
-    final ProvenanceAgent result = dao.create(bean);
-
-    logger.info("create(ProvenanceAgent) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ProvenanceAgent update(ProvenanceAgent bean) {
-  	requireNonNull(bean);
-    logger.info("update(ProvenanceAgent={}) - entered bean ");
-
-    final ProvenanceAgent result = dao.update(bean);
-
-    logger.info("update(ProvenanceAgent) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

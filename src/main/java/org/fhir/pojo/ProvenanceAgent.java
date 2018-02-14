@@ -83,6 +83,7 @@ public class ProvenanceAgent  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -104,32 +105,22 @@ public class ProvenanceAgent  {
 
   public ProvenanceAgent(ProvenanceAgentModel o) {
     this.id = o.getId();
-      this.role = CodeableConcept.fromArray(o.getRole());
-      if (null != o.getWhoUri()) {
-        this.whoUri = new String(o.getWhoUri());
-      }
-
-      if (null != o.getWhoReference()) {
-        this.whoReference = new Reference(o.getWhoReference());
-        this.whoReference.setId(this.getId());
-      }
-
-      if (null != o.getOnBehalfOfUri()) {
-        this.onBehalfOfUri = new String(o.getOnBehalfOfUri());
-      }
-
-      if (null != o.getOnBehalfOfReference()) {
-        this.onBehalfOfReference = new Reference(o.getOnBehalfOfReference());
-        this.onBehalfOfReference.setId(this.getId());
-      }
-
-      this.relatedAgentType = CodeableConcept.fromJson(o.getRelatedAgentType());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getWhoUri()) {
+      this.whoUri = o.getWhoUri();
+    }
+    if (null != o.getWhoReference() && !o.getWhoReference().isEmpty()) {
+      this.whoReference = new Reference(o.getWhoReference().get(0));
+    }
+    if (null != o.getOnBehalfOfUri()) {
+      this.onBehalfOfUri = o.getOnBehalfOfUri();
+    }
+    if (null != o.getOnBehalfOfReference() && !o.getOnBehalfOfReference().isEmpty()) {
+      this.onBehalfOfReference = new Reference(o.getOnBehalfOfReference().get(0));
+    }
+    this.relatedAgentType = CodeableConceptHelper.fromJson(o.getRelatedAgentType());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setRole( java.util.List<CodeableConcept> value) {
@@ -208,52 +199,21 @@ public class ProvenanceAgent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("whoUri" + "[" + String.valueOf(this.whoUri) + "]\n"); 
-     builder.append("_whoUri" + "[" + String.valueOf(this._whoUri) + "]\n"); 
-     builder.append("whoReference" + "[" + String.valueOf(this.whoReference) + "]\n"); 
-     builder.append("onBehalfOfUri" + "[" + String.valueOf(this.onBehalfOfUri) + "]\n"); 
-     builder.append("_onBehalfOfUri" + "[" + String.valueOf(this._onBehalfOfUri) + "]\n"); 
-     builder.append("onBehalfOfReference" + "[" + String.valueOf(this.onBehalfOfReference) + "]\n"); 
-     builder.append("relatedAgentType" + "[" + String.valueOf(this.relatedAgentType) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ProvenanceAgent]:" + "\n");
+     if(this.role != null) builder.append("role" + "->" + this.role.toString() + "\n"); 
+     if(this.whoUri != null) builder.append("whoUri" + "->" + this.whoUri.toString() + "\n"); 
+     if(this._whoUri != null) builder.append("_whoUri" + "->" + this._whoUri.toString() + "\n"); 
+     if(this.whoReference != null) builder.append("whoReference" + "->" + this.whoReference.toString() + "\n"); 
+     if(this.onBehalfOfUri != null) builder.append("onBehalfOfUri" + "->" + this.onBehalfOfUri.toString() + "\n"); 
+     if(this._onBehalfOfUri != null) builder.append("_onBehalfOfUri" + "->" + this._onBehalfOfUri.toString() + "\n"); 
+     if(this.onBehalfOfReference != null) builder.append("onBehalfOfReference" + "->" + this.onBehalfOfReference.toString() + "\n"); 
+     if(this.relatedAgentType != null) builder.append("relatedAgentType" + "->" + this.relatedAgentType.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ProvenanceAgent> fromArray(java.util.List<ProvenanceAgentModel> list) {
-    return (java.util.List<ProvenanceAgent>)list.stream()
-      .map(model -> new ProvenanceAgent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ProvenanceAgentModel> toModelArray(java.util.List<ProvenanceAgent> list) {
-    return (java.util.List<ProvenanceAgentModel>)list.stream()
-      .map(model -> new ProvenanceAgentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ProvenanceAgent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ProvenanceAgent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ProvenanceAgent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ProvenanceAgent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

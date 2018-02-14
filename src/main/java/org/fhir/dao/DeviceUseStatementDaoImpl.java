@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DeviceUseStatementModel;
 import org.fhir.pojo.DeviceUseStatement;
+import org.fhir.pojo.DeviceUseStatementHelper;
 
 public class DeviceUseStatementDaoImpl implements DeviceUseStatementDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DeviceUseStatementDaoImpl implements DeviceUseStatementDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceUseStatementModel a", DeviceUseStatementModel.class).setMaxResults(maxResult);
       List<DeviceUseStatementModel> models = query.getResultList();
-      return DeviceUseStatement.fromArray(models);
+      return DeviceUseStatementHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class DeviceUseStatementDaoImpl implements DeviceUseStatementDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceUseStatementModel a", DeviceUseStatementModel.class);
       List<DeviceUseStatementModel> models = query.getResultList();
-      return DeviceUseStatement.fromArray(models);
+      return DeviceUseStatementHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class DeviceUseStatementDaoImpl implements DeviceUseStatementDao {
       DeviceUseStatementModel model = em.merge(new DeviceUseStatementModel(e));
       return new DeviceUseStatement(model);
   }
-
   @Override
   @Transactional
   public void delete(DeviceUseStatement e) {

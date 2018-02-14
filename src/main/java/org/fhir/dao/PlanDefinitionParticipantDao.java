@@ -34,10 +34,5 @@ public interface PlanDefinitionParticipantDao {
   public List<PlanDefinitionParticipant> select(int maxResult);
 
   public List<PlanDefinitionParticipant> selectAll();
-
-  public PlanDefinitionParticipant create(PlanDefinitionParticipant e);
-
-  public PlanDefinitionParticipant update(PlanDefinitionParticipant e);
-
   public void delete(PlanDefinitionParticipant e);
 }

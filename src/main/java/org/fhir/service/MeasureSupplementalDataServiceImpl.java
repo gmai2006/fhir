@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public MeasureSupplementalData create(MeasureSupplementalData bean) {
-  	requireNonNull(bean);
-    logger.info("create(MeasureSupplementalData={}) - entered bean ");
-
-    final MeasureSupplementalData result = dao.create(bean);
-
-    logger.info("create(MeasureSupplementalData) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public MeasureSupplementalData update(MeasureSupplementalData bean) {
-  	requireNonNull(bean);
-    logger.info("update(MeasureSupplementalData={}) - entered bean ");
-
-    final MeasureSupplementalData result = dao.update(bean);
-
-    logger.info("update(MeasureSupplementalData) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

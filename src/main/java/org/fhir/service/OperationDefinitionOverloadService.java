@@ -32,7 +32,5 @@ public interface OperationDefinitionOverloadService {
 	public OperationDefinitionOverload find(String id);
   public List<OperationDefinitionOverload> select(int maxResult);
   public List<OperationDefinitionOverload> selectAll();
-  public OperationDefinitionOverload create(OperationDefinitionOverload bean);
-  public OperationDefinitionOverload update(OperationDefinitionOverload bean);
   public void delete(OperationDefinitionOverload bean);
 }

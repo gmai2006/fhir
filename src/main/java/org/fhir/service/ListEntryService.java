@@ -32,7 +32,5 @@ public interface ListEntryService {
 	public ListEntry find(String id);
   public List<ListEntry> select(int maxResult);
   public List<ListEntry> selectAll();
-  public ListEntry create(ListEntry bean);
-  public ListEntry update(ListEntry bean);
   public void delete(ListEntry bean);
 }

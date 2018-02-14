@@ -34,10 +34,5 @@ public interface PersonLinkDao {
   public List<PersonLink> select(int maxResult);
 
   public List<PersonLink> selectAll();
-
-  public PersonLink create(PersonLink e);
-
-  public PersonLink update(PersonLink e);
-
   public void delete(PersonLink e);
 }

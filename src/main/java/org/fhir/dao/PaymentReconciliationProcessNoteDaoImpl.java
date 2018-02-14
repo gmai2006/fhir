@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PaymentReconciliationProcessNoteModel;
 import org.fhir.pojo.PaymentReconciliationProcessNote;
+import org.fhir.pojo.PaymentReconciliationProcessNoteHelper;
 
 public class PaymentReconciliationProcessNoteDaoImpl implements PaymentReconciliationProcessNoteDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PaymentReconciliationProcessNoteDaoImpl implements PaymentReconcili
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PaymentReconciliationProcessNoteModel a", PaymentReconciliationProcessNoteModel.class).setMaxResults(maxResult);
       List<PaymentReconciliationProcessNoteModel> models = query.getResultList();
-      return PaymentReconciliationProcessNote.fromArray(models);
+      return PaymentReconciliationProcessNoteHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PaymentReconciliationProcessNoteDaoImpl implements PaymentReconcili
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PaymentReconciliationProcessNoteModel a", PaymentReconciliationProcessNoteModel.class);
       List<PaymentReconciliationProcessNoteModel> models = query.getResultList();
-      return PaymentReconciliationProcessNote.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PaymentReconciliationProcessNote create(PaymentReconciliationProcessNote e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PaymentReconciliationProcessNoteModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PaymentReconciliationProcessNote update(PaymentReconciliationProcessNote e) {
-      final EntityManager em = entityManagerProvider.get();
-      PaymentReconciliationProcessNoteModel model = em.merge(new PaymentReconciliationProcessNoteModel(e));
-      return new PaymentReconciliationProcessNote(model);
+      return PaymentReconciliationProcessNoteHelper.fromArray2Array(models);
   }
 
   @Override

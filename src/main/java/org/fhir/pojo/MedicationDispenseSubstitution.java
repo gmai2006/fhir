@@ -68,6 +68,7 @@ public class MedicationDispenseSubstitution  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -89,20 +90,16 @@ public class MedicationDispenseSubstitution  {
 
   public MedicationDispenseSubstitution(MedicationDispenseSubstitutionModel o) {
     this.id = o.getId();
-      if (null != o.getWasSubstituted()) {
-        this.wasSubstituted = new Boolean(o.getWasSubstituted());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.reason = CodeableConcept.fromArray(o.getReason());
-      this.responsibleParty = Reference.fromArray(o.getResponsibleParty());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getWasSubstituted()) {
+      this.wasSubstituted = o.getWasSubstituted();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getResponsibleParty() && !o.getResponsibleParty().isEmpty()) {
+    	this.responsibleParty = ReferenceHelper.fromArray2Array(o.getResponsibleParty());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setWasSubstituted( Boolean value) {
@@ -163,49 +160,18 @@ public class MedicationDispenseSubstitution  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("wasSubstituted" + "[" + String.valueOf(this.wasSubstituted) + "]\n"); 
-     builder.append("_wasSubstituted" + "[" + String.valueOf(this._wasSubstituted) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("responsibleParty" + "[" + String.valueOf(this.responsibleParty) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MedicationDispenseSubstitution]:" + "\n");
+     if(this.wasSubstituted != null) builder.append("wasSubstituted" + "->" + this.wasSubstituted.toString() + "\n"); 
+     if(this._wasSubstituted != null) builder.append("_wasSubstituted" + "->" + this._wasSubstituted.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); 
+     if(this.responsibleParty != null) builder.append("responsibleParty" + "->" + this.responsibleParty.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MedicationDispenseSubstitution> fromArray(java.util.List<MedicationDispenseSubstitutionModel> list) {
-    return (java.util.List<MedicationDispenseSubstitution>)list.stream()
-      .map(model -> new MedicationDispenseSubstitution(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MedicationDispenseSubstitutionModel> toModelArray(java.util.List<MedicationDispenseSubstitution> list) {
-    return (java.util.List<MedicationDispenseSubstitutionModel>)list.stream()
-      .map(model -> new MedicationDispenseSubstitutionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MedicationDispenseSubstitution fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MedicationDispenseSubstitution.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MedicationDispenseSubstitution o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MedicationDispenseSubstitution> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

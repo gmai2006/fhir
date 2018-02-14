@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.GoalTargetModel;
 import org.fhir.pojo.GoalTarget;
+import org.fhir.pojo.GoalTargetHelper;
 
 public class GoalTargetDaoImpl implements GoalTargetDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class GoalTargetDaoImpl implements GoalTargetDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GoalTargetModel a", GoalTargetModel.class).setMaxResults(maxResult);
       List<GoalTargetModel> models = query.getResultList();
-      return GoalTarget.fromArray(models);
+      return GoalTargetHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class GoalTargetDaoImpl implements GoalTargetDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GoalTargetModel a", GoalTargetModel.class);
       List<GoalTargetModel> models = query.getResultList();
-      return GoalTarget.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public GoalTarget create(GoalTarget e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new GoalTargetModel(e));
-      return e;
-  }
-
-  @Transactional
-  public GoalTarget update(GoalTarget e) {
-      final EntityManager em = entityManagerProvider.get();
-      GoalTargetModel model = em.merge(new GoalTargetModel(e));
-      return new GoalTarget(model);
+      return GoalTargetHelper.fromArray2Array(models);
   }
 
   @Override

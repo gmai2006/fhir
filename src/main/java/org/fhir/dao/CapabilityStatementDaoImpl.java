@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementModel;
 import org.fhir.pojo.CapabilityStatement;
+import org.fhir.pojo.CapabilityStatementHelper;
 
 public class CapabilityStatementDaoImpl implements CapabilityStatementDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementDaoImpl implements CapabilityStatementDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementModel a", CapabilityStatementModel.class).setMaxResults(maxResult);
       List<CapabilityStatementModel> models = query.getResultList();
-      return CapabilityStatement.fromArray(models);
+      return CapabilityStatementHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class CapabilityStatementDaoImpl implements CapabilityStatementDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementModel a", CapabilityStatementModel.class);
       List<CapabilityStatementModel> models = query.getResultList();
-      return CapabilityStatement.fromArray(models);
+      return CapabilityStatementHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class CapabilityStatementDaoImpl implements CapabilityStatementDao {
       CapabilityStatementModel model = em.merge(new CapabilityStatementModel(e));
       return new CapabilityStatement(model);
   }
-
   @Override
   @Transactional
   public void delete(CapabilityStatement e) {

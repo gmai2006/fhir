@@ -74,6 +74,7 @@ public class GraphDefinitionTarget  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -95,24 +96,21 @@ public class GraphDefinitionTarget  {
 
   public GraphDefinitionTarget(GraphDefinitionTargetModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getProfile()) {
-        this.profile = new String(o.getProfile());
-      }
-
-      this.compartment = GraphDefinitionCompartment.fromArray(o.getCompartment());
-
-      this.link = GraphDefinitionLink.fromArray(o.getLink());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getProfile()) {
+      this.profile = o.getProfile();
+    }
+    if (null != o.getCompartment() && !o.getCompartment().isEmpty()) {
+    	this.compartment = GraphDefinitionCompartmentHelper.fromArray2Array(o.getCompartment());
+    }
+    if (null != o.getLink() && !o.getLink().isEmpty()) {
+    	this.link = GraphDefinitionLinkHelper.fromArray2Array(o.getLink());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -179,50 +177,19 @@ public class GraphDefinitionTarget  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("_profile" + "[" + String.valueOf(this._profile) + "]\n"); 
-     builder.append("compartment" + "[" + String.valueOf(this.compartment) + "]\n"); 
-     builder.append("link" + "[" + String.valueOf(this.link) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[GraphDefinitionTarget]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this._profile != null) builder.append("_profile" + "->" + this._profile.toString() + "\n"); 
+     if(this.compartment != null) builder.append("compartment" + "->" + this.compartment.toString() + "\n"); 
+     if(this.link != null) builder.append("link" + "->" + this.link.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<GraphDefinitionTarget> fromArray(java.util.List<GraphDefinitionTargetModel> list) {
-    return (java.util.List<GraphDefinitionTarget>)list.stream()
-      .map(model -> new GraphDefinitionTarget(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<GraphDefinitionTargetModel> toModelArray(java.util.List<GraphDefinitionTarget> list) {
-    return (java.util.List<GraphDefinitionTargetModel>)list.stream()
-      .map(model -> new GraphDefinitionTargetModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static GraphDefinitionTarget fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, GraphDefinitionTarget.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(GraphDefinitionTarget o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<GraphDefinitionTarget> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

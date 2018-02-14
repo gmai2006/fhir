@@ -34,10 +34,5 @@ public interface ContractFriendlyDao {
   public List<ContractFriendly> select(int maxResult);
 
   public List<ContractFriendly> selectAll();
-
-  public ContractFriendly create(ContractFriendly e);
-
-  public ContractFriendly update(ContractFriendly e);
-
   public void delete(ContractFriendly e);
 }

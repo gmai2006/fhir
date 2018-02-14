@@ -34,10 +34,5 @@ public interface ImmunizationReactionDao {
   public List<ImmunizationReaction> select(int maxResult);
 
   public List<ImmunizationReaction> selectAll();
-
-  public ImmunizationReaction create(ImmunizationReaction e);
-
-  public ImmunizationReaction update(ImmunizationReaction e);
-
   public void delete(ImmunizationReaction e);
 }

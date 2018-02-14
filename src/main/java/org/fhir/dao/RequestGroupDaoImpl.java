@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.RequestGroupModel;
 import org.fhir.pojo.RequestGroup;
+import org.fhir.pojo.RequestGroupHelper;
 
 public class RequestGroupDaoImpl implements RequestGroupDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class RequestGroupDaoImpl implements RequestGroupDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RequestGroupModel a", RequestGroupModel.class).setMaxResults(maxResult);
       List<RequestGroupModel> models = query.getResultList();
-      return RequestGroup.fromArray(models);
+      return RequestGroupHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class RequestGroupDaoImpl implements RequestGroupDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from RequestGroupModel a", RequestGroupModel.class);
       List<RequestGroupModel> models = query.getResultList();
-      return RequestGroup.fromArray(models);
+      return RequestGroupHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class RequestGroupDaoImpl implements RequestGroupDao {
       RequestGroupModel model = em.merge(new RequestGroupModel(e));
       return new RequestGroup(model);
   }
-
   @Override
   @Transactional
   public void delete(RequestGroup e) {

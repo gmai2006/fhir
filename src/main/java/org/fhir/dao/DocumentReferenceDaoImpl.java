@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DocumentReferenceModel;
 import org.fhir.pojo.DocumentReference;
+import org.fhir.pojo.DocumentReferenceHelper;
 
 public class DocumentReferenceDaoImpl implements DocumentReferenceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DocumentReferenceDaoImpl implements DocumentReferenceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentReferenceModel a", DocumentReferenceModel.class).setMaxResults(maxResult);
       List<DocumentReferenceModel> models = query.getResultList();
-      return DocumentReference.fromArray(models);
+      return DocumentReferenceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class DocumentReferenceDaoImpl implements DocumentReferenceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentReferenceModel a", DocumentReferenceModel.class);
       List<DocumentReferenceModel> models = query.getResultList();
-      return DocumentReference.fromArray(models);
+      return DocumentReferenceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class DocumentReferenceDaoImpl implements DocumentReferenceDao {
       DocumentReferenceModel model = em.merge(new DocumentReferenceModel(e));
       return new DocumentReference(model);
   }
-
   @Override
   @Transactional
   public void delete(DocumentReference e) {

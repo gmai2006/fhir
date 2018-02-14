@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AllergyIntoleranceModel;
 import org.fhir.pojo.AllergyIntolerance;
+import org.fhir.pojo.AllergyIntoleranceHelper;
 
 public class AllergyIntoleranceDaoImpl implements AllergyIntoleranceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AllergyIntoleranceDaoImpl implements AllergyIntoleranceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AllergyIntoleranceModel a", AllergyIntoleranceModel.class).setMaxResults(maxResult);
       List<AllergyIntoleranceModel> models = query.getResultList();
-      return AllergyIntolerance.fromArray(models);
+      return AllergyIntoleranceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class AllergyIntoleranceDaoImpl implements AllergyIntoleranceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AllergyIntoleranceModel a", AllergyIntoleranceModel.class);
       List<AllergyIntoleranceModel> models = query.getResultList();
-      return AllergyIntolerance.fromArray(models);
+      return AllergyIntoleranceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class AllergyIntoleranceDaoImpl implements AllergyIntoleranceDao {
       AllergyIntoleranceModel model = em.merge(new AllergyIntoleranceModel(e));
       return new AllergyIntolerance(model);
   }
-
   @Override
   @Transactional
   public void delete(AllergyIntolerance e) {

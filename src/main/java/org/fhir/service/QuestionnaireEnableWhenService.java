@@ -32,7 +32,5 @@ public interface QuestionnaireEnableWhenService {
 	public QuestionnaireEnableWhen find(String id);
   public List<QuestionnaireEnableWhen> select(int maxResult);
   public List<QuestionnaireEnableWhen> selectAll();
-  public QuestionnaireEnableWhen create(QuestionnaireEnableWhen bean);
-  public QuestionnaireEnableWhen update(QuestionnaireEnableWhen bean);
   public void delete(QuestionnaireEnableWhen bean);
 }

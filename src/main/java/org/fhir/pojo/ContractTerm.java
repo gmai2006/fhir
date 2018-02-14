@@ -119,6 +119,7 @@ public class ContractTerm  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -140,35 +141,31 @@ public class ContractTerm  {
 
   public ContractTerm(ContractTermModel o) {
     this.id = o.getId();
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getIssued()) {
-        this.issued = new String(o.getIssued());
-      }
-
-      this.applies = Period.fromJson(o.getApplies());
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.subType = CodeableConcept.fromJson(o.getSubType());
-      this.topic = Reference.fromArray(o.getTopic());
-
-      this.action = CodeableConcept.fromArray(o.getAction());
-      this.actionReason = CodeableConcept.fromArray(o.getActionReason());
-      this.securityLabel = Coding.fromArray(o.getSecurityLabel());
-      this.agent = ContractAgent1.fromArray(o.getAgent());
-
-      if (null != o.getText()) {
-        this.text = new String(o.getText());
-      }
-
-      this.valuedItem = ContractValuedItem1.fromArray(o.getValuedItem());
-
-      this.group = ContractTerm.fromArray(o.getGroup());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getIssued()) {
+      this.issued = o.getIssued();
+    }
+    this.applies = PeriodHelper.fromJson(o.getApplies());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    this.subType = CodeableConceptHelper.fromJson(o.getSubType());
+    if (null != o.getTopic() && !o.getTopic().isEmpty()) {
+    	this.topic = ReferenceHelper.fromArray2Array(o.getTopic());
+    }
+    if (null != o.getAgent() && !o.getAgent().isEmpty()) {
+    	this.agent = ContractAgent1Helper.fromArray2Array(o.getAgent());
+    }
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+    if (null != o.getValuedItem() && !o.getValuedItem().isEmpty()) {
+    	this.valuedItem = ContractValuedItem1Helper.fromArray2Array(o.getValuedItem());
+    }
+    if (null != o.getGroup() && !o.getGroup().isEmpty()) {
+    	this.group = ContractTermHelper.fromArray2Array(o.getGroup());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( Identifier value) {
@@ -289,59 +286,28 @@ public class ContractTerm  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("issued" + "[" + String.valueOf(this.issued) + "]\n"); 
-     builder.append("_issued" + "[" + String.valueOf(this._issued) + "]\n"); 
-     builder.append("applies" + "[" + String.valueOf(this.applies) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("subType" + "[" + String.valueOf(this.subType) + "]\n"); 
-     builder.append("topic" + "[" + String.valueOf(this.topic) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("actionReason" + "[" + String.valueOf(this.actionReason) + "]\n"); 
-     builder.append("securityLabel" + "[" + String.valueOf(this.securityLabel) + "]\n"); 
-     builder.append("agent" + "[" + String.valueOf(this.agent) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("valuedItem" + "[" + String.valueOf(this.valuedItem) + "]\n"); 
-     builder.append("group" + "[" + String.valueOf(this.group) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ContractTerm]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.issued != null) builder.append("issued" + "->" + this.issued.toString() + "\n"); 
+     if(this._issued != null) builder.append("_issued" + "->" + this._issued.toString() + "\n"); 
+     if(this.applies != null) builder.append("applies" + "->" + this.applies.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.subType != null) builder.append("subType" + "->" + this.subType.toString() + "\n"); 
+     if(this.topic != null) builder.append("topic" + "->" + this.topic.toString() + "\n"); 
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
+     if(this.actionReason != null) builder.append("actionReason" + "->" + this.actionReason.toString() + "\n"); 
+     if(this.securityLabel != null) builder.append("securityLabel" + "->" + this.securityLabel.toString() + "\n"); 
+     if(this.agent != null) builder.append("agent" + "->" + this.agent.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.valuedItem != null) builder.append("valuedItem" + "->" + this.valuedItem.toString() + "\n"); 
+     if(this.group != null) builder.append("group" + "->" + this.group.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ContractTerm> fromArray(java.util.List<ContractTermModel> list) {
-    return (java.util.List<ContractTerm>)list.stream()
-      .map(model -> new ContractTerm(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ContractTermModel> toModelArray(java.util.List<ContractTerm> list) {
-    return (java.util.List<ContractTermModel>)list.stream()
-      .map(model -> new ContractTermModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ContractTerm fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ContractTerm.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ContractTerm o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ContractTerm> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

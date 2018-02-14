@@ -34,10 +34,5 @@ public interface ListEntryDao {
   public List<ListEntry> select(int maxResult);
 
   public List<ListEntry> selectAll();
-
-  public ListEntry create(ListEntry e);
-
-  public ListEntry update(ListEntry e);
-
   public void delete(ListEntry e);
 }

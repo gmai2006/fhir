@@ -34,10 +34,5 @@ public interface PaymentReconciliationProcessNoteDao {
   public List<PaymentReconciliationProcessNote> select(int maxResult);
 
   public List<PaymentReconciliationProcessNote> selectAll();
-
-  public PaymentReconciliationProcessNote create(PaymentReconciliationProcessNote e);
-
-  public PaymentReconciliationProcessNote update(PaymentReconciliationProcessNote e);
-
   public void delete(PaymentReconciliationProcessNote e);
 }

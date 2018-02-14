@@ -34,10 +34,5 @@ public interface CompositionSectionDao {
   public List<CompositionSection> select(int maxResult);
 
   public List<CompositionSection> selectAll();
-
-  public CompositionSection create(CompositionSection e);
-
-  public CompositionSection update(CompositionSection e);
-
   public void delete(CompositionSection e);
 }

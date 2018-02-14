@@ -32,7 +32,5 @@ public interface GroupCharacteristicService {
 	public GroupCharacteristic find(String id);
   public List<GroupCharacteristic> select(int maxResult);
   public List<GroupCharacteristic> selectAll();
-  public GroupCharacteristic create(GroupCharacteristic bean);
-  public GroupCharacteristic update(GroupCharacteristic bean);
   public void delete(GroupCharacteristic bean);
 }

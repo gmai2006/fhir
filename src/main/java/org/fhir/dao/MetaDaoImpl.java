@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MetaModel;
 import org.fhir.pojo.Meta;
+import org.fhir.pojo.MetaHelper;
 
 public class MetaDaoImpl implements MetaDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MetaDaoImpl implements MetaDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MetaModel a", MetaModel.class).setMaxResults(maxResult);
       List<MetaModel> models = query.getResultList();
-      return Meta.fromArray(models);
+      return MetaHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MetaDaoImpl implements MetaDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MetaModel a", MetaModel.class);
       List<MetaModel> models = query.getResultList();
-      return Meta.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public Meta create(Meta e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MetaModel(e));
-      return e;
-  }
-
-  @Transactional
-  public Meta update(Meta e) {
-      final EntityManager em = entityManagerProvider.get();
-      MetaModel model = em.merge(new MetaModel(e));
-      return new Meta(model);
+      return MetaHelper.fromArray2Array(models);
   }
 
   @Override

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ContractModel;
 import org.fhir.pojo.Contract;
+import org.fhir.pojo.ContractHelper;
 
 public class ContractDaoImpl implements ContractDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ContractDaoImpl implements ContractDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContractModel a", ContractModel.class).setMaxResults(maxResult);
       List<ContractModel> models = query.getResultList();
-      return Contract.fromArray(models);
+      return ContractHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ContractDaoImpl implements ContractDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContractModel a", ContractModel.class);
       List<ContractModel> models = query.getResultList();
-      return Contract.fromArray(models);
+      return ContractHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ContractDaoImpl implements ContractDao {
       ContractModel model = em.merge(new ContractModel(e));
       return new Contract(model);
   }
-
   @Override
   @Transactional
   public void delete(Contract e) {

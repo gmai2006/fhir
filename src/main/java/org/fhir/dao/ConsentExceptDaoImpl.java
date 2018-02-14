@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ConsentExceptModel;
 import org.fhir.pojo.ConsentExcept;
+import org.fhir.pojo.ConsentExceptHelper;
 
 public class ConsentExceptDaoImpl implements ConsentExceptDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ConsentExceptDaoImpl implements ConsentExceptDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConsentExceptModel a", ConsentExceptModel.class).setMaxResults(maxResult);
       List<ConsentExceptModel> models = query.getResultList();
-      return ConsentExcept.fromArray(models);
+      return ConsentExceptHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ConsentExceptDaoImpl implements ConsentExceptDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConsentExceptModel a", ConsentExceptModel.class);
       List<ConsentExceptModel> models = query.getResultList();
-      return ConsentExcept.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ConsentExcept create(ConsentExcept e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ConsentExceptModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ConsentExcept update(ConsentExcept e) {
-      final EntityManager em = entityManagerProvider.get();
-      ConsentExceptModel model = em.merge(new ConsentExceptModel(e));
-      return new ConsentExcept(model);
+      return ConsentExceptHelper.fromArray2Array(models);
   }
 
   @Override

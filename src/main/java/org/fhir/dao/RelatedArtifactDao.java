@@ -34,10 +34,5 @@ public interface RelatedArtifactDao {
   public List<RelatedArtifact> select(int maxResult);
 
   public List<RelatedArtifact> selectAll();
-
-  public RelatedArtifact create(RelatedArtifact e);
-
-  public RelatedArtifact update(RelatedArtifact e);
-
   public void delete(RelatedArtifact e);
 }

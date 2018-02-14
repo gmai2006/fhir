@@ -69,6 +69,7 @@ public class CompositionAttester  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -90,23 +91,18 @@ public class CompositionAttester  {
 
   public CompositionAttester(CompositionAttesterModel o) {
     this.id = o.getId();
-      this.mode = org.fhir.utils.JsonUtils.json2Array(o.getMode());
-
-      if (null != o.getTime()) {
-        this.time = new String(o.getTime());
-      }
-
-      if (null != o.getParty()) {
-        this.party = new Reference(o.getParty());
-        this.party.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (o.getMode() != null) {
+    	this.mode = org.fhir.utils.JsonUtils.json2Array(o.getMode());
+    }
+    if (null != o.getTime()) {
+      this.time = o.getTime();
+    }
+    if (null != o.getParty() && !o.getParty().isEmpty()) {
+      this.party = new Reference(o.getParty().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setMode( java.util.List<String> value) {
@@ -167,15 +163,16 @@ public class CompositionAttester  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("time" + "[" + String.valueOf(this.time) + "]\n"); 
-     builder.append("_time" + "[" + String.valueOf(this._time) + "]\n"); 
-     builder.append("party" + "[" + String.valueOf(this.party) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CompositionAttester]:" + "\n");
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.time != null) builder.append("time" + "->" + this.time.toString() + "\n"); 
+     if(this._time != null) builder.append("_time" + "->" + this._time.toString() + "\n"); 
+     if(this.party != null) builder.append("party" + "->" + this.party.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -201,36 +198,4 @@ public class CompositionAttester  {
   	  	}
   }
 
-  public static java.util.List<CompositionAttester> fromArray(java.util.List<CompositionAttesterModel> list) {
-    return (java.util.List<CompositionAttester>)list.stream()
-      .map(model -> new CompositionAttester(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CompositionAttesterModel> toModelArray(java.util.List<CompositionAttester> list) {
-    return (java.util.List<CompositionAttesterModel>)list.stream()
-      .map(model -> new CompositionAttesterModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CompositionAttester fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CompositionAttester.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CompositionAttester o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CompositionAttester> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

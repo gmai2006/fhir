@@ -104,6 +104,7 @@ public class ExplanationOfBenefitBenefitBalance  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -125,31 +126,26 @@ public class ExplanationOfBenefitBenefitBalance  {
 
   public ExplanationOfBenefitBenefitBalance(ExplanationOfBenefitBenefitBalanceModel o) {
     this.id = o.getId();
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      this.subCategory = CodeableConcept.fromJson(o.getSubCategory());
-      if (null != o.getExcluded()) {
-        this.excluded = new Boolean(o.getExcluded());
-      }
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.network = CodeableConcept.fromJson(o.getNetwork());
-      this.unit = CodeableConcept.fromJson(o.getUnit());
-      this.term = CodeableConcept.fromJson(o.getTerm());
-      this.financial = ExplanationOfBenefitFinancial.fromArray(o.getFinancial());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    this.subCategory = CodeableConceptHelper.fromJson(o.getSubCategory());
+    if (null != o.getExcluded()) {
+      this.excluded = o.getExcluded();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    this.network = CodeableConceptHelper.fromJson(o.getNetwork());
+    this.unit = CodeableConceptHelper.fromJson(o.getUnit());
+    this.term = CodeableConceptHelper.fromJson(o.getTerm());
+    if (null != o.getFinancial() && !o.getFinancial().isEmpty()) {
+    	this.financial = ExplanationOfBenefitFinancialHelper.fromArray2Array(o.getFinancial());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCategory( CodeableConcept value) {
@@ -252,56 +248,25 @@ public class ExplanationOfBenefitBenefitBalance  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("subCategory" + "[" + String.valueOf(this.subCategory) + "]\n"); 
-     builder.append("excluded" + "[" + String.valueOf(this.excluded) + "]\n"); 
-     builder.append("_excluded" + "[" + String.valueOf(this._excluded) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("network" + "[" + String.valueOf(this.network) + "]\n"); 
-     builder.append("unit" + "[" + String.valueOf(this.unit) + "]\n"); 
-     builder.append("term" + "[" + String.valueOf(this.term) + "]\n"); 
-     builder.append("financial" + "[" + String.valueOf(this.financial) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitBenefitBalance]:" + "\n");
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.subCategory != null) builder.append("subCategory" + "->" + this.subCategory.toString() + "\n"); 
+     if(this.excluded != null) builder.append("excluded" + "->" + this.excluded.toString() + "\n"); 
+     if(this._excluded != null) builder.append("_excluded" + "->" + this._excluded.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.network != null) builder.append("network" + "->" + this.network.toString() + "\n"); 
+     if(this.unit != null) builder.append("unit" + "->" + this.unit.toString() + "\n"); 
+     if(this.term != null) builder.append("term" + "->" + this.term.toString() + "\n"); 
+     if(this.financial != null) builder.append("financial" + "->" + this.financial.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExplanationOfBenefitBenefitBalance> fromArray(java.util.List<ExplanationOfBenefitBenefitBalanceModel> list) {
-    return (java.util.List<ExplanationOfBenefitBenefitBalance>)list.stream()
-      .map(model -> new ExplanationOfBenefitBenefitBalance(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExplanationOfBenefitBenefitBalanceModel> toModelArray(java.util.List<ExplanationOfBenefitBenefitBalance> list) {
-    return (java.util.List<ExplanationOfBenefitBenefitBalanceModel>)list.stream()
-      .map(model -> new ExplanationOfBenefitBenefitBalanceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExplanationOfBenefitBenefitBalance fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExplanationOfBenefitBenefitBalance.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExplanationOfBenefitBenefitBalance o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExplanationOfBenefitBenefitBalance> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

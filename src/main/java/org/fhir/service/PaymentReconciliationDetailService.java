@@ -32,7 +32,5 @@ public interface PaymentReconciliationDetailService {
 	public PaymentReconciliationDetail find(String id);
   public List<PaymentReconciliationDetail> select(int maxResult);
   public List<PaymentReconciliationDetail> selectAll();
-  public PaymentReconciliationDetail create(PaymentReconciliationDetail bean);
-  public PaymentReconciliationDetail update(PaymentReconciliationDetail bean);
   public void delete(PaymentReconciliationDetail bean);
 }

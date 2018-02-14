@@ -34,10 +34,5 @@ public interface CommunicationPayloadDao {
   public List<CommunicationPayload> select(int maxResult);
 
   public List<CommunicationPayload> selectAll();
-
-  public CommunicationPayload create(CommunicationPayload e);
-
-  public CommunicationPayload update(CommunicationPayload e);
-
   public void delete(CommunicationPayload e);
 }

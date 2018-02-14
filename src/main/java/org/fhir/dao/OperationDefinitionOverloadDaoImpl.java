@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.OperationDefinitionOverloadModel;
 import org.fhir.pojo.OperationDefinitionOverload;
+import org.fhir.pojo.OperationDefinitionOverloadHelper;
 
 public class OperationDefinitionOverloadDaoImpl implements OperationDefinitionOverloadDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class OperationDefinitionOverloadDaoImpl implements OperationDefinitionOv
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OperationDefinitionOverloadModel a", OperationDefinitionOverloadModel.class).setMaxResults(maxResult);
       List<OperationDefinitionOverloadModel> models = query.getResultList();
-      return OperationDefinitionOverload.fromArray(models);
+      return OperationDefinitionOverloadHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class OperationDefinitionOverloadDaoImpl implements OperationDefinitionOv
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OperationDefinitionOverloadModel a", OperationDefinitionOverloadModel.class);
       List<OperationDefinitionOverloadModel> models = query.getResultList();
-      return OperationDefinitionOverload.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public OperationDefinitionOverload create(OperationDefinitionOverload e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new OperationDefinitionOverloadModel(e));
-      return e;
-  }
-
-  @Transactional
-  public OperationDefinitionOverload update(OperationDefinitionOverload e) {
-      final EntityManager em = entityManagerProvider.get();
-      OperationDefinitionOverloadModel model = em.merge(new OperationDefinitionOverloadModel(e));
-      return new OperationDefinitionOverload(model);
+      return OperationDefinitionOverloadHelper.fromArray2Array(models);
   }
 
   @Override

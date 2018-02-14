@@ -93,6 +93,7 @@ public class TriggerDefinition  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -112,38 +113,28 @@ public class TriggerDefinition  {
 
   public TriggerDefinition(TriggerDefinitionModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getEventName()) {
-        this.eventName = new String(o.getEventName());
-      }
-
-      this.eventTimingTiming = Timing.fromJson(o.getEventTimingTiming());
-      if (null != o.getEventTimingReference()) {
-        this.eventTimingReference = new Reference(o.getEventTimingReference());
-        this.eventTimingReference.setId(this.getId());
-      }
-
-      if (null != o.getEventTimingDate()) {
-        this.eventTimingDate = new String(o.getEventTimingDate());
-      }
-
-      if (null != o.getEventTimingDateTime()) {
-        this.eventTimingDateTime = new String(o.getEventTimingDateTime());
-      }
-
-      if (null != o.getEventData()) {
-        this.eventData = new DataRequirement(o.getEventData());
-        this.eventData.setId(this.getId());
-      }
-
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getEventName()) {
+      this.eventName = o.getEventName();
+    }
+    this.eventTimingTiming = TimingHelper.fromJson(o.getEventTimingTiming());
+    if (null != o.getEventTimingReference() && !o.getEventTimingReference().isEmpty()) {
+      this.eventTimingReference = new Reference(o.getEventTimingReference().get(0));
+    }
+    if (null != o.getEventTimingDate()) {
+      this.eventTimingDate = o.getEventTimingDate();
+    }
+    if (null != o.getEventTimingDateTime()) {
+      this.eventTimingDateTime = o.getEventTimingDateTime();
+    }
+    if (null != o.getEventData() && !o.getEventData().isEmpty()) {
+      this.eventData = new DataRequirement(o.getEventData().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -234,20 +225,21 @@ public class TriggerDefinition  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("eventName" + "[" + String.valueOf(this.eventName) + "]\n"); 
-     builder.append("_eventName" + "[" + String.valueOf(this._eventName) + "]\n"); 
-     builder.append("eventTimingTiming" + "[" + String.valueOf(this.eventTimingTiming) + "]\n"); 
-     builder.append("eventTimingReference" + "[" + String.valueOf(this.eventTimingReference) + "]\n"); 
-     builder.append("eventTimingDate" + "[" + String.valueOf(this.eventTimingDate) + "]\n"); 
-     builder.append("_eventTimingDate" + "[" + String.valueOf(this._eventTimingDate) + "]\n"); 
-     builder.append("eventTimingDateTime" + "[" + String.valueOf(this.eventTimingDateTime) + "]\n"); 
-     builder.append("_eventTimingDateTime" + "[" + String.valueOf(this._eventTimingDateTime) + "]\n"); 
-     builder.append("eventData" + "[" + String.valueOf(this.eventData) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TriggerDefinition]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.eventName != null) builder.append("eventName" + "->" + this.eventName.toString() + "\n"); 
+     if(this._eventName != null) builder.append("_eventName" + "->" + this._eventName.toString() + "\n"); 
+     if(this.eventTimingTiming != null) builder.append("eventTimingTiming" + "->" + this.eventTimingTiming.toString() + "\n"); 
+     if(this.eventTimingReference != null) builder.append("eventTimingReference" + "->" + this.eventTimingReference.toString() + "\n"); 
+     if(this.eventTimingDate != null) builder.append("eventTimingDate" + "->" + this.eventTimingDate.toString() + "\n"); 
+     if(this._eventTimingDate != null) builder.append("_eventTimingDate" + "->" + this._eventTimingDate.toString() + "\n"); 
+     if(this.eventTimingDateTime != null) builder.append("eventTimingDateTime" + "->" + this.eventTimingDateTime.toString() + "\n"); 
+     if(this._eventTimingDateTime != null) builder.append("_eventTimingDateTime" + "->" + this._eventTimingDateTime.toString() + "\n"); 
+     if(this.eventData != null) builder.append("eventData" + "->" + this.eventData.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -275,36 +267,4 @@ public class TriggerDefinition  {
   	}
   }
 
-  public static java.util.List<TriggerDefinition> fromArray(java.util.List<TriggerDefinitionModel> list) {
-    return (java.util.List<TriggerDefinition>)list.stream()
-      .map(model -> new TriggerDefinition(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<TriggerDefinitionModel> toModelArray(java.util.List<TriggerDefinition> list) {
-    return (java.util.List<TriggerDefinitionModel>)list.stream()
-      .map(model -> new TriggerDefinitionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static TriggerDefinition fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TriggerDefinition.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TriggerDefinition o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TriggerDefinition> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

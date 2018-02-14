@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ResearchStudyArm create(ResearchStudyArm bean) {
-  	requireNonNull(bean);
-    logger.info("create(ResearchStudyArm={}) - entered bean ");
-
-    final ResearchStudyArm result = dao.create(bean);
-
-    logger.info("create(ResearchStudyArm) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ResearchStudyArm update(ResearchStudyArm bean) {
-  	requireNonNull(bean);
-    logger.info("update(ResearchStudyArm={}) - entered bean ");
-
-    final ResearchStudyArm result = dao.update(bean);
-
-    logger.info("update(ResearchStudyArm) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

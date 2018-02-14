@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimResponseAdjudicationModel;
 import org.fhir.pojo.ClaimResponseAdjudication;
+import org.fhir.pojo.ClaimResponseAdjudicationHelper;
 
 public class ClaimResponseAdjudicationDaoImpl implements ClaimResponseAdjudicationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimResponseAdjudicationDaoImpl implements ClaimResponseAdjudicati
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimResponseAdjudicationModel a", ClaimResponseAdjudicationModel.class).setMaxResults(maxResult);
       List<ClaimResponseAdjudicationModel> models = query.getResultList();
-      return ClaimResponseAdjudication.fromArray(models);
+      return ClaimResponseAdjudicationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimResponseAdjudicationDaoImpl implements ClaimResponseAdjudicati
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimResponseAdjudicationModel a", ClaimResponseAdjudicationModel.class);
       List<ClaimResponseAdjudicationModel> models = query.getResultList();
-      return ClaimResponseAdjudication.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimResponseAdjudication create(ClaimResponseAdjudication e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimResponseAdjudicationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimResponseAdjudication update(ClaimResponseAdjudication e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimResponseAdjudicationModel model = em.merge(new ClaimResponseAdjudicationModel(e));
-      return new ClaimResponseAdjudication(model);
+      return ClaimResponseAdjudicationHelper.fromArray2Array(models);
   }
 
   @Override

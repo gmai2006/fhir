@@ -34,10 +34,5 @@ public interface DataRequirementCodeFilterDao {
   public List<DataRequirementCodeFilter> select(int maxResult);
 
   public List<DataRequirementCodeFilter> selectAll();
-
-  public DataRequirementCodeFilter create(DataRequirementCodeFilter e);
-
-  public DataRequirementCodeFilter update(DataRequirementCodeFilter e);
-
   public void delete(DataRequirementCodeFilter e);
 }

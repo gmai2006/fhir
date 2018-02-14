@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ObservationComponentModel;
 import org.fhir.pojo.ObservationComponent;
+import org.fhir.pojo.ObservationComponentHelper;
 
 public class ObservationComponentDaoImpl implements ObservationComponentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ObservationComponentDaoImpl implements ObservationComponentDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ObservationComponentModel a", ObservationComponentModel.class).setMaxResults(maxResult);
       List<ObservationComponentModel> models = query.getResultList();
-      return ObservationComponent.fromArray(models);
+      return ObservationComponentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ObservationComponentDaoImpl implements ObservationComponentDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ObservationComponentModel a", ObservationComponentModel.class);
       List<ObservationComponentModel> models = query.getResultList();
-      return ObservationComponent.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ObservationComponent create(ObservationComponent e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ObservationComponentModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ObservationComponent update(ObservationComponent e) {
-      final EntityManager em = entityManagerProvider.get();
-      ObservationComponentModel model = em.merge(new ObservationComponentModel(e));
-      return new ObservationComponent(model);
+      return ObservationComponentHelper.fromArray2Array(models);
   }
 
   @Override

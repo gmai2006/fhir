@@ -34,10 +34,8 @@ public interface ScheduleDao {
   public List<Schedule> select(int maxResult);
 
   public List<Schedule> selectAll();
-
   public Schedule create(Schedule e);
 
   public Schedule update(Schedule e);
-
   public void delete(Schedule e);
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DocumentReferenceRelatedModel;
 import org.fhir.pojo.DocumentReferenceRelated;
+import org.fhir.pojo.DocumentReferenceRelatedHelper;
 
 public class DocumentReferenceRelatedDaoImpl implements DocumentReferenceRelatedDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DocumentReferenceRelatedDaoImpl implements DocumentReferenceRelated
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentReferenceRelatedModel a", DocumentReferenceRelatedModel.class).setMaxResults(maxResult);
       List<DocumentReferenceRelatedModel> models = query.getResultList();
-      return DocumentReferenceRelated.fromArray(models);
+      return DocumentReferenceRelatedHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DocumentReferenceRelatedDaoImpl implements DocumentReferenceRelated
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentReferenceRelatedModel a", DocumentReferenceRelatedModel.class);
       List<DocumentReferenceRelatedModel> models = query.getResultList();
-      return DocumentReferenceRelated.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DocumentReferenceRelated create(DocumentReferenceRelated e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DocumentReferenceRelatedModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DocumentReferenceRelated update(DocumentReferenceRelated e) {
-      final EntityManager em = entityManagerProvider.get();
-      DocumentReferenceRelatedModel model = em.merge(new DocumentReferenceRelatedModel(e));
-      return new DocumentReferenceRelated(model);
+      return DocumentReferenceRelatedHelper.fromArray2Array(models);
   }
 
   @Override

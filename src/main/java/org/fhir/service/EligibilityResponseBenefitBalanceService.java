@@ -32,7 +32,5 @@ public interface EligibilityResponseBenefitBalanceService {
 	public EligibilityResponseBenefitBalance find(String id);
   public List<EligibilityResponseBenefitBalance> select(int maxResult);
   public List<EligibilityResponseBenefitBalance> selectAll();
-  public EligibilityResponseBenefitBalance create(EligibilityResponseBenefitBalance bean);
-  public EligibilityResponseBenefitBalance update(EligibilityResponseBenefitBalance bean);
   public void delete(EligibilityResponseBenefitBalance bean);
 }

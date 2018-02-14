@@ -139,6 +139,7 @@ public class NutritionOrder  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -190,75 +191,51 @@ public class NutritionOrder  {
 
   public NutritionOrder(NutritionOrderModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      if (null != o.getEncounter()) {
-        this.encounter = new Reference(o.getEncounter());
-        this.encounter.setId(this.getId());
-      }
-
-      if (null != o.getDateTime()) {
-        this.dateTime = new String(o.getDateTime());
-      }
-
-      if (null != o.getOrderer()) {
-        this.orderer = new Reference(o.getOrderer());
-        this.orderer.setId(this.getId());
-      }
-
-      this.allergyIntolerance = Reference.fromArray(o.getAllergyIntolerance());
-
-      this.foodPreferenceModifier = CodeableConcept.fromArray(o.getFoodPreferenceModifier());
-      this.excludeFoodModifier = CodeableConcept.fromArray(o.getExcludeFoodModifier());
-      if (null != o.getOralDiet()) {
-        this.oralDiet = new NutritionOrderOralDiet(o.getOralDiet());
-        this.oralDiet.setId(this.getId());
-      }
-
-      this.supplement = NutritionOrderSupplement.fromArray(o.getSupplement());
-
-      if (null != o.getEnteralFormula()) {
-        this.enteralFormula = new NutritionOrderEnteralFormula(o.getEnteralFormula());
-        this.enteralFormula.setId(this.getId());
-      }
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    if (null != o.getEncounter() && !o.getEncounter().isEmpty()) {
+      this.encounter = new Reference(o.getEncounter().get(0));
+    }
+    if (null != o.getDateTime()) {
+      this.dateTime = o.getDateTime();
+    }
+    if (null != o.getOrderer() && !o.getOrderer().isEmpty()) {
+      this.orderer = new Reference(o.getOrderer().get(0));
+    }
+    if (null != o.getAllergyIntolerance() && !o.getAllergyIntolerance().isEmpty()) {
+    	this.allergyIntolerance = ReferenceHelper.fromArray2Array(o.getAllergyIntolerance());
+    }
+    if (null != o.getOralDiet() && !o.getOralDiet().isEmpty()) {
+      this.oralDiet = new NutritionOrderOralDiet(o.getOralDiet().get(0));
+    }
+    if (null != o.getSupplement() && !o.getSupplement().isEmpty()) {
+    	this.supplement = NutritionOrderSupplementHelper.fromArray2Array(o.getSupplement());
+    }
+    if (null != o.getEnteralFormula() && !o.getEnteralFormula().isEmpty()) {
+      this.enteralFormula = new NutritionOrderEnteralFormula(o.getEnteralFormula().get(0));
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -421,32 +398,33 @@ public class NutritionOrder  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("encounter" + "[" + String.valueOf(this.encounter) + "]\n"); 
-     builder.append("dateTime" + "[" + String.valueOf(this.dateTime) + "]\n"); 
-     builder.append("_dateTime" + "[" + String.valueOf(this._dateTime) + "]\n"); 
-     builder.append("orderer" + "[" + String.valueOf(this.orderer) + "]\n"); 
-     builder.append("allergyIntolerance" + "[" + String.valueOf(this.allergyIntolerance) + "]\n"); 
-     builder.append("foodPreferenceModifier" + "[" + String.valueOf(this.foodPreferenceModifier) + "]\n"); 
-     builder.append("excludeFoodModifier" + "[" + String.valueOf(this.excludeFoodModifier) + "]\n"); 
-     builder.append("oralDiet" + "[" + String.valueOf(this.oralDiet) + "]\n"); 
-     builder.append("supplement" + "[" + String.valueOf(this.supplement) + "]\n"); 
-     builder.append("enteralFormula" + "[" + String.valueOf(this.enteralFormula) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[NutritionOrder]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.encounter != null) builder.append("encounter" + "->" + this.encounter.toString() + "\n"); 
+     if(this.dateTime != null) builder.append("dateTime" + "->" + this.dateTime.toString() + "\n"); 
+     if(this._dateTime != null) builder.append("_dateTime" + "->" + this._dateTime.toString() + "\n"); 
+     if(this.orderer != null) builder.append("orderer" + "->" + this.orderer.toString() + "\n"); 
+     if(this.allergyIntolerance != null) builder.append("allergyIntolerance" + "->" + this.allergyIntolerance.toString() + "\n"); 
+     if(this.foodPreferenceModifier != null) builder.append("foodPreferenceModifier" + "->" + this.foodPreferenceModifier.toString() + "\n"); 
+     if(this.excludeFoodModifier != null) builder.append("excludeFoodModifier" + "->" + this.excludeFoodModifier.toString() + "\n"); 
+     if(this.oralDiet != null) builder.append("oralDiet" + "->" + this.oralDiet.toString() + "\n"); 
+     if(this.supplement != null) builder.append("supplement" + "->" + this.supplement.toString() + "\n"); 
+     if(this.enteralFormula != null) builder.append("enteralFormula" + "->" + this.enteralFormula.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -490,36 +468,4 @@ public class NutritionOrder  {
   	}
   }
 
-  public static java.util.List<NutritionOrder> fromArray(java.util.List<NutritionOrderModel> list) {
-    return (java.util.List<NutritionOrder>)list.stream()
-      .map(model -> new NutritionOrder(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<NutritionOrderModel> toModelArray(java.util.List<NutritionOrder> list) {
-    return (java.util.List<NutritionOrderModel>)list.stream()
-      .map(model -> new NutritionOrderModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static NutritionOrder fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, NutritionOrder.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(NutritionOrder o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<NutritionOrder> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

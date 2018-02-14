@@ -32,7 +32,5 @@ public interface ActivityDefinitionParticipantService {
 	public ActivityDefinitionParticipant find(String id);
   public List<ActivityDefinitionParticipant> select(int maxResult);
   public List<ActivityDefinitionParticipant> selectAll();
-  public ActivityDefinitionParticipant create(ActivityDefinitionParticipant bean);
-  public ActivityDefinitionParticipant update(ActivityDefinitionParticipant bean);
   public void delete(ActivityDefinitionParticipant bean);
 }

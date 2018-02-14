@@ -59,6 +59,7 @@ public class CapabilityStatementSupportedMessage  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,21 +81,15 @@ public class CapabilityStatementSupportedMessage  {
 
   public CapabilityStatementSupportedMessage(CapabilityStatementSupportedMessageModel o) {
     this.id = o.getId();
-      if (null != o.getMode()) {
-        this.mode = new String(o.getMode());
-      }
-
-      if (null != o.getDefinition()) {
-        this.definition = new Reference(o.getDefinition());
-        this.definition.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getMode()) {
+      this.mode = o.getMode();
+    }
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+      this.definition = new Reference(o.getDefinition().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setMode( String value) {
@@ -143,13 +138,14 @@ public class CapabilityStatementSupportedMessage  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementSupportedMessage]:" + "\n");
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -167,36 +163,4 @@ public class CapabilityStatementSupportedMessage  {
   	}
   }
 
-  public static java.util.List<CapabilityStatementSupportedMessage> fromArray(java.util.List<CapabilityStatementSupportedMessageModel> list) {
-    return (java.util.List<CapabilityStatementSupportedMessage>)list.stream()
-      .map(model -> new CapabilityStatementSupportedMessage(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementSupportedMessageModel> toModelArray(java.util.List<CapabilityStatementSupportedMessage> list) {
-    return (java.util.List<CapabilityStatementSupportedMessageModel>)list.stream()
-      .map(model -> new CapabilityStatementSupportedMessageModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatementSupportedMessage fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatementSupportedMessage.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementSupportedMessage o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementSupportedMessage> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

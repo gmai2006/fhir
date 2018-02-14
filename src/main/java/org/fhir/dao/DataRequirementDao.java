@@ -34,10 +34,5 @@ public interface DataRequirementDao {
   public List<DataRequirement> select(int maxResult);
 
   public List<DataRequirement> selectAll();
-
-  public DataRequirement create(DataRequirement e);
-
-  public DataRequirement update(DataRequirement e);
-
   public void delete(DataRequirement e);
 }

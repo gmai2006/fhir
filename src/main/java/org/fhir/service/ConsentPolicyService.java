@@ -32,7 +32,5 @@ public interface ConsentPolicyService {
 	public ConsentPolicy find(String id);
   public List<ConsentPolicy> select(int maxResult);
   public List<ConsentPolicy> selectAll();
-  public ConsentPolicy create(ConsentPolicy bean);
-  public ConsentPolicy update(ConsentPolicy bean);
   public void delete(ConsentPolicy bean);
 }

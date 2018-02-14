@@ -32,7 +32,5 @@ public interface ImagingManifestInstanceService {
 	public ImagingManifestInstance find(String id);
   public List<ImagingManifestInstance> select(int maxResult);
   public List<ImagingManifestInstance> selectAll();
-  public ImagingManifestInstance create(ImagingManifestInstance bean);
-  public ImagingManifestInstance update(ImagingManifestInstance bean);
   public void delete(ImagingManifestInstance bean);
 }

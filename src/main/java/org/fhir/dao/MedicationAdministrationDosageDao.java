@@ -34,10 +34,5 @@ public interface MedicationAdministrationDosageDao {
   public List<MedicationAdministrationDosage> select(int maxResult);
 
   public List<MedicationAdministrationDosage> selectAll();
-
-  public MedicationAdministrationDosage create(MedicationAdministrationDosage e);
-
-  public MedicationAdministrationDosage update(MedicationAdministrationDosage e);
-
   public void delete(MedicationAdministrationDosage e);
 }

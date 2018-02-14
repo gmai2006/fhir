@@ -32,7 +32,5 @@ public interface ConsentExceptService {
 	public ConsentExcept find(String id);
   public List<ConsentExcept> select(int maxResult);
   public List<ConsentExcept> selectAll();
-  public ConsentExcept create(ConsentExcept bean);
-  public ConsentExcept update(ConsentExcept bean);
   public void delete(ConsentExcept bean);
 }

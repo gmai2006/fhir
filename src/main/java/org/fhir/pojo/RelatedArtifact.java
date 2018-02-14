@@ -86,6 +86,7 @@ public class RelatedArtifact  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -105,33 +106,25 @@ public class RelatedArtifact  {
 
   public RelatedArtifact(RelatedArtifactModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getDisplay()) {
-        this.display = new String(o.getDisplay());
-      }
-
-      if (null != o.getCitation()) {
-        this.citation = new String(o.getCitation());
-      }
-
-      if (null != o.getUrl()) {
-        this.url = new String(o.getUrl());
-      }
-
-      this.document = Attachment.fromJson(o.getDocument());
-      if (null != o.getResource()) {
-        this.resource = new Reference(o.getResource());
-        this.resource.setId(this.getId());
-      }
-
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getDisplay()) {
+      this.display = o.getDisplay();
+    }
+    if (null != o.getCitation()) {
+      this.citation = o.getCitation();
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    this.document = AttachmentHelper.fromJson(o.getDocument());
+    if (null != o.getResource() && !o.getResource().isEmpty()) {
+      this.resource = new Reference(o.getResource().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -216,19 +209,20 @@ public class RelatedArtifact  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("_display" + "[" + String.valueOf(this._display) + "]\n"); 
-     builder.append("citation" + "[" + String.valueOf(this.citation) + "]\n"); 
-     builder.append("_citation" + "[" + String.valueOf(this._citation) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("document" + "[" + String.valueOf(this.document) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[RelatedArtifact]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
+     if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
+     if(this.citation != null) builder.append("citation" + "->" + this.citation.toString() + "\n"); 
+     if(this._citation != null) builder.append("_citation" + "->" + this._citation.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.document != null) builder.append("document" + "->" + this.document.toString() + "\n"); 
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -258,36 +252,4 @@ public class RelatedArtifact  {
   	}
   }
 
-  public static java.util.List<RelatedArtifact> fromArray(java.util.List<RelatedArtifactModel> list) {
-    return (java.util.List<RelatedArtifact>)list.stream()
-      .map(model -> new RelatedArtifact(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<RelatedArtifactModel> toModelArray(java.util.List<RelatedArtifact> list) {
-    return (java.util.List<RelatedArtifactModel>)list.stream()
-      .map(model -> new RelatedArtifactModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static RelatedArtifact fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, RelatedArtifact.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(RelatedArtifact o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<RelatedArtifact> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

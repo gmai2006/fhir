@@ -32,7 +32,5 @@ public interface BundleSearchService {
 	public BundleSearch find(String id);
   public List<BundleSearch> select(int maxResult);
   public List<BundleSearch> selectAll();
-  public BundleSearch create(BundleSearch bean);
-  public BundleSearch update(BundleSearch bean);
   public void delete(BundleSearch bean);
 }

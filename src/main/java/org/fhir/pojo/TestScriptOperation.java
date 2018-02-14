@@ -199,6 +199,7 @@ public class TestScriptOperation  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -425,61 +426,42 @@ public class TestScriptOperation  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("_resource" + "[" + String.valueOf(this._resource) + "]\n"); 
-     builder.append("label" + "[" + String.valueOf(this.label) + "]\n"); 
-     builder.append("_label" + "[" + String.valueOf(this._label) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("accept" + "[" + String.valueOf(this.accept) + "]\n"); 
-     builder.append("_accept" + "[" + String.valueOf(this._accept) + "]\n"); 
-     builder.append("contentType" + "[" + String.valueOf(this.contentType) + "]\n"); 
-     builder.append("_contentType" + "[" + String.valueOf(this._contentType) + "]\n"); 
-     builder.append("destination" + "[" + String.valueOf(this.destination) + "]\n"); 
-     builder.append("_destination" + "[" + String.valueOf(this._destination) + "]\n"); 
-     builder.append("encodeRequestUrl" + "[" + String.valueOf(this.encodeRequestUrl) + "]\n"); 
-     builder.append("_encodeRequestUrl" + "[" + String.valueOf(this._encodeRequestUrl) + "]\n"); 
-     builder.append("origin" + "[" + String.valueOf(this.origin) + "]\n"); 
-     builder.append("_origin" + "[" + String.valueOf(this._origin) + "]\n"); 
-     builder.append("params" + "[" + String.valueOf(this.params) + "]\n"); 
-     builder.append("_params" + "[" + String.valueOf(this._params) + "]\n"); 
-     builder.append("requestHeader" + "[" + String.valueOf(this.requestHeader) + "]\n"); 
-     builder.append("requestId" + "[" + String.valueOf(this.requestId) + "]\n"); 
-     builder.append("_requestId" + "[" + String.valueOf(this._requestId) + "]\n"); 
-     builder.append("responseId" + "[" + String.valueOf(this.responseId) + "]\n"); 
-     builder.append("_responseId" + "[" + String.valueOf(this._responseId) + "]\n"); 
-     builder.append("sourceId" + "[" + String.valueOf(this.sourceId) + "]\n"); 
-     builder.append("_sourceId" + "[" + String.valueOf(this._sourceId) + "]\n"); 
-     builder.append("targetId" + "[" + String.valueOf(this.targetId) + "]\n"); 
-     builder.append("_targetId" + "[" + String.valueOf(this._targetId) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TestScriptOperation]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
+     if(this._resource != null) builder.append("_resource" + "->" + this._resource.toString() + "\n"); 
+     if(this.label != null) builder.append("label" + "->" + this.label.toString() + "\n"); 
+     if(this._label != null) builder.append("_label" + "->" + this._label.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.accept != null) builder.append("accept" + "->" + this.accept.toString() + "\n"); 
+     if(this._accept != null) builder.append("_accept" + "->" + this._accept.toString() + "\n"); 
+     if(this.contentType != null) builder.append("contentType" + "->" + this.contentType.toString() + "\n"); 
+     if(this._contentType != null) builder.append("_contentType" + "->" + this._contentType.toString() + "\n"); 
+     if(this.destination != null) builder.append("destination" + "->" + this.destination.toString() + "\n"); 
+     if(this._destination != null) builder.append("_destination" + "->" + this._destination.toString() + "\n"); 
+     if(this.encodeRequestUrl != null) builder.append("encodeRequestUrl" + "->" + this.encodeRequestUrl.toString() + "\n"); 
+     if(this._encodeRequestUrl != null) builder.append("_encodeRequestUrl" + "->" + this._encodeRequestUrl.toString() + "\n"); 
+     if(this.origin != null) builder.append("origin" + "->" + this.origin.toString() + "\n"); 
+     if(this._origin != null) builder.append("_origin" + "->" + this._origin.toString() + "\n"); 
+     if(this.params != null) builder.append("params" + "->" + this.params.toString() + "\n"); 
+     if(this._params != null) builder.append("_params" + "->" + this._params.toString() + "\n"); 
+     if(this.requestHeader != null) builder.append("requestHeader" + "->" + this.requestHeader.toString() + "\n"); 
+     if(this.requestId != null) builder.append("requestId" + "->" + this.requestId.toString() + "\n"); 
+     if(this._requestId != null) builder.append("_requestId" + "->" + this._requestId.toString() + "\n"); 
+     if(this.responseId != null) builder.append("responseId" + "->" + this.responseId.toString() + "\n"); 
+     if(this._responseId != null) builder.append("_responseId" + "->" + this._responseId.toString() + "\n"); 
+     if(this.sourceId != null) builder.append("sourceId" + "->" + this.sourceId.toString() + "\n"); 
+     if(this._sourceId != null) builder.append("_sourceId" + "->" + this._sourceId.toString() + "\n"); 
+     if(this.targetId != null) builder.append("targetId" + "->" + this.targetId.toString() + "\n"); 
+     if(this._targetId != null) builder.append("_targetId" + "->" + this._targetId.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static TestScriptOperation fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TestScriptOperation.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TestScriptOperation o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TestScriptOperation> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum AcceptEnum {

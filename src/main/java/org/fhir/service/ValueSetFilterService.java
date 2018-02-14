@@ -32,7 +32,5 @@ public interface ValueSetFilterService {
 	public ValueSetFilter find(String id);
   public List<ValueSetFilter> select(int maxResult);
   public List<ValueSetFilter> selectAll();
-  public ValueSetFilter create(ValueSetFilter bean);
-  public ValueSetFilter update(ValueSetFilter bean);
   public void delete(ValueSetFilter bean);
 }

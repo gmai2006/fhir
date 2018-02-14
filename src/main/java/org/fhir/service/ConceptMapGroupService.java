@@ -32,7 +32,5 @@ public interface ConceptMapGroupService {
 	public ConceptMapGroup find(String id);
   public List<ConceptMapGroup> select(int maxResult);
   public List<ConceptMapGroup> selectAll();
-  public ConceptMapGroup create(ConceptMapGroup bean);
-  public ConceptMapGroup update(ConceptMapGroup bean);
   public void delete(ConceptMapGroup bean);
 }

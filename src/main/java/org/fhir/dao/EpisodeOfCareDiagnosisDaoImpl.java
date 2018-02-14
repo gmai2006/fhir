@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EpisodeOfCareDiagnosisModel;
 import org.fhir.pojo.EpisodeOfCareDiagnosis;
+import org.fhir.pojo.EpisodeOfCareDiagnosisHelper;
 
 public class EpisodeOfCareDiagnosisDaoImpl implements EpisodeOfCareDiagnosisDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EpisodeOfCareDiagnosisDaoImpl implements EpisodeOfCareDiagnosisDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EpisodeOfCareDiagnosisModel a", EpisodeOfCareDiagnosisModel.class).setMaxResults(maxResult);
       List<EpisodeOfCareDiagnosisModel> models = query.getResultList();
-      return EpisodeOfCareDiagnosis.fromArray(models);
+      return EpisodeOfCareDiagnosisHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EpisodeOfCareDiagnosisDaoImpl implements EpisodeOfCareDiagnosisDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EpisodeOfCareDiagnosisModel a", EpisodeOfCareDiagnosisModel.class);
       List<EpisodeOfCareDiagnosisModel> models = query.getResultList();
-      return EpisodeOfCareDiagnosis.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EpisodeOfCareDiagnosis create(EpisodeOfCareDiagnosis e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EpisodeOfCareDiagnosisModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EpisodeOfCareDiagnosis update(EpisodeOfCareDiagnosis e) {
-      final EntityManager em = entityManagerProvider.get();
-      EpisodeOfCareDiagnosisModel model = em.merge(new EpisodeOfCareDiagnosisModel(e));
-      return new EpisodeOfCareDiagnosis(model);
+      return EpisodeOfCareDiagnosisHelper.fromArray2Array(models);
   }
 
   @Override

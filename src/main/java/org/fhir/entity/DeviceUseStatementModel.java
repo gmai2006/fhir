@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A record of a device being used by a patient where the record is the result of a report from the patient or another clinician."
 */
 @Entity
 @Table(name="deviceusestatement")
-public class DeviceUseStatementModel  {
+public class DeviceUseStatementModel  implements Serializable {
+	private static final long serialVersionUID = 151857669670055612L;
   /**
   * Description: "This is a DeviceUseStatement resource"
   */
@@ -47,7 +48,7 @@ public class DeviceUseStatementModel  {
 
   /**
   * Description: "An external identifier for this statement such as an IRI."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -68,13 +69,13 @@ public class DeviceUseStatementModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "The time period over which the device was used."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -83,7 +84,7 @@ public class DeviceUseStatementModel  {
 
   /**
   * Description: "How often the device was used."
-  * Actual type: Timing
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -92,7 +93,7 @@ public class DeviceUseStatementModel  {
 
   /**
   * Description: "How often the device was used."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -122,9 +123,9 @@ public class DeviceUseStatementModel  {
   @Column(name="\"source_id\"")
   private String source_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`source_id`", insertable=false, updatable=false)
-  private ReferenceModel source;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="source_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> source;
 
   /**
   * Description: "The details of the device used."
@@ -133,13 +134,13 @@ public class DeviceUseStatementModel  {
   @Column(name="\"device_id\"")
   private String device_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`device_id`", insertable=false, updatable=false)
-  private ReferenceModel device;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="device_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> device;
 
   /**
   * Description: "Reason or justification for the use of the device."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -148,7 +149,7 @@ public class DeviceUseStatementModel  {
 
   /**
   * Description: "Indicates the site on the subject's body where the device was used ( i.e. the target site)."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -157,7 +158,7 @@ public class DeviceUseStatementModel  {
 
   /**
   * Description: "Details about the device statement that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -172,14 +173,14 @@ public class DeviceUseStatementModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -189,7 +190,7 @@ public class DeviceUseStatementModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -199,7 +200,7 @@ public class DeviceUseStatementModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -211,6 +212,7 @@ public class DeviceUseStatementModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -225,9 +227,9 @@ public class DeviceUseStatementModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -248,232 +250,225 @@ public class DeviceUseStatementModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public DeviceUseStatementModel() {
   }
 
   public DeviceUseStatementModel(DeviceUseStatement o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.status = o.getStatus();
-
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      this.whenUsed = Period.toJson(o.getWhenUsed());
-      this.timingTiming = Timing.toJson(o.getTimingTiming());
-      this.timingPeriod = Period.toJson(o.getTimingPeriod());
-      this.timingDateTime = o.getTimingDateTime();
-
-      this.recordedOn = o.getRecordedOn();
-
-      if (null != o.getSource()) {
-      	this.source_id = "source" + this.getId();
-        this.source = new ReferenceModel(o.getSource());
-        this.source.setId(this.source_id);
-        this.source.parent_id = this.source.getId();
-      }
-
-      if (null != o.getDevice()) {
-      	this.device_id = "device" + this.getId();
-        this.device = new ReferenceModel(o.getDevice());
-        this.device.setId(this.device_id);
-        this.device.parent_id = this.device.getId();
-      }
-
-      this.indication = CodeableConcept.toJson(o.getIndication());
-      this.bodySite = CodeableConcept.toJson(o.getBodySite());
-      this.note = Annotation.toJson(o.getNote());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.status = o.getStatus();
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    this.whenUsed = PeriodHelper.toJson(o.getWhenUsed());
+    this.timingTiming = TimingHelper.toJson(o.getTimingTiming());
+    this.timingPeriod = PeriodHelper.toJson(o.getTimingPeriod());
+    this.timingDateTime = o.getTimingDateTime();
+    this.recordedOn = o.getRecordedOn();
+    if (null != o.getSource() ) {
+    	this.source_id = "source" + this.id;
+    	this.source = ReferenceHelper.toModel(o.getSource(), this.source_id);
+    }
+    if (null != o.getDevice() ) {
+    	this.device_id = "device" + this.id;
+    	this.device = ReferenceHelper.toModel(o.getDevice(), this.device_id);
+    }
+    this.bodySite = CodeableConceptHelper.toJson(o.getBodySite());
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setWhenUsed( String value) {
-    this.whenUsed = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
   public String getWhenUsed() {
     return this.whenUsed;
   }
-  public void setTimingTiming( String value) {
-    this.timingTiming = value;
+  public void setWhenUsed( String value) {
+    this.whenUsed = value;
   }
   public String getTimingTiming() {
     return this.timingTiming;
   }
-  public void setTimingPeriod( String value) {
-    this.timingPeriod = value;
+  public void setTimingTiming( String value) {
+    this.timingTiming = value;
   }
   public String getTimingPeriod() {
     return this.timingPeriod;
   }
-  public void setTimingDateTime( String value) {
-    this.timingDateTime = value;
+  public void setTimingPeriod( String value) {
+    this.timingPeriod = value;
   }
   public String getTimingDateTime() {
     return this.timingDateTime;
   }
-  public void setRecordedOn( String value) {
-    this.recordedOn = value;
+  public void setTimingDateTime( String value) {
+    this.timingDateTime = value;
   }
   public String getRecordedOn() {
     return this.recordedOn;
   }
-  public void setSource( ReferenceModel value) {
-    this.source = value;
+  public void setRecordedOn( String value) {
+    this.recordedOn = value;
   }
-  public ReferenceModel getSource() {
+  public java.util.List<ReferenceModel> getSource() {
     return this.source;
   }
-  public void setDevice( ReferenceModel value) {
-    this.device = value;
+  public void setSource( java.util.List<ReferenceModel> value) {
+    this.source = value;
   }
-  public ReferenceModel getDevice() {
+  public java.util.List<ReferenceModel> getDevice() {
     return this.device;
   }
-  public void setIndication( String value) {
-    this.indication = value;
+  public void setDevice( java.util.List<ReferenceModel> value) {
+    this.device = value;
   }
   public String getIndication() {
     return this.indication;
   }
-  public void setBodySite( String value) {
-    this.bodySite = value;
+  public void setIndication( String value) {
+    this.indication = value;
   }
   public String getBodySite() {
     return this.bodySite;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setBodySite( String value) {
+    this.bodySite = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setNote( String value) {
+    this.note = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("whenUsed" + "[" + String.valueOf(this.whenUsed) + "]\n"); 
-     builder.append("timingTiming" + "[" + String.valueOf(this.timingTiming) + "]\n"); 
-     builder.append("timingPeriod" + "[" + String.valueOf(this.timingPeriod) + "]\n"); 
-     builder.append("timingDateTime" + "[" + String.valueOf(this.timingDateTime) + "]\n"); 
-     builder.append("recordedOn" + "[" + String.valueOf(this.recordedOn) + "]\n"); 
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("device" + "[" + String.valueOf(this.device) + "]\n"); 
-     builder.append("indication" + "[" + String.valueOf(this.indication) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[DeviceUseStatementModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("whenUsed" + "->" + this.whenUsed + "\n"); 
+     builder.append("timingTiming" + "->" + this.timingTiming + "\n"); 
+     builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
+     builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
+     builder.append("recordedOn" + "->" + this.recordedOn + "\n"); 
+     builder.append("indication" + "->" + this.indication + "\n"); 
+     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[DeviceUseStatementModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("whenUsed" + "->" + this.whenUsed + "\n"); 
+     builder.append("timingTiming" + "->" + this.timingTiming + "\n"); 
+     builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
+     builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
+     builder.append("recordedOn" + "->" + this.recordedOn + "\n"); 
+     builder.append("source" + "->" + this.source + "\n"); 
+     builder.append("device" + "->" + this.device + "\n"); 
+     builder.append("indication" + "->" + this.indication + "\n"); 
+     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

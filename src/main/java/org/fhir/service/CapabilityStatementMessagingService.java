@@ -32,7 +32,5 @@ public interface CapabilityStatementMessagingService {
 	public CapabilityStatementMessaging find(String id);
   public List<CapabilityStatementMessaging> select(int maxResult);
   public List<CapabilityStatementMessaging> selectAll();
-  public CapabilityStatementMessaging create(CapabilityStatementMessaging bean);
-  public CapabilityStatementMessaging update(CapabilityStatementMessaging bean);
   public void delete(CapabilityStatementMessaging bean);
 }

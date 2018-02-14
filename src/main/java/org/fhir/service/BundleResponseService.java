@@ -32,7 +32,5 @@ public interface BundleResponseService {
 	public BundleResponse find(String id);
   public List<BundleResponse> select(int maxResult);
   public List<BundleResponse> selectAll();
-  public BundleResponse create(BundleResponse bean);
-  public BundleResponse update(BundleResponse bean);
   public void delete(BundleResponse bean);
 }

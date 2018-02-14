@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.NutritionOrderTextureModel;
 import org.fhir.pojo.NutritionOrderTexture;
+import org.fhir.pojo.NutritionOrderTextureHelper;
 
 public class NutritionOrderTextureDaoImpl implements NutritionOrderTextureDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class NutritionOrderTextureDaoImpl implements NutritionOrderTextureDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NutritionOrderTextureModel a", NutritionOrderTextureModel.class).setMaxResults(maxResult);
       List<NutritionOrderTextureModel> models = query.getResultList();
-      return NutritionOrderTexture.fromArray(models);
+      return NutritionOrderTextureHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class NutritionOrderTextureDaoImpl implements NutritionOrderTextureDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from NutritionOrderTextureModel a", NutritionOrderTextureModel.class);
       List<NutritionOrderTextureModel> models = query.getResultList();
-      return NutritionOrderTexture.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public NutritionOrderTexture create(NutritionOrderTexture e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new NutritionOrderTextureModel(e));
-      return e;
-  }
-
-  @Transactional
-  public NutritionOrderTexture update(NutritionOrderTexture e) {
-      final EntityManager em = entityManagerProvider.get();
-      NutritionOrderTextureModel model = em.merge(new NutritionOrderTextureModel(e));
-      return new NutritionOrderTexture(model);
+      return NutritionOrderTextureHelper.fromArray2Array(models);
   }
 
   @Override

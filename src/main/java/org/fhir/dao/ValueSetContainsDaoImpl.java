@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ValueSetContainsModel;
 import org.fhir.pojo.ValueSetContains;
+import org.fhir.pojo.ValueSetContainsHelper;
 
 public class ValueSetContainsDaoImpl implements ValueSetContainsDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ValueSetContainsDaoImpl implements ValueSetContainsDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetContainsModel a", ValueSetContainsModel.class).setMaxResults(maxResult);
       List<ValueSetContainsModel> models = query.getResultList();
-      return ValueSetContains.fromArray(models);
+      return ValueSetContainsHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ValueSetContainsDaoImpl implements ValueSetContainsDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetContainsModel a", ValueSetContainsModel.class);
       List<ValueSetContainsModel> models = query.getResultList();
-      return ValueSetContains.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ValueSetContains create(ValueSetContains e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ValueSetContainsModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ValueSetContains update(ValueSetContains e) {
-      final EntityManager em = entityManagerProvider.get();
-      ValueSetContainsModel model = em.merge(new ValueSetContainsModel(e));
-      return new ValueSetContains(model);
+      return ValueSetContainsHelper.fromArray2Array(models);
   }
 
   @Override

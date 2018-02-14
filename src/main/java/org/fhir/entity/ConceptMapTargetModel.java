@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
 */
 @Entity
 @Table(name="conceptmaptarget")
-public class ConceptMapTargetModel  {
+public class ConceptMapTargetModel  implements Serializable {
+	private static final long serialVersionUID = 151857669711022033L;
   /**
   * Description: "Identity (code or path) or the element/item that the map refers to."
   */
@@ -69,21 +70,29 @@ public class ConceptMapTargetModel  {
   /**
   * Description: "A set of additional dependencies for this mapping to hold. This mapping is only applicable if the specified element can be resolved, and it has the specified value."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ConceptMapDependsOnModel> dependsOn = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"dependson_id\"")
+  private String dependson_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dependson_id", insertable=false, updatable=false)
+  private java.util.List<ConceptMapDependsOnModel> dependsOn;
 
   /**
   * Description: "A set of additional outcomes from this mapping to other elements. To properly execute this mapping, the specified element must be mapped to some data element or source that is in context. The mapping may still be useful without a place for the additional data elements, but the equivalence cannot be relied on."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ConceptMapDependsOnModel> product = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"product_id\"")
+  private String product_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="product_id", insertable=false, updatable=false)
+  private java.util.List<ConceptMapDependsOnModel> product;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -95,6 +104,7 @@ public class ConceptMapTargetModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -103,108 +113,130 @@ public class ConceptMapTargetModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ConceptMapTargetModel() {
   }
 
-  public ConceptMapTargetModel(ConceptMapTarget o) {
-    this.id = o.getId();
-      this.code = o.getCode();
-
-      this.display = o.getDisplay();
-
-      this.equivalence = o.getEquivalence();
-
-      this.comment = o.getComment();
-
-      this.dependsOn = ConceptMapDependsOn.toModelArray(o.getDependsOn());
-
-      this.product = ConceptMapDependsOn.toModelArray(o.getProduct());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ConceptMapTargetModel(ConceptMapTarget o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.code = o.getCode();
+    this.display = o.getDisplay();
+    this.equivalence = o.getEquivalence();
+    this.comment = o.getComment();
+    if (null != o.getDependsOn() && !o.getDependsOn().isEmpty()) {
+    	this.dependson_id = "dependson" + this.parent_id;
+    	this.dependsOn = ConceptMapDependsOnHelper.toModelFromArray(o.getDependsOn(), this.dependson_id);
+    }
+    if (null != o.getProduct() && !o.getProduct().isEmpty()) {
+    	this.product_id = "product" + this.parent_id;
+    	this.product = ConceptMapDependsOnHelper.toModelFromArray(o.getProduct(), this.product_id);
+    }
   }
 
-  public void setCode( String value) {
-    this.code = value;
-  }
   public String getCode() {
     return this.code;
   }
-  public void setDisplay( String value) {
-    this.display = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public String getDisplay() {
     return this.display;
   }
-  public void setEquivalence( String value) {
-    this.equivalence = value;
+  public void setDisplay( String value) {
+    this.display = value;
   }
   public String getEquivalence() {
     return this.equivalence;
   }
-  public void setComment( String value) {
-    this.comment = value;
+  public void setEquivalence( String value) {
+    this.equivalence = value;
   }
   public String getComment() {
     return this.comment;
   }
-  public void setDependsOn( java.util.List<ConceptMapDependsOnModel> value) {
-    this.dependsOn = value;
+  public void setComment( String value) {
+    this.comment = value;
   }
   public java.util.List<ConceptMapDependsOnModel> getDependsOn() {
     return this.dependsOn;
   }
-  public void setProduct( java.util.List<ConceptMapDependsOnModel> value) {
-    this.product = value;
+  public void setDependsOn( java.util.List<ConceptMapDependsOnModel> value) {
+    this.dependsOn = value;
   }
   public java.util.List<ConceptMapDependsOnModel> getProduct() {
     return this.product;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setProduct( java.util.List<ConceptMapDependsOnModel> value) {
+    this.product = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("equivalence" + "[" + String.valueOf(this.equivalence) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("dependsOn" + "[" + String.valueOf(this.dependsOn) + "]\n"); 
-     builder.append("product" + "[" + String.valueOf(this.product) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConceptMapTargetModel]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("display" + "->" + this.display + "\n"); 
+     builder.append("equivalence" + "->" + this.equivalence + "\n"); 
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ConceptMapTargetModel]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("display" + "->" + this.display + "\n"); 
+     builder.append("equivalence" + "->" + this.equivalence + "\n"); 
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("dependsOn" + "->" + this.dependsOn + "\n"); 
+     builder.append("product" + "->" + this.product + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

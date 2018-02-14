@@ -34,10 +34,8 @@ public interface LocationDao {
   public List<Location> select(int maxResult);
 
   public List<Location> selectAll();
-
   public Location create(Location e);
 
   public Location update(Location e);
-
   public void delete(Location e);
 }

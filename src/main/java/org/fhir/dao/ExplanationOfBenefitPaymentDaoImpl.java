@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExplanationOfBenefitPaymentModel;
 import org.fhir.pojo.ExplanationOfBenefitPayment;
+import org.fhir.pojo.ExplanationOfBenefitPaymentHelper;
 
 public class ExplanationOfBenefitPaymentDaoImpl implements ExplanationOfBenefitPaymentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExplanationOfBenefitPaymentDaoImpl implements ExplanationOfBenefitP
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitPaymentModel a", ExplanationOfBenefitPaymentModel.class).setMaxResults(maxResult);
       List<ExplanationOfBenefitPaymentModel> models = query.getResultList();
-      return ExplanationOfBenefitPayment.fromArray(models);
+      return ExplanationOfBenefitPaymentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ExplanationOfBenefitPaymentDaoImpl implements ExplanationOfBenefitP
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitPaymentModel a", ExplanationOfBenefitPaymentModel.class);
       List<ExplanationOfBenefitPaymentModel> models = query.getResultList();
-      return ExplanationOfBenefitPayment.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ExplanationOfBenefitPayment create(ExplanationOfBenefitPayment e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ExplanationOfBenefitPaymentModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ExplanationOfBenefitPayment update(ExplanationOfBenefitPayment e) {
-      final EntityManager em = entityManagerProvider.get();
-      ExplanationOfBenefitPaymentModel model = em.merge(new ExplanationOfBenefitPaymentModel(e));
-      return new ExplanationOfBenefitPayment(model);
+      return ExplanationOfBenefitPaymentHelper.fromArray2Array(models);
   }
 
   @Override

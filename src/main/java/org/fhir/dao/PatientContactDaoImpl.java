@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PatientContactModel;
 import org.fhir.pojo.PatientContact;
+import org.fhir.pojo.PatientContactHelper;
 
 public class PatientContactDaoImpl implements PatientContactDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PatientContactDaoImpl implements PatientContactDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PatientContactModel a", PatientContactModel.class).setMaxResults(maxResult);
       List<PatientContactModel> models = query.getResultList();
-      return PatientContact.fromArray(models);
+      return PatientContactHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PatientContactDaoImpl implements PatientContactDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PatientContactModel a", PatientContactModel.class);
       List<PatientContactModel> models = query.getResultList();
-      return PatientContact.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PatientContact create(PatientContact e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PatientContactModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PatientContact update(PatientContact e) {
-      final EntityManager em = entityManagerProvider.get();
-      PatientContactModel model = em.merge(new PatientContactModel(e));
-      return new PatientContact(model);
+      return PatientContactHelper.fromArray2Array(models);
   }
 
   @Override

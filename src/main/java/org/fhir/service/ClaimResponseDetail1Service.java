@@ -32,7 +32,5 @@ public interface ClaimResponseDetail1Service {
 	public ClaimResponseDetail1 find(String id);
   public List<ClaimResponseDetail1> select(int maxResult);
   public List<ClaimResponseDetail1> selectAll();
-  public ClaimResponseDetail1 create(ClaimResponseDetail1 bean);
-  public ClaimResponseDetail1 update(ClaimResponseDetail1 bean);
   public void delete(ClaimResponseDetail1 bean);
 }

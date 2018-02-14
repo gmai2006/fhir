@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PatientCommunicationModel;
 import org.fhir.pojo.PatientCommunication;
+import org.fhir.pojo.PatientCommunicationHelper;
 
 public class PatientCommunicationDaoImpl implements PatientCommunicationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PatientCommunicationDaoImpl implements PatientCommunicationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PatientCommunicationModel a", PatientCommunicationModel.class).setMaxResults(maxResult);
       List<PatientCommunicationModel> models = query.getResultList();
-      return PatientCommunication.fromArray(models);
+      return PatientCommunicationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PatientCommunicationDaoImpl implements PatientCommunicationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PatientCommunicationModel a", PatientCommunicationModel.class);
       List<PatientCommunicationModel> models = query.getResultList();
-      return PatientCommunication.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PatientCommunication create(PatientCommunication e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PatientCommunicationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PatientCommunication update(PatientCommunication e) {
-      final EntityManager em = entityManagerProvider.get();
-      PatientCommunicationModel model = em.merge(new PatientCommunicationModel(e));
-      return new PatientCommunication(model);
+      return PatientCommunicationHelper.fromArray2Array(models);
   }
 
   @Override

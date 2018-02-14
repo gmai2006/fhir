@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MeasureReportStratifierModel;
 import org.fhir.pojo.MeasureReportStratifier;
+import org.fhir.pojo.MeasureReportStratifierHelper;
 
 public class MeasureReportStratifierDaoImpl implements MeasureReportStratifierDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MeasureReportStratifierDaoImpl implements MeasureReportStratifierDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureReportStratifierModel a", MeasureReportStratifierModel.class).setMaxResults(maxResult);
       List<MeasureReportStratifierModel> models = query.getResultList();
-      return MeasureReportStratifier.fromArray(models);
+      return MeasureReportStratifierHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MeasureReportStratifierDaoImpl implements MeasureReportStratifierDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureReportStratifierModel a", MeasureReportStratifierModel.class);
       List<MeasureReportStratifierModel> models = query.getResultList();
-      return MeasureReportStratifier.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MeasureReportStratifier create(MeasureReportStratifier e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MeasureReportStratifierModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MeasureReportStratifier update(MeasureReportStratifier e) {
-      final EntityManager em = entityManagerProvider.get();
-      MeasureReportStratifierModel model = em.merge(new MeasureReportStratifierModel(e));
-      return new MeasureReportStratifier(model);
+      return MeasureReportStratifierHelper.fromArray2Array(models);
   }
 
   @Override

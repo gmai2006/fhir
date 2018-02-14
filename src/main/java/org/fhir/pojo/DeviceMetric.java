@@ -134,6 +134,7 @@ public class DeviceMetric  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -185,63 +186,46 @@ public class DeviceMetric  {
 
   public DeviceMetric(DeviceMetricModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.unit = CodeableConcept.fromJson(o.getUnit());
-      if (null != o.getSource()) {
-        this.source = new Reference(o.getSource());
-        this.source.setId(this.getId());
-      }
-
-      if (null != o.getParent()) {
-        this.parent = new Reference(o.getParent());
-        this.parent.setId(this.getId());
-      }
-
-      if (null != o.getOperationalStatus()) {
-        this.operationalStatus = new String(o.getOperationalStatus());
-      }
-
-      if (null != o.getColor()) {
-        this.color = new String(o.getColor());
-      }
-
-      if (null != o.getCategory()) {
-        this.category = new String(o.getCategory());
-      }
-
-      this.measurementPeriod = Timing.fromJson(o.getMeasurementPeriod());
-      this.calibration = DeviceMetricCalibration.fromArray(o.getCalibration());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    this.unit = CodeableConceptHelper.fromJson(o.getUnit());
+    if (null != o.getSource() && !o.getSource().isEmpty()) {
+      this.source = new Reference(o.getSource().get(0));
+    }
+    if (null != o.getParent() && !o.getParent().isEmpty()) {
+      this.parent = new Reference(o.getParent().get(0));
+    }
+    if (null != o.getOperationalStatus()) {
+      this.operationalStatus = o.getOperationalStatus();
+    }
+    if (null != o.getColor()) {
+      this.color = o.getColor();
+    }
+    if (null != o.getCategory()) {
+      this.category = o.getCategory();
+    }
+    this.measurementPeriod = TimingHelper.fromJson(o.getMeasurementPeriod());
+    if (null != o.getCalibration() && !o.getCalibration().isEmpty()) {
+    	this.calibration = DeviceMetricCalibrationHelper.fromArray2Array(o.getCalibration());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -398,31 +382,32 @@ public class DeviceMetric  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("unit" + "[" + String.valueOf(this.unit) + "]\n"); 
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("parent" + "[" + String.valueOf(this.parent) + "]\n"); 
-     builder.append("operationalStatus" + "[" + String.valueOf(this.operationalStatus) + "]\n"); 
-     builder.append("_operationalStatus" + "[" + String.valueOf(this._operationalStatus) + "]\n"); 
-     builder.append("color" + "[" + String.valueOf(this.color) + "]\n"); 
-     builder.append("_color" + "[" + String.valueOf(this._color) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("_category" + "[" + String.valueOf(this._category) + "]\n"); 
-     builder.append("measurementPeriod" + "[" + String.valueOf(this.measurementPeriod) + "]\n"); 
-     builder.append("calibration" + "[" + String.valueOf(this.calibration) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[DeviceMetric]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.unit != null) builder.append("unit" + "->" + this.unit.toString() + "\n"); 
+     if(this.source != null) builder.append("source" + "->" + this.source.toString() + "\n"); 
+     if(this.parent != null) builder.append("parent" + "->" + this.parent.toString() + "\n"); 
+     if(this.operationalStatus != null) builder.append("operationalStatus" + "->" + this.operationalStatus.toString() + "\n"); 
+     if(this._operationalStatus != null) builder.append("_operationalStatus" + "->" + this._operationalStatus.toString() + "\n"); 
+     if(this.color != null) builder.append("color" + "->" + this.color.toString() + "\n"); 
+     if(this._color != null) builder.append("_color" + "->" + this._color.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this._category != null) builder.append("_category" + "->" + this._category.toString() + "\n"); 
+     if(this.measurementPeriod != null) builder.append("measurementPeriod" + "->" + this.measurementPeriod.toString() + "\n"); 
+     if(this.calibration != null) builder.append("calibration" + "->" + this.calibration.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -500,36 +485,4 @@ public class DeviceMetric  {
   	}
   }
 
-  public static java.util.List<DeviceMetric> fromArray(java.util.List<DeviceMetricModel> list) {
-    return (java.util.List<DeviceMetric>)list.stream()
-      .map(model -> new DeviceMetric(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DeviceMetricModel> toModelArray(java.util.List<DeviceMetric> list) {
-    return (java.util.List<DeviceMetricModel>)list.stream()
-      .map(model -> new DeviceMetricModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DeviceMetric fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DeviceMetric.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DeviceMetric o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DeviceMetric> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

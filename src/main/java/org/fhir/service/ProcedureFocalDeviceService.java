@@ -32,7 +32,5 @@ public interface ProcedureFocalDeviceService {
 	public ProcedureFocalDevice find(String id);
   public List<ProcedureFocalDevice> select(int maxResult);
   public List<ProcedureFocalDevice> selectAll();
-  public ProcedureFocalDevice create(ProcedureFocalDevice bean);
-  public ProcedureFocalDevice update(ProcedureFocalDevice bean);
   public void delete(ProcedureFocalDevice bean);
 }

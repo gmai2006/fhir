@@ -70,6 +70,7 @@ public class ClaimResponseAdjudication  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -91,19 +92,15 @@ public class ClaimResponseAdjudication  {
 
   public ClaimResponseAdjudication(ClaimResponseAdjudicationModel o) {
     this.id = o.getId();
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      this.reason = CodeableConcept.fromJson(o.getReason());
-      this.amount = Money.fromJson(o.getAmount());
-      if (null != o.getValue()) {
-        this.value = new Float(o.getValue());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    this.reason = CodeableConceptHelper.fromJson(o.getReason());
+    this.amount = MoneyHelper.fromJson(o.getAmount());
+    if (null != o.getValue()) {
+      this.value = o.getValue();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCategory( CodeableConcept value) {
@@ -164,49 +161,18 @@ public class ClaimResponseAdjudication  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("amount" + "[" + String.valueOf(this.amount) + "]\n"); 
-     builder.append("value" + "[" + String.valueOf(this.value) + "]\n"); 
-     builder.append("_value" + "[" + String.valueOf(this._value) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ClaimResponseAdjudication]:" + "\n");
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); 
+     if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); 
+     if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
+     if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ClaimResponseAdjudication> fromArray(java.util.List<ClaimResponseAdjudicationModel> list) {
-    return (java.util.List<ClaimResponseAdjudication>)list.stream()
-      .map(model -> new ClaimResponseAdjudication(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ClaimResponseAdjudicationModel> toModelArray(java.util.List<ClaimResponseAdjudication> list) {
-    return (java.util.List<ClaimResponseAdjudicationModel>)list.stream()
-      .map(model -> new ClaimResponseAdjudicationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ClaimResponseAdjudication fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ClaimResponseAdjudication.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ClaimResponseAdjudication o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ClaimResponseAdjudication> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

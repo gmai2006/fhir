@@ -89,6 +89,7 @@ public class GroupCharacteristic  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -110,25 +111,20 @@ public class GroupCharacteristic  {
 
   public GroupCharacteristic(GroupCharacteristicModel o) {
     this.id = o.getId();
-      this.code = CodeableConcept.fromJson(o.getCode());
-      this.valueCodeableConcept = CodeableConcept.fromJson(o.getValueCodeableConcept());
-      if (null != o.getValueBoolean()) {
-        this.valueBoolean = new Boolean(o.getValueBoolean());
-      }
-
-      this.valueQuantity = Quantity.fromJson(o.getValueQuantity());
-      this.valueRange = Range.fromJson(o.getValueRange());
-      if (null != o.getExclude()) {
-        this.exclude = new Boolean(o.getExclude());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
+    if (null != o.getValueBoolean()) {
+      this.valueBoolean = o.getValueBoolean();
+    }
+    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    this.valueRange = RangeHelper.fromJson(o.getValueRange());
+    if (null != o.getExclude()) {
+      this.exclude = o.getExclude();
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( CodeableConcept value) {
@@ -213,53 +209,22 @@ public class GroupCharacteristic  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("valueCodeableConcept" + "[" + String.valueOf(this.valueCodeableConcept) + "]\n"); 
-     builder.append("valueBoolean" + "[" + String.valueOf(this.valueBoolean) + "]\n"); 
-     builder.append("_valueBoolean" + "[" + String.valueOf(this._valueBoolean) + "]\n"); 
-     builder.append("valueQuantity" + "[" + String.valueOf(this.valueQuantity) + "]\n"); 
-     builder.append("valueRange" + "[" + String.valueOf(this.valueRange) + "]\n"); 
-     builder.append("exclude" + "[" + String.valueOf(this.exclude) + "]\n"); 
-     builder.append("_exclude" + "[" + String.valueOf(this._exclude) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[GroupCharacteristic]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.valueCodeableConcept != null) builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept.toString() + "\n"); 
+     if(this.valueBoolean != null) builder.append("valueBoolean" + "->" + this.valueBoolean.toString() + "\n"); 
+     if(this._valueBoolean != null) builder.append("_valueBoolean" + "->" + this._valueBoolean.toString() + "\n"); 
+     if(this.valueQuantity != null) builder.append("valueQuantity" + "->" + this.valueQuantity.toString() + "\n"); 
+     if(this.valueRange != null) builder.append("valueRange" + "->" + this.valueRange.toString() + "\n"); 
+     if(this.exclude != null) builder.append("exclude" + "->" + this.exclude.toString() + "\n"); 
+     if(this._exclude != null) builder.append("_exclude" + "->" + this._exclude.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<GroupCharacteristic> fromArray(java.util.List<GroupCharacteristicModel> list) {
-    return (java.util.List<GroupCharacteristic>)list.stream()
-      .map(model -> new GroupCharacteristic(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<GroupCharacteristicModel> toModelArray(java.util.List<GroupCharacteristic> list) {
-    return (java.util.List<GroupCharacteristicModel>)list.stream()
-      .map(model -> new GroupCharacteristicModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static GroupCharacteristic fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, GroupCharacteristic.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(GroupCharacteristic o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<GroupCharacteristic> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -59,6 +59,7 @@ public class ConsentData1  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,21 +81,15 @@ public class ConsentData1  {
 
   public ConsentData1(ConsentData1Model o) {
     this.id = o.getId();
-      if (null != o.getMeaning()) {
-        this.meaning = new String(o.getMeaning());
-      }
-
-      if (null != o.getReference()) {
-        this.reference = new Reference(o.getReference());
-        this.reference.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getMeaning()) {
+      this.meaning = o.getMeaning();
+    }
+    if (null != o.getReference() && !o.getReference().isEmpty()) {
+      this.reference = new Reference(o.getReference().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setMeaning( String value) {
@@ -143,13 +138,14 @@ public class ConsentData1  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("meaning" + "[" + String.valueOf(this.meaning) + "]\n"); 
-     builder.append("_meaning" + "[" + String.valueOf(this._meaning) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConsentData1]:" + "\n");
+     if(this.meaning != null) builder.append("meaning" + "->" + this.meaning.toString() + "\n"); 
+     if(this._meaning != null) builder.append("_meaning" + "->" + this._meaning.toString() + "\n"); 
+     if(this.reference != null) builder.append("reference" + "->" + this.reference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -171,36 +167,4 @@ public class ConsentData1  {
   	}
   }
 
-  public static java.util.List<ConsentData1> fromArray(java.util.List<ConsentData1Model> list) {
-    return (java.util.List<ConsentData1>)list.stream()
-      .map(model -> new ConsentData1(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConsentData1Model> toModelArray(java.util.List<ConsentData1> list) {
-    return (java.util.List<ConsentData1Model>)list.stream()
-      .map(model -> new ConsentData1Model(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ConsentData1 fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ConsentData1.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ConsentData1 o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ConsentData1> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

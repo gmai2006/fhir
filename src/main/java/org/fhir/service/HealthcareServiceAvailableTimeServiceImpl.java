@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public HealthcareServiceAvailableTime create(HealthcareServiceAvailableTime bean) {
-  	requireNonNull(bean);
-    logger.info("create(HealthcareServiceAvailableTime={}) - entered bean ");
-
-    final HealthcareServiceAvailableTime result = dao.create(bean);
-
-    logger.info("create(HealthcareServiceAvailableTime) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public HealthcareServiceAvailableTime update(HealthcareServiceAvailableTime bean) {
-  	requireNonNull(bean);
-    logger.info("update(HealthcareServiceAvailableTime={}) - entered bean ");
-
-    final HealthcareServiceAvailableTime result = dao.update(bean);
-
-    logger.info("update(HealthcareServiceAvailableTime) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

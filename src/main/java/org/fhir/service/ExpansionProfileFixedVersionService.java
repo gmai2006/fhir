@@ -32,7 +32,5 @@ public interface ExpansionProfileFixedVersionService {
 	public ExpansionProfileFixedVersion find(String id);
   public List<ExpansionProfileFixedVersion> select(int maxResult);
   public List<ExpansionProfileFixedVersion> selectAll();
-  public ExpansionProfileFixedVersion create(ExpansionProfileFixedVersion bean);
-  public ExpansionProfileFixedVersion update(ExpansionProfileFixedVersion bean);
   public void delete(ExpansionProfileFixedVersion bean);
 }

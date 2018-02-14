@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CapabilityStatementOperation create(CapabilityStatementOperation bean) {
-  	requireNonNull(bean);
-    logger.info("create(CapabilityStatementOperation={}) - entered bean ");
-
-    final CapabilityStatementOperation result = dao.create(bean);
-
-    logger.info("create(CapabilityStatementOperation) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementOperation update(CapabilityStatementOperation bean) {
-  	requireNonNull(bean);
-    logger.info("update(CapabilityStatementOperation={}) - entered bean ");
-
-    final CapabilityStatementOperation result = dao.update(bean);
-
-    logger.info("update(CapabilityStatementOperation) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

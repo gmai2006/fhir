@@ -32,7 +32,5 @@ public interface EncounterStatusHistoryService {
 	public EncounterStatusHistory find(String id);
   public List<EncounterStatusHistory> select(int maxResult);
   public List<EncounterStatusHistory> selectAll();
-  public EncounterStatusHistory create(EncounterStatusHistory bean);
-  public EncounterStatusHistory update(EncounterStatusHistory bean);
   public void delete(EncounterStatusHistory bean);
 }

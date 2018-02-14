@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PractitionerRoleAvailableTimeModel;
 import org.fhir.pojo.PractitionerRoleAvailableTime;
+import org.fhir.pojo.PractitionerRoleAvailableTimeHelper;
 
 public class PractitionerRoleAvailableTimeDaoImpl implements PractitionerRoleAvailableTimeDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PractitionerRoleAvailableTimeDaoImpl implements PractitionerRoleAva
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PractitionerRoleAvailableTimeModel a", PractitionerRoleAvailableTimeModel.class).setMaxResults(maxResult);
       List<PractitionerRoleAvailableTimeModel> models = query.getResultList();
-      return PractitionerRoleAvailableTime.fromArray(models);
+      return PractitionerRoleAvailableTimeHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class PractitionerRoleAvailableTimeDaoImpl implements PractitionerRoleAva
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PractitionerRoleAvailableTimeModel a", PractitionerRoleAvailableTimeModel.class);
       List<PractitionerRoleAvailableTimeModel> models = query.getResultList();
-      return PractitionerRoleAvailableTime.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public PractitionerRoleAvailableTime create(PractitionerRoleAvailableTime e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new PractitionerRoleAvailableTimeModel(e));
-      return e;
-  }
-
-  @Transactional
-  public PractitionerRoleAvailableTime update(PractitionerRoleAvailableTime e) {
-      final EntityManager em = entityManagerProvider.get();
-      PractitionerRoleAvailableTimeModel model = em.merge(new PractitionerRoleAvailableTimeModel(e));
-      return new PractitionerRoleAvailableTime(model);
+      return PractitionerRoleAvailableTimeHelper.fromArray2Array(models);
   }
 
   @Override

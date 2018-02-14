@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities."
 */
 @Entity
 @Table(name="imagingstudyseries")
-public class ImagingStudySeriesModel  {
+public class ImagingStudySeriesModel  implements Serializable {
+	private static final long serialVersionUID = 151857669664962260L;
   /**
   * Description: "Formal identifier for this series."
   */
@@ -55,7 +56,7 @@ public class ImagingStudySeriesModel  {
 
   /**
   * Description: "The modality of this series sequence."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -88,13 +89,17 @@ public class ImagingStudySeriesModel  {
   /**
   * Description: "The network service providing access (e.g., query, view, or retrieval) for this series. See implementation notes for information about using DICOM endpoints. A series-level endpoint, if present, has precedence over a study-level endpoint with the same Endpoint.type."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> endpoint = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"endpoint_id\"")
+  private String endpoint_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="endpoint_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> endpoint;
 
   /**
   * Description: "The anatomic structures examined. See DICOM Part 16 Annex L (http://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_L.html) for DICOM to SNOMED-CT mappings. The bodySite may indicate the laterality of body part imaged; if so, it shall be consistent with any content of ImagingStudy.series.laterality."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -103,7 +108,7 @@ public class ImagingStudySeriesModel  {
 
   /**
   * Description: "The laterality of the (possibly paired) anatomic structures examined. E.g., the left knee, both lungs, or unpaired abdomen. If present, shall be consistent with any laterality information indicated in ImagingStudy.series.bodySite."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -121,21 +126,29 @@ public class ImagingStudySeriesModel  {
   /**
   * Description: "The physician or operator (often the radiology technician)  who performed the series. The performer is recorded at the series level, since each series in a study may be performed by a different practitioner, at different times, and using different devices. A series may be performed by multiple practitioners."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> performer = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"performer_id\"")
+  private String performer_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performer_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> performer;
 
   /**
   * Description: "A single SOP instance within the series, e.g. an image, or presentation state."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ImagingStudyInstanceModel> instance = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"instance_id\"")
+  private String instance_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="instance_id", insertable=false, updatable=false)
+  private java.util.List<ImagingStudyInstanceModel> instance;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -147,6 +160,7 @@ public class ImagingStudySeriesModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -155,159 +169,186 @@ public class ImagingStudySeriesModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ImagingStudySeriesModel() {
   }
 
-  public ImagingStudySeriesModel(ImagingStudySeries o) {
-    this.id = o.getId();
-      this.uid = o.getUid();
-
-      this.number = o.getNumber();
-
-      this.modality = Coding.toJson(o.getModality());
-      this.description = o.getDescription();
-
-      this.numberOfInstances = o.getNumberOfInstances();
-
-      this.availability = o.getAvailability();
-
-      this.endpoint = Reference.toModelArray(o.getEndpoint());
-
-      this.bodySite = Coding.toJson(o.getBodySite());
-      this.laterality = Coding.toJson(o.getLaterality());
-      this.started = o.getStarted();
-
-      this.performer = Reference.toModelArray(o.getPerformer());
-
-      this.instance = ImagingStudyInstance.toModelArray(o.getInstance());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ImagingStudySeriesModel(ImagingStudySeries o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.uid = o.getUid();
+    this.number = o.getNumber();
+    this.modality = CodingHelper.toJson(o.getModality());
+    this.description = o.getDescription();
+    this.numberOfInstances = o.getNumberOfInstances();
+    this.availability = o.getAvailability();
+    if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
+    	this.endpoint_id = "endpoint" + this.parent_id;
+    	this.endpoint = ReferenceHelper.toModelFromArray(o.getEndpoint(), this.endpoint_id);
+    }
+    this.bodySite = CodingHelper.toJson(o.getBodySite());
+    this.laterality = CodingHelper.toJson(o.getLaterality());
+    this.started = o.getStarted();
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+    	this.performer_id = "performer" + this.parent_id;
+    	this.performer = ReferenceHelper.toModelFromArray(o.getPerformer(), this.performer_id);
+    }
+    if (null != o.getInstance() && !o.getInstance().isEmpty()) {
+    	this.instance_id = "instance" + this.parent_id;
+    	this.instance = ImagingStudyInstanceHelper.toModelFromArray(o.getInstance(), this.instance_id);
+    }
   }
 
-  public void setUid( String value) {
-    this.uid = value;
-  }
   public String getUid() {
     return this.uid;
   }
-  public void setNumber( Float value) {
-    this.number = value;
+  public void setUid( String value) {
+    this.uid = value;
   }
   public Float getNumber() {
     return this.number;
   }
-  public void setModality( String value) {
-    this.modality = value;
+  public void setNumber( Float value) {
+    this.number = value;
   }
   public String getModality() {
     return this.modality;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setModality( String value) {
+    this.modality = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setNumberOfInstances( Float value) {
-    this.numberOfInstances = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public Float getNumberOfInstances() {
     return this.numberOfInstances;
   }
-  public void setAvailability( String value) {
-    this.availability = value;
+  public void setNumberOfInstances( Float value) {
+    this.numberOfInstances = value;
   }
   public String getAvailability() {
     return this.availability;
   }
-  public void setEndpoint( java.util.List<ReferenceModel> value) {
-    this.endpoint = value;
+  public void setAvailability( String value) {
+    this.availability = value;
   }
   public java.util.List<ReferenceModel> getEndpoint() {
     return this.endpoint;
   }
-  public void setBodySite( String value) {
-    this.bodySite = value;
+  public void setEndpoint( java.util.List<ReferenceModel> value) {
+    this.endpoint = value;
   }
   public String getBodySite() {
     return this.bodySite;
   }
-  public void setLaterality( String value) {
-    this.laterality = value;
+  public void setBodySite( String value) {
+    this.bodySite = value;
   }
   public String getLaterality() {
     return this.laterality;
   }
-  public void setStarted( String value) {
-    this.started = value;
+  public void setLaterality( String value) {
+    this.laterality = value;
   }
   public String getStarted() {
     return this.started;
   }
-  public void setPerformer( java.util.List<ReferenceModel> value) {
-    this.performer = value;
+  public void setStarted( String value) {
+    this.started = value;
   }
   public java.util.List<ReferenceModel> getPerformer() {
     return this.performer;
   }
-  public void setInstance( java.util.List<ImagingStudyInstanceModel> value) {
-    this.instance = value;
+  public void setPerformer( java.util.List<ReferenceModel> value) {
+    this.performer = value;
   }
   public java.util.List<ImagingStudyInstanceModel> getInstance() {
     return this.instance;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setInstance( java.util.List<ImagingStudyInstanceModel> value) {
+    this.instance = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("uid" + "[" + String.valueOf(this.uid) + "]\n"); 
-     builder.append("number" + "[" + String.valueOf(this.number) + "]\n"); 
-     builder.append("modality" + "[" + String.valueOf(this.modality) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("numberOfInstances" + "[" + String.valueOf(this.numberOfInstances) + "]\n"); 
-     builder.append("availability" + "[" + String.valueOf(this.availability) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("laterality" + "[" + String.valueOf(this.laterality) + "]\n"); 
-     builder.append("started" + "[" + String.valueOf(this.started) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("instance" + "[" + String.valueOf(this.instance) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImagingStudySeriesModel]:" + "\n");
+     builder.append("uid" + "->" + this.uid + "\n"); 
+     builder.append("number" + "->" + this.number + "\n"); 
+     builder.append("modality" + "->" + this.modality + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("numberOfInstances" + "->" + this.numberOfInstances + "\n"); 
+     builder.append("availability" + "->" + this.availability + "\n"); 
+     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
+     builder.append("laterality" + "->" + this.laterality + "\n"); 
+     builder.append("started" + "->" + this.started + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ImagingStudySeriesModel]:" + "\n");
+     builder.append("uid" + "->" + this.uid + "\n"); 
+     builder.append("number" + "->" + this.number + "\n"); 
+     builder.append("modality" + "->" + this.modality + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("numberOfInstances" + "->" + this.numberOfInstances + "\n"); 
+     builder.append("availability" + "->" + this.availability + "\n"); 
+     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
+     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
+     builder.append("laterality" + "->" + this.laterality + "\n"); 
+     builder.append("started" + "->" + this.started + "\n"); 
+     builder.append("performer" + "->" + this.performer + "\n"); 
+     builder.append("instance" + "->" + this.instance + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

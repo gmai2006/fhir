@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EncounterDiagnosisModel;
 import org.fhir.pojo.EncounterDiagnosis;
+import org.fhir.pojo.EncounterDiagnosisHelper;
 
 public class EncounterDiagnosisDaoImpl implements EncounterDiagnosisDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EncounterDiagnosisDaoImpl implements EncounterDiagnosisDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterDiagnosisModel a", EncounterDiagnosisModel.class).setMaxResults(maxResult);
       List<EncounterDiagnosisModel> models = query.getResultList();
-      return EncounterDiagnosis.fromArray(models);
+      return EncounterDiagnosisHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EncounterDiagnosisDaoImpl implements EncounterDiagnosisDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterDiagnosisModel a", EncounterDiagnosisModel.class);
       List<EncounterDiagnosisModel> models = query.getResultList();
-      return EncounterDiagnosis.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EncounterDiagnosis create(EncounterDiagnosis e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EncounterDiagnosisModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EncounterDiagnosis update(EncounterDiagnosis e) {
-      final EntityManager em = entityManagerProvider.get();
-      EncounterDiagnosisModel model = em.merge(new EncounterDiagnosisModel(e));
-      return new EncounterDiagnosis(model);
+      return EncounterDiagnosisHelper.fromArray2Array(models);
   }
 
   @Override

@@ -139,6 +139,7 @@ public class Specimen  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -190,65 +191,50 @@ public class Specimen  {
 
   public Specimen(SpecimenModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.accessionIdentifier = Identifier.fromJson(o.getAccessionIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getReceivedTime()) {
-        this.receivedTime = new String(o.getReceivedTime());
-      }
-
-      this.parent = Reference.fromArray(o.getParent());
-
-      this.request = Reference.fromArray(o.getRequest());
-
-      if (null != o.getCollection()) {
-        this.collection = new SpecimenCollection(o.getCollection());
-        this.collection.setId(this.getId());
-      }
-
-      this.processing = SpecimenProcessing.fromArray(o.getProcessing());
-
-      this.container = SpecimenContainer.fromArray(o.getContainer());
-
-      this.note = Annotation.fromArray(o.getNote());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.accessionIdentifier = IdentifierHelper.fromJson(o.getAccessionIdentifier());
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getReceivedTime()) {
+      this.receivedTime = o.getReceivedTime();
+    }
+    if (null != o.getParent() && !o.getParent().isEmpty()) {
+    	this.parent = ReferenceHelper.fromArray2Array(o.getParent());
+    }
+    if (null != o.getRequest() && !o.getRequest().isEmpty()) {
+    	this.request = ReferenceHelper.fromArray2Array(o.getRequest());
+    }
+    if (null != o.getCollection() && !o.getCollection().isEmpty()) {
+      this.collection = new SpecimenCollection(o.getCollection().get(0));
+    }
+    if (null != o.getProcessing() && !o.getProcessing().isEmpty()) {
+    	this.processing = SpecimenProcessingHelper.fromArray2Array(o.getProcessing());
+    }
+    if (null != o.getContainer() && !o.getContainer().isEmpty()) {
+    	this.container = SpecimenContainerHelper.fromArray2Array(o.getContainer());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -411,32 +397,33 @@ public class Specimen  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("accessionIdentifier" + "[" + String.valueOf(this.accessionIdentifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("receivedTime" + "[" + String.valueOf(this.receivedTime) + "]\n"); 
-     builder.append("_receivedTime" + "[" + String.valueOf(this._receivedTime) + "]\n"); 
-     builder.append("parent" + "[" + String.valueOf(this.parent) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("collection" + "[" + String.valueOf(this.collection) + "]\n"); 
-     builder.append("processing" + "[" + String.valueOf(this.processing) + "]\n"); 
-     builder.append("container" + "[" + String.valueOf(this.container) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Specimen]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.accessionIdentifier != null) builder.append("accessionIdentifier" + "->" + this.accessionIdentifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.receivedTime != null) builder.append("receivedTime" + "->" + this.receivedTime.toString() + "\n"); 
+     if(this._receivedTime != null) builder.append("_receivedTime" + "->" + this._receivedTime.toString() + "\n"); 
+     if(this.parent != null) builder.append("parent" + "->" + this.parent.toString() + "\n"); 
+     if(this.request != null) builder.append("request" + "->" + this.request.toString() + "\n"); 
+     if(this.collection != null) builder.append("collection" + "->" + this.collection.toString() + "\n"); 
+     if(this.processing != null) builder.append("processing" + "->" + this.processing.toString() + "\n"); 
+     if(this.container != null) builder.append("container" + "->" + this.container.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -470,36 +457,4 @@ public class Specimen  {
   	}
   }
 
-  public static java.util.List<Specimen> fromArray(java.util.List<SpecimenModel> list) {
-    return (java.util.List<Specimen>)list.stream()
-      .map(model -> new Specimen(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SpecimenModel> toModelArray(java.util.List<Specimen> list) {
-    return (java.util.List<SpecimenModel>)list.stream()
-      .map(model -> new SpecimenModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Specimen fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Specimen.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Specimen o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Specimen> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

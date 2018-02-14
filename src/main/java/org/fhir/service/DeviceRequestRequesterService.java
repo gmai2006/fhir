@@ -32,7 +32,5 @@ public interface DeviceRequestRequesterService {
 	public DeviceRequestRequester find(String id);
   public List<DeviceRequestRequester> select(int maxResult);
   public List<DeviceRequestRequester> selectAll();
-  public DeviceRequestRequester create(DeviceRequestRequester bean);
-  public DeviceRequestRequester update(DeviceRequestRequester bean);
   public void delete(DeviceRequestRequester bean);
 }

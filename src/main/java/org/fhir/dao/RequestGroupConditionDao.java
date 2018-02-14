@@ -34,10 +34,5 @@ public interface RequestGroupConditionDao {
   public List<RequestGroupCondition> select(int maxResult);
 
   public List<RequestGroupCondition> selectAll();
-
-  public RequestGroupCondition create(RequestGroupCondition e);
-
-  public RequestGroupCondition update(RequestGroupCondition e);
-
   public void delete(RequestGroupCondition e);
 }

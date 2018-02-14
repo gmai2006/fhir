@@ -32,7 +32,5 @@ public interface GraphDefinitionLinkService {
 	public GraphDefinitionLink find(String id);
   public List<GraphDefinitionLink> select(int maxResult);
   public List<GraphDefinitionLink> selectAll();
-  public GraphDefinitionLink create(GraphDefinitionLink bean);
-  public GraphDefinitionLink update(GraphDefinitionLink bean);
   public void delete(GraphDefinitionLink bean);
 }

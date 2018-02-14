@@ -34,10 +34,5 @@ public interface ReferenceDao {
   public List<Reference> select(int maxResult);
 
   public List<Reference> selectAll();
-
-  public Reference create(Reference e);
-
-  public Reference update(Reference e);
-
   public void delete(Reference e);
 }

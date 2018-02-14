@@ -34,10 +34,5 @@ public interface ClaimInformationDao {
   public List<ClaimInformation> select(int maxResult);
 
   public List<ClaimInformation> selectAll();
-
-  public ClaimInformation create(ClaimInformation e);
-
-  public ClaimInformation update(ClaimInformation e);
-
   public void delete(ClaimInformation e);
 }

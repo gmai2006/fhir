@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A sample to be used for analysis."
 */
 @Entity
 @Table(name="specimencontainer")
-public class SpecimenContainerModel  {
+public class SpecimenContainerModel  implements Serializable {
+	private static final long serialVersionUID = 151857669699933259L;
   /**
   * Description: "Id for container. There may be multiple; a manufacturer's bar code, lab assigned identifier, etc. The container ID may differ from the specimen id in some circumstances."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -55,7 +56,7 @@ public class SpecimenContainerModel  {
 
   /**
   * Description: "The type of container associated with the specimen (e.g. slide, aliquot, etc.)."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -64,7 +65,7 @@ public class SpecimenContainerModel  {
 
   /**
   * Description: "The capacity (volume or other measure) the container may contain."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -73,7 +74,7 @@ public class SpecimenContainerModel  {
 
   /**
   * Description: "The quantity of specimen in the container; may be volume, dimensions, or other appropriate measurements, depending on the specimen type."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -82,7 +83,7 @@ public class SpecimenContainerModel  {
 
   /**
   * Description: "Introduced substance to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -96,14 +97,14 @@ public class SpecimenContainerModel  {
   @Column(name="\"additivereference_id\"")
   private String additivereference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`additivereference_id`", insertable=false, updatable=false)
-  private ReferenceModel additiveReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="additivereference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> additiveReference;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -115,6 +116,7 @@ public class SpecimenContainerModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -123,117 +125,136 @@ public class SpecimenContainerModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public SpecimenContainerModel() {
   }
 
-  public SpecimenContainerModel(SpecimenContainer o) {
-    this.id = o.getId();
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.description = o.getDescription();
-
-      this.type = CodeableConcept.toJson(o.getType());
-      this.capacity = Quantity.toJson(o.getCapacity());
-      this.specimenQuantity = Quantity.toJson(o.getSpecimenQuantity());
-      this.additiveCodeableConcept = CodeableConcept.toJson(o.getAdditiveCodeableConcept());
-      if (null != o.getAdditiveReference()) {
-      	this.additivereference_id = "additiveReference" + this.getId();
-        this.additiveReference = new ReferenceModel(o.getAdditiveReference());
-        this.additiveReference.setId(this.additivereference_id);
-        this.additiveReference.parent_id = this.additiveReference.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public SpecimenContainerModel(SpecimenContainer o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.description = o.getDescription();
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.capacity = QuantityHelper.toJson(o.getCapacity());
+    this.specimenQuantity = QuantityHelper.toJson(o.getSpecimenQuantity());
+    this.additiveCodeableConcept = CodeableConceptHelper.toJson(o.getAdditiveCodeableConcept());
+    if (null != o.getAdditiveReference() ) {
+    	this.additivereference_id = "additivereference" + this.parent_id;
+    	this.additiveReference = ReferenceHelper.toModel(o.getAdditiveReference(), this.additivereference_id);
+    }
   }
 
-  public void setIdentifier( String value) {
-    this.identifier = value;
-  }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setCapacity( String value) {
-    this.capacity = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getCapacity() {
     return this.capacity;
   }
-  public void setSpecimenQuantity( String value) {
-    this.specimenQuantity = value;
+  public void setCapacity( String value) {
+    this.capacity = value;
   }
   public String getSpecimenQuantity() {
     return this.specimenQuantity;
   }
-  public void setAdditiveCodeableConcept( String value) {
-    this.additiveCodeableConcept = value;
+  public void setSpecimenQuantity( String value) {
+    this.specimenQuantity = value;
   }
   public String getAdditiveCodeableConcept() {
     return this.additiveCodeableConcept;
   }
-  public void setAdditiveReference( ReferenceModel value) {
-    this.additiveReference = value;
+  public void setAdditiveCodeableConcept( String value) {
+    this.additiveCodeableConcept = value;
   }
-  public ReferenceModel getAdditiveReference() {
+  public java.util.List<ReferenceModel> getAdditiveReference() {
     return this.additiveReference;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setAdditiveReference( java.util.List<ReferenceModel> value) {
+    this.additiveReference = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("capacity" + "[" + String.valueOf(this.capacity) + "]\n"); 
-     builder.append("specimenQuantity" + "[" + String.valueOf(this.specimenQuantity) + "]\n"); 
-     builder.append("additiveCodeableConcept" + "[" + String.valueOf(this.additiveCodeableConcept) + "]\n"); 
-     builder.append("additiveReference" + "[" + String.valueOf(this.additiveReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SpecimenContainerModel]:" + "\n");
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("capacity" + "->" + this.capacity + "\n"); 
+     builder.append("specimenQuantity" + "->" + this.specimenQuantity + "\n"); 
+     builder.append("additiveCodeableConcept" + "->" + this.additiveCodeableConcept + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[SpecimenContainerModel]:" + "\n");
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("capacity" + "->" + this.capacity + "\n"); 
+     builder.append("specimenQuantity" + "->" + this.specimenQuantity + "\n"); 
+     builder.append("additiveCodeableConcept" + "->" + this.additiveCodeableConcept + "\n"); 
+     builder.append("additiveReference" + "->" + this.additiveReference + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimResponseProcessNoteModel;
 import org.fhir.pojo.ClaimResponseProcessNote;
+import org.fhir.pojo.ClaimResponseProcessNoteHelper;
 
 public class ClaimResponseProcessNoteDaoImpl implements ClaimResponseProcessNoteDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimResponseProcessNoteDaoImpl implements ClaimResponseProcessNote
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimResponseProcessNoteModel a", ClaimResponseProcessNoteModel.class).setMaxResults(maxResult);
       List<ClaimResponseProcessNoteModel> models = query.getResultList();
-      return ClaimResponseProcessNote.fromArray(models);
+      return ClaimResponseProcessNoteHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimResponseProcessNoteDaoImpl implements ClaimResponseProcessNote
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimResponseProcessNoteModel a", ClaimResponseProcessNoteModel.class);
       List<ClaimResponseProcessNoteModel> models = query.getResultList();
-      return ClaimResponseProcessNote.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimResponseProcessNote create(ClaimResponseProcessNote e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimResponseProcessNoteModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimResponseProcessNote update(ClaimResponseProcessNote e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimResponseProcessNoteModel model = em.merge(new ClaimResponseProcessNoteModel(e));
-      return new ClaimResponseProcessNote(model);
+      return ClaimResponseProcessNoteHelper.fromArray2Array(models);
   }
 
   @Override

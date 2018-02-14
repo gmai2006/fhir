@@ -32,7 +32,5 @@ public interface SubstanceIngredientService {
 	public SubstanceIngredient find(String id);
   public List<SubstanceIngredient> select(int maxResult);
   public List<SubstanceIngredient> selectAll();
-  public SubstanceIngredient create(SubstanceIngredient bean);
-  public SubstanceIngredient update(SubstanceIngredient bean);
   public void delete(SubstanceIngredient bean);
 }

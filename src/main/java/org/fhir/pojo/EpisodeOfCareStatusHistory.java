@@ -59,6 +59,7 @@ public class EpisodeOfCareStatusHistory  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,17 +81,13 @@ public class EpisodeOfCareStatusHistory  {
 
   public EpisodeOfCareStatusHistory(EpisodeOfCareStatusHistoryModel o) {
     this.id = o.getId();
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setStatus( String value) {
@@ -139,13 +136,14 @@ public class EpisodeOfCareStatusHistory  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[EpisodeOfCareStatusHistory]:" + "\n");
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -173,36 +171,4 @@ public class EpisodeOfCareStatusHistory  {
   	}
   }
 
-  public static java.util.List<EpisodeOfCareStatusHistory> fromArray(java.util.List<EpisodeOfCareStatusHistoryModel> list) {
-    return (java.util.List<EpisodeOfCareStatusHistory>)list.stream()
-      .map(model -> new EpisodeOfCareStatusHistory(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<EpisodeOfCareStatusHistoryModel> toModelArray(java.util.List<EpisodeOfCareStatusHistory> list) {
-    return (java.util.List<EpisodeOfCareStatusHistoryModel>)list.stream()
-      .map(model -> new EpisodeOfCareStatusHistoryModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static EpisodeOfCareStatusHistory fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, EpisodeOfCareStatusHistory.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(EpisodeOfCareStatusHistory o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<EpisodeOfCareStatusHistory> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

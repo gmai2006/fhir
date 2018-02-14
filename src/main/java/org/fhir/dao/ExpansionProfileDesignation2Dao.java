@@ -34,10 +34,5 @@ public interface ExpansionProfileDesignation2Dao {
   public List<ExpansionProfileDesignation2> select(int maxResult);
 
   public List<ExpansionProfileDesignation2> selectAll();
-
-  public ExpansionProfileDesignation2 create(ExpansionProfileDesignation2 e);
-
-  public ExpansionProfileDesignation2 update(ExpansionProfileDesignation2 e);
-
   public void delete(ExpansionProfileDesignation2 e);
 }

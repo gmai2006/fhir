@@ -32,7 +32,5 @@ public interface ValueSetContainsService {
 	public ValueSetContains find(String id);
   public List<ValueSetContains> select(int maxResult);
   public List<ValueSetContains> selectAll();
-  public ValueSetContains create(ValueSetContains bean);
-  public ValueSetContains update(ValueSetContains bean);
   public void delete(ValueSetContains bean);
 }

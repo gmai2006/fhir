@@ -32,7 +32,5 @@ public interface PersonLinkService {
 	public PersonLink find(String id);
   public List<PersonLink> select(int maxResult);
   public List<PersonLink> selectAll();
-  public PersonLink create(PersonLink bean);
-  public PersonLink update(PersonLink bean);
   public void delete(PersonLink bean);
 }

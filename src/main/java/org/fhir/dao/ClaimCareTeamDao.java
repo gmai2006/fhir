@@ -34,10 +34,5 @@ public interface ClaimCareTeamDao {
   public List<ClaimCareTeam> select(int maxResult);
 
   public List<ClaimCareTeam> selectAll();
-
-  public ClaimCareTeam create(ClaimCareTeam e);
-
-  public ClaimCareTeam update(ClaimCareTeam e);
-
   public void delete(ClaimCareTeam e);
 }

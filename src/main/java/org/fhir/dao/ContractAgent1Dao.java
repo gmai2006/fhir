@@ -34,10 +34,5 @@ public interface ContractAgent1Dao {
   public List<ContractAgent1> select(int maxResult);
 
   public List<ContractAgent1> selectAll();
-
-  public ContractAgent1 create(ContractAgent1 e);
-
-  public ContractAgent1 update(ContractAgent1 e);
-
   public void delete(ContractAgent1 e);
 }

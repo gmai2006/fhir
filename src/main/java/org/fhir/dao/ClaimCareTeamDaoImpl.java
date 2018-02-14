@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimCareTeamModel;
 import org.fhir.pojo.ClaimCareTeam;
+import org.fhir.pojo.ClaimCareTeamHelper;
 
 public class ClaimCareTeamDaoImpl implements ClaimCareTeamDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimCareTeamDaoImpl implements ClaimCareTeamDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimCareTeamModel a", ClaimCareTeamModel.class).setMaxResults(maxResult);
       List<ClaimCareTeamModel> models = query.getResultList();
-      return ClaimCareTeam.fromArray(models);
+      return ClaimCareTeamHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimCareTeamDaoImpl implements ClaimCareTeamDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimCareTeamModel a", ClaimCareTeamModel.class);
       List<ClaimCareTeamModel> models = query.getResultList();
-      return ClaimCareTeam.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimCareTeam create(ClaimCareTeam e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimCareTeamModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimCareTeam update(ClaimCareTeam e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimCareTeamModel model = em.merge(new ClaimCareTeamModel(e));
-      return new ClaimCareTeam(model);
+      return ClaimCareTeamHelper.fromArray2Array(models);
   }
 
   @Override

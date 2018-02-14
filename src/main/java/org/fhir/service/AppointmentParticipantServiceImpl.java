@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public AppointmentParticipant create(AppointmentParticipant bean) {
-  	requireNonNull(bean);
-    logger.info("create(AppointmentParticipant={}) - entered bean ");
-
-    final AppointmentParticipant result = dao.create(bean);
-
-    logger.info("create(AppointmentParticipant) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public AppointmentParticipant update(AppointmentParticipant bean) {
-  	requireNonNull(bean);
-    logger.info("update(AppointmentParticipant={}) - entered bean ");
-
-    final AppointmentParticipant result = dao.update(bean);
-
-    logger.info("update(AppointmentParticipant) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

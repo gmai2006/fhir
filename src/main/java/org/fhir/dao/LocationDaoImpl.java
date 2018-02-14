@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.LocationModel;
 import org.fhir.pojo.Location;
+import org.fhir.pojo.LocationHelper;
 
 public class LocationDaoImpl implements LocationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class LocationDaoImpl implements LocationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from LocationModel a", LocationModel.class).setMaxResults(maxResult);
       List<LocationModel> models = query.getResultList();
-      return Location.fromArray(models);
+      return LocationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class LocationDaoImpl implements LocationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from LocationModel a", LocationModel.class);
       List<LocationModel> models = query.getResultList();
-      return Location.fromArray(models);
+      return LocationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class LocationDaoImpl implements LocationDao {
       LocationModel model = em.merge(new LocationModel(e));
       return new Location(model);
   }
-
   @Override
   @Transactional
   public void delete(Location e) {

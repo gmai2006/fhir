@@ -78,6 +78,7 @@ public class ProvenanceEntity  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -99,28 +100,22 @@ public class ProvenanceEntity  {
 
   public ProvenanceEntity(ProvenanceEntityModel o) {
     this.id = o.getId();
-      if (null != o.getRole()) {
-        this.role = new String(o.getRole());
-      }
-
-      if (null != o.getWhatUri()) {
-        this.whatUri = new String(o.getWhatUri());
-      }
-
-      if (null != o.getWhatReference()) {
-        this.whatReference = new Reference(o.getWhatReference());
-        this.whatReference.setId(this.getId());
-      }
-
-      this.whatIdentifier = Identifier.fromJson(o.getWhatIdentifier());
-      this.agent = ProvenanceAgent.fromArray(o.getAgent());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getRole()) {
+      this.role = o.getRole();
+    }
+    if (null != o.getWhatUri()) {
+      this.whatUri = o.getWhatUri();
+    }
+    if (null != o.getWhatReference() && !o.getWhatReference().isEmpty()) {
+      this.whatReference = new Reference(o.getWhatReference().get(0));
+    }
+    this.whatIdentifier = IdentifierHelper.fromJson(o.getWhatIdentifier());
+    if (null != o.getAgent() && !o.getAgent().isEmpty()) {
+    	this.agent = ProvenanceAgentHelper.fromArray2Array(o.getAgent());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setRole( String value) {
@@ -193,17 +188,18 @@ public class ProvenanceEntity  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("_role" + "[" + String.valueOf(this._role) + "]\n"); 
-     builder.append("whatUri" + "[" + String.valueOf(this.whatUri) + "]\n"); 
-     builder.append("_whatUri" + "[" + String.valueOf(this._whatUri) + "]\n"); 
-     builder.append("whatReference" + "[" + String.valueOf(this.whatReference) + "]\n"); 
-     builder.append("whatIdentifier" + "[" + String.valueOf(this.whatIdentifier) + "]\n"); 
-     builder.append("agent" + "[" + String.valueOf(this.agent) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ProvenanceEntity]:" + "\n");
+     if(this.role != null) builder.append("role" + "->" + this.role.toString() + "\n"); 
+     if(this._role != null) builder.append("_role" + "->" + this._role.toString() + "\n"); 
+     if(this.whatUri != null) builder.append("whatUri" + "->" + this.whatUri.toString() + "\n"); 
+     if(this._whatUri != null) builder.append("_whatUri" + "->" + this._whatUri.toString() + "\n"); 
+     if(this.whatReference != null) builder.append("whatReference" + "->" + this.whatReference.toString() + "\n"); 
+     if(this.whatIdentifier != null) builder.append("whatIdentifier" + "->" + this.whatIdentifier.toString() + "\n"); 
+     if(this.agent != null) builder.append("agent" + "->" + this.agent.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -227,36 +223,4 @@ public class ProvenanceEntity  {
   	}
   }
 
-  public static java.util.List<ProvenanceEntity> fromArray(java.util.List<ProvenanceEntityModel> list) {
-    return (java.util.List<ProvenanceEntity>)list.stream()
-      .map(model -> new ProvenanceEntity(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ProvenanceEntityModel> toModelArray(java.util.List<ProvenanceEntity> list) {
-    return (java.util.List<ProvenanceEntityModel>)list.stream()
-      .map(model -> new ProvenanceEntityModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ProvenanceEntity fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ProvenanceEntity.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ProvenanceEntity o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ProvenanceEntity> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

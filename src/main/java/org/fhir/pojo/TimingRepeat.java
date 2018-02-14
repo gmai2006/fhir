@@ -207,6 +207,7 @@ public class TimingRepeat  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -228,65 +229,54 @@ public class TimingRepeat  {
 
   public TimingRepeat(TimingRepeatModel o) {
     this.id = o.getId();
-      this.boundsDuration = Duration.fromJson(o.getBoundsDuration());
-      this.boundsRange = Range.fromJson(o.getBoundsRange());
-      this.boundsPeriod = Period.fromJson(o.getBoundsPeriod());
-      if (null != o.getCount()) {
-        this.count = new Float(o.getCount());
-      }
-
-      if (null != o.getCountMax()) {
-        this.countMax = new Float(o.getCountMax());
-      }
-
-      if (null != o.getDuration()) {
-        this.duration = new Float(o.getDuration());
-      }
-
-      if (null != o.getDurationMax()) {
-        this.durationMax = new Float(o.getDurationMax());
-      }
-
-      if (null != o.getDurationUnit()) {
-        this.durationUnit = new String(o.getDurationUnit());
-      }
-
-      if (null != o.getFrequency()) {
-        this.frequency = new Float(o.getFrequency());
-      }
-
-      if (null != o.getFrequencyMax()) {
-        this.frequencyMax = new Float(o.getFrequencyMax());
-      }
-
-      if (null != o.getPeriod()) {
-        this.period = new Float(o.getPeriod());
-      }
-
-      if (null != o.getPeriodMax()) {
-        this.periodMax = new Float(o.getPeriodMax());
-      }
-
-      if (null != o.getPeriodUnit()) {
-        this.periodUnit = new String(o.getPeriodUnit());
-      }
-
-      this.dayOfWeek = org.fhir.utils.JsonUtils.json2Array(o.getDayOfWeek());
-
-      this.timeOfDay = org.fhir.utils.JsonUtils.json2Array(o.getTimeOfDay());
-
-      this.when = org.fhir.utils.JsonUtils.json2Array(o.getWhen());
-
-      if (null != o.getOffset()) {
-        this.offset = new Float(o.getOffset());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.boundsDuration = DurationHelper.fromJson(o.getBoundsDuration());
+    this.boundsRange = RangeHelper.fromJson(o.getBoundsRange());
+    this.boundsPeriod = PeriodHelper.fromJson(o.getBoundsPeriod());
+    if (null != o.getCount()) {
+      this.count = o.getCount();
+    }
+    if (null != o.getCountMax()) {
+      this.countMax = o.getCountMax();
+    }
+    if (null != o.getDuration()) {
+      this.duration = o.getDuration();
+    }
+    if (null != o.getDurationMax()) {
+      this.durationMax = o.getDurationMax();
+    }
+    if (null != o.getDurationUnit()) {
+      this.durationUnit = o.getDurationUnit();
+    }
+    if (null != o.getFrequency()) {
+      this.frequency = o.getFrequency();
+    }
+    if (null != o.getFrequencyMax()) {
+      this.frequencyMax = o.getFrequencyMax();
+    }
+    if (null != o.getPeriod()) {
+      this.period = o.getPeriod();
+    }
+    if (null != o.getPeriodMax()) {
+      this.periodMax = o.getPeriodMax();
+    }
+    if (null != o.getPeriodUnit()) {
+      this.periodUnit = o.getPeriodUnit();
+    }
+    if (o.getDayOfWeek() != null) {
+    	this.dayOfWeek = org.fhir.utils.JsonUtils.json2Array(o.getDayOfWeek());
+    }
+    if (o.getTimeOfDay() != null) {
+    	this.timeOfDay = org.fhir.utils.JsonUtils.json2Array(o.getTimeOfDay());
+    }
+    if (o.getWhen() != null) {
+    	this.when = org.fhir.utils.JsonUtils.json2Array(o.getWhen());
+    }
+    if (null != o.getOffset()) {
+      this.offset = o.getOffset();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setBoundsDuration( Duration value) {
@@ -503,41 +493,42 @@ public class TimingRepeat  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("boundsDuration" + "[" + String.valueOf(this.boundsDuration) + "]\n"); 
-     builder.append("boundsRange" + "[" + String.valueOf(this.boundsRange) + "]\n"); 
-     builder.append("boundsPeriod" + "[" + String.valueOf(this.boundsPeriod) + "]\n"); 
-     builder.append("count" + "[" + String.valueOf(this.count) + "]\n"); 
-     builder.append("_count" + "[" + String.valueOf(this._count) + "]\n"); 
-     builder.append("countMax" + "[" + String.valueOf(this.countMax) + "]\n"); 
-     builder.append("_countMax" + "[" + String.valueOf(this._countMax) + "]\n"); 
-     builder.append("duration" + "[" + String.valueOf(this.duration) + "]\n"); 
-     builder.append("_duration" + "[" + String.valueOf(this._duration) + "]\n"); 
-     builder.append("durationMax" + "[" + String.valueOf(this.durationMax) + "]\n"); 
-     builder.append("_durationMax" + "[" + String.valueOf(this._durationMax) + "]\n"); 
-     builder.append("durationUnit" + "[" + String.valueOf(this.durationUnit) + "]\n"); 
-     builder.append("_durationUnit" + "[" + String.valueOf(this._durationUnit) + "]\n"); 
-     builder.append("frequency" + "[" + String.valueOf(this.frequency) + "]\n"); 
-     builder.append("_frequency" + "[" + String.valueOf(this._frequency) + "]\n"); 
-     builder.append("frequencyMax" + "[" + String.valueOf(this.frequencyMax) + "]\n"); 
-     builder.append("_frequencyMax" + "[" + String.valueOf(this._frequencyMax) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("_period" + "[" + String.valueOf(this._period) + "]\n"); 
-     builder.append("periodMax" + "[" + String.valueOf(this.periodMax) + "]\n"); 
-     builder.append("_periodMax" + "[" + String.valueOf(this._periodMax) + "]\n"); 
-     builder.append("periodUnit" + "[" + String.valueOf(this.periodUnit) + "]\n"); 
-     builder.append("_periodUnit" + "[" + String.valueOf(this._periodUnit) + "]\n"); 
-     builder.append("dayOfWeek" + "[" + String.valueOf(this.dayOfWeek) + "]\n"); 
-     builder.append("_dayOfWeek" + "[" + String.valueOf(this._dayOfWeek) + "]\n"); 
-     builder.append("timeOfDay" + "[" + String.valueOf(this.timeOfDay) + "]\n"); 
-     builder.append("_timeOfDay" + "[" + String.valueOf(this._timeOfDay) + "]\n"); 
-     builder.append("when" + "[" + String.valueOf(this.when) + "]\n"); 
-     builder.append("_when" + "[" + String.valueOf(this._when) + "]\n"); 
-     builder.append("offset" + "[" + String.valueOf(this.offset) + "]\n"); 
-     builder.append("_offset" + "[" + String.valueOf(this._offset) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TimingRepeat]:" + "\n");
+     if(this.boundsDuration != null) builder.append("boundsDuration" + "->" + this.boundsDuration.toString() + "\n"); 
+     if(this.boundsRange != null) builder.append("boundsRange" + "->" + this.boundsRange.toString() + "\n"); 
+     if(this.boundsPeriod != null) builder.append("boundsPeriod" + "->" + this.boundsPeriod.toString() + "\n"); 
+     if(this.count != null) builder.append("count" + "->" + this.count.toString() + "\n"); 
+     if(this._count != null) builder.append("_count" + "->" + this._count.toString() + "\n"); 
+     if(this.countMax != null) builder.append("countMax" + "->" + this.countMax.toString() + "\n"); 
+     if(this._countMax != null) builder.append("_countMax" + "->" + this._countMax.toString() + "\n"); 
+     if(this.duration != null) builder.append("duration" + "->" + this.duration.toString() + "\n"); 
+     if(this._duration != null) builder.append("_duration" + "->" + this._duration.toString() + "\n"); 
+     if(this.durationMax != null) builder.append("durationMax" + "->" + this.durationMax.toString() + "\n"); 
+     if(this._durationMax != null) builder.append("_durationMax" + "->" + this._durationMax.toString() + "\n"); 
+     if(this.durationUnit != null) builder.append("durationUnit" + "->" + this.durationUnit.toString() + "\n"); 
+     if(this._durationUnit != null) builder.append("_durationUnit" + "->" + this._durationUnit.toString() + "\n"); 
+     if(this.frequency != null) builder.append("frequency" + "->" + this.frequency.toString() + "\n"); 
+     if(this._frequency != null) builder.append("_frequency" + "->" + this._frequency.toString() + "\n"); 
+     if(this.frequencyMax != null) builder.append("frequencyMax" + "->" + this.frequencyMax.toString() + "\n"); 
+     if(this._frequencyMax != null) builder.append("_frequencyMax" + "->" + this._frequencyMax.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this._period != null) builder.append("_period" + "->" + this._period.toString() + "\n"); 
+     if(this.periodMax != null) builder.append("periodMax" + "->" + this.periodMax.toString() + "\n"); 
+     if(this._periodMax != null) builder.append("_periodMax" + "->" + this._periodMax.toString() + "\n"); 
+     if(this.periodUnit != null) builder.append("periodUnit" + "->" + this.periodUnit.toString() + "\n"); 
+     if(this._periodUnit != null) builder.append("_periodUnit" + "->" + this._periodUnit.toString() + "\n"); 
+     if(this.dayOfWeek != null) builder.append("dayOfWeek" + "->" + this.dayOfWeek.toString() + "\n"); 
+     if(this._dayOfWeek != null) builder.append("_dayOfWeek" + "->" + this._dayOfWeek.toString() + "\n"); 
+     if(this.timeOfDay != null) builder.append("timeOfDay" + "->" + this.timeOfDay.toString() + "\n"); 
+     if(this._timeOfDay != null) builder.append("_timeOfDay" + "->" + this._timeOfDay.toString() + "\n"); 
+     if(this.when != null) builder.append("when" + "->" + this.when.toString() + "\n"); 
+     if(this._when != null) builder.append("_when" + "->" + this._when.toString() + "\n"); 
+     if(this.offset != null) builder.append("offset" + "->" + this.offset.toString() + "\n"); 
+     if(this._offset != null) builder.append("_offset" + "->" + this._offset.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -641,36 +632,4 @@ public class TimingRepeat  {
   	  	}
   }
 
-  public static java.util.List<TimingRepeat> fromArray(java.util.List<TimingRepeatModel> list) {
-    return (java.util.List<TimingRepeat>)list.stream()
-      .map(model -> new TimingRepeat(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<TimingRepeatModel> toModelArray(java.util.List<TimingRepeat> list) {
-    return (java.util.List<TimingRepeatModel>)list.stream()
-      .map(model -> new TimingRepeatModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static TimingRepeat fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TimingRepeat.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TimingRepeat o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TimingRepeat> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -34,10 +34,5 @@ public interface ProvenanceAgentDao {
   public List<ProvenanceAgent> select(int maxResult);
 
   public List<ProvenanceAgent> selectAll();
-
-  public ProvenanceAgent create(ProvenanceAgent e);
-
-  public ProvenanceAgent update(ProvenanceAgent e);
-
   public void delete(ProvenanceAgent e);
 }

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public Distance create(Distance bean) {
-  	requireNonNull(bean);
-    logger.info("create(Distance={}) - entered bean ");
-
-    final Distance result = dao.create(bean);
-
-    logger.info("create(Distance) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public Distance update(Distance bean) {
-  	requireNonNull(bean);
-    logger.info("update(Distance={}) - entered bean ");
-
-    final Distance result = dao.update(bean);
-
-    logger.info("update(Distance) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

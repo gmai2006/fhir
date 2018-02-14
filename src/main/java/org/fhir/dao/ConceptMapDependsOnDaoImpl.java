@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ConceptMapDependsOnModel;
 import org.fhir.pojo.ConceptMapDependsOn;
+import org.fhir.pojo.ConceptMapDependsOnHelper;
 
 public class ConceptMapDependsOnDaoImpl implements ConceptMapDependsOnDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ConceptMapDependsOnDaoImpl implements ConceptMapDependsOnDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConceptMapDependsOnModel a", ConceptMapDependsOnModel.class).setMaxResults(maxResult);
       List<ConceptMapDependsOnModel> models = query.getResultList();
-      return ConceptMapDependsOn.fromArray(models);
+      return ConceptMapDependsOnHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ConceptMapDependsOnDaoImpl implements ConceptMapDependsOnDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ConceptMapDependsOnModel a", ConceptMapDependsOnModel.class);
       List<ConceptMapDependsOnModel> models = query.getResultList();
-      return ConceptMapDependsOn.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ConceptMapDependsOn create(ConceptMapDependsOn e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ConceptMapDependsOnModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ConceptMapDependsOn update(ConceptMapDependsOn e) {
-      final EntityManager em = entityManagerProvider.get();
-      ConceptMapDependsOnModel model = em.merge(new ConceptMapDependsOnModel(e));
-      return new ConceptMapDependsOn(model);
+      return ConceptMapDependsOnHelper.fromArray2Array(models);
   }
 
   @Override

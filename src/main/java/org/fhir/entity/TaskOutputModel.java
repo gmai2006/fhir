@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A task to be performed."
 */
 @Entity
 @Table(name="taskoutput")
-public class TaskOutputModel  {
+public class TaskOutputModel  implements Serializable {
+	private static final long serialVersionUID = 151857669694831492L;
   /**
   * Description: "The name of the Output parameter."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -179,7 +180,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Element
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -188,7 +189,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Extension
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -197,7 +198,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: BackboneElement
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -211,13 +212,13 @@ public class TaskOutputModel  {
   @Column(name="\"valuenarrative_id\"")
   private String valuenarrative_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuenarrative_id`", insertable=false, updatable=false)
-  private NarrativeModel valueNarrative;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuenarrative_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> valueNarrative;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Annotation
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -226,7 +227,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Attachment
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -235,7 +236,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -244,7 +245,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -253,7 +254,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -262,7 +263,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -271,7 +272,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Duration
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -280,7 +281,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -294,13 +295,13 @@ public class TaskOutputModel  {
   @Column(name="\"valuedistance_id\"")
   private String valuedistance_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuedistance_id`", insertable=false, updatable=false)
-  private DistanceModel valueDistance;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuedistance_id", insertable=false, updatable=false)
+  private java.util.List<DistanceModel> valueDistance;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Count
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -309,7 +310,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -318,7 +319,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Age
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -327,7 +328,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Range
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -336,7 +337,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -345,7 +346,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Ratio
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -359,13 +360,13 @@ public class TaskOutputModel  {
   @Column(name="\"valuereference_id\"")
   private String valuereference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuereference_id`", insertable=false, updatable=false)
-  private ReferenceModel valueReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuereference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> valueReference;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: SampledData
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -374,7 +375,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Signature
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -383,7 +384,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: HumanName
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -392,7 +393,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Address
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -401,7 +402,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: ContactPoint
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -410,7 +411,7 @@ public class TaskOutputModel  {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: Timing
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -424,13 +425,13 @@ public class TaskOutputModel  {
   @Column(name="\"valuemeta_id\"")
   private String valuemeta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuemeta_id`", insertable=false, updatable=false)
-  private MetaModel valueMeta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuemeta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> valueMeta;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: ElementDefinition
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -444,9 +445,9 @@ public class TaskOutputModel  {
   @Column(name="\"valuecontactdetail_id\"")
   private String valuecontactdetail_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuecontactdetail_id`", insertable=false, updatable=false)
-  private ContactDetailModel valueContactDetail;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecontactdetail_id", insertable=false, updatable=false)
+  private java.util.List<ContactDetailModel> valueContactDetail;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
@@ -455,9 +456,9 @@ public class TaskOutputModel  {
   @Column(name="\"valuecontributor_id\"")
   private String valuecontributor_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuecontributor_id`", insertable=false, updatable=false)
-  private ContributorModel valueContributor;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecontributor_id", insertable=false, updatable=false)
+  private java.util.List<ContributorModel> valueContributor;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
@@ -466,9 +467,9 @@ public class TaskOutputModel  {
   @Column(name="\"valuedosage_id\"")
   private String valuedosage_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuedosage_id`", insertable=false, updatable=false)
-  private DosageModel valueDosage;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuedosage_id", insertable=false, updatable=false)
+  private java.util.List<DosageModel> valueDosage;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
@@ -477,9 +478,9 @@ public class TaskOutputModel  {
   @Column(name="\"valuerelatedartifact_id\"")
   private String valuerelatedartifact_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuerelatedartifact_id`", insertable=false, updatable=false)
-  private RelatedArtifactModel valueRelatedArtifact;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuerelatedartifact_id", insertable=false, updatable=false)
+  private java.util.List<RelatedArtifactModel> valueRelatedArtifact;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
@@ -488,9 +489,9 @@ public class TaskOutputModel  {
   @Column(name="\"valueusagecontext_id\"")
   private String valueusagecontext_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valueusagecontext_id`", insertable=false, updatable=false)
-  private UsageContextModel valueUsageContext;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valueusagecontext_id", insertable=false, updatable=false)
+  private java.util.List<UsageContextModel> valueUsageContext;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
@@ -499,13 +500,13 @@ public class TaskOutputModel  {
   @Column(name="\"valuedatarequirement_id\"")
   private String valuedatarequirement_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuedatarequirement_id`", insertable=false, updatable=false)
-  private DataRequirementModel valueDataRequirement;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuedatarequirement_id", insertable=false, updatable=false)
+  private java.util.List<DataRequirementModel> valueDataRequirement;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: ParameterDefinition
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -519,14 +520,14 @@ public class TaskOutputModel  {
   @Column(name="\"valuetriggerdefinition_id\"")
   private String valuetriggerdefinition_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuetriggerdefinition_id`", insertable=false, updatable=false)
-  private TriggerDefinitionModel valueTriggerDefinition;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuetriggerdefinition_id", insertable=false, updatable=false)
+  private java.util.List<TriggerDefinitionModel> valueTriggerDefinition;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -538,6 +539,7 @@ public class TaskOutputModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -546,569 +548,580 @@ public class TaskOutputModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public TaskOutputModel() {
   }
 
-  public TaskOutputModel(TaskOutput o) {
-    this.id = o.getId();
-      this.type = CodeableConcept.toJson(o.getType());
-      this.valueBoolean = o.getValueBoolean();
-
-      this.valueInteger = o.getValueInteger();
-
-      this.valueDecimal = o.getValueDecimal();
-
-      this.valueBase64Binary = o.getValueBase64Binary();
-
-      this.valueInstant = o.getValueInstant();
-
-      this.valueString = o.getValueString();
-
-      this.valueUri = o.getValueUri();
-
-      this.valueDate = o.getValueDate();
-
-      this.valueDateTime = o.getValueDateTime();
-
-      this.valueTime = o.getValueTime();
-
-      this.valueCode = o.getValueCode();
-
-      this.valueOid = o.getValueOid();
-
-      this.valueUuid = o.getValueUuid();
-
-      this.valueId = o.getValueId();
-
-      this.valueUnsignedInt = o.getValueUnsignedInt();
-
-      this.valuePositiveInt = o.getValuePositiveInt();
-
-      this.valueMarkdown = o.getValueMarkdown();
-
-      this.valueElement = Element.toJson(o.getValueElement());
-      this.valueExtension = Extension.toJson(o.getValueExtension());
-      this.valueBackboneElement = BackboneElement.toJson(o.getValueBackboneElement());
-      if (null != o.getValueNarrative()) {
-      	this.valuenarrative_id = "valueNarrative" + this.getId();
-        this.valueNarrative = new NarrativeModel(o.getValueNarrative());
-        this.valueNarrative.setId(this.valuenarrative_id);
-        this.valueNarrative.parent_id = this.valueNarrative.getId();
-      }
-
-      this.valueAnnotation = Annotation.toJson(o.getValueAnnotation());
-      this.valueAttachment = Attachment.toJson(o.getValueAttachment());
-      this.valueIdentifier = Identifier.toJson(o.getValueIdentifier());
-      this.valueCodeableConcept = CodeableConcept.toJson(o.getValueCodeableConcept());
-      this.valueCoding = Coding.toJson(o.getValueCoding());
-      this.valueQuantity = Quantity.toJson(o.getValueQuantity());
-      this.valueDuration = Duration.toJson(o.getValueDuration());
-      this.valueSimpleQuantity = Quantity.toJson(o.getValueSimpleQuantity());
-      if (null != o.getValueDistance()) {
-      	this.valuedistance_id = "valueDistance" + this.getId();
-        this.valueDistance = new DistanceModel(o.getValueDistance());
-        this.valueDistance.setId(this.valuedistance_id);
-        this.valueDistance.parent_id = this.valueDistance.getId();
-      }
-
-      this.valueCount = Count.toJson(o.getValueCount());
-      this.valueMoney = Money.toJson(o.getValueMoney());
-      this.valueAge = Age.toJson(o.getValueAge());
-      this.valueRange = Range.toJson(o.getValueRange());
-      this.valuePeriod = Period.toJson(o.getValuePeriod());
-      this.valueRatio = Ratio.toJson(o.getValueRatio());
-      if (null != o.getValueReference()) {
-      	this.valuereference_id = "valueReference" + this.getId();
-        this.valueReference = new ReferenceModel(o.getValueReference());
-        this.valueReference.setId(this.valuereference_id);
-        this.valueReference.parent_id = this.valueReference.getId();
-      }
-
-      this.valueSampledData = SampledData.toJson(o.getValueSampledData());
-      this.valueSignature = Signature.toJson(o.getValueSignature());
-      this.valueHumanName = HumanName.toJson(o.getValueHumanName());
-      this.valueAddress = Address.toJson(o.getValueAddress());
-      this.valueContactPoint = ContactPoint.toJson(o.getValueContactPoint());
-      this.valueTiming = Timing.toJson(o.getValueTiming());
-      if (null != o.getValueMeta()) {
-      	this.valuemeta_id = "valueMeta" + this.getId();
-        this.valueMeta = new MetaModel(o.getValueMeta());
-        this.valueMeta.setId(this.valuemeta_id);
-        this.valueMeta.parent_id = this.valueMeta.getId();
-      }
-
-      this.valueElementDefinition = ElementDefinition.toJson(o.getValueElementDefinition());
-      if (null != o.getValueContactDetail()) {
-      	this.valuecontactdetail_id = "valueContactDetail" + this.getId();
-        this.valueContactDetail = new ContactDetailModel(o.getValueContactDetail());
-        this.valueContactDetail.setId(this.valuecontactdetail_id);
-        this.valueContactDetail.parent_id = this.valueContactDetail.getId();
-      }
-
-      if (null != o.getValueContributor()) {
-      	this.valuecontributor_id = "valueContributor" + this.getId();
-        this.valueContributor = new ContributorModel(o.getValueContributor());
-        this.valueContributor.setId(this.valuecontributor_id);
-        this.valueContributor.parent_id = this.valueContributor.getId();
-      }
-
-      if (null != o.getValueDosage()) {
-      	this.valuedosage_id = "valueDosage" + this.getId();
-        this.valueDosage = new DosageModel(o.getValueDosage());
-        this.valueDosage.setId(this.valuedosage_id);
-        this.valueDosage.parent_id = this.valueDosage.getId();
-      }
-
-      if (null != o.getValueRelatedArtifact()) {
-      	this.valuerelatedartifact_id = "valueRelatedArtifact" + this.getId();
-        this.valueRelatedArtifact = new RelatedArtifactModel(o.getValueRelatedArtifact());
-        this.valueRelatedArtifact.setId(this.valuerelatedartifact_id);
-        this.valueRelatedArtifact.parent_id = this.valueRelatedArtifact.getId();
-      }
-
-      if (null != o.getValueUsageContext()) {
-      	this.valueusagecontext_id = "valueUsageContext" + this.getId();
-        this.valueUsageContext = new UsageContextModel(o.getValueUsageContext());
-        this.valueUsageContext.setId(this.valueusagecontext_id);
-        this.valueUsageContext.parent_id = this.valueUsageContext.getId();
-      }
-
-      if (null != o.getValueDataRequirement()) {
-      	this.valuedatarequirement_id = "valueDataRequirement" + this.getId();
-        this.valueDataRequirement = new DataRequirementModel(o.getValueDataRequirement());
-        this.valueDataRequirement.setId(this.valuedatarequirement_id);
-        this.valueDataRequirement.parent_id = this.valueDataRequirement.getId();
-      }
-
-      this.valueParameterDefinition = ParameterDefinition.toJson(o.getValueParameterDefinition());
-      if (null != o.getValueTriggerDefinition()) {
-      	this.valuetriggerdefinition_id = "valueTriggerDefinition" + this.getId();
-        this.valueTriggerDefinition = new TriggerDefinitionModel(o.getValueTriggerDefinition());
-        this.valueTriggerDefinition.setId(this.valuetriggerdefinition_id);
-        this.valueTriggerDefinition.parent_id = this.valueTriggerDefinition.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public TaskOutputModel(TaskOutput o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.valueBoolean = o.getValueBoolean();
+    this.valueInteger = o.getValueInteger();
+    this.valueDecimal = o.getValueDecimal();
+    this.valueBase64Binary = o.getValueBase64Binary();
+    this.valueInstant = o.getValueInstant();
+    this.valueString = o.getValueString();
+    this.valueUri = o.getValueUri();
+    this.valueDate = o.getValueDate();
+    this.valueDateTime = o.getValueDateTime();
+    this.valueTime = o.getValueTime();
+    this.valueCode = o.getValueCode();
+    this.valueOid = o.getValueOid();
+    this.valueUuid = o.getValueUuid();
+    this.valueId = o.getValueId();
+    this.valueUnsignedInt = o.getValueUnsignedInt();
+    this.valuePositiveInt = o.getValuePositiveInt();
+    this.valueMarkdown = o.getValueMarkdown();
+    this.valueElement = ElementHelper.toJson(o.getValueElement());
+    this.valueExtension = ExtensionHelper.toJson(o.getValueExtension());
+    this.valueBackboneElement = BackboneElementHelper.toJson(o.getValueBackboneElement());
+    if (null != o.getValueNarrative() ) {
+    	this.valuenarrative_id = "valuenarrative" + this.parent_id;
+    	this.valueNarrative = NarrativeHelper.toModel(o.getValueNarrative(), this.valuenarrative_id);
+    }
+    this.valueAnnotation = AnnotationHelper.toJson(o.getValueAnnotation());
+    this.valueAttachment = AttachmentHelper.toJson(o.getValueAttachment());
+    this.valueIdentifier = IdentifierHelper.toJson(o.getValueIdentifier());
+    this.valueCodeableConcept = CodeableConceptHelper.toJson(o.getValueCodeableConcept());
+    this.valueCoding = CodingHelper.toJson(o.getValueCoding());
+    this.valueQuantity = QuantityHelper.toJson(o.getValueQuantity());
+    this.valueDuration = DurationHelper.toJson(o.getValueDuration());
+    this.valueSimpleQuantity = QuantityHelper.toJson(o.getValueSimpleQuantity());
+    if (null != o.getValueDistance() ) {
+    	this.valuedistance_id = "valuedistance" + this.parent_id;
+    	this.valueDistance = DistanceHelper.toModel(o.getValueDistance(), this.valuedistance_id);
+    }
+    this.valueCount = CountHelper.toJson(o.getValueCount());
+    this.valueMoney = MoneyHelper.toJson(o.getValueMoney());
+    this.valueAge = AgeHelper.toJson(o.getValueAge());
+    this.valueRange = RangeHelper.toJson(o.getValueRange());
+    this.valuePeriod = PeriodHelper.toJson(o.getValuePeriod());
+    this.valueRatio = RatioHelper.toJson(o.getValueRatio());
+    if (null != o.getValueReference() ) {
+    	this.valuereference_id = "valuereference" + this.parent_id;
+    	this.valueReference = ReferenceHelper.toModel(o.getValueReference(), this.valuereference_id);
+    }
+    this.valueSampledData = SampledDataHelper.toJson(o.getValueSampledData());
+    this.valueSignature = SignatureHelper.toJson(o.getValueSignature());
+    this.valueHumanName = HumanNameHelper.toJson(o.getValueHumanName());
+    this.valueAddress = AddressHelper.toJson(o.getValueAddress());
+    this.valueContactPoint = ContactPointHelper.toJson(o.getValueContactPoint());
+    this.valueTiming = TimingHelper.toJson(o.getValueTiming());
+    if (null != o.getValueMeta() ) {
+    	this.valuemeta_id = "valuemeta" + this.parent_id;
+    	this.valueMeta = MetaHelper.toModel(o.getValueMeta(), this.valuemeta_id);
+    }
+    this.valueElementDefinition = ElementDefinitionHelper.toJson(o.getValueElementDefinition());
+    if (null != o.getValueContactDetail() ) {
+    	this.valuecontactdetail_id = "valuecontactdetail" + this.parent_id;
+    	this.valueContactDetail = ContactDetailHelper.toModel(o.getValueContactDetail(), this.valuecontactdetail_id);
+    }
+    if (null != o.getValueContributor() ) {
+    	this.valuecontributor_id = "valuecontributor" + this.parent_id;
+    	this.valueContributor = ContributorHelper.toModel(o.getValueContributor(), this.valuecontributor_id);
+    }
+    if (null != o.getValueDosage() ) {
+    	this.valuedosage_id = "valuedosage" + this.parent_id;
+    	this.valueDosage = DosageHelper.toModel(o.getValueDosage(), this.valuedosage_id);
+    }
+    if (null != o.getValueRelatedArtifact() ) {
+    	this.valuerelatedartifact_id = "valuerelatedartifact" + this.parent_id;
+    	this.valueRelatedArtifact = RelatedArtifactHelper.toModel(o.getValueRelatedArtifact(), this.valuerelatedartifact_id);
+    }
+    if (null != o.getValueUsageContext() ) {
+    	this.valueusagecontext_id = "valueusagecontext" + this.parent_id;
+    	this.valueUsageContext = UsageContextHelper.toModel(o.getValueUsageContext(), this.valueusagecontext_id);
+    }
+    if (null != o.getValueDataRequirement() ) {
+    	this.valuedatarequirement_id = "valuedatarequirement" + this.parent_id;
+    	this.valueDataRequirement = DataRequirementHelper.toModel(o.getValueDataRequirement(), this.valuedatarequirement_id);
+    }
+    this.valueParameterDefinition = ParameterDefinitionHelper.toJson(o.getValueParameterDefinition());
+    if (null != o.getValueTriggerDefinition() ) {
+    	this.valuetriggerdefinition_id = "valuetriggerdefinition" + this.parent_id;
+    	this.valueTriggerDefinition = TriggerDefinitionHelper.toModel(o.getValueTriggerDefinition(), this.valuetriggerdefinition_id);
+    }
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setValueBoolean( Boolean value) {
-    this.valueBoolean = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public Boolean getValueBoolean() {
     return this.valueBoolean;
   }
-  public void setValueInteger( Float value) {
-    this.valueInteger = value;
+  public void setValueBoolean( Boolean value) {
+    this.valueBoolean = value;
   }
   public Float getValueInteger() {
     return this.valueInteger;
   }
-  public void setValueDecimal( Float value) {
-    this.valueDecimal = value;
+  public void setValueInteger( Float value) {
+    this.valueInteger = value;
   }
   public Float getValueDecimal() {
     return this.valueDecimal;
   }
-  public void setValueBase64Binary( String value) {
-    this.valueBase64Binary = value;
+  public void setValueDecimal( Float value) {
+    this.valueDecimal = value;
   }
   public String getValueBase64Binary() {
     return this.valueBase64Binary;
   }
-  public void setValueInstant( String value) {
-    this.valueInstant = value;
+  public void setValueBase64Binary( String value) {
+    this.valueBase64Binary = value;
   }
   public String getValueInstant() {
     return this.valueInstant;
   }
-  public void setValueString( String value) {
-    this.valueString = value;
+  public void setValueInstant( String value) {
+    this.valueInstant = value;
   }
   public String getValueString() {
     return this.valueString;
   }
-  public void setValueUri( String value) {
-    this.valueUri = value;
+  public void setValueString( String value) {
+    this.valueString = value;
   }
   public String getValueUri() {
     return this.valueUri;
   }
-  public void setValueDate( String value) {
-    this.valueDate = value;
+  public void setValueUri( String value) {
+    this.valueUri = value;
   }
   public String getValueDate() {
     return this.valueDate;
   }
-  public void setValueDateTime( String value) {
-    this.valueDateTime = value;
+  public void setValueDate( String value) {
+    this.valueDate = value;
   }
   public String getValueDateTime() {
     return this.valueDateTime;
   }
-  public void setValueTime( String value) {
-    this.valueTime = value;
+  public void setValueDateTime( String value) {
+    this.valueDateTime = value;
   }
   public String getValueTime() {
     return this.valueTime;
   }
-  public void setValueCode( String value) {
-    this.valueCode = value;
+  public void setValueTime( String value) {
+    this.valueTime = value;
   }
   public String getValueCode() {
     return this.valueCode;
   }
-  public void setValueOid( String value) {
-    this.valueOid = value;
+  public void setValueCode( String value) {
+    this.valueCode = value;
   }
   public String getValueOid() {
     return this.valueOid;
   }
-  public void setValueUuid( String value) {
-    this.valueUuid = value;
+  public void setValueOid( String value) {
+    this.valueOid = value;
   }
   public String getValueUuid() {
     return this.valueUuid;
   }
-  public void setValueId( String value) {
-    this.valueId = value;
+  public void setValueUuid( String value) {
+    this.valueUuid = value;
   }
   public String getValueId() {
     return this.valueId;
   }
-  public void setValueUnsignedInt( Float value) {
-    this.valueUnsignedInt = value;
+  public void setValueId( String value) {
+    this.valueId = value;
   }
   public Float getValueUnsignedInt() {
     return this.valueUnsignedInt;
   }
-  public void setValuePositiveInt( Float value) {
-    this.valuePositiveInt = value;
+  public void setValueUnsignedInt( Float value) {
+    this.valueUnsignedInt = value;
   }
   public Float getValuePositiveInt() {
     return this.valuePositiveInt;
   }
-  public void setValueMarkdown( String value) {
-    this.valueMarkdown = value;
+  public void setValuePositiveInt( Float value) {
+    this.valuePositiveInt = value;
   }
   public String getValueMarkdown() {
     return this.valueMarkdown;
   }
-  public void setValueElement( String value) {
-    this.valueElement = value;
+  public void setValueMarkdown( String value) {
+    this.valueMarkdown = value;
   }
   public String getValueElement() {
     return this.valueElement;
   }
-  public void setValueExtension( String value) {
-    this.valueExtension = value;
+  public void setValueElement( String value) {
+    this.valueElement = value;
   }
   public String getValueExtension() {
     return this.valueExtension;
   }
-  public void setValueBackboneElement( String value) {
-    this.valueBackboneElement = value;
+  public void setValueExtension( String value) {
+    this.valueExtension = value;
   }
   public String getValueBackboneElement() {
     return this.valueBackboneElement;
   }
-  public void setValueNarrative( NarrativeModel value) {
-    this.valueNarrative = value;
+  public void setValueBackboneElement( String value) {
+    this.valueBackboneElement = value;
   }
-  public NarrativeModel getValueNarrative() {
+  public java.util.List<NarrativeModel> getValueNarrative() {
     return this.valueNarrative;
   }
-  public void setValueAnnotation( String value) {
-    this.valueAnnotation = value;
+  public void setValueNarrative( java.util.List<NarrativeModel> value) {
+    this.valueNarrative = value;
   }
   public String getValueAnnotation() {
     return this.valueAnnotation;
   }
-  public void setValueAttachment( String value) {
-    this.valueAttachment = value;
+  public void setValueAnnotation( String value) {
+    this.valueAnnotation = value;
   }
   public String getValueAttachment() {
     return this.valueAttachment;
   }
-  public void setValueIdentifier( String value) {
-    this.valueIdentifier = value;
+  public void setValueAttachment( String value) {
+    this.valueAttachment = value;
   }
   public String getValueIdentifier() {
     return this.valueIdentifier;
   }
-  public void setValueCodeableConcept( String value) {
-    this.valueCodeableConcept = value;
+  public void setValueIdentifier( String value) {
+    this.valueIdentifier = value;
   }
   public String getValueCodeableConcept() {
     return this.valueCodeableConcept;
   }
-  public void setValueCoding( String value) {
-    this.valueCoding = value;
+  public void setValueCodeableConcept( String value) {
+    this.valueCodeableConcept = value;
   }
   public String getValueCoding() {
     return this.valueCoding;
   }
-  public void setValueQuantity( String value) {
-    this.valueQuantity = value;
+  public void setValueCoding( String value) {
+    this.valueCoding = value;
   }
   public String getValueQuantity() {
     return this.valueQuantity;
   }
-  public void setValueDuration( String value) {
-    this.valueDuration = value;
+  public void setValueQuantity( String value) {
+    this.valueQuantity = value;
   }
   public String getValueDuration() {
     return this.valueDuration;
   }
-  public void setValueSimpleQuantity( String value) {
-    this.valueSimpleQuantity = value;
+  public void setValueDuration( String value) {
+    this.valueDuration = value;
   }
   public String getValueSimpleQuantity() {
     return this.valueSimpleQuantity;
   }
-  public void setValueDistance( DistanceModel value) {
-    this.valueDistance = value;
+  public void setValueSimpleQuantity( String value) {
+    this.valueSimpleQuantity = value;
   }
-  public DistanceModel getValueDistance() {
+  public java.util.List<DistanceModel> getValueDistance() {
     return this.valueDistance;
   }
-  public void setValueCount( String value) {
-    this.valueCount = value;
+  public void setValueDistance( java.util.List<DistanceModel> value) {
+    this.valueDistance = value;
   }
   public String getValueCount() {
     return this.valueCount;
   }
-  public void setValueMoney( String value) {
-    this.valueMoney = value;
+  public void setValueCount( String value) {
+    this.valueCount = value;
   }
   public String getValueMoney() {
     return this.valueMoney;
   }
-  public void setValueAge( String value) {
-    this.valueAge = value;
+  public void setValueMoney( String value) {
+    this.valueMoney = value;
   }
   public String getValueAge() {
     return this.valueAge;
   }
-  public void setValueRange( String value) {
-    this.valueRange = value;
+  public void setValueAge( String value) {
+    this.valueAge = value;
   }
   public String getValueRange() {
     return this.valueRange;
   }
-  public void setValuePeriod( String value) {
-    this.valuePeriod = value;
+  public void setValueRange( String value) {
+    this.valueRange = value;
   }
   public String getValuePeriod() {
     return this.valuePeriod;
   }
-  public void setValueRatio( String value) {
-    this.valueRatio = value;
+  public void setValuePeriod( String value) {
+    this.valuePeriod = value;
   }
   public String getValueRatio() {
     return this.valueRatio;
   }
-  public void setValueReference( ReferenceModel value) {
-    this.valueReference = value;
+  public void setValueRatio( String value) {
+    this.valueRatio = value;
   }
-  public ReferenceModel getValueReference() {
+  public java.util.List<ReferenceModel> getValueReference() {
     return this.valueReference;
   }
-  public void setValueSampledData( String value) {
-    this.valueSampledData = value;
+  public void setValueReference( java.util.List<ReferenceModel> value) {
+    this.valueReference = value;
   }
   public String getValueSampledData() {
     return this.valueSampledData;
   }
-  public void setValueSignature( String value) {
-    this.valueSignature = value;
+  public void setValueSampledData( String value) {
+    this.valueSampledData = value;
   }
   public String getValueSignature() {
     return this.valueSignature;
   }
-  public void setValueHumanName( String value) {
-    this.valueHumanName = value;
+  public void setValueSignature( String value) {
+    this.valueSignature = value;
   }
   public String getValueHumanName() {
     return this.valueHumanName;
   }
-  public void setValueAddress( String value) {
-    this.valueAddress = value;
+  public void setValueHumanName( String value) {
+    this.valueHumanName = value;
   }
   public String getValueAddress() {
     return this.valueAddress;
   }
-  public void setValueContactPoint( String value) {
-    this.valueContactPoint = value;
+  public void setValueAddress( String value) {
+    this.valueAddress = value;
   }
   public String getValueContactPoint() {
     return this.valueContactPoint;
   }
-  public void setValueTiming( String value) {
-    this.valueTiming = value;
+  public void setValueContactPoint( String value) {
+    this.valueContactPoint = value;
   }
   public String getValueTiming() {
     return this.valueTiming;
   }
-  public void setValueMeta( MetaModel value) {
-    this.valueMeta = value;
+  public void setValueTiming( String value) {
+    this.valueTiming = value;
   }
-  public MetaModel getValueMeta() {
+  public java.util.List<MetaModel> getValueMeta() {
     return this.valueMeta;
   }
-  public void setValueElementDefinition( String value) {
-    this.valueElementDefinition = value;
+  public void setValueMeta( java.util.List<MetaModel> value) {
+    this.valueMeta = value;
   }
   public String getValueElementDefinition() {
     return this.valueElementDefinition;
   }
-  public void setValueContactDetail( ContactDetailModel value) {
-    this.valueContactDetail = value;
+  public void setValueElementDefinition( String value) {
+    this.valueElementDefinition = value;
   }
-  public ContactDetailModel getValueContactDetail() {
+  public java.util.List<ContactDetailModel> getValueContactDetail() {
     return this.valueContactDetail;
   }
-  public void setValueContributor( ContributorModel value) {
-    this.valueContributor = value;
+  public void setValueContactDetail( java.util.List<ContactDetailModel> value) {
+    this.valueContactDetail = value;
   }
-  public ContributorModel getValueContributor() {
+  public java.util.List<ContributorModel> getValueContributor() {
     return this.valueContributor;
   }
-  public void setValueDosage( DosageModel value) {
-    this.valueDosage = value;
+  public void setValueContributor( java.util.List<ContributorModel> value) {
+    this.valueContributor = value;
   }
-  public DosageModel getValueDosage() {
+  public java.util.List<DosageModel> getValueDosage() {
     return this.valueDosage;
   }
-  public void setValueRelatedArtifact( RelatedArtifactModel value) {
-    this.valueRelatedArtifact = value;
+  public void setValueDosage( java.util.List<DosageModel> value) {
+    this.valueDosage = value;
   }
-  public RelatedArtifactModel getValueRelatedArtifact() {
+  public java.util.List<RelatedArtifactModel> getValueRelatedArtifact() {
     return this.valueRelatedArtifact;
   }
-  public void setValueUsageContext( UsageContextModel value) {
-    this.valueUsageContext = value;
+  public void setValueRelatedArtifact( java.util.List<RelatedArtifactModel> value) {
+    this.valueRelatedArtifact = value;
   }
-  public UsageContextModel getValueUsageContext() {
+  public java.util.List<UsageContextModel> getValueUsageContext() {
     return this.valueUsageContext;
   }
-  public void setValueDataRequirement( DataRequirementModel value) {
-    this.valueDataRequirement = value;
+  public void setValueUsageContext( java.util.List<UsageContextModel> value) {
+    this.valueUsageContext = value;
   }
-  public DataRequirementModel getValueDataRequirement() {
+  public java.util.List<DataRequirementModel> getValueDataRequirement() {
     return this.valueDataRequirement;
   }
-  public void setValueParameterDefinition( String value) {
-    this.valueParameterDefinition = value;
+  public void setValueDataRequirement( java.util.List<DataRequirementModel> value) {
+    this.valueDataRequirement = value;
   }
   public String getValueParameterDefinition() {
     return this.valueParameterDefinition;
   }
-  public void setValueTriggerDefinition( TriggerDefinitionModel value) {
-    this.valueTriggerDefinition = value;
+  public void setValueParameterDefinition( String value) {
+    this.valueParameterDefinition = value;
   }
-  public TriggerDefinitionModel getValueTriggerDefinition() {
+  public java.util.List<TriggerDefinitionModel> getValueTriggerDefinition() {
     return this.valueTriggerDefinition;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setValueTriggerDefinition( java.util.List<TriggerDefinitionModel> value) {
+    this.valueTriggerDefinition = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("valueBoolean" + "[" + String.valueOf(this.valueBoolean) + "]\n"); 
-     builder.append("valueInteger" + "[" + String.valueOf(this.valueInteger) + "]\n"); 
-     builder.append("valueDecimal" + "[" + String.valueOf(this.valueDecimal) + "]\n"); 
-     builder.append("valueBase64Binary" + "[" + String.valueOf(this.valueBase64Binary) + "]\n"); 
-     builder.append("valueInstant" + "[" + String.valueOf(this.valueInstant) + "]\n"); 
-     builder.append("valueString" + "[" + String.valueOf(this.valueString) + "]\n"); 
-     builder.append("valueUri" + "[" + String.valueOf(this.valueUri) + "]\n"); 
-     builder.append("valueDate" + "[" + String.valueOf(this.valueDate) + "]\n"); 
-     builder.append("valueDateTime" + "[" + String.valueOf(this.valueDateTime) + "]\n"); 
-     builder.append("valueTime" + "[" + String.valueOf(this.valueTime) + "]\n"); 
-     builder.append("valueCode" + "[" + String.valueOf(this.valueCode) + "]\n"); 
-     builder.append("valueOid" + "[" + String.valueOf(this.valueOid) + "]\n"); 
-     builder.append("valueUuid" + "[" + String.valueOf(this.valueUuid) + "]\n"); 
-     builder.append("valueId" + "[" + String.valueOf(this.valueId) + "]\n"); 
-     builder.append("valueUnsignedInt" + "[" + String.valueOf(this.valueUnsignedInt) + "]\n"); 
-     builder.append("valuePositiveInt" + "[" + String.valueOf(this.valuePositiveInt) + "]\n"); 
-     builder.append("valueMarkdown" + "[" + String.valueOf(this.valueMarkdown) + "]\n"); 
-     builder.append("valueElement" + "[" + String.valueOf(this.valueElement) + "]\n"); 
-     builder.append("valueExtension" + "[" + String.valueOf(this.valueExtension) + "]\n"); 
-     builder.append("valueBackboneElement" + "[" + String.valueOf(this.valueBackboneElement) + "]\n"); 
-     builder.append("valueNarrative" + "[" + String.valueOf(this.valueNarrative) + "]\n"); 
-     builder.append("valueAnnotation" + "[" + String.valueOf(this.valueAnnotation) + "]\n"); 
-     builder.append("valueAttachment" + "[" + String.valueOf(this.valueAttachment) + "]\n"); 
-     builder.append("valueIdentifier" + "[" + String.valueOf(this.valueIdentifier) + "]\n"); 
-     builder.append("valueCodeableConcept" + "[" + String.valueOf(this.valueCodeableConcept) + "]\n"); 
-     builder.append("valueCoding" + "[" + String.valueOf(this.valueCoding) + "]\n"); 
-     builder.append("valueQuantity" + "[" + String.valueOf(this.valueQuantity) + "]\n"); 
-     builder.append("valueDuration" + "[" + String.valueOf(this.valueDuration) + "]\n"); 
-     builder.append("valueSimpleQuantity" + "[" + String.valueOf(this.valueSimpleQuantity) + "]\n"); 
-     builder.append("valueDistance" + "[" + String.valueOf(this.valueDistance) + "]\n"); 
-     builder.append("valueCount" + "[" + String.valueOf(this.valueCount) + "]\n"); 
-     builder.append("valueMoney" + "[" + String.valueOf(this.valueMoney) + "]\n"); 
-     builder.append("valueAge" + "[" + String.valueOf(this.valueAge) + "]\n"); 
-     builder.append("valueRange" + "[" + String.valueOf(this.valueRange) + "]\n"); 
-     builder.append("valuePeriod" + "[" + String.valueOf(this.valuePeriod) + "]\n"); 
-     builder.append("valueRatio" + "[" + String.valueOf(this.valueRatio) + "]\n"); 
-     builder.append("valueReference" + "[" + String.valueOf(this.valueReference) + "]\n"); 
-     builder.append("valueSampledData" + "[" + String.valueOf(this.valueSampledData) + "]\n"); 
-     builder.append("valueSignature" + "[" + String.valueOf(this.valueSignature) + "]\n"); 
-     builder.append("valueHumanName" + "[" + String.valueOf(this.valueHumanName) + "]\n"); 
-     builder.append("valueAddress" + "[" + String.valueOf(this.valueAddress) + "]\n"); 
-     builder.append("valueContactPoint" + "[" + String.valueOf(this.valueContactPoint) + "]\n"); 
-     builder.append("valueTiming" + "[" + String.valueOf(this.valueTiming) + "]\n"); 
-     builder.append("valueMeta" + "[" + String.valueOf(this.valueMeta) + "]\n"); 
-     builder.append("valueElementDefinition" + "[" + String.valueOf(this.valueElementDefinition) + "]\n"); 
-     builder.append("valueContactDetail" + "[" + String.valueOf(this.valueContactDetail) + "]\n"); 
-     builder.append("valueContributor" + "[" + String.valueOf(this.valueContributor) + "]\n"); 
-     builder.append("valueDosage" + "[" + String.valueOf(this.valueDosage) + "]\n"); 
-     builder.append("valueRelatedArtifact" + "[" + String.valueOf(this.valueRelatedArtifact) + "]\n"); 
-     builder.append("valueUsageContext" + "[" + String.valueOf(this.valueUsageContext) + "]\n"); 
-     builder.append("valueDataRequirement" + "[" + String.valueOf(this.valueDataRequirement) + "]\n"); 
-     builder.append("valueParameterDefinition" + "[" + String.valueOf(this.valueParameterDefinition) + "]\n"); 
-     builder.append("valueTriggerDefinition" + "[" + String.valueOf(this.valueTriggerDefinition) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TaskOutputModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 
+     builder.append("valueInteger" + "->" + this.valueInteger + "\n"); 
+     builder.append("valueDecimal" + "->" + this.valueDecimal + "\n"); 
+     builder.append("valueBase64Binary" + "->" + this.valueBase64Binary + "\n"); 
+     builder.append("valueInstant" + "->" + this.valueInstant + "\n"); 
+     builder.append("valueString" + "->" + this.valueString + "\n"); 
+     builder.append("valueUri" + "->" + this.valueUri + "\n"); 
+     builder.append("valueDate" + "->" + this.valueDate + "\n"); 
+     builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
+     builder.append("valueTime" + "->" + this.valueTime + "\n"); 
+     builder.append("valueCode" + "->" + this.valueCode + "\n"); 
+     builder.append("valueOid" + "->" + this.valueOid + "\n"); 
+     builder.append("valueUuid" + "->" + this.valueUuid + "\n"); 
+     builder.append("valueId" + "->" + this.valueId + "\n"); 
+     builder.append("valueUnsignedInt" + "->" + this.valueUnsignedInt + "\n"); 
+     builder.append("valuePositiveInt" + "->" + this.valuePositiveInt + "\n"); 
+     builder.append("valueMarkdown" + "->" + this.valueMarkdown + "\n"); 
+     builder.append("valueElement" + "->" + this.valueElement + "\n"); 
+     builder.append("valueExtension" + "->" + this.valueExtension + "\n"); 
+     builder.append("valueBackboneElement" + "->" + this.valueBackboneElement + "\n"); 
+     builder.append("valueAnnotation" + "->" + this.valueAnnotation + "\n"); 
+     builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
+     builder.append("valueIdentifier" + "->" + this.valueIdentifier + "\n"); 
+     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
+     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
+     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
+     builder.append("valueDuration" + "->" + this.valueDuration + "\n"); 
+     builder.append("valueSimpleQuantity" + "->" + this.valueSimpleQuantity + "\n"); 
+     builder.append("valueCount" + "->" + this.valueCount + "\n"); 
+     builder.append("valueMoney" + "->" + this.valueMoney + "\n"); 
+     builder.append("valueAge" + "->" + this.valueAge + "\n"); 
+     builder.append("valueRange" + "->" + this.valueRange + "\n"); 
+     builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
+     builder.append("valueRatio" + "->" + this.valueRatio + "\n"); 
+     builder.append("valueSampledData" + "->" + this.valueSampledData + "\n"); 
+     builder.append("valueSignature" + "->" + this.valueSignature + "\n"); 
+     builder.append("valueHumanName" + "->" + this.valueHumanName + "\n"); 
+     builder.append("valueAddress" + "->" + this.valueAddress + "\n"); 
+     builder.append("valueContactPoint" + "->" + this.valueContactPoint + "\n"); 
+     builder.append("valueTiming" + "->" + this.valueTiming + "\n"); 
+     builder.append("valueElementDefinition" + "->" + this.valueElementDefinition + "\n"); 
+     builder.append("valueParameterDefinition" + "->" + this.valueParameterDefinition + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[TaskOutputModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 
+     builder.append("valueInteger" + "->" + this.valueInteger + "\n"); 
+     builder.append("valueDecimal" + "->" + this.valueDecimal + "\n"); 
+     builder.append("valueBase64Binary" + "->" + this.valueBase64Binary + "\n"); 
+     builder.append("valueInstant" + "->" + this.valueInstant + "\n"); 
+     builder.append("valueString" + "->" + this.valueString + "\n"); 
+     builder.append("valueUri" + "->" + this.valueUri + "\n"); 
+     builder.append("valueDate" + "->" + this.valueDate + "\n"); 
+     builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
+     builder.append("valueTime" + "->" + this.valueTime + "\n"); 
+     builder.append("valueCode" + "->" + this.valueCode + "\n"); 
+     builder.append("valueOid" + "->" + this.valueOid + "\n"); 
+     builder.append("valueUuid" + "->" + this.valueUuid + "\n"); 
+     builder.append("valueId" + "->" + this.valueId + "\n"); 
+     builder.append("valueUnsignedInt" + "->" + this.valueUnsignedInt + "\n"); 
+     builder.append("valuePositiveInt" + "->" + this.valuePositiveInt + "\n"); 
+     builder.append("valueMarkdown" + "->" + this.valueMarkdown + "\n"); 
+     builder.append("valueElement" + "->" + this.valueElement + "\n"); 
+     builder.append("valueExtension" + "->" + this.valueExtension + "\n"); 
+     builder.append("valueBackboneElement" + "->" + this.valueBackboneElement + "\n"); 
+     builder.append("valueNarrative" + "->" + this.valueNarrative + "\n"); 
+     builder.append("valueAnnotation" + "->" + this.valueAnnotation + "\n"); 
+     builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
+     builder.append("valueIdentifier" + "->" + this.valueIdentifier + "\n"); 
+     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
+     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
+     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
+     builder.append("valueDuration" + "->" + this.valueDuration + "\n"); 
+     builder.append("valueSimpleQuantity" + "->" + this.valueSimpleQuantity + "\n"); 
+     builder.append("valueDistance" + "->" + this.valueDistance + "\n"); 
+     builder.append("valueCount" + "->" + this.valueCount + "\n"); 
+     builder.append("valueMoney" + "->" + this.valueMoney + "\n"); 
+     builder.append("valueAge" + "->" + this.valueAge + "\n"); 
+     builder.append("valueRange" + "->" + this.valueRange + "\n"); 
+     builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
+     builder.append("valueRatio" + "->" + this.valueRatio + "\n"); 
+     builder.append("valueReference" + "->" + this.valueReference + "\n"); 
+     builder.append("valueSampledData" + "->" + this.valueSampledData + "\n"); 
+     builder.append("valueSignature" + "->" + this.valueSignature + "\n"); 
+     builder.append("valueHumanName" + "->" + this.valueHumanName + "\n"); 
+     builder.append("valueAddress" + "->" + this.valueAddress + "\n"); 
+     builder.append("valueContactPoint" + "->" + this.valueContactPoint + "\n"); 
+     builder.append("valueTiming" + "->" + this.valueTiming + "\n"); 
+     builder.append("valueMeta" + "->" + this.valueMeta + "\n"); 
+     builder.append("valueElementDefinition" + "->" + this.valueElementDefinition + "\n"); 
+     builder.append("valueContactDetail" + "->" + this.valueContactDetail + "\n"); 
+     builder.append("valueContributor" + "->" + this.valueContributor + "\n"); 
+     builder.append("valueDosage" + "->" + this.valueDosage + "\n"); 
+     builder.append("valueRelatedArtifact" + "->" + this.valueRelatedArtifact + "\n"); 
+     builder.append("valueUsageContext" + "->" + this.valueUsageContext + "\n"); 
+     builder.append("valueDataRequirement" + "->" + this.valueDataRequirement + "\n"); 
+     builder.append("valueParameterDefinition" + "->" + this.valueParameterDefinition + "\n"); 
+     builder.append("valueTriggerDefinition" + "->" + this.valueTriggerDefinition + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

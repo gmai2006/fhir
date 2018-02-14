@@ -57,6 +57,7 @@ public class Period  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -119,34 +120,15 @@ public class Period  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("start" + "[" + String.valueOf(this.start) + "]\n"); 
-     builder.append("_start" + "[" + String.valueOf(this._start) + "]\n"); 
-     builder.append("end" + "[" + String.valueOf(this.end) + "]\n"); 
-     builder.append("_end" + "[" + String.valueOf(this._end) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Period]:" + "\n");
+     if(this.start != null) builder.append("start" + "->" + this.start.toString() + "\n"); 
+     if(this._start != null) builder.append("_start" + "->" + this._start.toString() + "\n"); 
+     if(this.end != null) builder.append("end" + "->" + this.end.toString() + "\n"); 
+     if(this._end != null) builder.append("_end" + "->" + this._end.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static Period fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Period.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Period o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Period> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

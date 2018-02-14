@@ -32,7 +32,5 @@ public interface DocumentManifestRelatedService {
 	public DocumentManifestRelated find(String id);
   public List<DocumentManifestRelated> select(int maxResult);
   public List<DocumentManifestRelated> selectAll();
-  public DocumentManifestRelated create(DocumentManifestRelated bean);
-  public DocumentManifestRelated update(DocumentManifestRelated bean);
   public void delete(DocumentManifestRelated bean);
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.PersonModel;
 import org.fhir.pojo.Person;
+import org.fhir.pojo.PersonHelper;
 
 public class PersonDaoImpl implements PersonDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class PersonDaoImpl implements PersonDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PersonModel a", PersonModel.class).setMaxResults(maxResult);
       List<PersonModel> models = query.getResultList();
-      return Person.fromArray(models);
+      return PersonHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class PersonDaoImpl implements PersonDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from PersonModel a", PersonModel.class);
       List<PersonModel> models = query.getResultList();
-      return Person.fromArray(models);
+      return PersonHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class PersonDaoImpl implements PersonDao {
       PersonModel model = em.merge(new PersonModel(e));
       return new Person(model);
   }
-
   @Override
   @Transactional
   public void delete(Person e) {

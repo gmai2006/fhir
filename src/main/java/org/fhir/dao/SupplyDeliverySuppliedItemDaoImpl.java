@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SupplyDeliverySuppliedItemModel;
 import org.fhir.pojo.SupplyDeliverySuppliedItem;
+import org.fhir.pojo.SupplyDeliverySuppliedItemHelper;
 
 public class SupplyDeliverySuppliedItemDaoImpl implements SupplyDeliverySuppliedItemDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SupplyDeliverySuppliedItemDaoImpl implements SupplyDeliverySupplied
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SupplyDeliverySuppliedItemModel a", SupplyDeliverySuppliedItemModel.class).setMaxResults(maxResult);
       List<SupplyDeliverySuppliedItemModel> models = query.getResultList();
-      return SupplyDeliverySuppliedItem.fromArray(models);
+      return SupplyDeliverySuppliedItemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SupplyDeliverySuppliedItemDaoImpl implements SupplyDeliverySupplied
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SupplyDeliverySuppliedItemModel a", SupplyDeliverySuppliedItemModel.class);
       List<SupplyDeliverySuppliedItemModel> models = query.getResultList();
-      return SupplyDeliverySuppliedItem.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SupplyDeliverySuppliedItem create(SupplyDeliverySuppliedItem e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SupplyDeliverySuppliedItemModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SupplyDeliverySuppliedItem update(SupplyDeliverySuppliedItem e) {
-      final EntityManager em = entityManagerProvider.get();
-      SupplyDeliverySuppliedItemModel model = em.merge(new SupplyDeliverySuppliedItemModel(e));
-      return new SupplyDeliverySuppliedItem(model);
+      return SupplyDeliverySuppliedItemHelper.fromArray2Array(models);
   }
 
   @Override

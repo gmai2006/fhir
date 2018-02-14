@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CarePlanModel;
 import org.fhir.pojo.CarePlan;
+import org.fhir.pojo.CarePlanHelper;
 
 public class CarePlanDaoImpl implements CarePlanDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CarePlanDaoImpl implements CarePlanDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CarePlanModel a", CarePlanModel.class).setMaxResults(maxResult);
       List<CarePlanModel> models = query.getResultList();
-      return CarePlan.fromArray(models);
+      return CarePlanHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class CarePlanDaoImpl implements CarePlanDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CarePlanModel a", CarePlanModel.class);
       List<CarePlanModel> models = query.getResultList();
-      return CarePlan.fromArray(models);
+      return CarePlanHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class CarePlanDaoImpl implements CarePlanDao {
       CarePlanModel model = em.merge(new CarePlanModel(e));
       return new CarePlan(model);
   }
-
   @Override
   @Transactional
   public void delete(CarePlan e) {

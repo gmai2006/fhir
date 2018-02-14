@@ -64,6 +64,7 @@ public class TaskRestriction  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -85,19 +86,16 @@ public class TaskRestriction  {
 
   public TaskRestriction(TaskRestrictionModel o) {
     this.id = o.getId();
-      if (null != o.getRepetitions()) {
-        this.repetitions = new Float(o.getRepetitions());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.recipient = Reference.fromArray(o.getRecipient());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getRepetitions()) {
+      this.repetitions = o.getRepetitions();
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    if (null != o.getRecipient() && !o.getRecipient().isEmpty()) {
+    	this.recipient = ReferenceHelper.fromArray2Array(o.getRecipient());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setRepetitions( Float value) {
@@ -152,48 +150,17 @@ public class TaskRestriction  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("repetitions" + "[" + String.valueOf(this.repetitions) + "]\n"); 
-     builder.append("_repetitions" + "[" + String.valueOf(this._repetitions) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("recipient" + "[" + String.valueOf(this.recipient) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TaskRestriction]:" + "\n");
+     if(this.repetitions != null) builder.append("repetitions" + "->" + this.repetitions.toString() + "\n"); 
+     if(this._repetitions != null) builder.append("_repetitions" + "->" + this._repetitions.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.recipient != null) builder.append("recipient" + "->" + this.recipient.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<TaskRestriction> fromArray(java.util.List<TaskRestrictionModel> list) {
-    return (java.util.List<TaskRestriction>)list.stream()
-      .map(model -> new TaskRestriction(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<TaskRestrictionModel> toModelArray(java.util.List<TaskRestriction> list) {
-    return (java.util.List<TaskRestrictionModel>)list.stream()
-      .map(model -> new TaskRestrictionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static TaskRestriction fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TaskRestriction.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TaskRestriction o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TaskRestriction> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

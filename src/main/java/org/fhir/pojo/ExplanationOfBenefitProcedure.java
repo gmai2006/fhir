@@ -75,6 +75,7 @@ public class ExplanationOfBenefitProcedure  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -96,26 +97,19 @@ public class ExplanationOfBenefitProcedure  {
 
   public ExplanationOfBenefitProcedure(ExplanationOfBenefitProcedureModel o) {
     this.id = o.getId();
-      if (null != o.getSequence()) {
-        this.sequence = new Float(o.getSequence());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      this.procedureCodeableConcept = CodeableConcept.fromJson(o.getProcedureCodeableConcept());
-      if (null != o.getProcedureReference()) {
-        this.procedureReference = new Reference(o.getProcedureReference());
-        this.procedureReference.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSequence()) {
+      this.sequence = o.getSequence();
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    this.procedureCodeableConcept = CodeableConceptHelper.fromJson(o.getProcedureCodeableConcept());
+    if (null != o.getProcedureReference() && !o.getProcedureReference().isEmpty()) {
+      this.procedureReference = new Reference(o.getProcedureReference().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSequence( Float value) {
@@ -182,50 +176,19 @@ public class ExplanationOfBenefitProcedure  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("_sequence" + "[" + String.valueOf(this._sequence) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("procedureCodeableConcept" + "[" + String.valueOf(this.procedureCodeableConcept) + "]\n"); 
-     builder.append("procedureReference" + "[" + String.valueOf(this.procedureReference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitProcedure]:" + "\n");
+     if(this.sequence != null) builder.append("sequence" + "->" + this.sequence.toString() + "\n"); 
+     if(this._sequence != null) builder.append("_sequence" + "->" + this._sequence.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.procedureCodeableConcept != null) builder.append("procedureCodeableConcept" + "->" + this.procedureCodeableConcept.toString() + "\n"); 
+     if(this.procedureReference != null) builder.append("procedureReference" + "->" + this.procedureReference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ExplanationOfBenefitProcedure> fromArray(java.util.List<ExplanationOfBenefitProcedureModel> list) {
-    return (java.util.List<ExplanationOfBenefitProcedure>)list.stream()
-      .map(model -> new ExplanationOfBenefitProcedure(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ExplanationOfBenefitProcedureModel> toModelArray(java.util.List<ExplanationOfBenefitProcedure> list) {
-    return (java.util.List<ExplanationOfBenefitProcedureModel>)list.stream()
-      .map(model -> new ExplanationOfBenefitProcedureModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ExplanationOfBenefitProcedure fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ExplanationOfBenefitProcedure.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExplanationOfBenefitProcedure o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExplanationOfBenefitProcedure> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time."
 */
 @Entity
 @Table(name="practitionerrolenotavailable")
-public class PractitionerRoleNotAvailableModel  {
+public class PractitionerRoleNotAvailableModel  implements Serializable {
+	private static final long serialVersionUID = 15185766969894265L;
   /**
   * Description: "The reason that can be presented to the user as to why this time is not available."
   */
@@ -46,7 +47,7 @@ public class PractitionerRoleNotAvailableModel  {
 
   /**
   * Description: "Service is not available (seasonally or for a public holiday) from this date."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -56,7 +57,7 @@ public class PractitionerRoleNotAvailableModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -68,6 +69,7 @@ public class PractitionerRoleNotAvailableModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -76,71 +78,90 @@ public class PractitionerRoleNotAvailableModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public PractitionerRoleNotAvailableModel() {
   }
 
-  public PractitionerRoleNotAvailableModel(PractitionerRoleNotAvailable o) {
-    this.id = o.getId();
-      this.description = o.getDescription();
-
-      this.during = Period.toJson(o.getDuring());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public PractitionerRoleNotAvailableModel(PractitionerRoleNotAvailable o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.description = o.getDescription();
+    this.during = PeriodHelper.toJson(o.getDuring());
   }
 
-  public void setDescription( String value) {
-    this.description = value;
-  }
   public String getDescription() {
     return this.description;
   }
-  public void setDuring( String value) {
-    this.during = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public String getDuring() {
     return this.during;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setDuring( String value) {
+    this.during = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("during" + "[" + String.valueOf(this.during) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PractitionerRoleNotAvailableModel]:" + "\n");
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("during" + "->" + this.during + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[PractitionerRoleNotAvailableModel]:" + "\n");
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("during" + "->" + this.during + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

@@ -32,7 +32,5 @@ public interface CapabilityStatementInteractionService {
 	public CapabilityStatementInteraction find(String id);
   public List<CapabilityStatementInteraction> select(int maxResult);
   public List<CapabilityStatementInteraction> selectAll();
-  public CapabilityStatementInteraction create(CapabilityStatementInteraction bean);
-  public CapabilityStatementInteraction update(CapabilityStatementInteraction bean);
   public void delete(CapabilityStatementInteraction bean);
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AuditEventModel;
 import org.fhir.pojo.AuditEvent;
+import org.fhir.pojo.AuditEventHelper;
 
 public class AuditEventDaoImpl implements AuditEventDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AuditEventDaoImpl implements AuditEventDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AuditEventModel a", AuditEventModel.class).setMaxResults(maxResult);
       List<AuditEventModel> models = query.getResultList();
-      return AuditEvent.fromArray(models);
+      return AuditEventHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class AuditEventDaoImpl implements AuditEventDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AuditEventModel a", AuditEventModel.class);
       List<AuditEventModel> models = query.getResultList();
-      return AuditEvent.fromArray(models);
+      return AuditEventHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class AuditEventDaoImpl implements AuditEventDao {
       AuditEventModel model = em.merge(new AuditEventModel(e));
       return new AuditEvent(model);
   }
-
   @Override
   @Transactional
   public void delete(AuditEvent e) {

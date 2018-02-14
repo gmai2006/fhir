@@ -30,25 +30,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
 @Entity
 @Table(name="claimresponseadditem")
-public class ClaimResponseAddItemModel  {
+public class ClaimResponseAddItemModel  implements Serializable {
+	private static final long serialVersionUID = 151857669696771748L;
   /**
   * Description: "List of input service items which this service line is intended to replace."
-  * Actual type: Array of number-> List<number>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"sequenceLinkId\"", length = 16777215)
+  @Column(name="\"sequenceLinkId\"")
   private String sequenceLinkId;
 
   /**
   * Description: "The type of reveneu or cost center providing the product and/or service."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -57,7 +56,7 @@ public class ClaimResponseAddItemModel  {
 
   /**
   * Description: "Health Care Service Type Codes  to identify the classification of service or benefits."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -66,7 +65,7 @@ public class ClaimResponseAddItemModel  {
 
   /**
   * Description: "A code to indicate the Professional Service or Product supplied."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -75,7 +74,7 @@ public class ClaimResponseAddItemModel  {
 
   /**
   * Description: "Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -84,7 +83,7 @@ public class ClaimResponseAddItemModel  {
 
   /**
   * Description: "The fee charged for the professional service or product.."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -93,31 +92,37 @@ public class ClaimResponseAddItemModel  {
 
   /**
   * Description: "A list of note references to the notes provided below."
-  * Actual type: Array of number-> List<number>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"noteNumber\"", length = 16777215)
+  @Column(name="\"noteNumber\"")
   private String noteNumber;
 
   /**
   * Description: "The adjudications results."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ClaimResponseAdjudicationModel> adjudication = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"adjudication_id\"")
+  private String adjudication_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="adjudication_id", insertable=false, updatable=false)
+  private java.util.List<ClaimResponseAdjudicationModel> adjudication;
 
   /**
   * Description: "The second tier service adjudications for payor added services."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ClaimResponseDetail1Model> detail = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"detail_id\"")
+  private String detail_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="detail_id", insertable=false, updatable=false)
+  private java.util.List<ClaimResponseDetail1Model> detail;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -129,6 +134,7 @@ public class ClaimResponseAddItemModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -137,130 +143,156 @@ public class ClaimResponseAddItemModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ClaimResponseAddItemModel() {
   }
 
-  public ClaimResponseAddItemModel(ClaimResponseAddItem o) {
-    this.id = o.getId();
-      this.sequenceLinkId = org.fhir.utils.JsonUtils.write2String(o.getSequenceLinkId());
-
-      this.revenue = CodeableConcept.toJson(o.getRevenue());
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.service = CodeableConcept.toJson(o.getService());
-      this.modifier = CodeableConcept.toJson(o.getModifier());
-      this.fee = Money.toJson(o.getFee());
-      this.noteNumber = org.fhir.utils.JsonUtils.write2String(o.getNoteNumber());
-
-      this.adjudication = ClaimResponseAdjudication.toModelArray(o.getAdjudication());
-
-      this.detail = ClaimResponseDetail1.toModelArray(o.getDetail());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ClaimResponseAddItemModel(ClaimResponseAddItem o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.sequenceLinkId = org.fhir.utils.JsonUtils.write2String(o.getSequenceLinkId());
+    this.revenue = CodeableConceptHelper.toJson(o.getRevenue());
+    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.service = CodeableConceptHelper.toJson(o.getService());
+    this.fee = MoneyHelper.toJson(o.getFee());
+    this.noteNumber = org.fhir.utils.JsonUtils.write2String(o.getNoteNumber());
+    if (null != o.getAdjudication() && !o.getAdjudication().isEmpty()) {
+    	this.adjudication_id = "adjudication" + this.parent_id;
+    	this.adjudication = ClaimResponseAdjudicationHelper.toModelFromArray(o.getAdjudication(), this.adjudication_id);
+    }
+    if (null != o.getDetail() && !o.getDetail().isEmpty()) {
+    	this.detail_id = "detail" + this.parent_id;
+    	this.detail = ClaimResponseDetail1Helper.toModelFromArray(o.getDetail(), this.detail_id);
+    }
   }
 
-  public void setSequenceLinkId( String value) {
-    this.sequenceLinkId = value;
-  }
   public String getSequenceLinkId() {
     return this.sequenceLinkId;
   }
-  public void setRevenue( String value) {
-    this.revenue = value;
+  public void setSequenceLinkId( String value) {
+    this.sequenceLinkId = value;
   }
   public String getRevenue() {
     return this.revenue;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setRevenue( String value) {
+    this.revenue = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setService( String value) {
-    this.service = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getService() {
     return this.service;
   }
-  public void setModifier( String value) {
-    this.modifier = value;
+  public void setService( String value) {
+    this.service = value;
   }
   public String getModifier() {
     return this.modifier;
   }
-  public void setFee( String value) {
-    this.fee = value;
+  public void setModifier( String value) {
+    this.modifier = value;
   }
   public String getFee() {
     return this.fee;
   }
-  public void setNoteNumber( String value) {
-    this.noteNumber = value;
+  public void setFee( String value) {
+    this.fee = value;
   }
   public String getNoteNumber() {
     return this.noteNumber;
   }
-  public void setAdjudication( java.util.List<ClaimResponseAdjudicationModel> value) {
-    this.adjudication = value;
+  public void setNoteNumber( String value) {
+    this.noteNumber = value;
   }
   public java.util.List<ClaimResponseAdjudicationModel> getAdjudication() {
     return this.adjudication;
   }
-  public void setDetail( java.util.List<ClaimResponseDetail1Model> value) {
-    this.detail = value;
+  public void setAdjudication( java.util.List<ClaimResponseAdjudicationModel> value) {
+    this.adjudication = value;
   }
   public java.util.List<ClaimResponseDetail1Model> getDetail() {
     return this.detail;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setDetail( java.util.List<ClaimResponseDetail1Model> value) {
+    this.detail = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequenceLinkId" + "[" + String.valueOf(this.sequenceLinkId) + "]\n"); 
-     builder.append("revenue" + "[" + String.valueOf(this.revenue) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("service" + "[" + String.valueOf(this.service) + "]\n"); 
-     builder.append("modifier" + "[" + String.valueOf(this.modifier) + "]\n"); 
-     builder.append("fee" + "[" + String.valueOf(this.fee) + "]\n"); 
-     builder.append("noteNumber" + "[" + String.valueOf(this.noteNumber) + "]\n"); 
-     builder.append("adjudication" + "[" + String.valueOf(this.adjudication) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ClaimResponseAddItemModel]:" + "\n");
+     builder.append("sequenceLinkId" + "->" + this.sequenceLinkId + "\n"); 
+     builder.append("revenue" + "->" + this.revenue + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("service" + "->" + this.service + "\n"); 
+     builder.append("modifier" + "->" + this.modifier + "\n"); 
+     builder.append("fee" + "->" + this.fee + "\n"); 
+     builder.append("noteNumber" + "->" + this.noteNumber + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ClaimResponseAddItemModel]:" + "\n");
+     builder.append("sequenceLinkId" + "->" + this.sequenceLinkId + "\n"); 
+     builder.append("revenue" + "->" + this.revenue + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("service" + "->" + this.service + "\n"); 
+     builder.append("modifier" + "->" + this.modifier + "\n"); 
+     builder.append("fee" + "->" + this.fee + "\n"); 
+     builder.append("noteNumber" + "->" + this.noteNumber + "\n"); 
+     builder.append("adjudication" + "->" + this.adjudication + "\n"); 
+     builder.append("detail" + "->" + this.detail + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

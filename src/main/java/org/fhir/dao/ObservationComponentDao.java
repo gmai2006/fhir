@@ -34,10 +34,5 @@ public interface ObservationComponentDao {
   public List<ObservationComponent> select(int maxResult);
 
   public List<ObservationComponent> selectAll();
-
-  public ObservationComponent create(ObservationComponent e);
-
-  public ObservationComponent update(ObservationComponent e);
-
   public void delete(ObservationComponent e);
 }

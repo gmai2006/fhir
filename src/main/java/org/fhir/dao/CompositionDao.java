@@ -34,10 +34,8 @@ public interface CompositionDao {
   public List<Composition> select(int maxResult);
 
   public List<Composition> selectAll();
-
   public Composition create(Composition e);
 
   public Composition update(Composition e);
-
   public void delete(Composition e);
 }

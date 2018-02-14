@@ -32,7 +32,5 @@ public interface MedicationAdministrationDosageService {
 	public MedicationAdministrationDosage find(String id);
   public List<MedicationAdministrationDosage> select(int maxResult);
   public List<MedicationAdministrationDosage> selectAll();
-  public MedicationAdministrationDosage create(MedicationAdministrationDosage bean);
-  public MedicationAdministrationDosage update(MedicationAdministrationDosage bean);
   public void delete(MedicationAdministrationDosage bean);
 }

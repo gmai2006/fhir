@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "The formal description of a single piece of information that can be gathered and reported."
 */
 @Entity
 @Table(name="dataelementmapping")
-public class DataElementMappingModel  {
+public class DataElementMappingModel  implements Serializable {
+	private static final long serialVersionUID = 151857669677089358L;
   /**
   * Description: "An internal id that is used to identify this mapping set when specific mappings are made on a per-element basis."
   */
@@ -69,7 +70,7 @@ public class DataElementMappingModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -81,6 +82,7 @@ public class DataElementMappingModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -89,90 +91,108 @@ public class DataElementMappingModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public DataElementMappingModel() {
   }
 
-  public DataElementMappingModel(DataElementMapping o) {
-    this.id = o.getId();
-      this.identity = o.getIdentity();
-
-      this.uri = o.getUri();
-
-      this.name = o.getName();
-
-      this.comment = o.getComment();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public DataElementMappingModel(DataElementMapping o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.identity = o.getIdentity();
+    this.uri = o.getUri();
+    this.name = o.getName();
+    this.comment = o.getComment();
   }
 
-  public void setIdentity( String value) {
-    this.identity = value;
-  }
   public String getIdentity() {
     return this.identity;
   }
-  public void setUri( String value) {
-    this.uri = value;
+  public void setIdentity( String value) {
+    this.identity = value;
   }
   public String getUri() {
     return this.uri;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setUri( String value) {
+    this.uri = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setComment( String value) {
-    this.comment = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getComment() {
     return this.comment;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setComment( String value) {
+    this.comment = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identity" + "[" + String.valueOf(this.identity) + "]\n"); 
-     builder.append("uri" + "[" + String.valueOf(this.uri) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DataElementMappingModel]:" + "\n");
+     builder.append("identity" + "->" + this.identity + "\n"); 
+     builder.append("uri" + "->" + this.uri + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[DataElementMappingModel]:" + "\n");
+     builder.append("identity" + "->" + this.identity + "\n"); 
+     builder.append("uri" + "->" + this.uri + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

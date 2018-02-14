@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides payment details and claim references supporting a bulk payment."
 */
 @Entity
 @Table(name="paymentreconciliation")
-public class PaymentReconciliationModel  {
+public class PaymentReconciliationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669659026203L;
   /**
   * Description: "This is a PaymentReconciliation resource"
   */
@@ -47,7 +48,7 @@ public class PaymentReconciliationModel  {
 
   /**
   * Description: "The Response business identifier."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -64,7 +65,7 @@ public class PaymentReconciliationModel  {
 
   /**
   * Description: "The period of time for which payments have been gathered into this bulk payment for settlement."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -86,9 +87,9 @@ public class PaymentReconciliationModel  {
   @Column(name="\"organization_id\"")
   private String organization_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`organization_id`", insertable=false, updatable=false)
-  private ReferenceModel organization;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> organization;
 
   /**
   * Description: "Original request resource reference."
@@ -97,13 +98,13 @@ public class PaymentReconciliationModel  {
   @Column(name="\"request_id\"")
   private String request_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`request_id`", insertable=false, updatable=false)
-  private ReferenceModel request;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> request;
 
   /**
   * Description: "Transaction status: error, complete."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -124,9 +125,9 @@ public class PaymentReconciliationModel  {
   @Column(name="\"requestprovider_id\"")
   private String requestprovider_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`requestprovider_id`", insertable=false, updatable=false)
-  private ReferenceModel requestProvider;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requestprovider_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> requestProvider;
 
   /**
   * Description: "The organization which is responsible for the services rendered to the patient."
@@ -135,20 +136,24 @@ public class PaymentReconciliationModel  {
   @Column(name="\"requestorganization_id\"")
   private String requestorganization_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`requestorganization_id`", insertable=false, updatable=false)
-  private ReferenceModel requestOrganization;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="requestorganization_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> requestOrganization;
 
   /**
   * Description: "List of individual settlement amounts and the corresponding transaction."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<PaymentReconciliationDetailModel> detail = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"detail_id\"")
+  private String detail_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="detail_id", insertable=false, updatable=false)
+  private java.util.List<PaymentReconciliationDetailModel> detail;
 
   /**
   * Description: "The form to be used for printing the content."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -157,7 +162,7 @@ public class PaymentReconciliationModel  {
 
   /**
   * Description: "Total payment amount."
-  * Actual type: Money
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -167,9 +172,13 @@ public class PaymentReconciliationModel  {
   /**
   * Description: "Suite of notes."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<PaymentReconciliationProcessNoteModel> processNote = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"processnote_id\"")
+  private String processnote_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="processnote_id", insertable=false, updatable=false)
+  private java.util.List<PaymentReconciliationProcessNoteModel> processNote;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -179,14 +188,14 @@ public class PaymentReconciliationModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -196,7 +205,7 @@ public class PaymentReconciliationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -206,7 +215,7 @@ public class PaymentReconciliationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -218,6 +227,7 @@ public class PaymentReconciliationModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -232,9 +242,9 @@ public class PaymentReconciliationModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -255,248 +265,242 @@ public class PaymentReconciliationModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public PaymentReconciliationModel() {
   }
 
   public PaymentReconciliationModel(PaymentReconciliation o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.status = o.getStatus();
-
-      this.period = Period.toJson(o.getPeriod());
-      this.created = o.getCreated();
-
-      if (null != o.getOrganization()) {
-      	this.organization_id = "organization" + this.getId();
-        this.organization = new ReferenceModel(o.getOrganization());
-        this.organization.setId(this.organization_id);
-        this.organization.parent_id = this.organization.getId();
-      }
-
-      if (null != o.getRequest()) {
-      	this.request_id = "request" + this.getId();
-        this.request = new ReferenceModel(o.getRequest());
-        this.request.setId(this.request_id);
-        this.request.parent_id = this.request.getId();
-      }
-
-      this.outcome = CodeableConcept.toJson(o.getOutcome());
-      this.disposition = o.getDisposition();
-
-      if (null != o.getRequestProvider()) {
-      	this.requestprovider_id = "requestProvider" + this.getId();
-        this.requestProvider = new ReferenceModel(o.getRequestProvider());
-        this.requestProvider.setId(this.requestprovider_id);
-        this.requestProvider.parent_id = this.requestProvider.getId();
-      }
-
-      if (null != o.getRequestOrganization()) {
-      	this.requestorganization_id = "requestOrganization" + this.getId();
-        this.requestOrganization = new ReferenceModel(o.getRequestOrganization());
-        this.requestOrganization.setId(this.requestorganization_id);
-        this.requestOrganization.parent_id = this.requestOrganization.getId();
-      }
-
-      this.detail = PaymentReconciliationDetail.toModelArray(o.getDetail());
-
-      this.form = CodeableConcept.toJson(o.getForm());
-      this.total = Money.toJson(o.getTotal());
-      this.processNote = PaymentReconciliationProcessNote.toModelArray(o.getProcessNote());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.status = o.getStatus();
+    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.created = o.getCreated();
+    if (null != o.getOrganization() ) {
+    	this.organization_id = "organization" + this.id;
+    	this.organization = ReferenceHelper.toModel(o.getOrganization(), this.organization_id);
+    }
+    if (null != o.getRequest() ) {
+    	this.request_id = "request" + this.id;
+    	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
+    }
+    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.disposition = o.getDisposition();
+    if (null != o.getRequestProvider() ) {
+    	this.requestprovider_id = "requestprovider" + this.id;
+    	this.requestProvider = ReferenceHelper.toModel(o.getRequestProvider(), this.requestprovider_id);
+    }
+    if (null != o.getRequestOrganization() ) {
+    	this.requestorganization_id = "requestorganization" + this.id;
+    	this.requestOrganization = ReferenceHelper.toModel(o.getRequestOrganization(), this.requestorganization_id);
+    }
+    if (null != o.getDetail() && !o.getDetail().isEmpty()) {
+    	this.detail_id = "detail" + this.id;
+    	this.detail = PaymentReconciliationDetailHelper.toModelFromArray(o.getDetail(), this.detail_id);
+    }
+    this.form = CodeableConceptHelper.toJson(o.getForm());
+    this.total = MoneyHelper.toJson(o.getTotal());
+    if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
+    	this.processnote_id = "processnote" + this.id;
+    	this.processNote = PaymentReconciliationProcessNoteHelper.toModelFromArray(o.getProcessNote(), this.processnote_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setPeriod( String value) {
-    this.period = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getPeriod() {
     return this.period;
   }
-  public void setCreated( String value) {
-    this.created = value;
+  public void setPeriod( String value) {
+    this.period = value;
   }
   public String getCreated() {
     return this.created;
   }
-  public void setOrganization( ReferenceModel value) {
-    this.organization = value;
+  public void setCreated( String value) {
+    this.created = value;
   }
-  public ReferenceModel getOrganization() {
+  public java.util.List<ReferenceModel> getOrganization() {
     return this.organization;
   }
-  public void setRequest( ReferenceModel value) {
-    this.request = value;
+  public void setOrganization( java.util.List<ReferenceModel> value) {
+    this.organization = value;
   }
-  public ReferenceModel getRequest() {
+  public java.util.List<ReferenceModel> getRequest() {
     return this.request;
   }
-  public void setOutcome( String value) {
-    this.outcome = value;
+  public void setRequest( java.util.List<ReferenceModel> value) {
+    this.request = value;
   }
   public String getOutcome() {
     return this.outcome;
   }
-  public void setDisposition( String value) {
-    this.disposition = value;
+  public void setOutcome( String value) {
+    this.outcome = value;
   }
   public String getDisposition() {
     return this.disposition;
   }
-  public void setRequestProvider( ReferenceModel value) {
-    this.requestProvider = value;
+  public void setDisposition( String value) {
+    this.disposition = value;
   }
-  public ReferenceModel getRequestProvider() {
+  public java.util.List<ReferenceModel> getRequestProvider() {
     return this.requestProvider;
   }
-  public void setRequestOrganization( ReferenceModel value) {
-    this.requestOrganization = value;
+  public void setRequestProvider( java.util.List<ReferenceModel> value) {
+    this.requestProvider = value;
   }
-  public ReferenceModel getRequestOrganization() {
+  public java.util.List<ReferenceModel> getRequestOrganization() {
     return this.requestOrganization;
   }
-  public void setDetail( java.util.List<PaymentReconciliationDetailModel> value) {
-    this.detail = value;
+  public void setRequestOrganization( java.util.List<ReferenceModel> value) {
+    this.requestOrganization = value;
   }
   public java.util.List<PaymentReconciliationDetailModel> getDetail() {
     return this.detail;
   }
-  public void setForm( String value) {
-    this.form = value;
+  public void setDetail( java.util.List<PaymentReconciliationDetailModel> value) {
+    this.detail = value;
   }
   public String getForm() {
     return this.form;
   }
-  public void setTotal( String value) {
-    this.total = value;
+  public void setForm( String value) {
+    this.form = value;
   }
   public String getTotal() {
     return this.total;
   }
-  public void setProcessNote( java.util.List<PaymentReconciliationProcessNoteModel> value) {
-    this.processNote = value;
+  public void setTotal( String value) {
+    this.total = value;
   }
   public java.util.List<PaymentReconciliationProcessNoteModel> getProcessNote() {
     return this.processNote;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setProcessNote( java.util.List<PaymentReconciliationProcessNoteModel> value) {
+    this.processNote = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("created" + "[" + String.valueOf(this.created) + "]\n"); 
-     builder.append("organization" + "[" + String.valueOf(this.organization) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("disposition" + "[" + String.valueOf(this.disposition) + "]\n"); 
-     builder.append("requestProvider" + "[" + String.valueOf(this.requestProvider) + "]\n"); 
-     builder.append("requestOrganization" + "[" + String.valueOf(this.requestOrganization) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("form" + "[" + String.valueOf(this.form) + "]\n"); 
-     builder.append("total" + "[" + String.valueOf(this.total) + "]\n"); 
-     builder.append("processNote" + "[" + String.valueOf(this.processNote) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[PaymentReconciliationModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("created" + "->" + this.created + "\n"); 
+     builder.append("outcome" + "->" + this.outcome + "\n"); 
+     builder.append("disposition" + "->" + this.disposition + "\n"); 
+     builder.append("form" + "->" + this.form + "\n"); 
+     builder.append("total" + "->" + this.total + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[PaymentReconciliationModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("created" + "->" + this.created + "\n"); 
+     builder.append("organization" + "->" + this.organization + "\n"); 
+     builder.append("request" + "->" + this.request + "\n"); 
+     builder.append("outcome" + "->" + this.outcome + "\n"); 
+     builder.append("disposition" + "->" + this.disposition + "\n"); 
+     builder.append("requestProvider" + "->" + this.requestProvider + "\n"); 
+     builder.append("requestOrganization" + "->" + this.requestOrganization + "\n"); 
+     builder.append("detail" + "->" + this.detail + "\n"); 
+     builder.append("form" + "->" + this.form + "\n"); 
+     builder.append("total" + "->" + this.total + "\n"); 
+     builder.append("processNote" + "->" + this.processNote + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

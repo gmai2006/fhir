@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImagingManifestInstanceModel;
 import org.fhir.pojo.ImagingManifestInstance;
+import org.fhir.pojo.ImagingManifestInstanceHelper;
 
 public class ImagingManifestInstanceDaoImpl implements ImagingManifestInstanceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImagingManifestInstanceDaoImpl implements ImagingManifestInstanceDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImagingManifestInstanceModel a", ImagingManifestInstanceModel.class).setMaxResults(maxResult);
       List<ImagingManifestInstanceModel> models = query.getResultList();
-      return ImagingManifestInstance.fromArray(models);
+      return ImagingManifestInstanceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImagingManifestInstanceDaoImpl implements ImagingManifestInstanceDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImagingManifestInstanceModel a", ImagingManifestInstanceModel.class);
       List<ImagingManifestInstanceModel> models = query.getResultList();
-      return ImagingManifestInstance.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImagingManifestInstance create(ImagingManifestInstance e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImagingManifestInstanceModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImagingManifestInstance update(ImagingManifestInstance e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImagingManifestInstanceModel model = em.merge(new ImagingManifestInstanceModel(e));
-      return new ImagingManifestInstance(model);
+      return ImagingManifestInstanceHelper.fromArray2Array(models);
   }
 
   @Override

@@ -85,6 +85,7 @@ public class PractitionerRoleAvailableTime  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -106,26 +107,21 @@ public class PractitionerRoleAvailableTime  {
 
   public PractitionerRoleAvailableTime(PractitionerRoleAvailableTimeModel o) {
     this.id = o.getId();
-      this.daysOfWeek = org.fhir.utils.JsonUtils.json2Array(o.getDaysOfWeek());
-
-      if (null != o.getAllDay()) {
-        this.allDay = new Boolean(o.getAllDay());
-      }
-
-      if (null != o.getAvailableStartTime()) {
-        this.availableStartTime = new String(o.getAvailableStartTime());
-      }
-
-      if (null != o.getAvailableEndTime()) {
-        this.availableEndTime = new String(o.getAvailableEndTime());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (o.getDaysOfWeek() != null) {
+    	this.daysOfWeek = org.fhir.utils.JsonUtils.json2Array(o.getDaysOfWeek());
+    }
+    if (null != o.getAllDay()) {
+      this.allDay = o.getAllDay();
+    }
+    if (null != o.getAvailableStartTime()) {
+      this.availableStartTime = o.getAvailableStartTime();
+    }
+    if (null != o.getAvailableEndTime()) {
+      this.availableEndTime = o.getAvailableEndTime();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setDaysOfWeek( java.util.List<String> value) {
@@ -204,52 +200,21 @@ public class PractitionerRoleAvailableTime  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("daysOfWeek" + "[" + String.valueOf(this.daysOfWeek) + "]\n"); 
-     builder.append("_daysOfWeek" + "[" + String.valueOf(this._daysOfWeek) + "]\n"); 
-     builder.append("allDay" + "[" + String.valueOf(this.allDay) + "]\n"); 
-     builder.append("_allDay" + "[" + String.valueOf(this._allDay) + "]\n"); 
-     builder.append("availableStartTime" + "[" + String.valueOf(this.availableStartTime) + "]\n"); 
-     builder.append("_availableStartTime" + "[" + String.valueOf(this._availableStartTime) + "]\n"); 
-     builder.append("availableEndTime" + "[" + String.valueOf(this.availableEndTime) + "]\n"); 
-     builder.append("_availableEndTime" + "[" + String.valueOf(this._availableEndTime) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PractitionerRoleAvailableTime]:" + "\n");
+     if(this.daysOfWeek != null) builder.append("daysOfWeek" + "->" + this.daysOfWeek.toString() + "\n"); 
+     if(this._daysOfWeek != null) builder.append("_daysOfWeek" + "->" + this._daysOfWeek.toString() + "\n"); 
+     if(this.allDay != null) builder.append("allDay" + "->" + this.allDay.toString() + "\n"); 
+     if(this._allDay != null) builder.append("_allDay" + "->" + this._allDay.toString() + "\n"); 
+     if(this.availableStartTime != null) builder.append("availableStartTime" + "->" + this.availableStartTime.toString() + "\n"); 
+     if(this._availableStartTime != null) builder.append("_availableStartTime" + "->" + this._availableStartTime.toString() + "\n"); 
+     if(this.availableEndTime != null) builder.append("availableEndTime" + "->" + this.availableEndTime.toString() + "\n"); 
+     if(this._availableEndTime != null) builder.append("_availableEndTime" + "->" + this._availableEndTime.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<PractitionerRoleAvailableTime> fromArray(java.util.List<PractitionerRoleAvailableTimeModel> list) {
-    return (java.util.List<PractitionerRoleAvailableTime>)list.stream()
-      .map(model -> new PractitionerRoleAvailableTime(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PractitionerRoleAvailableTimeModel> toModelArray(java.util.List<PractitionerRoleAvailableTime> list) {
-    return (java.util.List<PractitionerRoleAvailableTimeModel>)list.stream()
-      .map(model -> new PractitionerRoleAvailableTimeModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PractitionerRoleAvailableTime fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PractitionerRoleAvailableTime.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PractitionerRoleAvailableTime o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PractitionerRoleAvailableTime> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

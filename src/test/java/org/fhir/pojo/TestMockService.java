@@ -47,7 +47,7 @@ public class TestMockService {
 	  	String inputFile = "/media/paul/workspace/fhir-data/examples-json/account-example.json";
 
 			String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
-			Account account = Account.fromJson(json);
+			Account account = AccountHelper.fromJson(json);
 			
 	    List<Account> list = Arrays.asList(new Account[] {account});
 

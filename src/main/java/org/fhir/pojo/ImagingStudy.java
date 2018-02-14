@@ -197,6 +197,7 @@ public class ImagingStudy  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -248,89 +249,68 @@ public class ImagingStudy  {
 
   public ImagingStudy(ImagingStudyModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      if (null != o.getUid()) {
-        this.uid = new String(o.getUid());
-      }
-
-      this.accession = Identifier.fromJson(o.getAccession());
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getAvailability()) {
-        this.availability = new String(o.getAvailability());
-      }
-
-      this.modalityList = Coding.fromArray(o.getModalityList());
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getStarted()) {
-        this.started = new String(o.getStarted());
-      }
-
-      this.basedOn = Reference.fromArray(o.getBasedOn());
-
-      if (null != o.getReferrer()) {
-        this.referrer = new Reference(o.getReferrer());
-        this.referrer.setId(this.getId());
-      }
-
-      this.interpreter = Reference.fromArray(o.getInterpreter());
-
-      this.endpoint = Reference.fromArray(o.getEndpoint());
-
-      if (null != o.getNumberOfSeries()) {
-        this.numberOfSeries = new Float(o.getNumberOfSeries());
-      }
-
-      if (null != o.getNumberOfInstances()) {
-        this.numberOfInstances = new Float(o.getNumberOfInstances());
-      }
-
-      this.procedureReference = Reference.fromArray(o.getProcedureReference());
-
-      this.procedureCode = CodeableConcept.fromArray(o.getProcedureCode());
-      this.reason = CodeableConcept.fromJson(o.getReason());
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.series = ImagingStudySeries.fromArray(o.getSeries());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getUid()) {
+      this.uid = o.getUid();
+    }
+    this.accession = IdentifierHelper.fromJson(o.getAccession());
+    if (null != o.getAvailability()) {
+      this.availability = o.getAvailability();
+    }
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getStarted()) {
+      this.started = o.getStarted();
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedOn = ReferenceHelper.fromArray2Array(o.getBasedOn());
+    }
+    if (null != o.getReferrer() && !o.getReferrer().isEmpty()) {
+      this.referrer = new Reference(o.getReferrer().get(0));
+    }
+    if (null != o.getInterpreter() && !o.getInterpreter().isEmpty()) {
+    	this.interpreter = ReferenceHelper.fromArray2Array(o.getInterpreter());
+    }
+    if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
+    	this.endpoint = ReferenceHelper.fromArray2Array(o.getEndpoint());
+    }
+    if (null != o.getNumberOfSeries()) {
+      this.numberOfSeries = o.getNumberOfSeries();
+    }
+    if (null != o.getNumberOfInstances()) {
+      this.numberOfInstances = o.getNumberOfInstances();
+    }
+    if (null != o.getProcedureReference() && !o.getProcedureReference().isEmpty()) {
+    	this.procedureReference = ReferenceHelper.fromArray2Array(o.getProcedureReference());
+    }
+    this.reason = CodeableConceptHelper.fromJson(o.getReason());
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getSeries() && !o.getSeries().isEmpty()) {
+    	this.series = ImagingStudySeriesHelper.fromArray2Array(o.getSeries());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -559,43 +539,44 @@ public class ImagingStudy  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("uid" + "[" + String.valueOf(this.uid) + "]\n"); 
-     builder.append("_uid" + "[" + String.valueOf(this._uid) + "]\n"); 
-     builder.append("accession" + "[" + String.valueOf(this.accession) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("availability" + "[" + String.valueOf(this.availability) + "]\n"); 
-     builder.append("_availability" + "[" + String.valueOf(this._availability) + "]\n"); 
-     builder.append("modalityList" + "[" + String.valueOf(this.modalityList) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("started" + "[" + String.valueOf(this.started) + "]\n"); 
-     builder.append("_started" + "[" + String.valueOf(this._started) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("referrer" + "[" + String.valueOf(this.referrer) + "]\n"); 
-     builder.append("interpreter" + "[" + String.valueOf(this.interpreter) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("numberOfSeries" + "[" + String.valueOf(this.numberOfSeries) + "]\n"); 
-     builder.append("_numberOfSeries" + "[" + String.valueOf(this._numberOfSeries) + "]\n"); 
-     builder.append("numberOfInstances" + "[" + String.valueOf(this.numberOfInstances) + "]\n"); 
-     builder.append("_numberOfInstances" + "[" + String.valueOf(this._numberOfInstances) + "]\n"); 
-     builder.append("procedureReference" + "[" + String.valueOf(this.procedureReference) + "]\n"); 
-     builder.append("procedureCode" + "[" + String.valueOf(this.procedureCode) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("series" + "[" + String.valueOf(this.series) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[ImagingStudy]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.uid != null) builder.append("uid" + "->" + this.uid.toString() + "\n"); 
+     if(this._uid != null) builder.append("_uid" + "->" + this._uid.toString() + "\n"); 
+     if(this.accession != null) builder.append("accession" + "->" + this.accession.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.availability != null) builder.append("availability" + "->" + this.availability.toString() + "\n"); 
+     if(this._availability != null) builder.append("_availability" + "->" + this._availability.toString() + "\n"); 
+     if(this.modalityList != null) builder.append("modalityList" + "->" + this.modalityList.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.started != null) builder.append("started" + "->" + this.started.toString() + "\n"); 
+     if(this._started != null) builder.append("_started" + "->" + this._started.toString() + "\n"); 
+     if(this.basedOn != null) builder.append("basedOn" + "->" + this.basedOn.toString() + "\n"); 
+     if(this.referrer != null) builder.append("referrer" + "->" + this.referrer.toString() + "\n"); 
+     if(this.interpreter != null) builder.append("interpreter" + "->" + this.interpreter.toString() + "\n"); 
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
+     if(this.numberOfSeries != null) builder.append("numberOfSeries" + "->" + this.numberOfSeries.toString() + "\n"); 
+     if(this._numberOfSeries != null) builder.append("_numberOfSeries" + "->" + this._numberOfSeries.toString() + "\n"); 
+     if(this.numberOfInstances != null) builder.append("numberOfInstances" + "->" + this.numberOfInstances.toString() + "\n"); 
+     if(this._numberOfInstances != null) builder.append("_numberOfInstances" + "->" + this._numberOfInstances.toString() + "\n"); 
+     if(this.procedureReference != null) builder.append("procedureReference" + "->" + this.procedureReference.toString() + "\n"); 
+     if(this.procedureCode != null) builder.append("procedureCode" + "->" + this.procedureCode.toString() + "\n"); 
+     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.series != null) builder.append("series" + "->" + this.series.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -629,36 +610,4 @@ public class ImagingStudy  {
   	}
   }
 
-  public static java.util.List<ImagingStudy> fromArray(java.util.List<ImagingStudyModel> list) {
-    return (java.util.List<ImagingStudy>)list.stream()
-      .map(model -> new ImagingStudy(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImagingStudyModel> toModelArray(java.util.List<ImagingStudy> list) {
-    return (java.util.List<ImagingStudyModel>)list.stream()
-      .map(model -> new ImagingStudyModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImagingStudy fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImagingStudy.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImagingStudy o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImagingStudy> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

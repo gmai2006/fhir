@@ -34,10 +34,5 @@ public interface CompositionRelatesToDao {
   public List<CompositionRelatesTo> select(int maxResult);
 
   public List<CompositionRelatesTo> selectAll();
-
-  public CompositionRelatesTo create(CompositionRelatesTo e);
-
-  public CompositionRelatesTo update(CompositionRelatesTo e);
-
   public void delete(CompositionRelatesTo e);
 }

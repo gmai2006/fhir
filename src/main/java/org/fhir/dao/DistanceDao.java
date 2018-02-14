@@ -34,10 +34,5 @@ public interface DistanceDao {
   public List<Distance> select(int maxResult);
 
   public List<Distance> selectAll();
-
-  public Distance create(Distance e);
-
-  public Distance update(Distance e);
-
   public void delete(Distance e);
 }

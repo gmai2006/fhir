@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Financial instrument which may be used to reimburse or pay for health care products and services."
 */
 @Entity
 @Table(name="coveragegrouping")
-public class CoverageGroupingModel  {
+public class CoverageGroupingModel  implements Serializable {
+	private static final long serialVersionUID = 151857669715517161L;
   /**
   * Description: "Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify an employer group. May also be referred to as a Policy or Group ID."
   */
@@ -124,7 +125,7 @@ public class CoverageGroupingModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -136,6 +137,7 @@ public class CoverageGroupingModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -144,162 +146,180 @@ public class CoverageGroupingModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public CoverageGroupingModel() {
   }
 
-  public CoverageGroupingModel(CoverageGrouping o) {
-    this.id = o.getId();
-      this.group = o.getGroup();
-
-      this.groupDisplay = o.getGroupDisplay();
-
-      this.subGroup = o.getSubGroup();
-
-      this.subGroupDisplay = o.getSubGroupDisplay();
-
-      this.plan = o.getPlan();
-
-      this.planDisplay = o.getPlanDisplay();
-
-      this.subPlan = o.getSubPlan();
-
-      this.subPlanDisplay = o.getSubPlanDisplay();
-
-      this.FHIRclass = o.getFHIRclass();
-
-      this.classDisplay = o.getClassDisplay();
-
-      this.subClass = o.getSubClass();
-
-      this.subClassDisplay = o.getSubClassDisplay();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public CoverageGroupingModel(CoverageGrouping o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.group = o.getGroup();
+    this.groupDisplay = o.getGroupDisplay();
+    this.subGroup = o.getSubGroup();
+    this.subGroupDisplay = o.getSubGroupDisplay();
+    this.plan = o.getPlan();
+    this.planDisplay = o.getPlanDisplay();
+    this.subPlan = o.getSubPlan();
+    this.subPlanDisplay = o.getSubPlanDisplay();
+    this.FHIRclass = o.getFHIRclass();
+    this.classDisplay = o.getClassDisplay();
+    this.subClass = o.getSubClass();
+    this.subClassDisplay = o.getSubClassDisplay();
   }
 
-  public void setGroup( String value) {
-    this.group = value;
-  }
   public String getGroup() {
     return this.group;
   }
-  public void setGroupDisplay( String value) {
-    this.groupDisplay = value;
+  public void setGroup( String value) {
+    this.group = value;
   }
   public String getGroupDisplay() {
     return this.groupDisplay;
   }
-  public void setSubGroup( String value) {
-    this.subGroup = value;
+  public void setGroupDisplay( String value) {
+    this.groupDisplay = value;
   }
   public String getSubGroup() {
     return this.subGroup;
   }
-  public void setSubGroupDisplay( String value) {
-    this.subGroupDisplay = value;
+  public void setSubGroup( String value) {
+    this.subGroup = value;
   }
   public String getSubGroupDisplay() {
     return this.subGroupDisplay;
   }
-  public void setPlan( String value) {
-    this.plan = value;
+  public void setSubGroupDisplay( String value) {
+    this.subGroupDisplay = value;
   }
   public String getPlan() {
     return this.plan;
   }
-  public void setPlanDisplay( String value) {
-    this.planDisplay = value;
+  public void setPlan( String value) {
+    this.plan = value;
   }
   public String getPlanDisplay() {
     return this.planDisplay;
   }
-  public void setSubPlan( String value) {
-    this.subPlan = value;
+  public void setPlanDisplay( String value) {
+    this.planDisplay = value;
   }
   public String getSubPlan() {
     return this.subPlan;
   }
-  public void setSubPlanDisplay( String value) {
-    this.subPlanDisplay = value;
+  public void setSubPlan( String value) {
+    this.subPlan = value;
   }
   public String getSubPlanDisplay() {
     return this.subPlanDisplay;
   }
-  public void setFHIRclass( String value) {
-    this.FHIRclass = value;
+  public void setSubPlanDisplay( String value) {
+    this.subPlanDisplay = value;
   }
   public String getFHIRclass() {
     return this.FHIRclass;
   }
-  public void setClassDisplay( String value) {
-    this.classDisplay = value;
+  public void setFHIRclass( String value) {
+    this.FHIRclass = value;
   }
   public String getClassDisplay() {
     return this.classDisplay;
   }
-  public void setSubClass( String value) {
-    this.subClass = value;
+  public void setClassDisplay( String value) {
+    this.classDisplay = value;
   }
   public String getSubClass() {
     return this.subClass;
   }
-  public void setSubClassDisplay( String value) {
-    this.subClassDisplay = value;
+  public void setSubClass( String value) {
+    this.subClass = value;
   }
   public String getSubClassDisplay() {
     return this.subClassDisplay;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setSubClassDisplay( String value) {
+    this.subClassDisplay = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("group" + "[" + String.valueOf(this.group) + "]\n"); 
-     builder.append("groupDisplay" + "[" + String.valueOf(this.groupDisplay) + "]\n"); 
-     builder.append("subGroup" + "[" + String.valueOf(this.subGroup) + "]\n"); 
-     builder.append("subGroupDisplay" + "[" + String.valueOf(this.subGroupDisplay) + "]\n"); 
-     builder.append("plan" + "[" + String.valueOf(this.plan) + "]\n"); 
-     builder.append("planDisplay" + "[" + String.valueOf(this.planDisplay) + "]\n"); 
-     builder.append("subPlan" + "[" + String.valueOf(this.subPlan) + "]\n"); 
-     builder.append("subPlanDisplay" + "[" + String.valueOf(this.subPlanDisplay) + "]\n"); 
-     builder.append("FHIRclass" + "[" + String.valueOf(this.FHIRclass) + "]\n"); 
-     builder.append("classDisplay" + "[" + String.valueOf(this.classDisplay) + "]\n"); 
-     builder.append("subClass" + "[" + String.valueOf(this.subClass) + "]\n"); 
-     builder.append("subClassDisplay" + "[" + String.valueOf(this.subClassDisplay) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CoverageGroupingModel]:" + "\n");
+     builder.append("group" + "->" + this.group + "\n"); 
+     builder.append("groupDisplay" + "->" + this.groupDisplay + "\n"); 
+     builder.append("subGroup" + "->" + this.subGroup + "\n"); 
+     builder.append("subGroupDisplay" + "->" + this.subGroupDisplay + "\n"); 
+     builder.append("plan" + "->" + this.plan + "\n"); 
+     builder.append("planDisplay" + "->" + this.planDisplay + "\n"); 
+     builder.append("subPlan" + "->" + this.subPlan + "\n"); 
+     builder.append("subPlanDisplay" + "->" + this.subPlanDisplay + "\n"); 
+     builder.append("FHIRclass" + "->" + this.FHIRclass + "\n"); 
+     builder.append("classDisplay" + "->" + this.classDisplay + "\n"); 
+     builder.append("subClass" + "->" + this.subClass + "\n"); 
+     builder.append("subClassDisplay" + "->" + this.subClassDisplay + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[CoverageGroupingModel]:" + "\n");
+     builder.append("group" + "->" + this.group + "\n"); 
+     builder.append("groupDisplay" + "->" + this.groupDisplay + "\n"); 
+     builder.append("subGroup" + "->" + this.subGroup + "\n"); 
+     builder.append("subGroupDisplay" + "->" + this.subGroupDisplay + "\n"); 
+     builder.append("plan" + "->" + this.plan + "\n"); 
+     builder.append("planDisplay" + "->" + this.planDisplay + "\n"); 
+     builder.append("subPlan" + "->" + this.subPlan + "\n"); 
+     builder.append("subPlanDisplay" + "->" + this.subPlanDisplay + "\n"); 
+     builder.append("FHIRclass" + "->" + this.FHIRclass + "\n"); 
+     builder.append("classDisplay" + "->" + this.classDisplay + "\n"); 
+     builder.append("subClass" + "->" + this.subClass + "\n"); 
+     builder.append("subClassDisplay" + "->" + this.subClassDisplay + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

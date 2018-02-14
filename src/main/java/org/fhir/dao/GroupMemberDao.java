@@ -34,10 +34,5 @@ public interface GroupMemberDao {
   public List<GroupMember> select(int maxResult);
 
   public List<GroupMember> selectAll();
-
-  public GroupMember create(GroupMember e);
-
-  public GroupMember update(GroupMember e);
-
   public void delete(GroupMember e);
 }

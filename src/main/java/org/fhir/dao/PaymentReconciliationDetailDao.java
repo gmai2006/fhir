@@ -34,10 +34,5 @@ public interface PaymentReconciliationDetailDao {
   public List<PaymentReconciliationDetail> select(int maxResult);
 
   public List<PaymentReconciliationDetail> selectAll();
-
-  public PaymentReconciliationDetail create(PaymentReconciliationDetail e);
-
-  public PaymentReconciliationDetail update(PaymentReconciliationDetail e);
-
   public void delete(PaymentReconciliationDetail e);
 }

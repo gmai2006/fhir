@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
 @Entity
 @Table(name="capabilitystatementevent")
-public class CapabilityStatementEventModel  {
+public class CapabilityStatementEventModel  implements Serializable {
+	private static final long serialVersionUID = 151857669715424052L;
   /**
   * Description: "A coded identifier of a supported messaging event."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -76,9 +77,9 @@ public class CapabilityStatementEventModel  {
   @Column(name="\"request_id\"")
   private String request_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`request_id`", insertable=false, updatable=false)
-  private ReferenceModel request;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="request_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> request;
 
   /**
   * Description: "Information about the response for this event."
@@ -87,9 +88,9 @@ public class CapabilityStatementEventModel  {
   @Column(name="\"response_id\"")
   private String response_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`response_id`", insertable=false, updatable=false)
-  private ReferenceModel response;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="response_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> response;
 
   /**
   * Description: "Guidance on how this event is handled, such as internal system trigger points, business rules, etc."
@@ -101,7 +102,7 @@ public class CapabilityStatementEventModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -113,6 +114,7 @@ public class CapabilityStatementEventModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -121,126 +123,139 @@ public class CapabilityStatementEventModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public CapabilityStatementEventModel() {
   }
 
-  public CapabilityStatementEventModel(CapabilityStatementEvent o) {
-    this.id = o.getId();
-      this.code = Coding.toJson(o.getCode());
-      this.category = o.getCategory();
-
-      this.mode = o.getMode();
-
-      this.focus = o.getFocus();
-
-      if (null != o.getRequest()) {
-      	this.request_id = "request" + this.getId();
-        this.request = new ReferenceModel(o.getRequest());
-        this.request.setId(this.request_id);
-        this.request.parent_id = this.request.getId();
-      }
-
-      if (null != o.getResponse()) {
-      	this.response_id = "response" + this.getId();
-        this.response = new ReferenceModel(o.getResponse());
-        this.response.setId(this.response_id);
-        this.response.parent_id = this.response.getId();
-      }
-
-      this.documentation = o.getDocumentation();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public CapabilityStatementEventModel(CapabilityStatementEvent o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.code = CodingHelper.toJson(o.getCode());
+    this.category = o.getCategory();
+    this.mode = o.getMode();
+    this.focus = o.getFocus();
+    if (null != o.getRequest() ) {
+    	this.request_id = "request" + this.parent_id;
+    	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
+    }
+    if (null != o.getResponse() ) {
+    	this.response_id = "response" + this.parent_id;
+    	this.response = ReferenceHelper.toModel(o.getResponse(), this.response_id);
+    }
+    this.documentation = o.getDocumentation();
   }
 
-  public void setCode( String value) {
-    this.code = value;
-  }
   public String getCode() {
     return this.code;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setMode( String value) {
-    this.mode = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getMode() {
     return this.mode;
   }
-  public void setFocus( String value) {
-    this.focus = value;
+  public void setMode( String value) {
+    this.mode = value;
   }
   public String getFocus() {
     return this.focus;
   }
-  public void setRequest( ReferenceModel value) {
-    this.request = value;
+  public void setFocus( String value) {
+    this.focus = value;
   }
-  public ReferenceModel getRequest() {
+  public java.util.List<ReferenceModel> getRequest() {
     return this.request;
   }
-  public void setResponse( ReferenceModel value) {
-    this.response = value;
+  public void setRequest( java.util.List<ReferenceModel> value) {
+    this.request = value;
   }
-  public ReferenceModel getResponse() {
+  public java.util.List<ReferenceModel> getResponse() {
     return this.response;
   }
-  public void setDocumentation( String value) {
-    this.documentation = value;
+  public void setResponse( java.util.List<ReferenceModel> value) {
+    this.response = value;
   }
   public String getDocumentation() {
     return this.documentation;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setDocumentation( String value) {
+    this.documentation = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("focus" + "[" + String.valueOf(this.focus) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("response" + "[" + String.valueOf(this.response) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementEventModel]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("mode" + "->" + this.mode + "\n"); 
+     builder.append("focus" + "->" + this.focus + "\n"); 
+     builder.append("documentation" + "->" + this.documentation + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[CapabilityStatementEventModel]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("mode" + "->" + this.mode + "\n"); 
+     builder.append("focus" + "->" + this.focus + "\n"); 
+     builder.append("request" + "->" + this.request + "\n"); 
+     builder.append("response" + "->" + this.response + "\n"); 
+     builder.append("documentation" + "->" + this.documentation + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

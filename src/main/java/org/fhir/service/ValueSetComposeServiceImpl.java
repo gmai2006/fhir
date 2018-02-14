@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ValueSetCompose create(ValueSetCompose bean) {
-  	requireNonNull(bean);
-    logger.info("create(ValueSetCompose={}) - entered bean ");
-
-    final ValueSetCompose result = dao.create(bean);
-
-    logger.info("create(ValueSetCompose) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ValueSetCompose update(ValueSetCompose bean) {
-  	requireNonNull(bean);
-    logger.info("update(ValueSetCompose={}) - entered bean ");
-
-    final ValueSetCompose result = dao.update(bean);
-
-    logger.info("update(ValueSetCompose) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.GraphDefinitionTargetModel;
 import org.fhir.pojo.GraphDefinitionTarget;
+import org.fhir.pojo.GraphDefinitionTargetHelper;
 
 public class GraphDefinitionTargetDaoImpl implements GraphDefinitionTargetDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class GraphDefinitionTargetDaoImpl implements GraphDefinitionTargetDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GraphDefinitionTargetModel a", GraphDefinitionTargetModel.class).setMaxResults(maxResult);
       List<GraphDefinitionTargetModel> models = query.getResultList();
-      return GraphDefinitionTarget.fromArray(models);
+      return GraphDefinitionTargetHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class GraphDefinitionTargetDaoImpl implements GraphDefinitionTargetDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GraphDefinitionTargetModel a", GraphDefinitionTargetModel.class);
       List<GraphDefinitionTargetModel> models = query.getResultList();
-      return GraphDefinitionTarget.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public GraphDefinitionTarget create(GraphDefinitionTarget e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new GraphDefinitionTargetModel(e));
-      return e;
-  }
-
-  @Transactional
-  public GraphDefinitionTarget update(GraphDefinitionTarget e) {
-      final EntityManager em = entityManagerProvider.get();
-      GraphDefinitionTargetModel model = em.merge(new GraphDefinitionTargetModel(e));
-      return new GraphDefinitionTarget(model);
+      return GraphDefinitionTargetHelper.fromArray2Array(models);
   }
 
   @Override

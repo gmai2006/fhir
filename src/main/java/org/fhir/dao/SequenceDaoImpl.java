@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SequenceModel;
 import org.fhir.pojo.Sequence;
+import org.fhir.pojo.SequenceHelper;
 
 public class SequenceDaoImpl implements SequenceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SequenceDaoImpl implements SequenceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SequenceModel a", SequenceModel.class).setMaxResults(maxResult);
       List<SequenceModel> models = query.getResultList();
-      return Sequence.fromArray(models);
+      return SequenceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class SequenceDaoImpl implements SequenceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SequenceModel a", SequenceModel.class);
       List<SequenceModel> models = query.getResultList();
-      return Sequence.fromArray(models);
+      return SequenceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class SequenceDaoImpl implements SequenceDao {
       SequenceModel model = em.merge(new SequenceModel(e));
       return new Sequence(model);
   }
-
   @Override
   @Transactional
   public void delete(Sequence e) {

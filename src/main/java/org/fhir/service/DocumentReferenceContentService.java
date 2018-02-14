@@ -32,7 +32,5 @@ public interface DocumentReferenceContentService {
 	public DocumentReferenceContent find(String id);
   public List<DocumentReferenceContent> select(int maxResult);
   public List<DocumentReferenceContent> selectAll();
-  public DocumentReferenceContent create(DocumentReferenceContent bean);
-  public DocumentReferenceContent update(DocumentReferenceContent bean);
   public void delete(DocumentReferenceContent bean);
 }

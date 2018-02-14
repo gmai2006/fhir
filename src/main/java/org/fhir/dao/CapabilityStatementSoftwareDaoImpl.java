@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementSoftwareModel;
 import org.fhir.pojo.CapabilityStatementSoftware;
+import org.fhir.pojo.CapabilityStatementSoftwareHelper;
 
 public class CapabilityStatementSoftwareDaoImpl implements CapabilityStatementSoftwareDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementSoftwareDaoImpl implements CapabilityStatementSo
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementSoftwareModel a", CapabilityStatementSoftwareModel.class).setMaxResults(maxResult);
       List<CapabilityStatementSoftwareModel> models = query.getResultList();
-      return CapabilityStatementSoftware.fromArray(models);
+      return CapabilityStatementSoftwareHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CapabilityStatementSoftwareDaoImpl implements CapabilityStatementSo
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementSoftwareModel a", CapabilityStatementSoftwareModel.class);
       List<CapabilityStatementSoftwareModel> models = query.getResultList();
-      return CapabilityStatementSoftware.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementSoftware create(CapabilityStatementSoftware e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CapabilityStatementSoftwareModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CapabilityStatementSoftware update(CapabilityStatementSoftware e) {
-      final EntityManager em = entityManagerProvider.get();
-      CapabilityStatementSoftwareModel model = em.merge(new CapabilityStatementSoftwareModel(e));
-      return new CapabilityStatementSoftware(model);
+      return CapabilityStatementSoftwareHelper.fromArray2Array(models);
   }
 
   @Override

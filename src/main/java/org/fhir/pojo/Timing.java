@@ -55,6 +55,7 @@ public class Timing  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -117,34 +118,15 @@ public class Timing  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("event" + "[" + String.valueOf(this.event) + "]\n"); 
-     builder.append("_event" + "[" + String.valueOf(this._event) + "]\n"); 
-     builder.append("repeat" + "[" + String.valueOf(this.repeat) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Timing]:" + "\n");
+     if(this.event != null) builder.append("event" + "->" + this.event.toString() + "\n"); 
+     if(this._event != null) builder.append("_event" + "->" + this._event.toString() + "\n"); 
+     if(this.repeat != null) builder.append("repeat" + "->" + this.repeat.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static Timing fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Timing.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Timing o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Timing> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

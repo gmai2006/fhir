@@ -32,7 +32,5 @@ public interface SupplyDeliverySuppliedItemService {
 	public SupplyDeliverySuppliedItem find(String id);
   public List<SupplyDeliverySuppliedItem> select(int maxResult);
   public List<SupplyDeliverySuppliedItem> selectAll();
-  public SupplyDeliverySuppliedItem create(SupplyDeliverySuppliedItem bean);
-  public SupplyDeliverySuppliedItem update(SupplyDeliverySuppliedItem bean);
   public void delete(SupplyDeliverySuppliedItem bean);
 }

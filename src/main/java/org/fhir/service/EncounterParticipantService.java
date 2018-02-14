@@ -32,7 +32,5 @@ public interface EncounterParticipantService {
 	public EncounterParticipant find(String id);
   public List<EncounterParticipant> select(int maxResult);
   public List<EncounterParticipant> selectAll();
-  public EncounterParticipant create(EncounterParticipant bean);
-  public EncounterParticipant update(EncounterParticipant bean);
   public void delete(EncounterParticipant bean);
 }

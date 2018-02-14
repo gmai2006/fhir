@@ -32,7 +32,5 @@ public interface ValueSetDesignationService {
 	public ValueSetDesignation find(String id);
   public List<ValueSetDesignation> select(int maxResult);
   public List<ValueSetDesignation> selectAll();
-  public ValueSetDesignation create(ValueSetDesignation bean);
-  public ValueSetDesignation update(ValueSetDesignation bean);
   public void delete(ValueSetDesignation bean);
 }

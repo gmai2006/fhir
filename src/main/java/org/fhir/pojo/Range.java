@@ -45,6 +45,7 @@ public class Range  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -95,32 +96,13 @@ public class Range  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("low" + "[" + String.valueOf(this.low) + "]\n"); 
-     builder.append("high" + "[" + String.valueOf(this.high) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Range]:" + "\n");
+     if(this.low != null) builder.append("low" + "->" + this.low.toString() + "\n"); 
+     if(this.high != null) builder.append("high" + "->" + this.high.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static Range fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Range.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Range o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Range> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DataElementMapping create(DataElementMapping bean) {
-  	requireNonNull(bean);
-    logger.info("create(DataElementMapping={}) - entered bean ");
-
-    final DataElementMapping result = dao.create(bean);
-
-    logger.info("create(DataElementMapping) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DataElementMapping update(DataElementMapping bean) {
-  	requireNonNull(bean);
-    logger.info("update(DataElementMapping={}) - entered bean ");
-
-    final DataElementMapping result = dao.update(bean);
-
-    logger.info("update(DataElementMapping) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

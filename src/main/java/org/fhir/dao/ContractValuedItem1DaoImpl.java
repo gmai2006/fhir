@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ContractValuedItem1Model;
 import org.fhir.pojo.ContractValuedItem1;
+import org.fhir.pojo.ContractValuedItem1Helper;
 
 public class ContractValuedItem1DaoImpl implements ContractValuedItem1Dao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ContractValuedItem1DaoImpl implements ContractValuedItem1Dao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContractValuedItem1Model a", ContractValuedItem1Model.class).setMaxResults(maxResult);
       List<ContractValuedItem1Model> models = query.getResultList();
-      return ContractValuedItem1.fromArray(models);
+      return ContractValuedItem1Helper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ContractValuedItem1DaoImpl implements ContractValuedItem1Dao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ContractValuedItem1Model a", ContractValuedItem1Model.class);
       List<ContractValuedItem1Model> models = query.getResultList();
-      return ContractValuedItem1.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ContractValuedItem1 create(ContractValuedItem1 e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ContractValuedItem1Model(e));
-      return e;
-  }
-
-  @Transactional
-  public ContractValuedItem1 update(ContractValuedItem1 e) {
-      final EntityManager em = entityManagerProvider.get();
-      ContractValuedItem1Model model = em.merge(new ContractValuedItem1Model(e));
-      return new ContractValuedItem1(model);
+      return ContractValuedItem1Helper.fromArray2Array(models);
   }
 
   @Override

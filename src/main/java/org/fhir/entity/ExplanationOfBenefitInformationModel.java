@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitinformation")
-public class ExplanationOfBenefitInformationModel  {
+public class ExplanationOfBenefitInformationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669675636288L;
   /**
   * Description: "Sequence of the information element which serves to provide a link."
   */
@@ -47,7 +48,7 @@ public class ExplanationOfBenefitInformationModel  {
 
   /**
   * Description: "The general class of the information supplied: information; exception; accident, employment; onset, etc."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -57,7 +58,7 @@ public class ExplanationOfBenefitInformationModel  {
 
   /**
   * Description: "System and code pertaining to the specific information regarding special conditions relating to the setting, treatment or patient  for which care is sought which may influence the adjudication."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -74,7 +75,7 @@ public class ExplanationOfBenefitInformationModel  {
 
   /**
   * Description: "The date when or period to which this information refers."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -90,7 +91,7 @@ public class ExplanationOfBenefitInformationModel  {
 
   /**
   * Description: "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -99,7 +100,7 @@ public class ExplanationOfBenefitInformationModel  {
 
   /**
   * Description: "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
-  * Actual type: Attachment
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -113,13 +114,13 @@ public class ExplanationOfBenefitInformationModel  {
   @Column(name="\"valuereference_id\"")
   private String valuereference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`valuereference_id`", insertable=false, updatable=false)
-  private ReferenceModel valueReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuereference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> valueReference;
 
   /**
   * Description: "For example, provides the reason for: the additional stay, or missing tooth or any other situation where a reason code is required in addition to the content."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -129,7 +130,7 @@ public class ExplanationOfBenefitInformationModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -141,6 +142,7 @@ public class ExplanationOfBenefitInformationModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -149,143 +151,164 @@ public class ExplanationOfBenefitInformationModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ExplanationOfBenefitInformationModel() {
   }
 
-  public ExplanationOfBenefitInformationModel(ExplanationOfBenefitInformation o) {
-    this.id = o.getId();
-      this.sequence = o.getSequence();
-
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.code = CodeableConcept.toJson(o.getCode());
-      this.timingDate = o.getTimingDate();
-
-      this.timingPeriod = Period.toJson(o.getTimingPeriod());
-      this.valueString = o.getValueString();
-
-      this.valueQuantity = Quantity.toJson(o.getValueQuantity());
-      this.valueAttachment = Attachment.toJson(o.getValueAttachment());
-      if (null != o.getValueReference()) {
-      	this.valuereference_id = "valueReference" + this.getId();
-        this.valueReference = new ReferenceModel(o.getValueReference());
-        this.valueReference.setId(this.valuereference_id);
-        this.valueReference.parent_id = this.valueReference.getId();
-      }
-
-      this.reason = Coding.toJson(o.getReason());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ExplanationOfBenefitInformationModel(ExplanationOfBenefitInformation o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.sequence = o.getSequence();
+    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.timingDate = o.getTimingDate();
+    this.timingPeriod = PeriodHelper.toJson(o.getTimingPeriod());
+    this.valueString = o.getValueString();
+    this.valueQuantity = QuantityHelper.toJson(o.getValueQuantity());
+    this.valueAttachment = AttachmentHelper.toJson(o.getValueAttachment());
+    if (null != o.getValueReference() ) {
+    	this.valuereference_id = "valuereference" + this.parent_id;
+    	this.valueReference = ReferenceHelper.toModel(o.getValueReference(), this.valuereference_id);
+    }
+    this.reason = CodingHelper.toJson(o.getReason());
   }
 
-  public void setSequence( Float value) {
-    this.sequence = value;
-  }
   public Float getSequence() {
     return this.sequence;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setSequence( Float value) {
+    this.sequence = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setCode( String value) {
-    this.code = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getCode() {
     return this.code;
   }
-  public void setTimingDate( String value) {
-    this.timingDate = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public String getTimingDate() {
     return this.timingDate;
   }
-  public void setTimingPeriod( String value) {
-    this.timingPeriod = value;
+  public void setTimingDate( String value) {
+    this.timingDate = value;
   }
   public String getTimingPeriod() {
     return this.timingPeriod;
   }
-  public void setValueString( String value) {
-    this.valueString = value;
+  public void setTimingPeriod( String value) {
+    this.timingPeriod = value;
   }
   public String getValueString() {
     return this.valueString;
   }
-  public void setValueQuantity( String value) {
-    this.valueQuantity = value;
+  public void setValueString( String value) {
+    this.valueString = value;
   }
   public String getValueQuantity() {
     return this.valueQuantity;
   }
-  public void setValueAttachment( String value) {
-    this.valueAttachment = value;
+  public void setValueQuantity( String value) {
+    this.valueQuantity = value;
   }
   public String getValueAttachment() {
     return this.valueAttachment;
   }
-  public void setValueReference( ReferenceModel value) {
-    this.valueReference = value;
+  public void setValueAttachment( String value) {
+    this.valueAttachment = value;
   }
-  public ReferenceModel getValueReference() {
+  public java.util.List<ReferenceModel> getValueReference() {
     return this.valueReference;
   }
-  public void setReason( String value) {
-    this.reason = value;
+  public void setValueReference( java.util.List<ReferenceModel> value) {
+    this.valueReference = value;
   }
   public String getReason() {
     return this.reason;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setReason( String value) {
+    this.reason = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("timingDate" + "[" + String.valueOf(this.timingDate) + "]\n"); 
-     builder.append("timingPeriod" + "[" + String.valueOf(this.timingPeriod) + "]\n"); 
-     builder.append("valueString" + "[" + String.valueOf(this.valueString) + "]\n"); 
-     builder.append("valueQuantity" + "[" + String.valueOf(this.valueQuantity) + "]\n"); 
-     builder.append("valueAttachment" + "[" + String.valueOf(this.valueAttachment) + "]\n"); 
-     builder.append("valueReference" + "[" + String.valueOf(this.valueReference) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitInformationModel]:" + "\n");
+     builder.append("sequence" + "->" + this.sequence + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("timingDate" + "->" + this.timingDate + "\n"); 
+     builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
+     builder.append("valueString" + "->" + this.valueString + "\n"); 
+     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
+     builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
+     builder.append("reason" + "->" + this.reason + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ExplanationOfBenefitInformationModel]:" + "\n");
+     builder.append("sequence" + "->" + this.sequence + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("timingDate" + "->" + this.timingDate + "\n"); 
+     builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
+     builder.append("valueString" + "->" + this.valueString + "\n"); 
+     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
+     builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
+     builder.append("valueReference" + "->" + this.valueReference + "\n"); 
+     builder.append("reason" + "->" + this.reason + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

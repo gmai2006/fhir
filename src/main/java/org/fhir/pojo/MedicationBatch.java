@@ -64,6 +64,7 @@ public class MedicationBatch  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -85,20 +86,15 @@ public class MedicationBatch  {
 
   public MedicationBatch(MedicationBatchModel o) {
     this.id = o.getId();
-      if (null != o.getLotNumber()) {
-        this.lotNumber = new String(o.getLotNumber());
-      }
-
-      if (null != o.getExpirationDate()) {
-        this.expirationDate = new String(o.getExpirationDate());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getLotNumber()) {
+      this.lotNumber = o.getLotNumber();
+    }
+    if (null != o.getExpirationDate()) {
+      this.expirationDate = o.getExpirationDate();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLotNumber( String value) {
@@ -153,48 +149,17 @@ public class MedicationBatch  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("lotNumber" + "[" + String.valueOf(this.lotNumber) + "]\n"); 
-     builder.append("_lotNumber" + "[" + String.valueOf(this._lotNumber) + "]\n"); 
-     builder.append("expirationDate" + "[" + String.valueOf(this.expirationDate) + "]\n"); 
-     builder.append("_expirationDate" + "[" + String.valueOf(this._expirationDate) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MedicationBatch]:" + "\n");
+     if(this.lotNumber != null) builder.append("lotNumber" + "->" + this.lotNumber.toString() + "\n"); 
+     if(this._lotNumber != null) builder.append("_lotNumber" + "->" + this._lotNumber.toString() + "\n"); 
+     if(this.expirationDate != null) builder.append("expirationDate" + "->" + this.expirationDate.toString() + "\n"); 
+     if(this._expirationDate != null) builder.append("_expirationDate" + "->" + this._expirationDate.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<MedicationBatch> fromArray(java.util.List<MedicationBatchModel> list) {
-    return (java.util.List<MedicationBatch>)list.stream()
-      .map(model -> new MedicationBatch(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MedicationBatchModel> toModelArray(java.util.List<MedicationBatch> list) {
-    return (java.util.List<MedicationBatchModel>)list.stream()
-      .map(model -> new MedicationBatchModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MedicationBatch fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MedicationBatch.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MedicationBatch o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MedicationBatch> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

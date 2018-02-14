@@ -34,10 +34,8 @@ public interface GoalDao {
   public List<Goal> select(int maxResult);
 
   public List<Goal> selectAll();
-
   public Goal create(Goal e);
 
   public Goal update(Goal e);
-
   public void delete(Goal e);
 }

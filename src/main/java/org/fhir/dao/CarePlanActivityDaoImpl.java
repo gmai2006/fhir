@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CarePlanActivityModel;
 import org.fhir.pojo.CarePlanActivity;
+import org.fhir.pojo.CarePlanActivityHelper;
 
 public class CarePlanActivityDaoImpl implements CarePlanActivityDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CarePlanActivityDaoImpl implements CarePlanActivityDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CarePlanActivityModel a", CarePlanActivityModel.class).setMaxResults(maxResult);
       List<CarePlanActivityModel> models = query.getResultList();
-      return CarePlanActivity.fromArray(models);
+      return CarePlanActivityHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CarePlanActivityDaoImpl implements CarePlanActivityDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CarePlanActivityModel a", CarePlanActivityModel.class);
       List<CarePlanActivityModel> models = query.getResultList();
-      return CarePlanActivity.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CarePlanActivity create(CarePlanActivity e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CarePlanActivityModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CarePlanActivity update(CarePlanActivity e) {
-      final EntityManager em = entityManagerProvider.get();
-      CarePlanActivityModel model = em.merge(new CarePlanActivityModel(e));
-      return new CarePlanActivity(model);
+      return CarePlanActivityHelper.fromArray2Array(models);
   }
 
   @Override

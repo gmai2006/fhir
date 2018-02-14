@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ValueSetExpansionModel;
 import org.fhir.pojo.ValueSetExpansion;
+import org.fhir.pojo.ValueSetExpansionHelper;
 
 public class ValueSetExpansionDaoImpl implements ValueSetExpansionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ValueSetExpansionDaoImpl implements ValueSetExpansionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetExpansionModel a", ValueSetExpansionModel.class).setMaxResults(maxResult);
       List<ValueSetExpansionModel> models = query.getResultList();
-      return ValueSetExpansion.fromArray(models);
+      return ValueSetExpansionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ValueSetExpansionDaoImpl implements ValueSetExpansionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetExpansionModel a", ValueSetExpansionModel.class);
       List<ValueSetExpansionModel> models = query.getResultList();
-      return ValueSetExpansion.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ValueSetExpansion create(ValueSetExpansion e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ValueSetExpansionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ValueSetExpansion update(ValueSetExpansion e) {
-      final EntityManager em = entityManagerProvider.get();
-      ValueSetExpansionModel model = em.merge(new ValueSetExpansionModel(e));
-      return new ValueSetExpansion(model);
+      return ValueSetExpansionHelper.fromArray2Array(models);
   }
 
   @Override

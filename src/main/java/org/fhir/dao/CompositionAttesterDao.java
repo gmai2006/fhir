@@ -34,10 +34,5 @@ public interface CompositionAttesterDao {
   public List<CompositionAttester> select(int maxResult);
 
   public List<CompositionAttester> selectAll();
-
-  public CompositionAttester create(CompositionAttester e);
-
-  public CompositionAttester update(CompositionAttester e);
-
   public void delete(CompositionAttester e);
 }

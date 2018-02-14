@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CompositionRelatesTo create(CompositionRelatesTo bean) {
-  	requireNonNull(bean);
-    logger.info("create(CompositionRelatesTo={}) - entered bean ");
-
-    final CompositionRelatesTo result = dao.create(bean);
-
-    logger.info("create(CompositionRelatesTo) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CompositionRelatesTo update(CompositionRelatesTo bean) {
-  	requireNonNull(bean);
-    logger.info("update(CompositionRelatesTo={}) - entered bean ");
-
-    final CompositionRelatesTo result = dao.update(bean);
-
-    logger.info("update(CompositionRelatesTo) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -111,6 +111,7 @@ public class SequenceReferenceSeq  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -132,39 +133,29 @@ public class SequenceReferenceSeq  {
 
   public SequenceReferenceSeq(SequenceReferenceSeqModel o) {
     this.id = o.getId();
-      this.chromosome = CodeableConcept.fromJson(o.getChromosome());
-      if (null != o.getGenomeBuild()) {
-        this.genomeBuild = new String(o.getGenomeBuild());
-      }
-
-      this.referenceSeqId = CodeableConcept.fromJson(o.getReferenceSeqId());
-      if (null != o.getReferenceSeqPointer()) {
-        this.referenceSeqPointer = new Reference(o.getReferenceSeqPointer());
-        this.referenceSeqPointer.setId(this.getId());
-      }
-
-      if (null != o.getReferenceSeqString()) {
-        this.referenceSeqString = new String(o.getReferenceSeqString());
-      }
-
-      if (null != o.getStrand()) {
-        this.strand = new Float(o.getStrand());
-      }
-
-      if (null != o.getWindowStart()) {
-        this.windowStart = new Float(o.getWindowStart());
-      }
-
-      if (null != o.getWindowEnd()) {
-        this.windowEnd = new Float(o.getWindowEnd());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.chromosome = CodeableConceptHelper.fromJson(o.getChromosome());
+    if (null != o.getGenomeBuild()) {
+      this.genomeBuild = o.getGenomeBuild();
+    }
+    this.referenceSeqId = CodeableConceptHelper.fromJson(o.getReferenceSeqId());
+    if (null != o.getReferenceSeqPointer() && !o.getReferenceSeqPointer().isEmpty()) {
+      this.referenceSeqPointer = new Reference(o.getReferenceSeqPointer().get(0));
+    }
+    if (null != o.getReferenceSeqString()) {
+      this.referenceSeqString = o.getReferenceSeqString();
+    }
+    if (null != o.getStrand()) {
+      this.strand = o.getStrand();
+    }
+    if (null != o.getWindowStart()) {
+      this.windowStart = o.getWindowStart();
+    }
+    if (null != o.getWindowEnd()) {
+      this.windowEnd = o.getWindowEnd();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setChromosome( CodeableConcept value) {
@@ -273,57 +264,26 @@ public class SequenceReferenceSeq  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("chromosome" + "[" + String.valueOf(this.chromosome) + "]\n"); 
-     builder.append("genomeBuild" + "[" + String.valueOf(this.genomeBuild) + "]\n"); 
-     builder.append("_genomeBuild" + "[" + String.valueOf(this._genomeBuild) + "]\n"); 
-     builder.append("referenceSeqId" + "[" + String.valueOf(this.referenceSeqId) + "]\n"); 
-     builder.append("referenceSeqPointer" + "[" + String.valueOf(this.referenceSeqPointer) + "]\n"); 
-     builder.append("referenceSeqString" + "[" + String.valueOf(this.referenceSeqString) + "]\n"); 
-     builder.append("_referenceSeqString" + "[" + String.valueOf(this._referenceSeqString) + "]\n"); 
-     builder.append("strand" + "[" + String.valueOf(this.strand) + "]\n"); 
-     builder.append("_strand" + "[" + String.valueOf(this._strand) + "]\n"); 
-     builder.append("windowStart" + "[" + String.valueOf(this.windowStart) + "]\n"); 
-     builder.append("_windowStart" + "[" + String.valueOf(this._windowStart) + "]\n"); 
-     builder.append("windowEnd" + "[" + String.valueOf(this.windowEnd) + "]\n"); 
-     builder.append("_windowEnd" + "[" + String.valueOf(this._windowEnd) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SequenceReferenceSeq]:" + "\n");
+     if(this.chromosome != null) builder.append("chromosome" + "->" + this.chromosome.toString() + "\n"); 
+     if(this.genomeBuild != null) builder.append("genomeBuild" + "->" + this.genomeBuild.toString() + "\n"); 
+     if(this._genomeBuild != null) builder.append("_genomeBuild" + "->" + this._genomeBuild.toString() + "\n"); 
+     if(this.referenceSeqId != null) builder.append("referenceSeqId" + "->" + this.referenceSeqId.toString() + "\n"); 
+     if(this.referenceSeqPointer != null) builder.append("referenceSeqPointer" + "->" + this.referenceSeqPointer.toString() + "\n"); 
+     if(this.referenceSeqString != null) builder.append("referenceSeqString" + "->" + this.referenceSeqString.toString() + "\n"); 
+     if(this._referenceSeqString != null) builder.append("_referenceSeqString" + "->" + this._referenceSeqString.toString() + "\n"); 
+     if(this.strand != null) builder.append("strand" + "->" + this.strand.toString() + "\n"); 
+     if(this._strand != null) builder.append("_strand" + "->" + this._strand.toString() + "\n"); 
+     if(this.windowStart != null) builder.append("windowStart" + "->" + this.windowStart.toString() + "\n"); 
+     if(this._windowStart != null) builder.append("_windowStart" + "->" + this._windowStart.toString() + "\n"); 
+     if(this.windowEnd != null) builder.append("windowEnd" + "->" + this.windowEnd.toString() + "\n"); 
+     if(this._windowEnd != null) builder.append("_windowEnd" + "->" + this._windowEnd.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<SequenceReferenceSeq> fromArray(java.util.List<SequenceReferenceSeqModel> list) {
-    return (java.util.List<SequenceReferenceSeq>)list.stream()
-      .map(model -> new SequenceReferenceSeq(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SequenceReferenceSeqModel> toModelArray(java.util.List<SequenceReferenceSeq> list) {
-    return (java.util.List<SequenceReferenceSeqModel>)list.stream()
-      .map(model -> new SequenceReferenceSeqModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SequenceReferenceSeq fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SequenceReferenceSeq.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SequenceReferenceSeq o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SequenceReferenceSeq> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

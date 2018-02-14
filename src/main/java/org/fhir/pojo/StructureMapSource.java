@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.StructureMapSourceModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -496,6 +497,7 @@ public class StructureMapSource  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -512,7 +514,151 @@ public class StructureMapSource  {
   */
   private java.util.List<Extension> extension = new java.util.ArrayList<>();
 
-  public StructureMapSource() {}
+  public StructureMapSource() {
+  }
+
+  public StructureMapSource(StructureMapSourceModel o) {
+    this.id = o.getId();
+    if (null != o.getContext()) {
+      this.context = o.getContext();
+    }
+    if (null != o.getMin()) {
+      this.min = o.getMin();
+    }
+    if (null != o.getMax()) {
+      this.max = o.getMax();
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getDefaultValueBoolean()) {
+      this.defaultValueBoolean = o.getDefaultValueBoolean();
+    }
+    if (null != o.getDefaultValueInteger()) {
+      this.defaultValueInteger = o.getDefaultValueInteger();
+    }
+    if (null != o.getDefaultValueDecimal()) {
+      this.defaultValueDecimal = o.getDefaultValueDecimal();
+    }
+    if (null != o.getDefaultValueBase64Binary()) {
+      this.defaultValueBase64Binary = o.getDefaultValueBase64Binary();
+    }
+    if (null != o.getDefaultValueInstant()) {
+      this.defaultValueInstant = o.getDefaultValueInstant();
+    }
+    if (null != o.getDefaultValueString()) {
+      this.defaultValueString = o.getDefaultValueString();
+    }
+    if (null != o.getDefaultValueUri()) {
+      this.defaultValueUri = o.getDefaultValueUri();
+    }
+    if (null != o.getDefaultValueDate()) {
+      this.defaultValueDate = o.getDefaultValueDate();
+    }
+    if (null != o.getDefaultValueDateTime()) {
+      this.defaultValueDateTime = o.getDefaultValueDateTime();
+    }
+    if (null != o.getDefaultValueTime()) {
+      this.defaultValueTime = o.getDefaultValueTime();
+    }
+    if (null != o.getDefaultValueCode()) {
+      this.defaultValueCode = o.getDefaultValueCode();
+    }
+    if (null != o.getDefaultValueOid()) {
+      this.defaultValueOid = o.getDefaultValueOid();
+    }
+    if (null != o.getDefaultValueUuid()) {
+      this.defaultValueUuid = o.getDefaultValueUuid();
+    }
+    if (null != o.getDefaultValueId()) {
+      this.defaultValueId = o.getDefaultValueId();
+    }
+    if (null != o.getDefaultValueUnsignedInt()) {
+      this.defaultValueUnsignedInt = o.getDefaultValueUnsignedInt();
+    }
+    if (null != o.getDefaultValuePositiveInt()) {
+      this.defaultValuePositiveInt = o.getDefaultValuePositiveInt();
+    }
+    if (null != o.getDefaultValueMarkdown()) {
+      this.defaultValueMarkdown = o.getDefaultValueMarkdown();
+    }
+    this.defaultValueElement = ElementHelper.fromJson(o.getDefaultValueElement());
+    this.defaultValueExtension = ExtensionHelper.fromJson(o.getDefaultValueExtension());
+    this.defaultValueBackboneElement = BackboneElementHelper.fromJson(o.getDefaultValueBackboneElement());
+    if (null != o.getDefaultValueNarrative() && !o.getDefaultValueNarrative().isEmpty()) {
+      this.defaultValueNarrative = new Narrative(o.getDefaultValueNarrative().get(0));
+    }
+    this.defaultValueAnnotation = AnnotationHelper.fromJson(o.getDefaultValueAnnotation());
+    this.defaultValueAttachment = AttachmentHelper.fromJson(o.getDefaultValueAttachment());
+    this.defaultValueIdentifier = IdentifierHelper.fromJson(o.getDefaultValueIdentifier());
+    this.defaultValueCodeableConcept = CodeableConceptHelper.fromJson(o.getDefaultValueCodeableConcept());
+    this.defaultValueCoding = CodingHelper.fromJson(o.getDefaultValueCoding());
+    this.defaultValueQuantity = QuantityHelper.fromJson(o.getDefaultValueQuantity());
+    this.defaultValueDuration = DurationHelper.fromJson(o.getDefaultValueDuration());
+    this.defaultValueSimpleQuantity = QuantityHelper.fromJson(o.getDefaultValueSimpleQuantity());
+    if (null != o.getDefaultValueDistance() && !o.getDefaultValueDistance().isEmpty()) {
+      this.defaultValueDistance = new Distance(o.getDefaultValueDistance().get(0));
+    }
+    this.defaultValueCount = CountHelper.fromJson(o.getDefaultValueCount());
+    this.defaultValueMoney = MoneyHelper.fromJson(o.getDefaultValueMoney());
+    this.defaultValueAge = AgeHelper.fromJson(o.getDefaultValueAge());
+    this.defaultValueRange = RangeHelper.fromJson(o.getDefaultValueRange());
+    this.defaultValuePeriod = PeriodHelper.fromJson(o.getDefaultValuePeriod());
+    this.defaultValueRatio = RatioHelper.fromJson(o.getDefaultValueRatio());
+    if (null != o.getDefaultValueReference() && !o.getDefaultValueReference().isEmpty()) {
+      this.defaultValueReference = new Reference(o.getDefaultValueReference().get(0));
+    }
+    this.defaultValueSampledData = SampledDataHelper.fromJson(o.getDefaultValueSampledData());
+    this.defaultValueSignature = SignatureHelper.fromJson(o.getDefaultValueSignature());
+    this.defaultValueHumanName = HumanNameHelper.fromJson(o.getDefaultValueHumanName());
+    this.defaultValueAddress = AddressHelper.fromJson(o.getDefaultValueAddress());
+    this.defaultValueContactPoint = ContactPointHelper.fromJson(o.getDefaultValueContactPoint());
+    this.defaultValueTiming = TimingHelper.fromJson(o.getDefaultValueTiming());
+    if (null != o.getDefaultValueMeta() && !o.getDefaultValueMeta().isEmpty()) {
+      this.defaultValueMeta = new Meta(o.getDefaultValueMeta().get(0));
+    }
+    this.defaultValueElementDefinition = ElementDefinitionHelper.fromJson(o.getDefaultValueElementDefinition());
+    if (null != o.getDefaultValueContactDetail() && !o.getDefaultValueContactDetail().isEmpty()) {
+      this.defaultValueContactDetail = new ContactDetail(o.getDefaultValueContactDetail().get(0));
+    }
+    if (null != o.getDefaultValueContributor() && !o.getDefaultValueContributor().isEmpty()) {
+      this.defaultValueContributor = new Contributor(o.getDefaultValueContributor().get(0));
+    }
+    if (null != o.getDefaultValueDosage() && !o.getDefaultValueDosage().isEmpty()) {
+      this.defaultValueDosage = new Dosage(o.getDefaultValueDosage().get(0));
+    }
+    if (null != o.getDefaultValueRelatedArtifact() && !o.getDefaultValueRelatedArtifact().isEmpty()) {
+      this.defaultValueRelatedArtifact = new RelatedArtifact(o.getDefaultValueRelatedArtifact().get(0));
+    }
+    if (null != o.getDefaultValueUsageContext() && !o.getDefaultValueUsageContext().isEmpty()) {
+      this.defaultValueUsageContext = new UsageContext(o.getDefaultValueUsageContext().get(0));
+    }
+    if (null != o.getDefaultValueDataRequirement() && !o.getDefaultValueDataRequirement().isEmpty()) {
+      this.defaultValueDataRequirement = new DataRequirement(o.getDefaultValueDataRequirement().get(0));
+    }
+    this.defaultValueParameterDefinition = ParameterDefinitionHelper.fromJson(o.getDefaultValueParameterDefinition());
+    if (null != o.getDefaultValueTriggerDefinition() && !o.getDefaultValueTriggerDefinition().isEmpty()) {
+      this.defaultValueTriggerDefinition = new TriggerDefinition(o.getDefaultValueTriggerDefinition().get(0));
+    }
+    if (null != o.getElement()) {
+      this.element = o.getElement();
+    }
+    if (null != o.getListMode()) {
+      this.listMode = o.getListMode();
+    }
+    if (null != o.getVariable()) {
+      this.variable = o.getVariable();
+    }
+    if (null != o.getCondition()) {
+      this.condition = o.getCondition();
+    }
+    if (null != o.getCheck()) {
+      this.check = o.getCheck();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+  }
 
   public void setContext( String value) {
     this.context = value;
@@ -1070,119 +1216,100 @@ public class StructureMapSource  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("_context" + "[" + String.valueOf(this._context) + "]\n"); 
-     builder.append("min" + "[" + String.valueOf(this.min) + "]\n"); 
-     builder.append("_min" + "[" + String.valueOf(this._min) + "]\n"); 
-     builder.append("max" + "[" + String.valueOf(this.max) + "]\n"); 
-     builder.append("_max" + "[" + String.valueOf(this._max) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("defaultValueBoolean" + "[" + String.valueOf(this.defaultValueBoolean) + "]\n"); 
-     builder.append("_defaultValueBoolean" + "[" + String.valueOf(this._defaultValueBoolean) + "]\n"); 
-     builder.append("defaultValueInteger" + "[" + String.valueOf(this.defaultValueInteger) + "]\n"); 
-     builder.append("_defaultValueInteger" + "[" + String.valueOf(this._defaultValueInteger) + "]\n"); 
-     builder.append("defaultValueDecimal" + "[" + String.valueOf(this.defaultValueDecimal) + "]\n"); 
-     builder.append("_defaultValueDecimal" + "[" + String.valueOf(this._defaultValueDecimal) + "]\n"); 
-     builder.append("defaultValueBase64Binary" + "[" + String.valueOf(this.defaultValueBase64Binary) + "]\n"); 
-     builder.append("_defaultValueBase64Binary" + "[" + String.valueOf(this._defaultValueBase64Binary) + "]\n"); 
-     builder.append("defaultValueInstant" + "[" + String.valueOf(this.defaultValueInstant) + "]\n"); 
-     builder.append("_defaultValueInstant" + "[" + String.valueOf(this._defaultValueInstant) + "]\n"); 
-     builder.append("defaultValueString" + "[" + String.valueOf(this.defaultValueString) + "]\n"); 
-     builder.append("_defaultValueString" + "[" + String.valueOf(this._defaultValueString) + "]\n"); 
-     builder.append("defaultValueUri" + "[" + String.valueOf(this.defaultValueUri) + "]\n"); 
-     builder.append("_defaultValueUri" + "[" + String.valueOf(this._defaultValueUri) + "]\n"); 
-     builder.append("defaultValueDate" + "[" + String.valueOf(this.defaultValueDate) + "]\n"); 
-     builder.append("_defaultValueDate" + "[" + String.valueOf(this._defaultValueDate) + "]\n"); 
-     builder.append("defaultValueDateTime" + "[" + String.valueOf(this.defaultValueDateTime) + "]\n"); 
-     builder.append("_defaultValueDateTime" + "[" + String.valueOf(this._defaultValueDateTime) + "]\n"); 
-     builder.append("defaultValueTime" + "[" + String.valueOf(this.defaultValueTime) + "]\n"); 
-     builder.append("_defaultValueTime" + "[" + String.valueOf(this._defaultValueTime) + "]\n"); 
-     builder.append("defaultValueCode" + "[" + String.valueOf(this.defaultValueCode) + "]\n"); 
-     builder.append("_defaultValueCode" + "[" + String.valueOf(this._defaultValueCode) + "]\n"); 
-     builder.append("defaultValueOid" + "[" + String.valueOf(this.defaultValueOid) + "]\n"); 
-     builder.append("_defaultValueOid" + "[" + String.valueOf(this._defaultValueOid) + "]\n"); 
-     builder.append("defaultValueUuid" + "[" + String.valueOf(this.defaultValueUuid) + "]\n"); 
-     builder.append("_defaultValueUuid" + "[" + String.valueOf(this._defaultValueUuid) + "]\n"); 
-     builder.append("defaultValueId" + "[" + String.valueOf(this.defaultValueId) + "]\n"); 
-     builder.append("_defaultValueId" + "[" + String.valueOf(this._defaultValueId) + "]\n"); 
-     builder.append("defaultValueUnsignedInt" + "[" + String.valueOf(this.defaultValueUnsignedInt) + "]\n"); 
-     builder.append("_defaultValueUnsignedInt" + "[" + String.valueOf(this._defaultValueUnsignedInt) + "]\n"); 
-     builder.append("defaultValuePositiveInt" + "[" + String.valueOf(this.defaultValuePositiveInt) + "]\n"); 
-     builder.append("_defaultValuePositiveInt" + "[" + String.valueOf(this._defaultValuePositiveInt) + "]\n"); 
-     builder.append("defaultValueMarkdown" + "[" + String.valueOf(this.defaultValueMarkdown) + "]\n"); 
-     builder.append("_defaultValueMarkdown" + "[" + String.valueOf(this._defaultValueMarkdown) + "]\n"); 
-     builder.append("defaultValueElement" + "[" + String.valueOf(this.defaultValueElement) + "]\n"); 
-     builder.append("defaultValueExtension" + "[" + String.valueOf(this.defaultValueExtension) + "]\n"); 
-     builder.append("defaultValueBackboneElement" + "[" + String.valueOf(this.defaultValueBackboneElement) + "]\n"); 
-     builder.append("defaultValueNarrative" + "[" + String.valueOf(this.defaultValueNarrative) + "]\n"); 
-     builder.append("defaultValueAnnotation" + "[" + String.valueOf(this.defaultValueAnnotation) + "]\n"); 
-     builder.append("defaultValueAttachment" + "[" + String.valueOf(this.defaultValueAttachment) + "]\n"); 
-     builder.append("defaultValueIdentifier" + "[" + String.valueOf(this.defaultValueIdentifier) + "]\n"); 
-     builder.append("defaultValueCodeableConcept" + "[" + String.valueOf(this.defaultValueCodeableConcept) + "]\n"); 
-     builder.append("defaultValueCoding" + "[" + String.valueOf(this.defaultValueCoding) + "]\n"); 
-     builder.append("defaultValueQuantity" + "[" + String.valueOf(this.defaultValueQuantity) + "]\n"); 
-     builder.append("defaultValueDuration" + "[" + String.valueOf(this.defaultValueDuration) + "]\n"); 
-     builder.append("defaultValueSimpleQuantity" + "[" + String.valueOf(this.defaultValueSimpleQuantity) + "]\n"); 
-     builder.append("defaultValueDistance" + "[" + String.valueOf(this.defaultValueDistance) + "]\n"); 
-     builder.append("defaultValueCount" + "[" + String.valueOf(this.defaultValueCount) + "]\n"); 
-     builder.append("defaultValueMoney" + "[" + String.valueOf(this.defaultValueMoney) + "]\n"); 
-     builder.append("defaultValueAge" + "[" + String.valueOf(this.defaultValueAge) + "]\n"); 
-     builder.append("defaultValueRange" + "[" + String.valueOf(this.defaultValueRange) + "]\n"); 
-     builder.append("defaultValuePeriod" + "[" + String.valueOf(this.defaultValuePeriod) + "]\n"); 
-     builder.append("defaultValueRatio" + "[" + String.valueOf(this.defaultValueRatio) + "]\n"); 
-     builder.append("defaultValueReference" + "[" + String.valueOf(this.defaultValueReference) + "]\n"); 
-     builder.append("defaultValueSampledData" + "[" + String.valueOf(this.defaultValueSampledData) + "]\n"); 
-     builder.append("defaultValueSignature" + "[" + String.valueOf(this.defaultValueSignature) + "]\n"); 
-     builder.append("defaultValueHumanName" + "[" + String.valueOf(this.defaultValueHumanName) + "]\n"); 
-     builder.append("defaultValueAddress" + "[" + String.valueOf(this.defaultValueAddress) + "]\n"); 
-     builder.append("defaultValueContactPoint" + "[" + String.valueOf(this.defaultValueContactPoint) + "]\n"); 
-     builder.append("defaultValueTiming" + "[" + String.valueOf(this.defaultValueTiming) + "]\n"); 
-     builder.append("defaultValueMeta" + "[" + String.valueOf(this.defaultValueMeta) + "]\n"); 
-     builder.append("defaultValueElementDefinition" + "[" + String.valueOf(this.defaultValueElementDefinition) + "]\n"); 
-     builder.append("defaultValueContactDetail" + "[" + String.valueOf(this.defaultValueContactDetail) + "]\n"); 
-     builder.append("defaultValueContributor" + "[" + String.valueOf(this.defaultValueContributor) + "]\n"); 
-     builder.append("defaultValueDosage" + "[" + String.valueOf(this.defaultValueDosage) + "]\n"); 
-     builder.append("defaultValueRelatedArtifact" + "[" + String.valueOf(this.defaultValueRelatedArtifact) + "]\n"); 
-     builder.append("defaultValueUsageContext" + "[" + String.valueOf(this.defaultValueUsageContext) + "]\n"); 
-     builder.append("defaultValueDataRequirement" + "[" + String.valueOf(this.defaultValueDataRequirement) + "]\n"); 
-     builder.append("defaultValueParameterDefinition" + "[" + String.valueOf(this.defaultValueParameterDefinition) + "]\n"); 
-     builder.append("defaultValueTriggerDefinition" + "[" + String.valueOf(this.defaultValueTriggerDefinition) + "]\n"); 
-     builder.append("element" + "[" + String.valueOf(this.element) + "]\n"); 
-     builder.append("_element" + "[" + String.valueOf(this._element) + "]\n"); 
-     builder.append("listMode" + "[" + String.valueOf(this.listMode) + "]\n"); 
-     builder.append("_listMode" + "[" + String.valueOf(this._listMode) + "]\n"); 
-     builder.append("variable" + "[" + String.valueOf(this.variable) + "]\n"); 
-     builder.append("_variable" + "[" + String.valueOf(this._variable) + "]\n"); 
-     builder.append("condition" + "[" + String.valueOf(this.condition) + "]\n"); 
-     builder.append("_condition" + "[" + String.valueOf(this._condition) + "]\n"); 
-     builder.append("check" + "[" + String.valueOf(this.check) + "]\n"); 
-     builder.append("_check" + "[" + String.valueOf(this._check) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[StructureMapSource]:" + "\n");
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this._context != null) builder.append("_context" + "->" + this._context.toString() + "\n"); 
+     if(this.min != null) builder.append("min" + "->" + this.min.toString() + "\n"); 
+     if(this._min != null) builder.append("_min" + "->" + this._min.toString() + "\n"); 
+     if(this.max != null) builder.append("max" + "->" + this.max.toString() + "\n"); 
+     if(this._max != null) builder.append("_max" + "->" + this._max.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.defaultValueBoolean != null) builder.append("defaultValueBoolean" + "->" + this.defaultValueBoolean.toString() + "\n"); 
+     if(this._defaultValueBoolean != null) builder.append("_defaultValueBoolean" + "->" + this._defaultValueBoolean.toString() + "\n"); 
+     if(this.defaultValueInteger != null) builder.append("defaultValueInteger" + "->" + this.defaultValueInteger.toString() + "\n"); 
+     if(this._defaultValueInteger != null) builder.append("_defaultValueInteger" + "->" + this._defaultValueInteger.toString() + "\n"); 
+     if(this.defaultValueDecimal != null) builder.append("defaultValueDecimal" + "->" + this.defaultValueDecimal.toString() + "\n"); 
+     if(this._defaultValueDecimal != null) builder.append("_defaultValueDecimal" + "->" + this._defaultValueDecimal.toString() + "\n"); 
+     if(this.defaultValueBase64Binary != null) builder.append("defaultValueBase64Binary" + "->" + this.defaultValueBase64Binary.toString() + "\n"); 
+     if(this._defaultValueBase64Binary != null) builder.append("_defaultValueBase64Binary" + "->" + this._defaultValueBase64Binary.toString() + "\n"); 
+     if(this.defaultValueInstant != null) builder.append("defaultValueInstant" + "->" + this.defaultValueInstant.toString() + "\n"); 
+     if(this._defaultValueInstant != null) builder.append("_defaultValueInstant" + "->" + this._defaultValueInstant.toString() + "\n"); 
+     if(this.defaultValueString != null) builder.append("defaultValueString" + "->" + this.defaultValueString.toString() + "\n"); 
+     if(this._defaultValueString != null) builder.append("_defaultValueString" + "->" + this._defaultValueString.toString() + "\n"); 
+     if(this.defaultValueUri != null) builder.append("defaultValueUri" + "->" + this.defaultValueUri.toString() + "\n"); 
+     if(this._defaultValueUri != null) builder.append("_defaultValueUri" + "->" + this._defaultValueUri.toString() + "\n"); 
+     if(this.defaultValueDate != null) builder.append("defaultValueDate" + "->" + this.defaultValueDate.toString() + "\n"); 
+     if(this._defaultValueDate != null) builder.append("_defaultValueDate" + "->" + this._defaultValueDate.toString() + "\n"); 
+     if(this.defaultValueDateTime != null) builder.append("defaultValueDateTime" + "->" + this.defaultValueDateTime.toString() + "\n"); 
+     if(this._defaultValueDateTime != null) builder.append("_defaultValueDateTime" + "->" + this._defaultValueDateTime.toString() + "\n"); 
+     if(this.defaultValueTime != null) builder.append("defaultValueTime" + "->" + this.defaultValueTime.toString() + "\n"); 
+     if(this._defaultValueTime != null) builder.append("_defaultValueTime" + "->" + this._defaultValueTime.toString() + "\n"); 
+     if(this.defaultValueCode != null) builder.append("defaultValueCode" + "->" + this.defaultValueCode.toString() + "\n"); 
+     if(this._defaultValueCode != null) builder.append("_defaultValueCode" + "->" + this._defaultValueCode.toString() + "\n"); 
+     if(this.defaultValueOid != null) builder.append("defaultValueOid" + "->" + this.defaultValueOid.toString() + "\n"); 
+     if(this._defaultValueOid != null) builder.append("_defaultValueOid" + "->" + this._defaultValueOid.toString() + "\n"); 
+     if(this.defaultValueUuid != null) builder.append("defaultValueUuid" + "->" + this.defaultValueUuid.toString() + "\n"); 
+     if(this._defaultValueUuid != null) builder.append("_defaultValueUuid" + "->" + this._defaultValueUuid.toString() + "\n"); 
+     if(this.defaultValueId != null) builder.append("defaultValueId" + "->" + this.defaultValueId.toString() + "\n"); 
+     if(this._defaultValueId != null) builder.append("_defaultValueId" + "->" + this._defaultValueId.toString() + "\n"); 
+     if(this.defaultValueUnsignedInt != null) builder.append("defaultValueUnsignedInt" + "->" + this.defaultValueUnsignedInt.toString() + "\n"); 
+     if(this._defaultValueUnsignedInt != null) builder.append("_defaultValueUnsignedInt" + "->" + this._defaultValueUnsignedInt.toString() + "\n"); 
+     if(this.defaultValuePositiveInt != null) builder.append("defaultValuePositiveInt" + "->" + this.defaultValuePositiveInt.toString() + "\n"); 
+     if(this._defaultValuePositiveInt != null) builder.append("_defaultValuePositiveInt" + "->" + this._defaultValuePositiveInt.toString() + "\n"); 
+     if(this.defaultValueMarkdown != null) builder.append("defaultValueMarkdown" + "->" + this.defaultValueMarkdown.toString() + "\n"); 
+     if(this._defaultValueMarkdown != null) builder.append("_defaultValueMarkdown" + "->" + this._defaultValueMarkdown.toString() + "\n"); 
+     if(this.defaultValueElement != null) builder.append("defaultValueElement" + "->" + this.defaultValueElement.toString() + "\n"); 
+     if(this.defaultValueExtension != null) builder.append("defaultValueExtension" + "->" + this.defaultValueExtension.toString() + "\n"); 
+     if(this.defaultValueBackboneElement != null) builder.append("defaultValueBackboneElement" + "->" + this.defaultValueBackboneElement.toString() + "\n"); 
+     if(this.defaultValueNarrative != null) builder.append("defaultValueNarrative" + "->" + this.defaultValueNarrative.toString() + "\n"); 
+     if(this.defaultValueAnnotation != null) builder.append("defaultValueAnnotation" + "->" + this.defaultValueAnnotation.toString() + "\n"); 
+     if(this.defaultValueAttachment != null) builder.append("defaultValueAttachment" + "->" + this.defaultValueAttachment.toString() + "\n"); 
+     if(this.defaultValueIdentifier != null) builder.append("defaultValueIdentifier" + "->" + this.defaultValueIdentifier.toString() + "\n"); 
+     if(this.defaultValueCodeableConcept != null) builder.append("defaultValueCodeableConcept" + "->" + this.defaultValueCodeableConcept.toString() + "\n"); 
+     if(this.defaultValueCoding != null) builder.append("defaultValueCoding" + "->" + this.defaultValueCoding.toString() + "\n"); 
+     if(this.defaultValueQuantity != null) builder.append("defaultValueQuantity" + "->" + this.defaultValueQuantity.toString() + "\n"); 
+     if(this.defaultValueDuration != null) builder.append("defaultValueDuration" + "->" + this.defaultValueDuration.toString() + "\n"); 
+     if(this.defaultValueSimpleQuantity != null) builder.append("defaultValueSimpleQuantity" + "->" + this.defaultValueSimpleQuantity.toString() + "\n"); 
+     if(this.defaultValueDistance != null) builder.append("defaultValueDistance" + "->" + this.defaultValueDistance.toString() + "\n"); 
+     if(this.defaultValueCount != null) builder.append("defaultValueCount" + "->" + this.defaultValueCount.toString() + "\n"); 
+     if(this.defaultValueMoney != null) builder.append("defaultValueMoney" + "->" + this.defaultValueMoney.toString() + "\n"); 
+     if(this.defaultValueAge != null) builder.append("defaultValueAge" + "->" + this.defaultValueAge.toString() + "\n"); 
+     if(this.defaultValueRange != null) builder.append("defaultValueRange" + "->" + this.defaultValueRange.toString() + "\n"); 
+     if(this.defaultValuePeriod != null) builder.append("defaultValuePeriod" + "->" + this.defaultValuePeriod.toString() + "\n"); 
+     if(this.defaultValueRatio != null) builder.append("defaultValueRatio" + "->" + this.defaultValueRatio.toString() + "\n"); 
+     if(this.defaultValueReference != null) builder.append("defaultValueReference" + "->" + this.defaultValueReference.toString() + "\n"); 
+     if(this.defaultValueSampledData != null) builder.append("defaultValueSampledData" + "->" + this.defaultValueSampledData.toString() + "\n"); 
+     if(this.defaultValueSignature != null) builder.append("defaultValueSignature" + "->" + this.defaultValueSignature.toString() + "\n"); 
+     if(this.defaultValueHumanName != null) builder.append("defaultValueHumanName" + "->" + this.defaultValueHumanName.toString() + "\n"); 
+     if(this.defaultValueAddress != null) builder.append("defaultValueAddress" + "->" + this.defaultValueAddress.toString() + "\n"); 
+     if(this.defaultValueContactPoint != null) builder.append("defaultValueContactPoint" + "->" + this.defaultValueContactPoint.toString() + "\n"); 
+     if(this.defaultValueTiming != null) builder.append("defaultValueTiming" + "->" + this.defaultValueTiming.toString() + "\n"); 
+     if(this.defaultValueMeta != null) builder.append("defaultValueMeta" + "->" + this.defaultValueMeta.toString() + "\n"); 
+     if(this.defaultValueElementDefinition != null) builder.append("defaultValueElementDefinition" + "->" + this.defaultValueElementDefinition.toString() + "\n"); 
+     if(this.defaultValueContactDetail != null) builder.append("defaultValueContactDetail" + "->" + this.defaultValueContactDetail.toString() + "\n"); 
+     if(this.defaultValueContributor != null) builder.append("defaultValueContributor" + "->" + this.defaultValueContributor.toString() + "\n"); 
+     if(this.defaultValueDosage != null) builder.append("defaultValueDosage" + "->" + this.defaultValueDosage.toString() + "\n"); 
+     if(this.defaultValueRelatedArtifact != null) builder.append("defaultValueRelatedArtifact" + "->" + this.defaultValueRelatedArtifact.toString() + "\n"); 
+     if(this.defaultValueUsageContext != null) builder.append("defaultValueUsageContext" + "->" + this.defaultValueUsageContext.toString() + "\n"); 
+     if(this.defaultValueDataRequirement != null) builder.append("defaultValueDataRequirement" + "->" + this.defaultValueDataRequirement.toString() + "\n"); 
+     if(this.defaultValueParameterDefinition != null) builder.append("defaultValueParameterDefinition" + "->" + this.defaultValueParameterDefinition.toString() + "\n"); 
+     if(this.defaultValueTriggerDefinition != null) builder.append("defaultValueTriggerDefinition" + "->" + this.defaultValueTriggerDefinition.toString() + "\n"); 
+     if(this.element != null) builder.append("element" + "->" + this.element.toString() + "\n"); 
+     if(this._element != null) builder.append("_element" + "->" + this._element.toString() + "\n"); 
+     if(this.listMode != null) builder.append("listMode" + "->" + this.listMode.toString() + "\n"); 
+     if(this._listMode != null) builder.append("_listMode" + "->" + this._listMode.toString() + "\n"); 
+     if(this.variable != null) builder.append("variable" + "->" + this.variable.toString() + "\n"); 
+     if(this._variable != null) builder.append("_variable" + "->" + this._variable.toString() + "\n"); 
+     if(this.condition != null) builder.append("condition" + "->" + this.condition.toString() + "\n"); 
+     if(this._condition != null) builder.append("_condition" + "->" + this._condition.toString() + "\n"); 
+     if(this.check != null) builder.append("check" + "->" + this.check.toString() + "\n"); 
+     if(this._check != null) builder.append("_check" + "->" + this._check.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static StructureMapSource fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, StructureMapSource.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(StructureMapSource o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<StructureMapSource> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum ListModeEnum {
@@ -1204,4 +1331,5 @@ public class StructureMapSource  {
   		}
   	}
   }
+
 }

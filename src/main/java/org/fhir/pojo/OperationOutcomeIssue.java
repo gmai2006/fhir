@@ -98,6 +98,7 @@ public class OperationOutcomeIssue  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -119,29 +120,25 @@ public class OperationOutcomeIssue  {
 
   public OperationOutcomeIssue(OperationOutcomeIssueModel o) {
     this.id = o.getId();
-      if (null != o.getSeverity()) {
-        this.severity = new String(o.getSeverity());
-      }
-
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      this.details = CodeableConcept.fromJson(o.getDetails());
-      if (null != o.getDiagnostics()) {
-        this.diagnostics = new String(o.getDiagnostics());
-      }
-
-      this.location = org.fhir.utils.JsonUtils.json2Array(o.getLocation());
-
-      this.expression = org.fhir.utils.JsonUtils.json2Array(o.getExpression());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSeverity()) {
+      this.severity = o.getSeverity();
+    }
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    this.details = CodeableConceptHelper.fromJson(o.getDetails());
+    if (null != o.getDiagnostics()) {
+      this.diagnostics = o.getDiagnostics();
+    }
+    if (o.getLocation() != null) {
+    	this.location = org.fhir.utils.JsonUtils.json2Array(o.getLocation());
+    }
+    if (o.getExpression() != null) {
+    	this.expression = org.fhir.utils.JsonUtils.json2Array(o.getExpression());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSeverity( String value) {
@@ -238,21 +235,22 @@ public class OperationOutcomeIssue  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("severity" + "[" + String.valueOf(this.severity) + "]\n"); 
-     builder.append("_severity" + "[" + String.valueOf(this._severity) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("details" + "[" + String.valueOf(this.details) + "]\n"); 
-     builder.append("diagnostics" + "[" + String.valueOf(this.diagnostics) + "]\n"); 
-     builder.append("_diagnostics" + "[" + String.valueOf(this._diagnostics) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("_location" + "[" + String.valueOf(this._location) + "]\n"); 
-     builder.append("expression" + "[" + String.valueOf(this.expression) + "]\n"); 
-     builder.append("_expression" + "[" + String.valueOf(this._expression) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[OperationOutcomeIssue]:" + "\n");
+     if(this.severity != null) builder.append("severity" + "->" + this.severity.toString() + "\n"); 
+     if(this._severity != null) builder.append("_severity" + "->" + this._severity.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.details != null) builder.append("details" + "->" + this.details.toString() + "\n"); 
+     if(this.diagnostics != null) builder.append("diagnostics" + "->" + this.diagnostics.toString() + "\n"); 
+     if(this._diagnostics != null) builder.append("_diagnostics" + "->" + this._diagnostics.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this._location != null) builder.append("_location" + "->" + this._location.toString() + "\n"); 
+     if(this.expression != null) builder.append("expression" + "->" + this.expression.toString() + "\n"); 
+     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -342,36 +340,4 @@ public class OperationOutcomeIssue  {
   	}
   }
 
-  public static java.util.List<OperationOutcomeIssue> fromArray(java.util.List<OperationOutcomeIssueModel> list) {
-    return (java.util.List<OperationOutcomeIssue>)list.stream()
-      .map(model -> new OperationOutcomeIssue(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<OperationOutcomeIssueModel> toModelArray(java.util.List<OperationOutcomeIssue> list) {
-    return (java.util.List<OperationOutcomeIssueModel>)list.stream()
-      .map(model -> new OperationOutcomeIssueModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static OperationOutcomeIssue fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, OperationOutcomeIssue.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(OperationOutcomeIssue o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<OperationOutcomeIssue> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

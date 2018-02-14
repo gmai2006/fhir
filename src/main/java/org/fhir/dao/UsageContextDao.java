@@ -34,10 +34,5 @@ public interface UsageContextDao {
   public List<UsageContext> select(int maxResult);
 
   public List<UsageContext> selectAll();
-
-  public UsageContext create(UsageContext e);
-
-  public UsageContext update(UsageContext e);
-
   public void delete(UsageContext e);
 }

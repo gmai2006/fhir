@@ -89,6 +89,7 @@ public class CodeSystemConcept  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -110,30 +111,27 @@ public class CodeSystemConcept  {
 
   public CodeSystemConcept(CodeSystemConceptModel o) {
     this.id = o.getId();
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getDisplay()) {
-        this.display = new String(o.getDisplay());
-      }
-
-      if (null != o.getDefinition()) {
-        this.definition = new String(o.getDefinition());
-      }
-
-      this.designation = CodeSystemDesignation.fromArray(o.getDesignation());
-
-      this.property = CodeSystemProperty1.fromArray(o.getProperty());
-
-      this.concept = CodeSystemConcept.fromArray(o.getConcept());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getDisplay()) {
+      this.display = o.getDisplay();
+    }
+    if (null != o.getDefinition()) {
+      this.definition = o.getDefinition();
+    }
+    if (null != o.getDesignation() && !o.getDesignation().isEmpty()) {
+    	this.designation = CodeSystemDesignationHelper.fromArray2Array(o.getDesignation());
+    }
+    if (null != o.getProperty() && !o.getProperty().isEmpty()) {
+    	this.property = CodeSystemProperty1Helper.fromArray2Array(o.getProperty());
+    }
+    if (null != o.getConcept() && !o.getConcept().isEmpty()) {
+    	this.concept = CodeSystemConceptHelper.fromArray2Array(o.getConcept());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( String value) {
@@ -218,53 +216,22 @@ public class CodeSystemConcept  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("_display" + "[" + String.valueOf(this._display) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("_definition" + "[" + String.valueOf(this._definition) + "]\n"); 
-     builder.append("designation" + "[" + String.valueOf(this.designation) + "]\n"); 
-     builder.append("property" + "[" + String.valueOf(this.property) + "]\n"); 
-     builder.append("concept" + "[" + String.valueOf(this.concept) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CodeSystemConcept]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
+     if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this._definition != null) builder.append("_definition" + "->" + this._definition.toString() + "\n"); 
+     if(this.designation != null) builder.append("designation" + "->" + this.designation.toString() + "\n"); 
+     if(this.property != null) builder.append("property" + "->" + this.property.toString() + "\n"); 
+     if(this.concept != null) builder.append("concept" + "->" + this.concept.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CodeSystemConcept> fromArray(java.util.List<CodeSystemConceptModel> list) {
-    return (java.util.List<CodeSystemConcept>)list.stream()
-      .map(model -> new CodeSystemConcept(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CodeSystemConceptModel> toModelArray(java.util.List<CodeSystemConcept> list) {
-    return (java.util.List<CodeSystemConceptModel>)list.stream()
-      .map(model -> new CodeSystemConceptModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CodeSystemConcept fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CodeSystemConcept.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CodeSystemConcept o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CodeSystemConcept> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -130,6 +130,7 @@ public class Address  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -282,49 +283,30 @@ public class Address  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("use" + "[" + String.valueOf(this.use) + "]\n"); 
-     builder.append("_use" + "[" + String.valueOf(this._use) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("_text" + "[" + String.valueOf(this._text) + "]\n"); 
-     builder.append("line" + "[" + String.valueOf(this.line) + "]\n"); 
-     builder.append("_line" + "[" + String.valueOf(this._line) + "]\n"); 
-     builder.append("city" + "[" + String.valueOf(this.city) + "]\n"); 
-     builder.append("_city" + "[" + String.valueOf(this._city) + "]\n"); 
-     builder.append("district" + "[" + String.valueOf(this.district) + "]\n"); 
-     builder.append("_district" + "[" + String.valueOf(this._district) + "]\n"); 
-     builder.append("state" + "[" + String.valueOf(this.state) + "]\n"); 
-     builder.append("_state" + "[" + String.valueOf(this._state) + "]\n"); 
-     builder.append("postalCode" + "[" + String.valueOf(this.postalCode) + "]\n"); 
-     builder.append("_postalCode" + "[" + String.valueOf(this._postalCode) + "]\n"); 
-     builder.append("country" + "[" + String.valueOf(this.country) + "]\n"); 
-     builder.append("_country" + "[" + String.valueOf(this._country) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Address]:" + "\n");
+     if(this.use != null) builder.append("use" + "->" + this.use.toString() + "\n"); 
+     if(this._use != null) builder.append("_use" + "->" + this._use.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
+     if(this.line != null) builder.append("line" + "->" + this.line.toString() + "\n"); 
+     if(this._line != null) builder.append("_line" + "->" + this._line.toString() + "\n"); 
+     if(this.city != null) builder.append("city" + "->" + this.city.toString() + "\n"); 
+     if(this._city != null) builder.append("_city" + "->" + this._city.toString() + "\n"); 
+     if(this.district != null) builder.append("district" + "->" + this.district.toString() + "\n"); 
+     if(this._district != null) builder.append("_district" + "->" + this._district.toString() + "\n"); 
+     if(this.state != null) builder.append("state" + "->" + this.state.toString() + "\n"); 
+     if(this._state != null) builder.append("_state" + "->" + this._state.toString() + "\n"); 
+     if(this.postalCode != null) builder.append("postalCode" + "->" + this.postalCode.toString() + "\n"); 
+     if(this._postalCode != null) builder.append("_postalCode" + "->" + this._postalCode.toString() + "\n"); 
+     if(this.country != null) builder.append("country" + "->" + this.country.toString() + "\n"); 
+     if(this._country != null) builder.append("_country" + "->" + this._country.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static Address fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Address.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Address o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Address> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum UseEnum {

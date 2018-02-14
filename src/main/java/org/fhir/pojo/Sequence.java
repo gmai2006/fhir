@@ -164,6 +164,7 @@ public class Sequence  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -215,86 +216,64 @@ public class Sequence  {
 
   public Sequence(SequenceModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      if (null != o.getCoordinateSystem()) {
-        this.coordinateSystem = new Float(o.getCoordinateSystem());
-      }
-
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      if (null != o.getSpecimen()) {
-        this.specimen = new Reference(o.getSpecimen());
-        this.specimen.setId(this.getId());
-      }
-
-      if (null != o.getDevice()) {
-        this.device = new Reference(o.getDevice());
-        this.device.setId(this.getId());
-      }
-
-      if (null != o.getPerformer()) {
-        this.performer = new Reference(o.getPerformer());
-        this.performer.setId(this.getId());
-      }
-
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      if (null != o.getReferenceSeq()) {
-        this.referenceSeq = new SequenceReferenceSeq(o.getReferenceSeq());
-        this.referenceSeq.setId(this.getId());
-      }
-
-      this.variant = SequenceVariant.fromArray(o.getVariant());
-
-      if (null != o.getObservedSeq()) {
-        this.observedSeq = new String(o.getObservedSeq());
-      }
-
-      this.quality = SequenceQuality.fromArray(o.getQuality());
-
-      if (null != o.getReadCoverage()) {
-        this.readCoverage = new Float(o.getReadCoverage());
-      }
-
-      this.repository = SequenceRepository.fromArray(o.getRepository());
-
-      this.pointer = Reference.fromArray(o.getPointer());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getCoordinateSystem()) {
+      this.coordinateSystem = o.getCoordinateSystem();
+    }
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    if (null != o.getSpecimen() && !o.getSpecimen().isEmpty()) {
+      this.specimen = new Reference(o.getSpecimen().get(0));
+    }
+    if (null != o.getDevice() && !o.getDevice().isEmpty()) {
+      this.device = new Reference(o.getDevice().get(0));
+    }
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+      this.performer = new Reference(o.getPerformer().get(0));
+    }
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    if (null != o.getReferenceSeq() && !o.getReferenceSeq().isEmpty()) {
+      this.referenceSeq = new SequenceReferenceSeq(o.getReferenceSeq().get(0));
+    }
+    if (null != o.getVariant() && !o.getVariant().isEmpty()) {
+    	this.variant = SequenceVariantHelper.fromArray2Array(o.getVariant());
+    }
+    if (null != o.getObservedSeq()) {
+      this.observedSeq = o.getObservedSeq();
+    }
+    if (null != o.getQuality() && !o.getQuality().isEmpty()) {
+    	this.quality = SequenceQualityHelper.fromArray2Array(o.getQuality());
+    }
+    if (null != o.getReadCoverage()) {
+      this.readCoverage = o.getReadCoverage();
+    }
+    if (null != o.getRepository() && !o.getRepository().isEmpty()) {
+    	this.repository = SequenceRepositoryHelper.fromArray2Array(o.getRepository());
+    }
+    if (null != o.getPointer() && !o.getPointer().isEmpty()) {
+    	this.pointer = ReferenceHelper.fromArray2Array(o.getPointer());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -487,37 +466,38 @@ public class Sequence  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("coordinateSystem" + "[" + String.valueOf(this.coordinateSystem) + "]\n"); 
-     builder.append("_coordinateSystem" + "[" + String.valueOf(this._coordinateSystem) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("specimen" + "[" + String.valueOf(this.specimen) + "]\n"); 
-     builder.append("device" + "[" + String.valueOf(this.device) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("referenceSeq" + "[" + String.valueOf(this.referenceSeq) + "]\n"); 
-     builder.append("variant" + "[" + String.valueOf(this.variant) + "]\n"); 
-     builder.append("observedSeq" + "[" + String.valueOf(this.observedSeq) + "]\n"); 
-     builder.append("_observedSeq" + "[" + String.valueOf(this._observedSeq) + "]\n"); 
-     builder.append("quality" + "[" + String.valueOf(this.quality) + "]\n"); 
-     builder.append("readCoverage" + "[" + String.valueOf(this.readCoverage) + "]\n"); 
-     builder.append("_readCoverage" + "[" + String.valueOf(this._readCoverage) + "]\n"); 
-     builder.append("repository" + "[" + String.valueOf(this.repository) + "]\n"); 
-     builder.append("pointer" + "[" + String.valueOf(this.pointer) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Sequence]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.coordinateSystem != null) builder.append("coordinateSystem" + "->" + this.coordinateSystem.toString() + "\n"); 
+     if(this._coordinateSystem != null) builder.append("_coordinateSystem" + "->" + this._coordinateSystem.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.specimen != null) builder.append("specimen" + "->" + this.specimen.toString() + "\n"); 
+     if(this.device != null) builder.append("device" + "->" + this.device.toString() + "\n"); 
+     if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.referenceSeq != null) builder.append("referenceSeq" + "->" + this.referenceSeq.toString() + "\n"); 
+     if(this.variant != null) builder.append("variant" + "->" + this.variant.toString() + "\n"); 
+     if(this.observedSeq != null) builder.append("observedSeq" + "->" + this.observedSeq.toString() + "\n"); 
+     if(this._observedSeq != null) builder.append("_observedSeq" + "->" + this._observedSeq.toString() + "\n"); 
+     if(this.quality != null) builder.append("quality" + "->" + this.quality.toString() + "\n"); 
+     if(this.readCoverage != null) builder.append("readCoverage" + "->" + this.readCoverage.toString() + "\n"); 
+     if(this._readCoverage != null) builder.append("_readCoverage" + "->" + this._readCoverage.toString() + "\n"); 
+     if(this.repository != null) builder.append("repository" + "->" + this.repository.toString() + "\n"); 
+     if(this.pointer != null) builder.append("pointer" + "->" + this.pointer.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -549,36 +529,4 @@ public class Sequence  {
   	}
   }
 
-  public static java.util.List<Sequence> fromArray(java.util.List<SequenceModel> list) {
-    return (java.util.List<Sequence>)list.stream()
-      .map(model -> new Sequence(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SequenceModel> toModelArray(java.util.List<Sequence> list) {
-    return (java.util.List<SequenceModel>)list.stream()
-      .map(model -> new SequenceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Sequence fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Sequence.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Sequence o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Sequence> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

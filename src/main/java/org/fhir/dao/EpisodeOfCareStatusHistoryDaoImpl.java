@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EpisodeOfCareStatusHistoryModel;
 import org.fhir.pojo.EpisodeOfCareStatusHistory;
+import org.fhir.pojo.EpisodeOfCareStatusHistoryHelper;
 
 public class EpisodeOfCareStatusHistoryDaoImpl implements EpisodeOfCareStatusHistoryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EpisodeOfCareStatusHistoryDaoImpl implements EpisodeOfCareStatusHis
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EpisodeOfCareStatusHistoryModel a", EpisodeOfCareStatusHistoryModel.class).setMaxResults(maxResult);
       List<EpisodeOfCareStatusHistoryModel> models = query.getResultList();
-      return EpisodeOfCareStatusHistory.fromArray(models);
+      return EpisodeOfCareStatusHistoryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EpisodeOfCareStatusHistoryDaoImpl implements EpisodeOfCareStatusHis
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EpisodeOfCareStatusHistoryModel a", EpisodeOfCareStatusHistoryModel.class);
       List<EpisodeOfCareStatusHistoryModel> models = query.getResultList();
-      return EpisodeOfCareStatusHistory.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EpisodeOfCareStatusHistory create(EpisodeOfCareStatusHistory e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EpisodeOfCareStatusHistoryModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EpisodeOfCareStatusHistory update(EpisodeOfCareStatusHistory e) {
-      final EntityManager em = entityManagerProvider.get();
-      EpisodeOfCareStatusHistoryModel model = em.merge(new EpisodeOfCareStatusHistoryModel(e));
-      return new EpisodeOfCareStatusHistory(model);
+      return EpisodeOfCareStatusHistoryHelper.fromArray2Array(models);
   }
 
   @Override

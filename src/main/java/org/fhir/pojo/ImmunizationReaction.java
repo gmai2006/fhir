@@ -69,6 +69,7 @@ public class ImmunizationReaction  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -90,25 +91,18 @@ public class ImmunizationReaction  {
 
   public ImmunizationReaction(ImmunizationReactionModel o) {
     this.id = o.getId();
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      if (null != o.getDetail()) {
-        this.detail = new Reference(o.getDetail());
-        this.detail.setId(this.getId());
-      }
-
-      if (null != o.getReported()) {
-        this.reported = new Boolean(o.getReported());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getDetail() && !o.getDetail().isEmpty()) {
+      this.detail = new Reference(o.getDetail().get(0));
+    }
+    if (null != o.getReported()) {
+      this.reported = o.getReported();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setDate( String value) {
@@ -169,49 +163,18 @@ public class ImmunizationReaction  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("detail" + "[" + String.valueOf(this.detail) + "]\n"); 
-     builder.append("reported" + "[" + String.valueOf(this.reported) + "]\n"); 
-     builder.append("_reported" + "[" + String.valueOf(this._reported) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImmunizationReaction]:" + "\n");
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); 
+     if(this.reported != null) builder.append("reported" + "->" + this.reported.toString() + "\n"); 
+     if(this._reported != null) builder.append("_reported" + "->" + this._reported.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ImmunizationReaction> fromArray(java.util.List<ImmunizationReactionModel> list) {
-    return (java.util.List<ImmunizationReaction>)list.stream()
-      .map(model -> new ImmunizationReaction(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImmunizationReactionModel> toModelArray(java.util.List<ImmunizationReaction> list) {
-    return (java.util.List<ImmunizationReactionModel>)list.stream()
-      .map(model -> new ImmunizationReactionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ImmunizationReaction fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ImmunizationReaction.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ImmunizationReaction o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ImmunizationReaction> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

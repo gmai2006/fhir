@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public NutritionOrderTexture create(NutritionOrderTexture bean) {
-  	requireNonNull(bean);
-    logger.info("create(NutritionOrderTexture={}) - entered bean ");
-
-    final NutritionOrderTexture result = dao.create(bean);
-
-    logger.info("create(NutritionOrderTexture) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public NutritionOrderTexture update(NutritionOrderTexture bean) {
-  	requireNonNull(bean);
-    logger.info("update(NutritionOrderTexture={}) - entered bean ");
-
-    final NutritionOrderTexture result = dao.update(bean);
-
-    logger.info("update(NutritionOrderTexture) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -198,6 +198,7 @@ public class Media  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -249,89 +250,62 @@ public class Media  {
 
   public Media(MediaModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.basedOn = Reference.fromArray(o.getBasedOn());
-
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      this.subtype = CodeableConcept.fromJson(o.getSubtype());
-      this.view = CodeableConcept.fromJson(o.getView());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getOccurrenceDateTime()) {
-        this.occurrenceDateTime = new String(o.getOccurrenceDateTime());
-      }
-
-      this.occurrencePeriod = Period.fromJson(o.getOccurrencePeriod());
-      if (null != o.getOperator()) {
-        this.operator = new Reference(o.getOperator());
-        this.operator.setId(this.getId());
-      }
-
-      this.reasonCode = CodeableConcept.fromArray(o.getReasonCode());
-      this.bodySite = CodeableConcept.fromJson(o.getBodySite());
-      if (null != o.getDevice()) {
-        this.device = new Reference(o.getDevice());
-        this.device.setId(this.getId());
-      }
-
-      if (null != o.getHeight()) {
-        this.height = new Float(o.getHeight());
-      }
-
-      if (null != o.getWidth()) {
-        this.width = new Float(o.getWidth());
-      }
-
-      if (null != o.getFrames()) {
-        this.frames = new Float(o.getFrames());
-      }
-
-      if (null != o.getDuration()) {
-        this.duration = new Float(o.getDuration());
-      }
-
-      this.content = Attachment.fromJson(o.getContent());
-      this.note = Annotation.fromArray(o.getNote());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedOn = ReferenceHelper.fromArray2Array(o.getBasedOn());
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    this.subtype = CodeableConceptHelper.fromJson(o.getSubtype());
+    this.view = CodeableConceptHelper.fromJson(o.getView());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getOccurrenceDateTime()) {
+      this.occurrenceDateTime = o.getOccurrenceDateTime();
+    }
+    this.occurrencePeriod = PeriodHelper.fromJson(o.getOccurrencePeriod());
+    if (null != o.getOperator() && !o.getOperator().isEmpty()) {
+      this.operator = new Reference(o.getOperator().get(0));
+    }
+    this.bodySite = CodeableConceptHelper.fromJson(o.getBodySite());
+    if (null != o.getDevice() && !o.getDevice().isEmpty()) {
+      this.device = new Reference(o.getDevice().get(0));
+    }
+    if (null != o.getHeight()) {
+      this.height = o.getHeight();
+    }
+    if (null != o.getWidth()) {
+      this.width = o.getWidth();
+    }
+    if (null != o.getFrames()) {
+      this.frames = o.getFrames();
+    }
+    if (null != o.getDuration()) {
+      this.duration = o.getDuration();
+    }
+    this.content = AttachmentHelper.fromJson(o.getContent());
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -560,43 +534,44 @@ public class Media  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("subtype" + "[" + String.valueOf(this.subtype) + "]\n"); 
-     builder.append("view" + "[" + String.valueOf(this.view) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("occurrenceDateTime" + "[" + String.valueOf(this.occurrenceDateTime) + "]\n"); 
-     builder.append("_occurrenceDateTime" + "[" + String.valueOf(this._occurrenceDateTime) + "]\n"); 
-     builder.append("occurrencePeriod" + "[" + String.valueOf(this.occurrencePeriod) + "]\n"); 
-     builder.append("operator" + "[" + String.valueOf(this.operator) + "]\n"); 
-     builder.append("reasonCode" + "[" + String.valueOf(this.reasonCode) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("device" + "[" + String.valueOf(this.device) + "]\n"); 
-     builder.append("height" + "[" + String.valueOf(this.height) + "]\n"); 
-     builder.append("_height" + "[" + String.valueOf(this._height) + "]\n"); 
-     builder.append("width" + "[" + String.valueOf(this.width) + "]\n"); 
-     builder.append("_width" + "[" + String.valueOf(this._width) + "]\n"); 
-     builder.append("frames" + "[" + String.valueOf(this.frames) + "]\n"); 
-     builder.append("_frames" + "[" + String.valueOf(this._frames) + "]\n"); 
-     builder.append("duration" + "[" + String.valueOf(this.duration) + "]\n"); 
-     builder.append("_duration" + "[" + String.valueOf(this._duration) + "]\n"); 
-     builder.append("content" + "[" + String.valueOf(this.content) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Media]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.basedOn != null) builder.append("basedOn" + "->" + this.basedOn.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.subtype != null) builder.append("subtype" + "->" + this.subtype.toString() + "\n"); 
+     if(this.view != null) builder.append("view" + "->" + this.view.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.occurrenceDateTime != null) builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime.toString() + "\n"); 
+     if(this._occurrenceDateTime != null) builder.append("_occurrenceDateTime" + "->" + this._occurrenceDateTime.toString() + "\n"); 
+     if(this.occurrencePeriod != null) builder.append("occurrencePeriod" + "->" + this.occurrencePeriod.toString() + "\n"); 
+     if(this.operator != null) builder.append("operator" + "->" + this.operator.toString() + "\n"); 
+     if(this.reasonCode != null) builder.append("reasonCode" + "->" + this.reasonCode.toString() + "\n"); 
+     if(this.bodySite != null) builder.append("bodySite" + "->" + this.bodySite.toString() + "\n"); 
+     if(this.device != null) builder.append("device" + "->" + this.device.toString() + "\n"); 
+     if(this.height != null) builder.append("height" + "->" + this.height.toString() + "\n"); 
+     if(this._height != null) builder.append("_height" + "->" + this._height.toString() + "\n"); 
+     if(this.width != null) builder.append("width" + "->" + this.width.toString() + "\n"); 
+     if(this._width != null) builder.append("_width" + "->" + this._width.toString() + "\n"); 
+     if(this.frames != null) builder.append("frames" + "->" + this.frames.toString() + "\n"); 
+     if(this._frames != null) builder.append("_frames" + "->" + this._frames.toString() + "\n"); 
+     if(this.duration != null) builder.append("duration" + "->" + this.duration.toString() + "\n"); 
+     if(this._duration != null) builder.append("_duration" + "->" + this._duration.toString() + "\n"); 
+     if(this.content != null) builder.append("content" + "->" + this.content.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -628,36 +603,4 @@ public class Media  {
   	}
   }
 
-  public static java.util.List<Media> fromArray(java.util.List<MediaModel> list) {
-    return (java.util.List<Media>)list.stream()
-      .map(model -> new Media(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MediaModel> toModelArray(java.util.List<Media> list) {
-    return (java.util.List<MediaModel>)list.stream()
-      .map(model -> new MediaModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Media fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Media.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Media o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Media> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

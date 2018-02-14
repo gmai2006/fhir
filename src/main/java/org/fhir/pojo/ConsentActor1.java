@@ -55,6 +55,7 @@ public class ConsentActor1  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -76,18 +77,13 @@ public class ConsentActor1  {
 
   public ConsentActor1(ConsentActor1Model o) {
     this.id = o.getId();
-      this.role = CodeableConcept.fromJson(o.getRole());
-      if (null != o.getReference()) {
-        this.reference = new Reference(o.getReference());
-        this.reference.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.role = CodeableConceptHelper.fromJson(o.getRole());
+    if (null != o.getReference() && !o.getReference().isEmpty()) {
+      this.reference = new Reference(o.getReference().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setRole( CodeableConcept value) {
@@ -130,46 +126,15 @@ public class ConsentActor1  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConsentActor1]:" + "\n");
+     if(this.role != null) builder.append("role" + "->" + this.role.toString() + "\n"); 
+     if(this.reference != null) builder.append("reference" + "->" + this.reference.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ConsentActor1> fromArray(java.util.List<ConsentActor1Model> list) {
-    return (java.util.List<ConsentActor1>)list.stream()
-      .map(model -> new ConsentActor1(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConsentActor1Model> toModelArray(java.util.List<ConsentActor1> list) {
-    return (java.util.List<ConsentActor1Model>)list.stream()
-      .map(model -> new ConsentActor1Model(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ConsentActor1 fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ConsentActor1.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ConsentActor1 o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ConsentActor1> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

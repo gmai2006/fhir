@@ -32,7 +32,5 @@ public interface NamingSystemUniqueIdService {
 	public NamingSystemUniqueId find(String id);
   public List<NamingSystemUniqueId> select(int maxResult);
   public List<NamingSystemUniqueId> selectAll();
-  public NamingSystemUniqueId create(NamingSystemUniqueId bean);
-  public NamingSystemUniqueId update(NamingSystemUniqueId bean);
   public void delete(NamingSystemUniqueId bean);
 }

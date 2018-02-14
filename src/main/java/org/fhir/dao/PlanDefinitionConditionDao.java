@@ -34,10 +34,5 @@ public interface PlanDefinitionConditionDao {
   public List<PlanDefinitionCondition> select(int maxResult);
 
   public List<PlanDefinitionCondition> selectAll();
-
-  public PlanDefinitionCondition create(PlanDefinitionCondition e);
-
-  public PlanDefinitionCondition update(PlanDefinitionCondition e);
-
   public void delete(PlanDefinitionCondition e);
 }

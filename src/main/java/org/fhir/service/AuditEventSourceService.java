@@ -32,7 +32,5 @@ public interface AuditEventSourceService {
 	public AuditEventSource find(String id);
   public List<AuditEventSource> select(int maxResult);
   public List<AuditEventSource> selectAll();
-  public AuditEventSource create(AuditEventSource bean);
-  public AuditEventSource update(AuditEventSource bean);
   public void delete(AuditEventSource bean);
 }

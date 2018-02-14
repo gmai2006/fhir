@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DiagnosticReportPerformerModel;
 import org.fhir.pojo.DiagnosticReportPerformer;
+import org.fhir.pojo.DiagnosticReportPerformerHelper;
 
 public class DiagnosticReportPerformerDaoImpl implements DiagnosticReportPerformerDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DiagnosticReportPerformerDaoImpl implements DiagnosticReportPerform
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DiagnosticReportPerformerModel a", DiagnosticReportPerformerModel.class).setMaxResults(maxResult);
       List<DiagnosticReportPerformerModel> models = query.getResultList();
-      return DiagnosticReportPerformer.fromArray(models);
+      return DiagnosticReportPerformerHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DiagnosticReportPerformerDaoImpl implements DiagnosticReportPerform
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DiagnosticReportPerformerModel a", DiagnosticReportPerformerModel.class);
       List<DiagnosticReportPerformerModel> models = query.getResultList();
-      return DiagnosticReportPerformer.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DiagnosticReportPerformer create(DiagnosticReportPerformer e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DiagnosticReportPerformerModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DiagnosticReportPerformer update(DiagnosticReportPerformer e) {
-      final EntityManager em = entityManagerProvider.get();
-      DiagnosticReportPerformerModel model = em.merge(new DiagnosticReportPerformerModel(e));
-      return new DiagnosticReportPerformer(model);
+      return DiagnosticReportPerformerHelper.fromArray2Array(models);
   }
 
   @Override

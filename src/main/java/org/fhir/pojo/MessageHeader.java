@@ -134,6 +134,7 @@ public class MessageHeader  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -185,80 +186,56 @@ public class MessageHeader  {
 
   public MessageHeader(MessageHeaderModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.event = Coding.fromJson(o.getEvent());
-      this.destination = MessageHeaderDestination.fromArray(o.getDestination());
-
-      if (null != o.getReceiver()) {
-        this.receiver = new Reference(o.getReceiver());
-        this.receiver.setId(this.getId());
-      }
-
-      if (null != o.getSender()) {
-        this.sender = new Reference(o.getSender());
-        this.sender.setId(this.getId());
-      }
-
-      if (null != o.getTimestamp()) {
-        this.timestamp = new String(o.getTimestamp());
-      }
-
-      if (null != o.getEnterer()) {
-        this.enterer = new Reference(o.getEnterer());
-        this.enterer.setId(this.getId());
-      }
-
-      if (null != o.getAuthor()) {
-        this.author = new Reference(o.getAuthor());
-        this.author.setId(this.getId());
-      }
-
-      if (null != o.getSource()) {
-        this.source = new MessageHeaderSource(o.getSource());
-        this.source.setId(this.getId());
-      }
-
-      if (null != o.getResponsible()) {
-        this.responsible = new Reference(o.getResponsible());
-        this.responsible.setId(this.getId());
-      }
-
-      this.reason = CodeableConcept.fromJson(o.getReason());
-      if (null != o.getResponse()) {
-        this.response = new MessageHeaderResponse(o.getResponse());
-        this.response.setId(this.getId());
-      }
-
-      this.focus = Reference.fromArray(o.getFocus());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.event = CodingHelper.fromJson(o.getEvent());
+    if (null != o.getDestination() && !o.getDestination().isEmpty()) {
+    	this.destination = MessageHeaderDestinationHelper.fromArray2Array(o.getDestination());
+    }
+    if (null != o.getReceiver() && !o.getReceiver().isEmpty()) {
+      this.receiver = new Reference(o.getReceiver().get(0));
+    }
+    if (null != o.getSender() && !o.getSender().isEmpty()) {
+      this.sender = new Reference(o.getSender().get(0));
+    }
+    if (null != o.getTimestamp()) {
+      this.timestamp = o.getTimestamp();
+    }
+    if (null != o.getEnterer() && !o.getEnterer().isEmpty()) {
+      this.enterer = new Reference(o.getEnterer().get(0));
+    }
+    if (null != o.getAuthor() && !o.getAuthor().isEmpty()) {
+      this.author = new Reference(o.getAuthor().get(0));
+    }
+    if (null != o.getSource() && !o.getSource().isEmpty()) {
+      this.source = new MessageHeaderSource(o.getSource().get(0));
+    }
+    if (null != o.getResponsible() && !o.getResponsible().isEmpty()) {
+      this.responsible = new Reference(o.getResponsible().get(0));
+    }
+    this.reason = CodeableConceptHelper.fromJson(o.getReason());
+    if (null != o.getResponse() && !o.getResponse().isEmpty()) {
+      this.response = new MessageHeaderResponse(o.getResponse().get(0));
+    }
+    if (null != o.getFocus() && !o.getFocus().isEmpty()) {
+    	this.focus = ReferenceHelper.fromArray2Array(o.getFocus());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -415,31 +392,32 @@ public class MessageHeader  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("event" + "[" + String.valueOf(this.event) + "]\n"); 
-     builder.append("destination" + "[" + String.valueOf(this.destination) + "]\n"); 
-     builder.append("receiver" + "[" + String.valueOf(this.receiver) + "]\n"); 
-     builder.append("sender" + "[" + String.valueOf(this.sender) + "]\n"); 
-     builder.append("timestamp" + "[" + String.valueOf(this.timestamp) + "]\n"); 
-     builder.append("_timestamp" + "[" + String.valueOf(this._timestamp) + "]\n"); 
-     builder.append("enterer" + "[" + String.valueOf(this.enterer) + "]\n"); 
-     builder.append("author" + "[" + String.valueOf(this.author) + "]\n"); 
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("responsible" + "[" + String.valueOf(this.responsible) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("response" + "[" + String.valueOf(this.response) + "]\n"); 
-     builder.append("focus" + "[" + String.valueOf(this.focus) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[MessageHeader]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.event != null) builder.append("event" + "->" + this.event.toString() + "\n"); 
+     if(this.destination != null) builder.append("destination" + "->" + this.destination.toString() + "\n"); 
+     if(this.receiver != null) builder.append("receiver" + "->" + this.receiver.toString() + "\n"); 
+     if(this.sender != null) builder.append("sender" + "->" + this.sender.toString() + "\n"); 
+     if(this.timestamp != null) builder.append("timestamp" + "->" + this.timestamp.toString() + "\n"); 
+     if(this._timestamp != null) builder.append("_timestamp" + "->" + this._timestamp.toString() + "\n"); 
+     if(this.enterer != null) builder.append("enterer" + "->" + this.enterer.toString() + "\n"); 
+     if(this.author != null) builder.append("author" + "->" + this.author.toString() + "\n"); 
+     if(this.source != null) builder.append("source" + "->" + this.source.toString() + "\n"); 
+     if(this.responsible != null) builder.append("responsible" + "->" + this.responsible.toString() + "\n"); 
+     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); 
+     if(this.response != null) builder.append("response" + "->" + this.response.toString() + "\n"); 
+     if(this.focus != null) builder.append("focus" + "->" + this.focus.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -455,36 +433,4 @@ public class MessageHeader  {
   	}
   }
 
-  public static java.util.List<MessageHeader> fromArray(java.util.List<MessageHeaderModel> list) {
-    return (java.util.List<MessageHeader>)list.stream()
-      .map(model -> new MessageHeader(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MessageHeaderModel> toModelArray(java.util.List<MessageHeader> list) {
-    return (java.util.List<MessageHeaderModel>)list.stream()
-      .map(model -> new MessageHeaderModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MessageHeader fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MessageHeader.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MessageHeader o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MessageHeader> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

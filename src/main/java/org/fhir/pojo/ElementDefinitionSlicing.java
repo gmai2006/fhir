@@ -77,6 +77,7 @@ public class ElementDefinitionSlicing  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -165,38 +166,19 @@ public class ElementDefinitionSlicing  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("discriminator" + "[" + String.valueOf(this.discriminator) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("ordered" + "[" + String.valueOf(this.ordered) + "]\n"); 
-     builder.append("_ordered" + "[" + String.valueOf(this._ordered) + "]\n"); 
-     builder.append("rules" + "[" + String.valueOf(this.rules) + "]\n"); 
-     builder.append("_rules" + "[" + String.valueOf(this._rules) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ElementDefinitionSlicing]:" + "\n");
+     if(this.discriminator != null) builder.append("discriminator" + "->" + this.discriminator.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.ordered != null) builder.append("ordered" + "->" + this.ordered.toString() + "\n"); 
+     if(this._ordered != null) builder.append("_ordered" + "->" + this._ordered.toString() + "\n"); 
+     if(this.rules != null) builder.append("rules" + "->" + this.rules.toString() + "\n"); 
+     if(this._rules != null) builder.append("_rules" + "->" + this._rules.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static ElementDefinitionSlicing fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ElementDefinitionSlicing.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ElementDefinitionSlicing o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ElementDefinitionSlicing> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum RulesEnum {

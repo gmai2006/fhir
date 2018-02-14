@@ -32,7 +32,5 @@ public interface MessageHeaderSourceService {
 	public MessageHeaderSource find(String id);
   public List<MessageHeaderSource> select(int maxResult);
   public List<MessageHeaderSource> selectAll();
-  public MessageHeaderSource create(MessageHeaderSource bean);
-  public MessageHeaderSource update(MessageHeaderSource bean);
   public void delete(MessageHeaderSource bean);
 }

@@ -34,10 +34,5 @@ public interface ConsentExceptDao {
   public List<ConsentExcept> select(int maxResult);
 
   public List<ConsentExcept> selectAll();
-
-  public ConsentExcept create(ConsentExcept e);
-
-  public ConsentExcept update(ConsentExcept e);
-
   public void delete(ConsentExcept e);
 }

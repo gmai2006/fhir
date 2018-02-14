@@ -34,10 +34,8 @@ public interface VisionPrescriptionDao {
   public List<VisionPrescription> select(int maxResult);
 
   public List<VisionPrescription> selectAll();
-
   public VisionPrescription create(VisionPrescription e);
 
   public VisionPrescription update(VisionPrescription e);
-
   public void delete(VisionPrescription e);
 }

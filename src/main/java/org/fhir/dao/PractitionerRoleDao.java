@@ -34,10 +34,8 @@ public interface PractitionerRoleDao {
   public List<PractitionerRole> select(int maxResult);
 
   public List<PractitionerRole> selectAll();
-
   public PractitionerRole create(PractitionerRole e);
 
   public PractitionerRole update(PractitionerRole e);
-
   public void delete(PractitionerRole e);
 }

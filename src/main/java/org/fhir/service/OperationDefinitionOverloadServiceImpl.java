@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public OperationDefinitionOverload create(OperationDefinitionOverload bean) {
-  	requireNonNull(bean);
-    logger.info("create(OperationDefinitionOverload={}) - entered bean ");
-
-    final OperationDefinitionOverload result = dao.create(bean);
-
-    logger.info("create(OperationDefinitionOverload) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public OperationDefinitionOverload update(OperationDefinitionOverload bean) {
-  	requireNonNull(bean);
-    logger.info("update(OperationDefinitionOverload={}) - entered bean ");
-
-    final OperationDefinitionOverload result = dao.update(bean);
-
-    logger.info("update(OperationDefinitionOverload) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

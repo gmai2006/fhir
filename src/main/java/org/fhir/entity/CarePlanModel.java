@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
 @Entity
 @Table(name="careplan")
-public class CarePlanModel  {
+public class CarePlanModel  implements Serializable {
+	private static final long serialVersionUID = 151857669654834566L;
   /**
   * Description: "This is a CarePlan resource"
   */
@@ -47,7 +48,7 @@ public class CarePlanModel  {
 
   /**
   * Description: "This records identifiers associated with this care plan that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -57,30 +58,46 @@ public class CarePlanModel  {
   /**
   * Description: "Identifies the protocol, questionnaire, guideline or other specification the care plan should be conducted in accordance with."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> definition = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"definition_id\"")
+  private String definition_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="definition_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> definition;
 
   /**
   * Description: "A care plan that is fulfilled in whole or in part by this care plan."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> basedOn = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"basedon_id\"")
+  private String basedon_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="basedon_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> basedOn;
 
   /**
   * Description: "Completed or terminated care plan whose function is taken by this new care plan."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> replaces = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"replaces_id\"")
+  private String replaces_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="replaces_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> replaces;
 
   /**
   * Description: "A larger care plan of which this particular care plan is a component or step."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> partOf = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"partof_id\"")
+  private String partof_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="partof_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> partOf;
 
   /**
   * Description: "Indicates whether the plan is currently being acted upon, represents future intentions or is now a historical record."
@@ -98,7 +115,7 @@ public class CarePlanModel  {
 
   /**
   * Description: "Identifies what \"kind\" of plan this is to support differentiation between multiple co-existing plans; e.g. \"Home health\", \"psychiatric\", \"asthma\", \"disease management\", \"wellness plan\", etc."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -126,9 +143,9 @@ public class CarePlanModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "Identifies the original context in which this particular CarePlan was created."
@@ -137,13 +154,13 @@ public class CarePlanModel  {
   @Column(name="\"context_id\"")
   private String context_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`context_id`", insertable=false, updatable=false)
-  private ReferenceModel context;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="context_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> context;
 
   /**
   * Description: "Indicates when the plan did (or is intended to) come into effect and end."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -153,48 +170,72 @@ public class CarePlanModel  {
   /**
   * Description: "Identifies the individual(s) or ogranization who is responsible for the content of the care plan."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> author = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"author_id\"")
+  private String author_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="author_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> author;
 
   /**
   * Description: "Identifies all people and organizations who are expected to be involved in the care envisioned by this plan."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> careTeam = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"careteam_id\"")
+  private String careteam_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="careteam_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> careTeam;
 
   /**
   * Description: "Identifies the conditions/problems/concerns/diagnoses/etc. whose management and/or mitigation are handled by this plan."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> addresses = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"addresses_id\"")
+  private String addresses_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="addresses_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> addresses;
 
   /**
   * Description: "Identifies portions of the patient's record that specifically influenced the formation of the plan.  These might include co-morbidities, recent procedures, limitations, recent assessments, etc."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> supportingInfo = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"supportinginfo_id\"")
+  private String supportinginfo_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="supportinginfo_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> supportingInfo;
 
   /**
   * Description: "Describes the intended objective(s) of carrying out the care plan."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> goal = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"goal_id\"")
+  private String goal_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="goal_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> goal;
 
   /**
   * Description: "Identifies a planned action to occur as part of the plan.  For example, a medication to be used, lab tests to perform, self-monitoring, education, etc."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<CarePlanActivityModel> activity = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"activity_id\"")
+  private String activity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="activity_id", insertable=false, updatable=false)
+  private java.util.List<CarePlanActivityModel> activity;
 
   /**
   * Description: "General notes about the care plan not covered elsewhere."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -209,14 +250,14 @@ public class CarePlanModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -226,7 +267,7 @@ public class CarePlanModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -236,7 +277,7 @@ public class CarePlanModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -248,6 +289,7 @@ public class CarePlanModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -262,9 +304,9 @@ public class CarePlanModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -285,293 +327,306 @@ public class CarePlanModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public CarePlanModel() {
   }
 
   public CarePlanModel(CarePlan o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.definition = Reference.toModelArray(o.getDefinition());
-
-      this.basedOn = Reference.toModelArray(o.getBasedOn());
-
-      this.replaces = Reference.toModelArray(o.getReplaces());
-
-      this.partOf = Reference.toModelArray(o.getPartOf());
-
-      this.status = o.getStatus();
-
-      this.intent = o.getIntent();
-
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.title = o.getTitle();
-
-      this.description = o.getDescription();
-
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      if (null != o.getContext()) {
-      	this.context_id = "context" + this.getId();
-        this.context = new ReferenceModel(o.getContext());
-        this.context.setId(this.context_id);
-        this.context.parent_id = this.context.getId();
-      }
-
-      this.period = Period.toJson(o.getPeriod());
-      this.author = Reference.toModelArray(o.getAuthor());
-
-      this.careTeam = Reference.toModelArray(o.getCareTeam());
-
-      this.addresses = Reference.toModelArray(o.getAddresses());
-
-      this.supportingInfo = Reference.toModelArray(o.getSupportingInfo());
-
-      this.goal = Reference.toModelArray(o.getGoal());
-
-      this.activity = CarePlanActivity.toModelArray(o.getActivity());
-
-      this.note = Annotation.toJson(o.getNote());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+    	this.definition_id = "definition" + this.id;
+    	this.definition = ReferenceHelper.toModelFromArray(o.getDefinition(), this.definition_id);
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedon_id = "basedon" + this.id;
+    	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
+    }
+    if (null != o.getReplaces() && !o.getReplaces().isEmpty()) {
+    	this.replaces_id = "replaces" + this.id;
+    	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+    	this.partof_id = "partof" + this.id;
+    	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
+    }
+    this.status = o.getStatus();
+    this.intent = o.getIntent();
+    this.title = o.getTitle();
+    this.description = o.getDescription();
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    if (null != o.getContext() ) {
+    	this.context_id = "context" + this.id;
+    	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
+    }
+    this.period = PeriodHelper.toJson(o.getPeriod());
+    if (null != o.getAuthor() && !o.getAuthor().isEmpty()) {
+    	this.author_id = "author" + this.id;
+    	this.author = ReferenceHelper.toModelFromArray(o.getAuthor(), this.author_id);
+    }
+    if (null != o.getCareTeam() && !o.getCareTeam().isEmpty()) {
+    	this.careteam_id = "careteam" + this.id;
+    	this.careTeam = ReferenceHelper.toModelFromArray(o.getCareTeam(), this.careteam_id);
+    }
+    if (null != o.getAddresses() && !o.getAddresses().isEmpty()) {
+    	this.addresses_id = "addresses" + this.id;
+    	this.addresses = ReferenceHelper.toModelFromArray(o.getAddresses(), this.addresses_id);
+    }
+    if (null != o.getSupportingInfo() && !o.getSupportingInfo().isEmpty()) {
+    	this.supportinginfo_id = "supportinginfo" + this.id;
+    	this.supportingInfo = ReferenceHelper.toModelFromArray(o.getSupportingInfo(), this.supportinginfo_id);
+    }
+    if (null != o.getGoal() && !o.getGoal().isEmpty()) {
+    	this.goal_id = "goal" + this.id;
+    	this.goal = ReferenceHelper.toModelFromArray(o.getGoal(), this.goal_id);
+    }
+    if (null != o.getActivity() && !o.getActivity().isEmpty()) {
+    	this.activity_id = "activity" + this.id;
+    	this.activity = CarePlanActivityHelper.toModelFromArray(o.getActivity(), this.activity_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setDefinition( java.util.List<ReferenceModel> value) {
-    this.definition = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public java.util.List<ReferenceModel> getDefinition() {
     return this.definition;
   }
-  public void setBasedOn( java.util.List<ReferenceModel> value) {
-    this.basedOn = value;
+  public void setDefinition( java.util.List<ReferenceModel> value) {
+    this.definition = value;
   }
   public java.util.List<ReferenceModel> getBasedOn() {
     return this.basedOn;
   }
-  public void setReplaces( java.util.List<ReferenceModel> value) {
-    this.replaces = value;
+  public void setBasedOn( java.util.List<ReferenceModel> value) {
+    this.basedOn = value;
   }
   public java.util.List<ReferenceModel> getReplaces() {
     return this.replaces;
   }
-  public void setPartOf( java.util.List<ReferenceModel> value) {
-    this.partOf = value;
+  public void setReplaces( java.util.List<ReferenceModel> value) {
+    this.replaces = value;
   }
   public java.util.List<ReferenceModel> getPartOf() {
     return this.partOf;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setPartOf( java.util.List<ReferenceModel> value) {
+    this.partOf = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setIntent( String value) {
-    this.intent = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getIntent() {
     return this.intent;
   }
-  public void setCategory( String value) {
-    this.category = value;
+  public void setIntent( String value) {
+    this.intent = value;
   }
   public String getCategory() {
     return this.category;
   }
-  public void setTitle( String value) {
-    this.title = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getTitle() {
     return this.title;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setTitle( String value) {
+    this.title = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setContext( ReferenceModel value) {
-    this.context = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
-  public ReferenceModel getContext() {
+  public java.util.List<ReferenceModel> getContext() {
     return this.context;
   }
-  public void setPeriod( String value) {
-    this.period = value;
+  public void setContext( java.util.List<ReferenceModel> value) {
+    this.context = value;
   }
   public String getPeriod() {
     return this.period;
   }
-  public void setAuthor( java.util.List<ReferenceModel> value) {
-    this.author = value;
+  public void setPeriod( String value) {
+    this.period = value;
   }
   public java.util.List<ReferenceModel> getAuthor() {
     return this.author;
   }
-  public void setCareTeam( java.util.List<ReferenceModel> value) {
-    this.careTeam = value;
+  public void setAuthor( java.util.List<ReferenceModel> value) {
+    this.author = value;
   }
   public java.util.List<ReferenceModel> getCareTeam() {
     return this.careTeam;
   }
-  public void setAddresses( java.util.List<ReferenceModel> value) {
-    this.addresses = value;
+  public void setCareTeam( java.util.List<ReferenceModel> value) {
+    this.careTeam = value;
   }
   public java.util.List<ReferenceModel> getAddresses() {
     return this.addresses;
   }
-  public void setSupportingInfo( java.util.List<ReferenceModel> value) {
-    this.supportingInfo = value;
+  public void setAddresses( java.util.List<ReferenceModel> value) {
+    this.addresses = value;
   }
   public java.util.List<ReferenceModel> getSupportingInfo() {
     return this.supportingInfo;
   }
-  public void setGoal( java.util.List<ReferenceModel> value) {
-    this.goal = value;
+  public void setSupportingInfo( java.util.List<ReferenceModel> value) {
+    this.supportingInfo = value;
   }
   public java.util.List<ReferenceModel> getGoal() {
     return this.goal;
   }
-  public void setActivity( java.util.List<CarePlanActivityModel> value) {
-    this.activity = value;
+  public void setGoal( java.util.List<ReferenceModel> value) {
+    this.goal = value;
   }
   public java.util.List<CarePlanActivityModel> getActivity() {
     return this.activity;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setActivity( java.util.List<CarePlanActivityModel> value) {
+    this.activity = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setNote( String value) {
+    this.note = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("replaces" + "[" + String.valueOf(this.replaces) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("intent" + "[" + String.valueOf(this.intent) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("author" + "[" + String.valueOf(this.author) + "]\n"); 
-     builder.append("careTeam" + "[" + String.valueOf(this.careTeam) + "]\n"); 
-     builder.append("addresses" + "[" + String.valueOf(this.addresses) + "]\n"); 
-     builder.append("supportingInfo" + "[" + String.valueOf(this.supportingInfo) + "]\n"); 
-     builder.append("goal" + "[" + String.valueOf(this.goal) + "]\n"); 
-     builder.append("activity" + "[" + String.valueOf(this.activity) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[CarePlanModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("intent" + "->" + this.intent + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[CarePlanModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("basedOn" + "->" + this.basedOn + "\n"); 
+     builder.append("replaces" + "->" + this.replaces + "\n"); 
+     builder.append("partOf" + "->" + this.partOf + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("intent" + "->" + this.intent + "\n"); 
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("context" + "->" + this.context + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("author" + "->" + this.author + "\n"); 
+     builder.append("careTeam" + "->" + this.careTeam + "\n"); 
+     builder.append("addresses" + "->" + this.addresses + "\n"); 
+     builder.append("supportingInfo" + "->" + this.supportingInfo + "\n"); 
+     builder.append("goal" + "->" + this.goal + "\n"); 
+     builder.append("activity" + "->" + this.activity + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

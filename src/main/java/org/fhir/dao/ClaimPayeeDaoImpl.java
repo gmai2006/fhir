@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimPayeeModel;
 import org.fhir.pojo.ClaimPayee;
+import org.fhir.pojo.ClaimPayeeHelper;
 
 public class ClaimPayeeDaoImpl implements ClaimPayeeDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimPayeeDaoImpl implements ClaimPayeeDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimPayeeModel a", ClaimPayeeModel.class).setMaxResults(maxResult);
       List<ClaimPayeeModel> models = query.getResultList();
-      return ClaimPayee.fromArray(models);
+      return ClaimPayeeHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimPayeeDaoImpl implements ClaimPayeeDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimPayeeModel a", ClaimPayeeModel.class);
       List<ClaimPayeeModel> models = query.getResultList();
-      return ClaimPayee.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimPayee create(ClaimPayee e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimPayeeModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimPayee update(ClaimPayee e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimPayeeModel model = em.merge(new ClaimPayeeModel(e));
-      return new ClaimPayee(model);
+      return ClaimPayeeHelper.fromArray2Array(models);
   }
 
   @Override

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CodeSystemProperty1 create(CodeSystemProperty1 bean) {
-  	requireNonNull(bean);
-    logger.info("create(CodeSystemProperty1={}) - entered bean ");
-
-    final CodeSystemProperty1 result = dao.create(bean);
-
-    logger.info("create(CodeSystemProperty1) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CodeSystemProperty1 update(CodeSystemProperty1 bean) {
-  	requireNonNull(bean);
-    logger.info("update(CodeSystemProperty1={}) - entered bean ");
-
-    final CodeSystemProperty1 result = dao.update(bean);
-
-    logger.info("update(CodeSystemProperty1) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

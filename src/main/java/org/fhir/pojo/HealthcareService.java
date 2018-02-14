@@ -227,6 +227,7 @@ public class HealthcareService  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -278,90 +279,69 @@ public class HealthcareService  {
 
   public HealthcareService(HealthcareServiceModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getActive()) {
-        this.active = new Boolean(o.getActive());
-      }
-
-      if (null != o.getProvidedBy()) {
-        this.providedBy = new Reference(o.getProvidedBy());
-        this.providedBy.setId(this.getId());
-      }
-
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      this.type = CodeableConcept.fromArray(o.getType());
-      this.specialty = CodeableConcept.fromArray(o.getSpecialty());
-      this.location = Reference.fromArray(o.getLocation());
-
-      if (null != o.getName()) {
-        this.name = new String(o.getName());
-      }
-
-      if (null != o.getComment()) {
-        this.comment = new String(o.getComment());
-      }
-
-      if (null != o.getExtraDetails()) {
-        this.extraDetails = new String(o.getExtraDetails());
-      }
-
-      this.photo = Attachment.fromJson(o.getPhoto());
-      this.telecom = ContactPoint.fromArray(o.getTelecom());
-      this.coverageArea = Reference.fromArray(o.getCoverageArea());
-
-      this.serviceProvisionCode = CodeableConcept.fromArray(o.getServiceProvisionCode());
-      this.eligibility = CodeableConcept.fromJson(o.getEligibility());
-      if (null != o.getEligibilityNote()) {
-        this.eligibilityNote = new String(o.getEligibilityNote());
-      }
-
-      this.programName = org.fhir.utils.JsonUtils.json2Array(o.getProgramName());
-
-      this.characteristic = CodeableConcept.fromArray(o.getCharacteristic());
-      this.referralMethod = CodeableConcept.fromArray(o.getReferralMethod());
-      if (null != o.getAppointmentRequired()) {
-        this.appointmentRequired = new Boolean(o.getAppointmentRequired());
-      }
-
-      this.availableTime = HealthcareServiceAvailableTime.fromArray(o.getAvailableTime());
-
-      this.notAvailable = HealthcareServiceNotAvailable.fromArray(o.getNotAvailable());
-
-      if (null != o.getAvailabilityExceptions()) {
-        this.availabilityExceptions = new String(o.getAvailabilityExceptions());
-      }
-
-      this.endpoint = Reference.fromArray(o.getEndpoint());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getActive()) {
+      this.active = o.getActive();
+    }
+    if (null != o.getProvidedBy() && !o.getProvidedBy().isEmpty()) {
+      this.providedBy = new Reference(o.getProvidedBy().get(0));
+    }
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    if (null != o.getLocation() && !o.getLocation().isEmpty()) {
+    	this.location = ReferenceHelper.fromArray2Array(o.getLocation());
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getComment()) {
+      this.comment = o.getComment();
+    }
+    if (null != o.getExtraDetails()) {
+      this.extraDetails = o.getExtraDetails();
+    }
+    this.photo = AttachmentHelper.fromJson(o.getPhoto());
+    if (null != o.getCoverageArea() && !o.getCoverageArea().isEmpty()) {
+    	this.coverageArea = ReferenceHelper.fromArray2Array(o.getCoverageArea());
+    }
+    this.eligibility = CodeableConceptHelper.fromJson(o.getEligibility());
+    if (null != o.getEligibilityNote()) {
+      this.eligibilityNote = o.getEligibilityNote();
+    }
+    if (o.getProgramName() != null) {
+    	this.programName = org.fhir.utils.JsonUtils.json2Array(o.getProgramName());
+    }
+    if (null != o.getAppointmentRequired()) {
+      this.appointmentRequired = o.getAppointmentRequired();
+    }
+    if (null != o.getAvailableTime() && !o.getAvailableTime().isEmpty()) {
+    	this.availableTime = HealthcareServiceAvailableTimeHelper.fromArray2Array(o.getAvailableTime());
+    }
+    if (null != o.getNotAvailable() && !o.getNotAvailable().isEmpty()) {
+    	this.notAvailable = HealthcareServiceNotAvailableHelper.fromArray2Array(o.getNotAvailable());
+    }
+    if (null != o.getAvailabilityExceptions()) {
+      this.availabilityExceptions = o.getAvailabilityExceptions();
+    }
+    if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
+    	this.endpoint = ReferenceHelper.fromArray2Array(o.getEndpoint());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -632,50 +612,51 @@ public class HealthcareService  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("active" + "[" + String.valueOf(this.active) + "]\n"); 
-     builder.append("_active" + "[" + String.valueOf(this._active) + "]\n"); 
-     builder.append("providedBy" + "[" + String.valueOf(this.providedBy) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("specialty" + "[" + String.valueOf(this.specialty) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("_comment" + "[" + String.valueOf(this._comment) + "]\n"); 
-     builder.append("extraDetails" + "[" + String.valueOf(this.extraDetails) + "]\n"); 
-     builder.append("_extraDetails" + "[" + String.valueOf(this._extraDetails) + "]\n"); 
-     builder.append("photo" + "[" + String.valueOf(this.photo) + "]\n"); 
-     builder.append("telecom" + "[" + String.valueOf(this.telecom) + "]\n"); 
-     builder.append("coverageArea" + "[" + String.valueOf(this.coverageArea) + "]\n"); 
-     builder.append("serviceProvisionCode" + "[" + String.valueOf(this.serviceProvisionCode) + "]\n"); 
-     builder.append("eligibility" + "[" + String.valueOf(this.eligibility) + "]\n"); 
-     builder.append("eligibilityNote" + "[" + String.valueOf(this.eligibilityNote) + "]\n"); 
-     builder.append("_eligibilityNote" + "[" + String.valueOf(this._eligibilityNote) + "]\n"); 
-     builder.append("programName" + "[" + String.valueOf(this.programName) + "]\n"); 
-     builder.append("_programName" + "[" + String.valueOf(this._programName) + "]\n"); 
-     builder.append("characteristic" + "[" + String.valueOf(this.characteristic) + "]\n"); 
-     builder.append("referralMethod" + "[" + String.valueOf(this.referralMethod) + "]\n"); 
-     builder.append("appointmentRequired" + "[" + String.valueOf(this.appointmentRequired) + "]\n"); 
-     builder.append("_appointmentRequired" + "[" + String.valueOf(this._appointmentRequired) + "]\n"); 
-     builder.append("availableTime" + "[" + String.valueOf(this.availableTime) + "]\n"); 
-     builder.append("notAvailable" + "[" + String.valueOf(this.notAvailable) + "]\n"); 
-     builder.append("availabilityExceptions" + "[" + String.valueOf(this.availabilityExceptions) + "]\n"); 
-     builder.append("_availabilityExceptions" + "[" + String.valueOf(this._availabilityExceptions) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[HealthcareService]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.active != null) builder.append("active" + "->" + this.active.toString() + "\n"); 
+     if(this._active != null) builder.append("_active" + "->" + this._active.toString() + "\n"); 
+     if(this.providedBy != null) builder.append("providedBy" + "->" + this.providedBy.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.specialty != null) builder.append("specialty" + "->" + this.specialty.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
+     if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
+     if(this.extraDetails != null) builder.append("extraDetails" + "->" + this.extraDetails.toString() + "\n"); 
+     if(this._extraDetails != null) builder.append("_extraDetails" + "->" + this._extraDetails.toString() + "\n"); 
+     if(this.photo != null) builder.append("photo" + "->" + this.photo.toString() + "\n"); 
+     if(this.telecom != null) builder.append("telecom" + "->" + this.telecom.toString() + "\n"); 
+     if(this.coverageArea != null) builder.append("coverageArea" + "->" + this.coverageArea.toString() + "\n"); 
+     if(this.serviceProvisionCode != null) builder.append("serviceProvisionCode" + "->" + this.serviceProvisionCode.toString() + "\n"); 
+     if(this.eligibility != null) builder.append("eligibility" + "->" + this.eligibility.toString() + "\n"); 
+     if(this.eligibilityNote != null) builder.append("eligibilityNote" + "->" + this.eligibilityNote.toString() + "\n"); 
+     if(this._eligibilityNote != null) builder.append("_eligibilityNote" + "->" + this._eligibilityNote.toString() + "\n"); 
+     if(this.programName != null) builder.append("programName" + "->" + this.programName.toString() + "\n"); 
+     if(this._programName != null) builder.append("_programName" + "->" + this._programName.toString() + "\n"); 
+     if(this.characteristic != null) builder.append("characteristic" + "->" + this.characteristic.toString() + "\n"); 
+     if(this.referralMethod != null) builder.append("referralMethod" + "->" + this.referralMethod.toString() + "\n"); 
+     if(this.appointmentRequired != null) builder.append("appointmentRequired" + "->" + this.appointmentRequired.toString() + "\n"); 
+     if(this._appointmentRequired != null) builder.append("_appointmentRequired" + "->" + this._appointmentRequired.toString() + "\n"); 
+     if(this.availableTime != null) builder.append("availableTime" + "->" + this.availableTime.toString() + "\n"); 
+     if(this.notAvailable != null) builder.append("notAvailable" + "->" + this.notAvailable.toString() + "\n"); 
+     if(this.availabilityExceptions != null) builder.append("availabilityExceptions" + "->" + this.availabilityExceptions.toString() + "\n"); 
+     if(this._availabilityExceptions != null) builder.append("_availabilityExceptions" + "->" + this._availabilityExceptions.toString() + "\n"); 
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -691,36 +672,4 @@ public class HealthcareService  {
   	}
   }
 
-  public static java.util.List<HealthcareService> fromArray(java.util.List<HealthcareServiceModel> list) {
-    return (java.util.List<HealthcareService>)list.stream()
-      .map(model -> new HealthcareService(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<HealthcareServiceModel> toModelArray(java.util.List<HealthcareService> list) {
-    return (java.util.List<HealthcareServiceModel>)list.stream()
-      .map(model -> new HealthcareServiceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static HealthcareService fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, HealthcareService.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(HealthcareService o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<HealthcareService> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

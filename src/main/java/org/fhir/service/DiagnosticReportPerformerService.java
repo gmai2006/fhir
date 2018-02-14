@@ -32,7 +32,5 @@ public interface DiagnosticReportPerformerService {
 	public DiagnosticReportPerformer find(String id);
   public List<DiagnosticReportPerformer> select(int maxResult);
   public List<DiagnosticReportPerformer> selectAll();
-  public DiagnosticReportPerformer create(DiagnosticReportPerformer bean);
-  public DiagnosticReportPerformer update(DiagnosticReportPerformer bean);
   public void delete(DiagnosticReportPerformer bean);
 }

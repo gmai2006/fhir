@@ -32,7 +32,5 @@ public interface ProcessResponseProcessNoteService {
 	public ProcessResponseProcessNote find(String id);
   public List<ProcessResponseProcessNote> select(int maxResult);
   public List<ProcessResponseProcessNote> selectAll();
-  public ProcessResponseProcessNote create(ProcessResponseProcessNote bean);
-  public ProcessResponseProcessNote update(ProcessResponseProcessNote bean);
   public void delete(ProcessResponseProcessNote bean);
 }

@@ -32,7 +32,5 @@ public interface CapabilityStatementResourceService {
 	public CapabilityStatementResource find(String id);
   public List<CapabilityStatementResource> select(int maxResult);
   public List<CapabilityStatementResource> selectAll();
-  public CapabilityStatementResource create(CapabilityStatementResource bean);
-  public CapabilityStatementResource update(CapabilityStatementResource bean);
   public void delete(CapabilityStatementResource bean);
 }

@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.SearchParameterModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -288,6 +289,7 @@ public class SearchParameter  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -334,7 +336,99 @@ public class SearchParameter  {
   */
   private transient Element _language;
 
-  public SearchParameter() {}
+  public SearchParameter() {
+  }
+
+  public SearchParameter(SearchParameterModel o) {
+    this.id = o.getId();
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getUrl()) {
+      this.url = o.getUrl();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getExperimental()) {
+      this.experimental = o.getExperimental();
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getPublisher()) {
+      this.publisher = o.getPublisher();
+    }
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact = ContactDetailHelper.fromArray2Array(o.getContact());
+    }
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
+    }
+    if (null != o.getPurpose()) {
+      this.purpose = o.getPurpose();
+    }
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (o.getBase() != null) {
+    	this.base = org.fhir.utils.JsonUtils.json2Array(o.getBase());
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getDerivedFrom()) {
+      this.derivedFrom = o.getDerivedFrom();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getExpression()) {
+      this.expression = o.getExpression();
+    }
+    if (null != o.getXpath()) {
+      this.xpath = o.getXpath();
+    }
+    if (null != o.getXpathUsage()) {
+      this.xpathUsage = o.getXpathUsage();
+    }
+    if (o.getTarget() != null) {
+    	this.target = org.fhir.utils.JsonUtils.json2Array(o.getTarget());
+    }
+    if (o.getComparator() != null) {
+    	this.comparator = org.fhir.utils.JsonUtils.json2Array(o.getComparator());
+    }
+    if (o.getModifier() != null) {
+    	this.modifier = org.fhir.utils.JsonUtils.json2Array(o.getModifier());
+    }
+    if (o.getChain() != null) {
+    	this.chain = org.fhir.utils.JsonUtils.json2Array(o.getChain());
+    }
+    if (null != o.getComponent() && !o.getComponent().isEmpty()) {
+    	this.component = SearchParameterComponentHelper.fromArray2Array(o.getComponent());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
+  }
 
   public void setResourceType( String value) {
     this.resourceType = ResourceTypeEnum.fromCode(value);
@@ -676,83 +770,64 @@ public class SearchParameter  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("_url" + "[" + String.valueOf(this._url) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("experimental" + "[" + String.valueOf(this.experimental) + "]\n"); 
-     builder.append("_experimental" + "[" + String.valueOf(this._experimental) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("_publisher" + "[" + String.valueOf(this._publisher) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("purpose" + "[" + String.valueOf(this.purpose) + "]\n"); 
-     builder.append("_purpose" + "[" + String.valueOf(this._purpose) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("base" + "[" + String.valueOf(this.base) + "]\n"); 
-     builder.append("_base" + "[" + String.valueOf(this._base) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("derivedFrom" + "[" + String.valueOf(this.derivedFrom) + "]\n"); 
-     builder.append("_derivedFrom" + "[" + String.valueOf(this._derivedFrom) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("expression" + "[" + String.valueOf(this.expression) + "]\n"); 
-     builder.append("_expression" + "[" + String.valueOf(this._expression) + "]\n"); 
-     builder.append("xpath" + "[" + String.valueOf(this.xpath) + "]\n"); 
-     builder.append("_xpath" + "[" + String.valueOf(this._xpath) + "]\n"); 
-     builder.append("xpathUsage" + "[" + String.valueOf(this.xpathUsage) + "]\n"); 
-     builder.append("_xpathUsage" + "[" + String.valueOf(this._xpathUsage) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("_target" + "[" + String.valueOf(this._target) + "]\n"); 
-     builder.append("comparator" + "[" + String.valueOf(this.comparator) + "]\n"); 
-     builder.append("_comparator" + "[" + String.valueOf(this._comparator) + "]\n"); 
-     builder.append("modifier" + "[" + String.valueOf(this.modifier) + "]\n"); 
-     builder.append("_modifier" + "[" + String.valueOf(this._modifier) + "]\n"); 
-     builder.append("chain" + "[" + String.valueOf(this.chain) + "]\n"); 
-     builder.append("_chain" + "[" + String.valueOf(this._chain) + "]\n"); 
-     builder.append("component" + "[" + String.valueOf(this.component) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[SearchParameter]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.experimental != null) builder.append("experimental" + "->" + this.experimental.toString() + "\n"); 
+     if(this._experimental != null) builder.append("_experimental" + "->" + this._experimental.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.publisher != null) builder.append("publisher" + "->" + this.publisher.toString() + "\n"); 
+     if(this._publisher != null) builder.append("_publisher" + "->" + this._publisher.toString() + "\n"); 
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
+     if(this.useContext != null) builder.append("useContext" + "->" + this.useContext.toString() + "\n"); 
+     if(this.jurisdiction != null) builder.append("jurisdiction" + "->" + this.jurisdiction.toString() + "\n"); 
+     if(this.purpose != null) builder.append("purpose" + "->" + this.purpose.toString() + "\n"); 
+     if(this._purpose != null) builder.append("_purpose" + "->" + this._purpose.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.base != null) builder.append("base" + "->" + this.base.toString() + "\n"); 
+     if(this._base != null) builder.append("_base" + "->" + this._base.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.derivedFrom != null) builder.append("derivedFrom" + "->" + this.derivedFrom.toString() + "\n"); 
+     if(this._derivedFrom != null) builder.append("_derivedFrom" + "->" + this._derivedFrom.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.expression != null) builder.append("expression" + "->" + this.expression.toString() + "\n"); 
+     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); 
+     if(this.xpath != null) builder.append("xpath" + "->" + this.xpath.toString() + "\n"); 
+     if(this._xpath != null) builder.append("_xpath" + "->" + this._xpath.toString() + "\n"); 
+     if(this.xpathUsage != null) builder.append("xpathUsage" + "->" + this.xpathUsage.toString() + "\n"); 
+     if(this._xpathUsage != null) builder.append("_xpathUsage" + "->" + this._xpathUsage.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this._target != null) builder.append("_target" + "->" + this._target.toString() + "\n"); 
+     if(this.comparator != null) builder.append("comparator" + "->" + this.comparator.toString() + "\n"); 
+     if(this._comparator != null) builder.append("_comparator" + "->" + this._comparator.toString() + "\n"); 
+     if(this.modifier != null) builder.append("modifier" + "->" + this.modifier.toString() + "\n"); 
+     if(this._modifier != null) builder.append("_modifier" + "->" + this._modifier.toString() + "\n"); 
+     if(this.chain != null) builder.append("chain" + "->" + this.chain.toString() + "\n"); 
+     if(this._chain != null) builder.append("_chain" + "->" + this._chain.toString() + "\n"); 
+     if(this.component != null) builder.append("component" + "->" + this.component.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static SearchParameter fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SearchParameter.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SearchParameter o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SearchParameter> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum ResourceTypeEnum {
@@ -765,7 +840,9 @@ public class SearchParameter  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum StatusEnum {
+  }
+
+  public enum StatusEnum {
   	draft,
   	active,
   	retired,
@@ -781,7 +858,9 @@ public class SearchParameter  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum TypeEnum {
+  }
+
+  public enum TypeEnum {
   	number,
   	date,
   	string,
@@ -805,7 +884,9 @@ public class SearchParameter  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum XpathUsageEnum {
+  }
+
+  public enum XpathUsageEnum {
   	normal,
   	phonetic,
   	nearby,
@@ -823,7 +904,9 @@ public class SearchParameter  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum ComparatorEnum {
+  }
+
+  public enum ComparatorEnum {
   	eq,
   	ne,
   	gt,
@@ -853,7 +936,9 @@ public class SearchParameter  {
   	  		}
   	  		return result;
   	  	}
-  }public enum ModifierEnum {
+  }
+
+  public enum ModifierEnum {
   	missing,
   	exact,
   	contains,
@@ -886,4 +971,5 @@ public class SearchParameter  {
   	  		return result;
   	  	}
   }
+
 }

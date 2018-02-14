@@ -34,10 +34,8 @@ public interface EligibilityResponseDao {
   public List<EligibilityResponse> select(int maxResult);
 
   public List<EligibilityResponse> selectAll();
-
   public EligibilityResponse create(EligibilityResponse e);
 
   public EligibilityResponse update(EligibilityResponse e);
-
   public void delete(EligibilityResponse e);
 }

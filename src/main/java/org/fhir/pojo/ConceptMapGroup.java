@@ -94,6 +94,7 @@ public class ConceptMapGroup  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -115,35 +116,27 @@ public class ConceptMapGroup  {
 
   public ConceptMapGroup(ConceptMapGroupModel o) {
     this.id = o.getId();
-      if (null != o.getSource()) {
-        this.source = new String(o.getSource());
-      }
-
-      if (null != o.getSourceVersion()) {
-        this.sourceVersion = new String(o.getSourceVersion());
-      }
-
-      if (null != o.getTarget()) {
-        this.target = new String(o.getTarget());
-      }
-
-      if (null != o.getTargetVersion()) {
-        this.targetVersion = new String(o.getTargetVersion());
-      }
-
-      this.element = ConceptMapElement.fromArray(o.getElement());
-
-      if (null != o.getUnmapped()) {
-        this.unmapped = new ConceptMapUnmapped(o.getUnmapped());
-        this.unmapped.setId(this.getId());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSource()) {
+      this.source = o.getSource();
+    }
+    if (null != o.getSourceVersion()) {
+      this.sourceVersion = o.getSourceVersion();
+    }
+    if (null != o.getTarget()) {
+      this.target = o.getTarget();
+    }
+    if (null != o.getTargetVersion()) {
+      this.targetVersion = o.getTargetVersion();
+    }
+    if (null != o.getElement() && !o.getElement().isEmpty()) {
+    	this.element = ConceptMapElementHelper.fromArray2Array(o.getElement());
+    }
+    if (null != o.getUnmapped() && !o.getUnmapped().isEmpty()) {
+      this.unmapped = new ConceptMapUnmapped(o.getUnmapped().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSource( String value) {
@@ -234,54 +227,23 @@ public class ConceptMapGroup  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("_source" + "[" + String.valueOf(this._source) + "]\n"); 
-     builder.append("sourceVersion" + "[" + String.valueOf(this.sourceVersion) + "]\n"); 
-     builder.append("_sourceVersion" + "[" + String.valueOf(this._sourceVersion) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("_target" + "[" + String.valueOf(this._target) + "]\n"); 
-     builder.append("targetVersion" + "[" + String.valueOf(this.targetVersion) + "]\n"); 
-     builder.append("_targetVersion" + "[" + String.valueOf(this._targetVersion) + "]\n"); 
-     builder.append("element" + "[" + String.valueOf(this.element) + "]\n"); 
-     builder.append("unmapped" + "[" + String.valueOf(this.unmapped) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConceptMapGroup]:" + "\n");
+     if(this.source != null) builder.append("source" + "->" + this.source.toString() + "\n"); 
+     if(this._source != null) builder.append("_source" + "->" + this._source.toString() + "\n"); 
+     if(this.sourceVersion != null) builder.append("sourceVersion" + "->" + this.sourceVersion.toString() + "\n"); 
+     if(this._sourceVersion != null) builder.append("_sourceVersion" + "->" + this._sourceVersion.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this._target != null) builder.append("_target" + "->" + this._target.toString() + "\n"); 
+     if(this.targetVersion != null) builder.append("targetVersion" + "->" + this.targetVersion.toString() + "\n"); 
+     if(this._targetVersion != null) builder.append("_targetVersion" + "->" + this._targetVersion.toString() + "\n"); 
+     if(this.element != null) builder.append("element" + "->" + this.element.toString() + "\n"); 
+     if(this.unmapped != null) builder.append("unmapped" + "->" + this.unmapped.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ConceptMapGroup> fromArray(java.util.List<ConceptMapGroupModel> list) {
-    return (java.util.List<ConceptMapGroup>)list.stream()
-      .map(model -> new ConceptMapGroup(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConceptMapGroupModel> toModelArray(java.util.List<ConceptMapGroup> list) {
-    return (java.util.List<ConceptMapGroupModel>)list.stream()
-      .map(model -> new ConceptMapGroupModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ConceptMapGroup fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ConceptMapGroup.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ConceptMapGroup o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ConceptMapGroup> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

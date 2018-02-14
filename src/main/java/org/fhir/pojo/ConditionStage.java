@@ -53,6 +53,7 @@ public class ConditionStage  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -74,15 +75,13 @@ public class ConditionStage  {
 
   public ConditionStage(ConditionStageModel o) {
     this.id = o.getId();
-      this.summary = CodeableConcept.fromJson(o.getSummary());
-      this.assessment = Reference.fromArray(o.getAssessment());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.summary = CodeableConceptHelper.fromJson(o.getSummary());
+    if (null != o.getAssessment() && !o.getAssessment().isEmpty()) {
+    	this.assessment = ReferenceHelper.fromArray2Array(o.getAssessment());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSummary( CodeableConcept value) {
@@ -125,46 +124,15 @@ public class ConditionStage  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("summary" + "[" + String.valueOf(this.summary) + "]\n"); 
-     builder.append("assessment" + "[" + String.valueOf(this.assessment) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConditionStage]:" + "\n");
+     if(this.summary != null) builder.append("summary" + "->" + this.summary.toString() + "\n"); 
+     if(this.assessment != null) builder.append("assessment" + "->" + this.assessment.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ConditionStage> fromArray(java.util.List<ConditionStageModel> list) {
-    return (java.util.List<ConditionStage>)list.stream()
-      .map(model -> new ConditionStage(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConditionStageModel> toModelArray(java.util.List<ConditionStage> list) {
-    return (java.util.List<ConditionStageModel>)list.stream()
-      .map(model -> new ConditionStageModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ConditionStage fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ConditionStage.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ConditionStage o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ConditionStage> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

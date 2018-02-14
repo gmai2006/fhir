@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExpansionProfileModel;
 import org.fhir.pojo.ExpansionProfile;
+import org.fhir.pojo.ExpansionProfileHelper;
 
 public class ExpansionProfileDaoImpl implements ExpansionProfileDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExpansionProfileDaoImpl implements ExpansionProfileDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExpansionProfileModel a", ExpansionProfileModel.class).setMaxResults(maxResult);
       List<ExpansionProfileModel> models = query.getResultList();
-      return ExpansionProfile.fromArray(models);
+      return ExpansionProfileHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ExpansionProfileDaoImpl implements ExpansionProfileDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExpansionProfileModel a", ExpansionProfileModel.class);
       List<ExpansionProfileModel> models = query.getResultList();
-      return ExpansionProfile.fromArray(models);
+      return ExpansionProfileHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ExpansionProfileDaoImpl implements ExpansionProfileDao {
       ExpansionProfileModel model = em.merge(new ExpansionProfileModel(e));
       return new ExpansionProfile(model);
   }
-
   @Override
   @Transactional
   public void delete(ExpansionProfile e) {

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.OperationOutcomeModel;
 import org.fhir.pojo.OperationOutcome;
+import org.fhir.pojo.OperationOutcomeHelper;
 
 public class OperationOutcomeDaoImpl implements OperationOutcomeDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class OperationOutcomeDaoImpl implements OperationOutcomeDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OperationOutcomeModel a", OperationOutcomeModel.class).setMaxResults(maxResult);
       List<OperationOutcomeModel> models = query.getResultList();
-      return OperationOutcome.fromArray(models);
+      return OperationOutcomeHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class OperationOutcomeDaoImpl implements OperationOutcomeDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from OperationOutcomeModel a", OperationOutcomeModel.class);
       List<OperationOutcomeModel> models = query.getResultList();
-      return OperationOutcome.fromArray(models);
+      return OperationOutcomeHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class OperationOutcomeDaoImpl implements OperationOutcomeDao {
       OperationOutcomeModel model = em.merge(new OperationOutcomeModel(e));
       return new OperationOutcome(model);
   }
-
   @Override
   @Transactional
   public void delete(OperationOutcome e) {

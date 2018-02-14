@@ -34,10 +34,5 @@ public interface SpecimenContainerDao {
   public List<SpecimenContainer> select(int maxResult);
 
   public List<SpecimenContainer> selectAll();
-
-  public SpecimenContainer create(SpecimenContainer e);
-
-  public SpecimenContainer update(SpecimenContainer e);
-
   public void delete(SpecimenContainer e);
 }

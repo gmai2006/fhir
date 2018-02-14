@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public GraphDefinitionTarget create(GraphDefinitionTarget bean) {
-  	requireNonNull(bean);
-    logger.info("create(GraphDefinitionTarget={}) - entered bean ");
-
-    final GraphDefinitionTarget result = dao.create(bean);
-
-    logger.info("create(GraphDefinitionTarget) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public GraphDefinitionTarget update(GraphDefinitionTarget bean) {
-  	requireNonNull(bean);
-    logger.info("update(GraphDefinitionTarget={}) - entered bean ");
-
-    final GraphDefinitionTarget result = dao.update(bean);
-
-    logger.info("update(GraphDefinitionTarget) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

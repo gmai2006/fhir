@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitbenefitbalance")
-public class ExplanationOfBenefitBenefitBalanceModel  {
+public class ExplanationOfBenefitBenefitBalanceModel  implements Serializable {
+	private static final long serialVersionUID = 151857669652418702L;
   /**
   * Description: "Dental, Vision, Medical, Pharmacy, Rehab etc."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -49,7 +50,7 @@ public class ExplanationOfBenefitBenefitBalanceModel  {
 
   /**
   * Description: "Dental: basic, major, ortho; Vision exam, glasses, contacts; etc."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -79,7 +80,7 @@ public class ExplanationOfBenefitBenefitBalanceModel  {
 
   /**
   * Description: "Network designation."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -88,7 +89,7 @@ public class ExplanationOfBenefitBenefitBalanceModel  {
 
   /**
   * Description: "Unit designation: individual or family."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -97,7 +98,7 @@ public class ExplanationOfBenefitBenefitBalanceModel  {
 
   /**
   * Description: "The term or period of the values such as 'maximum lifetime benefit' or 'maximum annual vistis'."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -107,14 +108,18 @@ public class ExplanationOfBenefitBenefitBalanceModel  {
   /**
   * Description: "Benefits Used to date."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ExplanationOfBenefitFinancialModel> financial = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"financial_id\"")
+  private String financial_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="financial_id", insertable=false, updatable=false)
+  private java.util.List<ExplanationOfBenefitFinancialModel> financial;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -126,6 +131,7 @@ public class ExplanationOfBenefitBenefitBalanceModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -134,130 +140,155 @@ public class ExplanationOfBenefitBenefitBalanceModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ExplanationOfBenefitBenefitBalanceModel() {
   }
 
-  public ExplanationOfBenefitBenefitBalanceModel(ExplanationOfBenefitBenefitBalance o) {
-    this.id = o.getId();
-      this.category = CodeableConcept.toJson(o.getCategory());
-      this.subCategory = CodeableConcept.toJson(o.getSubCategory());
-      this.excluded = o.getExcluded();
-
-      this.name = o.getName();
-
-      this.description = o.getDescription();
-
-      this.network = CodeableConcept.toJson(o.getNetwork());
-      this.unit = CodeableConcept.toJson(o.getUnit());
-      this.term = CodeableConcept.toJson(o.getTerm());
-      this.financial = ExplanationOfBenefitFinancial.toModelArray(o.getFinancial());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ExplanationOfBenefitBenefitBalanceModel(ExplanationOfBenefitBenefitBalance o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.subCategory = CodeableConceptHelper.toJson(o.getSubCategory());
+    this.excluded = o.getExcluded();
+    this.name = o.getName();
+    this.description = o.getDescription();
+    this.network = CodeableConceptHelper.toJson(o.getNetwork());
+    this.unit = CodeableConceptHelper.toJson(o.getUnit());
+    this.term = CodeableConceptHelper.toJson(o.getTerm());
+    if (null != o.getFinancial() && !o.getFinancial().isEmpty()) {
+    	this.financial_id = "financial" + this.parent_id;
+    	this.financial = ExplanationOfBenefitFinancialHelper.toModelFromArray(o.getFinancial(), this.financial_id);
+    }
   }
 
-  public void setCategory( String value) {
-    this.category = value;
-  }
   public String getCategory() {
     return this.category;
   }
-  public void setSubCategory( String value) {
-    this.subCategory = value;
+  public void setCategory( String value) {
+    this.category = value;
   }
   public String getSubCategory() {
     return this.subCategory;
   }
-  public void setExcluded( Boolean value) {
-    this.excluded = value;
+  public void setSubCategory( String value) {
+    this.subCategory = value;
   }
   public Boolean getExcluded() {
     return this.excluded;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setExcluded( Boolean value) {
+    this.excluded = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setNetwork( String value) {
-    this.network = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public String getNetwork() {
     return this.network;
   }
-  public void setUnit( String value) {
-    this.unit = value;
+  public void setNetwork( String value) {
+    this.network = value;
   }
   public String getUnit() {
     return this.unit;
   }
-  public void setTerm( String value) {
-    this.term = value;
+  public void setUnit( String value) {
+    this.unit = value;
   }
   public String getTerm() {
     return this.term;
   }
-  public void setFinancial( java.util.List<ExplanationOfBenefitFinancialModel> value) {
-    this.financial = value;
+  public void setTerm( String value) {
+    this.term = value;
   }
   public java.util.List<ExplanationOfBenefitFinancialModel> getFinancial() {
     return this.financial;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setFinancial( java.util.List<ExplanationOfBenefitFinancialModel> value) {
+    this.financial = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("subCategory" + "[" + String.valueOf(this.subCategory) + "]\n"); 
-     builder.append("excluded" + "[" + String.valueOf(this.excluded) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("network" + "[" + String.valueOf(this.network) + "]\n"); 
-     builder.append("unit" + "[" + String.valueOf(this.unit) + "]\n"); 
-     builder.append("term" + "[" + String.valueOf(this.term) + "]\n"); 
-     builder.append("financial" + "[" + String.valueOf(this.financial) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitBenefitBalanceModel]:" + "\n");
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("subCategory" + "->" + this.subCategory + "\n"); 
+     builder.append("excluded" + "->" + this.excluded + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("network" + "->" + this.network + "\n"); 
+     builder.append("unit" + "->" + this.unit + "\n"); 
+     builder.append("term" + "->" + this.term + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ExplanationOfBenefitBenefitBalanceModel]:" + "\n");
+     builder.append("category" + "->" + this.category + "\n"); 
+     builder.append("subCategory" + "->" + this.subCategory + "\n"); 
+     builder.append("excluded" + "->" + this.excluded + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("network" + "->" + this.network + "\n"); 
+     builder.append("unit" + "->" + this.unit + "\n"); 
+     builder.append("term" + "->" + this.term + "\n"); 
+     builder.append("financial" + "->" + this.financial + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

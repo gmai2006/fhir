@@ -63,6 +63,7 @@ public class NutritionOrderAdministration  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,16 +85,13 @@ public class NutritionOrderAdministration  {
 
   public NutritionOrderAdministration(NutritionOrderAdministrationModel o) {
     this.id = o.getId();
-      this.schedule = Timing.fromJson(o.getSchedule());
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      this.rateSimpleQuantity = Quantity.fromJson(o.getRateSimpleQuantity());
-      this.rateRatio = Ratio.fromJson(o.getRateRatio());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.schedule = TimingHelper.fromJson(o.getSchedule());
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    this.rateSimpleQuantity = QuantityHelper.fromJson(o.getRateSimpleQuantity());
+    this.rateRatio = RatioHelper.fromJson(o.getRateRatio());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSchedule( Timing value) {
@@ -148,48 +146,17 @@ public class NutritionOrderAdministration  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("schedule" + "[" + String.valueOf(this.schedule) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("rateSimpleQuantity" + "[" + String.valueOf(this.rateSimpleQuantity) + "]\n"); 
-     builder.append("rateRatio" + "[" + String.valueOf(this.rateRatio) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[NutritionOrderAdministration]:" + "\n");
+     if(this.schedule != null) builder.append("schedule" + "->" + this.schedule.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.rateSimpleQuantity != null) builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity.toString() + "\n"); 
+     if(this.rateRatio != null) builder.append("rateRatio" + "->" + this.rateRatio.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<NutritionOrderAdministration> fromArray(java.util.List<NutritionOrderAdministrationModel> list) {
-    return (java.util.List<NutritionOrderAdministration>)list.stream()
-      .map(model -> new NutritionOrderAdministration(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<NutritionOrderAdministrationModel> toModelArray(java.util.List<NutritionOrderAdministration> list) {
-    return (java.util.List<NutritionOrderAdministrationModel>)list.stream()
-      .map(model -> new NutritionOrderAdministrationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static NutritionOrderAdministration fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, NutritionOrderAdministration.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(NutritionOrderAdministration o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<NutritionOrderAdministration> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

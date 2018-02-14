@@ -34,10 +34,8 @@ public interface AuditEventDao {
   public List<AuditEvent> select(int maxResult);
 
   public List<AuditEvent> selectAll();
-
   public AuditEvent create(AuditEvent e);
 
   public AuditEvent update(AuditEvent e);
-
   public void delete(AuditEvent e);
 }

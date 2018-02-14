@@ -32,7 +32,5 @@ public interface ReferralRequestRequesterService {
 	public ReferralRequestRequester find(String id);
   public List<ReferralRequestRequester> select(int maxResult);
   public List<ReferralRequestRequester> selectAll();
-  public ReferralRequestRequester create(ReferralRequestRequester bean);
-  public ReferralRequestRequester update(ReferralRequestRequester bean);
   public void delete(ReferralRequestRequester bean);
 }

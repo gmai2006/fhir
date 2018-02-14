@@ -96,6 +96,7 @@ public class ValueSetExpansion  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -117,31 +118,27 @@ public class ValueSetExpansion  {
 
   public ValueSetExpansion(ValueSetExpansionModel o) {
     this.id = o.getId();
-      if (null != o.getIdentifier()) {
-        this.identifier = new String(o.getIdentifier());
-      }
-
-      if (null != o.getTimestamp()) {
-        this.timestamp = new String(o.getTimestamp());
-      }
-
-      if (null != o.getTotal()) {
-        this.total = new Float(o.getTotal());
-      }
-
-      if (null != o.getOffset()) {
-        this.offset = new Float(o.getOffset());
-      }
-
-      this.parameter = ValueSetParameter.fromArray(o.getParameter());
-      this.contains = ValueSetContains.fromArray(o.getContains());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getIdentifier()) {
+      this.identifier = o.getIdentifier();
+    }
+    if (null != o.getTimestamp()) {
+      this.timestamp = o.getTimestamp();
+    }
+    if (null != o.getTotal()) {
+      this.total = o.getTotal();
+    }
+    if (null != o.getOffset()) {
+      this.offset = o.getOffset();
+    }
+    if (null != o.getParameter() && !o.getParameter().isEmpty()) {
+    	this.parameter = ValueSetParameterHelper.fromArray2Array(o.getParameter());
+    }
+    if (null != o.getContains() && !o.getContains().isEmpty()) {
+    	this.contains = ValueSetContainsHelper.fromArray2Array(o.getContains());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setIdentifier( String value) {
@@ -232,54 +229,23 @@ public class ValueSetExpansion  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("_identifier" + "[" + String.valueOf(this._identifier) + "]\n"); 
-     builder.append("timestamp" + "[" + String.valueOf(this.timestamp) + "]\n"); 
-     builder.append("_timestamp" + "[" + String.valueOf(this._timestamp) + "]\n"); 
-     builder.append("total" + "[" + String.valueOf(this.total) + "]\n"); 
-     builder.append("_total" + "[" + String.valueOf(this._total) + "]\n"); 
-     builder.append("offset" + "[" + String.valueOf(this.offset) + "]\n"); 
-     builder.append("_offset" + "[" + String.valueOf(this._offset) + "]\n"); 
-     builder.append("parameter" + "[" + String.valueOf(this.parameter) + "]\n"); 
-     builder.append("contains" + "[" + String.valueOf(this.contains) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ValueSetExpansion]:" + "\n");
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this._identifier != null) builder.append("_identifier" + "->" + this._identifier.toString() + "\n"); 
+     if(this.timestamp != null) builder.append("timestamp" + "->" + this.timestamp.toString() + "\n"); 
+     if(this._timestamp != null) builder.append("_timestamp" + "->" + this._timestamp.toString() + "\n"); 
+     if(this.total != null) builder.append("total" + "->" + this.total.toString() + "\n"); 
+     if(this._total != null) builder.append("_total" + "->" + this._total.toString() + "\n"); 
+     if(this.offset != null) builder.append("offset" + "->" + this.offset.toString() + "\n"); 
+     if(this._offset != null) builder.append("_offset" + "->" + this._offset.toString() + "\n"); 
+     if(this.parameter != null) builder.append("parameter" + "->" + this.parameter.toString() + "\n"); 
+     if(this.contains != null) builder.append("contains" + "->" + this.contains.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ValueSetExpansion> fromArray(java.util.List<ValueSetExpansionModel> list) {
-    return (java.util.List<ValueSetExpansion>)list.stream()
-      .map(model -> new ValueSetExpansion(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ValueSetExpansionModel> toModelArray(java.util.List<ValueSetExpansion> list) {
-    return (java.util.List<ValueSetExpansionModel>)list.stream()
-      .map(model -> new ValueSetExpansionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ValueSetExpansion fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ValueSetExpansion.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ValueSetExpansion o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ValueSetExpansion> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

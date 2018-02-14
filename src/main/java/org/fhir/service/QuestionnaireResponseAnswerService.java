@@ -32,7 +32,5 @@ public interface QuestionnaireResponseAnswerService {
 	public QuestionnaireResponseAnswer find(String id);
   public List<QuestionnaireResponseAnswer> select(int maxResult);
   public List<QuestionnaireResponseAnswer> selectAll();
-  public QuestionnaireResponseAnswer create(QuestionnaireResponseAnswer bean);
-  public QuestionnaireResponseAnswer update(QuestionnaireResponseAnswer bean);
   public void delete(QuestionnaireResponseAnswer bean);
 }

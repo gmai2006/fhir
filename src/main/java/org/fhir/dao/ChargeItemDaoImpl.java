@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ChargeItemModel;
 import org.fhir.pojo.ChargeItem;
+import org.fhir.pojo.ChargeItemHelper;
 
 public class ChargeItemDaoImpl implements ChargeItemDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ChargeItemDaoImpl implements ChargeItemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ChargeItemModel a", ChargeItemModel.class).setMaxResults(maxResult);
       List<ChargeItemModel> models = query.getResultList();
-      return ChargeItem.fromArray(models);
+      return ChargeItemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ChargeItemDaoImpl implements ChargeItemDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ChargeItemModel a", ChargeItemModel.class);
       List<ChargeItemModel> models = query.getResultList();
-      return ChargeItem.fromArray(models);
+      return ChargeItemHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ChargeItemDaoImpl implements ChargeItemDao {
       ChargeItemModel model = em.merge(new ChargeItemModel(e));
       return new ChargeItem(model);
   }
-
   @Override
   @Transactional
   public void delete(ChargeItem e) {

@@ -34,10 +34,5 @@ public interface ClaimResponseDetailDao {
   public List<ClaimResponseDetail> select(int maxResult);
 
   public List<ClaimResponseDetail> selectAll();
-
-  public ClaimResponseDetail create(ClaimResponseDetail e);
-
-  public ClaimResponseDetail update(ClaimResponseDetail e);
-
   public void delete(ClaimResponseDetail e);
 }

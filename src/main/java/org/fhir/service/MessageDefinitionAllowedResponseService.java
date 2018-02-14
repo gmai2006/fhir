@@ -32,7 +32,5 @@ public interface MessageDefinitionAllowedResponseService {
 	public MessageDefinitionAllowedResponse find(String id);
   public List<MessageDefinitionAllowedResponse> select(int maxResult);
   public List<MessageDefinitionAllowedResponse> selectAll();
-  public MessageDefinitionAllowedResponse create(MessageDefinitionAllowedResponse bean);
-  public MessageDefinitionAllowedResponse update(MessageDefinitionAllowedResponse bean);
   public void delete(MessageDefinitionAllowedResponse bean);
 }

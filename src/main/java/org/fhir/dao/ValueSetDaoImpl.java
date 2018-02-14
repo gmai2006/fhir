@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ValueSetModel;
 import org.fhir.pojo.ValueSet;
+import org.fhir.pojo.ValueSetHelper;
 
 public class ValueSetDaoImpl implements ValueSetDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ValueSetDaoImpl implements ValueSetDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetModel a", ValueSetModel.class).setMaxResults(maxResult);
       List<ValueSetModel> models = query.getResultList();
-      return ValueSet.fromArray(models);
+      return ValueSetHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ValueSetDaoImpl implements ValueSetDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ValueSetModel a", ValueSetModel.class);
       List<ValueSetModel> models = query.getResultList();
-      return ValueSet.fromArray(models);
+      return ValueSetHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ValueSetDaoImpl implements ValueSetDao {
       ValueSetModel model = em.merge(new ValueSetModel(e));
       return new ValueSet(model);
   }
-
   @Override
   @Transactional
   public void delete(ValueSet e) {

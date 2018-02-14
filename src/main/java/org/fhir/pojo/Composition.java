@@ -167,6 +167,7 @@ public class Composition  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -218,79 +219,63 @@ public class Composition  {
 
   public Composition(CompositionModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.FHIRclass = CodeableConcept.fromJson(o.getFHIRclass());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getEncounter()) {
-        this.encounter = new Reference(o.getEncounter());
-        this.encounter.setId(this.getId());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      this.author = Reference.fromArray(o.getAuthor());
-
-      if (null != o.getTitle()) {
-        this.title = new String(o.getTitle());
-      }
-
-      if (null != o.getConfidentiality()) {
-        this.confidentiality = new String(o.getConfidentiality());
-      }
-
-      this.attester = CompositionAttester.fromArray(o.getAttester());
-
-      if (null != o.getCustodian()) {
-        this.custodian = new Reference(o.getCustodian());
-        this.custodian.setId(this.getId());
-      }
-
-      this.relatesTo = CompositionRelatesTo.fromArray(o.getRelatesTo());
-
-      this.event = CompositionEvent.fromArray(o.getEvent());
-
-      this.section = CompositionSection.fromArray(o.getSection());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    this.FHIRclass = CodeableConceptHelper.fromJson(o.getFHIRclass());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getEncounter() && !o.getEncounter().isEmpty()) {
+      this.encounter = new Reference(o.getEncounter().get(0));
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getAuthor() && !o.getAuthor().isEmpty()) {
+    	this.author = ReferenceHelper.fromArray2Array(o.getAuthor());
+    }
+    if (null != o.getTitle()) {
+      this.title = o.getTitle();
+    }
+    if (null != o.getConfidentiality()) {
+      this.confidentiality = o.getConfidentiality();
+    }
+    if (null != o.getAttester() && !o.getAttester().isEmpty()) {
+    	this.attester = CompositionAttesterHelper.fromArray2Array(o.getAttester());
+    }
+    if (null != o.getCustodian() && !o.getCustodian().isEmpty()) {
+      this.custodian = new Reference(o.getCustodian().get(0));
+    }
+    if (null != o.getRelatesTo() && !o.getRelatesTo().isEmpty()) {
+    	this.relatesTo = CompositionRelatesToHelper.fromArray2Array(o.getRelatesTo());
+    }
+    if (null != o.getEvent() && !o.getEvent().isEmpty()) {
+    	this.event = CompositionEventHelper.fromArray2Array(o.getEvent());
+    }
+    if (null != o.getSection() && !o.getSection().isEmpty()) {
+    	this.section = CompositionSectionHelper.fromArray2Array(o.getSection());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -483,37 +468,38 @@ public class Composition  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("FHIRclass" + "[" + String.valueOf(this.FHIRclass) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("encounter" + "[" + String.valueOf(this.encounter) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("author" + "[" + String.valueOf(this.author) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("confidentiality" + "[" + String.valueOf(this.confidentiality) + "]\n"); 
-     builder.append("_confidentiality" + "[" + String.valueOf(this._confidentiality) + "]\n"); 
-     builder.append("attester" + "[" + String.valueOf(this.attester) + "]\n"); 
-     builder.append("custodian" + "[" + String.valueOf(this.custodian) + "]\n"); 
-     builder.append("relatesTo" + "[" + String.valueOf(this.relatesTo) + "]\n"); 
-     builder.append("event" + "[" + String.valueOf(this.event) + "]\n"); 
-     builder.append("section" + "[" + String.valueOf(this.section) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Composition]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.FHIRclass != null) builder.append("FHIRclass" + "->" + this.FHIRclass.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.encounter != null) builder.append("encounter" + "->" + this.encounter.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.author != null) builder.append("author" + "->" + this.author.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.confidentiality != null) builder.append("confidentiality" + "->" + this.confidentiality.toString() + "\n"); 
+     if(this._confidentiality != null) builder.append("_confidentiality" + "->" + this._confidentiality.toString() + "\n"); 
+     if(this.attester != null) builder.append("attester" + "->" + this.attester.toString() + "\n"); 
+     if(this.custodian != null) builder.append("custodian" + "->" + this.custodian.toString() + "\n"); 
+     if(this.relatesTo != null) builder.append("relatesTo" + "->" + this.relatesTo.toString() + "\n"); 
+     if(this.event != null) builder.append("event" + "->" + this.event.toString() + "\n"); 
+     if(this.section != null) builder.append("section" + "->" + this.section.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -547,36 +533,4 @@ public class Composition  {
   	}
   }
 
-  public static java.util.List<Composition> fromArray(java.util.List<CompositionModel> list) {
-    return (java.util.List<Composition>)list.stream()
-      .map(model -> new Composition(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CompositionModel> toModelArray(java.util.List<Composition> list) {
-    return (java.util.List<CompositionModel>)list.stream()
-      .map(model -> new CompositionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Composition fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Composition.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Composition o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Composition> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

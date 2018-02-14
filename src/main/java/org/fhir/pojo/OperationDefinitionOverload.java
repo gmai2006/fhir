@@ -63,6 +63,7 @@ public class OperationDefinitionOverload  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,18 +85,15 @@ public class OperationDefinitionOverload  {
 
   public OperationDefinitionOverload(OperationDefinitionOverloadModel o) {
     this.id = o.getId();
-      this.parameterName = org.fhir.utils.JsonUtils.json2Array(o.getParameterName());
-
-      if (null != o.getComment()) {
-        this.comment = new String(o.getComment());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (o.getParameterName() != null) {
+    	this.parameterName = org.fhir.utils.JsonUtils.json2Array(o.getParameterName());
+    }
+    if (null != o.getComment()) {
+      this.comment = o.getComment();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setParameterName( java.util.List<String> value) {
@@ -150,48 +148,17 @@ public class OperationDefinitionOverload  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("parameterName" + "[" + String.valueOf(this.parameterName) + "]\n"); 
-     builder.append("_parameterName" + "[" + String.valueOf(this._parameterName) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("_comment" + "[" + String.valueOf(this._comment) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[OperationDefinitionOverload]:" + "\n");
+     if(this.parameterName != null) builder.append("parameterName" + "->" + this.parameterName.toString() + "\n"); 
+     if(this._parameterName != null) builder.append("_parameterName" + "->" + this._parameterName.toString() + "\n"); 
+     if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
+     if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<OperationDefinitionOverload> fromArray(java.util.List<OperationDefinitionOverloadModel> list) {
-    return (java.util.List<OperationDefinitionOverload>)list.stream()
-      .map(model -> new OperationDefinitionOverload(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<OperationDefinitionOverloadModel> toModelArray(java.util.List<OperationDefinitionOverload> list) {
-    return (java.util.List<OperationDefinitionOverloadModel>)list.stream()
-      .map(model -> new OperationDefinitionOverloadModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static OperationDefinitionOverload fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, OperationDefinitionOverload.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(OperationDefinitionOverload o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<OperationDefinitionOverload> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.BodySiteModel;
 import org.fhir.pojo.BodySite;
+import org.fhir.pojo.BodySiteHelper;
 
 public class BodySiteDaoImpl implements BodySiteDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class BodySiteDaoImpl implements BodySiteDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BodySiteModel a", BodySiteModel.class).setMaxResults(maxResult);
       List<BodySiteModel> models = query.getResultList();
-      return BodySite.fromArray(models);
+      return BodySiteHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class BodySiteDaoImpl implements BodySiteDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BodySiteModel a", BodySiteModel.class);
       List<BodySiteModel> models = query.getResultList();
-      return BodySite.fromArray(models);
+      return BodySiteHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class BodySiteDaoImpl implements BodySiteDao {
       BodySiteModel model = em.merge(new BodySiteModel(e));
       return new BodySite(model);
   }
-
   @Override
   @Transactional
   public void delete(BodySite e) {

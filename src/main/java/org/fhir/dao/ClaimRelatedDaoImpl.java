@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimRelatedModel;
 import org.fhir.pojo.ClaimRelated;
+import org.fhir.pojo.ClaimRelatedHelper;
 
 public class ClaimRelatedDaoImpl implements ClaimRelatedDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimRelatedDaoImpl implements ClaimRelatedDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimRelatedModel a", ClaimRelatedModel.class).setMaxResults(maxResult);
       List<ClaimRelatedModel> models = query.getResultList();
-      return ClaimRelated.fromArray(models);
+      return ClaimRelatedHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimRelatedDaoImpl implements ClaimRelatedDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimRelatedModel a", ClaimRelatedModel.class);
       List<ClaimRelatedModel> models = query.getResultList();
-      return ClaimRelated.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimRelated create(ClaimRelated e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimRelatedModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimRelated update(ClaimRelated e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimRelatedModel model = em.merge(new ClaimRelatedModel(e));
-      return new ClaimRelated(model);
+      return ClaimRelatedHelper.fromArray2Array(models);
   }
 
   @Override

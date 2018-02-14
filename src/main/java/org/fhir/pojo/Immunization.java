@@ -207,6 +207,7 @@ public class Immunization  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -258,97 +259,71 @@ public class Immunization  {
 
   public Immunization(ImmunizationModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getNotGiven()) {
-        this.notGiven = new Boolean(o.getNotGiven());
-      }
-
-      this.vaccineCode = CodeableConcept.fromJson(o.getVaccineCode());
-      if (null != o.getPatient()) {
-        this.patient = new Reference(o.getPatient());
-        this.patient.setId(this.getId());
-      }
-
-      if (null != o.getEncounter()) {
-        this.encounter = new Reference(o.getEncounter());
-        this.encounter.setId(this.getId());
-      }
-
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      if (null != o.getPrimarySource()) {
-        this.primarySource = new Boolean(o.getPrimarySource());
-      }
-
-      this.reportOrigin = CodeableConcept.fromJson(o.getReportOrigin());
-      if (null != o.getLocation()) {
-        this.location = new Reference(o.getLocation());
-        this.location.setId(this.getId());
-      }
-
-      if (null != o.getManufacturer()) {
-        this.manufacturer = new Reference(o.getManufacturer());
-        this.manufacturer.setId(this.getId());
-      }
-
-      if (null != o.getLotNumber()) {
-        this.lotNumber = new String(o.getLotNumber());
-      }
-
-      if (null != o.getExpirationDate()) {
-        this.expirationDate = new String(o.getExpirationDate());
-      }
-
-      this.site = CodeableConcept.fromJson(o.getSite());
-      this.route = CodeableConcept.fromJson(o.getRoute());
-      this.doseQuantity = Quantity.fromJson(o.getDoseQuantity());
-      this.practitioner = ImmunizationPractitioner.fromArray(o.getPractitioner());
-
-      this.note = Annotation.fromArray(o.getNote());
-      if (null != o.getExplanation()) {
-        this.explanation = new ImmunizationExplanation(o.getExplanation());
-        this.explanation.setId(this.getId());
-      }
-
-      this.reaction = ImmunizationReaction.fromArray(o.getReaction());
-
-      this.vaccinationProtocol = ImmunizationVaccinationProtocol.fromArray(o.getVaccinationProtocol());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getNotGiven()) {
+      this.notGiven = o.getNotGiven();
+    }
+    this.vaccineCode = CodeableConceptHelper.fromJson(o.getVaccineCode());
+    if (null != o.getPatient() && !o.getPatient().isEmpty()) {
+      this.patient = new Reference(o.getPatient().get(0));
+    }
+    if (null != o.getEncounter() && !o.getEncounter().isEmpty()) {
+      this.encounter = new Reference(o.getEncounter().get(0));
+    }
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getPrimarySource()) {
+      this.primarySource = o.getPrimarySource();
+    }
+    this.reportOrigin = CodeableConceptHelper.fromJson(o.getReportOrigin());
+    if (null != o.getLocation() && !o.getLocation().isEmpty()) {
+      this.location = new Reference(o.getLocation().get(0));
+    }
+    if (null != o.getManufacturer() && !o.getManufacturer().isEmpty()) {
+      this.manufacturer = new Reference(o.getManufacturer().get(0));
+    }
+    if (null != o.getLotNumber()) {
+      this.lotNumber = o.getLotNumber();
+    }
+    if (null != o.getExpirationDate()) {
+      this.expirationDate = o.getExpirationDate();
+    }
+    this.site = CodeableConceptHelper.fromJson(o.getSite());
+    this.route = CodeableConceptHelper.fromJson(o.getRoute());
+    this.doseQuantity = QuantityHelper.fromJson(o.getDoseQuantity());
+    if (null != o.getPractitioner() && !o.getPractitioner().isEmpty()) {
+    	this.practitioner = ImmunizationPractitionerHelper.fromArray2Array(o.getPractitioner());
+    }
+    if (null != o.getExplanation() && !o.getExplanation().isEmpty()) {
+      this.explanation = new ImmunizationExplanation(o.getExplanation().get(0));
+    }
+    if (null != o.getReaction() && !o.getReaction().isEmpty()) {
+    	this.reaction = ImmunizationReactionHelper.fromArray2Array(o.getReaction());
+    }
+    if (null != o.getVaccinationProtocol() && !o.getVaccinationProtocol().isEmpty()) {
+    	this.vaccinationProtocol = ImmunizationVaccinationProtocolHelper.fromArray2Array(o.getVaccinationProtocol());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -589,45 +564,46 @@ public class Immunization  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("notGiven" + "[" + String.valueOf(this.notGiven) + "]\n"); 
-     builder.append("_notGiven" + "[" + String.valueOf(this._notGiven) + "]\n"); 
-     builder.append("vaccineCode" + "[" + String.valueOf(this.vaccineCode) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("encounter" + "[" + String.valueOf(this.encounter) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("primarySource" + "[" + String.valueOf(this.primarySource) + "]\n"); 
-     builder.append("_primarySource" + "[" + String.valueOf(this._primarySource) + "]\n"); 
-     builder.append("reportOrigin" + "[" + String.valueOf(this.reportOrigin) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("manufacturer" + "[" + String.valueOf(this.manufacturer) + "]\n"); 
-     builder.append("lotNumber" + "[" + String.valueOf(this.lotNumber) + "]\n"); 
-     builder.append("_lotNumber" + "[" + String.valueOf(this._lotNumber) + "]\n"); 
-     builder.append("expirationDate" + "[" + String.valueOf(this.expirationDate) + "]\n"); 
-     builder.append("_expirationDate" + "[" + String.valueOf(this._expirationDate) + "]\n"); 
-     builder.append("site" + "[" + String.valueOf(this.site) + "]\n"); 
-     builder.append("route" + "[" + String.valueOf(this.route) + "]\n"); 
-     builder.append("doseQuantity" + "[" + String.valueOf(this.doseQuantity) + "]\n"); 
-     builder.append("practitioner" + "[" + String.valueOf(this.practitioner) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("explanation" + "[" + String.valueOf(this.explanation) + "]\n"); 
-     builder.append("reaction" + "[" + String.valueOf(this.reaction) + "]\n"); 
-     builder.append("vaccinationProtocol" + "[" + String.valueOf(this.vaccinationProtocol) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Immunization]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.notGiven != null) builder.append("notGiven" + "->" + this.notGiven.toString() + "\n"); 
+     if(this._notGiven != null) builder.append("_notGiven" + "->" + this._notGiven.toString() + "\n"); 
+     if(this.vaccineCode != null) builder.append("vaccineCode" + "->" + this.vaccineCode.toString() + "\n"); 
+     if(this.patient != null) builder.append("patient" + "->" + this.patient.toString() + "\n"); 
+     if(this.encounter != null) builder.append("encounter" + "->" + this.encounter.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.primarySource != null) builder.append("primarySource" + "->" + this.primarySource.toString() + "\n"); 
+     if(this._primarySource != null) builder.append("_primarySource" + "->" + this._primarySource.toString() + "\n"); 
+     if(this.reportOrigin != null) builder.append("reportOrigin" + "->" + this.reportOrigin.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this.manufacturer != null) builder.append("manufacturer" + "->" + this.manufacturer.toString() + "\n"); 
+     if(this.lotNumber != null) builder.append("lotNumber" + "->" + this.lotNumber.toString() + "\n"); 
+     if(this._lotNumber != null) builder.append("_lotNumber" + "->" + this._lotNumber.toString() + "\n"); 
+     if(this.expirationDate != null) builder.append("expirationDate" + "->" + this.expirationDate.toString() + "\n"); 
+     if(this._expirationDate != null) builder.append("_expirationDate" + "->" + this._expirationDate.toString() + "\n"); 
+     if(this.site != null) builder.append("site" + "->" + this.site.toString() + "\n"); 
+     if(this.route != null) builder.append("route" + "->" + this.route.toString() + "\n"); 
+     if(this.doseQuantity != null) builder.append("doseQuantity" + "->" + this.doseQuantity.toString() + "\n"); 
+     if(this.practitioner != null) builder.append("practitioner" + "->" + this.practitioner.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.explanation != null) builder.append("explanation" + "->" + this.explanation.toString() + "\n"); 
+     if(this.reaction != null) builder.append("reaction" + "->" + this.reaction.toString() + "\n"); 
+     if(this.vaccinationProtocol != null) builder.append("vaccinationProtocol" + "->" + this.vaccinationProtocol.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -643,36 +619,4 @@ public class Immunization  {
   	}
   }
 
-  public static java.util.List<Immunization> fromArray(java.util.List<ImmunizationModel> list) {
-    return (java.util.List<Immunization>)list.stream()
-      .map(model -> new Immunization(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ImmunizationModel> toModelArray(java.util.List<Immunization> list) {
-    return (java.util.List<ImmunizationModel>)list.stream()
-      .map(model -> new ImmunizationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Immunization fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Immunization.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Immunization o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Immunization> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

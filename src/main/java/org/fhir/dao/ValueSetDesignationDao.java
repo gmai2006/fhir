@@ -34,10 +34,5 @@ public interface ValueSetDesignationDao {
   public List<ValueSetDesignation> select(int maxResult);
 
   public List<ValueSetDesignation> selectAll();
-
-  public ValueSetDesignation create(ValueSetDesignation e);
-
-  public ValueSetDesignation update(ValueSetDesignation e);
-
   public void delete(ValueSetDesignation e);
 }

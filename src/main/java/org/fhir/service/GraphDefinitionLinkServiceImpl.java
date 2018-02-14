@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public GraphDefinitionLink create(GraphDefinitionLink bean) {
-  	requireNonNull(bean);
-    logger.info("create(GraphDefinitionLink={}) - entered bean ");
-
-    final GraphDefinitionLink result = dao.create(bean);
-
-    logger.info("create(GraphDefinitionLink) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public GraphDefinitionLink update(GraphDefinitionLink bean) {
-  	requireNonNull(bean);
-    logger.info("update(GraphDefinitionLink={}) - entered bean ");
-
-    final GraphDefinitionLink result = dao.update(bean);
-
-    logger.info("update(GraphDefinitionLink) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ClaimResponseError create(ClaimResponseError bean) {
-  	requireNonNull(bean);
-    logger.info("create(ClaimResponseError={}) - entered bean ");
-
-    final ClaimResponseError result = dao.create(bean);
-
-    logger.info("create(ClaimResponseError) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ClaimResponseError update(ClaimResponseError bean) {
-  	requireNonNull(bean);
-    logger.info("update(ClaimResponseError={}) - entered bean ");
-
-    final ClaimResponseError result = dao.update(bean);
-
-    logger.info("update(ClaimResponseError) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

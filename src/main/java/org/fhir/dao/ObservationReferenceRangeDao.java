@@ -34,10 +34,5 @@ public interface ObservationReferenceRangeDao {
   public List<ObservationReferenceRange> select(int maxResult);
 
   public List<ObservationReferenceRange> selectAll();
-
-  public ObservationReferenceRange create(ObservationReferenceRange e);
-
-  public ObservationReferenceRange update(ObservationReferenceRange e);
-
   public void delete(ObservationReferenceRange e);
 }

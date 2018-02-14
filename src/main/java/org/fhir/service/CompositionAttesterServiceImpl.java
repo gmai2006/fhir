@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public CompositionAttester create(CompositionAttester bean) {
-  	requireNonNull(bean);
-    logger.info("create(CompositionAttester={}) - entered bean ");
-
-    final CompositionAttester result = dao.create(bean);
-
-    logger.info("create(CompositionAttester) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public CompositionAttester update(CompositionAttester bean) {
-  	requireNonNull(bean);
-    logger.info("update(CompositionAttester={}) - entered bean ");
-
-    final CompositionAttester result = dao.update(bean);
-
-    logger.info("update(CompositionAttester) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

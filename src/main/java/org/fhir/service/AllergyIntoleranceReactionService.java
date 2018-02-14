@@ -32,7 +32,5 @@ public interface AllergyIntoleranceReactionService {
 	public AllergyIntoleranceReaction find(String id);
   public List<AllergyIntoleranceReaction> select(int maxResult);
   public List<AllergyIntoleranceReaction> selectAll();
-  public AllergyIntoleranceReaction create(AllergyIntoleranceReaction bean);
-  public AllergyIntoleranceReaction update(AllergyIntoleranceReaction bean);
   public void delete(AllergyIntoleranceReaction bean);
 }

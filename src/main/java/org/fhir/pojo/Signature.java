@@ -102,6 +102,7 @@ public class Signature  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -218,43 +219,24 @@ public class Signature  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("when" + "[" + String.valueOf(this.when) + "]\n"); 
-     builder.append("_when" + "[" + String.valueOf(this._when) + "]\n"); 
-     builder.append("whoUri" + "[" + String.valueOf(this.whoUri) + "]\n"); 
-     builder.append("_whoUri" + "[" + String.valueOf(this._whoUri) + "]\n"); 
-     builder.append("whoReference" + "[" + String.valueOf(this.whoReference) + "]\n"); 
-     builder.append("onBehalfOfUri" + "[" + String.valueOf(this.onBehalfOfUri) + "]\n"); 
-     builder.append("_onBehalfOfUri" + "[" + String.valueOf(this._onBehalfOfUri) + "]\n"); 
-     builder.append("onBehalfOfReference" + "[" + String.valueOf(this.onBehalfOfReference) + "]\n"); 
-     builder.append("contentType" + "[" + String.valueOf(this.contentType) + "]\n"); 
-     builder.append("_contentType" + "[" + String.valueOf(this._contentType) + "]\n"); 
-     builder.append("blob" + "[" + String.valueOf(this.blob) + "]\n"); 
-     builder.append("_blob" + "[" + String.valueOf(this._blob) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Signature]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.when != null) builder.append("when" + "->" + this.when.toString() + "\n"); 
+     if(this._when != null) builder.append("_when" + "->" + this._when.toString() + "\n"); 
+     if(this.whoUri != null) builder.append("whoUri" + "->" + this.whoUri.toString() + "\n"); 
+     if(this._whoUri != null) builder.append("_whoUri" + "->" + this._whoUri.toString() + "\n"); 
+     if(this.whoReference != null) builder.append("whoReference" + "->" + this.whoReference.toString() + "\n"); 
+     if(this.onBehalfOfUri != null) builder.append("onBehalfOfUri" + "->" + this.onBehalfOfUri.toString() + "\n"); 
+     if(this._onBehalfOfUri != null) builder.append("_onBehalfOfUri" + "->" + this._onBehalfOfUri.toString() + "\n"); 
+     if(this.onBehalfOfReference != null) builder.append("onBehalfOfReference" + "->" + this.onBehalfOfReference.toString() + "\n"); 
+     if(this.contentType != null) builder.append("contentType" + "->" + this.contentType.toString() + "\n"); 
+     if(this._contentType != null) builder.append("_contentType" + "->" + this._contentType.toString() + "\n"); 
+     if(this.blob != null) builder.append("blob" + "->" + this.blob.toString() + "\n"); 
+     if(this._blob != null) builder.append("_blob" + "->" + this._blob.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static Signature fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Signature.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Signature o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Signature> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

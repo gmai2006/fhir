@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CodeSystemProperty1Model;
 import org.fhir.pojo.CodeSystemProperty1;
+import org.fhir.pojo.CodeSystemProperty1Helper;
 
 public class CodeSystemProperty1DaoImpl implements CodeSystemProperty1Dao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CodeSystemProperty1DaoImpl implements CodeSystemProperty1Dao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CodeSystemProperty1Model a", CodeSystemProperty1Model.class).setMaxResults(maxResult);
       List<CodeSystemProperty1Model> models = query.getResultList();
-      return CodeSystemProperty1.fromArray(models);
+      return CodeSystemProperty1Helper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CodeSystemProperty1DaoImpl implements CodeSystemProperty1Dao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CodeSystemProperty1Model a", CodeSystemProperty1Model.class);
       List<CodeSystemProperty1Model> models = query.getResultList();
-      return CodeSystemProperty1.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CodeSystemProperty1 create(CodeSystemProperty1 e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CodeSystemProperty1Model(e));
-      return e;
-  }
-
-  @Transactional
-  public CodeSystemProperty1 update(CodeSystemProperty1 e) {
-      final EntityManager em = entityManagerProvider.get();
-      CodeSystemProperty1Model model = em.merge(new CodeSystemProperty1Model(e));
-      return new CodeSystemProperty1(model);
+      return CodeSystemProperty1Helper.fromArray2Array(models);
   }
 
   @Override

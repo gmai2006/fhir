@@ -32,7 +32,5 @@ public interface PatientLinkService {
 	public PatientLink find(String id);
   public List<PatientLink> select(int maxResult);
   public List<PatientLink> selectAll();
-  public PatientLink create(PatientLink bean);
-  public PatientLink update(PatientLink bean);
   public void delete(PatientLink bean);
 }

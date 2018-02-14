@@ -34,10 +34,5 @@ public interface GroupCharacteristicDao {
   public List<GroupCharacteristic> select(int maxResult);
 
   public List<GroupCharacteristic> selectAll();
-
-  public GroupCharacteristic create(GroupCharacteristic e);
-
-  public GroupCharacteristic update(GroupCharacteristic e);
-
   public void delete(GroupCharacteristic e);
 }

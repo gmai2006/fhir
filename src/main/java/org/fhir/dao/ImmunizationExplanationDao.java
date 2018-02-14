@@ -34,10 +34,5 @@ public interface ImmunizationExplanationDao {
   public List<ImmunizationExplanation> select(int maxResult);
 
   public List<ImmunizationExplanation> selectAll();
-
-  public ImmunizationExplanation create(ImmunizationExplanation e);
-
-  public ImmunizationExplanation update(ImmunizationExplanation e);
-
   public void delete(ImmunizationExplanation e);
 }

@@ -68,6 +68,7 @@ public class Binary  {
   * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
    derived from Resource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -120,41 +121,30 @@ public class Binary  {
 
   public Binary(BinaryModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      if (null != o.getContentType()) {
-        this.contentType = new String(o.getContentType());
-      }
-
-      if (null != o.getSecurityContext()) {
-        this.securityContext = new Reference(o.getSecurityContext());
-        this.securityContext.setId(this.getId());
-      }
-
-      if (null != o.getContent()) {
-        this.content = new String(o.getContent());
-      }
-
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getContentType()) {
+      this.contentType = o.getContentType();
+    }
+    if (null != o.getSecurityContext() && !o.getSecurityContext().isEmpty()) {
+      this.securityContext = new Reference(o.getSecurityContext().get(0));
+    }
+    if (null != o.getContent()) {
+      this.content = o.getContent();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -245,20 +235,21 @@ public class Binary  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("contentType" + "[" + String.valueOf(this.contentType) + "]\n"); 
-     builder.append("_contentType" + "[" + String.valueOf(this._contentType) + "]\n"); 
-     builder.append("securityContext" + "[" + String.valueOf(this.securityContext) + "]\n"); 
-     builder.append("content" + "[" + String.valueOf(this.content) + "]\n"); 
-     builder.append("_content" + "[" + String.valueOf(this._content) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Binary]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.contentType != null) builder.append("contentType" + "->" + this.contentType.toString() + "\n"); 
+     if(this._contentType != null) builder.append("_contentType" + "->" + this._contentType.toString() + "\n"); 
+     if(this.securityContext != null) builder.append("securityContext" + "->" + this.securityContext.toString() + "\n"); 
+     if(this.content != null) builder.append("content" + "->" + this.content.toString() + "\n"); 
+     if(this._content != null) builder.append("_content" + "->" + this._content.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -274,36 +265,4 @@ public class Binary  {
   	}
   }
 
-  public static java.util.List<Binary> fromArray(java.util.List<BinaryModel> list) {
-    return (java.util.List<Binary>)list.stream()
-      .map(model -> new Binary(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<BinaryModel> toModelArray(java.util.List<Binary> list) {
-    return (java.util.List<BinaryModel>)list.stream()
-      .map(model -> new BinaryModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Binary fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Binary.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Binary o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Binary> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

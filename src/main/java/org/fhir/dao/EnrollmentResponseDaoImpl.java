@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EnrollmentResponseModel;
 import org.fhir.pojo.EnrollmentResponse;
+import org.fhir.pojo.EnrollmentResponseHelper;
 
 public class EnrollmentResponseDaoImpl implements EnrollmentResponseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EnrollmentResponseDaoImpl implements EnrollmentResponseDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EnrollmentResponseModel a", EnrollmentResponseModel.class).setMaxResults(maxResult);
       List<EnrollmentResponseModel> models = query.getResultList();
-      return EnrollmentResponse.fromArray(models);
+      return EnrollmentResponseHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class EnrollmentResponseDaoImpl implements EnrollmentResponseDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EnrollmentResponseModel a", EnrollmentResponseModel.class);
       List<EnrollmentResponseModel> models = query.getResultList();
-      return EnrollmentResponse.fromArray(models);
+      return EnrollmentResponseHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class EnrollmentResponseDaoImpl implements EnrollmentResponseDao {
       EnrollmentResponseModel model = em.merge(new EnrollmentResponseModel(e));
       return new EnrollmentResponse(model);
   }
-
   @Override
   @Transactional
   public void delete(EnrollmentResponse e) {

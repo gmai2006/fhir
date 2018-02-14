@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DiagnosticReportImageModel;
 import org.fhir.pojo.DiagnosticReportImage;
+import org.fhir.pojo.DiagnosticReportImageHelper;
 
 public class DiagnosticReportImageDaoImpl implements DiagnosticReportImageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DiagnosticReportImageDaoImpl implements DiagnosticReportImageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DiagnosticReportImageModel a", DiagnosticReportImageModel.class).setMaxResults(maxResult);
       List<DiagnosticReportImageModel> models = query.getResultList();
-      return DiagnosticReportImage.fromArray(models);
+      return DiagnosticReportImageHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DiagnosticReportImageDaoImpl implements DiagnosticReportImageDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DiagnosticReportImageModel a", DiagnosticReportImageModel.class);
       List<DiagnosticReportImageModel> models = query.getResultList();
-      return DiagnosticReportImage.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DiagnosticReportImage create(DiagnosticReportImage e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DiagnosticReportImageModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DiagnosticReportImage update(DiagnosticReportImage e) {
-      final EntityManager em = entityManagerProvider.get();
-      DiagnosticReportImageModel model = em.merge(new DiagnosticReportImageModel(e));
-      return new DiagnosticReportImage(model);
+      return DiagnosticReportImageHelper.fromArray2Array(models);
   }
 
   @Override

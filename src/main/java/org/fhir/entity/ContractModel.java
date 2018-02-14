@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
 @Entity
 @Table(name="contract")
-public class ContractModel  {
+public class ContractModel  implements Serializable {
+	private static final long serialVersionUID = 151857669660828743L;
   /**
   * Description: "This is a Contract resource"
   */
@@ -47,7 +48,7 @@ public class ContractModel  {
 
   /**
   * Description: "Unique identifier for this Contract."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -72,7 +73,7 @@ public class ContractModel  {
 
   /**
   * Description: "Relevant time or time-period when this Contract is applicable."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -82,34 +83,50 @@ public class ContractModel  {
   /**
   * Description: "The target entity impacted by or of interest to parties to the agreement."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> subject = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"subject_id\"")
+  private String subject_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "The matter of concern in the context of this agreement."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> topic = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"topic_id\"")
+  private String topic_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="topic_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> topic;
 
   /**
   * Description: "A formally or informally recognized grouping of people, principals, organizations, or jurisdictions formed for the purpose of achieving some form of collective action such as the promulgation, administration and enforcement of contracts and policies."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> authority = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"authority_id\"")
+  private String authority_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="authority_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> authority;
 
   /**
   * Description: "Recognized governance framework or system operating with a circumscribed scope in accordance with specified principles, policies, processes or procedures for managing rights, actions, or behaviors of parties or principals relative to resources."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> domain = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"domain_id\"")
+  private String domain_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="domain_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> domain;
 
   /**
   * Description: "Type of Contract such as an insurance policy, real estate contract, a will, power of attorny, Privacy or Security policy , trust framework agreement, etc."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -118,7 +135,7 @@ public class ContractModel  {
 
   /**
   * Description: "More specific type or specialization of an overarching or more general contract such as auto insurance, home owner  insurance, prenupial agreement, Advanced-Directive, or privacy consent."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -127,7 +144,7 @@ public class ContractModel  {
 
   /**
   * Description: "Action stipulated by this Contract."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -136,7 +153,7 @@ public class ContractModel  {
 
   /**
   * Description: "Reason for action stipulated by this Contract."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -145,7 +162,7 @@ public class ContractModel  {
 
   /**
   * Description: "The type of decision made by a grantor with respect to an offer made by a grantee."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -154,7 +171,7 @@ public class ContractModel  {
 
   /**
   * Description: "The minimal content derived from the basal information source at a specific stage in its lifecycle."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -163,7 +180,7 @@ public class ContractModel  {
 
   /**
   * Description: "A set of security labels that define which resources are controlled by this consent. If more than one label is specified, all resources must have all the specified labels."
-  * Actual type: Array of Coding-> List<Coding>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -173,34 +190,50 @@ public class ContractModel  {
   /**
   * Description: "An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContractAgentModel> agent = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"agent_id\"")
+  private String agent_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="agent_id", insertable=false, updatable=false)
+  private java.util.List<ContractAgentModel> agent;
 
   /**
   * Description: "Parties with legal standing in the Contract, including the principal parties, the grantor(s) and grantee(s), which are any person or organization bound by the contract, and any ancillary parties, which facilitate the execution of the contract such as a notary or witness."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContractSignerModel> signer = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"signer_id\"")
+  private String signer_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="signer_id", insertable=false, updatable=false)
+  private java.util.List<ContractSignerModel> signer;
 
   /**
   * Description: "Contract Valued Item List."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContractValuedItemModel> valuedItem = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"valueditem_id\"")
+  private String valueditem_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valueditem_id", insertable=false, updatable=false)
+  private java.util.List<ContractValuedItemModel> valuedItem;
 
   /**
   * Description: "One or more Contract Provisions, which may be related and conveyed as a group, and may contain nested groups."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContractTermModel> term = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"term_id\"")
+  private String term_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="term_id", insertable=false, updatable=false)
+  private java.util.List<ContractTermModel> term;
 
   /**
   * Description: "Legally binding Contract: This is the signed and legally recognized representation of the Contract, which is considered the \"source of truth\" and which would be the basis for legal action related to enforcement of this Contract."
-  * Actual type: Attachment
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -214,30 +247,42 @@ public class ContractModel  {
   @Column(name="\"bindingreference_id\"")
   private String bindingreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`bindingreference_id`", insertable=false, updatable=false)
-  private ReferenceModel bindingReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="bindingreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> bindingReference;
 
   /**
   * Description: "The \"patient friendly language\" versionof the Contract in whole or in parts. \"Patient friendly language\" means the representation of the Contract and Contract Provisions in a manner that is readily accessible and understandable by a layperson in accordance with best practices for communication styles that ensure that those agreeing to or signing the Contract understand the roles, actions, obligations, responsibilities, and implication of the agreement."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContractFriendlyModel> friendly = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"friendly_id\"")
+  private String friendly_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="friendly_id", insertable=false, updatable=false)
+  private java.util.List<ContractFriendlyModel> friendly;
 
   /**
   * Description: "List of Legal expressions or representations of this Contract."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContractLegalModel> legal = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"legal_id\"")
+  private String legal_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="legal_id", insertable=false, updatable=false)
+  private java.util.List<ContractLegalModel> legal;
 
   /**
   * Description: "List of Computable Policy Rule Language Representations of this Contract."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContractRuleModel> rule = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"rule_id\"")
+  private String rule_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="rule_id", insertable=false, updatable=false)
+  private java.util.List<ContractRuleModel> rule;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -247,14 +292,14 @@ public class ContractModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -264,7 +309,7 @@ public class ContractModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -274,7 +319,7 @@ public class ContractModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -286,6 +331,7 @@ public class ContractModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -300,9 +346,9 @@ public class ContractModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -323,318 +369,341 @@ public class ContractModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public ContractModel() {
   }
 
   public ContractModel(Contract o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.status = o.getStatus();
-
-      this.issued = o.getIssued();
-
-      this.applies = Period.toJson(o.getApplies());
-      this.subject = Reference.toModelArray(o.getSubject());
-
-      this.topic = Reference.toModelArray(o.getTopic());
-
-      this.authority = Reference.toModelArray(o.getAuthority());
-
-      this.domain = Reference.toModelArray(o.getDomain());
-
-      this.type = CodeableConcept.toJson(o.getType());
-      this.subType = CodeableConcept.toJson(o.getSubType());
-      this.action = CodeableConcept.toJson(o.getAction());
-      this.actionReason = CodeableConcept.toJson(o.getActionReason());
-      this.decisionType = CodeableConcept.toJson(o.getDecisionType());
-      this.contentDerivative = CodeableConcept.toJson(o.getContentDerivative());
-      this.securityLabel = Coding.toJson(o.getSecurityLabel());
-      this.agent = ContractAgent.toModelArray(o.getAgent());
-
-      this.signer = ContractSigner.toModelArray(o.getSigner());
-
-      this.valuedItem = ContractValuedItem.toModelArray(o.getValuedItem());
-
-      this.term = ContractTerm.toModelArray(o.getTerm());
-
-      this.bindingAttachment = Attachment.toJson(o.getBindingAttachment());
-      if (null != o.getBindingReference()) {
-      	this.bindingreference_id = "bindingReference" + this.getId();
-        this.bindingReference = new ReferenceModel(o.getBindingReference());
-        this.bindingReference.setId(this.bindingreference_id);
-        this.bindingReference.parent_id = this.bindingReference.getId();
-      }
-
-      this.friendly = ContractFriendly.toModelArray(o.getFriendly());
-
-      this.legal = ContractLegal.toModelArray(o.getLegal());
-
-      this.rule = ContractRule.toModelArray(o.getRule());
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.status = o.getStatus();
+    this.issued = o.getIssued();
+    this.applies = PeriodHelper.toJson(o.getApplies());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModelFromArray(o.getSubject(), this.subject_id);
+    }
+    if (null != o.getTopic() && !o.getTopic().isEmpty()) {
+    	this.topic_id = "topic" + this.id;
+    	this.topic = ReferenceHelper.toModelFromArray(o.getTopic(), this.topic_id);
+    }
+    if (null != o.getAuthority() && !o.getAuthority().isEmpty()) {
+    	this.authority_id = "authority" + this.id;
+    	this.authority = ReferenceHelper.toModelFromArray(o.getAuthority(), this.authority_id);
+    }
+    if (null != o.getDomain() && !o.getDomain().isEmpty()) {
+    	this.domain_id = "domain" + this.id;
+    	this.domain = ReferenceHelper.toModelFromArray(o.getDomain(), this.domain_id);
+    }
+    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.decisionType = CodeableConceptHelper.toJson(o.getDecisionType());
+    this.contentDerivative = CodeableConceptHelper.toJson(o.getContentDerivative());
+    if (null != o.getAgent() && !o.getAgent().isEmpty()) {
+    	this.agent_id = "agent" + this.id;
+    	this.agent = ContractAgentHelper.toModelFromArray(o.getAgent(), this.agent_id);
+    }
+    if (null != o.getSigner() && !o.getSigner().isEmpty()) {
+    	this.signer_id = "signer" + this.id;
+    	this.signer = ContractSignerHelper.toModelFromArray(o.getSigner(), this.signer_id);
+    }
+    if (null != o.getValuedItem() && !o.getValuedItem().isEmpty()) {
+    	this.valueditem_id = "valueditem" + this.id;
+    	this.valuedItem = ContractValuedItemHelper.toModelFromArray(o.getValuedItem(), this.valueditem_id);
+    }
+    if (null != o.getTerm() && !o.getTerm().isEmpty()) {
+    	this.term_id = "term" + this.id;
+    	this.term = ContractTermHelper.toModelFromArray(o.getTerm(), this.term_id);
+    }
+    this.bindingAttachment = AttachmentHelper.toJson(o.getBindingAttachment());
+    if (null != o.getBindingReference() ) {
+    	this.bindingreference_id = "bindingreference" + this.id;
+    	this.bindingReference = ReferenceHelper.toModel(o.getBindingReference(), this.bindingreference_id);
+    }
+    if (null != o.getFriendly() && !o.getFriendly().isEmpty()) {
+    	this.friendly_id = "friendly" + this.id;
+    	this.friendly = ContractFriendlyHelper.toModelFromArray(o.getFriendly(), this.friendly_id);
+    }
+    if (null != o.getLegal() && !o.getLegal().isEmpty()) {
+    	this.legal_id = "legal" + this.id;
+    	this.legal = ContractLegalHelper.toModelFromArray(o.getLegal(), this.legal_id);
+    }
+    if (null != o.getRule() && !o.getRule().isEmpty()) {
+    	this.rule_id = "rule" + this.id;
+    	this.rule = ContractRuleHelper.toModelFromArray(o.getRule(), this.rule_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setIssued( String value) {
-    this.issued = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getIssued() {
     return this.issued;
   }
-  public void setApplies( String value) {
-    this.applies = value;
+  public void setIssued( String value) {
+    this.issued = value;
   }
   public String getApplies() {
     return this.applies;
   }
-  public void setSubject( java.util.List<ReferenceModel> value) {
-    this.subject = value;
+  public void setApplies( String value) {
+    this.applies = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setTopic( java.util.List<ReferenceModel> value) {
-    this.topic = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
   public java.util.List<ReferenceModel> getTopic() {
     return this.topic;
   }
-  public void setAuthority( java.util.List<ReferenceModel> value) {
-    this.authority = value;
+  public void setTopic( java.util.List<ReferenceModel> value) {
+    this.topic = value;
   }
   public java.util.List<ReferenceModel> getAuthority() {
     return this.authority;
   }
-  public void setDomain( java.util.List<ReferenceModel> value) {
-    this.domain = value;
+  public void setAuthority( java.util.List<ReferenceModel> value) {
+    this.authority = value;
   }
   public java.util.List<ReferenceModel> getDomain() {
     return this.domain;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setDomain( java.util.List<ReferenceModel> value) {
+    this.domain = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setSubType( String value) {
-    this.subType = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getSubType() {
     return this.subType;
   }
-  public void setAction( String value) {
-    this.action = value;
+  public void setSubType( String value) {
+    this.subType = value;
   }
   public String getAction() {
     return this.action;
   }
-  public void setActionReason( String value) {
-    this.actionReason = value;
+  public void setAction( String value) {
+    this.action = value;
   }
   public String getActionReason() {
     return this.actionReason;
   }
-  public void setDecisionType( String value) {
-    this.decisionType = value;
+  public void setActionReason( String value) {
+    this.actionReason = value;
   }
   public String getDecisionType() {
     return this.decisionType;
   }
-  public void setContentDerivative( String value) {
-    this.contentDerivative = value;
+  public void setDecisionType( String value) {
+    this.decisionType = value;
   }
   public String getContentDerivative() {
     return this.contentDerivative;
   }
-  public void setSecurityLabel( String value) {
-    this.securityLabel = value;
+  public void setContentDerivative( String value) {
+    this.contentDerivative = value;
   }
   public String getSecurityLabel() {
     return this.securityLabel;
   }
-  public void setAgent( java.util.List<ContractAgentModel> value) {
-    this.agent = value;
+  public void setSecurityLabel( String value) {
+    this.securityLabel = value;
   }
   public java.util.List<ContractAgentModel> getAgent() {
     return this.agent;
   }
-  public void setSigner( java.util.List<ContractSignerModel> value) {
-    this.signer = value;
+  public void setAgent( java.util.List<ContractAgentModel> value) {
+    this.agent = value;
   }
   public java.util.List<ContractSignerModel> getSigner() {
     return this.signer;
   }
-  public void setValuedItem( java.util.List<ContractValuedItemModel> value) {
-    this.valuedItem = value;
+  public void setSigner( java.util.List<ContractSignerModel> value) {
+    this.signer = value;
   }
   public java.util.List<ContractValuedItemModel> getValuedItem() {
     return this.valuedItem;
   }
-  public void setTerm( java.util.List<ContractTermModel> value) {
-    this.term = value;
+  public void setValuedItem( java.util.List<ContractValuedItemModel> value) {
+    this.valuedItem = value;
   }
   public java.util.List<ContractTermModel> getTerm() {
     return this.term;
   }
-  public void setBindingAttachment( String value) {
-    this.bindingAttachment = value;
+  public void setTerm( java.util.List<ContractTermModel> value) {
+    this.term = value;
   }
   public String getBindingAttachment() {
     return this.bindingAttachment;
   }
-  public void setBindingReference( ReferenceModel value) {
-    this.bindingReference = value;
+  public void setBindingAttachment( String value) {
+    this.bindingAttachment = value;
   }
-  public ReferenceModel getBindingReference() {
+  public java.util.List<ReferenceModel> getBindingReference() {
     return this.bindingReference;
   }
-  public void setFriendly( java.util.List<ContractFriendlyModel> value) {
-    this.friendly = value;
+  public void setBindingReference( java.util.List<ReferenceModel> value) {
+    this.bindingReference = value;
   }
   public java.util.List<ContractFriendlyModel> getFriendly() {
     return this.friendly;
   }
-  public void setLegal( java.util.List<ContractLegalModel> value) {
-    this.legal = value;
+  public void setFriendly( java.util.List<ContractFriendlyModel> value) {
+    this.friendly = value;
   }
   public java.util.List<ContractLegalModel> getLegal() {
     return this.legal;
   }
-  public void setRule( java.util.List<ContractRuleModel> value) {
-    this.rule = value;
+  public void setLegal( java.util.List<ContractLegalModel> value) {
+    this.legal = value;
   }
   public java.util.List<ContractRuleModel> getRule() {
     return this.rule;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setRule( java.util.List<ContractRuleModel> value) {
+    this.rule = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("issued" + "[" + String.valueOf(this.issued) + "]\n"); 
-     builder.append("applies" + "[" + String.valueOf(this.applies) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("topic" + "[" + String.valueOf(this.topic) + "]\n"); 
-     builder.append("authority" + "[" + String.valueOf(this.authority) + "]\n"); 
-     builder.append("domain" + "[" + String.valueOf(this.domain) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("subType" + "[" + String.valueOf(this.subType) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("actionReason" + "[" + String.valueOf(this.actionReason) + "]\n"); 
-     builder.append("decisionType" + "[" + String.valueOf(this.decisionType) + "]\n"); 
-     builder.append("contentDerivative" + "[" + String.valueOf(this.contentDerivative) + "]\n"); 
-     builder.append("securityLabel" + "[" + String.valueOf(this.securityLabel) + "]\n"); 
-     builder.append("agent" + "[" + String.valueOf(this.agent) + "]\n"); 
-     builder.append("signer" + "[" + String.valueOf(this.signer) + "]\n"); 
-     builder.append("valuedItem" + "[" + String.valueOf(this.valuedItem) + "]\n"); 
-     builder.append("term" + "[" + String.valueOf(this.term) + "]\n"); 
-     builder.append("bindingAttachment" + "[" + String.valueOf(this.bindingAttachment) + "]\n"); 
-     builder.append("bindingReference" + "[" + String.valueOf(this.bindingReference) + "]\n"); 
-     builder.append("friendly" + "[" + String.valueOf(this.friendly) + "]\n"); 
-     builder.append("legal" + "[" + String.valueOf(this.legal) + "]\n"); 
-     builder.append("rule" + "[" + String.valueOf(this.rule) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[ContractModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("issued" + "->" + this.issued + "\n"); 
+     builder.append("applies" + "->" + this.applies + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("subType" + "->" + this.subType + "\n"); 
+     builder.append("action" + "->" + this.action + "\n"); 
+     builder.append("actionReason" + "->" + this.actionReason + "\n"); 
+     builder.append("decisionType" + "->" + this.decisionType + "\n"); 
+     builder.append("contentDerivative" + "->" + this.contentDerivative + "\n"); 
+     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
+     builder.append("bindingAttachment" + "->" + this.bindingAttachment + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ContractModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("issued" + "->" + this.issued + "\n"); 
+     builder.append("applies" + "->" + this.applies + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("topic" + "->" + this.topic + "\n"); 
+     builder.append("authority" + "->" + this.authority + "\n"); 
+     builder.append("domain" + "->" + this.domain + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("subType" + "->" + this.subType + "\n"); 
+     builder.append("action" + "->" + this.action + "\n"); 
+     builder.append("actionReason" + "->" + this.actionReason + "\n"); 
+     builder.append("decisionType" + "->" + this.decisionType + "\n"); 
+     builder.append("contentDerivative" + "->" + this.contentDerivative + "\n"); 
+     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
+     builder.append("agent" + "->" + this.agent + "\n"); 
+     builder.append("signer" + "->" + this.signer + "\n"); 
+     builder.append("valuedItem" + "->" + this.valuedItem + "\n"); 
+     builder.append("term" + "->" + this.term + "\n"); 
+     builder.append("bindingAttachment" + "->" + this.bindingAttachment + "\n"); 
+     builder.append("bindingReference" + "->" + this.bindingReference + "\n"); 
+     builder.append("friendly" + "->" + this.friendly + "\n"); 
+     builder.append("legal" + "->" + this.legal + "\n"); 
+     builder.append("rule" + "->" + this.rule + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

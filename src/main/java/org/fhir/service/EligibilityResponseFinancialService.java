@@ -32,7 +32,5 @@ public interface EligibilityResponseFinancialService {
 	public EligibilityResponseFinancial find(String id);
   public List<EligibilityResponseFinancial> select(int maxResult);
   public List<EligibilityResponseFinancial> selectAll();
-  public EligibilityResponseFinancial create(EligibilityResponseFinancial bean);
-  public EligibilityResponseFinancial update(EligibilityResponseFinancial bean);
   public void delete(EligibilityResponseFinancial bean);
 }

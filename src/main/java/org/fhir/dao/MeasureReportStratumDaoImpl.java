@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MeasureReportStratumModel;
 import org.fhir.pojo.MeasureReportStratum;
+import org.fhir.pojo.MeasureReportStratumHelper;
 
 public class MeasureReportStratumDaoImpl implements MeasureReportStratumDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MeasureReportStratumDaoImpl implements MeasureReportStratumDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureReportStratumModel a", MeasureReportStratumModel.class).setMaxResults(maxResult);
       List<MeasureReportStratumModel> models = query.getResultList();
-      return MeasureReportStratum.fromArray(models);
+      return MeasureReportStratumHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MeasureReportStratumDaoImpl implements MeasureReportStratumDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureReportStratumModel a", MeasureReportStratumModel.class);
       List<MeasureReportStratumModel> models = query.getResultList();
-      return MeasureReportStratum.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MeasureReportStratum create(MeasureReportStratum e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MeasureReportStratumModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MeasureReportStratum update(MeasureReportStratum e) {
-      final EntityManager em = entityManagerProvider.get();
-      MeasureReportStratumModel model = em.merge(new MeasureReportStratumModel(e));
-      return new MeasureReportStratum(model);
+      return MeasureReportStratumHelper.fromArray2Array(models);
   }
 
   @Override

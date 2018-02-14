@@ -209,6 +209,7 @@ public class RequestGroupAction  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -230,73 +231,62 @@ public class RequestGroupAction  {
 
   public RequestGroupAction(RequestGroupActionModel o) {
     this.id = o.getId();
-      if (null != o.getLabel()) {
-        this.label = new String(o.getLabel());
-      }
-
-      if (null != o.getTitle()) {
-        this.title = new String(o.getTitle());
-      }
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getTextEquivalent()) {
-        this.textEquivalent = new String(o.getTextEquivalent());
-      }
-
-      this.code = CodeableConcept.fromArray(o.getCode());
-      this.documentation = RelatedArtifact.fromArray(o.getDocumentation());
-
-      this.condition = RequestGroupCondition.fromArray(o.getCondition());
-
-      this.relatedAction = RequestGroupRelatedAction.fromArray(o.getRelatedAction());
-
-      if (null != o.getTimingDateTime()) {
-        this.timingDateTime = new String(o.getTimingDateTime());
-      }
-
-      this.timingPeriod = Period.fromJson(o.getTimingPeriod());
-      this.timingDuration = Duration.fromJson(o.getTimingDuration());
-      this.timingRange = Range.fromJson(o.getTimingRange());
-      this.timingTiming = Timing.fromJson(o.getTimingTiming());
-      this.participant = Reference.fromArray(o.getParticipant());
-
-      this.type = Coding.fromJson(o.getType());
-      if (null != o.getGroupingBehavior()) {
-        this.groupingBehavior = new String(o.getGroupingBehavior());
-      }
-
-      if (null != o.getSelectionBehavior()) {
-        this.selectionBehavior = new String(o.getSelectionBehavior());
-      }
-
-      if (null != o.getRequiredBehavior()) {
-        this.requiredBehavior = new String(o.getRequiredBehavior());
-      }
-
-      if (null != o.getPrecheckBehavior()) {
-        this.precheckBehavior = new String(o.getPrecheckBehavior());
-      }
-
-      if (null != o.getCardinalityBehavior()) {
-        this.cardinalityBehavior = new String(o.getCardinalityBehavior());
-      }
-
-      if (null != o.getResource()) {
-        this.resource = new Reference(o.getResource());
-        this.resource.setId(this.getId());
-      }
-
-      this.action = RequestGroupAction.fromArray(o.getAction());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getLabel()) {
+      this.label = o.getLabel();
+    }
+    if (null != o.getTitle()) {
+      this.title = o.getTitle();
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getTextEquivalent()) {
+      this.textEquivalent = o.getTextEquivalent();
+    }
+    if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
+    	this.documentation = RelatedArtifactHelper.fromArray2Array(o.getDocumentation());
+    }
+    if (null != o.getCondition() && !o.getCondition().isEmpty()) {
+    	this.condition = RequestGroupConditionHelper.fromArray2Array(o.getCondition());
+    }
+    if (null != o.getRelatedAction() && !o.getRelatedAction().isEmpty()) {
+    	this.relatedAction = RequestGroupRelatedActionHelper.fromArray2Array(o.getRelatedAction());
+    }
+    if (null != o.getTimingDateTime()) {
+      this.timingDateTime = o.getTimingDateTime();
+    }
+    this.timingPeriod = PeriodHelper.fromJson(o.getTimingPeriod());
+    this.timingDuration = DurationHelper.fromJson(o.getTimingDuration());
+    this.timingRange = RangeHelper.fromJson(o.getTimingRange());
+    this.timingTiming = TimingHelper.fromJson(o.getTimingTiming());
+    if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
+    	this.participant = ReferenceHelper.fromArray2Array(o.getParticipant());
+    }
+    this.type = CodingHelper.fromJson(o.getType());
+    if (null != o.getGroupingBehavior()) {
+      this.groupingBehavior = o.getGroupingBehavior();
+    }
+    if (null != o.getSelectionBehavior()) {
+      this.selectionBehavior = o.getSelectionBehavior();
+    }
+    if (null != o.getRequiredBehavior()) {
+      this.requiredBehavior = o.getRequiredBehavior();
+    }
+    if (null != o.getPrecheckBehavior()) {
+      this.precheckBehavior = o.getPrecheckBehavior();
+    }
+    if (null != o.getCardinalityBehavior()) {
+      this.cardinalityBehavior = o.getCardinalityBehavior();
+    }
+    if (null != o.getResource() && !o.getResource().isEmpty()) {
+      this.resource = new Reference(o.getResource().get(0));
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action = RequestGroupActionHelper.fromArray2Array(o.getAction());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLabel( String value) {
@@ -519,76 +509,45 @@ public class RequestGroupAction  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("label" + "[" + String.valueOf(this.label) + "]\n"); 
-     builder.append("_label" + "[" + String.valueOf(this._label) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("_title" + "[" + String.valueOf(this._title) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("textEquivalent" + "[" + String.valueOf(this.textEquivalent) + "]\n"); 
-     builder.append("_textEquivalent" + "[" + String.valueOf(this._textEquivalent) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("condition" + "[" + String.valueOf(this.condition) + "]\n"); 
-     builder.append("relatedAction" + "[" + String.valueOf(this.relatedAction) + "]\n"); 
-     builder.append("timingDateTime" + "[" + String.valueOf(this.timingDateTime) + "]\n"); 
-     builder.append("_timingDateTime" + "[" + String.valueOf(this._timingDateTime) + "]\n"); 
-     builder.append("timingPeriod" + "[" + String.valueOf(this.timingPeriod) + "]\n"); 
-     builder.append("timingDuration" + "[" + String.valueOf(this.timingDuration) + "]\n"); 
-     builder.append("timingRange" + "[" + String.valueOf(this.timingRange) + "]\n"); 
-     builder.append("timingTiming" + "[" + String.valueOf(this.timingTiming) + "]\n"); 
-     builder.append("participant" + "[" + String.valueOf(this.participant) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("groupingBehavior" + "[" + String.valueOf(this.groupingBehavior) + "]\n"); 
-     builder.append("_groupingBehavior" + "[" + String.valueOf(this._groupingBehavior) + "]\n"); 
-     builder.append("selectionBehavior" + "[" + String.valueOf(this.selectionBehavior) + "]\n"); 
-     builder.append("_selectionBehavior" + "[" + String.valueOf(this._selectionBehavior) + "]\n"); 
-     builder.append("requiredBehavior" + "[" + String.valueOf(this.requiredBehavior) + "]\n"); 
-     builder.append("_requiredBehavior" + "[" + String.valueOf(this._requiredBehavior) + "]\n"); 
-     builder.append("precheckBehavior" + "[" + String.valueOf(this.precheckBehavior) + "]\n"); 
-     builder.append("_precheckBehavior" + "[" + String.valueOf(this._precheckBehavior) + "]\n"); 
-     builder.append("cardinalityBehavior" + "[" + String.valueOf(this.cardinalityBehavior) + "]\n"); 
-     builder.append("_cardinalityBehavior" + "[" + String.valueOf(this._cardinalityBehavior) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[RequestGroupAction]:" + "\n");
+     if(this.label != null) builder.append("label" + "->" + this.label.toString() + "\n"); 
+     if(this._label != null) builder.append("_label" + "->" + this._label.toString() + "\n"); 
+     if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
+     if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.textEquivalent != null) builder.append("textEquivalent" + "->" + this.textEquivalent.toString() + "\n"); 
+     if(this._textEquivalent != null) builder.append("_textEquivalent" + "->" + this._textEquivalent.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this.condition != null) builder.append("condition" + "->" + this.condition.toString() + "\n"); 
+     if(this.relatedAction != null) builder.append("relatedAction" + "->" + this.relatedAction.toString() + "\n"); 
+     if(this.timingDateTime != null) builder.append("timingDateTime" + "->" + this.timingDateTime.toString() + "\n"); 
+     if(this._timingDateTime != null) builder.append("_timingDateTime" + "->" + this._timingDateTime.toString() + "\n"); 
+     if(this.timingPeriod != null) builder.append("timingPeriod" + "->" + this.timingPeriod.toString() + "\n"); 
+     if(this.timingDuration != null) builder.append("timingDuration" + "->" + this.timingDuration.toString() + "\n"); 
+     if(this.timingRange != null) builder.append("timingRange" + "->" + this.timingRange.toString() + "\n"); 
+     if(this.timingTiming != null) builder.append("timingTiming" + "->" + this.timingTiming.toString() + "\n"); 
+     if(this.participant != null) builder.append("participant" + "->" + this.participant.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.groupingBehavior != null) builder.append("groupingBehavior" + "->" + this.groupingBehavior.toString() + "\n"); 
+     if(this._groupingBehavior != null) builder.append("_groupingBehavior" + "->" + this._groupingBehavior.toString() + "\n"); 
+     if(this.selectionBehavior != null) builder.append("selectionBehavior" + "->" + this.selectionBehavior.toString() + "\n"); 
+     if(this._selectionBehavior != null) builder.append("_selectionBehavior" + "->" + this._selectionBehavior.toString() + "\n"); 
+     if(this.requiredBehavior != null) builder.append("requiredBehavior" + "->" + this.requiredBehavior.toString() + "\n"); 
+     if(this._requiredBehavior != null) builder.append("_requiredBehavior" + "->" + this._requiredBehavior.toString() + "\n"); 
+     if(this.precheckBehavior != null) builder.append("precheckBehavior" + "->" + this.precheckBehavior.toString() + "\n"); 
+     if(this._precheckBehavior != null) builder.append("_precheckBehavior" + "->" + this._precheckBehavior.toString() + "\n"); 
+     if(this.cardinalityBehavior != null) builder.append("cardinalityBehavior" + "->" + this.cardinalityBehavior.toString() + "\n"); 
+     if(this._cardinalityBehavior != null) builder.append("_cardinalityBehavior" + "->" + this._cardinalityBehavior.toString() + "\n"); 
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<RequestGroupAction> fromArray(java.util.List<RequestGroupActionModel> list) {
-    return (java.util.List<RequestGroupAction>)list.stream()
-      .map(model -> new RequestGroupAction(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<RequestGroupActionModel> toModelArray(java.util.List<RequestGroupAction> list) {
-    return (java.util.List<RequestGroupActionModel>)list.stream()
-      .map(model -> new RequestGroupActionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static RequestGroupAction fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, RequestGroupAction.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(RequestGroupAction o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<RequestGroupAction> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MedicationBatchModel;
 import org.fhir.pojo.MedicationBatch;
+import org.fhir.pojo.MedicationBatchHelper;
 
 public class MedicationBatchDaoImpl implements MedicationBatchDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MedicationBatchDaoImpl implements MedicationBatchDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationBatchModel a", MedicationBatchModel.class).setMaxResults(maxResult);
       List<MedicationBatchModel> models = query.getResultList();
-      return MedicationBatch.fromArray(models);
+      return MedicationBatchHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MedicationBatchDaoImpl implements MedicationBatchDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MedicationBatchModel a", MedicationBatchModel.class);
       List<MedicationBatchModel> models = query.getResultList();
-      return MedicationBatch.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MedicationBatch create(MedicationBatch e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MedicationBatchModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MedicationBatch update(MedicationBatch e) {
-      final EntityManager em = entityManagerProvider.get();
-      MedicationBatchModel model = em.merge(new MedicationBatchModel(e));
-      return new MedicationBatch(model);
+      return MedicationBatchHelper.fromArray2Array(models);
   }
 
   @Override

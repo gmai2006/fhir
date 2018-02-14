@@ -200,6 +200,7 @@ public class ClinicalImpression  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -251,92 +252,71 @@ public class ClinicalImpression  {
 
   public ClinicalImpression(ClinicalImpressionModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.code = CodeableConcept.fromJson(o.getCode());
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getEffectiveDateTime()) {
-        this.effectiveDateTime = new String(o.getEffectiveDateTime());
-      }
-
-      this.effectivePeriod = Period.fromJson(o.getEffectivePeriod());
-      if (null != o.getDate()) {
-        this.date = new String(o.getDate());
-      }
-
-      if (null != o.getAssessor()) {
-        this.assessor = new Reference(o.getAssessor());
-        this.assessor.setId(this.getId());
-      }
-
-      if (null != o.getPrevious()) {
-        this.previous = new Reference(o.getPrevious());
-        this.previous.setId(this.getId());
-      }
-
-      this.problem = Reference.fromArray(o.getProblem());
-
-      this.investigation = ClinicalImpressionInvestigation.fromArray(o.getInvestigation());
-
-      this.protocol = org.fhir.utils.JsonUtils.json2Array(o.getProtocol());
-
-      if (null != o.getSummary()) {
-        this.summary = new String(o.getSummary());
-      }
-
-      this.finding = ClinicalImpressionFinding.fromArray(o.getFinding());
-
-      this.prognosisCodeableConcept = CodeableConcept.fromArray(o.getPrognosisCodeableConcept());
-      this.prognosisReference = Reference.fromArray(o.getPrognosisReference());
-
-      this.action = Reference.fromArray(o.getAction());
-
-      this.note = Annotation.fromArray(o.getNote());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getEffectiveDateTime()) {
+      this.effectiveDateTime = o.getEffectiveDateTime();
+    }
+    this.effectivePeriod = PeriodHelper.fromJson(o.getEffectivePeriod());
+    if (null != o.getDate()) {
+      this.date = o.getDate();
+    }
+    if (null != o.getAssessor() && !o.getAssessor().isEmpty()) {
+      this.assessor = new Reference(o.getAssessor().get(0));
+    }
+    if (null != o.getPrevious() && !o.getPrevious().isEmpty()) {
+      this.previous = new Reference(o.getPrevious().get(0));
+    }
+    if (null != o.getProblem() && !o.getProblem().isEmpty()) {
+    	this.problem = ReferenceHelper.fromArray2Array(o.getProblem());
+    }
+    if (null != o.getInvestigation() && !o.getInvestigation().isEmpty()) {
+    	this.investigation = ClinicalImpressionInvestigationHelper.fromArray2Array(o.getInvestigation());
+    }
+    if (o.getProtocol() != null) {
+    	this.protocol = org.fhir.utils.JsonUtils.json2Array(o.getProtocol());
+    }
+    if (null != o.getSummary()) {
+      this.summary = o.getSummary();
+    }
+    if (null != o.getFinding() && !o.getFinding().isEmpty()) {
+    	this.finding = ClinicalImpressionFindingHelper.fromArray2Array(o.getFinding());
+    }
+    if (null != o.getPrognosisReference() && !o.getPrognosisReference().isEmpty()) {
+    	this.prognosisReference = ReferenceHelper.fromArray2Array(o.getPrognosisReference());
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action = ReferenceHelper.fromArray2Array(o.getAction());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -571,44 +551,45 @@ public class ClinicalImpression  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("effectiveDateTime" + "[" + String.valueOf(this.effectiveDateTime) + "]\n"); 
-     builder.append("_effectiveDateTime" + "[" + String.valueOf(this._effectiveDateTime) + "]\n"); 
-     builder.append("effectivePeriod" + "[" + String.valueOf(this.effectivePeriod) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("_date" + "[" + String.valueOf(this._date) + "]\n"); 
-     builder.append("assessor" + "[" + String.valueOf(this.assessor) + "]\n"); 
-     builder.append("previous" + "[" + String.valueOf(this.previous) + "]\n"); 
-     builder.append("problem" + "[" + String.valueOf(this.problem) + "]\n"); 
-     builder.append("investigation" + "[" + String.valueOf(this.investigation) + "]\n"); 
-     builder.append("protocol" + "[" + String.valueOf(this.protocol) + "]\n"); 
-     builder.append("_protocol" + "[" + String.valueOf(this._protocol) + "]\n"); 
-     builder.append("summary" + "[" + String.valueOf(this.summary) + "]\n"); 
-     builder.append("_summary" + "[" + String.valueOf(this._summary) + "]\n"); 
-     builder.append("finding" + "[" + String.valueOf(this.finding) + "]\n"); 
-     builder.append("prognosisCodeableConcept" + "[" + String.valueOf(this.prognosisCodeableConcept) + "]\n"); 
-     builder.append("prognosisReference" + "[" + String.valueOf(this.prognosisReference) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[ClinicalImpression]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.effectiveDateTime != null) builder.append("effectiveDateTime" + "->" + this.effectiveDateTime.toString() + "\n"); 
+     if(this._effectiveDateTime != null) builder.append("_effectiveDateTime" + "->" + this._effectiveDateTime.toString() + "\n"); 
+     if(this.effectivePeriod != null) builder.append("effectivePeriod" + "->" + this.effectivePeriod.toString() + "\n"); 
+     if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
+     if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
+     if(this.assessor != null) builder.append("assessor" + "->" + this.assessor.toString() + "\n"); 
+     if(this.previous != null) builder.append("previous" + "->" + this.previous.toString() + "\n"); 
+     if(this.problem != null) builder.append("problem" + "->" + this.problem.toString() + "\n"); 
+     if(this.investigation != null) builder.append("investigation" + "->" + this.investigation.toString() + "\n"); 
+     if(this.protocol != null) builder.append("protocol" + "->" + this.protocol.toString() + "\n"); 
+     if(this._protocol != null) builder.append("_protocol" + "->" + this._protocol.toString() + "\n"); 
+     if(this.summary != null) builder.append("summary" + "->" + this.summary.toString() + "\n"); 
+     if(this._summary != null) builder.append("_summary" + "->" + this._summary.toString() + "\n"); 
+     if(this.finding != null) builder.append("finding" + "->" + this.finding.toString() + "\n"); 
+     if(this.prognosisCodeableConcept != null) builder.append("prognosisCodeableConcept" + "->" + this.prognosisCodeableConcept.toString() + "\n"); 
+     if(this.prognosisReference != null) builder.append("prognosisReference" + "->" + this.prognosisReference.toString() + "\n"); 
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -640,36 +621,4 @@ public class ClinicalImpression  {
   	}
   }
 
-  public static java.util.List<ClinicalImpression> fromArray(java.util.List<ClinicalImpressionModel> list) {
-    return (java.util.List<ClinicalImpression>)list.stream()
-      .map(model -> new ClinicalImpression(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ClinicalImpressionModel> toModelArray(java.util.List<ClinicalImpression> list) {
-    return (java.util.List<ClinicalImpressionModel>)list.stream()
-      .map(model -> new ClinicalImpressionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ClinicalImpression fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ClinicalImpression.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ClinicalImpression o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ClinicalImpression> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

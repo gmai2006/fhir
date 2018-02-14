@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ContractFriendly create(ContractFriendly bean) {
-  	requireNonNull(bean);
-    logger.info("create(ContractFriendly={}) - entered bean ");
-
-    final ContractFriendly result = dao.create(bean);
-
-    logger.info("create(ContractFriendly) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ContractFriendly update(ContractFriendly bean) {
-  	requireNonNull(bean);
-    logger.info("update(ContractFriendly={}) - entered bean ");
-
-    final ContractFriendly result = dao.update(bean);
-
-    logger.info("update(ContractFriendly) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MeasureReportGroupModel;
 import org.fhir.pojo.MeasureReportGroup;
+import org.fhir.pojo.MeasureReportGroupHelper;
 
 public class MeasureReportGroupDaoImpl implements MeasureReportGroupDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MeasureReportGroupDaoImpl implements MeasureReportGroupDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureReportGroupModel a", MeasureReportGroupModel.class).setMaxResults(maxResult);
       List<MeasureReportGroupModel> models = query.getResultList();
-      return MeasureReportGroup.fromArray(models);
+      return MeasureReportGroupHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MeasureReportGroupDaoImpl implements MeasureReportGroupDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureReportGroupModel a", MeasureReportGroupModel.class);
       List<MeasureReportGroupModel> models = query.getResultList();
-      return MeasureReportGroup.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MeasureReportGroup create(MeasureReportGroup e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MeasureReportGroupModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MeasureReportGroup update(MeasureReportGroup e) {
-      final EntityManager em = entityManagerProvider.get();
-      MeasureReportGroupModel model = em.merge(new MeasureReportGroupModel(e));
-      return new MeasureReportGroup(model);
+      return MeasureReportGroupHelper.fromArray2Array(models);
   }
 
   @Override

@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ObservationComponent create(ObservationComponent bean) {
-  	requireNonNull(bean);
-    logger.info("create(ObservationComponent={}) - entered bean ");
-
-    final ObservationComponent result = dao.create(bean);
-
-    logger.info("create(ObservationComponent) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ObservationComponent update(ObservationComponent bean) {
-  	requireNonNull(bean);
-    logger.info("update(ObservationComponent={}) - entered bean ");
-
-    final ObservationComponent result = dao.update(bean);
-
-    logger.info("update(ObservationComponent) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

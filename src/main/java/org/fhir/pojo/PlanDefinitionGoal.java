@@ -79,6 +79,7 @@ public class PlanDefinitionGoal  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -100,21 +101,19 @@ public class PlanDefinitionGoal  {
 
   public PlanDefinitionGoal(PlanDefinitionGoalModel o) {
     this.id = o.getId();
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      this.description = CodeableConcept.fromJson(o.getDescription());
-      this.priority = CodeableConcept.fromJson(o.getPriority());
-      this.start = CodeableConcept.fromJson(o.getStart());
-      this.addresses = CodeableConcept.fromArray(o.getAddresses());
-      this.documentation = RelatedArtifact.fromArray(o.getDocumentation());
-
-      this.target = PlanDefinitionTarget.fromArray(o.getTarget());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    this.description = CodeableConceptHelper.fromJson(o.getDescription());
+    this.priority = CodeableConceptHelper.fromJson(o.getPriority());
+    this.start = CodeableConceptHelper.fromJson(o.getStart());
+    if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
+    	this.documentation = RelatedArtifactHelper.fromArray2Array(o.getDocumentation());
+    }
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+    	this.target = PlanDefinitionTargetHelper.fromArray2Array(o.getTarget());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCategory( CodeableConcept value) {
@@ -187,51 +186,20 @@ public class PlanDefinitionGoal  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("priority" + "[" + String.valueOf(this.priority) + "]\n"); 
-     builder.append("start" + "[" + String.valueOf(this.start) + "]\n"); 
-     builder.append("addresses" + "[" + String.valueOf(this.addresses) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PlanDefinitionGoal]:" + "\n");
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this.priority != null) builder.append("priority" + "->" + this.priority.toString() + "\n"); 
+     if(this.start != null) builder.append("start" + "->" + this.start.toString() + "\n"); 
+     if(this.addresses != null) builder.append("addresses" + "->" + this.addresses.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<PlanDefinitionGoal> fromArray(java.util.List<PlanDefinitionGoalModel> list) {
-    return (java.util.List<PlanDefinitionGoal>)list.stream()
-      .map(model -> new PlanDefinitionGoal(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PlanDefinitionGoalModel> toModelArray(java.util.List<PlanDefinitionGoal> list) {
-    return (java.util.List<PlanDefinitionGoalModel>)list.stream()
-      .map(model -> new PlanDefinitionGoalModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PlanDefinitionGoal fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PlanDefinitionGoal.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PlanDefinitionGoal o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PlanDefinitionGoal> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

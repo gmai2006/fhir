@@ -34,10 +34,5 @@ public interface ContactDetailDao {
   public List<ContactDetail> select(int maxResult);
 
   public List<ContactDetail> selectAll();
-
-  public ContactDetail create(ContactDetail e);
-
-  public ContactDetail update(ContactDetail e);
-
   public void delete(ContactDetail e);
 }

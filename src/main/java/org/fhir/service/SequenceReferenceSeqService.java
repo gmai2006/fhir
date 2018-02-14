@@ -32,7 +32,5 @@ public interface SequenceReferenceSeqService {
 	public SequenceReferenceSeq find(String id);
   public List<SequenceReferenceSeq> select(int maxResult);
   public List<SequenceReferenceSeq> selectAll();
-  public SequenceReferenceSeq create(SequenceReferenceSeq bean);
-  public SequenceReferenceSeq update(SequenceReferenceSeq bean);
   public void delete(SequenceReferenceSeq bean);
 }

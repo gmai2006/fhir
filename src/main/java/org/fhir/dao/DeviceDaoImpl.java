@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DeviceModel;
 import org.fhir.pojo.Device;
+import org.fhir.pojo.DeviceHelper;
 
 public class DeviceDaoImpl implements DeviceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DeviceDaoImpl implements DeviceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceModel a", DeviceModel.class).setMaxResults(maxResult);
       List<DeviceModel> models = query.getResultList();
-      return Device.fromArray(models);
+      return DeviceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class DeviceDaoImpl implements DeviceDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceModel a", DeviceModel.class);
       List<DeviceModel> models = query.getResultList();
-      return Device.fromArray(models);
+      return DeviceHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class DeviceDaoImpl implements DeviceDao {
       DeviceModel model = em.merge(new DeviceModel(e));
       return new Device(model);
   }
-
   @Override
   @Transactional
   public void delete(Device e) {

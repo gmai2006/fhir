@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.GroupModel;
 import org.fhir.pojo.Group;
+import org.fhir.pojo.GroupHelper;
 
 public class GroupDaoImpl implements GroupDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class GroupDaoImpl implements GroupDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GroupModel a", GroupModel.class).setMaxResults(maxResult);
       List<GroupModel> models = query.getResultList();
-      return Group.fromArray(models);
+      return GroupHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class GroupDaoImpl implements GroupDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GroupModel a", GroupModel.class);
       List<GroupModel> models = query.getResultList();
-      return Group.fromArray(models);
+      return GroupHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class GroupDaoImpl implements GroupDao {
       GroupModel model = em.merge(new GroupModel(e));
       return new Group(model);
   }
-
   @Override
   @Transactional
   public void delete(Group e) {

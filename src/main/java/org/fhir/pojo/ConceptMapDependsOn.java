@@ -83,6 +83,7 @@ public class ConceptMapDependsOn  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -104,28 +105,21 @@ public class ConceptMapDependsOn  {
 
   public ConceptMapDependsOn(ConceptMapDependsOnModel o) {
     this.id = o.getId();
-      if (null != o.getProperty()) {
-        this.property = new String(o.getProperty());
-      }
-
-      if (null != o.getSystem()) {
-        this.system = new String(o.getSystem());
-      }
-
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getDisplay()) {
-        this.display = new String(o.getDisplay());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getProperty()) {
+      this.property = o.getProperty();
+    }
+    if (null != o.getSystem()) {
+      this.system = o.getSystem();
+    }
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getDisplay()) {
+      this.display = o.getDisplay();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setProperty( String value) {
@@ -204,52 +198,21 @@ public class ConceptMapDependsOn  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("property" + "[" + String.valueOf(this.property) + "]\n"); 
-     builder.append("_property" + "[" + String.valueOf(this._property) + "]\n"); 
-     builder.append("system" + "[" + String.valueOf(this.system) + "]\n"); 
-     builder.append("_system" + "[" + String.valueOf(this._system) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("_display" + "[" + String.valueOf(this._display) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ConceptMapDependsOn]:" + "\n");
+     if(this.property != null) builder.append("property" + "->" + this.property.toString() + "\n"); 
+     if(this._property != null) builder.append("_property" + "->" + this._property.toString() + "\n"); 
+     if(this.system != null) builder.append("system" + "->" + this.system.toString() + "\n"); 
+     if(this._system != null) builder.append("_system" + "->" + this._system.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
+     if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ConceptMapDependsOn> fromArray(java.util.List<ConceptMapDependsOnModel> list) {
-    return (java.util.List<ConceptMapDependsOn>)list.stream()
-      .map(model -> new ConceptMapDependsOn(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ConceptMapDependsOnModel> toModelArray(java.util.List<ConceptMapDependsOn> list) {
-    return (java.util.List<ConceptMapDependsOnModel>)list.stream()
-      .map(model -> new ConceptMapDependsOnModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ConceptMapDependsOn fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ConceptMapDependsOn.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ConceptMapDependsOn o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ConceptMapDependsOn> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

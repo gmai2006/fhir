@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.GuidanceResponseModel;
 import org.fhir.pojo.GuidanceResponse;
+import org.fhir.pojo.GuidanceResponseHelper;
 
 public class GuidanceResponseDaoImpl implements GuidanceResponseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class GuidanceResponseDaoImpl implements GuidanceResponseDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GuidanceResponseModel a", GuidanceResponseModel.class).setMaxResults(maxResult);
       List<GuidanceResponseModel> models = query.getResultList();
-      return GuidanceResponse.fromArray(models);
+      return GuidanceResponseHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class GuidanceResponseDaoImpl implements GuidanceResponseDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GuidanceResponseModel a", GuidanceResponseModel.class);
       List<GuidanceResponseModel> models = query.getResultList();
-      return GuidanceResponse.fromArray(models);
+      return GuidanceResponseHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class GuidanceResponseDaoImpl implements GuidanceResponseDao {
       GuidanceResponseModel model = em.merge(new GuidanceResponseModel(e));
       return new GuidanceResponse(model);
   }
-
   @Override
   @Transactional
   public void delete(GuidanceResponse e) {

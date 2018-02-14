@@ -34,10 +34,8 @@ public interface SubstanceDao {
   public List<Substance> select(int maxResult);
 
   public List<Substance> selectAll();
-
   public Substance create(Substance e);
 
   public Substance update(Substance e);
-
   public void delete(Substance e);
 }

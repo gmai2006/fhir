@@ -34,10 +34,5 @@ public interface MessageDefinitionAllowedResponseDao {
   public List<MessageDefinitionAllowedResponse> select(int maxResult);
 
   public List<MessageDefinitionAllowedResponse> selectAll();
-
-  public MessageDefinitionAllowedResponse create(MessageDefinitionAllowedResponse e);
-
-  public MessageDefinitionAllowedResponse update(MessageDefinitionAllowedResponse e);
-
   public void delete(MessageDefinitionAllowedResponse e);
 }

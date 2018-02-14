@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
 */
 @Entity
 @Table(name="requestgroupaction")
-public class RequestGroupActionModel  {
+public class RequestGroupActionModel  implements Serializable {
+	private static final long serialVersionUID = 151857669676219120L;
   /**
   * Description: "A user-visible label for the action."
   */
@@ -67,7 +68,7 @@ public class RequestGroupActionModel  {
 
   /**
   * Description: "A code that provides meaning for the action or action group. For example, a section may have a LOINC code for a the section of a documentation template."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -77,23 +78,35 @@ public class RequestGroupActionModel  {
   /**
   * Description: "Didactic or other informational resources associated with the action that can be provided to the CDS recipient. Information resources can include inline text commentary and links to web resources."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<RelatedArtifactModel> documentation = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"documentation_id\"")
+  private String documentation_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="documentation_id", insertable=false, updatable=false)
+  private java.util.List<RelatedArtifactModel> documentation;
 
   /**
   * Description: "An expression that describes applicability criteria, or start/stop conditions for the action."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<RequestGroupConditionModel> condition = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"condition_id\"")
+  private String condition_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="condition_id", insertable=false, updatable=false)
+  private java.util.List<RequestGroupConditionModel> condition;
 
   /**
   * Description: "A relationship to another action such as \"before\" or \"30-60 minutes after start of\"."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<RequestGroupRelatedActionModel> relatedAction = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"relatedaction_id\"")
+  private String relatedaction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatedaction_id", insertable=false, updatable=false)
+  private java.util.List<RequestGroupRelatedActionModel> relatedAction;
 
   /**
   * Description: "An optional value describing when the action should be performed."
@@ -105,7 +118,7 @@ public class RequestGroupActionModel  {
 
   /**
   * Description: "An optional value describing when the action should be performed."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -114,7 +127,7 @@ public class RequestGroupActionModel  {
 
   /**
   * Description: "An optional value describing when the action should be performed."
-  * Actual type: Duration
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -123,7 +136,7 @@ public class RequestGroupActionModel  {
 
   /**
   * Description: "An optional value describing when the action should be performed."
-  * Actual type: Range
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -132,7 +145,7 @@ public class RequestGroupActionModel  {
 
   /**
   * Description: "An optional value describing when the action should be performed."
-  * Actual type: Timing
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -142,13 +155,17 @@ public class RequestGroupActionModel  {
   /**
   * Description: "The participant that should perform or be responsible for this action."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> participant = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"participant_id\"")
+  private String participant_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="participant_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> participant;
 
   /**
   * Description: "The type of action to perform (create, update, remove)."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -202,21 +219,25 @@ public class RequestGroupActionModel  {
   @Column(name="\"resource_id\"")
   private String resource_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`resource_id`", insertable=false, updatable=false)
-  private ReferenceModel resource;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="resource_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> resource;
 
   /**
   * Description: "Sub actions."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<RequestGroupActionModel> action = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"action_id\"")
+  private String action_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  private java.util.List<RequestGroupActionModel> action;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -228,6 +249,7 @@ public class RequestGroupActionModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -236,251 +258,281 @@ public class RequestGroupActionModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public RequestGroupActionModel() {
   }
 
-  public RequestGroupActionModel(RequestGroupAction o) {
-    this.id = o.getId();
-      this.label = o.getLabel();
-
-      this.title = o.getTitle();
-
-      this.description = o.getDescription();
-
-      this.textEquivalent = o.getTextEquivalent();
-
-      this.code = CodeableConcept.toJson(o.getCode());
-      this.documentation = RelatedArtifact.toModelArray(o.getDocumentation());
-
-      this.condition = RequestGroupCondition.toModelArray(o.getCondition());
-
-      this.relatedAction = RequestGroupRelatedAction.toModelArray(o.getRelatedAction());
-
-      this.timingDateTime = o.getTimingDateTime();
-
-      this.timingPeriod = Period.toJson(o.getTimingPeriod());
-      this.timingDuration = Duration.toJson(o.getTimingDuration());
-      this.timingRange = Range.toJson(o.getTimingRange());
-      this.timingTiming = Timing.toJson(o.getTimingTiming());
-      this.participant = Reference.toModelArray(o.getParticipant());
-
-      this.type = Coding.toJson(o.getType());
-      this.groupingBehavior = o.getGroupingBehavior();
-
-      this.selectionBehavior = o.getSelectionBehavior();
-
-      this.requiredBehavior = o.getRequiredBehavior();
-
-      this.precheckBehavior = o.getPrecheckBehavior();
-
-      this.cardinalityBehavior = o.getCardinalityBehavior();
-
-      if (null != o.getResource()) {
-      	this.resource_id = "resource" + this.getId();
-        this.resource = new ReferenceModel(o.getResource());
-        this.resource.setId(this.resource_id);
-        this.resource.parent_id = this.resource.getId();
-      }
-
-      this.action = RequestGroupAction.toModelArray(o.getAction());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public RequestGroupActionModel(RequestGroupAction o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.label = o.getLabel();
+    this.title = o.getTitle();
+    this.description = o.getDescription();
+    this.textEquivalent = o.getTextEquivalent();
+    if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
+    	this.documentation_id = "documentation" + this.parent_id;
+    	this.documentation = RelatedArtifactHelper.toModelFromArray(o.getDocumentation(), this.documentation_id);
+    }
+    if (null != o.getCondition() && !o.getCondition().isEmpty()) {
+    	this.condition_id = "condition" + this.parent_id;
+    	this.condition = RequestGroupConditionHelper.toModelFromArray(o.getCondition(), this.condition_id);
+    }
+    if (null != o.getRelatedAction() && !o.getRelatedAction().isEmpty()) {
+    	this.relatedaction_id = "relatedaction" + this.parent_id;
+    	this.relatedAction = RequestGroupRelatedActionHelper.toModelFromArray(o.getRelatedAction(), this.relatedaction_id);
+    }
+    this.timingDateTime = o.getTimingDateTime();
+    this.timingPeriod = PeriodHelper.toJson(o.getTimingPeriod());
+    this.timingDuration = DurationHelper.toJson(o.getTimingDuration());
+    this.timingRange = RangeHelper.toJson(o.getTimingRange());
+    this.timingTiming = TimingHelper.toJson(o.getTimingTiming());
+    if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
+    	this.participant_id = "participant" + this.parent_id;
+    	this.participant = ReferenceHelper.toModelFromArray(o.getParticipant(), this.participant_id);
+    }
+    this.type = CodingHelper.toJson(o.getType());
+    this.groupingBehavior = o.getGroupingBehavior();
+    this.selectionBehavior = o.getSelectionBehavior();
+    this.requiredBehavior = o.getRequiredBehavior();
+    this.precheckBehavior = o.getPrecheckBehavior();
+    this.cardinalityBehavior = o.getCardinalityBehavior();
+    if (null != o.getResource() ) {
+    	this.resource_id = "resource" + this.parent_id;
+    	this.resource = ReferenceHelper.toModel(o.getResource(), this.resource_id);
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action_id = "action" + this.parent_id;
+    	this.action = RequestGroupActionHelper.toModelFromArray(o.getAction(), this.action_id);
+    }
   }
 
-  public void setLabel( String value) {
-    this.label = value;
-  }
   public String getLabel() {
     return this.label;
   }
-  public void setTitle( String value) {
-    this.title = value;
+  public void setLabel( String value) {
+    this.label = value;
   }
   public String getTitle() {
     return this.title;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setTitle( String value) {
+    this.title = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setTextEquivalent( String value) {
-    this.textEquivalent = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public String getTextEquivalent() {
     return this.textEquivalent;
   }
-  public void setCode( String value) {
-    this.code = value;
+  public void setTextEquivalent( String value) {
+    this.textEquivalent = value;
   }
   public String getCode() {
     return this.code;
   }
-  public void setDocumentation( java.util.List<RelatedArtifactModel> value) {
-    this.documentation = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public java.util.List<RelatedArtifactModel> getDocumentation() {
     return this.documentation;
   }
-  public void setCondition( java.util.List<RequestGroupConditionModel> value) {
-    this.condition = value;
+  public void setDocumentation( java.util.List<RelatedArtifactModel> value) {
+    this.documentation = value;
   }
   public java.util.List<RequestGroupConditionModel> getCondition() {
     return this.condition;
   }
-  public void setRelatedAction( java.util.List<RequestGroupRelatedActionModel> value) {
-    this.relatedAction = value;
+  public void setCondition( java.util.List<RequestGroupConditionModel> value) {
+    this.condition = value;
   }
   public java.util.List<RequestGroupRelatedActionModel> getRelatedAction() {
     return this.relatedAction;
   }
-  public void setTimingDateTime( String value) {
-    this.timingDateTime = value;
+  public void setRelatedAction( java.util.List<RequestGroupRelatedActionModel> value) {
+    this.relatedAction = value;
   }
   public String getTimingDateTime() {
     return this.timingDateTime;
   }
-  public void setTimingPeriod( String value) {
-    this.timingPeriod = value;
+  public void setTimingDateTime( String value) {
+    this.timingDateTime = value;
   }
   public String getTimingPeriod() {
     return this.timingPeriod;
   }
-  public void setTimingDuration( String value) {
-    this.timingDuration = value;
+  public void setTimingPeriod( String value) {
+    this.timingPeriod = value;
   }
   public String getTimingDuration() {
     return this.timingDuration;
   }
-  public void setTimingRange( String value) {
-    this.timingRange = value;
+  public void setTimingDuration( String value) {
+    this.timingDuration = value;
   }
   public String getTimingRange() {
     return this.timingRange;
   }
-  public void setTimingTiming( String value) {
-    this.timingTiming = value;
+  public void setTimingRange( String value) {
+    this.timingRange = value;
   }
   public String getTimingTiming() {
     return this.timingTiming;
   }
-  public void setParticipant( java.util.List<ReferenceModel> value) {
-    this.participant = value;
+  public void setTimingTiming( String value) {
+    this.timingTiming = value;
   }
   public java.util.List<ReferenceModel> getParticipant() {
     return this.participant;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setParticipant( java.util.List<ReferenceModel> value) {
+    this.participant = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setGroupingBehavior( String value) {
-    this.groupingBehavior = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getGroupingBehavior() {
     return this.groupingBehavior;
   }
-  public void setSelectionBehavior( String value) {
-    this.selectionBehavior = value;
+  public void setGroupingBehavior( String value) {
+    this.groupingBehavior = value;
   }
   public String getSelectionBehavior() {
     return this.selectionBehavior;
   }
-  public void setRequiredBehavior( String value) {
-    this.requiredBehavior = value;
+  public void setSelectionBehavior( String value) {
+    this.selectionBehavior = value;
   }
   public String getRequiredBehavior() {
     return this.requiredBehavior;
   }
-  public void setPrecheckBehavior( String value) {
-    this.precheckBehavior = value;
+  public void setRequiredBehavior( String value) {
+    this.requiredBehavior = value;
   }
   public String getPrecheckBehavior() {
     return this.precheckBehavior;
   }
-  public void setCardinalityBehavior( String value) {
-    this.cardinalityBehavior = value;
+  public void setPrecheckBehavior( String value) {
+    this.precheckBehavior = value;
   }
   public String getCardinalityBehavior() {
     return this.cardinalityBehavior;
   }
-  public void setResource( ReferenceModel value) {
-    this.resource = value;
+  public void setCardinalityBehavior( String value) {
+    this.cardinalityBehavior = value;
   }
-  public ReferenceModel getResource() {
+  public java.util.List<ReferenceModel> getResource() {
     return this.resource;
   }
-  public void setAction( java.util.List<RequestGroupActionModel> value) {
-    this.action = value;
+  public void setResource( java.util.List<ReferenceModel> value) {
+    this.resource = value;
   }
   public java.util.List<RequestGroupActionModel> getAction() {
     return this.action;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setAction( java.util.List<RequestGroupActionModel> value) {
+    this.action = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("label" + "[" + String.valueOf(this.label) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("textEquivalent" + "[" + String.valueOf(this.textEquivalent) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("condition" + "[" + String.valueOf(this.condition) + "]\n"); 
-     builder.append("relatedAction" + "[" + String.valueOf(this.relatedAction) + "]\n"); 
-     builder.append("timingDateTime" + "[" + String.valueOf(this.timingDateTime) + "]\n"); 
-     builder.append("timingPeriod" + "[" + String.valueOf(this.timingPeriod) + "]\n"); 
-     builder.append("timingDuration" + "[" + String.valueOf(this.timingDuration) + "]\n"); 
-     builder.append("timingRange" + "[" + String.valueOf(this.timingRange) + "]\n"); 
-     builder.append("timingTiming" + "[" + String.valueOf(this.timingTiming) + "]\n"); 
-     builder.append("participant" + "[" + String.valueOf(this.participant) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("groupingBehavior" + "[" + String.valueOf(this.groupingBehavior) + "]\n"); 
-     builder.append("selectionBehavior" + "[" + String.valueOf(this.selectionBehavior) + "]\n"); 
-     builder.append("requiredBehavior" + "[" + String.valueOf(this.requiredBehavior) + "]\n"); 
-     builder.append("precheckBehavior" + "[" + String.valueOf(this.precheckBehavior) + "]\n"); 
-     builder.append("cardinalityBehavior" + "[" + String.valueOf(this.cardinalityBehavior) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[RequestGroupActionModel]:" + "\n");
+     builder.append("label" + "->" + this.label + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("textEquivalent" + "->" + this.textEquivalent + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
+     builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
+     builder.append("timingDuration" + "->" + this.timingDuration + "\n"); 
+     builder.append("timingRange" + "->" + this.timingRange + "\n"); 
+     builder.append("timingTiming" + "->" + this.timingTiming + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("groupingBehavior" + "->" + this.groupingBehavior + "\n"); 
+     builder.append("selectionBehavior" + "->" + this.selectionBehavior + "\n"); 
+     builder.append("requiredBehavior" + "->" + this.requiredBehavior + "\n"); 
+     builder.append("precheckBehavior" + "->" + this.precheckBehavior + "\n"); 
+     builder.append("cardinalityBehavior" + "->" + this.cardinalityBehavior + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[RequestGroupActionModel]:" + "\n");
+     builder.append("label" + "->" + this.label + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("textEquivalent" + "->" + this.textEquivalent + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("documentation" + "->" + this.documentation + "\n"); 
+     builder.append("condition" + "->" + this.condition + "\n"); 
+     builder.append("relatedAction" + "->" + this.relatedAction + "\n"); 
+     builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
+     builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
+     builder.append("timingDuration" + "->" + this.timingDuration + "\n"); 
+     builder.append("timingRange" + "->" + this.timingRange + "\n"); 
+     builder.append("timingTiming" + "->" + this.timingTiming + "\n"); 
+     builder.append("participant" + "->" + this.participant + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("groupingBehavior" + "->" + this.groupingBehavior + "\n"); 
+     builder.append("selectionBehavior" + "->" + this.selectionBehavior + "\n"); 
+     builder.append("requiredBehavior" + "->" + this.requiredBehavior + "\n"); 
+     builder.append("precheckBehavior" + "->" + this.precheckBehavior + "\n"); 
+     builder.append("cardinalityBehavior" + "->" + this.cardinalityBehavior + "\n"); 
+     builder.append("resource" + "->" + this.resource + "\n"); 
+     builder.append("action" + "->" + this.action + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

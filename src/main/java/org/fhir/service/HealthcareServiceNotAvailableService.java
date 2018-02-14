@@ -32,7 +32,5 @@ public interface HealthcareServiceNotAvailableService {
 	public HealthcareServiceNotAvailable find(String id);
   public List<HealthcareServiceNotAvailable> select(int maxResult);
   public List<HealthcareServiceNotAvailable> selectAll();
-  public HealthcareServiceNotAvailable create(HealthcareServiceNotAvailable bean);
-  public HealthcareServiceNotAvailable update(HealthcareServiceNotAvailable bean);
   public void delete(HealthcareServiceNotAvailable bean);
 }

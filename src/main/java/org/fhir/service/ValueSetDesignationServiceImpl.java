@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public ValueSetDesignation create(ValueSetDesignation bean) {
-  	requireNonNull(bean);
-    logger.info("create(ValueSetDesignation={}) - entered bean ");
-
-    final ValueSetDesignation result = dao.create(bean);
-
-    logger.info("create(ValueSetDesignation) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public ValueSetDesignation update(ValueSetDesignation bean) {
-  	requireNonNull(bean);
-    logger.info("update(ValueSetDesignation={}) - entered bean ");
-
-    final ValueSetDesignation result = dao.update(bean);
-
-    logger.info("update(ValueSetDesignation) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

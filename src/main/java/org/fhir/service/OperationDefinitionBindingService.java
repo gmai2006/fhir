@@ -32,7 +32,5 @@ public interface OperationDefinitionBindingService {
 	public OperationDefinitionBinding find(String id);
   public List<OperationDefinitionBinding> select(int maxResult);
   public List<OperationDefinitionBinding> selectAll();
-  public OperationDefinitionBinding create(OperationDefinitionBinding bean);
-  public OperationDefinitionBinding update(OperationDefinitionBinding bean);
   public void delete(OperationDefinitionBinding bean);
 }

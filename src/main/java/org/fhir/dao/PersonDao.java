@@ -34,10 +34,8 @@ public interface PersonDao {
   public List<Person> select(int maxResult);
 
   public List<Person> selectAll();
-
   public Person create(Person e);
 
   public Person update(Person e);
-
   public void delete(Person e);
 }

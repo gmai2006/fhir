@@ -34,10 +34,5 @@ public interface MeasureReportStratumDao {
   public List<MeasureReportStratum> select(int maxResult);
 
   public List<MeasureReportStratum> selectAll();
-
-  public MeasureReportStratum create(MeasureReportStratum e);
-
-  public MeasureReportStratum update(MeasureReportStratum e);
-
   public void delete(MeasureReportStratum e);
 }

@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts."
 */
 @Entity
 @Table(name="implementationguide")
-public class ImplementationGuideModel  {
+public class ImplementationGuideModel  implements Serializable {
+	private static final long serialVersionUID = 151857669688029492L;
   /**
   * Description: "This is a ImplementationGuide resource"
   */
@@ -98,9 +99,13 @@ public class ImplementationGuideModel  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ContactDetailModel> contact = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"contact_id\"")
+  private String contact_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contact_id", insertable=false, updatable=false)
+  private java.util.List<ContactDetailModel> contact;
 
   /**
   * Description: "A free text natural language description of the implementation guide from a consumer's perspective."
@@ -112,13 +117,17 @@ public class ImplementationGuideModel  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate implementation guide instances."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<UsageContextModel> useContext = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"usecontext_id\"")
+  private String usecontext_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usecontext_id", insertable=false, updatable=false)
+  private java.util.List<UsageContextModel> useContext;
 
   /**
   * Description: "A legal or geographic region in which the implementation guide is intended to be used."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -143,36 +152,46 @@ public class ImplementationGuideModel  {
   /**
   * Description: "Another implementation guide that this implementation depends on. Typically, an implementation guide uses value sets, profiles etc.defined in other implementation guides."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ImplementationGuideDependencyModel> dependency = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"dependency_id\"")
+  private String dependency_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dependency_id", insertable=false, updatable=false)
+  private java.util.List<ImplementationGuideDependencyModel> dependency;
 
   /**
   * Description: "A logical group of resources. Logical groups can be used when building pages."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ImplementationGuidePackageModel> FHIRpackage = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"fhirpackage_id\"")
+  private String fhirpackage_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fhirpackage_id", insertable=false, updatable=false)
+  private java.util.List<ImplementationGuidePackageModel> FHIRpackage;
 
   /**
   * Description: "A set of profiles that all resources covered by this implementation guide must conform to."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ImplementationGuideGlobalModel> global = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"global_id\"")
+  private String global_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="global_id", insertable=false, updatable=false)
+  private java.util.List<ImplementationGuideGlobalModel> global;
 
   /**
   * Description: "A binary file that is included in the  implementation guide when it is published."
-  * Actual type: Array of string-> List<string>
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"binary\"", length = 16777215)
+  @Column(name="\"binary\"")
   private String binary;
 
   /**
   * Description: "A page / section in the implementation guide. The root page is the implementation guide home page."
-  * Actual type: ImplementationGuidePage
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -187,14 +206,14 @@ public class ImplementationGuideModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -204,7 +223,7 @@ public class ImplementationGuideModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -214,7 +233,7 @@ public class ImplementationGuideModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -226,6 +245,7 @@ public class ImplementationGuideModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -240,9 +260,9 @@ public class ImplementationGuideModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -263,267 +283,276 @@ public class ImplementationGuideModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public ImplementationGuideModel() {
   }
 
   public ImplementationGuideModel(ImplementationGuide o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.url = o.getUrl();
-
-      this.version = o.getVersion();
-
-      this.name = o.getName();
-
-      this.status = o.getStatus();
-
-      this.experimental = o.getExperimental();
-
-      this.date = o.getDate();
-
-      this.publisher = o.getPublisher();
-
-      this.contact = ContactDetail.toModelArray(o.getContact());
-
-      this.description = o.getDescription();
-
-      this.useContext = UsageContext.toModelArray(o.getUseContext());
-
-      this.jurisdiction = CodeableConcept.toJson(o.getJurisdiction());
-      this.copyright = o.getCopyright();
-
-      this.fhirVersion = o.getFhirVersion();
-
-      this.dependency = ImplementationGuideDependency.toModelArray(o.getDependency());
-
-      this.FHIRpackage = ImplementationGuidePackage.toModelArray(o.getFHIRpackage());
-
-      this.global = ImplementationGuideGlobal.toModelArray(o.getGlobal());
-
-      this.binary = org.fhir.utils.JsonUtils.write2String(o.getBinary());
-
-      this.page = ImplementationGuidePage.toJson(o.getPage());
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.url = o.getUrl();
+    this.version = o.getVersion();
+    this.name = o.getName();
+    this.status = o.getStatus();
+    this.experimental = o.getExperimental();
+    this.date = o.getDate();
+    this.publisher = o.getPublisher();
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact_id = "contact" + this.id;
+    	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
+    }
+    this.description = o.getDescription();
+    if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
+    	this.usecontext_id = "usecontext" + this.id;
+    	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
+    }
+    this.copyright = o.getCopyright();
+    this.fhirVersion = o.getFhirVersion();
+    if (null != o.getDependency() && !o.getDependency().isEmpty()) {
+    	this.dependency_id = "dependency" + this.id;
+    	this.dependency = ImplementationGuideDependencyHelper.toModelFromArray(o.getDependency(), this.dependency_id);
+    }
+    if (null != o.getFHIRpackage() && !o.getFHIRpackage().isEmpty()) {
+    	this.fhirpackage_id = "fhirpackage" + this.id;
+    	this.FHIRpackage = ImplementationGuidePackageHelper.toModelFromArray(o.getFHIRpackage(), this.fhirpackage_id);
+    }
+    if (null != o.getGlobal() && !o.getGlobal().isEmpty()) {
+    	this.global_id = "global" + this.id;
+    	this.global = ImplementationGuideGlobalHelper.toModelFromArray(o.getGlobal(), this.global_id);
+    }
+    this.binary = org.fhir.utils.JsonUtils.write2String(o.getBinary());
+    this.page = ImplementationGuidePageHelper.toJson(o.getPage());
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setUrl( String value) {
-    this.url = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getUrl() {
     return this.url;
   }
-  public void setVersion( String value) {
-    this.version = value;
+  public void setUrl( String value) {
+    this.url = value;
   }
   public String getVersion() {
     return this.version;
   }
-  public void setName( String value) {
-    this.name = value;
+  public void setVersion( String value) {
+    this.version = value;
   }
   public String getName() {
     return this.name;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setExperimental( Boolean value) {
-    this.experimental = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public Boolean getExperimental() {
     return this.experimental;
   }
-  public void setDate( String value) {
-    this.date = value;
+  public void setExperimental( Boolean value) {
+    this.experimental = value;
   }
   public String getDate() {
     return this.date;
   }
-  public void setPublisher( String value) {
-    this.publisher = value;
+  public void setDate( String value) {
+    this.date = value;
   }
   public String getPublisher() {
     return this.publisher;
   }
-  public void setContact( java.util.List<ContactDetailModel> value) {
-    this.contact = value;
+  public void setPublisher( String value) {
+    this.publisher = value;
   }
   public java.util.List<ContactDetailModel> getContact() {
     return this.contact;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setContact( java.util.List<ContactDetailModel> value) {
+    this.contact = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setUseContext( java.util.List<UsageContextModel> value) {
-    this.useContext = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public java.util.List<UsageContextModel> getUseContext() {
     return this.useContext;
   }
-  public void setJurisdiction( String value) {
-    this.jurisdiction = value;
+  public void setUseContext( java.util.List<UsageContextModel> value) {
+    this.useContext = value;
   }
   public String getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setCopyright( String value) {
-    this.copyright = value;
+  public void setJurisdiction( String value) {
+    this.jurisdiction = value;
   }
   public String getCopyright() {
     return this.copyright;
   }
-  public void setFhirVersion( String value) {
-    this.fhirVersion = value;
+  public void setCopyright( String value) {
+    this.copyright = value;
   }
   public String getFhirVersion() {
     return this.fhirVersion;
   }
-  public void setDependency( java.util.List<ImplementationGuideDependencyModel> value) {
-    this.dependency = value;
+  public void setFhirVersion( String value) {
+    this.fhirVersion = value;
   }
   public java.util.List<ImplementationGuideDependencyModel> getDependency() {
     return this.dependency;
   }
-  public void setFHIRpackage( java.util.List<ImplementationGuidePackageModel> value) {
-    this.FHIRpackage = value;
+  public void setDependency( java.util.List<ImplementationGuideDependencyModel> value) {
+    this.dependency = value;
   }
   public java.util.List<ImplementationGuidePackageModel> getFHIRpackage() {
     return this.FHIRpackage;
   }
-  public void setGlobal( java.util.List<ImplementationGuideGlobalModel> value) {
-    this.global = value;
+  public void setFHIRpackage( java.util.List<ImplementationGuidePackageModel> value) {
+    this.FHIRpackage = value;
   }
   public java.util.List<ImplementationGuideGlobalModel> getGlobal() {
     return this.global;
   }
-  public void setBinary( String value) {
-    this.binary = value;
+  public void setGlobal( java.util.List<ImplementationGuideGlobalModel> value) {
+    this.global = value;
   }
   public String getBinary() {
     return this.binary;
   }
-  public void setPage( String value) {
-    this.page = value;
+  public void setBinary( String value) {
+    this.binary = value;
   }
   public String getPage() {
     return this.page;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setPage( String value) {
+    this.page = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("experimental" + "[" + String.valueOf(this.experimental) + "]\n"); 
-     builder.append("date" + "[" + String.valueOf(this.date) + "]\n"); 
-     builder.append("publisher" + "[" + String.valueOf(this.publisher) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("useContext" + "[" + String.valueOf(this.useContext) + "]\n"); 
-     builder.append("jurisdiction" + "[" + String.valueOf(this.jurisdiction) + "]\n"); 
-     builder.append("copyright" + "[" + String.valueOf(this.copyright) + "]\n"); 
-     builder.append("fhirVersion" + "[" + String.valueOf(this.fhirVersion) + "]\n"); 
-     builder.append("dependency" + "[" + String.valueOf(this.dependency) + "]\n"); 
-     builder.append("FHIRpackage" + "[" + String.valueOf(this.FHIRpackage) + "]\n"); 
-     builder.append("global" + "[" + String.valueOf(this.global) + "]\n"); 
-     builder.append("binary" + "[" + String.valueOf(this.binary) + "]\n"); 
-     builder.append("page" + "[" + String.valueOf(this.page) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[ImplementationGuideModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("experimental" + "->" + this.experimental + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("copyright" + "->" + this.copyright + "\n"); 
+     builder.append("fhirVersion" + "->" + this.fhirVersion + "\n"); 
+     builder.append("binary" + "->" + this.binary + "\n"); 
+     builder.append("page" + "->" + this.page + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ImplementationGuideModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("experimental" + "->" + this.experimental + "\n"); 
+     builder.append("date" + "->" + this.date + "\n"); 
+     builder.append("publisher" + "->" + this.publisher + "\n"); 
+     builder.append("contact" + "->" + this.contact + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("useContext" + "->" + this.useContext + "\n"); 
+     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
+     builder.append("copyright" + "->" + this.copyright + "\n"); 
+     builder.append("fhirVersion" + "->" + this.fhirVersion + "\n"); 
+     builder.append("dependency" + "->" + this.dependency + "\n"); 
+     builder.append("FHIRpackage" + "->" + this.FHIRpackage + "\n"); 
+     builder.append("global" + "->" + this.global + "\n"); 
+     builder.append("binary" + "->" + this.binary + "\n"); 
+     builder.append("page" + "->" + this.page + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

@@ -34,10 +34,5 @@ public interface BundleLinkDao {
   public List<BundleLink> select(int maxResult);
 
   public List<BundleLink> selectAll();
-
-  public BundleLink create(BundleLink e);
-
-  public BundleLink update(BundleLink e);
-
   public void delete(BundleLink e);
 }

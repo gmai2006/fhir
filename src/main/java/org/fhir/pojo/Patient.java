@@ -200,6 +200,7 @@ public class Patient  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -251,87 +252,64 @@ public class Patient  {
 
   public Patient(PatientModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getActive()) {
-        this.active = new Boolean(o.getActive());
-      }
-
-      this.name = HumanName.fromArray(o.getName());
-      this.telecom = ContactPoint.fromArray(o.getTelecom());
-      if (null != o.getGender()) {
-        this.gender = new String(o.getGender());
-      }
-
-      if (null != o.getBirthDate()) {
-        this.birthDate = new String(o.getBirthDate());
-      }
-
-      if (null != o.getDeceasedBoolean()) {
-        this.deceasedBoolean = new Boolean(o.getDeceasedBoolean());
-      }
-
-      if (null != o.getDeceasedDateTime()) {
-        this.deceasedDateTime = new String(o.getDeceasedDateTime());
-      }
-
-      this.address = Address.fromArray(o.getAddress());
-      this.maritalStatus = CodeableConcept.fromJson(o.getMaritalStatus());
-      if (null != o.getMultipleBirthBoolean()) {
-        this.multipleBirthBoolean = new Boolean(o.getMultipleBirthBoolean());
-      }
-
-      if (null != o.getMultipleBirthInteger()) {
-        this.multipleBirthInteger = new Float(o.getMultipleBirthInteger());
-      }
-
-      this.photo = Attachment.fromArray(o.getPhoto());
-      this.contact = PatientContact.fromArray(o.getContact());
-
-      if (null != o.getAnimal()) {
-        this.animal = new PatientAnimal(o.getAnimal());
-        this.animal.setId(this.getId());
-      }
-
-      this.communication = PatientCommunication.fromArray(o.getCommunication());
-
-      this.generalPractitioner = Reference.fromArray(o.getGeneralPractitioner());
-
-      if (null != o.getManagingOrganization()) {
-        this.managingOrganization = new Reference(o.getManagingOrganization());
-        this.managingOrganization.setId(this.getId());
-      }
-
-      this.link = PatientLink.fromArray(o.getLink());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getActive()) {
+      this.active = o.getActive();
+    }
+    if (null != o.getGender()) {
+      this.gender = o.getGender();
+    }
+    if (null != o.getBirthDate()) {
+      this.birthDate = o.getBirthDate();
+    }
+    if (null != o.getDeceasedBoolean()) {
+      this.deceasedBoolean = o.getDeceasedBoolean();
+    }
+    if (null != o.getDeceasedDateTime()) {
+      this.deceasedDateTime = o.getDeceasedDateTime();
+    }
+    this.maritalStatus = CodeableConceptHelper.fromJson(o.getMaritalStatus());
+    if (null != o.getMultipleBirthBoolean()) {
+      this.multipleBirthBoolean = o.getMultipleBirthBoolean();
+    }
+    if (null != o.getMultipleBirthInteger()) {
+      this.multipleBirthInteger = o.getMultipleBirthInteger();
+    }
+    if (null != o.getContact() && !o.getContact().isEmpty()) {
+    	this.contact = PatientContactHelper.fromArray2Array(o.getContact());
+    }
+    if (null != o.getAnimal() && !o.getAnimal().isEmpty()) {
+      this.animal = new PatientAnimal(o.getAnimal().get(0));
+    }
+    if (null != o.getCommunication() && !o.getCommunication().isEmpty()) {
+    	this.communication = PatientCommunicationHelper.fromArray2Array(o.getCommunication());
+    }
+    if (null != o.getGeneralPractitioner() && !o.getGeneralPractitioner().isEmpty()) {
+    	this.generalPractitioner = ReferenceHelper.fromArray2Array(o.getGeneralPractitioner());
+    }
+    if (null != o.getManagingOrganization() && !o.getManagingOrganization().isEmpty()) {
+      this.managingOrganization = new Reference(o.getManagingOrganization().get(0));
+    }
+    if (null != o.getLink() && !o.getLink().isEmpty()) {
+    	this.link = PatientLinkHelper.fromArray2Array(o.getLink());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -566,44 +544,45 @@ public class Patient  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("active" + "[" + String.valueOf(this.active) + "]\n"); 
-     builder.append("_active" + "[" + String.valueOf(this._active) + "]\n"); 
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("telecom" + "[" + String.valueOf(this.telecom) + "]\n"); 
-     builder.append("gender" + "[" + String.valueOf(this.gender) + "]\n"); 
-     builder.append("_gender" + "[" + String.valueOf(this._gender) + "]\n"); 
-     builder.append("birthDate" + "[" + String.valueOf(this.birthDate) + "]\n"); 
-     builder.append("_birthDate" + "[" + String.valueOf(this._birthDate) + "]\n"); 
-     builder.append("deceasedBoolean" + "[" + String.valueOf(this.deceasedBoolean) + "]\n"); 
-     builder.append("_deceasedBoolean" + "[" + String.valueOf(this._deceasedBoolean) + "]\n"); 
-     builder.append("deceasedDateTime" + "[" + String.valueOf(this.deceasedDateTime) + "]\n"); 
-     builder.append("_deceasedDateTime" + "[" + String.valueOf(this._deceasedDateTime) + "]\n"); 
-     builder.append("address" + "[" + String.valueOf(this.address) + "]\n"); 
-     builder.append("maritalStatus" + "[" + String.valueOf(this.maritalStatus) + "]\n"); 
-     builder.append("multipleBirthBoolean" + "[" + String.valueOf(this.multipleBirthBoolean) + "]\n"); 
-     builder.append("_multipleBirthBoolean" + "[" + String.valueOf(this._multipleBirthBoolean) + "]\n"); 
-     builder.append("multipleBirthInteger" + "[" + String.valueOf(this.multipleBirthInteger) + "]\n"); 
-     builder.append("_multipleBirthInteger" + "[" + String.valueOf(this._multipleBirthInteger) + "]\n"); 
-     builder.append("photo" + "[" + String.valueOf(this.photo) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("animal" + "[" + String.valueOf(this.animal) + "]\n"); 
-     builder.append("communication" + "[" + String.valueOf(this.communication) + "]\n"); 
-     builder.append("generalPractitioner" + "[" + String.valueOf(this.generalPractitioner) + "]\n"); 
-     builder.append("managingOrganization" + "[" + String.valueOf(this.managingOrganization) + "]\n"); 
-     builder.append("link" + "[" + String.valueOf(this.link) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Patient]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.active != null) builder.append("active" + "->" + this.active.toString() + "\n"); 
+     if(this._active != null) builder.append("_active" + "->" + this._active.toString() + "\n"); 
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this.telecom != null) builder.append("telecom" + "->" + this.telecom.toString() + "\n"); 
+     if(this.gender != null) builder.append("gender" + "->" + this.gender.toString() + "\n"); 
+     if(this._gender != null) builder.append("_gender" + "->" + this._gender.toString() + "\n"); 
+     if(this.birthDate != null) builder.append("birthDate" + "->" + this.birthDate.toString() + "\n"); 
+     if(this._birthDate != null) builder.append("_birthDate" + "->" + this._birthDate.toString() + "\n"); 
+     if(this.deceasedBoolean != null) builder.append("deceasedBoolean" + "->" + this.deceasedBoolean.toString() + "\n"); 
+     if(this._deceasedBoolean != null) builder.append("_deceasedBoolean" + "->" + this._deceasedBoolean.toString() + "\n"); 
+     if(this.deceasedDateTime != null) builder.append("deceasedDateTime" + "->" + this.deceasedDateTime.toString() + "\n"); 
+     if(this._deceasedDateTime != null) builder.append("_deceasedDateTime" + "->" + this._deceasedDateTime.toString() + "\n"); 
+     if(this.address != null) builder.append("address" + "->" + this.address.toString() + "\n"); 
+     if(this.maritalStatus != null) builder.append("maritalStatus" + "->" + this.maritalStatus.toString() + "\n"); 
+     if(this.multipleBirthBoolean != null) builder.append("multipleBirthBoolean" + "->" + this.multipleBirthBoolean.toString() + "\n"); 
+     if(this._multipleBirthBoolean != null) builder.append("_multipleBirthBoolean" + "->" + this._multipleBirthBoolean.toString() + "\n"); 
+     if(this.multipleBirthInteger != null) builder.append("multipleBirthInteger" + "->" + this.multipleBirthInteger.toString() + "\n"); 
+     if(this._multipleBirthInteger != null) builder.append("_multipleBirthInteger" + "->" + this._multipleBirthInteger.toString() + "\n"); 
+     if(this.photo != null) builder.append("photo" + "->" + this.photo.toString() + "\n"); 
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
+     if(this.animal != null) builder.append("animal" + "->" + this.animal.toString() + "\n"); 
+     if(this.communication != null) builder.append("communication" + "->" + this.communication.toString() + "\n"); 
+     if(this.generalPractitioner != null) builder.append("generalPractitioner" + "->" + this.generalPractitioner.toString() + "\n"); 
+     if(this.managingOrganization != null) builder.append("managingOrganization" + "->" + this.managingOrganization.toString() + "\n"); 
+     if(this.link != null) builder.append("link" + "->" + this.link.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -637,36 +616,4 @@ public class Patient  {
   	}
   }
 
-  public static java.util.List<Patient> fromArray(java.util.List<PatientModel> list) {
-    return (java.util.List<Patient>)list.stream()
-      .map(model -> new Patient(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PatientModel> toModelArray(java.util.List<Patient> list) {
-    return (java.util.List<PatientModel>)list.stream()
-      .map(model -> new PatientModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Patient fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Patient.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Patient o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Patient> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

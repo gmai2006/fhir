@@ -34,10 +34,5 @@ public interface ContractTermDao {
   public List<ContractTerm> select(int maxResult);
 
   public List<ContractTerm> selectAll();
-
-  public ContractTerm create(ContractTerm e);
-
-  public ContractTerm update(ContractTerm e);
-
   public void delete(ContractTerm e);
 }

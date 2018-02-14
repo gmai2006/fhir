@@ -34,10 +34,5 @@ public interface TaskRequesterDao {
   public List<TaskRequester> select(int maxResult);
 
   public List<TaskRequester> selectAll();
-
-  public TaskRequester create(TaskRequester e);
-
-  public TaskRequester update(TaskRequester e);
-
   public void delete(TaskRequester e);
 }

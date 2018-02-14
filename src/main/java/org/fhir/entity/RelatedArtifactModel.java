@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Related artifacts such as additional documentation, justification, or bibliographic references."
 */
 @Entity
 @Table(name="relatedartifact")
-public class RelatedArtifactModel  {
+public class RelatedArtifactModel  implements Serializable {
+	private static final long serialVersionUID = 151857669707067858L;
   /**
   * Description: "The type of relationship to the related artifact."
   */
@@ -67,7 +68,7 @@ public class RelatedArtifactModel  {
 
   /**
   * Description: "The document being referenced, represented as an attachment. This is exclusive with the resource element."
-  * Actual type: Attachment
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -81,14 +82,15 @@ public class RelatedArtifactModel  {
   @Column(name="\"resource_id\"")
   private String resource_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`resource_id`", insertable=false, updatable=false)
-  private ReferenceModel resource;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="resource_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> resource;
 
   /**
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -96,104 +98,120 @@ public class RelatedArtifactModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public RelatedArtifactModel() {
   }
 
-  public RelatedArtifactModel(RelatedArtifact o) {
-    this.id = o.getId();
-      this.type = o.getType();
-
-      this.display = o.getDisplay();
-
-      this.citation = o.getCitation();
-
-      this.url = o.getUrl();
-
-      this.document = Attachment.toJson(o.getDocument());
-      if (null != o.getResource()) {
-      	this.resource_id = "resource" + this.getId();
-        this.resource = new ReferenceModel(o.getResource());
-        this.resource.setId(this.resource_id);
-        this.resource.parent_id = this.resource.getId();
-      }
-
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public RelatedArtifactModel(RelatedArtifact o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.type = o.getType();
+    this.display = o.getDisplay();
+    this.citation = o.getCitation();
+    this.url = o.getUrl();
+    this.document = AttachmentHelper.toJson(o.getDocument());
+    if (null != o.getResource() ) {
+    	this.resource_id = "resource" + this.parent_id;
+    	this.resource = ReferenceHelper.toModel(o.getResource(), this.resource_id);
+    }
   }
 
-  public void setType( String value) {
-    this.type = value;
-  }
   public String getType() {
     return this.type;
   }
-  public void setDisplay( String value) {
-    this.display = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public String getDisplay() {
     return this.display;
   }
-  public void setCitation( String value) {
-    this.citation = value;
+  public void setDisplay( String value) {
+    this.display = value;
   }
   public String getCitation() {
     return this.citation;
   }
-  public void setUrl( String value) {
-    this.url = value;
+  public void setCitation( String value) {
+    this.citation = value;
   }
   public String getUrl() {
     return this.url;
   }
-  public void setDocument( String value) {
-    this.document = value;
+  public void setUrl( String value) {
+    this.url = value;
   }
   public String getDocument() {
     return this.document;
   }
-  public void setResource( ReferenceModel value) {
-    this.resource = value;
+  public void setDocument( String value) {
+    this.document = value;
   }
-  public ReferenceModel getResource() {
+  public java.util.List<ReferenceModel> getResource() {
     return this.resource;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setResource( java.util.List<ReferenceModel> value) {
+    this.resource = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("citation" + "[" + String.valueOf(this.citation) + "]\n"); 
-     builder.append("url" + "[" + String.valueOf(this.url) + "]\n"); 
-     builder.append("document" + "[" + String.valueOf(this.document) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[RelatedArtifactModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("display" + "->" + this.display + "\n"); 
+     builder.append("citation" + "->" + this.citation + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("document" + "->" + this.document + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[RelatedArtifactModel]:" + "\n");
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("display" + "->" + this.display + "\n"); 
+     builder.append("citation" + "->" + this.citation + "\n"); 
+     builder.append("url" + "->" + this.url + "\n"); 
+     builder.append("document" + "->" + this.document + "\n"); 
+     builder.append("resource" + "->" + this.resource + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

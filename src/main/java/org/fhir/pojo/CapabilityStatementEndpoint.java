@@ -59,6 +59,7 @@ public class CapabilityStatementEndpoint  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,17 +81,13 @@ public class CapabilityStatementEndpoint  {
 
   public CapabilityStatementEndpoint(CapabilityStatementEndpointModel o) {
     this.id = o.getId();
-      this.protocol = Coding.fromJson(o.getProtocol());
-      if (null != o.getAddress()) {
-        this.address = new String(o.getAddress());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.protocol = CodingHelper.fromJson(o.getProtocol());
+    if (null != o.getAddress()) {
+      this.address = o.getAddress();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setProtocol( Coding value) {
@@ -139,47 +136,16 @@ public class CapabilityStatementEndpoint  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("protocol" + "[" + String.valueOf(this.protocol) + "]\n"); 
-     builder.append("address" + "[" + String.valueOf(this.address) + "]\n"); 
-     builder.append("_address" + "[" + String.valueOf(this._address) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementEndpoint]:" + "\n");
+     if(this.protocol != null) builder.append("protocol" + "->" + this.protocol.toString() + "\n"); 
+     if(this.address != null) builder.append("address" + "->" + this.address.toString() + "\n"); 
+     if(this._address != null) builder.append("_address" + "->" + this._address.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CapabilityStatementEndpoint> fromArray(java.util.List<CapabilityStatementEndpointModel> list) {
-    return (java.util.List<CapabilityStatementEndpoint>)list.stream()
-      .map(model -> new CapabilityStatementEndpoint(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementEndpointModel> toModelArray(java.util.List<CapabilityStatementEndpoint> list) {
-    return (java.util.List<CapabilityStatementEndpointModel>)list.stream()
-      .map(model -> new CapabilityStatementEndpointModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatementEndpoint fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatementEndpoint.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementEndpoint o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementEndpoint> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

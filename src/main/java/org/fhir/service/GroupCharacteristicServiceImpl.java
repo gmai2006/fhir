@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public GroupCharacteristic create(GroupCharacteristic bean) {
-  	requireNonNull(bean);
-    logger.info("create(GroupCharacteristic={}) - entered bean ");
-
-    final GroupCharacteristic result = dao.create(bean);
-
-    logger.info("create(GroupCharacteristic) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public GroupCharacteristic update(GroupCharacteristic bean) {
-  	requireNonNull(bean);
-    logger.info("update(GroupCharacteristic={}) - entered bean ");
-
-    final GroupCharacteristic result = dao.update(bean);
-
-    logger.info("update(GroupCharacteristic) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

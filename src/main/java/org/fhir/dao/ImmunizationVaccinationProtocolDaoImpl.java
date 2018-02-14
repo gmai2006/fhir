@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImmunizationVaccinationProtocolModel;
 import org.fhir.pojo.ImmunizationVaccinationProtocol;
+import org.fhir.pojo.ImmunizationVaccinationProtocolHelper;
 
 public class ImmunizationVaccinationProtocolDaoImpl implements ImmunizationVaccinationProtocolDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImmunizationVaccinationProtocolDaoImpl implements ImmunizationVacci
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationVaccinationProtocolModel a", ImmunizationVaccinationProtocolModel.class).setMaxResults(maxResult);
       List<ImmunizationVaccinationProtocolModel> models = query.getResultList();
-      return ImmunizationVaccinationProtocol.fromArray(models);
+      return ImmunizationVaccinationProtocolHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImmunizationVaccinationProtocolDaoImpl implements ImmunizationVacci
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationVaccinationProtocolModel a", ImmunizationVaccinationProtocolModel.class);
       List<ImmunizationVaccinationProtocolModel> models = query.getResultList();
-      return ImmunizationVaccinationProtocol.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImmunizationVaccinationProtocol create(ImmunizationVaccinationProtocol e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImmunizationVaccinationProtocolModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImmunizationVaccinationProtocol update(ImmunizationVaccinationProtocol e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImmunizationVaccinationProtocolModel model = em.merge(new ImmunizationVaccinationProtocolModel(e));
-      return new ImmunizationVaccinationProtocol(model);
+      return ImmunizationVaccinationProtocolHelper.fromArray2Array(models);
   }
 
   @Override

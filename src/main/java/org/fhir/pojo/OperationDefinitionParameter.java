@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.OperationDefinitionParameterModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -130,6 +131,7 @@ public class OperationDefinitionParameter  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -146,7 +148,45 @@ public class OperationDefinitionParameter  {
   */
   private java.util.List<Extension> extension = new java.util.ArrayList<>();
 
-  public OperationDefinitionParameter() {}
+  public OperationDefinitionParameter() {
+  }
+
+  public OperationDefinitionParameter(OperationDefinitionParameterModel o) {
+    this.id = o.getId();
+    if (null != o.getName()) {
+      this.name = o.getName();
+    }
+    if (null != o.getUse()) {
+      this.use = o.getUse();
+    }
+    if (null != o.getMin()) {
+      this.min = o.getMin();
+    }
+    if (null != o.getMax()) {
+      this.max = o.getMax();
+    }
+    if (null != o.getDocumentation()) {
+      this.documentation = o.getDocumentation();
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getSearchType()) {
+      this.searchType = o.getSearchType();
+    }
+    if (null != o.getProfile() && !o.getProfile().isEmpty()) {
+      this.profile = new Reference(o.getProfile().get(0));
+    }
+    if (null != o.getBinding() && !o.getBinding().isEmpty()) {
+      this.binding = new OperationDefinitionBinding(o.getBinding().get(0));
+    }
+    if (null != o.getPart() && !o.getPart().isEmpty()) {
+    	this.part = OperationDefinitionParameterHelper.fromArray2Array(o.getPart());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+  }
 
   public void setName( String value) {
     this.name = value;
@@ -278,48 +318,29 @@ public class OperationDefinitionParameter  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("_name" + "[" + String.valueOf(this._name) + "]\n"); 
-     builder.append("use" + "[" + String.valueOf(this.use) + "]\n"); 
-     builder.append("_use" + "[" + String.valueOf(this._use) + "]\n"); 
-     builder.append("min" + "[" + String.valueOf(this.min) + "]\n"); 
-     builder.append("_min" + "[" + String.valueOf(this._min) + "]\n"); 
-     builder.append("max" + "[" + String.valueOf(this.max) + "]\n"); 
-     builder.append("_max" + "[" + String.valueOf(this._max) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("_documentation" + "[" + String.valueOf(this._documentation) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("searchType" + "[" + String.valueOf(this.searchType) + "]\n"); 
-     builder.append("_searchType" + "[" + String.valueOf(this._searchType) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("binding" + "[" + String.valueOf(this.binding) + "]\n"); 
-     builder.append("part" + "[" + String.valueOf(this.part) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[OperationDefinitionParameter]:" + "\n");
+     if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
+     if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
+     if(this.use != null) builder.append("use" + "->" + this.use.toString() + "\n"); 
+     if(this._use != null) builder.append("_use" + "->" + this._use.toString() + "\n"); 
+     if(this.min != null) builder.append("min" + "->" + this.min.toString() + "\n"); 
+     if(this._min != null) builder.append("_min" + "->" + this._min.toString() + "\n"); 
+     if(this.max != null) builder.append("max" + "->" + this.max.toString() + "\n"); 
+     if(this._max != null) builder.append("_max" + "->" + this._max.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.searchType != null) builder.append("searchType" + "->" + this.searchType.toString() + "\n"); 
+     if(this._searchType != null) builder.append("_searchType" + "->" + this._searchType.toString() + "\n"); 
+     if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
+     if(this.binding != null) builder.append("binding" + "->" + this.binding.toString() + "\n"); 
+     if(this.part != null) builder.append("part" + "->" + this.part.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static OperationDefinitionParameter fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, OperationDefinitionParameter.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(OperationDefinitionParameter o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<OperationDefinitionParameter> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
   public enum UseEnum {
@@ -334,7 +355,9 @@ public class OperationDefinitionParameter  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum SearchTypeEnum {
+  }
+
+  public enum SearchTypeEnum {
   	number,
   	date,
   	string,
@@ -359,4 +382,5 @@ public class OperationDefinitionParameter  {
   		}
   	}
   }
+
 }

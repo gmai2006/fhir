@@ -34,10 +34,5 @@ public interface ExpansionProfileExcludedSystemDao {
   public List<ExpansionProfileExcludedSystem> select(int maxResult);
 
   public List<ExpansionProfileExcludedSystem> selectAll();
-
-  public ExpansionProfileExcludedSystem create(ExpansionProfileExcludedSystem e);
-
-  public ExpansionProfileExcludedSystem update(ExpansionProfileExcludedSystem e);
-
   public void delete(ExpansionProfileExcludedSystem e);
 }

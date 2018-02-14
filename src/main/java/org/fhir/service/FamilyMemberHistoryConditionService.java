@@ -32,7 +32,5 @@ public interface FamilyMemberHistoryConditionService {
 	public FamilyMemberHistoryCondition find(String id);
   public List<FamilyMemberHistoryCondition> select(int maxResult);
   public List<FamilyMemberHistoryCondition> selectAll();
-  public FamilyMemberHistoryCondition create(FamilyMemberHistoryCondition bean);
-  public FamilyMemberHistoryCondition update(FamilyMemberHistoryCondition bean);
   public void delete(FamilyMemberHistoryCondition bean);
 }

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EndpointModel;
 import org.fhir.pojo.Endpoint;
+import org.fhir.pojo.EndpointHelper;
 
 public class EndpointDaoImpl implements EndpointDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EndpointDaoImpl implements EndpointDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EndpointModel a", EndpointModel.class).setMaxResults(maxResult);
       List<EndpointModel> models = query.getResultList();
-      return Endpoint.fromArray(models);
+      return EndpointHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class EndpointDaoImpl implements EndpointDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EndpointModel a", EndpointModel.class);
       List<EndpointModel> models = query.getResultList();
-      return Endpoint.fromArray(models);
+      return EndpointHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class EndpointDaoImpl implements EndpointDao {
       EndpointModel model = em.merge(new EndpointModel(e));
       return new Endpoint(model);
   }
-
   @Override
   @Transactional
   public void delete(Endpoint e) {

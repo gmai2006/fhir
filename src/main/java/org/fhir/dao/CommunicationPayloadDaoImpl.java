@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CommunicationPayloadModel;
 import org.fhir.pojo.CommunicationPayload;
+import org.fhir.pojo.CommunicationPayloadHelper;
 
 public class CommunicationPayloadDaoImpl implements CommunicationPayloadDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CommunicationPayloadDaoImpl implements CommunicationPayloadDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CommunicationPayloadModel a", CommunicationPayloadModel.class).setMaxResults(maxResult);
       List<CommunicationPayloadModel> models = query.getResultList();
-      return CommunicationPayload.fromArray(models);
+      return CommunicationPayloadHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CommunicationPayloadDaoImpl implements CommunicationPayloadDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CommunicationPayloadModel a", CommunicationPayloadModel.class);
       List<CommunicationPayloadModel> models = query.getResultList();
-      return CommunicationPayload.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CommunicationPayload create(CommunicationPayload e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CommunicationPayloadModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CommunicationPayload update(CommunicationPayload e) {
-      final EntityManager em = entityManagerProvider.get();
-      CommunicationPayloadModel model = em.merge(new CommunicationPayloadModel(e));
-      return new CommunicationPayload(model);
+      return CommunicationPayloadHelper.fromArray2Array(models);
   }
 
   @Override

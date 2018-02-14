@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public SubstanceInstance create(SubstanceInstance bean) {
-  	requireNonNull(bean);
-    logger.info("create(SubstanceInstance={}) - entered bean ");
-
-    final SubstanceInstance result = dao.create(bean);
-
-    logger.info("create(SubstanceInstance) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public SubstanceInstance update(SubstanceInstance bean) {
-  	requireNonNull(bean);
-    logger.info("update(SubstanceInstance={}) - entered bean ");
-
-    final SubstanceInstance result = dao.update(bean);
-
-    logger.info("update(SubstanceInstance) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

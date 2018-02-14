@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DetectedIssueModel;
 import org.fhir.pojo.DetectedIssue;
+import org.fhir.pojo.DetectedIssueHelper;
 
 public class DetectedIssueDaoImpl implements DetectedIssueDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DetectedIssueDaoImpl implements DetectedIssueDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DetectedIssueModel a", DetectedIssueModel.class).setMaxResults(maxResult);
       List<DetectedIssueModel> models = query.getResultList();
-      return DetectedIssue.fromArray(models);
+      return DetectedIssueHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class DetectedIssueDaoImpl implements DetectedIssueDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DetectedIssueModel a", DetectedIssueModel.class);
       List<DetectedIssueModel> models = query.getResultList();
-      return DetectedIssue.fromArray(models);
+      return DetectedIssueHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class DetectedIssueDaoImpl implements DetectedIssueDao {
       DetectedIssueModel model = em.merge(new DetectedIssueModel(e));
       return new DetectedIssue(model);
   }
-
   @Override
   @Transactional
   public void delete(DetectedIssue e) {

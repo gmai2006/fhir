@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.AccountGuarantorModel;
 import org.fhir.pojo.AccountGuarantor;
+import org.fhir.pojo.AccountGuarantorHelper;
 
 public class AccountGuarantorDaoImpl implements AccountGuarantorDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class AccountGuarantorDaoImpl implements AccountGuarantorDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AccountGuarantorModel a", AccountGuarantorModel.class).setMaxResults(maxResult);
       List<AccountGuarantorModel> models = query.getResultList();
-      return AccountGuarantor.fromArray(models);
+      return AccountGuarantorHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class AccountGuarantorDaoImpl implements AccountGuarantorDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from AccountGuarantorModel a", AccountGuarantorModel.class);
       List<AccountGuarantorModel> models = query.getResultList();
-      return AccountGuarantor.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public AccountGuarantor create(AccountGuarantor e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new AccountGuarantorModel(e));
-      return e;
-  }
-
-  @Transactional
-  public AccountGuarantor update(AccountGuarantor e) {
-      final EntityManager em = entityManagerProvider.get();
-      AccountGuarantorModel model = em.merge(new AccountGuarantorModel(e));
-      return new AccountGuarantor(model);
+      return AccountGuarantorHelper.fromArray2Array(models);
   }
 
   @Override

@@ -103,6 +103,7 @@ public class NutritionOrderEnteralFormula  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -124,31 +125,26 @@ public class NutritionOrderEnteralFormula  {
 
   public NutritionOrderEnteralFormula(NutritionOrderEnteralFormulaModel o) {
     this.id = o.getId();
-      this.baseFormulaType = CodeableConcept.fromJson(o.getBaseFormulaType());
-      if (null != o.getBaseFormulaProductName()) {
-        this.baseFormulaProductName = new String(o.getBaseFormulaProductName());
-      }
-
-      this.additiveType = CodeableConcept.fromJson(o.getAdditiveType());
-      if (null != o.getAdditiveProductName()) {
-        this.additiveProductName = new String(o.getAdditiveProductName());
-      }
-
-      this.caloricDensity = Quantity.fromJson(o.getCaloricDensity());
-      this.routeofAdministration = CodeableConcept.fromJson(o.getRouteofAdministration());
-      this.administration = NutritionOrderAdministration.fromArray(o.getAdministration());
-
-      this.maxVolumeToDeliver = Quantity.fromJson(o.getMaxVolumeToDeliver());
-      if (null != o.getAdministrationInstruction()) {
-        this.administrationInstruction = new String(o.getAdministrationInstruction());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.baseFormulaType = CodeableConceptHelper.fromJson(o.getBaseFormulaType());
+    if (null != o.getBaseFormulaProductName()) {
+      this.baseFormulaProductName = o.getBaseFormulaProductName();
+    }
+    this.additiveType = CodeableConceptHelper.fromJson(o.getAdditiveType());
+    if (null != o.getAdditiveProductName()) {
+      this.additiveProductName = o.getAdditiveProductName();
+    }
+    this.caloricDensity = QuantityHelper.fromJson(o.getCaloricDensity());
+    this.routeofAdministration = CodeableConceptHelper.fromJson(o.getRouteofAdministration());
+    if (null != o.getAdministration() && !o.getAdministration().isEmpty()) {
+    	this.administration = NutritionOrderAdministrationHelper.fromArray2Array(o.getAdministration());
+    }
+    this.maxVolumeToDeliver = QuantityHelper.fromJson(o.getMaxVolumeToDeliver());
+    if (null != o.getAdministrationInstruction()) {
+      this.administrationInstruction = o.getAdministrationInstruction();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setBaseFormulaType( CodeableConcept value) {
@@ -251,56 +247,25 @@ public class NutritionOrderEnteralFormula  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("baseFormulaType" + "[" + String.valueOf(this.baseFormulaType) + "]\n"); 
-     builder.append("baseFormulaProductName" + "[" + String.valueOf(this.baseFormulaProductName) + "]\n"); 
-     builder.append("_baseFormulaProductName" + "[" + String.valueOf(this._baseFormulaProductName) + "]\n"); 
-     builder.append("additiveType" + "[" + String.valueOf(this.additiveType) + "]\n"); 
-     builder.append("additiveProductName" + "[" + String.valueOf(this.additiveProductName) + "]\n"); 
-     builder.append("_additiveProductName" + "[" + String.valueOf(this._additiveProductName) + "]\n"); 
-     builder.append("caloricDensity" + "[" + String.valueOf(this.caloricDensity) + "]\n"); 
-     builder.append("routeofAdministration" + "[" + String.valueOf(this.routeofAdministration) + "]\n"); 
-     builder.append("administration" + "[" + String.valueOf(this.administration) + "]\n"); 
-     builder.append("maxVolumeToDeliver" + "[" + String.valueOf(this.maxVolumeToDeliver) + "]\n"); 
-     builder.append("administrationInstruction" + "[" + String.valueOf(this.administrationInstruction) + "]\n"); 
-     builder.append("_administrationInstruction" + "[" + String.valueOf(this._administrationInstruction) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[NutritionOrderEnteralFormula]:" + "\n");
+     if(this.baseFormulaType != null) builder.append("baseFormulaType" + "->" + this.baseFormulaType.toString() + "\n"); 
+     if(this.baseFormulaProductName != null) builder.append("baseFormulaProductName" + "->" + this.baseFormulaProductName.toString() + "\n"); 
+     if(this._baseFormulaProductName != null) builder.append("_baseFormulaProductName" + "->" + this._baseFormulaProductName.toString() + "\n"); 
+     if(this.additiveType != null) builder.append("additiveType" + "->" + this.additiveType.toString() + "\n"); 
+     if(this.additiveProductName != null) builder.append("additiveProductName" + "->" + this.additiveProductName.toString() + "\n"); 
+     if(this._additiveProductName != null) builder.append("_additiveProductName" + "->" + this._additiveProductName.toString() + "\n"); 
+     if(this.caloricDensity != null) builder.append("caloricDensity" + "->" + this.caloricDensity.toString() + "\n"); 
+     if(this.routeofAdministration != null) builder.append("routeofAdministration" + "->" + this.routeofAdministration.toString() + "\n"); 
+     if(this.administration != null) builder.append("administration" + "->" + this.administration.toString() + "\n"); 
+     if(this.maxVolumeToDeliver != null) builder.append("maxVolumeToDeliver" + "->" + this.maxVolumeToDeliver.toString() + "\n"); 
+     if(this.administrationInstruction != null) builder.append("administrationInstruction" + "->" + this.administrationInstruction.toString() + "\n"); 
+     if(this._administrationInstruction != null) builder.append("_administrationInstruction" + "->" + this._administrationInstruction.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<NutritionOrderEnteralFormula> fromArray(java.util.List<NutritionOrderEnteralFormulaModel> list) {
-    return (java.util.List<NutritionOrderEnteralFormula>)list.stream()
-      .map(model -> new NutritionOrderEnteralFormula(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<NutritionOrderEnteralFormulaModel> toModelArray(java.util.List<NutritionOrderEnteralFormula> list) {
-    return (java.util.List<NutritionOrderEnteralFormulaModel>)list.stream()
-      .map(model -> new NutritionOrderEnteralFormulaModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static NutritionOrderEnteralFormula fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, NutritionOrderEnteralFormula.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(NutritionOrderEnteralFormula o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<NutritionOrderEnteralFormula> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

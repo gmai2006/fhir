@@ -78,6 +78,7 @@ public class NutritionOrderSupplement  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -99,23 +100,17 @@ public class NutritionOrderSupplement  {
 
   public NutritionOrderSupplement(NutritionOrderSupplementModel o) {
     this.id = o.getId();
-      this.type = CodeableConcept.fromJson(o.getType());
-      if (null != o.getProductName()) {
-        this.productName = new String(o.getProductName());
-      }
-
-      this.schedule = Timing.fromArray(o.getSchedule());
-      this.quantity = Quantity.fromJson(o.getQuantity());
-      if (null != o.getInstruction()) {
-        this.instruction = new String(o.getInstruction());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getProductName()) {
+      this.productName = o.getProductName();
+    }
+    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    if (null != o.getInstruction()) {
+      this.instruction = o.getInstruction();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( CodeableConcept value) {
@@ -188,51 +183,20 @@ public class NutritionOrderSupplement  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("productName" + "[" + String.valueOf(this.productName) + "]\n"); 
-     builder.append("_productName" + "[" + String.valueOf(this._productName) + "]\n"); 
-     builder.append("schedule" + "[" + String.valueOf(this.schedule) + "]\n"); 
-     builder.append("quantity" + "[" + String.valueOf(this.quantity) + "]\n"); 
-     builder.append("instruction" + "[" + String.valueOf(this.instruction) + "]\n"); 
-     builder.append("_instruction" + "[" + String.valueOf(this._instruction) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[NutritionOrderSupplement]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.productName != null) builder.append("productName" + "->" + this.productName.toString() + "\n"); 
+     if(this._productName != null) builder.append("_productName" + "->" + this._productName.toString() + "\n"); 
+     if(this.schedule != null) builder.append("schedule" + "->" + this.schedule.toString() + "\n"); 
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
+     if(this.instruction != null) builder.append("instruction" + "->" + this.instruction.toString() + "\n"); 
+     if(this._instruction != null) builder.append("_instruction" + "->" + this._instruction.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<NutritionOrderSupplement> fromArray(java.util.List<NutritionOrderSupplementModel> list) {
-    return (java.util.List<NutritionOrderSupplement>)list.stream()
-      .map(model -> new NutritionOrderSupplement(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<NutritionOrderSupplementModel> toModelArray(java.util.List<NutritionOrderSupplement> list) {
-    return (java.util.List<NutritionOrderSupplementModel>)list.stream()
-      .map(model -> new NutritionOrderSupplementModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static NutritionOrderSupplement fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, NutritionOrderSupplement.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(NutritionOrderSupplement o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<NutritionOrderSupplement> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

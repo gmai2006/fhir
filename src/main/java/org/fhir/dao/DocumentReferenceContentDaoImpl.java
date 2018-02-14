@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DocumentReferenceContentModel;
 import org.fhir.pojo.DocumentReferenceContent;
+import org.fhir.pojo.DocumentReferenceContentHelper;
 
 public class DocumentReferenceContentDaoImpl implements DocumentReferenceContentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DocumentReferenceContentDaoImpl implements DocumentReferenceContent
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentReferenceContentModel a", DocumentReferenceContentModel.class).setMaxResults(maxResult);
       List<DocumentReferenceContentModel> models = query.getResultList();
-      return DocumentReferenceContent.fromArray(models);
+      return DocumentReferenceContentHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DocumentReferenceContentDaoImpl implements DocumentReferenceContent
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DocumentReferenceContentModel a", DocumentReferenceContentModel.class);
       List<DocumentReferenceContentModel> models = query.getResultList();
-      return DocumentReferenceContent.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DocumentReferenceContent create(DocumentReferenceContent e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DocumentReferenceContentModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DocumentReferenceContent update(DocumentReferenceContent e) {
-      final EntityManager em = entityManagerProvider.get();
-      DocumentReferenceContentModel model = em.merge(new DocumentReferenceContentModel(e));
-      return new DocumentReferenceContent(model);
+      return DocumentReferenceContentHelper.fromArray2Array(models);
   }
 
   @Override

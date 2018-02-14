@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ExplanationOfBenefitInformationModel;
 import org.fhir.pojo.ExplanationOfBenefitInformation;
+import org.fhir.pojo.ExplanationOfBenefitInformationHelper;
 
 public class ExplanationOfBenefitInformationDaoImpl implements ExplanationOfBenefitInformationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ExplanationOfBenefitInformationDaoImpl implements ExplanationOfBene
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitInformationModel a", ExplanationOfBenefitInformationModel.class).setMaxResults(maxResult);
       List<ExplanationOfBenefitInformationModel> models = query.getResultList();
-      return ExplanationOfBenefitInformation.fromArray(models);
+      return ExplanationOfBenefitInformationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ExplanationOfBenefitInformationDaoImpl implements ExplanationOfBene
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ExplanationOfBenefitInformationModel a", ExplanationOfBenefitInformationModel.class);
       List<ExplanationOfBenefitInformationModel> models = query.getResultList();
-      return ExplanationOfBenefitInformation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ExplanationOfBenefitInformation create(ExplanationOfBenefitInformation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ExplanationOfBenefitInformationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ExplanationOfBenefitInformation update(ExplanationOfBenefitInformation e) {
-      final EntityManager em = entityManagerProvider.get();
-      ExplanationOfBenefitInformationModel model = em.merge(new ExplanationOfBenefitInformationModel(e));
-      return new ExplanationOfBenefitInformation(model);
+      return ExplanationOfBenefitInformationHelper.fromArray2Array(models);
   }
 
   @Override

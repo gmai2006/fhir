@@ -76,6 +76,7 @@ public class LocationPosition  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -97,24 +98,18 @@ public class LocationPosition  {
 
   public LocationPosition(LocationPositionModel o) {
     this.id = o.getId();
-      if (null != o.getLongitude()) {
-        this.longitude = new Float(o.getLongitude());
-      }
-
-      if (null != o.getLatitude()) {
-        this.latitude = new Float(o.getLatitude());
-      }
-
-      if (null != o.getAltitude()) {
-        this.altitude = new Float(o.getAltitude());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getLongitude()) {
+      this.longitude = o.getLongitude();
+    }
+    if (null != o.getLatitude()) {
+      this.latitude = o.getLatitude();
+    }
+    if (null != o.getAltitude()) {
+      this.altitude = o.getAltitude();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLongitude( Float value) {
@@ -181,50 +176,19 @@ public class LocationPosition  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("longitude" + "[" + String.valueOf(this.longitude) + "]\n"); 
-     builder.append("_longitude" + "[" + String.valueOf(this._longitude) + "]\n"); 
-     builder.append("latitude" + "[" + String.valueOf(this.latitude) + "]\n"); 
-     builder.append("_latitude" + "[" + String.valueOf(this._latitude) + "]\n"); 
-     builder.append("altitude" + "[" + String.valueOf(this.altitude) + "]\n"); 
-     builder.append("_altitude" + "[" + String.valueOf(this._altitude) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[LocationPosition]:" + "\n");
+     if(this.longitude != null) builder.append("longitude" + "->" + this.longitude.toString() + "\n"); 
+     if(this._longitude != null) builder.append("_longitude" + "->" + this._longitude.toString() + "\n"); 
+     if(this.latitude != null) builder.append("latitude" + "->" + this.latitude.toString() + "\n"); 
+     if(this._latitude != null) builder.append("_latitude" + "->" + this._latitude.toString() + "\n"); 
+     if(this.altitude != null) builder.append("altitude" + "->" + this.altitude.toString() + "\n"); 
+     if(this._altitude != null) builder.append("_altitude" + "->" + this._altitude.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<LocationPosition> fromArray(java.util.List<LocationPositionModel> list) {
-    return (java.util.List<LocationPosition>)list.stream()
-      .map(model -> new LocationPosition(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<LocationPositionModel> toModelArray(java.util.List<LocationPosition> list) {
-    return (java.util.List<LocationPositionModel>)list.stream()
-      .map(model -> new LocationPositionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static LocationPosition fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, LocationPosition.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(LocationPosition o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<LocationPosition> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

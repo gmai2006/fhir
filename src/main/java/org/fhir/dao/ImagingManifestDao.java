@@ -34,10 +34,8 @@ public interface ImagingManifestDao {
   public List<ImagingManifest> select(int maxResult);
 
   public List<ImagingManifest> selectAll();
-
   public ImagingManifest create(ImagingManifest e);
 
   public ImagingManifest update(ImagingManifest e);
-
   public void delete(ImagingManifest e);
 }

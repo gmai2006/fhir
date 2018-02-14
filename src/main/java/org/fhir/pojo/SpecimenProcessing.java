@@ -79,6 +79,7 @@ public class SpecimenProcessing  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -100,24 +101,20 @@ public class SpecimenProcessing  {
 
   public SpecimenProcessing(SpecimenProcessingModel o) {
     this.id = o.getId();
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.procedure = CodeableConcept.fromJson(o.getProcedure());
-      this.additive = Reference.fromArray(o.getAdditive());
-
-      if (null != o.getTimeDateTime()) {
-        this.timeDateTime = new String(o.getTimeDateTime());
-      }
-
-      this.timePeriod = Period.fromJson(o.getTimePeriod());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    this.procedure = CodeableConceptHelper.fromJson(o.getProcedure());
+    if (null != o.getAdditive() && !o.getAdditive().isEmpty()) {
+    	this.additive = ReferenceHelper.fromArray2Array(o.getAdditive());
+    }
+    if (null != o.getTimeDateTime()) {
+      this.timeDateTime = o.getTimeDateTime();
+    }
+    this.timePeriod = PeriodHelper.fromJson(o.getTimePeriod());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setDescription( String value) {
@@ -190,51 +187,20 @@ public class SpecimenProcessing  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("procedure" + "[" + String.valueOf(this.procedure) + "]\n"); 
-     builder.append("additive" + "[" + String.valueOf(this.additive) + "]\n"); 
-     builder.append("timeDateTime" + "[" + String.valueOf(this.timeDateTime) + "]\n"); 
-     builder.append("_timeDateTime" + "[" + String.valueOf(this._timeDateTime) + "]\n"); 
-     builder.append("timePeriod" + "[" + String.valueOf(this.timePeriod) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[SpecimenProcessing]:" + "\n");
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.procedure != null) builder.append("procedure" + "->" + this.procedure.toString() + "\n"); 
+     if(this.additive != null) builder.append("additive" + "->" + this.additive.toString() + "\n"); 
+     if(this.timeDateTime != null) builder.append("timeDateTime" + "->" + this.timeDateTime.toString() + "\n"); 
+     if(this._timeDateTime != null) builder.append("_timeDateTime" + "->" + this._timeDateTime.toString() + "\n"); 
+     if(this.timePeriod != null) builder.append("timePeriod" + "->" + this.timePeriod.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<SpecimenProcessing> fromArray(java.util.List<SpecimenProcessingModel> list) {
-    return (java.util.List<SpecimenProcessing>)list.stream()
-      .map(model -> new SpecimenProcessing(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<SpecimenProcessingModel> toModelArray(java.util.List<SpecimenProcessing> list) {
-    return (java.util.List<SpecimenProcessingModel>)list.stream()
-      .map(model -> new SpecimenProcessingModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static SpecimenProcessing fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, SpecimenProcessing.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SpecimenProcessing o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SpecimenProcessing> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

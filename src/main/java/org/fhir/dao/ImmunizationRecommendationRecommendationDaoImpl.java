@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImmunizationRecommendationRecommendationModel;
 import org.fhir.pojo.ImmunizationRecommendationRecommendation;
+import org.fhir.pojo.ImmunizationRecommendationRecommendationHelper;
 
 public class ImmunizationRecommendationRecommendationDaoImpl implements ImmunizationRecommendationRecommendationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImmunizationRecommendationRecommendationDaoImpl implements Immuniza
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationRecommendationRecommendationModel a", ImmunizationRecommendationRecommendationModel.class).setMaxResults(maxResult);
       List<ImmunizationRecommendationRecommendationModel> models = query.getResultList();
-      return ImmunizationRecommendationRecommendation.fromArray(models);
+      return ImmunizationRecommendationRecommendationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImmunizationRecommendationRecommendationDaoImpl implements Immuniza
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationRecommendationRecommendationModel a", ImmunizationRecommendationRecommendationModel.class);
       List<ImmunizationRecommendationRecommendationModel> models = query.getResultList();
-      return ImmunizationRecommendationRecommendation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImmunizationRecommendationRecommendation create(ImmunizationRecommendationRecommendation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImmunizationRecommendationRecommendationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImmunizationRecommendationRecommendation update(ImmunizationRecommendationRecommendation e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImmunizationRecommendationRecommendationModel model = em.merge(new ImmunizationRecommendationRecommendationModel(e));
-      return new ImmunizationRecommendationRecommendation(model);
+      return ImmunizationRecommendationRecommendationHelper.fromArray2Array(models);
   }
 
   @Override

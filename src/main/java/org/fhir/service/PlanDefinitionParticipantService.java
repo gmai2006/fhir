@@ -32,7 +32,5 @@ public interface PlanDefinitionParticipantService {
 	public PlanDefinitionParticipant find(String id);
   public List<PlanDefinitionParticipant> select(int maxResult);
   public List<PlanDefinitionParticipant> selectAll();
-  public PlanDefinitionParticipant create(PlanDefinitionParticipant bean);
-  public PlanDefinitionParticipant update(PlanDefinitionParticipant bean);
   public void delete(PlanDefinitionParticipant bean);
 }

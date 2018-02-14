@@ -34,10 +34,5 @@ public interface DeviceComponentProductionSpecificationDao {
   public List<DeviceComponentProductionSpecification> select(int maxResult);
 
   public List<DeviceComponentProductionSpecification> selectAll();
-
-  public DeviceComponentProductionSpecification create(DeviceComponentProductionSpecification e);
-
-  public DeviceComponentProductionSpecification update(DeviceComponentProductionSpecification e);
-
   public void delete(DeviceComponentProductionSpecification e);
 }

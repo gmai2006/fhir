@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides the insurance enrollment details to the insurer regarding a specified coverage."
 */
 @Entity
 @Table(name="enrollmentrequest")
-public class EnrollmentRequestModel  {
+public class EnrollmentRequestModel  implements Serializable {
+	private static final long serialVersionUID = 151857669716272421L;
   /**
   * Description: "This is a EnrollmentRequest resource"
   */
@@ -47,7 +48,7 @@ public class EnrollmentRequestModel  {
 
   /**
   * Description: "The Response business identifier."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -77,9 +78,9 @@ public class EnrollmentRequestModel  {
   @Column(name="\"insurer_id\"")
   private String insurer_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`insurer_id`", insertable=false, updatable=false)
-  private ReferenceModel insurer;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="insurer_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> insurer;
 
   /**
   * Description: "The practitioner who is responsible for the services rendered to the patient."
@@ -88,9 +89,9 @@ public class EnrollmentRequestModel  {
   @Column(name="\"provider_id\"")
   private String provider_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`provider_id`", insertable=false, updatable=false)
-  private ReferenceModel provider;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="provider_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> provider;
 
   /**
   * Description: "The organization which is responsible for the services rendered to the patient."
@@ -99,9 +100,9 @@ public class EnrollmentRequestModel  {
   @Column(name="\"organization_id\"")
   private String organization_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`organization_id`", insertable=false, updatable=false)
-  private ReferenceModel organization;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="organization_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> organization;
 
   /**
   * Description: "Patient Resource."
@@ -110,9 +111,9 @@ public class EnrollmentRequestModel  {
   @Column(name="\"subject_id\"")
   private String subject_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`subject_id`", insertable=false, updatable=false)
-  private ReferenceModel subject;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subject_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> subject;
 
   /**
   * Description: "Reference to the program or plan identification, underwriter or payor."
@@ -121,9 +122,9 @@ public class EnrollmentRequestModel  {
   @Column(name="\"coverage_id\"")
   private String coverage_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`coverage_id`", insertable=false, updatable=false)
-  private ReferenceModel coverage;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="coverage_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> coverage;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -133,14 +134,14 @@ public class EnrollmentRequestModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -150,7 +151,7 @@ public class EnrollmentRequestModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -160,7 +161,7 @@ public class EnrollmentRequestModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -172,6 +173,7 @@ public class EnrollmentRequestModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -186,9 +188,9 @@ public class EnrollmentRequestModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -209,203 +211,186 @@ public class EnrollmentRequestModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public EnrollmentRequestModel() {
   }
 
   public EnrollmentRequestModel(EnrollmentRequest o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.status = o.getStatus();
-
-      this.created = o.getCreated();
-
-      if (null != o.getInsurer()) {
-      	this.insurer_id = "insurer" + this.getId();
-        this.insurer = new ReferenceModel(o.getInsurer());
-        this.insurer.setId(this.insurer_id);
-        this.insurer.parent_id = this.insurer.getId();
-      }
-
-      if (null != o.getProvider()) {
-      	this.provider_id = "provider" + this.getId();
-        this.provider = new ReferenceModel(o.getProvider());
-        this.provider.setId(this.provider_id);
-        this.provider.parent_id = this.provider.getId();
-      }
-
-      if (null != o.getOrganization()) {
-      	this.organization_id = "organization" + this.getId();
-        this.organization = new ReferenceModel(o.getOrganization());
-        this.organization.setId(this.organization_id);
-        this.organization.parent_id = this.organization.getId();
-      }
-
-      if (null != o.getSubject()) {
-      	this.subject_id = "subject" + this.getId();
-        this.subject = new ReferenceModel(o.getSubject());
-        this.subject.setId(this.subject_id);
-        this.subject.parent_id = this.subject.getId();
-      }
-
-      if (null != o.getCoverage()) {
-      	this.coverage_id = "coverage" + this.getId();
-        this.coverage = new ReferenceModel(o.getCoverage());
-        this.coverage.setId(this.coverage_id);
-        this.coverage.parent_id = this.coverage.getId();
-      }
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.status = o.getStatus();
+    this.created = o.getCreated();
+    if (null != o.getInsurer() ) {
+    	this.insurer_id = "insurer" + this.id;
+    	this.insurer = ReferenceHelper.toModel(o.getInsurer(), this.insurer_id);
+    }
+    if (null != o.getProvider() ) {
+    	this.provider_id = "provider" + this.id;
+    	this.provider = ReferenceHelper.toModel(o.getProvider(), this.provider_id);
+    }
+    if (null != o.getOrganization() ) {
+    	this.organization_id = "organization" + this.id;
+    	this.organization = ReferenceHelper.toModel(o.getOrganization(), this.organization_id);
+    }
+    if (null != o.getSubject() ) {
+    	this.subject_id = "subject" + this.id;
+    	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
+    }
+    if (null != o.getCoverage() ) {
+    	this.coverage_id = "coverage" + this.id;
+    	this.coverage = ReferenceHelper.toModel(o.getCoverage(), this.coverage_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setCreated( String value) {
-    this.created = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getCreated() {
     return this.created;
   }
-  public void setInsurer( ReferenceModel value) {
-    this.insurer = value;
+  public void setCreated( String value) {
+    this.created = value;
   }
-  public ReferenceModel getInsurer() {
+  public java.util.List<ReferenceModel> getInsurer() {
     return this.insurer;
   }
-  public void setProvider( ReferenceModel value) {
-    this.provider = value;
+  public void setInsurer( java.util.List<ReferenceModel> value) {
+    this.insurer = value;
   }
-  public ReferenceModel getProvider() {
+  public java.util.List<ReferenceModel> getProvider() {
     return this.provider;
   }
-  public void setOrganization( ReferenceModel value) {
-    this.organization = value;
+  public void setProvider( java.util.List<ReferenceModel> value) {
+    this.provider = value;
   }
-  public ReferenceModel getOrganization() {
+  public java.util.List<ReferenceModel> getOrganization() {
     return this.organization;
   }
-  public void setSubject( ReferenceModel value) {
-    this.subject = value;
+  public void setOrganization( java.util.List<ReferenceModel> value) {
+    this.organization = value;
   }
-  public ReferenceModel getSubject() {
+  public java.util.List<ReferenceModel> getSubject() {
     return this.subject;
   }
-  public void setCoverage( ReferenceModel value) {
-    this.coverage = value;
+  public void setSubject( java.util.List<ReferenceModel> value) {
+    this.subject = value;
   }
-  public ReferenceModel getCoverage() {
+  public java.util.List<ReferenceModel> getCoverage() {
     return this.coverage;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setCoverage( java.util.List<ReferenceModel> value) {
+    this.coverage = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("created" + "[" + String.valueOf(this.created) + "]\n"); 
-     builder.append("insurer" + "[" + String.valueOf(this.insurer) + "]\n"); 
-     builder.append("provider" + "[" + String.valueOf(this.provider) + "]\n"); 
-     builder.append("organization" + "[" + String.valueOf(this.organization) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("coverage" + "[" + String.valueOf(this.coverage) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[EnrollmentRequestModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("created" + "->" + this.created + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[EnrollmentRequestModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("created" + "->" + this.created + "\n"); 
+     builder.append("insurer" + "->" + this.insurer + "\n"); 
+     builder.append("provider" + "->" + this.provider + "\n"); 
+     builder.append("organization" + "->" + this.organization + "\n"); 
+     builder.append("subject" + "->" + this.subject + "\n"); 
+     builder.append("coverage" + "->" + this.coverage + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

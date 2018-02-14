@@ -190,6 +190,7 @@ public class Communication  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -241,86 +242,67 @@ public class Communication  {
 
   public Communication(CommunicationModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.definition = Reference.fromArray(o.getDefinition());
-
-      this.basedOn = Reference.fromArray(o.getBasedOn());
-
-      this.partOf = Reference.fromArray(o.getPartOf());
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getNotDone()) {
-        this.notDone = new Boolean(o.getNotDone());
-      }
-
-      this.notDoneReason = CodeableConcept.fromJson(o.getNotDoneReason());
-      this.category = CodeableConcept.fromArray(o.getCategory());
-      this.medium = CodeableConcept.fromArray(o.getMedium());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      this.recipient = Reference.fromArray(o.getRecipient());
-
-      this.topic = Reference.fromArray(o.getTopic());
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getSent()) {
-        this.sent = new String(o.getSent());
-      }
-
-      if (null != o.getReceived()) {
-        this.received = new String(o.getReceived());
-      }
-
-      if (null != o.getSender()) {
-        this.sender = new Reference(o.getSender());
-        this.sender.setId(this.getId());
-      }
-
-      this.reasonCode = CodeableConcept.fromArray(o.getReasonCode());
-      this.reasonReference = Reference.fromArray(o.getReasonReference());
-
-      this.payload = CommunicationPayload.fromArray(o.getPayload());
-
-      this.note = Annotation.fromArray(o.getNote());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+    	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedOn = ReferenceHelper.fromArray2Array(o.getBasedOn());
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+    	this.partOf = ReferenceHelper.fromArray2Array(o.getPartOf());
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getNotDone()) {
+      this.notDone = o.getNotDone();
+    }
+    this.notDoneReason = CodeableConceptHelper.fromJson(o.getNotDoneReason());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getRecipient() && !o.getRecipient().isEmpty()) {
+    	this.recipient = ReferenceHelper.fromArray2Array(o.getRecipient());
+    }
+    if (null != o.getTopic() && !o.getTopic().isEmpty()) {
+    	this.topic = ReferenceHelper.fromArray2Array(o.getTopic());
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getSent()) {
+      this.sent = o.getSent();
+    }
+    if (null != o.getReceived()) {
+      this.received = o.getReceived();
+    }
+    if (null != o.getSender() && !o.getSender().isEmpty()) {
+      this.sender = new Reference(o.getSender().get(0));
+    }
+    if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
+    	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
+    }
+    if (null != o.getPayload() && !o.getPayload().isEmpty()) {
+    	this.payload = CommunicationPayloadHelper.fromArray2Array(o.getPayload());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -543,42 +525,43 @@ public class Communication  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("notDone" + "[" + String.valueOf(this.notDone) + "]\n"); 
-     builder.append("_notDone" + "[" + String.valueOf(this._notDone) + "]\n"); 
-     builder.append("notDoneReason" + "[" + String.valueOf(this.notDoneReason) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("medium" + "[" + String.valueOf(this.medium) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("recipient" + "[" + String.valueOf(this.recipient) + "]\n"); 
-     builder.append("topic" + "[" + String.valueOf(this.topic) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("sent" + "[" + String.valueOf(this.sent) + "]\n"); 
-     builder.append("_sent" + "[" + String.valueOf(this._sent) + "]\n"); 
-     builder.append("received" + "[" + String.valueOf(this.received) + "]\n"); 
-     builder.append("_received" + "[" + String.valueOf(this._received) + "]\n"); 
-     builder.append("sender" + "[" + String.valueOf(this.sender) + "]\n"); 
-     builder.append("reasonCode" + "[" + String.valueOf(this.reasonCode) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("payload" + "[" + String.valueOf(this.payload) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Communication]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this.basedOn != null) builder.append("basedOn" + "->" + this.basedOn.toString() + "\n"); 
+     if(this.partOf != null) builder.append("partOf" + "->" + this.partOf.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.notDone != null) builder.append("notDone" + "->" + this.notDone.toString() + "\n"); 
+     if(this._notDone != null) builder.append("_notDone" + "->" + this._notDone.toString() + "\n"); 
+     if(this.notDoneReason != null) builder.append("notDoneReason" + "->" + this.notDoneReason.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.medium != null) builder.append("medium" + "->" + this.medium.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.recipient != null) builder.append("recipient" + "->" + this.recipient.toString() + "\n"); 
+     if(this.topic != null) builder.append("topic" + "->" + this.topic.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.sent != null) builder.append("sent" + "->" + this.sent.toString() + "\n"); 
+     if(this._sent != null) builder.append("_sent" + "->" + this._sent.toString() + "\n"); 
+     if(this.received != null) builder.append("received" + "->" + this.received.toString() + "\n"); 
+     if(this._received != null) builder.append("_received" + "->" + this._received.toString() + "\n"); 
+     if(this.sender != null) builder.append("sender" + "->" + this.sender.toString() + "\n"); 
+     if(this.reasonCode != null) builder.append("reasonCode" + "->" + this.reasonCode.toString() + "\n"); 
+     if(this.reasonReference != null) builder.append("reasonReference" + "->" + this.reasonReference.toString() + "\n"); 
+     if(this.payload != null) builder.append("payload" + "->" + this.payload.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -594,36 +577,4 @@ public class Communication  {
   	}
   }
 
-  public static java.util.List<Communication> fromArray(java.util.List<CommunicationModel> list) {
-    return (java.util.List<Communication>)list.stream()
-      .map(model -> new Communication(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CommunicationModel> toModelArray(java.util.List<Communication> list) {
-    return (java.util.List<CommunicationModel>)list.stream()
-      .map(model -> new CommunicationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Communication fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Communication.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Communication o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Communication> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

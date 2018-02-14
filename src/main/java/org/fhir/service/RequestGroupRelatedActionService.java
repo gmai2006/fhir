@@ -32,7 +32,5 @@ public interface RequestGroupRelatedActionService {
 	public RequestGroupRelatedAction find(String id);
   public List<RequestGroupRelatedAction> select(int maxResult);
   public List<RequestGroupRelatedAction> selectAll();
-  public RequestGroupRelatedAction create(RequestGroupRelatedAction bean);
-  public RequestGroupRelatedAction update(RequestGroupRelatedAction bean);
   public void delete(RequestGroupRelatedAction bean);
 }

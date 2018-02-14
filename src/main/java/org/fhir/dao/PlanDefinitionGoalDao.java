@@ -34,10 +34,5 @@ public interface PlanDefinitionGoalDao {
   public List<PlanDefinitionGoal> select(int maxResult);
 
   public List<PlanDefinitionGoal> selectAll();
-
-  public PlanDefinitionGoal create(PlanDefinitionGoal e);
-
-  public PlanDefinitionGoal update(PlanDefinitionGoal e);
-
   public void delete(PlanDefinitionGoal e);
 }

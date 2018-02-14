@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A reference to a document."
 */
 @Entity
 @Table(name="documentreferencecontext")
-public class DocumentReferenceContextModel  {
+public class DocumentReferenceContextModel  implements Serializable {
+	private static final long serialVersionUID = 151857669716935127L;
   /**
   * Description: "Describes the clinical encounter or type of care that the document content is associated with."
   */
@@ -44,13 +45,13 @@ public class DocumentReferenceContextModel  {
   @Column(name="\"encounter_id\"")
   private String encounter_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`encounter_id`", insertable=false, updatable=false)
-  private ReferenceModel encounter;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> encounter;
 
   /**
   * Description: "This list of codes represents the main clinical acts, such as a colonoscopy or an appendectomy, being documented. In some cases, the event is inherent in the typeCode, such as a \"History and Physical Report\" in which the procedure being documented is necessarily a \"History and Physical\" act."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -59,7 +60,7 @@ public class DocumentReferenceContextModel  {
 
   /**
   * Description: "The time period over which the service that is described by the document was provided."
-  * Actual type: Period
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -68,7 +69,7 @@ public class DocumentReferenceContextModel  {
 
   /**
   * Description: "The kind of facility where the patient was seen."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -77,7 +78,7 @@ public class DocumentReferenceContextModel  {
 
   /**
   * Description: "This property may convey specifics about the practice setting where the content was created, often reflecting the clinical specialty."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -91,21 +92,25 @@ public class DocumentReferenceContextModel  {
   @Column(name="\"sourcepatientinfo_id\"")
   private String sourcepatientinfo_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`sourcepatientinfo_id`", insertable=false, updatable=false)
-  private ReferenceModel sourcePatientInfo;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="sourcepatientinfo_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> sourcePatientInfo;
 
   /**
   * Description: "Related identifiers or resources associated with the DocumentReference."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<DocumentReferenceRelatedModel> related = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"related_id\"")
+  private String related_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="related_id", insertable=false, updatable=false)
+  private java.util.List<DocumentReferenceRelatedModel> related;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -117,6 +122,7 @@ public class DocumentReferenceContextModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -125,123 +131,140 @@ public class DocumentReferenceContextModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public DocumentReferenceContextModel() {
   }
 
-  public DocumentReferenceContextModel(DocumentReferenceContext o) {
-    this.id = o.getId();
-      if (null != o.getEncounter()) {
-      	this.encounter_id = "encounter" + this.getId();
-        this.encounter = new ReferenceModel(o.getEncounter());
-        this.encounter.setId(this.encounter_id);
-        this.encounter.parent_id = this.encounter.getId();
-      }
-
-      this.event = CodeableConcept.toJson(o.getEvent());
-      this.period = Period.toJson(o.getPeriod());
-      this.facilityType = CodeableConcept.toJson(o.getFacilityType());
-      this.practiceSetting = CodeableConcept.toJson(o.getPracticeSetting());
-      if (null != o.getSourcePatientInfo()) {
-      	this.sourcepatientinfo_id = "sourcePatientInfo" + this.getId();
-        this.sourcePatientInfo = new ReferenceModel(o.getSourcePatientInfo());
-        this.sourcePatientInfo.setId(this.sourcepatientinfo_id);
-        this.sourcePatientInfo.parent_id = this.sourcePatientInfo.getId();
-      }
-
-      this.related = DocumentReferenceRelated.toModelArray(o.getRelated());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public DocumentReferenceContextModel(DocumentReferenceContext o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    if (null != o.getEncounter() ) {
+    	this.encounter_id = "encounter" + this.parent_id;
+    	this.encounter = ReferenceHelper.toModel(o.getEncounter(), this.encounter_id);
+    }
+    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.facilityType = CodeableConceptHelper.toJson(o.getFacilityType());
+    this.practiceSetting = CodeableConceptHelper.toJson(o.getPracticeSetting());
+    if (null != o.getSourcePatientInfo() ) {
+    	this.sourcepatientinfo_id = "sourcepatientinfo" + this.parent_id;
+    	this.sourcePatientInfo = ReferenceHelper.toModel(o.getSourcePatientInfo(), this.sourcepatientinfo_id);
+    }
+    if (null != o.getRelated() && !o.getRelated().isEmpty()) {
+    	this.related_id = "related" + this.parent_id;
+    	this.related = DocumentReferenceRelatedHelper.toModelFromArray(o.getRelated(), this.related_id);
+    }
   }
 
-  public void setEncounter( ReferenceModel value) {
-    this.encounter = value;
-  }
-  public ReferenceModel getEncounter() {
+  public java.util.List<ReferenceModel> getEncounter() {
     return this.encounter;
   }
-  public void setEvent( String value) {
-    this.event = value;
+  public void setEncounter( java.util.List<ReferenceModel> value) {
+    this.encounter = value;
   }
   public String getEvent() {
     return this.event;
   }
-  public void setPeriod( String value) {
-    this.period = value;
+  public void setEvent( String value) {
+    this.event = value;
   }
   public String getPeriod() {
     return this.period;
   }
-  public void setFacilityType( String value) {
-    this.facilityType = value;
+  public void setPeriod( String value) {
+    this.period = value;
   }
   public String getFacilityType() {
     return this.facilityType;
   }
-  public void setPracticeSetting( String value) {
-    this.practiceSetting = value;
+  public void setFacilityType( String value) {
+    this.facilityType = value;
   }
   public String getPracticeSetting() {
     return this.practiceSetting;
   }
-  public void setSourcePatientInfo( ReferenceModel value) {
-    this.sourcePatientInfo = value;
+  public void setPracticeSetting( String value) {
+    this.practiceSetting = value;
   }
-  public ReferenceModel getSourcePatientInfo() {
+  public java.util.List<ReferenceModel> getSourcePatientInfo() {
     return this.sourcePatientInfo;
   }
-  public void setRelated( java.util.List<DocumentReferenceRelatedModel> value) {
-    this.related = value;
+  public void setSourcePatientInfo( java.util.List<ReferenceModel> value) {
+    this.sourcePatientInfo = value;
   }
   public java.util.List<DocumentReferenceRelatedModel> getRelated() {
     return this.related;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setRelated( java.util.List<DocumentReferenceRelatedModel> value) {
+    this.related = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("encounter" + "[" + String.valueOf(this.encounter) + "]\n"); 
-     builder.append("event" + "[" + String.valueOf(this.event) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("facilityType" + "[" + String.valueOf(this.facilityType) + "]\n"); 
-     builder.append("practiceSetting" + "[" + String.valueOf(this.practiceSetting) + "]\n"); 
-     builder.append("sourcePatientInfo" + "[" + String.valueOf(this.sourcePatientInfo) + "]\n"); 
-     builder.append("related" + "[" + String.valueOf(this.related) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[DocumentReferenceContextModel]:" + "\n");
+     builder.append("event" + "->" + this.event + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("facilityType" + "->" + this.facilityType + "\n"); 
+     builder.append("practiceSetting" + "->" + this.practiceSetting + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[DocumentReferenceContextModel]:" + "\n");
+     builder.append("encounter" + "->" + this.encounter + "\n"); 
+     builder.append("event" + "->" + this.event + "\n"); 
+     builder.append("period" + "->" + this.period + "\n"); 
+     builder.append("facilityType" + "->" + this.facilityType + "\n"); 
+     builder.append("practiceSetting" + "->" + this.practiceSetting + "\n"); 
+     builder.append("sourcePatientInfo" + "->" + this.sourcePatientInfo + "\n"); 
+     builder.append("related" + "->" + this.related + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

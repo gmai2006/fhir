@@ -34,10 +34,5 @@ public interface MedicationBatchDao {
   public List<MedicationBatch> select(int maxResult);
 
   public List<MedicationBatch> selectAll();
-
-  public MedicationBatch create(MedicationBatch e);
-
-  public MedicationBatch update(MedicationBatch e);
-
   public void delete(MedicationBatch e);
 }

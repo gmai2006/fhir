@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."
 */
 @Entity
 @Table(name="allergyintolerancereaction")
-public class AllergyIntoleranceReactionModel  {
+public class AllergyIntoleranceReactionModel  implements Serializable {
+	private static final long serialVersionUID = 151857669690328198L;
   /**
   * Description: "Identification of the specific substance (or pharmaceutical product) considered to be responsible for the Adverse Reaction event. Note: the substance for a specific reaction may be different from the substance identified as the cause of the risk, but it must be consistent with it. For instance, it may be a more specific substance (e.g. a brand medication) or a composite product that includes the identified substance. It must be clinically safe to only process the 'code' and ignore the 'reaction.substance'."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -48,7 +49,7 @@ public class AllergyIntoleranceReactionModel  {
 
   /**
   * Description: "Clinical symptoms and/or signs that are observed or associated with the adverse reaction event."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.validation.constraints.NotNull
@@ -80,7 +81,7 @@ public class AllergyIntoleranceReactionModel  {
 
   /**
   * Description: "Identification of the route by which the subject was exposed to the substance."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -89,7 +90,7 @@ public class AllergyIntoleranceReactionModel  {
 
   /**
   * Description: "Additional text about the adverse reaction event not captured in other fields."
-  * Actual type: Array of Annotation-> List<Annotation>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -99,7 +100,7 @@ public class AllergyIntoleranceReactionModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -111,6 +112,7 @@ public class AllergyIntoleranceReactionModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -119,113 +121,133 @@ public class AllergyIntoleranceReactionModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public AllergyIntoleranceReactionModel() {
   }
 
-  public AllergyIntoleranceReactionModel(AllergyIntoleranceReaction o) {
-    this.id = o.getId();
-      this.substance = CodeableConcept.toJson(o.getSubstance());
-      this.manifestation = CodeableConcept.toJson(o.getManifestation());
-      this.description = o.getDescription();
-
-      this.onset = o.getOnset();
-
-      this.severity = o.getSeverity();
-
-      this.exposureRoute = CodeableConcept.toJson(o.getExposureRoute());
-      this.note = Annotation.toJson(o.getNote());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public AllergyIntoleranceReactionModel(AllergyIntoleranceReaction o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.substance = CodeableConceptHelper.toJson(o.getSubstance());
+    this.description = o.getDescription();
+    this.onset = o.getOnset();
+    this.severity = o.getSeverity();
+    this.exposureRoute = CodeableConceptHelper.toJson(o.getExposureRoute());
   }
 
-  public void setSubstance( String value) {
-    this.substance = value;
-  }
   public String getSubstance() {
     return this.substance;
   }
-  public void setManifestation( String value) {
-    this.manifestation = value;
+  public void setSubstance( String value) {
+    this.substance = value;
   }
   public String getManifestation() {
     return this.manifestation;
   }
-  public void setDescription( String value) {
-    this.description = value;
+  public void setManifestation( String value) {
+    this.manifestation = value;
   }
   public String getDescription() {
     return this.description;
   }
-  public void setOnset( String value) {
-    this.onset = value;
+  public void setDescription( String value) {
+    this.description = value;
   }
   public String getOnset() {
     return this.onset;
   }
-  public void setSeverity( String value) {
-    this.severity = value;
+  public void setOnset( String value) {
+    this.onset = value;
   }
   public String getSeverity() {
     return this.severity;
   }
-  public void setExposureRoute( String value) {
-    this.exposureRoute = value;
+  public void setSeverity( String value) {
+    this.severity = value;
   }
   public String getExposureRoute() {
     return this.exposureRoute;
   }
-  public void setNote( String value) {
-    this.note = value;
+  public void setExposureRoute( String value) {
+    this.exposureRoute = value;
   }
   public String getNote() {
     return this.note;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setNote( String value) {
+    this.note = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("substance" + "[" + String.valueOf(this.substance) + "]\n"); 
-     builder.append("manifestation" + "[" + String.valueOf(this.manifestation) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("onset" + "[" + String.valueOf(this.onset) + "]\n"); 
-     builder.append("severity" + "[" + String.valueOf(this.severity) + "]\n"); 
-     builder.append("exposureRoute" + "[" + String.valueOf(this.exposureRoute) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AllergyIntoleranceReactionModel]:" + "\n");
+     builder.append("substance" + "->" + this.substance + "\n"); 
+     builder.append("manifestation" + "->" + this.manifestation + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("onset" + "->" + this.onset + "\n"); 
+     builder.append("severity" + "->" + this.severity + "\n"); 
+     builder.append("exposureRoute" + "->" + this.exposureRoute + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[AllergyIntoleranceReactionModel]:" + "\n");
+     builder.append("substance" + "->" + this.substance + "\n"); 
+     builder.append("manifestation" + "->" + this.manifestation + "\n"); 
+     builder.append("description" + "->" + this.description + "\n"); 
+     builder.append("onset" + "->" + this.onset + "\n"); 
+     builder.append("severity" + "->" + this.severity + "\n"); 
+     builder.append("exposureRoute" + "->" + this.exposureRoute + "\n"); 
+     builder.append("note" + "->" + this.note + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

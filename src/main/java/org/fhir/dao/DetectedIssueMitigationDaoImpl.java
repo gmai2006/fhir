@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DetectedIssueMitigationModel;
 import org.fhir.pojo.DetectedIssueMitigation;
+import org.fhir.pojo.DetectedIssueMitigationHelper;
 
 public class DetectedIssueMitigationDaoImpl implements DetectedIssueMitigationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DetectedIssueMitigationDaoImpl implements DetectedIssueMitigationDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DetectedIssueMitigationModel a", DetectedIssueMitigationModel.class).setMaxResults(maxResult);
       List<DetectedIssueMitigationModel> models = query.getResultList();
-      return DetectedIssueMitigation.fromArray(models);
+      return DetectedIssueMitigationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DetectedIssueMitigationDaoImpl implements DetectedIssueMitigationDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DetectedIssueMitigationModel a", DetectedIssueMitigationModel.class);
       List<DetectedIssueMitigationModel> models = query.getResultList();
-      return DetectedIssueMitigation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DetectedIssueMitigation create(DetectedIssueMitigation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DetectedIssueMitigationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DetectedIssueMitigation update(DetectedIssueMitigation e) {
-      final EntityManager em = entityManagerProvider.get();
-      DetectedIssueMitigationModel model = em.merge(new DetectedIssueMitigationModel(e));
-      return new DetectedIssueMitigation(model);
+      return DetectedIssueMitigationHelper.fromArray2Array(models);
   }
 
   @Override

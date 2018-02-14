@@ -34,10 +34,5 @@ public interface CodeSystemFilterDao {
   public List<CodeSystemFilter> select(int maxResult);
 
   public List<CodeSystemFilter> selectAll();
-
-  public CodeSystemFilter create(CodeSystemFilter e);
-
-  public CodeSystemFilter update(CodeSystemFilter e);
-
   public void delete(CodeSystemFilter e);
 }

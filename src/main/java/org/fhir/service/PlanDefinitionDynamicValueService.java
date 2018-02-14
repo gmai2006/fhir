@@ -32,7 +32,5 @@ public interface PlanDefinitionDynamicValueService {
 	public PlanDefinitionDynamicValue find(String id);
   public List<PlanDefinitionDynamicValue> select(int maxResult);
   public List<PlanDefinitionDynamicValue> selectAll();
-  public PlanDefinitionDynamicValue create(PlanDefinitionDynamicValue bean);
-  public PlanDefinitionDynamicValue update(PlanDefinitionDynamicValue bean);
   public void delete(PlanDefinitionDynamicValue bean);
 }

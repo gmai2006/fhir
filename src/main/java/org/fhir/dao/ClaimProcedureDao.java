@@ -34,10 +34,5 @@ public interface ClaimProcedureDao {
   public List<ClaimProcedure> select(int maxResult);
 
   public List<ClaimProcedure> selectAll();
-
-  public ClaimProcedure create(ClaimProcedure e);
-
-  public ClaimProcedure update(ClaimProcedure e);
-
   public void delete(ClaimProcedure e);
 }

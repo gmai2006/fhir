@@ -58,6 +58,7 @@ public class PlanDefinitionParticipant  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -79,17 +80,13 @@ public class PlanDefinitionParticipant  {
 
   public PlanDefinitionParticipant(PlanDefinitionParticipantModel o) {
     this.id = o.getId();
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      this.role = CodeableConcept.fromJson(o.getRole());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    this.role = CodeableConceptHelper.fromJson(o.getRole());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setType( String value) {
@@ -138,13 +135,14 @@ public class PlanDefinitionParticipant  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PlanDefinitionParticipant]:" + "\n");
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.role != null) builder.append("role" + "->" + this.role.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -164,36 +162,4 @@ public class PlanDefinitionParticipant  {
   	}
   }
 
-  public static java.util.List<PlanDefinitionParticipant> fromArray(java.util.List<PlanDefinitionParticipantModel> list) {
-    return (java.util.List<PlanDefinitionParticipant>)list.stream()
-      .map(model -> new PlanDefinitionParticipant(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PlanDefinitionParticipantModel> toModelArray(java.util.List<PlanDefinitionParticipant> list) {
-    return (java.util.List<PlanDefinitionParticipantModel>)list.stream()
-      .map(model -> new PlanDefinitionParticipantModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PlanDefinitionParticipant fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PlanDefinitionParticipant.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PlanDefinitionParticipant o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PlanDefinitionParticipant> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

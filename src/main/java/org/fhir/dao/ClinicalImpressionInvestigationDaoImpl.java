@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClinicalImpressionInvestigationModel;
 import org.fhir.pojo.ClinicalImpressionInvestigation;
+import org.fhir.pojo.ClinicalImpressionInvestigationHelper;
 
 public class ClinicalImpressionInvestigationDaoImpl implements ClinicalImpressionInvestigationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClinicalImpressionInvestigationDaoImpl implements ClinicalImpressio
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClinicalImpressionInvestigationModel a", ClinicalImpressionInvestigationModel.class).setMaxResults(maxResult);
       List<ClinicalImpressionInvestigationModel> models = query.getResultList();
-      return ClinicalImpressionInvestigation.fromArray(models);
+      return ClinicalImpressionInvestigationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClinicalImpressionInvestigationDaoImpl implements ClinicalImpressio
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClinicalImpressionInvestigationModel a", ClinicalImpressionInvestigationModel.class);
       List<ClinicalImpressionInvestigationModel> models = query.getResultList();
-      return ClinicalImpressionInvestigation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClinicalImpressionInvestigation create(ClinicalImpressionInvestigation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClinicalImpressionInvestigationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClinicalImpressionInvestigation update(ClinicalImpressionInvestigation e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClinicalImpressionInvestigationModel model = em.merge(new ClinicalImpressionInvestigationModel(e));
-      return new ClinicalImpressionInvestigation(model);
+      return ClinicalImpressionInvestigationHelper.fromArray2Array(models);
   }
 
   @Override

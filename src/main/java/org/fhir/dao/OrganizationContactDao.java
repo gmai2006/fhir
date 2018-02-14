@@ -34,10 +34,5 @@ public interface OrganizationContactDao {
   public List<OrganizationContact> select(int maxResult);
 
   public List<OrganizationContact> selectAll();
-
-  public OrganizationContact create(OrganizationContact e);
-
-  public OrganizationContact update(OrganizationContact e);
-
   public void delete(OrganizationContact e);
 }

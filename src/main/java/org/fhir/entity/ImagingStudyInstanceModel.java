@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities."
 */
 @Entity
 @Table(name="imagingstudyinstance")
-public class ImagingStudyInstanceModel  {
+public class ImagingStudyInstanceModel  implements Serializable {
+	private static final long serialVersionUID = 151857669702353226L;
   /**
   * Description: "Formal identifier for this image or other content."
   */
@@ -71,7 +72,7 @@ public class ImagingStudyInstanceModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -83,6 +84,7 @@ public class ImagingStudyInstanceModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -91,90 +93,108 @@ public class ImagingStudyInstanceModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ImagingStudyInstanceModel() {
   }
 
-  public ImagingStudyInstanceModel(ImagingStudyInstance o) {
-    this.id = o.getId();
-      this.uid = o.getUid();
-
-      this.number = o.getNumber();
-
-      this.sopClass = o.getSopClass();
-
-      this.title = o.getTitle();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ImagingStudyInstanceModel(ImagingStudyInstance o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.uid = o.getUid();
+    this.number = o.getNumber();
+    this.sopClass = o.getSopClass();
+    this.title = o.getTitle();
   }
 
-  public void setUid( String value) {
-    this.uid = value;
-  }
   public String getUid() {
     return this.uid;
   }
-  public void setNumber( Float value) {
-    this.number = value;
+  public void setUid( String value) {
+    this.uid = value;
   }
   public Float getNumber() {
     return this.number;
   }
-  public void setSopClass( String value) {
-    this.sopClass = value;
+  public void setNumber( Float value) {
+    this.number = value;
   }
   public String getSopClass() {
     return this.sopClass;
   }
-  public void setTitle( String value) {
-    this.title = value;
+  public void setSopClass( String value) {
+    this.sopClass = value;
   }
   public String getTitle() {
     return this.title;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setTitle( String value) {
+    this.title = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("uid" + "[" + String.valueOf(this.uid) + "]\n"); 
-     builder.append("number" + "[" + String.valueOf(this.number) + "]\n"); 
-     builder.append("sopClass" + "[" + String.valueOf(this.sopClass) + "]\n"); 
-     builder.append("title" + "[" + String.valueOf(this.title) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ImagingStudyInstanceModel]:" + "\n");
+     builder.append("uid" + "->" + this.uid + "\n"); 
+     builder.append("number" + "->" + this.number + "\n"); 
+     builder.append("sopClass" + "->" + this.sopClass + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ImagingStudyInstanceModel]:" + "\n");
+     builder.append("uid" + "->" + this.uid + "\n"); 
+     builder.append("number" + "->" + this.number + "\n"); 
+     builder.append("sopClass" + "->" + this.sopClass + "\n"); 
+     builder.append("title" + "->" + this.title + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

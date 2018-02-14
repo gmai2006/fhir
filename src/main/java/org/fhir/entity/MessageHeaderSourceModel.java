@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle."
 */
 @Entity
 @Table(name="messageheadersource")
-public class MessageHeaderSourceModel  {
+public class MessageHeaderSourceModel  implements Serializable {
+	private static final long serialVersionUID = 151857669690048737L;
   /**
   * Description: "Human-readable name for the source system."
   */
@@ -60,7 +61,7 @@ public class MessageHeaderSourceModel  {
 
   /**
   * Description: "An e-mail, phone, website or other contact point to use to resolve issues with message communications."
-  * Actual type: ContactPoint
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -77,7 +78,7 @@ public class MessageHeaderSourceModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -89,6 +90,7 @@ public class MessageHeaderSourceModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -97,98 +99,117 @@ public class MessageHeaderSourceModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public MessageHeaderSourceModel() {
   }
 
-  public MessageHeaderSourceModel(MessageHeaderSource o) {
-    this.id = o.getId();
-      this.name = o.getName();
-
-      this.software = o.getSoftware();
-
-      this.version = o.getVersion();
-
-      this.contact = ContactPoint.toJson(o.getContact());
-      this.endpoint = o.getEndpoint();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public MessageHeaderSourceModel(MessageHeaderSource o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.name = o.getName();
+    this.software = o.getSoftware();
+    this.version = o.getVersion();
+    this.contact = ContactPointHelper.toJson(o.getContact());
+    this.endpoint = o.getEndpoint();
   }
 
-  public void setName( String value) {
-    this.name = value;
-  }
   public String getName() {
     return this.name;
   }
-  public void setSoftware( String value) {
-    this.software = value;
+  public void setName( String value) {
+    this.name = value;
   }
   public String getSoftware() {
     return this.software;
   }
-  public void setVersion( String value) {
-    this.version = value;
+  public void setSoftware( String value) {
+    this.software = value;
   }
   public String getVersion() {
     return this.version;
   }
-  public void setContact( String value) {
-    this.contact = value;
+  public void setVersion( String value) {
+    this.version = value;
   }
   public String getContact() {
     return this.contact;
   }
-  public void setEndpoint( String value) {
-    this.endpoint = value;
+  public void setContact( String value) {
+    this.contact = value;
   }
   public String getEndpoint() {
     return this.endpoint;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setEndpoint( String value) {
+    this.endpoint = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("name" + "[" + String.valueOf(this.name) + "]\n"); 
-     builder.append("software" + "[" + String.valueOf(this.software) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("contact" + "[" + String.valueOf(this.contact) + "]\n"); 
-     builder.append("endpoint" + "[" + String.valueOf(this.endpoint) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MessageHeaderSourceModel]:" + "\n");
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("software" + "->" + this.software + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("contact" + "->" + this.contact + "\n"); 
+     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[MessageHeaderSourceModel]:" + "\n");
+     builder.append("name" + "->" + this.name + "\n"); 
+     builder.append("software" + "->" + this.software + "\n"); 
+     builder.append("version" + "->" + this.version + "\n"); 
+     builder.append("contact" + "->" + this.contact + "\n"); 
+     builder.append("endpoint" + "->" + this.endpoint + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

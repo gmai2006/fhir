@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time."
 */
 @Entity
 @Table(name="episodeofcarediagnosis")
-public class EpisodeOfCareDiagnosisModel  {
+public class EpisodeOfCareDiagnosisModel  implements Serializable {
+	private static final long serialVersionUID = 151857669700924285L;
   /**
   * Description: "A list of conditions/problems/diagnoses that this episode of care is intended to be providing care for."
   */
@@ -44,13 +45,13 @@ public class EpisodeOfCareDiagnosisModel  {
   @Column(name="\"condition_id\"")
   private String condition_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`condition_id`", insertable=false, updatable=false)
-  private ReferenceModel condition;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="condition_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> condition;
 
   /**
   * Description: "Role that this diagnosis has within the episode of care (e.g. admission, billing, discharge …)."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -68,7 +69,7 @@ public class EpisodeOfCareDiagnosisModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -80,6 +81,7 @@ public class EpisodeOfCareDiagnosisModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -88,85 +90,101 @@ public class EpisodeOfCareDiagnosisModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public EpisodeOfCareDiagnosisModel() {
   }
 
-  public EpisodeOfCareDiagnosisModel(EpisodeOfCareDiagnosis o) {
-    this.id = o.getId();
-      if (null != o.getCondition()) {
-      	this.condition_id = "condition" + this.getId();
-        this.condition = new ReferenceModel(o.getCondition());
-        this.condition.setId(this.condition_id);
-        this.condition.parent_id = this.condition.getId();
-      }
-
-      this.role = CodeableConcept.toJson(o.getRole());
-      this.rank = o.getRank();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public EpisodeOfCareDiagnosisModel(EpisodeOfCareDiagnosis o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    if (null != o.getCondition() ) {
+    	this.condition_id = "condition" + this.parent_id;
+    	this.condition = ReferenceHelper.toModel(o.getCondition(), this.condition_id);
+    }
+    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.rank = o.getRank();
   }
 
-  public void setCondition( ReferenceModel value) {
-    this.condition = value;
-  }
-  public ReferenceModel getCondition() {
+  public java.util.List<ReferenceModel> getCondition() {
     return this.condition;
   }
-  public void setRole( String value) {
-    this.role = value;
+  public void setCondition( java.util.List<ReferenceModel> value) {
+    this.condition = value;
   }
   public String getRole() {
     return this.role;
   }
-  public void setRank( Float value) {
-    this.rank = value;
+  public void setRole( String value) {
+    this.role = value;
   }
   public Float getRank() {
     return this.rank;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setRank( Float value) {
+    this.rank = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("condition" + "[" + String.valueOf(this.condition) + "]\n"); 
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("rank" + "[" + String.valueOf(this.rank) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[EpisodeOfCareDiagnosisModel]:" + "\n");
+     builder.append("role" + "->" + this.role + "\n"); 
+     builder.append("rank" + "->" + this.rank + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[EpisodeOfCareDiagnosisModel]:" + "\n");
+     builder.append("condition" + "->" + this.condition + "\n"); 
+     builder.append("role" + "->" + this.role + "\n"); 
+     builder.append("rank" + "->" + this.rank + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

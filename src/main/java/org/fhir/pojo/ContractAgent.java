@@ -54,6 +54,7 @@ public class ContractAgent  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -75,18 +76,12 @@ public class ContractAgent  {
 
   public ContractAgent(ContractAgentModel o) {
     this.id = o.getId();
-      if (null != o.getActor()) {
-        this.actor = new Reference(o.getActor());
-        this.actor.setId(this.getId());
-      }
-
-      this.role = CodeableConcept.fromArray(o.getRole());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getActor() && !o.getActor().isEmpty()) {
+      this.actor = new Reference(o.getActor().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setActor( Reference value) {
@@ -129,46 +124,15 @@ public class ContractAgent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("actor" + "[" + String.valueOf(this.actor) + "]\n"); 
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ContractAgent]:" + "\n");
+     if(this.actor != null) builder.append("actor" + "->" + this.actor.toString() + "\n"); 
+     if(this.role != null) builder.append("role" + "->" + this.role.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ContractAgent> fromArray(java.util.List<ContractAgentModel> list) {
-    return (java.util.List<ContractAgent>)list.stream()
-      .map(model -> new ContractAgent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ContractAgentModel> toModelArray(java.util.List<ContractAgent> list) {
-    return (java.util.List<ContractAgentModel>)list.stream()
-      .map(model -> new ContractAgentModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ContractAgent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ContractAgent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ContractAgent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ContractAgent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

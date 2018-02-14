@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public AccountGuarantor create(AccountGuarantor bean) {
-  	requireNonNull(bean);
-    logger.info("create(AccountGuarantor={}) - entered bean ");
-
-    final AccountGuarantor result = dao.create(bean);
-
-    logger.info("create(AccountGuarantor) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public AccountGuarantor update(AccountGuarantor bean) {
-  	requireNonNull(bean);
-    logger.info("update(AccountGuarantor={}) - entered bean ");
-
-    final AccountGuarantor result = dao.update(bean);
-
-    logger.info("update(AccountGuarantor) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

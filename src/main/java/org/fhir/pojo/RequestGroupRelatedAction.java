@@ -75,6 +75,7 @@ public class RequestGroupRelatedAction  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -96,22 +97,17 @@ public class RequestGroupRelatedAction  {
 
   public RequestGroupRelatedAction(RequestGroupRelatedActionModel o) {
     this.id = o.getId();
-      if (null != o.getActionId()) {
-        this.actionId = new String(o.getActionId());
-      }
-
-      if (null != o.getRelationship()) {
-        this.relationship = new String(o.getRelationship());
-      }
-
-      this.offsetDuration = Duration.fromJson(o.getOffsetDuration());
-      this.offsetRange = Range.fromJson(o.getOffsetRange());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getActionId()) {
+      this.actionId = o.getActionId();
+    }
+    if (null != o.getRelationship()) {
+      this.relationship = o.getRelationship();
+    }
+    this.offsetDuration = DurationHelper.fromJson(o.getOffsetDuration());
+    this.offsetRange = RangeHelper.fromJson(o.getOffsetRange());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setActionId( String value) {
@@ -178,50 +174,19 @@ public class RequestGroupRelatedAction  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("actionId" + "[" + String.valueOf(this.actionId) + "]\n"); 
-     builder.append("_actionId" + "[" + String.valueOf(this._actionId) + "]\n"); 
-     builder.append("relationship" + "[" + String.valueOf(this.relationship) + "]\n"); 
-     builder.append("_relationship" + "[" + String.valueOf(this._relationship) + "]\n"); 
-     builder.append("offsetDuration" + "[" + String.valueOf(this.offsetDuration) + "]\n"); 
-     builder.append("offsetRange" + "[" + String.valueOf(this.offsetRange) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[RequestGroupRelatedAction]:" + "\n");
+     if(this.actionId != null) builder.append("actionId" + "->" + this.actionId.toString() + "\n"); 
+     if(this._actionId != null) builder.append("_actionId" + "->" + this._actionId.toString() + "\n"); 
+     if(this.relationship != null) builder.append("relationship" + "->" + this.relationship.toString() + "\n"); 
+     if(this._relationship != null) builder.append("_relationship" + "->" + this._relationship.toString() + "\n"); 
+     if(this.offsetDuration != null) builder.append("offsetDuration" + "->" + this.offsetDuration.toString() + "\n"); 
+     if(this.offsetRange != null) builder.append("offsetRange" + "->" + this.offsetRange.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<RequestGroupRelatedAction> fromArray(java.util.List<RequestGroupRelatedActionModel> list) {
-    return (java.util.List<RequestGroupRelatedAction>)list.stream()
-      .map(model -> new RequestGroupRelatedAction(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<RequestGroupRelatedActionModel> toModelArray(java.util.List<RequestGroupRelatedAction> list) {
-    return (java.util.List<RequestGroupRelatedActionModel>)list.stream()
-      .map(model -> new RequestGroupRelatedActionModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static RequestGroupRelatedAction fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, RequestGroupRelatedAction.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(RequestGroupRelatedAction o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<RequestGroupRelatedAction> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

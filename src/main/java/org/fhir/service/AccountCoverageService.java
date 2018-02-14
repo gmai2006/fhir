@@ -32,7 +32,5 @@ public interface AccountCoverageService {
 	public AccountCoverage find(String id);
   public List<AccountCoverage> select(int maxResult);
   public List<AccountCoverage> selectAll();
-  public AccountCoverage create(AccountCoverage bean);
-  public AccountCoverage update(AccountCoverage bean);
   public void delete(AccountCoverage bean);
 }

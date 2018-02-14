@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
 @Entity
 @Table(name="nutritionorder")
-public class NutritionOrderModel  {
+public class NutritionOrderModel  implements Serializable {
+	private static final long serialVersionUID = 151857669671060284L;
   /**
   * Description: "This is a NutritionOrder resource"
   */
@@ -47,7 +48,7 @@ public class NutritionOrderModel  {
 
   /**
   * Description: "Identifiers assigned to this order by the order sender or by the order receiver."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -68,9 +69,9 @@ public class NutritionOrderModel  {
   @Column(name="\"patient_id\"")
   private String patient_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`patient_id`", insertable=false, updatable=false)
-  private ReferenceModel patient;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patient_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> patient;
 
   /**
   * Description: "An encounter that provides additional information about the healthcare context in which this request is made."
@@ -79,9 +80,9 @@ public class NutritionOrderModel  {
   @Column(name="\"encounter_id\"")
   private String encounter_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`encounter_id`", insertable=false, updatable=false)
-  private ReferenceModel encounter;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="encounter_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> encounter;
 
   /**
   * Description: "The date and time that this nutrition order was requested."
@@ -98,20 +99,24 @@ public class NutritionOrderModel  {
   @Column(name="\"orderer_id\"")
   private String orderer_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`orderer_id`", insertable=false, updatable=false)
-  private ReferenceModel orderer;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="orderer_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> orderer;
 
   /**
   * Description: "A link to a record of allergies or intolerances  which should be included in the nutrition order."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<ReferenceModel> allergyIntolerance = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"allergyintolerance_id\"")
+  private String allergyintolerance_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="allergyintolerance_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> allergyIntolerance;
 
   /**
   * Description: "This modifier is used to convey order-specific modifiers about the type of food that should be given. These can be derived from patient allergies, intolerances, or preferences such as Halal, Vegan or Kosher. This modifier applies to the entire nutrition order inclusive of the oral diet, nutritional supplements and enteral formula feedings."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -120,7 +125,7 @@ public class NutritionOrderModel  {
 
   /**
   * Description: "This modifier is used to convey order-specific modifiers about the type of food that should NOT be given. These can be derived from patient allergies, intolerances, or preferences such as No Red Meat, No Soy or No Wheat or  Gluten-Free.  While it should not be necessary to repeat allergy or intolerance information captured in the referenced AllergyIntolerance resource in the excludeFoodModifier, this element may be used to convey additional specificity related to foods that should be eliminated from the patient’s diet for any reason.  This modifier applies to the entire nutrition order inclusive of the oral diet, nutritional supplements and enteral formula feedings."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -134,16 +139,20 @@ public class NutritionOrderModel  {
   @Column(name="\"oraldiet_id\"")
   private String oraldiet_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`oraldiet_id`", insertable=false, updatable=false)
-  private NutritionOrderOralDietModel oralDiet;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="oraldiet_id", insertable=false, updatable=false)
+  private java.util.List<NutritionOrderOralDietModel> oralDiet;
 
   /**
   * Description: "Oral nutritional products given in order to add further nutritional value to the patient's diet."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<NutritionOrderSupplementModel> supplement = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"supplement_id\"")
+  private String supplement_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="supplement_id", insertable=false, updatable=false)
+  private java.util.List<NutritionOrderSupplementModel> supplement;
 
   /**
   * Description: "Feeding provided through the gastrointestinal tract via a tube, catheter, or stoma that delivers nutrition distal to the oral cavity."
@@ -152,9 +161,9 @@ public class NutritionOrderModel  {
   @Column(name="\"enteralformula_id\"")
   private String enteralformula_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`enteralformula_id`", insertable=false, updatable=false)
-  private NutritionOrderEnteralFormulaModel enteralFormula;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="enteralformula_id", insertable=false, updatable=false)
+  private java.util.List<NutritionOrderEnteralFormulaModel> enteralFormula;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -164,14 +173,14 @@ public class NutritionOrderModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -181,7 +190,7 @@ public class NutritionOrderModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -191,7 +200,7 @@ public class NutritionOrderModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -203,6 +212,7 @@ public class NutritionOrderModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -217,9 +227,9 @@ public class NutritionOrderModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -240,237 +250,224 @@ public class NutritionOrderModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public NutritionOrderModel() {
   }
 
   public NutritionOrderModel(NutritionOrder o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.status = o.getStatus();
-
-      if (null != o.getPatient()) {
-      	this.patient_id = "patient" + this.getId();
-        this.patient = new ReferenceModel(o.getPatient());
-        this.patient.setId(this.patient_id);
-        this.patient.parent_id = this.patient.getId();
-      }
-
-      if (null != o.getEncounter()) {
-      	this.encounter_id = "encounter" + this.getId();
-        this.encounter = new ReferenceModel(o.getEncounter());
-        this.encounter.setId(this.encounter_id);
-        this.encounter.parent_id = this.encounter.getId();
-      }
-
-      this.dateTime = o.getDateTime();
-
-      if (null != o.getOrderer()) {
-      	this.orderer_id = "orderer" + this.getId();
-        this.orderer = new ReferenceModel(o.getOrderer());
-        this.orderer.setId(this.orderer_id);
-        this.orderer.parent_id = this.orderer.getId();
-      }
-
-      this.allergyIntolerance = Reference.toModelArray(o.getAllergyIntolerance());
-
-      this.foodPreferenceModifier = CodeableConcept.toJson(o.getFoodPreferenceModifier());
-      this.excludeFoodModifier = CodeableConcept.toJson(o.getExcludeFoodModifier());
-      if (null != o.getOralDiet()) {
-      	this.oraldiet_id = "oralDiet" + this.getId();
-        this.oralDiet = new NutritionOrderOralDietModel(o.getOralDiet());
-        this.oralDiet.setId(this.oraldiet_id);
-        this.oralDiet.parent_id = this.oralDiet.getId();
-      }
-
-      this.supplement = NutritionOrderSupplement.toModelArray(o.getSupplement());
-
-      if (null != o.getEnteralFormula()) {
-      	this.enteralformula_id = "enteralFormula" + this.getId();
-        this.enteralFormula = new NutritionOrderEnteralFormulaModel(o.getEnteralFormula());
-        this.enteralFormula.setId(this.enteralformula_id);
-        this.enteralFormula.parent_id = this.enteralFormula.getId();
-      }
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.status = o.getStatus();
+    if (null != o.getPatient() ) {
+    	this.patient_id = "patient" + this.id;
+    	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
+    }
+    if (null != o.getEncounter() ) {
+    	this.encounter_id = "encounter" + this.id;
+    	this.encounter = ReferenceHelper.toModel(o.getEncounter(), this.encounter_id);
+    }
+    this.dateTime = o.getDateTime();
+    if (null != o.getOrderer() ) {
+    	this.orderer_id = "orderer" + this.id;
+    	this.orderer = ReferenceHelper.toModel(o.getOrderer(), this.orderer_id);
+    }
+    if (null != o.getAllergyIntolerance() && !o.getAllergyIntolerance().isEmpty()) {
+    	this.allergyintolerance_id = "allergyintolerance" + this.id;
+    	this.allergyIntolerance = ReferenceHelper.toModelFromArray(o.getAllergyIntolerance(), this.allergyintolerance_id);
+    }
+    if (null != o.getOralDiet() ) {
+    	this.oraldiet_id = "oraldiet" + this.id;
+    	this.oralDiet = NutritionOrderOralDietHelper.toModel(o.getOralDiet(), this.oraldiet_id);
+    }
+    if (null != o.getSupplement() && !o.getSupplement().isEmpty()) {
+    	this.supplement_id = "supplement" + this.id;
+    	this.supplement = NutritionOrderSupplementHelper.toModelFromArray(o.getSupplement(), this.supplement_id);
+    }
+    if (null != o.getEnteralFormula() ) {
+    	this.enteralformula_id = "enteralformula" + this.id;
+    	this.enteralFormula = NutritionOrderEnteralFormulaHelper.toModel(o.getEnteralFormula(), this.enteralformula_id);
+    }
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setPatient( ReferenceModel value) {
-    this.patient = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
-  public ReferenceModel getPatient() {
+  public java.util.List<ReferenceModel> getPatient() {
     return this.patient;
   }
-  public void setEncounter( ReferenceModel value) {
-    this.encounter = value;
+  public void setPatient( java.util.List<ReferenceModel> value) {
+    this.patient = value;
   }
-  public ReferenceModel getEncounter() {
+  public java.util.List<ReferenceModel> getEncounter() {
     return this.encounter;
   }
-  public void setDateTime( String value) {
-    this.dateTime = value;
+  public void setEncounter( java.util.List<ReferenceModel> value) {
+    this.encounter = value;
   }
   public String getDateTime() {
     return this.dateTime;
   }
-  public void setOrderer( ReferenceModel value) {
-    this.orderer = value;
+  public void setDateTime( String value) {
+    this.dateTime = value;
   }
-  public ReferenceModel getOrderer() {
+  public java.util.List<ReferenceModel> getOrderer() {
     return this.orderer;
   }
-  public void setAllergyIntolerance( java.util.List<ReferenceModel> value) {
-    this.allergyIntolerance = value;
+  public void setOrderer( java.util.List<ReferenceModel> value) {
+    this.orderer = value;
   }
   public java.util.List<ReferenceModel> getAllergyIntolerance() {
     return this.allergyIntolerance;
   }
-  public void setFoodPreferenceModifier( String value) {
-    this.foodPreferenceModifier = value;
+  public void setAllergyIntolerance( java.util.List<ReferenceModel> value) {
+    this.allergyIntolerance = value;
   }
   public String getFoodPreferenceModifier() {
     return this.foodPreferenceModifier;
   }
-  public void setExcludeFoodModifier( String value) {
-    this.excludeFoodModifier = value;
+  public void setFoodPreferenceModifier( String value) {
+    this.foodPreferenceModifier = value;
   }
   public String getExcludeFoodModifier() {
     return this.excludeFoodModifier;
   }
-  public void setOralDiet( NutritionOrderOralDietModel value) {
-    this.oralDiet = value;
+  public void setExcludeFoodModifier( String value) {
+    this.excludeFoodModifier = value;
   }
-  public NutritionOrderOralDietModel getOralDiet() {
+  public java.util.List<NutritionOrderOralDietModel> getOralDiet() {
     return this.oralDiet;
   }
-  public void setSupplement( java.util.List<NutritionOrderSupplementModel> value) {
-    this.supplement = value;
+  public void setOralDiet( java.util.List<NutritionOrderOralDietModel> value) {
+    this.oralDiet = value;
   }
   public java.util.List<NutritionOrderSupplementModel> getSupplement() {
     return this.supplement;
   }
-  public void setEnteralFormula( NutritionOrderEnteralFormulaModel value) {
-    this.enteralFormula = value;
+  public void setSupplement( java.util.List<NutritionOrderSupplementModel> value) {
+    this.supplement = value;
   }
-  public NutritionOrderEnteralFormulaModel getEnteralFormula() {
+  public java.util.List<NutritionOrderEnteralFormulaModel> getEnteralFormula() {
     return this.enteralFormula;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setEnteralFormula( java.util.List<NutritionOrderEnteralFormulaModel> value) {
+    this.enteralFormula = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("patient" + "[" + String.valueOf(this.patient) + "]\n"); 
-     builder.append("encounter" + "[" + String.valueOf(this.encounter) + "]\n"); 
-     builder.append("dateTime" + "[" + String.valueOf(this.dateTime) + "]\n"); 
-     builder.append("orderer" + "[" + String.valueOf(this.orderer) + "]\n"); 
-     builder.append("allergyIntolerance" + "[" + String.valueOf(this.allergyIntolerance) + "]\n"); 
-     builder.append("foodPreferenceModifier" + "[" + String.valueOf(this.foodPreferenceModifier) + "]\n"); 
-     builder.append("excludeFoodModifier" + "[" + String.valueOf(this.excludeFoodModifier) + "]\n"); 
-     builder.append("oralDiet" + "[" + String.valueOf(this.oralDiet) + "]\n"); 
-     builder.append("supplement" + "[" + String.valueOf(this.supplement) + "]\n"); 
-     builder.append("enteralFormula" + "[" + String.valueOf(this.enteralFormula) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[NutritionOrderModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("dateTime" + "->" + this.dateTime + "\n"); 
+     builder.append("foodPreferenceModifier" + "->" + this.foodPreferenceModifier + "\n"); 
+     builder.append("excludeFoodModifier" + "->" + this.excludeFoodModifier + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[NutritionOrderModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("patient" + "->" + this.patient + "\n"); 
+     builder.append("encounter" + "->" + this.encounter + "\n"); 
+     builder.append("dateTime" + "->" + this.dateTime + "\n"); 
+     builder.append("orderer" + "->" + this.orderer + "\n"); 
+     builder.append("allergyIntolerance" + "->" + this.allergyIntolerance + "\n"); 
+     builder.append("foodPreferenceModifier" + "->" + this.foodPreferenceModifier + "\n"); 
+     builder.append("excludeFoodModifier" + "->" + this.excludeFoodModifier + "\n"); 
+     builder.append("oralDiet" + "->" + this.oralDiet + "\n"); 
+     builder.append("supplement" + "->" + this.supplement + "\n"); 
+     builder.append("enteralFormula" + "->" + this.enteralFormula + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

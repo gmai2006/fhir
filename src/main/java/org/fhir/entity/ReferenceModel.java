@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A reference from one resource to another."
 */
 @Entity
 @Table(name="reference")
-public class ReferenceModel  {
+public class ReferenceModel  implements Serializable {
+	private static final long serialVersionUID = 15185766971781532L;
   /**
   * Description: "A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources."
   */
@@ -46,7 +47,7 @@ public class ReferenceModel  {
 
   /**
   * Description: "An identifier for the other resource. This is used when there is no way to reference the other resource directly, either because the entity is not available through a FHIR server, or because there is no way for the author of the resource to convert a known identifier to an actual location. There is no requirement that a Reference.identifier point to something that is actually exposed as a FHIR instance, but it SHALL point to a business concept that would be expected to be exposed as a FHIR instance, and that instance would need to be of a FHIR resource type allowed by the reference."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -64,6 +65,7 @@ public class ReferenceModel  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -71,72 +73,91 @@ public class ReferenceModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ReferenceModel() {
   }
 
-  public ReferenceModel(Reference o) {
-    this.id = o.getId();
-      this.reference = o.getReference();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.display = o.getDisplay();
-
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ReferenceModel(Reference o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.reference = o.getReference();
+    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.display = o.getDisplay();
   }
 
-  public void setReference( String value) {
-    this.reference = value;
-  }
   public String getReference() {
     return this.reference;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setReference( String value) {
+    this.reference = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setDisplay( String value) {
-    this.display = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getDisplay() {
     return this.display;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setDisplay( String value) {
+    this.display = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("reference" + "[" + String.valueOf(this.reference) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ReferenceModel]:" + "\n");
+     builder.append("reference" + "->" + this.reference + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("display" + "->" + this.display + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ReferenceModel]:" + "\n");
+     builder.append("reference" + "->" + this.reference + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("display" + "->" + this.display + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

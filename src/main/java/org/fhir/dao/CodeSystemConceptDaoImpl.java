@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CodeSystemConceptModel;
 import org.fhir.pojo.CodeSystemConcept;
+import org.fhir.pojo.CodeSystemConceptHelper;
 
 public class CodeSystemConceptDaoImpl implements CodeSystemConceptDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CodeSystemConceptDaoImpl implements CodeSystemConceptDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CodeSystemConceptModel a", CodeSystemConceptModel.class).setMaxResults(maxResult);
       List<CodeSystemConceptModel> models = query.getResultList();
-      return CodeSystemConcept.fromArray(models);
+      return CodeSystemConceptHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CodeSystemConceptDaoImpl implements CodeSystemConceptDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CodeSystemConceptModel a", CodeSystemConceptModel.class);
       List<CodeSystemConceptModel> models = query.getResultList();
-      return CodeSystemConcept.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CodeSystemConcept create(CodeSystemConcept e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CodeSystemConceptModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CodeSystemConcept update(CodeSystemConcept e) {
-      final EntityManager em = entityManagerProvider.get();
-      CodeSystemConceptModel model = em.merge(new CodeSystemConceptModel(e));
-      return new CodeSystemConcept(model);
+      return CodeSystemConceptHelper.fromArray2Array(models);
   }
 
   @Override

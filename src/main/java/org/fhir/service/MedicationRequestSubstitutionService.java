@@ -32,7 +32,5 @@ public interface MedicationRequestSubstitutionService {
 	public MedicationRequestSubstitution find(String id);
   public List<MedicationRequestSubstitution> select(int maxResult);
   public List<MedicationRequestSubstitution> selectAll();
-  public MedicationRequestSubstitution create(MedicationRequestSubstitution bean);
-  public MedicationRequestSubstitution update(MedicationRequestSubstitution bean);
   public void delete(MedicationRequestSubstitution bean);
 }

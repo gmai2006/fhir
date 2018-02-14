@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.FlagModel;
 import org.fhir.pojo.Flag;
+import org.fhir.pojo.FlagHelper;
 
 public class FlagDaoImpl implements FlagDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class FlagDaoImpl implements FlagDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from FlagModel a", FlagModel.class).setMaxResults(maxResult);
       List<FlagModel> models = query.getResultList();
-      return Flag.fromArray(models);
+      return FlagHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class FlagDaoImpl implements FlagDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from FlagModel a", FlagModel.class);
       List<FlagModel> models = query.getResultList();
-      return Flag.fromArray(models);
+      return FlagHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class FlagDaoImpl implements FlagDao {
       FlagModel model = em.merge(new FlagModel(e));
       return new Flag(model);
   }
-
   @Override
   @Transactional
   public void delete(Flag e) {

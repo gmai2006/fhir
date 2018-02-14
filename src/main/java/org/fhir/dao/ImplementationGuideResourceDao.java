@@ -34,10 +34,5 @@ public interface ImplementationGuideResourceDao {
   public List<ImplementationGuideResource> select(int maxResult);
 
   public List<ImplementationGuideResource> selectAll();
-
-  public ImplementationGuideResource create(ImplementationGuideResource e);
-
-  public ImplementationGuideResource update(ImplementationGuideResource e);
-
   public void delete(ImplementationGuideResource e);
 }

@@ -199,6 +199,7 @@ public class Contract  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -250,80 +251,72 @@ public class Contract  {
 
   public Contract(ContractModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromJson(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getIssued()) {
-        this.issued = new String(o.getIssued());
-      }
-
-      this.applies = Period.fromJson(o.getApplies());
-      this.subject = Reference.fromArray(o.getSubject());
-
-      this.topic = Reference.fromArray(o.getTopic());
-
-      this.authority = Reference.fromArray(o.getAuthority());
-
-      this.domain = Reference.fromArray(o.getDomain());
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.subType = CodeableConcept.fromArray(o.getSubType());
-      this.action = CodeableConcept.fromArray(o.getAction());
-      this.actionReason = CodeableConcept.fromArray(o.getActionReason());
-      this.decisionType = CodeableConcept.fromJson(o.getDecisionType());
-      this.contentDerivative = CodeableConcept.fromJson(o.getContentDerivative());
-      this.securityLabel = Coding.fromArray(o.getSecurityLabel());
-      this.agent = ContractAgent.fromArray(o.getAgent());
-
-      this.signer = ContractSigner.fromArray(o.getSigner());
-
-      this.valuedItem = ContractValuedItem.fromArray(o.getValuedItem());
-
-      this.term = ContractTerm.fromArray(o.getTerm());
-
-      this.bindingAttachment = Attachment.fromJson(o.getBindingAttachment());
-      if (null != o.getBindingReference()) {
-        this.bindingReference = new Reference(o.getBindingReference());
-        this.bindingReference.setId(this.getId());
-      }
-
-      this.friendly = ContractFriendly.fromArray(o.getFriendly());
-
-      this.legal = ContractLegal.fromArray(o.getLegal());
-
-      this.rule = ContractRule.fromArray(o.getRule());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getIssued()) {
+      this.issued = o.getIssued();
+    }
+    this.applies = PeriodHelper.fromJson(o.getApplies());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+    	this.subject = ReferenceHelper.fromArray2Array(o.getSubject());
+    }
+    if (null != o.getTopic() && !o.getTopic().isEmpty()) {
+    	this.topic = ReferenceHelper.fromArray2Array(o.getTopic());
+    }
+    if (null != o.getAuthority() && !o.getAuthority().isEmpty()) {
+    	this.authority = ReferenceHelper.fromArray2Array(o.getAuthority());
+    }
+    if (null != o.getDomain() && !o.getDomain().isEmpty()) {
+    	this.domain = ReferenceHelper.fromArray2Array(o.getDomain());
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    this.decisionType = CodeableConceptHelper.fromJson(o.getDecisionType());
+    this.contentDerivative = CodeableConceptHelper.fromJson(o.getContentDerivative());
+    if (null != o.getAgent() && !o.getAgent().isEmpty()) {
+    	this.agent = ContractAgentHelper.fromArray2Array(o.getAgent());
+    }
+    if (null != o.getSigner() && !o.getSigner().isEmpty()) {
+    	this.signer = ContractSignerHelper.fromArray2Array(o.getSigner());
+    }
+    if (null != o.getValuedItem() && !o.getValuedItem().isEmpty()) {
+    	this.valuedItem = ContractValuedItemHelper.fromArray2Array(o.getValuedItem());
+    }
+    if (null != o.getTerm() && !o.getTerm().isEmpty()) {
+    	this.term = ContractTermHelper.fromArray2Array(o.getTerm());
+    }
+    this.bindingAttachment = AttachmentHelper.fromJson(o.getBindingAttachment());
+    if (null != o.getBindingReference() && !o.getBindingReference().isEmpty()) {
+      this.bindingReference = new Reference(o.getBindingReference().get(0));
+    }
+    if (null != o.getFriendly() && !o.getFriendly().isEmpty()) {
+    	this.friendly = ContractFriendlyHelper.fromArray2Array(o.getFriendly());
+    }
+    if (null != o.getLegal() && !o.getLegal().isEmpty()) {
+    	this.legal = ContractLegalHelper.fromArray2Array(o.getLegal());
+    }
+    if (null != o.getRule() && !o.getRule().isEmpty()) {
+    	this.rule = ContractRuleHelper.fromArray2Array(o.getRule());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -558,44 +551,45 @@ public class Contract  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("issued" + "[" + String.valueOf(this.issued) + "]\n"); 
-     builder.append("_issued" + "[" + String.valueOf(this._issued) + "]\n"); 
-     builder.append("applies" + "[" + String.valueOf(this.applies) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("topic" + "[" + String.valueOf(this.topic) + "]\n"); 
-     builder.append("authority" + "[" + String.valueOf(this.authority) + "]\n"); 
-     builder.append("domain" + "[" + String.valueOf(this.domain) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("subType" + "[" + String.valueOf(this.subType) + "]\n"); 
-     builder.append("action" + "[" + String.valueOf(this.action) + "]\n"); 
-     builder.append("actionReason" + "[" + String.valueOf(this.actionReason) + "]\n"); 
-     builder.append("decisionType" + "[" + String.valueOf(this.decisionType) + "]\n"); 
-     builder.append("contentDerivative" + "[" + String.valueOf(this.contentDerivative) + "]\n"); 
-     builder.append("securityLabel" + "[" + String.valueOf(this.securityLabel) + "]\n"); 
-     builder.append("agent" + "[" + String.valueOf(this.agent) + "]\n"); 
-     builder.append("signer" + "[" + String.valueOf(this.signer) + "]\n"); 
-     builder.append("valuedItem" + "[" + String.valueOf(this.valuedItem) + "]\n"); 
-     builder.append("term" + "[" + String.valueOf(this.term) + "]\n"); 
-     builder.append("bindingAttachment" + "[" + String.valueOf(this.bindingAttachment) + "]\n"); 
-     builder.append("bindingReference" + "[" + String.valueOf(this.bindingReference) + "]\n"); 
-     builder.append("friendly" + "[" + String.valueOf(this.friendly) + "]\n"); 
-     builder.append("legal" + "[" + String.valueOf(this.legal) + "]\n"); 
-     builder.append("rule" + "[" + String.valueOf(this.rule) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Contract]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.issued != null) builder.append("issued" + "->" + this.issued.toString() + "\n"); 
+     if(this._issued != null) builder.append("_issued" + "->" + this._issued.toString() + "\n"); 
+     if(this.applies != null) builder.append("applies" + "->" + this.applies.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.topic != null) builder.append("topic" + "->" + this.topic.toString() + "\n"); 
+     if(this.authority != null) builder.append("authority" + "->" + this.authority.toString() + "\n"); 
+     if(this.domain != null) builder.append("domain" + "->" + this.domain.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.subType != null) builder.append("subType" + "->" + this.subType.toString() + "\n"); 
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
+     if(this.actionReason != null) builder.append("actionReason" + "->" + this.actionReason.toString() + "\n"); 
+     if(this.decisionType != null) builder.append("decisionType" + "->" + this.decisionType.toString() + "\n"); 
+     if(this.contentDerivative != null) builder.append("contentDerivative" + "->" + this.contentDerivative.toString() + "\n"); 
+     if(this.securityLabel != null) builder.append("securityLabel" + "->" + this.securityLabel.toString() + "\n"); 
+     if(this.agent != null) builder.append("agent" + "->" + this.agent.toString() + "\n"); 
+     if(this.signer != null) builder.append("signer" + "->" + this.signer.toString() + "\n"); 
+     if(this.valuedItem != null) builder.append("valuedItem" + "->" + this.valuedItem.toString() + "\n"); 
+     if(this.term != null) builder.append("term" + "->" + this.term.toString() + "\n"); 
+     if(this.bindingAttachment != null) builder.append("bindingAttachment" + "->" + this.bindingAttachment.toString() + "\n"); 
+     if(this.bindingReference != null) builder.append("bindingReference" + "->" + this.bindingReference.toString() + "\n"); 
+     if(this.friendly != null) builder.append("friendly" + "->" + this.friendly.toString() + "\n"); 
+     if(this.legal != null) builder.append("legal" + "->" + this.legal.toString() + "\n"); 
+     if(this.rule != null) builder.append("rule" + "->" + this.rule.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -611,36 +605,4 @@ public class Contract  {
   	}
   }
 
-  public static java.util.List<Contract> fromArray(java.util.List<ContractModel> list) {
-    return (java.util.List<Contract>)list.stream()
-      .map(model -> new Contract(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ContractModel> toModelArray(java.util.List<Contract> list) {
-    return (java.util.List<ContractModel>)list.stream()
-      .map(model -> new ContractModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Contract fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Contract.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Contract o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Contract> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

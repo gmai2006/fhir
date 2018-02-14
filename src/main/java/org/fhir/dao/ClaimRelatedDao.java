@@ -34,10 +34,5 @@ public interface ClaimRelatedDao {
   public List<ClaimRelated> select(int maxResult);
 
   public List<ClaimRelated> selectAll();
-
-  public ClaimRelated create(ClaimRelated e);
-
-  public ClaimRelated update(ClaimRelated e);
-
   public void delete(ClaimRelated e);
 }

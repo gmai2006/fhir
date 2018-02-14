@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementMessagingModel;
 import org.fhir.pojo.CapabilityStatementMessaging;
+import org.fhir.pojo.CapabilityStatementMessagingHelper;
 
 public class CapabilityStatementMessagingDaoImpl implements CapabilityStatementMessagingDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementMessagingDaoImpl implements CapabilityStatementM
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementMessagingModel a", CapabilityStatementMessagingModel.class).setMaxResults(maxResult);
       List<CapabilityStatementMessagingModel> models = query.getResultList();
-      return CapabilityStatementMessaging.fromArray(models);
+      return CapabilityStatementMessagingHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CapabilityStatementMessagingDaoImpl implements CapabilityStatementM
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementMessagingModel a", CapabilityStatementMessagingModel.class);
       List<CapabilityStatementMessagingModel> models = query.getResultList();
-      return CapabilityStatementMessaging.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementMessaging create(CapabilityStatementMessaging e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CapabilityStatementMessagingModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CapabilityStatementMessaging update(CapabilityStatementMessaging e) {
-      final EntityManager em = entityManagerProvider.get();
-      CapabilityStatementMessagingModel model = em.merge(new CapabilityStatementMessagingModel(e));
-      return new CapabilityStatementMessaging(model);
+      return CapabilityStatementMessagingHelper.fromArray2Array(models);
   }
 
   @Override

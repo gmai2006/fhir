@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImmunizationReactionModel;
 import org.fhir.pojo.ImmunizationReaction;
+import org.fhir.pojo.ImmunizationReactionHelper;
 
 public class ImmunizationReactionDaoImpl implements ImmunizationReactionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImmunizationReactionDaoImpl implements ImmunizationReactionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationReactionModel a", ImmunizationReactionModel.class).setMaxResults(maxResult);
       List<ImmunizationReactionModel> models = query.getResultList();
-      return ImmunizationReaction.fromArray(models);
+      return ImmunizationReactionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ImmunizationReactionDaoImpl implements ImmunizationReactionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationReactionModel a", ImmunizationReactionModel.class);
       List<ImmunizationReactionModel> models = query.getResultList();
-      return ImmunizationReaction.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ImmunizationReaction create(ImmunizationReaction e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ImmunizationReactionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ImmunizationReaction update(ImmunizationReaction e) {
-      final EntityManager em = entityManagerProvider.get();
-      ImmunizationReactionModel model = em.merge(new ImmunizationReactionModel(e));
-      return new ImmunizationReaction(model);
+      return ImmunizationReactionHelper.fromArray2Array(models);
   }
 
   @Override

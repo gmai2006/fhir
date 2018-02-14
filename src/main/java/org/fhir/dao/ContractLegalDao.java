@@ -34,10 +34,5 @@ public interface ContractLegalDao {
   public List<ContractLegal> select(int maxResult);
 
   public List<ContractLegal> selectAll();
-
-  public ContractLegal create(ContractLegal e);
-
-  public ContractLegal update(ContractLegal e);
-
   public void delete(ContractLegal e);
 }

@@ -102,6 +102,7 @@ public class CapabilityStatementEvent  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -123,39 +124,28 @@ public class CapabilityStatementEvent  {
 
   public CapabilityStatementEvent(CapabilityStatementEventModel o) {
     this.id = o.getId();
-      this.code = Coding.fromJson(o.getCode());
-      if (null != o.getCategory()) {
-        this.category = new String(o.getCategory());
-      }
-
-      if (null != o.getMode()) {
-        this.mode = new String(o.getMode());
-      }
-
-      if (null != o.getFocus()) {
-        this.focus = new String(o.getFocus());
-      }
-
-      if (null != o.getRequest()) {
-        this.request = new Reference(o.getRequest());
-        this.request.setId(this.getId());
-      }
-
-      if (null != o.getResponse()) {
-        this.response = new Reference(o.getResponse());
-        this.response.setId(this.getId());
-      }
-
-      if (null != o.getDocumentation()) {
-        this.documentation = new String(o.getDocumentation());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.code = CodingHelper.fromJson(o.getCode());
+    if (null != o.getCategory()) {
+      this.category = o.getCategory();
+    }
+    if (null != o.getMode()) {
+      this.mode = o.getMode();
+    }
+    if (null != o.getFocus()) {
+      this.focus = o.getFocus();
+    }
+    if (null != o.getRequest() && !o.getRequest().isEmpty()) {
+      this.request = new Reference(o.getRequest().get(0));
+    }
+    if (null != o.getResponse() && !o.getResponse().isEmpty()) {
+      this.response = new Reference(o.getResponse().get(0));
+    }
+    if (null != o.getDocumentation()) {
+      this.documentation = o.getDocumentation();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( Coding value) {
@@ -252,21 +242,22 @@ public class CapabilityStatementEvent  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("_category" + "[" + String.valueOf(this._category) + "]\n"); 
-     builder.append("mode" + "[" + String.valueOf(this.mode) + "]\n"); 
-     builder.append("_mode" + "[" + String.valueOf(this._mode) + "]\n"); 
-     builder.append("focus" + "[" + String.valueOf(this.focus) + "]\n"); 
-     builder.append("_focus" + "[" + String.valueOf(this._focus) + "]\n"); 
-     builder.append("request" + "[" + String.valueOf(this.request) + "]\n"); 
-     builder.append("response" + "[" + String.valueOf(this.response) + "]\n"); 
-     builder.append("documentation" + "[" + String.valueOf(this.documentation) + "]\n"); 
-     builder.append("_documentation" + "[" + String.valueOf(this._documentation) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CapabilityStatementEvent]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this._category != null) builder.append("_category" + "->" + this._category.toString() + "\n"); 
+     if(this.mode != null) builder.append("mode" + "->" + this.mode.toString() + "\n"); 
+     if(this._mode != null) builder.append("_mode" + "->" + this._mode.toString() + "\n"); 
+     if(this.focus != null) builder.append("focus" + "->" + this.focus.toString() + "\n"); 
+     if(this._focus != null) builder.append("_focus" + "->" + this._focus.toString() + "\n"); 
+     if(this.request != null) builder.append("request" + "->" + this.request.toString() + "\n"); 
+     if(this.response != null) builder.append("response" + "->" + this.response.toString() + "\n"); 
+     if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -300,36 +291,4 @@ public class CapabilityStatementEvent  {
   	}
   }
 
-  public static java.util.List<CapabilityStatementEvent> fromArray(java.util.List<CapabilityStatementEventModel> list) {
-    return (java.util.List<CapabilityStatementEvent>)list.stream()
-      .map(model -> new CapabilityStatementEvent(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CapabilityStatementEventModel> toModelArray(java.util.List<CapabilityStatementEvent> list) {
-    return (java.util.List<CapabilityStatementEventModel>)list.stream()
-      .map(model -> new CapabilityStatementEventModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CapabilityStatementEvent fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CapabilityStatementEvent.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementEvent o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementEvent> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

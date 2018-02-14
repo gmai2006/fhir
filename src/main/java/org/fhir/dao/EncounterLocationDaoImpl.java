@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.EncounterLocationModel;
 import org.fhir.pojo.EncounterLocation;
+import org.fhir.pojo.EncounterLocationHelper;
 
 public class EncounterLocationDaoImpl implements EncounterLocationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class EncounterLocationDaoImpl implements EncounterLocationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterLocationModel a", EncounterLocationModel.class).setMaxResults(maxResult);
       List<EncounterLocationModel> models = query.getResultList();
-      return EncounterLocation.fromArray(models);
+      return EncounterLocationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class EncounterLocationDaoImpl implements EncounterLocationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from EncounterLocationModel a", EncounterLocationModel.class);
       List<EncounterLocationModel> models = query.getResultList();
-      return EncounterLocation.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public EncounterLocation create(EncounterLocation e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new EncounterLocationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public EncounterLocation update(EncounterLocation e) {
-      final EntityManager em = entityManagerProvider.get();
-      EncounterLocationModel model = em.merge(new EncounterLocationModel(e));
-      return new EncounterLocation(model);
+      return EncounterLocationHelper.fromArray2Array(models);
   }
 
   @Override

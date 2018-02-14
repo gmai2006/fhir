@@ -34,10 +34,5 @@ public interface PatientAnimalDao {
   public List<PatientAnimal> select(int maxResult);
 
   public List<PatientAnimal> selectAll();
-
-  public PatientAnimal create(PatientAnimal e);
-
-  public PatientAnimal update(PatientAnimal e);
-
   public void delete(PatientAnimal e);
 }

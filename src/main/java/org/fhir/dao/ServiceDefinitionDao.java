@@ -34,10 +34,8 @@ public interface ServiceDefinitionDao {
   public List<ServiceDefinition> select(int maxResult);
 
   public List<ServiceDefinition> selectAll();
-
   public ServiceDefinition create(ServiceDefinition e);
 
   public ServiceDefinition update(ServiceDefinition e);
-
   public void delete(ServiceDefinition e);
 }

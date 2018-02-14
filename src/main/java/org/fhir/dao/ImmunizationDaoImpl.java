@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ImmunizationModel;
 import org.fhir.pojo.Immunization;
+import org.fhir.pojo.ImmunizationHelper;
 
 public class ImmunizationDaoImpl implements ImmunizationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ImmunizationDaoImpl implements ImmunizationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationModel a", ImmunizationModel.class).setMaxResults(maxResult);
       List<ImmunizationModel> models = query.getResultList();
-      return Immunization.fromArray(models);
+      return ImmunizationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ImmunizationDaoImpl implements ImmunizationDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ImmunizationModel a", ImmunizationModel.class);
       List<ImmunizationModel> models = query.getResultList();
-      return Immunization.fromArray(models);
+      return ImmunizationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ImmunizationDaoImpl implements ImmunizationDao {
       ImmunizationModel model = em.merge(new ImmunizationModel(e));
       return new Immunization(model);
   }
-
   @Override
   @Transactional
   public void delete(Immunization e) {

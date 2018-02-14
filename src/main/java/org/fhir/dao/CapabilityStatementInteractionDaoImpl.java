@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.CapabilityStatementInteractionModel;
 import org.fhir.pojo.CapabilityStatementInteraction;
+import org.fhir.pojo.CapabilityStatementInteractionHelper;
 
 public class CapabilityStatementInteractionDaoImpl implements CapabilityStatementInteractionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class CapabilityStatementInteractionDaoImpl implements CapabilityStatemen
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementInteractionModel a", CapabilityStatementInteractionModel.class).setMaxResults(maxResult);
       List<CapabilityStatementInteractionModel> models = query.getResultList();
-      return CapabilityStatementInteraction.fromArray(models);
+      return CapabilityStatementInteractionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class CapabilityStatementInteractionDaoImpl implements CapabilityStatemen
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from CapabilityStatementInteractionModel a", CapabilityStatementInteractionModel.class);
       List<CapabilityStatementInteractionModel> models = query.getResultList();
-      return CapabilityStatementInteraction.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public CapabilityStatementInteraction create(CapabilityStatementInteraction e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new CapabilityStatementInteractionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public CapabilityStatementInteraction update(CapabilityStatementInteraction e) {
-      final EntityManager em = entityManagerProvider.get();
-      CapabilityStatementInteractionModel model = em.merge(new CapabilityStatementInteractionModel(e));
-      return new CapabilityStatementInteraction(model);
+      return CapabilityStatementInteractionHelper.fromArray2Array(models);
   }
 
   @Override

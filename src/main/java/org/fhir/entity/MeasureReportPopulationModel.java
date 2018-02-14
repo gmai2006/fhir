@@ -30,16 +30,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
 */
 @Entity
 @Table(name="measurereportpopulation")
-public class MeasureReportPopulationModel  {
+public class MeasureReportPopulationModel  implements Serializable {
+	private static final long serialVersionUID = 151857669684488153L;
   /**
   * Description: "The identifier of the population being reported, as defined by the population element of the measure."
-  * Actual type: Identifier
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -48,7 +49,7 @@ public class MeasureReportPopulationModel  {
 
   /**
   * Description: "The type of the population."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -70,14 +71,14 @@ public class MeasureReportPopulationModel  {
   @Column(name="\"patients_id\"")
   private String patients_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`patients_id`", insertable=false, updatable=false)
-  private ReferenceModel patients;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="patients_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> patients;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -89,6 +90,7 @@ public class MeasureReportPopulationModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -97,93 +99,110 @@ public class MeasureReportPopulationModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public MeasureReportPopulationModel() {
   }
 
-  public MeasureReportPopulationModel(MeasureReportPopulation o) {
-    this.id = o.getId();
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.code = CodeableConcept.toJson(o.getCode());
-      this.count = o.getCount();
-
-      if (null != o.getPatients()) {
-      	this.patients_id = "patients" + this.getId();
-        this.patients = new ReferenceModel(o.getPatients());
-        this.patients.setId(this.patients_id);
-        this.patients.parent_id = this.patients.getId();
-      }
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public MeasureReportPopulationModel(MeasureReportPopulation o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.count = o.getCount();
+    if (null != o.getPatients() ) {
+    	this.patients_id = "patients" + this.parent_id;
+    	this.patients = ReferenceHelper.toModel(o.getPatients(), this.patients_id);
+    }
   }
 
-  public void setIdentifier( String value) {
-    this.identifier = value;
-  }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setCode( String value) {
-    this.code = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getCode() {
     return this.code;
   }
-  public void setCount( Float value) {
-    this.count = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public Float getCount() {
     return this.count;
   }
-  public void setPatients( ReferenceModel value) {
-    this.patients = value;
+  public void setCount( Float value) {
+    this.count = value;
   }
-  public ReferenceModel getPatients() {
+  public java.util.List<ReferenceModel> getPatients() {
     return this.patients;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setPatients( java.util.List<ReferenceModel> value) {
+    this.patients = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("count" + "[" + String.valueOf(this.count) + "]\n"); 
-     builder.append("patients" + "[" + String.valueOf(this.patients) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MeasureReportPopulationModel]:" + "\n");
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("count" + "->" + this.count + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[MeasureReportPopulationModel]:" + "\n");
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("count" + "->" + this.count + "\n"); 
+     builder.append("patients" + "->" + this.patients + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

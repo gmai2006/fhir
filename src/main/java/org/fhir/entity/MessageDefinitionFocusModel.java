@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted."
 */
 @Entity
 @Table(name="messagedefinitionfocus")
-public class MessageDefinitionFocusModel  {
+public class MessageDefinitionFocusModel  implements Serializable {
+	private static final long serialVersionUID = 151857669705872995L;
   /**
   * Description: "The kind of resource that must be the focus for this message."
   */
@@ -52,9 +53,9 @@ public class MessageDefinitionFocusModel  {
   @Column(name="\"profile_id\"")
   private String profile_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`profile_id`", insertable=false, updatable=false)
-  private ReferenceModel profile;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="profile_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> profile;
 
   /**
   * Description: "Identifies the minimum number of resources of this type that must be pointed to by a message in order for it to be valid against this MessageDefinition."
@@ -74,7 +75,7 @@ public class MessageDefinitionFocusModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -86,6 +87,7 @@ public class MessageDefinitionFocusModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -94,95 +96,110 @@ public class MessageDefinitionFocusModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public MessageDefinitionFocusModel() {
   }
 
-  public MessageDefinitionFocusModel(MessageDefinitionFocus o) {
-    this.id = o.getId();
-      this.code = o.getCode();
-
-      if (null != o.getProfile()) {
-      	this.profile_id = "profile" + this.getId();
-        this.profile = new ReferenceModel(o.getProfile());
-        this.profile.setId(this.profile_id);
-        this.profile.parent_id = this.profile.getId();
-      }
-
-      this.min = o.getMin();
-
-      this.max = o.getMax();
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public MessageDefinitionFocusModel(MessageDefinitionFocus o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.code = o.getCode();
+    if (null != o.getProfile() ) {
+    	this.profile_id = "profile" + this.parent_id;
+    	this.profile = ReferenceHelper.toModel(o.getProfile(), this.profile_id);
+    }
+    this.min = o.getMin();
+    this.max = o.getMax();
   }
 
-  public void setCode( String value) {
-    this.code = value;
-  }
   public String getCode() {
     return this.code;
   }
-  public void setProfile( ReferenceModel value) {
-    this.profile = value;
+  public void setCode( String value) {
+    this.code = value;
   }
-  public ReferenceModel getProfile() {
+  public java.util.List<ReferenceModel> getProfile() {
     return this.profile;
   }
-  public void setMin( Float value) {
-    this.min = value;
+  public void setProfile( java.util.List<ReferenceModel> value) {
+    this.profile = value;
   }
   public Float getMin() {
     return this.min;
   }
-  public void setMax( String value) {
-    this.max = value;
+  public void setMin( Float value) {
+    this.min = value;
   }
   public String getMax() {
     return this.max;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setMax( String value) {
+    this.max = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("profile" + "[" + String.valueOf(this.profile) + "]\n"); 
-     builder.append("min" + "[" + String.valueOf(this.min) + "]\n"); 
-     builder.append("max" + "[" + String.valueOf(this.max) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[MessageDefinitionFocusModel]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("min" + "->" + this.min + "\n"); 
+     builder.append("max" + "->" + this.max + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[MessageDefinitionFocusModel]:" + "\n");
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("profile" + "->" + this.profile + "\n"); 
+     builder.append("min" + "->" + this.min + "\n"); 
+     builder.append("max" + "->" + this.max + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

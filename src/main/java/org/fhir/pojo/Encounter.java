@@ -177,6 +177,7 @@ public class Encounter  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -228,87 +229,70 @@ public class Encounter  {
 
   public Encounter(EncounterModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.statusHistory = EncounterStatusHistory.fromArray(o.getStatusHistory());
-
-      this.FHIRclass = Coding.fromJson(o.getFHIRclass());
-      this.classHistory = EncounterClassHistory.fromArray(o.getClassHistory());
-
-      this.type = CodeableConcept.fromArray(o.getType());
-      this.priority = CodeableConcept.fromJson(o.getPriority());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      this.episodeOfCare = Reference.fromArray(o.getEpisodeOfCare());
-
-      this.incomingReferral = Reference.fromArray(o.getIncomingReferral());
-
-      this.participant = EncounterParticipant.fromArray(o.getParticipant());
-
-      if (null != o.getAppointment()) {
-        this.appointment = new Reference(o.getAppointment());
-        this.appointment.setId(this.getId());
-      }
-
-      this.period = Period.fromJson(o.getPeriod());
-      this.length = Duration.fromJson(o.getLength());
-      this.reason = CodeableConcept.fromArray(o.getReason());
-      this.diagnosis = EncounterDiagnosis.fromArray(o.getDiagnosis());
-
-      this.account = Reference.fromArray(o.getAccount());
-
-      if (null != o.getHospitalization()) {
-        this.hospitalization = new EncounterHospitalization(o.getHospitalization());
-        this.hospitalization.setId(this.getId());
-      }
-
-      this.location = EncounterLocation.fromArray(o.getLocation());
-
-      if (null != o.getServiceProvider()) {
-        this.serviceProvider = new Reference(o.getServiceProvider());
-        this.serviceProvider.setId(this.getId());
-      }
-
-      if (null != o.getPartOf()) {
-        this.partOf = new Reference(o.getPartOf());
-        this.partOf.setId(this.getId());
-      }
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getStatusHistory() && !o.getStatusHistory().isEmpty()) {
+    	this.statusHistory = EncounterStatusHistoryHelper.fromArray2Array(o.getStatusHistory());
+    }
+    this.FHIRclass = CodingHelper.fromJson(o.getFHIRclass());
+    if (null != o.getClassHistory() && !o.getClassHistory().isEmpty()) {
+    	this.classHistory = EncounterClassHistoryHelper.fromArray2Array(o.getClassHistory());
+    }
+    this.priority = CodeableConceptHelper.fromJson(o.getPriority());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getEpisodeOfCare() && !o.getEpisodeOfCare().isEmpty()) {
+    	this.episodeOfCare = ReferenceHelper.fromArray2Array(o.getEpisodeOfCare());
+    }
+    if (null != o.getIncomingReferral() && !o.getIncomingReferral().isEmpty()) {
+    	this.incomingReferral = ReferenceHelper.fromArray2Array(o.getIncomingReferral());
+    }
+    if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
+    	this.participant = EncounterParticipantHelper.fromArray2Array(o.getParticipant());
+    }
+    if (null != o.getAppointment() && !o.getAppointment().isEmpty()) {
+      this.appointment = new Reference(o.getAppointment().get(0));
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+    this.length = DurationHelper.fromJson(o.getLength());
+    if (null != o.getDiagnosis() && !o.getDiagnosis().isEmpty()) {
+    	this.diagnosis = EncounterDiagnosisHelper.fromArray2Array(o.getDiagnosis());
+    }
+    if (null != o.getAccount() && !o.getAccount().isEmpty()) {
+    	this.account = ReferenceHelper.fromArray2Array(o.getAccount());
+    }
+    if (null != o.getHospitalization() && !o.getHospitalization().isEmpty()) {
+      this.hospitalization = new EncounterHospitalization(o.getHospitalization().get(0));
+    }
+    if (null != o.getLocation() && !o.getLocation().isEmpty()) {
+    	this.location = EncounterLocationHelper.fromArray2Array(o.getLocation());
+    }
+    if (null != o.getServiceProvider() && !o.getServiceProvider().isEmpty()) {
+      this.serviceProvider = new Reference(o.getServiceProvider().get(0));
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+      this.partOf = new Reference(o.getPartOf().get(0));
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -519,40 +503,41 @@ public class Encounter  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("statusHistory" + "[" + String.valueOf(this.statusHistory) + "]\n"); 
-     builder.append("FHIRclass" + "[" + String.valueOf(this.FHIRclass) + "]\n"); 
-     builder.append("classHistory" + "[" + String.valueOf(this.classHistory) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("priority" + "[" + String.valueOf(this.priority) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("episodeOfCare" + "[" + String.valueOf(this.episodeOfCare) + "]\n"); 
-     builder.append("incomingReferral" + "[" + String.valueOf(this.incomingReferral) + "]\n"); 
-     builder.append("participant" + "[" + String.valueOf(this.participant) + "]\n"); 
-     builder.append("appointment" + "[" + String.valueOf(this.appointment) + "]\n"); 
-     builder.append("period" + "[" + String.valueOf(this.period) + "]\n"); 
-     builder.append("length" + "[" + String.valueOf(this.length) + "]\n"); 
-     builder.append("reason" + "[" + String.valueOf(this.reason) + "]\n"); 
-     builder.append("diagnosis" + "[" + String.valueOf(this.diagnosis) + "]\n"); 
-     builder.append("account" + "[" + String.valueOf(this.account) + "]\n"); 
-     builder.append("hospitalization" + "[" + String.valueOf(this.hospitalization) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("serviceProvider" + "[" + String.valueOf(this.serviceProvider) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Encounter]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.statusHistory != null) builder.append("statusHistory" + "->" + this.statusHistory.toString() + "\n"); 
+     if(this.FHIRclass != null) builder.append("FHIRclass" + "->" + this.FHIRclass.toString() + "\n"); 
+     if(this.classHistory != null) builder.append("classHistory" + "->" + this.classHistory.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.priority != null) builder.append("priority" + "->" + this.priority.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.episodeOfCare != null) builder.append("episodeOfCare" + "->" + this.episodeOfCare.toString() + "\n"); 
+     if(this.incomingReferral != null) builder.append("incomingReferral" + "->" + this.incomingReferral.toString() + "\n"); 
+     if(this.participant != null) builder.append("participant" + "->" + this.participant.toString() + "\n"); 
+     if(this.appointment != null) builder.append("appointment" + "->" + this.appointment.toString() + "\n"); 
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
+     if(this.length != null) builder.append("length" + "->" + this.length.toString() + "\n"); 
+     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); 
+     if(this.diagnosis != null) builder.append("diagnosis" + "->" + this.diagnosis.toString() + "\n"); 
+     if(this.account != null) builder.append("account" + "->" + this.account.toString() + "\n"); 
+     if(this.hospitalization != null) builder.append("hospitalization" + "->" + this.hospitalization.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this.serviceProvider != null) builder.append("serviceProvider" + "->" + this.serviceProvider.toString() + "\n"); 
+     if(this.partOf != null) builder.append("partOf" + "->" + this.partOf.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -596,36 +581,4 @@ public class Encounter  {
   	}
   }
 
-  public static java.util.List<Encounter> fromArray(java.util.List<EncounterModel> list) {
-    return (java.util.List<Encounter>)list.stream()
-      .map(model -> new Encounter(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<EncounterModel> toModelArray(java.util.List<Encounter> list) {
-    return (java.util.List<EncounterModel>)list.stream()
-      .map(model -> new EncounterModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Encounter fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Encounter.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Encounter o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Encounter> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

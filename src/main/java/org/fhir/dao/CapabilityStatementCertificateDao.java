@@ -34,10 +34,5 @@ public interface CapabilityStatementCertificateDao {
   public List<CapabilityStatementCertificate> select(int maxResult);
 
   public List<CapabilityStatementCertificate> selectAll();
-
-  public CapabilityStatementCertificate create(CapabilityStatementCertificate e);
-
-  public CapabilityStatementCertificate update(CapabilityStatementCertificate e);
-
   public void delete(CapabilityStatementCertificate e);
 }

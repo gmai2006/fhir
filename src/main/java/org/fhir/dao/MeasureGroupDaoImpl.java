@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.MeasureGroupModel;
 import org.fhir.pojo.MeasureGroup;
+import org.fhir.pojo.MeasureGroupHelper;
 
 public class MeasureGroupDaoImpl implements MeasureGroupDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class MeasureGroupDaoImpl implements MeasureGroupDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureGroupModel a", MeasureGroupModel.class).setMaxResults(maxResult);
       List<MeasureGroupModel> models = query.getResultList();
-      return MeasureGroup.fromArray(models);
+      return MeasureGroupHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class MeasureGroupDaoImpl implements MeasureGroupDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from MeasureGroupModel a", MeasureGroupModel.class);
       List<MeasureGroupModel> models = query.getResultList();
-      return MeasureGroup.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public MeasureGroup create(MeasureGroup e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new MeasureGroupModel(e));
-      return e;
-  }
-
-  @Transactional
-  public MeasureGroup update(MeasureGroup e) {
-      final EntityManager em = entityManagerProvider.get();
-      MeasureGroupModel model = em.merge(new MeasureGroupModel(e));
-      return new MeasureGroup(model);
+      return MeasureGroupHelper.fromArray2Array(models);
   }
 
   @Override

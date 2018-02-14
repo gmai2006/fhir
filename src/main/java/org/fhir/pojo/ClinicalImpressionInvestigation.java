@@ -54,6 +54,7 @@ public class ClinicalImpressionInvestigation  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -75,15 +76,13 @@ public class ClinicalImpressionInvestigation  {
 
   public ClinicalImpressionInvestigation(ClinicalImpressionInvestigationModel o) {
     this.id = o.getId();
-      this.code = CodeableConcept.fromJson(o.getCode());
-      this.item = Reference.fromArray(o.getItem());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getItem() && !o.getItem().isEmpty()) {
+    	this.item = ReferenceHelper.fromArray2Array(o.getItem());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setCode( CodeableConcept value) {
@@ -126,46 +125,15 @@ public class ClinicalImpressionInvestigation  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("item" + "[" + String.valueOf(this.item) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ClinicalImpressionInvestigation]:" + "\n");
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ClinicalImpressionInvestigation> fromArray(java.util.List<ClinicalImpressionInvestigationModel> list) {
-    return (java.util.List<ClinicalImpressionInvestigation>)list.stream()
-      .map(model -> new ClinicalImpressionInvestigation(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ClinicalImpressionInvestigationModel> toModelArray(java.util.List<ClinicalImpressionInvestigation> list) {
-    return (java.util.List<ClinicalImpressionInvestigationModel>)list.stream()
-      .map(model -> new ClinicalImpressionInvestigationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ClinicalImpressionInvestigation fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ClinicalImpressionInvestigation.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ClinicalImpressionInvestigation o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ClinicalImpressionInvestigation> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

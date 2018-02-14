@@ -32,7 +32,5 @@ public interface DocumentManifestContentService {
 	public DocumentManifestContent find(String id);
   public List<DocumentManifestContent> select(int maxResult);
   public List<DocumentManifestContent> selectAll();
-  public DocumentManifestContent create(DocumentManifestContent bean);
-  public DocumentManifestContent update(DocumentManifestContent bean);
   public void delete(DocumentManifestContent bean);
 }

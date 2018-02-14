@@ -151,6 +151,7 @@ public class DeviceUseStatement  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -202,69 +203,46 @@ public class DeviceUseStatement  {
 
   public DeviceUseStatement(DeviceUseStatementModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      this.whenUsed = Period.fromJson(o.getWhenUsed());
-      this.timingTiming = Timing.fromJson(o.getTimingTiming());
-      this.timingPeriod = Period.fromJson(o.getTimingPeriod());
-      if (null != o.getTimingDateTime()) {
-        this.timingDateTime = new String(o.getTimingDateTime());
-      }
-
-      if (null != o.getRecordedOn()) {
-        this.recordedOn = new String(o.getRecordedOn());
-      }
-
-      if (null != o.getSource()) {
-        this.source = new Reference(o.getSource());
-        this.source.setId(this.getId());
-      }
-
-      if (null != o.getDevice()) {
-        this.device = new Reference(o.getDevice());
-        this.device.setId(this.getId());
-      }
-
-      this.indication = CodeableConcept.fromArray(o.getIndication());
-      this.bodySite = CodeableConcept.fromJson(o.getBodySite());
-      this.note = Annotation.fromArray(o.getNote());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    this.whenUsed = PeriodHelper.fromJson(o.getWhenUsed());
+    this.timingTiming = TimingHelper.fromJson(o.getTimingTiming());
+    this.timingPeriod = PeriodHelper.fromJson(o.getTimingPeriod());
+    if (null != o.getTimingDateTime()) {
+      this.timingDateTime = o.getTimingDateTime();
+    }
+    if (null != o.getRecordedOn()) {
+      this.recordedOn = o.getRecordedOn();
+    }
+    if (null != o.getSource() && !o.getSource().isEmpty()) {
+      this.source = new Reference(o.getSource().get(0));
+    }
+    if (null != o.getDevice() && !o.getDevice().isEmpty()) {
+      this.device = new Reference(o.getDevice().get(0));
+    }
+    this.bodySite = CodeableConceptHelper.fromJson(o.getBodySite());
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -439,34 +417,35 @@ public class DeviceUseStatement  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("whenUsed" + "[" + String.valueOf(this.whenUsed) + "]\n"); 
-     builder.append("timingTiming" + "[" + String.valueOf(this.timingTiming) + "]\n"); 
-     builder.append("timingPeriod" + "[" + String.valueOf(this.timingPeriod) + "]\n"); 
-     builder.append("timingDateTime" + "[" + String.valueOf(this.timingDateTime) + "]\n"); 
-     builder.append("_timingDateTime" + "[" + String.valueOf(this._timingDateTime) + "]\n"); 
-     builder.append("recordedOn" + "[" + String.valueOf(this.recordedOn) + "]\n"); 
-     builder.append("_recordedOn" + "[" + String.valueOf(this._recordedOn) + "]\n"); 
-     builder.append("source" + "[" + String.valueOf(this.source) + "]\n"); 
-     builder.append("device" + "[" + String.valueOf(this.device) + "]\n"); 
-     builder.append("indication" + "[" + String.valueOf(this.indication) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[DeviceUseStatement]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.whenUsed != null) builder.append("whenUsed" + "->" + this.whenUsed.toString() + "\n"); 
+     if(this.timingTiming != null) builder.append("timingTiming" + "->" + this.timingTiming.toString() + "\n"); 
+     if(this.timingPeriod != null) builder.append("timingPeriod" + "->" + this.timingPeriod.toString() + "\n"); 
+     if(this.timingDateTime != null) builder.append("timingDateTime" + "->" + this.timingDateTime.toString() + "\n"); 
+     if(this._timingDateTime != null) builder.append("_timingDateTime" + "->" + this._timingDateTime.toString() + "\n"); 
+     if(this.recordedOn != null) builder.append("recordedOn" + "->" + this.recordedOn.toString() + "\n"); 
+     if(this._recordedOn != null) builder.append("_recordedOn" + "->" + this._recordedOn.toString() + "\n"); 
+     if(this.source != null) builder.append("source" + "->" + this.source.toString() + "\n"); 
+     if(this.device != null) builder.append("device" + "->" + this.device.toString() + "\n"); 
+     if(this.indication != null) builder.append("indication" + "->" + this.indication.toString() + "\n"); 
+     if(this.bodySite != null) builder.append("bodySite" + "->" + this.bodySite.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -504,36 +483,4 @@ public class DeviceUseStatement  {
   	}
   }
 
-  public static java.util.List<DeviceUseStatement> fromArray(java.util.List<DeviceUseStatementModel> list) {
-    return (java.util.List<DeviceUseStatement>)list.stream()
-      .map(model -> new DeviceUseStatement(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DeviceUseStatementModel> toModelArray(java.util.List<DeviceUseStatement> list) {
-    return (java.util.List<DeviceUseStatementModel>)list.stream()
-      .map(model -> new DeviceUseStatementModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DeviceUseStatement fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DeviceUseStatement.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DeviceUseStatement o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DeviceUseStatement> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

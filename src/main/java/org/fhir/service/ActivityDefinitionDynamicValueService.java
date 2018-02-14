@@ -32,7 +32,5 @@ public interface ActivityDefinitionDynamicValueService {
 	public ActivityDefinitionDynamicValue find(String id);
   public List<ActivityDefinitionDynamicValue> select(int maxResult);
   public List<ActivityDefinitionDynamicValue> selectAll();
-  public ActivityDefinitionDynamicValue create(ActivityDefinitionDynamicValue bean);
-  public ActivityDefinitionDynamicValue update(ActivityDefinitionDynamicValue bean);
   public void delete(ActivityDefinitionDynamicValue bean);
 }

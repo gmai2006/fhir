@@ -32,7 +32,5 @@ public interface ProcedurePerformerService {
 	public ProcedurePerformer find(String id);
   public List<ProcedurePerformer> select(int maxResult);
   public List<ProcedurePerformer> selectAll();
-  public ProcedurePerformer create(ProcedurePerformer bean);
-  public ProcedurePerformer update(ProcedurePerformer bean);
   public void delete(ProcedurePerformer bean);
 }

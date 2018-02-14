@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A slot of time on a schedule that may be available for booking appointments."
 */
 @Entity
 @Table(name="slot")
-public class SlotModel  {
+public class SlotModel  implements Serializable {
+	private static final long serialVersionUID = 151857669688224072L;
   /**
   * Description: "This is a Slot resource"
   */
@@ -47,7 +48,7 @@ public class SlotModel  {
 
   /**
   * Description: "External Ids for this item."
-  * Actual type: Array of Identifier-> List<Identifier>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -56,7 +57,7 @@ public class SlotModel  {
 
   /**
   * Description: "A broad categorisation of the service that is to be performed during this appointment."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -65,7 +66,7 @@ public class SlotModel  {
 
   /**
   * Description: "The type of appointments that can be booked into this slot (ideally this would be an identifiable service - which is at a location, rather than the location itself). If provided then this overrides the value provided on the availability resource."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -74,7 +75,7 @@ public class SlotModel  {
 
   /**
   * Description: "The specialty of a practitioner that would be required to perform the service requested in this appointment."
-  * Actual type: Array of CodeableConcept-> List<CodeableConcept>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -83,7 +84,7 @@ public class SlotModel  {
 
   /**
   * Description: "The style of appointment or patient that may be booked in the slot (not service type)."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -97,9 +98,9 @@ public class SlotModel  {
   @Column(name="\"schedule_id\"")
   private String schedule_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`schedule_id`", insertable=false, updatable=false)
-  private ReferenceModel schedule;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="schedule_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> schedule;
 
   /**
   * Description: "busy | free | busy-unavailable | busy-tentative | entered-in-error."
@@ -144,14 +145,14 @@ public class SlotModel  {
   @Column(name="\"text_id\"")
   private String text_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`text_id`", insertable=false, updatable=false)
-  private NarrativeModel text;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="text_id", insertable=false, updatable=false)
+  private java.util.List<NarrativeModel> text;
 
   /**
   * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
    derived from DomainResource
-  * Actual type: Array of ResourceList-> List<ResourceList>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -161,7 +162,7 @@ public class SlotModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -171,7 +172,7 @@ public class SlotModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from DomainResource
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -183,6 +184,7 @@ public class SlotModel  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   @javax.persistence.Id
   @Column(name="\"id\"")
@@ -197,9 +199,9 @@ public class SlotModel  {
   @Column(name="\"meta_id\"")
   private String meta_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`meta_id`", insertable=false, updatable=false)
-  private MetaModel meta;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="meta_id", insertable=false, updatable=false)
+  private java.util.List<MetaModel> meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
@@ -220,206 +222,203 @@ public class SlotModel  {
   @Column(name="\"language\"")
   private String language;
 
-
   public SlotModel() {
   }
 
   public SlotModel(Slot o) {
-    this.id = o.getId();
-      this.resourceType = o.getResourceType();
-
-      this.identifier = Identifier.toJson(o.getIdentifier());
-      this.serviceCategory = CodeableConcept.toJson(o.getServiceCategory());
-      this.serviceType = CodeableConcept.toJson(o.getServiceType());
-      this.specialty = CodeableConcept.toJson(o.getSpecialty());
-      this.appointmentType = CodeableConcept.toJson(o.getAppointmentType());
-      if (null != o.getSchedule()) {
-      	this.schedule_id = "schedule" + this.getId();
-        this.schedule = new ReferenceModel(o.getSchedule());
-        this.schedule.setId(this.schedule_id);
-        this.schedule.parent_id = this.schedule.getId();
-      }
-
-      this.status = o.getStatus();
-
-      this.start = o.getStart();
-
-      this.end = o.getEnd();
-
-      this.overbooked = o.getOverbooked();
-
-      this.comment = o.getComment();
-
-      if (null != o.getText()) {
-      	this.text_id = "text" + this.getId();
-        this.text = new NarrativeModel(o.getText());
-        this.text.setId(this.text_id);
-        this.text.parent_id = this.text.getId();
-      }
-
-      this.contained = ResourceList.toJson(o.getContained());
-      this.extension = Extension.toJson(o.getExtension());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      if (null != o.getMeta()) {
-      	this.meta_id = "meta" + this.getId();
-        this.meta = new MetaModel(o.getMeta());
-        this.meta.setId(this.meta_id);
-        this.meta.parent_id = this.meta.getId();
-      }
-
-      this.implicitRules = o.getImplicitRules();
-
-      this.language = o.getLanguage();
-
+  	this.id = o.getId();
+    this.resourceType = o.getResourceType();
+    this.serviceCategory = CodeableConceptHelper.toJson(o.getServiceCategory());
+    this.appointmentType = CodeableConceptHelper.toJson(o.getAppointmentType());
+    if (null != o.getSchedule() ) {
+    	this.schedule_id = "schedule" + this.id;
+    	this.schedule = ReferenceHelper.toModel(o.getSchedule(), this.schedule_id);
+    }
+    this.status = o.getStatus();
+    this.start = o.getStart();
+    this.end = o.getEnd();
+    this.overbooked = o.getOverbooked();
+    this.comment = o.getComment();
+    if (null != o.getText() ) {
+    	this.text_id = "text" + this.id;
+    	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getMeta() ) {
+    	this.meta_id = "meta" + this.id;
+    	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
+    }
+    this.implicitRules = o.getImplicitRules();
+    this.language = o.getLanguage();
   }
 
-  public void setResourceType( String value) {
-    this.resourceType = value;
-  }
   public String getResourceType() {
     return this.resourceType;
   }
-  public void setIdentifier( String value) {
-    this.identifier = value;
+  public void setResourceType( String value) {
+    this.resourceType = value;
   }
   public String getIdentifier() {
     return this.identifier;
   }
-  public void setServiceCategory( String value) {
-    this.serviceCategory = value;
+  public void setIdentifier( String value) {
+    this.identifier = value;
   }
   public String getServiceCategory() {
     return this.serviceCategory;
   }
-  public void setServiceType( String value) {
-    this.serviceType = value;
+  public void setServiceCategory( String value) {
+    this.serviceCategory = value;
   }
   public String getServiceType() {
     return this.serviceType;
   }
-  public void setSpecialty( String value) {
-    this.specialty = value;
+  public void setServiceType( String value) {
+    this.serviceType = value;
   }
   public String getSpecialty() {
     return this.specialty;
   }
-  public void setAppointmentType( String value) {
-    this.appointmentType = value;
+  public void setSpecialty( String value) {
+    this.specialty = value;
   }
   public String getAppointmentType() {
     return this.appointmentType;
   }
-  public void setSchedule( ReferenceModel value) {
-    this.schedule = value;
+  public void setAppointmentType( String value) {
+    this.appointmentType = value;
   }
-  public ReferenceModel getSchedule() {
+  public java.util.List<ReferenceModel> getSchedule() {
     return this.schedule;
   }
-  public void setStatus( String value) {
-    this.status = value;
+  public void setSchedule( java.util.List<ReferenceModel> value) {
+    this.schedule = value;
   }
   public String getStatus() {
     return this.status;
   }
-  public void setStart( String value) {
-    this.start = value;
+  public void setStatus( String value) {
+    this.status = value;
   }
   public String getStart() {
     return this.start;
   }
-  public void setEnd( String value) {
-    this.end = value;
+  public void setStart( String value) {
+    this.start = value;
   }
   public String getEnd() {
     return this.end;
   }
-  public void setOverbooked( Boolean value) {
-    this.overbooked = value;
+  public void setEnd( String value) {
+    this.end = value;
   }
   public Boolean getOverbooked() {
     return this.overbooked;
   }
-  public void setComment( String value) {
-    this.comment = value;
+  public void setOverbooked( Boolean value) {
+    this.overbooked = value;
   }
   public String getComment() {
     return this.comment;
   }
-  public void setText( NarrativeModel value) {
-    this.text = value;
+  public void setComment( String value) {
+    this.comment = value;
   }
-  public NarrativeModel getText() {
+  public java.util.List<NarrativeModel> getText() {
     return this.text;
   }
-  public void setContained( String value) {
-    this.contained = value;
+  public void setText( java.util.List<NarrativeModel> value) {
+    this.text = value;
   }
   public String getContained() {
     return this.contained;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setContained( String value) {
+    this.contained = value;
   }
   public String getExtension() {
     return this.extension;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setExtension( String value) {
+    this.extension = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setMeta( MetaModel value) {
-    this.meta = value;
+  public void setId( String value) {
+    this.id = value;
   }
-  public MetaModel getMeta() {
+  public java.util.List<MetaModel> getMeta() {
     return this.meta;
   }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
+  public void setMeta( java.util.List<MetaModel> value) {
+    this.meta = value;
   }
   public String getImplicitRules() {
     return this.implicitRules;
   }
-  public void setLanguage( String value) {
-    this.language = value;
+  public void setImplicitRules( String value) {
+    this.implicitRules = value;
   }
   public String getLanguage() {
     return this.language;
   }
-
+  public void setLanguage( String value) {
+    this.language = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("serviceCategory" + "[" + String.valueOf(this.serviceCategory) + "]\n"); 
-     builder.append("serviceType" + "[" + String.valueOf(this.serviceType) + "]\n"); 
-     builder.append("specialty" + "[" + String.valueOf(this.specialty) + "]\n"); 
-     builder.append("appointmentType" + "[" + String.valueOf(this.appointmentType) + "]\n"); 
-     builder.append("schedule" + "[" + String.valueOf(this.schedule) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("start" + "[" + String.valueOf(this.start) + "]\n"); 
-     builder.append("end" + "[" + String.valueOf(this.end) + "]\n"); 
-     builder.append("overbooked" + "[" + String.valueOf(this.overbooked) + "]\n"); 
-     builder.append("comment" + "[" + String.valueOf(this.comment) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); ;
+    builder.append("[SlotModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("serviceCategory" + "->" + this.serviceCategory + "\n"); 
+     builder.append("serviceType" + "->" + this.serviceType + "\n"); 
+     builder.append("specialty" + "->" + this.specialty + "\n"); 
+     builder.append("appointmentType" + "->" + this.appointmentType + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("start" + "->" + this.start + "\n"); 
+     builder.append("end" + "->" + this.end + "\n"); 
+     builder.append("overbooked" + "->" + this.overbooked + "\n"); 
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[SlotModel]:" + "\n");
+     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
+     builder.append("identifier" + "->" + this.identifier + "\n"); 
+     builder.append("serviceCategory" + "->" + this.serviceCategory + "\n"); 
+     builder.append("serviceType" + "->" + this.serviceType + "\n"); 
+     builder.append("specialty" + "->" + this.specialty + "\n"); 
+     builder.append("appointmentType" + "->" + this.appointmentType + "\n"); 
+     builder.append("schedule" + "->" + this.schedule + "\n"); 
+     builder.append("status" + "->" + this.status + "\n"); 
+     builder.append("start" + "->" + this.start + "\n"); 
+     builder.append("end" + "->" + this.end + "\n"); 
+     builder.append("overbooked" + "->" + this.overbooked + "\n"); 
+     builder.append("comment" + "->" + this.comment + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("contained" + "->" + this.contained + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("meta" + "->" + this.meta + "\n"); 
+     builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

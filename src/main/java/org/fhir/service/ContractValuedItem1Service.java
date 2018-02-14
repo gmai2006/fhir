@@ -32,7 +32,5 @@ public interface ContractValuedItem1Service {
 	public ContractValuedItem1 find(String id);
   public List<ContractValuedItem1> select(int maxResult);
   public List<ContractValuedItem1> selectAll();
-  public ContractValuedItem1 create(ContractValuedItem1 bean);
-  public ContractValuedItem1 update(ContractValuedItem1 bean);
   public void delete(ContractValuedItem1 bean);
 }

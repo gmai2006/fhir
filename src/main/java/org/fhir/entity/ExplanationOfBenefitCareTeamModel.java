@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitcareteam")
-public class ExplanationOfBenefitCareTeamModel  {
+public class ExplanationOfBenefitCareTeamModel  implements Serializable {
+	private static final long serialVersionUID = 151857669708659243L;
   /**
   * Description: "Sequence of careteam which serves to order and provide a link."
   */
@@ -52,9 +53,9 @@ public class ExplanationOfBenefitCareTeamModel  {
   @Column(name="\"provider_id\"")
   private String provider_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`provider_id`", insertable=false, updatable=false)
-  private ReferenceModel provider;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="provider_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> provider;
 
   /**
   * Description: "The practitioner who is billing and responsible for the claimed services rendered to the patient."
@@ -65,7 +66,7 @@ public class ExplanationOfBenefitCareTeamModel  {
 
   /**
   * Description: "The lead, assisting or supervising practitioner and their discipline if a multidisiplinary team."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -74,7 +75,7 @@ public class ExplanationOfBenefitCareTeamModel  {
 
   /**
   * Description: "The qualification which is applicable for this service."
-  * Actual type: CodeableConcept
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -84,7 +85,7 @@ public class ExplanationOfBenefitCareTeamModel  {
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -96,6 +97,7 @@ public class ExplanationOfBenefitCareTeamModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -104,102 +106,119 @@ public class ExplanationOfBenefitCareTeamModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public ExplanationOfBenefitCareTeamModel() {
   }
 
-  public ExplanationOfBenefitCareTeamModel(ExplanationOfBenefitCareTeam o) {
-    this.id = o.getId();
-      this.sequence = o.getSequence();
-
-      if (null != o.getProvider()) {
-      	this.provider_id = "provider" + this.getId();
-        this.provider = new ReferenceModel(o.getProvider());
-        this.provider.setId(this.provider_id);
-        this.provider.parent_id = this.provider.getId();
-      }
-
-      this.responsible = o.getResponsible();
-
-      this.role = CodeableConcept.toJson(o.getRole());
-      this.qualification = CodeableConcept.toJson(o.getQualification());
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public ExplanationOfBenefitCareTeamModel(ExplanationOfBenefitCareTeam o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.sequence = o.getSequence();
+    if (null != o.getProvider() ) {
+    	this.provider_id = "provider" + this.parent_id;
+    	this.provider = ReferenceHelper.toModel(o.getProvider(), this.provider_id);
+    }
+    this.responsible = o.getResponsible();
+    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.qualification = CodeableConceptHelper.toJson(o.getQualification());
   }
 
-  public void setSequence( Float value) {
-    this.sequence = value;
-  }
   public Float getSequence() {
     return this.sequence;
   }
-  public void setProvider( ReferenceModel value) {
-    this.provider = value;
+  public void setSequence( Float value) {
+    this.sequence = value;
   }
-  public ReferenceModel getProvider() {
+  public java.util.List<ReferenceModel> getProvider() {
     return this.provider;
   }
-  public void setResponsible( Boolean value) {
-    this.responsible = value;
+  public void setProvider( java.util.List<ReferenceModel> value) {
+    this.provider = value;
   }
   public Boolean getResponsible() {
     return this.responsible;
   }
-  public void setRole( String value) {
-    this.role = value;
+  public void setResponsible( Boolean value) {
+    this.responsible = value;
   }
   public String getRole() {
     return this.role;
   }
-  public void setQualification( String value) {
-    this.qualification = value;
+  public void setRole( String value) {
+    this.role = value;
   }
   public String getQualification() {
     return this.qualification;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setQualification( String value) {
+    this.qualification = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("sequence" + "[" + String.valueOf(this.sequence) + "]\n"); 
-     builder.append("provider" + "[" + String.valueOf(this.provider) + "]\n"); 
-     builder.append("responsible" + "[" + String.valueOf(this.responsible) + "]\n"); 
-     builder.append("role" + "[" + String.valueOf(this.role) + "]\n"); 
-     builder.append("qualification" + "[" + String.valueOf(this.qualification) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ExplanationOfBenefitCareTeamModel]:" + "\n");
+     builder.append("sequence" + "->" + this.sequence + "\n"); 
+     builder.append("responsible" + "->" + this.responsible + "\n"); 
+     builder.append("role" + "->" + this.role + "\n"); 
+     builder.append("qualification" + "->" + this.qualification + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[ExplanationOfBenefitCareTeamModel]:" + "\n");
+     builder.append("sequence" + "->" + this.sequence + "\n"); 
+     builder.append("provider" + "->" + this.provider + "\n"); 
+     builder.append("responsible" + "->" + this.responsible + "\n"); 
+     builder.append("role" + "->" + this.role + "\n"); 
+     builder.append("qualification" + "->" + this.qualification + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

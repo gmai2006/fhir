@@ -32,7 +32,5 @@ public interface EncounterDiagnosisService {
 	public EncounterDiagnosis find(String id);
   public List<EncounterDiagnosis> select(int maxResult);
   public List<EncounterDiagnosis> selectAll();
-  public EncounterDiagnosis create(EncounterDiagnosis bean);
-  public EncounterDiagnosis update(EncounterDiagnosis bean);
   public void delete(EncounterDiagnosis bean);
 }

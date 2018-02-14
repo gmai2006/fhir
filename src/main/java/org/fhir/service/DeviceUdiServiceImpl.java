@@ -70,29 +70,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
       return results;
   }
 
-  @Override
-  @Transactional
-  public DeviceUdi create(DeviceUdi bean) {
-  	requireNonNull(bean);
-    logger.info("create(DeviceUdi={}) - entered bean ");
-
-    final DeviceUdi result = dao.create(bean);
-
-    logger.info("create(DeviceUdi) - exited - return value={} result ");
-    return result;
-  }
-
-  @Override
-  @Transactional
-  public DeviceUdi update(DeviceUdi bean) {
-  	requireNonNull(bean);
-    logger.info("update(DeviceUdi={}) - entered bean ");
-
-    final DeviceUdi result = dao.update(bean);
-
-    logger.info("update(DeviceUdi) - exited - return value={} result ");
-    return result;
-  }
 
   @Override
   @Transactional

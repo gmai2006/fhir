@@ -114,6 +114,7 @@ public class ValueSetContains  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -135,40 +136,33 @@ public class ValueSetContains  {
 
   public ValueSetContains(ValueSetContainsModel o) {
     this.id = o.getId();
-      if (null != o.getSystem()) {
-        this.system = new String(o.getSystem());
-      }
-
-      if (null != o.getFHIRabstract()) {
-        this.FHIRabstract = new Boolean(o.getFHIRabstract());
-      }
-
-      if (null != o.getInactive()) {
-        this.inactive = new Boolean(o.getInactive());
-      }
-
-      if (null != o.getVersion()) {
-        this.version = new String(o.getVersion());
-      }
-
-      if (null != o.getCode()) {
-        this.code = new String(o.getCode());
-      }
-
-      if (null != o.getDisplay()) {
-        this.display = new String(o.getDisplay());
-      }
-
-      this.designation = ValueSetDesignation.fromArray(o.getDesignation());
-
-      this.contains = ValueSetContains.fromArray(o.getContains());
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getSystem()) {
+      this.system = o.getSystem();
+    }
+    if (null != o.getFHIRabstract()) {
+      this.FHIRabstract = o.getFHIRabstract();
+    }
+    if (null != o.getInactive()) {
+      this.inactive = o.getInactive();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getDisplay()) {
+      this.display = o.getDisplay();
+    }
+    if (null != o.getDesignation() && !o.getDesignation().isEmpty()) {
+    	this.designation = ValueSetDesignationHelper.fromArray2Array(o.getDesignation());
+    }
+    if (null != o.getContains() && !o.getContains().isEmpty()) {
+    	this.contains = ValueSetContainsHelper.fromArray2Array(o.getContains());
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setSystem( String value) {
@@ -283,58 +277,27 @@ public class ValueSetContains  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("system" + "[" + String.valueOf(this.system) + "]\n"); 
-     builder.append("_system" + "[" + String.valueOf(this._system) + "]\n"); 
-     builder.append("FHIRabstract" + "[" + String.valueOf(this.FHIRabstract) + "]\n"); 
-     builder.append("_abstract" + "[" + String.valueOf(this._abstract) + "]\n"); 
-     builder.append("inactive" + "[" + String.valueOf(this.inactive) + "]\n"); 
-     builder.append("_inactive" + "[" + String.valueOf(this._inactive) + "]\n"); 
-     builder.append("version" + "[" + String.valueOf(this.version) + "]\n"); 
-     builder.append("_version" + "[" + String.valueOf(this._version) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("_code" + "[" + String.valueOf(this._code) + "]\n"); 
-     builder.append("display" + "[" + String.valueOf(this.display) + "]\n"); 
-     builder.append("_display" + "[" + String.valueOf(this._display) + "]\n"); 
-     builder.append("designation" + "[" + String.valueOf(this.designation) + "]\n"); 
-     builder.append("contains" + "[" + String.valueOf(this.contains) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[ValueSetContains]:" + "\n");
+     if(this.system != null) builder.append("system" + "->" + this.system.toString() + "\n"); 
+     if(this._system != null) builder.append("_system" + "->" + this._system.toString() + "\n"); 
+     if(this.FHIRabstract != null) builder.append("FHIRabstract" + "->" + this.FHIRabstract.toString() + "\n"); 
+     if(this._abstract != null) builder.append("_abstract" + "->" + this._abstract.toString() + "\n"); 
+     if(this.inactive != null) builder.append("inactive" + "->" + this.inactive.toString() + "\n"); 
+     if(this._inactive != null) builder.append("_inactive" + "->" + this._inactive.toString() + "\n"); 
+     if(this.version != null) builder.append("version" + "->" + this.version.toString() + "\n"); 
+     if(this._version != null) builder.append("_version" + "->" + this._version.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
+     if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
+     if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
+     if(this.designation != null) builder.append("designation" + "->" + this.designation.toString() + "\n"); 
+     if(this.contains != null) builder.append("contains" + "->" + this.contains.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<ValueSetContains> fromArray(java.util.List<ValueSetContainsModel> list) {
-    return (java.util.List<ValueSetContains>)list.stream()
-      .map(model -> new ValueSetContains(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ValueSetContainsModel> toModelArray(java.util.List<ValueSetContains> list) {
-    return (java.util.List<ValueSetContainsModel>)list.stream()
-      .map(model -> new ValueSetContainsModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static ValueSetContains fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, ValueSetContains.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ValueSetContains o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ValueSetContains> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

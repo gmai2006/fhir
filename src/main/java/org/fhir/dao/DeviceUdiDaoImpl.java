@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DeviceUdiModel;
 import org.fhir.pojo.DeviceUdi;
+import org.fhir.pojo.DeviceUdiHelper;
 
 public class DeviceUdiDaoImpl implements DeviceUdiDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DeviceUdiDaoImpl implements DeviceUdiDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceUdiModel a", DeviceUdiModel.class).setMaxResults(maxResult);
       List<DeviceUdiModel> models = query.getResultList();
-      return DeviceUdi.fromArray(models);
+      return DeviceUdiHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DeviceUdiDaoImpl implements DeviceUdiDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceUdiModel a", DeviceUdiModel.class);
       List<DeviceUdiModel> models = query.getResultList();
-      return DeviceUdi.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DeviceUdi create(DeviceUdi e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DeviceUdiModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DeviceUdi update(DeviceUdi e) {
-      final EntityManager em = entityManagerProvider.get();
-      DeviceUdiModel model = em.merge(new DeviceUdiModel(e));
-      return new DeviceUdi(model);
+      return DeviceUdiHelper.fromArray2Array(models);
   }
 
   @Override

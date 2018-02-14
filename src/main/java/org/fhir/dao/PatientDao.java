@@ -34,10 +34,8 @@ public interface PatientDao {
   public List<Patient> select(int maxResult);
 
   public List<Patient> selectAll();
-
   public Patient create(Patient e);
 
   public Patient update(Patient e);
-
   public void delete(Patient e);
 }

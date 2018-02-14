@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClaimResponseSubDetailModel;
 import org.fhir.pojo.ClaimResponseSubDetail;
+import org.fhir.pojo.ClaimResponseSubDetailHelper;
 
 public class ClaimResponseSubDetailDaoImpl implements ClaimResponseSubDetailDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClaimResponseSubDetailDaoImpl implements ClaimResponseSubDetailDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimResponseSubDetailModel a", ClaimResponseSubDetailModel.class).setMaxResults(maxResult);
       List<ClaimResponseSubDetailModel> models = query.getResultList();
-      return ClaimResponseSubDetail.fromArray(models);
+      return ClaimResponseSubDetailHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class ClaimResponseSubDetailDaoImpl implements ClaimResponseSubDetailDao 
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClaimResponseSubDetailModel a", ClaimResponseSubDetailModel.class);
       List<ClaimResponseSubDetailModel> models = query.getResultList();
-      return ClaimResponseSubDetail.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public ClaimResponseSubDetail create(ClaimResponseSubDetail e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new ClaimResponseSubDetailModel(e));
-      return e;
-  }
-
-  @Transactional
-  public ClaimResponseSubDetail update(ClaimResponseSubDetail e) {
-      final EntityManager em = entityManagerProvider.get();
-      ClaimResponseSubDetailModel model = em.merge(new ClaimResponseSubDetailModel(e));
-      return new ClaimResponseSubDetail(model);
+      return ClaimResponseSubDetailHelper.fromArray2Array(models);
   }
 
   @Override

@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.BundleSearchModel;
 import org.fhir.pojo.BundleSearch;
+import org.fhir.pojo.BundleSearchHelper;
 
 public class BundleSearchDaoImpl implements BundleSearchDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class BundleSearchDaoImpl implements BundleSearchDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BundleSearchModel a", BundleSearchModel.class).setMaxResults(maxResult);
       List<BundleSearchModel> models = query.getResultList();
-      return BundleSearch.fromArray(models);
+      return BundleSearchHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class BundleSearchDaoImpl implements BundleSearchDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BundleSearchModel a", BundleSearchModel.class);
       List<BundleSearchModel> models = query.getResultList();
-      return BundleSearch.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public BundleSearch create(BundleSearch e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new BundleSearchModel(e));
-      return e;
-  }
-
-  @Transactional
-  public BundleSearch update(BundleSearch e) {
-      final EntityManager em = entityManagerProvider.get();
-      BundleSearchModel model = em.merge(new BundleSearchModel(e));
-      return new BundleSearch(model);
+      return BundleSearchHelper.fromArray2Array(models);
   }
 
   @Override

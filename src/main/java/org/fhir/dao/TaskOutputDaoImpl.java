@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.TaskOutputModel;
 import org.fhir.pojo.TaskOutput;
+import org.fhir.pojo.TaskOutputHelper;
 
 public class TaskOutputDaoImpl implements TaskOutputDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class TaskOutputDaoImpl implements TaskOutputDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TaskOutputModel a", TaskOutputModel.class).setMaxResults(maxResult);
       List<TaskOutputModel> models = query.getResultList();
-      return TaskOutput.fromArray(models);
+      return TaskOutputHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class TaskOutputDaoImpl implements TaskOutputDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from TaskOutputModel a", TaskOutputModel.class);
       List<TaskOutputModel> models = query.getResultList();
-      return TaskOutput.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public TaskOutput create(TaskOutput e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new TaskOutputModel(e));
-      return e;
-  }
-
-  @Transactional
-  public TaskOutput update(TaskOutput e) {
-      final EntityManager em = entityManagerProvider.get();
-      TaskOutputModel model = em.merge(new TaskOutputModel(e));
-      return new TaskOutput(model);
+      return TaskOutputHelper.fromArray2Array(models);
   }
 
   @Override

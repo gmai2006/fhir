@@ -32,7 +32,5 @@ public interface CompositionEventService {
 	public CompositionEvent find(String id);
   public List<CompositionEvent> select(int maxResult);
   public List<CompositionEvent> selectAll();
-  public CompositionEvent create(CompositionEvent bean);
-  public CompositionEvent update(CompositionEvent bean);
   public void delete(CompositionEvent bean);
 }

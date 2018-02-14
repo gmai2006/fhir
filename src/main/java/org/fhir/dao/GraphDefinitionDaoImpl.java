@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.GraphDefinitionModel;
 import org.fhir.pojo.GraphDefinition;
+import org.fhir.pojo.GraphDefinitionHelper;
 
 public class GraphDefinitionDaoImpl implements GraphDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class GraphDefinitionDaoImpl implements GraphDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GraphDefinitionModel a", GraphDefinitionModel.class).setMaxResults(maxResult);
       List<GraphDefinitionModel> models = query.getResultList();
-      return GraphDefinition.fromArray(models);
+      return GraphDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class GraphDefinitionDaoImpl implements GraphDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GraphDefinitionModel a", GraphDefinitionModel.class);
       List<GraphDefinitionModel> models = query.getResultList();
-      return GraphDefinition.fromArray(models);
+      return GraphDefinitionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class GraphDefinitionDaoImpl implements GraphDefinitionDao {
       GraphDefinitionModel model = em.merge(new GraphDefinitionModel(e));
       return new GraphDefinition(model);
   }
-
   @Override
   @Transactional
   public void delete(GraphDefinition e) {

@@ -34,10 +34,5 @@ public interface PractitionerRoleNotAvailableDao {
   public List<PractitionerRoleNotAvailable> select(int maxResult);
 
   public List<PractitionerRoleNotAvailable> selectAll();
-
-  public PractitionerRoleNotAvailable create(PractitionerRoleNotAvailable e);
-
-  public PractitionerRoleNotAvailable update(PractitionerRoleNotAvailable e);
-
   public void delete(PractitionerRoleNotAvailable e);
 }

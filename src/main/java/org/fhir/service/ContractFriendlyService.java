@@ -32,7 +32,5 @@ public interface ContractFriendlyService {
 	public ContractFriendly find(String id);
   public List<ContractFriendly> select(int maxResult);
   public List<ContractFriendly> selectAll();
-  public ContractFriendly create(ContractFriendly bean);
-  public ContractFriendly update(ContractFriendly bean);
   public void delete(ContractFriendly bean);
 }

@@ -59,6 +59,7 @@ public class PersonLink  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,21 +81,15 @@ public class PersonLink  {
 
   public PersonLink(PersonLinkModel o) {
     this.id = o.getId();
-      if (null != o.getTarget()) {
-        this.target = new Reference(o.getTarget());
-        this.target.setId(this.getId());
-      }
-
-      if (null != o.getAssurance()) {
-        this.assurance = new String(o.getAssurance());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getTarget() && !o.getTarget().isEmpty()) {
+      this.target = new Reference(o.getTarget().get(0));
+    }
+    if (null != o.getAssurance()) {
+      this.assurance = o.getAssurance();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setTarget( Reference value) {
@@ -143,13 +138,14 @@ public class PersonLink  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("target" + "[" + String.valueOf(this.target) + "]\n"); 
-     builder.append("assurance" + "[" + String.valueOf(this.assurance) + "]\n"); 
-     builder.append("_assurance" + "[" + String.valueOf(this._assurance) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PersonLink]:" + "\n");
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
+     if(this.assurance != null) builder.append("assurance" + "->" + this.assurance.toString() + "\n"); 
+     if(this._assurance != null) builder.append("_assurance" + "->" + this._assurance.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -171,36 +167,4 @@ public class PersonLink  {
   	}
   }
 
-  public static java.util.List<PersonLink> fromArray(java.util.List<PersonLinkModel> list) {
-    return (java.util.List<PersonLink>)list.stream()
-      .map(model -> new PersonLink(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PersonLinkModel> toModelArray(java.util.List<PersonLink> list) {
-    return (java.util.List<PersonLinkModel>)list.stream()
-      .map(model -> new PersonLinkModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PersonLink fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PersonLink.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PersonLink o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PersonLink> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

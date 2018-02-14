@@ -163,6 +163,7 @@ public class CoverageGrouping  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -184,60 +185,45 @@ public class CoverageGrouping  {
 
   public CoverageGrouping(CoverageGroupingModel o) {
     this.id = o.getId();
-      if (null != o.getGroup()) {
-        this.group = new String(o.getGroup());
-      }
-
-      if (null != o.getGroupDisplay()) {
-        this.groupDisplay = new String(o.getGroupDisplay());
-      }
-
-      if (null != o.getSubGroup()) {
-        this.subGroup = new String(o.getSubGroup());
-      }
-
-      if (null != o.getSubGroupDisplay()) {
-        this.subGroupDisplay = new String(o.getSubGroupDisplay());
-      }
-
-      if (null != o.getPlan()) {
-        this.plan = new String(o.getPlan());
-      }
-
-      if (null != o.getPlanDisplay()) {
-        this.planDisplay = new String(o.getPlanDisplay());
-      }
-
-      if (null != o.getSubPlan()) {
-        this.subPlan = new String(o.getSubPlan());
-      }
-
-      if (null != o.getSubPlanDisplay()) {
-        this.subPlanDisplay = new String(o.getSubPlanDisplay());
-      }
-
-      if (null != o.getFHIRclass()) {
-        this.FHIRclass = new String(o.getFHIRclass());
-      }
-
-      if (null != o.getClassDisplay()) {
-        this.classDisplay = new String(o.getClassDisplay());
-      }
-
-      if (null != o.getSubClass()) {
-        this.subClass = new String(o.getSubClass());
-      }
-
-      if (null != o.getSubClassDisplay()) {
-        this.subClassDisplay = new String(o.getSubClassDisplay());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getGroup()) {
+      this.group = o.getGroup();
+    }
+    if (null != o.getGroupDisplay()) {
+      this.groupDisplay = o.getGroupDisplay();
+    }
+    if (null != o.getSubGroup()) {
+      this.subGroup = o.getSubGroup();
+    }
+    if (null != o.getSubGroupDisplay()) {
+      this.subGroupDisplay = o.getSubGroupDisplay();
+    }
+    if (null != o.getPlan()) {
+      this.plan = o.getPlan();
+    }
+    if (null != o.getPlanDisplay()) {
+      this.planDisplay = o.getPlanDisplay();
+    }
+    if (null != o.getSubPlan()) {
+      this.subPlan = o.getSubPlan();
+    }
+    if (null != o.getSubPlanDisplay()) {
+      this.subPlanDisplay = o.getSubPlanDisplay();
+    }
+    if (null != o.getFHIRclass()) {
+      this.FHIRclass = o.getFHIRclass();
+    }
+    if (null != o.getClassDisplay()) {
+      this.classDisplay = o.getClassDisplay();
+    }
+    if (null != o.getSubClass()) {
+      this.subClass = o.getSubClass();
+    }
+    if (null != o.getSubClassDisplay()) {
+      this.subClassDisplay = o.getSubClassDisplay();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setGroup( String value) {
@@ -412,68 +398,37 @@ public class CoverageGrouping  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("group" + "[" + String.valueOf(this.group) + "]\n"); 
-     builder.append("_group" + "[" + String.valueOf(this._group) + "]\n"); 
-     builder.append("groupDisplay" + "[" + String.valueOf(this.groupDisplay) + "]\n"); 
-     builder.append("_groupDisplay" + "[" + String.valueOf(this._groupDisplay) + "]\n"); 
-     builder.append("subGroup" + "[" + String.valueOf(this.subGroup) + "]\n"); 
-     builder.append("_subGroup" + "[" + String.valueOf(this._subGroup) + "]\n"); 
-     builder.append("subGroupDisplay" + "[" + String.valueOf(this.subGroupDisplay) + "]\n"); 
-     builder.append("_subGroupDisplay" + "[" + String.valueOf(this._subGroupDisplay) + "]\n"); 
-     builder.append("plan" + "[" + String.valueOf(this.plan) + "]\n"); 
-     builder.append("_plan" + "[" + String.valueOf(this._plan) + "]\n"); 
-     builder.append("planDisplay" + "[" + String.valueOf(this.planDisplay) + "]\n"); 
-     builder.append("_planDisplay" + "[" + String.valueOf(this._planDisplay) + "]\n"); 
-     builder.append("subPlan" + "[" + String.valueOf(this.subPlan) + "]\n"); 
-     builder.append("_subPlan" + "[" + String.valueOf(this._subPlan) + "]\n"); 
-     builder.append("subPlanDisplay" + "[" + String.valueOf(this.subPlanDisplay) + "]\n"); 
-     builder.append("_subPlanDisplay" + "[" + String.valueOf(this._subPlanDisplay) + "]\n"); 
-     builder.append("FHIRclass" + "[" + String.valueOf(this.FHIRclass) + "]\n"); 
-     builder.append("_class" + "[" + String.valueOf(this._class) + "]\n"); 
-     builder.append("classDisplay" + "[" + String.valueOf(this.classDisplay) + "]\n"); 
-     builder.append("_classDisplay" + "[" + String.valueOf(this._classDisplay) + "]\n"); 
-     builder.append("subClass" + "[" + String.valueOf(this.subClass) + "]\n"); 
-     builder.append("_subClass" + "[" + String.valueOf(this._subClass) + "]\n"); 
-     builder.append("subClassDisplay" + "[" + String.valueOf(this.subClassDisplay) + "]\n"); 
-     builder.append("_subClassDisplay" + "[" + String.valueOf(this._subClassDisplay) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[CoverageGrouping]:" + "\n");
+     if(this.group != null) builder.append("group" + "->" + this.group.toString() + "\n"); 
+     if(this._group != null) builder.append("_group" + "->" + this._group.toString() + "\n"); 
+     if(this.groupDisplay != null) builder.append("groupDisplay" + "->" + this.groupDisplay.toString() + "\n"); 
+     if(this._groupDisplay != null) builder.append("_groupDisplay" + "->" + this._groupDisplay.toString() + "\n"); 
+     if(this.subGroup != null) builder.append("subGroup" + "->" + this.subGroup.toString() + "\n"); 
+     if(this._subGroup != null) builder.append("_subGroup" + "->" + this._subGroup.toString() + "\n"); 
+     if(this.subGroupDisplay != null) builder.append("subGroupDisplay" + "->" + this.subGroupDisplay.toString() + "\n"); 
+     if(this._subGroupDisplay != null) builder.append("_subGroupDisplay" + "->" + this._subGroupDisplay.toString() + "\n"); 
+     if(this.plan != null) builder.append("plan" + "->" + this.plan.toString() + "\n"); 
+     if(this._plan != null) builder.append("_plan" + "->" + this._plan.toString() + "\n"); 
+     if(this.planDisplay != null) builder.append("planDisplay" + "->" + this.planDisplay.toString() + "\n"); 
+     if(this._planDisplay != null) builder.append("_planDisplay" + "->" + this._planDisplay.toString() + "\n"); 
+     if(this.subPlan != null) builder.append("subPlan" + "->" + this.subPlan.toString() + "\n"); 
+     if(this._subPlan != null) builder.append("_subPlan" + "->" + this._subPlan.toString() + "\n"); 
+     if(this.subPlanDisplay != null) builder.append("subPlanDisplay" + "->" + this.subPlanDisplay.toString() + "\n"); 
+     if(this._subPlanDisplay != null) builder.append("_subPlanDisplay" + "->" + this._subPlanDisplay.toString() + "\n"); 
+     if(this.FHIRclass != null) builder.append("FHIRclass" + "->" + this.FHIRclass.toString() + "\n"); 
+     if(this._class != null) builder.append("_class" + "->" + this._class.toString() + "\n"); 
+     if(this.classDisplay != null) builder.append("classDisplay" + "->" + this.classDisplay.toString() + "\n"); 
+     if(this._classDisplay != null) builder.append("_classDisplay" + "->" + this._classDisplay.toString() + "\n"); 
+     if(this.subClass != null) builder.append("subClass" + "->" + this.subClass.toString() + "\n"); 
+     if(this._subClass != null) builder.append("_subClass" + "->" + this._subClass.toString() + "\n"); 
+     if(this.subClassDisplay != null) builder.append("subClassDisplay" + "->" + this.subClassDisplay.toString() + "\n"); 
+     if(this._subClassDisplay != null) builder.append("_subClassDisplay" + "->" + this._subClassDisplay.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<CoverageGrouping> fromArray(java.util.List<CoverageGroupingModel> list) {
-    return (java.util.List<CoverageGrouping>)list.stream()
-      .map(model -> new CoverageGrouping(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<CoverageGroupingModel> toModelArray(java.util.List<CoverageGrouping> list) {
-    return (java.util.List<CoverageGroupingModel>)list.stream()
-      .map(model -> new CoverageGroupingModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static CoverageGrouping fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, CoverageGrouping.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CoverageGrouping o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CoverageGrouping> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

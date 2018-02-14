@@ -63,6 +63,7 @@ public class AuditEventNetwork  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -84,20 +85,15 @@ public class AuditEventNetwork  {
 
   public AuditEventNetwork(AuditEventNetworkModel o) {
     this.id = o.getId();
-      if (null != o.getAddress()) {
-        this.address = new String(o.getAddress());
-      }
-
-      if (null != o.getType()) {
-        this.type = new String(o.getType());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getAddress()) {
+      this.address = o.getAddress();
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setAddress( String value) {
@@ -152,14 +148,15 @@ public class AuditEventNetwork  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("address" + "[" + String.valueOf(this.address) + "]\n"); 
-     builder.append("_address" + "[" + String.valueOf(this._address) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("_type" + "[" + String.valueOf(this._type) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[AuditEventNetwork]:" + "\n");
+     if(this.address != null) builder.append("address" + "->" + this.address.toString() + "\n"); 
+     if(this._address != null) builder.append("_address" + "->" + this._address.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -183,36 +180,4 @@ public class AuditEventNetwork  {
   	}
   }
 
-  public static java.util.List<AuditEventNetwork> fromArray(java.util.List<AuditEventNetworkModel> list) {
-    return (java.util.List<AuditEventNetwork>)list.stream()
-      .map(model -> new AuditEventNetwork(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<AuditEventNetworkModel> toModelArray(java.util.List<AuditEventNetwork> list) {
-    return (java.util.List<AuditEventNetworkModel>)list.stream()
-      .map(model -> new AuditEventNetworkModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static AuditEventNetwork fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, AuditEventNetwork.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AuditEventNetwork o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AuditEventNetwork> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

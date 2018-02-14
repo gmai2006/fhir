@@ -34,10 +34,5 @@ public interface DeviceMetricCalibrationDao {
   public List<DeviceMetricCalibration> select(int maxResult);
 
   public List<DeviceMetricCalibration> selectAll();
-
-  public DeviceMetricCalibration create(DeviceMetricCalibration e);
-
-  public DeviceMetricCalibration update(DeviceMetricCalibration e);
-
   public void delete(DeviceMetricCalibration e);
 }

@@ -32,7 +32,5 @@ public interface ContactDetailService {
 	public ContactDetail find(String id);
   public List<ContactDetail> select(int maxResult);
   public List<ContactDetail> selectAll();
-  public ContactDetail create(ContactDetail bean);
-  public ContactDetail update(ContactDetail bean);
   public void delete(ContactDetail bean);
 }

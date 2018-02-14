@@ -30,13 +30,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
-
+import java.io.Serializable;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
 */
 @Entity
 @Table(name="questionnaireitem")
-public class QuestionnaireItemModel  {
+public class QuestionnaireItemModel  implements Serializable {
+	private static final long serialVersionUID = 151857669693065346L;
   /**
   * Description: "An identifier that is unique within the Questionnaire allowing linkage to the equivalent item in a QuestionnaireResponse resource."
   */
@@ -53,7 +54,7 @@ public class QuestionnaireItemModel  {
 
   /**
   * Description: "A terminology code that corresponds to this group or question (e.g. a code from LOINC, which defines many questions and answers)."
-  * Actual type: Array of Coding-> List<Coding>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -84,9 +85,13 @@ public class QuestionnaireItemModel  {
   /**
   * Description: "A constraint indicating that this item should only be enabled (displayed/allow answers to be captured) when the specified condition is true."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<QuestionnaireEnableWhenModel> enableWhen = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"enablewhen_id\"")
+  private String enablewhen_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="enablewhen_id", insertable=false, updatable=false)
+  private java.util.List<QuestionnaireEnableWhenModel> enableWhen;
 
   /**
   * Description: "An indication, if true, that the item must be present in a \"completed\" QuestionnaireResponse.  If false, the item may be skipped when answering the questionnaire."
@@ -124,16 +129,20 @@ public class QuestionnaireItemModel  {
   @Column(name="\"options_id\"")
   private String options_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`options_id`", insertable=false, updatable=false)
-  private ReferenceModel options;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="options_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> options;
 
   /**
   * Description: "One of the permitted answers for a \"choice\" or \"open-choice\" question."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<QuestionnaireOptionModel> option = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"option_id\"")
+  private String option_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="option_id", insertable=false, updatable=false)
+  private java.util.List<QuestionnaireOptionModel> option;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
@@ -198,7 +207,7 @@ public class QuestionnaireItemModel  {
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
-  * Actual type: Attachment
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -207,7 +216,7 @@ public class QuestionnaireItemModel  {
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
-  * Actual type: Coding
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -216,7 +225,7 @@ public class QuestionnaireItemModel  {
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
-  * Actual type: Quantity
+  * Actual type: String;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -230,21 +239,25 @@ public class QuestionnaireItemModel  {
   @Column(name="\"initialreference_id\"")
   private String initialreference_id;
 
-  @javax.persistence.OneToOne(cascade = {javax.persistence.CascadeType.ALL}, fetch = javax.persistence.FetchType.LAZY)
-  @javax.persistence.JoinColumn(name = "`initialreference_id`", insertable=false, updatable=false)
-  private ReferenceModel initialReference;
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="initialreference_id", insertable=false, updatable=false)
+  private java.util.List<ReferenceModel> initialReference;
 
   /**
   * Description: "Text, questions and other groups to be nested beneath a question or group."
   */
-  @javax.persistence.OneToMany
-  @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName="id", insertable=false, updatable=false)
-  private java.util.List<QuestionnaireItemModel> item = new java.util.ArrayList<>();
+  @javax.persistence.Basic
+  @Column(name="\"item_id\"")
+  private String item_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="item_id", insertable=false, updatable=false)
+  private java.util.List<QuestionnaireItemModel> item;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
@@ -256,6 +269,7 @@ public class QuestionnaireItemModel  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   @javax.persistence.Id
   @Column(name="\"id\"")
   private String id;
@@ -264,294 +278,315 @@ public class QuestionnaireItemModel  {
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
    derived from Element
    derived from BackboneElement
-  * Actual type: Array of Extension-> List<Extension>
+  * Actual type: List<String>;
   * Store this type as a string in db
   */
   @javax.persistence.Basic
   @Column(name="\"extension\"", length = 16777215)
   private String extension;
 
-  @javax.persistence.Basic
+  /**
+  * Description: 
+  */
   @javax.validation.constraints.NotNull
-  String parent_id;
+  @javax.persistence.Basic
+  @Column(name="\"parent_id\"")
+  private String parent_id;
 
   public QuestionnaireItemModel() {
   }
 
-  public QuestionnaireItemModel(QuestionnaireItem o) {
-    this.id = o.getId();
-      this.linkId = o.getLinkId();
-
-      this.definition = o.getDefinition();
-
-      this.code = Coding.toJson(o.getCode());
-      this.prefix = o.getPrefix();
-
-      this.text = o.getText();
-
-      this.type = o.getType();
-
-      this.enableWhen = QuestionnaireEnableWhen.toModelArray(o.getEnableWhen());
-
-      this.required = o.getRequired();
-
-      this.repeats = o.getRepeats();
-
-      this.readOnly = o.getReadOnly();
-
-      this.maxLength = o.getMaxLength();
-
-      if (null != o.getOptions()) {
-      	this.options_id = "options" + this.getId();
-        this.options = new ReferenceModel(o.getOptions());
-        this.options.setId(this.options_id);
-        this.options.parent_id = this.options.getId();
-      }
-
-      this.option = QuestionnaireOption.toModelArray(o.getOption());
-
-      this.initialBoolean = o.getInitialBoolean();
-
-      this.initialDecimal = o.getInitialDecimal();
-
-      this.initialInteger = o.getInitialInteger();
-
-      this.initialDate = o.getInitialDate();
-
-      this.initialDateTime = o.getInitialDateTime();
-
-      this.initialTime = o.getInitialTime();
-
-      this.initialString = o.getInitialString();
-
-      this.initialUri = o.getInitialUri();
-
-      this.initialAttachment = Attachment.toJson(o.getInitialAttachment());
-      this.initialCoding = Coding.toJson(o.getInitialCoding());
-      this.initialQuantity = Quantity.toJson(o.getInitialQuantity());
-      if (null != o.getInitialReference()) {
-      	this.initialreference_id = "initialReference" + this.getId();
-        this.initialReference = new ReferenceModel(o.getInitialReference());
-        this.initialReference.setId(this.initialreference_id);
-        this.initialReference.parent_id = this.initialReference.getId();
-      }
-
-      this.item = QuestionnaireItem.toModelArray(o.getItem());
-
-      this.modifierExtension = Extension.toJson(o.getModifierExtension());
-      this.id = o.getId();
-
-      this.extension = Extension.toJson(o.getExtension());
+  public QuestionnaireItemModel(QuestionnaireItem o, String parentId) {
+  	this.parent_id = parentId;
+  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+    this.linkId = o.getLinkId();
+    this.definition = o.getDefinition();
+    this.prefix = o.getPrefix();
+    this.text = o.getText();
+    this.type = o.getType();
+    if (null != o.getEnableWhen() && !o.getEnableWhen().isEmpty()) {
+    	this.enablewhen_id = "enablewhen" + this.parent_id;
+    	this.enableWhen = QuestionnaireEnableWhenHelper.toModelFromArray(o.getEnableWhen(), this.enablewhen_id);
+    }
+    this.required = o.getRequired();
+    this.repeats = o.getRepeats();
+    this.readOnly = o.getReadOnly();
+    this.maxLength = o.getMaxLength();
+    if (null != o.getOptions() ) {
+    	this.options_id = "options" + this.parent_id;
+    	this.options = ReferenceHelper.toModel(o.getOptions(), this.options_id);
+    }
+    if (null != o.getOption() && !o.getOption().isEmpty()) {
+    	this.option_id = "option" + this.parent_id;
+    	this.option = QuestionnaireOptionHelper.toModelFromArray(o.getOption(), this.option_id);
+    }
+    this.initialBoolean = o.getInitialBoolean();
+    this.initialDecimal = o.getInitialDecimal();
+    this.initialInteger = o.getInitialInteger();
+    this.initialDate = o.getInitialDate();
+    this.initialDateTime = o.getInitialDateTime();
+    this.initialTime = o.getInitialTime();
+    this.initialString = o.getInitialString();
+    this.initialUri = o.getInitialUri();
+    this.initialAttachment = AttachmentHelper.toJson(o.getInitialAttachment());
+    this.initialCoding = CodingHelper.toJson(o.getInitialCoding());
+    this.initialQuantity = QuantityHelper.toJson(o.getInitialQuantity());
+    if (null != o.getInitialReference() ) {
+    	this.initialreference_id = "initialreference" + this.parent_id;
+    	this.initialReference = ReferenceHelper.toModel(o.getInitialReference(), this.initialreference_id);
+    }
+    if (null != o.getItem() && !o.getItem().isEmpty()) {
+    	this.item_id = "item" + this.parent_id;
+    	this.item = QuestionnaireItemHelper.toModelFromArray(o.getItem(), this.item_id);
+    }
   }
 
-  public void setLinkId( String value) {
-    this.linkId = value;
-  }
   public String getLinkId() {
     return this.linkId;
   }
-  public void setDefinition( String value) {
-    this.definition = value;
+  public void setLinkId( String value) {
+    this.linkId = value;
   }
   public String getDefinition() {
     return this.definition;
   }
-  public void setCode( String value) {
-    this.code = value;
+  public void setDefinition( String value) {
+    this.definition = value;
   }
   public String getCode() {
     return this.code;
   }
-  public void setPrefix( String value) {
-    this.prefix = value;
+  public void setCode( String value) {
+    this.code = value;
   }
   public String getPrefix() {
     return this.prefix;
   }
-  public void setText( String value) {
-    this.text = value;
+  public void setPrefix( String value) {
+    this.prefix = value;
   }
   public String getText() {
     return this.text;
   }
-  public void setType( String value) {
-    this.type = value;
+  public void setText( String value) {
+    this.text = value;
   }
   public String getType() {
     return this.type;
   }
-  public void setEnableWhen( java.util.List<QuestionnaireEnableWhenModel> value) {
-    this.enableWhen = value;
+  public void setType( String value) {
+    this.type = value;
   }
   public java.util.List<QuestionnaireEnableWhenModel> getEnableWhen() {
     return this.enableWhen;
   }
-  public void setRequired( Boolean value) {
-    this.required = value;
+  public void setEnableWhen( java.util.List<QuestionnaireEnableWhenModel> value) {
+    this.enableWhen = value;
   }
   public Boolean getRequired() {
     return this.required;
   }
-  public void setRepeats( Boolean value) {
-    this.repeats = value;
+  public void setRequired( Boolean value) {
+    this.required = value;
   }
   public Boolean getRepeats() {
     return this.repeats;
   }
-  public void setReadOnly( Boolean value) {
-    this.readOnly = value;
+  public void setRepeats( Boolean value) {
+    this.repeats = value;
   }
   public Boolean getReadOnly() {
     return this.readOnly;
   }
-  public void setMaxLength( Float value) {
-    this.maxLength = value;
+  public void setReadOnly( Boolean value) {
+    this.readOnly = value;
   }
   public Float getMaxLength() {
     return this.maxLength;
   }
-  public void setOptions( ReferenceModel value) {
-    this.options = value;
+  public void setMaxLength( Float value) {
+    this.maxLength = value;
   }
-  public ReferenceModel getOptions() {
+  public java.util.List<ReferenceModel> getOptions() {
     return this.options;
   }
-  public void setOption( java.util.List<QuestionnaireOptionModel> value) {
-    this.option = value;
+  public void setOptions( java.util.List<ReferenceModel> value) {
+    this.options = value;
   }
   public java.util.List<QuestionnaireOptionModel> getOption() {
     return this.option;
   }
-  public void setInitialBoolean( Boolean value) {
-    this.initialBoolean = value;
+  public void setOption( java.util.List<QuestionnaireOptionModel> value) {
+    this.option = value;
   }
   public Boolean getInitialBoolean() {
     return this.initialBoolean;
   }
-  public void setInitialDecimal( Float value) {
-    this.initialDecimal = value;
+  public void setInitialBoolean( Boolean value) {
+    this.initialBoolean = value;
   }
   public Float getInitialDecimal() {
     return this.initialDecimal;
   }
-  public void setInitialInteger( Float value) {
-    this.initialInteger = value;
+  public void setInitialDecimal( Float value) {
+    this.initialDecimal = value;
   }
   public Float getInitialInteger() {
     return this.initialInteger;
   }
-  public void setInitialDate( String value) {
-    this.initialDate = value;
+  public void setInitialInteger( Float value) {
+    this.initialInteger = value;
   }
   public String getInitialDate() {
     return this.initialDate;
   }
-  public void setInitialDateTime( String value) {
-    this.initialDateTime = value;
+  public void setInitialDate( String value) {
+    this.initialDate = value;
   }
   public String getInitialDateTime() {
     return this.initialDateTime;
   }
-  public void setInitialTime( String value) {
-    this.initialTime = value;
+  public void setInitialDateTime( String value) {
+    this.initialDateTime = value;
   }
   public String getInitialTime() {
     return this.initialTime;
   }
-  public void setInitialString( String value) {
-    this.initialString = value;
+  public void setInitialTime( String value) {
+    this.initialTime = value;
   }
   public String getInitialString() {
     return this.initialString;
   }
-  public void setInitialUri( String value) {
-    this.initialUri = value;
+  public void setInitialString( String value) {
+    this.initialString = value;
   }
   public String getInitialUri() {
     return this.initialUri;
   }
-  public void setInitialAttachment( String value) {
-    this.initialAttachment = value;
+  public void setInitialUri( String value) {
+    this.initialUri = value;
   }
   public String getInitialAttachment() {
     return this.initialAttachment;
   }
-  public void setInitialCoding( String value) {
-    this.initialCoding = value;
+  public void setInitialAttachment( String value) {
+    this.initialAttachment = value;
   }
   public String getInitialCoding() {
     return this.initialCoding;
   }
-  public void setInitialQuantity( String value) {
-    this.initialQuantity = value;
+  public void setInitialCoding( String value) {
+    this.initialCoding = value;
   }
   public String getInitialQuantity() {
     return this.initialQuantity;
   }
-  public void setInitialReference( ReferenceModel value) {
-    this.initialReference = value;
+  public void setInitialQuantity( String value) {
+    this.initialQuantity = value;
   }
-  public ReferenceModel getInitialReference() {
+  public java.util.List<ReferenceModel> getInitialReference() {
     return this.initialReference;
   }
-  public void setItem( java.util.List<QuestionnaireItemModel> value) {
-    this.item = value;
+  public void setInitialReference( java.util.List<ReferenceModel> value) {
+    this.initialReference = value;
   }
   public java.util.List<QuestionnaireItemModel> getItem() {
     return this.item;
   }
-  public void setModifierExtension( String value) {
-    this.modifierExtension = value;
+  public void setItem( java.util.List<QuestionnaireItemModel> value) {
+    this.item = value;
   }
   public String getModifierExtension() {
     return this.modifierExtension;
   }
-  public void setId( String value) {
-    this.id = value;
+  public void setModifierExtension( String value) {
+    this.modifierExtension = value;
   }
   public String getId() {
     return this.id;
   }
-  public void setExtension( String value) {
-    this.extension = value;
+  public void setId( String value) {
+    this.id = value;
   }
   public String getExtension() {
     return this.extension;
   }
-
+  public void setExtension( String value) {
+    this.extension = value;
+  }
+  public String getParent_id() {
+    return this.parent_id;
+  }
+  public void setParent_id( String value) {
+    this.parent_id = value;
+  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("linkId" + "[" + String.valueOf(this.linkId) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("prefix" + "[" + String.valueOf(this.prefix) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("enableWhen" + "[" + String.valueOf(this.enableWhen) + "]\n"); 
-     builder.append("required" + "[" + String.valueOf(this.required) + "]\n"); 
-     builder.append("repeats" + "[" + String.valueOf(this.repeats) + "]\n"); 
-     builder.append("readOnly" + "[" + String.valueOf(this.readOnly) + "]\n"); 
-     builder.append("maxLength" + "[" + String.valueOf(this.maxLength) + "]\n"); 
-     builder.append("options" + "[" + String.valueOf(this.options) + "]\n"); 
-     builder.append("option" + "[" + String.valueOf(this.option) + "]\n"); 
-     builder.append("initialBoolean" + "[" + String.valueOf(this.initialBoolean) + "]\n"); 
-     builder.append("initialDecimal" + "[" + String.valueOf(this.initialDecimal) + "]\n"); 
-     builder.append("initialInteger" + "[" + String.valueOf(this.initialInteger) + "]\n"); 
-     builder.append("initialDate" + "[" + String.valueOf(this.initialDate) + "]\n"); 
-     builder.append("initialDateTime" + "[" + String.valueOf(this.initialDateTime) + "]\n"); 
-     builder.append("initialTime" + "[" + String.valueOf(this.initialTime) + "]\n"); 
-     builder.append("initialString" + "[" + String.valueOf(this.initialString) + "]\n"); 
-     builder.append("initialUri" + "[" + String.valueOf(this.initialUri) + "]\n"); 
-     builder.append("initialAttachment" + "[" + String.valueOf(this.initialAttachment) + "]\n"); 
-     builder.append("initialCoding" + "[" + String.valueOf(this.initialCoding) + "]\n"); 
-     builder.append("initialQuantity" + "[" + String.valueOf(this.initialQuantity) + "]\n"); 
-     builder.append("initialReference" + "[" + String.valueOf(this.initialReference) + "]\n"); 
-     builder.append("item" + "[" + String.valueOf(this.item) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[QuestionnaireItemModel]:" + "\n");
+     builder.append("linkId" + "->" + this.linkId + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("prefix" + "->" + this.prefix + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("required" + "->" + this.required + "\n"); 
+     builder.append("repeats" + "->" + this.repeats + "\n"); 
+     builder.append("readOnly" + "->" + this.readOnly + "\n"); 
+     builder.append("maxLength" + "->" + this.maxLength + "\n"); 
+     builder.append("initialBoolean" + "->" + this.initialBoolean + "\n"); 
+     builder.append("initialDecimal" + "->" + this.initialDecimal + "\n"); 
+     builder.append("initialInteger" + "->" + this.initialInteger + "\n"); 
+     builder.append("initialDate" + "->" + this.initialDate + "\n"); 
+     builder.append("initialDateTime" + "->" + this.initialDateTime + "\n"); 
+     builder.append("initialTime" + "->" + this.initialTime + "\n"); 
+     builder.append("initialString" + "->" + this.initialString + "\n"); 
+     builder.append("initialUri" + "->" + this.initialUri + "\n"); 
+     builder.append("initialAttachment" + "->" + this.initialAttachment + "\n"); 
+     builder.append("initialCoding" + "->" + this.initialCoding + "\n"); 
+     builder.append("initialQuantity" + "->" + this.initialQuantity + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
+    return builder.toString();
+  }
+
+  public String debug() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[QuestionnaireItemModel]:" + "\n");
+     builder.append("linkId" + "->" + this.linkId + "\n"); 
+     builder.append("definition" + "->" + this.definition + "\n"); 
+     builder.append("code" + "->" + this.code + "\n"); 
+     builder.append("prefix" + "->" + this.prefix + "\n"); 
+     builder.append("text" + "->" + this.text + "\n"); 
+     builder.append("type" + "->" + this.type + "\n"); 
+     builder.append("enableWhen" + "->" + this.enableWhen + "\n"); 
+     builder.append("required" + "->" + this.required + "\n"); 
+     builder.append("repeats" + "->" + this.repeats + "\n"); 
+     builder.append("readOnly" + "->" + this.readOnly + "\n"); 
+     builder.append("maxLength" + "->" + this.maxLength + "\n"); 
+     builder.append("options" + "->" + this.options + "\n"); 
+     builder.append("option" + "->" + this.option + "\n"); 
+     builder.append("initialBoolean" + "->" + this.initialBoolean + "\n"); 
+     builder.append("initialDecimal" + "->" + this.initialDecimal + "\n"); 
+     builder.append("initialInteger" + "->" + this.initialInteger + "\n"); 
+     builder.append("initialDate" + "->" + this.initialDate + "\n"); 
+     builder.append("initialDateTime" + "->" + this.initialDateTime + "\n"); 
+     builder.append("initialTime" + "->" + this.initialTime + "\n"); 
+     builder.append("initialString" + "->" + this.initialString + "\n"); 
+     builder.append("initialUri" + "->" + this.initialUri + "\n"); 
+     builder.append("initialAttachment" + "->" + this.initialAttachment + "\n"); 
+     builder.append("initialCoding" + "->" + this.initialCoding + "\n"); 
+     builder.append("initialQuantity" + "->" + this.initialQuantity + "\n"); 
+     builder.append("initialReference" + "->" + this.initialReference + "\n"); 
+     builder.append("item" + "->" + this.item + "\n"); 
+     builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
+     builder.append("id" + "->" + this.id + "\n"); 
+     builder.append("extension" + "->" + this.extension + "\n"); 
+     builder.append("parent_id" + "->" + this.parent_id + "\n"); ;
     return builder.toString();
   }
 }

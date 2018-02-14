@@ -32,7 +32,5 @@ public interface NutritionOrderTextureService {
 	public NutritionOrderTexture find(String id);
   public List<NutritionOrderTexture> select(int maxResult);
   public List<NutritionOrderTexture> selectAll();
-  public NutritionOrderTexture create(NutritionOrderTexture bean);
-  public NutritionOrderTexture update(NutritionOrderTexture bean);
   public void delete(NutritionOrderTexture bean);
 }

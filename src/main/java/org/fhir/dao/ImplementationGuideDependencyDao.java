@@ -34,10 +34,5 @@ public interface ImplementationGuideDependencyDao {
   public List<ImplementationGuideDependency> select(int maxResult);
 
   public List<ImplementationGuideDependency> selectAll();
-
-  public ImplementationGuideDependency create(ImplementationGuideDependency e);
-
-  public ImplementationGuideDependency update(ImplementationGuideDependency e);
-
   public void delete(ImplementationGuideDependency e);
 }

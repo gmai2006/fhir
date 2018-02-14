@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.ClinicalImpressionModel;
 import org.fhir.pojo.ClinicalImpression;
+import org.fhir.pojo.ClinicalImpressionHelper;
 
 public class ClinicalImpressionDaoImpl implements ClinicalImpressionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class ClinicalImpressionDaoImpl implements ClinicalImpressionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClinicalImpressionModel a", ClinicalImpressionModel.class).setMaxResults(maxResult);
       List<ClinicalImpressionModel> models = query.getResultList();
-      return ClinicalImpression.fromArray(models);
+      return ClinicalImpressionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class ClinicalImpressionDaoImpl implements ClinicalImpressionDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from ClinicalImpressionModel a", ClinicalImpressionModel.class);
       List<ClinicalImpressionModel> models = query.getResultList();
-      return ClinicalImpression.fromArray(models);
+      return ClinicalImpressionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class ClinicalImpressionDaoImpl implements ClinicalImpressionDao {
       ClinicalImpressionModel model = em.merge(new ClinicalImpressionModel(e));
       return new ClinicalImpression(model);
   }
-
   @Override
   @Transactional
   public void delete(ClinicalImpression e) {

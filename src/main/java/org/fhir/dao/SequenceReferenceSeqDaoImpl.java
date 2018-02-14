@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.SequenceReferenceSeqModel;
 import org.fhir.pojo.SequenceReferenceSeq;
+import org.fhir.pojo.SequenceReferenceSeqHelper;
 
 public class SequenceReferenceSeqDaoImpl implements SequenceReferenceSeqDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class SequenceReferenceSeqDaoImpl implements SequenceReferenceSeqDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SequenceReferenceSeqModel a", SequenceReferenceSeqModel.class).setMaxResults(maxResult);
       List<SequenceReferenceSeqModel> models = query.getResultList();
-      return SequenceReferenceSeq.fromArray(models);
+      return SequenceReferenceSeqHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class SequenceReferenceSeqDaoImpl implements SequenceReferenceSeqDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from SequenceReferenceSeqModel a", SequenceReferenceSeqModel.class);
       List<SequenceReferenceSeqModel> models = query.getResultList();
-      return SequenceReferenceSeq.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public SequenceReferenceSeq create(SequenceReferenceSeq e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new SequenceReferenceSeqModel(e));
-      return e;
-  }
-
-  @Transactional
-  public SequenceReferenceSeq update(SequenceReferenceSeq e) {
-      final EntityManager em = entityManagerProvider.get();
-      SequenceReferenceSeqModel model = em.merge(new SequenceReferenceSeqModel(e));
-      return new SequenceReferenceSeq(model);
+      return SequenceReferenceSeqHelper.fromArray2Array(models);
   }
 
   @Override

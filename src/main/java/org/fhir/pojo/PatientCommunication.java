@@ -59,6 +59,7 @@ public class PatientCommunication  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -80,17 +81,13 @@ public class PatientCommunication  {
 
   public PatientCommunication(PatientCommunicationModel o) {
     this.id = o.getId();
-      this.language = CodeableConcept.fromJson(o.getLanguage());
-      if (null != o.getPreferred()) {
-        this.preferred = new Boolean(o.getPreferred());
-      }
-
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.language = CodeableConceptHelper.fromJson(o.getLanguage());
+    if (null != o.getPreferred()) {
+      this.preferred = o.getPreferred();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setLanguage( CodeableConcept value) {
@@ -139,47 +136,16 @@ public class PatientCommunication  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("preferred" + "[" + String.valueOf(this.preferred) + "]\n"); 
-     builder.append("_preferred" + "[" + String.valueOf(this._preferred) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[PatientCommunication]:" + "\n");
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this.preferred != null) builder.append("preferred" + "->" + this.preferred.toString() + "\n"); 
+     if(this._preferred != null) builder.append("_preferred" + "->" + this._preferred.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<PatientCommunication> fromArray(java.util.List<PatientCommunicationModel> list) {
-    return (java.util.List<PatientCommunication>)list.stream()
-      .map(model -> new PatientCommunication(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<PatientCommunicationModel> toModelArray(java.util.List<PatientCommunication> list) {
-    return (java.util.List<PatientCommunicationModel>)list.stream()
-      .map(model -> new PatientCommunicationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static PatientCommunication fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, PatientCommunication.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PatientCommunication o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PatientCommunication> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

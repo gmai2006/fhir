@@ -32,7 +32,5 @@ public interface MeasureReportStratifierService {
 	public MeasureReportStratifier find(String id);
   public List<MeasureReportStratifier> select(int maxResult);
   public List<MeasureReportStratifier> selectAll();
-  public MeasureReportStratifier create(MeasureReportStratifier bean);
-  public MeasureReportStratifier update(MeasureReportStratifier bean);
   public void delete(MeasureReportStratifier bean);
 }

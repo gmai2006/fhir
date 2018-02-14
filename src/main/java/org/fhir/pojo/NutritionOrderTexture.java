@@ -53,6 +53,7 @@ public class NutritionOrderTexture  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -74,14 +75,11 @@ public class NutritionOrderTexture  {
 
   public NutritionOrderTexture(NutritionOrderTextureModel o) {
     this.id = o.getId();
-      this.modifier = CodeableConcept.fromJson(o.getModifier());
-      this.foodType = CodeableConcept.fromJson(o.getFoodType());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    this.modifier = CodeableConceptHelper.fromJson(o.getModifier());
+    this.foodType = CodeableConceptHelper.fromJson(o.getFoodType());
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setModifier( CodeableConcept value) {
@@ -124,46 +122,15 @@ public class NutritionOrderTexture  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("modifier" + "[" + String.valueOf(this.modifier) + "]\n"); 
-     builder.append("foodType" + "[" + String.valueOf(this.foodType) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[NutritionOrderTexture]:" + "\n");
+     if(this.modifier != null) builder.append("modifier" + "->" + this.modifier.toString() + "\n"); 
+     if(this.foodType != null) builder.append("foodType" + "->" + this.foodType.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
 
-  public static java.util.List<NutritionOrderTexture> fromArray(java.util.List<NutritionOrderTextureModel> list) {
-    return (java.util.List<NutritionOrderTexture>)list.stream()
-      .map(model -> new NutritionOrderTexture(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<NutritionOrderTextureModel> toModelArray(java.util.List<NutritionOrderTexture> list) {
-    return (java.util.List<NutritionOrderTextureModel>)list.stream()
-      .map(model -> new NutritionOrderTextureModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static NutritionOrderTexture fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, NutritionOrderTexture.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(NutritionOrderTexture o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<NutritionOrderTexture> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

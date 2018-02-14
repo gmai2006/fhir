@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.GoalModel;
 import org.fhir.pojo.Goal;
+import org.fhir.pojo.GoalHelper;
 
 public class GoalDaoImpl implements GoalDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class GoalDaoImpl implements GoalDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GoalModel a", GoalModel.class).setMaxResults(maxResult);
       List<GoalModel> models = query.getResultList();
-      return Goal.fromArray(models);
+      return GoalHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class GoalDaoImpl implements GoalDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from GoalModel a", GoalModel.class);
       List<GoalModel> models = query.getResultList();
-      return Goal.fromArray(models);
+      return GoalHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class GoalDaoImpl implements GoalDao {
       GoalModel model = em.merge(new GoalModel(e));
       return new Goal(model);
   }
-
   @Override
   @Transactional
   public void delete(Goal e) {

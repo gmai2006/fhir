@@ -67,6 +67,7 @@ public class TestScriptFixture  {
    derived from Element
    derived from BackboneElement
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -143,36 +144,17 @@ public class TestScriptFixture  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("autocreate" + "[" + String.valueOf(this.autocreate) + "]\n"); 
-     builder.append("_autocreate" + "[" + String.valueOf(this._autocreate) + "]\n"); 
-     builder.append("autodelete" + "[" + String.valueOf(this.autodelete) + "]\n"); 
-     builder.append("_autodelete" + "[" + String.valueOf(this._autodelete) + "]\n"); 
-     builder.append("resource" + "[" + String.valueOf(this.resource) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[TestScriptFixture]:" + "\n");
+     if(this.autocreate != null) builder.append("autocreate" + "->" + this.autocreate.toString() + "\n"); 
+     if(this._autocreate != null) builder.append("_autocreate" + "->" + this._autocreate.toString() + "\n"); 
+     if(this.autodelete != null) builder.append("autodelete" + "->" + this.autodelete.toString() + "\n"); 
+     if(this._autodelete != null) builder.append("_autodelete" + "->" + this._autodelete.toString() + "\n"); 
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
-  }
-
-  public static TestScriptFixture fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, TestScriptFixture.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(TestScriptFixture o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<TestScriptFixture> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 
 }

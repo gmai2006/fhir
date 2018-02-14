@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.BinaryModel;
 import org.fhir.pojo.Binary;
+import org.fhir.pojo.BinaryHelper;
 
 public class BinaryDaoImpl implements BinaryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class BinaryDaoImpl implements BinaryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BinaryModel a", BinaryModel.class).setMaxResults(maxResult);
       List<BinaryModel> models = query.getResultList();
-      return Binary.fromArray(models);
+      return BinaryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,7 +70,7 @@ public class BinaryDaoImpl implements BinaryDao {
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from BinaryModel a", BinaryModel.class);
       List<BinaryModel> models = query.getResultList();
-      return Binary.fromArray(models);
+      return BinaryHelper.fromArray2Array(models);
   }
 
   @Override
@@ -86,7 +87,6 @@ public class BinaryDaoImpl implements BinaryDao {
       BinaryModel model = em.merge(new BinaryModel(e));
       return new Binary(model);
   }
-
   @Override
   @Transactional
   public void delete(Binary e) {

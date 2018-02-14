@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.DeviceMetricCalibrationModel;
 import org.fhir.pojo.DeviceMetricCalibration;
+import org.fhir.pojo.DeviceMetricCalibrationHelper;
 
 public class DeviceMetricCalibrationDaoImpl implements DeviceMetricCalibrationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class DeviceMetricCalibrationDaoImpl implements DeviceMetricCalibrationDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceMetricCalibrationModel a", DeviceMetricCalibrationModel.class).setMaxResults(maxResult);
       List<DeviceMetricCalibrationModel> models = query.getResultList();
-      return DeviceMetricCalibration.fromArray(models);
+      return DeviceMetricCalibrationHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class DeviceMetricCalibrationDaoImpl implements DeviceMetricCalibrationDa
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from DeviceMetricCalibrationModel a", DeviceMetricCalibrationModel.class);
       List<DeviceMetricCalibrationModel> models = query.getResultList();
-      return DeviceMetricCalibration.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public DeviceMetricCalibration create(DeviceMetricCalibration e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new DeviceMetricCalibrationModel(e));
-      return e;
-  }
-
-  @Transactional
-  public DeviceMetricCalibration update(DeviceMetricCalibration e) {
-      final EntityManager em = entityManagerProvider.get();
-      DeviceMetricCalibrationModel model = em.merge(new DeviceMetricCalibrationModel(e));
-      return new DeviceMetricCalibration(model);
+      return DeviceMetricCalibrationHelper.fromArray2Array(models);
   }
 
   @Override

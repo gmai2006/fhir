@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 
 import org.fhir.entity.FamilyMemberHistoryConditionModel;
 import org.fhir.pojo.FamilyMemberHistoryCondition;
+import org.fhir.pojo.FamilyMemberHistoryConditionHelper;
 
 public class FamilyMemberHistoryConditionDaoImpl implements FamilyMemberHistoryConditionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -61,7 +62,7 @@ public class FamilyMemberHistoryConditionDaoImpl implements FamilyMemberHistoryC
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from FamilyMemberHistoryConditionModel a", FamilyMemberHistoryConditionModel.class).setMaxResults(maxResult);
       List<FamilyMemberHistoryConditionModel> models = query.getResultList();
-      return FamilyMemberHistoryCondition.fromArray(models);
+      return FamilyMemberHistoryConditionHelper.fromArray2Array(models);
   }
 
   @Override
@@ -69,22 +70,7 @@ public class FamilyMemberHistoryConditionDaoImpl implements FamilyMemberHistoryC
       final EntityManager em = entityManagerProvider.get();
       Query query = em.createQuery("select a from FamilyMemberHistoryConditionModel a", FamilyMemberHistoryConditionModel.class);
       List<FamilyMemberHistoryConditionModel> models = query.getResultList();
-      return FamilyMemberHistoryCondition.fromArray(models);
-  }
-
-  @Override
-  @Transactional
-  public FamilyMemberHistoryCondition create(FamilyMemberHistoryCondition e) {
-      final EntityManager em = entityManagerProvider.get();
-      em.persist(new FamilyMemberHistoryConditionModel(e));
-      return e;
-  }
-
-  @Transactional
-  public FamilyMemberHistoryCondition update(FamilyMemberHistoryCondition e) {
-      final EntityManager em = entityManagerProvider.get();
-      FamilyMemberHistoryConditionModel model = em.merge(new FamilyMemberHistoryConditionModel(e));
-      return new FamilyMemberHistoryCondition(model);
+      return FamilyMemberHistoryConditionHelper.fromArray2Array(models);
   }
 
   @Override

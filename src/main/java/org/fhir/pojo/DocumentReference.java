@@ -181,6 +181,7 @@ public class DocumentReference  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -232,86 +233,63 @@ public class DocumentReference  {
 
   public DocumentReference(DocumentReferenceModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.masterIdentifier = Identifier.fromJson(o.getMasterIdentifier());
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getDocStatus()) {
-        this.docStatus = new String(o.getDocStatus());
-      }
-
-      this.type = CodeableConcept.fromJson(o.getType());
-      this.FHIRclass = CodeableConcept.fromJson(o.getFHIRclass());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getCreated()) {
-        this.created = new String(o.getCreated());
-      }
-
-      if (null != o.getIndexed()) {
-        this.indexed = new String(o.getIndexed());
-      }
-
-      this.author = Reference.fromArray(o.getAuthor());
-
-      if (null != o.getAuthenticator()) {
-        this.authenticator = new Reference(o.getAuthenticator());
-        this.authenticator.setId(this.getId());
-      }
-
-      if (null != o.getCustodian()) {
-        this.custodian = new Reference(o.getCustodian());
-        this.custodian.setId(this.getId());
-      }
-
-      this.relatesTo = DocumentReferenceRelatesTo.fromArray(o.getRelatesTo());
-
-      if (null != o.getDescription()) {
-        this.description = new String(o.getDescription());
-      }
-
-      this.securityLabel = CodeableConcept.fromArray(o.getSecurityLabel());
-      this.content = DocumentReferenceContent.fromArray(o.getContent());
-
-      if (null != o.getContext()) {
-        this.context = new DocumentReferenceContext(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    this.masterIdentifier = IdentifierHelper.fromJson(o.getMasterIdentifier());
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getDocStatus()) {
+      this.docStatus = o.getDocStatus();
+    }
+    this.type = CodeableConceptHelper.fromJson(o.getType());
+    this.FHIRclass = CodeableConceptHelper.fromJson(o.getFHIRclass());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getCreated()) {
+      this.created = o.getCreated();
+    }
+    if (null != o.getIndexed()) {
+      this.indexed = o.getIndexed();
+    }
+    if (null != o.getAuthor() && !o.getAuthor().isEmpty()) {
+    	this.author = ReferenceHelper.fromArray2Array(o.getAuthor());
+    }
+    if (null != o.getAuthenticator() && !o.getAuthenticator().isEmpty()) {
+      this.authenticator = new Reference(o.getAuthenticator().get(0));
+    }
+    if (null != o.getCustodian() && !o.getCustodian().isEmpty()) {
+      this.custodian = new Reference(o.getCustodian().get(0));
+    }
+    if (null != o.getRelatesTo() && !o.getRelatesTo().isEmpty()) {
+    	this.relatesTo = DocumentReferenceRelatesToHelper.fromArray2Array(o.getRelatesTo());
+    }
+    if (null != o.getDescription()) {
+      this.description = o.getDescription();
+    }
+    if (null != o.getContent() && !o.getContent().isEmpty()) {
+    	this.content = DocumentReferenceContentHelper.fromArray2Array(o.getContent());
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new DocumentReferenceContext(o.getContext().get(0));
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -522,40 +500,41 @@ public class DocumentReference  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("masterIdentifier" + "[" + String.valueOf(this.masterIdentifier) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("docStatus" + "[" + String.valueOf(this.docStatus) + "]\n"); 
-     builder.append("_docStatus" + "[" + String.valueOf(this._docStatus) + "]\n"); 
-     builder.append("type" + "[" + String.valueOf(this.type) + "]\n"); 
-     builder.append("FHIRclass" + "[" + String.valueOf(this.FHIRclass) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("created" + "[" + String.valueOf(this.created) + "]\n"); 
-     builder.append("_created" + "[" + String.valueOf(this._created) + "]\n"); 
-     builder.append("indexed" + "[" + String.valueOf(this.indexed) + "]\n"); 
-     builder.append("_indexed" + "[" + String.valueOf(this._indexed) + "]\n"); 
-     builder.append("author" + "[" + String.valueOf(this.author) + "]\n"); 
-     builder.append("authenticator" + "[" + String.valueOf(this.authenticator) + "]\n"); 
-     builder.append("custodian" + "[" + String.valueOf(this.custodian) + "]\n"); 
-     builder.append("relatesTo" + "[" + String.valueOf(this.relatesTo) + "]\n"); 
-     builder.append("description" + "[" + String.valueOf(this.description) + "]\n"); 
-     builder.append("_description" + "[" + String.valueOf(this._description) + "]\n"); 
-     builder.append("securityLabel" + "[" + String.valueOf(this.securityLabel) + "]\n"); 
-     builder.append("content" + "[" + String.valueOf(this.content) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[DocumentReference]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.masterIdentifier != null) builder.append("masterIdentifier" + "->" + this.masterIdentifier.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.docStatus != null) builder.append("docStatus" + "->" + this.docStatus.toString() + "\n"); 
+     if(this._docStatus != null) builder.append("_docStatus" + "->" + this._docStatus.toString() + "\n"); 
+     if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
+     if(this.FHIRclass != null) builder.append("FHIRclass" + "->" + this.FHIRclass.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.created != null) builder.append("created" + "->" + this.created.toString() + "\n"); 
+     if(this._created != null) builder.append("_created" + "->" + this._created.toString() + "\n"); 
+     if(this.indexed != null) builder.append("indexed" + "->" + this.indexed.toString() + "\n"); 
+     if(this._indexed != null) builder.append("_indexed" + "->" + this._indexed.toString() + "\n"); 
+     if(this.author != null) builder.append("author" + "->" + this.author.toString() + "\n"); 
+     if(this.authenticator != null) builder.append("authenticator" + "->" + this.authenticator.toString() + "\n"); 
+     if(this.custodian != null) builder.append("custodian" + "->" + this.custodian.toString() + "\n"); 
+     if(this.relatesTo != null) builder.append("relatesTo" + "->" + this.relatesTo.toString() + "\n"); 
+     if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
+     if(this.securityLabel != null) builder.append("securityLabel" + "->" + this.securityLabel.toString() + "\n"); 
+     if(this.content != null) builder.append("content" + "->" + this.content.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -587,36 +566,4 @@ public class DocumentReference  {
   	}
   }
 
-  public static java.util.List<DocumentReference> fromArray(java.util.List<DocumentReferenceModel> list) {
-    return (java.util.List<DocumentReference>)list.stream()
-      .map(model -> new DocumentReference(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<DocumentReferenceModel> toModelArray(java.util.List<DocumentReference> list) {
-    return (java.util.List<DocumentReferenceModel>)list.stream()
-      .map(model -> new DocumentReferenceModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static DocumentReference fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, DocumentReference.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DocumentReference o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DocumentReference> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

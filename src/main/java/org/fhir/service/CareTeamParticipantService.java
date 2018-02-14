@@ -32,7 +32,5 @@ public interface CareTeamParticipantService {
 	public CareTeamParticipant find(String id);
   public List<CareTeamParticipant> select(int maxResult);
   public List<CareTeamParticipant> selectAll();
-  public CareTeamParticipant create(CareTeamParticipant bean);
-  public CareTeamParticipant update(CareTeamParticipant bean);
   public void delete(CareTeamParticipant bean);
 }

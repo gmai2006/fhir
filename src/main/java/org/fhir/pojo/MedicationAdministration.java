@@ -194,6 +194,7 @@ public class MedicationAdministration  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -245,93 +246,72 @@ public class MedicationAdministration  {
 
   public MedicationAdministration(MedicationAdministrationModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.definition = Reference.fromArray(o.getDefinition());
-
-      this.partOf = Reference.fromArray(o.getPartOf());
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      this.medicationCodeableConcept = CodeableConcept.fromJson(o.getMedicationCodeableConcept());
-      if (null != o.getMedicationReference()) {
-        this.medicationReference = new Reference(o.getMedicationReference());
-        this.medicationReference.setId(this.getId());
-      }
-
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      this.supportingInformation = Reference.fromArray(o.getSupportingInformation());
-
-      if (null != o.getEffectiveDateTime()) {
-        this.effectiveDateTime = new String(o.getEffectiveDateTime());
-      }
-
-      this.effectivePeriod = Period.fromJson(o.getEffectivePeriod());
-      this.performer = MedicationAdministrationPerformer.fromArray(o.getPerformer());
-
-      if (null != o.getNotGiven()) {
-        this.notGiven = new Boolean(o.getNotGiven());
-      }
-
-      this.reasonNotGiven = CodeableConcept.fromArray(o.getReasonNotGiven());
-      this.reasonCode = CodeableConcept.fromArray(o.getReasonCode());
-      this.reasonReference = Reference.fromArray(o.getReasonReference());
-
-      if (null != o.getPrescription()) {
-        this.prescription = new Reference(o.getPrescription());
-        this.prescription.setId(this.getId());
-      }
-
-      this.device = Reference.fromArray(o.getDevice());
-
-      this.note = Annotation.fromArray(o.getNote());
-      if (null != o.getDosage()) {
-        this.dosage = new MedicationAdministrationDosage(o.getDosage());
-        this.dosage.setId(this.getId());
-      }
-
-      this.eventHistory = Reference.fromArray(o.getEventHistory());
-
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+    	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+    	this.partOf = ReferenceHelper.fromArray2Array(o.getPartOf());
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    this.medicationCodeableConcept = CodeableConceptHelper.fromJson(o.getMedicationCodeableConcept());
+    if (null != o.getMedicationReference() && !o.getMedicationReference().isEmpty()) {
+      this.medicationReference = new Reference(o.getMedicationReference().get(0));
+    }
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getSupportingInformation() && !o.getSupportingInformation().isEmpty()) {
+    	this.supportingInformation = ReferenceHelper.fromArray2Array(o.getSupportingInformation());
+    }
+    if (null != o.getEffectiveDateTime()) {
+      this.effectiveDateTime = o.getEffectiveDateTime();
+    }
+    this.effectivePeriod = PeriodHelper.fromJson(o.getEffectivePeriod());
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+    	this.performer = MedicationAdministrationPerformerHelper.fromArray2Array(o.getPerformer());
+    }
+    if (null != o.getNotGiven()) {
+      this.notGiven = o.getNotGiven();
+    }
+    if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
+    	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
+    }
+    if (null != o.getPrescription() && !o.getPrescription().isEmpty()) {
+      this.prescription = new Reference(o.getPrescription().get(0));
+    }
+    if (null != o.getDevice() && !o.getDevice().isEmpty()) {
+    	this.device = ReferenceHelper.fromArray2Array(o.getDevice());
+    }
+    if (null != o.getDosage() && !o.getDosage().isEmpty()) {
+      this.dosage = new MedicationAdministrationDosage(o.getDosage().get(0));
+    }
+    if (null != o.getEventHistory() && !o.getEventHistory().isEmpty()) {
+    	this.eventHistory = ReferenceHelper.fromArray2Array(o.getEventHistory());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -560,43 +540,44 @@ public class MedicationAdministration  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("medicationCodeableConcept" + "[" + String.valueOf(this.medicationCodeableConcept) + "]\n"); 
-     builder.append("medicationReference" + "[" + String.valueOf(this.medicationReference) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("supportingInformation" + "[" + String.valueOf(this.supportingInformation) + "]\n"); 
-     builder.append("effectiveDateTime" + "[" + String.valueOf(this.effectiveDateTime) + "]\n"); 
-     builder.append("_effectiveDateTime" + "[" + String.valueOf(this._effectiveDateTime) + "]\n"); 
-     builder.append("effectivePeriod" + "[" + String.valueOf(this.effectivePeriod) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("notGiven" + "[" + String.valueOf(this.notGiven) + "]\n"); 
-     builder.append("_notGiven" + "[" + String.valueOf(this._notGiven) + "]\n"); 
-     builder.append("reasonNotGiven" + "[" + String.valueOf(this.reasonNotGiven) + "]\n"); 
-     builder.append("reasonCode" + "[" + String.valueOf(this.reasonCode) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("prescription" + "[" + String.valueOf(this.prescription) + "]\n"); 
-     builder.append("device" + "[" + String.valueOf(this.device) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("dosage" + "[" + String.valueOf(this.dosage) + "]\n"); 
-     builder.append("eventHistory" + "[" + String.valueOf(this.eventHistory) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[MedicationAdministration]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this.partOf != null) builder.append("partOf" + "->" + this.partOf.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.medicationCodeableConcept != null) builder.append("medicationCodeableConcept" + "->" + this.medicationCodeableConcept.toString() + "\n"); 
+     if(this.medicationReference != null) builder.append("medicationReference" + "->" + this.medicationReference.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.supportingInformation != null) builder.append("supportingInformation" + "->" + this.supportingInformation.toString() + "\n"); 
+     if(this.effectiveDateTime != null) builder.append("effectiveDateTime" + "->" + this.effectiveDateTime.toString() + "\n"); 
+     if(this._effectiveDateTime != null) builder.append("_effectiveDateTime" + "->" + this._effectiveDateTime.toString() + "\n"); 
+     if(this.effectivePeriod != null) builder.append("effectivePeriod" + "->" + this.effectivePeriod.toString() + "\n"); 
+     if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
+     if(this.notGiven != null) builder.append("notGiven" + "->" + this.notGiven.toString() + "\n"); 
+     if(this._notGiven != null) builder.append("_notGiven" + "->" + this._notGiven.toString() + "\n"); 
+     if(this.reasonNotGiven != null) builder.append("reasonNotGiven" + "->" + this.reasonNotGiven.toString() + "\n"); 
+     if(this.reasonCode != null) builder.append("reasonCode" + "->" + this.reasonCode.toString() + "\n"); 
+     if(this.reasonReference != null) builder.append("reasonReference" + "->" + this.reasonReference.toString() + "\n"); 
+     if(this.prescription != null) builder.append("prescription" + "->" + this.prescription.toString() + "\n"); 
+     if(this.device != null) builder.append("device" + "->" + this.device.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.dosage != null) builder.append("dosage" + "->" + this.dosage.toString() + "\n"); 
+     if(this.eventHistory != null) builder.append("eventHistory" + "->" + this.eventHistory.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -634,36 +615,4 @@ public class MedicationAdministration  {
   	}
   }
 
-  public static java.util.List<MedicationAdministration> fromArray(java.util.List<MedicationAdministrationModel> list) {
-    return (java.util.List<MedicationAdministration>)list.stream()
-      .map(model -> new MedicationAdministration(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<MedicationAdministrationModel> toModelArray(java.util.List<MedicationAdministration> list) {
-    return (java.util.List<MedicationAdministrationModel>)list.stream()
-      .map(model -> new MedicationAdministrationModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static MedicationAdministration fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, MedicationAdministration.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MedicationAdministration o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MedicationAdministration> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

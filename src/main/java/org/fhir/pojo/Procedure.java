@@ -220,6 +220,7 @@ public class Procedure  {
    derived from Resource
    derived from DomainResource
   */
+  @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
   private String id;
 
@@ -271,92 +272,74 @@ public class Procedure  {
 
   public Procedure(ProcedureModel o) {
     this.id = o.getId();
-      if (null != o.getResourceType()) {
-        this.resourceType = new String(o.getResourceType());
-      }
-
-      this.identifier = Identifier.fromArray(o.getIdentifier());
-      this.definition = Reference.fromArray(o.getDefinition());
-
-      this.basedOn = Reference.fromArray(o.getBasedOn());
-
-      this.partOf = Reference.fromArray(o.getPartOf());
-
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getNotDone()) {
-        this.notDone = new Boolean(o.getNotDone());
-      }
-
-      this.notDoneReason = CodeableConcept.fromJson(o.getNotDoneReason());
-      this.category = CodeableConcept.fromJson(o.getCategory());
-      this.code = CodeableConcept.fromJson(o.getCode());
-      if (null != o.getSubject()) {
-        this.subject = new Reference(o.getSubject());
-        this.subject.setId(this.getId());
-      }
-
-      if (null != o.getContext()) {
-        this.context = new Reference(o.getContext());
-        this.context.setId(this.getId());
-      }
-
-      if (null != o.getPerformedDateTime()) {
-        this.performedDateTime = new String(o.getPerformedDateTime());
-      }
-
-      this.performedPeriod = Period.fromJson(o.getPerformedPeriod());
-      this.performer = ProcedurePerformer.fromArray(o.getPerformer());
-
-      if (null != o.getLocation()) {
-        this.location = new Reference(o.getLocation());
-        this.location.setId(this.getId());
-      }
-
-      this.reasonCode = CodeableConcept.fromArray(o.getReasonCode());
-      this.reasonReference = Reference.fromArray(o.getReasonReference());
-
-      this.bodySite = CodeableConcept.fromArray(o.getBodySite());
-      this.outcome = CodeableConcept.fromJson(o.getOutcome());
-      this.report = Reference.fromArray(o.getReport());
-
-      this.complication = CodeableConcept.fromArray(o.getComplication());
-      this.complicationDetail = Reference.fromArray(o.getComplicationDetail());
-
-      this.followUp = CodeableConcept.fromArray(o.getFollowUp());
-      this.note = Annotation.fromArray(o.getNote());
-      this.focalDevice = ProcedureFocalDevice.fromArray(o.getFocalDevice());
-
-      this.usedReference = Reference.fromArray(o.getUsedReference());
-
-      this.usedCode = CodeableConcept.fromArray(o.getUsedCode());
-      if (null != o.getText()) {
-        this.text = new Narrative(o.getText());
-        this.text.setId(this.getId());
-      }
-
-      this.contained = ResourceList.fromArray(o.getContained());
-      this.extension = Extension.fromArray(o.getExtension());
-      this.modifierExtension = Extension.fromArray(o.getModifierExtension());
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      if (null != o.getMeta()) {
-        this.meta = new Meta(o.getMeta());
-        this.meta.setId(this.getId());
-      }
-
-      if (null != o.getImplicitRules()) {
-        this.implicitRules = new String(o.getImplicitRules());
-      }
-
-      if (null != o.getLanguage()) {
-        this.language = new String(o.getLanguage());
-      }
-
+    if (null != o.getResourceType()) {
+      this.resourceType = o.getResourceType();
+    }
+    if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
+    	this.definition = ReferenceHelper.fromArray2Array(o.getDefinition());
+    }
+    if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
+    	this.basedOn = ReferenceHelper.fromArray2Array(o.getBasedOn());
+    }
+    if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
+    	this.partOf = ReferenceHelper.fromArray2Array(o.getPartOf());
+    }
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getNotDone()) {
+      this.notDone = o.getNotDone();
+    }
+    this.notDoneReason = CodeableConceptHelper.fromJson(o.getNotDoneReason());
+    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getSubject() && !o.getSubject().isEmpty()) {
+      this.subject = new Reference(o.getSubject().get(0));
+    }
+    if (null != o.getContext() && !o.getContext().isEmpty()) {
+      this.context = new Reference(o.getContext().get(0));
+    }
+    if (null != o.getPerformedDateTime()) {
+      this.performedDateTime = o.getPerformedDateTime();
+    }
+    this.performedPeriod = PeriodHelper.fromJson(o.getPerformedPeriod());
+    if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
+    	this.performer = ProcedurePerformerHelper.fromArray2Array(o.getPerformer());
+    }
+    if (null != o.getLocation() && !o.getLocation().isEmpty()) {
+      this.location = new Reference(o.getLocation().get(0));
+    }
+    if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
+    	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
+    }
+    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getReport() && !o.getReport().isEmpty()) {
+    	this.report = ReferenceHelper.fromArray2Array(o.getReport());
+    }
+    if (null != o.getComplicationDetail() && !o.getComplicationDetail().isEmpty()) {
+    	this.complicationDetail = ReferenceHelper.fromArray2Array(o.getComplicationDetail());
+    }
+    if (null != o.getFocalDevice() && !o.getFocalDevice().isEmpty()) {
+    	this.focalDevice = ProcedureFocalDeviceHelper.fromArray2Array(o.getFocalDevice());
+    }
+    if (null != o.getUsedReference() && !o.getUsedReference().isEmpty()) {
+    	this.usedReference = ReferenceHelper.fromArray2Array(o.getUsedReference());
+    }
+    if (null != o.getText() && !o.getText().isEmpty()) {
+      this.text = new Narrative(o.getText().get(0));
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
+    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
+      this.meta = new Meta(o.getMeta().get(0));
+    }
+    if (null != o.getImplicitRules()) {
+      this.implicitRules = o.getImplicitRules();
+    }
+    if (null != o.getLanguage()) {
+      this.language = o.getLanguage();
+    }
   }
 
   public void setResourceType( String value) {
@@ -615,48 +598,49 @@ public class Procedure  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("resourceType" + "[" + String.valueOf(this.resourceType) + "]\n"); 
-     builder.append("identifier" + "[" + String.valueOf(this.identifier) + "]\n"); 
-     builder.append("definition" + "[" + String.valueOf(this.definition) + "]\n"); 
-     builder.append("basedOn" + "[" + String.valueOf(this.basedOn) + "]\n"); 
-     builder.append("partOf" + "[" + String.valueOf(this.partOf) + "]\n"); 
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("notDone" + "[" + String.valueOf(this.notDone) + "]\n"); 
-     builder.append("_notDone" + "[" + String.valueOf(this._notDone) + "]\n"); 
-     builder.append("notDoneReason" + "[" + String.valueOf(this.notDoneReason) + "]\n"); 
-     builder.append("category" + "[" + String.valueOf(this.category) + "]\n"); 
-     builder.append("code" + "[" + String.valueOf(this.code) + "]\n"); 
-     builder.append("subject" + "[" + String.valueOf(this.subject) + "]\n"); 
-     builder.append("context" + "[" + String.valueOf(this.context) + "]\n"); 
-     builder.append("performedDateTime" + "[" + String.valueOf(this.performedDateTime) + "]\n"); 
-     builder.append("_performedDateTime" + "[" + String.valueOf(this._performedDateTime) + "]\n"); 
-     builder.append("performedPeriod" + "[" + String.valueOf(this.performedPeriod) + "]\n"); 
-     builder.append("performer" + "[" + String.valueOf(this.performer) + "]\n"); 
-     builder.append("location" + "[" + String.valueOf(this.location) + "]\n"); 
-     builder.append("reasonCode" + "[" + String.valueOf(this.reasonCode) + "]\n"); 
-     builder.append("reasonReference" + "[" + String.valueOf(this.reasonReference) + "]\n"); 
-     builder.append("bodySite" + "[" + String.valueOf(this.bodySite) + "]\n"); 
-     builder.append("outcome" + "[" + String.valueOf(this.outcome) + "]\n"); 
-     builder.append("report" + "[" + String.valueOf(this.report) + "]\n"); 
-     builder.append("complication" + "[" + String.valueOf(this.complication) + "]\n"); 
-     builder.append("complicationDetail" + "[" + String.valueOf(this.complicationDetail) + "]\n"); 
-     builder.append("followUp" + "[" + String.valueOf(this.followUp) + "]\n"); 
-     builder.append("note" + "[" + String.valueOf(this.note) + "]\n"); 
-     builder.append("focalDevice" + "[" + String.valueOf(this.focalDevice) + "]\n"); 
-     builder.append("usedReference" + "[" + String.valueOf(this.usedReference) + "]\n"); 
-     builder.append("usedCode" + "[" + String.valueOf(this.usedCode) + "]\n"); 
-     builder.append("text" + "[" + String.valueOf(this.text) + "]\n"); 
-     builder.append("contained" + "[" + String.valueOf(this.contained) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); 
-     builder.append("modifierExtension" + "[" + String.valueOf(this.modifierExtension) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("meta" + "[" + String.valueOf(this.meta) + "]\n"); 
-     builder.append("implicitRules" + "[" + String.valueOf(this.implicitRules) + "]\n"); 
-     builder.append("_implicitRules" + "[" + String.valueOf(this._implicitRules) + "]\n"); 
-     builder.append("language" + "[" + String.valueOf(this.language) + "]\n"); 
-     builder.append("_language" + "[" + String.valueOf(this._language) + "]\n"); ;
+    builder.append("[Procedure]:" + "\n");
+     if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
+     if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
+     if(this.basedOn != null) builder.append("basedOn" + "->" + this.basedOn.toString() + "\n"); 
+     if(this.partOf != null) builder.append("partOf" + "->" + this.partOf.toString() + "\n"); 
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.notDone != null) builder.append("notDone" + "->" + this.notDone.toString() + "\n"); 
+     if(this._notDone != null) builder.append("_notDone" + "->" + this._notDone.toString() + "\n"); 
+     if(this.notDoneReason != null) builder.append("notDoneReason" + "->" + this.notDoneReason.toString() + "\n"); 
+     if(this.category != null) builder.append("category" + "->" + this.category.toString() + "\n"); 
+     if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
+     if(this.subject != null) builder.append("subject" + "->" + this.subject.toString() + "\n"); 
+     if(this.context != null) builder.append("context" + "->" + this.context.toString() + "\n"); 
+     if(this.performedDateTime != null) builder.append("performedDateTime" + "->" + this.performedDateTime.toString() + "\n"); 
+     if(this._performedDateTime != null) builder.append("_performedDateTime" + "->" + this._performedDateTime.toString() + "\n"); 
+     if(this.performedPeriod != null) builder.append("performedPeriod" + "->" + this.performedPeriod.toString() + "\n"); 
+     if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
+     if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
+     if(this.reasonCode != null) builder.append("reasonCode" + "->" + this.reasonCode.toString() + "\n"); 
+     if(this.reasonReference != null) builder.append("reasonReference" + "->" + this.reasonReference.toString() + "\n"); 
+     if(this.bodySite != null) builder.append("bodySite" + "->" + this.bodySite.toString() + "\n"); 
+     if(this.outcome != null) builder.append("outcome" + "->" + this.outcome.toString() + "\n"); 
+     if(this.report != null) builder.append("report" + "->" + this.report.toString() + "\n"); 
+     if(this.complication != null) builder.append("complication" + "->" + this.complication.toString() + "\n"); 
+     if(this.complicationDetail != null) builder.append("complicationDetail" + "->" + this.complicationDetail.toString() + "\n"); 
+     if(this.followUp != null) builder.append("followUp" + "->" + this.followUp.toString() + "\n"); 
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
+     if(this.focalDevice != null) builder.append("focalDevice" + "->" + this.focalDevice.toString() + "\n"); 
+     if(this.usedReference != null) builder.append("usedReference" + "->" + this.usedReference.toString() + "\n"); 
+     if(this.usedCode != null) builder.append("usedCode" + "->" + this.usedCode.toString() + "\n"); 
+     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
+     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
+     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
+     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
+     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
+     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -672,36 +656,4 @@ public class Procedure  {
   	}
   }
 
-  public static java.util.List<Procedure> fromArray(java.util.List<ProcedureModel> list) {
-    return (java.util.List<Procedure>)list.stream()
-      .map(model -> new Procedure(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<ProcedureModel> toModelArray(java.util.List<Procedure> list) {
-    return (java.util.List<ProcedureModel>)list.stream()
-      .map(model -> new ProcedureModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Procedure fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Procedure.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Procedure o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Procedure> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

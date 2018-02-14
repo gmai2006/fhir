@@ -52,6 +52,7 @@ public class Narrative  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
    derived from Element
   */
+  @javax.validation.constraints.NotNull
   private String id;
 
   /**
@@ -71,19 +72,15 @@ public class Narrative  {
 
   public Narrative(NarrativeModel o) {
     this.id = o.getId();
-      if (null != o.getStatus()) {
-        this.status = new String(o.getStatus());
-      }
-
-      if (null != o.getDiv()) {
-        this.div = new String(o.getDiv());
-      }
-
-      if (null != o.getId()) {
-        this.id = new String(o.getId());
-      }
-
-      this.extension = Extension.fromArray(o.getExtension());
+    if (null != o.getStatus()) {
+      this.status = o.getStatus();
+    }
+    if (null != o.getDiv()) {
+      this.div = o.getDiv();
+    }
+    if (null != o.getId()) {
+      this.id = o.getId();
+    }
   }
 
   public void setStatus( String value) {
@@ -126,12 +123,13 @@ public class Narrative  {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append("status" + "[" + String.valueOf(this.status) + "]\n"); 
-     builder.append("_status" + "[" + String.valueOf(this._status) + "]\n"); 
-     builder.append("div" + "[" + String.valueOf(this.div) + "]\n"); 
-     builder.append("id" + "[" + String.valueOf(this.id) + "]\n"); 
-     builder.append("_id" + "[" + String.valueOf(this._id) + "]\n"); 
-     builder.append("extension" + "[" + String.valueOf(this.extension) + "]\n"); ;
+    builder.append("[Narrative]:" + "\n");
+     if(this.status != null) builder.append("status" + "->" + this.status.toString() + "\n"); 
+     if(this._status != null) builder.append("_status" + "->" + this._status.toString() + "\n"); 
+     if(this.div != null) builder.append("div" + "->" + this.div.toString() + "\n"); 
+     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
+     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
+     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -153,36 +151,4 @@ public class Narrative  {
   	}
   }
 
-  public static java.util.List<Narrative> fromArray(java.util.List<NarrativeModel> list) {
-    return (java.util.List<Narrative>)list.stream()
-      .map(model -> new Narrative(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-  public static java.util.List<NarrativeModel> toModelArray(java.util.List<Narrative> list) {
-    return (java.util.List<NarrativeModel>)list.stream()
-      .map(model -> new NarrativeModel(model))
-      .collect(java.util.stream.Collectors.toList());
-  }
-
-
-  public static Narrative fromJson(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, Narrative.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Narrative o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Narrative> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }
