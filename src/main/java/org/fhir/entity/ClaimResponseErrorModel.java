@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
 @Entity
 @Table(name="claimresponseerror")
 public class ClaimResponseErrorModel  implements Serializable {
-	private static final long serialVersionUID = 151857669679121029L;
+	private static final long serialVersionUID = 151873631157277885L;
   /**
   * Description: "The sequence number of the line item submitted which contains the error. This value is omitted when the error is elsewhere."
   */
@@ -120,7 +121,7 @@ public class ClaimResponseErrorModel  implements Serializable {
     this.sequenceLinkId = o.getSequenceLinkId();
     this.detailSequenceLinkId = o.getDetailSequenceLinkId();
     this.subdetailSequenceLinkId = o.getSubdetailSequenceLinkId();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
   }
 
   public Float getSequenceLinkId() {

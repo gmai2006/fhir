@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitadjudication")
 public class ExplanationOfBenefitAdjudicationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669702428751L;
+	private static final long serialVersionUID = 151873631180991839L;
   /**
   * Description: "Code indicating: Co-Pay, deductable, elegible, benefit, tax, etc."
   * Actual type: String;
@@ -59,12 +60,14 @@ public class ExplanationOfBenefitAdjudicationModel  implements Serializable {
 
   /**
   * Description: "Monitory amount associated with the code."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"amount\"", length = 16777215)
-  private String amount;
+  @Column(name="\"amount_id\"")
+  private String amount_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> amount;
 
   /**
   * Description: "A non-monetary value for example a percentage. Mutually exclusive to the amount element above."
@@ -119,9 +122,12 @@ public class ExplanationOfBenefitAdjudicationModel  implements Serializable {
   public ExplanationOfBenefitAdjudicationModel(ExplanationOfBenefitAdjudication o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.reason = CodeableConceptHelper.toJson(o.getReason());
-    this.amount = MoneyHelper.toJson(o.getAmount());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.reason = JsonUtils.toJson(o.getReason());
+    if (null != o.getAmount() ) {
+    	this.amount_id = "amount" + this.parent_id;
+    	this.amount = MoneyHelper.toModel(o.getAmount(), this.amount_id);
+    }
     this.value = o.getValue();
   }
 
@@ -137,10 +143,10 @@ public class ExplanationOfBenefitAdjudicationModel  implements Serializable {
   public void setReason( String value) {
     this.reason = value;
   }
-  public String getAmount() {
+  public java.util.List<MoneyModel> getAmount() {
     return this.amount;
   }
-  public void setAmount( String value) {
+  public void setAmount( java.util.List<MoneyModel> value) {
     this.amount = value;
   }
   public Float getValue() {
@@ -180,7 +186,6 @@ public class ExplanationOfBenefitAdjudicationModel  implements Serializable {
     builder.append("[ExplanationOfBenefitAdjudicationModel]:" + "\n");
      builder.append("category" + "->" + this.category + "\n"); 
      builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("amount" + "->" + this.amount + "\n"); 
      builder.append("value" + "->" + this.value + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

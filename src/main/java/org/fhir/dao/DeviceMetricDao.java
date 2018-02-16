@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DeviceMetric;
 
 public interface DeviceMetricDao {
@@ -38,4 +39,9 @@ public interface DeviceMetricDao {
 
   public DeviceMetric update(DeviceMetric e);
   public void delete(DeviceMetric e);
+
+  public List<DeviceMetric> findByField(QueryBuilder queryBuilder);
+
+  public List<DeviceMetric> findByParent(QueryBuilder queryBuilder);
+  public List<DeviceMetric> findBySource(QueryBuilder queryBuilder);
 }

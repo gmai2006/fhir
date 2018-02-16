@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PractitionerRole;
 
 public interface PractitionerRoleDao {
@@ -38,4 +39,11 @@ public interface PractitionerRoleDao {
 
   public PractitionerRole update(PractitionerRole e);
   public void delete(PractitionerRole e);
+
+  public List<PractitionerRole> findByField(QueryBuilder queryBuilder);
+
+  public List<PractitionerRole> findByEndpoint(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByLocation(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByOrganization(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByPractitioner(QueryBuilder queryBuilder);
 }

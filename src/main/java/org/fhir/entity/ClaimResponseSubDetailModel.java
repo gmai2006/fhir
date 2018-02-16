@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
 @Entity
 @Table(name="claimresponsesubdetail")
 public class ClaimResponseSubDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151857669706228794L;
+	private static final long serialVersionUID = 15187363118471655L;
   /**
   * Description: "A service line number."
   */

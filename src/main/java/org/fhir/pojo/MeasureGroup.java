@@ -31,70 +31,42 @@ import com.google.gson.GsonBuilder;
 /**
 * "The Measure resource provides the definition of a quality measure."
 */
-public class MeasureGroup  {
+public class MeasureGroup  extends BackboneElement  {
   /**
   * Description: "A unique identifier for the group. This identifier will used to report data for the group in the measure report."
   */
   @javax.validation.constraints.NotNull
-  private Identifier identifier;
+  protected Identifier identifier;
 
   /**
   * Description: "Optional name or short description of this group."
   */
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "The human readable description of this population group."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "A population criteria for the measure."
   */
-  private java.util.List<MeasurePopulation> population = new java.util.ArrayList<>();
+  protected java.util.List<MeasurePopulation> population = new java.util.ArrayList<>();
 
   /**
   * Description: "The stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library, or a valid FHIR Resource Path."
   */
-  private java.util.List<MeasureStratifier> stratifier = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<MeasureStratifier> stratifier = new java.util.ArrayList<>();
 
   public MeasureGroup() {
   }
@@ -113,9 +85,6 @@ public class MeasureGroup  {
     }
     if (null != o.getStratifier() && !o.getStratifier().isEmpty()) {
     	this.stratifier = MeasureStratifierHelper.fromArray2Array(o.getStratifier());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -161,30 +130,6 @@ public class MeasureGroup  {
   public java.util.List<MeasureStratifier> getStratifier() {
     return this.stratifier;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -196,11 +141,7 @@ public class MeasureGroup  {
      if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
      if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
      if(this.population != null) builder.append("population" + "->" + this.population.toString() + "\n"); 
-     if(this.stratifier != null) builder.append("stratifier" + "->" + this.stratifier.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.stratifier != null) builder.append("stratifier" + "->" + this.stratifier.toString() + "\n"); ;
     return builder.toString();
   }
 

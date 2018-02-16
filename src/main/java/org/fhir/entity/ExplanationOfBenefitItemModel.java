@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefititem")
 public class ExplanationOfBenefitItemModel  implements Serializable {
-	private static final long serialVersionUID = 151857669683915416L;
+	private static final long serialVersionUID = 151873631162739403L;
   /**
   * Description: "A service line number."
   */
@@ -147,12 +148,14 @@ public class ExplanationOfBenefitItemModel  implements Serializable {
 
   /**
   * Description: "Where the service was provided."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"locationAddress\"", length = 16777215)
-  private String locationAddress;
+  @Column(name="\"locationaddress_id\"")
+  private String locationaddress_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="locationaddress_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> locationAddress;
 
   /**
   * Description: "Where the service was provided."
@@ -167,21 +170,25 @@ public class ExplanationOfBenefitItemModel  implements Serializable {
 
   /**
   * Description: "The number of repetitions of a service or product."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "If the item is a node then this is the fee for the product or service, otherwise this is the total of the fees for the children of the group."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"unitPrice\"", length = 16777215)
-  private String unitPrice;
+  @Column(name="\"unitprice_id\"")
+  private String unitprice_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unitprice_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> unitPrice;
 
   /**
   * Description: "A real number that represents a multiplier used in determining the overall value of services delivered and/or goods received. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount."
@@ -193,12 +200,14 @@ public class ExplanationOfBenefitItemModel  implements Serializable {
 
   /**
   * Description: "The quantity times the unit price for an addittional service or product or charge. For example, the formula: unit Quantity * unit Price (Cost per Point) * factor Number  * points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"net\"", length = 16777215)
-  private String net;
+  @Column(name="\"net_id\"")
+  private String net_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="net_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> net;
 
   /**
   * Description: "List of Unique Device Identifiers associated with this line item."
@@ -319,26 +328,38 @@ public class ExplanationOfBenefitItemModel  implements Serializable {
     this.diagnosisLinkId = org.fhir.utils.JsonUtils.write2String(o.getDiagnosisLinkId());
     this.procedureLinkId = org.fhir.utils.JsonUtils.write2String(o.getProcedureLinkId());
     this.informationLinkId = org.fhir.utils.JsonUtils.write2String(o.getInformationLinkId());
-    this.revenue = CodeableConceptHelper.toJson(o.getRevenue());
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.service = CodeableConceptHelper.toJson(o.getService());
+    this.revenue = JsonUtils.toJson(o.getRevenue());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.service = JsonUtils.toJson(o.getService());
     this.servicedDate = o.getServicedDate();
-    this.servicedPeriod = PeriodHelper.toJson(o.getServicedPeriod());
-    this.locationCodeableConcept = CodeableConceptHelper.toJson(o.getLocationCodeableConcept());
-    this.locationAddress = AddressHelper.toJson(o.getLocationAddress());
+    this.servicedPeriod = JsonUtils.toJson(o.getServicedPeriod());
+    this.locationCodeableConcept = JsonUtils.toJson(o.getLocationCodeableConcept());
+    if (null != o.getLocationAddress() ) {
+    	this.locationaddress_id = "locationaddress" + this.parent_id;
+    	this.locationAddress = AddressHelper.toModel(o.getLocationAddress(), this.locationaddress_id);
+    }
     if (null != o.getLocationReference() ) {
     	this.locationreference_id = "locationreference" + this.parent_id;
     	this.locationReference = ReferenceHelper.toModel(o.getLocationReference(), this.locationreference_id);
     }
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
-    this.unitPrice = MoneyHelper.toJson(o.getUnitPrice());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
+    if (null != o.getUnitPrice() ) {
+    	this.unitprice_id = "unitprice" + this.parent_id;
+    	this.unitPrice = MoneyHelper.toModel(o.getUnitPrice(), this.unitprice_id);
+    }
     this.factor = o.getFactor();
-    this.net = MoneyHelper.toJson(o.getNet());
+    if (null != o.getNet() ) {
+    	this.net_id = "net" + this.parent_id;
+    	this.net = MoneyHelper.toModel(o.getNet(), this.net_id);
+    }
     if (null != o.getUdi() && !o.getUdi().isEmpty()) {
     	this.udi_id = "udi" + this.parent_id;
     	this.udi = ReferenceHelper.toModelFromArray(o.getUdi(), this.udi_id);
     }
-    this.bodySite = CodeableConceptHelper.toJson(o.getBodySite());
+    this.bodySite = JsonUtils.toJson(o.getBodySite());
     if (null != o.getEncounter() && !o.getEncounter().isEmpty()) {
     	this.encounter_id = "encounter" + this.parent_id;
     	this.encounter = ReferenceHelper.toModelFromArray(o.getEncounter(), this.encounter_id);
@@ -432,10 +453,10 @@ public class ExplanationOfBenefitItemModel  implements Serializable {
   public void setLocationCodeableConcept( String value) {
     this.locationCodeableConcept = value;
   }
-  public String getLocationAddress() {
+  public java.util.List<AddressModel> getLocationAddress() {
     return this.locationAddress;
   }
-  public void setLocationAddress( String value) {
+  public void setLocationAddress( java.util.List<AddressModel> value) {
     this.locationAddress = value;
   }
   public java.util.List<ReferenceModel> getLocationReference() {
@@ -444,16 +465,16 @@ public class ExplanationOfBenefitItemModel  implements Serializable {
   public void setLocationReference( java.util.List<ReferenceModel> value) {
     this.locationReference = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
-  public String getUnitPrice() {
+  public java.util.List<MoneyModel> getUnitPrice() {
     return this.unitPrice;
   }
-  public void setUnitPrice( String value) {
+  public void setUnitPrice( java.util.List<MoneyModel> value) {
     this.unitPrice = value;
   }
   public Float getFactor() {
@@ -462,10 +483,10 @@ public class ExplanationOfBenefitItemModel  implements Serializable {
   public void setFactor( Float value) {
     this.factor = value;
   }
-  public String getNet() {
+  public java.util.List<MoneyModel> getNet() {
     return this.net;
   }
-  public void setNet( String value) {
+  public void setNet( java.util.List<MoneyModel> value) {
     this.net = value;
   }
   public java.util.List<ReferenceModel> getUdi() {
@@ -552,11 +573,7 @@ public class ExplanationOfBenefitItemModel  implements Serializable {
      builder.append("servicedDate" + "->" + this.servicedDate + "\n"); 
      builder.append("servicedPeriod" + "->" + this.servicedPeriod + "\n"); 
      builder.append("locationCodeableConcept" + "->" + this.locationCodeableConcept + "\n"); 
-     builder.append("locationAddress" + "->" + this.locationAddress + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("unitPrice" + "->" + this.unitPrice + "\n"); 
      builder.append("factor" + "->" + this.factor + "\n"); 
-     builder.append("net" + "->" + this.net + "\n"); 
      builder.append("bodySite" + "->" + this.bodySite + "\n"); 
      builder.append("subSite" + "->" + this.subSite + "\n"); 
      builder.append("noteNumber" + "->" + this.noteNumber + "\n"); 

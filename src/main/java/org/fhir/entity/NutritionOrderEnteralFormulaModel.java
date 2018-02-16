@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
 @Entity
 @Table(name="nutritionorderenteralformula")
 public class NutritionOrderEnteralFormulaModel  implements Serializable {
-	private static final long serialVersionUID = 151857669696054241L;
+	private static final long serialVersionUID = 151873631175638492L;
   /**
   * Description: "The type of enteral or infant formula such as an adult standard formula with fiber or a soy-based infant formula."
   * Actual type: String;
@@ -72,12 +73,14 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
 
   /**
   * Description: "The amount of energy (calories) that the formula should provide per specified volume, typically per mL or fluid oz.  For example, an infant may require a formula that provides 24 calories per fluid ounce or an adult may require an enteral formula that provides 1.5 calorie/mL."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"caloricDensity\"", length = 16777215)
-  private String caloricDensity;
+  @Column(name="\"caloricdensity_id\"")
+  private String caloricdensity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="caloricdensity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> caloricDensity;
 
   /**
   * Description: "The route or physiological path of administration into the patient's gastrointestinal  tract for purposes of providing the formula feeding, e.g. nasogastric tube."
@@ -101,12 +104,14 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
 
   /**
   * Description: "The maximum total quantity of formula that may be administered to a subject over the period of time, e.g. 1440 mL over 24 hours."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"maxVolumeToDeliver\"", length = 16777215)
-  private String maxVolumeToDeliver;
+  @Column(name="\"maxvolumetodeliver_id\"")
+  private String maxvolumetodeliver_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="maxvolumetodeliver_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> maxVolumeToDeliver;
 
   /**
   * Description: "Free text formula administration, feeding instructions or additional instructions or information."
@@ -160,17 +165,23 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   public NutritionOrderEnteralFormulaModel(NutritionOrderEnteralFormula o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.baseFormulaType = CodeableConceptHelper.toJson(o.getBaseFormulaType());
+    this.baseFormulaType = JsonUtils.toJson(o.getBaseFormulaType());
     this.baseFormulaProductName = o.getBaseFormulaProductName();
-    this.additiveType = CodeableConceptHelper.toJson(o.getAdditiveType());
+    this.additiveType = JsonUtils.toJson(o.getAdditiveType());
     this.additiveProductName = o.getAdditiveProductName();
-    this.caloricDensity = QuantityHelper.toJson(o.getCaloricDensity());
-    this.routeofAdministration = CodeableConceptHelper.toJson(o.getRouteofAdministration());
+    if (null != o.getCaloricDensity() ) {
+    	this.caloricdensity_id = "caloricdensity" + this.parent_id;
+    	this.caloricDensity = QuantityHelper.toModel(o.getCaloricDensity(), this.caloricdensity_id);
+    }
+    this.routeofAdministration = JsonUtils.toJson(o.getRouteofAdministration());
     if (null != o.getAdministration() && !o.getAdministration().isEmpty()) {
     	this.administration_id = "administration" + this.parent_id;
     	this.administration = NutritionOrderAdministrationHelper.toModelFromArray(o.getAdministration(), this.administration_id);
     }
-    this.maxVolumeToDeliver = QuantityHelper.toJson(o.getMaxVolumeToDeliver());
+    if (null != o.getMaxVolumeToDeliver() ) {
+    	this.maxvolumetodeliver_id = "maxvolumetodeliver" + this.parent_id;
+    	this.maxVolumeToDeliver = QuantityHelper.toModel(o.getMaxVolumeToDeliver(), this.maxvolumetodeliver_id);
+    }
     this.administrationInstruction = o.getAdministrationInstruction();
   }
 
@@ -198,10 +209,10 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   public void setAdditiveProductName( String value) {
     this.additiveProductName = value;
   }
-  public String getCaloricDensity() {
+  public java.util.List<QuantityModel> getCaloricDensity() {
     return this.caloricDensity;
   }
-  public void setCaloricDensity( String value) {
+  public void setCaloricDensity( java.util.List<QuantityModel> value) {
     this.caloricDensity = value;
   }
   public String getRouteofAdministration() {
@@ -216,10 +227,10 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   public void setAdministration( java.util.List<NutritionOrderAdministrationModel> value) {
     this.administration = value;
   }
-  public String getMaxVolumeToDeliver() {
+  public java.util.List<QuantityModel> getMaxVolumeToDeliver() {
     return this.maxVolumeToDeliver;
   }
-  public void setMaxVolumeToDeliver( String value) {
+  public void setMaxVolumeToDeliver( java.util.List<QuantityModel> value) {
     this.maxVolumeToDeliver = value;
   }
   public String getAdministrationInstruction() {
@@ -261,9 +272,7 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
      builder.append("baseFormulaProductName" + "->" + this.baseFormulaProductName + "\n"); 
      builder.append("additiveType" + "->" + this.additiveType + "\n"); 
      builder.append("additiveProductName" + "->" + this.additiveProductName + "\n"); 
-     builder.append("caloricDensity" + "->" + this.caloricDensity + "\n"); 
      builder.append("routeofAdministration" + "->" + this.routeofAdministration + "\n"); 
-     builder.append("maxVolumeToDeliver" + "->" + this.maxVolumeToDeliver + "\n"); 
      builder.append("administrationInstruction" + "->" + this.administrationInstruction + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

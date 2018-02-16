@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DiagnosticReport;
 
 public interface DiagnosticReportDao {
@@ -38,4 +39,13 @@ public interface DiagnosticReportDao {
 
   public DiagnosticReport update(DiagnosticReport e);
   public void delete(DiagnosticReport e);
+
+  public List<DiagnosticReport> findByField(QueryBuilder queryBuilder);
+
+  public List<DiagnosticReport> findByContext(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByImage(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByPerformer(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByResult(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findBySpecimen(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findBySubject(QueryBuilder queryBuilder);
 }

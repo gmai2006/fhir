@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CapabilityStatement;
 
 public interface CapabilityStatementService {
@@ -35,4 +37,8 @@ public interface CapabilityStatementService {
   public CapabilityStatement create(CapabilityStatement bean);
   public CapabilityStatement update(CapabilityStatement bean);
   public void delete(CapabilityStatement bean);
+  public List<CapabilityStatement> findByField(QueryBuilder queryBuilder);
+  public List<CapabilityStatement> findBySoftware(QueryBuilder queryBuilder);
+
+
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
 @Entity
 @Table(name="careplandetail")
 public class CarePlanDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151857669708227739L;
+	private static final long serialVersionUID = 151873631186943800L;
   /**
   * Description: "High-level categorization of the type of activity in a care plan."
   * Actual type: String;
@@ -188,21 +189,25 @@ public class CarePlanDetailModel  implements Serializable {
 
   /**
   * Description: "Identifies the quantity expected to be consumed in a given day."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"dailyAmount\"", length = 16777215)
-  private String dailyAmount;
+  @Column(name="\"dailyamount_id\"")
+  private String dailyamount_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dailyamount_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> dailyAmount;
 
   /**
   * Description: "Identifies the quantity expected to be supplied, administered or consumed by the subject."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "This provides a textual description of constraints on the intended activity occurrence, including relation to other activities.  It may also include objectives, pre-conditions and end-conditions.  Finally, it may convey specifics about the activity such as body site, method, route, etc."
@@ -256,12 +261,12 @@ public class CarePlanDetailModel  implements Serializable {
   public CarePlanDetailModel(CarePlanDetail o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.category = JsonUtils.toJson(o.getCategory());
     if (null != o.getDefinition() ) {
     	this.definition_id = "definition" + this.parent_id;
     	this.definition = ReferenceHelper.toModel(o.getDefinition(), this.definition_id);
     }
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonreference_id = "reasonreference" + this.parent_id;
     	this.reasonReference = ReferenceHelper.toModelFromArray(o.getReasonReference(), this.reasonreference_id);
@@ -273,8 +278,8 @@ public class CarePlanDetailModel  implements Serializable {
     this.status = o.getStatus();
     this.statusReason = o.getStatusReason();
     this.prohibited = o.getProhibited();
-    this.scheduledTiming = TimingHelper.toJson(o.getScheduledTiming());
-    this.scheduledPeriod = PeriodHelper.toJson(o.getScheduledPeriod());
+    this.scheduledTiming = JsonUtils.toJson(o.getScheduledTiming());
+    this.scheduledPeriod = JsonUtils.toJson(o.getScheduledPeriod());
     this.scheduledString = o.getScheduledString();
     if (null != o.getLocation() ) {
     	this.location_id = "location" + this.parent_id;
@@ -284,13 +289,19 @@ public class CarePlanDetailModel  implements Serializable {
     	this.performer_id = "performer" + this.parent_id;
     	this.performer = ReferenceHelper.toModelFromArray(o.getPerformer(), this.performer_id);
     }
-    this.productCodeableConcept = CodeableConceptHelper.toJson(o.getProductCodeableConcept());
+    this.productCodeableConcept = JsonUtils.toJson(o.getProductCodeableConcept());
     if (null != o.getProductReference() ) {
     	this.productreference_id = "productreference" + this.parent_id;
     	this.productReference = ReferenceHelper.toModel(o.getProductReference(), this.productreference_id);
     }
-    this.dailyAmount = QuantityHelper.toJson(o.getDailyAmount());
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    if (null != o.getDailyAmount() ) {
+    	this.dailyamount_id = "dailyamount" + this.parent_id;
+    	this.dailyAmount = QuantityHelper.toModel(o.getDailyAmount(), this.dailyamount_id);
+    }
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
     this.description = o.getDescription();
   }
 
@@ -390,16 +401,16 @@ public class CarePlanDetailModel  implements Serializable {
   public void setProductReference( java.util.List<ReferenceModel> value) {
     this.productReference = value;
   }
-  public String getDailyAmount() {
+  public java.util.List<QuantityModel> getDailyAmount() {
     return this.dailyAmount;
   }
-  public void setDailyAmount( String value) {
+  public void setDailyAmount( java.util.List<QuantityModel> value) {
     this.dailyAmount = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
   public String getDescription() {
@@ -447,8 +458,6 @@ public class CarePlanDetailModel  implements Serializable {
      builder.append("scheduledPeriod" + "->" + this.scheduledPeriod + "\n"); 
      builder.append("scheduledString" + "->" + this.scheduledString + "\n"); 
      builder.append("productCodeableConcept" + "->" + this.productCodeableConcept + "\n"); 
-     builder.append("dailyAmount" + "->" + this.dailyAmount + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

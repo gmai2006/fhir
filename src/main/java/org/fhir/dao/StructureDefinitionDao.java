@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.StructureDefinition;
 
 public interface StructureDefinitionDao {
@@ -38,4 +39,7 @@ public interface StructureDefinitionDao {
 
   public StructureDefinition update(StructureDefinition e);
   public void delete(StructureDefinition e);
+
+  public List<StructureDefinition> findByField(QueryBuilder queryBuilder);
+
 }

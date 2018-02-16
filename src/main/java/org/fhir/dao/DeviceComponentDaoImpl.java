@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.DeviceComponentModel;
 import org.fhir.pojo.DeviceComponent;
 import org.fhir.pojo.DeviceComponentHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class DeviceComponentDaoImpl implements DeviceComponentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class DeviceComponentDaoImpl implements DeviceComponentDao {
       final EntityManager em = entityManagerProvider.get();
       final DeviceComponentModel removed = em.find(DeviceComponentModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<DeviceComponent> findByParent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceComponentModel a, Reference b where a.parent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceComponent> findBySource(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceComponentModel a, Reference b where a.source_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<DeviceComponent> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceComponentModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<DeviceComponent> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, DeviceComponentModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<DeviceComponentModel> models = query.getResultList();
+    return DeviceComponentHelper.fromArray2Array(models);
   }
 }

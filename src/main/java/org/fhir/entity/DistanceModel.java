@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A length - a value with a unit that is a physical distance."
 */
 @Entity
 @Table(name="distance")
 public class DistanceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669673548047L;
+	private static final long serialVersionUID = 15187363114866836L;
   /**
   * Description: "The value of the measured amount. The value includes an implicit precision in the presentation of the value."
    derived from Quantity

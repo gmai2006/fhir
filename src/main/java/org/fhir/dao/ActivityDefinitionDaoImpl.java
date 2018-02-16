@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ActivityDefinitionModel;
 import org.fhir.pojo.ActivityDefinition;
 import org.fhir.pojo.ActivityDefinitionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ActivityDefinitionDaoImpl implements ActivityDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class ActivityDefinitionDaoImpl implements ActivityDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       final ActivityDefinitionModel removed = em.find(ActivityDefinitionModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<ActivityDefinition> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ActivityDefinitionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ActivityDefinition> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ActivityDefinitionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ActivityDefinitionModel> models = query.getResultList();
+    return ActivityDefinitionHelper.fromArray2Array(models);
   }
 }

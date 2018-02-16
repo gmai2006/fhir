@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.RelatedPersonModel;
 import org.fhir.pojo.RelatedPerson;
 import org.fhir.pojo.RelatedPersonHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class RelatedPersonDaoImpl implements RelatedPersonDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class RelatedPersonDaoImpl implements RelatedPersonDao {
       final EntityManager em = entityManagerProvider.get();
       final RelatedPersonModel removed = em.find(RelatedPersonModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<RelatedPerson> findByAddress(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RelatedPersonModel a, Address b where a.address_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RelatedPerson> findByPatient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RelatedPersonModel a, Reference b where a.patient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<RelatedPerson> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RelatedPersonModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<RelatedPerson> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, RelatedPersonModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<RelatedPersonModel> models = query.getResultList();
+    return RelatedPersonHelper.fromArray2Array(models);
   }
 }

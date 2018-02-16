@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.SpecimenModel;
 import org.fhir.pojo.Specimen;
 import org.fhir.pojo.SpecimenHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class SpecimenDaoImpl implements SpecimenDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class SpecimenDaoImpl implements SpecimenDao {
       final EntityManager em = entityManagerProvider.get();
       final SpecimenModel removed = em.find(SpecimenModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Specimen> findByContainer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SpecimenModel a, SpecimenContainer b where a.container_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Specimen> findByParent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SpecimenModel a, Reference b where a.parent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Specimen> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SpecimenModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Specimen> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SpecimenModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Specimen> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, SpecimenModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<SpecimenModel> models = query.getResultList();
+    return SpecimenHelper.fromArray2Array(models);
   }
 }

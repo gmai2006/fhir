@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A homogeneous material with a definite composition."
 */
 @Entity
 @Table(name="substance")
 public class SubstanceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669682914523L;
+	private static final long serialVersionUID = 151873631161764028L;
   /**
   * Description: "This is a Substance resource"
   */
@@ -202,7 +203,7 @@ public class SubstanceModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     this.description = o.getDescription();
     if (null != o.getInstance() && !o.getInstance().isEmpty()) {
     	this.instance_id = "instance" + this.id;

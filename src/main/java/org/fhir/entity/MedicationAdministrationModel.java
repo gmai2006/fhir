@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient consuming or otherwise being administered a medication.  This may be as simple as swallowing a tablet or it may be a long running infusion.  Related resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner."
 */
 @Entity
 @Table(name="medicationadministration")
 public class MedicationAdministrationModel  implements Serializable {
-	private static final long serialVersionUID = 15185766966257118L;
+	private static final long serialVersionUID = 15187363113374693L;
   /**
   * Description: "This is a MedicationAdministration resource"
   */
@@ -363,8 +364,8 @@ public class MedicationAdministrationModel  implements Serializable {
     	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
     }
     this.status = o.getStatus();
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.medicationCodeableConcept = CodeableConceptHelper.toJson(o.getMedicationCodeableConcept());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.medicationCodeableConcept = JsonUtils.toJson(o.getMedicationCodeableConcept());
     if (null != o.getMedicationReference() ) {
     	this.medicationreference_id = "medicationreference" + this.id;
     	this.medicationReference = ReferenceHelper.toModel(o.getMedicationReference(), this.medicationreference_id);
@@ -382,7 +383,7 @@ public class MedicationAdministrationModel  implements Serializable {
     	this.supportingInformation = ReferenceHelper.toModelFromArray(o.getSupportingInformation(), this.supportinginformation_id);
     }
     this.effectiveDateTime = o.getEffectiveDateTime();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
     	this.performer_id = "performer" + this.id;
     	this.performer = MedicationAdministrationPerformerHelper.toModelFromArray(o.getPerformer(), this.performer_id);

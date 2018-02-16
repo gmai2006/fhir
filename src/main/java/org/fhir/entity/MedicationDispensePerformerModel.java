@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order."
 */
 @Entity
 @Table(name="medicationdispenseperformer")
 public class MedicationDispensePerformerModel  implements Serializable {
-	private static final long serialVersionUID = 151857669664862383L;
+	private static final long serialVersionUID = 15187363113713990L;
   /**
   * Description: "The device, practitioner, etc. who performed the action.  It should be assumed that the actor is the dispenser of the medication."
   */

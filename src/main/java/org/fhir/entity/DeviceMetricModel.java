@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes a measurement, calculation or setting capability of a medical device."
 */
 @Entity
 @Table(name="devicemetric")
 public class DeviceMetricModel  implements Serializable {
-	private static final long serialVersionUID = 151857669664099685L;
+	private static final long serialVersionUID = 151873631136046560L;
   /**
   * Description: "This is a DeviceMetric resource"
   */
@@ -229,9 +230,9 @@ public class DeviceMetricModel  implements Serializable {
   public DeviceMetricModel(DeviceMetric o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.unit = CodeableConceptHelper.toJson(o.getUnit());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    this.type = JsonUtils.toJson(o.getType());
+    this.unit = JsonUtils.toJson(o.getUnit());
     if (null != o.getSource() ) {
     	this.source_id = "source" + this.id;
     	this.source = ReferenceHelper.toModel(o.getSource(), this.source_id);
@@ -243,7 +244,7 @@ public class DeviceMetricModel  implements Serializable {
     this.operationalStatus = o.getOperationalStatus();
     this.color = o.getColor();
     this.category = o.getCategory();
-    this.measurementPeriod = TimingHelper.toJson(o.getMeasurementPeriod());
+    this.measurementPeriod = JsonUtils.toJson(o.getMeasurementPeriod());
     if (null != o.getCalibration() && !o.getCalibration().isEmpty()) {
     	this.calibration_id = "calibration" + this.id;
     	this.calibration = DeviceMetricCalibrationHelper.toModelFromArray(o.getCalibration(), this.calibration_id);

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
 @Entity
 @Table(name="claimresponse")
 public class ClaimResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669685198850L;
+	private static final long serialVersionUID = 151873631163948448L;
   /**
   * Description: "This is a ClaimResponse resource"
   */
@@ -186,30 +187,36 @@ public class ClaimResponseModel  implements Serializable {
 
   /**
   * Description: "The total cost of the services reported."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"totalCost\"", length = 16777215)
-  private String totalCost;
+  @Column(name="\"totalcost_id\"")
+  private String totalcost_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="totalcost_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> totalCost;
 
   /**
   * Description: "The amount of deductible applied which was not allocated to any particular service line."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"unallocDeductable\"", length = 16777215)
-  private String unallocDeductable;
+  @Column(name="\"unallocdeductable_id\"")
+  private String unallocdeductable_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unallocdeductable_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> unallocDeductable;
 
   /**
   * Description: "Total amount of benefit payable (Equal to sum of the Benefit amounts from all detail lines and additions less the Unallocated Deductible)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"totalBenefit\"", length = 16777215)
-  private String totalBenefit;
+  @Column(name="\"totalbenefit_id\"")
+  private String totalbenefit_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="totalbenefit_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> totalBenefit;
 
   /**
   * Description: "Payment details for the claim if the claim has been paid."
@@ -386,9 +393,9 @@ public class ClaimResponseModel  implements Serializable {
     	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
-    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.outcome = JsonUtils.toJson(o.getOutcome());
     this.disposition = o.getDisposition();
-    this.payeeType = CodeableConceptHelper.toJson(o.getPayeeType());
+    this.payeeType = JsonUtils.toJson(o.getPayeeType());
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item_id = "item" + this.id;
     	this.item = ClaimResponseItemHelper.toModelFromArray(o.getItem(), this.item_id);
@@ -401,15 +408,24 @@ public class ClaimResponseModel  implements Serializable {
     	this.error_id = "error" + this.id;
     	this.error = ClaimResponseErrorHelper.toModelFromArray(o.getError(), this.error_id);
     }
-    this.totalCost = MoneyHelper.toJson(o.getTotalCost());
-    this.unallocDeductable = MoneyHelper.toJson(o.getUnallocDeductable());
-    this.totalBenefit = MoneyHelper.toJson(o.getTotalBenefit());
+    if (null != o.getTotalCost() ) {
+    	this.totalcost_id = "totalcost" + this.id;
+    	this.totalCost = MoneyHelper.toModel(o.getTotalCost(), this.totalcost_id);
+    }
+    if (null != o.getUnallocDeductable() ) {
+    	this.unallocdeductable_id = "unallocdeductable" + this.id;
+    	this.unallocDeductable = MoneyHelper.toModel(o.getUnallocDeductable(), this.unallocdeductable_id);
+    }
+    if (null != o.getTotalBenefit() ) {
+    	this.totalbenefit_id = "totalbenefit" + this.id;
+    	this.totalBenefit = MoneyHelper.toModel(o.getTotalBenefit(), this.totalbenefit_id);
+    }
     if (null != o.getPayment() ) {
     	this.payment_id = "payment" + this.id;
     	this.payment = ClaimResponsePaymentHelper.toModel(o.getPayment(), this.payment_id);
     }
-    this.reserved = CodingHelper.toJson(o.getReserved());
-    this.form = CodeableConceptHelper.toJson(o.getForm());
+    this.reserved = JsonUtils.toJson(o.getReserved());
+    this.form = JsonUtils.toJson(o.getForm());
     if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
     	this.processnote_id = "processnote" + this.id;
     	this.processNote = ClaimResponseProcessNoteHelper.toModelFromArray(o.getProcessNote(), this.processnote_id);
@@ -524,22 +540,22 @@ public class ClaimResponseModel  implements Serializable {
   public void setError( java.util.List<ClaimResponseErrorModel> value) {
     this.error = value;
   }
-  public String getTotalCost() {
+  public java.util.List<MoneyModel> getTotalCost() {
     return this.totalCost;
   }
-  public void setTotalCost( String value) {
+  public void setTotalCost( java.util.List<MoneyModel> value) {
     this.totalCost = value;
   }
-  public String getUnallocDeductable() {
+  public java.util.List<MoneyModel> getUnallocDeductable() {
     return this.unallocDeductable;
   }
-  public void setUnallocDeductable( String value) {
+  public void setUnallocDeductable( java.util.List<MoneyModel> value) {
     this.unallocDeductable = value;
   }
-  public String getTotalBenefit() {
+  public java.util.List<MoneyModel> getTotalBenefit() {
     return this.totalBenefit;
   }
-  public void setTotalBenefit( String value) {
+  public void setTotalBenefit( java.util.List<MoneyModel> value) {
     this.totalBenefit = value;
   }
   public java.util.List<ClaimResponsePaymentModel> getPayment() {
@@ -638,9 +654,6 @@ public class ClaimResponseModel  implements Serializable {
      builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("disposition" + "->" + this.disposition + "\n"); 
      builder.append("payeeType" + "->" + this.payeeType + "\n"); 
-     builder.append("totalCost" + "->" + this.totalCost + "\n"); 
-     builder.append("unallocDeductable" + "->" + this.unallocDeductable + "\n"); 
-     builder.append("totalBenefit" + "->" + this.totalBenefit + "\n"); 
      builder.append("reserved" + "->" + this.reserved + "\n"); 
      builder.append("form" + "->" + this.form + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

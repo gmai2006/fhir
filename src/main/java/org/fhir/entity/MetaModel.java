@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The metadata about a resource. This is content in the resource that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
 */
 @Entity
 @Table(name="meta")
 public class MetaModel  implements Serializable {
-	private static final long serialVersionUID = 151857669675461255L;
+	private static final long serialVersionUID = 151873631151274643L;
   /**
   * Description: "The version specific identifier, as it appears in the version portion of the URL. This values changes when the resource is created, updated, or deleted."
   */

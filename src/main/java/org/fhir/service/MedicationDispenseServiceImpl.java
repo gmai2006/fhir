@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MedicationDispense;
 /**
 * auto generated from SQL files
@@ -103,5 +104,43 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(MedicationDispense) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<MedicationDispense> findByField(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<MedicationDispense> findByContext(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByDestination(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByDestination(queryBuilder);
+    logger.info("findBydestination - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByPerformer(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByPerformer(queryBuilder);
+    logger.info("findByperformer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByReceiver(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByReceiver(queryBuilder);
+    logger.info("findByreceiver - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findBySubject(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
 */
 @Entity
 @Table(name="operationdefinitionparameter")
 public class OperationDefinitionParameterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669682365131L;
+	private static final long serialVersionUID = 151873631161298758L;
   /**
   * Description: "The name of used to identify the parameter."
   */

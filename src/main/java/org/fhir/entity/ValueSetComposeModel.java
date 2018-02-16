@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
 @Entity
 @Table(name="valuesetcompose")
 public class ValueSetComposeModel  implements Serializable {
-	private static final long serialVersionUID = 151857669689832080L;
+	private static final long serialVersionUID = 151873631168919318L;
   /**
   * Description: "If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined."
   */

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
 @Entity
 @Table(name="observationrelated")
 public class ObservationRelatedModel  implements Serializable {
-	private static final long serialVersionUID = 151857669710845020L;
+	private static final long serialVersionUID = 151873631189718632L;
   /**
   * Description: "A code specifying the kind of relationship that exists with the target resource."
   */

@@ -31,74 +31,46 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
-public class ClaimResponseDetail1  {
+public class ClaimResponseDetail1  extends BackboneElement  {
   /**
   * Description: "The type of reveneu or cost center providing the product and/or service."
   */
-  private CodeableConcept revenue;
+  protected CodeableConcept revenue;
 
   /**
   * Description: "Health Care Service Type Codes  to identify the classification of service or benefits."
   */
-  private CodeableConcept category;
+  protected CodeableConcept category;
 
   /**
   * Description: "A code to indicate the Professional Service or Product supplied."
   */
-  private CodeableConcept service;
+  protected CodeableConcept service;
 
   /**
   * Description: "Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours."
   */
-  private java.util.List<CodeableConcept> modifier = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> modifier = new java.util.ArrayList<>();
 
   /**
   * Description: "The fee charged for the professional service or product.."
   */
-  private Money fee;
+  protected Money fee;
 
   /**
   * Description: "A list of note references to the notes provided below."
   */
-  private java.util.List<Float> noteNumber = new java.util.ArrayList<>();
+  protected java.util.List<Float> noteNumber = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for noteNumber"
   */
-  private transient java.util.List<Element> _noteNumber = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _noteNumber = new java.util.ArrayList<>();
 
   /**
   * Description: "The adjudications results."
   */
-  private java.util.List<ClaimResponseAdjudication> adjudication = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseAdjudication> adjudication = new java.util.ArrayList<>();
 
   public ClaimResponseDetail1() {
   }
@@ -108,15 +80,14 @@ public class ClaimResponseDetail1  {
     this.revenue = CodeableConceptHelper.fromJson(o.getRevenue());
     this.category = CodeableConceptHelper.fromJson(o.getCategory());
     this.service = CodeableConceptHelper.fromJson(o.getService());
-    this.fee = MoneyHelper.fromJson(o.getFee());
+    if (null != o.getFee() && !o.getFee().isEmpty()) {
+      this.fee = new Money(o.getFee().get(0));
+    }
     if (o.getNoteNumber() != null) {
     	this.noteNumber = org.fhir.utils.JsonUtils.json2Array(o.getNoteNumber());
     }
     if (null != o.getAdjudication() && !o.getAdjudication().isEmpty()) {
     	this.adjudication = ClaimResponseAdjudicationHelper.fromArray2Array(o.getAdjudication());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -168,30 +139,6 @@ public class ClaimResponseDetail1  {
   public java.util.List<ClaimResponseAdjudication> getAdjudication() {
     return this.adjudication;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -204,11 +151,7 @@ public class ClaimResponseDetail1  {
      if(this.fee != null) builder.append("fee" + "->" + this.fee.toString() + "\n"); 
      if(this.noteNumber != null) builder.append("noteNumber" + "->" + this.noteNumber.toString() + "\n"); 
      if(this._noteNumber != null) builder.append("_noteNumber" + "->" + this._noteNumber.toString() + "\n"); 
-     if(this.adjudication != null) builder.append("adjudication" + "->" + this.adjudication.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.adjudication != null) builder.append("adjudication" + "->" + this.adjudication.toString() + "\n"); ;
     return builder.toString();
   }
 

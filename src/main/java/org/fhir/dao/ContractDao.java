@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Contract;
 
 public interface ContractDao {
@@ -38,4 +39,12 @@ public interface ContractDao {
 
   public Contract update(Contract e);
   public void delete(Contract e);
+
+  public List<Contract> findByField(QueryBuilder queryBuilder);
+
+  public List<Contract> findByAgent(QueryBuilder queryBuilder);
+  public List<Contract> findByAuthority(QueryBuilder queryBuilder);
+  public List<Contract> findByDomain(QueryBuilder queryBuilder);
+  public List<Contract> findBySigner(QueryBuilder queryBuilder);
+  public List<Contract> findBySubject(QueryBuilder queryBuilder);
 }

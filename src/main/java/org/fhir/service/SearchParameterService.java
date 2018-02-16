@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.SearchParameter;
 
 public interface SearchParameterService {
@@ -35,4 +37,8 @@ public interface SearchParameterService {
   public SearchParameter create(SearchParameter bean);
   public SearchParameter update(SearchParameter bean);
   public void delete(SearchParameter bean);
+  public List<SearchParameter> findByField(QueryBuilder queryBuilder);
+  public List<SearchParameter> findByComponent(QueryBuilder queryBuilder);
+
+
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
 @Entity
 @Table(name="nutritionordernutrient")
 public class NutritionOrderNutrientModel  implements Serializable {
-	private static final long serialVersionUID = 151857669689470464L;
+	private static final long serialVersionUID = 151873631168654925L;
   /**
   * Description: "The nutrient that is being modified such as carbohydrate or sodium."
   * Actual type: String;
@@ -49,12 +50,14 @@ public class NutritionOrderNutrientModel  implements Serializable {
 
   /**
   * Description: "The quantity of the specified nutrient to include in diet."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"amount\"", length = 16777215)
-  private String amount;
+  @Column(name="\"amount_id\"")
+  private String amount_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> amount;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -101,8 +104,11 @@ public class NutritionOrderNutrientModel  implements Serializable {
   public NutritionOrderNutrientModel(NutritionOrderNutrient o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.modifier = CodeableConceptHelper.toJson(o.getModifier());
-    this.amount = QuantityHelper.toJson(o.getAmount());
+    this.modifier = JsonUtils.toJson(o.getModifier());
+    if (null != o.getAmount() ) {
+    	this.amount_id = "amount" + this.parent_id;
+    	this.amount = QuantityHelper.toModel(o.getAmount(), this.amount_id);
+    }
   }
 
   public String getModifier() {
@@ -111,10 +117,10 @@ public class NutritionOrderNutrientModel  implements Serializable {
   public void setModifier( String value) {
     this.modifier = value;
   }
-  public String getAmount() {
+  public java.util.List<QuantityModel> getAmount() {
     return this.amount;
   }
-  public void setAmount( String value) {
+  public void setAmount( java.util.List<QuantityModel> value) {
     this.amount = value;
   }
   public String getModifierExtension() {
@@ -147,7 +153,6 @@ public class NutritionOrderNutrientModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[NutritionOrderNutrientModel]:" + "\n");
      builder.append("modifier" + "->" + this.modifier + "\n"); 
-     builder.append("amount" + "->" + this.amount + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

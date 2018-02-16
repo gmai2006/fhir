@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time."
 */
 @Entity
 @Table(name="practitionerroleavailabletime")
 public class PractitionerRoleAvailableTimeModel  implements Serializable {
-	private static final long serialVersionUID = 151857669699551297L;
+	private static final long serialVersionUID = 151873631178330162L;
   /**
   * Description: "Indicates which days of the week are available between the start and end Times."
   */

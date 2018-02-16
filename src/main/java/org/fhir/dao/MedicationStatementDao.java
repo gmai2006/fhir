@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MedicationStatement;
 
 public interface MedicationStatementDao {
@@ -38,4 +39,9 @@ public interface MedicationStatementDao {
 
   public MedicationStatement update(MedicationStatement e);
   public void delete(MedicationStatement e);
+
+  public List<MedicationStatement> findByField(QueryBuilder queryBuilder);
+
+  public List<MedicationStatement> findByContext(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findBySubject(QueryBuilder queryBuilder);
 }

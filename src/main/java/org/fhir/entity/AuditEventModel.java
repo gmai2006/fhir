@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
 */
 @Entity
 @Table(name="auditevent")
 public class AuditEventModel  implements Serializable {
-	private static final long serialVersionUID = 151857669666794644L;
+	private static final long serialVersionUID = 151873631139416268L;
   /**
   * Description: "This is a AuditEvent resource"
   */
@@ -226,7 +227,7 @@ public class AuditEventModel  implements Serializable {
   public AuditEventModel(AuditEvent o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.type = CodingHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.action = o.getAction();
     this.recorded = o.getRecorded();
     this.outcome = o.getOutcome();

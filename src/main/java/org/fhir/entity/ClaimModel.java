@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
 @Entity
 @Table(name="claim")
 public class ClaimModel  implements Serializable {
-	private static final long serialVersionUID = 15185766965277618L;
+	private static final long serialVersionUID = 151873631118686211L;
   /**
   * Description: "This is a Claim resource"
   */
@@ -341,12 +342,14 @@ public class ClaimModel  implements Serializable {
 
   /**
   * Description: "The total value of the claim."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"total\"", length = 16777215)
-  private String total;
+  @Column(name="\"total_id\"")
+  private String total_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="total_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> total;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -440,13 +443,13 @@ public class ClaimModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.use = o.getUse();
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
-    this.billablePeriod = PeriodHelper.toJson(o.getBillablePeriod());
+    this.billablePeriod = JsonUtils.toJson(o.getBillablePeriod());
     this.created = o.getCreated();
     if (null != o.getEnterer() ) {
     	this.enterer_id = "enterer" + this.id;
@@ -464,8 +467,8 @@ public class ClaimModel  implements Serializable {
     	this.organization_id = "organization" + this.id;
     	this.organization = ReferenceHelper.toModel(o.getOrganization(), this.organization_id);
     }
-    this.priority = CodeableConceptHelper.toJson(o.getPriority());
-    this.fundsReserve = CodeableConceptHelper.toJson(o.getFundsReserve());
+    this.priority = JsonUtils.toJson(o.getPriority());
+    this.fundsReserve = JsonUtils.toJson(o.getFundsReserve());
     if (null != o.getRelated() && !o.getRelated().isEmpty()) {
     	this.related_id = "related" + this.id;
     	this.related = ClaimRelatedHelper.toModelFromArray(o.getRelated(), this.related_id);
@@ -514,13 +517,16 @@ public class ClaimModel  implements Serializable {
     	this.accident_id = "accident" + this.id;
     	this.accident = ClaimAccidentHelper.toModel(o.getAccident(), this.accident_id);
     }
-    this.employmentImpacted = PeriodHelper.toJson(o.getEmploymentImpacted());
-    this.hospitalization = PeriodHelper.toJson(o.getHospitalization());
+    this.employmentImpacted = JsonUtils.toJson(o.getEmploymentImpacted());
+    this.hospitalization = JsonUtils.toJson(o.getHospitalization());
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item_id = "item" + this.id;
     	this.item = ClaimItemHelper.toModelFromArray(o.getItem(), this.item_id);
     }
-    this.total = MoneyHelper.toJson(o.getTotal());
+    if (null != o.getTotal() ) {
+    	this.total_id = "total" + this.id;
+    	this.total = MoneyHelper.toModel(o.getTotal(), this.total_id);
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
@@ -713,10 +719,10 @@ public class ClaimModel  implements Serializable {
   public void setItem( java.util.List<ClaimItemModel> value) {
     this.item = value;
   }
-  public String getTotal() {
+  public java.util.List<MoneyModel> getTotal() {
     return this.total;
   }
-  public void setTotal( String value) {
+  public void setTotal( java.util.List<MoneyModel> value) {
     this.total = value;
   }
   public java.util.List<NarrativeModel> getText() {
@@ -784,7 +790,6 @@ public class ClaimModel  implements Serializable {
      builder.append("fundsReserve" + "->" + this.fundsReserve + "\n"); 
      builder.append("employmentImpacted" + "->" + this.employmentImpacted + "\n"); 
      builder.append("hospitalization" + "->" + this.hospitalization + "\n"); 
-     builder.append("total" + "->" + this.total + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

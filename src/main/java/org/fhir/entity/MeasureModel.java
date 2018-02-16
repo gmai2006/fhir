@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The Measure resource provides the definition of a quality measure."
 */
 @Entity
 @Table(name="measure")
 public class MeasureModel  implements Serializable {
-	private static final long serialVersionUID = 151857669649095587L;
+	private static final long serialVersionUID = 151873631112313696L;
   /**
   * Description: "This is a Measure resource"
   */
@@ -454,7 +455,7 @@ public class MeasureModel  implements Serializable {
     this.usage = o.getUsage();
     this.approvalDate = o.getApprovalDate();
     this.lastReviewDate = o.getLastReviewDate();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
@@ -477,8 +478,8 @@ public class MeasureModel  implements Serializable {
     	this.library = ReferenceHelper.toModelFromArray(o.getLibrary(), this.library_id);
     }
     this.disclaimer = o.getDisclaimer();
-    this.scoring = CodeableConceptHelper.toJson(o.getScoring());
-    this.compositeScoring = CodeableConceptHelper.toJson(o.getCompositeScoring());
+    this.scoring = JsonUtils.toJson(o.getScoring());
+    this.compositeScoring = JsonUtils.toJson(o.getCompositeScoring());
     this.riskAdjustment = o.getRiskAdjustment();
     this.rateAggregation = o.getRateAggregation();
     this.rationale = o.getRationale();

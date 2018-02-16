@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ValueSet;
 
 public interface ValueSetDao {
@@ -38,4 +39,8 @@ public interface ValueSetDao {
 
   public ValueSet update(ValueSet e);
   public void delete(ValueSet e);
+
+  public List<ValueSet> findByField(QueryBuilder queryBuilder);
+
+  public List<ValueSet> findByExpansion(QueryBuilder queryBuilder);
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Basic is used for handling concepts not yet defined in FHIR, narrative-only resources that don't map to an existing resource, and custom resources not appropriate for inclusion in the FHIR specification."
 */
 @Entity
 @Table(name="basic")
 public class BasicModel  implements Serializable {
-	private static final long serialVersionUID = 151857669662371229L;
+	private static final long serialVersionUID = 151873631133334617L;
   /**
   * Description: "This is a Basic resource"
   */
@@ -186,7 +187,7 @@ public class BasicModel  implements Serializable {
   public BasicModel(Basic o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);

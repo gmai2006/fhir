@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Practitioner;
 /**
 * auto generated from SQL files
@@ -104,4 +105,12 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     logger.info("delete(Practitioner) - exited - return value={} result ");
   }
+
+  @Override
+  public List<Practitioner> findByField(QueryBuilder queryBuilder) {
+  	final List<Practitioner> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
 }

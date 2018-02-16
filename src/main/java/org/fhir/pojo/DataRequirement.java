@@ -31,66 +31,47 @@ import com.google.gson.GsonBuilder;
 /**
 * "Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data."
 */
-public class DataRequirement  {
+public class DataRequirement  extends Element  {
   /**
   * Description: "The type of the required data, specified as the type name of a resource. For profiles, this value is set to the type of the base resource of the profile."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "The profile of the required data, specified as the uri of the profile definition."
   */
-  private java.util.List<String> profile = new java.util.ArrayList<>();
+  protected java.util.List<String> profile = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for profile"
   */
-  private transient java.util.List<Element> _profile = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _profile = new java.util.ArrayList<>();
 
   /**
   * Description: "Indicates that specific elements of the type are referenced by the knowledge module and must be supported by the consumer in order to obtain an effective evaluation. This does not mean that a value is required for this element, only that the consuming system must understand the element and be able to provide values for it if they are available. Note that the value for this element can be a path to allow references to nested elements. In that case, all the elements along the path must be supported."
   */
-  private java.util.List<String> mustSupport = new java.util.ArrayList<>();
+  protected java.util.List<String> mustSupport = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for mustSupport"
   */
-  private transient java.util.List<Element> _mustSupport = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _mustSupport = new java.util.ArrayList<>();
 
   /**
   * Description: "Code filters specify additional constraints on the data, specifying the value set of interest for a particular element of the data."
   */
-  private java.util.List<DataRequirementCodeFilter> codeFilter = new java.util.ArrayList<>();
+  protected java.util.List<DataRequirementCodeFilter> codeFilter = new java.util.ArrayList<>();
 
   /**
   * Description: "Date filters specify additional constraints on the data in terms of the applicable date range for specific elements."
   */
-  private java.util.List<DataRequirementDateFilter> dateFilter = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<DataRequirementDateFilter> dateFilter = new java.util.ArrayList<>();
 
   public DataRequirement() {
   }
@@ -111,9 +92,6 @@ public class DataRequirement  {
     }
     if (null != o.getDateFilter() && !o.getDateFilter().isEmpty()) {
     	this.dateFilter = DataRequirementDateFilterHelper.fromArray2Array(o.getDateFilter());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -165,24 +143,6 @@ public class DataRequirement  {
   public java.util.List<DataRequirementDateFilter> getDateFilter() {
     return this.dateFilter;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -195,10 +155,7 @@ public class DataRequirement  {
      if(this.mustSupport != null) builder.append("mustSupport" + "->" + this.mustSupport.toString() + "\n"); 
      if(this._mustSupport != null) builder.append("_mustSupport" + "->" + this._mustSupport.toString() + "\n"); 
      if(this.codeFilter != null) builder.append("codeFilter" + "->" + this.codeFilter.toString() + "\n"); 
-     if(this.dateFilter != null) builder.append("dateFilter" + "->" + this.dateFilter.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.dateFilter != null) builder.append("dateFilter" + "->" + this.dateFilter.toString() + "\n"); ;
     return builder.toString();
   }
 

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc."
 */
 @Entity
 @Table(name="goaltarget")
 public class GoalTargetModel  implements Serializable {
-	private static final long serialVersionUID = 151857669705238590L;
+	private static final long serialVersionUID = 15187363118367623L;
   /**
   * Description: "The parameter whose value is being tracked, e.g. body weight, blood pressure, or hemoglobin A1c level."
   * Actual type: String;
@@ -49,12 +50,14 @@ public class GoalTargetModel  implements Serializable {
 
   /**
   * Description: "The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"detailQuantity\"", length = 16777215)
-  private String detailQuantity;
+  @Column(name="\"detailquantity_id\"")
+  private String detailquantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="detailquantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> detailQuantity;
 
   /**
   * Description: "The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value."
@@ -136,12 +139,15 @@ public class GoalTargetModel  implements Serializable {
   public GoalTargetModel(GoalTarget o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.measure = CodeableConceptHelper.toJson(o.getMeasure());
-    this.detailQuantity = QuantityHelper.toJson(o.getDetailQuantity());
-    this.detailRange = RangeHelper.toJson(o.getDetailRange());
-    this.detailCodeableConcept = CodeableConceptHelper.toJson(o.getDetailCodeableConcept());
+    this.measure = JsonUtils.toJson(o.getMeasure());
+    if (null != o.getDetailQuantity() ) {
+    	this.detailquantity_id = "detailquantity" + this.parent_id;
+    	this.detailQuantity = QuantityHelper.toModel(o.getDetailQuantity(), this.detailquantity_id);
+    }
+    this.detailRange = JsonUtils.toJson(o.getDetailRange());
+    this.detailCodeableConcept = JsonUtils.toJson(o.getDetailCodeableConcept());
     this.dueDate = o.getDueDate();
-    this.dueDuration = DurationHelper.toJson(o.getDueDuration());
+    this.dueDuration = JsonUtils.toJson(o.getDueDuration());
   }
 
   public String getMeasure() {
@@ -150,10 +156,10 @@ public class GoalTargetModel  implements Serializable {
   public void setMeasure( String value) {
     this.measure = value;
   }
-  public String getDetailQuantity() {
+  public java.util.List<QuantityModel> getDetailQuantity() {
     return this.detailQuantity;
   }
-  public void setDetailQuantity( String value) {
+  public void setDetailQuantity( java.util.List<QuantityModel> value) {
     this.detailQuantity = value;
   }
   public String getDetailRange() {
@@ -210,7 +216,6 @@ public class GoalTargetModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[GoalTargetModel]:" + "\n");
      builder.append("measure" + "->" + this.measure + "\n"); 
-     builder.append("detailQuantity" + "->" + this.detailQuantity + "\n"); 
      builder.append("detailRange" + "->" + this.detailRange + "\n"); 
      builder.append("detailCodeableConcept" + "->" + this.detailCodeableConcept + "\n"); 
      builder.append("dueDate" + "->" + this.dueDate + "\n"); 

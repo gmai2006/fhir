@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImagingStudy;
 
 public interface ImagingStudyService {
@@ -35,4 +37,10 @@ public interface ImagingStudyService {
   public ImagingStudy create(ImagingStudy bean);
   public ImagingStudy update(ImagingStudy bean);
   public void delete(ImagingStudy bean);
+  public List<ImagingStudy> findByField(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByContext(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByEndpoint(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findBySeries(QueryBuilder queryBuilder);
+
+
 }

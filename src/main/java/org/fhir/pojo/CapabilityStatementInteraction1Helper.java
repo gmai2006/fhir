@@ -53,19 +53,4 @@ public class CapabilityStatementInteraction1Helper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, CapabilityStatementInteraction1.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CapabilityStatementInteraction1 o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CapabilityStatementInteraction1> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Group;
 
 public interface GroupService {
@@ -35,4 +37,9 @@ public interface GroupService {
   public Group create(Group bean);
   public Group update(Group bean);
   public void delete(Group bean);
+  public List<Group> findByField(QueryBuilder queryBuilder);
+  public List<Group> findByCharacteristic(QueryBuilder queryBuilder);
+  public List<Group> findByMember(QueryBuilder queryBuilder);
+
+
 }

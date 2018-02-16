@@ -31,49 +31,21 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
 */
-public class MedicationContent  {
+public class MedicationContent  extends BackboneElement  {
   /**
   * Description: "Identifies one of the items in the package."
   */
-  private CodeableConcept itemCodeableConcept;
+  protected CodeableConcept itemCodeableConcept;
 
   /**
   * Description: "Identifies one of the items in the package."
   */
-  private Reference itemReference;
+  protected Reference itemReference;
 
   /**
   * Description: "The amount of the product that is in the package."
   */
-  private Quantity amount;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Quantity amount;
 
   public MedicationContent() {
   }
@@ -84,9 +56,8 @@ public class MedicationContent  {
     if (null != o.getItemReference() && !o.getItemReference().isEmpty()) {
       this.itemReference = new Reference(o.getItemReference().get(0));
     }
-    this.amount = QuantityHelper.fromJson(o.getAmount());
-    if (null != o.getId()) {
-      this.id = o.getId();
+    if (null != o.getAmount() && !o.getAmount().isEmpty()) {
+      this.amount = new Quantity(o.getAmount().get(0));
     }
   }
 
@@ -108,30 +79,6 @@ public class MedicationContent  {
   public Quantity getAmount() {
     return this.amount;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -139,11 +86,7 @@ public class MedicationContent  {
     builder.append("[MedicationContent]:" + "\n");
      if(this.itemCodeableConcept != null) builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept.toString() + "\n"); 
      if(this.itemReference != null) builder.append("itemReference" + "->" + this.itemReference.toString() + "\n"); 
-     if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); ;
     return builder.toString();
   }
 

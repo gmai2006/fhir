@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death."
 */
 @Entity
 @Table(name="adverseevent")
 public class AdverseEventModel  implements Serializable {
-	private static final long serialVersionUID = 151857669718032455L;
+	private static final long serialVersionUID = 151873631197948382L;
   /**
   * Description: "This is a AdverseEvent resource"
   */
@@ -294,9 +295,9 @@ public class AdverseEventModel  implements Serializable {
   public AdverseEventModel(AdverseEvent o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.category = o.getCategory();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -310,8 +311,8 @@ public class AdverseEventModel  implements Serializable {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
     }
-    this.seriousness = CodeableConceptHelper.toJson(o.getSeriousness());
-    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.seriousness = JsonUtils.toJson(o.getSeriousness());
+    this.outcome = JsonUtils.toJson(o.getOutcome());
     if (null != o.getRecorder() ) {
     	this.recorder_id = "recorder" + this.id;
     	this.recorder = ReferenceHelper.toModel(o.getRecorder(), this.recorder_id);

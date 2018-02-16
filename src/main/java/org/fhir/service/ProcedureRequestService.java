@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ProcedureRequest;
 
 public interface ProcedureRequestService {
@@ -35,4 +37,14 @@ public interface ProcedureRequestService {
   public ProcedureRequest create(ProcedureRequest bean);
   public ProcedureRequest update(ProcedureRequest bean);
   public void delete(ProcedureRequest bean);
+  public List<ProcedureRequest> findByField(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByContext(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByDefinition(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByPerformer(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByReplaces(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findBySpecimen(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findBySubject(QueryBuilder queryBuilder);
+
+
 }

@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Task;
 /**
 * auto generated from SQL files
@@ -103,5 +104,37 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Task) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Task> findByField(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Task> findByContext(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByFocus(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByFocus(queryBuilder);
+    logger.info("findByfocus - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByOwner(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByOwner(queryBuilder);
+    logger.info("findByowner - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByRequester(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByRequester(queryBuilder);
+    logger.info("findByrequester - exited - return value={} result ");
+    return result;
   }
 }

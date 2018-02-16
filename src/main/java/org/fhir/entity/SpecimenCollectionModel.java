@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A sample to be used for analysis."
 */
 @Entity
 @Table(name="specimencollection")
 public class SpecimenCollectionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669663045695L;
+	private static final long serialVersionUID = 151873631134655944L;
   /**
   * Description: "Person who collected the specimen."
   */
@@ -68,12 +69,14 @@ public class SpecimenCollectionModel  implements Serializable {
 
   /**
   * Description: "The quantity of specimen collected; for instance the volume of a blood sample, or the physical measurement of an anatomic pathology sample."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "A coded value specifying the technique that is used to perform the procedure."
@@ -143,10 +146,13 @@ public class SpecimenCollectionModel  implements Serializable {
     	this.collector = ReferenceHelper.toModel(o.getCollector(), this.collector_id);
     }
     this.collectedDateTime = o.getCollectedDateTime();
-    this.collectedPeriod = PeriodHelper.toJson(o.getCollectedPeriod());
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
-    this.method = CodeableConceptHelper.toJson(o.getMethod());
-    this.bodySite = CodeableConceptHelper.toJson(o.getBodySite());
+    this.collectedPeriod = JsonUtils.toJson(o.getCollectedPeriod());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
+    this.method = JsonUtils.toJson(o.getMethod());
+    this.bodySite = JsonUtils.toJson(o.getBodySite());
   }
 
   public java.util.List<ReferenceModel> getCollector() {
@@ -167,10 +173,10 @@ public class SpecimenCollectionModel  implements Serializable {
   public void setCollectedPeriod( String value) {
     this.collectedPeriod = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
   public String getMethod() {
@@ -216,7 +222,6 @@ public class SpecimenCollectionModel  implements Serializable {
     builder.append("[SpecimenCollectionModel]:" + "\n");
      builder.append("collectedDateTime" + "->" + this.collectedDateTime + "\n"); 
      builder.append("collectedPeriod" + "->" + this.collectedPeriod + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("method" + "->" + this.method + "\n"); 
      builder.append("bodySite" + "->" + this.bodySite + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

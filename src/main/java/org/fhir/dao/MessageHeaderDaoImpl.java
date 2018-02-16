@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.MessageHeaderModel;
 import org.fhir.pojo.MessageHeader;
 import org.fhir.pojo.MessageHeaderHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class MessageHeaderDaoImpl implements MessageHeaderDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,73 @@ public class MessageHeaderDaoImpl implements MessageHeaderDao {
       final EntityManager em = entityManagerProvider.get();
       final MessageHeaderModel removed = em.find(MessageHeaderModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<MessageHeader> findByAuthor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByDestination(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, MessageHeaderDestination b where a.destination_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByEnterer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.enterer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByFocus(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.focus_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByReceiver(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.receiver_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByResponsible(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.responsible_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findBySender(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.sender_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findBySource(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, MessageHeaderSource b where a.source_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<MessageHeader> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<MessageHeader> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, MessageHeaderModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<MessageHeaderModel> models = query.getResultList();
+    return MessageHeaderHelper.fromArray2Array(models);
   }
 }

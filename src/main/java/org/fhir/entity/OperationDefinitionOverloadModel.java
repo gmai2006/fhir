@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
 */
 @Entity
 @Table(name="operationdefinitionoverload")
 public class OperationDefinitionOverloadModel  implements Serializable {
-	private static final long serialVersionUID = 151857669686450041L;
+	private static final long serialVersionUID = 15187363116523969L;
   /**
   * Description: "Name of parameter to include in overload."
   */

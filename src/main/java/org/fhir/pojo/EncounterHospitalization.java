@@ -31,79 +31,51 @@ import com.google.gson.GsonBuilder;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
-public class EncounterHospitalization  {
+public class EncounterHospitalization  extends BackboneElement  {
   /**
   * Description: "Pre-admission identifier."
   */
-  private Identifier preAdmissionIdentifier;
+  protected Identifier preAdmissionIdentifier;
 
   /**
   * Description: "The location from which the patient came before admission."
   */
-  private Reference origin;
+  protected Reference origin;
 
   /**
   * Description: "From where patient was admitted (physician referral, transfer)."
   */
-  private CodeableConcept admitSource;
+  protected CodeableConcept admitSource;
 
   /**
   * Description: "Whether this hospitalization is a readmission and why if known."
   */
-  private CodeableConcept reAdmission;
+  protected CodeableConcept reAdmission;
 
   /**
   * Description: "Diet preferences reported by the patient."
   */
-  private java.util.List<CodeableConcept> dietPreference = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> dietPreference = new java.util.ArrayList<>();
 
   /**
   * Description: "Special courtesies (VIP, board member)."
   */
-  private java.util.List<CodeableConcept> specialCourtesy = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> specialCourtesy = new java.util.ArrayList<>();
 
   /**
   * Description: "Any special requests that have been made for this hospitalization encounter, such as the provision of specific equipment or other things."
   */
-  private java.util.List<CodeableConcept> specialArrangement = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> specialArrangement = new java.util.ArrayList<>();
 
   /**
   * Description: "Location to which the patient is discharged."
   */
-  private Reference destination;
+  protected Reference destination;
 
   /**
   * Description: "Category or kind of location after discharge."
   */
-  private CodeableConcept dischargeDisposition;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected CodeableConcept dischargeDisposition;
 
   public EncounterHospitalization() {
   }
@@ -120,9 +92,6 @@ public class EncounterHospitalization  {
       this.destination = new Reference(o.getDestination().get(0));
     }
     this.dischargeDisposition = CodeableConceptHelper.fromJson(o.getDischargeDisposition());
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
   }
 
   public void setPreAdmissionIdentifier( Identifier value) {
@@ -179,30 +148,6 @@ public class EncounterHospitalization  {
   public CodeableConcept getDischargeDisposition() {
     return this.dischargeDisposition;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -216,11 +161,7 @@ public class EncounterHospitalization  {
      if(this.specialCourtesy != null) builder.append("specialCourtesy" + "->" + this.specialCourtesy.toString() + "\n"); 
      if(this.specialArrangement != null) builder.append("specialArrangement" + "->" + this.specialArrangement.toString() + "\n"); 
      if(this.destination != null) builder.append("destination" + "->" + this.destination.toString() + "\n"); 
-     if(this.dischargeDisposition != null) builder.append("dischargeDisposition" + "->" + this.dischargeDisposition.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.dischargeDisposition != null) builder.append("dischargeDisposition" + "->" + this.dischargeDisposition.toString() + "\n"); ;
     return builder.toString();
   }
 

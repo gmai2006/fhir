@@ -53,19 +53,4 @@ public class MedicationRequestSubstitutionHelper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, MedicationRequestSubstitution.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(MedicationRequestSubstitution o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<MedicationRequestSubstitution> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

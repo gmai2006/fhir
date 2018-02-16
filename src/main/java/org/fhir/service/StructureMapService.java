@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.StructureMap;
 
 public interface StructureMapService {
@@ -35,4 +37,7 @@ public interface StructureMapService {
   public StructureMap create(StructureMap bean);
   public StructureMap update(StructureMap bean);
   public void delete(StructureMap bean);
+  public List<StructureMap> findByField(QueryBuilder queryBuilder);
+
+
 }

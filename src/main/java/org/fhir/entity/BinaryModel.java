@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A binary resource can contain any content, whether text, image, pdf, zip archive, etc."
 */
 @Entity
 @Table(name="fhirbinary")
 public class BinaryModel  implements Serializable {
-	private static final long serialVersionUID = 151857669664258178L;
+	private static final long serialVersionUID = 151873631136447571L;
   /**
   * Description: "This is a Binary resource"
   */
@@ -111,17 +112,6 @@ public class BinaryModel  implements Serializable {
   @Column(name="\"language\"")
   private String language;
 
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from Resource
-  * Actual type: List<String>;
-  * Store this type as a string in db
-  */
-  @javax.persistence.Basic
-  @Column(name="\"extension\"", length = 16777215)
-  private String extension;
-
   public BinaryModel() {
   }
 
@@ -190,12 +180,6 @@ public class BinaryModel  implements Serializable {
   public void setLanguage( String value) {
     this.language = value;
   }
-  public String getExtension() {
-    return this.extension;
-  }
-  public void setExtension( String value) {
-    this.extension = value;
-  }
 
   @Override
   public String toString() {
@@ -206,8 +190,7 @@ public class BinaryModel  implements Serializable {
      builder.append("content" + "->" + this.content + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
-     builder.append("language" + "->" + this.language + "\n"); 
-     builder.append("extension" + "->" + this.extension + "\n"); ;
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 
@@ -221,8 +204,7 @@ public class BinaryModel  implements Serializable {
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
-     builder.append("language" + "->" + this.language + "\n"); 
-     builder.append("extension" + "->" + this.extension + "\n"); ;
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

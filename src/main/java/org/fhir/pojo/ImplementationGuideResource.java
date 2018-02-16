@@ -31,94 +31,66 @@ import com.google.gson.GsonBuilder;
 /**
 * "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts."
 */
-public class ImplementationGuideResource  {
+public class ImplementationGuideResource  extends BackboneElement  {
   /**
   * Description: "Whether a resource is included in the guide as part of the rules defined by the guide, or just as an example of a resource that conforms to the rules and/or help implementers understand the intent of the guide."
   */
-  private Boolean example;
+  protected Boolean example;
 
   /**
   * Description: "Extensions for example"
   */
-  private transient Element _example;
+  protected transient Element _example;
 
   /**
   * Description: "A human assigned name for the resource. All resources SHOULD have a name, but the name may be extracted from the resource (e.g. ValueSet.name)."
   */
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "A description of the reason that a resource has been included in the implementation guide."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "A short code that may be used to identify the resource throughout the implementation guide."
   */
-  private String acronym;
+  protected String acronym;
 
   /**
   * Description: "Extensions for acronym"
   */
-  private transient Element _acronym;
+  protected transient Element _acronym;
 
   /**
   * Description: "Where this resource is found."
   */
-  private String sourceUri;
+  protected String sourceUri;
 
   /**
   * Description: "Extensions for sourceUri"
   */
-  private transient Element _sourceUri;
+  protected transient Element _sourceUri;
 
   /**
   * Description: "Where this resource is found."
   */
-  private Reference sourceReference;
+  protected Reference sourceReference;
 
   /**
   * Description: "Another resource that this resource is an example for. This is mostly used for resources that are included as examples of StructureDefinitions."
   */
-  private Reference exampleFor;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Reference exampleFor;
 
   public ImplementationGuideResource() {
   }
@@ -145,9 +117,6 @@ public class ImplementationGuideResource  {
     }
     if (null != o.getExampleFor() && !o.getExampleFor().isEmpty()) {
       this.exampleFor = new Reference(o.getExampleFor().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -223,30 +192,6 @@ public class ImplementationGuideResource  {
   public Reference getExampleFor() {
     return this.exampleFor;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -263,11 +208,7 @@ public class ImplementationGuideResource  {
      if(this.sourceUri != null) builder.append("sourceUri" + "->" + this.sourceUri.toString() + "\n"); 
      if(this._sourceUri != null) builder.append("_sourceUri" + "->" + this._sourceUri.toString() + "\n"); 
      if(this.sourceReference != null) builder.append("sourceReference" + "->" + this.sourceReference.toString() + "\n"); 
-     if(this.exampleFor != null) builder.append("exampleFor" + "->" + this.exampleFor.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.exampleFor != null) builder.append("exampleFor" + "->" + this.exampleFor.toString() + "\n"); ;
     return builder.toString();
   }
 

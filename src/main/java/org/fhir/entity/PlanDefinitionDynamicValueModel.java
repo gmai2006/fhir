@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinitiondynamicvalue")
 public class PlanDefinitionDynamicValueModel  implements Serializable {
-	private static final long serialVersionUID = 151857669675266264L;
+	private static final long serialVersionUID = 151873631150926608L;
   /**
   * Description: "A brief, natural language description of the intended semantics of the dynamic value."
   */

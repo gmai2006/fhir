@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ClaimResponseModel;
 import org.fhir.pojo.ClaimResponse;
 import org.fhir.pojo.ClaimResponseHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ClaimResponseDaoImpl implements ClaimResponseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class ClaimResponseDaoImpl implements ClaimResponseDao {
       final EntityManager em = entityManagerProvider.get();
       final ClaimResponseModel removed = em.find(ClaimResponseModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ClaimResponse> findByInsurer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClaimResponseModel a, Reference b where a.insurer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ClaimResponse> findByPatient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClaimResponseModel a, Reference b where a.patient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ClaimResponse> findByRequest(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClaimResponseModel a, Reference b where a.request_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ClaimResponse> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClaimResponseModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ClaimResponse> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ClaimResponseModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ClaimResponseModel> models = query.getResultList();
+    return ClaimResponseHelper.fromArray2Array(models);
   }
 }

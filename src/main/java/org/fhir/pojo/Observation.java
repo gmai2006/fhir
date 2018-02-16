@@ -31,292 +31,216 @@ import com.google.gson.GsonBuilder;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
-public class Observation  {
+public class Observation  extends DomainResource  {
   /**
   * Description: "This is a Observation resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "A unique identifier assigned to this observation."
   */
-  private java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
 
   /**
   * Description: "A plan, proposal or order that is fulfilled in whole or in part by this event."
   */
-  private java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
 
   /**
   * Description: "The status of the result value."
   */
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "A code that classifies the general type of observation being made."
   */
-  private java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
 
   /**
   * Description: "Describes what was observed. Sometimes this is called the observation \"name\"."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept code;
+  protected CodeableConcept code;
 
   /**
   * Description: "The patient, or group of patients, location, or device whose characteristics (direct or indirect) are described by the observation and into whose record the observation is placed.  Comments: Indirect characteristics may be those of a specimen, fetus, donor,  other observer (for example a relative or EMT), or any observation made about the subject."
   */
-  private Reference subject;
+  protected Reference subject;
 
   /**
   * Description: "The healthcare event  (e.g. a patient and healthcare provider interaction) during which this observation is made."
   */
-  private Reference context;
+  protected Reference context;
 
   /**
   * Description: "The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String effectiveDateTime;
+  protected String effectiveDateTime;
 
   /**
   * Description: "Extensions for effectiveDateTime"
   */
-  private transient Element _effectiveDateTime;
+  protected transient Element _effectiveDateTime;
 
   /**
   * Description: "The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself."
   */
-  private Period effectivePeriod;
+  protected Period effectivePeriod;
 
   /**
   * Description: "The date and time this observation was made available to providers, typically after the results have been reviewed and verified."
   */
-  private String issued;
+  protected String issued;
 
   /**
   * Description: "Extensions for issued"
   */
-  private transient Element _issued;
+  protected transient Element _issued;
 
   /**
   * Description: "Who was responsible for asserting the observed value as \"true\"."
   */
-  private java.util.List<Reference> performer = new java.util.ArrayList<>();
+  protected java.util.List<Reference> performer = new java.util.ArrayList<>();
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Quantity valueQuantity;
+  protected Quantity valueQuantity;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private CodeableConcept valueCodeableConcept;
+  protected CodeableConcept valueCodeableConcept;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private String valueString;
+  protected String valueString;
 
   /**
   * Description: "Extensions for valueString"
   */
-  private transient Element _valueString;
+  protected transient Element _valueString;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Boolean valueBoolean;
+  protected Boolean valueBoolean;
 
   /**
   * Description: "Extensions for valueBoolean"
   */
-  private transient Element _valueBoolean;
+  protected transient Element _valueBoolean;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Range valueRange;
+  protected Range valueRange;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Ratio valueRatio;
+  protected Ratio valueRatio;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private SampledData valueSampledData;
+  protected SampledData valueSampledData;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Attachment valueAttachment;
+  protected Attachment valueAttachment;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
   @javax.validation.constraints.Pattern(regexp="([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?")
-  private String valueTime;
+  protected String valueTime;
 
   /**
   * Description: "Extensions for valueTime"
   */
-  private transient Element _valueTime;
+  protected transient Element _valueTime;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String valueDateTime;
+  protected String valueDateTime;
 
   /**
   * Description: "Extensions for valueDateTime"
   */
-  private transient Element _valueDateTime;
+  protected transient Element _valueDateTime;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Period valuePeriod;
+  protected Period valuePeriod;
 
   /**
   * Description: "Provides a reason why the expected value in the element Observation.value[x] is missing."
   */
-  private CodeableConcept dataAbsentReason;
+  protected CodeableConcept dataAbsentReason;
 
   /**
   * Description: "The assessment made based on the result of the observation.  Intended as a simple compact code often placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status of the result. Otherwise known as abnormal flag."
   */
-  private CodeableConcept interpretation;
+  protected CodeableConcept interpretation;
 
   /**
   * Description: "May include statements about significant, unexpected or unreliable values, or information about the source of the value where this may be relevant to the interpretation of the result."
   */
-  private String comment;
+  protected String comment;
 
   /**
   * Description: "Extensions for comment"
   */
-  private transient Element _comment;
+  protected transient Element _comment;
 
   /**
   * Description: "Indicates the site on the subject's body where the observation was made (i.e. the target site)."
   */
-  private CodeableConcept bodySite;
+  protected CodeableConcept bodySite;
 
   /**
   * Description: "Indicates the mechanism used to perform the observation."
   */
-  private CodeableConcept method;
+  protected CodeableConcept method;
 
   /**
   * Description: "The specimen that was used when this observation was made."
   */
-  private Reference specimen;
+  protected Reference specimen;
 
   /**
   * Description: "The device used to generate the observation data."
   */
-  private Reference device;
+  protected Reference device;
 
   /**
   * Description: "Guidance on how to interpret the value by comparison to a normal or recommended range."
   */
-  private java.util.List<ObservationReferenceRange> referenceRange = new java.util.ArrayList<>();
+  protected java.util.List<ObservationReferenceRange> referenceRange = new java.util.ArrayList<>();
 
   /**
   * Description: "A  reference to another resource (usually another Observation) whose relationship is defined by the relationship type code."
   */
-  private java.util.List<ObservationRelated> related = new java.util.ArrayList<>();
+  protected java.util.List<ObservationRelated> related = new java.util.ArrayList<>();
 
   /**
   * Description: "Some observations have multiple component observations.  These component observations are expressed as separate code value pairs that share the same attributes.  Examples include systolic and diastolic component observations for blood pressure measurement and multiple component observations for genetics observations."
   */
-  private java.util.List<ObservationComponent> component = new java.util.ArrayList<>();
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected java.util.List<ObservationComponent> component = new java.util.ArrayList<>();
 
   public Observation() {
   }
@@ -349,7 +273,9 @@ public class Observation  {
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
     	this.performer = ReferenceHelper.fromArray2Array(o.getPerformer());
     }
-    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
+      this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
+    }
     this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
     if (null != o.getValueString()) {
       this.valueString = o.getValueString();
@@ -389,21 +315,6 @@ public class Observation  {
     }
     if (null != o.getComponent() && !o.getComponent().isEmpty()) {
     	this.component = ObservationComponentHelper.fromArray2Array(o.getComponent());
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -653,72 +564,6 @@ public class Observation  {
   public java.util.List<ObservationComponent> getComponent() {
     return this.component;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -764,18 +609,7 @@ public class Observation  {
      if(this.device != null) builder.append("device" + "->" + this.device.toString() + "\n"); 
      if(this.referenceRange != null) builder.append("referenceRange" + "->" + this.referenceRange.toString() + "\n"); 
      if(this.related != null) builder.append("related" + "->" + this.related.toString() + "\n"); 
-     if(this.component != null) builder.append("component" + "->" + this.component.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.component != null) builder.append("component" + "->" + this.component.toString() + "\n"); ;
     return builder.toString();
   }
 

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Communication;
 
 public interface CommunicationService {
@@ -35,4 +37,12 @@ public interface CommunicationService {
   public Communication create(Communication bean);
   public Communication update(Communication bean);
   public void delete(Communication bean);
+  public List<Communication> findByField(QueryBuilder queryBuilder);
+  public List<Communication> findByContext(QueryBuilder queryBuilder);
+  public List<Communication> findByDefinition(QueryBuilder queryBuilder);
+  public List<Communication> findByRecipient(QueryBuilder queryBuilder);
+  public List<Communication> findBySender(QueryBuilder queryBuilder);
+  public List<Communication> findBySubject(QueryBuilder queryBuilder);
+
+
 }

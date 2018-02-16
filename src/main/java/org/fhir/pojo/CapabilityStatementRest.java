@@ -31,89 +31,61 @@ import com.google.gson.GsonBuilder;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
-public class CapabilityStatementRest  {
+public class CapabilityStatementRest  extends BackboneElement  {
   /**
   * Description: "Identifies whether this portion of the statement is describing the ability to initiate or receive restful operations."
   */
-  private String mode;
+  protected String mode;
 
   /**
   * Description: "Extensions for mode"
   */
-  private transient Element _mode;
+  protected transient Element _mode;
 
   /**
   * Description: "Information about the system's restful capabilities that apply across all applications, such as security."
   */
-  private String documentation;
+  protected String documentation;
 
   /**
   * Description: "Extensions for documentation"
   */
-  private transient Element _documentation;
+  protected transient Element _documentation;
 
   /**
   * Description: "Information about security implementation from an interface perspective - what a client needs to know."
   */
-  private CapabilityStatementSecurity security;
+  protected CapabilityStatementSecurity security;
 
   /**
   * Description: "A specification of the restful capabilities of the solution for a specific resource type."
   */
-  private java.util.List<CapabilityStatementResource> resource = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementResource> resource = new java.util.ArrayList<>();
 
   /**
   * Description: "A specification of restful operations supported by the system."
   */
-  private java.util.List<CapabilityStatementInteraction1> interaction = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementInteraction1> interaction = new java.util.ArrayList<>();
 
   /**
   * Description: "Search parameters that are supported for searching all resources for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation."
   */
-  private java.util.List<CapabilityStatementSearchParam> searchParam = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementSearchParam> searchParam = new java.util.ArrayList<>();
 
   /**
   * Description: "Definition of an operation or a named query together with its parameters and their meaning and type."
   */
-  private java.util.List<CapabilityStatementOperation> operation = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementOperation> operation = new java.util.ArrayList<>();
 
   /**
   * Description: "An absolute URI which is a reference to the definition of a compartment that the system supports. The reference is to a CompartmentDefinition resource by its canonical URL ."
   */
-  private java.util.List<String> compartment = new java.util.ArrayList<>();
+  protected java.util.List<String> compartment = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for compartment"
   */
-  private transient java.util.List<Element> _compartment = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _compartment = new java.util.ArrayList<>();
 
   public CapabilityStatementRest() {
   }
@@ -143,9 +115,6 @@ public class CapabilityStatementRest  {
     }
     if (o.getCompartment() != null) {
     	this.compartment = org.fhir.utils.JsonUtils.json2Array(o.getCompartment());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -215,30 +184,6 @@ public class CapabilityStatementRest  {
   public java.util.List<Element> get_compartment() {
     return this._compartment;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -254,11 +199,7 @@ public class CapabilityStatementRest  {
      if(this.searchParam != null) builder.append("searchParam" + "->" + this.searchParam.toString() + "\n"); 
      if(this.operation != null) builder.append("operation" + "->" + this.operation.toString() + "\n"); 
      if(this.compartment != null) builder.append("compartment" + "->" + this.compartment.toString() + "\n"); 
-     if(this._compartment != null) builder.append("_compartment" + "->" + this._compartment.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._compartment != null) builder.append("_compartment" + "->" + this._compartment.toString() + "\n"); ;
     return builder.toString();
   }
 

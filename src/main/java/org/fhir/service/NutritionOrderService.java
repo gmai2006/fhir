@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.NutritionOrder;
 
 public interface NutritionOrderService {
@@ -35,4 +37,8 @@ public interface NutritionOrderService {
   public NutritionOrder create(NutritionOrder bean);
   public NutritionOrder update(NutritionOrder bean);
   public void delete(NutritionOrder bean);
+  public List<NutritionOrder> findByField(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findBySupplement(QueryBuilder queryBuilder);
+
+
 }

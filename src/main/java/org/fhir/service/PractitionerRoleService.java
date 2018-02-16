@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PractitionerRole;
 
 public interface PractitionerRoleService {
@@ -35,4 +37,11 @@ public interface PractitionerRoleService {
   public PractitionerRole create(PractitionerRole bean);
   public PractitionerRole update(PractitionerRole bean);
   public void delete(PractitionerRole bean);
+  public List<PractitionerRole> findByField(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByEndpoint(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByLocation(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByOrganization(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByPractitioner(QueryBuilder queryBuilder);
+
+
 }

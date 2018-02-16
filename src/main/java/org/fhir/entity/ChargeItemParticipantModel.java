@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation."
 */
 @Entity
 @Table(name="chargeitemparticipant")
 public class ChargeItemParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 151857669693547752L;
+	private static final long serialVersionUID = 151873631173033125L;
   /**
   * Description: "Describes the type of performance or participation(e.g. primary surgeon, anaesthesiologiest, etc.)."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class ChargeItemParticipantModel  implements Serializable {
   public ChargeItemParticipantModel(ChargeItemParticipant o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.role = JsonUtils.toJson(o.getRole());
     if (null != o.getActor() ) {
     	this.actor_id = "actor" + this.parent_id;
     	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);

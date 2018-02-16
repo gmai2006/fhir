@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
 @Entity
 @Table(name="contractrule")
 public class ContractRuleModel  implements Serializable {
-	private static final long serialVersionUID = 151857669709485771L;
+	private static final long serialVersionUID = 151873631188150239L;
   /**
   * Description: "Computable Contract conveyed using a policy rule language (e.g. XACML, DKAL, SecPal)."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class ContractRuleModel  implements Serializable {
   public ContractRuleModel(ContractRule o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.contentAttachment = AttachmentHelper.toJson(o.getContentAttachment());
+    this.contentAttachment = JsonUtils.toJson(o.getContentAttachment());
     if (null != o.getContentReference() ) {
     	this.contentreference_id = "contentreference" + this.parent_id;
     	this.contentReference = ReferenceHelper.toModel(o.getContentReference(), this.contentreference_id);

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A homogeneous material with a definite composition."
 */
 @Entity
 @Table(name="substanceingredient")
 public class SubstanceIngredientModel  implements Serializable {
-	private static final long serialVersionUID = 151857669675956138L;
+	private static final long serialVersionUID = 151873631152327770L;
   /**
   * Description: "The amount of the ingredient in the substance - a concentration ratio."
   * Actual type: String;
@@ -112,8 +113,8 @@ public class SubstanceIngredientModel  implements Serializable {
   public SubstanceIngredientModel(SubstanceIngredient o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.quantity = RatioHelper.toJson(o.getQuantity());
-    this.substanceCodeableConcept = CodeableConceptHelper.toJson(o.getSubstanceCodeableConcept());
+    this.quantity = JsonUtils.toJson(o.getQuantity());
+    this.substanceCodeableConcept = JsonUtils.toJson(o.getSubstanceCodeableConcept());
     if (null != o.getSubstanceReference() ) {
     	this.substancereference_id = "substancereference" + this.parent_id;
     	this.substanceReference = ReferenceHelper.toModel(o.getSubstanceReference(), this.substancereference_id);

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
 @Entity
 @Table(name="nutritionordersupplement")
 public class NutritionOrderSupplementModel  implements Serializable {
-	private static final long serialVersionUID = 151857669648143130L;
+	private static final long serialVersionUID = 151873631111074946L;
   /**
   * Description: "The kind of nutritional supplement product required such as a high protein or pediatric clear liquid supplement."
   * Actual type: String;
@@ -65,12 +66,14 @@ public class NutritionOrderSupplementModel  implements Serializable {
 
   /**
   * Description: "The amount of the nutritional supplement to be given."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "Free text or additional instructions or information pertaining to the oral supplement."
@@ -124,9 +127,12 @@ public class NutritionOrderSupplementModel  implements Serializable {
   public NutritionOrderSupplementModel(NutritionOrderSupplement o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.productName = o.getProductName();
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
     this.instruction = o.getInstruction();
   }
 
@@ -148,10 +154,10 @@ public class NutritionOrderSupplementModel  implements Serializable {
   public void setSchedule( String value) {
     this.schedule = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
   public String getInstruction() {
@@ -192,7 +198,6 @@ public class NutritionOrderSupplementModel  implements Serializable {
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("productName" + "->" + this.productName + "\n"); 
      builder.append("schedule" + "->" + this.schedule + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("instruction" + "->" + this.instruction + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

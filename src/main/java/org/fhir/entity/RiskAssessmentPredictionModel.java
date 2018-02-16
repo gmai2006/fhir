@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome."
 */
 @Entity
 @Table(name="riskassessmentprediction")
 public class RiskAssessmentPredictionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669700267818L;
+	private static final long serialVersionUID = 151873631179147167L;
   /**
   * Description: "One of the potential outcomes for the patient (e.g. remission, death,  a particular condition)."
   * Actual type: String;
@@ -152,13 +153,13 @@ public class RiskAssessmentPredictionModel  implements Serializable {
   public RiskAssessmentPredictionModel(RiskAssessmentPrediction o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.outcome = JsonUtils.toJson(o.getOutcome());
     this.probabilityDecimal = o.getProbabilityDecimal();
-    this.probabilityRange = RangeHelper.toJson(o.getProbabilityRange());
-    this.qualitativeRisk = CodeableConceptHelper.toJson(o.getQualitativeRisk());
+    this.probabilityRange = JsonUtils.toJson(o.getProbabilityRange());
+    this.qualitativeRisk = JsonUtils.toJson(o.getQualitativeRisk());
     this.relativeRisk = o.getRelativeRisk();
-    this.whenPeriod = PeriodHelper.toJson(o.getWhenPeriod());
-    this.whenRange = RangeHelper.toJson(o.getWhenRange());
+    this.whenPeriod = JsonUtils.toJson(o.getWhenPeriod());
+    this.whenRange = JsonUtils.toJson(o.getWhenRange());
     this.rationale = o.getRationale();
   }
 

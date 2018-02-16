@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A text description of the DICOM SOP instances selected in the ImagingManifest; or the reason for, or significance of, the selection."
 */
 @Entity
 @Table(name="imagingmanifeststudy")
 public class ImagingManifestStudyModel  implements Serializable {
-	private static final long serialVersionUID = 151857669704538870L;
+	private static final long serialVersionUID = 151873631183073554L;
   /**
   * Description: "Study instance UID of the SOP instances in the selection."
   */

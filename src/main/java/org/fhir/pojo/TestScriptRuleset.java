@@ -30,46 +30,18 @@ import com.google.gson.GsonBuilder;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
-public class TestScriptRuleset  {
+public class TestScriptRuleset  extends BackboneElement  {
   /**
   * Description: "Reference to the resource (containing the contents of the ruleset needed for assertions)."
   */
   @javax.validation.constraints.NotNull
-  private Reference resource;
+  protected Reference resource;
 
   /**
   * Description: "The referenced rule within the external ruleset template."
   */
   @javax.validation.constraints.NotNull
-  private java.util.List<TestScriptRule1> rule = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptRule1> rule = new java.util.ArrayList<>();
 
   public TestScriptRuleset() {}
 
@@ -85,41 +57,13 @@ public class TestScriptRuleset  {
   public java.util.List<TestScriptRule1> getRule() {
     return this.rule;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[TestScriptRuleset]:" + "\n");
      if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
-     if(this.rule != null) builder.append("rule" + "->" + this.rule.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.rule != null) builder.append("rule" + "->" + this.rule.toString() + "\n"); ;
     return builder.toString();
   }
 

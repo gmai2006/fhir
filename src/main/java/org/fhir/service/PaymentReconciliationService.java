@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PaymentReconciliation;
 
 public interface PaymentReconciliationService {
@@ -35,4 +37,9 @@ public interface PaymentReconciliationService {
   public PaymentReconciliation create(PaymentReconciliation bean);
   public PaymentReconciliation update(PaymentReconciliation bean);
   public void delete(PaymentReconciliation bean);
+  public List<PaymentReconciliation> findByField(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByOrganization(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByRequest(QueryBuilder queryBuilder);
+
+
 }

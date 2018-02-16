@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
 */
 @Entity
 @Table(name="compositionsection")
 public class CompositionSectionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669663431427L;
+	private static final long serialVersionUID = 151873631135297094L;
   /**
   * Description: "The label for this particular section.  This will be part of the rendered content for the document, and is often used to build a table of contents."
   */
@@ -159,18 +160,18 @@ public class CompositionSectionModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.title = o.getTitle();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.parent_id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
     }
     this.mode = o.getMode();
-    this.orderedBy = CodeableConceptHelper.toJson(o.getOrderedBy());
+    this.orderedBy = JsonUtils.toJson(o.getOrderedBy());
     if (null != o.getEntry() && !o.getEntry().isEmpty()) {
     	this.entry_id = "entry" + this.parent_id;
     	this.entry = ReferenceHelper.toModelFromArray(o.getEntry(), this.entry_id);
     }
-    this.emptyReason = CodeableConceptHelper.toJson(o.getEmptyReason());
+    this.emptyReason = JsonUtils.toJson(o.getEmptyReason());
     if (null != o.getSection() && !o.getSection().isEmpty()) {
     	this.section_id = "section" + this.parent_id;
     	this.section = CompositionSectionHelper.toModelFromArray(o.getSection(), this.section_id);

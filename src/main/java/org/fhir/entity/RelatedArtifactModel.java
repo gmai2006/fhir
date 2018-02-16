@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Related artifacts such as additional documentation, justification, or bibliographic references."
 */
 @Entity
 @Table(name="relatedartifact")
 public class RelatedArtifactModel  implements Serializable {
-	private static final long serialVersionUID = 151857669707067858L;
+	private static final long serialVersionUID = 151873631185584739L;
   /**
   * Description: "The type of relationship to the related artifact."
   */
@@ -123,7 +124,7 @@ public class RelatedArtifactModel  implements Serializable {
     this.display = o.getDisplay();
     this.citation = o.getCitation();
     this.url = o.getUrl();
-    this.document = AttachmentHelper.toJson(o.getDocument());
+    this.document = JsonUtils.toJson(o.getDocument());
     if (null != o.getResource() ) {
     	this.resource_id = "resource" + this.parent_id;
     	this.resource = ReferenceHelper.toModel(o.getResource(), this.resource_id);

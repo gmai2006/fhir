@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.CompartmentDefinitionModel;
 import org.fhir.pojo.CompartmentDefinition;
 import org.fhir.pojo.CompartmentDefinitionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class CompartmentDefinitionDaoImpl implements CompartmentDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class CompartmentDefinitionDaoImpl implements CompartmentDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       final CompartmentDefinitionModel removed = em.find(CompartmentDefinitionModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<CompartmentDefinition> findByResource(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CompartmentDefinitionModel a, CompartmentDefinitionResource b where a.resource_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<CompartmentDefinition> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CompartmentDefinitionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<CompartmentDefinition> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, CompartmentDefinitionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<CompartmentDefinitionModel> models = query.getResultList();
+    return CompartmentDefinitionHelper.fromArray2Array(models);
   }
 }

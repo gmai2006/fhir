@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides eligibility and plan details from the processing of an Eligibility resource."
 */
 @Entity
 @Table(name="eligibilityresponseinsurance")
 public class EligibilityResponseInsuranceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669657946166L;
+	private static final long serialVersionUID = 151873631126377622L;
   /**
   * Description: "A suite of updated or additional Coverages from the Insurer."
   */

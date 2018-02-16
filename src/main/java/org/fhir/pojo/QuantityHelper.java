@@ -24,27 +24,33 @@
  * then submit the template through our web interface.  
  */
 package org.fhir.pojo;
+import org.fhir.entity.QuantityModel;
 import com.google.gson.GsonBuilder;
 
 public class QuantityHelper {
+	public static java.util.List<Quantity> fromArray2Array(java.util.List<QuantityModel> list) {
+    return
+    		list.stream()
+    		.map(x -> new Quantity(x))
+    		.collect(java.util.stream.Collectors.toList());
+  }
 
+  public static Quantity fromArray2Object(java.util.List<QuantityModel> list) {
+    return new Quantity(list.get(0));
+  }
+
+  public static java.util.List<QuantityModel> toModel(Quantity reference, String parentId) {
+  	QuantityModel model = new QuantityModel(reference, parentId);
+  	return java.util.Arrays.asList(new QuantityModel[] { model });
+  }
+
+  public static java.util.List<QuantityModel> toModelFromArray(java.util.List<Quantity> list, String parentId) {
+    return (java.util.List<QuantityModel>)list.stream()
+    	.map(x -> new QuantityModel(x, parentId))
+      .collect(java.util.stream.Collectors.toList());
+  }
   public static Quantity fromJson(String json) {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, Quantity.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Quantity o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Quantity> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 }

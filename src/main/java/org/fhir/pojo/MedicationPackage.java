@@ -31,49 +31,21 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
 */
-public class MedicationPackage  {
+public class MedicationPackage  extends BackboneElement  {
   /**
   * Description: "The kind of container that this package comes as."
   */
-  private CodeableConcept container;
+  protected CodeableConcept container;
 
   /**
   * Description: "A set of components that go to make up the described item."
   */
-  private java.util.List<MedicationContent> content = new java.util.ArrayList<>();
+  protected java.util.List<MedicationContent> content = new java.util.ArrayList<>();
 
   /**
   * Description: "Information about a group of medication produced or packaged from one production run."
   */
-  private java.util.List<MedicationBatch> batch = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<MedicationBatch> batch = new java.util.ArrayList<>();
 
   public MedicationPackage() {
   }
@@ -86,9 +58,6 @@ public class MedicationPackage  {
     }
     if (null != o.getBatch() && !o.getBatch().isEmpty()) {
     	this.batch = MedicationBatchHelper.fromArray2Array(o.getBatch());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -110,30 +79,6 @@ public class MedicationPackage  {
   public java.util.List<MedicationBatch> getBatch() {
     return this.batch;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -141,11 +86,7 @@ public class MedicationPackage  {
     builder.append("[MedicationPackage]:" + "\n");
      if(this.container != null) builder.append("container" + "->" + this.container.toString() + "\n"); 
      if(this.content != null) builder.append("content" + "->" + this.content.toString() + "\n"); 
-     if(this.batch != null) builder.append("batch" + "->" + this.batch.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.batch != null) builder.append("batch" + "->" + this.batch.toString() + "\n"); ;
     return builder.toString();
   }
 

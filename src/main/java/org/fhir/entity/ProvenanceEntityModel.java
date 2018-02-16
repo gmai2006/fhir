@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies."
 */
 @Entity
 @Table(name="provenanceentity")
 public class ProvenanceEntityModel  implements Serializable {
-	private static final long serialVersionUID = 151857669707810993L;
+	private static final long serialVersionUID = 151873631186558552L;
   /**
   * Description: "How the entity was used during the activity."
   */
@@ -134,7 +135,7 @@ public class ProvenanceEntityModel  implements Serializable {
     	this.whatreference_id = "whatreference" + this.parent_id;
     	this.whatReference = ReferenceHelper.toModel(o.getWhatReference(), this.whatreference_id);
     }
-    this.whatIdentifier = IdentifierHelper.toJson(o.getWhatIdentifier());
+    this.whatIdentifier = JsonUtils.toJson(o.getWhatIdentifier());
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent_id = "agent" + this.parent_id;
     	this.agent = ProvenanceAgentHelper.toModelFromArray(o.getAgent(), this.agent_id);

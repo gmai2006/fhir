@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy."
 */
 @Entity
 @Table(name="procedurefocaldevice")
 public class ProcedureFocalDeviceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669716085396L;
+	private static final long serialVersionUID = 151873631195685627L;
   /**
   * Description: "The kind of change that happened to the device during the procedure."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class ProcedureFocalDeviceModel  implements Serializable {
   public ProcedureFocalDeviceModel(ProcedureFocalDevice o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.action = CodeableConceptHelper.toJson(o.getAction());
+    this.action = JsonUtils.toJson(o.getAction());
     if (null != o.getManipulated() ) {
     	this.manipulated_id = "manipulated" + this.parent_id;
     	this.manipulated = ReferenceHelper.toModel(o.getManipulated(), this.manipulated_id);

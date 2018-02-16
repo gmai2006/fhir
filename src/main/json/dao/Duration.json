@@ -1,0 +1,9 @@
+{
+  "className": "Duration",
+  "type": "COMPLEX",
+  "descr": "\"A length of time.\"",
+  "parent": "Quantity",
+  "isInnerClass": true,
+  "autoIncrement": false,
+  "fields": []
+}

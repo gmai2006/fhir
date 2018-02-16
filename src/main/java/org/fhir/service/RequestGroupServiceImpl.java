@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.RequestGroup;
 /**
 * auto generated from SQL files
@@ -103,5 +104,37 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(RequestGroup) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<RequestGroup> findByField(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<RequestGroup> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RequestGroup> findByContext(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RequestGroup> findByDefinition(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByDefinition(queryBuilder);
+    logger.info("findBydefinition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RequestGroup> findBySubject(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

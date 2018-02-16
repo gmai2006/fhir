@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
 */
 @Entity
 @Table(name="patientcommunication")
 public class PatientCommunicationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669678720691L;
+	private static final long serialVersionUID = 151873631156624861L;
   /**
   * Description: "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
   * Actual type: String;
@@ -100,7 +101,7 @@ public class PatientCommunicationModel  implements Serializable {
   public PatientCommunicationModel(PatientCommunication o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.language = CodeableConceptHelper.toJson(o.getLanguage());
+    this.language = JsonUtils.toJson(o.getLanguage());
     this.preferred = o.getPreferred();
   }
 

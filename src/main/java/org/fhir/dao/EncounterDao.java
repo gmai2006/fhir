@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Encounter;
 
 public interface EncounterDao {
@@ -38,4 +39,12 @@ public interface EncounterDao {
 
   public Encounter update(Encounter e);
   public void delete(Encounter e);
+
+  public List<Encounter> findByField(QueryBuilder queryBuilder);
+
+  public List<Encounter> findByAppointment(QueryBuilder queryBuilder);
+  public List<Encounter> findByDiagnosis(QueryBuilder queryBuilder);
+  public List<Encounter> findByLocation(QueryBuilder queryBuilder);
+  public List<Encounter> findByParticipant(QueryBuilder queryBuilder);
+  public List<Encounter> findBySubject(QueryBuilder queryBuilder);
 }

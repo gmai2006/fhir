@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
 @Entity
 @Table(name="capabilitystatementmessaging")
 public class CapabilityStatementMessagingModel  implements Serializable {
-	private static final long serialVersionUID = 151857669655423086L;
+	private static final long serialVersionUID = 151873631123091821L;
   /**
   * Description: "An endpoint (network accessible address) to which messages and/or replies are to be sent."
   */

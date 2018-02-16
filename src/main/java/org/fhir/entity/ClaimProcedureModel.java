@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
 @Entity
 @Table(name="claimprocedure")
 public class ClaimProcedureModel  implements Serializable {
-	private static final long serialVersionUID = 151857669657126720L;
+	private static final long serialVersionUID = 151873631125452023L;
   /**
   * Description: "Sequence of procedures which serves to order and provide a link."
   */
@@ -121,7 +122,7 @@ public class ClaimProcedureModel  implements Serializable {
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.sequence = o.getSequence();
     this.date = o.getDate();
-    this.procedureCodeableConcept = CodeableConceptHelper.toJson(o.getProcedureCodeableConcept());
+    this.procedureCodeableConcept = JsonUtils.toJson(o.getProcedureCodeableConcept());
     if (null != o.getProcedureReference() ) {
     	this.procedurereference_id = "procedurereference" + this.parent_id;
     	this.procedureReference = ReferenceHelper.toModel(o.getProcedureReference(), this.procedurereference_id);

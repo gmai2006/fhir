@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and administrative information about a person independent of a specific health-related context."
 */
 @Entity
 @Table(name="person")
 public class PersonModel  implements Serializable {
-	private static final long serialVersionUID = 151857669692527708L;
+	private static final long serialVersionUID = 151873631171846835L;
   /**
   * Description: "This is a Person resource"
   */
@@ -90,12 +91,14 @@ public class PersonModel  implements Serializable {
 
   /**
   * Description: "One or more addresses for the person."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"address\"", length = 16777215)
-  private String address;
+  @Column(name="\"address_id\"")
+  private String address_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> address;
 
   /**
   * Description: "An image that can be displayed as a thumbnail of the person to enhance the identification of the individual."
@@ -228,7 +231,11 @@ public class PersonModel  implements Serializable {
     this.resourceType = o.getResourceType();
     this.gender = o.getGender();
     this.birthDate = o.getBirthDate();
-    this.photo = AttachmentHelper.toJson(o.getPhoto());
+    if (null != o.getAddress() && !o.getAddress().isEmpty()) {
+    	this.address_id = "address" + this.id;
+    	this.address = AddressHelper.toModelFromArray(o.getAddress(), this.address_id);
+    }
+    this.photo = JsonUtils.toJson(o.getPhoto());
     if (null != o.getManagingOrganization() ) {
     	this.managingorganization_id = "managingorganization" + this.id;
     	this.managingOrganization = ReferenceHelper.toModel(o.getManagingOrganization(), this.managingorganization_id);
@@ -286,10 +293,10 @@ public class PersonModel  implements Serializable {
   public void setBirthDate( String value) {
     this.birthDate = value;
   }
-  public String getAddress() {
+  public java.util.List<AddressModel> getAddress() {
     return this.address;
   }
-  public void setAddress( String value) {
+  public void setAddress( java.util.List<AddressModel> value) {
     this.address = value;
   }
   public String getPhoto() {
@@ -375,7 +382,6 @@ public class PersonModel  implements Serializable {
      builder.append("telecom" + "->" + this.telecom + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 
      builder.append("birthDate" + "->" + this.birthDate + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("photo" + "->" + this.photo + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A reference to a document."
 */
 @Entity
 @Table(name="documentreferencecontent")
 public class DocumentReferenceContentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669696226755L;
+	private static final long serialVersionUID = 15187363117586980L;
   /**
   * Description: "The document or URL of the document along with critical metadata to prove content has integrity."
   * Actual type: String;
@@ -102,8 +103,8 @@ public class DocumentReferenceContentModel  implements Serializable {
   public DocumentReferenceContentModel(DocumentReferenceContent o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.attachment = AttachmentHelper.toJson(o.getAttachment());
-    this.format = CodingHelper.toJson(o.getFormat());
+    this.attachment = JsonUtils.toJson(o.getAttachment());
+    this.format = JsonUtils.toJson(o.getFormat());
   }
 
   public String getAttachment() {

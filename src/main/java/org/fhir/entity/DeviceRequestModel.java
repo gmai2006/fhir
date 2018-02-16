@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker."
 */
 @Entity
 @Table(name="devicerequest")
 public class DeviceRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669647237316L;
+	private static final long serialVersionUID = 151873631109669439L;
   /**
   * Description: "This is a DeviceRequest resource"
   */
@@ -384,15 +385,15 @@ public class DeviceRequestModel  implements Serializable {
     	this.priorrequest_id = "priorrequest" + this.id;
     	this.priorRequest = ReferenceHelper.toModelFromArray(o.getPriorRequest(), this.priorrequest_id);
     }
-    this.groupIdentifier = IdentifierHelper.toJson(o.getGroupIdentifier());
+    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
     this.status = o.getStatus();
-    this.intent = CodeableConceptHelper.toJson(o.getIntent());
+    this.intent = JsonUtils.toJson(o.getIntent());
     this.priority = o.getPriority();
     if (null != o.getCodeReference() ) {
     	this.codereference_id = "codereference" + this.id;
     	this.codeReference = ReferenceHelper.toModel(o.getCodeReference(), this.codereference_id);
     }
-    this.codeCodeableConcept = CodeableConceptHelper.toJson(o.getCodeCodeableConcept());
+    this.codeCodeableConcept = JsonUtils.toJson(o.getCodeCodeableConcept());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -402,14 +403,14 @@ public class DeviceRequestModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = PeriodHelper.toJson(o.getOccurrencePeriod());
-    this.occurrenceTiming = TimingHelper.toJson(o.getOccurrenceTiming());
+    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
     this.authoredOn = o.getAuthoredOn();
     if (null != o.getRequester() ) {
     	this.requester_id = "requester" + this.id;
     	this.requester = DeviceRequestRequesterHelper.toModel(o.getRequester(), this.requester_id);
     }
-    this.performerType = CodeableConceptHelper.toJson(o.getPerformerType());
+    this.performerType = JsonUtils.toJson(o.getPerformerType());
     if (null != o.getPerformer() ) {
     	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);

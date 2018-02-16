@@ -37,44 +37,38 @@ public class Resource  {
   */
   @javax.validation.constraints.NotNull
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
+  protected String id;
 
   /**
   * Description: "Extensions for id"
   */
-  private transient Element _id;
+  protected transient Element _id;
 
   /**
   * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
   */
-  private Meta meta;
+  protected Meta meta;
 
   /**
   * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
   */
-  private String implicitRules;
+  protected String implicitRules;
 
   /**
   * Description: "Extensions for implicitRules"
   */
-  private transient Element _implicitRules;
+  protected transient Element _implicitRules;
 
   /**
   * Description: "The base language in which the resource is written."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
+  protected String language;
 
   /**
   * Description: "Extensions for language"
   */
-  private transient Element _language;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _language;
 
   public Resource() {
   }
@@ -137,12 +131,6 @@ public class Resource  {
   public Element get_language() {
     return this._language;
   }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -154,8 +142,7 @@ public class Resource  {
      if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
      if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
      if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
     return builder.toString();
   }
 

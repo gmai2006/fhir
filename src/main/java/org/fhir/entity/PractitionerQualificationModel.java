@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A person who is directly or indirectly involved in the provisioning of healthcare."
 */
 @Entity
 @Table(name="practitionerqualification")
 public class PractitionerQualificationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669649956072L;
+	private static final long serialVersionUID = 151873631113671405L;
   /**
   * Description: "An identifier that applies to this person's qualification in this role."
   * Actual type: List<String>;
@@ -122,8 +123,8 @@ public class PractitionerQualificationModel  implements Serializable {
   public PractitionerQualificationModel(PractitionerQualification o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.code = JsonUtils.toJson(o.getCode());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getIssuer() ) {
     	this.issuer_id = "issuer" + this.parent_id;
     	this.issuer = ReferenceHelper.toModel(o.getIssuer(), this.issuer_id);

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy."
 */
 @Entity
 @Table(name="fhirprocedure")
 public class ProcedureModel  implements Serializable {
-	private static final long serialVersionUID = 151857669714945061L;
+	private static final long serialVersionUID = 15187363119433678L;
   /**
   * Description: "This is a Procedure resource"
   */
@@ -414,9 +415,9 @@ public class ProcedureModel  implements Serializable {
     }
     this.status = o.getStatus();
     this.notDone = o.getNotDone();
-    this.notDoneReason = CodeableConceptHelper.toJson(o.getNotDoneReason());
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.notDoneReason = JsonUtils.toJson(o.getNotDoneReason());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -426,7 +427,7 @@ public class ProcedureModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.performedDateTime = o.getPerformedDateTime();
-    this.performedPeriod = PeriodHelper.toJson(o.getPerformedPeriod());
+    this.performedPeriod = JsonUtils.toJson(o.getPerformedPeriod());
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
     	this.performer_id = "performer" + this.id;
     	this.performer = ProcedurePerformerHelper.toModelFromArray(o.getPerformer(), this.performer_id);
@@ -439,7 +440,7 @@ public class ProcedureModel  implements Serializable {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModelFromArray(o.getReasonReference(), this.reasonreference_id);
     }
-    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.outcome = JsonUtils.toJson(o.getOutcome());
     if (null != o.getReport() && !o.getReport().isEmpty()) {
     	this.report_id = "report" + this.id;
     	this.report = ReferenceHelper.toModelFromArray(o.getReport(), this.report_id);

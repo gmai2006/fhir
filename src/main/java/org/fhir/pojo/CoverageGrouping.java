@@ -31,154 +31,126 @@ import com.google.gson.GsonBuilder;
 /**
 * "Financial instrument which may be used to reimburse or pay for health care products and services."
 */
-public class CoverageGrouping  {
+public class CoverageGrouping  extends BackboneElement  {
   /**
   * Description: "Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify an employer group. May also be referred to as a Policy or Group ID."
   */
-  private String group;
+  protected String group;
 
   /**
   * Description: "Extensions for group"
   */
-  private transient Element _group;
+  protected transient Element _group;
 
   /**
   * Description: "A short description for the group."
   */
-  private String groupDisplay;
+  protected String groupDisplay;
 
   /**
   * Description: "Extensions for groupDisplay"
   */
-  private transient Element _groupDisplay;
+  protected transient Element _groupDisplay;
 
   /**
   * Description: "Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify a subset of an employer group."
   */
-  private String subGroup;
+  protected String subGroup;
 
   /**
   * Description: "Extensions for subGroup"
   */
-  private transient Element _subGroup;
+  protected transient Element _subGroup;
 
   /**
   * Description: "A short description for the subgroup."
   */
-  private String subGroupDisplay;
+  protected String subGroupDisplay;
 
   /**
   * Description: "Extensions for subGroupDisplay"
   */
-  private transient Element _subGroupDisplay;
+  protected transient Element _subGroupDisplay;
 
   /**
   * Description: "Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify a collection of benefits provided to employees. May be referred to as a Section or Division ID."
   */
-  private String plan;
+  protected String plan;
 
   /**
   * Description: "Extensions for plan"
   */
-  private transient Element _plan;
+  protected transient Element _plan;
 
   /**
   * Description: "A short description for the plan."
   */
-  private String planDisplay;
+  protected String planDisplay;
 
   /**
   * Description: "Extensions for planDisplay"
   */
-  private transient Element _planDisplay;
+  protected transient Element _planDisplay;
 
   /**
   * Description: "Identifies a sub-style or sub-collective of coverage issued by the underwriter, for example may be used to identify a subset of a collection of benefits provided to employees."
   */
-  private String subPlan;
+  protected String subPlan;
 
   /**
   * Description: "Extensions for subPlan"
   */
-  private transient Element _subPlan;
+  protected transient Element _subPlan;
 
   /**
   * Description: "A short description for the subplan."
   */
-  private String subPlanDisplay;
+  protected String subPlanDisplay;
 
   /**
   * Description: "Extensions for subPlanDisplay"
   */
-  private transient Element _subPlanDisplay;
+  protected transient Element _subPlanDisplay;
 
   /**
   * Description: "Identifies a style or collective of coverage issues by the underwriter, for example may be used to identify a class of coverage such as a level of deductables or co-payment."
   */
-  private String FHIRclass;
+  protected String FHIRclass;
 
   /**
   * Description: "Extensions for class"
   */
-  private transient Element _class;
+  protected transient Element _class;
 
   /**
   * Description: "A short description for the class."
   */
-  private String classDisplay;
+  protected String classDisplay;
 
   /**
   * Description: "Extensions for classDisplay"
   */
-  private transient Element _classDisplay;
+  protected transient Element _classDisplay;
 
   /**
   * Description: "Identifies a sub-style or sub-collective of coverage issues by the underwriter, for example may be used to identify a subclass of coverage such as a sub-level of deductables or co-payment."
   */
-  private String subClass;
+  protected String subClass;
 
   /**
   * Description: "Extensions for subClass"
   */
-  private transient Element _subClass;
+  protected transient Element _subClass;
 
   /**
   * Description: "A short description for the subclass."
   */
-  private String subClassDisplay;
+  protected String subClassDisplay;
 
   /**
   * Description: "Extensions for subClassDisplay"
   */
-  private transient Element _subClassDisplay;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _subClassDisplay;
 
   public CoverageGrouping() {
   }
@@ -220,9 +192,6 @@ public class CoverageGrouping  {
     }
     if (null != o.getSubClassDisplay()) {
       this.subClassDisplay = o.getSubClassDisplay();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -370,30 +339,6 @@ public class CoverageGrouping  {
   public Element get_subClassDisplay() {
     return this._subClassDisplay;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -422,11 +367,7 @@ public class CoverageGrouping  {
      if(this.subClass != null) builder.append("subClass" + "->" + this.subClass.toString() + "\n"); 
      if(this._subClass != null) builder.append("_subClass" + "->" + this._subClass.toString() + "\n"); 
      if(this.subClassDisplay != null) builder.append("subClassDisplay" + "->" + this.subClassDisplay.toString() + "\n"); 
-     if(this._subClassDisplay != null) builder.append("_subClassDisplay" + "->" + this._subClassDisplay.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._subClassDisplay != null) builder.append("_subClassDisplay" + "->" + this._subClassDisplay.toString() + "\n"); ;
     return builder.toString();
   }
 

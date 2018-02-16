@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
 */
 @Entity
 @Table(name="immunizationrecommendationdatecriterion")
 public class ImmunizationRecommendationDateCriterionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669714049004L;
+	private static final long serialVersionUID = 151873631193475491L;
   /**
   * Description: "Date classification of recommendation.  For example, earliest date to give, latest date to give, etc."
   * Actual type: String;
@@ -101,7 +102,7 @@ public class ImmunizationRecommendationDateCriterionModel  implements Serializab
   public ImmunizationRecommendationDateCriterionModel(ImmunizationRecommendationDateCriterion o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     this.value = o.getValue();
   }
 

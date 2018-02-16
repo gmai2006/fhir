@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ReferralRequest;
 
 public interface ReferralRequestDao {
@@ -38,4 +39,13 @@ public interface ReferralRequestDao {
 
   public ReferralRequest update(ReferralRequest e);
   public void delete(ReferralRequest e);
+
+  public List<ReferralRequest> findByField(QueryBuilder queryBuilder);
+
+  public List<ReferralRequest> findByContext(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByDefinition(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByRecipient(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByReplaces(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findBySubject(QueryBuilder queryBuilder);
 }

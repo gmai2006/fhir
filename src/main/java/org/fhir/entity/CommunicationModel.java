@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition."
 */
 @Entity
 @Table(name="communication")
 public class CommunicationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669674086205L;
+	private static final long serialVersionUID = 151873631149410603L;
   /**
   * Description: "This is a Communication resource"
   */
@@ -346,7 +347,7 @@ public class CommunicationModel  implements Serializable {
     }
     this.status = o.getStatus();
     this.notDone = o.getNotDone();
-    this.notDoneReason = CodeableConceptHelper.toJson(o.getNotDoneReason());
+    this.notDoneReason = JsonUtils.toJson(o.getNotDoneReason());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);

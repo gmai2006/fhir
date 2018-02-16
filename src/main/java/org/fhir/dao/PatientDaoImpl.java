@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.PatientModel;
 import org.fhir.pojo.Patient;
 import org.fhir.pojo.PatientHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class PatientDaoImpl implements PatientDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class PatientDaoImpl implements PatientDao {
       final EntityManager em = entityManagerProvider.get();
       final PatientModel removed = em.find(PatientModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Patient> findByLink(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PatientModel a, PatientLink b where a.link_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Patient> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PatientModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Patient> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, PatientModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<PatientModel> models = query.getResultList();
+    return PatientHelper.fromArray2Array(models);
   }
 }

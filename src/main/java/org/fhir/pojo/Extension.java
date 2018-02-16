@@ -30,396 +30,377 @@ import com.google.gson.GsonBuilder;
 /**
 * "Optional Extension Element - found in all resources."
 */
-public class Extension  {
+public class Extension  extends Element  {
   /**
   * Description: "Source of the definition for the extension code - a logical name or a URL."
   */
-  private String url;
+  protected String url;
 
   /**
   * Description: "Extensions for url"
   */
-  private transient Element _url;
+  protected transient Element _url;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Boolean valueBoolean;
+  protected Boolean valueBoolean;
 
   /**
   * Description: "Extensions for valueBoolean"
   */
-  private transient Element _valueBoolean;
+  protected transient Element _valueBoolean;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float valueInteger;
+  protected Float valueInteger;
 
   /**
   * Description: "Extensions for valueInteger"
   */
-  private transient Element _valueInteger;
+  protected transient Element _valueInteger;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float valueDecimal;
+  protected Float valueDecimal;
 
   /**
   * Description: "Extensions for valueDecimal"
   */
-  private transient Element _valueDecimal;
+  protected transient Element _valueDecimal;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private String valueBase64Binary;
+  protected String valueBase64Binary;
 
   /**
   * Description: "Extensions for valueBase64Binary"
   */
-  private transient Element _valueBase64Binary;
+  protected transient Element _valueBase64Binary;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private String valueInstant;
+  protected String valueInstant;
 
   /**
   * Description: "Extensions for valueInstant"
   */
-  private transient Element _valueInstant;
+  protected transient Element _valueInstant;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private String valueString;
+  protected String valueString;
 
   /**
   * Description: "Extensions for valueString"
   */
-  private transient Element _valueString;
+  protected transient Element _valueString;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private String valueUri;
+  protected String valueUri;
 
   /**
   * Description: "Extensions for valueUri"
   */
-  private transient Element _valueUri;
+  protected transient Element _valueUri;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?")
-  private String valueDate;
+  protected String valueDate;
 
   /**
   * Description: "Extensions for valueDate"
   */
-  private transient Element _valueDate;
+  protected transient Element _valueDate;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String valueDateTime;
+  protected String valueDateTime;
 
   /**
   * Description: "Extensions for valueDateTime"
   */
-  private transient Element _valueDateTime;
+  protected transient Element _valueDateTime;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?")
-  private String valueTime;
+  protected String valueTime;
 
   /**
   * Description: "Extensions for valueTime"
   */
-  private transient Element _valueTime;
+  protected transient Element _valueTime;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String valueCode;
+  protected String valueCode;
 
   /**
   * Description: "Extensions for valueCode"
   */
-  private transient Element _valueCode;
+  protected transient Element _valueCode;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="urn:oid:(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*))*")
-  private String valueOid;
+  protected String valueOid;
 
   /**
   * Description: "Extensions for valueOid"
   */
-  private transient Element _valueOid;
+  protected transient Element _valueOid;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
-  private String valueUuid;
+  protected String valueUuid;
 
   /**
   * Description: "Extensions for valueUuid"
   */
-  private transient Element _valueUuid;
+  protected transient Element _valueUuid;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String valueId;
+  protected String valueId;
 
   /**
   * Description: "Extensions for valueId"
   */
-  private transient Element _valueId;
+  protected transient Element _valueId;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="[0]|([1-9][0-9]*)")
-  private Float valueUnsignedInt;
+  protected Float valueUnsignedInt;
 
   /**
   * Description: "Extensions for valueUnsignedInt"
   */
-  private transient Element _valueUnsignedInt;
+  protected transient Element _valueUnsignedInt;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
   @javax.validation.constraints.Pattern(regexp="[1-9][0-9]*")
-  private Float valuePositiveInt;
+  protected Float valuePositiveInt;
 
   /**
   * Description: "Extensions for valuePositiveInt"
   */
-  private transient Element _valuePositiveInt;
+  protected transient Element _valuePositiveInt;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private String valueMarkdown;
+  protected String valueMarkdown;
 
   /**
   * Description: "Extensions for valueMarkdown"
   */
-  private transient Element _valueMarkdown;
+  protected transient Element _valueMarkdown;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Element valueElement;
+  protected Element valueElement;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Extension valueExtension;
+  protected Extension valueExtension;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private BackboneElement valueBackboneElement;
+  protected BackboneElement valueBackboneElement;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Narrative valueNarrative;
+  protected Narrative valueNarrative;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Annotation valueAnnotation;
+  protected Annotation valueAnnotation;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Attachment valueAttachment;
+  protected Attachment valueAttachment;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Identifier valueIdentifier;
+  protected Identifier valueIdentifier;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private CodeableConcept valueCodeableConcept;
+  protected CodeableConcept valueCodeableConcept;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Coding valueCoding;
+  protected Coding valueCoding;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Quantity valueQuantity;
+  protected Quantity valueQuantity;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Duration valueDuration;
+  protected Duration valueDuration;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Quantity valueSimpleQuantity;
+  protected Quantity valueSimpleQuantity;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Distance valueDistance;
+  protected Distance valueDistance;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Count valueCount;
+  protected Count valueCount;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Money valueMoney;
+  protected Money valueMoney;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Age valueAge;
+  protected Age valueAge;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Range valueRange;
+  protected Range valueRange;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Period valuePeriod;
+  protected Period valuePeriod;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Ratio valueRatio;
+  protected Ratio valueRatio;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Reference valueReference;
+  protected Reference valueReference;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private SampledData valueSampledData;
+  protected SampledData valueSampledData;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Signature valueSignature;
+  protected Signature valueSignature;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private HumanName valueHumanName;
+  protected HumanName valueHumanName;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Address valueAddress;
+  protected Address valueAddress;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private ContactPoint valueContactPoint;
+  protected ContactPoint valueContactPoint;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Timing valueTiming;
+  protected Timing valueTiming;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Meta valueMeta;
+  protected Meta valueMeta;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private ElementDefinition valueElementDefinition;
+  protected ElementDefinition valueElementDefinition;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private ContactDetail valueContactDetail;
+  protected ContactDetail valueContactDetail;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Contributor valueContributor;
+  protected Contributor valueContributor;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private Dosage valueDosage;
+  protected Dosage valueDosage;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private RelatedArtifact valueRelatedArtifact;
+  protected RelatedArtifact valueRelatedArtifact;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private UsageContext valueUsageContext;
+  protected UsageContext valueUsageContext;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private DataRequirement valueDataRequirement;
+  protected DataRequirement valueDataRequirement;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private ParameterDefinition valueParameterDefinition;
+  protected ParameterDefinition valueParameterDefinition;
 
   /**
   * Description: "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."
   */
-  private TriggerDefinition valueTriggerDefinition;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected TriggerDefinition valueTriggerDefinition;
 
   public Extension() {}
 
@@ -855,24 +836,6 @@ public class Extension  {
   public TriggerDefinition getValueTriggerDefinition() {
     return this.valueTriggerDefinition;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -949,10 +912,7 @@ public class Extension  {
      if(this.valueUsageContext != null) builder.append("valueUsageContext" + "->" + this.valueUsageContext.toString() + "\n"); 
      if(this.valueDataRequirement != null) builder.append("valueDataRequirement" + "->" + this.valueDataRequirement.toString() + "\n"); 
      if(this.valueParameterDefinition != null) builder.append("valueParameterDefinition" + "->" + this.valueParameterDefinition.toString() + "\n"); 
-     if(this.valueTriggerDefinition != null) builder.append("valueTriggerDefinition" + "->" + this.valueTriggerDefinition.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.valueTriggerDefinition != null) builder.append("valueTriggerDefinition" + "->" + this.valueTriggerDefinition.toString() + "\n"); ;
     return builder.toString();
   }
 

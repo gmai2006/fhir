@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinitioncondition")
 public class PlanDefinitionConditionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669672977686L;
+	private static final long serialVersionUID = 15187363114734376L;
   /**
   * Description: "The kind of condition."
   */

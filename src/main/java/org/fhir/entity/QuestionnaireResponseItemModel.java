@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to."
 */
 @Entity
 @Table(name="questionnaireresponseitem")
 public class QuestionnaireResponseItemModel  implements Serializable {
-	private static final long serialVersionUID = 151857669678810609L;
+	private static final long serialVersionUID = 151873631156889272L;
   /**
   * Description: "The item from the Questionnaire that corresponds to this item in the QuestionnaireResponse resource."
   */

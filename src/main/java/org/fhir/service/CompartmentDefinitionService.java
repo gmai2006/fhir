@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CompartmentDefinition;
 
 public interface CompartmentDefinitionService {
@@ -35,4 +37,8 @@ public interface CompartmentDefinitionService {
   public CompartmentDefinition create(CompartmentDefinition bean);
   public CompartmentDefinition update(CompartmentDefinition bean);
   public void delete(CompartmentDefinition bean);
+  public List<CompartmentDefinition> findByField(QueryBuilder queryBuilder);
+  public List<CompartmentDefinition> findByResource(QueryBuilder queryBuilder);
+
+
 }

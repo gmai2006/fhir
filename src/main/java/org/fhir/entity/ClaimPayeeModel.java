@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
 @Entity
 @Table(name="claimpayee")
 public class ClaimPayeeModel  implements Serializable {
-	private static final long serialVersionUID = 151857669675544435L;
+	private static final long serialVersionUID = 151873631151454949L;
   /**
   * Description: "Type of Party to be reimbursed: Subscriber, provider, other."
   * Actual type: String;
@@ -113,8 +114,8 @@ public class ClaimPayeeModel  implements Serializable {
   public ClaimPayeeModel(ClaimPayee o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.resourceType = CodingHelper.toJson(o.getResourceType());
+    this.type = JsonUtils.toJson(o.getType());
+    this.resourceType = JsonUtils.toJson(o.getResourceType());
     if (null != o.getParty() ) {
     	this.party_id = "party" + this.parent_id;
     	this.party = ReferenceHelper.toModel(o.getParty(), this.party_id);

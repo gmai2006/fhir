@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Contract;
 /**
 * auto generated from SQL files
@@ -103,5 +104,43 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Contract) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Contract> findByField(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Contract> findByAgent(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByAgent(queryBuilder);
+    logger.info("findByagent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByAuthority(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByAuthority(queryBuilder);
+    logger.info("findByauthority - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByDomain(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByDomain(queryBuilder);
+    logger.info("findBydomain - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findBySigner(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findBySigner(queryBuilder);
+    logger.info("findBysigner - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

@@ -20,9 +20,9 @@ public class JsonUtils {
 	}
 	
 	public static String write2String(Object o) {
+		if (null == o) return null;
 		try {
-	    Gson gson = new GsonBuilder().create();
-	    return gson.toJson(o);
+	    return getGson().toJson(o);
 		} catch (Exception ex) {
 			logger.severe("Unable to write object to json [" + ex.getMessage() + "]");
 			return "";
@@ -31,15 +31,20 @@ public class JsonUtils {
 	
 	public static JsonObject parseJson(Path inputFile) {
 		try {
-			Gson gson = new GsonBuilder().create();
-			return gson.fromJson(new BufferedReader(new FileReader(inputFile.toFile())), JsonObject.class);
+			return getGson().fromJson(new BufferedReader(new FileReader(inputFile.toFile())), JsonObject.class);
 		} catch (Exception ex) {
 			logger.severe("Unable to read from [" + ex.getMessage() + "]");
 			return null;
 		}
 	}
 	
+	public static String toJson(Object o) {
+    if (null == o) return null;
+    return new GsonBuilder().create().toJson(o);
+  }
+	
 	public static java.util.List json2Array(String json) {
+		if (null == json) return null;
 		if ( "[]".equals(json)) return new ArrayList<>();
 		return getGson().fromJson(json, java.util.List.class);
 	}

@@ -30,90 +30,71 @@ import com.google.gson.GsonBuilder;
 /**
 * "A human's name with the ability to identify parts and usage."
 */
-public class HumanName  {
+public class HumanName  extends Element  {
   /**
   * Description: "Identifies the purpose for this name."
   */
-  private String use;
+  protected String use;
 
   /**
   * Description: "Extensions for use"
   */
-  private transient Element _use;
+  protected transient Element _use;
 
   /**
   * Description: "A full text representation of the name."
   */
-  private String text;
+  protected String text;
 
   /**
   * Description: "Extensions for text"
   */
-  private transient Element _text;
+  protected transient Element _text;
 
   /**
   * Description: "The part of a name that links to the genealogy. In some cultures (e.g. Eritrea) the family name of a son is the first name of his father."
   */
-  private String family;
+  protected String family;
 
   /**
   * Description: "Extensions for family"
   */
-  private transient Element _family;
+  protected transient Element _family;
 
   /**
   * Description: "Given name."
   */
-  private java.util.List<String> given = new java.util.ArrayList<>();
+  protected java.util.List<String> given = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for given"
   */
-  private transient java.util.List<Element> _given = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _given = new java.util.ArrayList<>();
 
   /**
   * Description: "Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the start of the name."
   */
-  private java.util.List<String> prefix = new java.util.ArrayList<>();
+  protected java.util.List<String> prefix = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for prefix"
   */
-  private transient java.util.List<Element> _prefix = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _prefix = new java.util.ArrayList<>();
 
   /**
   * Description: "Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name."
   */
-  private java.util.List<String> suffix = new java.util.ArrayList<>();
+  protected java.util.List<String> suffix = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for suffix"
   */
-  private transient java.util.List<Element> _suffix = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _suffix = new java.util.ArrayList<>();
 
   /**
   * Description: "Indicates the period of time when this name was valid for the named person."
   */
-  private Period period;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Period period;
 
   public HumanName() {}
 
@@ -195,24 +176,6 @@ public class HumanName  {
   public Period getPeriod() {
     return this.period;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -230,10 +193,7 @@ public class HumanName  {
      if(this._prefix != null) builder.append("_prefix" + "->" + this._prefix.toString() + "\n"); 
      if(this.suffix != null) builder.append("suffix" + "->" + this.suffix.toString() + "\n"); 
      if(this._suffix != null) builder.append("_suffix" + "->" + this._suffix.toString() + "\n"); 
-     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); ;
     return builder.toString();
   }
 

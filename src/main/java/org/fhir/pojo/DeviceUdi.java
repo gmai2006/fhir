@@ -31,104 +31,76 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc."
 */
-public class DeviceUdi  {
+public class DeviceUdi  extends BackboneElement  {
   /**
   * Description: "The device identifier (DI) is a mandatory, fixed portion of a UDI that identifies the labeler and the specific version or model of a device."
   */
-  private String deviceIdentifier;
+  protected String deviceIdentifier;
 
   /**
   * Description: "Extensions for deviceIdentifier"
   */
-  private transient Element _deviceIdentifier;
+  protected transient Element _deviceIdentifier;
 
   /**
   * Description: "Name of device as used in labeling or catalog."
   */
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "The identity of the authoritative source for UDI generation within a  jurisdiction.  All UDIs are globally unique within a single namespace. with the appropriate repository uri as the system.  For example,  UDIs of devices managed in the U.S. by the FDA, the value is  http://hl7.org/fhir/NamingSystem/fda-udi."
   */
-  private String jurisdiction;
+  protected String jurisdiction;
 
   /**
   * Description: "Extensions for jurisdiction"
   */
-  private transient Element _jurisdiction;
+  protected transient Element _jurisdiction;
 
   /**
   * Description: "The full UDI carrier as the human readable form (HRF) representation of the barcode string as printed on the packaging of the device."
   */
-  private String carrierHRF;
+  protected String carrierHRF;
 
   /**
   * Description: "Extensions for carrierHRF"
   */
-  private transient Element _carrierHRF;
+  protected transient Element _carrierHRF;
 
   /**
   * Description: "The full UDI carrier of the Automatic Identification and Data Capture (AIDC) technology representation of the barcode string as printed on the packaging of the device - E.g a barcode or RFID.   Because of limitations on character sets in XML and the need to round-trip JSON data through XML, AIDC Formats *SHALL* be base64 encoded."
   */
-  private String carrierAIDC;
+  protected String carrierAIDC;
 
   /**
   * Description: "Extensions for carrierAIDC"
   */
-  private transient Element _carrierAIDC;
+  protected transient Element _carrierAIDC;
 
   /**
   * Description: "Organization that is charged with issuing UDIs for devices.  For example, the US FDA issuers include :\n1) GS1: \nhttp://hl7.org/fhir/NamingSystem/gs1-di, \n2) HIBCC:\nhttp://hl7.org/fhir/NamingSystem/hibcc-dI, \n3) ICCBBA for blood containers:\nhttp://hl7.org/fhir/NamingSystem/iccbba-blood-di, \n4) ICCBA for other devices:\nhttp://hl7.org/fhir/NamingSystem/iccbba-other-di."
   */
-  private String issuer;
+  protected String issuer;
 
   /**
   * Description: "Extensions for issuer"
   */
-  private transient Element _issuer;
+  protected transient Element _issuer;
 
   /**
   * Description: "A coded entry to indicate how the data was entered."
   */
-  private String entryType;
+  protected String entryType;
 
   /**
   * Description: "Extensions for entryType"
   */
-  private transient Element _entryType;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _entryType;
 
   public DeviceUdi() {
   }
@@ -155,9 +127,6 @@ public class DeviceUdi  {
     }
     if (null != o.getEntryType()) {
       this.entryType = o.getEntryType();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -245,30 +214,6 @@ public class DeviceUdi  {
   public Element get_entryType() {
     return this._entryType;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -287,11 +232,7 @@ public class DeviceUdi  {
      if(this.issuer != null) builder.append("issuer" + "->" + this.issuer.toString() + "\n"); 
      if(this._issuer != null) builder.append("_issuer" + "->" + this._issuer.toString() + "\n"); 
      if(this.entryType != null) builder.append("entryType" + "->" + this.entryType.toString() + "\n"); 
-     if(this._entryType != null) builder.append("_entryType" + "->" + this._entryType.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._entryType != null) builder.append("_entryType" + "->" + this._entryType.toString() + "\n"); ;
     return builder.toString();
   }
 

@@ -31,50 +31,22 @@ import com.google.gson.GsonBuilder;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
-public class ClaimPayee  {
+public class ClaimPayee  extends BackboneElement  {
   /**
   * Description: "Type of Party to be reimbursed: Subscriber, provider, other."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept type;
+  protected CodeableConcept type;
 
   /**
   * Description: "organization | patient | practitioner | relatedperson."
   */
-  private Coding resourceType;
+  protected Coding resourceType;
 
   /**
   * Description: "Party to be reimbursed: Subscriber, provider, other."
   */
-  private Reference party;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Reference party;
 
   public ClaimPayee() {
   }
@@ -85,9 +57,6 @@ public class ClaimPayee  {
     this.resourceType = CodingHelper.fromJson(o.getResourceType());
     if (null != o.getParty() && !o.getParty().isEmpty()) {
       this.party = new Reference(o.getParty().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -109,30 +78,6 @@ public class ClaimPayee  {
   public Reference getParty() {
     return this.party;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -140,11 +85,7 @@ public class ClaimPayee  {
     builder.append("[ClaimPayee]:" + "\n");
      if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
      if(this.resourceType != null) builder.append("resourceType" + "->" + this.resourceType.toString() + "\n"); 
-     if(this.party != null) builder.append("party" + "->" + this.party.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.party != null) builder.append("party" + "->" + this.party.toString() + "\n"); ;
     return builder.toString();
   }
 

@@ -31,200 +31,172 @@ import com.google.gson.GsonBuilder;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
 */
-public class RequestGroupAction  {
+public class RequestGroupAction  extends BackboneElement  {
   /**
   * Description: "A user-visible label for the action."
   */
-  private String label;
+  protected String label;
 
   /**
   * Description: "Extensions for label"
   */
-  private transient Element _label;
+  protected transient Element _label;
 
   /**
   * Description: "The title of the action displayed to a user."
   */
-  private String title;
+  protected String title;
 
   /**
   * Description: "Extensions for title"
   */
-  private transient Element _title;
+  protected transient Element _title;
 
   /**
   * Description: "A short description of the action used to provide a summary to display to the user."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "A text equivalent of the action to be performed. This provides a human-interpretable description of the action when the definition is consumed by a system that may not be capable of interpreting it dynamically."
   */
-  private String textEquivalent;
+  protected String textEquivalent;
 
   /**
   * Description: "Extensions for textEquivalent"
   */
-  private transient Element _textEquivalent;
+  protected transient Element _textEquivalent;
 
   /**
   * Description: "A code that provides meaning for the action or action group. For example, a section may have a LOINC code for a the section of a documentation template."
   */
-  private java.util.List<CodeableConcept> code = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> code = new java.util.ArrayList<>();
 
   /**
   * Description: "Didactic or other informational resources associated with the action that can be provided to the CDS recipient. Information resources can include inline text commentary and links to web resources."
   */
-  private java.util.List<RelatedArtifact> documentation = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> documentation = new java.util.ArrayList<>();
 
   /**
   * Description: "An expression that describes applicability criteria, or start/stop conditions for the action."
   */
-  private java.util.List<RequestGroupCondition> condition = new java.util.ArrayList<>();
+  protected java.util.List<RequestGroupCondition> condition = new java.util.ArrayList<>();
 
   /**
   * Description: "A relationship to another action such as \"before\" or \"30-60 minutes after start of\"."
   */
-  private java.util.List<RequestGroupRelatedAction> relatedAction = new java.util.ArrayList<>();
+  protected java.util.List<RequestGroupRelatedAction> relatedAction = new java.util.ArrayList<>();
 
   /**
   * Description: "An optional value describing when the action should be performed."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String timingDateTime;
+  protected String timingDateTime;
 
   /**
   * Description: "Extensions for timingDateTime"
   */
-  private transient Element _timingDateTime;
+  protected transient Element _timingDateTime;
 
   /**
   * Description: "An optional value describing when the action should be performed."
   */
-  private Period timingPeriod;
+  protected Period timingPeriod;
 
   /**
   * Description: "An optional value describing when the action should be performed."
   */
-  private Duration timingDuration;
+  protected Duration timingDuration;
 
   /**
   * Description: "An optional value describing when the action should be performed."
   */
-  private Range timingRange;
+  protected Range timingRange;
 
   /**
   * Description: "An optional value describing when the action should be performed."
   */
-  private Timing timingTiming;
+  protected Timing timingTiming;
 
   /**
   * Description: "The participant that should perform or be responsible for this action."
   */
-  private java.util.List<Reference> participant = new java.util.ArrayList<>();
+  protected java.util.List<Reference> participant = new java.util.ArrayList<>();
 
   /**
   * Description: "The type of action to perform (create, update, remove)."
   */
-  private Coding type;
+  protected Coding type;
 
   /**
   * Description: "Defines the grouping behavior for the action and its children."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String groupingBehavior;
+  protected String groupingBehavior;
 
   /**
   * Description: "Extensions for groupingBehavior"
   */
-  private transient Element _groupingBehavior;
+  protected transient Element _groupingBehavior;
 
   /**
   * Description: "Defines the selection behavior for the action and its children."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String selectionBehavior;
+  protected String selectionBehavior;
 
   /**
   * Description: "Extensions for selectionBehavior"
   */
-  private transient Element _selectionBehavior;
+  protected transient Element _selectionBehavior;
 
   /**
   * Description: "Defines the requiredness behavior for the action."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String requiredBehavior;
+  protected String requiredBehavior;
 
   /**
   * Description: "Extensions for requiredBehavior"
   */
-  private transient Element _requiredBehavior;
+  protected transient Element _requiredBehavior;
 
   /**
   * Description: "Defines whether the action should usually be preselected."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String precheckBehavior;
+  protected String precheckBehavior;
 
   /**
   * Description: "Extensions for precheckBehavior"
   */
-  private transient Element _precheckBehavior;
+  protected transient Element _precheckBehavior;
 
   /**
   * Description: "Defines whether the action can be selected multiple times."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String cardinalityBehavior;
+  protected String cardinalityBehavior;
 
   /**
   * Description: "Extensions for cardinalityBehavior"
   */
-  private transient Element _cardinalityBehavior;
+  protected transient Element _cardinalityBehavior;
 
   /**
   * Description: "The resource that is the target of the action (e.g. CommunicationRequest)."
   */
-  private Reference resource;
+  protected Reference resource;
 
   /**
   * Description: "Sub actions."
   */
-  private java.util.List<RequestGroupAction> action = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<RequestGroupAction> action = new java.util.ArrayList<>();
 
   public RequestGroupAction() {
   }
@@ -283,9 +255,6 @@ public class RequestGroupAction  {
     }
     if (null != o.getAction() && !o.getAction().isEmpty()) {
     	this.action = RequestGroupActionHelper.fromArray2Array(o.getAction());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -481,30 +450,6 @@ public class RequestGroupAction  {
   public java.util.List<RequestGroupAction> getAction() {
     return this.action;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -541,11 +486,7 @@ public class RequestGroupAction  {
      if(this.cardinalityBehavior != null) builder.append("cardinalityBehavior" + "->" + this.cardinalityBehavior.toString() + "\n"); 
      if(this._cardinalityBehavior != null) builder.append("_cardinalityBehavior" + "->" + this._cardinalityBehavior.toString() + "\n"); 
      if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
-     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); ;
     return builder.toString();
   }
 

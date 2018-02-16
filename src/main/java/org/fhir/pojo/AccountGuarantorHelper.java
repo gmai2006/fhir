@@ -53,19 +53,4 @@ public class AccountGuarantorHelper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, AccountGuarantor.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AccountGuarantor o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AccountGuarantor> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

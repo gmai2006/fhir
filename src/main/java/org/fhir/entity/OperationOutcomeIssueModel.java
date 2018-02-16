@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A collection of error, warning or information messages that result from a system action."
 */
 @Entity
 @Table(name="operationoutcomeissue")
 public class OperationOutcomeIssueModel  implements Serializable {
-	private static final long serialVersionUID = 151857669688792913L;
+	private static final long serialVersionUID = 151873631167837150L;
   /**
   * Description: "Indicates whether the issue indicates a variation from successful processing."
   */
@@ -129,7 +130,7 @@ public class OperationOutcomeIssueModel  implements Serializable {
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.severity = o.getSeverity();
     this.code = o.getCode();
-    this.details = CodeableConceptHelper.toJson(o.getDetails());
+    this.details = JsonUtils.toJson(o.getDetails());
     this.diagnostics = o.getDiagnostics();
     this.location = org.fhir.utils.JsonUtils.write2String(o.getLocation());
     this.expression = org.fhir.utils.JsonUtils.write2String(o.getExpression());

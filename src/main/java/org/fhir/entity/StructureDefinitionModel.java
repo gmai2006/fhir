@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A definition of a FHIR structure. This resource is used to describe the underlying resources, data types defined in FHIR, and also for describing extensions and constraints on resources and data types."
 */
 @Entity
 @Table(name="structuredefinition")
 public class StructureDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669686514556L;
+	private static final long serialVersionUID = 151873631165382699L;
   /**
   * Description: "This is a StructureDefinition resource"
   */
@@ -384,8 +385,8 @@ public class StructureDefinitionModel  implements Serializable {
     this.type = o.getType();
     this.baseDefinition = o.getBaseDefinition();
     this.derivation = o.getDerivation();
-    this.snapshot = StructureDefinitionSnapshotHelper.toJson(o.getSnapshot());
-    this.differential = StructureDefinitionDifferentialHelper.toJson(o.getDifferential());
+    this.snapshot = JsonUtils.toJson(o.getSnapshot());
+    this.differential = JsonUtils.toJson(o.getDifferential());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);

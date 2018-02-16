@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set."
 */
 @Entity
 @Table(name="graphdefinitionlink")
 public class GraphDefinitionLinkModel  implements Serializable {
-	private static final long serialVersionUID = 151857669680030055L;
+	private static final long serialVersionUID = 151873631158180699L;
   /**
   * Description: "Path in the resource that contains the link."
   */

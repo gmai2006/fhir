@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.PlanDefinitionModel;
 import org.fhir.pojo.PlanDefinition;
 import org.fhir.pojo.PlanDefinitionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class PlanDefinitionDaoImpl implements PlanDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class PlanDefinitionDaoImpl implements PlanDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       final PlanDefinitionModel removed = em.find(PlanDefinitionModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<PlanDefinition> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PlanDefinitionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<PlanDefinition> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, PlanDefinitionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<PlanDefinitionModel> models = query.getResultList();
+    return PlanDefinitionHelper.fromArray2Array(models);
   }
 }

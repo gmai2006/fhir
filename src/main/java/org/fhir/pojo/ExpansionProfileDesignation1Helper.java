@@ -53,19 +53,4 @@ public class ExpansionProfileDesignation1Helper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, ExpansionProfileDesignation1.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(ExpansionProfileDesignation1 o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<ExpansionProfileDesignation1> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

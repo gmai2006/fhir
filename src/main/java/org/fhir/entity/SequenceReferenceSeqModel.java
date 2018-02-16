@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Raw data describing a biological sequence."
 */
 @Entity
 @Table(name="sequencereferenceseq")
 public class SequenceReferenceSeqModel  implements Serializable {
-	private static final long serialVersionUID = 151857669695965372L;
+	private static final long serialVersionUID = 151873631175567916L;
   /**
   * Description: "Structural unit composed of a nucleic acid molecule which controls its own replication through the interaction of specific proteins at one or more origins of replication ([SO:0000340](http://www.sequenceontology.org/browser/current_svn/term/SO:0000340))."
   * Actual type: String;
@@ -150,9 +151,9 @@ public class SequenceReferenceSeqModel  implements Serializable {
   public SequenceReferenceSeqModel(SequenceReferenceSeq o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.chromosome = CodeableConceptHelper.toJson(o.getChromosome());
+    this.chromosome = JsonUtils.toJson(o.getChromosome());
     this.genomeBuild = o.getGenomeBuild();
-    this.referenceSeqId = CodeableConceptHelper.toJson(o.getReferenceSeqId());
+    this.referenceSeqId = JsonUtils.toJson(o.getReferenceSeqId());
     if (null != o.getReferenceSeqPointer() ) {
     	this.referenceseqpointer_id = "referenceseqpointer" + this.parent_id;
     	this.referenceSeqPointer = ReferenceHelper.toModel(o.getReferenceSeqPointer(), this.referenceseqpointer_id);

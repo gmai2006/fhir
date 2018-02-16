@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
 @Entity
 @Table(name="contractvalueditem")
 public class ContractValuedItemModel  implements Serializable {
-	private static final long serialVersionUID = 151857669718395986L;
+	private static final long serialVersionUID = 151873631198348991L;
   /**
   * Description: "Specific type of Contract Valued Item that may be priced."
   * Actual type: String;
@@ -77,21 +78,25 @@ public class ContractValuedItemModel  implements Serializable {
 
   /**
   * Description: "Specifies the units by which the Contract Valued Item is measured or counted, and quantifies the countable or measurable Contract Valued Item instances."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "A Contract Valued Item unit valuation measure."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"unitPrice\"", length = 16777215)
-  private String unitPrice;
+  @Column(name="\"unitprice_id\"")
+  private String unitprice_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unitprice_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> unitPrice;
 
   /**
   * Description: "A real number that represents a multiplier used in determining the overall value of the Contract Valued Item delivered. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount."
@@ -111,12 +116,14 @@ public class ContractValuedItemModel  implements Serializable {
 
   /**
   * Description: "Expresses the product of the Contract Valued Item unitQuantity and the unitPriceAmt. For example, the formula: unit Quantity * unit Price (Cost per Point) * factor Number  * points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"net\"", length = 16777215)
-  private String net;
+  @Column(name="\"net_id\"")
+  private String net_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="net_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> net;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -163,18 +170,27 @@ public class ContractValuedItemModel  implements Serializable {
   public ContractValuedItemModel(ContractValuedItem o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.entityCodeableConcept = CodeableConceptHelper.toJson(o.getEntityCodeableConcept());
+    this.entityCodeableConcept = JsonUtils.toJson(o.getEntityCodeableConcept());
     if (null != o.getEntityReference() ) {
     	this.entityreference_id = "entityreference" + this.parent_id;
     	this.entityReference = ReferenceHelper.toModel(o.getEntityReference(), this.entityreference_id);
     }
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.effectiveTime = o.getEffectiveTime();
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
-    this.unitPrice = MoneyHelper.toJson(o.getUnitPrice());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
+    if (null != o.getUnitPrice() ) {
+    	this.unitprice_id = "unitprice" + this.parent_id;
+    	this.unitPrice = MoneyHelper.toModel(o.getUnitPrice(), this.unitprice_id);
+    }
     this.factor = o.getFactor();
     this.points = o.getPoints();
-    this.net = MoneyHelper.toJson(o.getNet());
+    if (null != o.getNet() ) {
+    	this.net_id = "net" + this.parent_id;
+    	this.net = MoneyHelper.toModel(o.getNet(), this.net_id);
+    }
   }
 
   public String getEntityCodeableConcept() {
@@ -201,16 +217,16 @@ public class ContractValuedItemModel  implements Serializable {
   public void setEffectiveTime( String value) {
     this.effectiveTime = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
-  public String getUnitPrice() {
+  public java.util.List<MoneyModel> getUnitPrice() {
     return this.unitPrice;
   }
-  public void setUnitPrice( String value) {
+  public void setUnitPrice( java.util.List<MoneyModel> value) {
     this.unitPrice = value;
   }
   public Float getFactor() {
@@ -225,10 +241,10 @@ public class ContractValuedItemModel  implements Serializable {
   public void setPoints( Float value) {
     this.points = value;
   }
-  public String getNet() {
+  public java.util.List<MoneyModel> getNet() {
     return this.net;
   }
-  public void setNet( String value) {
+  public void setNet( java.util.List<MoneyModel> value) {
     this.net = value;
   }
   public String getModifierExtension() {
@@ -263,11 +279,8 @@ public class ContractValuedItemModel  implements Serializable {
      builder.append("entityCodeableConcept" + "->" + this.entityCodeableConcept + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("effectiveTime" + "->" + this.effectiveTime + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("unitPrice" + "->" + this.unitPrice + "\n"); 
      builder.append("factor" + "->" + this.factor + "\n"); 
      builder.append("points" + "->" + this.points + "\n"); 
-     builder.append("net" + "->" + this.net + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

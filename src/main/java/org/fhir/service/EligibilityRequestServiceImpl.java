@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.EligibilityRequest;
 /**
 * auto generated from SQL files
@@ -103,5 +104,43 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(EligibilityRequest) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<EligibilityRequest> findByField(QueryBuilder queryBuilder) {
+  	final List<EligibilityRequest> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<EligibilityRequest> findByEnterer(QueryBuilder queryBuilder) {
+  	final List<EligibilityRequest> result = dao.findByEnterer(queryBuilder);
+    logger.info("findByenterer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityRequest> findByFacility(QueryBuilder queryBuilder) {
+  	final List<EligibilityRequest> result = dao.findByFacility(queryBuilder);
+    logger.info("findByfacility - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityRequest> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<EligibilityRequest> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityRequest> findByPatient(QueryBuilder queryBuilder) {
+  	final List<EligibilityRequest> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityRequest> findByProvider(QueryBuilder queryBuilder) {
+  	final List<EligibilityRequest> result = dao.findByProvider(queryBuilder);
+    logger.info("findByprovider - exited - return value={} result ");
+    return result;
   }
 }

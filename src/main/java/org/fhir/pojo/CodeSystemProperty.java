@@ -31,75 +31,47 @@ import com.google.gson.GsonBuilder;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
 */
-public class CodeSystemProperty  {
+public class CodeSystemProperty  extends BackboneElement  {
   /**
   * Description: "A code that is used to identify the property. The code is used internally (in CodeSystem.concept.property.code) and also externally, such as in property filters."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String code;
+  protected String code;
 
   /**
   * Description: "Extensions for code"
   */
-  private transient Element _code;
+  protected transient Element _code;
 
   /**
   * Description: "Reference to the formal meaning of the property. One possible source of meaning is the [Concept Properties](codesystem-concept-properties.html) code system."
   */
-  private String uri;
+  protected String uri;
 
   /**
   * Description: "Extensions for uri"
   */
-  private transient Element _uri;
+  protected transient Element _uri;
 
   /**
   * Description: "A description of the property- why it is defined, and how its value might be used."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "The type of the property value. Properties of type \"code\" contain a code defined by the code system (e.g. a reference to anotherr defined concept)."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _type;
 
   public CodeSystemProperty() {
   }
@@ -117,9 +89,6 @@ public class CodeSystemProperty  {
     }
     if (null != o.getType()) {
       this.type = o.getType();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -171,30 +140,6 @@ public class CodeSystemProperty  {
   public Element get_type() {
     return this._type;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -207,11 +152,7 @@ public class CodeSystemProperty  {
      if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
      if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
      if(this.type != null) builder.append("type" + "->" + this.type.toString() + "\n"); 
-     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); ;
     return builder.toString();
   }
 

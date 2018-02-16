@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DetectedIssue;
 
 public interface DetectedIssueService {
@@ -35,4 +37,9 @@ public interface DetectedIssueService {
   public DetectedIssue create(DetectedIssue bean);
   public DetectedIssue update(DetectedIssue bean);
   public void delete(DetectedIssue bean);
+  public List<DetectedIssue> findByField(QueryBuilder queryBuilder);
+  public List<DetectedIssue> findByAuthor(QueryBuilder queryBuilder);
+  public List<DetectedIssue> findByImplicated(QueryBuilder queryBuilder);
+
+
 }

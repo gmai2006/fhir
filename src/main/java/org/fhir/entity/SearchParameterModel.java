@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A search parameter that defines a named search item that can be used to search/filter on a resource."
 */
 @Entity
 @Table(name="searchparameter")
 public class SearchParameterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669707232024L;
+	private static final long serialVersionUID = 151873631185721073L;
   /**
   * Description: "This is a SearchParameter resource"
   */

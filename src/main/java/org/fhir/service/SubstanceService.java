@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Substance;
 
 public interface SubstanceService {
@@ -35,4 +37,7 @@ public interface SubstanceService {
   public Substance create(Substance bean);
   public Substance update(Substance bean);
   public void delete(Substance bean);
+  public List<Substance> findByField(QueryBuilder queryBuilder);
+
+
 }

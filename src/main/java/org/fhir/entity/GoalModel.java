@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc."
 */
 @Entity
 @Table(name="goal")
 public class GoalModel  implements Serializable {
-	private static final long serialVersionUID = 151857669696529490L;
+	private static final long serialVersionUID = 151873631176197224L;
   /**
   * Description: "This is a Goal resource"
   */
@@ -287,14 +288,14 @@ public class GoalModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.priority = CodeableConceptHelper.toJson(o.getPriority());
-    this.description = CodeableConceptHelper.toJson(o.getDescription());
+    this.priority = JsonUtils.toJson(o.getPriority());
+    this.description = JsonUtils.toJson(o.getDescription());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
     }
     this.startDate = o.getStartDate();
-    this.startCodeableConcept = CodeableConceptHelper.toJson(o.getStartCodeableConcept());
+    this.startCodeableConcept = JsonUtils.toJson(o.getStartCodeableConcept());
     if (null != o.getTarget() ) {
     	this.target_id = "target" + this.id;
     	this.target = GoalTargetHelper.toModel(o.getTarget(), this.target_id);

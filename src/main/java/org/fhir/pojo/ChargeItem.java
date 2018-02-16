@@ -31,248 +31,172 @@ import com.google.gson.GsonBuilder;
 /**
 * "The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation."
 */
-public class ChargeItem  {
+public class ChargeItem  extends DomainResource  {
   /**
   * Description: "This is a ChargeItem resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "Identifiers assigned to this event performer or other systems."
   */
-  private Identifier identifier;
+  protected Identifier identifier;
 
   /**
   * Description: "References the source of pricing information, rules of application for the code this ChargeItem uses."
   */
-  private java.util.List<String> definition = new java.util.ArrayList<>();
+  protected java.util.List<String> definition = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for definition"
   */
-  private transient java.util.List<Element> _definition = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _definition = new java.util.ArrayList<>();
 
   /**
   * Description: "The current state of the ChargeItem."
   */
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "ChargeItems can be grouped to larger ChargeItems covering the whole set."
   */
-  private java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
 
   /**
   * Description: "A code that identifies the charge, like a billing code."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept code;
+  protected CodeableConcept code;
 
   /**
   * Description: "The individual or set of individuals the action is being or was performed on."
   */
   @javax.validation.constraints.NotNull
-  private Reference subject;
+  protected Reference subject;
 
   /**
   * Description: "The encounter or episode of care that establishes the context for this event."
   */
-  private Reference context;
+  protected Reference context;
 
   /**
   * Description: "Date/time(s) or duration when the charged service was applied."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String occurrenceDateTime;
+  protected String occurrenceDateTime;
 
   /**
   * Description: "Extensions for occurrenceDateTime"
   */
-  private transient Element _occurrenceDateTime;
+  protected transient Element _occurrenceDateTime;
 
   /**
   * Description: "Date/time(s) or duration when the charged service was applied."
   */
-  private Period occurrencePeriod;
+  protected Period occurrencePeriod;
 
   /**
   * Description: "Date/time(s) or duration when the charged service was applied."
   */
-  private Timing occurrenceTiming;
+  protected Timing occurrenceTiming;
 
   /**
   * Description: "Indicates who or what performed or participated in the charged service."
   */
-  private java.util.List<ChargeItemParticipant> participant = new java.util.ArrayList<>();
+  protected java.util.List<ChargeItemParticipant> participant = new java.util.ArrayList<>();
 
   /**
   * Description: "The organization requesting the service."
   */
-  private Reference performingOrganization;
+  protected Reference performingOrganization;
 
   /**
   * Description: "The organization performing the service."
   */
-  private Reference requestingOrganization;
+  protected Reference requestingOrganization;
 
   /**
   * Description: "Quantity of which the charge item has been serviced."
   */
-  private Quantity quantity;
+  protected Quantity quantity;
 
   /**
   * Description: "The anatomical location where the related service has been applied."
   */
-  private java.util.List<CodeableConcept> bodysite = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> bodysite = new java.util.ArrayList<>();
 
   /**
   * Description: "Factor overriding the factor determined by the rules associated with the code."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float factorOverride;
+  protected Float factorOverride;
 
   /**
   * Description: "Extensions for factorOverride"
   */
-  private transient Element _factorOverride;
+  protected transient Element _factorOverride;
 
   /**
   * Description: "Total price of the charge overriding the list price associated with the code."
   */
-  private Money priceOverride;
+  protected Money priceOverride;
 
   /**
   * Description: "If the list price or the rule based factor associated with the code is overridden, this attribute can capture a text to indicate the  reason for this action."
   */
-  private String overrideReason;
+  protected String overrideReason;
 
   /**
   * Description: "Extensions for overrideReason"
   */
-  private transient Element _overrideReason;
+  protected transient Element _overrideReason;
 
   /**
   * Description: "The device, practitioner, etc. who entered the charge item."
   */
-  private Reference enterer;
+  protected Reference enterer;
 
   /**
   * Description: "Date the charge item was entered."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String enteredDate;
+  protected String enteredDate;
 
   /**
   * Description: "Extensions for enteredDate"
   */
-  private transient Element _enteredDate;
+  protected transient Element _enteredDate;
 
   /**
   * Description: "Describes why the event occurred in coded or textual form."
   */
-  private java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
 
   /**
   * Description: "Indicated the rendered service that caused this charge."
   */
-  private java.util.List<Reference> service = new java.util.ArrayList<>();
+  protected java.util.List<Reference> service = new java.util.ArrayList<>();
 
   /**
   * Description: "Account into which this ChargeItems belongs."
   */
-  private java.util.List<Reference> account = new java.util.ArrayList<>();
+  protected java.util.List<Reference> account = new java.util.ArrayList<>();
 
   /**
   * Description: "Comments made about the event by the performer, subject or other participants."
   */
-  private java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
 
   /**
   * Description: "Further information supporting the this charge."
   */
-  private java.util.List<Reference> supportingInformation = new java.util.ArrayList<>();
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected java.util.List<Reference> supportingInformation = new java.util.ArrayList<>();
 
   public ChargeItem() {
   }
@@ -313,11 +237,15 @@ public class ChargeItem  {
     if (null != o.getRequestingOrganization() && !o.getRequestingOrganization().isEmpty()) {
       this.requestingOrganization = new Reference(o.getRequestingOrganization().get(0));
     }
-    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
+      this.quantity = new Quantity(o.getQuantity().get(0));
+    }
     if (null != o.getFactorOverride()) {
       this.factorOverride = o.getFactorOverride();
     }
-    this.priceOverride = MoneyHelper.fromJson(o.getPriceOverride());
+    if (null != o.getPriceOverride() && !o.getPriceOverride().isEmpty()) {
+      this.priceOverride = new Money(o.getPriceOverride().get(0));
+    }
     if (null != o.getOverrideReason()) {
       this.overrideReason = o.getOverrideReason();
     }
@@ -335,21 +263,6 @@ public class ChargeItem  {
     }
     if (null != o.getSupportingInformation() && !o.getSupportingInformation().isEmpty()) {
     	this.supportingInformation = ReferenceHelper.fromArray2Array(o.getSupportingInformation());
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -545,72 +458,6 @@ public class ChargeItem  {
   public java.util.List<Reference> getSupportingInformation() {
     return this.supportingInformation;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -647,18 +494,7 @@ public class ChargeItem  {
      if(this.service != null) builder.append("service" + "->" + this.service.toString() + "\n"); 
      if(this.account != null) builder.append("account" + "->" + this.account.toString() + "\n"); 
      if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
-     if(this.supportingInformation != null) builder.append("supportingInformation" + "->" + this.supportingInformation.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.supportingInformation != null) builder.append("supportingInformation" + "->" + this.supportingInformation.toString() + "\n"); ;
     return builder.toString();
   }
 

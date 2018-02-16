@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc."
 */
 @Entity
 @Table(name="organizationcontact")
 public class OrganizationContactModel  implements Serializable {
-	private static final long serialVersionUID = 151857669704944996L;
+	private static final long serialVersionUID = 151873631183496861L;
   /**
   * Description: "Indicates a purpose for which the contact can be reached."
   * Actual type: String;
@@ -67,12 +68,14 @@ public class OrganizationContactModel  implements Serializable {
 
   /**
   * Description: "Visiting or postal addresses for the contact."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"address\"", length = 16777215)
-  private String address;
+  @Column(name="\"address_id\"")
+  private String address_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> address;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -119,9 +122,12 @@ public class OrganizationContactModel  implements Serializable {
   public OrganizationContactModel(OrganizationContact o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.purpose = CodeableConceptHelper.toJson(o.getPurpose());
-    this.name = HumanNameHelper.toJson(o.getName());
-    this.address = AddressHelper.toJson(o.getAddress());
+    this.purpose = JsonUtils.toJson(o.getPurpose());
+    this.name = JsonUtils.toJson(o.getName());
+    if (null != o.getAddress() ) {
+    	this.address_id = "address" + this.parent_id;
+    	this.address = AddressHelper.toModel(o.getAddress(), this.address_id);
+    }
   }
 
   public String getPurpose() {
@@ -142,10 +148,10 @@ public class OrganizationContactModel  implements Serializable {
   public void setTelecom( String value) {
     this.telecom = value;
   }
-  public String getAddress() {
+  public java.util.List<AddressModel> getAddress() {
     return this.address;
   }
-  public void setAddress( String value) {
+  public void setAddress( java.util.List<AddressModel> value) {
     this.address = value;
   }
   public String getModifierExtension() {
@@ -180,7 +186,6 @@ public class OrganizationContactModel  implements Serializable {
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

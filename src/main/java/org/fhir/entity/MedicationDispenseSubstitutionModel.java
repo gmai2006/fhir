@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order."
 */
 @Entity
 @Table(name="medicationdispensesubstitution")
 public class MedicationDispenseSubstitutionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669646677346L;
+	private static final long serialVersionUID = 151873631108848367L;
   /**
   * Description: "True if the dispenser dispensed a different drug or product from what was prescribed."
   */
@@ -120,7 +121,7 @@ public class MedicationDispenseSubstitutionModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.wasSubstituted = o.getWasSubstituted();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     if (null != o.getResponsibleParty() && !o.getResponsibleParty().isEmpty()) {
     	this.responsibleparty_id = "responsibleparty" + this.parent_id;
     	this.responsibleParty = ReferenceHelper.toModelFromArray(o.getResponsibleParty(), this.responsibleparty_id);

@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ClinicalImpression;
 /**
 * auto generated from SQL files
@@ -103,5 +104,55 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(ClinicalImpression) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<ClinicalImpression> findByField(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<ClinicalImpression> findByAction(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByAction(queryBuilder);
+    logger.info("findByaction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByAssessor(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByAssessor(queryBuilder);
+    logger.info("findByassessor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByContext(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByInvestigation(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByInvestigation(queryBuilder);
+    logger.info("findByinvestigation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByPrevious(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByPrevious(queryBuilder);
+    logger.info("findByprevious - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByProblem(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByProblem(queryBuilder);
+    logger.info("findByproblem - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findBySubject(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

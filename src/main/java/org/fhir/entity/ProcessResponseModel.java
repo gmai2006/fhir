@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides processing status, errors and notes from the processing of a resource."
 */
 @Entity
 @Table(name="processresponse")
 public class ProcessResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669680315134L;
+	private static final long serialVersionUID = 151873631158697493L;
   /**
   * Description: "This is a ProcessResponse resource"
   */
@@ -272,7 +273,7 @@ public class ProcessResponseModel  implements Serializable {
     	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
-    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.outcome = JsonUtils.toJson(o.getOutcome());
     this.disposition = o.getDisposition();
     if (null != o.getRequestProvider() ) {
     	this.requestprovider_id = "requestprovider" + this.id;
@@ -282,7 +283,7 @@ public class ProcessResponseModel  implements Serializable {
     	this.requestorganization_id = "requestorganization" + this.id;
     	this.requestOrganization = ReferenceHelper.toModel(o.getRequestOrganization(), this.requestorganization_id);
     }
-    this.form = CodeableConceptHelper.toJson(o.getForm());
+    this.form = JsonUtils.toJson(o.getForm());
     if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
     	this.processnote_id = "processnote" + this.id;
     	this.processNote = ProcessResponseProcessNoteHelper.toModelFromArray(o.getProcessNote(), this.processnote_id);

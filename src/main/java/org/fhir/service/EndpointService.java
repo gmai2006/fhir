@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Endpoint;
 
 public interface EndpointService {
@@ -35,4 +37,7 @@ public interface EndpointService {
   public Endpoint create(Endpoint bean);
   public Endpoint update(Endpoint bean);
   public void delete(Endpoint bean);
+  public List<Endpoint> findByField(QueryBuilder queryBuilder);
+
+
 }

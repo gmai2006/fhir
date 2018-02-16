@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MessageHeader;
 /**
 * auto generated from SQL files
@@ -103,5 +104,61 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(MessageHeader) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<MessageHeader> findByField(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<MessageHeader> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByDestination(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByDestination(queryBuilder);
+    logger.info("findBydestination - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByEnterer(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByEnterer(queryBuilder);
+    logger.info("findByenterer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByFocus(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByFocus(queryBuilder);
+    logger.info("findByfocus - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByReceiver(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByReceiver(queryBuilder);
+    logger.info("findByreceiver - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByResponsible(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByResponsible(queryBuilder);
+    logger.info("findByresponsible - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findBySender(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findBySender(queryBuilder);
+    logger.info("findBysender - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findBySource(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findBySource(queryBuilder);
+    logger.info("findBysource - exited - return value={} result ");
+    return result;
   }
 }

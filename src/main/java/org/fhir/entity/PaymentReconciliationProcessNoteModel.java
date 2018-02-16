@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides payment details and claim references supporting a bulk payment."
 */
 @Entity
 @Table(name="paymentreconciliationprocessnote")
 public class PaymentReconciliationProcessNoteModel  implements Serializable {
-	private static final long serialVersionUID = 151857669717493591L;
+	private static final long serialVersionUID = 151873631197282067L;
   /**
   * Description: "The note purpose: Print/Display."
   * Actual type: String;
@@ -99,7 +100,7 @@ public class PaymentReconciliationProcessNoteModel  implements Serializable {
   public PaymentReconciliationProcessNoteModel(PaymentReconciliationProcessNote o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.text = o.getText();
   }
 

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MessageDefinition;
 
 public interface MessageDefinitionService {
@@ -35,4 +37,8 @@ public interface MessageDefinitionService {
   public MessageDefinition create(MessageDefinition bean);
   public MessageDefinition update(MessageDefinition bean);
   public void delete(MessageDefinition bean);
+  public List<MessageDefinition> findByField(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByFocus(QueryBuilder queryBuilder);
+
+
 }

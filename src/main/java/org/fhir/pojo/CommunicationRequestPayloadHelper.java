@@ -53,19 +53,4 @@ public class CommunicationRequestPayloadHelper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, CommunicationRequestPayload.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(CommunicationRequestPayload o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<CommunicationRequestPayload> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

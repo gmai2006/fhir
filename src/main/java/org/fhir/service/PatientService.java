@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Patient;
 
 public interface PatientService {
@@ -35,4 +37,8 @@ public interface PatientService {
   public Patient create(Patient bean);
   public Patient update(Patient bean);
   public void delete(Patient bean);
+  public List<Patient> findByField(QueryBuilder queryBuilder);
+  public List<Patient> findByLink(QueryBuilder queryBuilder);
+
+
 }

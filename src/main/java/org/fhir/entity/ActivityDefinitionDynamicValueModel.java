@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context."
 */
 @Entity
 @Table(name="activitydefinitiondynamicvalue")
 public class ActivityDefinitionDynamicValueModel  implements Serializable {
-	private static final long serialVersionUID = 151857669707625565L;
+	private static final long serialVersionUID = 151873631186231902L;
   /**
   * Description: "A brief, natural language description of the intended semantics of the dynamic value."
   */

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
 */
 @Entity
 @Table(name="patientlink")
 public class PatientLinkModel  implements Serializable {
-	private static final long serialVersionUID = 15185766968427453L;
+	private static final long serialVersionUID = 151873631163066036L;
   /**
   * Description: "The other patient resource that the link refers to."
   */

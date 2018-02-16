@@ -30,267 +30,239 @@ import com.google.gson.GsonBuilder;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
-public class TestScriptAssert  {
+public class TestScriptAssert  extends BackboneElement  {
   /**
   * Description: "The label would be used for tracking/logging purposes by test engines."
   */
-  private String label;
+  protected String label;
 
   /**
   * Description: "Extensions for label"
   */
-  private transient Element _label;
+  protected transient Element _label;
 
   /**
   * Description: "The description would be used by test engines for tracking and reporting purposes."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "The direction to use for the assertion."
   */
-  private String direction;
+  protected String direction;
 
   /**
   * Description: "Extensions for direction"
   */
-  private transient Element _direction;
+  protected transient Element _direction;
 
   /**
   * Description: "Id of the source fixture used as the contents to be evaluated by either the \"source/expression\" or \"sourceId/path\" definition."
   */
-  private String compareToSourceId;
+  protected String compareToSourceId;
 
   /**
   * Description: "Extensions for compareToSourceId"
   */
-  private transient Element _compareToSourceId;
+  protected transient Element _compareToSourceId;
 
   /**
   * Description: "The fluentpath expression to evaluate against the source fixture. When compareToSourceId is defined, either compareToSourceExpression or compareToSourcePath must be defined, but not both."
   */
-  private String compareToSourceExpression;
+  protected String compareToSourceExpression;
 
   /**
   * Description: "Extensions for compareToSourceExpression"
   */
-  private transient Element _compareToSourceExpression;
+  protected transient Element _compareToSourceExpression;
 
   /**
   * Description: "XPath or JSONPath expression to evaluate against the source fixture. When compareToSourceId is defined, either compareToSourceExpression or compareToSourcePath must be defined, but not both."
   */
-  private String compareToSourcePath;
+  protected String compareToSourcePath;
 
   /**
   * Description: "Extensions for compareToSourcePath"
   */
-  private transient Element _compareToSourcePath;
+  protected transient Element _compareToSourcePath;
 
   /**
   * Description: "The content-type or mime-type to use for RESTful operation in the 'Content-Type' header."
   */
-  private String contentType;
+  protected String contentType;
 
   /**
   * Description: "Extensions for contentType"
   */
-  private transient Element _contentType;
+  protected transient Element _contentType;
 
   /**
   * Description: "The fluentpath expression to be evaluated against the request or response message contents - HTTP headers and payload."
   */
-  private String expression;
+  protected String expression;
 
   /**
   * Description: "Extensions for expression"
   */
-  private transient Element _expression;
+  protected transient Element _expression;
 
   /**
   * Description: "The HTTP header field name e.g. 'Location'."
   */
-  private String headerField;
+  protected String headerField;
 
   /**
   * Description: "Extensions for headerField"
   */
-  private transient Element _headerField;
+  protected transient Element _headerField;
 
   /**
   * Description: "The ID of a fixture.  Asserts that the response contains at a minimum the fixture specified by minimumId."
   */
-  private String minimumId;
+  protected String minimumId;
 
   /**
   * Description: "Extensions for minimumId"
   */
-  private transient Element _minimumId;
+  protected transient Element _minimumId;
 
   /**
   * Description: "Whether or not the test execution performs validation on the bundle navigation links."
   */
-  private Boolean navigationLinks;
+  protected Boolean navigationLinks;
 
   /**
   * Description: "Extensions for navigationLinks"
   */
-  private transient Element _navigationLinks;
+  protected transient Element _navigationLinks;
 
   /**
   * Description: "The operator type defines the conditional behavior of the assert. If not defined, the default is equals."
   */
-  private String operator;
+  protected String operator;
 
   /**
   * Description: "Extensions for operator"
   */
-  private transient Element _operator;
+  protected transient Element _operator;
 
   /**
   * Description: "The XPath or JSONPath expression to be evaluated against the fixture representing the response received from server."
   */
-  private String path;
+  protected String path;
 
   /**
   * Description: "Extensions for path"
   */
-  private transient Element _path;
+  protected transient Element _path;
 
   /**
   * Description: "The request method or HTTP operation code to compare against that used by the client system under test."
   */
-  private String requestMethod;
+  protected String requestMethod;
 
   /**
   * Description: "Extensions for requestMethod"
   */
-  private transient Element _requestMethod;
+  protected transient Element _requestMethod;
 
   /**
   * Description: "The value to use in a comparison against the request URL path string."
   */
-  private String requestURL;
+  protected String requestURL;
 
   /**
   * Description: "Extensions for requestURL"
   */
-  private transient Element _requestURL;
+  protected transient Element _requestURL;
 
   /**
   * Description: "The type of the resource.  See http://build.fhir.org/resourcelist.html."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String resource;
+  protected String resource;
 
   /**
   * Description: "Extensions for resource"
   */
-  private transient Element _resource;
+  protected transient Element _resource;
 
   /**
   * Description: "okay | created | noContent | notModified | bad | forbidden | notFound | methodNotAllowed | conflict | gone | preconditionFailed | unprocessable."
   */
-  private String response;
+  protected String response;
 
   /**
   * Description: "Extensions for response"
   */
-  private transient Element _response;
+  protected transient Element _response;
 
   /**
   * Description: "The value of the HTTP response code to be tested."
   */
-  private String responseCode;
+  protected String responseCode;
 
   /**
   * Description: "Extensions for responseCode"
   */
-  private transient Element _responseCode;
+  protected transient Element _responseCode;
 
   /**
   * Description: "The TestScript.rule this assert will evaluate."
   */
-  private TestScriptRule2 rule;
+  protected TestScriptRule2 rule;
 
   /**
   * Description: "The TestScript.ruleset this assert will evaluate."
   */
-  private TestScriptRuleset1 ruleset;
+  protected TestScriptRuleset1 ruleset;
 
   /**
   * Description: "Fixture to evaluate the XPath/JSONPath expression or the headerField  against."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String sourceId;
+  protected String sourceId;
 
   /**
   * Description: "Extensions for sourceId"
   */
-  private transient Element _sourceId;
+  protected transient Element _sourceId;
 
   /**
   * Description: "The ID of the Profile to validate against."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String validateProfileId;
+  protected String validateProfileId;
 
   /**
   * Description: "Extensions for validateProfileId"
   */
-  private transient Element _validateProfileId;
+  protected transient Element _validateProfileId;
 
   /**
   * Description: "The value to compare to."
   */
-  private String value;
+  protected String value;
 
   /**
   * Description: "Extensions for value"
   */
-  private transient Element _value;
+  protected transient Element _value;
 
   /**
   * Description: "Whether or not the test execution will produce a warning only on error for this assert."
   */
-  private Boolean warningOnly;
+  protected Boolean warningOnly;
 
   /**
   * Description: "Extensions for warningOnly"
   */
-  private transient Element _warningOnly;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _warningOnly;
 
   public TestScriptAssert() {}
 
@@ -570,30 +542,6 @@ public class TestScriptAssert  {
   public Element get_warningOnly() {
     return this._warningOnly;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -644,11 +592,7 @@ public class TestScriptAssert  {
      if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
      if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
      if(this.warningOnly != null) builder.append("warningOnly" + "->" + this.warningOnly.toString() + "\n"); 
-     if(this._warningOnly != null) builder.append("_warningOnly" + "->" + this._warningOnly.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._warningOnly != null) builder.append("_warningOnly" + "->" + this._warningOnly.toString() + "\n"); ;
     return builder.toString();
   }
 

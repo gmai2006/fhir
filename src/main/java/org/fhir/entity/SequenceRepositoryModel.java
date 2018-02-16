@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Raw data describing a biological sequence."
 */
 @Entity
 @Table(name="sequencerepository")
 public class SequenceRepositoryModel  implements Serializable {
-	private static final long serialVersionUID = 151857669704058832L;
+	private static final long serialVersionUID = 151873631182594236L;
   /**
   * Description: "Click and see / RESTful API / Need login to see / RESTful API with authentication / Other ways to see resource."
   */

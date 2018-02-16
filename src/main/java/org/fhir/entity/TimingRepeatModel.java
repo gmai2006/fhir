@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out."
 */
 @Entity
 @Table(name="timingrepeat")
 public class TimingRepeatModel  implements Serializable {
-	private static final long serialVersionUID = 151857669714680192L;
+	private static final long serialVersionUID = 151873631194110946L;
   /**
   * Description: "Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule."
   * Actual type: String;
@@ -217,9 +218,9 @@ public class TimingRepeatModel  implements Serializable {
   public TimingRepeatModel(TimingRepeat o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.boundsDuration = DurationHelper.toJson(o.getBoundsDuration());
-    this.boundsRange = RangeHelper.toJson(o.getBoundsRange());
-    this.boundsPeriod = PeriodHelper.toJson(o.getBoundsPeriod());
+    this.boundsDuration = JsonUtils.toJson(o.getBoundsDuration());
+    this.boundsRange = JsonUtils.toJson(o.getBoundsRange());
+    this.boundsPeriod = JsonUtils.toJson(o.getBoundsPeriod());
     this.count = o.getCount();
     this.countMax = o.getCountMax();
     this.duration = o.getDuration();

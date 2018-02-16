@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.StructureDefinitionModel;
 import org.fhir.pojo.StructureDefinition;
 import org.fhir.pojo.StructureDefinitionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class StructureDefinitionDaoImpl implements StructureDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class StructureDefinitionDaoImpl implements StructureDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       final StructureDefinitionModel removed = em.find(StructureDefinitionModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<StructureDefinition> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from StructureDefinitionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<StructureDefinition> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, StructureDefinitionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<StructureDefinitionModel> models = query.getResultList();
+    return StructureDefinitionHelper.fromArray2Array(models);
   }
 }

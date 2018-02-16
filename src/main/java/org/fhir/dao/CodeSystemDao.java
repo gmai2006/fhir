@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CodeSystem;
 
 public interface CodeSystemDao {
@@ -38,4 +39,7 @@ public interface CodeSystemDao {
 
   public CodeSystem update(CodeSystem e);
   public void delete(CodeSystem e);
+
+  public List<CodeSystem> findByField(QueryBuilder queryBuilder);
+
 }

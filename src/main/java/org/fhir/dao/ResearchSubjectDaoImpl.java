@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ResearchSubjectModel;
 import org.fhir.pojo.ResearchSubject;
 import org.fhir.pojo.ResearchSubjectHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ResearchSubjectDaoImpl implements ResearchSubjectDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class ResearchSubjectDaoImpl implements ResearchSubjectDao {
       final EntityManager em = entityManagerProvider.get();
       final ResearchSubjectModel removed = em.find(ResearchSubjectModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ResearchSubject> findByIndividual(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ResearchSubjectModel a, Reference b where a.individual_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ResearchSubject> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ResearchSubjectModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ResearchSubject> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ResearchSubjectModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ResearchSubjectModel> models = query.getResultList();
+    return ResearchSubjectHelper.fromArray2Array(models);
   }
 }

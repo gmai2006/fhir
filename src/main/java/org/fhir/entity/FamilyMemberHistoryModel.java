@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Significant health events and conditions for a person related to the patient relevant in the context of care for the patient."
 */
 @Entity
 @Table(name="familymemberhistory")
 public class FamilyMemberHistoryModel  implements Serializable {
-	private static final long serialVersionUID = 151857669691179908L;
+	private static final long serialVersionUID = 15187363117042951L;
   /**
   * Description: "This is a FamilyMemberHistory resource"
   */
@@ -365,25 +366,25 @@ public class FamilyMemberHistoryModel  implements Serializable {
     }
     this.status = o.getStatus();
     this.notDone = o.getNotDone();
-    this.notDoneReason = CodeableConceptHelper.toJson(o.getNotDoneReason());
+    this.notDoneReason = JsonUtils.toJson(o.getNotDoneReason());
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
     this.date = o.getDate();
     this.name = o.getName();
-    this.relationship = CodeableConceptHelper.toJson(o.getRelationship());
+    this.relationship = JsonUtils.toJson(o.getRelationship());
     this.gender = o.getGender();
-    this.bornPeriod = PeriodHelper.toJson(o.getBornPeriod());
+    this.bornPeriod = JsonUtils.toJson(o.getBornPeriod());
     this.bornDate = o.getBornDate();
     this.bornString = o.getBornString();
-    this.ageAge = AgeHelper.toJson(o.getAgeAge());
-    this.ageRange = RangeHelper.toJson(o.getAgeRange());
+    this.ageAge = JsonUtils.toJson(o.getAgeAge());
+    this.ageRange = JsonUtils.toJson(o.getAgeRange());
     this.ageString = o.getAgeString();
     this.estimatedAge = o.getEstimatedAge();
     this.deceasedBoolean = o.getDeceasedBoolean();
-    this.deceasedAge = AgeHelper.toJson(o.getDeceasedAge());
-    this.deceasedRange = RangeHelper.toJson(o.getDeceasedRange());
+    this.deceasedAge = JsonUtils.toJson(o.getDeceasedAge());
+    this.deceasedRange = JsonUtils.toJson(o.getDeceasedRange());
     this.deceasedDate = o.getDeceasedDate();
     this.deceasedString = o.getDeceasedString();
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {

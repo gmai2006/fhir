@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Subscription;
 
 public interface SubscriptionDao {
@@ -38,4 +39,7 @@ public interface SubscriptionDao {
 
   public Subscription update(Subscription e);
   public void delete(Subscription e);
+
+  public List<Subscription> findByField(QueryBuilder queryBuilder);
+
 }

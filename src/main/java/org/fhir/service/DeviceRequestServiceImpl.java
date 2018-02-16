@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DeviceRequest;
 /**
 * auto generated from SQL files
@@ -103,5 +104,37 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(DeviceRequest) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<DeviceRequest> findByField(QueryBuilder queryBuilder) {
+  	final List<DeviceRequest> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<DeviceRequest> findByDefinition(QueryBuilder queryBuilder) {
+  	final List<DeviceRequest> result = dao.findByDefinition(queryBuilder);
+    logger.info("findBydefinition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceRequest> findByPerformer(QueryBuilder queryBuilder) {
+  	final List<DeviceRequest> result = dao.findByPerformer(queryBuilder);
+    logger.info("findByperformer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceRequest> findByRequester(QueryBuilder queryBuilder) {
+  	final List<DeviceRequest> result = dao.findByRequester(queryBuilder);
+    logger.info("findByrequester - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceRequest> findBySubject(QueryBuilder queryBuilder) {
+  	final List<DeviceRequest> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides processing status, errors and notes from the processing of a resource."
 */
 @Entity
 @Table(name="processresponseprocessnote")
 public class ProcessResponseProcessNoteModel  implements Serializable {
-	private static final long serialVersionUID = 151857669674891650L;
+	private static final long serialVersionUID = 151873631150487529L;
   /**
   * Description: "The note purpose: Print/Display."
   * Actual type: String;
@@ -99,7 +100,7 @@ public class ProcessResponseProcessNoteModel  implements Serializable {
   public ProcessResponseProcessNoteModel(ProcessResponseProcessNote o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.text = o.getText();
   }
 

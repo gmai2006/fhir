@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DiagnosticReport;
 /**
 * auto generated from SQL files
@@ -103,5 +104,49 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(DiagnosticReport) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<DiagnosticReport> findByField(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<DiagnosticReport> findByContext(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findByImage(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByImage(queryBuilder);
+    logger.info("findByimage - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findByPerformer(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByPerformer(queryBuilder);
+    logger.info("findByperformer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findByResult(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByResult(queryBuilder);
+    logger.info("findByresult - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findBySpecimen(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findBySpecimen(queryBuilder);
+    logger.info("findByspecimen - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findBySubject(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.TestScript;
 
 public interface TestScriptDao {
@@ -38,4 +39,7 @@ public interface TestScriptDao {
 
   public TestScript update(TestScript e);
   public void delete(TestScript e);
+
+  public List<TestScript> findByField(QueryBuilder queryBuilder);
+
 }

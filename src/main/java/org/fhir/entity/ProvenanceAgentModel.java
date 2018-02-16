@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies."
 */
 @Entity
 @Table(name="provenanceagent")
 public class ProvenanceAgentModel  implements Serializable {
-	private static final long serialVersionUID = 15185766967427587L;
+	private static final long serialVersionUID = 151873631149768870L;
   /**
   * Description: "The function of the agent with respect to the activity. The security role enabling the agent with respect to the activity."
   * Actual type: List<String>;
@@ -147,7 +148,7 @@ public class ProvenanceAgentModel  implements Serializable {
     	this.onbehalfofreference_id = "onbehalfofreference" + this.parent_id;
     	this.onBehalfOfReference = ReferenceHelper.toModel(o.getOnBehalfOfReference(), this.onbehalfofreference_id);
     }
-    this.relatedAgentType = CodeableConceptHelper.toJson(o.getRelatedAgentType());
+    this.relatedAgentType = JsonUtils.toJson(o.getRelatedAgentType());
   }
 
   public String getRole() {

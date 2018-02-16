@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Information about a person that is involved in the care for a patient, but who is not the target of healthcare, nor has a formal responsibility in the care process."
 */
 @Entity
 @Table(name="relatedperson")
 public class RelatedPersonModel  implements Serializable {
-	private static final long serialVersionUID = 151857669670961203L;
+	private static final long serialVersionUID = 151873631144895629L;
   /**
   * Description: "This is a RelatedPerson resource"
   */
@@ -117,12 +118,14 @@ public class RelatedPersonModel  implements Serializable {
 
   /**
   * Description: "Address where the related person can be contacted or visited."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"address\"", length = 16777215)
-  private String address;
+  @Column(name="\"address_id\"")
+  private String address_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> address;
 
   /**
   * Description: "Image of the person."
@@ -238,10 +241,14 @@ public class RelatedPersonModel  implements Serializable {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
-    this.relationship = CodeableConceptHelper.toJson(o.getRelationship());
+    this.relationship = JsonUtils.toJson(o.getRelationship());
     this.gender = o.getGender();
     this.birthDate = o.getBirthDate();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    if (null != o.getAddress() && !o.getAddress().isEmpty()) {
+    	this.address_id = "address" + this.id;
+    	this.address = AddressHelper.toModelFromArray(o.getAddress(), this.address_id);
+    }
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
@@ -308,10 +315,10 @@ public class RelatedPersonModel  implements Serializable {
   public void setBirthDate( String value) {
     this.birthDate = value;
   }
-  public String getAddress() {
+  public java.util.List<AddressModel> getAddress() {
     return this.address;
   }
-  public void setAddress( String value) {
+  public void setAddress( java.util.List<AddressModel> value) {
     this.address = value;
   }
   public String getPhoto() {
@@ -387,7 +394,6 @@ public class RelatedPersonModel  implements Serializable {
      builder.append("telecom" + "->" + this.telecom + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 
      builder.append("birthDate" + "->" + this.birthDate + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("photo" + "->" + this.photo + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

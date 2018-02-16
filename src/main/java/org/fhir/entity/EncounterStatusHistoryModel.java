@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
 @Entity
 @Table(name="encounterstatushistory")
 public class EncounterStatusHistoryModel  implements Serializable {
-	private static final long serialVersionUID = 151857669686389918L;
+	private static final long serialVersionUID = 151873631165117225L;
   /**
   * Description: "planned | arrived | triaged | in-progress | onleave | finished | cancelled +."
   */
@@ -101,7 +102,7 @@ public class EncounterStatusHistoryModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.status = o.getStatus();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
   }
 
   public String getStatus() {

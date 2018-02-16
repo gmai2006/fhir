@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation."
 */
 @Entity
 @Table(name="chargeitem")
 public class ChargeItemModel  implements Serializable {
-	private static final long serialVersionUID = 151857669709760781L;
+	private static final long serialVersionUID = 151873631188415550L;
   /**
   * Description: "This is a ChargeItem resource"
   */
@@ -173,12 +174,14 @@ public class ChargeItemModel  implements Serializable {
 
   /**
   * Description: "Quantity of which the charge item has been serviced."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "The anatomical location where the related service has been applied."
@@ -199,12 +202,14 @@ public class ChargeItemModel  implements Serializable {
 
   /**
   * Description: "Total price of the charge overriding the list price associated with the code."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"priceOverride\"", length = 16777215)
-  private String priceOverride;
+  @Column(name="\"priceoverride_id\"")
+  private String priceoverride_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="priceoverride_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> priceOverride;
 
   /**
   * Description: "If the list price or the rule based factor associated with the code is overridden, this attribute can capture a text to indicate the  reason for this action."
@@ -374,14 +379,14 @@ public class ChargeItemModel  implements Serializable {
   public ChargeItemModel(ChargeItem o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.definition = org.fhir.utils.JsonUtils.write2String(o.getDefinition());
     this.status = o.getStatus();
     if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
     	this.partof_id = "partof" + this.id;
     	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
     }
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -391,8 +396,8 @@ public class ChargeItemModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = PeriodHelper.toJson(o.getOccurrencePeriod());
-    this.occurrenceTiming = TimingHelper.toJson(o.getOccurrenceTiming());
+    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
     	this.participant_id = "participant" + this.id;
     	this.participant = ChargeItemParticipantHelper.toModelFromArray(o.getParticipant(), this.participant_id);
@@ -405,9 +410,15 @@ public class ChargeItemModel  implements Serializable {
     	this.requestingorganization_id = "requestingorganization" + this.id;
     	this.requestingOrganization = ReferenceHelper.toModel(o.getRequestingOrganization(), this.requestingorganization_id);
     }
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
     this.factorOverride = o.getFactorOverride();
-    this.priceOverride = MoneyHelper.toJson(o.getPriceOverride());
+    if (null != o.getPriceOverride() ) {
+    	this.priceoverride_id = "priceoverride" + this.id;
+    	this.priceOverride = MoneyHelper.toModel(o.getPriceOverride(), this.priceoverride_id);
+    }
     this.overrideReason = o.getOverrideReason();
     if (null != o.getEnterer() ) {
     	this.enterer_id = "enterer" + this.id;
@@ -522,10 +533,10 @@ public class ChargeItemModel  implements Serializable {
   public void setRequestingOrganization( java.util.List<ReferenceModel> value) {
     this.requestingOrganization = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
   public String getBodysite() {
@@ -540,10 +551,10 @@ public class ChargeItemModel  implements Serializable {
   public void setFactorOverride( Float value) {
     this.factorOverride = value;
   }
-  public String getPriceOverride() {
+  public java.util.List<MoneyModel> getPriceOverride() {
     return this.priceOverride;
   }
-  public void setPriceOverride( String value) {
+  public void setPriceOverride( java.util.List<MoneyModel> value) {
     this.priceOverride = value;
   }
   public String getOverrideReason() {
@@ -655,10 +666,8 @@ public class ChargeItemModel  implements Serializable {
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("occurrenceTiming" + "->" + this.occurrenceTiming + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("bodysite" + "->" + this.bodysite + "\n"); 
      builder.append("factorOverride" + "->" + this.factorOverride + "\n"); 
-     builder.append("priceOverride" + "->" + this.priceOverride + "\n"); 
      builder.append("overrideReason" + "->" + this.overrideReason + "\n"); 
      builder.append("enteredDate" + "->" + this.enteredDate + "\n"); 
      builder.append("reason" + "->" + this.reason + "\n"); 

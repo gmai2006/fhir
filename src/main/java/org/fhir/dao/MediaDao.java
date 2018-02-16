@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Media;
 
 public interface MediaDao {
@@ -38,4 +39,11 @@ public interface MediaDao {
 
   public Media update(Media e);
   public void delete(Media e);
+
+  public List<Media> findByField(QueryBuilder queryBuilder);
+
+  public List<Media> findByContext(QueryBuilder queryBuilder);
+  public List<Media> findByDevice(QueryBuilder queryBuilder);
+  public List<Media> findByOperator(QueryBuilder queryBuilder);
+  public List<Media> findBySubject(QueryBuilder queryBuilder);
 }

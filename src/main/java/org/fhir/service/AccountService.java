@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Account;
 
 public interface AccountService {
@@ -35,4 +37,10 @@ public interface AccountService {
   public Account create(Account bean);
   public Account update(Account bean);
   public void delete(Account bean);
+  public List<Account> findByField(QueryBuilder queryBuilder);
+  public List<Account> findByBalance(QueryBuilder queryBuilder);
+  public List<Account> findByOwner(QueryBuilder queryBuilder);
+  public List<Account> findBySubject(QueryBuilder queryBuilder);
+
+
 }

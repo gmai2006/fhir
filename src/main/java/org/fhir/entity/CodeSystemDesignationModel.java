@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
 */
 @Entity
 @Table(name="codesystemdesignation")
 public class CodeSystemDesignationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669677720688L;
+	private static final long serialVersionUID = 151873631155172220L;
   /**
   * Description: "The language this designation is defined for."
   */
@@ -108,7 +109,7 @@ public class CodeSystemDesignationModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.language = o.getLanguage();
-    this.use = CodingHelper.toJson(o.getUse());
+    this.use = JsonUtils.toJson(o.getUse());
     this.value = o.getValue();
   }
 

@@ -24,27 +24,33 @@
  * then submit the template through our web interface.  
  */
 package org.fhir.pojo;
+import org.fhir.entity.MoneyModel;
 import com.google.gson.GsonBuilder;
 
 public class MoneyHelper {
+	public static java.util.List<Money> fromArray2Array(java.util.List<MoneyModel> list) {
+    return
+    		list.stream()
+    		.map(x -> new Money(x))
+    		.collect(java.util.stream.Collectors.toList());
+  }
 
+  public static Money fromArray2Object(java.util.List<MoneyModel> list) {
+    return new Money(list.get(0));
+  }
+
+  public static java.util.List<MoneyModel> toModel(Money reference, String parentId) {
+  	MoneyModel model = new MoneyModel(reference, parentId);
+  	return java.util.Arrays.asList(new MoneyModel[] { model });
+  }
+
+  public static java.util.List<MoneyModel> toModelFromArray(java.util.List<Money> list, String parentId) {
+    return (java.util.List<MoneyModel>)list.stream()
+    	.map(x -> new MoneyModel(x, parentId))
+      .collect(java.util.stream.Collectors.toList());
+  }
   public static Money fromJson(String json) {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, Money.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Money o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Money> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 }

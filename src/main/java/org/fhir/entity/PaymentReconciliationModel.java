@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides payment details and claim references supporting a bulk payment."
 */
 @Entity
 @Table(name="paymentreconciliation")
 public class PaymentReconciliationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669659026203L;
+	private static final long serialVersionUID = 15187363112792734L;
   /**
   * Description: "This is a PaymentReconciliation resource"
   */
@@ -162,12 +163,14 @@ public class PaymentReconciliationModel  implements Serializable {
 
   /**
   * Description: "Total payment amount."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"total\"", length = 16777215)
-  private String total;
+  @Column(name="\"total_id\"")
+  private String total_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="total_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> total;
 
   /**
   * Description: "Suite of notes."
@@ -272,7 +275,7 @@ public class PaymentReconciliationModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     this.created = o.getCreated();
     if (null != o.getOrganization() ) {
     	this.organization_id = "organization" + this.id;
@@ -282,7 +285,7 @@ public class PaymentReconciliationModel  implements Serializable {
     	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
-    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.outcome = JsonUtils.toJson(o.getOutcome());
     this.disposition = o.getDisposition();
     if (null != o.getRequestProvider() ) {
     	this.requestprovider_id = "requestprovider" + this.id;
@@ -296,8 +299,11 @@ public class PaymentReconciliationModel  implements Serializable {
     	this.detail_id = "detail" + this.id;
     	this.detail = PaymentReconciliationDetailHelper.toModelFromArray(o.getDetail(), this.detail_id);
     }
-    this.form = CodeableConceptHelper.toJson(o.getForm());
-    this.total = MoneyHelper.toJson(o.getTotal());
+    this.form = JsonUtils.toJson(o.getForm());
+    if (null != o.getTotal() ) {
+    	this.total_id = "total" + this.id;
+    	this.total = MoneyHelper.toModel(o.getTotal(), this.total_id);
+    }
     if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
     	this.processnote_id = "processnote" + this.id;
     	this.processNote = PaymentReconciliationProcessNoteHelper.toModelFromArray(o.getProcessNote(), this.processnote_id);
@@ -392,10 +398,10 @@ public class PaymentReconciliationModel  implements Serializable {
   public void setForm( String value) {
     this.form = value;
   }
-  public String getTotal() {
+  public java.util.List<MoneyModel> getTotal() {
     return this.total;
   }
-  public void setTotal( String value) {
+  public void setTotal( java.util.List<MoneyModel> value) {
     this.total = value;
   }
   public java.util.List<PaymentReconciliationProcessNoteModel> getProcessNote() {
@@ -465,7 +471,6 @@ public class PaymentReconciliationModel  implements Serializable {
      builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("disposition" + "->" + this.disposition + "\n"); 
      builder.append("form" + "->" + this.form + "\n"); 
-     builder.append("total" + "->" + this.total + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

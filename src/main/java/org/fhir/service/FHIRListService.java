@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.FHIRList;
 
 public interface FHIRListService {
@@ -35,4 +37,9 @@ public interface FHIRListService {
   public FHIRList create(FHIRList bean);
   public FHIRList update(FHIRList bean);
   public void delete(FHIRList bean);
+  public List<FHIRList> findByField(QueryBuilder queryBuilder);
+  public List<FHIRList> findBySource(QueryBuilder queryBuilder);
+  public List<FHIRList> findBySubject(QueryBuilder queryBuilder);
+
+
 }

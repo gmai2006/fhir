@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Media;
 
 public interface MediaService {
@@ -35,4 +37,11 @@ public interface MediaService {
   public Media create(Media bean);
   public Media update(Media bean);
   public void delete(Media bean);
+  public List<Media> findByField(QueryBuilder queryBuilder);
+  public List<Media> findByContext(QueryBuilder queryBuilder);
+  public List<Media> findByDevice(QueryBuilder queryBuilder);
+  public List<Media> findByOperator(QueryBuilder queryBuilder);
+  public List<Media> findBySubject(QueryBuilder queryBuilder);
+
+
 }

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CommunicationRequest;
 
 public interface CommunicationRequestDao {
@@ -38,4 +39,13 @@ public interface CommunicationRequestDao {
 
   public CommunicationRequest update(CommunicationRequest e);
   public void delete(CommunicationRequest e);
+
+  public List<CommunicationRequest> findByField(QueryBuilder queryBuilder);
+
+  public List<CommunicationRequest> findByContext(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByRecipient(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByReplaces(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findBySender(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findBySubject(QueryBuilder queryBuilder);
 }

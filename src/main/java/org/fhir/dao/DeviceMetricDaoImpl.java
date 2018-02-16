@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.DeviceMetricModel;
 import org.fhir.pojo.DeviceMetric;
 import org.fhir.pojo.DeviceMetricHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class DeviceMetricDaoImpl implements DeviceMetricDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class DeviceMetricDaoImpl implements DeviceMetricDao {
       final EntityManager em = entityManagerProvider.get();
       final DeviceMetricModel removed = em.find(DeviceMetricModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<DeviceMetric> findByParent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceMetricModel a, Reference b where a.parent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceMetric> findBySource(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceMetricModel a, Reference b where a.source_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<DeviceMetric> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceMetricModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<DeviceMetric> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, DeviceMetricModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<DeviceMetricModel> models = query.getResultList();
+    return DeviceMetricHelper.fromArray2Array(models);
   }
 }

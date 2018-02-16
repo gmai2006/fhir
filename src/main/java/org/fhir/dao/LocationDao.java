@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Location;
 
 public interface LocationDao {
@@ -38,4 +39,9 @@ public interface LocationDao {
 
   public Location update(Location e);
   public void delete(Location e);
+
+  public List<Location> findByField(QueryBuilder queryBuilder);
+
+  public List<Location> findByAddress(QueryBuilder queryBuilder);
+  public List<Location> findByEndpoint(QueryBuilder queryBuilder);
 }

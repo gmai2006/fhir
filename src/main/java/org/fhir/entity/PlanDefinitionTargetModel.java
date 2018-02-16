@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinitiontarget")
 public class PlanDefinitionTargetModel  implements Serializable {
-	private static final long serialVersionUID = 15185766970364471L;
+	private static final long serialVersionUID = 151873631182193918L;
   /**
   * Description: "The parameter whose value is to be tracked, e.g. body weigth, blood pressure, or hemoglobin A1c level."
   * Actual type: String;
@@ -49,12 +50,14 @@ public class PlanDefinitionTargetModel  implements Serializable {
 
   /**
   * Description: "The target value of the measure to be achieved to signify fulfillment of the goal, e.g. 150 pounds or 7.0%. Either the high or low or both values of the range can be specified. Whan a low value is missing, it indicates that the goal is achieved at any value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any value at or above the low value."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"detailQuantity\"", length = 16777215)
-  private String detailQuantity;
+  @Column(name="\"detailquantity_id\"")
+  private String detailquantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="detailquantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> detailQuantity;
 
   /**
   * Description: "The target value of the measure to be achieved to signify fulfillment of the goal, e.g. 150 pounds or 7.0%. Either the high or low or both values of the range can be specified. Whan a low value is missing, it indicates that the goal is achieved at any value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any value at or above the low value."
@@ -128,11 +131,14 @@ public class PlanDefinitionTargetModel  implements Serializable {
   public PlanDefinitionTargetModel(PlanDefinitionTarget o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.measure = CodeableConceptHelper.toJson(o.getMeasure());
-    this.detailQuantity = QuantityHelper.toJson(o.getDetailQuantity());
-    this.detailRange = RangeHelper.toJson(o.getDetailRange());
-    this.detailCodeableConcept = CodeableConceptHelper.toJson(o.getDetailCodeableConcept());
-    this.due = DurationHelper.toJson(o.getDue());
+    this.measure = JsonUtils.toJson(o.getMeasure());
+    if (null != o.getDetailQuantity() ) {
+    	this.detailquantity_id = "detailquantity" + this.parent_id;
+    	this.detailQuantity = QuantityHelper.toModel(o.getDetailQuantity(), this.detailquantity_id);
+    }
+    this.detailRange = JsonUtils.toJson(o.getDetailRange());
+    this.detailCodeableConcept = JsonUtils.toJson(o.getDetailCodeableConcept());
+    this.due = JsonUtils.toJson(o.getDue());
   }
 
   public String getMeasure() {
@@ -141,10 +147,10 @@ public class PlanDefinitionTargetModel  implements Serializable {
   public void setMeasure( String value) {
     this.measure = value;
   }
-  public String getDetailQuantity() {
+  public java.util.List<QuantityModel> getDetailQuantity() {
     return this.detailQuantity;
   }
-  public void setDetailQuantity( String value) {
+  public void setDetailQuantity( java.util.List<QuantityModel> value) {
     this.detailQuantity = value;
   }
   public String getDetailRange() {
@@ -195,7 +201,6 @@ public class PlanDefinitionTargetModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[PlanDefinitionTargetModel]:" + "\n");
      builder.append("measure" + "->" + this.measure + "\n"); 
-     builder.append("detailQuantity" + "->" + this.detailQuantity + "\n"); 
      builder.append("detailRange" + "->" + this.detailRange + "\n"); 
      builder.append("detailCodeableConcept" + "->" + this.detailCodeableConcept + "\n"); 
      builder.append("due" + "->" + this.due + "\n"); 

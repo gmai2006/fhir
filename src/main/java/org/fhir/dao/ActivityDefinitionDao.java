@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ActivityDefinition;
 
 public interface ActivityDefinitionDao {
@@ -38,4 +39,7 @@ public interface ActivityDefinitionDao {
 
   public ActivityDefinition update(ActivityDefinition e);
   public void delete(ActivityDefinition e);
+
+  public List<ActivityDefinition> findByField(QueryBuilder queryBuilder);
+
 }

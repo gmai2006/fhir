@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ProcessResponse;
 /**
 * auto generated from SQL files
@@ -103,5 +104,25 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(ProcessResponse) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<ProcessResponse> findByField(QueryBuilder queryBuilder) {
+  	final List<ProcessResponse> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<ProcessResponse> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<ProcessResponse> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ProcessResponse> findByRequest(QueryBuilder queryBuilder) {
+  	final List<ProcessResponse> result = dao.findByRequest(queryBuilder);
+    logger.info("findByrequest - exited - return value={} result ");
+    return result;
   }
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Used to record and send details about a request for referral service or transfer of a patient to the care of another provider or provider organization."
 */
 @Entity
 @Table(name="referralrequestrequester")
 public class ReferralRequestRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669711242460L;
+	private static final long serialVersionUID = 151873631190183233L;
   /**
   * Description: "The device, practitioner, etc. who initiated the request."
   */

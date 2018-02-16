@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Bundle;
 
 public interface BundleDao {
@@ -38,4 +39,7 @@ public interface BundleDao {
 
   public Bundle update(Bundle e);
   public void delete(Bundle e);
+
+  public List<Bundle> findByField(QueryBuilder queryBuilder);
+
 }

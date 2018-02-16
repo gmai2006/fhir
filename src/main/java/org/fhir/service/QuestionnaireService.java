@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Questionnaire;
 
 public interface QuestionnaireService {
@@ -35,4 +37,7 @@ public interface QuestionnaireService {
   public Questionnaire create(Questionnaire bean);
   public Questionnaire update(Questionnaire bean);
   public void delete(Questionnaire bean);
+  public List<Questionnaire> findByField(QueryBuilder queryBuilder);
+
+
 }

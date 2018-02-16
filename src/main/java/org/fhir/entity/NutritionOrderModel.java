@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
 @Entity
 @Table(name="nutritionorder")
 public class NutritionOrderModel  implements Serializable {
-	private static final long serialVersionUID = 151857669671060284L;
+	private static final long serialVersionUID = 151873631145161469L;
   /**
   * Description: "This is a NutritionOrder resource"
   */

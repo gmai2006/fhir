@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.VisionPrescriptionModel;
 import org.fhir.pojo.VisionPrescription;
 import org.fhir.pojo.VisionPrescriptionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class VisionPrescriptionDaoImpl implements VisionPrescriptionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class VisionPrescriptionDaoImpl implements VisionPrescriptionDao {
       final EntityManager em = entityManagerProvider.get();
       final VisionPrescriptionModel removed = em.find(VisionPrescriptionModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<VisionPrescription> findByPrescriber(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from VisionPrescriptionModel a, Reference b where a.prescriber_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<VisionPrescription> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from VisionPrescriptionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<VisionPrescription> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, VisionPrescriptionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<VisionPrescriptionModel> models = query.getResultList();
+    return VisionPrescriptionHelper.fromArray2Array(models);
   }
 }

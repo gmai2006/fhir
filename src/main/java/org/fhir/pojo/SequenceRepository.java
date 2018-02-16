@@ -31,94 +31,66 @@ import com.google.gson.GsonBuilder;
 /**
 * "Raw data describing a biological sequence."
 */
-public class SequenceRepository  {
+public class SequenceRepository  extends BackboneElement  {
   /**
   * Description: "Click and see / RESTful API / Need login to see / RESTful API with authentication / Other ways to see resource."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "URI of an external repository which contains further details about the genetics data."
   */
-  private String url;
+  protected String url;
 
   /**
   * Description: "Extensions for url"
   */
-  private transient Element _url;
+  protected transient Element _url;
 
   /**
   * Description: "URI of an external repository which contains further details about the genetics data."
   */
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "Id of the variant in this external repository. The server will understand how to use this id to call for more info about datasets in external repository."
   */
-  private String datasetId;
+  protected String datasetId;
 
   /**
   * Description: "Extensions for datasetId"
   */
-  private transient Element _datasetId;
+  protected transient Element _datasetId;
 
   /**
   * Description: "Id of the variantset in this external repository. The server will understand how to use this id to call for more info about variantsets in external repository."
   */
-  private String variantsetId;
+  protected String variantsetId;
 
   /**
   * Description: "Extensions for variantsetId"
   */
-  private transient Element _variantsetId;
+  protected transient Element _variantsetId;
 
   /**
   * Description: "Id of the read in this external repository."
   */
-  private String readsetId;
+  protected String readsetId;
 
   /**
   * Description: "Extensions for readsetId"
   */
-  private transient Element _readsetId;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _readsetId;
 
   public SequenceRepository() {
   }
@@ -142,9 +114,6 @@ public class SequenceRepository  {
     }
     if (null != o.getReadsetId()) {
       this.readsetId = o.getReadsetId();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -220,30 +189,6 @@ public class SequenceRepository  {
   public Element get_readsetId() {
     return this._readsetId;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -260,11 +205,7 @@ public class SequenceRepository  {
      if(this.variantsetId != null) builder.append("variantsetId" + "->" + this.variantsetId.toString() + "\n"); 
      if(this._variantsetId != null) builder.append("_variantsetId" + "->" + this._variantsetId.toString() + "\n"); 
      if(this.readsetId != null) builder.append("readsetId" + "->" + this.readsetId.toString() + "\n"); 
-     if(this._readsetId != null) builder.append("_readsetId" + "->" + this._readsetId.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._readsetId != null) builder.append("_readsetId" + "->" + this._readsetId.toString() + "\n"); ;
     return builder.toString();
   }
 

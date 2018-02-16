@@ -31,255 +31,179 @@ import com.google.gson.GsonBuilder;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
-public class Claim  {
+public class Claim  extends DomainResource  {
   /**
   * Description: "This is a Claim resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "The business identifier for the instance: claim number, pre-determination or pre-authorization number."
   */
-  private java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
 
   /**
   * Description: "The status of the resource instance."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "The category of claim, eg, oral, pharmacy, vision, insitutional, professional."
   */
-  private CodeableConcept type;
+  protected CodeableConcept type;
 
   /**
   * Description: "A finer grained suite of claim subtype codes which may convey Inpatient vs Outpatient and/or a specialty service. In the US the BillType."
   */
-  private java.util.List<CodeableConcept> subType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> subType = new java.util.ArrayList<>();
 
   /**
   * Description: "Complete (Bill or Claim), Proposed (Pre-Authorization), Exploratory (Pre-determination)."
   */
-  private String use;
+  protected String use;
 
   /**
   * Description: "Extensions for use"
   */
-  private transient Element _use;
+  protected transient Element _use;
 
   /**
   * Description: "Patient Resource."
   */
-  private Reference patient;
+  protected Reference patient;
 
   /**
   * Description: "The billable period for which charges are being submitted."
   */
-  private Period billablePeriod;
+  protected Period billablePeriod;
 
   /**
   * Description: "The date when the enclosed suite of services were performed or completed."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String created;
+  protected String created;
 
   /**
   * Description: "Extensions for created"
   */
-  private transient Element _created;
+  protected transient Element _created;
 
   /**
   * Description: "Person who created the invoice/claim/pre-determination or pre-authorization."
   */
-  private Reference enterer;
+  protected Reference enterer;
 
   /**
   * Description: "The Insurer who is target of the request."
   */
-  private Reference insurer;
+  protected Reference insurer;
 
   /**
   * Description: "The provider which is responsible for the bill, claim pre-determination, pre-authorization."
   */
-  private Reference provider;
+  protected Reference provider;
 
   /**
   * Description: "The organization which is responsible for the bill, claim pre-determination, pre-authorization."
   */
-  private Reference organization;
+  protected Reference organization;
 
   /**
   * Description: "Immediate (STAT), best effort (NORMAL), deferred (DEFER)."
   */
-  private CodeableConcept priority;
+  protected CodeableConcept priority;
 
   /**
   * Description: "In the case of a Pre-Determination/Pre-Authorization the provider may request that funds in the amount of the expected Benefit be reserved ('Patient' or 'Provider') to pay for the Benefits determined on the subsequent claim(s). 'None' explicitly indicates no funds reserving is requested."
   */
-  private CodeableConcept fundsReserve;
+  protected CodeableConcept fundsReserve;
 
   /**
   * Description: "Other claims which are related to this claim such as prior claim versions or for related services."
   */
-  private java.util.List<ClaimRelated> related = new java.util.ArrayList<>();
+  protected java.util.List<ClaimRelated> related = new java.util.ArrayList<>();
 
   /**
   * Description: "Prescription to support the dispensing of Pharmacy or Vision products."
   */
-  private Reference prescription;
+  protected Reference prescription;
 
   /**
   * Description: "Original prescription which has been superceded by this prescription to support the dispensing of pharmacy services, medications or products. For example, a physician may prescribe a medication which the pharmacy determines is contraindicated, or for which the patient has an intolerance, and therefor issues a new precription for an alternate medication which has the same theraputic intent. The prescription from the pharmacy becomes the 'prescription' and that from the physician becomes the 'original prescription'."
   */
-  private Reference originalPrescription;
+  protected Reference originalPrescription;
 
   /**
   * Description: "The party to be reimbursed for the services."
   */
-  private ClaimPayee payee;
+  protected ClaimPayee payee;
 
   /**
   * Description: "The referral resource which lists the date, practitioner, reason and other supporting information."
   */
-  private Reference referral;
+  protected Reference referral;
 
   /**
   * Description: "Facility where the services were provided."
   */
-  private Reference facility;
+  protected Reference facility;
 
   /**
   * Description: "The members of the team who provided the overall service as well as their role and whether responsible and qualifications."
   */
-  private java.util.List<ClaimCareTeam> careTeam = new java.util.ArrayList<>();
+  protected java.util.List<ClaimCareTeam> careTeam = new java.util.ArrayList<>();
 
   /**
   * Description: "Additional information codes regarding exceptions, special considerations, the condition, situation, prior or concurrent issues. Often there are mutiple jurisdiction specific valuesets which are required."
   */
-  private java.util.List<ClaimInformation> information = new java.util.ArrayList<>();
+  protected java.util.List<ClaimInformation> information = new java.util.ArrayList<>();
 
   /**
   * Description: "List of patient diagnosis for which care is sought."
   */
-  private java.util.List<ClaimDiagnosis> diagnosis = new java.util.ArrayList<>();
+  protected java.util.List<ClaimDiagnosis> diagnosis = new java.util.ArrayList<>();
 
   /**
   * Description: "Ordered list of patient procedures performed to support the adjudication."
   */
-  private java.util.List<ClaimProcedure> procedure = new java.util.ArrayList<>();
+  protected java.util.List<ClaimProcedure> procedure = new java.util.ArrayList<>();
 
   /**
   * Description: "Financial instrument by which payment information for health care."
   */
-  private java.util.List<ClaimInsurance> insurance = new java.util.ArrayList<>();
+  protected java.util.List<ClaimInsurance> insurance = new java.util.ArrayList<>();
 
   /**
   * Description: "An accident which resulted in the need for healthcare services."
   */
-  private ClaimAccident accident;
+  protected ClaimAccident accident;
 
   /**
   * Description: "The start and optional end dates of when the patient was precluded from working due to the treatable condition(s)."
   */
-  private Period employmentImpacted;
+  protected Period employmentImpacted;
 
   /**
   * Description: "The start and optional end dates of when the patient was confined to a treatment center."
   */
-  private Period hospitalization;
+  protected Period hospitalization;
 
   /**
   * Description: "First tier of goods and services."
   */
-  private java.util.List<ClaimItem> item = new java.util.ArrayList<>();
+  protected java.util.List<ClaimItem> item = new java.util.ArrayList<>();
 
   /**
   * Description: "The total value of the claim."
   */
-  private Money total;
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected Money total;
 
   public Claim() {
   }
@@ -358,21 +282,8 @@ public class Claim  {
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item = ClaimItemHelper.fromArray2Array(o.getItem());
     }
-    this.total = MoneyHelper.fromJson(o.getTotal());
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
+    if (null != o.getTotal() && !o.getTotal().isEmpty()) {
+      this.total = new Money(o.getTotal().get(0));
     }
   }
 
@@ -580,72 +491,6 @@ public class Claim  {
   public Money getTotal() {
     return this.total;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -684,18 +529,7 @@ public class Claim  {
      if(this.employmentImpacted != null) builder.append("employmentImpacted" + "->" + this.employmentImpacted.toString() + "\n"); 
      if(this.hospitalization != null) builder.append("hospitalization" + "->" + this.hospitalization.toString() + "\n"); 
      if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); 
-     if(this.total != null) builder.append("total" + "->" + this.total.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.total != null) builder.append("total" + "->" + this.total.toString() + "\n"); ;
     return builder.toString();
   }
 

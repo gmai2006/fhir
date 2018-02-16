@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.FamilyMemberHistory;
 
 public interface FamilyMemberHistoryService {
@@ -35,4 +37,8 @@ public interface FamilyMemberHistoryService {
   public FamilyMemberHistory create(FamilyMemberHistory bean);
   public FamilyMemberHistory update(FamilyMemberHistory bean);
   public void delete(FamilyMemberHistory bean);
+  public List<FamilyMemberHistory> findByField(QueryBuilder queryBuilder);
+  public List<FamilyMemberHistory> findByDefinition(QueryBuilder queryBuilder);
+
+
 }

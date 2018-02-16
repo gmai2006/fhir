@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
 */
 @Entity
 @Table(name="requestgroupcondition")
 public class RequestGroupConditionModel  implements Serializable {
-	private static final long serialVersionUID = 15185766971177978L;
+	private static final long serialVersionUID = 151873631190631289L;
   /**
   * Description: "The kind of condition."
   */

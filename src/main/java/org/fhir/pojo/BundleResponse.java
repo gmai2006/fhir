@@ -31,79 +31,51 @@ import com.google.gson.GsonBuilder;
 /**
 * "A container for a collection of resources."
 */
-public class BundleResponse  {
+public class BundleResponse  extends BackboneElement  {
   /**
   * Description: "The status code returned by processing this entry. The status SHALL start with a 3 digit HTTP code (e.g. 404) and may contain the standard HTTP description associated with the status code."
   */
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "The location header created by processing this operation."
   */
-  private String location;
+  protected String location;
 
   /**
   * Description: "Extensions for location"
   */
-  private transient Element _location;
+  protected transient Element _location;
 
   /**
   * Description: "The etag for the resource, it the operation for the entry produced a versioned resource (see [Resource Metadata and Versioning](http.html#versioning) and [Managing Resource Contention](http.html#concurrency))."
   */
-  private String etag;
+  protected String etag;
 
   /**
   * Description: "Extensions for etag"
   */
-  private transient Element _etag;
+  protected transient Element _etag;
 
   /**
   * Description: "The date/time that the resource was modified on the server."
   */
-  private String lastModified;
+  protected String lastModified;
 
   /**
   * Description: "Extensions for lastModified"
   */
-  private transient Element _lastModified;
+  protected transient Element _lastModified;
 
   /**
   * Description: "An OperationOutcome containing hints and warnings produced as part of processing this entry in a batch or transaction."
   */
-  private ResourceList outcome;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected ResourceList outcome;
 
   public BundleResponse() {
   }
@@ -123,9 +95,6 @@ public class BundleResponse  {
       this.lastModified = o.getLastModified();
     }
     this.outcome = ResourceListHelper.fromJson(o.getOutcome());
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
   }
 
   public void setStatus( String value) {
@@ -182,30 +151,6 @@ public class BundleResponse  {
   public ResourceList getOutcome() {
     return this.outcome;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -219,11 +164,7 @@ public class BundleResponse  {
      if(this._etag != null) builder.append("_etag" + "->" + this._etag.toString() + "\n"); 
      if(this.lastModified != null) builder.append("lastModified" + "->" + this.lastModified.toString() + "\n"); 
      if(this._lastModified != null) builder.append("_lastModified" + "->" + this._lastModified.toString() + "\n"); 
-     if(this.outcome != null) builder.append("outcome" + "->" + this.outcome.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.outcome != null) builder.append("outcome" + "->" + this.outcome.toString() + "\n"); ;
     return builder.toString();
   }
 

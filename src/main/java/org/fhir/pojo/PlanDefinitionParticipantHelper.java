@@ -53,19 +53,4 @@ public class PlanDefinitionParticipantHelper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, PlanDefinitionParticipant.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PlanDefinitionParticipant o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PlanDefinitionParticipant> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

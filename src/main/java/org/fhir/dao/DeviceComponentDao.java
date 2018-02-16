@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DeviceComponent;
 
 public interface DeviceComponentDao {
@@ -38,4 +39,9 @@ public interface DeviceComponentDao {
 
   public DeviceComponent update(DeviceComponent e);
   public void delete(DeviceComponent e);
+
+  public List<DeviceComponent> findByField(QueryBuilder queryBuilder);
+
+  public List<DeviceComponent> findByParent(QueryBuilder queryBuilder);
+  public List<DeviceComponent> findBySource(QueryBuilder queryBuilder);
 }

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ActivityDefinition;
 
 public interface ActivityDefinitionService {
@@ -35,4 +37,7 @@ public interface ActivityDefinitionService {
   public ActivityDefinition create(ActivityDefinition bean);
   public ActivityDefinition update(ActivityDefinition bean);
   public void delete(ActivityDefinition bean);
+  public List<ActivityDefinition> findByField(QueryBuilder queryBuilder);
+
+
 }

@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ScheduleModel;
 import org.fhir.pojo.Schedule;
 import org.fhir.pojo.ScheduleHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ScheduleDaoImpl implements ScheduleDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class ScheduleDaoImpl implements ScheduleDao {
       final EntityManager em = entityManagerProvider.get();
       final ScheduleModel removed = em.find(ScheduleModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Schedule> findByActor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ScheduleModel a, Reference b where a.actor_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Schedule> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ScheduleModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Schedule> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ScheduleModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ScheduleModel> models = query.getResultList();
+    return ScheduleHelper.fromArray2Array(models);
   }
 }

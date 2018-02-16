@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.EnrollmentRequestModel;
 import org.fhir.pojo.EnrollmentRequest;
 import org.fhir.pojo.EnrollmentRequestHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class EnrollmentRequestDaoImpl implements EnrollmentRequestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class EnrollmentRequestDaoImpl implements EnrollmentRequestDao {
       final EntityManager em = entityManagerProvider.get();
       final EnrollmentRequestModel removed = em.find(EnrollmentRequestModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<EnrollmentRequest> findByOrganization(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EnrollmentRequestModel a, Reference b where a.organization_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<EnrollmentRequest> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EnrollmentRequestModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<EnrollmentRequest> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EnrollmentRequestModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<EnrollmentRequest> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, EnrollmentRequestModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<EnrollmentRequestModel> models = query.getResultList();
+    return EnrollmentRequestHelper.fromArray2Array(models);
   }
 }

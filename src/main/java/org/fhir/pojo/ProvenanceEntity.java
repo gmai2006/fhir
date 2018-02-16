@@ -31,69 +31,41 @@ import com.google.gson.GsonBuilder;
 /**
 * "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies."
 */
-public class ProvenanceEntity  {
+public class ProvenanceEntity  extends BackboneElement  {
   /**
   * Description: "How the entity was used during the activity."
   */
-  private String role;
+  protected String role;
 
   /**
   * Description: "Extensions for role"
   */
-  private transient Element _role;
+  protected transient Element _role;
 
   /**
   * Description: "Identity of the  Entity used. May be a logical or physical uri and maybe absolute or relative."
   */
-  private String whatUri;
+  protected String whatUri;
 
   /**
   * Description: "Extensions for whatUri"
   */
-  private transient Element _whatUri;
+  protected transient Element _whatUri;
 
   /**
   * Description: "Identity of the  Entity used. May be a logical or physical uri and maybe absolute or relative."
   */
-  private Reference whatReference;
+  protected Reference whatReference;
 
   /**
   * Description: "Identity of the  Entity used. May be a logical or physical uri and maybe absolute or relative."
   */
-  private Identifier whatIdentifier;
+  protected Identifier whatIdentifier;
 
   /**
   * Description: "The entity is attributed to an agent to express the agent's responsibility for that entity, possibly along with other agents. This description can be understood as shorthand for saying that the agent was responsible for the activity which generated the entity."
   */
-  private java.util.List<ProvenanceAgent> agent = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ProvenanceAgent> agent = new java.util.ArrayList<>();
 
   public ProvenanceEntity() {
   }
@@ -112,9 +84,6 @@ public class ProvenanceEntity  {
     this.whatIdentifier = IdentifierHelper.fromJson(o.getWhatIdentifier());
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent = ProvenanceAgentHelper.fromArray2Array(o.getAgent());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -160,30 +129,6 @@ public class ProvenanceEntity  {
   public java.util.List<ProvenanceAgent> getAgent() {
     return this.agent;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -195,11 +140,7 @@ public class ProvenanceEntity  {
      if(this._whatUri != null) builder.append("_whatUri" + "->" + this._whatUri.toString() + "\n"); 
      if(this.whatReference != null) builder.append("whatReference" + "->" + this.whatReference.toString() + "\n"); 
      if(this.whatIdentifier != null) builder.append("whatIdentifier" + "->" + this.whatIdentifier.toString() + "\n"); 
-     if(this.agent != null) builder.append("agent" + "->" + this.agent.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.agent != null) builder.append("agent" + "->" + this.agent.toString() + "\n"); ;
     return builder.toString();
   }
 

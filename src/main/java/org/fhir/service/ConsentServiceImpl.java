@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Consent;
 /**
 * auto generated from SQL files
@@ -103,5 +104,31 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Consent) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Consent> findByField(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Consent> findByActor(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByActor(queryBuilder);
+    logger.info("findByactor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findByData(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByData(queryBuilder);
+    logger.info("findBydata - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
   }
 }

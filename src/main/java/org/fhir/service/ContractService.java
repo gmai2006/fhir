@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Contract;
 
 public interface ContractService {
@@ -35,4 +37,12 @@ public interface ContractService {
   public Contract create(Contract bean);
   public Contract update(Contract bean);
   public void delete(Contract bean);
+  public List<Contract> findByField(QueryBuilder queryBuilder);
+  public List<Contract> findByAgent(QueryBuilder queryBuilder);
+  public List<Contract> findByAuthority(QueryBuilder queryBuilder);
+  public List<Contract> findByDomain(QueryBuilder queryBuilder);
+  public List<Contract> findBySigner(QueryBuilder queryBuilder);
+  public List<Contract> findBySubject(QueryBuilder queryBuilder);
+
+
 }

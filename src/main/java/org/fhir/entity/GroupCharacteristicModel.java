@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization."
 */
 @Entity
 @Table(name="groupcharacteristic")
 public class GroupCharacteristicModel  implements Serializable {
-	private static final long serialVersionUID = 151857669677820755L;
+	private static final long serialVersionUID = 151873631155455113L;
   /**
   * Description: "A code that identifies the kind of trait being asserted."
   * Actual type: String;
@@ -66,12 +67,14 @@ public class GroupCharacteristicModel  implements Serializable {
 
   /**
   * Description: "The value of the trait that holds (or does not hold - see 'exclude') for members of the group."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueQuantity\"", length = 16777215)
-  private String valueQuantity;
+  @Column(name="\"valuequantity_id\"")
+  private String valuequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> valueQuantity;
 
   /**
   * Description: "The value of the trait that holds (or does not hold - see 'exclude') for members of the group."
@@ -143,13 +146,16 @@ public class GroupCharacteristicModel  implements Serializable {
   public GroupCharacteristicModel(GroupCharacteristic o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
-    this.valueCodeableConcept = CodeableConceptHelper.toJson(o.getValueCodeableConcept());
+    this.code = JsonUtils.toJson(o.getCode());
+    this.valueCodeableConcept = JsonUtils.toJson(o.getValueCodeableConcept());
     this.valueBoolean = o.getValueBoolean();
-    this.valueQuantity = QuantityHelper.toJson(o.getValueQuantity());
-    this.valueRange = RangeHelper.toJson(o.getValueRange());
+    if (null != o.getValueQuantity() ) {
+    	this.valuequantity_id = "valuequantity" + this.parent_id;
+    	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
+    }
+    this.valueRange = JsonUtils.toJson(o.getValueRange());
     this.exclude = o.getExclude();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
   }
 
   public String getCode() {
@@ -170,10 +176,10 @@ public class GroupCharacteristicModel  implements Serializable {
   public void setValueBoolean( Boolean value) {
     this.valueBoolean = value;
   }
-  public String getValueQuantity() {
+  public java.util.List<QuantityModel> getValueQuantity() {
     return this.valueQuantity;
   }
-  public void setValueQuantity( String value) {
+  public void setValueQuantity( java.util.List<QuantityModel> value) {
     this.valueQuantity = value;
   }
   public String getValueRange() {
@@ -226,7 +232,6 @@ public class GroupCharacteristicModel  implements Serializable {
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 
      builder.append("exclude" + "->" + this.exclude + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 

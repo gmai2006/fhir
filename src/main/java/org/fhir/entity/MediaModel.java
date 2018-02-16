@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A photo, video, or audio recording acquired or used in healthcare. The actual content may be inline or provided by direct reference."
 */
 @Entity
 @Table(name="media")
 public class MediaModel  implements Serializable {
-	private static final long serialVersionUID = 151857669674523833L;
+	private static final long serialVersionUID = 151873631150160321L;
   /**
   * Description: "This is a Media resource"
   */
@@ -317,8 +318,8 @@ public class MediaModel  implements Serializable {
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
     }
     this.type = o.getType();
-    this.subtype = CodeableConceptHelper.toJson(o.getSubtype());
-    this.view = CodeableConceptHelper.toJson(o.getView());
+    this.subtype = JsonUtils.toJson(o.getSubtype());
+    this.view = JsonUtils.toJson(o.getView());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -328,12 +329,12 @@ public class MediaModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = PeriodHelper.toJson(o.getOccurrencePeriod());
+    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
     if (null != o.getOperator() ) {
     	this.operator_id = "operator" + this.id;
     	this.operator = ReferenceHelper.toModel(o.getOperator(), this.operator_id);
     }
-    this.bodySite = CodeableConceptHelper.toJson(o.getBodySite());
+    this.bodySite = JsonUtils.toJson(o.getBodySite());
     if (null != o.getDevice() ) {
     	this.device_id = "device" + this.id;
     	this.device = ReferenceHelper.toModel(o.getDevice(), this.device_id);
@@ -342,7 +343,7 @@ public class MediaModel  implements Serializable {
     this.width = o.getWidth();
     this.frames = o.getFrames();
     this.duration = o.getDuration();
-    this.content = AttachmentHelper.toJson(o.getContent());
+    this.content = JsonUtils.toJson(o.getContent());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);

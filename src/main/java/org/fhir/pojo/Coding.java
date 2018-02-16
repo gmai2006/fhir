@@ -30,76 +30,57 @@ import com.google.gson.GsonBuilder;
 /**
 * "A reference to a code defined by a terminology system."
 */
-public class Coding  {
+public class Coding  extends Element  {
   /**
   * Description: "The identification of the code system that defines the meaning of the symbol in the code."
   */
-  private String system;
+  protected String system;
 
   /**
   * Description: "Extensions for system"
   */
-  private transient Element _system;
+  protected transient Element _system;
 
   /**
   * Description: "The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured. and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged."
   */
-  private String version;
+  protected String version;
 
   /**
   * Description: "Extensions for version"
   */
-  private transient Element _version;
+  protected transient Element _version;
 
   /**
   * Description: "A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String code;
+  protected String code;
 
   /**
   * Description: "Extensions for code"
   */
-  private transient Element _code;
+  protected transient Element _code;
 
   /**
   * Description: "A representation of the meaning of the code in the system, following the rules of the system."
   */
-  private String display;
+  protected String display;
 
   /**
   * Description: "Extensions for display"
   */
-  private transient Element _display;
+  protected transient Element _display;
 
   /**
   * Description: "Indicates that this coding was chosen by a user directly - i.e. off a pick list of available items (codes or displays)."
   */
-  private Boolean userSelected;
+  protected Boolean userSelected;
 
   /**
   * Description: "Extensions for userSelected"
   */
-  private transient Element _userSelected;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _userSelected;
 
   public Coding() {}
 
@@ -163,24 +144,6 @@ public class Coding  {
   public Element get_userSelected() {
     return this._userSelected;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -195,10 +158,7 @@ public class Coding  {
      if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
      if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
      if(this.userSelected != null) builder.append("userSelected" + "->" + this.userSelected.toString() + "\n"); 
-     if(this._userSelected != null) builder.append("_userSelected" + "->" + this._userSelected.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._userSelected != null) builder.append("_userSelected" + "->" + this._userSelected.toString() + "\n"); ;
     return builder.toString();
   }
 

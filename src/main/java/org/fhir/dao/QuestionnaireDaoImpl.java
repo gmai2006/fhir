@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.QuestionnaireModel;
 import org.fhir.pojo.Questionnaire;
 import org.fhir.pojo.QuestionnaireHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class QuestionnaireDaoImpl implements QuestionnaireDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class QuestionnaireDaoImpl implements QuestionnaireDao {
       final EntityManager em = entityManagerProvider.get();
       final QuestionnaireModel removed = em.find(QuestionnaireModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<Questionnaire> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from QuestionnaireModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Questionnaire> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, QuestionnaireModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<QuestionnaireModel> models = query.getResultList();
+    return QuestionnaireHelper.fromArray2Array(models);
   }
 }

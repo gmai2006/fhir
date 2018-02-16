@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinitiongoal")
 public class PlanDefinitionGoalModel  implements Serializable {
-	private static final long serialVersionUID = 151857669696996406L;
+	private static final long serialVersionUID = 151873631176599866L;
   /**
   * Description: "Indicates a category the goal falls within."
   * Actual type: String;
@@ -151,10 +152,10 @@ public class PlanDefinitionGoalModel  implements Serializable {
   public PlanDefinitionGoalModel(PlanDefinitionGoal o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.description = CodeableConceptHelper.toJson(o.getDescription());
-    this.priority = CodeableConceptHelper.toJson(o.getPriority());
-    this.start = CodeableConceptHelper.toJson(o.getStart());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.description = JsonUtils.toJson(o.getDescription());
+    this.priority = JsonUtils.toJson(o.getPriority());
+    this.start = JsonUtils.toJson(o.getStart());
     if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
     	this.documentation_id = "documentation" + this.parent_id;
     	this.documentation = RelatedArtifactHelper.toModelFromArray(o.getDocumentation(), this.documentation_id);

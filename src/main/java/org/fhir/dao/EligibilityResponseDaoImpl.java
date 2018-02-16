@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.EligibilityResponseModel;
 import org.fhir.pojo.EligibilityResponse;
 import org.fhir.pojo.EligibilityResponseHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class EligibilityResponseDaoImpl implements EligibilityResponseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class EligibilityResponseDaoImpl implements EligibilityResponseDao {
       final EntityManager em = entityManagerProvider.get();
       final EligibilityResponseModel removed = em.find(EligibilityResponseModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<EligibilityResponse> findByInsurer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EligibilityResponseModel a, Reference b where a.insurer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<EligibilityResponse> findByRequest(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EligibilityResponseModel a, Reference b where a.request_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<EligibilityResponse> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EligibilityResponseModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<EligibilityResponse> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, EligibilityResponseModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<EligibilityResponseModel> models = query.getResultList();
+    return EligibilityResponseHelper.fromArray2Array(models);
   }
 }

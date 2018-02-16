@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Claim;
 /**
 * auto generated from SQL files
@@ -103,5 +104,55 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Claim) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Claim> findByField(QueryBuilder queryBuilder) {
+  	final List<Claim> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Claim> findByEnterer(QueryBuilder queryBuilder) {
+  	final List<Claim> result = dao.findByEnterer(queryBuilder);
+    logger.info("findByenterer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Claim> findByFacility(QueryBuilder queryBuilder) {
+  	final List<Claim> result = dao.findByFacility(queryBuilder);
+    logger.info("findByfacility - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Claim> findByInsurer(QueryBuilder queryBuilder) {
+  	final List<Claim> result = dao.findByInsurer(queryBuilder);
+    logger.info("findByinsurer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Claim> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<Claim> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Claim> findByPatient(QueryBuilder queryBuilder) {
+  	final List<Claim> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Claim> findByPayee(QueryBuilder queryBuilder) {
+  	final List<Claim> result = dao.findByPayee(queryBuilder);
+    logger.info("findBypayee - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Claim> findByProvider(QueryBuilder queryBuilder) {
+  	final List<Claim> result = dao.findByProvider(queryBuilder);
+    logger.info("findByprovider - exited - return value={} result ");
+    return result;
   }
 }

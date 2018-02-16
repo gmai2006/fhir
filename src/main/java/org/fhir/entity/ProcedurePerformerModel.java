@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy."
 */
 @Entity
 @Table(name="procedureperformer")
 public class ProcedurePerformerModel  implements Serializable {
-	private static final long serialVersionUID = 15185766968349617L;
+	private static final long serialVersionUID = 151873631162275618L;
   /**
   * Description: "For example: surgeon, anaethetist, endoscopist."
   * Actual type: String;
@@ -114,7 +115,7 @@ public class ProcedurePerformerModel  implements Serializable {
   public ProcedurePerformerModel(ProcedurePerformer o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.role = JsonUtils.toJson(o.getRole());
     if (null != o.getActor() ) {
     	this.actor_id = "actor" + this.parent_id;
     	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);

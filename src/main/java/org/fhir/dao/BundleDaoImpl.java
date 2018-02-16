@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.BundleModel;
 import org.fhir.pojo.Bundle;
 import org.fhir.pojo.BundleHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class BundleDaoImpl implements BundleDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class BundleDaoImpl implements BundleDao {
       final EntityManager em = entityManagerProvider.get();
       final BundleModel removed = em.find(BundleModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<Bundle> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BundleModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Bundle> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, BundleModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<BundleModel> models = query.getResultList();
+    return BundleHelper.fromArray2Array(models);
   }
 }

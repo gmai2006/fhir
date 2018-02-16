@@ -30,191 +30,163 @@ import com.google.gson.GsonBuilder;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
-public class TestScriptOperation  {
+public class TestScriptOperation  extends BackboneElement  {
   /**
   * Description: "Server interaction or operation type."
   */
-  private Coding type;
+  protected Coding type;
 
   /**
   * Description: "The type of the resource.  See http://build.fhir.org/resourcelist.html."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String resource;
+  protected String resource;
 
   /**
   * Description: "Extensions for resource"
   */
-  private transient Element _resource;
+  protected transient Element _resource;
 
   /**
   * Description: "The label would be used for tracking/logging purposes by test engines."
   */
-  private String label;
+  protected String label;
 
   /**
   * Description: "Extensions for label"
   */
-  private transient Element _label;
+  protected transient Element _label;
 
   /**
   * Description: "The description would be used by test engines for tracking and reporting purposes."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "The content-type or mime-type to use for RESTful operation in the 'Accept' header."
   */
-  private String accept;
+  protected String accept;
 
   /**
   * Description: "Extensions for accept"
   */
-  private transient Element _accept;
+  protected transient Element _accept;
 
   /**
   * Description: "The content-type or mime-type to use for RESTful operation in the 'Content-Type' header."
   */
-  private String contentType;
+  protected String contentType;
 
   /**
   * Description: "Extensions for contentType"
   */
-  private transient Element _contentType;
+  protected transient Element _contentType;
 
   /**
   * Description: "The server where the request message is destined for.  Must be one of the server numbers listed in TestScript.destination section."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float destination;
+  protected Float destination;
 
   /**
   * Description: "Extensions for destination"
   */
-  private transient Element _destination;
+  protected transient Element _destination;
 
   /**
   * Description: "Whether or not to implicitly send the request url in encoded format. The default is true to match the standard RESTful client behavior. Set to false when communicating with a server that does not support encoded url paths."
   */
-  private Boolean encodeRequestUrl;
+  protected Boolean encodeRequestUrl;
 
   /**
   * Description: "Extensions for encodeRequestUrl"
   */
-  private transient Element _encodeRequestUrl;
+  protected transient Element _encodeRequestUrl;
 
   /**
   * Description: "The server where the request message originates from.  Must be one of the server numbers listed in TestScript.origin section."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float origin;
+  protected Float origin;
 
   /**
   * Description: "Extensions for origin"
   */
-  private transient Element _origin;
+  protected transient Element _origin;
 
   /**
   * Description: "Path plus parameters after [type].  Used to set parts of the request URL explicitly."
   */
-  private String params;
+  protected String params;
 
   /**
   * Description: "Extensions for params"
   */
-  private transient Element _params;
+  protected transient Element _params;
 
   /**
   * Description: "Header elements would be used to set HTTP headers."
   */
-  private java.util.List<TestScriptRequestHeader> requestHeader = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptRequestHeader> requestHeader = new java.util.ArrayList<>();
 
   /**
   * Description: "The fixture id (maybe new) to map to the request."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String requestId;
+  protected String requestId;
 
   /**
   * Description: "Extensions for requestId"
   */
-  private transient Element _requestId;
+  protected transient Element _requestId;
 
   /**
   * Description: "The fixture id (maybe new) to map to the response."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String responseId;
+  protected String responseId;
 
   /**
   * Description: "Extensions for responseId"
   */
-  private transient Element _responseId;
+  protected transient Element _responseId;
 
   /**
   * Description: "The id of the fixture used as the body of a PUT or POST request."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String sourceId;
+  protected String sourceId;
 
   /**
   * Description: "Extensions for sourceId"
   */
-  private transient Element _sourceId;
+  protected transient Element _sourceId;
 
   /**
   * Description: "Id of fixture used for extracting the [id],  [type], and [vid] for GET requests."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String targetId;
+  protected String targetId;
 
   /**
   * Description: "Extensions for targetId"
   */
-  private transient Element _targetId;
+  protected transient Element _targetId;
 
   /**
   * Description: "Complete request URL."
   */
-  private String url;
+  protected String url;
 
   /**
   * Description: "Extensions for url"
   */
-  private transient Element _url;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _url;
 
   public TestScriptOperation() {}
 
@@ -398,30 +370,6 @@ public class TestScriptOperation  {
   public Element get_url() {
     return this._url;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -456,11 +404,7 @@ public class TestScriptOperation  {
      if(this.targetId != null) builder.append("targetId" + "->" + this.targetId.toString() + "\n"); 
      if(this._targetId != null) builder.append("_targetId" + "->" + this._targetId.toString() + "\n"); 
      if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
-     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); ;
     return builder.toString();
   }
 

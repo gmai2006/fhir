@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a device being used by a patient where the record is the result of a report from the patient or another clinician."
 */
 @Entity
 @Table(name="deviceusestatement")
 public class DeviceUseStatementModel  implements Serializable {
-	private static final long serialVersionUID = 151857669670055612L;
+	private static final long serialVersionUID = 151873631143353599L;
   /**
   * Description: "This is a DeviceUseStatement resource"
   */
@@ -261,9 +262,9 @@ public class DeviceUseStatementModel  implements Serializable {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
     }
-    this.whenUsed = PeriodHelper.toJson(o.getWhenUsed());
-    this.timingTiming = TimingHelper.toJson(o.getTimingTiming());
-    this.timingPeriod = PeriodHelper.toJson(o.getTimingPeriod());
+    this.whenUsed = JsonUtils.toJson(o.getWhenUsed());
+    this.timingTiming = JsonUtils.toJson(o.getTimingTiming());
+    this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
     this.timingDateTime = o.getTimingDateTime();
     this.recordedOn = o.getRecordedOn();
     if (null != o.getSource() ) {
@@ -274,7 +275,7 @@ public class DeviceUseStatementModel  implements Serializable {
     	this.device_id = "device" + this.id;
     	this.device = ReferenceHelper.toModel(o.getDevice(), this.device_id);
     }
-    this.bodySite = CodeableConceptHelper.toJson(o.getBodySite());
+    this.bodySite = JsonUtils.toJson(o.getBodySite());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);

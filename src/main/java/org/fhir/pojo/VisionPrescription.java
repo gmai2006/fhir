@@ -31,145 +31,69 @@ import com.google.gson.GsonBuilder;
 /**
 * "An authorization for the supply of glasses and/or contact lenses to a patient."
 */
-public class VisionPrescription  {
+public class VisionPrescription  extends DomainResource  {
   /**
   * Description: "This is a VisionPrescription resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "Business identifier which may be used by other parties to reference or identify the prescription."
   */
-  private java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
 
   /**
   * Description: "The status of the resource instance."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "A link to a resource representing the person to whom the vision products will be supplied."
   */
-  private Reference patient;
+  protected Reference patient;
 
   /**
   * Description: "A link to a resource that identifies the particular occurrence of contact between patient and health care provider."
   */
-  private Reference encounter;
+  protected Reference encounter;
 
   /**
   * Description: "The date (and perhaps time) when the prescription was written."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String dateWritten;
+  protected String dateWritten;
 
   /**
   * Description: "Extensions for dateWritten"
   */
-  private transient Element _dateWritten;
+  protected transient Element _dateWritten;
 
   /**
   * Description: "The healthcare professional responsible for authorizing the prescription."
   */
-  private Reference prescriber;
+  protected Reference prescriber;
 
   /**
   * Description: "Can be the reason or the indication for writing the prescription."
   */
-  private CodeableConcept reasonCodeableConcept;
+  protected CodeableConcept reasonCodeableConcept;
 
   /**
   * Description: "Can be the reason or the indication for writing the prescription."
   */
-  private Reference reasonReference;
+  protected Reference reasonReference;
 
   /**
   * Description: "Deals with details of the dispense part of the supply specification."
   */
-  private java.util.List<VisionPrescriptionDispense> dispense = new java.util.ArrayList<>();
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected java.util.List<VisionPrescriptionDispense> dispense = new java.util.ArrayList<>();
 
   public VisionPrescription() {
   }
@@ -200,21 +124,6 @@ public class VisionPrescription  {
     }
     if (null != o.getDispense() && !o.getDispense().isEmpty()) {
     	this.dispense = VisionPrescriptionDispenseHelper.fromArray2Array(o.getDispense());
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -290,72 +199,6 @@ public class VisionPrescription  {
   public java.util.List<VisionPrescriptionDispense> getDispense() {
     return this.dispense;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -372,18 +215,7 @@ public class VisionPrescription  {
      if(this.prescriber != null) builder.append("prescriber" + "->" + this.prescriber.toString() + "\n"); 
      if(this.reasonCodeableConcept != null) builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept.toString() + "\n"); 
      if(this.reasonReference != null) builder.append("reasonReference" + "->" + this.reasonReference.toString() + "\n"); 
-     if(this.dispense != null) builder.append("dispense" + "->" + this.dispense.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.dispense != null) builder.append("dispense" + "->" + this.dispense.toString() + "\n"); ;
     return builder.toString();
   }
 

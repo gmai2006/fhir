@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
 */
 @Entity
 @Table(name="requestgrouprelatedaction")
 public class RequestGroupRelatedActionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669669040605L;
+	private static final long serialVersionUID = 151873631142117732L;
   /**
   * Description: "The element id of the action this is related to."
   */
@@ -119,8 +120,8 @@ public class RequestGroupRelatedActionModel  implements Serializable {
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.actionId = o.getActionId();
     this.relationship = o.getRelationship();
-    this.offsetDuration = DurationHelper.toJson(o.getOffsetDuration());
-    this.offsetRange = RangeHelper.toJson(o.getOffsetRange());
+    this.offsetDuration = JsonUtils.toJson(o.getOffsetDuration());
+    this.offsetRange = JsonUtils.toJson(o.getOffsetRange());
   }
 
   public String getActionId() {

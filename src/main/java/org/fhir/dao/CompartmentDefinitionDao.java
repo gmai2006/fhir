@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CompartmentDefinition;
 
 public interface CompartmentDefinitionDao {
@@ -38,4 +39,8 @@ public interface CompartmentDefinitionDao {
 
   public CompartmentDefinition update(CompartmentDefinition e);
   public void delete(CompartmentDefinition e);
+
+  public List<CompartmentDefinition> findByField(QueryBuilder queryBuilder);
+
+  public List<CompartmentDefinition> findByResource(QueryBuilder queryBuilder);
 }

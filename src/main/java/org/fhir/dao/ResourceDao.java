@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Resource;
 
 public interface ResourceDao {
@@ -38,4 +39,7 @@ public interface ResourceDao {
 
   public Resource update(Resource e);
   public void delete(Resource e);
+
+  public List<Resource> findByField(QueryBuilder queryBuilder);
+
 }

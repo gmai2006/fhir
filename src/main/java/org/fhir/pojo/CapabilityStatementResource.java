@@ -31,171 +31,143 @@ import com.google.gson.GsonBuilder;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
-public class CapabilityStatementResource  {
+public class CapabilityStatementResource  extends BackboneElement  {
   /**
   * Description: "A type of resource exposed via the restful interface."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "A specification of the profile that describes the solution's overall support for the resource, including any constraints on cardinality, bindings, lengths or other limitations. See further discussion in [Using Profiles](profiling.html#profile-uses)."
   */
-  private Reference profile;
+  protected Reference profile;
 
   /**
   * Description: "Additional information about the resource type used by the system."
   */
-  private String documentation;
+  protected String documentation;
 
   /**
   * Description: "Extensions for documentation"
   */
-  private transient Element _documentation;
+  protected transient Element _documentation;
 
   /**
   * Description: "Identifies a restful operation supported by the solution."
   */
   @javax.validation.constraints.NotNull
-  private java.util.List<CapabilityStatementInteraction> interaction = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementInteraction> interaction = new java.util.ArrayList<>();
 
   /**
   * Description: "This field is set to no-version to specify that the system does not support (server) or use (client) versioning for this resource type. If this has some other value, the server must at least correctly track and populate the versionId meta-property on resources. If the value is 'versioned-update', then the server supports all the versioning features, including using e-tags for version integrity in the API."
   */
-  private String versioning;
+  protected String versioning;
 
   /**
   * Description: "Extensions for versioning"
   */
-  private transient Element _versioning;
+  protected transient Element _versioning;
 
   /**
   * Description: "A flag for whether the server is able to return past versions as part of the vRead operation."
   */
-  private Boolean readHistory;
+  protected Boolean readHistory;
 
   /**
   * Description: "Extensions for readHistory"
   */
-  private transient Element _readHistory;
+  protected transient Element _readHistory;
 
   /**
   * Description: "A flag to indicate that the server allows or needs to allow the client to create new identities on the server (e.g. that is, the client PUTs to a location where there is no existing resource). Allowing this operation means that the server allows the client to create new identities on the server."
   */
-  private Boolean updateCreate;
+  protected Boolean updateCreate;
 
   /**
   * Description: "Extensions for updateCreate"
   */
-  private transient Element _updateCreate;
+  protected transient Element _updateCreate;
 
   /**
   * Description: "A flag that indicates that the server supports conditional create."
   */
-  private Boolean conditionalCreate;
+  protected Boolean conditionalCreate;
 
   /**
   * Description: "Extensions for conditionalCreate"
   */
-  private transient Element _conditionalCreate;
+  protected transient Element _conditionalCreate;
 
   /**
   * Description: "A code that indicates how the server supports conditional read."
   */
-  private String conditionalRead;
+  protected String conditionalRead;
 
   /**
   * Description: "Extensions for conditionalRead"
   */
-  private transient Element _conditionalRead;
+  protected transient Element _conditionalRead;
 
   /**
   * Description: "A flag that indicates that the server supports conditional update."
   */
-  private Boolean conditionalUpdate;
+  protected Boolean conditionalUpdate;
 
   /**
   * Description: "Extensions for conditionalUpdate"
   */
-  private transient Element _conditionalUpdate;
+  protected transient Element _conditionalUpdate;
 
   /**
   * Description: "A code that indicates how the server supports conditional delete."
   */
-  private String conditionalDelete;
+  protected String conditionalDelete;
 
   /**
   * Description: "Extensions for conditionalDelete"
   */
-  private transient Element _conditionalDelete;
+  protected transient Element _conditionalDelete;
 
   /**
   * Description: "A set of flags that defines how references are supported."
   */
-  private java.util.List<String> referencePolicy = new java.util.ArrayList<>();
+  protected java.util.List<String> referencePolicy = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for referencePolicy"
   */
-  private transient java.util.List<Element> _referencePolicy = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _referencePolicy = new java.util.ArrayList<>();
 
   /**
   * Description: "A list of _include values supported by the server."
   */
-  private java.util.List<String> searchInclude = new java.util.ArrayList<>();
+  protected java.util.List<String> searchInclude = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for searchInclude"
   */
-  private transient java.util.List<Element> _searchInclude = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _searchInclude = new java.util.ArrayList<>();
 
   /**
   * Description: "A list of _revinclude (reverse include) values supported by the server."
   */
-  private java.util.List<String> searchRevInclude = new java.util.ArrayList<>();
+  protected java.util.List<String> searchRevInclude = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for searchRevInclude"
   */
-  private transient java.util.List<Element> _searchRevInclude = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _searchRevInclude = new java.util.ArrayList<>();
 
   /**
   * Description: "Search parameters for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation."
   */
-  private java.util.List<CapabilityStatementSearchParam> searchParam = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementSearchParam> searchParam = new java.util.ArrayList<>();
 
   public CapabilityStatementResource() {
   }
@@ -246,9 +218,6 @@ public class CapabilityStatementResource  {
     }
     if (null != o.getSearchParam() && !o.getSearchParam().isEmpty()) {
     	this.searchParam = CapabilityStatementSearchParamHelper.fromArray2Array(o.getSearchParam());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -414,30 +383,6 @@ public class CapabilityStatementResource  {
   public java.util.List<CapabilityStatementSearchParam> getSearchParam() {
     return this.searchParam;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -469,11 +414,7 @@ public class CapabilityStatementResource  {
      if(this._searchInclude != null) builder.append("_searchInclude" + "->" + this._searchInclude.toString() + "\n"); 
      if(this.searchRevInclude != null) builder.append("searchRevInclude" + "->" + this.searchRevInclude.toString() + "\n"); 
      if(this._searchRevInclude != null) builder.append("_searchRevInclude" + "->" + this._searchRevInclude.toString() + "\n"); 
-     if(this.searchParam != null) builder.append("searchParam" + "->" + this.searchParam.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.searchParam != null) builder.append("searchParam" + "->" + this.searchParam.toString() + "\n"); ;
     return builder.toString();
   }
 

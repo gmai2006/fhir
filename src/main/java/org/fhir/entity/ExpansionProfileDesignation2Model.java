@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
 */
 @Entity
 @Table(name="expansionprofiledesignation2")
 public class ExpansionProfileDesignation2Model  implements Serializable {
-	private static final long serialVersionUID = 151857669713132286L;
+	private static final long serialVersionUID = 151873631192424051L;
   /**
   * Description: "The language this designation is defined for."
   */
@@ -101,7 +102,7 @@ public class ExpansionProfileDesignation2Model  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.language = o.getLanguage();
-    this.use = CodingHelper.toJson(o.getUse());
+    this.use = JsonUtils.toJson(o.getUse());
   }
 
   public String getLanguage() {

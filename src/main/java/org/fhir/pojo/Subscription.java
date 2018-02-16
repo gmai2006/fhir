@@ -31,154 +31,78 @@ import com.google.gson.GsonBuilder;
 /**
 * "The subscription resource is used to define a push based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined \"channel\" so that another system is able to take an appropriate action."
 */
-public class Subscription  {
+public class Subscription  extends DomainResource  {
   /**
   * Description: "This is a Subscription resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "The status of the subscription, which marks the server state for managing the subscription."
   */
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting."
   */
-  private java.util.List<ContactPoint> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> contact = new java.util.ArrayList<>();
 
   /**
   * Description: "The time for the server to turn the subscription off."
   */
-  private String end;
+  protected String end;
 
   /**
   * Description: "Extensions for end"
   */
-  private transient Element _end;
+  protected transient Element _end;
 
   /**
   * Description: "A description of why this subscription is defined."
   */
-  private String reason;
+  protected String reason;
 
   /**
   * Description: "Extensions for reason"
   */
-  private transient Element _reason;
+  protected transient Element _reason;
 
   /**
   * Description: "The rules that the server should use to determine when to generate notifications for this subscription."
   */
-  private String criteria;
+  protected String criteria;
 
   /**
   * Description: "Extensions for criteria"
   */
-  private transient Element _criteria;
+  protected transient Element _criteria;
 
   /**
   * Description: "A record of the last error that occurred when the server processed a notification."
   */
-  private String error;
+  protected String error;
 
   /**
   * Description: "Extensions for error"
   */
-  private transient Element _error;
+  protected transient Element _error;
 
   /**
   * Description: "Details where to send notifications when resources are received that meet the criteria."
   */
   @javax.validation.constraints.NotNull
-  private SubscriptionChannel channel;
+  protected SubscriptionChannel channel;
 
   /**
   * Description: "A tag to add to any resource that matches the criteria, after the subscription is processed."
   */
-  private java.util.List<Coding> tag = new java.util.ArrayList<>();
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected java.util.List<Coding> tag = new java.util.ArrayList<>();
 
   public Subscription() {
   }
@@ -205,21 +129,6 @@ public class Subscription  {
     }
     if (null != o.getChannel() && !o.getChannel().isEmpty()) {
       this.channel = new SubscriptionChannel(o.getChannel().get(0));
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -307,72 +216,6 @@ public class Subscription  {
   public java.util.List<Coding> getTag() {
     return this.tag;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -391,18 +234,7 @@ public class Subscription  {
      if(this.error != null) builder.append("error" + "->" + this.error.toString() + "\n"); 
      if(this._error != null) builder.append("_error" + "->" + this._error.toString() + "\n"); 
      if(this.channel != null) builder.append("channel" + "->" + this.channel.toString() + "\n"); 
-     if(this.tag != null) builder.append("tag" + "->" + this.tag.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.tag != null) builder.append("tag" + "->" + this.tag.toString() + "\n"); ;
     return builder.toString();
   }
 

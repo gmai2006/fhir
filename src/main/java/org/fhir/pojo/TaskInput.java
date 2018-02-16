@@ -30,401 +30,373 @@ import com.google.gson.GsonBuilder;
 /**
 * "A task to be performed."
 */
-public class TaskInput  {
+public class TaskInput  extends BackboneElement  {
   /**
   * Description: "A code or description indicating how the input is intended to be used as part of the task execution."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept type;
+  protected CodeableConcept type;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Boolean valueBoolean;
+  protected Boolean valueBoolean;
 
   /**
   * Description: "Extensions for valueBoolean"
   */
-  private transient Element _valueBoolean;
+  protected transient Element _valueBoolean;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float valueInteger;
+  protected Float valueInteger;
 
   /**
   * Description: "Extensions for valueInteger"
   */
-  private transient Element _valueInteger;
+  protected transient Element _valueInteger;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float valueDecimal;
+  protected Float valueDecimal;
 
   /**
   * Description: "Extensions for valueDecimal"
   */
-  private transient Element _valueDecimal;
+  protected transient Element _valueDecimal;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private String valueBase64Binary;
+  protected String valueBase64Binary;
 
   /**
   * Description: "Extensions for valueBase64Binary"
   */
-  private transient Element _valueBase64Binary;
+  protected transient Element _valueBase64Binary;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private String valueInstant;
+  protected String valueInstant;
 
   /**
   * Description: "Extensions for valueInstant"
   */
-  private transient Element _valueInstant;
+  protected transient Element _valueInstant;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private String valueString;
+  protected String valueString;
 
   /**
   * Description: "Extensions for valueString"
   */
-  private transient Element _valueString;
+  protected transient Element _valueString;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private String valueUri;
+  protected String valueUri;
 
   /**
   * Description: "Extensions for valueUri"
   */
-  private transient Element _valueUri;
+  protected transient Element _valueUri;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?")
-  private String valueDate;
+  protected String valueDate;
 
   /**
   * Description: "Extensions for valueDate"
   */
-  private transient Element _valueDate;
+  protected transient Element _valueDate;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String valueDateTime;
+  protected String valueDateTime;
 
   /**
   * Description: "Extensions for valueDateTime"
   */
-  private transient Element _valueDateTime;
+  protected transient Element _valueDateTime;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?")
-  private String valueTime;
+  protected String valueTime;
 
   /**
   * Description: "Extensions for valueTime"
   */
-  private transient Element _valueTime;
+  protected transient Element _valueTime;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String valueCode;
+  protected String valueCode;
 
   /**
   * Description: "Extensions for valueCode"
   */
-  private transient Element _valueCode;
+  protected transient Element _valueCode;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="urn:oid:(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*))*")
-  private String valueOid;
+  protected String valueOid;
 
   /**
   * Description: "Extensions for valueOid"
   */
-  private transient Element _valueOid;
+  protected transient Element _valueOid;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
-  private String valueUuid;
+  protected String valueUuid;
 
   /**
   * Description: "Extensions for valueUuid"
   */
-  private transient Element _valueUuid;
+  protected transient Element _valueUuid;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String valueId;
+  protected String valueId;
 
   /**
   * Description: "Extensions for valueId"
   */
-  private transient Element _valueId;
+  protected transient Element _valueId;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="[0]|([1-9][0-9]*)")
-  private Float valueUnsignedInt;
+  protected Float valueUnsignedInt;
 
   /**
   * Description: "Extensions for valueUnsignedInt"
   */
-  private transient Element _valueUnsignedInt;
+  protected transient Element _valueUnsignedInt;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
   @javax.validation.constraints.Pattern(regexp="[1-9][0-9]*")
-  private Float valuePositiveInt;
+  protected Float valuePositiveInt;
 
   /**
   * Description: "Extensions for valuePositiveInt"
   */
-  private transient Element _valuePositiveInt;
+  protected transient Element _valuePositiveInt;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private String valueMarkdown;
+  protected String valueMarkdown;
 
   /**
   * Description: "Extensions for valueMarkdown"
   */
-  private transient Element _valueMarkdown;
+  protected transient Element _valueMarkdown;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Element valueElement;
+  protected Element valueElement;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Extension valueExtension;
+  protected Extension valueExtension;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private BackboneElement valueBackboneElement;
+  protected BackboneElement valueBackboneElement;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Narrative valueNarrative;
+  protected Narrative valueNarrative;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Annotation valueAnnotation;
+  protected Annotation valueAnnotation;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Attachment valueAttachment;
+  protected Attachment valueAttachment;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Identifier valueIdentifier;
+  protected Identifier valueIdentifier;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private CodeableConcept valueCodeableConcept;
+  protected CodeableConcept valueCodeableConcept;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Coding valueCoding;
+  protected Coding valueCoding;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Quantity valueQuantity;
+  protected Quantity valueQuantity;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Duration valueDuration;
+  protected Duration valueDuration;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Quantity valueSimpleQuantity;
+  protected Quantity valueSimpleQuantity;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Distance valueDistance;
+  protected Distance valueDistance;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Count valueCount;
+  protected Count valueCount;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Money valueMoney;
+  protected Money valueMoney;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Age valueAge;
+  protected Age valueAge;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Range valueRange;
+  protected Range valueRange;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Period valuePeriod;
+  protected Period valuePeriod;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Ratio valueRatio;
+  protected Ratio valueRatio;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Reference valueReference;
+  protected Reference valueReference;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private SampledData valueSampledData;
+  protected SampledData valueSampledData;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Signature valueSignature;
+  protected Signature valueSignature;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private HumanName valueHumanName;
+  protected HumanName valueHumanName;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Address valueAddress;
+  protected Address valueAddress;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private ContactPoint valueContactPoint;
+  protected ContactPoint valueContactPoint;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Timing valueTiming;
+  protected Timing valueTiming;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Meta valueMeta;
+  protected Meta valueMeta;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private ElementDefinition valueElementDefinition;
+  protected ElementDefinition valueElementDefinition;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private ContactDetail valueContactDetail;
+  protected ContactDetail valueContactDetail;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Contributor valueContributor;
+  protected Contributor valueContributor;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private Dosage valueDosage;
+  protected Dosage valueDosage;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private RelatedArtifact valueRelatedArtifact;
+  protected RelatedArtifact valueRelatedArtifact;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private UsageContext valueUsageContext;
+  protected UsageContext valueUsageContext;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private DataRequirement valueDataRequirement;
+  protected DataRequirement valueDataRequirement;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private ParameterDefinition valueParameterDefinition;
+  protected ParameterDefinition valueParameterDefinition;
 
   /**
   * Description: "The value of the input parameter as a basic type."
   */
-  private TriggerDefinition valueTriggerDefinition;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected TriggerDefinition valueTriggerDefinition;
 
   public TaskInput() {}
 
@@ -854,30 +826,6 @@ public class TaskInput  {
   public TriggerDefinition getValueTriggerDefinition() {
     return this.valueTriggerDefinition;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -953,11 +901,7 @@ public class TaskInput  {
      if(this.valueUsageContext != null) builder.append("valueUsageContext" + "->" + this.valueUsageContext.toString() + "\n"); 
      if(this.valueDataRequirement != null) builder.append("valueDataRequirement" + "->" + this.valueDataRequirement.toString() + "\n"); 
      if(this.valueParameterDefinition != null) builder.append("valueParameterDefinition" + "->" + this.valueParameterDefinition.toString() + "\n"); 
-     if(this.valueTriggerDefinition != null) builder.append("valueTriggerDefinition" + "->" + this.valueTriggerDefinition.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.valueTriggerDefinition != null) builder.append("valueTriggerDefinition" + "->" + this.valueTriggerDefinition.toString() + "\n"); ;
     return builder.toString();
   }
 

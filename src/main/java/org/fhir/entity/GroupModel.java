@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization."
 */
 @Entity
 @Table(name="fhirgroup")
 public class GroupModel  implements Serializable {
-	private static final long serialVersionUID = 151857669690876535L;
+	private static final long serialVersionUID = 151873631170122285L;
   /**
   * Description: "This is a Group resource"
   */
@@ -216,7 +217,7 @@ public class GroupModel  implements Serializable {
     this.active = o.getActive();
     this.type = o.getType();
     this.actual = o.getActual();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     this.name = o.getName();
     this.quantity = o.getQuantity();
     if (null != o.getCharacteristic() && !o.getCharacteristic().isEmpty()) {

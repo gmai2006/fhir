@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.FlagModel;
 import org.fhir.pojo.Flag;
 import org.fhir.pojo.FlagHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class FlagDaoImpl implements FlagDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class FlagDaoImpl implements FlagDao {
       final EntityManager em = entityManagerProvider.get();
       final FlagModel removed = em.find(FlagModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Flag> findByAuthor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from FlagModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Flag> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from FlagModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Flag> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from FlagModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Flag> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, FlagModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<FlagModel> models = query.getResultList();
+    return FlagHelper.fromArray2Array(models);
   }
 }

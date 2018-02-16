@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ImplementationGuideModel;
 import org.fhir.pojo.ImplementationGuide;
 import org.fhir.pojo.ImplementationGuideHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ImplementationGuideDaoImpl implements ImplementationGuideDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class ImplementationGuideDaoImpl implements ImplementationGuideDao {
       final EntityManager em = entityManagerProvider.get();
       final ImplementationGuideModel removed = em.find(ImplementationGuideModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ImplementationGuide> findByDependency(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImplementationGuideModel a, ImplementationGuideDependency b where a.dependency_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ImplementationGuide> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImplementationGuideModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ImplementationGuide> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ImplementationGuideModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ImplementationGuideModel> models = query.getResultList();
+    return ImplementationGuideHelper.fromArray2Array(models);
   }
 }

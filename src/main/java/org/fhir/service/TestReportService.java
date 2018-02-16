@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.TestReport;
 
 public interface TestReportService {
@@ -35,4 +37,8 @@ public interface TestReportService {
   public TestReport create(TestReport bean);
   public TestReport update(TestReport bean);
   public void delete(TestReport bean);
+  public List<TestReport> findByField(QueryBuilder queryBuilder);
+  public List<TestReport> findByParticipant(QueryBuilder queryBuilder);
+
+
 }

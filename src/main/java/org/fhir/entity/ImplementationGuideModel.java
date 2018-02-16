@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts."
 */
 @Entity
 @Table(name="implementationguide")
 public class ImplementationGuideModel  implements Serializable {
-	private static final long serialVersionUID = 151857669688029492L;
+	private static final long serialVersionUID = 151873631167294486L;
   /**
   * Description: "This is a ImplementationGuide resource"
   */
@@ -320,7 +321,7 @@ public class ImplementationGuideModel  implements Serializable {
     	this.global = ImplementationGuideGlobalHelper.toModelFromArray(o.getGlobal(), this.global_id);
     }
     this.binary = org.fhir.utils.JsonUtils.write2String(o.getBinary());
-    this.page = ImplementationGuidePageHelper.toJson(o.getPage());
+    this.page = JsonUtils.toJson(o.getPage());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
 */
 @Entity
 @Table(name="bundlelink")
 public class BundleLinkModel  implements Serializable {
-	private static final long serialVersionUID = 151857669675337141L;
+	private static final long serialVersionUID = 151873631151079251L;
   /**
   * Description: "A name which details the functional use for this link - see [http://www.iana.org/assignments/link-relations/link-relations.xhtml#link-relations-1](http://www.iana.org/assignments/link-relations/link-relations.xhtml#link-relations-1)."
   */

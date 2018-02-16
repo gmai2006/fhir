@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.RiskAssessment;
 
 public interface RiskAssessmentDao {
@@ -38,4 +39,10 @@ public interface RiskAssessmentDao {
 
   public RiskAssessment update(RiskAssessment e);
   public void delete(RiskAssessment e);
+
+  public List<RiskAssessment> findByField(QueryBuilder queryBuilder);
+
+  public List<RiskAssessment> findByCondition(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByPerformer(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findBySubject(QueryBuilder queryBuilder);
 }

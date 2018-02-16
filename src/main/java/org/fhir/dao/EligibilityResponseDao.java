@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.EligibilityResponse;
 
 public interface EligibilityResponseDao {
@@ -38,4 +39,9 @@ public interface EligibilityResponseDao {
 
   public EligibilityResponse update(EligibilityResponse e);
   public void delete(EligibilityResponse e);
+
+  public List<EligibilityResponse> findByField(QueryBuilder queryBuilder);
+
+  public List<EligibilityResponse> findByInsurer(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByRequest(QueryBuilder queryBuilder);
 }

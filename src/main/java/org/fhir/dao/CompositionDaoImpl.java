@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.CompositionModel;
 import org.fhir.pojo.Composition;
 import org.fhir.pojo.CompositionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class CompositionDaoImpl implements CompositionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,49 @@ public class CompositionDaoImpl implements CompositionDao {
       final EntityManager em = entityManagerProvider.get();
       final CompositionModel removed = em.find(CompositionModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Composition> findByAttester(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CompositionModel a, CompositionAttester b where a.attester_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Composition> findByAuthor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CompositionModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Composition> findBySection(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CompositionModel a, CompositionSection b where a.section_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Composition> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CompositionModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Composition> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CompositionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Composition> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, CompositionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<CompositionModel> models = query.getResultList();
+    return CompositionHelper.fromArray2Array(models);
   }
 }

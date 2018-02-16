@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time."
 */
 @Entity
 @Table(name="practitionerrole")
 public class PractitionerRoleModel  implements Serializable {
-	private static final long serialVersionUID = 151857669711528973L;
+	private static final long serialVersionUID = 151873631190488471L;
   /**
   * Description: "This is a PractitionerRole resource"
   */
@@ -274,7 +275,7 @@ public class PractitionerRoleModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.active = o.getActive();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getPractitioner() ) {
     	this.practitioner_id = "practitioner" + this.id;
     	this.practitioner = ReferenceHelper.toModel(o.getPractitioner(), this.practitioner_id);

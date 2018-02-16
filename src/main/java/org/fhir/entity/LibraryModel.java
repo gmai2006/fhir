@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The Library resource is a general-purpose container for knowledge asset definitions. It can be used to describe and expose existing knowledge assets such as logic libraries and information model descriptions, as well as to describe a collection of knowledge assets."
 */
 @Entity
 @Table(name="library")
 public class LibraryModel  implements Serializable {
-	private static final long serialVersionUID = 151857669688496251L;
+	private static final long serialVersionUID = 151873631167627123L;
   /**
   * Description: "This is a Library resource"
   */
@@ -363,7 +364,7 @@ public class LibraryModel  implements Serializable {
     this.title = o.getTitle();
     this.status = o.getStatus();
     this.experimental = o.getExperimental();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.date = o.getDate();
     this.publisher = o.getPublisher();
     this.description = o.getDescription();
@@ -371,7 +372,7 @@ public class LibraryModel  implements Serializable {
     this.usage = o.getUsage();
     this.approvalDate = o.getApprovalDate();
     this.lastReviewDate = o.getLastReviewDate();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);

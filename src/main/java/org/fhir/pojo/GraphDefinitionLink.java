@@ -31,91 +31,63 @@ import com.google.gson.GsonBuilder;
 /**
 * "A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set."
 */
-public class GraphDefinitionLink  {
+public class GraphDefinitionLink  extends BackboneElement  {
   /**
   * Description: "Path in the resource that contains the link."
   */
-  private String path;
+  protected String path;
 
   /**
   * Description: "Extensions for path"
   */
-  private transient Element _path;
+  protected transient Element _path;
 
   /**
   * Description: "Which slice (if profiled)."
   */
-  private String sliceName;
+  protected String sliceName;
 
   /**
   * Description: "Extensions for sliceName"
   */
-  private transient Element _sliceName;
+  protected transient Element _sliceName;
 
   /**
   * Description: "Minimum occurrences for this link."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float min;
+  protected Float min;
 
   /**
   * Description: "Extensions for min"
   */
-  private transient Element _min;
+  protected transient Element _min;
 
   /**
   * Description: "Maximum occurrences for this link."
   */
-  private String max;
+  protected String max;
 
   /**
   * Description: "Extensions for max"
   */
-  private transient Element _max;
+  protected transient Element _max;
 
   /**
   * Description: "Information about why this link is of interest in this graph definition."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "Potential target for the link."
   */
   @javax.validation.constraints.NotNull
-  private java.util.List<GraphDefinitionTarget> target = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<GraphDefinitionTarget> target = new java.util.ArrayList<>();
 
   public GraphDefinitionLink() {
   }
@@ -139,9 +111,6 @@ public class GraphDefinitionLink  {
     }
     if (null != o.getTarget() && !o.getTarget().isEmpty()) {
     	this.target = GraphDefinitionTargetHelper.fromArray2Array(o.getTarget());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -211,30 +180,6 @@ public class GraphDefinitionLink  {
   public java.util.List<GraphDefinitionTarget> getTarget() {
     return this.target;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -250,11 +195,7 @@ public class GraphDefinitionLink  {
      if(this._max != null) builder.append("_max" + "->" + this._max.toString() + "\n"); 
      if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
      if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
-     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.target != null) builder.append("target" + "->" + this.target.toString() + "\n"); ;
     return builder.toString();
   }
 

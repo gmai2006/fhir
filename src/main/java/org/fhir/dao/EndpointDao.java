@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Endpoint;
 
 public interface EndpointDao {
@@ -38,4 +39,7 @@ public interface EndpointDao {
 
   public Endpoint update(Endpoint e);
   public void delete(Endpoint e);
+
+  public List<Endpoint> findByField(QueryBuilder queryBuilder);
+
 }

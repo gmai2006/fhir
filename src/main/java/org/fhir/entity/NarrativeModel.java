@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A human-readable formatted text, including images."
 */
 @Entity
 @Table(name="narrative")
 public class NarrativeModel  implements Serializable {
-	private static final long serialVersionUID = 15185766966992882L;
+	private static final long serialVersionUID = 151873631143186272L;
   /**
   * Description: "The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data."
   */

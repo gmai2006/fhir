@@ -31,159 +31,131 @@ import com.google.gson.GsonBuilder;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
 */
-public class QuestionnaireEnableWhen  {
+public class QuestionnaireEnableWhen  extends BackboneElement  {
   /**
   * Description: "The linkId for the question whose answer (or lack of answer) governs whether this item is enabled."
   */
-  private String question;
+  protected String question;
 
   /**
   * Description: "Extensions for question"
   */
-  private transient Element _question;
+  protected transient Element _question;
 
   /**
   * Description: "An indication that this item should be enabled only if the specified question is answered (hasAnswer=true) or not answered (hasAnswer=false)."
   */
-  private Boolean hasAnswer;
+  protected Boolean hasAnswer;
 
   /**
   * Description: "Extensions for hasAnswer"
   */
-  private transient Element _hasAnswer;
+  protected transient Element _hasAnswer;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
-  private Boolean answerBoolean;
+  protected Boolean answerBoolean;
 
   /**
   * Description: "Extensions for answerBoolean"
   */
-  private transient Element _answerBoolean;
+  protected transient Element _answerBoolean;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float answerDecimal;
+  protected Float answerDecimal;
 
   /**
   * Description: "Extensions for answerDecimal"
   */
-  private transient Element _answerDecimal;
+  protected transient Element _answerDecimal;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float answerInteger;
+  protected Float answerInteger;
 
   /**
   * Description: "Extensions for answerInteger"
   */
-  private transient Element _answerInteger;
+  protected transient Element _answerInteger;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?")
-  private String answerDate;
+  protected String answerDate;
 
   /**
   * Description: "Extensions for answerDate"
   */
-  private transient Element _answerDate;
+  protected transient Element _answerDate;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String answerDateTime;
+  protected String answerDateTime;
 
   /**
   * Description: "Extensions for answerDateTime"
   */
-  private transient Element _answerDateTime;
+  protected transient Element _answerDateTime;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
   @javax.validation.constraints.Pattern(regexp="([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?")
-  private String answerTime;
+  protected String answerTime;
 
   /**
   * Description: "Extensions for answerTime"
   */
-  private transient Element _answerTime;
+  protected transient Element _answerTime;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
-  private String answerString;
+  protected String answerString;
 
   /**
   * Description: "Extensions for answerString"
   */
-  private transient Element _answerString;
+  protected transient Element _answerString;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
-  private String answerUri;
+  protected String answerUri;
 
   /**
   * Description: "Extensions for answerUri"
   */
-  private transient Element _answerUri;
+  protected transient Element _answerUri;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
-  private Attachment answerAttachment;
+  protected Attachment answerAttachment;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
-  private Coding answerCoding;
+  protected Coding answerCoding;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
-  private Quantity answerQuantity;
+  protected Quantity answerQuantity;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
   */
-  private Reference answerReference;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Reference answerReference;
 
   public QuestionnaireEnableWhen() {
   }
@@ -222,12 +194,11 @@ public class QuestionnaireEnableWhen  {
     }
     this.answerAttachment = AttachmentHelper.fromJson(o.getAnswerAttachment());
     this.answerCoding = CodingHelper.fromJson(o.getAnswerCoding());
-    this.answerQuantity = QuantityHelper.fromJson(o.getAnswerQuantity());
+    if (null != o.getAnswerQuantity() && !o.getAnswerQuantity().isEmpty()) {
+      this.answerQuantity = new Quantity(o.getAnswerQuantity().get(0));
+    }
     if (null != o.getAnswerReference() && !o.getAnswerReference().isEmpty()) {
       this.answerReference = new Reference(o.getAnswerReference().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -375,30 +346,6 @@ public class QuestionnaireEnableWhen  {
   public Reference getAnswerReference() {
     return this.answerReference;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -427,11 +374,7 @@ public class QuestionnaireEnableWhen  {
      if(this.answerAttachment != null) builder.append("answerAttachment" + "->" + this.answerAttachment.toString() + "\n"); 
      if(this.answerCoding != null) builder.append("answerCoding" + "->" + this.answerCoding.toString() + "\n"); 
      if(this.answerQuantity != null) builder.append("answerQuantity" + "->" + this.answerQuantity.toString() + "\n"); 
-     if(this.answerReference != null) builder.append("answerReference" + "->" + this.answerReference.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.answerReference != null) builder.append("answerReference" + "->" + this.answerReference.toString() + "\n"); ;
     return builder.toString();
   }
 

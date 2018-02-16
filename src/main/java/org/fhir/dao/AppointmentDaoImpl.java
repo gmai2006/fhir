@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.AppointmentModel;
 import org.fhir.pojo.Appointment;
 import org.fhir.pojo.AppointmentHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class AppointmentDaoImpl implements AppointmentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class AppointmentDaoImpl implements AppointmentDao {
       final EntityManager em = entityManagerProvider.get();
       final AppointmentModel removed = em.find(AppointmentModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<Appointment> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AppointmentModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Appointment> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, AppointmentModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<AppointmentModel> models = query.getResultList();
+    return AppointmentHelper.fromArray2Array(models);
   }
 }

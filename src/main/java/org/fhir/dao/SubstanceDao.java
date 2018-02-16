@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Substance;
 
 public interface SubstanceDao {
@@ -38,4 +39,7 @@ public interface SubstanceDao {
 
   public Substance update(Substance e);
   public void delete(Substance e);
+
+  public List<Substance> findByField(QueryBuilder queryBuilder);
+
 }

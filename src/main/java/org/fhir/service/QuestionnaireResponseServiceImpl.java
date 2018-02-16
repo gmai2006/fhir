@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.QuestionnaireResponse;
 /**
 * auto generated from SQL files
@@ -103,5 +104,49 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(QuestionnaireResponse) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<QuestionnaireResponse> findByField(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<QuestionnaireResponse> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<QuestionnaireResponse> findByContext(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<QuestionnaireResponse> findByParent(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByParent(queryBuilder);
+    logger.info("findByparent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<QuestionnaireResponse> findByQuestionnaire(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByQuestionnaire(queryBuilder);
+    logger.info("findByquestionnaire - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<QuestionnaireResponse> findBySource(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findBySource(queryBuilder);
+    logger.info("findBysource - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<QuestionnaireResponse> findBySubject(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

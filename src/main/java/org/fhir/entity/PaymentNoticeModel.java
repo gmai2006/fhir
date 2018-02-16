@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the status of the payment for goods and services rendered, and the request and response resource references."
 */
 @Entity
 @Table(name="paymentnotice")
 public class PaymentNoticeModel  implements Serializable {
-	private static final long serialVersionUID = 151857669667772052L;
+	private static final long serialVersionUID = 151873631140590211L;
   /**
   * Description: "This is a PaymentNotice resource"
   */
@@ -257,7 +258,7 @@ public class PaymentNoticeModel  implements Serializable {
     	this.organization_id = "organization" + this.id;
     	this.organization = ReferenceHelper.toModel(o.getOrganization(), this.organization_id);
     }
-    this.paymentStatus = CodeableConceptHelper.toJson(o.getPaymentStatus());
+    this.paymentStatus = JsonUtils.toJson(o.getPaymentStatus());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);

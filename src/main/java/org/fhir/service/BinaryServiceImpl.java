@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Binary;
 /**
 * auto generated from SQL files
@@ -104,4 +105,12 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     logger.info("delete(Binary) - exited - return value={} result ");
   }
+
+  @Override
+  public List<Binary> findByField(QueryBuilder queryBuilder) {
+  	final List<Binary> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
 }

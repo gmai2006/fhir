@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ImmunizationModel;
 import org.fhir.pojo.Immunization;
 import org.fhir.pojo.ImmunizationHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ImmunizationDaoImpl implements ImmunizationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,49 @@ public class ImmunizationDaoImpl implements ImmunizationDao {
       final EntityManager em = entityManagerProvider.get();
       final ImmunizationModel removed = em.find(ImmunizationModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Immunization> findByLocation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImmunizationModel a, Reference b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Immunization> findByManufacturer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImmunizationModel a, Reference b where a.manufacturer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Immunization> findByPractitioner(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImmunizationModel a, ImmunizationPractitioner b where a.practitioner_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Immunization> findByReaction(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImmunizationModel a, ImmunizationReaction b where a.reaction_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Immunization> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImmunizationModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Immunization> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ImmunizationModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ImmunizationModel> models = query.getResultList();
+    return ImmunizationHelper.fromArray2Array(models);
   }
 }

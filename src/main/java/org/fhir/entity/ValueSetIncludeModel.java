@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
 @Entity
 @Table(name="valuesetinclude")
 public class ValueSetIncludeModel  implements Serializable {
-	private static final long serialVersionUID = 151857669682219304L;
+	private static final long serialVersionUID = 151873631161117261L;
   /**
   * Description: "An absolute URI which is the code system from which the selected codes come from."
   */

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PaymentNotice;
 
 public interface PaymentNoticeService {
@@ -35,4 +37,11 @@ public interface PaymentNoticeService {
   public PaymentNotice create(PaymentNotice bean);
   public PaymentNotice update(PaymentNotice bean);
   public void delete(PaymentNotice bean);
+  public List<PaymentNotice> findByField(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByOrganization(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByProvider(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByRequest(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByResponse(QueryBuilder queryBuilder);
+
+
 }

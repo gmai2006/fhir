@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A reference to a document."
 */
 @Entity
 @Table(name="documentreferencerelatesto")
 public class DocumentReferenceRelatesToModel  implements Serializable {
-	private static final long serialVersionUID = 151857669711480187L;
+	private static final long serialVersionUID = 151873631190354745L;
   /**
   * Description: "The type of relationship that this document has with anther document."
   */

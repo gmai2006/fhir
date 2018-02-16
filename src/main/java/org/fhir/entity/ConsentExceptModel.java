@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
 */
 @Entity
 @Table(name="consentexcept")
 public class ConsentExceptModel  implements Serializable {
-	private static final long serialVersionUID = 151857669682035818L;
+	private static final long serialVersionUID = 151873631160979881L;
   /**
   * Description: "Action  to take - permit or deny - when the exception conditions are met."
   */
@@ -176,12 +177,12 @@ public class ConsentExceptModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.type = o.getType();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getActor() && !o.getActor().isEmpty()) {
     	this.actor_id = "actor" + this.parent_id;
     	this.actor = ConsentActor1Helper.toModelFromArray(o.getActor(), this.actor_id);
     }
-    this.dataPeriod = PeriodHelper.toJson(o.getDataPeriod());
+    this.dataPeriod = JsonUtils.toJson(o.getDataPeriod());
     if (null != o.getData() && !o.getData().isEmpty()) {
     	this.data_id = "data" + this.parent_id;
     	this.data = ConsentData1Helper.toModelFromArray(o.getData(), this.data_id);

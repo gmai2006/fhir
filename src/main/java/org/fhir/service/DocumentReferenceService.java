@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DocumentReference;
 
 public interface DocumentReferenceService {
@@ -35,4 +37,11 @@ public interface DocumentReferenceService {
   public DocumentReference create(DocumentReference bean);
   public DocumentReference update(DocumentReference bean);
   public void delete(DocumentReference bean);
+  public List<DocumentReference> findByField(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByAuthenticator(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByAuthor(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByCustodian(QueryBuilder queryBuilder);
+  public List<DocumentReference> findBySubject(QueryBuilder queryBuilder);
+
+
 }

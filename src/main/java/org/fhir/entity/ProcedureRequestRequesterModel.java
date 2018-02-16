@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a request for diagnostic investigations, treatments, or operations to be performed."
 */
 @Entity
 @Table(name="procedurerequestrequester")
 public class ProcedureRequestRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669703887757L;
+	private static final long serialVersionUID = 151873631182323004L;
   /**
   * Description: "The device, practitioner or organization who initiated the request."
   */

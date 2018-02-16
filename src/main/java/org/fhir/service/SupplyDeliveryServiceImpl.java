@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.SupplyDelivery;
 /**
 * auto generated from SQL files
@@ -103,5 +104,25 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(SupplyDelivery) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<SupplyDelivery> findByField(QueryBuilder queryBuilder) {
+  	final List<SupplyDelivery> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<SupplyDelivery> findByReceiver(QueryBuilder queryBuilder) {
+  	final List<SupplyDelivery> result = dao.findByReceiver(queryBuilder);
+    logger.info("findByreceiver - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SupplyDelivery> findBySupplier(QueryBuilder queryBuilder) {
+  	final List<SupplyDelivery> result = dao.findBySupplier(queryBuilder);
+    logger.info("findBysupplier - exited - return value={} result ");
+    return result;
   }
 }

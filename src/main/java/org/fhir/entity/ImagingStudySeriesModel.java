@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities."
 */
 @Entity
 @Table(name="imagingstudyseries")
 public class ImagingStudySeriesModel  implements Serializable {
-	private static final long serialVersionUID = 151857669664962260L;
+	private static final long serialVersionUID = 151873631137354299L;
   /**
   * Description: "Formal identifier for this series."
   */
@@ -192,7 +193,7 @@ public class ImagingStudySeriesModel  implements Serializable {
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.uid = o.getUid();
     this.number = o.getNumber();
-    this.modality = CodingHelper.toJson(o.getModality());
+    this.modality = JsonUtils.toJson(o.getModality());
     this.description = o.getDescription();
     this.numberOfInstances = o.getNumberOfInstances();
     this.availability = o.getAvailability();
@@ -200,8 +201,8 @@ public class ImagingStudySeriesModel  implements Serializable {
     	this.endpoint_id = "endpoint" + this.parent_id;
     	this.endpoint = ReferenceHelper.toModelFromArray(o.getEndpoint(), this.endpoint_id);
     }
-    this.bodySite = CodingHelper.toJson(o.getBodySite());
-    this.laterality = CodingHelper.toJson(o.getLaterality());
+    this.bodySite = JsonUtils.toJson(o.getBodySite());
+    this.laterality = JsonUtils.toJson(o.getLaterality());
     this.started = o.getStarted();
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
     	this.performer_id = "performer" + this.parent_id;

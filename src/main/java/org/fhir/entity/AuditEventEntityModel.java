@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
 */
 @Entity
 @Table(name="auditevententity")
 public class AuditEventEntityModel  implements Serializable {
-	private static final long serialVersionUID = 151857669654398908L;
+	private static final long serialVersionUID = 151873631121248861L;
   /**
   * Description: "Identifies a specific instance of the entity. The reference should always be version specific."
   * Actual type: String;
@@ -171,14 +172,14 @@ public class AuditEventEntityModel  implements Serializable {
   public AuditEventEntityModel(AuditEventEntity o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     if (null != o.getReference() ) {
     	this.reference_id = "reference" + this.parent_id;
     	this.reference = ReferenceHelper.toModel(o.getReference(), this.reference_id);
     }
-    this.type = CodingHelper.toJson(o.getType());
-    this.role = CodingHelper.toJson(o.getRole());
-    this.lifecycle = CodingHelper.toJson(o.getLifecycle());
+    this.type = JsonUtils.toJson(o.getType());
+    this.role = JsonUtils.toJson(o.getRole());
+    this.lifecycle = JsonUtils.toJson(o.getLifecycle());
     this.name = o.getName();
     this.description = o.getDescription();
     this.query = o.getQuery();

@@ -1,5 +1,9 @@
-# FHIR
-An implementation of the Fast Healthcare Interoperability Resources (FHIR) version 3.0.1 
+# FHIR - BETA version
+Update:
+- Added REST layer validator
+
+An implementation of the Fast Healthcare Interoperability Resources (FHIR) version 3.0.1.
+
 This implentation is 100% auto generated
 
 Please see here for more information about the FHIR

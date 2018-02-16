@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.AuditEventModel;
 import org.fhir.pojo.AuditEvent;
 import org.fhir.pojo.AuditEventHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class AuditEventDaoImpl implements AuditEventDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class AuditEventDaoImpl implements AuditEventDao {
       final EntityManager em = entityManagerProvider.get();
       final AuditEventModel removed = em.find(AuditEventModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<AuditEvent> findByAgent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AuditEventModel a, AuditEventAgent b where a.agent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AuditEvent> findByEntity(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AuditEventModel a, AuditEventEntity b where a.entity_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AuditEvent> findBySource(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AuditEventModel a, AuditEventSource b where a.source_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<AuditEvent> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AuditEventModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<AuditEvent> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, AuditEventModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<AuditEventModel> models = query.getResultList();
+    return AuditEventHelper.fromArray2Array(models);
   }
 }

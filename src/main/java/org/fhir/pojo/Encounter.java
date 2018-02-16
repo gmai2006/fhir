@@ -31,198 +31,122 @@ import com.google.gson.GsonBuilder;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
-public class Encounter  {
+public class Encounter  extends DomainResource  {
   /**
   * Description: "This is a Encounter resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "Identifier(s) by which this encounter is known."
   */
-  private java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
 
   /**
   * Description: "planned | arrived | triaged | in-progress | onleave | finished | cancelled +."
   */
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "The status history permits the encounter resource to contain the status history without needing to read through the historical versions of the resource, or even have the server store them."
   */
-  private java.util.List<EncounterStatusHistory> statusHistory = new java.util.ArrayList<>();
+  protected java.util.List<EncounterStatusHistory> statusHistory = new java.util.ArrayList<>();
 
   /**
   * Description: "inpatient | outpatient | ambulatory | emergency +."
   */
-  private Coding FHIRclass;
+  protected Coding FHIRclass;
 
   /**
   * Description: "The class history permits the tracking of the encounters transitions without needing to go  through the resource history.\n\nThis would be used for a case where an admission starts of as an emergency encounter, then transisions into an inpatient scenario. Doing this and not restarting a new encounter ensures that any lab/diagnostic results can more easily follow the patient and not require re-processing and not get lost or cancelled during a kindof discharge from emergency to inpatient."
   */
-  private java.util.List<EncounterClassHistory> classHistory = new java.util.ArrayList<>();
+  protected java.util.List<EncounterClassHistory> classHistory = new java.util.ArrayList<>();
 
   /**
   * Description: "Specific type of encounter (e.g. e-mail consultation, surgical day-care, skilled nursing, rehabilitation)."
   */
-  private java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
 
   /**
   * Description: "Indicates the urgency of the encounter."
   */
-  private CodeableConcept priority;
+  protected CodeableConcept priority;
 
   /**
   * Description: "The patient ro group present at the encounter."
   */
-  private Reference subject;
+  protected Reference subject;
 
   /**
   * Description: "Where a specific encounter should be classified as a part of a specific episode(s) of care this field should be used. This association can facilitate grouping of related encounters together for a specific purpose, such as government reporting, issue tracking, association via a common problem.  The association is recorded on the encounter as these are typically created after the episode of care, and grouped on entry rather than editing the episode of care to append another encounter to it (the episode of care could span years)."
   */
-  private java.util.List<Reference> episodeOfCare = new java.util.ArrayList<>();
+  protected java.util.List<Reference> episodeOfCare = new java.util.ArrayList<>();
 
   /**
   * Description: "The referral request this encounter satisfies (incoming referral)."
   */
-  private java.util.List<Reference> incomingReferral = new java.util.ArrayList<>();
+  protected java.util.List<Reference> incomingReferral = new java.util.ArrayList<>();
 
   /**
   * Description: "The list of people responsible for providing the service."
   */
-  private java.util.List<EncounterParticipant> participant = new java.util.ArrayList<>();
+  protected java.util.List<EncounterParticipant> participant = new java.util.ArrayList<>();
 
   /**
   * Description: "The appointment that scheduled this encounter."
   */
-  private Reference appointment;
+  protected Reference appointment;
 
   /**
   * Description: "The start and end time of the encounter."
   */
-  private Period period;
+  protected Period period;
 
   /**
   * Description: "Quantity of time the encounter lasted. This excludes the time during leaves of absence."
   */
-  private Duration length;
+  protected Duration length;
 
   /**
   * Description: "Reason the encounter takes place, expressed as a code. For admissions, this can be used for a coded admission diagnosis."
   */
-  private java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
 
   /**
   * Description: "The list of diagnosis relevant to this encounter."
   */
-  private java.util.List<EncounterDiagnosis> diagnosis = new java.util.ArrayList<>();
+  protected java.util.List<EncounterDiagnosis> diagnosis = new java.util.ArrayList<>();
 
   /**
   * Description: "The set of accounts that may be used for billing for this Encounter."
   */
-  private java.util.List<Reference> account = new java.util.ArrayList<>();
+  protected java.util.List<Reference> account = new java.util.ArrayList<>();
 
   /**
   * Description: "Details about the admission to a healthcare service."
   */
-  private EncounterHospitalization hospitalization;
+  protected EncounterHospitalization hospitalization;
 
   /**
   * Description: "List of locations where  the patient has been during this encounter."
   */
-  private java.util.List<EncounterLocation> location = new java.util.ArrayList<>();
+  protected java.util.List<EncounterLocation> location = new java.util.ArrayList<>();
 
   /**
   * Description: "An organization that is in charge of maintaining the information of this Encounter (e.g. who maintains the report or the master service catalog item, etc.). This MAY be the same as the organization on the Patient record, however it could be different. This MAY not be not the Service Delivery Location's Organization."
   */
-  private Reference serviceProvider;
+  protected Reference serviceProvider;
 
   /**
   * Description: "Another Encounter of which this encounter is a part of (administratively or in time)."
   */
-  private Reference partOf;
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected Reference partOf;
 
   public Encounter() {
   }
@@ -277,21 +201,6 @@ public class Encounter  {
     }
     if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
       this.partOf = new Reference(o.getPartOf().get(0));
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -433,72 +342,6 @@ public class Encounter  {
   public Reference getPartOf() {
     return this.partOf;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -526,18 +369,7 @@ public class Encounter  {
      if(this.hospitalization != null) builder.append("hospitalization" + "->" + this.hospitalization.toString() + "\n"); 
      if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
      if(this.serviceProvider != null) builder.append("serviceProvider" + "->" + this.serviceProvider.toString() + "\n"); 
-     if(this.partOf != null) builder.append("partOf" + "->" + this.partOf.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.partOf != null) builder.append("partOf" + "->" + this.partOf.toString() + "\n"); ;
     return builder.toString();
   }
 

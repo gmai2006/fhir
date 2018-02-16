@@ -31,70 +31,42 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
-public class ExplanationOfBenefitPayment  {
+public class ExplanationOfBenefitPayment  extends BackboneElement  {
   /**
   * Description: "Whether this represents partial or complete payment of the claim."
   */
-  private CodeableConcept type;
+  protected CodeableConcept type;
 
   /**
   * Description: "Adjustment to the payment of this transaction which is not related to adjudication of this transaction."
   */
-  private Money adjustment;
+  protected Money adjustment;
 
   /**
   * Description: "Reason for the payment adjustment."
   */
-  private CodeableConcept adjustmentReason;
+  protected CodeableConcept adjustmentReason;
 
   /**
   * Description: "Estimated payment date."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?")
-  private String date;
+  protected String date;
 
   /**
   * Description: "Extensions for date"
   */
-  private transient Element _date;
+  protected transient Element _date;
 
   /**
   * Description: "Payable less any payment adjustment."
   */
-  private Money amount;
+  protected Money amount;
 
   /**
   * Description: "Payment identifer."
   */
-  private Identifier identifier;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Identifier identifier;
 
   public ExplanationOfBenefitPayment() {
   }
@@ -102,16 +74,17 @@ public class ExplanationOfBenefitPayment  {
   public ExplanationOfBenefitPayment(ExplanationOfBenefitPaymentModel o) {
     this.id = o.getId();
     this.type = CodeableConceptHelper.fromJson(o.getType());
-    this.adjustment = MoneyHelper.fromJson(o.getAdjustment());
+    if (null != o.getAdjustment() && !o.getAdjustment().isEmpty()) {
+      this.adjustment = new Money(o.getAdjustment().get(0));
+    }
     this.adjustmentReason = CodeableConceptHelper.fromJson(o.getAdjustmentReason());
     if (null != o.getDate()) {
       this.date = o.getDate();
     }
-    this.amount = MoneyHelper.fromJson(o.getAmount());
-    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
-    if (null != o.getId()) {
-      this.id = o.getId();
+    if (null != o.getAmount() && !o.getAmount().isEmpty()) {
+      this.amount = new Money(o.getAmount().get(0));
     }
+    this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
   }
 
   public void setType( CodeableConcept value) {
@@ -156,30 +129,6 @@ public class ExplanationOfBenefitPayment  {
   public Identifier getIdentifier() {
     return this.identifier;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -191,11 +140,7 @@ public class ExplanationOfBenefitPayment  {
      if(this.date != null) builder.append("date" + "->" + this.date.toString() + "\n"); 
      if(this._date != null) builder.append("_date" + "->" + this._date.toString() + "\n"); 
      if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); 
-     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); ;
     return builder.toString();
   }
 

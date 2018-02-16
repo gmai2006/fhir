@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The subscription resource is used to define a push based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined \"channel\" so that another system is able to take an appropriate action."
 */
 @Entity
 @Table(name="subscription")
 public class SubscriptionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669674320294L;
+	private static final long serialVersionUID = 151873631149855964L;
   /**
   * Description: "This is a Subscription resource"
   */

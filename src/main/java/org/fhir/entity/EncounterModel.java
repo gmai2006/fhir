@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
 @Entity
 @Table(name="encounter")
 public class EncounterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669683685530L;
+	private static final long serialVersionUID = 151873631162450049L;
   /**
   * Description: "This is a Encounter resource"
   */
@@ -355,12 +356,12 @@ public class EncounterModel  implements Serializable {
     	this.statushistory_id = "statushistory" + this.id;
     	this.statusHistory = EncounterStatusHistoryHelper.toModelFromArray(o.getStatusHistory(), this.statushistory_id);
     }
-    this.FHIRclass = CodingHelper.toJson(o.getFHIRclass());
+    this.FHIRclass = JsonUtils.toJson(o.getFHIRclass());
     if (null != o.getClassHistory() && !o.getClassHistory().isEmpty()) {
     	this.classhistory_id = "classhistory" + this.id;
     	this.classHistory = EncounterClassHistoryHelper.toModelFromArray(o.getClassHistory(), this.classhistory_id);
     }
-    this.priority = CodeableConceptHelper.toJson(o.getPriority());
+    this.priority = JsonUtils.toJson(o.getPriority());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -381,8 +382,8 @@ public class EncounterModel  implements Serializable {
     	this.appointment_id = "appointment" + this.id;
     	this.appointment = ReferenceHelper.toModel(o.getAppointment(), this.appointment_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
-    this.length = DurationHelper.toJson(o.getLength());
+    this.period = JsonUtils.toJson(o.getPeriod());
+    this.length = JsonUtils.toJson(o.getLength());
     if (null != o.getDiagnosis() && !o.getDiagnosis().isEmpty()) {
     	this.diagnosis_id = "diagnosis" + this.id;
     	this.diagnosis = EncounterDiagnosisHelper.toModelFromArray(o.getDiagnosis(), this.diagnosis_id);

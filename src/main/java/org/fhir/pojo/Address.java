@@ -25,127 +25,142 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.AddressModel;
 import com.google.gson.GsonBuilder;
 
 /**
 * "An address expressed using postal conventions (as opposed to GPS or other location definition formats).  This data type may be used to convey addresses for use in delivering mail as well as for visiting locations which might not be valid for mail delivery.  There are a variety of postal address formats defined around the world."
 */
-public class Address  {
+public class Address  extends Element  {
   /**
   * Description: "The purpose of this address."
   */
-  private String use;
+  protected String use;
 
   /**
   * Description: "Extensions for use"
   */
-  private transient Element _use;
+  protected transient Element _use;
 
   /**
   * Description: "Distinguishes between physical addresses (those you can visit) and mailing addresses (e.g. PO Boxes and care-of addresses). Most addresses are both."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "A full text representation of the address."
   */
-  private String text;
+  protected String text;
 
   /**
   * Description: "Extensions for text"
   */
-  private transient Element _text;
+  protected transient Element _text;
 
   /**
   * Description: "This component contains the house number, apartment number, street name, street direction,  P.O. Box number, delivery hints, and similar address information."
   */
-  private java.util.List<String> line = new java.util.ArrayList<>();
+  protected java.util.List<String> line = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for line"
   */
-  private transient java.util.List<Element> _line = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _line = new java.util.ArrayList<>();
 
   /**
   * Description: "The name of the city, town, village or other community or delivery center."
   */
-  private String city;
+  protected String city;
 
   /**
   * Description: "Extensions for city"
   */
-  private transient Element _city;
+  protected transient Element _city;
 
   /**
   * Description: "The name of the administrative area (county)."
   */
-  private String district;
+  protected String district;
 
   /**
   * Description: "Extensions for district"
   */
-  private transient Element _district;
+  protected transient Element _district;
 
   /**
   * Description: "Sub-unit of a country with limited sovereignty in a federally organized country. A code may be used if codes are in common use (i.e. US 2 letter state codes)."
   */
-  private String state;
+  protected String state;
 
   /**
   * Description: "Extensions for state"
   */
-  private transient Element _state;
+  protected transient Element _state;
 
   /**
   * Description: "A postal code designating a region defined by the postal service."
   */
-  private String postalCode;
+  protected String postalCode;
 
   /**
   * Description: "Extensions for postalCode"
   */
-  private transient Element _postalCode;
+  protected transient Element _postalCode;
 
   /**
   * Description: "Country - a nation as commonly understood or generally accepted."
   */
-  private String country;
+  protected String country;
 
   /**
   * Description: "Extensions for country"
   */
-  private transient Element _country;
+  protected transient Element _country;
 
   /**
   * Description: "Time period when address was/is in use."
   */
-  private Period period;
+  protected Period period;
 
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
+  public Address() {
+  }
 
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  public Address() {}
+  public Address(AddressModel o) {
+    this.id = o.getId();
+    if (null != o.getUse()) {
+      this.use = o.getUse();
+    }
+    if (null != o.getType()) {
+      this.type = o.getType();
+    }
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+    if (o.getLine() != null) {
+    	this.line = org.fhir.utils.JsonUtils.json2Array(o.getLine());
+    }
+    if (null != o.getCity()) {
+      this.city = o.getCity();
+    }
+    if (null != o.getDistrict()) {
+      this.district = o.getDistrict();
+    }
+    if (null != o.getState()) {
+      this.state = o.getState();
+    }
+    if (null != o.getPostalCode()) {
+      this.postalCode = o.getPostalCode();
+    }
+    if (null != o.getCountry()) {
+      this.country = o.getCountry();
+    }
+    this.period = PeriodHelper.fromJson(o.getPeriod());
+  }
 
   public void setUse( String value) {
     this.use = UseEnum.fromCode(value);
@@ -261,24 +276,6 @@ public class Address  {
   public Period getPeriod() {
     return this.period;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -302,10 +299,7 @@ public class Address  {
      if(this._postalCode != null) builder.append("_postalCode" + "->" + this._postalCode.toString() + "\n"); 
      if(this.country != null) builder.append("country" + "->" + this.country.toString() + "\n"); 
      if(this._country != null) builder.append("_country" + "->" + this._country.toString() + "\n"); 
-     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -325,7 +319,9 @@ public class Address  {
   			throw new IllegalArgumentException("Unknown resource type ["+ strVal + "]");
   		}
   	}
-  }public enum TypeEnum {
+  }
+
+  public enum TypeEnum {
   	postal,
   	physical,
   	both,
@@ -340,4 +336,5 @@ public class Address  {
   		}
   	}
   }
+
 }

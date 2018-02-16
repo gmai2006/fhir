@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ResearchSubject;
 
 public interface ResearchSubjectService {
@@ -35,4 +37,8 @@ public interface ResearchSubjectService {
   public ResearchSubject create(ResearchSubject bean);
   public ResearchSubject update(ResearchSubject bean);
   public void delete(ResearchSubject bean);
+  public List<ResearchSubject> findByField(QueryBuilder queryBuilder);
+  public List<ResearchSubject> findByIndividual(QueryBuilder queryBuilder);
+
+
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
 */
 @Entity
 @Table(name="immunizationrecommendationrecommendation")
 public class ImmunizationRecommendationRecommendationModel  implements Serializable {
-	private static final long serialVersionUID = 15185766970067688L;
+	private static final long serialVersionUID = 151873631179542196L;
   /**
   * Description: "The date the immunization recommendation was created."
   */
@@ -172,10 +173,10 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.date = o.getDate();
-    this.vaccineCode = CodeableConceptHelper.toJson(o.getVaccineCode());
-    this.targetDisease = CodeableConceptHelper.toJson(o.getTargetDisease());
+    this.vaccineCode = JsonUtils.toJson(o.getVaccineCode());
+    this.targetDisease = JsonUtils.toJson(o.getTargetDisease());
     this.doseNumber = o.getDoseNumber();
-    this.forecastStatus = CodeableConceptHelper.toJson(o.getForecastStatus());
+    this.forecastStatus = JsonUtils.toJson(o.getForecastStatus());
     if (null != o.getDateCriterion() && !o.getDateCriterion().isEmpty()) {
     	this.datecriterion_id = "datecriterion" + this.parent_id;
     	this.dateCriterion = ImmunizationRecommendationDateCriterionHelper.toModelFromArray(o.getDateCriterion(), this.datecriterion_id);

@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.SequenceModel;
 import org.fhir.pojo.Sequence;
 import org.fhir.pojo.SequenceHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class SequenceDaoImpl implements SequenceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class SequenceDaoImpl implements SequenceDao {
       final EntityManager em = entityManagerProvider.get();
       final SequenceModel removed = em.find(SequenceModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Sequence> findByPatient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SequenceModel a, Reference b where a.patient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Sequence> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SequenceModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Sequence> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, SequenceModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<SequenceModel> models = query.getResultList();
+    return SequenceHelper.fromArray2Array(models);
   }
 }

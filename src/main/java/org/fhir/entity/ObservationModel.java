@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
 @Entity
 @Table(name="observation")
 public class ObservationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669677925127L;
+	private static final long serialVersionUID = 15187363115557234L;
   /**
   * Description: "This is a Observation resource"
   */
@@ -151,12 +152,14 @@ public class ObservationModel  implements Serializable {
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueQuantity\"", length = 16777215)
-  private String valueQuantity;
+  @Column(name="\"valuequantity_id\"")
+  private String valuequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> valueQuantity;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
@@ -436,7 +439,7 @@ public class ObservationModel  implements Serializable {
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
     }
     this.status = o.getStatus();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -446,28 +449,31 @@ public class ObservationModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.effectiveDateTime = o.getEffectiveDateTime();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     this.issued = o.getIssued();
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
     	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModelFromArray(o.getPerformer(), this.performer_id);
     }
-    this.valueQuantity = QuantityHelper.toJson(o.getValueQuantity());
-    this.valueCodeableConcept = CodeableConceptHelper.toJson(o.getValueCodeableConcept());
+    if (null != o.getValueQuantity() ) {
+    	this.valuequantity_id = "valuequantity" + this.id;
+    	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
+    }
+    this.valueCodeableConcept = JsonUtils.toJson(o.getValueCodeableConcept());
     this.valueString = o.getValueString();
     this.valueBoolean = o.getValueBoolean();
-    this.valueRange = RangeHelper.toJson(o.getValueRange());
-    this.valueRatio = RatioHelper.toJson(o.getValueRatio());
-    this.valueSampledData = SampledDataHelper.toJson(o.getValueSampledData());
-    this.valueAttachment = AttachmentHelper.toJson(o.getValueAttachment());
+    this.valueRange = JsonUtils.toJson(o.getValueRange());
+    this.valueRatio = JsonUtils.toJson(o.getValueRatio());
+    this.valueSampledData = JsonUtils.toJson(o.getValueSampledData());
+    this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
     this.valueTime = o.getValueTime();
     this.valueDateTime = o.getValueDateTime();
-    this.valuePeriod = PeriodHelper.toJson(o.getValuePeriod());
-    this.dataAbsentReason = CodeableConceptHelper.toJson(o.getDataAbsentReason());
-    this.interpretation = CodeableConceptHelper.toJson(o.getInterpretation());
+    this.valuePeriod = JsonUtils.toJson(o.getValuePeriod());
+    this.dataAbsentReason = JsonUtils.toJson(o.getDataAbsentReason());
+    this.interpretation = JsonUtils.toJson(o.getInterpretation());
     this.comment = o.getComment();
-    this.bodySite = CodeableConceptHelper.toJson(o.getBodySite());
-    this.method = CodeableConceptHelper.toJson(o.getMethod());
+    this.bodySite = JsonUtils.toJson(o.getBodySite());
+    this.method = JsonUtils.toJson(o.getMethod());
     if (null != o.getSpecimen() ) {
     	this.specimen_id = "specimen" + this.id;
     	this.specimen = ReferenceHelper.toModel(o.getSpecimen(), this.specimen_id);
@@ -572,10 +578,10 @@ public class ObservationModel  implements Serializable {
   public void setPerformer( java.util.List<ReferenceModel> value) {
     this.performer = value;
   }
-  public String getValueQuantity() {
+  public java.util.List<QuantityModel> getValueQuantity() {
     return this.valueQuantity;
   }
-  public void setValueQuantity( String value) {
+  public void setValueQuantity( java.util.List<QuantityModel> value) {
     this.valueQuantity = value;
   }
   public String getValueCodeableConcept() {
@@ -759,7 +765,6 @@ public class ObservationModel  implements Serializable {
      builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
      builder.append("issued" + "->" + this.issued + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("valueString" + "->" + this.valueString + "\n"); 
      builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DeviceUseStatement;
 
 public interface DeviceUseStatementDao {
@@ -38,4 +39,9 @@ public interface DeviceUseStatementDao {
 
   public DeviceUseStatement update(DeviceUseStatement e);
   public void delete(DeviceUseStatement e);
+
+  public List<DeviceUseStatement> findByField(QueryBuilder queryBuilder);
+
+  public List<DeviceUseStatement> findByDevice(QueryBuilder queryBuilder);
+  public List<DeviceUseStatement> findBySubject(QueryBuilder queryBuilder);
 }

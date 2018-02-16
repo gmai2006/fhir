@@ -58,7 +58,7 @@ System.out.println(model.debug());
 		assertEquals("Expect status", "active", accts.get(0).getStatus());
 		assertEquals("Expect code", "PBILLACCT", accts.get(0).getType().getCoding().get(0).getCode());
 //		clean the test data
-//		service.delete(acct);
+		service.delete(acct);
 	}
 
 }

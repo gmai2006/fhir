@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Practitioner;
 
 public interface PractitionerDao {
@@ -38,4 +39,7 @@ public interface PractitionerDao {
 
   public Practitioner update(Practitioner e);
   public void delete(Practitioner e);
+
+  public List<Practitioner> findByField(QueryBuilder queryBuilder);
+
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information."
 */
 @Entity
 @Table(name="endpoint")
 public class EndpointModel  implements Serializable {
-	private static final long serialVersionUID = 151857669661328044L;
+	private static final long serialVersionUID = 151873631131758215L;
   /**
   * Description: "This is a Endpoint resource"
   */
@@ -231,13 +232,13 @@ public class EndpointModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.connectionType = CodingHelper.toJson(o.getConnectionType());
+    this.connectionType = JsonUtils.toJson(o.getConnectionType());
     this.name = o.getName();
     if (null != o.getManagingOrganization() ) {
     	this.managingorganization_id = "managingorganization" + this.id;
     	this.managingOrganization = ReferenceHelper.toModel(o.getManagingOrganization(), this.managingorganization_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     this.payloadMimeType = org.fhir.utils.JsonUtils.write2String(o.getPayloadMimeType());
     this.address = o.getAddress();
     this.header = org.fhir.utils.JsonUtils.write2String(o.getHeader());

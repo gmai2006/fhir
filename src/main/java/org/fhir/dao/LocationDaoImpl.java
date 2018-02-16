@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.LocationModel;
 import org.fhir.pojo.Location;
 import org.fhir.pojo.LocationHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class LocationDaoImpl implements LocationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class LocationDaoImpl implements LocationDao {
       final EntityManager em = entityManagerProvider.get();
       final LocationModel removed = em.find(LocationModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Location> findByAddress(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from LocationModel a, Address b where a.address_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Location> findByEndpoint(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from LocationModel a, Reference b where a.endpoint_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Location> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from LocationModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Location> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, LocationModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<LocationModel> models = query.getResultList();
+    return LocationHelper.fromArray2Array(models);
   }
 }

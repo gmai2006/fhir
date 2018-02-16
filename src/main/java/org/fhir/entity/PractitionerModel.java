@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A person who is directly or indirectly involved in the provisioning of healthcare."
 */
 @Entity
 @Table(name="practitioner")
 public class PractitionerModel  implements Serializable {
-	private static final long serialVersionUID = 151857669710153932L;
+	private static final long serialVersionUID = 151873631188967091L;
   /**
   * Description: "This is a Practitioner resource"
   */
@@ -82,12 +83,14 @@ public class PractitionerModel  implements Serializable {
 
   /**
   * Description: "Address(es) of the practitioner that are not role specific (typically home address). \rWork addresses are not typically entered in this property as they are usually role dependent."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"address\"", length = 16777215)
-  private String address;
+  @Column(name="\"address_id\"")
+  private String address_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> address;
 
   /**
   * Description: "Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes."
@@ -225,6 +228,10 @@ public class PractitionerModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.active = o.getActive();
+    if (null != o.getAddress() && !o.getAddress().isEmpty()) {
+    	this.address_id = "address" + this.id;
+    	this.address = AddressHelper.toModelFromArray(o.getAddress(), this.address_id);
+    }
     this.gender = o.getGender();
     this.birthDate = o.getBirthDate();
     if (null != o.getQualification() && !o.getQualification().isEmpty()) {
@@ -273,10 +280,10 @@ public class PractitionerModel  implements Serializable {
   public void setTelecom( String value) {
     this.telecom = value;
   }
-  public String getAddress() {
+  public java.util.List<AddressModel> getAddress() {
     return this.address;
   }
-  public void setAddress( String value) {
+  public void setAddress( java.util.List<AddressModel> value) {
     this.address = value;
   }
   public String getGender() {
@@ -367,7 +374,6 @@ public class PractitionerModel  implements Serializable {
      builder.append("active" + "->" + this.active + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 
      builder.append("birthDate" + "->" + this.birthDate + "\n"); 
      builder.append("photo" + "->" + this.photo + "\n"); 

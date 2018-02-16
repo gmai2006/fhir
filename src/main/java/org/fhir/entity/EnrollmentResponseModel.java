@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides enrollment and plan details from the processing of an Enrollment resource."
 */
 @Entity
 @Table(name="enrollmentresponse")
 public class EnrollmentResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669677149814L;
+	private static final long serialVersionUID = 151873631154151823L;
   /**
   * Description: "This is a EnrollmentResponse resource"
   */
@@ -227,7 +228,7 @@ public class EnrollmentResponseModel  implements Serializable {
     	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
-    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.outcome = JsonUtils.toJson(o.getOutcome());
     this.disposition = o.getDisposition();
     this.created = o.getCreated();
     if (null != o.getOrganization() ) {

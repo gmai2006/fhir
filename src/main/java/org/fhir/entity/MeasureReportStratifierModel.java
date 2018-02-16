@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
 */
 @Entity
 @Table(name="measurereportstratifier")
 public class MeasureReportStratifierModel  implements Serializable {
-	private static final long serialVersionUID = 151857669695840023L;
+	private static final long serialVersionUID = 151873631175411097L;
   /**
   * Description: "The identifier of this stratifier, as defined in the measure definition."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class MeasureReportStratifierModel  implements Serializable {
   public MeasureReportStratifierModel(MeasureReportStratifier o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     if (null != o.getStratum() && !o.getStratum().isEmpty()) {
     	this.stratum_id = "stratum" + this.parent_id;
     	this.stratum = MeasureReportStratumHelper.toModelFromArray(o.getStratum(), this.stratum_id);

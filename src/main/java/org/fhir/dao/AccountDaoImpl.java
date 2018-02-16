@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.AccountModel;
 import org.fhir.pojo.Account;
 import org.fhir.pojo.AccountHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class AccountDaoImpl implements AccountDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class AccountDaoImpl implements AccountDao {
       final EntityManager em = entityManagerProvider.get();
       final AccountModel removed = em.find(AccountModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Account> findByBalance(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AccountModel a, Money b where a.balance_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Account> findByOwner(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AccountModel a, Reference b where a.owner_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Account> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AccountModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Account> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AccountModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Account> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, AccountModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<AccountModel> models = query.getResultList();
+    return AccountHelper.fromArray2Array(models);
   }
 }

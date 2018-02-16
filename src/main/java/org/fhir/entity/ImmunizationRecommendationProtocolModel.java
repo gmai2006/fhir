@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
 */
 @Entity
 @Table(name="immunizationrecommendationprotocol")
 public class ImmunizationRecommendationProtocolModel  implements Serializable {
-	private static final long serialVersionUID = 151857669678240176L;
+	private static final long serialVersionUID = 151873631155873139L;
   /**
   * Description: "Indicates the nominal position in a series of the next dose.  This is the recommended dose number as per a specified protocol."
   */

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ProcessRequest;
 
 public interface ProcessRequestDao {
@@ -38,4 +39,9 @@ public interface ProcessRequestDao {
 
   public ProcessRequest update(ProcessRequest e);
   public void delete(ProcessRequest e);
+
+  public List<ProcessRequest> findByField(QueryBuilder queryBuilder);
+
+  public List<ProcessRequest> findByOrganization(QueryBuilder queryBuilder);
+  public List<ProcessRequest> findByProvider(QueryBuilder queryBuilder);
 }

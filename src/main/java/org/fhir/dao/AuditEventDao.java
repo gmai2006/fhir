@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AuditEvent;
 
 public interface AuditEventDao {
@@ -38,4 +39,10 @@ public interface AuditEventDao {
 
   public AuditEvent update(AuditEvent e);
   public void delete(AuditEvent e);
+
+  public List<AuditEvent> findByField(QueryBuilder queryBuilder);
+
+  public List<AuditEvent> findByAgent(QueryBuilder queryBuilder);
+  public List<AuditEvent> findByEntity(QueryBuilder queryBuilder);
+  public List<AuditEvent> findBySource(QueryBuilder queryBuilder);
 }

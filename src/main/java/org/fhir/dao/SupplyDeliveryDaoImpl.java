@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.SupplyDeliveryModel;
 import org.fhir.pojo.SupplyDelivery;
 import org.fhir.pojo.SupplyDeliveryHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class SupplyDeliveryDaoImpl implements SupplyDeliveryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class SupplyDeliveryDaoImpl implements SupplyDeliveryDao {
       final EntityManager em = entityManagerProvider.get();
       final SupplyDeliveryModel removed = em.find(SupplyDeliveryModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<SupplyDelivery> findByReceiver(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SupplyDeliveryModel a, Reference b where a.receiver_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<SupplyDelivery> findBySupplier(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SupplyDeliveryModel a, Reference b where a.supplier_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<SupplyDelivery> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SupplyDeliveryModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<SupplyDelivery> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, SupplyDeliveryModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<SupplyDeliveryModel> models = query.getResultList();
+    return SupplyDeliveryHelper.fromArray2Array(models);
   }
 }

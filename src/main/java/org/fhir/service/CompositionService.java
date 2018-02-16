@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Composition;
 
 public interface CompositionService {
@@ -35,4 +37,11 @@ public interface CompositionService {
   public Composition create(Composition bean);
   public Composition update(Composition bean);
   public void delete(Composition bean);
+  public List<Composition> findByField(QueryBuilder queryBuilder);
+  public List<Composition> findByAttester(QueryBuilder queryBuilder);
+  public List<Composition> findByAuthor(QueryBuilder queryBuilder);
+  public List<Composition> findBySection(QueryBuilder queryBuilder);
+  public List<Composition> findBySubject(QueryBuilder queryBuilder);
+
+
 }

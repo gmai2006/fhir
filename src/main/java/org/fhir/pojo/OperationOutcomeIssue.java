@@ -31,89 +31,61 @@ import com.google.gson.GsonBuilder;
 /**
 * "A collection of error, warning or information messages that result from a system action."
 */
-public class OperationOutcomeIssue  {
+public class OperationOutcomeIssue  extends BackboneElement  {
   /**
   * Description: "Indicates whether the issue indicates a variation from successful processing."
   */
-  private String severity;
+  protected String severity;
 
   /**
   * Description: "Extensions for severity"
   */
-  private transient Element _severity;
+  protected transient Element _severity;
 
   /**
   * Description: "Describes the type of the issue. The system that creates an OperationOutcome SHALL choose the most applicable code from the IssueType value set, and may additional provide its own code for the error in the details element."
   */
-  private String code;
+  protected String code;
 
   /**
   * Description: "Extensions for code"
   */
-  private transient Element _code;
+  protected transient Element _code;
 
   /**
   * Description: "Additional details about the error. This may be a text description of the error, or a system code that identifies the error."
   */
-  private CodeableConcept details;
+  protected CodeableConcept details;
 
   /**
   * Description: "Additional diagnostic information about the issue.  Typically, this may be a description of how a value is erroneous, or a stack dump to help trace the issue."
   */
-  private String diagnostics;
+  protected String diagnostics;
 
   /**
   * Description: "Extensions for diagnostics"
   */
-  private transient Element _diagnostics;
+  protected transient Element _diagnostics;
 
   /**
   * Description: "For resource issues, this will be a simple XPath limited to element names, repetition indicators and the default child access that identifies one of the elements in the resource that caused this issue to be raised.  For HTTP errors, will be \"http.\" + the parameter name."
   */
-  private java.util.List<String> location = new java.util.ArrayList<>();
+  protected java.util.List<String> location = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for location"
   */
-  private transient java.util.List<Element> _location = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _location = new java.util.ArrayList<>();
 
   /**
   * Description: "A simple FHIRPath limited to element names, repetition indicators and the default child access that identifies one of the elements in the resource that caused this issue to be raised."
   */
-  private java.util.List<String> expression = new java.util.ArrayList<>();
+  protected java.util.List<String> expression = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for expression"
   */
-  private transient java.util.List<Element> _expression = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _expression = new java.util.ArrayList<>();
 
   public OperationOutcomeIssue() {
   }
@@ -135,9 +107,6 @@ public class OperationOutcomeIssue  {
     }
     if (o.getExpression() != null) {
     	this.expression = org.fhir.utils.JsonUtils.json2Array(o.getExpression());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -207,30 +176,6 @@ public class OperationOutcomeIssue  {
   public java.util.List<Element> get_expression() {
     return this._expression;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -246,11 +191,7 @@ public class OperationOutcomeIssue  {
      if(this.location != null) builder.append("location" + "->" + this.location.toString() + "\n"); 
      if(this._location != null) builder.append("_location" + "->" + this._location.toString() + "\n"); 
      if(this.expression != null) builder.append("expression" + "->" + this.expression.toString() + "\n"); 
-     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); ;
     return builder.toString();
   }
 

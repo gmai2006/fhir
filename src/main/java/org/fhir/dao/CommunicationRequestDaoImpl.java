@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.CommunicationRequestModel;
 import org.fhir.pojo.CommunicationRequest;
 import org.fhir.pojo.CommunicationRequestHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class CommunicationRequestDaoImpl implements CommunicationRequestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,61 @@ public class CommunicationRequestDaoImpl implements CommunicationRequestDao {
       final EntityManager em = entityManagerProvider.get();
       final CommunicationRequestModel removed = em.find(CommunicationRequestModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<CommunicationRequest> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CommunicationRequestModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CommunicationRequest> findByRecipient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CommunicationRequestModel a, Reference b where a.recipient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CommunicationRequest> findByReplaces(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CommunicationRequestModel a, Reference b where a.replaces_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CommunicationRequest> findByRequester(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CommunicationRequestModel a, CommunicationRequestRequester b where a.requester_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CommunicationRequest> findBySender(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CommunicationRequestModel a, Reference b where a.sender_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CommunicationRequest> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CommunicationRequestModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<CommunicationRequest> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CommunicationRequestModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<CommunicationRequest> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, CommunicationRequestModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<CommunicationRequestModel> models = query.getResultList();
+    return CommunicationRequestHelper.fromArray2Array(models);
   }
 }

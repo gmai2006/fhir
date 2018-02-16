@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.TestScript;
 
 public interface TestScriptService {
@@ -35,4 +37,7 @@ public interface TestScriptService {
   public TestScript create(TestScript bean);
   public TestScript update(TestScript bean);
   public void delete(TestScript bean);
+  public List<TestScript> findByField(QueryBuilder queryBuilder);
+
+
 }

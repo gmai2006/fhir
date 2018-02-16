@@ -31,93 +31,65 @@ import com.google.gson.GsonBuilder;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
-public class CapabilityStatementEvent  {
+public class CapabilityStatementEvent  extends BackboneElement  {
   /**
   * Description: "A coded identifier of a supported messaging event."
   */
   @javax.validation.constraints.NotNull
-  private Coding code;
+  protected Coding code;
 
   /**
   * Description: "The impact of the content of the message."
   */
-  private String category;
+  protected String category;
 
   /**
   * Description: "Extensions for category"
   */
-  private transient Element _category;
+  protected transient Element _category;
 
   /**
   * Description: "The mode of this event declaration - whether an application is a sender or receiver."
   */
-  private String mode;
+  protected String mode;
 
   /**
   * Description: "Extensions for mode"
   */
-  private transient Element _mode;
+  protected transient Element _mode;
 
   /**
   * Description: "A resource associated with the event.  This is the resource that defines the event."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String focus;
+  protected String focus;
 
   /**
   * Description: "Extensions for focus"
   */
-  private transient Element _focus;
+  protected transient Element _focus;
 
   /**
   * Description: "Information about the request for this event."
   */
   @javax.validation.constraints.NotNull
-  private Reference request;
+  protected Reference request;
 
   /**
   * Description: "Information about the response for this event."
   */
   @javax.validation.constraints.NotNull
-  private Reference response;
+  protected Reference response;
 
   /**
   * Description: "Guidance on how this event is handled, such as internal system trigger points, business rules, etc."
   */
-  private String documentation;
+  protected String documentation;
 
   /**
   * Description: "Extensions for documentation"
   */
-  private transient Element _documentation;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _documentation;
 
   public CapabilityStatementEvent() {
   }
@@ -142,9 +114,6 @@ public class CapabilityStatementEvent  {
     }
     if (null != o.getDocumentation()) {
       this.documentation = o.getDocumentation();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -214,30 +183,6 @@ public class CapabilityStatementEvent  {
   public Element get_documentation() {
     return this._documentation;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -253,11 +198,7 @@ public class CapabilityStatementEvent  {
      if(this.request != null) builder.append("request" + "->" + this.request.toString() + "\n"); 
      if(this.response != null) builder.append("response" + "->" + this.response.toString() + "\n"); 
      if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
-     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); ;
     return builder.toString();
   }
 

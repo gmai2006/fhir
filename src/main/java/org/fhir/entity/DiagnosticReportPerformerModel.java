@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports."
 */
 @Entity
 @Table(name="diagnosticreportperformer")
 public class DiagnosticReportPerformerModel  implements Serializable {
-	private static final long serialVersionUID = 151857669718582524L;
+	private static final long serialVersionUID = 151873631198583618L;
   /**
   * Description: "Describes the type of participation (e.g.  a responsible party, author, or verifier)."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class DiagnosticReportPerformerModel  implements Serializable {
   public DiagnosticReportPerformerModel(DiagnosticReportPerformer o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.role = JsonUtils.toJson(o.getRole());
     if (null != o.getActor() ) {
     	this.actor_id = "actor" + this.parent_id;
     	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);

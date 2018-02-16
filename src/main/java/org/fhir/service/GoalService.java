@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Goal;
 
 public interface GoalService {
@@ -35,4 +37,8 @@ public interface GoalService {
   public Goal create(Goal bean);
   public Goal update(Goal bean);
   public void delete(Goal bean);
+  public List<Goal> findByField(QueryBuilder queryBuilder);
+  public List<Goal> findBySubject(QueryBuilder queryBuilder);
+
+
 }

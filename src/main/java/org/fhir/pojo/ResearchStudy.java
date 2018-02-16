@@ -31,203 +31,127 @@ import com.google.gson.GsonBuilder;
 /**
 * "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects."
 */
-public class ResearchStudy  {
+public class ResearchStudy  extends DomainResource  {
   /**
   * Description: "This is a ResearchStudy resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "Identifiers assigned to this research study by the sponsor or other systems."
   */
-  private java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
 
   /**
   * Description: "A short, descriptive user-friendly label for the study."
   */
-  private String title;
+  protected String title;
 
   /**
   * Description: "Extensions for title"
   */
-  private transient Element _title;
+  protected transient Element _title;
 
   /**
   * Description: "The set of steps expected to be performed as part of the execution of the study."
   */
-  private java.util.List<Reference> protocol = new java.util.ArrayList<>();
+  protected java.util.List<Reference> protocol = new java.util.ArrayList<>();
 
   /**
   * Description: "A larger research study of which this particular study is a component or step."
   */
-  private java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
 
   /**
   * Description: "The current state of the study."
   */
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "Codes categorizing the type of study such as investigational vs. observational, type of blinding, type of randomization, safety vs. efficacy, etc."
   */
-  private java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
 
   /**
   * Description: "The condition(s), medication(s), food(s), therapy(ies), device(s) or other concerns or interventions that the study is seeking to gain more information about."
   */
-  private java.util.List<CodeableConcept> focus = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> focus = new java.util.ArrayList<>();
 
   /**
   * Description: "Contact details to assist a user in learning more about or engaging with the study."
   */
-  private java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
 
   /**
   * Description: "Citations, references and other related documents."
   */
-  private java.util.List<RelatedArtifact> relatedArtifact = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> relatedArtifact = new java.util.ArrayList<>();
 
   /**
   * Description: "Key terms to aid in searching for or filtering the study."
   */
-  private java.util.List<CodeableConcept> keyword = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> keyword = new java.util.ArrayList<>();
 
   /**
   * Description: "Indicates a country, state or other region where the study is taking place."
   */
-  private java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
 
   /**
   * Description: "A full description of how the study is being conducted."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "Reference to a Group that defines the criteria for and quantity of subjects participating in the study.  E.g. \" 200 female Europeans between the ages of 20 and 45 with early onset diabetes\"."
   */
-  private java.util.List<Reference> enrollment = new java.util.ArrayList<>();
+  protected java.util.List<Reference> enrollment = new java.util.ArrayList<>();
 
   /**
   * Description: "Identifies the start date and the expected (or actual, depending on status) end date for the study."
   */
-  private Period period;
+  protected Period period;
 
   /**
   * Description: "The organization responsible for the execution of the study."
   */
-  private Reference sponsor;
+  protected Reference sponsor;
 
   /**
   * Description: "Indicates the individual who has primary oversite of the execution of the study."
   */
-  private Reference principalInvestigator;
+  protected Reference principalInvestigator;
 
   /**
   * Description: "Clinic, hospital or other healthcare location that is participating in the study."
   */
-  private java.util.List<Reference> site = new java.util.ArrayList<>();
+  protected java.util.List<Reference> site = new java.util.ArrayList<>();
 
   /**
   * Description: "A description and/or code explaining the premature termination of the study."
   */
-  private CodeableConcept reasonStopped;
+  protected CodeableConcept reasonStopped;
 
   /**
   * Description: "Comments made about the event by the performer, subject or other participants."
   */
-  private java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
 
   /**
   * Description: "Describes an expected sequence of events for one of the participants of a study.  E.g. Exposure to drug A, wash-out, exposure to drug B, wash-out, follow-up."
   */
-  private java.util.List<ResearchStudyArm> arm = new java.util.ArrayList<>();
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected java.util.List<ResearchStudyArm> arm = new java.util.ArrayList<>();
 
   public ResearchStudy() {
   }
@@ -274,21 +198,6 @@ public class ResearchStudy  {
     this.reasonStopped = CodeableConceptHelper.fromJson(o.getReasonStopped());
     if (null != o.getArm() && !o.getArm().isEmpty()) {
     	this.arm = ResearchStudyArmHelper.fromArray2Array(o.getArm());
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -436,72 +345,6 @@ public class ResearchStudy  {
   public java.util.List<ResearchStudyArm> getArm() {
     return this.arm;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -530,18 +373,7 @@ public class ResearchStudy  {
      if(this.site != null) builder.append("site" + "->" + this.site.toString() + "\n"); 
      if(this.reasonStopped != null) builder.append("reasonStopped" + "->" + this.reasonStopped.toString() + "\n"); 
      if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
-     if(this.arm != null) builder.append("arm" + "->" + this.arm.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.arm != null) builder.append("arm" + "->" + this.arm.toString() + "\n"); ;
     return builder.toString();
   }
 

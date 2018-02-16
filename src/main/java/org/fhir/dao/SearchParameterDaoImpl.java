@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.SearchParameterModel;
 import org.fhir.pojo.SearchParameter;
 import org.fhir.pojo.SearchParameterHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class SearchParameterDaoImpl implements SearchParameterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class SearchParameterDaoImpl implements SearchParameterDao {
       final EntityManager em = entityManagerProvider.get();
       final SearchParameterModel removed = em.find(SearchParameterModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<SearchParameter> findByComponent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SearchParameterModel a, SearchParameterComponent b where a.component_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<SearchParameter> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SearchParameterModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<SearchParameter> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, SearchParameterModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<SearchParameterModel> models = query.getResultList();
+    return SearchParameterHelper.fromArray2Array(models);
   }
 }

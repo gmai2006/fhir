@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Practitioner;
 
 public interface PractitionerService {
@@ -35,4 +37,7 @@ public interface PractitionerService {
   public Practitioner create(Practitioner bean);
   public Practitioner update(Practitioner bean);
   public void delete(Practitioner bean);
+  public List<Practitioner> findByField(QueryBuilder queryBuilder);
+
+
 }

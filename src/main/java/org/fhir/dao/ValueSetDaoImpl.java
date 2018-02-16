@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ValueSetModel;
 import org.fhir.pojo.ValueSet;
 import org.fhir.pojo.ValueSetHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ValueSetDaoImpl implements ValueSetDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class ValueSetDaoImpl implements ValueSetDao {
       final EntityManager em = entityManagerProvider.get();
       final ValueSetModel removed = em.find(ValueSetModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ValueSet> findByExpansion(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ValueSetModel a, ValueSetExpansion b where a.expansion_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ValueSet> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ValueSetModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ValueSet> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ValueSetModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ValueSetModel> models = query.getResultList();
+    return ValueSetHelper.fromArray2Array(models);
   }
 }

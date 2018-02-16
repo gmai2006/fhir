@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Media;
 /**
 * auto generated from SQL files
@@ -103,5 +104,37 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Media) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Media> findByField(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Media> findByContext(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Media> findByDevice(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByDevice(queryBuilder);
+    logger.info("findBydevice - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Media> findByOperator(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByOperator(queryBuilder);
+    logger.info("findByoperator - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Media> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

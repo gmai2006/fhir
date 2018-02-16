@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.PractitionerRoleModel;
 import org.fhir.pojo.PractitionerRole;
 import org.fhir.pojo.PractitionerRoleHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class PractitionerRoleDaoImpl implements PractitionerRoleDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,49 @@ public class PractitionerRoleDaoImpl implements PractitionerRoleDao {
       final EntityManager em = entityManagerProvider.get();
       final PractitionerRoleModel removed = em.find(PractitionerRoleModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<PractitionerRole> findByEndpoint(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.endpoint_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findByLocation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findByOrganization(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.organization_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findByPractitioner(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.practitioner_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<PractitionerRole> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<PractitionerRole> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, PractitionerRoleModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<PractitionerRoleModel> models = query.getResultList();
+    return PractitionerRoleHelper.fromArray2Array(models);
   }
 }

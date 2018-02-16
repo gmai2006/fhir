@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Group;
 
 public interface GroupDao {
@@ -38,4 +39,9 @@ public interface GroupDao {
 
   public Group update(Group e);
   public void delete(Group e);
+
+  public List<Group> findByField(QueryBuilder queryBuilder);
+
+  public List<Group> findByCharacteristic(QueryBuilder queryBuilder);
+  public List<Group> findByMember(QueryBuilder queryBuilder);
 }

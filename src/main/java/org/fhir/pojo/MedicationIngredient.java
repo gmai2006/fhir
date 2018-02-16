@@ -31,59 +31,31 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
 */
-public class MedicationIngredient  {
+public class MedicationIngredient  extends BackboneElement  {
   /**
   * Description: "The actual ingredient - either a substance (simple ingredient) or another medication."
   */
-  private CodeableConcept itemCodeableConcept;
+  protected CodeableConcept itemCodeableConcept;
 
   /**
   * Description: "The actual ingredient - either a substance (simple ingredient) or another medication."
   */
-  private Reference itemReference;
+  protected Reference itemReference;
 
   /**
   * Description: "Indication of whether this ingredient affects the therapeutic action of the drug."
   */
-  private Boolean isActive;
+  protected Boolean isActive;
 
   /**
   * Description: "Extensions for isActive"
   */
-  private transient Element _isActive;
+  protected transient Element _isActive;
 
   /**
   * Description: "Specifies how many (or how much) of the items there are in this Medication.  For example, 250 mg per tablet.  This is expressed as a ratio where the numerator is 250mg and the denominator is 1 tablet."
   */
-  private Ratio amount;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Ratio amount;
 
   public MedicationIngredient() {
   }
@@ -98,9 +70,6 @@ public class MedicationIngredient  {
       this.isActive = o.getIsActive();
     }
     this.amount = RatioHelper.fromJson(o.getAmount());
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
   }
 
   public void setItemCodeableConcept( CodeableConcept value) {
@@ -133,30 +102,6 @@ public class MedicationIngredient  {
   public Ratio getAmount() {
     return this.amount;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -166,11 +111,7 @@ public class MedicationIngredient  {
      if(this.itemReference != null) builder.append("itemReference" + "->" + this.itemReference.toString() + "\n"); 
      if(this.isActive != null) builder.append("isActive" + "->" + this.isActive.toString() + "\n"); 
      if(this._isActive != null) builder.append("_isActive" + "->" + this._isActive.toString() + "\n"); 
-     if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.amount != null) builder.append("amount" + "->" + this.amount.toString() + "\n"); ;
     return builder.toString();
   }
 

@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.TaskModel;
 import org.fhir.pojo.Task;
 import org.fhir.pojo.TaskHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class TaskDaoImpl implements TaskDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,49 @@ public class TaskDaoImpl implements TaskDao {
       final EntityManager em = entityManagerProvider.get();
       final TaskModel removed = em.find(TaskModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Task> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from TaskModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Task> findByFocus(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from TaskModel a, Reference b where a.focus_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Task> findByOwner(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from TaskModel a, Reference b where a.owner_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Task> findByRequester(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from TaskModel a, TaskRequester b where a.requester_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Task> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from TaskModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Task> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, TaskModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<TaskModel> models = query.getResultList();
+    return TaskHelper.fromArray2Array(models);
   }
 }

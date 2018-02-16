@@ -31,75 +31,56 @@ import com.google.gson.GsonBuilder;
 /**
 * "Related artifacts such as additional documentation, justification, or bibliographic references."
 */
-public class RelatedArtifact  {
+public class RelatedArtifact  extends Element  {
   /**
   * Description: "The type of relationship to the related artifact."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "A brief description of the document or knowledge resource being referenced, suitable for display to a consumer."
   */
-  private String display;
+  protected String display;
 
   /**
   * Description: "Extensions for display"
   */
-  private transient Element _display;
+  protected transient Element _display;
 
   /**
   * Description: "A bibliographic citation for the related artifact. This text SHOULD be formatted according to an accepted citation format."
   */
-  private String citation;
+  protected String citation;
 
   /**
   * Description: "Extensions for citation"
   */
-  private transient Element _citation;
+  protected transient Element _citation;
 
   /**
   * Description: "A url for the artifact that can be followed to access the actual content."
   */
-  private String url;
+  protected String url;
 
   /**
   * Description: "Extensions for url"
   */
-  private transient Element _url;
+  protected transient Element _url;
 
   /**
   * Description: "The document being referenced, represented as an attachment. This is exclusive with the resource element."
   */
-  private Attachment document;
+  protected Attachment document;
 
   /**
   * Description: "The related resource, such as a library, value set, profile, or other knowledge resource."
   */
-  private Reference resource;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Reference resource;
 
   public RelatedArtifact() {
   }
@@ -121,9 +102,6 @@ public class RelatedArtifact  {
     this.document = AttachmentHelper.fromJson(o.getDocument());
     if (null != o.getResource() && !o.getResource().isEmpty()) {
       this.resource = new Reference(o.getResource().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -187,24 +165,6 @@ public class RelatedArtifact  {
   public Reference getResource() {
     return this.resource;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -219,10 +179,7 @@ public class RelatedArtifact  {
      if(this.url != null) builder.append("url" + "->" + this.url.toString() + "\n"); 
      if(this._url != null) builder.append("_url" + "->" + this._url.toString() + "\n"); 
      if(this.document != null) builder.append("document" + "->" + this.document.toString() + "\n"); 
-     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); ;
     return builder.toString();
   }
 

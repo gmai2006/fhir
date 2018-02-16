@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImmunizationRecommendation;
 
 public interface ImmunizationRecommendationDao {
@@ -38,4 +39,8 @@ public interface ImmunizationRecommendationDao {
 
   public ImmunizationRecommendation update(ImmunizationRecommendation e);
   public void delete(ImmunizationRecommendation e);
+
+  public List<ImmunizationRecommendation> findByField(QueryBuilder queryBuilder);
+
+  public List<ImmunizationRecommendation> findByPatient(QueryBuilder queryBuilder);
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
 */
 @Entity
 @Table(name="conceptmapdependson")
 public class ConceptMapDependsOnModel  implements Serializable {
-	private static final long serialVersionUID = 151857669658142087L;
+	private static final long serialVersionUID = 151873631126777289L;
   /**
   * Description: "A reference to an element that holds a coded value that corresponds to a code system property. The idea is that the information model carries an element somwhere that is labeled to correspond with a code system property."
   */

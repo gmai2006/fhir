@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ResearchStudy;
 /**
 * auto generated from SQL files
@@ -103,5 +104,31 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(ResearchStudy) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<ResearchStudy> findByField(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<ResearchStudy> findByProtocol(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByProtocol(queryBuilder);
+    logger.info("findByprotocol - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findBySite(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findBySite(queryBuilder);
+    logger.info("findBysite - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findBySponsor(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findBySponsor(queryBuilder);
+    logger.info("findBysponsor - exited - return value={} result ");
+    return result;
   }
 }

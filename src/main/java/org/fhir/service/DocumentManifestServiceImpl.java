@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DocumentManifest;
 /**
 * auto generated from SQL files
@@ -103,5 +104,31 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(DocumentManifest) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<DocumentManifest> findByField(QueryBuilder queryBuilder) {
+  	final List<DocumentManifest> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<DocumentManifest> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<DocumentManifest> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentManifest> findByRecipient(QueryBuilder queryBuilder) {
+  	final List<DocumentManifest> result = dao.findByRecipient(queryBuilder);
+    logger.info("findByrecipient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentManifest> findBySubject(QueryBuilder queryBuilder) {
+  	final List<DocumentManifest> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

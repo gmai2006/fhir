@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The Measure resource provides the definition of a quality measure."
 */
 @Entity
 @Table(name="measuresupplementaldata")
 public class MeasureSupplementalDataModel  implements Serializable {
-	private static final long serialVersionUID = 151857669706755229L;
+	private static final long serialVersionUID = 15187363118528588L;
   /**
   * Description: "An identifier for the supplemental data."
   * Actual type: String;
@@ -115,7 +116,7 @@ public class MeasureSupplementalDataModel  implements Serializable {
   public MeasureSupplementalDataModel(MeasureSupplementalData o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.criteria = o.getCriteria();
     this.path = o.getPath();
   }

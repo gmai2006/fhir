@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This is the base resource type for everything."
 */
 @Entity
 @Table(name="resource")
 public class ResourceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669698550662L;
+	private static final long serialVersionUID = 151873631177613205L;
   /**
   * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
   */
@@ -72,16 +73,6 @@ public class ResourceModel  implements Serializable {
   @javax.persistence.Basic
   @Column(name="\"language\"")
   private String language;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  * Actual type: List<String>;
-  * Store this type as a string in db
-  */
-  @javax.persistence.Basic
-  @Column(name="\"extension\"", length = 16777215)
-  private String extension;
 
   public ResourceModel() {
   }
@@ -120,12 +111,6 @@ public class ResourceModel  implements Serializable {
   public void setLanguage( String value) {
     this.language = value;
   }
-  public String getExtension() {
-    return this.extension;
-  }
-  public void setExtension( String value) {
-    this.extension = value;
-  }
 
   @Override
   public String toString() {
@@ -133,8 +118,7 @@ public class ResourceModel  implements Serializable {
     builder.append("[ResourceModel]:" + "\n");
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
-     builder.append("language" + "->" + this.language + "\n"); 
-     builder.append("extension" + "->" + this.extension + "\n"); ;
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 
@@ -144,8 +128,7 @@ public class ResourceModel  implements Serializable {
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
-     builder.append("language" + "->" + this.language + "\n"); 
-     builder.append("extension" + "->" + this.extension + "\n"); ;
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

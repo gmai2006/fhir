@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ValueSet;
 
 public interface ValueSetService {
@@ -35,4 +37,8 @@ public interface ValueSetService {
   public ValueSet create(ValueSet bean);
   public ValueSet update(ValueSet bean);
   public void delete(ValueSet bean);
+  public List<ValueSet> findByField(QueryBuilder queryBuilder);
+  public List<ValueSet> findByExpansion(QueryBuilder queryBuilder);
+
+
 }

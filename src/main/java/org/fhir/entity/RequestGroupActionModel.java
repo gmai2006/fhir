@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
 */
 @Entity
 @Table(name="requestgroupaction")
 public class RequestGroupActionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669676219120L;
+	private static final long serialVersionUID = 151873631152869176L;
   /**
   * Description: "A user-visible label for the action."
   */
@@ -296,15 +297,15 @@ public class RequestGroupActionModel  implements Serializable {
     	this.relatedAction = RequestGroupRelatedActionHelper.toModelFromArray(o.getRelatedAction(), this.relatedaction_id);
     }
     this.timingDateTime = o.getTimingDateTime();
-    this.timingPeriod = PeriodHelper.toJson(o.getTimingPeriod());
-    this.timingDuration = DurationHelper.toJson(o.getTimingDuration());
-    this.timingRange = RangeHelper.toJson(o.getTimingRange());
-    this.timingTiming = TimingHelper.toJson(o.getTimingTiming());
+    this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
+    this.timingDuration = JsonUtils.toJson(o.getTimingDuration());
+    this.timingRange = JsonUtils.toJson(o.getTimingRange());
+    this.timingTiming = JsonUtils.toJson(o.getTimingTiming());
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
     	this.participant_id = "participant" + this.parent_id;
     	this.participant = ReferenceHelper.toModelFromArray(o.getParticipant(), this.participant_id);
     }
-    this.type = CodingHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.groupingBehavior = o.getGroupingBehavior();
     this.selectionBehavior = o.getSelectionBehavior();
     this.requiredBehavior = o.getRequiredBehavior();

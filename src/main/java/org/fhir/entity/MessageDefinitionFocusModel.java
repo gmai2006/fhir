@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted."
 */
 @Entity
 @Table(name="messagedefinitionfocus")
 public class MessageDefinitionFocusModel  implements Serializable {
-	private static final long serialVersionUID = 151857669705872995L;
+	private static final long serialVersionUID = 151873631184231617L;
   /**
   * Description: "The kind of resource that must be the focus for this message."
   */

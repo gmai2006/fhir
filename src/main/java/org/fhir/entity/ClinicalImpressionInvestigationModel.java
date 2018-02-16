@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called \"ClinicalImpression\" rather than \"ClinicalAssessment\" to avoid confusion with the recording of assessment tools such as Apgar score."
 */
 @Entity
 @Table(name="clinicalimpressioninvestigation")
 public class ClinicalImpressionInvestigationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669697035571L;
+	private static final long serialVersionUID = 151873631176699649L;
   /**
   * Description: "A name/code for the group (\"set\") of investigations. Typically, this will be something like \"signs\", \"symptoms\", \"clinical\", \"diagnostic\", but the list is not constrained, and others such groups such as (exposure|family|travel|nutitirional) history may be used."
   * Actual type: String;
@@ -104,7 +105,7 @@ public class ClinicalImpressionInvestigationModel  implements Serializable {
   public ClinicalImpressionInvestigationModel(ClinicalImpressionInvestigation o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item_id = "item" + this.parent_id;
     	this.item = ReferenceHelper.toModelFromArray(o.getItem(), this.item_id);

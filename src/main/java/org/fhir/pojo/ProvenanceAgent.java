@@ -31,74 +31,46 @@ import com.google.gson.GsonBuilder;
 /**
 * "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies."
 */
-public class ProvenanceAgent  {
+public class ProvenanceAgent  extends BackboneElement  {
   /**
   * Description: "The function of the agent with respect to the activity. The security role enabling the agent with respect to the activity."
   */
-  private java.util.List<CodeableConcept> role = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> role = new java.util.ArrayList<>();
 
   /**
   * Description: "The individual, device or organization that participated in the event."
   */
-  private String whoUri;
+  protected String whoUri;
 
   /**
   * Description: "Extensions for whoUri"
   */
-  private transient Element _whoUri;
+  protected transient Element _whoUri;
 
   /**
   * Description: "The individual, device or organization that participated in the event."
   */
-  private Reference whoReference;
+  protected Reference whoReference;
 
   /**
   * Description: "The individual, device, or organization for whom the change was made."
   */
-  private String onBehalfOfUri;
+  protected String onBehalfOfUri;
 
   /**
   * Description: "Extensions for onBehalfOfUri"
   */
-  private transient Element _onBehalfOfUri;
+  protected transient Element _onBehalfOfUri;
 
   /**
   * Description: "The individual, device, or organization for whom the change was made."
   */
-  private Reference onBehalfOfReference;
+  protected Reference onBehalfOfReference;
 
   /**
   * Description: "The type of relationship between agents."
   */
-  private CodeableConcept relatedAgentType;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected CodeableConcept relatedAgentType;
 
   public ProvenanceAgent() {
   }
@@ -118,9 +90,6 @@ public class ProvenanceAgent  {
       this.onBehalfOfReference = new Reference(o.getOnBehalfOfReference().get(0));
     }
     this.relatedAgentType = CodeableConceptHelper.fromJson(o.getRelatedAgentType());
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
   }
 
   public void setRole( java.util.List<CodeableConcept> value) {
@@ -171,30 +140,6 @@ public class ProvenanceAgent  {
   public CodeableConcept getRelatedAgentType() {
     return this.relatedAgentType;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -207,11 +152,7 @@ public class ProvenanceAgent  {
      if(this.onBehalfOfUri != null) builder.append("onBehalfOfUri" + "->" + this.onBehalfOfUri.toString() + "\n"); 
      if(this._onBehalfOfUri != null) builder.append("_onBehalfOfUri" + "->" + this._onBehalfOfUri.toString() + "\n"); 
      if(this.onBehalfOfReference != null) builder.append("onBehalfOfReference" + "->" + this.onBehalfOfReference.toString() + "\n"); 
-     if(this.relatedAgentType != null) builder.append("relatedAgentType" + "->" + this.relatedAgentType.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.relatedAgentType != null) builder.append("relatedAgentType" + "->" + this.relatedAgentType.toString() + "\n"); ;
     return builder.toString();
   }
 

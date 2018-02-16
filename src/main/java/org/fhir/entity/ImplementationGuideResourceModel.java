@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts."
 */
 @Entity
 @Table(name="implementationguideresource")
 public class ImplementationGuideResourceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669704619394L;
+	private static final long serialVersionUID = 151873631183128393L;
   /**
   * Description: "Whether a resource is included in the guide as part of the rules defined by the guide, or just as an example of a resource that conforms to the rules and/or help implementers understand the intent of the guide."
   */

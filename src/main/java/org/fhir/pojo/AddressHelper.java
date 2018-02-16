@@ -24,27 +24,33 @@
  * then submit the template through our web interface.  
  */
 package org.fhir.pojo;
+import org.fhir.entity.AddressModel;
 import com.google.gson.GsonBuilder;
 
 public class AddressHelper {
+	public static java.util.List<Address> fromArray2Array(java.util.List<AddressModel> list) {
+    return
+    		list.stream()
+    		.map(x -> new Address(x))
+    		.collect(java.util.stream.Collectors.toList());
+  }
 
+  public static Address fromArray2Object(java.util.List<AddressModel> list) {
+    return new Address(list.get(0));
+  }
+
+  public static java.util.List<AddressModel> toModel(Address reference, String parentId) {
+  	AddressModel model = new AddressModel(reference, parentId);
+  	return java.util.Arrays.asList(new AddressModel[] { model });
+  }
+
+  public static java.util.List<AddressModel> toModelFromArray(java.util.List<Address> list, String parentId) {
+    return (java.util.List<AddressModel>)list.stream()
+    	.map(x -> new AddressModel(x, parentId))
+      .collect(java.util.stream.Collectors.toList());
+  }
   public static Address fromJson(String json) {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, Address.class);
-  }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(Address o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<Address> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
   }
 }

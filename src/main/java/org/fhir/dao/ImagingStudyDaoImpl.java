@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ImagingStudyModel;
 import org.fhir.pojo.ImagingStudy;
 import org.fhir.pojo.ImagingStudyHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ImagingStudyDaoImpl implements ImagingStudyDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class ImagingStudyDaoImpl implements ImagingStudyDao {
       final EntityManager em = entityManagerProvider.get();
       final ImagingStudyModel removed = em.find(ImagingStudyModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ImagingStudy> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImagingStudyModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ImagingStudy> findByEndpoint(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImagingStudyModel a, Reference b where a.endpoint_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ImagingStudy> findBySeries(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImagingStudyModel a, ImagingStudySeries b where a.series_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ImagingStudy> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImagingStudyModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ImagingStudy> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ImagingStudyModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ImagingStudyModel> models = query.getResultList();
+    return ImagingStudyHelper.fromArray2Array(models);
   }
 }

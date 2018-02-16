@@ -25,84 +25,86 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.QuantityModel;
 import com.google.gson.GsonBuilder;
 
 /**
 * "A measured amount (or an amount that can potentially be measured). Note that measured amounts include amounts that are not precisely quantified, including amounts involving arbitrary units and floating currencies."
 */
-public class Quantity  {
+public class Quantity  extends Element  {
   /**
   * Description: "The value of the measured amount. The value includes an implicit precision in the presentation of the value."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float value;
+  protected Float value;
 
   /**
   * Description: "Extensions for value"
   */
-  private transient Element _value;
+  protected transient Element _value;
 
   /**
   * Description: "How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues; e.g. if the comparator is \"<\" , then the real value is < stated value."
   */
-  private String comparator;
+  protected String comparator;
 
   /**
   * Description: "Extensions for comparator"
   */
-  private transient Element _comparator;
+  protected transient Element _comparator;
 
   /**
   * Description: "A human-readable form of the unit."
   */
-  private String unit;
+  protected String unit;
 
   /**
   * Description: "Extensions for unit"
   */
-  private transient Element _unit;
+  protected transient Element _unit;
 
   /**
   * Description: "The identification of the system that provides the coded form of the unit."
   */
-  private String system;
+  protected String system;
 
   /**
   * Description: "Extensions for system"
   */
-  private transient Element _system;
+  protected transient Element _system;
 
   /**
   * Description: "A computer processable form of the unit in some unit representation system."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String code;
+  protected String code;
 
   /**
   * Description: "Extensions for code"
   */
-  private transient Element _code;
+  protected transient Element _code;
 
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
+  public Quantity() {
+  }
 
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  public Quantity() {}
+  public Quantity(QuantityModel o) {
+    this.id = o.getId();
+    if (null != o.getValue()) {
+      this.value = o.getValue();
+    }
+    if (null != o.getComparator()) {
+      this.comparator = o.getComparator();
+    }
+    if (null != o.getUnit()) {
+      this.unit = o.getUnit();
+    }
+    if (null != o.getSystem()) {
+      this.system = o.getSystem();
+    }
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+  }
 
   public void setValue( Float value) {
     this.value = value;
@@ -164,24 +166,6 @@ public class Quantity  {
   public Element get_code() {
     return this._code;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -196,10 +180,7 @@ public class Quantity  {
      if(this.system != null) builder.append("system" + "->" + this.system.toString() + "\n"); 
      if(this._system != null) builder.append("_system" + "->" + this._system.toString() + "\n"); 
      if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
-     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); ;
     return builder.toString();
   }
 
@@ -220,4 +201,5 @@ public class Quantity  {
   		}
   	}
   }
+
 }

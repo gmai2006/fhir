@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Details and position information for a physical place where services are provided  and resources and participants may be stored, found, contained or accommodated."
 */
 @Entity
 @Table(name="location")
 public class LocationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669658775214L;
+	private static final long serialVersionUID = 151873631127466309L;
   /**
   * Description: "This is a Location resource"
   */
@@ -119,12 +120,14 @@ public class LocationModel  implements Serializable {
 
   /**
   * Description: "Physical location."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"address\"", length = 16777215)
-  private String address;
+  @Column(name="\"address_id\"")
+  private String address_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> address;
 
   /**
   * Description: "Physical form of the location, e.g. building, room, vehicle, road."
@@ -271,14 +274,17 @@ public class LocationModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.operationalStatus = CodingHelper.toJson(o.getOperationalStatus());
+    this.operationalStatus = JsonUtils.toJson(o.getOperationalStatus());
     this.name = o.getName();
     this.alias = org.fhir.utils.JsonUtils.write2String(o.getAlias());
     this.description = o.getDescription();
     this.mode = o.getMode();
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.address = AddressHelper.toJson(o.getAddress());
-    this.physicalType = CodeableConceptHelper.toJson(o.getPhysicalType());
+    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getAddress() ) {
+    	this.address_id = "address" + this.id;
+    	this.address = AddressHelper.toModel(o.getAddress(), this.address_id);
+    }
+    this.physicalType = JsonUtils.toJson(o.getPhysicalType());
     if (null != o.getPosition() ) {
     	this.position_id = "position" + this.id;
     	this.position = LocationPositionHelper.toModel(o.getPosition(), this.position_id);
@@ -367,10 +373,10 @@ public class LocationModel  implements Serializable {
   public void setTelecom( String value) {
     this.telecom = value;
   }
-  public String getAddress() {
+  public java.util.List<AddressModel> getAddress() {
     return this.address;
   }
-  public void setAddress( String value) {
+  public void setAddress( java.util.List<AddressModel> value) {
     this.address = value;
   }
   public String getPhysicalType() {
@@ -466,7 +472,6 @@ public class LocationModel  implements Serializable {
      builder.append("mode" + "->" + this.mode + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("physicalType" + "->" + this.physicalType + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

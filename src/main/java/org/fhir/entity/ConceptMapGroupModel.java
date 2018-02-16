@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
 */
 @Entity
 @Table(name="conceptmapgroup")
 public class ConceptMapGroupModel  implements Serializable {
-	private static final long serialVersionUID = 15185766971345457L;
+	private static final long serialVersionUID = 151873631192874666L;
   /**
   * Description: "An absolute URI that identifies the Code System (if the source is a value set that crosses more than one code system)."
   */

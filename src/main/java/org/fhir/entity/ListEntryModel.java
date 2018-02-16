@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A set of information summarized from a list of other resources."
 */
 @Entity
 @Table(name="listentry")
 public class ListEntryModel  implements Serializable {
-	private static final long serialVersionUID = 151857669699136298L;
+	private static final long serialVersionUID = 151873631177953174L;
   /**
   * Description: "The flag allows the system constructing the list to indicate the role and significance of the item in the list."
   * Actual type: String;
@@ -118,7 +119,7 @@ public class ListEntryModel  implements Serializable {
   public ListEntryModel(ListEntry o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.flag = CodeableConceptHelper.toJson(o.getFlag());
+    this.flag = JsonUtils.toJson(o.getFlag());
     this.deleted = o.getDeleted();
     this.date = o.getDate();
     if (null != o.getItem() ) {

@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.NamingSystemModel;
 import org.fhir.pojo.NamingSystem;
 import org.fhir.pojo.NamingSystemHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class NamingSystemDaoImpl implements NamingSystemDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class NamingSystemDaoImpl implements NamingSystemDao {
       final EntityManager em = entityManagerProvider.get();
       final NamingSystemModel removed = em.find(NamingSystemModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<NamingSystem> findByContact(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from NamingSystemModel a, ContactDetail b where a.contact_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<NamingSystem> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from NamingSystemModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<NamingSystem> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, NamingSystemModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<NamingSystemModel> models = query.getResultList();
+    return NamingSystemHelper.fromArray2Array(models);
   }
 }

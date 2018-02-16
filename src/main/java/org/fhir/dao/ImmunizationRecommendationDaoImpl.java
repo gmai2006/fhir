@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ImmunizationRecommendationModel;
 import org.fhir.pojo.ImmunizationRecommendation;
 import org.fhir.pojo.ImmunizationRecommendationHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ImmunizationRecommendationDaoImpl implements ImmunizationRecommendationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class ImmunizationRecommendationDaoImpl implements ImmunizationRecommenda
       final EntityManager em = entityManagerProvider.get();
       final ImmunizationRecommendationModel removed = em.find(ImmunizationRecommendationModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ImmunizationRecommendation> findByPatient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImmunizationRecommendationModel a, Reference b where a.patient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ImmunizationRecommendation> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImmunizationRecommendationModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ImmunizationRecommendation> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ImmunizationRecommendationModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ImmunizationRecommendationModel> models = query.getResultList();
+    return ImmunizationRecommendationHelper.fromArray2Array(models);
   }
 }

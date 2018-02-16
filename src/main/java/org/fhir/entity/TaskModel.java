@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A task to be performed."
 */
 @Entity
 @Table(name="task")
 public class TaskModel  implements Serializable {
-	private static final long serialVersionUID = 151857669704154897L;
+	private static final long serialVersionUID = 151873631182663991L;
   /**
   * Description: "This is a Task resource"
   */
@@ -410,17 +411,17 @@ public class TaskModel  implements Serializable {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
     }
-    this.groupIdentifier = IdentifierHelper.toJson(o.getGroupIdentifier());
+    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
     if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
     	this.partof_id = "partof" + this.id;
     	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
     }
     this.status = o.getStatus();
-    this.statusReason = CodeableConceptHelper.toJson(o.getStatusReason());
-    this.businessStatus = CodeableConceptHelper.toJson(o.getBusinessStatus());
+    this.statusReason = JsonUtils.toJson(o.getStatusReason());
+    this.businessStatus = JsonUtils.toJson(o.getBusinessStatus());
     this.intent = o.getIntent();
     this.priority = o.getPriority();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     this.description = o.getDescription();
     if (null != o.getFocus() ) {
     	this.focus_id = "focus" + this.id;
@@ -434,7 +435,7 @@ public class TaskModel  implements Serializable {
     	this.context_id = "context" + this.id;
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
-    this.executionPeriod = PeriodHelper.toJson(o.getExecutionPeriod());
+    this.executionPeriod = JsonUtils.toJson(o.getExecutionPeriod());
     this.authoredOn = o.getAuthoredOn();
     this.lastModified = o.getLastModified();
     if (null != o.getRequester() ) {
@@ -445,7 +446,7 @@ public class TaskModel  implements Serializable {
     	this.owner_id = "owner" + this.id;
     	this.owner = ReferenceHelper.toModel(o.getOwner(), this.owner_id);
     }
-    this.reason = CodeableConceptHelper.toJson(o.getReason());
+    this.reason = JsonUtils.toJson(o.getReason());
     if (null != o.getRelevantHistory() && !o.getRelevantHistory().isEmpty()) {
     	this.relevanthistory_id = "relevanthistory" + this.id;
     	this.relevantHistory = ReferenceHelper.toModelFromArray(o.getRelevantHistory(), this.relevanthistory_id);

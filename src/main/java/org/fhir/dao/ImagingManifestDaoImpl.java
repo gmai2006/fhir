@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ImagingManifestModel;
 import org.fhir.pojo.ImagingManifest;
 import org.fhir.pojo.ImagingManifestHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ImagingManifestDaoImpl implements ImagingManifestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class ImagingManifestDaoImpl implements ImagingManifestDao {
       final EntityManager em = entityManagerProvider.get();
       final ImagingManifestModel removed = em.find(ImagingManifestModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ImagingManifest> findByAuthor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImagingManifestModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ImagingManifest> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImagingManifestModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ImagingManifest> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ImagingManifestModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ImagingManifestModel> models = query.getResultList();
+    return ImagingManifestHelper.fromArray2Array(models);
   }
 }

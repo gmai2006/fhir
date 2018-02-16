@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Binary;
 
 public interface BinaryService {
@@ -35,4 +37,7 @@ public interface BinaryService {
   public Binary create(Binary bean);
   public Binary update(Binary bean);
   public void delete(Binary bean);
+  public List<Binary> findByField(QueryBuilder queryBuilder);
+
+
 }

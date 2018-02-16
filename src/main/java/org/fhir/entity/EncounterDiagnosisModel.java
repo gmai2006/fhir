@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
 @Entity
 @Table(name="encounterdiagnosis")
 public class EncounterDiagnosisModel  implements Serializable {
-	private static final long serialVersionUID = 151857669705412284L;
+	private static final long serialVersionUID = 151873631183715655L;
   /**
   * Description: "Reason the encounter takes place, as specified using information from another resource. For admissions, this is the admission diagnosis. The indication will typically be a Condition (with other resources referenced in the evidence.detail), or a Procedure."
   */
@@ -115,7 +116,7 @@ public class EncounterDiagnosisModel  implements Serializable {
     	this.condition_id = "condition" + this.parent_id;
     	this.condition = ReferenceHelper.toModel(o.getCondition(), this.condition_id);
     }
-    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.role = JsonUtils.toJson(o.getRole());
     this.rank = o.getRank();
   }
 

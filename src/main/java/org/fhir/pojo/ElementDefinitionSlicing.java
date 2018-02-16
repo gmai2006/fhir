@@ -30,69 +30,41 @@ import com.google.gson.GsonBuilder;
 /**
 * "Captures constraints on each element within the resource, profile, or extension."
 */
-public class ElementDefinitionSlicing  {
+public class ElementDefinitionSlicing  extends BackboneElement  {
   /**
   * Description: "Designates which child elements are used to discriminate between the slices when processing an instance. If one or more discriminators are provided, the value of the child elements in the instance data SHALL completely distinguish which slice the element in the resource matches based on the allowed values for those elements in each of the slices."
   */
-  private java.util.List<ElementDefinitionDiscriminator> discriminator = new java.util.ArrayList<>();
+  protected java.util.List<ElementDefinitionDiscriminator> discriminator = new java.util.ArrayList<>();
 
   /**
   * Description: "A human-readable text description of how the slicing works. If there is no discriminator, this is required to be present to provide whatever information is possible about how the slices can be differentiated."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "If the matching elements have to occur in the same order as defined in the profile."
   */
-  private Boolean ordered;
+  protected Boolean ordered;
 
   /**
   * Description: "Extensions for ordered"
   */
-  private transient Element _ordered;
+  protected transient Element _ordered;
 
   /**
   * Description: "Whether additional slices are allowed or not. When the slices are ordered, profile authors can also say that additional slices are only allowed at the end."
   */
-  private String rules;
+  protected String rules;
 
   /**
   * Description: "Extensions for rules"
   */
-  private transient Element _rules;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _rules;
 
   public ElementDefinitionSlicing() {}
 
@@ -138,30 +110,6 @@ public class ElementDefinitionSlicing  {
   public Element get_rules() {
     return this._rules;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -173,11 +121,7 @@ public class ElementDefinitionSlicing  {
      if(this.ordered != null) builder.append("ordered" + "->" + this.ordered.toString() + "\n"); 
      if(this._ordered != null) builder.append("_ordered" + "->" + this._ordered.toString() + "\n"); 
      if(this.rules != null) builder.append("rules" + "->" + this.rules.toString() + "\n"); 
-     if(this._rules != null) builder.append("_rules" + "->" + this._rules.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._rules != null) builder.append("_rules" + "->" + this._rules.toString() + "\n"); ;
     return builder.toString();
   }
 

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A contributor to the content of a knowledge asset, including authors, editors, reviewers, and endorsers."
 */
 @Entity
 @Table(name="contributor")
 public class ContributorModel  implements Serializable {
-	private static final long serialVersionUID = 151857669687628705L;
+	private static final long serialVersionUID = 151873631166730950L;
   /**
   * Description: "The type of contributor."
   */

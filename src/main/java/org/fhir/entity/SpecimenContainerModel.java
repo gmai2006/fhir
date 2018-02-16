@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A sample to be used for analysis."
 */
 @Entity
 @Table(name="specimencontainer")
 public class SpecimenContainerModel  implements Serializable {
-	private static final long serialVersionUID = 151857669699933259L;
+	private static final long serialVersionUID = 151873631178982336L;
   /**
   * Description: "Id for container. There may be multiple; a manufacturer's bar code, lab assigned identifier, etc. The container ID may differ from the specimen id in some circumstances."
   * Actual type: List<String>;
@@ -65,21 +66,25 @@ public class SpecimenContainerModel  implements Serializable {
 
   /**
   * Description: "The capacity (volume or other measure) the container may contain."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"capacity\"", length = 16777215)
-  private String capacity;
+  @Column(name="\"capacity_id\"")
+  private String capacity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="capacity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> capacity;
 
   /**
   * Description: "The quantity of specimen in the container; may be volume, dimensions, or other appropriate measurements, depending on the specimen type."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"specimenQuantity\"", length = 16777215)
-  private String specimenQuantity;
+  @Column(name="\"specimenquantity_id\"")
+  private String specimenquantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specimenquantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> specimenQuantity;
 
   /**
   * Description: "Introduced substance to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA."
@@ -147,10 +152,16 @@ public class SpecimenContainerModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.description = o.getDescription();
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.capacity = QuantityHelper.toJson(o.getCapacity());
-    this.specimenQuantity = QuantityHelper.toJson(o.getSpecimenQuantity());
-    this.additiveCodeableConcept = CodeableConceptHelper.toJson(o.getAdditiveCodeableConcept());
+    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getCapacity() ) {
+    	this.capacity_id = "capacity" + this.parent_id;
+    	this.capacity = QuantityHelper.toModel(o.getCapacity(), this.capacity_id);
+    }
+    if (null != o.getSpecimenQuantity() ) {
+    	this.specimenquantity_id = "specimenquantity" + this.parent_id;
+    	this.specimenQuantity = QuantityHelper.toModel(o.getSpecimenQuantity(), this.specimenquantity_id);
+    }
+    this.additiveCodeableConcept = JsonUtils.toJson(o.getAdditiveCodeableConcept());
     if (null != o.getAdditiveReference() ) {
     	this.additivereference_id = "additivereference" + this.parent_id;
     	this.additiveReference = ReferenceHelper.toModel(o.getAdditiveReference(), this.additivereference_id);
@@ -175,16 +186,16 @@ public class SpecimenContainerModel  implements Serializable {
   public void setType( String value) {
     this.type = value;
   }
-  public String getCapacity() {
+  public java.util.List<QuantityModel> getCapacity() {
     return this.capacity;
   }
-  public void setCapacity( String value) {
+  public void setCapacity( java.util.List<QuantityModel> value) {
     this.capacity = value;
   }
-  public String getSpecimenQuantity() {
+  public java.util.List<QuantityModel> getSpecimenQuantity() {
     return this.specimenQuantity;
   }
-  public void setSpecimenQuantity( String value) {
+  public void setSpecimenQuantity( java.util.List<QuantityModel> value) {
     this.specimenQuantity = value;
   }
   public String getAdditiveCodeableConcept() {
@@ -231,8 +242,6 @@ public class SpecimenContainerModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("capacity" + "->" + this.capacity + "\n"); 
-     builder.append("specimenQuantity" + "->" + this.specimenQuantity + "\n"); 
      builder.append("additiveCodeableConcept" + "->" + this.additiveCodeableConcept + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.DiagnosticReportModel;
 import org.fhir.pojo.DiagnosticReport;
 import org.fhir.pojo.DiagnosticReportHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class DiagnosticReportDaoImpl implements DiagnosticReportDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,61 @@ public class DiagnosticReportDaoImpl implements DiagnosticReportDao {
       final EntityManager em = entityManagerProvider.get();
       final DiagnosticReportModel removed = em.find(DiagnosticReportModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<DiagnosticReport> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DiagnosticReportModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DiagnosticReport> findByImage(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DiagnosticReportModel a, DiagnosticReportImage b where a.image_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DiagnosticReport> findByPerformer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DiagnosticReportModel a, DiagnosticReportPerformer b where a.performer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DiagnosticReport> findByResult(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DiagnosticReportModel a, Reference b where a.result_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DiagnosticReport> findBySpecimen(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DiagnosticReportModel a, Reference b where a.specimen_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DiagnosticReport> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DiagnosticReportModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<DiagnosticReport> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DiagnosticReportModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<DiagnosticReport> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, DiagnosticReportModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<DiagnosticReportModel> models = query.getResultList();
+    return DiagnosticReportHelper.fromArray2Array(models);
   }
 }

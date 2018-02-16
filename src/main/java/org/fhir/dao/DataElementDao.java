@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DataElement;
 
 public interface DataElementDao {
@@ -38,4 +39,7 @@ public interface DataElementDao {
 
   public DataElement update(DataElement e);
   public void delete(DataElement e);
+
+  public List<DataElement> findByField(QueryBuilder queryBuilder);
+
 }

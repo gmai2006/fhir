@@ -31,79 +31,51 @@ import com.google.gson.GsonBuilder;
 /**
 * "Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data."
 */
-public class DataRequirementCodeFilter  {
+public class DataRequirementCodeFilter  extends BackboneElement  {
   /**
   * Description: "The code-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type code, Coding, or CodeableConcept."
   */
-  private String path;
+  protected String path;
 
   /**
   * Description: "Extensions for path"
   */
-  private transient Element _path;
+  protected transient Element _path;
 
   /**
   * Description: "The valueset for the code filter. The valueSet and value elements are exclusive. If valueSet is specified, the filter will return only those data items for which the value of the code-valued element specified in the path is a member of the specified valueset."
   */
-  private String valueSetString;
+  protected String valueSetString;
 
   /**
   * Description: "Extensions for valueSetString"
   */
-  private transient Element _valueSetString;
+  protected transient Element _valueSetString;
 
   /**
   * Description: "The valueset for the code filter. The valueSet and value elements are exclusive. If valueSet is specified, the filter will return only those data items for which the value of the code-valued element specified in the path is a member of the specified valueset."
   */
-  private Reference valueSetReference;
+  protected Reference valueSetReference;
 
   /**
   * Description: "The codes for the code filter. Only one of valueSet, valueCode, valueCoding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified codes."
   */
-  private java.util.List<String> valueCode = new java.util.ArrayList<>();
+  protected java.util.List<String> valueCode = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for valueCode"
   */
-  private transient java.util.List<Element> _valueCode = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _valueCode = new java.util.ArrayList<>();
 
   /**
   * Description: "The Codings for the code filter. Only one of valueSet, valueCode, valueConding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified Codings."
   */
-  private java.util.List<Coding> valueCoding = new java.util.ArrayList<>();
+  protected java.util.List<Coding> valueCoding = new java.util.ArrayList<>();
 
   /**
   * Description: "The CodeableConcepts for the code filter. Only one of valueSet, valueCode, valueConding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified CodeableConcepts."
   */
-  private java.util.List<CodeableConcept> valueCodeableConcept = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> valueCodeableConcept = new java.util.ArrayList<>();
 
   public DataRequirementCodeFilter() {
   }
@@ -121,9 +93,6 @@ public class DataRequirementCodeFilter  {
     }
     if (o.getValueCode() != null) {
     	this.valueCode = org.fhir.utils.JsonUtils.json2Array(o.getValueCode());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -181,30 +150,6 @@ public class DataRequirementCodeFilter  {
   public java.util.List<CodeableConcept> getValueCodeableConcept() {
     return this.valueCodeableConcept;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -218,11 +163,7 @@ public class DataRequirementCodeFilter  {
      if(this.valueCode != null) builder.append("valueCode" + "->" + this.valueCode.toString() + "\n"); 
      if(this._valueCode != null) builder.append("_valueCode" + "->" + this._valueCode.toString() + "\n"); 
      if(this.valueCoding != null) builder.append("valueCoding" + "->" + this.valueCoding.toString() + "\n"); 
-     if(this.valueCodeableConcept != null) builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.valueCodeableConcept != null) builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept.toString() + "\n"); ;
     return builder.toString();
   }
 

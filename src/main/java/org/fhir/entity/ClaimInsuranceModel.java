@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
 @Entity
 @Table(name="claiminsurance")
 public class ClaimInsuranceModel  implements Serializable {
-	private static final long serialVersionUID = 15185766965665856L;
+	private static final long serialVersionUID = 151873631124769885L;
   /**
   * Description: "Sequence of coverage which serves to provide a link and convey coordination of benefit order."
   */

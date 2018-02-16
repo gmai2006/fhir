@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern."
 */
 @Entity
 @Table(name="fhircondition")
 public class ConditionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669667929499L;
+	private static final long serialVersionUID = 151873631140849609L;
   /**
   * Description: "This is a Condition resource"
   */
@@ -362,8 +363,8 @@ public class ConditionModel  implements Serializable {
     this.resourceType = o.getResourceType();
     this.clinicalStatus = o.getClinicalStatus();
     this.verificationStatus = o.getVerificationStatus();
-    this.severity = CodeableConceptHelper.toJson(o.getSeverity());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.severity = JsonUtils.toJson(o.getSeverity());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -373,15 +374,15 @@ public class ConditionModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.onsetDateTime = o.getOnsetDateTime();
-    this.onsetAge = AgeHelper.toJson(o.getOnsetAge());
-    this.onsetPeriod = PeriodHelper.toJson(o.getOnsetPeriod());
-    this.onsetRange = RangeHelper.toJson(o.getOnsetRange());
+    this.onsetAge = JsonUtils.toJson(o.getOnsetAge());
+    this.onsetPeriod = JsonUtils.toJson(o.getOnsetPeriod());
+    this.onsetRange = JsonUtils.toJson(o.getOnsetRange());
     this.onsetString = o.getOnsetString();
     this.abatementDateTime = o.getAbatementDateTime();
-    this.abatementAge = AgeHelper.toJson(o.getAbatementAge());
+    this.abatementAge = JsonUtils.toJson(o.getAbatementAge());
     this.abatementBoolean = o.getAbatementBoolean();
-    this.abatementPeriod = PeriodHelper.toJson(o.getAbatementPeriod());
-    this.abatementRange = RangeHelper.toJson(o.getAbatementRange());
+    this.abatementPeriod = JsonUtils.toJson(o.getAbatementPeriod());
+    this.abatementRange = JsonUtils.toJson(o.getAbatementRange());
     this.abatementString = o.getAbatementString();
     this.assertedDate = o.getAssertedDate();
     if (null != o.getAsserter() ) {

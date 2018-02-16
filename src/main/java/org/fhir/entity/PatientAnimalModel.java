@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
 */
 @Entity
 @Table(name="patientanimal")
 public class PatientAnimalModel  implements Serializable {
-	private static final long serialVersionUID = 1518576696728237L;
+	private static final long serialVersionUID = 151873631147213244L;
   /**
   * Description: "Identifies the high level taxonomic categorization of the kind of animal."
   * Actual type: String;
@@ -111,9 +112,9 @@ public class PatientAnimalModel  implements Serializable {
   public PatientAnimalModel(PatientAnimal o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.species = CodeableConceptHelper.toJson(o.getSpecies());
-    this.breed = CodeableConceptHelper.toJson(o.getBreed());
-    this.genderStatus = CodeableConceptHelper.toJson(o.getGenderStatus());
+    this.species = JsonUtils.toJson(o.getSpecies());
+    this.breed = JsonUtils.toJson(o.getBreed());
+    this.genderStatus = JsonUtils.toJson(o.getGenderStatus());
   }
 
   public String getSpecies() {

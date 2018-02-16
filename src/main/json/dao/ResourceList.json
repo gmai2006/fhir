@@ -1,0 +1,7 @@
+{
+  "className": "ResourceList",
+  "type": "COMPLEX",
+  "isInnerClass": true,
+  "autoIncrement": true,
+  "fields": []
+}

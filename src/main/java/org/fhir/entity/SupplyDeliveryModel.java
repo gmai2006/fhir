@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Record of delivery of what is supplied."
 */
 @Entity
 @Table(name="supplydelivery")
 public class SupplyDeliveryModel  implements Serializable {
-	private static final long serialVersionUID = 151857669703246776L;
+	private static final long serialVersionUID = 151873631181730773L;
   /**
   * Description: "This is a SupplyDelivery resource"
   */
@@ -265,7 +266,7 @@ public class SupplyDeliveryModel  implements Serializable {
   public SupplyDeliveryModel(SupplyDelivery o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
@@ -279,14 +280,14 @@ public class SupplyDeliveryModel  implements Serializable {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     if (null != o.getSuppliedItem() ) {
     	this.supplieditem_id = "supplieditem" + this.id;
     	this.suppliedItem = SupplyDeliverySuppliedItemHelper.toModel(o.getSuppliedItem(), this.supplieditem_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = PeriodHelper.toJson(o.getOccurrencePeriod());
-    this.occurrenceTiming = TimingHelper.toJson(o.getOccurrenceTiming());
+    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
     if (null != o.getSupplier() ) {
     	this.supplier_id = "supplier" + this.id;
     	this.supplier = ReferenceHelper.toModel(o.getSupplier(), this.supplier_id);

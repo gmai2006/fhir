@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.AppointmentResponseModel;
 import org.fhir.pojo.AppointmentResponse;
 import org.fhir.pojo.AppointmentResponseHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class AppointmentResponseDaoImpl implements AppointmentResponseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class AppointmentResponseDaoImpl implements AppointmentResponseDao {
       final EntityManager em = entityManagerProvider.get();
       final AppointmentResponseModel removed = em.find(AppointmentResponseModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<AppointmentResponse> findByActor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AppointmentResponseModel a, Reference b where a.actor_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AppointmentResponse> findByAppointment(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AppointmentResponseModel a, Reference b where a.appointment_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<AppointmentResponse> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AppointmentResponseModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<AppointmentResponse> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, AppointmentResponseModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<AppointmentResponseModel> models = query.getResultList();
+    return AppointmentResponseHelper.fromArray2Array(models);
   }
 }

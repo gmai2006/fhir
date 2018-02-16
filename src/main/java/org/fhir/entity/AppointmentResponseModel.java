@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection."
 */
 @Entity
 @Table(name="appointmentresponse")
 public class AppointmentResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669713286021L;
+	private static final long serialVersionUID = 151873631192659052L;
   /**
   * Description: "This is a AppointmentResponse resource"
   */

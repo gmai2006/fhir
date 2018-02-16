@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.RiskAssessment;
 
 public interface RiskAssessmentService {
@@ -35,4 +37,10 @@ public interface RiskAssessmentService {
   public RiskAssessment create(RiskAssessment bean);
   public RiskAssessment update(RiskAssessment bean);
   public void delete(RiskAssessment bean);
+  public List<RiskAssessment> findByField(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByCondition(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByPerformer(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findBySubject(QueryBuilder queryBuilder);
+
+
 }

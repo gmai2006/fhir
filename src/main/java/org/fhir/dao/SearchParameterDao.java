@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.SearchParameter;
 
 public interface SearchParameterDao {
@@ -38,4 +39,8 @@ public interface SearchParameterDao {
 
   public SearchParameter update(SearchParameter e);
   public void delete(SearchParameter e);
+
+  public List<SearchParameter> findByField(QueryBuilder queryBuilder);
+
+  public List<SearchParameter> findByComponent(QueryBuilder queryBuilder);
 }

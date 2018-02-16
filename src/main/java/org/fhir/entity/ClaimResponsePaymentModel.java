@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
 @Entity
 @Table(name="claimresponsepayment")
 public class ClaimResponsePaymentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669678572691L;
+	private static final long serialVersionUID = 151873631156257354L;
   /**
   * Description: "Whether this represents partial or complete payment of the claim."
   * Actual type: String;
@@ -49,12 +50,14 @@ public class ClaimResponsePaymentModel  implements Serializable {
 
   /**
   * Description: "Adjustment to the payment of this transaction which is not related to adjudication of this transaction."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"adjustment\"", length = 16777215)
-  private String adjustment;
+  @Column(name="\"adjustment_id\"")
+  private String adjustment_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="adjustment_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> adjustment;
 
   /**
   * Description: "Reason for the payment adjustment."
@@ -75,12 +78,14 @@ public class ClaimResponsePaymentModel  implements Serializable {
 
   /**
   * Description: "Payable less any payment adjustment."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"amount\"", length = 16777215)
-  private String amount;
+  @Column(name="\"amount_id\"")
+  private String amount_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> amount;
 
   /**
   * Description: "Payment identifier."
@@ -136,12 +141,18 @@ public class ClaimResponsePaymentModel  implements Serializable {
   public ClaimResponsePaymentModel(ClaimResponsePayment o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.adjustment = MoneyHelper.toJson(o.getAdjustment());
-    this.adjustmentReason = CodeableConceptHelper.toJson(o.getAdjustmentReason());
+    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getAdjustment() ) {
+    	this.adjustment_id = "adjustment" + this.parent_id;
+    	this.adjustment = MoneyHelper.toModel(o.getAdjustment(), this.adjustment_id);
+    }
+    this.adjustmentReason = JsonUtils.toJson(o.getAdjustmentReason());
     this.date = o.getDate();
-    this.amount = MoneyHelper.toJson(o.getAmount());
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    if (null != o.getAmount() ) {
+    	this.amount_id = "amount" + this.parent_id;
+    	this.amount = MoneyHelper.toModel(o.getAmount(), this.amount_id);
+    }
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
   }
 
   public String getType() {
@@ -150,10 +161,10 @@ public class ClaimResponsePaymentModel  implements Serializable {
   public void setType( String value) {
     this.type = value;
   }
-  public String getAdjustment() {
+  public java.util.List<MoneyModel> getAdjustment() {
     return this.adjustment;
   }
-  public void setAdjustment( String value) {
+  public void setAdjustment( java.util.List<MoneyModel> value) {
     this.adjustment = value;
   }
   public String getAdjustmentReason() {
@@ -168,10 +179,10 @@ public class ClaimResponsePaymentModel  implements Serializable {
   public void setDate( String value) {
     this.date = value;
   }
-  public String getAmount() {
+  public java.util.List<MoneyModel> getAmount() {
     return this.amount;
   }
-  public void setAmount( String value) {
+  public void setAmount( java.util.List<MoneyModel> value) {
     this.amount = value;
   }
   public String getIdentifier() {
@@ -210,10 +221,8 @@ public class ClaimResponsePaymentModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClaimResponsePaymentModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("adjustment" + "->" + this.adjustment + "\n"); 
      builder.append("adjustmentReason" + "->" + this.adjustmentReason + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("amount" + "->" + this.amount + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

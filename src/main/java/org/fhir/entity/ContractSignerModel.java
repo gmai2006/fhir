@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
 @Entity
 @Table(name="contractsigner")
 public class ContractSignerModel  implements Serializable {
-	private static final long serialVersionUID = 151857669663849087L;
+	private static final long serialVersionUID = 151873631135879042L;
   /**
   * Description: "Role of this Contract signer, e.g. notary, grantee."
   * Actual type: String;
@@ -114,7 +115,7 @@ public class ContractSignerModel  implements Serializable {
   public ContractSignerModel(ContractSigner o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = CodingHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     if (null != o.getParty() ) {
     	this.party_id = "party" + this.parent_id;
     	this.party = ReferenceHelper.toModel(o.getParty(), this.party_id);

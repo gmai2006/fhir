@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A summary of information based on the results of executing a TestScript."
 */
 @Entity
 @Table(name="testreportteardown")
 public class TestReportTeardownModel  implements Serializable {
-	private static final long serialVersionUID = 151857669660562954L;
+	private static final long serialVersionUID = 151873631130475759L;
   /**
   * Description: "The teardown action will only contain an operation."
   */

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data."
 */
 @Entity
 @Table(name="datarequirementdatefilter")
 public class DataRequirementDateFilterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669678627437L;
+	private static final long serialVersionUID = 151873631156499106L;
   /**
   * Description: "The date-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type dateTime, Period, Schedule, or Timing."
   */
@@ -118,8 +119,8 @@ public class DataRequirementDateFilterModel  implements Serializable {
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.path = o.getPath();
     this.valueDateTime = o.getValueDateTime();
-    this.valuePeriod = PeriodHelper.toJson(o.getValuePeriod());
-    this.valueDuration = DurationHelper.toJson(o.getValueDuration());
+    this.valuePeriod = JsonUtils.toJson(o.getValuePeriod());
+    this.valueDuration = JsonUtils.toJson(o.getValueDuration());
   }
 
   public String getPath() {

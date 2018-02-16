@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
 */
 @Entity
 @Table(name="consentpolicy")
 public class ConsentPolicyModel  implements Serializable {
-	private static final long serialVersionUID = 151857669717678916L;
+	private static final long serialVersionUID = 151873631197493010L;
   /**
   * Description: "Entity or Organization having regulatory jurisdiction or accountability for  enforcing policies pertaining to Consent Directives."
   */

@@ -31,82 +31,63 @@ import com.google.gson.GsonBuilder;
 /**
 * "A description of a triggering event."
 */
-public class TriggerDefinition  {
+public class TriggerDefinition  extends Element  {
   /**
   * Description: "The type of triggering event."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "The name of the event (if this is a named-event trigger)."
   */
-  private String eventName;
+  protected String eventName;
 
   /**
   * Description: "Extensions for eventName"
   */
-  private transient Element _eventName;
+  protected transient Element _eventName;
 
   /**
   * Description: "The timing of the event (if this is a period trigger)."
   */
-  private Timing eventTimingTiming;
+  protected Timing eventTimingTiming;
 
   /**
   * Description: "The timing of the event (if this is a period trigger)."
   */
-  private Reference eventTimingReference;
+  protected Reference eventTimingReference;
 
   /**
   * Description: "The timing of the event (if this is a period trigger)."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?")
-  private String eventTimingDate;
+  protected String eventTimingDate;
 
   /**
   * Description: "Extensions for eventTimingDate"
   */
-  private transient Element _eventTimingDate;
+  protected transient Element _eventTimingDate;
 
   /**
   * Description: "The timing of the event (if this is a period trigger)."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String eventTimingDateTime;
+  protected String eventTimingDateTime;
 
   /**
   * Description: "Extensions for eventTimingDateTime"
   */
-  private transient Element _eventTimingDateTime;
+  protected transient Element _eventTimingDateTime;
 
   /**
   * Description: "The triggering data of the event (if this is a data trigger)."
   */
-  private DataRequirement eventData;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected DataRequirement eventData;
 
   public TriggerDefinition() {
   }
@@ -131,9 +112,6 @@ public class TriggerDefinition  {
     }
     if (null != o.getEventData() && !o.getEventData().isEmpty()) {
       this.eventData = new DataRequirement(o.getEventData().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -203,24 +181,6 @@ public class TriggerDefinition  {
   public DataRequirement getEventData() {
     return this.eventData;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -236,10 +196,7 @@ public class TriggerDefinition  {
      if(this._eventTimingDate != null) builder.append("_eventTimingDate" + "->" + this._eventTimingDate.toString() + "\n"); 
      if(this.eventTimingDateTime != null) builder.append("eventTimingDateTime" + "->" + this.eventTimingDateTime.toString() + "\n"); 
      if(this._eventTimingDateTime != null) builder.append("_eventTimingDateTime" + "->" + this._eventTimingDateTime.toString() + "\n"); 
-     if(this.eventData != null) builder.append("eventData" + "->" + this.eventData.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.eventData != null) builder.append("eventData" + "->" + this.eventData.toString() + "\n"); ;
     return builder.toString();
   }
 

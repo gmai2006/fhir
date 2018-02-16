@@ -31,60 +31,32 @@ import com.google.gson.GsonBuilder;
 /**
 * "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle."
 */
-public class MessageHeaderResponse  {
+public class MessageHeaderResponse  extends BackboneElement  {
   /**
   * Description: "The MessageHeader.id of the message to which this message is a response."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String identifier;
+  protected String identifier;
 
   /**
   * Description: "Extensions for identifier"
   */
-  private transient Element _identifier;
+  protected transient Element _identifier;
 
   /**
   * Description: "Code that identifies the type of response to the message - whether it was successful or not, and whether it should be resent or not."
   */
-  private String code;
+  protected String code;
 
   /**
   * Description: "Extensions for code"
   */
-  private transient Element _code;
+  protected transient Element _code;
 
   /**
   * Description: "Full details of any issues found in the message."
   */
-  private Reference details;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Reference details;
 
   public MessageHeaderResponse() {
   }
@@ -99,9 +71,6 @@ public class MessageHeaderResponse  {
     }
     if (null != o.getDetails() && !o.getDetails().isEmpty()) {
       this.details = new Reference(o.getDetails().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -135,30 +104,6 @@ public class MessageHeaderResponse  {
   public Reference getDetails() {
     return this.details;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -168,11 +113,7 @@ public class MessageHeaderResponse  {
      if(this._identifier != null) builder.append("_identifier" + "->" + this._identifier.toString() + "\n"); 
      if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
      if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
-     if(this.details != null) builder.append("details" + "->" + this.details.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.details != null) builder.append("details" + "->" + this.details.toString() + "\n"); ;
     return builder.toString();
   }
 

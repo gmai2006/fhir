@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.CapabilityStatementModel;
 import org.fhir.pojo.CapabilityStatement;
 import org.fhir.pojo.CapabilityStatementHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class CapabilityStatementDaoImpl implements CapabilityStatementDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class CapabilityStatementDaoImpl implements CapabilityStatementDao {
       final EntityManager em = entityManagerProvider.get();
       final CapabilityStatementModel removed = em.find(CapabilityStatementModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<CapabilityStatement> findBySoftware(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CapabilityStatementModel a, CapabilityStatementSoftware b where a.software_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<CapabilityStatement> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CapabilityStatementModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<CapabilityStatement> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, CapabilityStatementModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<CapabilityStatementModel> models = query.getResultList();
+    return CapabilityStatementHelper.fromArray2Array(models);
   }
 }

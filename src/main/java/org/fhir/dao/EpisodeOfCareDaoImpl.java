@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.EpisodeOfCareModel;
 import org.fhir.pojo.EpisodeOfCare;
 import org.fhir.pojo.EpisodeOfCareHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class EpisodeOfCareDaoImpl implements EpisodeOfCareDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class EpisodeOfCareDaoImpl implements EpisodeOfCareDao {
       final EntityManager em = entityManagerProvider.get();
       final EpisodeOfCareModel removed = em.find(EpisodeOfCareModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<EpisodeOfCare> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EpisodeOfCareModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<EpisodeOfCare> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, EpisodeOfCareModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<EpisodeOfCareModel> models = query.getResultList();
+    return EpisodeOfCareHelper.fromArray2Array(models);
   }
 }

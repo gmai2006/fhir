@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
 */
 @Entity
 @Table(name="consentactor")
 public class ConsentActorModel  implements Serializable {
-	private static final long serialVersionUID = 151857669679526457L;
+	private static final long serialVersionUID = 151873631157598611L;
   /**
   * Description: "How the individual is involved in the resources content that is described in the consent."
   * Actual type: String;
@@ -104,7 +105,7 @@ public class ConsentActorModel  implements Serializable {
   public ConsentActorModel(ConsentActor o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.role = JsonUtils.toJson(o.getRole());
     if (null != o.getReference() ) {
     	this.reference_id = "reference" + this.parent_id;
     	this.reference = ReferenceHelper.toModel(o.getReference(), this.reference_id);

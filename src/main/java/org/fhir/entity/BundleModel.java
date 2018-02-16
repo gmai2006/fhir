@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
 */
 @Entity
 @Table(name="bundle")
 public class BundleModel  implements Serializable {
-	private static final long serialVersionUID = 151857669709597499L;
+	private static final long serialVersionUID = 151873631188263557L;
   /**
   * Description: "This is a Bundle resource"
   */
@@ -140,24 +141,13 @@ public class BundleModel  implements Serializable {
   @Column(name="\"language\"")
   private String language;
 
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from Resource
-  * Actual type: List<String>;
-  * Store this type as a string in db
-  */
-  @javax.persistence.Basic
-  @Column(name="\"extension\"", length = 16777215)
-  private String extension;
-
   public BundleModel() {
   }
 
   public BundleModel(Bundle o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.type = o.getType();
     this.total = o.getTotal();
     if (null != o.getLink() && !o.getLink().isEmpty()) {
@@ -168,7 +158,7 @@ public class BundleModel  implements Serializable {
     	this.entry_id = "entry" + this.id;
     	this.entry = BundleEntryHelper.toModelFromArray(o.getEntry(), this.entry_id);
     }
-    this.signature = SignatureHelper.toJson(o.getSignature());
+    this.signature = JsonUtils.toJson(o.getSignature());
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
     	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
@@ -243,12 +233,6 @@ public class BundleModel  implements Serializable {
   public void setLanguage( String value) {
     this.language = value;
   }
-  public String getExtension() {
-    return this.extension;
-  }
-  public void setExtension( String value) {
-    this.extension = value;
-  }
 
   @Override
   public String toString() {
@@ -261,8 +245,7 @@ public class BundleModel  implements Serializable {
      builder.append("signature" + "->" + this.signature + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
-     builder.append("language" + "->" + this.language + "\n"); 
-     builder.append("extension" + "->" + this.extension + "\n"); ;
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 
@@ -279,8 +262,7 @@ public class BundleModel  implements Serializable {
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("meta" + "->" + this.meta + "\n"); 
      builder.append("implicitRules" + "->" + this.implicitRules + "\n"); 
-     builder.append("language" + "->" + this.language + "\n"); 
-     builder.append("extension" + "->" + this.extension + "\n"); ;
+     builder.append("language" + "->" + this.language + "\n"); ;
     return builder.toString();
   }
 }

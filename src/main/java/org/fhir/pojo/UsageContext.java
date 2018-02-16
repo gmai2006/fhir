@@ -31,46 +31,27 @@ import com.google.gson.GsonBuilder;
 /**
 * "Specifies clinical/business/etc metadata that can be used to retrieve, index and/or categorize an artifact. This metadata can either be specific to the applicable population (e.g., age category, DRG) or the specific context of care (e.g., venue, care setting, provider of care)."
 */
-public class UsageContext  {
+public class UsageContext  extends Element  {
   /**
   * Description: "A code that identifies the type of context being specified by this usage context."
   */
   @javax.validation.constraints.NotNull
-  private Coding code;
+  protected Coding code;
 
   /**
   * Description: "A value that defines the context specified in this context of use. The interpretation of the value is defined by the code."
   */
-  private CodeableConcept valueCodeableConcept;
+  protected CodeableConcept valueCodeableConcept;
 
   /**
   * Description: "A value that defines the context specified in this context of use. The interpretation of the value is defined by the code."
   */
-  private Quantity valueQuantity;
+  protected Quantity valueQuantity;
 
   /**
   * Description: "A value that defines the context specified in this context of use. The interpretation of the value is defined by the code."
   */
-  private Range valueRange;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Range valueRange;
 
   public UsageContext() {
   }
@@ -79,11 +60,10 @@ public class UsageContext  {
     this.id = o.getId();
     this.code = CodingHelper.fromJson(o.getCode());
     this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
-    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
-    this.valueRange = RangeHelper.fromJson(o.getValueRange());
-    if (null != o.getId()) {
-      this.id = o.getId();
+    if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
+      this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
     }
+    this.valueRange = RangeHelper.fromJson(o.getValueRange());
   }
 
   public void setCode( Coding value) {
@@ -110,24 +90,6 @@ public class UsageContext  {
   public Range getValueRange() {
     return this.valueRange;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -136,10 +98,7 @@ public class UsageContext  {
      if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
      if(this.valueCodeableConcept != null) builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept.toString() + "\n"); 
      if(this.valueQuantity != null) builder.append("valueQuantity" + "->" + this.valueQuantity.toString() + "\n"); 
-     if(this.valueRange != null) builder.append("valueRange" + "->" + this.valueRange.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.valueRange != null) builder.append("valueRange" + "->" + this.valueRange.toString() + "\n"); ;
     return builder.toString();
   }
 

@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.RiskAssessment;
 /**
 * auto generated from SQL files
@@ -103,5 +104,31 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(RiskAssessment) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<RiskAssessment> findByField(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<RiskAssessment> findByCondition(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByCondition(queryBuilder);
+    logger.info("findBycondition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findByPerformer(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByPerformer(queryBuilder);
+    logger.info("findByperformer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findBySubject(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

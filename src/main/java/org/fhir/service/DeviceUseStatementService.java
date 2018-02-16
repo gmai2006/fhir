@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DeviceUseStatement;
 
 public interface DeviceUseStatementService {
@@ -35,4 +37,9 @@ public interface DeviceUseStatementService {
   public DeviceUseStatement create(DeviceUseStatement bean);
   public DeviceUseStatement update(DeviceUseStatement bean);
   public void delete(DeviceUseStatement bean);
+  public List<DeviceUseStatement> findByField(QueryBuilder queryBuilder);
+  public List<DeviceUseStatement> findByDevice(QueryBuilder queryBuilder);
+  public List<DeviceUseStatement> findBySubject(QueryBuilder queryBuilder);
+
+
 }

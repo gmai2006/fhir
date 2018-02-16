@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Organization;
 
 public interface OrganizationService {
@@ -35,4 +37,9 @@ public interface OrganizationService {
   public Organization create(Organization bean);
   public Organization update(Organization bean);
   public void delete(Organization bean);
+  public List<Organization> findByField(QueryBuilder queryBuilder);
+  public List<Organization> findByAddress(QueryBuilder queryBuilder);
+  public List<Organization> findByEndpoint(QueryBuilder queryBuilder);
+
+
 }

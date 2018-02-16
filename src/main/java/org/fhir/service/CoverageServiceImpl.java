@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Coverage;
 /**
 * auto generated from SQL files
@@ -103,5 +104,31 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Coverage) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Coverage> findByField(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Coverage> findByBeneficiary(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findByBeneficiary(queryBuilder);
+    logger.info("findBybeneficiary - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Coverage> findByPayor(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findByPayor(queryBuilder);
+    logger.info("findBypayor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Coverage> findBySubscriber(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findBySubscriber(queryBuilder);
+    logger.info("findBysubscriber - exited - return value={} result ");
+    return result;
   }
 }

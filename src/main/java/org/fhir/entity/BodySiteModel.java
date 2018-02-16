@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Record details about the anatomical location of a specimen or body part.  This resource may be used when a coded concept does not provide the necessary detail needed for the use case."
 */
 @Entity
 @Table(name="bodysite")
 public class BodySiteModel  implements Serializable {
-	private static final long serialVersionUID = 151857669669416192L;
+	private static final long serialVersionUID = 151873631142696720L;
   /**
   * Description: "This is a BodySite resource"
   */
@@ -199,7 +200,7 @@ public class BodySiteModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.active = o.getActive();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     this.description = o.getDescription();
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;

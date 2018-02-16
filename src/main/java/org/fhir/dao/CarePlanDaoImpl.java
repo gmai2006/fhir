@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.CarePlanModel;
 import org.fhir.pojo.CarePlan;
 import org.fhir.pojo.CarePlanHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class CarePlanDaoImpl implements CarePlanDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,55 @@ public class CarePlanDaoImpl implements CarePlanDao {
       final EntityManager em = entityManagerProvider.get();
       final CarePlanModel removed = em.find(CarePlanModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<CarePlan> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CarePlanModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CarePlan> findByDefinition(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CarePlanModel a, Reference b where a.definition_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CarePlan> findByGoal(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CarePlanModel a, Reference b where a.goal_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CarePlan> findByReplaces(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CarePlanModel a, Reference b where a.replaces_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CarePlan> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CarePlanModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<CarePlan> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CarePlanModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<CarePlan> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, CarePlanModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<CarePlanModel> models = query.getResultList();
+    return CarePlanHelper.fromArray2Array(models);
   }
 }

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AuditEvent;
 
 public interface AuditEventService {
@@ -35,4 +37,10 @@ public interface AuditEventService {
   public AuditEvent create(AuditEvent bean);
   public AuditEvent update(AuditEvent bean);
   public void delete(AuditEvent bean);
+  public List<AuditEvent> findByField(QueryBuilder queryBuilder);
+  public List<AuditEvent> findByAgent(QueryBuilder queryBuilder);
+  public List<AuditEvent> findByEntity(QueryBuilder queryBuilder);
+  public List<AuditEvent> findBySource(QueryBuilder queryBuilder);
+
+
 }

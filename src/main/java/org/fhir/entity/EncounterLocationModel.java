@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
 @Entity
 @Table(name="encounterlocation")
 public class EncounterLocationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669693411796L;
+	private static final long serialVersionUID = 151873631172939902L;
   /**
   * Description: "The location where the encounter takes place."
   */
@@ -115,7 +116,7 @@ public class EncounterLocationModel  implements Serializable {
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
     }
     this.status = o.getStatus();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
   }
 
   public java.util.List<ReferenceModel> getLocation() {

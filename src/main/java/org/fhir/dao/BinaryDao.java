@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Binary;
 
 public interface BinaryDao {
@@ -38,4 +39,7 @@ public interface BinaryDao {
 
   public Binary update(Binary e);
   public void delete(Binary e);
+
+  public List<Binary> findByField(QueryBuilder queryBuilder);
+
 }

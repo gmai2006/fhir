@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.RequestGroup;
 
 public interface RequestGroupService {
@@ -35,4 +37,11 @@ public interface RequestGroupService {
   public RequestGroup create(RequestGroup bean);
   public RequestGroup update(RequestGroup bean);
   public void delete(RequestGroup bean);
+  public List<RequestGroup> findByField(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByAuthor(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByContext(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByDefinition(QueryBuilder queryBuilder);
+  public List<RequestGroup> findBySubject(QueryBuilder queryBuilder);
+
+
 }

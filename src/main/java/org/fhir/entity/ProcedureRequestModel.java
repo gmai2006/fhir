@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a request for diagnostic investigations, treatments, or operations to be performed."
 */
 @Entity
 @Table(name="procedurerequest")
 public class ProcedureRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669710560908L;
+	private static final long serialVersionUID = 151873631189431108L;
   /**
   * Description: "This is a ProcedureRequest resource"
   */
@@ -424,12 +425,12 @@ public class ProcedureRequestModel  implements Serializable {
     	this.replaces_id = "replaces" + this.id;
     	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
     }
-    this.requisition = IdentifierHelper.toJson(o.getRequisition());
+    this.requisition = JsonUtils.toJson(o.getRequisition());
     this.status = o.getStatus();
     this.intent = o.getIntent();
     this.priority = o.getPriority();
     this.doNotPerform = o.getDoNotPerform();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -439,16 +440,16 @@ public class ProcedureRequestModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = PeriodHelper.toJson(o.getOccurrencePeriod());
-    this.occurrenceTiming = TimingHelper.toJson(o.getOccurrenceTiming());
+    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
     this.asNeededBoolean = o.getAsNeededBoolean();
-    this.asNeededCodeableConcept = CodeableConceptHelper.toJson(o.getAsNeededCodeableConcept());
+    this.asNeededCodeableConcept = JsonUtils.toJson(o.getAsNeededCodeableConcept());
     this.authoredOn = o.getAuthoredOn();
     if (null != o.getRequester() ) {
     	this.requester_id = "requester" + this.id;
     	this.requester = ProcedureRequestRequesterHelper.toModel(o.getRequester(), this.requester_id);
     }
-    this.performerType = CodeableConceptHelper.toJson(o.getPerformerType());
+    this.performerType = JsonUtils.toJson(o.getPerformerType());
     if (null != o.getPerformer() ) {
     	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);

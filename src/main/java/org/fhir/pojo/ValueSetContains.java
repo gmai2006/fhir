@@ -31,105 +31,77 @@ import com.google.gson.GsonBuilder;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
-public class ValueSetContains  {
+public class ValueSetContains  extends BackboneElement  {
   /**
   * Description: "An absolute URI which is the code system in which the code for this item in the expansion is defined."
   */
-  private String system;
+  protected String system;
 
   /**
   * Description: "Extensions for system"
   */
-  private transient Element _system;
+  protected transient Element _system;
 
   /**
   * Description: "If true, this entry is included in the expansion for navigational purposes, and the user cannot select the code directly as a proper value."
   */
-  private Boolean FHIRabstract;
+  protected Boolean FHIRabstract;
 
   /**
   * Description: "Extensions for abstract"
   */
-  private transient Element _abstract;
+  protected transient Element _abstract;
 
   /**
   * Description: "If the concept is inactive in the code system that defines it. Inactive codes are those that are no longer to be used, but are maintained by the code system for understanding legacy data."
   */
-  private Boolean inactive;
+  protected Boolean inactive;
 
   /**
   * Description: "Extensions for inactive"
   */
-  private transient Element _inactive;
+  protected transient Element _inactive;
 
   /**
   * Description: "The version of this code system that defined this code and/or display. This should only be used with code systems that do not enforce concept permanence."
   */
-  private String version;
+  protected String version;
 
   /**
   * Description: "Extensions for version"
   */
-  private transient Element _version;
+  protected transient Element _version;
 
   /**
   * Description: "The code for this item in the expansion hierarchy. If this code is missing the entry in the hierarchy is a place holder (abstract) and does not represent a valid code in the value set."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String code;
+  protected String code;
 
   /**
   * Description: "Extensions for code"
   */
-  private transient Element _code;
+  protected transient Element _code;
 
   /**
   * Description: "The recommended display for this item in the expansion."
   */
-  private String display;
+  protected String display;
 
   /**
   * Description: "Extensions for display"
   */
-  private transient Element _display;
+  protected transient Element _display;
 
   /**
   * Description: "Additional representations for this item - other languages, aliases, specialized purposes, used for particular purposes, etc. These are relevant when the conditions of the expansion do not fix to a single correct representation."
   */
-  private java.util.List<ValueSetDesignation> designation = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetDesignation> designation = new java.util.ArrayList<>();
 
   /**
   * Description: "Other codes and entries contained under this entry in the hierarchy."
   */
-  private java.util.List<ValueSetContains> contains = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetContains> contains = new java.util.ArrayList<>();
 
   public ValueSetContains() {
   }
@@ -159,9 +131,6 @@ public class ValueSetContains  {
     }
     if (null != o.getContains() && !o.getContains().isEmpty()) {
     	this.contains = ValueSetContainsHelper.fromArray2Array(o.getContains());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -249,30 +218,6 @@ public class ValueSetContains  {
   public java.util.List<ValueSetContains> getContains() {
     return this.contains;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -291,11 +236,7 @@ public class ValueSetContains  {
      if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
      if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
      if(this.designation != null) builder.append("designation" + "->" + this.designation.toString() + "\n"); 
-     if(this.contains != null) builder.append("contains" + "->" + this.contains.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.contains != null) builder.append("contains" + "->" + this.contains.toString() + "\n"); ;
     return builder.toString();
   }
 

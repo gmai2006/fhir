@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PlanDefinition;
 
 public interface PlanDefinitionService {
@@ -35,4 +37,7 @@ public interface PlanDefinitionService {
   public PlanDefinition create(PlanDefinition bean);
   public PlanDefinition update(PlanDefinition bean);
   public void delete(PlanDefinition bean);
+  public List<PlanDefinition> findByField(QueryBuilder queryBuilder);
+
+
 }

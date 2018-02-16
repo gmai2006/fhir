@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A collection of documents compiled for a purpose together with metadata that applies to the collection."
 */
 @Entity
 @Table(name="documentmanifestrelated")
 public class DocumentManifestRelatedModel  implements Serializable {
-	private static final long serialVersionUID = 15185766968143664L;
+	private static final long serialVersionUID = 151873631160223632L;
   /**
   * Description: "Related identifier to this DocumentManifest.  For example, Order numbers, accession numbers, XDW workflow numbers."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class DocumentManifestRelatedModel  implements Serializable {
   public DocumentManifestRelatedModel(DocumentManifestRelated o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     if (null != o.getRef() ) {
     	this.ref_id = "ref" + this.parent_id;
     	this.ref = ReferenceHelper.toModel(o.getRef(), this.ref_id);

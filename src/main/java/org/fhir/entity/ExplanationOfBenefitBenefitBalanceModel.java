@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitbenefitbalance")
 public class ExplanationOfBenefitBenefitBalanceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669652418702L;
+	private static final long serialVersionUID = 151873631118080854L;
   /**
   * Description: "Dental, Vision, Medical, Pharmacy, Rehab etc."
   * Actual type: String;
@@ -161,14 +162,14 @@ public class ExplanationOfBenefitBenefitBalanceModel  implements Serializable {
   public ExplanationOfBenefitBenefitBalanceModel(ExplanationOfBenefitBenefitBalance o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.subCategory = CodeableConceptHelper.toJson(o.getSubCategory());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.subCategory = JsonUtils.toJson(o.getSubCategory());
     this.excluded = o.getExcluded();
     this.name = o.getName();
     this.description = o.getDescription();
-    this.network = CodeableConceptHelper.toJson(o.getNetwork());
-    this.unit = CodeableConceptHelper.toJson(o.getUnit());
-    this.term = CodeableConceptHelper.toJson(o.getTerm());
+    this.network = JsonUtils.toJson(o.getNetwork());
+    this.unit = JsonUtils.toJson(o.getUnit());
+    this.term = JsonUtils.toJson(o.getTerm());
     if (null != o.getFinancial() && !o.getFinancial().isEmpty()) {
     	this.financial_id = "financial" + this.parent_id;
     	this.financial = ExplanationOfBenefitFinancialHelper.toModelFromArray(o.getFinancial(), this.financial_id);

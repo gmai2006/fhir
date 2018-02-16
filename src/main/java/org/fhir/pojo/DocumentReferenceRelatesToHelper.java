@@ -53,19 +53,4 @@ public class DocumentReferenceRelatesToHelper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, DocumentReferenceRelatesTo.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DocumentReferenceRelatesTo o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DocumentReferenceRelatesTo> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

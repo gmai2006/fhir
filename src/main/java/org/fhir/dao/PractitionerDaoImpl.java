@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.PractitionerModel;
 import org.fhir.pojo.Practitioner;
 import org.fhir.pojo.PractitionerHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class PractitionerDaoImpl implements PractitionerDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class PractitionerDaoImpl implements PractitionerDao {
       final EntityManager em = entityManagerProvider.get();
       final PractitionerModel removed = em.find(PractitionerModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<Practitioner> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Practitioner> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, PractitionerModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<PractitionerModel> models = query.getResultList();
+    return PractitionerHelper.fromArray2Array(models);
   }
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects."
 */
 @Entity
 @Table(name="researchstudy")
 public class ResearchStudyModel  implements Serializable {
-	private static final long serialVersionUID = 151857669708720743L;
+	private static final long serialVersionUID = 151873631187497120L;
   /**
   * Description: "This is a ResearchStudy resource"
   */
@@ -352,7 +353,7 @@ public class ResearchStudyModel  implements Serializable {
     	this.enrollment_id = "enrollment" + this.id;
     	this.enrollment = ReferenceHelper.toModelFromArray(o.getEnrollment(), this.enrollment_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getSponsor() ) {
     	this.sponsor_id = "sponsor" + this.id;
     	this.sponsor = ReferenceHelper.toModel(o.getSponsor(), this.sponsor_id);
@@ -365,7 +366,7 @@ public class ResearchStudyModel  implements Serializable {
     	this.site_id = "site" + this.id;
     	this.site = ReferenceHelper.toModelFromArray(o.getSite(), this.site_id);
     }
-    this.reasonStopped = CodeableConceptHelper.toJson(o.getReasonStopped());
+    this.reasonStopped = JsonUtils.toJson(o.getReasonStopped());
     if (null != o.getArm() && !o.getArm().isEmpty()) {
     	this.arm_id = "arm" + this.id;
     	this.arm = ResearchStudyArmHelper.toModelFromArray(o.getArm(), this.arm_id);

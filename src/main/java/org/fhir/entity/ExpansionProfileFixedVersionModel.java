@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
 */
 @Entity
 @Table(name="expansionprofilefixedversion")
 public class ExpansionProfileFixedVersionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669680768465L;
+	private static final long serialVersionUID = 151873631159074970L;
   /**
   * Description: "The specific system for which to fix the version."
   */

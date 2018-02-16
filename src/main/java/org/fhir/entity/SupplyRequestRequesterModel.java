@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a request for a medication, substance or device used in the healthcare setting."
 */
 @Entity
 @Table(name="supplyrequestrequester")
 public class SupplyRequestRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669660376405L;
+	private static final long serialVersionUID = 151873631130154030L;
   /**
   * Description: "The device, practitioner, etc. who initiated the request."
   */

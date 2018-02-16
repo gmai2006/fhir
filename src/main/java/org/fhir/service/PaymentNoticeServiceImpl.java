@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PaymentNotice;
 /**
 * auto generated from SQL files
@@ -103,5 +104,37 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(PaymentNotice) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<PaymentNotice> findByField(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<PaymentNotice> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentNotice> findByProvider(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByProvider(queryBuilder);
+    logger.info("findByprovider - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentNotice> findByRequest(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByRequest(queryBuilder);
+    logger.info("findByrequest - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentNotice> findByResponse(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByResponse(queryBuilder);
+    logger.info("findByresponse - exited - return value={} result ");
+    return result;
   }
 }

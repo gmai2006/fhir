@@ -3,5 +3,6 @@
   "type": "COMPLEX",
   "isInnerClass": true,
   "autoIncrement": true,
-  "fields": []
+  "fields": [],
+  "searches": []
 }

@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ResourceModel;
 import org.fhir.pojo.Resource;
 import org.fhir.pojo.ResourceHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ResourceDaoImpl implements ResourceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class ResourceDaoImpl implements ResourceDao {
       final EntityManager em = entityManagerProvider.get();
       final ResourceModel removed = em.find(ResourceModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<Resource> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ResourceModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Resource> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ResourceModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ResourceModel> models = query.getResultList();
+    return ResourceHelper.fromArray2Array(models);
   }
 }

@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Procedure;
 /**
 * auto generated from SQL files
@@ -103,5 +104,43 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Procedure) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Procedure> findByField(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Procedure> findByContext(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByDefinition(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByDefinition(queryBuilder);
+    logger.info("findBydefinition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByLocation(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByPerformer(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByPerformer(queryBuilder);
+    logger.info("findByperformer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

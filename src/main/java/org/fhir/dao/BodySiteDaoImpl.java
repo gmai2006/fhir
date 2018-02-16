@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.BodySiteModel;
 import org.fhir.pojo.BodySite;
 import org.fhir.pojo.BodySiteHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class BodySiteDaoImpl implements BodySiteDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class BodySiteDaoImpl implements BodySiteDao {
       final EntityManager em = entityManagerProvider.get();
       final BodySiteModel removed = em.find(BodySiteModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<BodySite> findByPatient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BodySiteModel a, Reference b where a.patient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<BodySite> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BodySiteModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<BodySite> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, BodySiteModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<BodySiteModel> models = query.getResultList();
+    return BodySiteHelper.fromArray2Array(models);
   }
 }

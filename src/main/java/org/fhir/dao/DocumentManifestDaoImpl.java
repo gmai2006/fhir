@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.DocumentManifestModel;
 import org.fhir.pojo.DocumentManifest;
 import org.fhir.pojo.DocumentManifestHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class DocumentManifestDaoImpl implements DocumentManifestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class DocumentManifestDaoImpl implements DocumentManifestDao {
       final EntityManager em = entityManagerProvider.get();
       final DocumentManifestModel removed = em.find(DocumentManifestModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<DocumentManifest> findByAuthor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DocumentManifestModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DocumentManifest> findByRecipient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DocumentManifestModel a, Reference b where a.recipient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DocumentManifest> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DocumentManifestModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<DocumentManifest> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DocumentManifestModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<DocumentManifest> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, DocumentManifestModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<DocumentManifestModel> models = query.getResultList();
+    return DocumentManifestHelper.fromArray2Array(models);
   }
 }

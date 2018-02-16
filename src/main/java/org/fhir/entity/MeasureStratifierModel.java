@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The Measure resource provides the definition of a quality measure."
 */
 @Entity
 @Table(name="measurestratifier")
 public class MeasureStratifierModel  implements Serializable {
-	private static final long serialVersionUID = 151857669711250582L;
+	private static final long serialVersionUID = 151873631190165874L;
   /**
   * Description: "The identifier for the stratifier used to coordinate the reported data back to this stratifier."
   * Actual type: String;
@@ -106,7 +107,7 @@ public class MeasureStratifierModel  implements Serializable {
   public MeasureStratifierModel(MeasureStratifier o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.criteria = o.getCriteria();
     this.path = o.getPath();
   }

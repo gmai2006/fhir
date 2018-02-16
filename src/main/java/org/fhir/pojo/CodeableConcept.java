@@ -30,40 +30,21 @@ import com.google.gson.GsonBuilder;
 /**
 * "A concept that may be defined by a formal reference to a terminology or ontology or may be provided by text."
 */
-public class CodeableConcept  {
+public class CodeableConcept  extends Element  {
   /**
   * Description: "A reference to a code defined by a terminology system."
   */
-  private java.util.List<Coding> coding = new java.util.ArrayList<>();
+  protected java.util.List<Coding> coding = new java.util.ArrayList<>();
 
   /**
   * Description: "A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user."
   */
-  private String text;
+  protected String text;
 
   /**
   * Description: "Extensions for text"
   */
-  private transient Element _text;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _text;
 
   public CodeableConcept() {}
 
@@ -85,24 +66,6 @@ public class CodeableConcept  {
   public Element get_text() {
     return this._text;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -110,10 +73,7 @@ public class CodeableConcept  {
     builder.append("[CodeableConcept]:" + "\n");
      if(this.coding != null) builder.append("coding" + "->" + this.coding.toString() + "\n"); 
      if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); ;
     return builder.toString();
   }
 

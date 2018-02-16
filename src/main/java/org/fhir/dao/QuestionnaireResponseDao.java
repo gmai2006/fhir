@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.QuestionnaireResponse;
 
 public interface QuestionnaireResponseDao {
@@ -38,4 +39,13 @@ public interface QuestionnaireResponseDao {
 
   public QuestionnaireResponse update(QuestionnaireResponse e);
   public void delete(QuestionnaireResponse e);
+
+  public List<QuestionnaireResponse> findByField(QueryBuilder queryBuilder);
+
+  public List<QuestionnaireResponse> findByAuthor(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByContext(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByParent(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByQuestionnaire(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findBySource(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findBySubject(QueryBuilder queryBuilder);
 }

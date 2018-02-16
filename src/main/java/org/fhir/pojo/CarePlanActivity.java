@@ -31,59 +31,31 @@ import com.google.gson.GsonBuilder;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
-public class CarePlanActivity  {
+public class CarePlanActivity  extends BackboneElement  {
   /**
   * Description: "Identifies the outcome at the point when the status of the activity is assessed.  For example, the outcome of an education activity could be patient understands (or not)."
   */
-  private java.util.List<CodeableConcept> outcomeCodeableConcept = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> outcomeCodeableConcept = new java.util.ArrayList<>();
 
   /**
   * Description: "Details of the outcome or action resulting from the activity.  The reference to an \"event\" resource, such as Procedure or Encounter or Observation, is the result/outcome of the activity itself.  The activity can be conveyed using CarePlan.activity.detail OR using the CarePlan.activity.reference (a reference to a “request” resource)."
   */
-  private java.util.List<Reference> outcomeReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> outcomeReference = new java.util.ArrayList<>();
 
   /**
   * Description: "Notes about the adherence/status/progress of the activity."
   */
-  private java.util.List<Annotation> progress = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> progress = new java.util.ArrayList<>();
 
   /**
   * Description: "The details of the proposed activity represented in a specific resource."
   */
-  private Reference reference;
+  protected Reference reference;
 
   /**
   * Description: "A simple summary of a planned activity suitable for a general care plan system (e.g. form driven) that doesn't know about specific resources such as procedure etc."
   */
-  private CarePlanDetail detail;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected CarePlanDetail detail;
 
   public CarePlanActivity() {
   }
@@ -98,9 +70,6 @@ public class CarePlanActivity  {
     }
     if (null != o.getDetail() && !o.getDetail().isEmpty()) {
       this.detail = new CarePlanDetail(o.getDetail().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -134,30 +103,6 @@ public class CarePlanActivity  {
   public CarePlanDetail getDetail() {
     return this.detail;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -167,11 +112,7 @@ public class CarePlanActivity  {
      if(this.outcomeReference != null) builder.append("outcomeReference" + "->" + this.outcomeReference.toString() + "\n"); 
      if(this.progress != null) builder.append("progress" + "->" + this.progress.toString() + "\n"); 
      if(this.reference != null) builder.append("reference" + "->" + this.reference.toString() + "\n"); 
-     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.detail != null) builder.append("detail" + "->" + this.detail.toString() + "\n"); ;
     return builder.toString();
   }
 

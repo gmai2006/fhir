@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.SubstanceModel;
 import org.fhir.pojo.Substance;
 import org.fhir.pojo.SubstanceHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class SubstanceDaoImpl implements SubstanceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class SubstanceDaoImpl implements SubstanceDao {
       final EntityManager em = entityManagerProvider.get();
       final SubstanceModel removed = em.find(SubstanceModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<Substance> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SubstanceModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Substance> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, SubstanceModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<SubstanceModel> models = query.getResultList();
+    return SubstanceHelper.fromArray2Array(models);
   }
 }

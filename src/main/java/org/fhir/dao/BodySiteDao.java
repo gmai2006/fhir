@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.BodySite;
 
 public interface BodySiteDao {
@@ -38,4 +39,8 @@ public interface BodySiteDao {
 
   public BodySite update(BodySite e);
   public void delete(BodySite e);
+
+  public List<BodySite> findByField(QueryBuilder queryBuilder);
+
+  public List<BodySite> findByPatient(QueryBuilder queryBuilder);
 }

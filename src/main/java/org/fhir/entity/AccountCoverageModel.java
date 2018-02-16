@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc."
 */
 @Entity
 @Table(name="accountcoverage")
 public class AccountCoverageModel  implements Serializable {
-	private static final long serialVersionUID = 151857669717247522L;
+	private static final long serialVersionUID = 151873631196989563L;
   /**
   * Description: "The party(s) that are responsible for payment (or part of) of charges applied to this account (including self-pay).\n\nA coverage may only be resposible for specific types of charges, and the sequence of the coverages in the account could be important when processing billing."
   */

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A reference to a document."
 */
 @Entity
 @Table(name="documentreferencerelated")
 public class DocumentReferenceRelatedModel  implements Serializable {
-	private static final long serialVersionUID = 151857669673077777L;
+	private static final long serialVersionUID = 151873631147588453L;
   /**
   * Description: "Related identifier to this DocumentReference. If both id and ref are present they shall refer to the same thing."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class DocumentReferenceRelatedModel  implements Serializable {
   public DocumentReferenceRelatedModel(DocumentReferenceRelated o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     if (null != o.getRef() ) {
     	this.ref_id = "ref" + this.parent_id;
     	this.ref = ReferenceHelper.toModel(o.getRef(), this.ref_id);

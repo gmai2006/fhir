@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ResearchStudyModel;
 import org.fhir.pojo.ResearchStudy;
 import org.fhir.pojo.ResearchStudyHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ResearchStudyDaoImpl implements ResearchStudyDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class ResearchStudyDaoImpl implements ResearchStudyDao {
       final EntityManager em = entityManagerProvider.get();
       final ResearchStudyModel removed = em.find(ResearchStudyModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ResearchStudy> findByProtocol(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ResearchStudyModel a, Reference b where a.protocol_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ResearchStudy> findBySite(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ResearchStudyModel a, Reference b where a.site_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ResearchStudy> findBySponsor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ResearchStudyModel a, Reference b where a.sponsor_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ResearchStudy> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ResearchStudyModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ResearchStudy> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ResearchStudyModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ResearchStudyModel> models = query.getResultList();
+    return ResearchStudyHelper.fromArray2Array(models);
   }
 }

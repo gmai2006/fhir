@@ -53,19 +53,4 @@ public class DocumentManifestRelatedHelper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, DocumentManifestRelated.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(DocumentManifestRelated o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<DocumentManifestRelated> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

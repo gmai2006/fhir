@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A collection of documents compiled for a purpose together with metadata that applies to the collection."
 */
 @Entity
 @Table(name="documentmanifestcontent")
 public class DocumentManifestContentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669681169103L;
+	private static final long serialVersionUID = 151873631159871416L;
   /**
   * Description: "The list of references to document content, or Attachment that consist of the parts of this document manifest. Usually, these would be document references, but direct references to Media or Attachments are also allowed."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class DocumentManifestContentModel  implements Serializable {
   public DocumentManifestContentModel(DocumentManifestContent o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.pAttachment = AttachmentHelper.toJson(o.getPAttachment());
+    this.pAttachment = JsonUtils.toJson(o.getPAttachment());
     if (null != o.getPReference() ) {
     	this.preference_id = "preference" + this.parent_id;
     	this.pReference = ReferenceHelper.toModel(o.getPReference(), this.preference_id);

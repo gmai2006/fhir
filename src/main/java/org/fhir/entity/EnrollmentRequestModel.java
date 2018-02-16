@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the insurance enrollment details to the insurer regarding a specified coverage."
 */
 @Entity
 @Table(name="enrollmentrequest")
 public class EnrollmentRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669716272421L;
+	private static final long serialVersionUID = 151873631195829518L;
   /**
   * Description: "This is a EnrollmentRequest resource"
   */

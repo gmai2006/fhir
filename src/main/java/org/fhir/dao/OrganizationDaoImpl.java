@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.OrganizationModel;
 import org.fhir.pojo.Organization;
 import org.fhir.pojo.OrganizationHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class OrganizationDaoImpl implements OrganizationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class OrganizationDaoImpl implements OrganizationDao {
       final EntityManager em = entityManagerProvider.get();
       final OrganizationModel removed = em.find(OrganizationModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Organization> findByAddress(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from OrganizationModel a, Address b where a.address_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Organization> findByEndpoint(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from OrganizationModel a, Reference b where a.endpoint_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Organization> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from OrganizationModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Organization> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, OrganizationModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<OrganizationModel> models = query.getResultList();
+    return OrganizationHelper.fromArray2Array(models);
   }
 }

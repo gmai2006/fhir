@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.MedicationAdministrationModel;
 import org.fhir.pojo.MedicationAdministration;
 import org.fhir.pojo.MedicationAdministrationHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class MedicationAdministrationDaoImpl implements MedicationAdministrationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,55 @@ public class MedicationAdministrationDaoImpl implements MedicationAdministration
       final EntityManager em = entityManagerProvider.get();
       final MedicationAdministrationModel removed = em.find(MedicationAdministrationModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<MedicationAdministration> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationAdministrationModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MedicationAdministration> findByDevice(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationAdministrationModel a, Reference b where a.device_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MedicationAdministration> findByPerformer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationAdministrationModel a, MedicationAdministrationPerformer b where a.performer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MedicationAdministration> findByPrescription(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationAdministrationModel a, Reference b where a.prescription_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MedicationAdministration> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationAdministrationModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<MedicationAdministration> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationAdministrationModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<MedicationAdministration> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, MedicationAdministrationModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<MedicationAdministrationModel> models = query.getResultList();
+    return MedicationAdministrationHelper.fromArray2Array(models);
   }
 }

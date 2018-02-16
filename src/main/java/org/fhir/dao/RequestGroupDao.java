@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.RequestGroup;
 
 public interface RequestGroupDao {
@@ -38,4 +39,11 @@ public interface RequestGroupDao {
 
   public RequestGroup update(RequestGroup e);
   public void delete(RequestGroup e);
+
+  public List<RequestGroup> findByField(QueryBuilder queryBuilder);
+
+  public List<RequestGroup> findByAuthor(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByContext(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByDefinition(QueryBuilder queryBuilder);
+  public List<RequestGroup> findBySubject(QueryBuilder queryBuilder);
 }

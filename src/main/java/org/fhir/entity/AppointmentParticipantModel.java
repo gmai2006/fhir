@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s)."
 */
 @Entity
 @Table(name="appointmentparticipant")
 public class AppointmentParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 15185766966464157L;
+	private static final long serialVersionUID = 151873631136968948L;
   /**
   * Description: "Role of participant in the appointment."
   * Actual type: List<String>;

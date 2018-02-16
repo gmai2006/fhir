@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CarePlan;
 /**
 * auto generated from SQL files
@@ -103,5 +104,43 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(CarePlan) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<CarePlan> findByField(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<CarePlan> findByContext(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByDefinition(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByDefinition(queryBuilder);
+    logger.info("findBydefinition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByGoal(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByGoal(queryBuilder);
+    logger.info("findBygoal - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByReplaces(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByReplaces(queryBuilder);
+    logger.info("findByreplaces - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findBySubject(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

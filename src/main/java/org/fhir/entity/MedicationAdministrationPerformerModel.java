@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient consuming or otherwise being administered a medication.  This may be as simple as swallowing a tablet or it may be a long running infusion.  Related resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner."
 */
 @Entity
 @Table(name="medicationadministrationperformer")
 public class MedicationAdministrationPerformerModel  implements Serializable {
-	private static final long serialVersionUID = 151857669659396633L;
+	private static final long serialVersionUID = 151873631128319904L;
   /**
   * Description: "The device, practitioner, etc. who performed the action."
   */

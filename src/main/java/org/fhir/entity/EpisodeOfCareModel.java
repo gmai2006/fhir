@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time."
 */
 @Entity
 @Table(name="episodeofcare")
 public class EpisodeOfCareModel  implements Serializable {
-	private static final long serialVersionUID = 151857669659882034L;
+	private static final long serialVersionUID = 151873631129385861L;
   /**
   * Description: "This is a EpisodeOfCare resource"
   */
@@ -276,7 +277,7 @@ public class EpisodeOfCareModel  implements Serializable {
     	this.managingorganization_id = "managingorganization" + this.id;
     	this.managingOrganization = ReferenceHelper.toModel(o.getManagingOrganization(), this.managingorganization_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getReferralRequest() && !o.getReferralRequest().isEmpty()) {
     	this.referralrequest_id = "referralrequest" + this.id;
     	this.referralRequest = ReferenceHelper.toModelFromArray(o.getReferralRequest(), this.referralrequest_id);

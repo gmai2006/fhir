@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An authorization for the supply of glasses and/or contact lenses to a patient."
 */
 @Entity
 @Table(name="visionprescriptiondispense")
 public class VisionPrescriptionDispenseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669714546758L;
+	private static final long serialVersionUID = 151873631193931737L;
   /**
   * Description: "Identifies the type of vision correction product which is required for the patient."
   * Actual type: String;
@@ -127,12 +128,14 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
 
   /**
   * Description: "The recommended maximum wear period for the lens."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"duration\"", length = 16777215)
-  private String duration;
+  @Column(name="\"duration_id\"")
+  private String duration_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="duration_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> duration;
 
   /**
   * Description: "Special color or pattern."
@@ -202,7 +205,7 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
   public VisionPrescriptionDispenseModel(VisionPrescriptionDispense o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.product = CodeableConceptHelper.toJson(o.getProduct());
+    this.product = JsonUtils.toJson(o.getProduct());
     this.eye = o.getEye();
     this.sphere = o.getSphere();
     this.cylinder = o.getCylinder();
@@ -213,7 +216,10 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
     this.power = o.getPower();
     this.backCurve = o.getBackCurve();
     this.diameter = o.getDiameter();
-    this.duration = QuantityHelper.toJson(o.getDuration());
+    if (null != o.getDuration() ) {
+    	this.duration_id = "duration" + this.parent_id;
+    	this.duration = QuantityHelper.toModel(o.getDuration(), this.duration_id);
+    }
     this.color = o.getColor();
     this.brand = o.getBrand();
   }
@@ -284,10 +290,10 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
   public void setDiameter( Float value) {
     this.diameter = value;
   }
-  public String getDuration() {
+  public java.util.List<QuantityModel> getDuration() {
     return this.duration;
   }
-  public void setDuration( String value) {
+  public void setDuration( java.util.List<QuantityModel> value) {
     this.duration = value;
   }
   public String getColor() {
@@ -348,7 +354,6 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
      builder.append("power" + "->" + this.power + "\n"); 
      builder.append("backCurve" + "->" + this.backCurve + "\n"); 
      builder.append("diameter" + "->" + this.diameter + "\n"); 
-     builder.append("duration" + "->" + this.duration + "\n"); 
      builder.append("color" + "->" + this.color + "\n"); 
      builder.append("brand" + "->" + this.brand + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 

@@ -31,50 +31,31 @@ import com.google.gson.GsonBuilder;
 /**
 * "A contributor to the content of a knowledge asset, including authors, editors, reviewers, and endorsers."
 */
-public class Contributor  {
+public class Contributor  extends Element  {
   /**
   * Description: "The type of contributor."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "The name of the individual or organization responsible for the contribution."
   */
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "Contact details to assist a user in finding and communicating with the contributor."
   */
-  private java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
 
   public Contributor() {
   }
@@ -89,9 +70,6 @@ public class Contributor  {
     }
     if (null != o.getContact() && !o.getContact().isEmpty()) {
     	this.contact = ContactDetailHelper.fromArray2Array(o.getContact());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -125,24 +103,6 @@ public class Contributor  {
   public java.util.List<ContactDetail> getContact() {
     return this.contact;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -152,10 +112,7 @@ public class Contributor  {
      if(this._type != null) builder.append("_type" + "->" + this._type.toString() + "\n"); 
      if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
      if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
-     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.contact != null) builder.append("contact" + "->" + this.contact.toString() + "\n"); ;
     return builder.toString();
   }
 

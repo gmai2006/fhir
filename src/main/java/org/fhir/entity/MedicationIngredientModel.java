@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
 */
 @Entity
 @Table(name="medicationingredient")
 public class MedicationIngredientModel  implements Serializable {
-	private static final long serialVersionUID = 1518576696621952L;
+	private static final long serialVersionUID = 151873631133084165L;
   /**
   * Description: "The actual ingredient - either a substance (simple ingredient) or another medication."
   * Actual type: String;
@@ -119,13 +120,13 @@ public class MedicationIngredientModel  implements Serializable {
   public MedicationIngredientModel(MedicationIngredient o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.itemCodeableConcept = CodeableConceptHelper.toJson(o.getItemCodeableConcept());
+    this.itemCodeableConcept = JsonUtils.toJson(o.getItemCodeableConcept());
     if (null != o.getItemReference() ) {
     	this.itemreference_id = "itemreference" + this.parent_id;
     	this.itemReference = ReferenceHelper.toModel(o.getItemReference(), this.itemreference_id);
     }
     this.isActive = o.getIsActive();
-    this.amount = RatioHelper.toJson(o.getAmount());
+    this.amount = JsonUtils.toJson(o.getAmount());
   }
 
   public String getItemCodeableConcept() {

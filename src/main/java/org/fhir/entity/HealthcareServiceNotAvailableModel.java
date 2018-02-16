@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The details of a healthcare service available at a location."
 */
 @Entity
 @Table(name="healthcareservicenotavailable")
 public class HealthcareServiceNotAvailableModel  implements Serializable {
-	private static final long serialVersionUID = 151857669671942807L;
+	private static final long serialVersionUID = 1518736311462278L;
   /**
   * Description: "The reason that can be presented to the user as to why this time is not available."
   */
@@ -100,7 +101,7 @@ public class HealthcareServiceNotAvailableModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.description = o.getDescription();
-    this.during = PeriodHelper.toJson(o.getDuring());
+    this.during = JsonUtils.toJson(o.getDuring());
   }
 
   public String getDescription() {

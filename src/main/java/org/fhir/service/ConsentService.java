@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Consent;
 
 public interface ConsentService {
@@ -35,4 +37,10 @@ public interface ConsentService {
   public Consent create(Consent bean);
   public Consent update(Consent bean);
   public void delete(Consent bean);
+  public List<Consent> findByField(QueryBuilder queryBuilder);
+  public List<Consent> findByActor(QueryBuilder queryBuilder);
+  public List<Consent> findByData(QueryBuilder queryBuilder);
+  public List<Consent> findByOrganization(QueryBuilder queryBuilder);
+
+
 }

@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.VisionPrescription;
 /**
 * auto generated from SQL files
@@ -103,5 +104,19 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(VisionPrescription) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<VisionPrescription> findByField(QueryBuilder queryBuilder) {
+  	final List<VisionPrescription> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<VisionPrescription> findByPrescriber(QueryBuilder queryBuilder) {
+  	final List<VisionPrescription> result = dao.findByPrescriber(queryBuilder);
+    logger.info("findByprescriber - exited - return value={} result ");
+    return result;
   }
 }

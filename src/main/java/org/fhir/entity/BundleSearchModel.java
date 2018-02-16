@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
 */
 @Entity
 @Table(name="bundlesearch")
 public class BundleSearchModel  implements Serializable {
-	private static final long serialVersionUID = 151857669679386401L;
+	private static final long serialVersionUID = 151873631157379754L;
   /**
   * Description: "Why this entry is in the result set - whether it's included as a match or because of an _include requirement."
   */

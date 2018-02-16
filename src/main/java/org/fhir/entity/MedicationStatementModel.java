@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now, or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains \r\rThe primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information."
 */
 @Entity
 @Table(name="medicationstatement")
 public class MedicationStatementModel  implements Serializable {
-	private static final long serialVersionUID = 151857669665296992L;
+	private static final long serialVersionUID = 151873631137580875L;
   /**
   * Description: "This is a MedicationStatement resource"
   */
@@ -342,14 +343,14 @@ public class MedicationStatementModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.status = o.getStatus();
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.medicationCodeableConcept = CodeableConceptHelper.toJson(o.getMedicationCodeableConcept());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.medicationCodeableConcept = JsonUtils.toJson(o.getMedicationCodeableConcept());
     if (null != o.getMedicationReference() ) {
     	this.medicationreference_id = "medicationreference" + this.id;
     	this.medicationReference = ReferenceHelper.toModel(o.getMedicationReference(), this.medicationreference_id);
     }
     this.effectiveDateTime = o.getEffectiveDateTime();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     this.dateAsserted = o.getDateAsserted();
     if (null != o.getInformationSource() ) {
     	this.informationsource_id = "informationsource" + this.id;

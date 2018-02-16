@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Prospective warnings of potential issues when providing care to the patient."
 */
 @Entity
 @Table(name="flag")
 public class FlagModel  implements Serializable {
-	private static final long serialVersionUID = 15185766966626608L;
+	private static final long serialVersionUID = 151873631138897205L;
   /**
   * Description: "This is a Flag resource"
   */
@@ -215,13 +216,13 @@ public class FlagModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getEncounter() ) {
     	this.encounter_id = "encounter" + this.id;
     	this.encounter = ReferenceHelper.toModel(o.getEncounter(), this.encounter_id);

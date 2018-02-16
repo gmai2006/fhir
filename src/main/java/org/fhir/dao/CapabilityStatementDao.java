@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CapabilityStatement;
 
 public interface CapabilityStatementDao {
@@ -38,4 +39,8 @@ public interface CapabilityStatementDao {
 
   public CapabilityStatement update(CapabilityStatement e);
   public void delete(CapabilityStatement e);
+
+  public List<CapabilityStatement> findByField(QueryBuilder queryBuilder);
+
+  public List<CapabilityStatement> findBySoftware(QueryBuilder queryBuilder);
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The EligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an EligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy."
 */
 @Entity
 @Table(name="eligibilityrequest")
 public class EligibilityRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669712188564L;
+	private static final long serialVersionUID = 151873631191133011L;
   /**
   * Description: "This is a EligibilityRequest resource"
   */
@@ -291,13 +292,13 @@ public class EligibilityRequestModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.priority = CodeableConceptHelper.toJson(o.getPriority());
+    this.priority = JsonUtils.toJson(o.getPriority());
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
     this.servicedDate = o.getServicedDate();
-    this.servicedPeriod = PeriodHelper.toJson(o.getServicedPeriod());
+    this.servicedPeriod = JsonUtils.toJson(o.getServicedPeriod());
     this.created = o.getCreated();
     if (null != o.getEnterer() ) {
     	this.enterer_id = "enterer" + this.id;
@@ -324,8 +325,8 @@ public class EligibilityRequestModel  implements Serializable {
     	this.coverage = ReferenceHelper.toModel(o.getCoverage(), this.coverage_id);
     }
     this.businessArrangement = o.getBusinessArrangement();
-    this.benefitCategory = CodeableConceptHelper.toJson(o.getBenefitCategory());
-    this.benefitSubCategory = CodeableConceptHelper.toJson(o.getBenefitSubCategory());
+    this.benefitCategory = JsonUtils.toJson(o.getBenefitCategory());
+    this.benefitSubCategory = JsonUtils.toJson(o.getBenefitSubCategory());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);

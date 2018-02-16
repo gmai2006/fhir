@@ -31,61 +31,33 @@ import com.google.gson.GsonBuilder;
 /**
 * "A text description of the DICOM SOP instances selected in the ImagingManifest; or the reason for, or significance of, the selection."
 */
-public class ImagingManifestStudy  {
+public class ImagingManifestStudy  extends BackboneElement  {
   /**
   * Description: "Study instance UID of the SOP instances in the selection."
   */
   @javax.validation.constraints.Pattern(regexp="urn:oid:(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*))*")
-  private String uid;
+  protected String uid;
 
   /**
   * Description: "Extensions for uid"
   */
-  private transient Element _uid;
+  protected transient Element _uid;
 
   /**
   * Description: "Reference to the Imaging Study in FHIR form."
   */
-  private Reference imagingStudy;
+  protected Reference imagingStudy;
 
   /**
   * Description: "The network service providing access (e.g., query, view, or retrieval) for the study. See implementation notes for information about using DICOM endpoints. A study-level endpoint applies to each series in the study, unless overridden by a series-level endpoint with the same Endpoint.type."
   */
-  private java.util.List<Reference> endpoint = new java.util.ArrayList<>();
+  protected java.util.List<Reference> endpoint = new java.util.ArrayList<>();
 
   /**
   * Description: "Series identity and locating information of the DICOM SOP instances in the selection."
   */
   @javax.validation.constraints.NotNull
-  private java.util.List<ImagingManifestSeries> series = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ImagingManifestSeries> series = new java.util.ArrayList<>();
 
   public ImagingManifestStudy() {
   }
@@ -103,9 +75,6 @@ public class ImagingManifestStudy  {
     }
     if (null != o.getSeries() && !o.getSeries().isEmpty()) {
     	this.series = ImagingManifestSeriesHelper.fromArray2Array(o.getSeries());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -139,30 +108,6 @@ public class ImagingManifestStudy  {
   public java.util.List<ImagingManifestSeries> getSeries() {
     return this.series;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -172,11 +117,7 @@ public class ImagingManifestStudy  {
      if(this._uid != null) builder.append("_uid" + "->" + this._uid.toString() + "\n"); 
      if(this.imagingStudy != null) builder.append("imagingStudy" + "->" + this.imagingStudy.toString() + "\n"); 
      if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
-     if(this.series != null) builder.append("series" + "->" + this.series.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.series != null) builder.append("series" + "->" + this.series.toString() + "\n"); ;
     return builder.toString();
   }
 

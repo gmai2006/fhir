@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes a measurement, calculation or setting capability of a medical device."
 */
 @Entity
 @Table(name="devicemetriccalibration")
 public class DeviceMetricCalibrationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669655256706L;
+	private static final long serialVersionUID = 151873631122760395L;
   /**
   * Description: "Describes the type of the calibration method."
   */

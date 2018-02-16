@@ -111,6 +111,7 @@
 <class>org.fhir.entity.DeviceComponent</class>
 <class>org.fhir.entity.CapabilityStatementOperation</class>
 <class>org.fhir.entity.CommunicationRequestPayload</class>
+<class>org.fhir.entity.Quantity</class>
 <class>org.fhir.entity.Communication</class>
 <class>org.fhir.entity.ProvenanceAgent</class>
 <class>org.fhir.entity.Subscription</class>
@@ -139,6 +140,7 @@
 <class>org.fhir.entity.ImmunizationRecommendation</class>
 <class>org.fhir.entity.DataRequirementCodeFilter</class>
 <class>org.fhir.entity.CodeSystemDesignation</class>
+<class>org.fhir.entity.Address</class>
 <class>org.fhir.entity.GroupCharacteristic</class>
 <class>org.fhir.entity.Observation</class>
 <class>org.fhir.entity.ImmunizationRecommendationProtocol</class>
@@ -272,6 +274,7 @@
 <class>org.fhir.entity.Organization</class>
 <class>org.fhir.entity.Resource</class>
 <class>org.fhir.entity.CodeSystemFilter</class>
+<class>org.fhir.entity.Money</class>
 <class>org.fhir.entity.PractitionerRoleNotAvailable</class>
 <class>org.fhir.entity.ListEntry</class>
 <class>org.fhir.entity.ValueSetDesignation</class>

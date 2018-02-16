@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
 */
 @Entity
 @Table(name="questionnaireoption")
 public class QuestionnaireOptionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669681873030L;
+	private static final long serialVersionUID = 151873631160690095L;
   /**
   * Description: "A potential answer that's allowed as the answer to this question."
   */
@@ -127,7 +128,7 @@ public class QuestionnaireOptionModel  implements Serializable {
     this.valueDate = o.getValueDate();
     this.valueTime = o.getValueTime();
     this.valueString = o.getValueString();
-    this.valueCoding = CodingHelper.toJson(o.getValueCoding());
+    this.valueCoding = JsonUtils.toJson(o.getValueCoding());
   }
 
   public Float getValueInteger() {

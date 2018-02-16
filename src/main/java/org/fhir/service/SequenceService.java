@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Sequence;
 
 public interface SequenceService {
@@ -35,4 +37,8 @@ public interface SequenceService {
   public Sequence create(Sequence bean);
   public Sequence update(Sequence bean);
   public void delete(Sequence bean);
+  public List<Sequence> findByField(QueryBuilder queryBuilder);
+  public List<Sequence> findByPatient(QueryBuilder queryBuilder);
+
+
 }

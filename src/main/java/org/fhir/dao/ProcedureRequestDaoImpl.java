@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ProcedureRequestModel;
 import org.fhir.pojo.ProcedureRequest;
 import org.fhir.pojo.ProcedureRequestHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ProcedureRequestDaoImpl implements ProcedureRequestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,67 @@ public class ProcedureRequestDaoImpl implements ProcedureRequestDao {
       final EntityManager em = entityManagerProvider.get();
       final ProcedureRequestModel removed = em.find(ProcedureRequestModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ProcedureRequest> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureRequestModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ProcedureRequest> findByDefinition(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureRequestModel a, Reference b where a.definition_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ProcedureRequest> findByPerformer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureRequestModel a, Reference b where a.performer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ProcedureRequest> findByReplaces(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureRequestModel a, Reference b where a.replaces_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ProcedureRequest> findByRequester(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureRequestModel a, ProcedureRequestRequester b where a.requester_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ProcedureRequest> findBySpecimen(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureRequestModel a, Reference b where a.specimen_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ProcedureRequest> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureRequestModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ProcedureRequest> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureRequestModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ProcedureRequest> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ProcedureRequestModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ProcedureRequestModel> models = query.getResultList();
+    return ProcedureRequestHelper.fromArray2Array(models);
   }
 }

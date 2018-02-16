@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A collection of error, warning or information messages that result from a system action."
 */
 @Entity
 @Table(name="operationoutcome")
 public class OperationOutcomeModel  implements Serializable {
-	private static final long serialVersionUID = 151857669693380041L;
+	private static final long serialVersionUID = 15187363117274400L;
   /**
   * Description: "This is a OperationOutcome resource"
   */

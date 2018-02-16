@@ -31,94 +31,66 @@ import com.google.gson.GsonBuilder;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
-public class NutritionOrderEnteralFormula  {
+public class NutritionOrderEnteralFormula  extends BackboneElement  {
   /**
   * Description: "The type of enteral or infant formula such as an adult standard formula with fiber or a soy-based infant formula."
   */
-  private CodeableConcept baseFormulaType;
+  protected CodeableConcept baseFormulaType;
 
   /**
   * Description: "The product or brand name of the enteral or infant formula product such as \"ACME Adult Standard Formula\"."
   */
-  private String baseFormulaProductName;
+  protected String baseFormulaProductName;
 
   /**
   * Description: "Extensions for baseFormulaProductName"
   */
-  private transient Element _baseFormulaProductName;
+  protected transient Element _baseFormulaProductName;
 
   /**
   * Description: "Indicates the type of modular component such as protein, carbohydrate, fat or fiber to be provided in addition to or mixed with the base formula."
   */
-  private CodeableConcept additiveType;
+  protected CodeableConcept additiveType;
 
   /**
   * Description: "The product or brand name of the type of modular component to be added to the formula."
   */
-  private String additiveProductName;
+  protected String additiveProductName;
 
   /**
   * Description: "Extensions for additiveProductName"
   */
-  private transient Element _additiveProductName;
+  protected transient Element _additiveProductName;
 
   /**
   * Description: "The amount of energy (calories) that the formula should provide per specified volume, typically per mL or fluid oz.  For example, an infant may require a formula that provides 24 calories per fluid ounce or an adult may require an enteral formula that provides 1.5 calorie/mL."
   */
-  private Quantity caloricDensity;
+  protected Quantity caloricDensity;
 
   /**
   * Description: "The route or physiological path of administration into the patient's gastrointestinal  tract for purposes of providing the formula feeding, e.g. nasogastric tube."
   */
-  private CodeableConcept routeofAdministration;
+  protected CodeableConcept routeofAdministration;
 
   /**
   * Description: "Formula administration instructions as structured data.  This repeating structure allows for changing the administration rate or volume over time for both bolus and continuous feeding.  An example of this would be an instruction to increase the rate of continuous feeding every 2 hours."
   */
-  private java.util.List<NutritionOrderAdministration> administration = new java.util.ArrayList<>();
+  protected java.util.List<NutritionOrderAdministration> administration = new java.util.ArrayList<>();
 
   /**
   * Description: "The maximum total quantity of formula that may be administered to a subject over the period of time, e.g. 1440 mL over 24 hours."
   */
-  private Quantity maxVolumeToDeliver;
+  protected Quantity maxVolumeToDeliver;
 
   /**
   * Description: "Free text formula administration, feeding instructions or additional instructions or information."
   */
-  private String administrationInstruction;
+  protected String administrationInstruction;
 
   /**
   * Description: "Extensions for administrationInstruction"
   */
-  private transient Element _administrationInstruction;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _administrationInstruction;
 
   public NutritionOrderEnteralFormula() {
   }
@@ -133,17 +105,18 @@ public class NutritionOrderEnteralFormula  {
     if (null != o.getAdditiveProductName()) {
       this.additiveProductName = o.getAdditiveProductName();
     }
-    this.caloricDensity = QuantityHelper.fromJson(o.getCaloricDensity());
+    if (null != o.getCaloricDensity() && !o.getCaloricDensity().isEmpty()) {
+      this.caloricDensity = new Quantity(o.getCaloricDensity().get(0));
+    }
     this.routeofAdministration = CodeableConceptHelper.fromJson(o.getRouteofAdministration());
     if (null != o.getAdministration() && !o.getAdministration().isEmpty()) {
     	this.administration = NutritionOrderAdministrationHelper.fromArray2Array(o.getAdministration());
     }
-    this.maxVolumeToDeliver = QuantityHelper.fromJson(o.getMaxVolumeToDeliver());
+    if (null != o.getMaxVolumeToDeliver() && !o.getMaxVolumeToDeliver().isEmpty()) {
+      this.maxVolumeToDeliver = new Quantity(o.getMaxVolumeToDeliver().get(0));
+    }
     if (null != o.getAdministrationInstruction()) {
       this.administrationInstruction = o.getAdministrationInstruction();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -219,30 +192,6 @@ public class NutritionOrderEnteralFormula  {
   public Element get_administrationInstruction() {
     return this._administrationInstruction;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -259,11 +208,7 @@ public class NutritionOrderEnteralFormula  {
      if(this.administration != null) builder.append("administration" + "->" + this.administration.toString() + "\n"); 
      if(this.maxVolumeToDeliver != null) builder.append("maxVolumeToDeliver" + "->" + this.maxVolumeToDeliver.toString() + "\n"); 
      if(this.administrationInstruction != null) builder.append("administrationInstruction" + "->" + this.administrationInstruction.toString() + "\n"); 
-     if(this._administrationInstruction != null) builder.append("_administrationInstruction" + "->" + this._administrationInstruction.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._administrationInstruction != null) builder.append("_administrationInstruction" + "->" + this._administrationInstruction.toString() + "\n"); ;
     return builder.toString();
   }
 

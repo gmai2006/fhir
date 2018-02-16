@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Observation;
 
 public interface ObservationDao {
@@ -38,4 +39,13 @@ public interface ObservationDao {
 
   public Observation update(Observation e);
   public void delete(Observation e);
+
+  public List<Observation> findByField(QueryBuilder queryBuilder);
+
+  public List<Observation> findByContext(QueryBuilder queryBuilder);
+  public List<Observation> findByDevice(QueryBuilder queryBuilder);
+  public List<Observation> findByPerformer(QueryBuilder queryBuilder);
+  public List<Observation> findByRelated(QueryBuilder queryBuilder);
+  public List<Observation> findBySpecimen(QueryBuilder queryBuilder);
+  public List<Observation> findBySubject(QueryBuilder queryBuilder);
 }

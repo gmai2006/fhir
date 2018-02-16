@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Account;
 
 public interface AccountDao {
@@ -38,4 +39,10 @@ public interface AccountDao {
 
   public Account update(Account e);
   public void delete(Account e);
+
+  public List<Account> findByField(QueryBuilder queryBuilder);
+
+  public List<Account> findByBalance(QueryBuilder queryBuilder);
+  public List<Account> findByOwner(QueryBuilder queryBuilder);
+  public List<Account> findBySubject(QueryBuilder queryBuilder);
 }

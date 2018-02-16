@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.DataElementModel;
 import org.fhir.pojo.DataElement;
 import org.fhir.pojo.DataElementHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class DataElementDaoImpl implements DataElementDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class DataElementDaoImpl implements DataElementDao {
       final EntityManager em = entityManagerProvider.get();
       final DataElementModel removed = em.find(DataElementModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<DataElement> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DataElementModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<DataElement> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, DataElementModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<DataElementModel> models = query.getResultList();
+    return DataElementHelper.fromArray2Array(models);
   }
 }

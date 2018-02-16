@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.BasicModel;
 import org.fhir.pojo.Basic;
 import org.fhir.pojo.BasicHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class BasicDaoImpl implements BasicDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class BasicDaoImpl implements BasicDao {
       final EntityManager em = entityManagerProvider.get();
       final BasicModel removed = em.find(BasicModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Basic> findByAuthor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BasicModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Basic> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BasicModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Basic> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BasicModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Basic> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, BasicModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<BasicModel> models = query.getResultList();
+    return BasicHelper.fromArray2Array(models);
   }
 }

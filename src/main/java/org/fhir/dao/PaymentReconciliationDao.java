@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PaymentReconciliation;
 
 public interface PaymentReconciliationDao {
@@ -38,4 +39,9 @@ public interface PaymentReconciliationDao {
 
   public PaymentReconciliation update(PaymentReconciliation e);
   public void delete(PaymentReconciliation e);
+
+  public List<PaymentReconciliation> findByField(QueryBuilder queryBuilder);
+
+  public List<PaymentReconciliation> findByOrganization(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByRequest(QueryBuilder queryBuilder);
 }

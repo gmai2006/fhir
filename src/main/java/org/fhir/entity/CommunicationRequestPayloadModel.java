@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition."
 */
 @Entity
 @Table(name="communicationrequestpayload")
 public class CommunicationRequestPayloadModel  implements Serializable {
-	private static final long serialVersionUID = 15185766967383353L;
+	private static final long serialVersionUID = 151873631149178994L;
   /**
   * Description: "The communicated content (or for multi-part communications, one portion of the communication)."
   */
@@ -111,7 +112,7 @@ public class CommunicationRequestPayloadModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.contentString = o.getContentString();
-    this.contentAttachment = AttachmentHelper.toJson(o.getContentAttachment());
+    this.contentAttachment = JsonUtils.toJson(o.getContentAttachment());
     if (null != o.getContentReference() ) {
     	this.contentreference_id = "contentreference" + this.parent_id;
     	this.contentReference = ReferenceHelper.toModel(o.getContentReference(), this.contentreference_id);

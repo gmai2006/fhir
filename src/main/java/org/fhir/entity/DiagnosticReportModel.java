@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports."
 */
 @Entity
 @Table(name="diagnosticreport")
 public class DiagnosticReportModel  implements Serializable {
-	private static final long serialVersionUID = 151857669658321026L;
+	private static final long serialVersionUID = 151873631127065102L;
   /**
   * Description: "This is a DiagnosticReport resource"
   */
@@ -314,8 +315,8 @@ public class DiagnosticReportModel  implements Serializable {
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
     }
     this.status = o.getStatus();
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -325,7 +326,7 @@ public class DiagnosticReportModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.effectiveDateTime = o.getEffectiveDateTime();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     this.issued = o.getIssued();
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
     	this.performer_id = "performer" + this.id;

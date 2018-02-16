@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitfinancial")
 public class ExplanationOfBenefitFinancialModel  implements Serializable {
-	private static final long serialVersionUID = 151857669666957558L;
+	private static final long serialVersionUID = 151873631139634908L;
   /**
   * Description: "Deductable, visits, benefit amount."
   * Actual type: String;
@@ -65,12 +66,14 @@ public class ExplanationOfBenefitFinancialModel  implements Serializable {
 
   /**
   * Description: "Benefits allowed."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"allowedMoney\"", length = 16777215)
-  private String allowedMoney;
+  @Column(name="\"allowedmoney_id\"")
+  private String allowedmoney_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="allowedmoney_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> allowedMoney;
 
   /**
   * Description: "Benefits used."
@@ -82,12 +85,14 @@ public class ExplanationOfBenefitFinancialModel  implements Serializable {
 
   /**
   * Description: "Benefits used."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"usedMoney\"", length = 16777215)
-  private String usedMoney;
+  @Column(name="\"usedmoney_id\"")
+  private String usedmoney_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usedmoney_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> usedMoney;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -134,12 +139,18 @@ public class ExplanationOfBenefitFinancialModel  implements Serializable {
   public ExplanationOfBenefitFinancialModel(ExplanationOfBenefitFinancial o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.allowedUnsignedInt = o.getAllowedUnsignedInt();
     this.allowedString = o.getAllowedString();
-    this.allowedMoney = MoneyHelper.toJson(o.getAllowedMoney());
+    if (null != o.getAllowedMoney() ) {
+    	this.allowedmoney_id = "allowedmoney" + this.parent_id;
+    	this.allowedMoney = MoneyHelper.toModel(o.getAllowedMoney(), this.allowedmoney_id);
+    }
     this.usedUnsignedInt = o.getUsedUnsignedInt();
-    this.usedMoney = MoneyHelper.toJson(o.getUsedMoney());
+    if (null != o.getUsedMoney() ) {
+    	this.usedmoney_id = "usedmoney" + this.parent_id;
+    	this.usedMoney = MoneyHelper.toModel(o.getUsedMoney(), this.usedmoney_id);
+    }
   }
 
   public String getType() {
@@ -160,10 +171,10 @@ public class ExplanationOfBenefitFinancialModel  implements Serializable {
   public void setAllowedString( String value) {
     this.allowedString = value;
   }
-  public String getAllowedMoney() {
+  public java.util.List<MoneyModel> getAllowedMoney() {
     return this.allowedMoney;
   }
-  public void setAllowedMoney( String value) {
+  public void setAllowedMoney( java.util.List<MoneyModel> value) {
     this.allowedMoney = value;
   }
   public Float getUsedUnsignedInt() {
@@ -172,10 +183,10 @@ public class ExplanationOfBenefitFinancialModel  implements Serializable {
   public void setUsedUnsignedInt( Float value) {
     this.usedUnsignedInt = value;
   }
-  public String getUsedMoney() {
+  public java.util.List<MoneyModel> getUsedMoney() {
     return this.usedMoney;
   }
-  public void setUsedMoney( String value) {
+  public void setUsedMoney( java.util.List<MoneyModel> value) {
     this.usedMoney = value;
   }
   public String getModifierExtension() {
@@ -210,9 +221,7 @@ public class ExplanationOfBenefitFinancialModel  implements Serializable {
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("allowedUnsignedInt" + "->" + this.allowedUnsignedInt + "\n"); 
      builder.append("allowedString" + "->" + this.allowedString + "\n"); 
-     builder.append("allowedMoney" + "->" + this.allowedMoney + "\n"); 
      builder.append("usedUnsignedInt" + "->" + this.usedUnsignedInt + "\n"); 
-     builder.append("usedMoney" + "->" + this.usedMoney + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

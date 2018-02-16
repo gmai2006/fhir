@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.TestReport;
 
 public interface TestReportDao {
@@ -38,4 +39,8 @@ public interface TestReportDao {
 
   public TestReport update(TestReport e);
   public void delete(TestReport e);
+
+  public List<TestReport> findByField(QueryBuilder queryBuilder);
+
+  public List<TestReport> findByParticipant(QueryBuilder queryBuilder);
 }

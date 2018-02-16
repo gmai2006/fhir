@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ExpansionProfile;
 
 public interface ExpansionProfileDao {
@@ -38,4 +39,7 @@ public interface ExpansionProfileDao {
 
   public ExpansionProfile update(ExpansionProfile e);
   public void delete(ExpansionProfile e);
+
+  public List<ExpansionProfile> findByField(QueryBuilder queryBuilder);
+
 }

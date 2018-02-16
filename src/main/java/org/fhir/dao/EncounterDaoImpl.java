@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.EncounterModel;
 import org.fhir.pojo.Encounter;
 import org.fhir.pojo.EncounterHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class EncounterDaoImpl implements EncounterDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,55 @@ public class EncounterDaoImpl implements EncounterDao {
       final EntityManager em = entityManagerProvider.get();
       final EncounterModel removed = em.find(EncounterModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Encounter> findByAppointment(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, Reference b where a.appointment_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByDiagnosis(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, EncounterDiagnosis b where a.diagnosis_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByLocation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, EncounterLocation b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByParticipant(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, EncounterParticipant b where a.participant_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Encounter> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Encounter> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, EncounterModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<EncounterModel> models = query.getResultList();
+    return EncounterHelper.fromArray2Array(models);
   }
 }

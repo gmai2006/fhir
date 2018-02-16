@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
 */
 @Entity
 @Table(name="bundleentry")
 public class BundleEntryModel  implements Serializable {
-	private static final long serialVersionUID = 151857669691489354L;
+	private static final long serialVersionUID = 151873631170694002L;
   /**
   * Description: "A series of links that provide context to this entry."
   */
@@ -148,7 +149,7 @@ public class BundleEntryModel  implements Serializable {
     	this.link = BundleLinkHelper.toModelFromArray(o.getLink(), this.link_id);
     }
     this.fullUrl = o.getFullUrl();
-    this.resource = ResourceListHelper.toJson(o.getResource());
+    this.resource = JsonUtils.toJson(o.getResource());
     if (null != o.getSearch() ) {
     	this.search_id = "search" + this.parent_id;
     	this.search = BundleSearchHelper.toModel(o.getSearch(), this.search_id);

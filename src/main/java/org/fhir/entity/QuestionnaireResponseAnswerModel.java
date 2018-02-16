@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to."
 */
 @Entity
 @Table(name="questionnaireresponseanswer")
 public class QuestionnaireResponseAnswerModel  implements Serializable {
-	private static final long serialVersionUID = 151857669691969717L;
+	private static final long serialVersionUID = 151873631171133125L;
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
@@ -119,12 +120,14 @@ public class QuestionnaireResponseAnswerModel  implements Serializable {
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueQuantity\"", length = 16777215)
-  private String valueQuantity;
+  @Column(name="\"valuequantity_id\"")
+  private String valuequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> valueQuantity;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
@@ -201,9 +204,12 @@ public class QuestionnaireResponseAnswerModel  implements Serializable {
     this.valueTime = o.getValueTime();
     this.valueString = o.getValueString();
     this.valueUri = o.getValueUri();
-    this.valueAttachment = AttachmentHelper.toJson(o.getValueAttachment());
-    this.valueCoding = CodingHelper.toJson(o.getValueCoding());
-    this.valueQuantity = QuantityHelper.toJson(o.getValueQuantity());
+    this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
+    this.valueCoding = JsonUtils.toJson(o.getValueCoding());
+    if (null != o.getValueQuantity() ) {
+    	this.valuequantity_id = "valuequantity" + this.parent_id;
+    	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
+    }
     if (null != o.getValueReference() ) {
     	this.valuereference_id = "valuereference" + this.parent_id;
     	this.valueReference = ReferenceHelper.toModel(o.getValueReference(), this.valuereference_id);
@@ -274,10 +280,10 @@ public class QuestionnaireResponseAnswerModel  implements Serializable {
   public void setValueCoding( String value) {
     this.valueCoding = value;
   }
-  public String getValueQuantity() {
+  public java.util.List<QuantityModel> getValueQuantity() {
     return this.valueQuantity;
   }
-  public void setValueQuantity( String value) {
+  public void setValueQuantity( java.util.List<QuantityModel> value) {
     this.valueQuantity = value;
   }
   public java.util.List<ReferenceModel> getValueReference() {
@@ -331,7 +337,6 @@ public class QuestionnaireResponseAnswerModel  implements Serializable {
      builder.append("valueUri" + "->" + this.valueUri + "\n"); 
      builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
      builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

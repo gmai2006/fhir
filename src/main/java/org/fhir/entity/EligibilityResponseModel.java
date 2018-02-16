@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides eligibility and plan details from the processing of an Eligibility resource."
 */
 @Entity
 @Table(name="eligibilityresponse")
 public class EligibilityResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669678973303L;
+	private static final long serialVersionUID = 151873631157043218L;
   /**
   * Description: "This is a EligibilityResponse resource"
   */
@@ -274,7 +275,7 @@ public class EligibilityResponseModel  implements Serializable {
     	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
-    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
+    this.outcome = JsonUtils.toJson(o.getOutcome());
     this.disposition = o.getDisposition();
     if (null != o.getInsurer() ) {
     	this.insurer_id = "insurer" + this.id;
@@ -285,7 +286,7 @@ public class EligibilityResponseModel  implements Serializable {
     	this.insurance_id = "insurance" + this.id;
     	this.insurance = EligibilityResponseInsuranceHelper.toModelFromArray(o.getInsurance(), this.insurance_id);
     }
-    this.form = CodeableConceptHelper.toJson(o.getForm());
+    this.form = JsonUtils.toJson(o.getForm());
     if (null != o.getError() && !o.getError().isEmpty()) {
     	this.error_id = "error" + this.id;
     	this.error = EligibilityResponseErrorHelper.toModelFromArray(o.getError(), this.error_id);

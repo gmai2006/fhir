@@ -53,19 +53,4 @@ public class PractitionerRoleHelper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, PractitionerRole.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(PractitionerRole o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<PractitionerRole> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

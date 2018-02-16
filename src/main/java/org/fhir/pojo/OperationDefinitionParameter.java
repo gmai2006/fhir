@@ -31,122 +31,94 @@ import com.google.gson.GsonBuilder;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
 */
-public class OperationDefinitionParameter  {
+public class OperationDefinitionParameter  extends BackboneElement  {
   /**
   * Description: "The name of used to identify the parameter."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "Whether this is an input or an output parameter."
   */
-  private String use;
+  protected String use;
 
   /**
   * Description: "Extensions for use"
   */
-  private transient Element _use;
+  protected transient Element _use;
 
   /**
   * Description: "The minimum number of times this parameter SHALL appear in the request or response."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float min;
+  protected Float min;
 
   /**
   * Description: "Extensions for min"
   */
-  private transient Element _min;
+  protected transient Element _min;
 
   /**
   * Description: "The maximum number of times this element is permitted to appear in the request or response."
   */
-  private String max;
+  protected String max;
 
   /**
   * Description: "Extensions for max"
   */
-  private transient Element _max;
+  protected transient Element _max;
 
   /**
   * Description: "Describes the meaning or use of this parameter."
   */
-  private String documentation;
+  protected String documentation;
 
   /**
   * Description: "Extensions for documentation"
   */
-  private transient Element _documentation;
+  protected transient Element _documentation;
 
   /**
   * Description: "The type for this parameter."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "How the parameter is understood as a search parameter. This is only used if the parameter type is 'string'."
   */
-  private String searchType;
+  protected String searchType;
 
   /**
   * Description: "Extensions for searchType"
   */
-  private transient Element _searchType;
+  protected transient Element _searchType;
 
   /**
   * Description: "A profile the specifies the rules that this parameter must conform to."
   */
-  private Reference profile;
+  protected Reference profile;
 
   /**
   * Description: "Binds to a value set if this parameter is coded (code, Coding, CodeableConcept)."
   */
-  private OperationDefinitionBinding binding;
+  protected OperationDefinitionBinding binding;
 
   /**
   * Description: "The parts of a nested Parameter."
   */
-  private java.util.List<OperationDefinitionParameter> part = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<OperationDefinitionParameter> part = new java.util.ArrayList<>();
 
   public OperationDefinitionParameter() {
   }
@@ -182,9 +154,6 @@ public class OperationDefinitionParameter  {
     }
     if (null != o.getPart() && !o.getPart().isEmpty()) {
     	this.part = OperationDefinitionParameterHelper.fromArray2Array(o.getPart());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -290,30 +259,6 @@ public class OperationDefinitionParameter  {
   public java.util.List<OperationDefinitionParameter> getPart() {
     return this.part;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -335,11 +280,7 @@ public class OperationDefinitionParameter  {
      if(this._searchType != null) builder.append("_searchType" + "->" + this._searchType.toString() + "\n"); 
      if(this.profile != null) builder.append("profile" + "->" + this.profile.toString() + "\n"); 
      if(this.binding != null) builder.append("binding" + "->" + this.binding.toString() + "\n"); 
-     if(this.part != null) builder.append("part" + "->" + this.part.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.part != null) builder.append("part" + "->" + this.part.toString() + "\n"); ;
     return builder.toString();
   }
 

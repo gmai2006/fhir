@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DetectedIssue;
 
 public interface DetectedIssueDao {
@@ -38,4 +39,9 @@ public interface DetectedIssueDao {
 
   public DetectedIssue update(DetectedIssue e);
   public void delete(DetectedIssue e);
+
+  public List<DetectedIssue> findByField(QueryBuilder queryBuilder);
+
+  public List<DetectedIssue> findByAuthor(QueryBuilder queryBuilder);
+  public List<DetectedIssue> findByImplicated(QueryBuilder queryBuilder);
 }

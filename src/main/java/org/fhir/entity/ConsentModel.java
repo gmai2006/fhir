@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
 */
 @Entity
 @Table(name="consent")
 public class ConsentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669676686460L;
+	private static final long serialVersionUID = 151873631153498550L;
   /**
   * Description: "This is a Consent resource"
   */
@@ -328,13 +329,13 @@ public class ConsentModel  implements Serializable {
   public ConsentModel(Consent o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.status = o.getStatus();
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     this.dateTime = o.getDateTime();
     if (null != o.getConsentingParty() && !o.getConsentingParty().isEmpty()) {
     	this.consentingparty_id = "consentingparty" + this.id;
@@ -348,8 +349,8 @@ public class ConsentModel  implements Serializable {
     	this.organization_id = "organization" + this.id;
     	this.organization = ReferenceHelper.toModelFromArray(o.getOrganization(), this.organization_id);
     }
-    this.sourceAttachment = AttachmentHelper.toJson(o.getSourceAttachment());
-    this.sourceIdentifier = IdentifierHelper.toJson(o.getSourceIdentifier());
+    this.sourceAttachment = JsonUtils.toJson(o.getSourceAttachment());
+    this.sourceIdentifier = JsonUtils.toJson(o.getSourceIdentifier());
     if (null != o.getSourceReference() ) {
     	this.sourcereference_id = "sourcereference" + this.id;
     	this.sourceReference = ReferenceHelper.toModel(o.getSourceReference(), this.sourcereference_id);
@@ -359,7 +360,7 @@ public class ConsentModel  implements Serializable {
     	this.policy = ConsentPolicyHelper.toModelFromArray(o.getPolicy(), this.policy_id);
     }
     this.policyRule = o.getPolicyRule();
-    this.dataPeriod = PeriodHelper.toJson(o.getDataPeriod());
+    this.dataPeriod = JsonUtils.toJson(o.getDataPeriod());
     if (null != o.getData() && !o.getData().isEmpty()) {
     	this.data_id = "data" + this.id;
     	this.data = ConsentDataHelper.toModelFromArray(o.getData(), this.data_id);

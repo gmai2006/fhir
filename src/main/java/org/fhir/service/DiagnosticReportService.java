@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DiagnosticReport;
 
 public interface DiagnosticReportService {
@@ -35,4 +37,13 @@ public interface DiagnosticReportService {
   public DiagnosticReport create(DiagnosticReport bean);
   public DiagnosticReport update(DiagnosticReport bean);
   public void delete(DiagnosticReport bean);
+  public List<DiagnosticReport> findByField(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByContext(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByImage(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByPerformer(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByResult(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findBySpecimen(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findBySubject(QueryBuilder queryBuilder);
+
+
 }

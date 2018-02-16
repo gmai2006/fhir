@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Provenance;
 
 public interface ProvenanceService {
@@ -35,4 +37,10 @@ public interface ProvenanceService {
   public Provenance create(Provenance bean);
   public Provenance update(Provenance bean);
   public void delete(Provenance bean);
+  public List<Provenance> findByField(QueryBuilder queryBuilder);
+  public List<Provenance> findByAgent(QueryBuilder queryBuilder);
+  public List<Provenance> findByLocation(QueryBuilder queryBuilder);
+  public List<Provenance> findByTarget(QueryBuilder queryBuilder);
+
+
 }

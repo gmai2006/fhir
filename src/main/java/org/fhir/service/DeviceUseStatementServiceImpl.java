@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DeviceUseStatement;
 /**
 * auto generated from SQL files
@@ -103,5 +104,25 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(DeviceUseStatement) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<DeviceUseStatement> findByField(QueryBuilder queryBuilder) {
+  	final List<DeviceUseStatement> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<DeviceUseStatement> findByDevice(QueryBuilder queryBuilder) {
+  	final List<DeviceUseStatement> result = dao.findByDevice(queryBuilder);
+    logger.info("findBydevice - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceUseStatement> findBySubject(QueryBuilder queryBuilder) {
+  	final List<DeviceUseStatement> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

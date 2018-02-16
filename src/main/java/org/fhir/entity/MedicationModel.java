@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
 */
 @Entity
 @Table(name="medication")
 public class MedicationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669715145366L;
+	private static final long serialVersionUID = 151873631194615994L;
   /**
   * Description: "This is a Medication resource"
   */
@@ -218,7 +219,7 @@ public class MedicationModel  implements Serializable {
   public MedicationModel(Medication o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     this.status = o.getStatus();
     this.isBrand = o.getIsBrand();
     this.isOverTheCounter = o.getIsOverTheCounter();
@@ -226,7 +227,7 @@ public class MedicationModel  implements Serializable {
     	this.manufacturer_id = "manufacturer" + this.id;
     	this.manufacturer = ReferenceHelper.toModel(o.getManufacturer(), this.manufacturer_id);
     }
-    this.form = CodeableConceptHelper.toJson(o.getForm());
+    this.form = JsonUtils.toJson(o.getForm());
     if (null != o.getIngredient() && !o.getIngredient().isEmpty()) {
     	this.ingredient_id = "ingredient" + this.id;
     	this.ingredient = MedicationIngredientHelper.toModelFromArray(o.getIngredient(), this.ingredient_id);

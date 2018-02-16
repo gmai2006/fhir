@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
 @Entity
 @Table(name="capabilitystatementevent")
 public class CapabilityStatementEventModel  implements Serializable {
-	private static final long serialVersionUID = 151857669715424052L;
+	private static final long serialVersionUID = 151873631194958843L;
   /**
   * Description: "A coded identifier of a supported messaging event."
   * Actual type: String;
@@ -144,7 +145,7 @@ public class CapabilityStatementEventModel  implements Serializable {
   public CapabilityStatementEventModel(CapabilityStatementEvent o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = CodingHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     this.category = o.getCategory();
     this.mode = o.getMode();
     this.focus = o.getFocus();

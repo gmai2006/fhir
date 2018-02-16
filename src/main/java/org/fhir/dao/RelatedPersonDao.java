@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.RelatedPerson;
 
 public interface RelatedPersonDao {
@@ -38,4 +39,9 @@ public interface RelatedPersonDao {
 
   public RelatedPerson update(RelatedPerson e);
   public void delete(RelatedPerson e);
+
+  public List<RelatedPerson> findByField(QueryBuilder queryBuilder);
+
+  public List<RelatedPerson> findByAddress(QueryBuilder queryBuilder);
+  public List<RelatedPerson> findByPatient(QueryBuilder queryBuilder);
 }

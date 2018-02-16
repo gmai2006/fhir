@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CareTeam;
 
 public interface CareTeamService {
@@ -35,4 +37,10 @@ public interface CareTeamService {
   public CareTeam create(CareTeam bean);
   public CareTeam update(CareTeam bean);
   public void delete(CareTeam bean);
+  public List<CareTeam> findByField(QueryBuilder queryBuilder);
+  public List<CareTeam> findByContext(QueryBuilder queryBuilder);
+  public List<CareTeam> findByParticipant(QueryBuilder queryBuilder);
+  public List<CareTeam> findBySubject(QueryBuilder queryBuilder);
+
+
 }

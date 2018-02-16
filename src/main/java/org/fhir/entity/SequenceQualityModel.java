@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Raw data describing a biological sequence."
 */
 @Entity
 @Table(name="sequencequality")
 public class SequenceQualityModel  implements Serializable {
-	private static final long serialVersionUID = 151857669701261690L;
+	private static final long serialVersionUID = 151873631180035118L;
   /**
   * Description: "INDEL / SNP / Undefined variant."
   */
@@ -72,12 +73,14 @@ public class SequenceQualityModel  implements Serializable {
 
   /**
   * Description: "The score of an experimentally derived feature such as a p-value ([SO:0001685](http://www.sequenceontology.org/browser/current_svn/term/SO:0001685))."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"score\"", length = 16777215)
-  private String score;
+  @Column(name="\"score_id\"")
+  private String score_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="score_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> score;
 
   /**
   * Description: "Which method is used to get sequence quality."
@@ -198,11 +201,14 @@ public class SequenceQualityModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.type = o.getType();
-    this.standardSequence = CodeableConceptHelper.toJson(o.getStandardSequence());
+    this.standardSequence = JsonUtils.toJson(o.getStandardSequence());
     this.start = o.getStart();
     this.end = o.getEnd();
-    this.score = QuantityHelper.toJson(o.getScore());
-    this.method = CodeableConceptHelper.toJson(o.getMethod());
+    if (null != o.getScore() ) {
+    	this.score_id = "score" + this.parent_id;
+    	this.score = QuantityHelper.toModel(o.getScore(), this.score_id);
+    }
+    this.method = JsonUtils.toJson(o.getMethod());
     this.truthTP = o.getTruthTP();
     this.queryTP = o.getQueryTP();
     this.truthFN = o.getTruthFN();
@@ -237,10 +243,10 @@ public class SequenceQualityModel  implements Serializable {
   public void setEnd( Float value) {
     this.end = value;
   }
-  public String getScore() {
+  public java.util.List<QuantityModel> getScore() {
     return this.score;
   }
-  public void setScore( String value) {
+  public void setScore( java.util.List<QuantityModel> value) {
     this.score = value;
   }
   public String getMethod() {
@@ -330,7 +336,6 @@ public class SequenceQualityModel  implements Serializable {
      builder.append("standardSequence" + "->" + this.standardSequence + "\n"); 
      builder.append("start" + "->" + this.start + "\n"); 
      builder.append("end" + "->" + this.end + "\n"); 
-     builder.append("score" + "->" + this.score + "\n"); 
      builder.append("method" + "->" + this.method + "\n"); 
      builder.append("truthTP" + "->" + this.truthTP + "\n"); 
      builder.append("queryTP" + "->" + this.queryTP + "\n"); 

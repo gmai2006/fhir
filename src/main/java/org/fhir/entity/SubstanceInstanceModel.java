@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A homogeneous material with a definite composition."
 */
 @Entity
 @Table(name="substanceinstance")
 public class SubstanceInstanceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669709943879L;
+	private static final long serialVersionUID = 151873631188742327L;
   /**
   * Description: "Identifier associated with the package/container (usually a label affixed directly)."
   * Actual type: String;
@@ -57,12 +58,14 @@ public class SubstanceInstanceModel  implements Serializable {
 
   /**
   * Description: "The amount of the substance."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -109,9 +112,12 @@ public class SubstanceInstanceModel  implements Serializable {
   public SubstanceInstanceModel(SubstanceInstance o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.expiry = o.getExpiry();
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
   }
 
   public String getIdentifier() {
@@ -126,10 +132,10 @@ public class SubstanceInstanceModel  implements Serializable {
   public void setExpiry( String value) {
     this.expiry = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
   public String getModifierExtension() {
@@ -163,7 +169,6 @@ public class SubstanceInstanceModel  implements Serializable {
     builder.append("[SubstanceInstanceModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("expiry" + "->" + this.expiry + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

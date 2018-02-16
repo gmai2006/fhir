@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.MedicationRequestModel;
 import org.fhir.pojo.MedicationRequest;
 import org.fhir.pojo.MedicationRequestHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class MedicationRequestDaoImpl implements MedicationRequestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class MedicationRequestDaoImpl implements MedicationRequestDao {
       final EntityManager em = entityManagerProvider.get();
       final MedicationRequestModel removed = em.find(MedicationRequestModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<MedicationRequest> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationRequestModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MedicationRequest> findByRequester(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationRequestModel a, MedicationRequestRequester b where a.requester_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MedicationRequest> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationRequestModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<MedicationRequest> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationRequestModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<MedicationRequest> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, MedicationRequestModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<MedicationRequestModel> models = query.getResultList();
+    return MedicationRequestHelper.fromArray2Array(models);
   }
 }

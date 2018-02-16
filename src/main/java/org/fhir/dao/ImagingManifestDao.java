@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImagingManifest;
 
 public interface ImagingManifestDao {
@@ -38,4 +39,8 @@ public interface ImagingManifestDao {
 
   public ImagingManifest update(ImagingManifest e);
   public void delete(ImagingManifest e);
+
+  public List<ImagingManifest> findByField(QueryBuilder queryBuilder);
+
+  public List<ImagingManifest> findByAuthor(QueryBuilder queryBuilder);
 }

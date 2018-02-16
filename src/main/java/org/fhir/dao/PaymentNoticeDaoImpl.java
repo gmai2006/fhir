@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.PaymentNoticeModel;
 import org.fhir.pojo.PaymentNotice;
 import org.fhir.pojo.PaymentNoticeHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class PaymentNoticeDaoImpl implements PaymentNoticeDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,49 @@ public class PaymentNoticeDaoImpl implements PaymentNoticeDao {
       final EntityManager em = entityManagerProvider.get();
       final PaymentNoticeModel removed = em.find(PaymentNoticeModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<PaymentNotice> findByOrganization(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.organization_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PaymentNotice> findByProvider(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.provider_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PaymentNotice> findByRequest(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.request_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PaymentNotice> findByResponse(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.response_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<PaymentNotice> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<PaymentNotice> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, PaymentNoticeModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<PaymentNoticeModel> models = query.getResultList();
+    return PaymentNoticeHelper.fromArray2Array(models);
   }
 }

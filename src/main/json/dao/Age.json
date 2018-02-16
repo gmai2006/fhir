@@ -1,0 +1,9 @@
+{
+  "className": "Age",
+  "type": "COMPLEX",
+  "descr": "\"A duration of time during which an organism (or a process) has existed.\"",
+  "parent": "Quantity",
+  "isInnerClass": true,
+  "autoIncrement": false,
+  "fields": []
+}

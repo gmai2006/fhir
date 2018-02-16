@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The details of a healthcare service available at a location."
 */
 @Entity
 @Table(name="healthcareserviceavailabletime")
 public class HealthcareServiceAvailableTimeModel  implements Serializable {
-	private static final long serialVersionUID = 151857669709358028L;
+	private static final long serialVersionUID = 151873631188060209L;
   /**
   * Description: "Indicates which days of the week are available between the start and end Times."
   */

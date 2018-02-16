@@ -31,112 +31,84 @@ import com.google.gson.GsonBuilder;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
 */
-public class StructureMapTarget  {
+public class StructureMapTarget  extends BackboneElement  {
   /**
   * Description: "Type or variable this rule applies to."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String context;
+  protected String context;
 
   /**
   * Description: "Extensions for context"
   */
-  private transient Element _context;
+  protected transient Element _context;
 
   /**
   * Description: "How to interpret the context."
   */
-  private String contextType;
+  protected String contextType;
 
   /**
   * Description: "Extensions for contextType"
   */
-  private transient Element _contextType;
+  protected transient Element _contextType;
 
   /**
   * Description: "Field to create in the context."
   */
-  private String element;
+  protected String element;
 
   /**
   * Description: "Extensions for element"
   */
-  private transient Element _element;
+  protected transient Element _element;
 
   /**
   * Description: "Named context for field, if desired, and a field is specified."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String variable;
+  protected String variable;
 
   /**
   * Description: "Extensions for variable"
   */
-  private transient Element _variable;
+  protected transient Element _variable;
 
   /**
   * Description: "If field is a list, how to manage the list."
   */
-  private java.util.List<String> listMode = new java.util.ArrayList<>();
+  protected java.util.List<String> listMode = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for listMode"
   */
-  private transient java.util.List<Element> _listMode = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _listMode = new java.util.ArrayList<>();
 
   /**
   * Description: "Internal rule reference for shared list items."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String listRuleId;
+  protected String listRuleId;
 
   /**
   * Description: "Extensions for listRuleId"
   */
-  private transient Element _listRuleId;
+  protected transient Element _listRuleId;
 
   /**
   * Description: "How the data is copied / created."
   */
-  private String transform;
+  protected String transform;
 
   /**
   * Description: "Extensions for transform"
   */
-  private transient Element _transform;
+  protected transient Element _transform;
 
   /**
   * Description: "Parameters to the transform."
   */
-  private java.util.List<StructureMapParameter> parameter = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<StructureMapParameter> parameter = new java.util.ArrayList<>();
 
   public StructureMapTarget() {
   }
@@ -166,9 +138,6 @@ public class StructureMapTarget  {
     }
     if (null != o.getParameter() && !o.getParameter().isEmpty()) {
     	this.parameter = StructureMapParameterHelper.fromArray2Array(o.getParameter());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -262,30 +231,6 @@ public class StructureMapTarget  {
   public java.util.List<StructureMapParameter> getParameter() {
     return this.parameter;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -305,11 +250,7 @@ public class StructureMapTarget  {
      if(this._listRuleId != null) builder.append("_listRuleId" + "->" + this._listRuleId.toString() + "\n"); 
      if(this.transform != null) builder.append("transform" + "->" + this.transform.toString() + "\n"); 
      if(this._transform != null) builder.append("_transform" + "->" + this._transform.toString() + "\n"); 
-     if(this.parameter != null) builder.append("parameter" + "->" + this.parameter.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.parameter != null) builder.append("parameter" + "->" + this.parameter.toString() + "\n"); ;
     return builder.toString();
   }
 

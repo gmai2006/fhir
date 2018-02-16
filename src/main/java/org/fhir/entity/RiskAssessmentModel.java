@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome."
 */
 @Entity
 @Table(name="riskassessment")
 public class RiskAssessmentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669712690138L;
+	private static final long serialVersionUID = 151873631191661713L;
   /**
   * Description: "This is a RiskAssessment resource"
   */
@@ -311,7 +312,7 @@ public class RiskAssessmentModel  implements Serializable {
   public RiskAssessmentModel(RiskAssessment o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     if (null != o.getBasedOn() ) {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModel(o.getBasedOn(), this.basedon_id);
@@ -321,8 +322,8 @@ public class RiskAssessmentModel  implements Serializable {
     	this.parent = ReferenceHelper.toModel(o.getParent(), this.parent_id);
     }
     this.status = o.getStatus();
-    this.method = CodeableConceptHelper.toJson(o.getMethod());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.method = JsonUtils.toJson(o.getMethod());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -332,7 +333,7 @@ public class RiskAssessmentModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = PeriodHelper.toJson(o.getOccurrencePeriod());
+    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
     if (null != o.getCondition() ) {
     	this.condition_id = "condition" + this.id;
     	this.condition = ReferenceHelper.toModel(o.getCondition(), this.condition_id);
@@ -341,7 +342,7 @@ public class RiskAssessmentModel  implements Serializable {
     	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);
     }
-    this.reasonCodeableConcept = CodeableConceptHelper.toJson(o.getReasonCodeableConcept());
+    this.reasonCodeableConcept = JsonUtils.toJson(o.getReasonCodeableConcept());
     if (null != o.getReasonReference() ) {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModel(o.getReasonReference(), this.reasonreference_id);

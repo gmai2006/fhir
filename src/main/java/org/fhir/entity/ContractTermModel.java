@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
 @Entity
 @Table(name="contractterm")
 public class ContractTermModel  implements Serializable {
-	private static final long serialVersionUID = 151857669685689051L;
+	private static final long serialVersionUID = 151873631164212857L;
   /**
   * Description: "Unique identifier for this particular Contract Provision."
   * Actual type: String;
@@ -205,11 +206,11 @@ public class ContractTermModel  implements Serializable {
   public ContractTermModel(ContractTerm o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.issued = o.getIssued();
-    this.applies = PeriodHelper.toJson(o.getApplies());
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.subType = CodeableConceptHelper.toJson(o.getSubType());
+    this.applies = JsonUtils.toJson(o.getApplies());
+    this.type = JsonUtils.toJson(o.getType());
+    this.subType = JsonUtils.toJson(o.getSubType());
     if (null != o.getTopic() && !o.getTopic().isEmpty()) {
     	this.topic_id = "topic" + this.parent_id;
     	this.topic = ReferenceHelper.toModelFromArray(o.getTopic(), this.topic_id);

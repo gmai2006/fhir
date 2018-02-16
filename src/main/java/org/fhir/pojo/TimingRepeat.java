@@ -31,198 +31,170 @@ import com.google.gson.GsonBuilder;
 /**
 * "Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out."
 */
-public class TimingRepeat  {
+public class TimingRepeat  extends BackboneElement  {
   /**
   * Description: "Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule."
   */
-  private Duration boundsDuration;
+  protected Duration boundsDuration;
 
   /**
   * Description: "Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule."
   */
-  private Range boundsRange;
+  protected Range boundsRange;
 
   /**
   * Description: "Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule."
   */
-  private Period boundsPeriod;
+  protected Period boundsPeriod;
 
   /**
   * Description: "A total count of the desired number of repetitions."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float count;
+  protected Float count;
 
   /**
   * Description: "Extensions for count"
   */
-  private transient Element _count;
+  protected transient Element _count;
 
   /**
   * Description: "A maximum value for the count of the desired repetitions (e.g. do something 6-8 times)."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float countMax;
+  protected Float countMax;
 
   /**
   * Description: "Extensions for countMax"
   */
-  private transient Element _countMax;
+  protected transient Element _countMax;
 
   /**
   * Description: "How long this thing happens for when it happens."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float duration;
+  protected Float duration;
 
   /**
   * Description: "Extensions for duration"
   */
-  private transient Element _duration;
+  protected transient Element _duration;
 
   /**
   * Description: "The upper limit of how long this thing happens for when it happens."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float durationMax;
+  protected Float durationMax;
 
   /**
   * Description: "Extensions for durationMax"
   */
-  private transient Element _durationMax;
+  protected transient Element _durationMax;
 
   /**
   * Description: "The units of time for the duration, in UCUM units."
   */
-  private String durationUnit;
+  protected String durationUnit;
 
   /**
   * Description: "Extensions for durationUnit"
   */
-  private transient Element _durationUnit;
+  protected transient Element _durationUnit;
 
   /**
   * Description: "The number of times to repeat the action within the specified period / period range (i.e. both period and periodMax provided)."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float frequency;
+  protected Float frequency;
 
   /**
   * Description: "Extensions for frequency"
   */
-  private transient Element _frequency;
+  protected transient Element _frequency;
 
   /**
   * Description: "If present, indicates that the frequency is a range - so to repeat between [frequency] and [frequencyMax] times within the period or period range."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float frequencyMax;
+  protected Float frequencyMax;
 
   /**
   * Description: "Extensions for frequencyMax"
   */
-  private transient Element _frequencyMax;
+  protected transient Element _frequencyMax;
 
   /**
   * Description: "Indicates the duration of time over which repetitions are to occur; e.g. to express \"3 times per day\", 3 would be the frequency and \"1 day\" would be the period."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float period;
+  protected Float period;
 
   /**
   * Description: "Extensions for period"
   */
-  private transient Element _period;
+  protected transient Element _period;
 
   /**
   * Description: "If present, indicates that the period is a range from [period] to [periodMax], allowing expressing concepts such as \"do this once every 3-5 days."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float periodMax;
+  protected Float periodMax;
 
   /**
   * Description: "Extensions for periodMax"
   */
-  private transient Element _periodMax;
+  protected transient Element _periodMax;
 
   /**
   * Description: "The units of time for the period in UCUM units."
   */
-  private String periodUnit;
+  protected String periodUnit;
 
   /**
   * Description: "Extensions for periodUnit"
   */
-  private transient Element _periodUnit;
+  protected transient Element _periodUnit;
 
   /**
   * Description: "If one or more days of week is provided, then the action happens only on the specified day(s)."
   */
-  private java.util.List<String> dayOfWeek = new java.util.ArrayList<>();
+  protected java.util.List<String> dayOfWeek = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for dayOfWeek"
   */
-  private transient java.util.List<Element> _dayOfWeek = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _dayOfWeek = new java.util.ArrayList<>();
 
   /**
   * Description: "Specified time of day for action to take place."
   */
-  private java.util.List<String> timeOfDay = new java.util.ArrayList<>();
+  protected java.util.List<String> timeOfDay = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for timeOfDay"
   */
-  private transient java.util.List<Element> _timeOfDay = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _timeOfDay = new java.util.ArrayList<>();
 
   /**
   * Description: "Real world events that the occurrence of the event should be tied to."
   */
-  private java.util.List<String> when = new java.util.ArrayList<>();
+  protected java.util.List<String> when = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for when"
   */
-  private transient java.util.List<Element> _when = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _when = new java.util.ArrayList<>();
 
   /**
   * Description: "The number of minutes from the event. If the event code does not indicate whether the minutes is before or after the event, then the offset is assumed to be after the event."
   */
   @javax.validation.constraints.Pattern(regexp="[0]|([1-9][0-9]*)")
-  private Float offset;
+  protected Float offset;
 
   /**
   * Description: "Extensions for offset"
   */
-  private transient Element _offset;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _offset;
 
   public TimingRepeat() {
   }
@@ -273,9 +245,6 @@ public class TimingRepeat  {
     }
     if (null != o.getOffset()) {
       this.offset = o.getOffset();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -465,30 +434,6 @@ public class TimingRepeat  {
   public Element get_offset() {
     return this._offset;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -524,11 +469,7 @@ public class TimingRepeat  {
      if(this.when != null) builder.append("when" + "->" + this.when.toString() + "\n"); 
      if(this._when != null) builder.append("_when" + "->" + this._when.toString() + "\n"); 
      if(this.offset != null) builder.append("offset" + "->" + this.offset.toString() + "\n"); 
-     if(this._offset != null) builder.append("_offset" + "->" + this._offset.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._offset != null) builder.append("_offset" + "->" + this._offset.toString() + "\n"); ;
     return builder.toString();
   }
 

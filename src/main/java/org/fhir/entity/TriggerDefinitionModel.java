@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A description of a triggering event."
 */
 @Entity
 @Table(name="triggerdefinition")
 public class TriggerDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669687776935L;
+	private static final long serialVersionUID = 15187363116683735L;
   /**
   * Description: "The type of triggering event."
   */
@@ -134,7 +135,7 @@ public class TriggerDefinitionModel  implements Serializable {
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.type = o.getType();
     this.eventName = o.getEventName();
-    this.eventTimingTiming = TimingHelper.toJson(o.getEventTimingTiming());
+    this.eventTimingTiming = JsonUtils.toJson(o.getEventTimingTiming());
     if (null != o.getEventTimingReference() ) {
     	this.eventtimingreference_id = "eventtimingreference" + this.parent_id;
     	this.eventTimingReference = ReferenceHelper.toModel(o.getEventTimingReference(), this.eventtimingreference_id);

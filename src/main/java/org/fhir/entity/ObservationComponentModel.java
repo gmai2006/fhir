@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
 @Entity
 @Table(name="observationcomponent")
 public class ObservationComponentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669663636283L;
+	private static final long serialVersionUID = 151873631135521551L;
   /**
   * Description: "Describes what was observed. Sometimes this is called the observation \"code\"."
   * Actual type: String;
@@ -50,12 +51,14 @@ public class ObservationComponentModel  implements Serializable {
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueQuantity\"", length = 16777215)
-  private String valueQuantity;
+  @Column(name="\"valuequantity_id\"")
+  private String valuequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> valueQuantity;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
@@ -208,19 +211,22 @@ public class ObservationComponentModel  implements Serializable {
   public ObservationComponentModel(ObservationComponent o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
-    this.valueQuantity = QuantityHelper.toJson(o.getValueQuantity());
-    this.valueCodeableConcept = CodeableConceptHelper.toJson(o.getValueCodeableConcept());
+    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getValueQuantity() ) {
+    	this.valuequantity_id = "valuequantity" + this.parent_id;
+    	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
+    }
+    this.valueCodeableConcept = JsonUtils.toJson(o.getValueCodeableConcept());
     this.valueString = o.getValueString();
-    this.valueRange = RangeHelper.toJson(o.getValueRange());
-    this.valueRatio = RatioHelper.toJson(o.getValueRatio());
-    this.valueSampledData = SampledDataHelper.toJson(o.getValueSampledData());
-    this.valueAttachment = AttachmentHelper.toJson(o.getValueAttachment());
+    this.valueRange = JsonUtils.toJson(o.getValueRange());
+    this.valueRatio = JsonUtils.toJson(o.getValueRatio());
+    this.valueSampledData = JsonUtils.toJson(o.getValueSampledData());
+    this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
     this.valueTime = o.getValueTime();
     this.valueDateTime = o.getValueDateTime();
-    this.valuePeriod = PeriodHelper.toJson(o.getValuePeriod());
-    this.dataAbsentReason = CodeableConceptHelper.toJson(o.getDataAbsentReason());
-    this.interpretation = CodeableConceptHelper.toJson(o.getInterpretation());
+    this.valuePeriod = JsonUtils.toJson(o.getValuePeriod());
+    this.dataAbsentReason = JsonUtils.toJson(o.getDataAbsentReason());
+    this.interpretation = JsonUtils.toJson(o.getInterpretation());
     if (null != o.getReferenceRange() && !o.getReferenceRange().isEmpty()) {
     	this.referencerange_id = "referencerange" + this.parent_id;
     	this.referenceRange = ObservationReferenceRangeHelper.toModelFromArray(o.getReferenceRange(), this.referencerange_id);
@@ -233,10 +239,10 @@ public class ObservationComponentModel  implements Serializable {
   public void setCode( String value) {
     this.code = value;
   }
-  public String getValueQuantity() {
+  public java.util.List<QuantityModel> getValueQuantity() {
     return this.valueQuantity;
   }
-  public void setValueQuantity( String value) {
+  public void setValueQuantity( java.util.List<QuantityModel> value) {
     this.valueQuantity = value;
   }
   public String getValueCodeableConcept() {
@@ -341,7 +347,6 @@ public class ObservationComponentModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ObservationComponentModel]:" + "\n");
      builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("valueString" + "->" + this.valueString + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 

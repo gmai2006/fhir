@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects."
 */
 @Entity
 @Table(name="researchstudyarm")
 public class ResearchStudyArmModel  implements Serializable {
-	private static final long serialVersionUID = 151857669700774016L;
+	private static final long serialVersionUID = 151873631179623570L;
   /**
   * Description: "Unique, human-readable label for this arm of the study."
   */
@@ -107,7 +108,7 @@ public class ResearchStudyArmModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.name = o.getName();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     this.description = o.getDescription();
   }
 

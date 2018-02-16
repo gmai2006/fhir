@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A sample to be used for analysis."
 */
 @Entity
 @Table(name="specimen")
 public class SpecimenModel  implements Serializable {
-	private static final long serialVersionUID = 15185766969286357L;
+	private static final long serialVersionUID = 151873631172284030L;
   /**
   * Description: "This is a Specimen resource"
   */
@@ -254,9 +255,9 @@ public class SpecimenModel  implements Serializable {
   public SpecimenModel(Specimen o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.accessionIdentifier = IdentifierHelper.toJson(o.getAccessionIdentifier());
+    this.accessionIdentifier = JsonUtils.toJson(o.getAccessionIdentifier());
     this.status = o.getStatus();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);

@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.FHIRListModel;
 import org.fhir.pojo.FHIRList;
 import org.fhir.pojo.FHIRListHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class FHIRListDaoImpl implements FHIRListDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class FHIRListDaoImpl implements FHIRListDao {
       final EntityManager em = entityManagerProvider.get();
       final FHIRListModel removed = em.find(FHIRListModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<FHIRList> findBySource(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from FHIRListModel a, Reference b where a.source_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<FHIRList> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from FHIRListModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<FHIRList> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from FHIRListModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<FHIRList> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, FHIRListModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<FHIRListModel> models = query.getResultList();
+    return FHIRListHelper.fromArray2Array(models);
   }
 }

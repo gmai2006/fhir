@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.LibraryModel;
 import org.fhir.pojo.Library;
 import org.fhir.pojo.LibraryHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class LibraryDaoImpl implements LibraryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class LibraryDaoImpl implements LibraryDao {
       final EntityManager em = entityManagerProvider.get();
       final LibraryModel removed = em.find(LibraryModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<Library> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from LibraryModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Library> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, LibraryModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<LibraryModel> models = query.getResultList();
+    return LibraryHelper.fromArray2Array(models);
   }
 }

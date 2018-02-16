@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ExpansionProfileModel;
 import org.fhir.pojo.ExpansionProfile;
 import org.fhir.pojo.ExpansionProfileHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ExpansionProfileDaoImpl implements ExpansionProfileDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class ExpansionProfileDaoImpl implements ExpansionProfileDao {
       final EntityManager em = entityManagerProvider.get();
       final ExpansionProfileModel removed = em.find(ExpansionProfileModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<ExpansionProfile> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExpansionProfileModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ExpansionProfile> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ExpansionProfileModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ExpansionProfileModel> models = query.getResultList();
+    return ExpansionProfileHelper.fromArray2Array(models);
   }
 }

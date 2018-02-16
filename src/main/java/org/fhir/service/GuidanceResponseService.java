@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.GuidanceResponse;
 
 public interface GuidanceResponseService {
@@ -35,4 +37,8 @@ public interface GuidanceResponseService {
   public GuidanceResponse create(GuidanceResponse bean);
   public GuidanceResponse update(GuidanceResponse bean);
   public void delete(GuidanceResponse bean);
+  public List<GuidanceResponse> findByField(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findBySubject(QueryBuilder queryBuilder);
+
+
 }

@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ValueSet;
 /**
 * auto generated from SQL files
@@ -103,5 +104,19 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(ValueSet) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<ValueSet> findByField(QueryBuilder queryBuilder) {
+  	final List<ValueSet> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<ValueSet> findByExpansion(QueryBuilder queryBuilder) {
+  	final List<ValueSet> result = dao.findByExpansion(queryBuilder);
+    logger.info("findByexpansion - exited - return value={} result ");
+    return result;
   }
 }

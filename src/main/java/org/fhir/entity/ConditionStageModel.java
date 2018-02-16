@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern."
 */
 @Entity
 @Table(name="conditionstage")
 public class ConditionStageModel  implements Serializable {
-	private static final long serialVersionUID = 151857669702731982L;
+	private static final long serialVersionUID = 15187363118118499L;
   /**
   * Description: "A simple summary of the stage such as \"Stage 3\". The determination of the stage is disease-specific."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class ConditionStageModel  implements Serializable {
   public ConditionStageModel(ConditionStage o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.summary = CodeableConceptHelper.toJson(o.getSummary());
+    this.summary = JsonUtils.toJson(o.getSummary());
     if (null != o.getAssessment() && !o.getAssessment().isEmpty()) {
     	this.assessment_id = "assessment" + this.parent_id;
     	this.assessment = ReferenceHelper.toModelFromArray(o.getAssessment(), this.assessment_id);

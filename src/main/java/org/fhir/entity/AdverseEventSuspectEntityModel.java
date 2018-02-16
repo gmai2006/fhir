@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death."
 */
 @Entity
 @Table(name="adverseeventsuspectentity")
 public class AdverseEventSuspectEntityModel  implements Serializable {
-	private static final long serialVersionUID = 151857669683576153L;
+	private static final long serialVersionUID = 151873631162373018L;
   /**
   * Description: "Identifies the actual instance of what caused the adverse event.  May be a substance, medication, medication administration, medication statement or a device."
   */
@@ -151,14 +152,14 @@ public class AdverseEventSuspectEntityModel  implements Serializable {
     	this.instance = ReferenceHelper.toModel(o.getInstance(), this.instance_id);
     }
     this.causality = o.getCausality();
-    this.causalityAssessment = CodeableConceptHelper.toJson(o.getCausalityAssessment());
+    this.causalityAssessment = JsonUtils.toJson(o.getCausalityAssessment());
     this.causalityProductRelatedness = o.getCausalityProductRelatedness();
-    this.causalityMethod = CodeableConceptHelper.toJson(o.getCausalityMethod());
+    this.causalityMethod = JsonUtils.toJson(o.getCausalityMethod());
     if (null != o.getCausalityAuthor() ) {
     	this.causalityauthor_id = "causalityauthor" + this.parent_id;
     	this.causalityAuthor = ReferenceHelper.toModel(o.getCausalityAuthor(), this.causalityauthor_id);
     }
-    this.causalityResult = CodeableConceptHelper.toJson(o.getCausalityResult());
+    this.causalityResult = JsonUtils.toJson(o.getCausalityResult());
   }
 
   public java.util.List<ReferenceModel> getInstance() {

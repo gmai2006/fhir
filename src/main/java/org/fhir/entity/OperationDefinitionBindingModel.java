@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
 */
 @Entity
 @Table(name="operationdefinitionbinding")
 public class OperationDefinitionBindingModel  implements Serializable {
-	private static final long serialVersionUID = 15185766967513031L;
+	private static final long serialVersionUID = 151873631150810888L;
   /**
   * Description: "Indicates the degree of conformance expectations associated with this binding - that is, the degree to which the provided value set must be adhered to in the instances."
   */

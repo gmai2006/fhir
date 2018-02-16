@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Consent;
 
 public interface ConsentDao {
@@ -38,4 +39,10 @@ public interface ConsentDao {
 
   public Consent update(Consent e);
   public void delete(Consent e);
+
+  public List<Consent> findByField(QueryBuilder queryBuilder);
+
+  public List<Consent> findByActor(QueryBuilder queryBuilder);
+  public List<Consent> findByData(QueryBuilder queryBuilder);
+  public List<Consent> findByOrganization(QueryBuilder queryBuilder);
 }

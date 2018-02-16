@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ServiceDefinition;
 
 public interface ServiceDefinitionService {
@@ -35,4 +37,7 @@ public interface ServiceDefinitionService {
   public ServiceDefinition create(ServiceDefinition bean);
   public ServiceDefinition update(ServiceDefinition bean);
   public void delete(ServiceDefinition bean);
+  public List<ServiceDefinition> findByField(QueryBuilder queryBuilder);
+
+
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition."
 */
 @Entity
 @Table(name="communicationrequestrequester")
 public class CommunicationRequestRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669704894612L;
+	private static final long serialVersionUID = 151873631183311825L;
   /**
   * Description: "The device, practitioner, etc. who initiated the request."
   */

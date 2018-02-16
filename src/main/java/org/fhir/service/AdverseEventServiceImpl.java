@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AdverseEvent;
 /**
 * auto generated from SQL files
@@ -103,5 +104,43 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(AdverseEvent) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<AdverseEvent> findByField(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<AdverseEvent> findByLocation(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findByReaction(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByReaction(queryBuilder);
+    logger.info("findByreaction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findByRecorder(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByRecorder(queryBuilder);
+    logger.info("findByrecorder - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findByStudy(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByStudy(queryBuilder);
+    logger.info("findBystudy - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findBySubject(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

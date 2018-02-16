@@ -30,115 +30,87 @@ import com.google.gson.GsonBuilder;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
-public class TestScriptVariable  {
+public class TestScriptVariable  extends BackboneElement  {
   /**
   * Description: "Descriptive name for this variable."
   */
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "A default, hard-coded, or user-defined value for this variable."
   */
-  private String defaultValue;
+  protected String defaultValue;
 
   /**
   * Description: "Extensions for defaultValue"
   */
-  private transient Element _defaultValue;
+  protected transient Element _defaultValue;
 
   /**
   * Description: "A free text natural language description of the variable and its purpose."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "The fluentpath expression to evaluate against the fixture body. When variables are defined, only one of either expression, headerField or path must be specified."
   */
-  private String expression;
+  protected String expression;
 
   /**
   * Description: "Extensions for expression"
   */
-  private transient Element _expression;
+  protected transient Element _expression;
 
   /**
   * Description: "Will be used to grab the HTTP header field value from the headers that sourceId is pointing to."
   */
-  private String headerField;
+  protected String headerField;
 
   /**
   * Description: "Extensions for headerField"
   */
-  private transient Element _headerField;
+  protected transient Element _headerField;
 
   /**
   * Description: "Displayable text string with hint help information to the user when entering a default value."
   */
-  private String hint;
+  protected String hint;
 
   /**
   * Description: "Extensions for hint"
   */
-  private transient Element _hint;
+  protected transient Element _hint;
 
   /**
   * Description: "XPath or JSONPath to evaluate against the fixture body.  When variables are defined, only one of either expression, headerField or path must be specified."
   */
-  private String path;
+  protected String path;
 
   /**
   * Description: "Extensions for path"
   */
-  private transient Element _path;
+  protected transient Element _path;
 
   /**
   * Description: "Fixture to evaluate the XPath/JSONPath expression or the headerField  against within this variable."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String sourceId;
+  protected String sourceId;
 
   /**
   * Description: "Extensions for sourceId"
   */
-  private transient Element _sourceId;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _sourceId;
 
   public TestScriptVariable() {}
 
@@ -238,30 +210,6 @@ public class TestScriptVariable  {
   public Element get_sourceId() {
     return this._sourceId;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -282,11 +230,7 @@ public class TestScriptVariable  {
      if(this.path != null) builder.append("path" + "->" + this.path.toString() + "\n"); 
      if(this._path != null) builder.append("_path" + "->" + this._path.toString() + "\n"); 
      if(this.sourceId != null) builder.append("sourceId" + "->" + this.sourceId.toString() + "\n"); 
-     if(this._sourceId != null) builder.append("_sourceId" + "->" + this._sourceId.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._sourceId != null) builder.append("_sourceId" + "->" + this._sourceId.toString() + "\n"); ;
     return builder.toString();
   }
 

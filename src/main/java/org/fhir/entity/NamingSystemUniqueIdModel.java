@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a \"System\" used within the Identifier and Coding data types."
 */
 @Entity
 @Table(name="namingsystemuniqueid")
 public class NamingSystemUniqueIdModel  implements Serializable {
-	private static final long serialVersionUID = 15185766964303390L;
+	private static final long serialVersionUID = 151873631104651655L;
   /**
   * Description: "Identifies the unique identifier scheme used for this particular identifier."
   */
@@ -124,7 +125,7 @@ public class NamingSystemUniqueIdModel  implements Serializable {
     this.value = o.getValue();
     this.preferred = o.getPreferred();
     this.comment = o.getComment();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
   }
 
   public String getType() {

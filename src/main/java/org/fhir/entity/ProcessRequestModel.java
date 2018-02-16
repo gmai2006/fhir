@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the target, request and response, and action details for an action to be performed by the target on or about existing resources."
 */
 @Entity
 @Table(name="processrequest")
 public class ProcessRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669707481798L;
+	private static final long serialVersionUID = 151873631186096587L;
   /**
   * Description: "This is a ProcessRequest resource"
   */
@@ -303,7 +304,7 @@ public class ProcessRequestModel  implements Serializable {
     }
     this.include = org.fhir.utils.JsonUtils.write2String(o.getInclude());
     this.exclude = org.fhir.utils.JsonUtils.write2String(o.getExclude());
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);

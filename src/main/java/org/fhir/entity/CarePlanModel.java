@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
 @Entity
 @Table(name="careplan")
 public class CarePlanModel  implements Serializable {
-	private static final long serialVersionUID = 151857669654834566L;
+	private static final long serialVersionUID = 151873631122048707L;
   /**
   * Description: "This is a CarePlan resource"
   */
@@ -361,7 +362,7 @@ public class CarePlanModel  implements Serializable {
     	this.context_id = "context" + this.id;
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getAuthor() && !o.getAuthor().isEmpty()) {
     	this.author_id = "author" + this.id;
     	this.author = ReferenceHelper.toModelFromArray(o.getAuthor(), this.author_id);

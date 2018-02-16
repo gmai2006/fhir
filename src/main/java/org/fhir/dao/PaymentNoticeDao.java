@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PaymentNotice;
 
 public interface PaymentNoticeDao {
@@ -38,4 +39,11 @@ public interface PaymentNoticeDao {
 
   public PaymentNotice update(PaymentNotice e);
   public void delete(PaymentNotice e);
+
+  public List<PaymentNotice> findByField(QueryBuilder queryBuilder);
+
+  public List<PaymentNotice> findByOrganization(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByProvider(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByRequest(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByResponse(QueryBuilder queryBuilder);
 }

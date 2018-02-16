@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Organization;
 
 public interface OrganizationDao {
@@ -38,4 +39,9 @@ public interface OrganizationDao {
 
   public Organization update(Organization e);
   public void delete(Organization e);
+
+  public List<Organization> findByField(QueryBuilder queryBuilder);
+
+  public List<Organization> findByAddress(QueryBuilder queryBuilder);
+  public List<Organization> findByEndpoint(QueryBuilder queryBuilder);
 }

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ConceptMap;
 
 public interface ConceptMapService {
@@ -35,4 +37,7 @@ public interface ConceptMapService {
   public ConceptMap create(ConceptMap bean);
   public ConceptMap update(ConceptMap bean);
   public void delete(ConceptMap bean);
+  public List<ConceptMap> findByField(QueryBuilder queryBuilder);
+
+
 }

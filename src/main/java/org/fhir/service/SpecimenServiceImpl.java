@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Specimen;
 /**
 * auto generated from SQL files
@@ -103,5 +104,31 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Specimen) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Specimen> findByField(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Specimen> findByContainer(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findByContainer(queryBuilder);
+    logger.info("findBycontainer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Specimen> findByParent(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findByParent(queryBuilder);
+    logger.info("findByparent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Specimen> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

@@ -30,70 +30,51 @@ import com.google.gson.GsonBuilder;
 /**
 * "A technical identifier - identifies some entity uniquely and unambiguously."
 */
-public class Identifier  {
+public class Identifier  extends Element  {
   /**
   * Description: "The purpose of this identifier."
   */
-  private String use;
+  protected String use;
 
   /**
   * Description: "Extensions for use"
   */
-  private transient Element _use;
+  protected transient Element _use;
 
   /**
   * Description: "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose."
   */
-  private CodeableConcept type;
+  protected CodeableConcept type;
 
   /**
   * Description: "Establishes the namespace for the value - that is, a URL that describes a set values that are unique."
   */
-  private String system;
+  protected String system;
 
   /**
   * Description: "Extensions for system"
   */
-  private transient Element _system;
+  protected transient Element _system;
 
   /**
   * Description: "The portion of the identifier typically relevant to the user and which is unique within the context of the system."
   */
-  private String value;
+  protected String value;
 
   /**
   * Description: "Extensions for value"
   */
-  private transient Element _value;
+  protected transient Element _value;
 
   /**
   * Description: "Time period during which identifier is/was valid for use."
   */
-  private Period period;
+  protected Period period;
 
   /**
   * Description: "Organization that issued/manages the identifier."
   */
-  private Reference assigner;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Reference assigner;
 
   public Identifier() {}
 
@@ -151,24 +132,6 @@ public class Identifier  {
   public Reference getAssigner() {
     return this.assigner;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -182,10 +145,7 @@ public class Identifier  {
      if(this.value != null) builder.append("value" + "->" + this.value.toString() + "\n"); 
      if(this._value != null) builder.append("_value" + "->" + this._value.toString() + "\n"); 
      if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
-     if(this.assigner != null) builder.append("assigner" + "->" + this.assigner.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.assigner != null) builder.append("assigner" + "->" + this.assigner.toString() + "\n"); ;
     return builder.toString();
   }
 

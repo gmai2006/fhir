@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The characteristics, operational status and capabilities of a medical-related component of a medical device."
 */
 @Entity
 @Table(name="devicecomponent")
 public class DeviceComponentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669673666338L;
+	private static final long serialVersionUID = 151873631148716259L;
   /**
   * Description: "This is a DeviceComponent resource"
   */
@@ -231,8 +232,8 @@ public class DeviceComponentModel  implements Serializable {
   public DeviceComponentModel(DeviceComponent o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    this.type = JsonUtils.toJson(o.getType());
     this.lastSystemChange = o.getLastSystemChange();
     if (null != o.getSource() ) {
     	this.source_id = "source" + this.id;
@@ -242,13 +243,13 @@ public class DeviceComponentModel  implements Serializable {
     	this.parent_id = "parent" + this.id;
     	this.parent = ReferenceHelper.toModel(o.getParent(), this.parent_id);
     }
-    this.parameterGroup = CodeableConceptHelper.toJson(o.getParameterGroup());
+    this.parameterGroup = JsonUtils.toJson(o.getParameterGroup());
     this.measurementPrinciple = o.getMeasurementPrinciple();
     if (null != o.getProductionSpecification() && !o.getProductionSpecification().isEmpty()) {
     	this.productionspecification_id = "productionspecification" + this.id;
     	this.productionSpecification = DeviceComponentProductionSpecificationHelper.toModelFromArray(o.getProductionSpecification(), this.productionspecification_id);
     }
-    this.languageCode = CodeableConceptHelper.toJson(o.getLanguageCode());
+    this.languageCode = JsonUtils.toJson(o.getLanguageCode());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);

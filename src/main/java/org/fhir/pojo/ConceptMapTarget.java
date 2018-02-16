@@ -31,85 +31,57 @@ import com.google.gson.GsonBuilder;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
 */
-public class ConceptMapTarget  {
+public class ConceptMapTarget  extends BackboneElement  {
   /**
   * Description: "Identity (code or path) or the element/item that the map refers to."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String code;
+  protected String code;
 
   /**
   * Description: "Extensions for code"
   */
-  private transient Element _code;
+  protected transient Element _code;
 
   /**
   * Description: "The display for the code. The display is only provided to help editors when editing the concept map."
   */
-  private String display;
+  protected String display;
 
   /**
   * Description: "Extensions for display"
   */
-  private transient Element _display;
+  protected transient Element _display;
 
   /**
   * Description: "The equivalence between the source and target concepts (counting for the dependencies and products). The equivalence is read from target to source (e.g. the target is 'wider' than the source)."
   */
-  private String equivalence;
+  protected String equivalence;
 
   /**
   * Description: "Extensions for equivalence"
   */
-  private transient Element _equivalence;
+  protected transient Element _equivalence;
 
   /**
   * Description: "A description of status/issues in mapping that conveys additional information not represented in  the structured data."
   */
-  private String comment;
+  protected String comment;
 
   /**
   * Description: "Extensions for comment"
   */
-  private transient Element _comment;
+  protected transient Element _comment;
 
   /**
   * Description: "A set of additional dependencies for this mapping to hold. This mapping is only applicable if the specified element can be resolved, and it has the specified value."
   */
-  private java.util.List<ConceptMapDependsOn> dependsOn = new java.util.ArrayList<>();
+  protected java.util.List<ConceptMapDependsOn> dependsOn = new java.util.ArrayList<>();
 
   /**
   * Description: "A set of additional outcomes from this mapping to other elements. To properly execute this mapping, the specified element must be mapped to some data element or source that is in context. The mapping may still be useful without a place for the additional data elements, but the equivalence cannot be relied on."
   */
-  private java.util.List<ConceptMapDependsOn> product = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ConceptMapDependsOn> product = new java.util.ArrayList<>();
 
   public ConceptMapTarget() {
   }
@@ -133,9 +105,6 @@ public class ConceptMapTarget  {
     }
     if (null != o.getProduct() && !o.getProduct().isEmpty()) {
     	this.product = ConceptMapDependsOnHelper.fromArray2Array(o.getProduct());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -199,30 +168,6 @@ public class ConceptMapTarget  {
   public java.util.List<ConceptMapDependsOn> getProduct() {
     return this.product;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -237,11 +182,7 @@ public class ConceptMapTarget  {
      if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
      if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
      if(this.dependsOn != null) builder.append("dependsOn" + "->" + this.dependsOn.toString() + "\n"); 
-     if(this.product != null) builder.append("product" + "->" + this.product.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.product != null) builder.append("product" + "->" + this.product.toString() + "\n"); ;
     return builder.toString();
   }
 

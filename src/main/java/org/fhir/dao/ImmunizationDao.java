@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Immunization;
 
 public interface ImmunizationDao {
@@ -38,4 +39,11 @@ public interface ImmunizationDao {
 
   public Immunization update(Immunization e);
   public void delete(Immunization e);
+
+  public List<Immunization> findByField(QueryBuilder queryBuilder);
+
+  public List<Immunization> findByLocation(QueryBuilder queryBuilder);
+  public List<Immunization> findByManufacturer(QueryBuilder queryBuilder);
+  public List<Immunization> findByPractitioner(QueryBuilder queryBuilder);
+  public List<Immunization> findByReaction(QueryBuilder queryBuilder);
 }

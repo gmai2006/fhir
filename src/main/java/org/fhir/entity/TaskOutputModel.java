@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A task to be performed."
 */
 @Entity
 @Table(name="taskoutput")
 public class TaskOutputModel  implements Serializable {
-	private static final long serialVersionUID = 151857669694831492L;
+	private static final long serialVersionUID = 151873631174484241L;
   /**
   * Description: "The name of the Output parameter."
   * Actual type: String;
@@ -263,12 +264,14 @@ public class TaskOutputModel  implements Serializable {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueQuantity\"", length = 16777215)
-  private String valueQuantity;
+  @Column(name="\"valuequantity_id\"")
+  private String valuequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> valueQuantity;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
@@ -281,12 +284,14 @@ public class TaskOutputModel  implements Serializable {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueSimpleQuantity\"", length = 16777215)
-  private String valueSimpleQuantity;
+  @Column(name="\"valuesimplequantity_id\"")
+  private String valuesimplequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuesimplequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> valueSimpleQuantity;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
@@ -310,12 +315,14 @@ public class TaskOutputModel  implements Serializable {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueMoney\"", length = 16777215)
-  private String valueMoney;
+  @Column(name="\"valuemoney_id\"")
+  private String valuemoney_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuemoney_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> valueMoney;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
@@ -393,12 +400,14 @@ public class TaskOutputModel  implements Serializable {
 
   /**
   * Description: "The value of the Output parameter as a basic type."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueAddress\"", length = 16777215)
-  private String valueAddress;
+  @Column(name="\"valueaddress_id\"")
+  private String valueaddress_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valueaddress_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> valueAddress;
 
   /**
   * Description: "The value of the Output parameter as a basic type."
@@ -569,7 +578,7 @@ public class TaskOutputModel  implements Serializable {
   public TaskOutputModel(TaskOutput o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.valueBoolean = o.getValueBoolean();
     this.valueInteger = o.getValueInteger();
     this.valueDecimal = o.getValueDecimal();
@@ -587,46 +596,58 @@ public class TaskOutputModel  implements Serializable {
     this.valueUnsignedInt = o.getValueUnsignedInt();
     this.valuePositiveInt = o.getValuePositiveInt();
     this.valueMarkdown = o.getValueMarkdown();
-    this.valueElement = ElementHelper.toJson(o.getValueElement());
-    this.valueExtension = ExtensionHelper.toJson(o.getValueExtension());
-    this.valueBackboneElement = BackboneElementHelper.toJson(o.getValueBackboneElement());
+    this.valueElement = JsonUtils.toJson(o.getValueElement());
+    this.valueExtension = JsonUtils.toJson(o.getValueExtension());
+    this.valueBackboneElement = JsonUtils.toJson(o.getValueBackboneElement());
     if (null != o.getValueNarrative() ) {
     	this.valuenarrative_id = "valuenarrative" + this.parent_id;
     	this.valueNarrative = NarrativeHelper.toModel(o.getValueNarrative(), this.valuenarrative_id);
     }
-    this.valueAnnotation = AnnotationHelper.toJson(o.getValueAnnotation());
-    this.valueAttachment = AttachmentHelper.toJson(o.getValueAttachment());
-    this.valueIdentifier = IdentifierHelper.toJson(o.getValueIdentifier());
-    this.valueCodeableConcept = CodeableConceptHelper.toJson(o.getValueCodeableConcept());
-    this.valueCoding = CodingHelper.toJson(o.getValueCoding());
-    this.valueQuantity = QuantityHelper.toJson(o.getValueQuantity());
-    this.valueDuration = DurationHelper.toJson(o.getValueDuration());
-    this.valueSimpleQuantity = QuantityHelper.toJson(o.getValueSimpleQuantity());
+    this.valueAnnotation = JsonUtils.toJson(o.getValueAnnotation());
+    this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
+    this.valueIdentifier = JsonUtils.toJson(o.getValueIdentifier());
+    this.valueCodeableConcept = JsonUtils.toJson(o.getValueCodeableConcept());
+    this.valueCoding = JsonUtils.toJson(o.getValueCoding());
+    if (null != o.getValueQuantity() ) {
+    	this.valuequantity_id = "valuequantity" + this.parent_id;
+    	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
+    }
+    this.valueDuration = JsonUtils.toJson(o.getValueDuration());
+    if (null != o.getValueSimpleQuantity() ) {
+    	this.valuesimplequantity_id = "valuesimplequantity" + this.parent_id;
+    	this.valueSimpleQuantity = QuantityHelper.toModel(o.getValueSimpleQuantity(), this.valuesimplequantity_id);
+    }
     if (null != o.getValueDistance() ) {
     	this.valuedistance_id = "valuedistance" + this.parent_id;
     	this.valueDistance = DistanceHelper.toModel(o.getValueDistance(), this.valuedistance_id);
     }
-    this.valueCount = CountHelper.toJson(o.getValueCount());
-    this.valueMoney = MoneyHelper.toJson(o.getValueMoney());
-    this.valueAge = AgeHelper.toJson(o.getValueAge());
-    this.valueRange = RangeHelper.toJson(o.getValueRange());
-    this.valuePeriod = PeriodHelper.toJson(o.getValuePeriod());
-    this.valueRatio = RatioHelper.toJson(o.getValueRatio());
+    this.valueCount = JsonUtils.toJson(o.getValueCount());
+    if (null != o.getValueMoney() ) {
+    	this.valuemoney_id = "valuemoney" + this.parent_id;
+    	this.valueMoney = MoneyHelper.toModel(o.getValueMoney(), this.valuemoney_id);
+    }
+    this.valueAge = JsonUtils.toJson(o.getValueAge());
+    this.valueRange = JsonUtils.toJson(o.getValueRange());
+    this.valuePeriod = JsonUtils.toJson(o.getValuePeriod());
+    this.valueRatio = JsonUtils.toJson(o.getValueRatio());
     if (null != o.getValueReference() ) {
     	this.valuereference_id = "valuereference" + this.parent_id;
     	this.valueReference = ReferenceHelper.toModel(o.getValueReference(), this.valuereference_id);
     }
-    this.valueSampledData = SampledDataHelper.toJson(o.getValueSampledData());
-    this.valueSignature = SignatureHelper.toJson(o.getValueSignature());
-    this.valueHumanName = HumanNameHelper.toJson(o.getValueHumanName());
-    this.valueAddress = AddressHelper.toJson(o.getValueAddress());
-    this.valueContactPoint = ContactPointHelper.toJson(o.getValueContactPoint());
-    this.valueTiming = TimingHelper.toJson(o.getValueTiming());
+    this.valueSampledData = JsonUtils.toJson(o.getValueSampledData());
+    this.valueSignature = JsonUtils.toJson(o.getValueSignature());
+    this.valueHumanName = JsonUtils.toJson(o.getValueHumanName());
+    if (null != o.getValueAddress() ) {
+    	this.valueaddress_id = "valueaddress" + this.parent_id;
+    	this.valueAddress = AddressHelper.toModel(o.getValueAddress(), this.valueaddress_id);
+    }
+    this.valueContactPoint = JsonUtils.toJson(o.getValueContactPoint());
+    this.valueTiming = JsonUtils.toJson(o.getValueTiming());
     if (null != o.getValueMeta() ) {
     	this.valuemeta_id = "valuemeta" + this.parent_id;
     	this.valueMeta = MetaHelper.toModel(o.getValueMeta(), this.valuemeta_id);
     }
-    this.valueElementDefinition = ElementDefinitionHelper.toJson(o.getValueElementDefinition());
+    this.valueElementDefinition = JsonUtils.toJson(o.getValueElementDefinition());
     if (null != o.getValueContactDetail() ) {
     	this.valuecontactdetail_id = "valuecontactdetail" + this.parent_id;
     	this.valueContactDetail = ContactDetailHelper.toModel(o.getValueContactDetail(), this.valuecontactdetail_id);
@@ -651,7 +672,7 @@ public class TaskOutputModel  implements Serializable {
     	this.valuedatarequirement_id = "valuedatarequirement" + this.parent_id;
     	this.valueDataRequirement = DataRequirementHelper.toModel(o.getValueDataRequirement(), this.valuedatarequirement_id);
     }
-    this.valueParameterDefinition = ParameterDefinitionHelper.toJson(o.getValueParameterDefinition());
+    this.valueParameterDefinition = JsonUtils.toJson(o.getValueParameterDefinition());
     if (null != o.getValueTriggerDefinition() ) {
     	this.valuetriggerdefinition_id = "valuetriggerdefinition" + this.parent_id;
     	this.valueTriggerDefinition = TriggerDefinitionHelper.toModel(o.getValueTriggerDefinition(), this.valuetriggerdefinition_id);
@@ -820,10 +841,10 @@ public class TaskOutputModel  implements Serializable {
   public void setValueCoding( String value) {
     this.valueCoding = value;
   }
-  public String getValueQuantity() {
+  public java.util.List<QuantityModel> getValueQuantity() {
     return this.valueQuantity;
   }
-  public void setValueQuantity( String value) {
+  public void setValueQuantity( java.util.List<QuantityModel> value) {
     this.valueQuantity = value;
   }
   public String getValueDuration() {
@@ -832,10 +853,10 @@ public class TaskOutputModel  implements Serializable {
   public void setValueDuration( String value) {
     this.valueDuration = value;
   }
-  public String getValueSimpleQuantity() {
+  public java.util.List<QuantityModel> getValueSimpleQuantity() {
     return this.valueSimpleQuantity;
   }
-  public void setValueSimpleQuantity( String value) {
+  public void setValueSimpleQuantity( java.util.List<QuantityModel> value) {
     this.valueSimpleQuantity = value;
   }
   public java.util.List<DistanceModel> getValueDistance() {
@@ -850,10 +871,10 @@ public class TaskOutputModel  implements Serializable {
   public void setValueCount( String value) {
     this.valueCount = value;
   }
-  public String getValueMoney() {
+  public java.util.List<MoneyModel> getValueMoney() {
     return this.valueMoney;
   }
-  public void setValueMoney( String value) {
+  public void setValueMoney( java.util.List<MoneyModel> value) {
     this.valueMoney = value;
   }
   public String getValueAge() {
@@ -904,10 +925,10 @@ public class TaskOutputModel  implements Serializable {
   public void setValueHumanName( String value) {
     this.valueHumanName = value;
   }
-  public String getValueAddress() {
+  public java.util.List<AddressModel> getValueAddress() {
     return this.valueAddress;
   }
-  public void setValueAddress( String value) {
+  public void setValueAddress( java.util.List<AddressModel> value) {
     this.valueAddress = value;
   }
   public String getValueContactPoint() {
@@ -1037,11 +1058,8 @@ public class TaskOutputModel  implements Serializable {
      builder.append("valueIdentifier" + "->" + this.valueIdentifier + "\n"); 
      builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("valueDuration" + "->" + this.valueDuration + "\n"); 
-     builder.append("valueSimpleQuantity" + "->" + this.valueSimpleQuantity + "\n"); 
      builder.append("valueCount" + "->" + this.valueCount + "\n"); 
-     builder.append("valueMoney" + "->" + this.valueMoney + "\n"); 
      builder.append("valueAge" + "->" + this.valueAge + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 
      builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
@@ -1049,7 +1067,6 @@ public class TaskOutputModel  implements Serializable {
      builder.append("valueSampledData" + "->" + this.valueSampledData + "\n"); 
      builder.append("valueSignature" + "->" + this.valueSignature + "\n"); 
      builder.append("valueHumanName" + "->" + this.valueHumanName + "\n"); 
-     builder.append("valueAddress" + "->" + this.valueAddress + "\n"); 
      builder.append("valueContactPoint" + "->" + this.valueContactPoint + "\n"); 
      builder.append("valueTiming" + "->" + this.valueTiming + "\n"); 
      builder.append("valueElementDefinition" + "->" + this.valueElementDefinition + "\n"); 

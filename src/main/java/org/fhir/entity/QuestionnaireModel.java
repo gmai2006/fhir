@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
 */
 @Entity
 @Table(name="questionnaire")
 public class QuestionnaireModel  implements Serializable {
-	private static final long serialVersionUID = 151857669711845251L;
+	private static final long serialVersionUID = 151873631190760072L;
   /**
   * Description: "This is a Questionnaire resource"
   */
@@ -319,7 +320,7 @@ public class QuestionnaireModel  implements Serializable {
     this.purpose = o.getPurpose();
     this.approvalDate = o.getApprovalDate();
     this.lastReviewDate = o.getLastReviewDate();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);

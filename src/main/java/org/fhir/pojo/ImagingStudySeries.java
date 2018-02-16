@@ -31,129 +31,101 @@ import com.google.gson.GsonBuilder;
 /**
 * "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities."
 */
-public class ImagingStudySeries  {
+public class ImagingStudySeries  extends BackboneElement  {
   /**
   * Description: "Formal identifier for this series."
   */
   @javax.validation.constraints.Pattern(regexp="urn:oid:(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*))*")
-  private String uid;
+  protected String uid;
 
   /**
   * Description: "Extensions for uid"
   */
-  private transient Element _uid;
+  protected transient Element _uid;
 
   /**
   * Description: "The numeric identifier of this series in the study."
   */
   @javax.validation.constraints.Pattern(regexp="[0]|([1-9][0-9]*)")
-  private Float number;
+  protected Float number;
 
   /**
   * Description: "Extensions for number"
   */
-  private transient Element _number;
+  protected transient Element _number;
 
   /**
   * Description: "The modality of this series sequence."
   */
   @javax.validation.constraints.NotNull
-  private Coding modality;
+  protected Coding modality;
 
   /**
   * Description: "A description of the series."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "Number of SOP Instances in the Study. The value given may be larger than the number of instance elements this resource contains due to resource availability, security, or other factors. This element should be present if any instance elements are present."
   */
   @javax.validation.constraints.Pattern(regexp="[0]|([1-9][0-9]*)")
-  private Float numberOfInstances;
+  protected Float numberOfInstances;
 
   /**
   * Description: "Extensions for numberOfInstances"
   */
-  private transient Element _numberOfInstances;
+  protected transient Element _numberOfInstances;
 
   /**
   * Description: "Availability of series (online, offline or nearline)."
   */
-  private String availability;
+  protected String availability;
 
   /**
   * Description: "Extensions for availability"
   */
-  private transient Element _availability;
+  protected transient Element _availability;
 
   /**
   * Description: "The network service providing access (e.g., query, view, or retrieval) for this series. See implementation notes for information about using DICOM endpoints. A series-level endpoint, if present, has precedence over a study-level endpoint with the same Endpoint.type."
   */
-  private java.util.List<Reference> endpoint = new java.util.ArrayList<>();
+  protected java.util.List<Reference> endpoint = new java.util.ArrayList<>();
 
   /**
   * Description: "The anatomic structures examined. See DICOM Part 16 Annex L (http://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_L.html) for DICOM to SNOMED-CT mappings. The bodySite may indicate the laterality of body part imaged; if so, it shall be consistent with any content of ImagingStudy.series.laterality."
   */
-  private Coding bodySite;
+  protected Coding bodySite;
 
   /**
   * Description: "The laterality of the (possibly paired) anatomic structures examined. E.g., the left knee, both lungs, or unpaired abdomen. If present, shall be consistent with any laterality information indicated in ImagingStudy.series.bodySite."
   */
-  private Coding laterality;
+  protected Coding laterality;
 
   /**
   * Description: "The date and time the series was started."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String started;
+  protected String started;
 
   /**
   * Description: "Extensions for started"
   */
-  private transient Element _started;
+  protected transient Element _started;
 
   /**
   * Description: "The physician or operator (often the radiology technician)  who performed the series. The performer is recorded at the series level, since each series in a study may be performed by a different practitioner, at different times, and using different devices. A series may be performed by multiple practitioners."
   */
-  private java.util.List<Reference> performer = new java.util.ArrayList<>();
+  protected java.util.List<Reference> performer = new java.util.ArrayList<>();
 
   /**
   * Description: "A single SOP instance within the series, e.g. an image, or presentation state."
   */
-  private java.util.List<ImagingStudyInstance> instance = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ImagingStudyInstance> instance = new java.util.ArrayList<>();
 
   public ImagingStudySeries() {
   }
@@ -189,9 +161,6 @@ public class ImagingStudySeries  {
     }
     if (null != o.getInstance() && !o.getInstance().isEmpty()) {
     	this.instance = ImagingStudyInstanceHelper.fromArray2Array(o.getInstance());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -303,30 +272,6 @@ public class ImagingStudySeries  {
   public java.util.List<ImagingStudyInstance> getInstance() {
     return this.instance;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -349,11 +294,7 @@ public class ImagingStudySeries  {
      if(this.started != null) builder.append("started" + "->" + this.started.toString() + "\n"); 
      if(this._started != null) builder.append("_started" + "->" + this._started.toString() + "\n"); 
      if(this.performer != null) builder.append("performer" + "->" + this.performer.toString() + "\n"); 
-     if(this.instance != null) builder.append("instance" + "->" + this.instance.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.instance != null) builder.append("instance" + "->" + this.instance.toString() + "\n"); ;
     return builder.toString();
   }
 

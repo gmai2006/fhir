@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ResearchStudy;
 
 public interface ResearchStudyDao {
@@ -38,4 +39,10 @@ public interface ResearchStudyDao {
 
   public ResearchStudy update(ResearchStudy e);
   public void delete(ResearchStudy e);
+
+  public List<ResearchStudy> findByField(QueryBuilder queryBuilder);
+
+  public List<ResearchStudy> findByProtocol(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findBySite(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findBySponsor(QueryBuilder queryBuilder);
 }

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Schedule;
 
 public interface ScheduleDao {
@@ -38,4 +39,8 @@ public interface ScheduleDao {
 
   public Schedule update(Schedule e);
   public void delete(Schedule e);
+
+  public List<Schedule> findByField(QueryBuilder queryBuilder);
+
+  public List<Schedule> findByActor(QueryBuilder queryBuilder);
 }

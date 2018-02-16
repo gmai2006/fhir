@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DocumentReference;
 
 public interface DocumentReferenceDao {
@@ -38,4 +39,11 @@ public interface DocumentReferenceDao {
 
   public DocumentReference update(DocumentReference e);
   public void delete(DocumentReference e);
+
+  public List<DocumentReference> findByField(QueryBuilder queryBuilder);
+
+  public List<DocumentReference> findByAuthenticator(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByAuthor(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByCustodian(QueryBuilder queryBuilder);
+  public List<DocumentReference> findBySubject(QueryBuilder queryBuilder);
 }

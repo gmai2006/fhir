@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A collection of documents compiled for a purpose together with metadata that applies to the collection."
 */
 @Entity
 @Table(name="documentmanifest")
 public class DocumentManifestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669687826658L;
+	private static final long serialVersionUID = 151873631167079885L;
   /**
   * Description: "This is a DocumentManifest resource"
   */
@@ -248,9 +249,9 @@ public class DocumentManifestModel  implements Serializable {
   public DocumentManifestModel(DocumentManifest o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.masterIdentifier = IdentifierHelper.toJson(o.getMasterIdentifier());
+    this.masterIdentifier = JsonUtils.toJson(o.getMasterIdentifier());
     this.status = o.getStatus();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);

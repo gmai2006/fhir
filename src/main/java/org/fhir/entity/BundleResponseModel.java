@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
 */
 @Entity
 @Table(name="bundleresponse")
 public class BundleResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669697857305L;
+	private static final long serialVersionUID = 151873631176951765L;
   /**
   * Description: "The status code returned by processing this entry. The status SHALL start with a 3 digit HTTP code (e.g. 404) and may contain the standard HTTP description associated with the status code."
   */
@@ -124,7 +125,7 @@ public class BundleResponseModel  implements Serializable {
     this.location = o.getLocation();
     this.etag = o.getEtag();
     this.lastModified = o.getLastModified();
-    this.outcome = ResourceListHelper.toJson(o.getOutcome());
+    this.outcome = JsonUtils.toJson(o.getOutcome());
   }
 
   public String getStatus() {

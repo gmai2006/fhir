@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitinsurance")
 public class ExplanationOfBenefitInsuranceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669663223879L;
+	private static final long serialVersionUID = 151873631134969589L;
   /**
   * Description: "Reference to the program or plan identification, underwriter or payor."
   */

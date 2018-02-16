@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted."
 */
 @Entity
 @Table(name="messagedefinition")
 public class MessageDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669706070508L;
+	private static final long serialVersionUID = 151873631184415753L;
   /**
   * Description: "This is a MessageDefinition resource"
   */
@@ -336,7 +337,7 @@ public class MessageDefinitionModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.url = o.getUrl();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.version = o.getVersion();
     this.name = o.getName();
     this.title = o.getTitle();
@@ -367,7 +368,7 @@ public class MessageDefinitionModel  implements Serializable {
     	this.replaces_id = "replaces" + this.id;
     	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
     }
-    this.event = CodingHelper.toJson(o.getEvent());
+    this.event = JsonUtils.toJson(o.getEvent());
     this.category = o.getCategory();
     if (null != o.getFocus() && !o.getFocus().isEmpty()) {
     	this.focus_id = "focus" + this.id;

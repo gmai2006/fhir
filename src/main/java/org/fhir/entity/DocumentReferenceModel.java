@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A reference to a document."
 */
 @Entity
 @Table(name="documentreference")
 public class DocumentReferenceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669702834801L;
+	private static final long serialVersionUID = 151873631181289909L;
   /**
   * Description: "This is a DocumentReference resource"
   */
@@ -297,11 +298,11 @@ public class DocumentReferenceModel  implements Serializable {
   public DocumentReferenceModel(DocumentReference o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.masterIdentifier = IdentifierHelper.toJson(o.getMasterIdentifier());
+    this.masterIdentifier = JsonUtils.toJson(o.getMasterIdentifier());
     this.status = o.getStatus();
     this.docStatus = o.getDocStatus();
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.FHIRclass = CodeableConceptHelper.toJson(o.getFHIRclass());
+    this.type = JsonUtils.toJson(o.getType());
+    this.FHIRclass = JsonUtils.toJson(o.getFHIRclass());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);

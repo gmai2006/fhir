@@ -35,17 +35,17 @@ public class Element  {
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
   */
   @javax.validation.constraints.NotNull
-  private String id;
+  protected String id;
 
   /**
   * Description: "Extensions for id"
   */
-  private transient Element _id;
+  protected transient Element _id;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
   */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<Extension> extension = new java.util.ArrayList<>();
 
   public Element() {}
 

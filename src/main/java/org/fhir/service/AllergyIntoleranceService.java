@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AllergyIntolerance;
 
 public interface AllergyIntoleranceService {
@@ -35,4 +37,9 @@ public interface AllergyIntoleranceService {
   public AllergyIntolerance create(AllergyIntolerance bean);
   public AllergyIntolerance update(AllergyIntolerance bean);
   public void delete(AllergyIntolerance bean);
+  public List<AllergyIntolerance> findByField(QueryBuilder queryBuilder);
+  public List<AllergyIntolerance> findByAsserter(QueryBuilder queryBuilder);
+  public List<AllergyIntolerance> findByRecorder(QueryBuilder queryBuilder);
+
+
 }

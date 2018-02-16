@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Coverage;
 
 public interface CoverageService {
@@ -35,4 +37,10 @@ public interface CoverageService {
   public Coverage create(Coverage bean);
   public Coverage update(Coverage bean);
   public void delete(Coverage bean);
+  public List<Coverage> findByField(QueryBuilder queryBuilder);
+  public List<Coverage> findByBeneficiary(QueryBuilder queryBuilder);
+  public List<Coverage> findByPayor(QueryBuilder queryBuilder);
+  public List<Coverage> findBySubscriber(QueryBuilder queryBuilder);
+
+
 }

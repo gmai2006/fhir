@@ -31,127 +31,99 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
-public class ExplanationOfBenefitDetail  {
+public class ExplanationOfBenefitDetail  extends BackboneElement  {
   /**
   * Description: "A service line number."
   */
   @javax.validation.constraints.Pattern(regexp="[1-9][0-9]*")
-  private Float sequence;
+  protected Float sequence;
 
   /**
   * Description: "Extensions for sequence"
   */
-  private transient Element _sequence;
+  protected transient Element _sequence;
 
   /**
   * Description: "The type of product or service."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept type;
+  protected CodeableConcept type;
 
   /**
   * Description: "The type of reveneu or cost center providing the product and/or service."
   */
-  private CodeableConcept revenue;
+  protected CodeableConcept revenue;
 
   /**
   * Description: "Health Care Service Type Codes  to identify the classification of service or benefits."
   */
-  private CodeableConcept category;
+  protected CodeableConcept category;
 
   /**
   * Description: "If this is an actual service or product line, ie. not a Group, then use code to indicate the Professional Service or Product supplied (eg. CTP, HCPCS,USCLS,ICD10, NCPDP,DIN,ACHI,CCI). If a grouping item then use a group code to indicate the type of thing being grouped eg. 'glasses' or 'compound'."
   */
-  private CodeableConcept service;
+  protected CodeableConcept service;
 
   /**
   * Description: "Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours."
   */
-  private java.util.List<CodeableConcept> modifier = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> modifier = new java.util.ArrayList<>();
 
   /**
   * Description: "For programs which require reson codes for the inclusion, covering, of this billed item under the program or sub-program."
   */
-  private java.util.List<CodeableConcept> programCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> programCode = new java.util.ArrayList<>();
 
   /**
   * Description: "The number of repetitions of a service or product."
   */
-  private Quantity quantity;
+  protected Quantity quantity;
 
   /**
   * Description: "If the item is a node then this is the fee for the product or service, otherwise this is the total of the fees for the children of the group."
   */
-  private Money unitPrice;
+  protected Money unitPrice;
 
   /**
   * Description: "A real number that represents a multiplier used in determining the overall value of services delivered and/or goods received. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float factor;
+  protected Float factor;
 
   /**
   * Description: "Extensions for factor"
   */
-  private transient Element _factor;
+  protected transient Element _factor;
 
   /**
   * Description: "The quantity times the unit price for an addittional service or product or charge. For example, the formula: unit Quantity * unit Price (Cost per Point) * factor Number  * points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied."
   */
-  private Money net;
+  protected Money net;
 
   /**
   * Description: "List of Unique Device Identifiers associated with this line item."
   */
-  private java.util.List<Reference> udi = new java.util.ArrayList<>();
+  protected java.util.List<Reference> udi = new java.util.ArrayList<>();
 
   /**
   * Description: "A list of note references to the notes provided below."
   */
-  private java.util.List<Float> noteNumber = new java.util.ArrayList<>();
+  protected java.util.List<Float> noteNumber = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for noteNumber"
   */
-  private transient java.util.List<Element> _noteNumber = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _noteNumber = new java.util.ArrayList<>();
 
   /**
   * Description: "The adjudications results."
   */
-  private java.util.List<ExplanationOfBenefitAdjudication> adjudication = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitAdjudication> adjudication = new java.util.ArrayList<>();
 
   /**
   * Description: "Third tier of goods and services."
   */
-  private java.util.List<ExplanationOfBenefitSubDetail> subDetail = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitSubDetail> subDetail = new java.util.ArrayList<>();
 
   public ExplanationOfBenefitDetail() {
   }
@@ -165,12 +137,18 @@ public class ExplanationOfBenefitDetail  {
     this.revenue = CodeableConceptHelper.fromJson(o.getRevenue());
     this.category = CodeableConceptHelper.fromJson(o.getCategory());
     this.service = CodeableConceptHelper.fromJson(o.getService());
-    this.quantity = QuantityHelper.fromJson(o.getQuantity());
-    this.unitPrice = MoneyHelper.fromJson(o.getUnitPrice());
+    if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
+      this.quantity = new Quantity(o.getQuantity().get(0));
+    }
+    if (null != o.getUnitPrice() && !o.getUnitPrice().isEmpty()) {
+      this.unitPrice = new Money(o.getUnitPrice().get(0));
+    }
     if (null != o.getFactor()) {
       this.factor = o.getFactor();
     }
-    this.net = MoneyHelper.fromJson(o.getNet());
+    if (null != o.getNet() && !o.getNet().isEmpty()) {
+      this.net = new Money(o.getNet().get(0));
+    }
     if (null != o.getUdi() && !o.getUdi().isEmpty()) {
     	this.udi = ReferenceHelper.fromArray2Array(o.getUdi());
     }
@@ -182,9 +160,6 @@ public class ExplanationOfBenefitDetail  {
     }
     if (null != o.getSubDetail() && !o.getSubDetail().isEmpty()) {
     	this.subDetail = ExplanationOfBenefitSubDetailHelper.fromArray2Array(o.getSubDetail());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -296,30 +271,6 @@ public class ExplanationOfBenefitDetail  {
   public java.util.List<ExplanationOfBenefitSubDetail> getSubDetail() {
     return this.subDetail;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -342,11 +293,7 @@ public class ExplanationOfBenefitDetail  {
      if(this.noteNumber != null) builder.append("noteNumber" + "->" + this.noteNumber.toString() + "\n"); 
      if(this._noteNumber != null) builder.append("_noteNumber" + "->" + this._noteNumber.toString() + "\n"); 
      if(this.adjudication != null) builder.append("adjudication" + "->" + this.adjudication.toString() + "\n"); 
-     if(this.subDetail != null) builder.append("subDetail" + "->" + this.subDetail.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.subDetail != null) builder.append("subDetail" + "->" + this.subDetail.toString() + "\n"); ;
     return builder.toString();
   }
 

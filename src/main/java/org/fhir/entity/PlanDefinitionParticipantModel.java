@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinitionparticipant")
 public class PlanDefinitionParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 15185766971849783L;
+	private static final long serialVersionUID = 151873631198454415L;
   /**
   * Description: "The type of participant in the action."
   */
@@ -100,7 +101,7 @@ public class PlanDefinitionParticipantModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.type = o.getType();
-    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.role = JsonUtils.toJson(o.getRole());
   }
 
   public String getType() {

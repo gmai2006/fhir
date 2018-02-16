@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AppointmentResponse;
 
 public interface AppointmentResponseService {
@@ -35,4 +37,9 @@ public interface AppointmentResponseService {
   public AppointmentResponse create(AppointmentResponse bean);
   public AppointmentResponse update(AppointmentResponse bean);
   public void delete(AppointmentResponse bean);
+  public List<AppointmentResponse> findByField(QueryBuilder queryBuilder);
+  public List<AppointmentResponse> findByActor(QueryBuilder queryBuilder);
+  public List<AppointmentResponse> findByAppointment(QueryBuilder queryBuilder);
+
+
 }

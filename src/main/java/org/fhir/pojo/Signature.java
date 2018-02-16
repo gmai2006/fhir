@@ -30,92 +30,73 @@ import com.google.gson.GsonBuilder;
 /**
 * "A digital signature along with supporting context. The signature may be electronic/cryptographic in nature, or a graphical image representing a hand-written signature, or a signature process. Different signature approaches have different utilities."
 */
-public class Signature  {
+public class Signature  extends Element  {
   /**
   * Description: "An indication of the reason that the entity signed this document. This may be explicitly included as part of the signature information and can be used when determining accountability for various actions concerning the document."
   */
   @javax.validation.constraints.NotNull
-  private java.util.List<Coding> type = new java.util.ArrayList<>();
+  protected java.util.List<Coding> type = new java.util.ArrayList<>();
 
   /**
   * Description: "When the digital signature was signed."
   */
-  private String when;
+  protected String when;
 
   /**
   * Description: "Extensions for when"
   */
-  private transient Element _when;
+  protected transient Element _when;
 
   /**
   * Description: "A reference to an application-usable description of the identity that signed  (e.g. the signature used their private key)."
   */
-  private String whoUri;
+  protected String whoUri;
 
   /**
   * Description: "Extensions for whoUri"
   */
-  private transient Element _whoUri;
+  protected transient Element _whoUri;
 
   /**
   * Description: "A reference to an application-usable description of the identity that signed  (e.g. the signature used their private key)."
   */
-  private Reference whoReference;
+  protected Reference whoReference;
 
   /**
   * Description: "A reference to an application-usable description of the identity that is represented by the signature."
   */
-  private String onBehalfOfUri;
+  protected String onBehalfOfUri;
 
   /**
   * Description: "Extensions for onBehalfOfUri"
   */
-  private transient Element _onBehalfOfUri;
+  protected transient Element _onBehalfOfUri;
 
   /**
   * Description: "A reference to an application-usable description of the identity that is represented by the signature."
   */
-  private Reference onBehalfOfReference;
+  protected Reference onBehalfOfReference;
 
   /**
   * Description: "A mime type that indicates the technical format of the signature. Important mime types are application/signature+xml for X ML DigSig, application/jwt for JWT, and image/* for a graphical image of a signature, etc."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String contentType;
+  protected String contentType;
 
   /**
   * Description: "Extensions for contentType"
   */
-  private transient Element _contentType;
+  protected transient Element _contentType;
 
   /**
   * Description: "The base64 encoding of the Signature content. When signature is not recorded electronically this element would be empty."
   */
-  private String blob;
+  protected String blob;
 
   /**
   * Description: "Extensions for blob"
   */
-  private transient Element _blob;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _blob;
 
   public Signature() {}
 
@@ -197,24 +178,6 @@ public class Signature  {
   public Element get_blob() {
     return this._blob;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -232,10 +195,7 @@ public class Signature  {
      if(this.contentType != null) builder.append("contentType" + "->" + this.contentType.toString() + "\n"); 
      if(this._contentType != null) builder.append("_contentType" + "->" + this._contentType.toString() + "\n"); 
      if(this.blob != null) builder.append("blob" + "->" + this.blob.toString() + "\n"); 
-     if(this._blob != null) builder.append("_blob" + "->" + this._blob.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._blob != null) builder.append("_blob" + "->" + this._blob.toString() + "\n"); ;
     return builder.toString();
   }
 

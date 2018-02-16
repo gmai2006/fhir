@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.EnrollmentResponse;
 
 public interface EnrollmentResponseService {
@@ -35,4 +37,9 @@ public interface EnrollmentResponseService {
   public EnrollmentResponse create(EnrollmentResponse bean);
   public EnrollmentResponse update(EnrollmentResponse bean);
   public void delete(EnrollmentResponse bean);
+  public List<EnrollmentResponse> findByField(QueryBuilder queryBuilder);
+  public List<EnrollmentResponse> findByOrganization(QueryBuilder queryBuilder);
+  public List<EnrollmentResponse> findByRequest(QueryBuilder queryBuilder);
+
+
 }

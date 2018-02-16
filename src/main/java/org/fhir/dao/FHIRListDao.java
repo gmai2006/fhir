@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.FHIRList;
 
 public interface FHIRListDao {
@@ -38,4 +39,9 @@ public interface FHIRListDao {
 
   public FHIRList update(FHIRList e);
   public void delete(FHIRList e);
+
+  public List<FHIRList> findByField(QueryBuilder queryBuilder);
+
+  public List<FHIRList> findBySource(QueryBuilder queryBuilder);
+  public List<FHIRList> findBySubject(QueryBuilder queryBuilder);
 }

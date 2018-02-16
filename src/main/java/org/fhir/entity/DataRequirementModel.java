@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data."
 */
 @Entity
 @Table(name="datarequirement")
 public class DataRequirementModel  implements Serializable {
-	private static final long serialVersionUID = 151857669680170938L;
+	private static final long serialVersionUID = 151873631158337369L;
   /**
   * Description: "The type of the required data, specified as the type name of a resource. For profiles, this value is set to the type of the base resource of the profile."
   */

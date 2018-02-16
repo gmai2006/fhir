@@ -31,205 +31,129 @@ import com.google.gson.GsonBuilder;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
 */
-public class Consent  {
+public class Consent  extends DomainResource  {
   /**
   * Description: "This is a Consent resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "Unique identifier for this copy of the Consent Statement."
   */
-  private Identifier identifier;
+  protected Identifier identifier;
 
   /**
   * Description: "Indicates the current state of this consent."
   */
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "A classification of the type of consents found in the statement. This element supports indexing and retrieval of consent statements."
   */
-  private java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
 
   /**
   * Description: "The patient/healthcare consumer to whom this consent applies."
   */
   @javax.validation.constraints.NotNull
-  private Reference patient;
+  protected Reference patient;
 
   /**
   * Description: "Relevant time or time-period when this Consent is applicable."
   */
-  private Period period;
+  protected Period period;
 
   /**
   * Description: "When this  Consent was issued / created / indexed."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String dateTime;
+  protected String dateTime;
 
   /**
   * Description: "Extensions for dateTime"
   */
-  private transient Element _dateTime;
+  protected transient Element _dateTime;
 
   /**
   * Description: "Either the Grantor, which is the entity responsible for granting the rights listed in a Consent Directive or the Grantee, which is the entity responsible for complying with the Consent Directive, including any obligations or limitations on authorizations and enforcement of prohibitions."
   */
-  private java.util.List<Reference> consentingParty = new java.util.ArrayList<>();
+  protected java.util.List<Reference> consentingParty = new java.util.ArrayList<>();
 
   /**
   * Description: "Who or what is controlled by this consent. Use group to identify a set of actors by some property they share (e.g. 'admitting officers')."
   */
-  private java.util.List<ConsentActor> actor = new java.util.ArrayList<>();
+  protected java.util.List<ConsentActor> actor = new java.util.ArrayList<>();
 
   /**
   * Description: "Actions controlled by this consent."
   */
-  private java.util.List<CodeableConcept> action = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> action = new java.util.ArrayList<>();
 
   /**
   * Description: "The organization that manages the consent, and the framework within which it is executed."
   */
-  private java.util.List<Reference> organization = new java.util.ArrayList<>();
+  protected java.util.List<Reference> organization = new java.util.ArrayList<>();
 
   /**
   * Description: "The source on which this consent statement is based. The source might be a scanned original paper form, or a reference to a consent that links back to such a source, a reference to a document repository (e.g. XDS) that stores the original consent document."
   */
-  private Attachment sourceAttachment;
+  protected Attachment sourceAttachment;
 
   /**
   * Description: "The source on which this consent statement is based. The source might be a scanned original paper form, or a reference to a consent that links back to such a source, a reference to a document repository (e.g. XDS) that stores the original consent document."
   */
-  private Identifier sourceIdentifier;
+  protected Identifier sourceIdentifier;
 
   /**
   * Description: "The source on which this consent statement is based. The source might be a scanned original paper form, or a reference to a consent that links back to such a source, a reference to a document repository (e.g. XDS) that stores the original consent document."
   */
-  private Reference sourceReference;
+  protected Reference sourceReference;
 
   /**
   * Description: "The references to the policies that are included in this consent scope. Policies may be organizational, but are often defined jurisdictionally, or in law."
   */
-  private java.util.List<ConsentPolicy> policy = new java.util.ArrayList<>();
+  protected java.util.List<ConsentPolicy> policy = new java.util.ArrayList<>();
 
   /**
   * Description: "A referece to the specific computable policy."
   */
-  private String policyRule;
+  protected String policyRule;
 
   /**
   * Description: "Extensions for policyRule"
   */
-  private transient Element _policyRule;
+  protected transient Element _policyRule;
 
   /**
   * Description: "A set of security labels that define which resources are controlled by this consent. If more than one label is specified, all resources must have all the specified labels."
   */
-  private java.util.List<Coding> securityLabel = new java.util.ArrayList<>();
+  protected java.util.List<Coding> securityLabel = new java.util.ArrayList<>();
 
   /**
   * Description: "The context of the activities a user is taking - why the user is accessing the data - that are controlled by this consent."
   */
-  private java.util.List<Coding> purpose = new java.util.ArrayList<>();
+  protected java.util.List<Coding> purpose = new java.util.ArrayList<>();
 
   /**
   * Description: "Clinical or Operational Relevant period of time that bounds the data controlled by this consent."
   */
-  private Period dataPeriod;
+  protected Period dataPeriod;
 
   /**
   * Description: "The resources controlled by this consent, if specific resources are referenced."
   */
-  private java.util.List<ConsentData> data = new java.util.ArrayList<>();
+  protected java.util.List<ConsentData> data = new java.util.ArrayList<>();
 
   /**
   * Description: "An exception to the base policy of this consent. An exception can be an addition or removal of access permissions."
   */
-  private java.util.List<ConsentExcept> except = new java.util.ArrayList<>();
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected java.util.List<ConsentExcept> except = new java.util.ArrayList<>();
 
   public Consent() {
   }
@@ -276,21 +200,6 @@ public class Consent  {
     }
     if (null != o.getExcept() && !o.getExcept().isEmpty()) {
     	this.except = ConsentExceptHelper.fromArray2Array(o.getExcept());
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -438,72 +347,6 @@ public class Consent  {
   public java.util.List<ConsentExcept> getExcept() {
     return this.except;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -532,18 +375,7 @@ public class Consent  {
      if(this.purpose != null) builder.append("purpose" + "->" + this.purpose.toString() + "\n"); 
      if(this.dataPeriod != null) builder.append("dataPeriod" + "->" + this.dataPeriod.toString() + "\n"); 
      if(this.data != null) builder.append("data" + "->" + this.data.toString() + "\n"); 
-     if(this.except != null) builder.append("except" + "->" + this.except.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.except != null) builder.append("except" + "->" + this.except.toString() + "\n"); ;
     return builder.toString();
   }
 

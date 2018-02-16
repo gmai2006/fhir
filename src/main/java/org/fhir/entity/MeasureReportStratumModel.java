@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
 */
 @Entity
 @Table(name="measurereportstratum")
 public class MeasureReportStratumModel  implements Serializable {
-	private static final long serialVersionUID = 1518576696819551L;
+	private static final long serialVersionUID = 151873631160720836L;
   /**
   * Description: "The value for this stratum, expressed as a string. When defining stratifiers on complex values, the value must be rendered such that the value for each stratum within the stratifier is unique."
   */

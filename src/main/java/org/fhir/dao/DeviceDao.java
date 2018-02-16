@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Device;
 
 public interface DeviceDao {
@@ -38,4 +39,9 @@ public interface DeviceDao {
 
   public Device update(Device e);
   public void delete(Device e);
+
+  public List<Device> findByField(QueryBuilder queryBuilder);
+
+  public List<Device> findByLocation(QueryBuilder queryBuilder);
+  public List<Device> findByPatient(QueryBuilder queryBuilder);
 }

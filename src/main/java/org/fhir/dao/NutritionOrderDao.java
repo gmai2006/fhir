@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.NutritionOrder;
 
 public interface NutritionOrderDao {
@@ -38,4 +39,8 @@ public interface NutritionOrderDao {
 
   public NutritionOrder update(NutritionOrder e);
   public void delete(NutritionOrder e);
+
+  public List<NutritionOrder> findByField(QueryBuilder queryBuilder);
+
+  public List<NutritionOrder> findBySupplement(QueryBuilder queryBuilder);
 }

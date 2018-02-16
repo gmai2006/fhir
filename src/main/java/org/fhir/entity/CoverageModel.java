@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Financial instrument which may be used to reimburse or pay for health care products and services."
 */
 @Entity
 @Table(name="coverage")
 public class CoverageModel  implements Serializable {
-	private static final long serialVersionUID = 151857669651434425L;
+	private static final long serialVersionUID = 151873631116123891L;
   /**
   * Description: "This is a Coverage resource"
   */
@@ -284,7 +285,7 @@ public class CoverageModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     if (null != o.getPolicyHolder() ) {
     	this.policyholder_id = "policyholder" + this.id;
     	this.policyHolder = ReferenceHelper.toModel(o.getPolicyHolder(), this.policyholder_id);
@@ -298,8 +299,8 @@ public class CoverageModel  implements Serializable {
     	this.beneficiary_id = "beneficiary" + this.id;
     	this.beneficiary = ReferenceHelper.toModel(o.getBeneficiary(), this.beneficiary_id);
     }
-    this.relationship = CodeableConceptHelper.toJson(o.getRelationship());
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.relationship = JsonUtils.toJson(o.getRelationship());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getPayor() && !o.getPayor().isEmpty()) {
     	this.payor_id = "payor" + this.id;
     	this.payor = ReferenceHelper.toModelFromArray(o.getPayor(), this.payor_id);

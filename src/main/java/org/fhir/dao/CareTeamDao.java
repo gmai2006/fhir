@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CareTeam;
 
 public interface CareTeamDao {
@@ -38,4 +39,10 @@ public interface CareTeamDao {
 
   public CareTeam update(CareTeam e);
   public void delete(CareTeam e);
+
+  public List<CareTeam> findByField(QueryBuilder queryBuilder);
+
+  public List<CareTeam> findByContext(QueryBuilder queryBuilder);
+  public List<CareTeam> findByParticipant(QueryBuilder queryBuilder);
+  public List<CareTeam> findBySubject(QueryBuilder queryBuilder);
 }

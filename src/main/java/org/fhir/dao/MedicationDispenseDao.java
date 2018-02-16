@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MedicationDispense;
 
 public interface MedicationDispenseDao {
@@ -38,4 +39,12 @@ public interface MedicationDispenseDao {
 
   public MedicationDispense update(MedicationDispense e);
   public void delete(MedicationDispense e);
+
+  public List<MedicationDispense> findByField(QueryBuilder queryBuilder);
+
+  public List<MedicationDispense> findByContext(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByDestination(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByPerformer(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByReceiver(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findBySubject(QueryBuilder queryBuilder);
 }

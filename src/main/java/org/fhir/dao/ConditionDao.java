@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Condition;
 
 public interface ConditionDao {
@@ -38,4 +39,12 @@ public interface ConditionDao {
 
   public Condition update(Condition e);
   public void delete(Condition e);
+
+  public List<Condition> findByField(QueryBuilder queryBuilder);
+
+  public List<Condition> findByAsserter(QueryBuilder queryBuilder);
+  public List<Condition> findByContext(QueryBuilder queryBuilder);
+  public List<Condition> findByEvidence(QueryBuilder queryBuilder);
+  public List<Condition> findByStage(QueryBuilder queryBuilder);
+  public List<Condition> findBySubject(QueryBuilder queryBuilder);
 }

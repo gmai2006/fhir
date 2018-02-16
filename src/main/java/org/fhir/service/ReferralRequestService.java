@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ReferralRequest;
 
 public interface ReferralRequestService {
@@ -35,4 +37,13 @@ public interface ReferralRequestService {
   public ReferralRequest create(ReferralRequest bean);
   public ReferralRequest update(ReferralRequest bean);
   public void delete(ReferralRequest bean);
+  public List<ReferralRequest> findByField(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByContext(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByDefinition(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByRecipient(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByReplaces(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findBySubject(QueryBuilder queryBuilder);
+
+
 }

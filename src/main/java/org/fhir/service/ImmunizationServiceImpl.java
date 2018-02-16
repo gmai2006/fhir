@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Immunization;
 /**
 * auto generated from SQL files
@@ -103,5 +104,37 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Immunization) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Immunization> findByField(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Immunization> findByLocation(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByManufacturer(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByManufacturer(queryBuilder);
+    logger.info("findBymanufacturer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByPractitioner(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByPractitioner(queryBuilder);
+    logger.info("findBypractitioner - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByReaction(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByReaction(queryBuilder);
+    logger.info("findByreaction - exited - return value={} result ");
+    return result;
   }
 }

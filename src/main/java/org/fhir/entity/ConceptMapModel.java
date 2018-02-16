@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
 */
 @Entity
 @Table(name="conceptmap")
 public class ConceptMapModel  implements Serializable {
-	private static final long serialVersionUID = 151857669657642136L;
+	private static final long serialVersionUID = 151873631125976657L;
   /**
   * Description: "This is a ConceptMap resource"
   */
@@ -303,7 +304,7 @@ public class ConceptMapModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.url = o.getUrl();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.version = o.getVersion();
     this.name = o.getName();
     this.title = o.getTitle();

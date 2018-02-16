@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.SubscriptionModel;
 import org.fhir.pojo.Subscription;
 import org.fhir.pojo.SubscriptionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class SubscriptionDaoImpl implements SubscriptionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
       final EntityManager em = entityManagerProvider.get();
       final SubscriptionModel removed = em.find(SubscriptionModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<Subscription> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SubscriptionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Subscription> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, SubscriptionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<SubscriptionModel> models = query.getResultList();
+    return SubscriptionHelper.fromArray2Array(models);
   }
 }

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ConceptMap;
 
 public interface ConceptMapDao {
@@ -38,4 +39,7 @@ public interface ConceptMapDao {
 
   public ConceptMap update(ConceptMap e);
   public void delete(ConceptMap e);
+
+  public List<ConceptMap> findByField(QueryBuilder queryBuilder);
+
 }

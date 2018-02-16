@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinition")
 public class PlanDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669673173160L;
+	private static final long serialVersionUID = 151873631147696131L;
   /**
   * Description: "This is a PlanDefinition resource"
   */
@@ -364,7 +365,7 @@ public class PlanDefinitionModel  implements Serializable {
     this.version = o.getVersion();
     this.name = o.getName();
     this.title = o.getTitle();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.status = o.getStatus();
     this.experimental = o.getExperimental();
     this.date = o.getDate();
@@ -374,7 +375,7 @@ public class PlanDefinitionModel  implements Serializable {
     this.usage = o.getUsage();
     this.approvalDate = o.getApprovalDate();
     this.lastReviewDate = o.getLastReviewDate();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);

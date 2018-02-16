@@ -31,177 +31,149 @@ import com.google.gson.GsonBuilder;
 /**
 * "An authorization for the supply of glasses and/or contact lenses to a patient."
 */
-public class VisionPrescriptionDispense  {
+public class VisionPrescriptionDispense  extends BackboneElement  {
   /**
   * Description: "Identifies the type of vision correction product which is required for the patient."
   */
-  private CodeableConcept product;
+  protected CodeableConcept product;
 
   /**
   * Description: "The eye for which the lens applies."
   */
-  private String eye;
+  protected String eye;
 
   /**
   * Description: "Extensions for eye"
   */
-  private transient Element _eye;
+  protected transient Element _eye;
 
   /**
   * Description: "Lens power measured in diopters (0.25 units)."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float sphere;
+  protected Float sphere;
 
   /**
   * Description: "Extensions for sphere"
   */
-  private transient Element _sphere;
+  protected transient Element _sphere;
 
   /**
   * Description: "Power adjustment for astigmatism measured in diopters (0.25 units)."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float cylinder;
+  protected Float cylinder;
 
   /**
   * Description: "Extensions for cylinder"
   */
-  private transient Element _cylinder;
+  protected transient Element _cylinder;
 
   /**
   * Description: "Adjustment for astigmatism measured in integer degrees."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float axis;
+  protected Float axis;
 
   /**
   * Description: "Extensions for axis"
   */
-  private transient Element _axis;
+  protected transient Element _axis;
 
   /**
   * Description: "Amount of prism to compensate for eye alignment in fractional units."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float prism;
+  protected Float prism;
 
   /**
   * Description: "Extensions for prism"
   */
-  private transient Element _prism;
+  protected transient Element _prism;
 
   /**
   * Description: "The relative base, or reference lens edge, for the prism."
   */
-  private String base;
+  protected String base;
 
   /**
   * Description: "Extensions for base"
   */
-  private transient Element _base;
+  protected transient Element _base;
 
   /**
   * Description: "Power adjustment for multifocal lenses measured in diopters (0.25 units)."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float add;
+  protected Float add;
 
   /**
   * Description: "Extensions for add"
   */
-  private transient Element _add;
+  protected transient Element _add;
 
   /**
   * Description: "Contact lens power measured in diopters (0.25 units)."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float power;
+  protected Float power;
 
   /**
   * Description: "Extensions for power"
   */
-  private transient Element _power;
+  protected transient Element _power;
 
   /**
   * Description: "Back curvature measured in millimeters."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float backCurve;
+  protected Float backCurve;
 
   /**
   * Description: "Extensions for backCurve"
   */
-  private transient Element _backCurve;
+  protected transient Element _backCurve;
 
   /**
   * Description: "Contact lens diameter measured in millimeters."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float diameter;
+  protected Float diameter;
 
   /**
   * Description: "Extensions for diameter"
   */
-  private transient Element _diameter;
+  protected transient Element _diameter;
 
   /**
   * Description: "The recommended maximum wear period for the lens."
   */
-  private Quantity duration;
+  protected Quantity duration;
 
   /**
   * Description: "Special color or pattern."
   */
-  private String color;
+  protected String color;
 
   /**
   * Description: "Extensions for color"
   */
-  private transient Element _color;
+  protected transient Element _color;
 
   /**
   * Description: "Brand recommendations or restrictions."
   */
-  private String brand;
+  protected String brand;
 
   /**
   * Description: "Extensions for brand"
   */
-  private transient Element _brand;
+  protected transient Element _brand;
 
   /**
   * Description: "Notes for special requirements such as coatings and lens materials."
   */
-  private java.util.List<Annotation> note = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
 
   public VisionPrescriptionDispense() {
   }
@@ -239,15 +211,14 @@ public class VisionPrescriptionDispense  {
     if (null != o.getDiameter()) {
       this.diameter = o.getDiameter();
     }
-    this.duration = QuantityHelper.fromJson(o.getDuration());
+    if (null != o.getDuration() && !o.getDuration().isEmpty()) {
+      this.duration = new Quantity(o.getDuration().get(0));
+    }
     if (null != o.getColor()) {
       this.color = o.getColor();
     }
     if (null != o.getBrand()) {
       this.brand = o.getBrand();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -413,30 +384,6 @@ public class VisionPrescriptionDispense  {
   public java.util.List<Annotation> getNote() {
     return this.note;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -468,11 +415,7 @@ public class VisionPrescriptionDispense  {
      if(this._color != null) builder.append("_color" + "->" + this._color.toString() + "\n"); 
      if(this.brand != null) builder.append("brand" + "->" + this.brand.toString() + "\n"); 
      if(this._brand != null) builder.append("_brand" + "->" + this._brand.toString() + "\n"); 
-     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); ;
     return builder.toString();
   }
 

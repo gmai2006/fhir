@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A summary of information based on the results of executing a TestScript."
 */
 @Entity
 @Table(name="testreportoperation")
 public class TestReportOperationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669699416610L;
+	private static final long serialVersionUID = 151873631178226648L;
   /**
   * Description: "The result of this operation."
   */

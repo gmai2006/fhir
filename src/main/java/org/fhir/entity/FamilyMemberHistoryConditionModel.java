@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Significant health events and conditions for a person related to the patient relevant in the context of care for the patient."
 */
 @Entity
 @Table(name="familymemberhistorycondition")
 public class FamilyMemberHistoryConditionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669691058574L;
+	private static final long serialVersionUID = 151873631170323429L;
   /**
   * Description: "The actual condition specified. Could be a coded condition (like MI or Diabetes) or a less specific string like 'cancer' depending on how much is known about the condition and the capabilities of the creating system."
   * Actual type: String;
@@ -145,11 +146,11 @@ public class FamilyMemberHistoryConditionModel  implements Serializable {
   public FamilyMemberHistoryConditionModel(FamilyMemberHistoryCondition o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
-    this.outcome = CodeableConceptHelper.toJson(o.getOutcome());
-    this.onsetAge = AgeHelper.toJson(o.getOnsetAge());
-    this.onsetRange = RangeHelper.toJson(o.getOnsetRange());
-    this.onsetPeriod = PeriodHelper.toJson(o.getOnsetPeriod());
+    this.code = JsonUtils.toJson(o.getCode());
+    this.outcome = JsonUtils.toJson(o.getOutcome());
+    this.onsetAge = JsonUtils.toJson(o.getOnsetAge());
+    this.onsetRange = JsonUtils.toJson(o.getOnsetRange());
+    this.onsetPeriod = JsonUtils.toJson(o.getOnsetPeriod());
     this.onsetString = o.getOnsetString();
   }
 

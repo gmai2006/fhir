@@ -31,488 +31,460 @@ import com.google.gson.GsonBuilder;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
 */
-public class StructureMapSource  {
+public class StructureMapSource  extends BackboneElement  {
   /**
   * Description: "Type or variable this rule applies to."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String context;
+  protected String context;
 
   /**
   * Description: "Extensions for context"
   */
-  private transient Element _context;
+  protected transient Element _context;
 
   /**
   * Description: "Specified minimum cardinality for the element. This is optional; if present, it acts an implicit check on the input content."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float min;
+  protected Float min;
 
   /**
   * Description: "Extensions for min"
   */
-  private transient Element _min;
+  protected transient Element _min;
 
   /**
   * Description: "Specified maximum cardinality for the element - a number or a \"*\". This is optional; if present, it acts an implicit check on the input content (* just serves as documentation; it's the default value)."
   */
-  private String max;
+  protected String max;
 
   /**
   * Description: "Extensions for max"
   */
-  private transient Element _max;
+  protected transient Element _max;
 
   /**
   * Description: "Specified type for the element. This works as a condition on the mapping - use for polymorphic elements."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Boolean defaultValueBoolean;
+  protected Boolean defaultValueBoolean;
 
   /**
   * Description: "Extensions for defaultValueBoolean"
   */
-  private transient Element _defaultValueBoolean;
+  protected transient Element _defaultValueBoolean;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float defaultValueInteger;
+  protected Float defaultValueInteger;
 
   /**
   * Description: "Extensions for defaultValueInteger"
   */
-  private transient Element _defaultValueInteger;
+  protected transient Element _defaultValueInteger;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float defaultValueDecimal;
+  protected Float defaultValueDecimal;
 
   /**
   * Description: "Extensions for defaultValueDecimal"
   */
-  private transient Element _defaultValueDecimal;
+  protected transient Element _defaultValueDecimal;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private String defaultValueBase64Binary;
+  protected String defaultValueBase64Binary;
 
   /**
   * Description: "Extensions for defaultValueBase64Binary"
   */
-  private transient Element _defaultValueBase64Binary;
+  protected transient Element _defaultValueBase64Binary;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private String defaultValueInstant;
+  protected String defaultValueInstant;
 
   /**
   * Description: "Extensions for defaultValueInstant"
   */
-  private transient Element _defaultValueInstant;
+  protected transient Element _defaultValueInstant;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private String defaultValueString;
+  protected String defaultValueString;
 
   /**
   * Description: "Extensions for defaultValueString"
   */
-  private transient Element _defaultValueString;
+  protected transient Element _defaultValueString;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private String defaultValueUri;
+  protected String defaultValueUri;
 
   /**
   * Description: "Extensions for defaultValueUri"
   */
-  private transient Element _defaultValueUri;
+  protected transient Element _defaultValueUri;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?")
-  private String defaultValueDate;
+  protected String defaultValueDate;
 
   /**
   * Description: "Extensions for defaultValueDate"
   */
-  private transient Element _defaultValueDate;
+  protected transient Element _defaultValueDate;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String defaultValueDateTime;
+  protected String defaultValueDateTime;
 
   /**
   * Description: "Extensions for defaultValueDateTime"
   */
-  private transient Element _defaultValueDateTime;
+  protected transient Element _defaultValueDateTime;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?")
-  private String defaultValueTime;
+  protected String defaultValueTime;
 
   /**
   * Description: "Extensions for defaultValueTime"
   */
-  private transient Element _defaultValueTime;
+  protected transient Element _defaultValueTime;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String defaultValueCode;
+  protected String defaultValueCode;
 
   /**
   * Description: "Extensions for defaultValueCode"
   */
-  private transient Element _defaultValueCode;
+  protected transient Element _defaultValueCode;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="urn:oid:(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*))*")
-  private String defaultValueOid;
+  protected String defaultValueOid;
 
   /**
   * Description: "Extensions for defaultValueOid"
   */
-  private transient Element _defaultValueOid;
+  protected transient Element _defaultValueOid;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
-  private String defaultValueUuid;
+  protected String defaultValueUuid;
 
   /**
   * Description: "Extensions for defaultValueUuid"
   */
-  private transient Element _defaultValueUuid;
+  protected transient Element _defaultValueUuid;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String defaultValueId;
+  protected String defaultValueId;
 
   /**
   * Description: "Extensions for defaultValueId"
   */
-  private transient Element _defaultValueId;
+  protected transient Element _defaultValueId;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="[0]|([1-9][0-9]*)")
-  private Float defaultValueUnsignedInt;
+  protected Float defaultValueUnsignedInt;
 
   /**
   * Description: "Extensions for defaultValueUnsignedInt"
   */
-  private transient Element _defaultValueUnsignedInt;
+  protected transient Element _defaultValueUnsignedInt;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
   @javax.validation.constraints.Pattern(regexp="[1-9][0-9]*")
-  private Float defaultValuePositiveInt;
+  protected Float defaultValuePositiveInt;
 
   /**
   * Description: "Extensions for defaultValuePositiveInt"
   */
-  private transient Element _defaultValuePositiveInt;
+  protected transient Element _defaultValuePositiveInt;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private String defaultValueMarkdown;
+  protected String defaultValueMarkdown;
 
   /**
   * Description: "Extensions for defaultValueMarkdown"
   */
-  private transient Element _defaultValueMarkdown;
+  protected transient Element _defaultValueMarkdown;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Element defaultValueElement;
+  protected Element defaultValueElement;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Extension defaultValueExtension;
+  protected Extension defaultValueExtension;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private BackboneElement defaultValueBackboneElement;
+  protected BackboneElement defaultValueBackboneElement;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Narrative defaultValueNarrative;
+  protected Narrative defaultValueNarrative;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Annotation defaultValueAnnotation;
+  protected Annotation defaultValueAnnotation;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Attachment defaultValueAttachment;
+  protected Attachment defaultValueAttachment;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Identifier defaultValueIdentifier;
+  protected Identifier defaultValueIdentifier;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private CodeableConcept defaultValueCodeableConcept;
+  protected CodeableConcept defaultValueCodeableConcept;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Coding defaultValueCoding;
+  protected Coding defaultValueCoding;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Quantity defaultValueQuantity;
+  protected Quantity defaultValueQuantity;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Duration defaultValueDuration;
+  protected Duration defaultValueDuration;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Quantity defaultValueSimpleQuantity;
+  protected Quantity defaultValueSimpleQuantity;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Distance defaultValueDistance;
+  protected Distance defaultValueDistance;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Count defaultValueCount;
+  protected Count defaultValueCount;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Money defaultValueMoney;
+  protected Money defaultValueMoney;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Age defaultValueAge;
+  protected Age defaultValueAge;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Range defaultValueRange;
+  protected Range defaultValueRange;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Period defaultValuePeriod;
+  protected Period defaultValuePeriod;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Ratio defaultValueRatio;
+  protected Ratio defaultValueRatio;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Reference defaultValueReference;
+  protected Reference defaultValueReference;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private SampledData defaultValueSampledData;
+  protected SampledData defaultValueSampledData;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Signature defaultValueSignature;
+  protected Signature defaultValueSignature;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private HumanName defaultValueHumanName;
+  protected HumanName defaultValueHumanName;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Address defaultValueAddress;
+  protected Address defaultValueAddress;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private ContactPoint defaultValueContactPoint;
+  protected ContactPoint defaultValueContactPoint;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Timing defaultValueTiming;
+  protected Timing defaultValueTiming;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Meta defaultValueMeta;
+  protected Meta defaultValueMeta;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private ElementDefinition defaultValueElementDefinition;
+  protected ElementDefinition defaultValueElementDefinition;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private ContactDetail defaultValueContactDetail;
+  protected ContactDetail defaultValueContactDetail;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Contributor defaultValueContributor;
+  protected Contributor defaultValueContributor;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private Dosage defaultValueDosage;
+  protected Dosage defaultValueDosage;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private RelatedArtifact defaultValueRelatedArtifact;
+  protected RelatedArtifact defaultValueRelatedArtifact;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private UsageContext defaultValueUsageContext;
+  protected UsageContext defaultValueUsageContext;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private DataRequirement defaultValueDataRequirement;
+  protected DataRequirement defaultValueDataRequirement;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private ParameterDefinition defaultValueParameterDefinition;
+  protected ParameterDefinition defaultValueParameterDefinition;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
   */
-  private TriggerDefinition defaultValueTriggerDefinition;
+  protected TriggerDefinition defaultValueTriggerDefinition;
 
   /**
   * Description: "Optional field for this source."
   */
-  private String element;
+  protected String element;
 
   /**
   * Description: "Extensions for element"
   */
-  private transient Element _element;
+  protected transient Element _element;
 
   /**
   * Description: "How to handle the list mode for this element."
   */
-  private String listMode;
+  protected String listMode;
 
   /**
   * Description: "Extensions for listMode"
   */
-  private transient Element _listMode;
+  protected transient Element _listMode;
 
   /**
   * Description: "Named context for field, if a field is specified."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String variable;
+  protected String variable;
 
   /**
   * Description: "Extensions for variable"
   */
-  private transient Element _variable;
+  protected transient Element _variable;
 
   /**
   * Description: "FHIRPath expression  - must be true or the rule does not apply."
   */
-  private String condition;
+  protected String condition;
 
   /**
   * Description: "Extensions for condition"
   */
-  private transient Element _condition;
+  protected transient Element _condition;
 
   /**
   * Description: "FHIRPath expression  - must be true or the mapping engine throws an error instead of completing."
   */
-  private String check;
+  protected String check;
 
   /**
   * Description: "Extensions for check"
   */
-  private transient Element _check;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _check;
 
   public StructureMapSource() {
   }
@@ -593,14 +565,20 @@ public class StructureMapSource  {
     this.defaultValueIdentifier = IdentifierHelper.fromJson(o.getDefaultValueIdentifier());
     this.defaultValueCodeableConcept = CodeableConceptHelper.fromJson(o.getDefaultValueCodeableConcept());
     this.defaultValueCoding = CodingHelper.fromJson(o.getDefaultValueCoding());
-    this.defaultValueQuantity = QuantityHelper.fromJson(o.getDefaultValueQuantity());
+    if (null != o.getDefaultValueQuantity() && !o.getDefaultValueQuantity().isEmpty()) {
+      this.defaultValueQuantity = new Quantity(o.getDefaultValueQuantity().get(0));
+    }
     this.defaultValueDuration = DurationHelper.fromJson(o.getDefaultValueDuration());
-    this.defaultValueSimpleQuantity = QuantityHelper.fromJson(o.getDefaultValueSimpleQuantity());
+    if (null != o.getDefaultValueSimpleQuantity() && !o.getDefaultValueSimpleQuantity().isEmpty()) {
+      this.defaultValueSimpleQuantity = new Quantity(o.getDefaultValueSimpleQuantity().get(0));
+    }
     if (null != o.getDefaultValueDistance() && !o.getDefaultValueDistance().isEmpty()) {
       this.defaultValueDistance = new Distance(o.getDefaultValueDistance().get(0));
     }
     this.defaultValueCount = CountHelper.fromJson(o.getDefaultValueCount());
-    this.defaultValueMoney = MoneyHelper.fromJson(o.getDefaultValueMoney());
+    if (null != o.getDefaultValueMoney() && !o.getDefaultValueMoney().isEmpty()) {
+      this.defaultValueMoney = new Money(o.getDefaultValueMoney().get(0));
+    }
     this.defaultValueAge = AgeHelper.fromJson(o.getDefaultValueAge());
     this.defaultValueRange = RangeHelper.fromJson(o.getDefaultValueRange());
     this.defaultValuePeriod = PeriodHelper.fromJson(o.getDefaultValuePeriod());
@@ -611,7 +589,9 @@ public class StructureMapSource  {
     this.defaultValueSampledData = SampledDataHelper.fromJson(o.getDefaultValueSampledData());
     this.defaultValueSignature = SignatureHelper.fromJson(o.getDefaultValueSignature());
     this.defaultValueHumanName = HumanNameHelper.fromJson(o.getDefaultValueHumanName());
-    this.defaultValueAddress = AddressHelper.fromJson(o.getDefaultValueAddress());
+    if (null != o.getDefaultValueAddress() && !o.getDefaultValueAddress().isEmpty()) {
+      this.defaultValueAddress = new Address(o.getDefaultValueAddress().get(0));
+    }
     this.defaultValueContactPoint = ContactPointHelper.fromJson(o.getDefaultValueContactPoint());
     this.defaultValueTiming = TimingHelper.fromJson(o.getDefaultValueTiming());
     if (null != o.getDefaultValueMeta() && !o.getDefaultValueMeta().isEmpty()) {
@@ -654,9 +634,6 @@ public class StructureMapSource  {
     }
     if (null != o.getCheck()) {
       this.check = o.getCheck();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -1188,30 +1165,6 @@ public class StructureMapSource  {
   public Element get_check() {
     return this._check;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -1304,11 +1257,7 @@ public class StructureMapSource  {
      if(this.condition != null) builder.append("condition" + "->" + this.condition.toString() + "\n"); 
      if(this._condition != null) builder.append("_condition" + "->" + this._condition.toString() + "\n"); 
      if(this.check != null) builder.append("check" + "->" + this.check.toString() + "\n"); 
-     if(this._check != null) builder.append("_check" + "->" + this._check.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._check != null) builder.append("_check" + "->" + this._check.toString() + "\n"); ;
     return builder.toString();
   }
 

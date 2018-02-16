@@ -31,95 +31,67 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
-public class ExplanationOfBenefitBenefitBalance  {
+public class ExplanationOfBenefitBenefitBalance  extends BackboneElement  {
   /**
   * Description: "Dental, Vision, Medical, Pharmacy, Rehab etc."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept category;
+  protected CodeableConcept category;
 
   /**
   * Description: "Dental: basic, major, ortho; Vision exam, glasses, contacts; etc."
   */
-  private CodeableConcept subCategory;
+  protected CodeableConcept subCategory;
 
   /**
   * Description: "True if the indicated class of service is excluded from the plan, missing or False indicated the service is included in the coverage."
   */
-  private Boolean excluded;
+  protected Boolean excluded;
 
   /**
   * Description: "Extensions for excluded"
   */
-  private transient Element _excluded;
+  protected transient Element _excluded;
 
   /**
   * Description: "A short name or tag for the benefit, for example MED01, or DENT2."
   */
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "A richer description of the benefit, for example 'DENT2 covers 100% of basic, 50% of major but exclused Ortho, Implants and Costmetic services'."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "Network designation."
   */
-  private CodeableConcept network;
+  protected CodeableConcept network;
 
   /**
   * Description: "Unit designation: individual or family."
   */
-  private CodeableConcept unit;
+  protected CodeableConcept unit;
 
   /**
   * Description: "The term or period of the values such as 'maximum lifetime benefit' or 'maximum annual vistis'."
   */
-  private CodeableConcept term;
+  protected CodeableConcept term;
 
   /**
   * Description: "Benefits Used to date."
   */
-  private java.util.List<ExplanationOfBenefitFinancial> financial = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitFinancial> financial = new java.util.ArrayList<>();
 
   public ExplanationOfBenefitBenefitBalance() {
   }
@@ -142,9 +114,6 @@ public class ExplanationOfBenefitBenefitBalance  {
     this.term = CodeableConceptHelper.fromJson(o.getTerm());
     if (null != o.getFinancial() && !o.getFinancial().isEmpty()) {
     	this.financial = ExplanationOfBenefitFinancialHelper.fromArray2Array(o.getFinancial());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -220,30 +189,6 @@ public class ExplanationOfBenefitBenefitBalance  {
   public java.util.List<ExplanationOfBenefitFinancial> getFinancial() {
     return this.financial;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -260,11 +205,7 @@ public class ExplanationOfBenefitBenefitBalance  {
      if(this.network != null) builder.append("network" + "->" + this.network.toString() + "\n"); 
      if(this.unit != null) builder.append("unit" + "->" + this.unit.toString() + "\n"); 
      if(this.term != null) builder.append("term" + "->" + this.term.toString() + "\n"); 
-     if(this.financial != null) builder.append("financial" + "->" + this.financial.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.financial != null) builder.append("financial" + "->" + this.financial.toString() + "\n"); ;
     return builder.toString();
   }
 

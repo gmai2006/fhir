@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Indicates how the medication is/was taken or should be taken by the patient."
 */
 @Entity
 @Table(name="dosage")
 public class DosageModel  implements Serializable {
-	private static final long serialVersionUID = 151857669717374320L;
+	private static final long serialVersionUID = 15187363119703036L;
   /**
   * Description: "Indicates the order in which the dosage instructions should be applied or interpreted."
   */
@@ -132,12 +133,14 @@ public class DosageModel  implements Serializable {
 
   /**
   * Description: "Amount of medication per dose."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"doseSimpleQuantity\"", length = 16777215)
-  private String doseSimpleQuantity;
+  @Column(name="\"dosesimplequantity_id\"")
+  private String dosesimplequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dosesimplequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> doseSimpleQuantity;
 
   /**
   * Description: "Upper limit on medication per unit of time."
@@ -150,21 +153,25 @@ public class DosageModel  implements Serializable {
 
   /**
   * Description: "Upper limit on medication per administration."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"maxDosePerAdministration\"", length = 16777215)
-  private String maxDosePerAdministration;
+  @Column(name="\"maxdoseperadministration_id\"")
+  private String maxdoseperadministration_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="maxdoseperadministration_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> maxDosePerAdministration;
 
   /**
   * Description: "Upper limit on medication per lifetime of the patient."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"maxDosePerLifetime\"", length = 16777215)
-  private String maxDosePerLifetime;
+  @Column(name="\"maxdoseperlifetime_id\"")
+  private String maxdoseperlifetime_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="maxdoseperlifetime_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> maxDosePerLifetime;
 
   /**
   * Description: "Amount of medication per unit of time."
@@ -186,12 +193,14 @@ public class DosageModel  implements Serializable {
 
   /**
   * Description: "Amount of medication per unit of time."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"rateSimpleQuantity\"", length = 16777215)
-  private String rateSimpleQuantity;
+  @Column(name="\"ratesimplequantity_id\"")
+  private String ratesimplequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="ratesimplequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> rateSimpleQuantity;
 
   /**
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
@@ -229,20 +238,32 @@ public class DosageModel  implements Serializable {
     this.sequence = o.getSequence();
     this.text = o.getText();
     this.patientInstruction = o.getPatientInstruction();
-    this.timing = TimingHelper.toJson(o.getTiming());
+    this.timing = JsonUtils.toJson(o.getTiming());
     this.asNeededBoolean = o.getAsNeededBoolean();
-    this.asNeededCodeableConcept = CodeableConceptHelper.toJson(o.getAsNeededCodeableConcept());
-    this.site = CodeableConceptHelper.toJson(o.getSite());
-    this.route = CodeableConceptHelper.toJson(o.getRoute());
-    this.method = CodeableConceptHelper.toJson(o.getMethod());
-    this.doseRange = RangeHelper.toJson(o.getDoseRange());
-    this.doseSimpleQuantity = QuantityHelper.toJson(o.getDoseSimpleQuantity());
-    this.maxDosePerPeriod = RatioHelper.toJson(o.getMaxDosePerPeriod());
-    this.maxDosePerAdministration = QuantityHelper.toJson(o.getMaxDosePerAdministration());
-    this.maxDosePerLifetime = QuantityHelper.toJson(o.getMaxDosePerLifetime());
-    this.rateRatio = RatioHelper.toJson(o.getRateRatio());
-    this.rateRange = RangeHelper.toJson(o.getRateRange());
-    this.rateSimpleQuantity = QuantityHelper.toJson(o.getRateSimpleQuantity());
+    this.asNeededCodeableConcept = JsonUtils.toJson(o.getAsNeededCodeableConcept());
+    this.site = JsonUtils.toJson(o.getSite());
+    this.route = JsonUtils.toJson(o.getRoute());
+    this.method = JsonUtils.toJson(o.getMethod());
+    this.doseRange = JsonUtils.toJson(o.getDoseRange());
+    if (null != o.getDoseSimpleQuantity() ) {
+    	this.dosesimplequantity_id = "dosesimplequantity" + this.parent_id;
+    	this.doseSimpleQuantity = QuantityHelper.toModel(o.getDoseSimpleQuantity(), this.dosesimplequantity_id);
+    }
+    this.maxDosePerPeriod = JsonUtils.toJson(o.getMaxDosePerPeriod());
+    if (null != o.getMaxDosePerAdministration() ) {
+    	this.maxdoseperadministration_id = "maxdoseperadministration" + this.parent_id;
+    	this.maxDosePerAdministration = QuantityHelper.toModel(o.getMaxDosePerAdministration(), this.maxdoseperadministration_id);
+    }
+    if (null != o.getMaxDosePerLifetime() ) {
+    	this.maxdoseperlifetime_id = "maxdoseperlifetime" + this.parent_id;
+    	this.maxDosePerLifetime = QuantityHelper.toModel(o.getMaxDosePerLifetime(), this.maxdoseperlifetime_id);
+    }
+    this.rateRatio = JsonUtils.toJson(o.getRateRatio());
+    this.rateRange = JsonUtils.toJson(o.getRateRange());
+    if (null != o.getRateSimpleQuantity() ) {
+    	this.ratesimplequantity_id = "ratesimplequantity" + this.parent_id;
+    	this.rateSimpleQuantity = QuantityHelper.toModel(o.getRateSimpleQuantity(), this.ratesimplequantity_id);
+    }
   }
 
   public Float getSequence() {
@@ -311,10 +332,10 @@ public class DosageModel  implements Serializable {
   public void setDoseRange( String value) {
     this.doseRange = value;
   }
-  public String getDoseSimpleQuantity() {
+  public java.util.List<QuantityModel> getDoseSimpleQuantity() {
     return this.doseSimpleQuantity;
   }
-  public void setDoseSimpleQuantity( String value) {
+  public void setDoseSimpleQuantity( java.util.List<QuantityModel> value) {
     this.doseSimpleQuantity = value;
   }
   public String getMaxDosePerPeriod() {
@@ -323,16 +344,16 @@ public class DosageModel  implements Serializable {
   public void setMaxDosePerPeriod( String value) {
     this.maxDosePerPeriod = value;
   }
-  public String getMaxDosePerAdministration() {
+  public java.util.List<QuantityModel> getMaxDosePerAdministration() {
     return this.maxDosePerAdministration;
   }
-  public void setMaxDosePerAdministration( String value) {
+  public void setMaxDosePerAdministration( java.util.List<QuantityModel> value) {
     this.maxDosePerAdministration = value;
   }
-  public String getMaxDosePerLifetime() {
+  public java.util.List<QuantityModel> getMaxDosePerLifetime() {
     return this.maxDosePerLifetime;
   }
-  public void setMaxDosePerLifetime( String value) {
+  public void setMaxDosePerLifetime( java.util.List<QuantityModel> value) {
     this.maxDosePerLifetime = value;
   }
   public String getRateRatio() {
@@ -347,10 +368,10 @@ public class DosageModel  implements Serializable {
   public void setRateRange( String value) {
     this.rateRange = value;
   }
-  public String getRateSimpleQuantity() {
+  public java.util.List<QuantityModel> getRateSimpleQuantity() {
     return this.rateSimpleQuantity;
   }
-  public void setRateSimpleQuantity( String value) {
+  public void setRateSimpleQuantity( java.util.List<QuantityModel> value) {
     this.rateSimpleQuantity = value;
   }
   public String getId() {
@@ -387,13 +408,9 @@ public class DosageModel  implements Serializable {
      builder.append("route" + "->" + this.route + "\n"); 
      builder.append("method" + "->" + this.method + "\n"); 
      builder.append("doseRange" + "->" + this.doseRange + "\n"); 
-     builder.append("doseSimpleQuantity" + "->" + this.doseSimpleQuantity + "\n"); 
      builder.append("maxDosePerPeriod" + "->" + this.maxDosePerPeriod + "\n"); 
-     builder.append("maxDosePerAdministration" + "->" + this.maxDosePerAdministration + "\n"); 
-     builder.append("maxDosePerLifetime" + "->" + this.maxDosePerLifetime + "\n"); 
      builder.append("rateRatio" + "->" + this.rateRatio + "\n"); 
      builder.append("rateRange" + "->" + this.rateRange + "\n"); 
-     builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("parent_id" + "->" + this.parent_id + "\n"); ;

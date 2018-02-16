@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.RiskAssessmentModel;
 import org.fhir.pojo.RiskAssessment;
 import org.fhir.pojo.RiskAssessmentHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class RiskAssessmentDaoImpl implements RiskAssessmentDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class RiskAssessmentDaoImpl implements RiskAssessmentDao {
       final EntityManager em = entityManagerProvider.get();
       final RiskAssessmentModel removed = em.find(RiskAssessmentModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<RiskAssessment> findByCondition(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.condition_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findByPerformer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.performer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<RiskAssessment> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<RiskAssessment> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, RiskAssessmentModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<RiskAssessmentModel> models = query.getResultList();
+    return RiskAssessmentHelper.fromArray2Array(models);
   }
 }

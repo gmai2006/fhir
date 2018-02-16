@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
 @Entity
 @Table(name="contract")
 public class ContractModel  implements Serializable {
-	private static final long serialVersionUID = 151857669660828743L;
+	private static final long serialVersionUID = 151873631131037460L;
   /**
   * Description: "This is a Contract resource"
   */
@@ -375,10 +376,10 @@ public class ContractModel  implements Serializable {
   public ContractModel(Contract o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.status = o.getStatus();
     this.issued = o.getIssued();
-    this.applies = PeriodHelper.toJson(o.getApplies());
+    this.applies = JsonUtils.toJson(o.getApplies());
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModelFromArray(o.getSubject(), this.subject_id);
@@ -395,9 +396,9 @@ public class ContractModel  implements Serializable {
     	this.domain_id = "domain" + this.id;
     	this.domain = ReferenceHelper.toModelFromArray(o.getDomain(), this.domain_id);
     }
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.decisionType = CodeableConceptHelper.toJson(o.getDecisionType());
-    this.contentDerivative = CodeableConceptHelper.toJson(o.getContentDerivative());
+    this.type = JsonUtils.toJson(o.getType());
+    this.decisionType = JsonUtils.toJson(o.getDecisionType());
+    this.contentDerivative = JsonUtils.toJson(o.getContentDerivative());
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent_id = "agent" + this.id;
     	this.agent = ContractAgentHelper.toModelFromArray(o.getAgent(), this.agent_id);
@@ -414,7 +415,7 @@ public class ContractModel  implements Serializable {
     	this.term_id = "term" + this.id;
     	this.term = ContractTermHelper.toModelFromArray(o.getTerm(), this.term_id);
     }
-    this.bindingAttachment = AttachmentHelper.toJson(o.getBindingAttachment());
+    this.bindingAttachment = JsonUtils.toJson(o.getBindingAttachment());
     if (null != o.getBindingReference() ) {
     	this.bindingreference_id = "bindingreference" + this.id;
     	this.bindingReference = ReferenceHelper.toModel(o.getBindingReference(), this.bindingreference_id);

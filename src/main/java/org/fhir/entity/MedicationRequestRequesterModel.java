@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns."
 */
 @Entity
 @Table(name="medicationrequestrequester")
 public class MedicationRequestRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669707137274L;
+	private static final long serialVersionUID = 15187363118562972L;
   /**
   * Description: "The healthcare professional responsible for authorizing the initial prescription."
   */

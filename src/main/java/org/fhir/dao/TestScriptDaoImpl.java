@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.TestScriptModel;
 import org.fhir.pojo.TestScript;
 import org.fhir.pojo.TestScriptHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class TestScriptDaoImpl implements TestScriptDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class TestScriptDaoImpl implements TestScriptDao {
       final EntityManager em = entityManagerProvider.get();
       final TestScriptModel removed = em.find(TestScriptModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<TestScript> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from TestScriptModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<TestScript> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, TestScriptModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<TestScriptModel> models = query.getResultList();
+    return TestScriptHelper.fromArray2Array(models);
   }
 }

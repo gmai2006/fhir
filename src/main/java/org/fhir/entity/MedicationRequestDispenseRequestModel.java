@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns."
 */
 @Entity
 @Table(name="medicationrequestdispenserequest")
 public class MedicationRequestDispenseRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669652249088L;
+	private static final long serialVersionUID = 151873631117520289L;
   /**
   * Description: "This indicates the validity period of a prescription (stale dating the Prescription)."
   * Actual type: String;
@@ -57,12 +58,14 @@ public class MedicationRequestDispenseRequestModel  implements Serializable {
 
   /**
   * Description: "The amount that is to be dispensed for one fill."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "Identifies the period time over which the supplied product is expected to be used, or the length of time the dispense is expected to last."
@@ -129,10 +132,13 @@ public class MedicationRequestDispenseRequestModel  implements Serializable {
   public MedicationRequestDispenseRequestModel(MedicationRequestDispenseRequest o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.validityPeriod = PeriodHelper.toJson(o.getValidityPeriod());
+    this.validityPeriod = JsonUtils.toJson(o.getValidityPeriod());
     this.numberOfRepeatsAllowed = o.getNumberOfRepeatsAllowed();
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
-    this.expectedSupplyDuration = DurationHelper.toJson(o.getExpectedSupplyDuration());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
+    this.expectedSupplyDuration = JsonUtils.toJson(o.getExpectedSupplyDuration());
     if (null != o.getPerformer() ) {
     	this.performer_id = "performer" + this.parent_id;
     	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);
@@ -151,10 +157,10 @@ public class MedicationRequestDispenseRequestModel  implements Serializable {
   public void setNumberOfRepeatsAllowed( Float value) {
     this.numberOfRepeatsAllowed = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
   public String getExpectedSupplyDuration() {
@@ -200,7 +206,6 @@ public class MedicationRequestDispenseRequestModel  implements Serializable {
     builder.append("[MedicationRequestDispenseRequestModel]:" + "\n");
      builder.append("validityPeriod" + "->" + this.validityPeriod + "\n"); 
      builder.append("numberOfRepeatsAllowed" + "->" + this.numberOfRepeatsAllowed + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("expectedSupplyDuration" + "->" + this.expectedSupplyDuration + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken."
 */
 @Entity
 @Table(name="guidanceresponse")
 public class GuidanceResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669713564231L;
+	private static final long serialVersionUID = 151873631192995041L;
   /**
   * Description: "This is a GuidanceResponse resource"
   */
@@ -287,7 +288,7 @@ public class GuidanceResponseModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.requestId = o.getRequestId();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     if (null != o.getModule() ) {
     	this.module_id = "module" + this.id;
     	this.module = ReferenceHelper.toModel(o.getModule(), this.module_id);
@@ -306,7 +307,7 @@ public class GuidanceResponseModel  implements Serializable {
     	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);
     }
-    this.reasonCodeableConcept = CodeableConceptHelper.toJson(o.getReasonCodeableConcept());
+    this.reasonCodeableConcept = JsonUtils.toJson(o.getReasonCodeableConcept());
     if (null != o.getReasonReference() ) {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModel(o.getReasonReference(), this.reasonreference_id);

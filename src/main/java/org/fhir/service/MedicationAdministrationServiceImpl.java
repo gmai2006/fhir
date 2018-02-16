@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MedicationAdministration;
 /**
 * auto generated from SQL files
@@ -103,5 +104,43 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(MedicationAdministration) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<MedicationAdministration> findByField(QueryBuilder queryBuilder) {
+  	final List<MedicationAdministration> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<MedicationAdministration> findByContext(QueryBuilder queryBuilder) {
+  	final List<MedicationAdministration> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationAdministration> findByDevice(QueryBuilder queryBuilder) {
+  	final List<MedicationAdministration> result = dao.findByDevice(queryBuilder);
+    logger.info("findBydevice - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationAdministration> findByPerformer(QueryBuilder queryBuilder) {
+  	final List<MedicationAdministration> result = dao.findByPerformer(queryBuilder);
+    logger.info("findByperformer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationAdministration> findByPrescription(QueryBuilder queryBuilder) {
+  	final List<MedicationAdministration> result = dao.findByPrescription(queryBuilder);
+    logger.info("findByprescription - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationAdministration> findBySubject(QueryBuilder queryBuilder) {
+  	final List<MedicationAdministration> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

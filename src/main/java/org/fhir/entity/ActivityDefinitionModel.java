@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context."
 */
 @Entity
 @Table(name="activitydefinition")
 public class ActivityDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669712895976L;
+	private static final long serialVersionUID = 151873631192070814L;
   /**
   * Description: "This is a ActivityDefinition resource"
   */
@@ -334,12 +335,14 @@ public class ActivityDefinitionModel  implements Serializable {
 
   /**
   * Description: "Identifies the quantity expected to be consumed at once (per dose, per meal, etc.)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "Provides detailed dosage instructions in the same way that they are described for MedicationRequest resources."
@@ -487,7 +490,7 @@ public class ActivityDefinitionModel  implements Serializable {
     this.usage = o.getUsage();
     this.approvalDate = o.getApprovalDate();
     this.lastReviewDate = o.getLastReviewDate();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
@@ -510,11 +513,11 @@ public class ActivityDefinitionModel  implements Serializable {
     	this.library = ReferenceHelper.toModelFromArray(o.getLibrary(), this.library_id);
     }
     this.kind = o.getKind();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
-    this.timingTiming = TimingHelper.toJson(o.getTimingTiming());
+    this.code = JsonUtils.toJson(o.getCode());
+    this.timingTiming = JsonUtils.toJson(o.getTimingTiming());
     this.timingDateTime = o.getTimingDateTime();
-    this.timingPeriod = PeriodHelper.toJson(o.getTimingPeriod());
-    this.timingRange = RangeHelper.toJson(o.getTimingRange());
+    this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
+    this.timingRange = JsonUtils.toJson(o.getTimingRange());
     if (null != o.getLocation() ) {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
@@ -527,8 +530,11 @@ public class ActivityDefinitionModel  implements Serializable {
     	this.productreference_id = "productreference" + this.id;
     	this.productReference = ReferenceHelper.toModel(o.getProductReference(), this.productreference_id);
     }
-    this.productCodeableConcept = CodeableConceptHelper.toJson(o.getProductCodeableConcept());
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    this.productCodeableConcept = JsonUtils.toJson(o.getProductCodeableConcept());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
     if (null != o.getDosage() && !o.getDosage().isEmpty()) {
     	this.dosage_id = "dosage" + this.id;
     	this.dosage = DosageHelper.toModelFromArray(o.getDosage(), this.dosage_id);
@@ -757,10 +763,10 @@ public class ActivityDefinitionModel  implements Serializable {
   public void setProductCodeableConcept( String value) {
     this.productCodeableConcept = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
   public java.util.List<DosageModel> getDosage() {
@@ -866,7 +872,6 @@ public class ActivityDefinitionModel  implements Serializable {
      builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
      builder.append("timingRange" + "->" + this.timingRange + "\n"); 
      builder.append("productCodeableConcept" + "->" + this.productCodeableConcept + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("bodySite" + "->" + this.bodySite + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

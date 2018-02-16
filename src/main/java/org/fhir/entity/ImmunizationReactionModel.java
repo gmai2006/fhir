@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
 */
 @Entity
 @Table(name="immunizationreaction")
 public class ImmunizationReactionModel  implements Serializable {
-	private static final long serialVersionUID = 15185766967041149L;
+	private static final long serialVersionUID = 151873631143886559L;
   /**
   * Description: "Date of reaction to the immunization."
   */

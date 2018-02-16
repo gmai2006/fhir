@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
 */
 @Entity
 @Table(name="immunization")
 public class ImmunizationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669688985097L;
+	private static final long serialVersionUID = 151873631168143404L;
   /**
   * Description: "This is a Immunization resource"
   */
@@ -183,12 +184,14 @@ public class ImmunizationModel  implements Serializable {
 
   /**
   * Description: "The quantity of vaccine product that was administered."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"doseQuantity\"", length = 16777215)
-  private String doseQuantity;
+  @Column(name="\"dosequantity_id\"")
+  private String dosequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dosequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> doseQuantity;
 
   /**
   * Description: "Indicates who or what performed the event."
@@ -336,7 +339,7 @@ public class ImmunizationModel  implements Serializable {
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
     this.notGiven = o.getNotGiven();
-    this.vaccineCode = CodeableConceptHelper.toJson(o.getVaccineCode());
+    this.vaccineCode = JsonUtils.toJson(o.getVaccineCode());
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
@@ -347,7 +350,7 @@ public class ImmunizationModel  implements Serializable {
     }
     this.date = o.getDate();
     this.primarySource = o.getPrimarySource();
-    this.reportOrigin = CodeableConceptHelper.toJson(o.getReportOrigin());
+    this.reportOrigin = JsonUtils.toJson(o.getReportOrigin());
     if (null != o.getLocation() ) {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
@@ -358,9 +361,12 @@ public class ImmunizationModel  implements Serializable {
     }
     this.lotNumber = o.getLotNumber();
     this.expirationDate = o.getExpirationDate();
-    this.site = CodeableConceptHelper.toJson(o.getSite());
-    this.route = CodeableConceptHelper.toJson(o.getRoute());
-    this.doseQuantity = QuantityHelper.toJson(o.getDoseQuantity());
+    this.site = JsonUtils.toJson(o.getSite());
+    this.route = JsonUtils.toJson(o.getRoute());
+    if (null != o.getDoseQuantity() ) {
+    	this.dosequantity_id = "dosequantity" + this.id;
+    	this.doseQuantity = QuantityHelper.toModel(o.getDoseQuantity(), this.dosequantity_id);
+    }
     if (null != o.getPractitioner() && !o.getPractitioner().isEmpty()) {
     	this.practitioner_id = "practitioner" + this.id;
     	this.practitioner = ImmunizationPractitionerHelper.toModelFromArray(o.getPractitioner(), this.practitioner_id);
@@ -485,10 +491,10 @@ public class ImmunizationModel  implements Serializable {
   public void setRoute( String value) {
     this.route = value;
   }
-  public String getDoseQuantity() {
+  public java.util.List<QuantityModel> getDoseQuantity() {
     return this.doseQuantity;
   }
-  public void setDoseQuantity( String value) {
+  public void setDoseQuantity( java.util.List<QuantityModel> value) {
     this.doseQuantity = value;
   }
   public java.util.List<ImmunizationPractitionerModel> getPractitioner() {
@@ -586,7 +592,6 @@ public class ImmunizationModel  implements Serializable {
      builder.append("expirationDate" + "->" + this.expirationDate + "\n"); 
      builder.append("site" + "->" + this.site + "\n"); 
      builder.append("route" + "->" + this.route + "\n"); 
-     builder.append("doseQuantity" + "->" + this.doseQuantity + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A sample to be used for analysis."
 */
 @Entity
 @Table(name="specimenprocessing")
 public class SpecimenProcessingModel  implements Serializable {
-	private static final long serialVersionUID = 151857669714147601L;
+	private static final long serialVersionUID = 151873631193591974L;
   /**
   * Description: "Textual description of procedure."
   */
@@ -128,13 +129,13 @@ public class SpecimenProcessingModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.description = o.getDescription();
-    this.procedure = CodeableConceptHelper.toJson(o.getProcedure());
+    this.procedure = JsonUtils.toJson(o.getProcedure());
     if (null != o.getAdditive() && !o.getAdditive().isEmpty()) {
     	this.additive_id = "additive" + this.parent_id;
     	this.additive = ReferenceHelper.toModelFromArray(o.getAdditive(), this.additive_id);
     }
     this.timeDateTime = o.getTimeDateTime();
-    this.timePeriod = PeriodHelper.toJson(o.getTimePeriod());
+    this.timePeriod = JsonUtils.toJson(o.getTimePeriod());
   }
 
   public String getDescription() {

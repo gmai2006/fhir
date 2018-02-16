@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.FamilyMemberHistory;
 /**
 * auto generated from SQL files
@@ -103,5 +104,19 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(FamilyMemberHistory) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<FamilyMemberHistory> findByField(QueryBuilder queryBuilder) {
+  	final List<FamilyMemberHistory> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<FamilyMemberHistory> findByDefinition(QueryBuilder queryBuilder) {
+  	final List<FamilyMemberHistory> result = dao.findByDefinition(queryBuilder);
+    logger.info("findBydefinition - exited - return value={} result ");
+    return result;
   }
 }

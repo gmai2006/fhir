@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.GraphDefinition;
 
 public interface GraphDefinitionService {
@@ -35,4 +37,7 @@ public interface GraphDefinitionService {
   public GraphDefinition create(GraphDefinition bean);
   public GraphDefinition update(GraphDefinition bean);
   public void delete(GraphDefinition bean);
+  public List<GraphDefinition> findByField(QueryBuilder queryBuilder);
+
+
 }

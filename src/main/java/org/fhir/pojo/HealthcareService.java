@@ -31,248 +31,172 @@ import com.google.gson.GsonBuilder;
 /**
 * "The details of a healthcare service available at a location."
 */
-public class HealthcareService  {
+public class HealthcareService  extends DomainResource  {
   /**
   * Description: "This is a HealthcareService resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "External identifiers for this item."
   */
-  private java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
 
   /**
   * Description: "Whether this healthcareservice record is in active use."
   */
-  private Boolean active;
+  protected Boolean active;
 
   /**
   * Description: "Extensions for active"
   */
-  private transient Element _active;
+  protected transient Element _active;
 
   /**
   * Description: "The organization that provides this healthcare service."
   */
-  private Reference providedBy;
+  protected Reference providedBy;
 
   /**
   * Description: "Identifies the broad category of service being performed or delivered."
   */
-  private CodeableConcept category;
+  protected CodeableConcept category;
 
   /**
   * Description: "The specific type of service that may be delivered or performed."
   */
-  private java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
 
   /**
   * Description: "Collection of specialties handled by the service site. This is more of a medical term."
   */
-  private java.util.List<CodeableConcept> specialty = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> specialty = new java.util.ArrayList<>();
 
   /**
   * Description: "The location(s) where this healthcare service may be provided."
   */
-  private java.util.List<Reference> location = new java.util.ArrayList<>();
+  protected java.util.List<Reference> location = new java.util.ArrayList<>();
 
   /**
   * Description: "Further description of the service as it would be presented to a consumer while searching."
   */
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "Any additional description of the service and/or any specific issues not covered by the other attributes, which can be displayed as further detail under the serviceName."
   */
-  private String comment;
+  protected String comment;
 
   /**
   * Description: "Extensions for comment"
   */
-  private transient Element _comment;
+  protected transient Element _comment;
 
   /**
   * Description: "Extra details about the service that can't be placed in the other fields."
   */
-  private String extraDetails;
+  protected String extraDetails;
 
   /**
   * Description: "Extensions for extraDetails"
   */
-  private transient Element _extraDetails;
+  protected transient Element _extraDetails;
 
   /**
   * Description: "If there is a photo/symbol associated with this HealthcareService, it may be included here to facilitate quick identification of the service in a list."
   */
-  private Attachment photo;
+  protected Attachment photo;
 
   /**
   * Description: "List of contacts related to this specific healthcare service."
   */
-  private java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
 
   /**
   * Description: "The location(s) that this service is available to (not where the service is provided)."
   */
-  private java.util.List<Reference> coverageArea = new java.util.ArrayList<>();
+  protected java.util.List<Reference> coverageArea = new java.util.ArrayList<>();
 
   /**
   * Description: "The code(s) that detail the conditions under which the healthcare service is available/offered."
   */
-  private java.util.List<CodeableConcept> serviceProvisionCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> serviceProvisionCode = new java.util.ArrayList<>();
 
   /**
   * Description: "Does this service have specific eligibility requirements that need to be met in order to use the service?"
   */
-  private CodeableConcept eligibility;
+  protected CodeableConcept eligibility;
 
   /**
   * Description: "Describes the eligibility conditions for the service."
   */
-  private String eligibilityNote;
+  protected String eligibilityNote;
 
   /**
   * Description: "Extensions for eligibilityNote"
   */
-  private transient Element _eligibilityNote;
+  protected transient Element _eligibilityNote;
 
   /**
   * Description: "Program Names that can be used to categorize the service."
   */
-  private java.util.List<String> programName = new java.util.ArrayList<>();
+  protected java.util.List<String> programName = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for programName"
   */
-  private transient java.util.List<Element> _programName = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _programName = new java.util.ArrayList<>();
 
   /**
   * Description: "Collection of characteristics (attributes)."
   */
-  private java.util.List<CodeableConcept> characteristic = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> characteristic = new java.util.ArrayList<>();
 
   /**
   * Description: "Ways that the service accepts referrals, if this is not provided then it is implied that no referral is required."
   */
-  private java.util.List<CodeableConcept> referralMethod = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> referralMethod = new java.util.ArrayList<>();
 
   /**
   * Description: "Indicates whether or not a prospective consumer will require an appointment for a particular service at a site to be provided by the Organization. Indicates if an appointment is required for access to this service."
   */
-  private Boolean appointmentRequired;
+  protected Boolean appointmentRequired;
 
   /**
   * Description: "Extensions for appointmentRequired"
   */
-  private transient Element _appointmentRequired;
+  protected transient Element _appointmentRequired;
 
   /**
   * Description: "A collection of times that the Service Site is available."
   */
-  private java.util.List<HealthcareServiceAvailableTime> availableTime = new java.util.ArrayList<>();
+  protected java.util.List<HealthcareServiceAvailableTime> availableTime = new java.util.ArrayList<>();
 
   /**
   * Description: "The HealthcareService is not available during this period of time due to the provided reason."
   */
-  private java.util.List<HealthcareServiceNotAvailable> notAvailable = new java.util.ArrayList<>();
+  protected java.util.List<HealthcareServiceNotAvailable> notAvailable = new java.util.ArrayList<>();
 
   /**
   * Description: "A description of site availability exceptions, e.g. public holiday availability. Succinctly describing all possible exceptions to normal site availability as details in the available Times and not available Times."
   */
-  private String availabilityExceptions;
+  protected String availabilityExceptions;
 
   /**
   * Description: "Extensions for availabilityExceptions"
   */
-  private transient Element _availabilityExceptions;
+  protected transient Element _availabilityExceptions;
 
   /**
   * Description: "Technical endpoints providing access to services operated for the specific healthcare services defined at this resource."
   */
-  private java.util.List<Reference> endpoint = new java.util.ArrayList<>();
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected java.util.List<Reference> endpoint = new java.util.ArrayList<>();
 
   public HealthcareService() {
   }
@@ -326,21 +250,6 @@ public class HealthcareService  {
     }
     if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
     	this.endpoint = ReferenceHelper.fromArray2Array(o.getEndpoint());
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -542,72 +451,6 @@ public class HealthcareService  {
   public java.util.List<Reference> getEndpoint() {
     return this.endpoint;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -645,18 +488,7 @@ public class HealthcareService  {
      if(this.notAvailable != null) builder.append("notAvailable" + "->" + this.notAvailable.toString() + "\n"); 
      if(this.availabilityExceptions != null) builder.append("availabilityExceptions" + "->" + this.availabilityExceptions.toString() + "\n"); 
      if(this._availabilityExceptions != null) builder.append("_availabilityExceptions" + "->" + this._availabilityExceptions.toString() + "\n"); 
-     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.endpoint != null) builder.append("endpoint" + "->" + this.endpoint.toString() + "\n"); ;
     return builder.toString();
   }
 

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.SupplyRequest;
 
 public interface SupplyRequestService {
@@ -35,4 +37,9 @@ public interface SupplyRequestService {
   public SupplyRequest create(SupplyRequest bean);
   public SupplyRequest update(SupplyRequest bean);
   public void delete(SupplyRequest bean);
+  public List<SupplyRequest> findByField(QueryBuilder queryBuilder);
+  public List<SupplyRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<SupplyRequest> findBySupplier(QueryBuilder queryBuilder);
+
+
 }

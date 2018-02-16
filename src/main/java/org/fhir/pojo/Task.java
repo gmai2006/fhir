@@ -31,267 +31,191 @@ import com.google.gson.GsonBuilder;
 /**
 * "A task to be performed."
 */
-public class Task  {
+public class Task  extends DomainResource  {
   /**
   * Description: "This is a Task resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "The business identifier for this task."
   */
-  private java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
 
   /**
   * Description: "A reference to a formal or informal definition of the task.  For example, a protocol, a step within a defined workflow definition, etc."
   */
-  private String definitionUri;
+  protected String definitionUri;
 
   /**
   * Description: "Extensions for definitionUri"
   */
-  private transient Element _definitionUri;
+  protected transient Element _definitionUri;
 
   /**
   * Description: "A reference to a formal or informal definition of the task.  For example, a protocol, a step within a defined workflow definition, etc."
   */
-  private Reference definitionReference;
+  protected Reference definitionReference;
 
   /**
   * Description: "BasedOn refers to a higher-level authorization that triggered the creation of the task.  It references a \"request\" resource such as a ProcedureRequest, MedicationRequest, ProcedureRequest, CarePlan, etc. which is distinct from the \"request\" resource the task is seeking to fulfil.  This latter resource is referenced by FocusOn.  For example, based on a ProcedureRequest (= BasedOn), a task is created to fulfil a procedureRequest ( = FocusOn ) to collect a specimen from a patient."
   */
-  private java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
 
   /**
   * Description: "An identifier that links together multiple tasks and other requests that were created in the same context."
   */
-  private Identifier groupIdentifier;
+  protected Identifier groupIdentifier;
 
   /**
   * Description: "Task that this particular task is part of."
   */
-  private java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
 
   /**
   * Description: "The current status of the task."
   */
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "An explanation as to why this task is held, failed, was refused, etc."
   */
-  private CodeableConcept statusReason;
+  protected CodeableConcept statusReason;
 
   /**
   * Description: "Contains business-specific nuances of the business state."
   */
-  private CodeableConcept businessStatus;
+  protected CodeableConcept businessStatus;
 
   /**
   * Description: "Indicates the \"level\" of actionability associated with the Task.  I.e. Is this a proposed task, a planned task, an actionable task, etc."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String intent;
+  protected String intent;
 
   /**
   * Description: "Extensions for intent"
   */
-  private transient Element _intent;
+  protected transient Element _intent;
 
   /**
   * Description: "Indicates how quickly the Task should be addressed with respect to other requests."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String priority;
+  protected String priority;
 
   /**
   * Description: "Extensions for priority"
   */
-  private transient Element _priority;
+  protected transient Element _priority;
 
   /**
   * Description: "A name or code (or both) briefly describing what the task involves."
   */
-  private CodeableConcept code;
+  protected CodeableConcept code;
 
   /**
   * Description: "A free-text description of what is to be performed."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "The request being actioned or the resource being manipulated by this task."
   */
-  private Reference focus;
+  protected Reference focus;
 
   /**
   * Description: "The entity who benefits from the performance of the service specified in the task (e.g., the patient)."
   */
-  private Reference FHIRfor;
+  protected Reference FHIRfor;
 
   /**
   * Description: "The healthcare event  (e.g. a patient and healthcare provider interaction) during which this task was created."
   */
-  private Reference context;
+  protected Reference context;
 
   /**
   * Description: "Identifies the time action was first taken against the task (start) and/or the time final action was taken against the task prior to marking it as completed (end)."
   */
-  private Period executionPeriod;
+  protected Period executionPeriod;
 
   /**
   * Description: "The date and time this task was created."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String authoredOn;
+  protected String authoredOn;
 
   /**
   * Description: "Extensions for authoredOn"
   */
-  private transient Element _authoredOn;
+  protected transient Element _authoredOn;
 
   /**
   * Description: "The date and time of last modification to this task."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String lastModified;
+  protected String lastModified;
 
   /**
   * Description: "Extensions for lastModified"
   */
-  private transient Element _lastModified;
+  protected transient Element _lastModified;
 
   /**
   * Description: "The creator of the task."
   */
-  private TaskRequester requester;
+  protected TaskRequester requester;
 
   /**
   * Description: "The type of participant that can execute the task."
   */
-  private java.util.List<CodeableConcept> performerType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> performerType = new java.util.ArrayList<>();
 
   /**
   * Description: "Individual organization or Device currently responsible for task execution."
   */
-  private Reference owner;
+  protected Reference owner;
 
   /**
   * Description: "A description or code indicating why this task needs to be performed."
   */
-  private CodeableConcept reason;
+  protected CodeableConcept reason;
 
   /**
   * Description: "Free-text information captured about the task as it progresses."
   */
-  private java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
 
   /**
   * Description: "Links to Provenance records for past versions of this Task that identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the task."
   */
-  private java.util.List<Reference> relevantHistory = new java.util.ArrayList<>();
+  protected java.util.List<Reference> relevantHistory = new java.util.ArrayList<>();
 
   /**
   * Description: "If the Task.focus is a request resource and the task is seeking fulfillment (i.e is asking for the request to be actioned), this element identifies any limitations on what parts of the referenced request should be actioned."
   */
-  private TaskRestriction restriction;
+  protected TaskRestriction restriction;
 
   /**
   * Description: "Additional information that may be needed in the execution of the task."
   */
-  private java.util.List<TaskInput> input = new java.util.ArrayList<>();
+  protected java.util.List<TaskInput> input = new java.util.ArrayList<>();
 
   /**
   * Description: "Outputs produced by the Task."
   */
-  private java.util.List<TaskOutput> output = new java.util.ArrayList<>();
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected java.util.List<TaskOutput> output = new java.util.ArrayList<>();
 
   public Task() {
   }
@@ -360,21 +284,6 @@ public class Task  {
     }
     if (null != o.getOutput() && !o.getOutput().isEmpty()) {
     	this.output = TaskOutputHelper.fromArray2Array(o.getOutput());
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -594,72 +503,6 @@ public class Task  {
   public java.util.List<TaskOutput> getOutput() {
     return this.output;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -700,18 +543,7 @@ public class Task  {
      if(this.relevantHistory != null) builder.append("relevantHistory" + "->" + this.relevantHistory.toString() + "\n"); 
      if(this.restriction != null) builder.append("restriction" + "->" + this.restriction.toString() + "\n"); 
      if(this.input != null) builder.append("input" + "->" + this.input.toString() + "\n"); 
-     if(this.output != null) builder.append("output" + "->" + this.output.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.output != null) builder.append("output" + "->" + this.output.toString() + "\n"); ;
     return builder.toString();
   }
 

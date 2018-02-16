@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.OperationDefinitionModel;
 import org.fhir.pojo.OperationDefinition;
 import org.fhir.pojo.OperationDefinitionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class OperationDefinitionDaoImpl implements OperationDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class OperationDefinitionDaoImpl implements OperationDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       final OperationDefinitionModel removed = em.find(OperationDefinitionModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<OperationDefinition> findByBase(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from OperationDefinitionModel a, Reference b where a.base_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<OperationDefinition> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from OperationDefinitionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<OperationDefinition> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, OperationDefinitionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<OperationDefinitionModel> models = query.getResultList();
+    return OperationDefinitionHelper.fromArray2Array(models);
   }
 }

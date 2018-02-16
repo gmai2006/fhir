@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DocumentManifest;
 
 public interface DocumentManifestDao {
@@ -38,4 +39,10 @@ public interface DocumentManifestDao {
 
   public DocumentManifest update(DocumentManifest e);
   public void delete(DocumentManifest e);
+
+  public List<DocumentManifest> findByField(QueryBuilder queryBuilder);
+
+  public List<DocumentManifest> findByAuthor(QueryBuilder queryBuilder);
+  public List<DocumentManifest> findByRecipient(QueryBuilder queryBuilder);
+  public List<DocumentManifest> findBySubject(QueryBuilder queryBuilder);
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitaccident")
 public class ExplanationOfBenefitAccidentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669703025290L;
+	private static final long serialVersionUID = 151873631181567908L;
   /**
   * Description: "Date of an accident which these services are addressing."
   */
@@ -57,12 +58,14 @@ public class ExplanationOfBenefitAccidentModel  implements Serializable {
 
   /**
   * Description: "Where the accident occurred."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"locationAddress\"", length = 16777215)
-  private String locationAddress;
+  @Column(name="\"locationaddress_id\"")
+  private String locationaddress_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="locationaddress_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> locationAddress;
 
   /**
   * Description: "Where the accident occurred."
@@ -121,8 +124,11 @@ public class ExplanationOfBenefitAccidentModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.date = o.getDate();
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.locationAddress = AddressHelper.toJson(o.getLocationAddress());
+    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getLocationAddress() ) {
+    	this.locationaddress_id = "locationaddress" + this.parent_id;
+    	this.locationAddress = AddressHelper.toModel(o.getLocationAddress(), this.locationaddress_id);
+    }
     if (null != o.getLocationReference() ) {
     	this.locationreference_id = "locationreference" + this.parent_id;
     	this.locationReference = ReferenceHelper.toModel(o.getLocationReference(), this.locationreference_id);
@@ -141,10 +147,10 @@ public class ExplanationOfBenefitAccidentModel  implements Serializable {
   public void setType( String value) {
     this.type = value;
   }
-  public String getLocationAddress() {
+  public java.util.List<AddressModel> getLocationAddress() {
     return this.locationAddress;
   }
-  public void setLocationAddress( String value) {
+  public void setLocationAddress( java.util.List<AddressModel> value) {
     this.locationAddress = value;
   }
   public java.util.List<ReferenceModel> getLocationReference() {
@@ -184,7 +190,6 @@ public class ExplanationOfBenefitAccidentModel  implements Serializable {
     builder.append("[ExplanationOfBenefitAccidentModel]:" + "\n");
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("locationAddress" + "->" + this.locationAddress + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

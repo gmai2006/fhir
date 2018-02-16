@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ClinicalImpressionModel;
 import org.fhir.pojo.ClinicalImpression;
 import org.fhir.pojo.ClinicalImpressionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ClinicalImpressionDaoImpl implements ClinicalImpressionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,67 @@ public class ClinicalImpressionDaoImpl implements ClinicalImpressionDao {
       final EntityManager em = entityManagerProvider.get();
       final ClinicalImpressionModel removed = em.find(ClinicalImpressionModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ClinicalImpression> findByAction(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClinicalImpressionModel a, Reference b where a.action_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ClinicalImpression> findByAssessor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClinicalImpressionModel a, Reference b where a.assessor_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ClinicalImpression> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClinicalImpressionModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ClinicalImpression> findByInvestigation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClinicalImpressionModel a, ClinicalImpressionInvestigation b where a.investigation_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ClinicalImpression> findByPrevious(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClinicalImpressionModel a, Reference b where a.previous_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ClinicalImpression> findByProblem(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClinicalImpressionModel a, Reference b where a.problem_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ClinicalImpression> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClinicalImpressionModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ClinicalImpression> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ClinicalImpressionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ClinicalImpression> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ClinicalImpressionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ClinicalImpressionModel> models = query.getResultList();
+    return ClinicalImpressionHelper.fromArray2Array(models);
   }
 }

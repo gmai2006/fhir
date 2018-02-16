@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.TestReportModel;
 import org.fhir.pojo.TestReport;
 import org.fhir.pojo.TestReportHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class TestReportDaoImpl implements TestReportDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class TestReportDaoImpl implements TestReportDao {
       final EntityManager em = entityManagerProvider.get();
       final TestReportModel removed = em.find(TestReportModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<TestReport> findByParticipant(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from TestReportModel a, TestReportParticipant b where a.participant_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<TestReport> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from TestReportModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<TestReport> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, TestReportModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<TestReportModel> models = query.getResultList();
+    return TestReportHelper.fromArray2Array(models);
   }
 }

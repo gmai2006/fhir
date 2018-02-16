@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DeviceMetric;
 
 public interface DeviceMetricService {
@@ -35,4 +37,9 @@ public interface DeviceMetricService {
   public DeviceMetric create(DeviceMetric bean);
   public DeviceMetric update(DeviceMetric bean);
   public void delete(DeviceMetric bean);
+  public List<DeviceMetric> findByField(QueryBuilder queryBuilder);
+  public List<DeviceMetric> findByParent(QueryBuilder queryBuilder);
+  public List<DeviceMetric> findBySource(QueryBuilder queryBuilder);
+
+
 }

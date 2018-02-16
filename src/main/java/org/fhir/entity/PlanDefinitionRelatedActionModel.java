@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinitionrelatedaction")
 public class PlanDefinitionRelatedActionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669709670170L;
+	private static final long serialVersionUID = 15187363118833335L;
   /**
   * Description: "The element id of the related action."
   */
@@ -118,8 +119,8 @@ public class PlanDefinitionRelatedActionModel  implements Serializable {
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.actionId = o.getActionId();
     this.relationship = o.getRelationship();
-    this.offsetDuration = DurationHelper.toJson(o.getOffsetDuration());
-    this.offsetRange = RangeHelper.toJson(o.getOffsetRange());
+    this.offsetDuration = JsonUtils.toJson(o.getOffsetDuration());
+    this.offsetRange = JsonUtils.toJson(o.getOffsetRange());
   }
 
   public String getActionId() {

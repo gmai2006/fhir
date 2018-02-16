@@ -30,71 +30,52 @@ import com.google.gson.GsonBuilder;
 /**
 * "Details for all kinds of technology mediated contact points for a person or organization, including telephone, email, etc."
 */
-public class ContactPoint  {
+public class ContactPoint  extends Element  {
   /**
   * Description: "Telecommunications form for contact point - what communications system is required to make use of the contact."
   */
-  private String system;
+  protected String system;
 
   /**
   * Description: "Extensions for system"
   */
-  private transient Element _system;
+  protected transient Element _system;
 
   /**
   * Description: "The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address)."
   */
-  private String value;
+  protected String value;
 
   /**
   * Description: "Extensions for value"
   */
-  private transient Element _value;
+  protected transient Element _value;
 
   /**
   * Description: "Identifies the purpose for the contact point."
   */
-  private String use;
+  protected String use;
 
   /**
   * Description: "Extensions for use"
   */
-  private transient Element _use;
+  protected transient Element _use;
 
   /**
   * Description: "Specifies a preferred order in which to use a set of contacts. Contacts are ranked with lower values coming before higher values."
   */
   @javax.validation.constraints.Pattern(regexp="[1-9][0-9]*")
-  private Float rank;
+  protected Float rank;
 
   /**
   * Description: "Extensions for rank"
   */
-  private transient Element _rank;
+  protected transient Element _rank;
 
   /**
   * Description: "Time period when the contact point was/is in use."
   */
-  private Period period;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Period period;
 
   public ContactPoint() {}
 
@@ -152,24 +133,6 @@ public class ContactPoint  {
   public Period getPeriod() {
     return this.period;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -183,10 +146,7 @@ public class ContactPoint  {
      if(this._use != null) builder.append("_use" + "->" + this._use.toString() + "\n"); 
      if(this.rank != null) builder.append("rank" + "->" + this.rank.toString() + "\n"); 
      if(this._rank != null) builder.append("_rank" + "->" + this._rank.toString() + "\n"); 
-     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); ;
     return builder.toString();
   }
 

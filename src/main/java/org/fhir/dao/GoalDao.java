@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Goal;
 
 public interface GoalDao {
@@ -38,4 +39,8 @@ public interface GoalDao {
 
   public Goal update(Goal e);
   public void delete(Goal e);
+
+  public List<Goal> findByField(QueryBuilder queryBuilder);
+
+  public List<Goal> findBySubject(QueryBuilder queryBuilder);
 }

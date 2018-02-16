@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Identifies two or more records (resource instances) that are referring to the same real-world \"occurrence\"."
 */
 @Entity
 @Table(name="linkageitem")
 public class LinkageItemModel  implements Serializable {
-	private static final long serialVersionUID = 1518576696947374L;
+	private static final long serialVersionUID = 151873631174286616L;
   /**
   * Description: "Distinguishes which item is \"source of truth\" (if any) and which items are no longer considered to be current representations."
   */

@@ -30,109 +30,90 @@ import com.google.gson.GsonBuilder;
 /**
 * "For referring to data content defined in other formats."
 */
-public class Attachment  {
+public class Attachment  extends Element  {
   /**
   * Description: "Identifies the type of the data in the attachment and allows a method to be chosen to interpret or render the data. Includes mime type parameters such as charset where appropriate."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String contentType;
+  protected String contentType;
 
   /**
   * Description: "Extensions for contentType"
   */
-  private transient Element _contentType;
+  protected transient Element _contentType;
 
   /**
   * Description: "The human language of the content. The value can be any valid value according to BCP 47."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
+  protected String language;
 
   /**
   * Description: "Extensions for language"
   */
-  private transient Element _language;
+  protected transient Element _language;
 
   /**
   * Description: "The actual data of the attachment - a sequence of bytes. In XML, represented using base64."
   */
-  private String data;
+  protected String data;
 
   /**
   * Description: "Extensions for data"
   */
-  private transient Element _data;
+  protected transient Element _data;
 
   /**
   * Description: "An alternative location where the data can be accessed."
   */
-  private String url;
+  protected String url;
 
   /**
   * Description: "Extensions for url"
   */
-  private transient Element _url;
+  protected transient Element _url;
 
   /**
   * Description: "The number of bytes of data that make up this attachment (before base64 encoding, if that is done)."
   */
   @javax.validation.constraints.Pattern(regexp="[0]|([1-9][0-9]*)")
-  private Float size;
+  protected Float size;
 
   /**
   * Description: "Extensions for size"
   */
-  private transient Element _size;
+  protected transient Element _size;
 
   /**
   * Description: "The calculated hash of the data using SHA-1. Represented using base64."
   */
-  private String hash;
+  protected String hash;
 
   /**
   * Description: "Extensions for hash"
   */
-  private transient Element _hash;
+  protected transient Element _hash;
 
   /**
   * Description: "A label or set of text to display in place of the data."
   */
-  private String title;
+  protected String title;
 
   /**
   * Description: "Extensions for title"
   */
-  private transient Element _title;
+  protected transient Element _title;
 
   /**
   * Description: "The date that the attachment was first created."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String creation;
+  protected String creation;
 
   /**
   * Description: "Extensions for creation"
   */
-  private transient Element _creation;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _creation;
 
   public Attachment() {}
 
@@ -232,24 +213,6 @@ public class Attachment  {
   public Element get_creation() {
     return this._creation;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -270,10 +233,7 @@ public class Attachment  {
      if(this.title != null) builder.append("title" + "->" + this.title.toString() + "\n"); 
      if(this._title != null) builder.append("_title" + "->" + this._title.toString() + "\n"); 
      if(this.creation != null) builder.append("creation" + "->" + this.creation.toString() + "\n"); 
-     if(this._creation != null) builder.append("_creation" + "->" + this._creation.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._creation != null) builder.append("_creation" + "->" + this._creation.toString() + "\n"); ;
     return builder.toString();
   }
 

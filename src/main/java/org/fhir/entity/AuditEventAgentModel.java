@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
 */
 @Entity
 @Table(name="auditeventagent")
 public class AuditEventAgentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669666076531L;
+	private static final long serialVersionUID = 151873631138550919L;
   /**
   * Description: "The security role that the user was acting under, that come from local codes defined by the access control security system (e.g. RBAC, ABAC) used in the local context."
   * Actual type: List<String>;
@@ -184,7 +185,7 @@ public class AuditEventAgentModel  implements Serializable {
     	this.reference_id = "reference" + this.parent_id;
     	this.reference = ReferenceHelper.toModel(o.getReference(), this.reference_id);
     }
-    this.userId = IdentifierHelper.toJson(o.getUserId());
+    this.userId = JsonUtils.toJson(o.getUserId());
     this.altId = o.getAltId();
     this.name = o.getName();
     this.requestor = o.getRequestor();
@@ -193,7 +194,7 @@ public class AuditEventAgentModel  implements Serializable {
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
     }
     this.policy = org.fhir.utils.JsonUtils.write2String(o.getPolicy());
-    this.media = CodingHelper.toJson(o.getMedia());
+    this.media = JsonUtils.toJson(o.getMedia());
     if (null != o.getNetwork() ) {
     	this.network_id = "network" + this.parent_id;
     	this.network = AuditEventNetworkHelper.toModel(o.getNetwork(), this.network_id);

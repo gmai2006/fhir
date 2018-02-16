@@ -31,69 +31,41 @@ import com.google.gson.GsonBuilder;
 /**
 * "A container for a collection of resources."
 */
-public class BundleEntry  {
+public class BundleEntry  extends BackboneElement  {
   /**
   * Description: "A series of links that provide context to this entry."
   */
-  private java.util.List<BundleLink> link = new java.util.ArrayList<>();
+  protected java.util.List<BundleLink> link = new java.util.ArrayList<>();
 
   /**
   * Description: "The Absolute URL for the resource.  The fullUrl SHALL not disagree with the id in the resource. The fullUrl is a version independent reference to the resource. The fullUrl element SHALL have a value except that: \n* fullUrl can be empty on a POST (although it does not need to when specifying a temporary id for reference in the bundle)\n* Results from operations might involve resources that are not identified."
   */
-  private String fullUrl;
+  protected String fullUrl;
 
   /**
   * Description: "Extensions for fullUrl"
   */
-  private transient Element _fullUrl;
+  protected transient Element _fullUrl;
 
   /**
   * Description: "The Resources for the entry."
   */
-  private ResourceList resource;
+  protected ResourceList resource;
 
   /**
   * Description: "Information about the search process that lead to the creation of this entry."
   */
-  private BundleSearch search;
+  protected BundleSearch search;
 
   /**
   * Description: "Additional information about how this entry should be processed as part of a transaction."
   */
-  private BundleRequest request;
+  protected BundleRequest request;
 
   /**
   * Description: "Additional information about how this entry should be processed as part of a transaction."
   */
-  private BundleResponse response;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected BundleResponse response;
 
   public BundleEntry() {
   }
@@ -115,9 +87,6 @@ public class BundleEntry  {
     }
     if (null != o.getResponse() && !o.getResponse().isEmpty()) {
       this.response = new BundleResponse(o.getResponse().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -163,30 +132,6 @@ public class BundleEntry  {
   public BundleResponse getResponse() {
     return this.response;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -198,11 +143,7 @@ public class BundleEntry  {
      if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
      if(this.search != null) builder.append("search" + "->" + this.search.toString() + "\n"); 
      if(this.request != null) builder.append("request" + "->" + this.request.toString() + "\n"); 
-     if(this.response != null) builder.append("response" + "->" + this.response.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.response != null) builder.append("response" + "->" + this.response.toString() + "\n"); ;
     return builder.toString();
   }
 

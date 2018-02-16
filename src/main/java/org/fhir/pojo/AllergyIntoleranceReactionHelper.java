@@ -53,19 +53,4 @@ public class AllergyIntoleranceReactionHelper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, AllergyIntoleranceReaction.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(AllergyIntoleranceReaction o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<AllergyIntoleranceReaction> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

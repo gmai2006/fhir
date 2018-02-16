@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."
 */
 @Entity
 @Table(name="allergyintolerance")
 public class AllergyIntoleranceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669692168420L;
+	private static final long serialVersionUID = 151873631171391248L;
   /**
   * Description: "This is a AllergyIntolerance resource"
   */
@@ -306,15 +307,15 @@ public class AllergyIntoleranceModel  implements Serializable {
     this.type = o.getType();
     this.category = org.fhir.utils.JsonUtils.write2String(o.getCategory());
     this.criticality = o.getCriticality();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
     this.onsetDateTime = o.getOnsetDateTime();
-    this.onsetAge = AgeHelper.toJson(o.getOnsetAge());
-    this.onsetPeriod = PeriodHelper.toJson(o.getOnsetPeriod());
-    this.onsetRange = RangeHelper.toJson(o.getOnsetRange());
+    this.onsetAge = JsonUtils.toJson(o.getOnsetAge());
+    this.onsetPeriod = JsonUtils.toJson(o.getOnsetPeriod());
+    this.onsetRange = JsonUtils.toJson(o.getOnsetRange());
     this.onsetString = o.getOnsetString();
     this.assertedDate = o.getAssertedDate();
     if (null != o.getRecorder() ) {

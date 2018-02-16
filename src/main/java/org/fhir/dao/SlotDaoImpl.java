@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.SlotModel;
 import org.fhir.pojo.Slot;
 import org.fhir.pojo.SlotHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class SlotDaoImpl implements SlotDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class SlotDaoImpl implements SlotDao {
       final EntityManager em = entityManagerProvider.get();
       final SlotModel removed = em.find(SlotModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Slot> findBySchedule(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SlotModel a, Reference b where a.schedule_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Slot> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SlotModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Slot> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, SlotModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<SlotModel> models = query.getResultList();
+    return SlotHelper.fromArray2Array(models);
   }
 }

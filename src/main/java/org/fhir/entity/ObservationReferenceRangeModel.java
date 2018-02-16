@@ -31,30 +31,35 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
 @Entity
 @Table(name="observationreferencerange")
 public class ObservationReferenceRangeModel  implements Serializable {
-	private static final long serialVersionUID = 151857669710022042L;
+	private static final long serialVersionUID = 151873631188857706L;
   /**
   * Description: "The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"low\"", length = 16777215)
-  private String low;
+  @Column(name="\"low_id\"")
+  private String low_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="low_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> low;
 
   /**
   * Description: "The value of the high bound of the reference range.  The high bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the high bound is omitted,  it is assumed to be meaningless (e.g. reference range is >= 2.3)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"high\"", length = 16777215)
-  private String high;
+  @Column(name="\"high_id\"")
+  private String high_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="high_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> high;
 
   /**
   * Description: "Codes to indicate the what part of the targeted reference population it applies to. For example, the normal or therapeutic range."
@@ -135,23 +140,29 @@ public class ObservationReferenceRangeModel  implements Serializable {
   public ObservationReferenceRangeModel(ObservationReferenceRange o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.low = QuantityHelper.toJson(o.getLow());
-    this.high = QuantityHelper.toJson(o.getHigh());
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.age = RangeHelper.toJson(o.getAge());
+    if (null != o.getLow() ) {
+    	this.low_id = "low" + this.parent_id;
+    	this.low = QuantityHelper.toModel(o.getLow(), this.low_id);
+    }
+    if (null != o.getHigh() ) {
+    	this.high_id = "high" + this.parent_id;
+    	this.high = QuantityHelper.toModel(o.getHigh(), this.high_id);
+    }
+    this.type = JsonUtils.toJson(o.getType());
+    this.age = JsonUtils.toJson(o.getAge());
     this.text = o.getText();
   }
 
-  public String getLow() {
+  public java.util.List<QuantityModel> getLow() {
     return this.low;
   }
-  public void setLow( String value) {
+  public void setLow( java.util.List<QuantityModel> value) {
     this.low = value;
   }
-  public String getHigh() {
+  public java.util.List<QuantityModel> getHigh() {
     return this.high;
   }
-  public void setHigh( String value) {
+  public void setHigh( java.util.List<QuantityModel> value) {
     this.high = value;
   }
   public String getType() {
@@ -207,8 +218,6 @@ public class ObservationReferenceRangeModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ObservationReferenceRangeModel]:" + "\n");
-     builder.append("low" + "->" + this.low + "\n"); 
-     builder.append("high" + "->" + this.high + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("appliesTo" + "->" + this.appliesTo + "\n"); 
      builder.append("age" + "->" + this.age + "\n"); 

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DocumentManifest;
 
 public interface DocumentManifestService {
@@ -35,4 +37,10 @@ public interface DocumentManifestService {
   public DocumentManifest create(DocumentManifest bean);
   public DocumentManifest update(DocumentManifest bean);
   public void delete(DocumentManifest bean);
+  public List<DocumentManifest> findByField(QueryBuilder queryBuilder);
+  public List<DocumentManifest> findByAuthor(QueryBuilder queryBuilder);
+  public List<DocumentManifest> findByRecipient(QueryBuilder queryBuilder);
+  public List<DocumentManifest> findBySubject(QueryBuilder queryBuilder);
+
+
 }

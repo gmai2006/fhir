@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Raw data describing a biological sequence."
 */
 @Entity
 @Table(name="sequencevariant")
 public class SequenceVariantModel  implements Serializable {
-	private static final long serialVersionUID = 151857669669793153L;
+	private static final long serialVersionUID = 151873631142853008L;
   /**
   * Description: "Start position of the variant on the  reference sequence.If the coordinate system is either 0-based or 1-based, then start position is inclusive."
   */

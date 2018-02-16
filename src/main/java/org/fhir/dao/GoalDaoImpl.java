@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.GoalModel;
 import org.fhir.pojo.Goal;
 import org.fhir.pojo.GoalHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class GoalDaoImpl implements GoalDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class GoalDaoImpl implements GoalDao {
       final EntityManager em = entityManagerProvider.get();
       final GoalModel removed = em.find(GoalModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Goal> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from GoalModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Goal> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from GoalModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Goal> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, GoalModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<GoalModel> models = query.getResultList();
+    return GoalHelper.fromArray2Array(models);
   }
 }

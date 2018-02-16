@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Slot;
 
 public interface SlotService {
@@ -35,4 +37,8 @@ public interface SlotService {
   public Slot create(Slot bean);
   public Slot update(Slot bean);
   public void delete(Slot bean);
+  public List<Slot> findByField(QueryBuilder queryBuilder);
+  public List<Slot> findBySchedule(QueryBuilder queryBuilder);
+
+
 }

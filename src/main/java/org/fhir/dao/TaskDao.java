@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Task;
 
 public interface TaskDao {
@@ -38,4 +39,11 @@ public interface TaskDao {
 
   public Task update(Task e);
   public void delete(Task e);
+
+  public List<Task> findByField(QueryBuilder queryBuilder);
+
+  public List<Task> findByContext(QueryBuilder queryBuilder);
+  public List<Task> findByFocus(QueryBuilder queryBuilder);
+  public List<Task> findByOwner(QueryBuilder queryBuilder);
+  public List<Task> findByRequester(QueryBuilder queryBuilder);
 }

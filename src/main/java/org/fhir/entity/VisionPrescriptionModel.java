@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An authorization for the supply of glasses and/or contact lenses to a patient."
 */
 @Entity
 @Table(name="visionprescription")
 public class VisionPrescriptionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669717982441L;
+	private static final long serialVersionUID = 151873631197840540L;
   /**
   * Description: "This is a VisionPrescription resource"
   */
@@ -240,7 +241,7 @@ public class VisionPrescriptionModel  implements Serializable {
     	this.prescriber_id = "prescriber" + this.id;
     	this.prescriber = ReferenceHelper.toModel(o.getPrescriber(), this.prescriber_id);
     }
-    this.reasonCodeableConcept = CodeableConceptHelper.toJson(o.getReasonCodeableConcept());
+    this.reasonCodeableConcept = JsonUtils.toJson(o.getReasonCodeableConcept());
     if (null != o.getReasonReference() ) {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModel(o.getReasonReference(), this.reasonreference_id);

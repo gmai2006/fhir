@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Medication;
 
 public interface MedicationService {
@@ -35,4 +37,9 @@ public interface MedicationService {
   public Medication create(Medication bean);
   public Medication update(Medication bean);
   public void delete(Medication bean);
+  public List<Medication> findByField(QueryBuilder queryBuilder);
+  public List<Medication> findByIngredient(QueryBuilder queryBuilder);
+  public List<Medication> findByManufacturer(QueryBuilder queryBuilder);
+
+
 }

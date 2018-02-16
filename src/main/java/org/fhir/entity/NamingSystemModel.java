@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a \"System\" used within the Identifier and Coding data types."
 */
 @Entity
 @Table(name="namingsystem")
 public class NamingSystemModel  implements Serializable {
-	private static final long serialVersionUID = 151857669693874882L;
+	private static final long serialVersionUID = 151873631173313059L;
   /**
   * Description: "This is a NamingSystem resource"
   */
@@ -266,7 +267,7 @@ public class NamingSystemModel  implements Serializable {
     	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
     }
     this.responsible = o.getResponsible();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.description = o.getDescription();
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.usecontext_id = "usecontext" + this.id;

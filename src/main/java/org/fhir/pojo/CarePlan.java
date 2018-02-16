@@ -31,209 +31,133 @@ import com.google.gson.GsonBuilder;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
-public class CarePlan  {
+public class CarePlan  extends DomainResource  {
   /**
   * Description: "This is a CarePlan resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "This records identifiers associated with this care plan that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
   */
-  private java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
 
   /**
   * Description: "Identifies the protocol, questionnaire, guideline or other specification the care plan should be conducted in accordance with."
   */
-  private java.util.List<Reference> definition = new java.util.ArrayList<>();
+  protected java.util.List<Reference> definition = new java.util.ArrayList<>();
 
   /**
   * Description: "A care plan that is fulfilled in whole or in part by this care plan."
   */
-  private java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
 
   /**
   * Description: "Completed or terminated care plan whose function is taken by this new care plan."
   */
-  private java.util.List<Reference> replaces = new java.util.ArrayList<>();
+  protected java.util.List<Reference> replaces = new java.util.ArrayList<>();
 
   /**
   * Description: "A larger care plan of which this particular care plan is a component or step."
   */
-  private java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
 
   /**
   * Description: "Indicates whether the plan is currently being acted upon, represents future intentions or is now a historical record."
   */
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "Indicates the level of authority/intentionality associated with the care plan and where the care plan fits into the workflow chain."
   */
-  private String intent;
+  protected String intent;
 
   /**
   * Description: "Extensions for intent"
   */
-  private transient Element _intent;
+  protected transient Element _intent;
 
   /**
   * Description: "Identifies what \"kind\" of plan this is to support differentiation between multiple co-existing plans; e.g. \"Home health\", \"psychiatric\", \"asthma\", \"disease management\", \"wellness plan\", etc."
   */
-  private java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
 
   /**
   * Description: "Human-friendly name for the CarePlan."
   */
-  private String title;
+  protected String title;
 
   /**
   * Description: "Extensions for title"
   */
-  private transient Element _title;
+  protected transient Element _title;
 
   /**
   * Description: "A description of the scope and nature of the plan."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "Identifies the patient or group whose intended care is described by the plan."
   */
   @javax.validation.constraints.NotNull
-  private Reference subject;
+  protected Reference subject;
 
   /**
   * Description: "Identifies the original context in which this particular CarePlan was created."
   */
-  private Reference context;
+  protected Reference context;
 
   /**
   * Description: "Indicates when the plan did (or is intended to) come into effect and end."
   */
-  private Period period;
+  protected Period period;
 
   /**
   * Description: "Identifies the individual(s) or ogranization who is responsible for the content of the care plan."
   */
-  private java.util.List<Reference> author = new java.util.ArrayList<>();
+  protected java.util.List<Reference> author = new java.util.ArrayList<>();
 
   /**
   * Description: "Identifies all people and organizations who are expected to be involved in the care envisioned by this plan."
   */
-  private java.util.List<Reference> careTeam = new java.util.ArrayList<>();
+  protected java.util.List<Reference> careTeam = new java.util.ArrayList<>();
 
   /**
   * Description: "Identifies the conditions/problems/concerns/diagnoses/etc. whose management and/or mitigation are handled by this plan."
   */
-  private java.util.List<Reference> addresses = new java.util.ArrayList<>();
+  protected java.util.List<Reference> addresses = new java.util.ArrayList<>();
 
   /**
   * Description: "Identifies portions of the patient's record that specifically influenced the formation of the plan.  These might include co-morbidities, recent procedures, limitations, recent assessments, etc."
   */
-  private java.util.List<Reference> supportingInfo = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingInfo = new java.util.ArrayList<>();
 
   /**
   * Description: "Describes the intended objective(s) of carrying out the care plan."
   */
-  private java.util.List<Reference> goal = new java.util.ArrayList<>();
+  protected java.util.List<Reference> goal = new java.util.ArrayList<>();
 
   /**
   * Description: "Identifies a planned action to occur as part of the plan.  For example, a medication to be used, lab tests to perform, self-monitoring, education, etc."
   */
-  private java.util.List<CarePlanActivity> activity = new java.util.ArrayList<>();
+  protected java.util.List<CarePlanActivity> activity = new java.util.ArrayList<>();
 
   /**
   * Description: "General notes about the care plan not covered elsewhere."
   */
-  private java.util.List<Annotation> note = new java.util.ArrayList<>();
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
 
   public CarePlan() {
   }
@@ -291,21 +215,6 @@ public class CarePlan  {
     }
     if (null != o.getActivity() && !o.getActivity().isEmpty()) {
     	this.activity = CarePlanActivityHelper.fromArray2Array(o.getActivity());
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -459,72 +368,6 @@ public class CarePlan  {
   public java.util.List<Annotation> getNote() {
     return this.note;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -554,18 +397,7 @@ public class CarePlan  {
      if(this.supportingInfo != null) builder.append("supportingInfo" + "->" + this.supportingInfo.toString() + "\n"); 
      if(this.goal != null) builder.append("goal" + "->" + this.goal.toString() + "\n"); 
      if(this.activity != null) builder.append("activity" + "->" + this.activity.toString() + "\n"); 
-     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); ;
     return builder.toString();
   }
 

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care for a patient."
 */
 @Entity
 @Table(name="careteam")
 public class CareTeamModel  implements Serializable {
-	private static final long serialVersionUID = 151857669651894498L;
+	private static final long serialVersionUID = 151873631116915224L;
   /**
   * Description: "This is a CareTeam resource"
   */
@@ -261,7 +262,7 @@ public class CareTeamModel  implements Serializable {
     	this.context_id = "context" + this.id;
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
     	this.participant_id = "participant" + this.id;
     	this.participant = CareTeamParticipantHelper.toModelFromArray(o.getParticipant(), this.participant_id);

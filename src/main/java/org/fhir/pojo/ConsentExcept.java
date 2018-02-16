@@ -31,89 +31,61 @@ import com.google.gson.GsonBuilder;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
 */
-public class ConsentExcept  {
+public class ConsentExcept  extends BackboneElement  {
   /**
   * Description: "Action  to take - permit or deny - when the exception conditions are met."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "The timeframe in this exception is valid."
   */
-  private Period period;
+  protected Period period;
 
   /**
   * Description: "Who or what is controlled by this Exception. Use group to identify a set of actors by some property they share (e.g. 'admitting officers')."
   */
-  private java.util.List<ConsentActor1> actor = new java.util.ArrayList<>();
+  protected java.util.List<ConsentActor1> actor = new java.util.ArrayList<>();
 
   /**
   * Description: "Actions controlled by this Exception."
   */
-  private java.util.List<CodeableConcept> action = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> action = new java.util.ArrayList<>();
 
   /**
   * Description: "A set of security labels that define which resources are controlled by this exception. If more than one label is specified, all resources must have all the specified labels."
   */
-  private java.util.List<Coding> securityLabel = new java.util.ArrayList<>();
+  protected java.util.List<Coding> securityLabel = new java.util.ArrayList<>();
 
   /**
   * Description: "The context of the activities a user is taking - why the user is accessing the data - that are controlled by this exception."
   */
-  private java.util.List<Coding> purpose = new java.util.ArrayList<>();
+  protected java.util.List<Coding> purpose = new java.util.ArrayList<>();
 
   /**
   * Description: "The class of information covered by this exception. The type can be a FHIR resource type, a profile on a type, or a CDA document, or some other type that indicates what sort of information the consent relates to."
   */
-  private java.util.List<Coding> FHIRclass = new java.util.ArrayList<>();
+  protected java.util.List<Coding> FHIRclass = new java.util.ArrayList<>();
 
   /**
   * Description: "If this code is found in an instance, then the exception applies."
   */
-  private java.util.List<Coding> code = new java.util.ArrayList<>();
+  protected java.util.List<Coding> code = new java.util.ArrayList<>();
 
   /**
   * Description: "Clinical or Operational Relevant period of time that bounds the data controlled by this exception."
   */
-  private Period dataPeriod;
+  protected Period dataPeriod;
 
   /**
   * Description: "The resources controlled by this exception, if specific resources are referenced."
   */
-  private java.util.List<ConsentData1> data = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ConsentData1> data = new java.util.ArrayList<>();
 
   public ConsentExcept() {
   }
@@ -130,9 +102,6 @@ public class ConsentExcept  {
     this.dataPeriod = PeriodHelper.fromJson(o.getDataPeriod());
     if (null != o.getData() && !o.getData().isEmpty()) {
     	this.data = ConsentData1Helper.fromArray2Array(o.getData());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -202,30 +171,6 @@ public class ConsentExcept  {
   public java.util.List<ConsentData1> getData() {
     return this.data;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -241,11 +186,7 @@ public class ConsentExcept  {
      if(this.FHIRclass != null) builder.append("FHIRclass" + "->" + this.FHIRclass.toString() + "\n"); 
      if(this.code != null) builder.append("code" + "->" + this.code.toString() + "\n"); 
      if(this.dataPeriod != null) builder.append("dataPeriod" + "->" + this.dataPeriod.toString() + "\n"); 
-     if(this.data != null) builder.append("data" + "->" + this.data.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.data != null) builder.append("data" + "->" + this.data.toString() + "\n"); ;
     return builder.toString();
   }
 

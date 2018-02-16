@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
 */
 @Entity
 @Table(name="questionnaireenablewhen")
 public class QuestionnaireEnableWhenModel  implements Serializable {
-	private static final long serialVersionUID = 151857669715978064L;
+	private static final long serialVersionUID = 151873631195578973L;
   /**
   * Description: "The linkId for the question whose answer (or lack of answer) governs whether this item is enabled."
   */
@@ -133,12 +134,14 @@ public class QuestionnaireEnableWhenModel  implements Serializable {
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"answerQuantity\"", length = 16777215)
-  private String answerQuantity;
+  @Column(name="\"answerquantity_id\"")
+  private String answerquantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="answerquantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> answerQuantity;
 
   /**
   * Description: "An answer that the referenced question must match in order for the item to be enabled."
@@ -206,9 +209,12 @@ public class QuestionnaireEnableWhenModel  implements Serializable {
     this.answerTime = o.getAnswerTime();
     this.answerString = o.getAnswerString();
     this.answerUri = o.getAnswerUri();
-    this.answerAttachment = AttachmentHelper.toJson(o.getAnswerAttachment());
-    this.answerCoding = CodingHelper.toJson(o.getAnswerCoding());
-    this.answerQuantity = QuantityHelper.toJson(o.getAnswerQuantity());
+    this.answerAttachment = JsonUtils.toJson(o.getAnswerAttachment());
+    this.answerCoding = JsonUtils.toJson(o.getAnswerCoding());
+    if (null != o.getAnswerQuantity() ) {
+    	this.answerquantity_id = "answerquantity" + this.parent_id;
+    	this.answerQuantity = QuantityHelper.toModel(o.getAnswerQuantity(), this.answerquantity_id);
+    }
     if (null != o.getAnswerReference() ) {
     	this.answerreference_id = "answerreference" + this.parent_id;
     	this.answerReference = ReferenceHelper.toModel(o.getAnswerReference(), this.answerreference_id);
@@ -287,10 +293,10 @@ public class QuestionnaireEnableWhenModel  implements Serializable {
   public void setAnswerCoding( String value) {
     this.answerCoding = value;
   }
-  public String getAnswerQuantity() {
+  public java.util.List<QuantityModel> getAnswerQuantity() {
     return this.answerQuantity;
   }
-  public void setAnswerQuantity( String value) {
+  public void setAnswerQuantity( java.util.List<QuantityModel> value) {
     this.answerQuantity = value;
   }
   public java.util.List<ReferenceModel> getAnswerReference() {
@@ -340,7 +346,6 @@ public class QuestionnaireEnableWhenModel  implements Serializable {
      builder.append("answerUri" + "->" + this.answerUri + "\n"); 
      builder.append("answerAttachment" + "->" + this.answerAttachment + "\n"); 
      builder.append("answerCoding" + "->" + this.answerCoding + "\n"); 
-     builder.append("answerQuantity" + "->" + this.answerQuantity + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

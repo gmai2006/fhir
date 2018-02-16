@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s)."
 */
 @Entity
 @Table(name="appointment")
 public class AppointmentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669706892774L;
+	private static final long serialVersionUID = 151873631185330682L;
   /**
   * Description: "This is a Appointment resource"
   */
@@ -315,8 +316,8 @@ public class AppointmentModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.serviceCategory = CodeableConceptHelper.toJson(o.getServiceCategory());
-    this.appointmentType = CodeableConceptHelper.toJson(o.getAppointmentType());
+    this.serviceCategory = JsonUtils.toJson(o.getServiceCategory());
+    this.appointmentType = JsonUtils.toJson(o.getAppointmentType());
     if (null != o.getIndication() && !o.getIndication().isEmpty()) {
     	this.indication_id = "indication" + this.id;
     	this.indication = ReferenceHelper.toModelFromArray(o.getIndication(), this.indication_id);

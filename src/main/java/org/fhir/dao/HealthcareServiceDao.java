@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.HealthcareService;
 
 public interface HealthcareServiceDao {
@@ -38,4 +39,9 @@ public interface HealthcareServiceDao {
 
   public HealthcareService update(HealthcareService e);
   public void delete(HealthcareService e);
+
+  public List<HealthcareService> findByField(QueryBuilder queryBuilder);
+
+  public List<HealthcareService> findByEndpoint(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByLocation(QueryBuilder queryBuilder);
 }

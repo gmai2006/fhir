@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.BodySite;
 
 public interface BodySiteService {
@@ -35,4 +37,8 @@ public interface BodySiteService {
   public BodySite create(BodySite bean);
   public BodySite update(BodySite bean);
   public void delete(BodySite bean);
+  public List<BodySite> findByField(QueryBuilder queryBuilder);
+  public List<BodySite> findByPatient(QueryBuilder queryBuilder);
+
+
 }

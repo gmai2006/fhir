@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Specimen;
 
 public interface SpecimenDao {
@@ -38,4 +39,10 @@ public interface SpecimenDao {
 
   public Specimen update(Specimen e);
   public void delete(Specimen e);
+
+  public List<Specimen> findByField(QueryBuilder queryBuilder);
+
+  public List<Specimen> findByContainer(QueryBuilder queryBuilder);
+  public List<Specimen> findByParent(QueryBuilder queryBuilder);
+  public List<Specimen> findBySubject(QueryBuilder queryBuilder);
 }

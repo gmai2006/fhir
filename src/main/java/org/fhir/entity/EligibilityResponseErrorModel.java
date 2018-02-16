@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides eligibility and plan details from the processing of an Eligibility resource."
 */
 @Entity
 @Table(name="eligibilityresponseerror")
 public class EligibilityResponseErrorModel  implements Serializable {
-	private static final long serialVersionUID = 151857669685494942L;
+	private static final long serialVersionUID = 151873631164185036L;
   /**
   * Description: "An error code,from a specified code system, which details why the eligibility check could not be performed."
   * Actual type: String;
@@ -93,7 +94,7 @@ public class EligibilityResponseErrorModel  implements Serializable {
   public EligibilityResponseErrorModel(EligibilityResponseError o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
   }
 
   public String getCode() {

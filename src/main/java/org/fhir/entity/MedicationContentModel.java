@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
 */
 @Entity
 @Table(name="medicationcontent")
 public class MedicationContentModel  implements Serializable {
-	private static final long serialVersionUID = 15185766971042066L;
+	private static final long serialVersionUID = 151873631189330249L;
   /**
   * Description: "Identifies one of the items in the package."
   * Actual type: String;
@@ -60,12 +61,14 @@ public class MedicationContentModel  implements Serializable {
 
   /**
   * Description: "The amount of the product that is in the package."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"amount\"", length = 16777215)
-  private String amount;
+  @Column(name="\"amount_id\"")
+  private String amount_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> amount;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -112,12 +115,15 @@ public class MedicationContentModel  implements Serializable {
   public MedicationContentModel(MedicationContent o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.itemCodeableConcept = CodeableConceptHelper.toJson(o.getItemCodeableConcept());
+    this.itemCodeableConcept = JsonUtils.toJson(o.getItemCodeableConcept());
     if (null != o.getItemReference() ) {
     	this.itemreference_id = "itemreference" + this.parent_id;
     	this.itemReference = ReferenceHelper.toModel(o.getItemReference(), this.itemreference_id);
     }
-    this.amount = QuantityHelper.toJson(o.getAmount());
+    if (null != o.getAmount() ) {
+    	this.amount_id = "amount" + this.parent_id;
+    	this.amount = QuantityHelper.toModel(o.getAmount(), this.amount_id);
+    }
   }
 
   public String getItemCodeableConcept() {
@@ -132,10 +138,10 @@ public class MedicationContentModel  implements Serializable {
   public void setItemReference( java.util.List<ReferenceModel> value) {
     this.itemReference = value;
   }
-  public String getAmount() {
+  public java.util.List<QuantityModel> getAmount() {
     return this.amount;
   }
-  public void setAmount( String value) {
+  public void setAmount( java.util.List<QuantityModel> value) {
     this.amount = value;
   }
   public String getModifierExtension() {
@@ -168,7 +174,6 @@ public class MedicationContentModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationContentModel]:" + "\n");
      builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept + "\n"); 
-     builder.append("amount" + "->" + this.amount + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitinformation")
 public class ExplanationOfBenefitInformationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669675636288L;
+	private static final long serialVersionUID = 15187363115165456L;
   /**
   * Description: "Sequence of the information element which serves to provide a link."
   */
@@ -91,12 +92,14 @@ public class ExplanationOfBenefitInformationModel  implements Serializable {
 
   /**
   * Description: "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueQuantity\"", length = 16777215)
-  private String valueQuantity;
+  @Column(name="\"valuequantity_id\"")
+  private String valuequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> valueQuantity;
 
   /**
   * Description: "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
@@ -173,18 +176,21 @@ public class ExplanationOfBenefitInformationModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.sequence = o.getSequence();
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.code = JsonUtils.toJson(o.getCode());
     this.timingDate = o.getTimingDate();
-    this.timingPeriod = PeriodHelper.toJson(o.getTimingPeriod());
+    this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
     this.valueString = o.getValueString();
-    this.valueQuantity = QuantityHelper.toJson(o.getValueQuantity());
-    this.valueAttachment = AttachmentHelper.toJson(o.getValueAttachment());
+    if (null != o.getValueQuantity() ) {
+    	this.valuequantity_id = "valuequantity" + this.parent_id;
+    	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
+    }
+    this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
     if (null != o.getValueReference() ) {
     	this.valuereference_id = "valuereference" + this.parent_id;
     	this.valueReference = ReferenceHelper.toModel(o.getValueReference(), this.valuereference_id);
     }
-    this.reason = CodingHelper.toJson(o.getReason());
+    this.reason = JsonUtils.toJson(o.getReason());
   }
 
   public Float getSequence() {
@@ -223,10 +229,10 @@ public class ExplanationOfBenefitInformationModel  implements Serializable {
   public void setValueString( String value) {
     this.valueString = value;
   }
-  public String getValueQuantity() {
+  public java.util.List<QuantityModel> getValueQuantity() {
     return this.valueQuantity;
   }
-  public void setValueQuantity( String value) {
+  public void setValueQuantity( java.util.List<QuantityModel> value) {
     this.valueQuantity = value;
   }
   public String getValueAttachment() {
@@ -282,7 +288,6 @@ public class ExplanationOfBenefitInformationModel  implements Serializable {
      builder.append("timingDate" + "->" + this.timingDate + "\n"); 
      builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
      builder.append("valueString" + "->" + this.valueString + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
      builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

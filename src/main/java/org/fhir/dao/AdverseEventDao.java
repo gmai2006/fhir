@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AdverseEvent;
 
 public interface AdverseEventDao {
@@ -38,4 +39,12 @@ public interface AdverseEventDao {
 
   public AdverseEvent update(AdverseEvent e);
   public void delete(AdverseEvent e);
+
+  public List<AdverseEvent> findByField(QueryBuilder queryBuilder);
+
+  public List<AdverseEvent> findByLocation(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByReaction(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByRecorder(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByStudy(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findBySubject(QueryBuilder queryBuilder);
 }

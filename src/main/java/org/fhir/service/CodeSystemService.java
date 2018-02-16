@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CodeSystem;
 
 public interface CodeSystemService {
@@ -35,4 +37,7 @@ public interface CodeSystemService {
   public CodeSystem create(CodeSystem bean);
   public CodeSystem update(CodeSystem bean);
   public void delete(CodeSystem bean);
+  public List<CodeSystem> findByField(QueryBuilder queryBuilder);
+
+
 }

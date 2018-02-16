@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Device;
 
 public interface DeviceService {
@@ -35,4 +37,9 @@ public interface DeviceService {
   public Device create(Device bean);
   public Device update(Device bean);
   public void delete(Device bean);
+  public List<Device> findByField(QueryBuilder queryBuilder);
+  public List<Device> findByLocation(QueryBuilder queryBuilder);
+  public List<Device> findByPatient(QueryBuilder queryBuilder);
+
+
 }

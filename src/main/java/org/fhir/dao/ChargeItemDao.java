@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ChargeItem;
 
 public interface ChargeItemDao {
@@ -38,4 +39,13 @@ public interface ChargeItemDao {
 
   public ChargeItem update(ChargeItem e);
   public void delete(ChargeItem e);
+
+  public List<ChargeItem> findByField(QueryBuilder queryBuilder);
+
+  public List<ChargeItem> findByAccount(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByContext(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByEnterer(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByQuantity(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByService(QueryBuilder queryBuilder);
+  public List<ChargeItem> findBySubject(QueryBuilder queryBuilder);
 }

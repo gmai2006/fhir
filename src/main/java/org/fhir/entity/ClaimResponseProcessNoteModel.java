@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
 @Entity
 @Table(name="claimresponseprocessnote")
 public class ClaimResponseProcessNoteModel  implements Serializable {
-	private static final long serialVersionUID = 151857669676813328L;
+	private static final long serialVersionUID = 151873631153891264L;
   /**
   * Description: "An integer associated with each note which may be referred to from each service line item."
   */
@@ -117,9 +118,9 @@ public class ClaimResponseProcessNoteModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.number = o.getNumber();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.text = o.getText();
-    this.language = CodeableConceptHelper.toJson(o.getLanguage());
+    this.language = JsonUtils.toJson(o.getLanguage());
   }
 
   public Float getNumber() {

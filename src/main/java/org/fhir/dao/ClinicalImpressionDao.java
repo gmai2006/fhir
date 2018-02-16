@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ClinicalImpression;
 
 public interface ClinicalImpressionDao {
@@ -38,4 +39,14 @@ public interface ClinicalImpressionDao {
 
   public ClinicalImpression update(ClinicalImpression e);
   public void delete(ClinicalImpression e);
+
+  public List<ClinicalImpression> findByField(QueryBuilder queryBuilder);
+
+  public List<ClinicalImpression> findByAction(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByAssessor(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByContext(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByInvestigation(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByPrevious(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByProblem(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findBySubject(QueryBuilder queryBuilder);
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context."
 */
 @Entity
 @Table(name="activitydefinitionparticipant")
 public class ActivityDefinitionParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 151857669690739737L;
+	private static final long serialVersionUID = 15187363117006874L;
   /**
   * Description: "The type of participant in the action."
   */
@@ -101,7 +102,7 @@ public class ActivityDefinitionParticipantModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.type = o.getType();
-    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.role = JsonUtils.toJson(o.getRole());
   }
 
   public String getType() {

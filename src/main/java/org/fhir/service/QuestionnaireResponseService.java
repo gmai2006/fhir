@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.QuestionnaireResponse;
 
 public interface QuestionnaireResponseService {
@@ -35,4 +37,13 @@ public interface QuestionnaireResponseService {
   public QuestionnaireResponse create(QuestionnaireResponse bean);
   public QuestionnaireResponse update(QuestionnaireResponse bean);
   public void delete(QuestionnaireResponse bean);
+  public List<QuestionnaireResponse> findByField(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByAuthor(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByContext(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByParent(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByQuestionnaire(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findBySource(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findBySubject(QueryBuilder queryBuilder);
+
+
 }

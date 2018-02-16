@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient consuming or otherwise being administered a medication.  This may be as simple as swallowing a tablet or it may be a long running infusion.  Related resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner."
 */
 @Entity
 @Table(name="medicationadministrationdosage")
 public class MedicationAdministrationDosageModel  implements Serializable {
-	private static final long serialVersionUID = 15185766968168102L;
+	private static final long serialVersionUID = 151873631160453955L;
   /**
   * Description: "Free text dosage can be used for cases where the dosage administered is too complex to code. When coded dosage is present, the free text dosage may still be present for display to humans.\r\rThe dosage instructions should reflect the dosage of the medication that was administered."
   */
@@ -74,12 +75,14 @@ public class MedicationAdministrationDosageModel  implements Serializable {
 
   /**
   * Description: "The amount of the medication given at one administration event.   Use this value when the administration is essentially an instantaneous event such as a swallowing a tablet or giving an injection."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"dose\"", length = 16777215)
-  private String dose;
+  @Column(name="\"dose_id\"")
+  private String dose_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dose_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> dose;
 
   /**
   * Description: "Identifies the speed with which the medication was or will be introduced into the patient.  Typically the rate for an infusion e.g. 100 ml per 1 hour or 100 ml/hr.  May also be expressed as a rate per unit of time e.g. 500 ml per 2 hours.  Other examples:  200 mcg/min or 200 mcg/1 minute; 1 liter/8 hours."
@@ -92,12 +95,14 @@ public class MedicationAdministrationDosageModel  implements Serializable {
 
   /**
   * Description: "Identifies the speed with which the medication was or will be introduced into the patient.  Typically the rate for an infusion e.g. 100 ml per 1 hour or 100 ml/hr.  May also be expressed as a rate per unit of time e.g. 500 ml per 2 hours.  Other examples:  200 mcg/min or 200 mcg/1 minute; 1 liter/8 hours."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"rateSimpleQuantity\"", length = 16777215)
-  private String rateSimpleQuantity;
+  @Column(name="\"ratesimplequantity_id\"")
+  private String ratesimplequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="ratesimplequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> rateSimpleQuantity;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -145,12 +150,18 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.text = o.getText();
-    this.site = CodeableConceptHelper.toJson(o.getSite());
-    this.route = CodeableConceptHelper.toJson(o.getRoute());
-    this.method = CodeableConceptHelper.toJson(o.getMethod());
-    this.dose = QuantityHelper.toJson(o.getDose());
-    this.rateRatio = RatioHelper.toJson(o.getRateRatio());
-    this.rateSimpleQuantity = QuantityHelper.toJson(o.getRateSimpleQuantity());
+    this.site = JsonUtils.toJson(o.getSite());
+    this.route = JsonUtils.toJson(o.getRoute());
+    this.method = JsonUtils.toJson(o.getMethod());
+    if (null != o.getDose() ) {
+    	this.dose_id = "dose" + this.parent_id;
+    	this.dose = QuantityHelper.toModel(o.getDose(), this.dose_id);
+    }
+    this.rateRatio = JsonUtils.toJson(o.getRateRatio());
+    if (null != o.getRateSimpleQuantity() ) {
+    	this.ratesimplequantity_id = "ratesimplequantity" + this.parent_id;
+    	this.rateSimpleQuantity = QuantityHelper.toModel(o.getRateSimpleQuantity(), this.ratesimplequantity_id);
+    }
   }
 
   public String getText() {
@@ -177,10 +188,10 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   public void setMethod( String value) {
     this.method = value;
   }
-  public String getDose() {
+  public java.util.List<QuantityModel> getDose() {
     return this.dose;
   }
-  public void setDose( String value) {
+  public void setDose( java.util.List<QuantityModel> value) {
     this.dose = value;
   }
   public String getRateRatio() {
@@ -189,10 +200,10 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   public void setRateRatio( String value) {
     this.rateRatio = value;
   }
-  public String getRateSimpleQuantity() {
+  public java.util.List<QuantityModel> getRateSimpleQuantity() {
     return this.rateSimpleQuantity;
   }
-  public void setRateSimpleQuantity( String value) {
+  public void setRateSimpleQuantity( java.util.List<QuantityModel> value) {
     this.rateSimpleQuantity = value;
   }
   public String getModifierExtension() {
@@ -228,9 +239,7 @@ public class MedicationAdministrationDosageModel  implements Serializable {
      builder.append("site" + "->" + this.site + "\n"); 
      builder.append("route" + "->" + this.route + "\n"); 
      builder.append("method" + "->" + this.method + "\n"); 
-     builder.append("dose" + "->" + this.dose + "\n"); 
      builder.append("rateRatio" + "->" + this.rateRatio + "\n"); 
-     builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

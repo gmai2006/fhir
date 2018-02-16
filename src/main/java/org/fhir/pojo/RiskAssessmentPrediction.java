@@ -31,92 +31,64 @@ import com.google.gson.GsonBuilder;
 /**
 * "An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome."
 */
-public class RiskAssessmentPrediction  {
+public class RiskAssessmentPrediction  extends BackboneElement  {
   /**
   * Description: "One of the potential outcomes for the patient (e.g. remission, death,  a particular condition)."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept outcome;
+  protected CodeableConcept outcome;
 
   /**
   * Description: "How likely is the outcome (in the specified timeframe)."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float probabilityDecimal;
+  protected Float probabilityDecimal;
 
   /**
   * Description: "Extensions for probabilityDecimal"
   */
-  private transient Element _probabilityDecimal;
+  protected transient Element _probabilityDecimal;
 
   /**
   * Description: "How likely is the outcome (in the specified timeframe)."
   */
-  private Range probabilityRange;
+  protected Range probabilityRange;
 
   /**
   * Description: "How likely is the outcome (in the specified timeframe), expressed as a qualitative value (e.g. low, medium, high)."
   */
-  private CodeableConcept qualitativeRisk;
+  protected CodeableConcept qualitativeRisk;
 
   /**
   * Description: "Indicates the risk for this particular subject (with their specific characteristics) divided by the risk of the population in general.  (Numbers greater than 1 = higher risk than the population, numbers less than 1 = lower risk.)."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float relativeRisk;
+  protected Float relativeRisk;
 
   /**
   * Description: "Extensions for relativeRisk"
   */
-  private transient Element _relativeRisk;
+  protected transient Element _relativeRisk;
 
   /**
   * Description: "Indicates the period of time or age range of the subject to which the specified probability applies."
   */
-  private Period whenPeriod;
+  protected Period whenPeriod;
 
   /**
   * Description: "Indicates the period of time or age range of the subject to which the specified probability applies."
   */
-  private Range whenRange;
+  protected Range whenRange;
 
   /**
   * Description: "Additional information explaining the basis for the prediction."
   */
-  private String rationale;
+  protected String rationale;
 
   /**
   * Description: "Extensions for rationale"
   */
-  private transient Element _rationale;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _rationale;
 
   public RiskAssessmentPrediction() {
   }
@@ -136,9 +108,6 @@ public class RiskAssessmentPrediction  {
     this.whenRange = RangeHelper.fromJson(o.getWhenRange());
     if (null != o.getRationale()) {
       this.rationale = o.getRationale();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -208,30 +177,6 @@ public class RiskAssessmentPrediction  {
   public Element get_rationale() {
     return this._rationale;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -247,11 +192,7 @@ public class RiskAssessmentPrediction  {
      if(this.whenPeriod != null) builder.append("whenPeriod" + "->" + this.whenPeriod.toString() + "\n"); 
      if(this.whenRange != null) builder.append("whenRange" + "->" + this.whenRange.toString() + "\n"); 
      if(this.rationale != null) builder.append("rationale" + "->" + this.rationale.toString() + "\n"); 
-     if(this._rationale != null) builder.append("_rationale" + "->" + this._rationale.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._rationale != null) builder.append("_rationale" + "->" + this._rationale.toString() + "\n"); ;
     return builder.toString();
   }
 

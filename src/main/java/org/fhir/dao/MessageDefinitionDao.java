@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MessageDefinition;
 
 public interface MessageDefinitionDao {
@@ -38,4 +39,8 @@ public interface MessageDefinitionDao {
 
   public MessageDefinition update(MessageDefinition e);
   public void delete(MessageDefinition e);
+
+  public List<MessageDefinition> findByField(QueryBuilder queryBuilder);
+
+  public List<MessageDefinition> findByFocus(QueryBuilder queryBuilder);
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker."
 */
 @Entity
 @Table(name="devicerequestrequester")
 public class DeviceRequestRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669666672748L;
+	private static final long serialVersionUID = 151873631139123951L;
   /**
   * Description: "The device, practitioner, etc. who initiated the request."
   */

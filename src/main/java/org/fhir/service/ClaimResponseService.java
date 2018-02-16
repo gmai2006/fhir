@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ClaimResponse;
 
 public interface ClaimResponseService {
@@ -35,4 +37,10 @@ public interface ClaimResponseService {
   public ClaimResponse create(ClaimResponse bean);
   public ClaimResponse update(ClaimResponse bean);
   public void delete(ClaimResponse bean);
+  public List<ClaimResponse> findByField(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByInsurer(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByPatient(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByRequest(QueryBuilder queryBuilder);
+
+
 }

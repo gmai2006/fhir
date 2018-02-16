@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.EpisodeOfCare;
 
 public interface EpisodeOfCareDao {
@@ -38,4 +39,7 @@ public interface EpisodeOfCareDao {
 
   public EpisodeOfCare update(EpisodeOfCare e);
   public void delete(EpisodeOfCare e);
+
+  public List<EpisodeOfCare> findByField(QueryBuilder queryBuilder);
+
 }

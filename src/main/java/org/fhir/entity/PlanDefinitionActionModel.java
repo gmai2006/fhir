@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
 @Entity
 @Table(name="plandefinitionaction")
 public class PlanDefinitionActionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669645525114L;
+	private static final long serialVersionUID = 151873631107233701L;
   /**
   * Description: "A user-visible label for the action."
   */
@@ -375,15 +376,15 @@ public class PlanDefinitionActionModel  implements Serializable {
     	this.relatedAction = PlanDefinitionRelatedActionHelper.toModelFromArray(o.getRelatedAction(), this.relatedaction_id);
     }
     this.timingDateTime = o.getTimingDateTime();
-    this.timingPeriod = PeriodHelper.toJson(o.getTimingPeriod());
-    this.timingDuration = DurationHelper.toJson(o.getTimingDuration());
-    this.timingRange = RangeHelper.toJson(o.getTimingRange());
-    this.timingTiming = TimingHelper.toJson(o.getTimingTiming());
+    this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
+    this.timingDuration = JsonUtils.toJson(o.getTimingDuration());
+    this.timingRange = JsonUtils.toJson(o.getTimingRange());
+    this.timingTiming = JsonUtils.toJson(o.getTimingTiming());
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
     	this.participant_id = "participant" + this.parent_id;
     	this.participant = PlanDefinitionParticipantHelper.toModelFromArray(o.getParticipant(), this.participant_id);
     }
-    this.type = CodingHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.groupingBehavior = o.getGroupingBehavior();
     this.selectionBehavior = o.getSelectionBehavior();
     this.requiredBehavior = o.getRequiredBehavior();

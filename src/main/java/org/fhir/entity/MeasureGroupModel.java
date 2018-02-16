@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The Measure resource provides the definition of a quality measure."
 */
 @Entity
 @Table(name="measuregroup")
 public class MeasureGroupModel  implements Serializable {
-	private static final long serialVersionUID = 151857669703713746L;
+	private static final long serialVersionUID = 15187363118222764L;
   /**
   * Description: "A unique identifier for the group. This identifier will used to report data for the group in the measure report."
   * Actual type: String;
@@ -129,7 +130,7 @@ public class MeasureGroupModel  implements Serializable {
   public MeasureGroupModel(MeasureGroup o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.name = o.getName();
     this.description = o.getDescription();
     if (null != o.getPopulation() && !o.getPopulation().isEmpty()) {

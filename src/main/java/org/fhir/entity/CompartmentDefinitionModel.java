@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A compartment definition that defines how resources are accessed on a server."
 */
 @Entity
 @Table(name="compartmentdefinition")
 public class CompartmentDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669681289107L;
+	private static final long serialVersionUID = 151873631160018889L;
   /**
   * Description: "This is a CompartmentDefinition resource"
   */

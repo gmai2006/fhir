@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.FamilyMemberHistoryModel;
 import org.fhir.pojo.FamilyMemberHistory;
 import org.fhir.pojo.FamilyMemberHistoryHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class FamilyMemberHistoryDaoImpl implements FamilyMemberHistoryDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class FamilyMemberHistoryDaoImpl implements FamilyMemberHistoryDao {
       final EntityManager em = entityManagerProvider.get();
       final FamilyMemberHistoryModel removed = em.find(FamilyMemberHistoryModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<FamilyMemberHistory> findByDefinition(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from FamilyMemberHistoryModel a, Reference b where a.definition_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<FamilyMemberHistory> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from FamilyMemberHistoryModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<FamilyMemberHistory> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, FamilyMemberHistoryModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<FamilyMemberHistoryModel> models = query.getResultList();
+    return FamilyMemberHistoryHelper.fromArray2Array(models);
   }
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A container for a collection of resources."
 */
 @Entity
 @Table(name="bundlerequest")
 public class BundleRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669681077747L;
+	private static final long serialVersionUID = 151873631159719914L;
   /**
   * Description: "The HTTP verb for this entry in either a change history, or a transaction/ transaction response."
   */

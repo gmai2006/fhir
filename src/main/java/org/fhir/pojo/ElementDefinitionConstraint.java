@@ -30,105 +30,77 @@ import com.google.gson.GsonBuilder;
 /**
 * "Captures constraints on each element within the resource, profile, or extension."
 */
-public class ElementDefinitionConstraint  {
+public class ElementDefinitionConstraint  extends BackboneElement  {
   /**
   * Description: "Allows identification of which elements have their cardinalities impacted by the constraint.  Will not be referenced for constraints that do not affect cardinality."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String key;
+  protected String key;
 
   /**
   * Description: "Extensions for key"
   */
-  private transient Element _key;
+  protected transient Element _key;
 
   /**
   * Description: "Description of why this constraint is necessary or appropriate."
   */
-  private String requirements;
+  protected String requirements;
 
   /**
   * Description: "Extensions for requirements"
   */
-  private transient Element _requirements;
+  protected transient Element _requirements;
 
   /**
   * Description: "Identifies the impact constraint violation has on the conformance of the instance."
   */
-  private String severity;
+  protected String severity;
 
   /**
   * Description: "Extensions for severity"
   */
-  private transient Element _severity;
+  protected transient Element _severity;
 
   /**
   * Description: "Text that can be used to describe the constraint in messages identifying that the constraint has been violated."
   */
-  private String human;
+  protected String human;
 
   /**
   * Description: "Extensions for human"
   */
-  private transient Element _human;
+  protected transient Element _human;
 
   /**
   * Description: "A [FHIRPath](http://hl7.org/fluentpath) expression of constraint that can be executed to see if this constraint is met."
   */
-  private String expression;
+  protected String expression;
 
   /**
   * Description: "Extensions for expression"
   */
-  private transient Element _expression;
+  protected transient Element _expression;
 
   /**
   * Description: "An XPath expression of constraint that can be executed to see if this constraint is met."
   */
-  private String xpath;
+  protected String xpath;
 
   /**
   * Description: "Extensions for xpath"
   */
-  private transient Element _xpath;
+  protected transient Element _xpath;
 
   /**
   * Description: "A reference to the original source of the constraint, for traceability purposes."
   */
-  private String source;
+  protected String source;
 
   /**
   * Description: "Extensions for source"
   */
-  private transient Element _source;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _source;
 
   public ElementDefinitionConstraint() {}
 
@@ -216,30 +188,6 @@ public class ElementDefinitionConstraint  {
   public Element get_source() {
     return this._source;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -258,11 +206,7 @@ public class ElementDefinitionConstraint  {
      if(this.xpath != null) builder.append("xpath" + "->" + this.xpath.toString() + "\n"); 
      if(this._xpath != null) builder.append("_xpath" + "->" + this._xpath.toString() + "\n"); 
      if(this.source != null) builder.append("source" + "->" + this.source.toString() + "\n"); 
-     if(this._source != null) builder.append("_source" + "->" + this._source.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._source != null) builder.append("_source" + "->" + this._source.toString() + "\n"); ;
     return builder.toString();
   }
 

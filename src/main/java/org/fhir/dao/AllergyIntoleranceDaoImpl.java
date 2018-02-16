@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.AllergyIntoleranceModel;
 import org.fhir.pojo.AllergyIntolerance;
 import org.fhir.pojo.AllergyIntoleranceHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class AllergyIntoleranceDaoImpl implements AllergyIntoleranceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class AllergyIntoleranceDaoImpl implements AllergyIntoleranceDao {
       final EntityManager em = entityManagerProvider.get();
       final AllergyIntoleranceModel removed = em.find(AllergyIntoleranceModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<AllergyIntolerance> findByAsserter(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AllergyIntoleranceModel a, Reference b where a.asserter_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AllergyIntolerance> findByRecorder(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AllergyIntoleranceModel a, Reference b where a.recorder_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<AllergyIntolerance> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AllergyIntoleranceModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<AllergyIntolerance> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, AllergyIntoleranceModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<AllergyIntoleranceModel> models = query.getResultList();
+    return AllergyIntoleranceHelper.fromArray2Array(models);
   }
 }

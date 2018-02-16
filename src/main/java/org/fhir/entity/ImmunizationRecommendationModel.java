@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
 */
 @Entity
 @Table(name="immunizationrecommendation")
 public class ImmunizationRecommendationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669677465L;
+	private static final long serialVersionUID = 151873631154742995L;
   /**
   * Description: "This is a ImmunizationRecommendation resource"
   */

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.SupplyRequest;
 
 public interface SupplyRequestDao {
@@ -38,4 +39,9 @@ public interface SupplyRequestDao {
 
   public SupplyRequest update(SupplyRequest e);
   public void delete(SupplyRequest e);
+
+  public List<SupplyRequest> findByField(QueryBuilder queryBuilder);
+
+  public List<SupplyRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<SupplyRequest> findBySupplier(QueryBuilder queryBuilder);
 }

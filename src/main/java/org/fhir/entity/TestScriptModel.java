@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
 @Entity
 @Table(name="testscript")
 public class TestScriptModel  implements Serializable {
-	private static final long serialVersionUID = 151857669682556283L;
+	private static final long serialVersionUID = 15187363116132915L;
   /**
   * Description: "This is a TestScript resource"
   */
@@ -357,7 +358,7 @@ public class TestScriptModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.url = o.getUrl();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.version = o.getVersion();
     this.name = o.getName();
     this.title = o.getTitle();
@@ -376,13 +377,13 @@ public class TestScriptModel  implements Serializable {
     }
     this.purpose = o.getPurpose();
     this.copyright = o.getCopyright();
-    this.metadata = TestScriptMetadataHelper.toJson(o.getMetadata());
+    this.metadata = JsonUtils.toJson(o.getMetadata());
     if (null != o.getProfile() && !o.getProfile().isEmpty()) {
     	this.profile_id = "profile" + this.id;
     	this.profile = ReferenceHelper.toModelFromArray(o.getProfile(), this.profile_id);
     }
-    this.setup = TestScriptSetupHelper.toJson(o.getSetup());
-    this.teardown = TestScriptTeardownHelper.toJson(o.getTeardown());
+    this.setup = JsonUtils.toJson(o.getSetup());
+    this.teardown = JsonUtils.toJson(o.getTeardown());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);

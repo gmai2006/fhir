@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides payment details and claim references supporting a bulk payment."
 */
 @Entity
 @Table(name="paymentreconciliationdetail")
 public class PaymentReconciliationDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151857669715347467L;
+	private static final long serialVersionUID = 151873631194839623L;
   /**
   * Description: "Code to indicate the nature of the payment, adjustment, funds advance, etc."
   * Actual type: String;
@@ -102,12 +103,14 @@ public class PaymentReconciliationDetailModel  implements Serializable {
 
   /**
   * Description: "Amount paid for this detail."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"amount\"", length = 16777215)
-  private String amount;
+  @Column(name="\"amount_id\"")
+  private String amount_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="amount_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> amount;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -154,7 +157,7 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   public PaymentReconciliationDetailModel(PaymentReconciliationDetail o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     if (null != o.getRequest() ) {
     	this.request_id = "request" + this.parent_id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
@@ -172,7 +175,10 @@ public class PaymentReconciliationDetailModel  implements Serializable {
     	this.payee = ReferenceHelper.toModel(o.getPayee(), this.payee_id);
     }
     this.date = o.getDate();
-    this.amount = MoneyHelper.toJson(o.getAmount());
+    if (null != o.getAmount() ) {
+    	this.amount_id = "amount" + this.parent_id;
+    	this.amount = MoneyHelper.toModel(o.getAmount(), this.amount_id);
+    }
   }
 
   public String getType() {
@@ -211,10 +217,10 @@ public class PaymentReconciliationDetailModel  implements Serializable {
   public void setDate( String value) {
     this.date = value;
   }
-  public String getAmount() {
+  public java.util.List<MoneyModel> getAmount() {
     return this.amount;
   }
-  public void setAmount( String value) {
+  public void setAmount( java.util.List<MoneyModel> value) {
     this.amount = value;
   }
   public String getModifierExtension() {
@@ -248,7 +254,6 @@ public class PaymentReconciliationDetailModel  implements Serializable {
     builder.append("[PaymentReconciliationDetailModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("amount" + "->" + this.amount + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

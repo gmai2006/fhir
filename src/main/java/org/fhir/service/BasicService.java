@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Basic;
 
 public interface BasicService {
@@ -35,4 +37,9 @@ public interface BasicService {
   public Basic create(Basic bean);
   public Basic update(Basic bean);
   public void delete(Basic bean);
+  public List<Basic> findByField(QueryBuilder queryBuilder);
+  public List<Basic> findByAuthor(QueryBuilder queryBuilder);
+  public List<Basic> findBySubject(QueryBuilder queryBuilder);
+
+
 }

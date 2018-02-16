@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Measure;
 
 public interface MeasureDao {
@@ -38,4 +39,7 @@ public interface MeasureDao {
 
   public Measure update(Measure e);
   public void delete(Measure e);
+
+  public List<Measure> findByField(QueryBuilder queryBuilder);
+
 }

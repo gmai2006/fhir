@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A set of information summarized from a list of other resources."
 */
 @Entity
 @Table(name="fhirlist")
 public class FHIRListModel  implements Serializable {
-	private static final long serialVersionUID = 151857669655688887L;
+	private static final long serialVersionUID = 151873631123445802L;
   /**
   * Description: "This is a List resource"
   */
@@ -258,7 +259,7 @@ public class FHIRListModel  implements Serializable {
     this.status = o.getStatus();
     this.mode = o.getMode();
     this.title = o.getTitle();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -272,12 +273,12 @@ public class FHIRListModel  implements Serializable {
     	this.source_id = "source" + this.id;
     	this.source = ReferenceHelper.toModel(o.getSource(), this.source_id);
     }
-    this.orderedBy = CodeableConceptHelper.toJson(o.getOrderedBy());
+    this.orderedBy = JsonUtils.toJson(o.getOrderedBy());
     if (null != o.getEntry() && !o.getEntry().isEmpty()) {
     	this.entry_id = "entry" + this.id;
     	this.entry = ListEntryHelper.toModelFromArray(o.getEntry(), this.entry_id);
     }
-    this.emptyReason = CodeableConceptHelper.toJson(o.getEmptyReason());
+    this.emptyReason = JsonUtils.toJson(o.getEmptyReason());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);

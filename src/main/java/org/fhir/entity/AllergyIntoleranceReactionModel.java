@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."
 */
 @Entity
 @Table(name="allergyintolerancereaction")
 public class AllergyIntoleranceReactionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669690328198L;
+	private static final long serialVersionUID = 151873631169640360L;
   /**
   * Description: "Identification of the specific substance (or pharmaceutical product) considered to be responsible for the Adverse Reaction event. Note: the substance for a specific reaction may be different from the substance identified as the cause of the risk, but it must be consistent with it. For instance, it may be a more specific substance (e.g. a brand medication) or a composite product that includes the identified substance. It must be clinically safe to only process the 'code' and ignore the 'reaction.substance'."
   * Actual type: String;
@@ -142,11 +143,11 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
   public AllergyIntoleranceReactionModel(AllergyIntoleranceReaction o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.substance = CodeableConceptHelper.toJson(o.getSubstance());
+    this.substance = JsonUtils.toJson(o.getSubstance());
     this.description = o.getDescription();
     this.onset = o.getOnset();
     this.severity = o.getSeverity();
-    this.exposureRoute = CodeableConceptHelper.toJson(o.getExposureRoute());
+    this.exposureRoute = JsonUtils.toJson(o.getExposureRoute());
   }
 
   public String getSubstance() {

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImagingManifest;
 
 public interface ImagingManifestService {
@@ -35,4 +37,8 @@ public interface ImagingManifestService {
   public ImagingManifest create(ImagingManifest bean);
   public ImagingManifest update(ImagingManifest bean);
   public void delete(ImagingManifest bean);
+  public List<ImagingManifest> findByField(QueryBuilder queryBuilder);
+  public List<ImagingManifest> findByAuthor(QueryBuilder queryBuilder);
+
+
 }

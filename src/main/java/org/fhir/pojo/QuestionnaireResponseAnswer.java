@@ -31,144 +31,116 @@ import com.google.gson.GsonBuilder;
 /**
 * "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to."
 */
-public class QuestionnaireResponseAnswer  {
+public class QuestionnaireResponseAnswer  extends BackboneElement  {
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
-  private Boolean valueBoolean;
+  protected Boolean valueBoolean;
 
   /**
   * Description: "Extensions for valueBoolean"
   */
-  private transient Element _valueBoolean;
+  protected transient Element _valueBoolean;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float valueDecimal;
+  protected Float valueDecimal;
 
   /**
   * Description: "Extensions for valueDecimal"
   */
-  private transient Element _valueDecimal;
+  protected transient Element _valueDecimal;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float valueInteger;
+  protected Float valueInteger;
 
   /**
   * Description: "Extensions for valueInteger"
   */
-  private transient Element _valueInteger;
+  protected transient Element _valueInteger;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?")
-  private String valueDate;
+  protected String valueDate;
 
   /**
   * Description: "Extensions for valueDate"
   */
-  private transient Element _valueDate;
+  protected transient Element _valueDate;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String valueDateTime;
+  protected String valueDateTime;
 
   /**
   * Description: "Extensions for valueDateTime"
   */
-  private transient Element _valueDateTime;
+  protected transient Element _valueDateTime;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
   @javax.validation.constraints.Pattern(regexp="([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?")
-  private String valueTime;
+  protected String valueTime;
 
   /**
   * Description: "Extensions for valueTime"
   */
-  private transient Element _valueTime;
+  protected transient Element _valueTime;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
-  private String valueString;
+  protected String valueString;
 
   /**
   * Description: "Extensions for valueString"
   */
-  private transient Element _valueString;
+  protected transient Element _valueString;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
-  private String valueUri;
+  protected String valueUri;
 
   /**
   * Description: "Extensions for valueUri"
   */
-  private transient Element _valueUri;
+  protected transient Element _valueUri;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
-  private Attachment valueAttachment;
+  protected Attachment valueAttachment;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
-  private Coding valueCoding;
+  protected Coding valueCoding;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
-  private Quantity valueQuantity;
+  protected Quantity valueQuantity;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
-  private Reference valueReference;
+  protected Reference valueReference;
 
   /**
   * Description: "Nested groups and/or questions found within this particular answer."
   */
-  private java.util.List<QuestionnaireResponseItem> item = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<QuestionnaireResponseItem> item = new java.util.ArrayList<>();
 
   public QuestionnaireResponseAnswer() {
   }
@@ -201,15 +173,14 @@ public class QuestionnaireResponseAnswer  {
     }
     this.valueAttachment = AttachmentHelper.fromJson(o.getValueAttachment());
     this.valueCoding = CodingHelper.fromJson(o.getValueCoding());
-    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
+      this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
+    }
     if (null != o.getValueReference() && !o.getValueReference().isEmpty()) {
       this.valueReference = new Reference(o.getValueReference().get(0));
     }
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item = QuestionnaireResponseItemHelper.fromArray2Array(o.getItem());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -339,30 +310,6 @@ public class QuestionnaireResponseAnswer  {
   public java.util.List<QuestionnaireResponseItem> getItem() {
     return this.item;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -388,11 +335,7 @@ public class QuestionnaireResponseAnswer  {
      if(this.valueCoding != null) builder.append("valueCoding" + "->" + this.valueCoding.toString() + "\n"); 
      if(this.valueQuantity != null) builder.append("valueQuantity" + "->" + this.valueQuantity.toString() + "\n"); 
      if(this.valueReference != null) builder.append("valueReference" + "->" + this.valueReference.toString() + "\n"); 
-     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); ;
     return builder.toString();
   }
 

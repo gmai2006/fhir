@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AllergyIntolerance;
 /**
 * auto generated from SQL files
@@ -103,5 +104,25 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(AllergyIntolerance) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<AllergyIntolerance> findByField(QueryBuilder queryBuilder) {
+  	final List<AllergyIntolerance> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<AllergyIntolerance> findByAsserter(QueryBuilder queryBuilder) {
+  	final List<AllergyIntolerance> result = dao.findByAsserter(queryBuilder);
+    logger.info("findByasserter - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AllergyIntolerance> findByRecorder(QueryBuilder queryBuilder) {
+  	final List<AllergyIntolerance> result = dao.findByRecorder(queryBuilder);
+    logger.info("findByrecorder - exited - return value={} result ");
+    return result;
   }
 }

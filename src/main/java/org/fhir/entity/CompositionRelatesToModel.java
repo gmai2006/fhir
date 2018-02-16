@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
 */
 @Entity
 @Table(name="compositionrelatesto")
 public class CompositionRelatesToModel  implements Serializable {
-	private static final long serialVersionUID = 151857669662939133L;
+	private static final long serialVersionUID = 151873631134351626L;
   /**
   * Description: "The type of relationship that this composition has with anther composition or document."
   */
@@ -112,7 +113,7 @@ public class CompositionRelatesToModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.code = o.getCode();
-    this.targetIdentifier = IdentifierHelper.toJson(o.getTargetIdentifier());
+    this.targetIdentifier = JsonUtils.toJson(o.getTargetIdentifier());
     if (null != o.getTargetReference() ) {
     	this.targetreference_id = "targetreference" + this.parent_id;
     	this.targetReference = ReferenceHelper.toModel(o.getTargetReference(), this.targetreference_id);

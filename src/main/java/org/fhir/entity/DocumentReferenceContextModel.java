@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A reference to a document."
 */
 @Entity
 @Table(name="documentreferencecontext")
 public class DocumentReferenceContextModel  implements Serializable {
-	private static final long serialVersionUID = 151857669716935127L;
+	private static final long serialVersionUID = 151873631196622274L;
   /**
   * Description: "Describes the clinical encounter or type of care that the document content is associated with."
   */
@@ -156,9 +157,9 @@ public class DocumentReferenceContextModel  implements Serializable {
     	this.encounter_id = "encounter" + this.parent_id;
     	this.encounter = ReferenceHelper.toModel(o.getEncounter(), this.encounter_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
-    this.facilityType = CodeableConceptHelper.toJson(o.getFacilityType());
-    this.practiceSetting = CodeableConceptHelper.toJson(o.getPracticeSetting());
+    this.period = JsonUtils.toJson(o.getPeriod());
+    this.facilityType = JsonUtils.toJson(o.getFacilityType());
+    this.practiceSetting = JsonUtils.toJson(o.getPracticeSetting());
     if (null != o.getSourcePatientInfo() ) {
     	this.sourcepatientinfo_id = "sourcepatientinfo" + this.parent_id;
     	this.sourcePatientInfo = ReferenceHelper.toModel(o.getSourcePatientInfo(), this.sourcepatientinfo_id);

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The ServiceDefinition describes a unit of decision support functionality that is made available as a service, such as immunization modules or drug-drug interaction checking."
 */
 @Entity
 @Table(name="servicedefinition")
 public class ServiceDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669679776550L;
+	private static final long serialVersionUID = 151873631157816830L;
   /**
   * Description: "This is a ServiceDefinition resource"
   */
@@ -364,7 +365,7 @@ public class ServiceDefinitionModel  implements Serializable {
     this.usage = o.getUsage();
     this.approvalDate = o.getApprovalDate();
     this.lastReviewDate = o.getLastReviewDate();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);

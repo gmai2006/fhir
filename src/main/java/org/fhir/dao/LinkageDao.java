@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Linkage;
 
 public interface LinkageDao {
@@ -38,4 +39,9 @@ public interface LinkageDao {
 
   public Linkage update(Linkage e);
   public void delete(Linkage e);
+
+  public List<Linkage> findByField(QueryBuilder queryBuilder);
+
+  public List<Linkage> findByAuthor(QueryBuilder queryBuilder);
+  public List<Linkage> findByItem(QueryBuilder queryBuilder);
 }

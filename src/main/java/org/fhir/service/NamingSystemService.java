@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.NamingSystem;
 
 public interface NamingSystemService {
@@ -35,4 +37,8 @@ public interface NamingSystemService {
   public NamingSystem create(NamingSystem bean);
   public NamingSystem update(NamingSystem bean);
   public void delete(NamingSystem bean);
+  public List<NamingSystem> findByField(QueryBuilder queryBuilder);
+  public List<NamingSystem> findByContact(QueryBuilder queryBuilder);
+
+
 }

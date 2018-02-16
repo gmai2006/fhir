@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
 @Entity
 @Table(name="capabilitystatementendpoint")
 public class CapabilityStatementEndpointModel  implements Serializable {
-	private static final long serialVersionUID = 151857669718268524L;
+	private static final long serialVersionUID = 151873631198226508L;
   /**
   * Description: "A list of the messaging transport protocol(s) identifiers, supported by this endpoint."
   * Actual type: String;
@@ -100,7 +101,7 @@ public class CapabilityStatementEndpointModel  implements Serializable {
   public CapabilityStatementEndpointModel(CapabilityStatementEndpoint o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.protocol = CodingHelper.toJson(o.getProtocol());
+    this.protocol = JsonUtils.toJson(o.getProtocol());
     this.address = o.getAddress();
   }
 

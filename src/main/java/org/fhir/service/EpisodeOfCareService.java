@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.EpisodeOfCare;
 
 public interface EpisodeOfCareService {
@@ -35,4 +37,7 @@ public interface EpisodeOfCareService {
   public EpisodeOfCare create(EpisodeOfCare bean);
   public EpisodeOfCare update(EpisodeOfCare bean);
   public void delete(EpisodeOfCare bean);
+  public List<EpisodeOfCare> findByField(QueryBuilder queryBuilder);
+
+
 }

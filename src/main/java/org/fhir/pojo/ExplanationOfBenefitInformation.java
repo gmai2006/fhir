@@ -31,102 +31,74 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
-public class ExplanationOfBenefitInformation  {
+public class ExplanationOfBenefitInformation  extends BackboneElement  {
   /**
   * Description: "Sequence of the information element which serves to provide a link."
   */
   @javax.validation.constraints.Pattern(regexp="[1-9][0-9]*")
-  private Float sequence;
+  protected Float sequence;
 
   /**
   * Description: "Extensions for sequence"
   */
-  private transient Element _sequence;
+  protected transient Element _sequence;
 
   /**
   * Description: "The general class of the information supplied: information; exception; accident, employment; onset, etc."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept category;
+  protected CodeableConcept category;
 
   /**
   * Description: "System and code pertaining to the specific information regarding special conditions relating to the setting, treatment or patient  for which care is sought which may influence the adjudication."
   */
-  private CodeableConcept code;
+  protected CodeableConcept code;
 
   /**
   * Description: "The date when or period to which this information refers."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?")
-  private String timingDate;
+  protected String timingDate;
 
   /**
   * Description: "Extensions for timingDate"
   */
-  private transient Element _timingDate;
+  protected transient Element _timingDate;
 
   /**
   * Description: "The date when or period to which this information refers."
   */
-  private Period timingPeriod;
+  protected Period timingPeriod;
 
   /**
   * Description: "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
   */
-  private String valueString;
+  protected String valueString;
 
   /**
   * Description: "Extensions for valueString"
   */
-  private transient Element _valueString;
+  protected transient Element _valueString;
 
   /**
   * Description: "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
   */
-  private Quantity valueQuantity;
+  protected Quantity valueQuantity;
 
   /**
   * Description: "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
   */
-  private Attachment valueAttachment;
+  protected Attachment valueAttachment;
 
   /**
   * Description: "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
   */
-  private Reference valueReference;
+  protected Reference valueReference;
 
   /**
   * Description: "For example, provides the reason for: the additional stay, or missing tooth or any other situation where a reason code is required in addition to the content."
   */
-  private Coding reason;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Coding reason;
 
   public ExplanationOfBenefitInformation() {
   }
@@ -145,15 +117,14 @@ public class ExplanationOfBenefitInformation  {
     if (null != o.getValueString()) {
       this.valueString = o.getValueString();
     }
-    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
+      this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
+    }
     this.valueAttachment = AttachmentHelper.fromJson(o.getValueAttachment());
     if (null != o.getValueReference() && !o.getValueReference().isEmpty()) {
       this.valueReference = new Reference(o.getValueReference().get(0));
     }
     this.reason = CodingHelper.fromJson(o.getReason());
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
   }
 
   public void setSequence( Float value) {
@@ -234,30 +205,6 @@ public class ExplanationOfBenefitInformation  {
   public Coding getReason() {
     return this.reason;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -275,11 +222,7 @@ public class ExplanationOfBenefitInformation  {
      if(this.valueQuantity != null) builder.append("valueQuantity" + "->" + this.valueQuantity.toString() + "\n"); 
      if(this.valueAttachment != null) builder.append("valueAttachment" + "->" + this.valueAttachment.toString() + "\n"); 
      if(this.valueReference != null) builder.append("valueReference" + "->" + this.valueReference.toString() + "\n"); 
-     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.reason != null) builder.append("reason" + "->" + this.reason.toString() + "\n"); ;
     return builder.toString();
   }
 

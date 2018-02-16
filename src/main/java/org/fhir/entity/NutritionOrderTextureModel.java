@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
 @Entity
 @Table(name="nutritionordertexture")
 public class NutritionOrderTextureModel  implements Serializable {
-	private static final long serialVersionUID = 151857669656442443L;
+	private static final long serialVersionUID = 151873631124568519L;
   /**
   * Description: "Any texture modifications (for solid foods) that should be made, e.g. easy to chew, chopped, ground, and pureed."
   * Actual type: String;
@@ -101,8 +102,8 @@ public class NutritionOrderTextureModel  implements Serializable {
   public NutritionOrderTextureModel(NutritionOrderTexture o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.modifier = CodeableConceptHelper.toJson(o.getModifier());
-    this.foodType = CodeableConceptHelper.toJson(o.getFoodType());
+    this.modifier = JsonUtils.toJson(o.getModifier());
+    this.foodType = JsonUtils.toJson(o.getFoodType());
   }
 
   public String getModifier() {

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities."
 */
 @Entity
 @Table(name="imagingstudy")
 public class ImagingStudyModel  implements Serializable {
-	private static final long serialVersionUID = 151857669672060567L;
+	private static final long serialVersionUID = 151873631146589323L;
   /**
   * Description: "This is a ImagingStudy resource"
   */
@@ -317,7 +318,7 @@ public class ImagingStudyModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.uid = o.getUid();
-    this.accession = IdentifierHelper.toJson(o.getAccession());
+    this.accession = JsonUtils.toJson(o.getAccession());
     this.availability = o.getAvailability();
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
@@ -350,7 +351,7 @@ public class ImagingStudyModel  implements Serializable {
     	this.procedurereference_id = "procedurereference" + this.id;
     	this.procedureReference = ReferenceHelper.toModelFromArray(o.getProcedureReference(), this.procedurereference_id);
     }
-    this.reason = CodeableConceptHelper.toJson(o.getReason());
+    this.reason = JsonUtils.toJson(o.getReason());
     this.description = o.getDescription();
     if (null != o.getSeries() && !o.getSeries().isEmpty()) {
     	this.series_id = "series" + this.id;

@@ -31,80 +31,52 @@ import com.google.gson.GsonBuilder;
 /**
 * "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization."
 */
-public class GroupCharacteristic  {
+public class GroupCharacteristic  extends BackboneElement  {
   /**
   * Description: "A code that identifies the kind of trait being asserted."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept code;
+  protected CodeableConcept code;
 
   /**
   * Description: "The value of the trait that holds (or does not hold - see 'exclude') for members of the group."
   */
-  private CodeableConcept valueCodeableConcept;
+  protected CodeableConcept valueCodeableConcept;
 
   /**
   * Description: "The value of the trait that holds (or does not hold - see 'exclude') for members of the group."
   */
-  private Boolean valueBoolean;
+  protected Boolean valueBoolean;
 
   /**
   * Description: "Extensions for valueBoolean"
   */
-  private transient Element _valueBoolean;
+  protected transient Element _valueBoolean;
 
   /**
   * Description: "The value of the trait that holds (or does not hold - see 'exclude') for members of the group."
   */
-  private Quantity valueQuantity;
+  protected Quantity valueQuantity;
 
   /**
   * Description: "The value of the trait that holds (or does not hold - see 'exclude') for members of the group."
   */
-  private Range valueRange;
+  protected Range valueRange;
 
   /**
   * Description: "If true, indicates the characteristic is one that is NOT held by members of the group."
   */
-  private Boolean exclude;
+  protected Boolean exclude;
 
   /**
   * Description: "Extensions for exclude"
   */
-  private transient Element _exclude;
+  protected transient Element _exclude;
 
   /**
   * Description: "The period over which the characteristic is tested; e.g. the patient had an operation during the month of June."
   */
-  private Period period;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Period period;
 
   public GroupCharacteristic() {
   }
@@ -116,15 +88,14 @@ public class GroupCharacteristic  {
     if (null != o.getValueBoolean()) {
       this.valueBoolean = o.getValueBoolean();
     }
-    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
+      this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
+    }
     this.valueRange = RangeHelper.fromJson(o.getValueRange());
     if (null != o.getExclude()) {
       this.exclude = o.getExclude();
     }
     this.period = PeriodHelper.fromJson(o.getPeriod());
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
   }
 
   public void setCode( CodeableConcept value) {
@@ -181,30 +152,6 @@ public class GroupCharacteristic  {
   public Period getPeriod() {
     return this.period;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -218,11 +165,7 @@ public class GroupCharacteristic  {
      if(this.valueRange != null) builder.append("valueRange" + "->" + this.valueRange.toString() + "\n"); 
      if(this.exclude != null) builder.append("exclude" + "->" + this.exclude.toString() + "\n"); 
      if(this._exclude != null) builder.append("_exclude" + "->" + this._exclude.toString() + "\n"); 
-     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); ;
     return builder.toString();
   }
 

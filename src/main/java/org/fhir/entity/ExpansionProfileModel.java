@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
 */
 @Entity
 @Table(name="expansionprofile")
 public class ExpansionProfileModel  implements Serializable {
-	private static final long serialVersionUID = 151857669713734530L;
+	private static final long serialVersionUID = 151873631193123396L;
   /**
   * Description: "This is a ExpansionProfile resource"
   */
@@ -325,7 +326,7 @@ public class ExpansionProfileModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.url = o.getUrl();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.version = o.getVersion();
     this.name = o.getName();
     this.status = o.getStatus();

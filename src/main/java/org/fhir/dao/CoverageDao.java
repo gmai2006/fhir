@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Coverage;
 
 public interface CoverageDao {
@@ -38,4 +39,10 @@ public interface CoverageDao {
 
   public Coverage update(Coverage e);
   public void delete(Coverage e);
+
+  public List<Coverage> findByField(QueryBuilder queryBuilder);
+
+  public List<Coverage> findByBeneficiary(QueryBuilder queryBuilder);
+  public List<Coverage> findByPayor(QueryBuilder queryBuilder);
+  public List<Coverage> findBySubscriber(QueryBuilder queryBuilder);
 }

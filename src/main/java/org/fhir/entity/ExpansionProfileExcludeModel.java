@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
 */
 @Entity
 @Table(name="expansionprofileexclude")
 public class ExpansionProfileExcludeModel  implements Serializable {
-	private static final long serialVersionUID = 151857669695212878L;
+	private static final long serialVersionUID = 151873631174850676L;
   /**
   * Description: "A data group for each designation to be excluded."
   */

@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.MedicationStatementModel;
 import org.fhir.pojo.MedicationStatement;
 import org.fhir.pojo.MedicationStatementHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class MedicationStatementDaoImpl implements MedicationStatementDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class MedicationStatementDaoImpl implements MedicationStatementDao {
       final EntityManager em = entityManagerProvider.get();
       final MedicationStatementModel removed = em.find(MedicationStatementModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<MedicationStatement> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationStatementModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MedicationStatement> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationStatementModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<MedicationStatement> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationStatementModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<MedicationStatement> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, MedicationStatementModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<MedicationStatementModel> models = query.getResultList();
+    return MedicationStatementHelper.fromArray2Array(models);
   }
 }

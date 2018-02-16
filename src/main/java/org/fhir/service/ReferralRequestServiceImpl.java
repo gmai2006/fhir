@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ReferralRequest;
 /**
 * auto generated from SQL files
@@ -103,5 +104,49 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(ReferralRequest) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<ReferralRequest> findByField(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<ReferralRequest> findByContext(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByDefinition(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByDefinition(queryBuilder);
+    logger.info("findBydefinition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByRecipient(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByRecipient(queryBuilder);
+    logger.info("findByrecipient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByReplaces(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByReplaces(queryBuilder);
+    logger.info("findByreplaces - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByRequester(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByRequester(queryBuilder);
+    logger.info("findByrequester - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findBySubject(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

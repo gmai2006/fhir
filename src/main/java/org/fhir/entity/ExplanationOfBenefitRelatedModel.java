@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitrelated")
 public class ExplanationOfBenefitRelatedModel  implements Serializable {
-	private static final long serialVersionUID = 151857669672745511L;
+	private static final long serialVersionUID = 15187363114708390L;
   /**
   * Description: "Other claims which are related to this claim such as prior claim versions or for related services."
   */
@@ -116,8 +117,8 @@ public class ExplanationOfBenefitRelatedModel  implements Serializable {
     	this.claim_id = "claim" + this.parent_id;
     	this.claim = ReferenceHelper.toModel(o.getClaim(), this.claim_id);
     }
-    this.relationship = CodeableConceptHelper.toJson(o.getRelationship());
-    this.reference = IdentifierHelper.toJson(o.getReference());
+    this.relationship = JsonUtils.toJson(o.getRelationship());
+    this.reference = JsonUtils.toJson(o.getReference());
   }
 
   public java.util.List<ReferenceModel> getClaim() {

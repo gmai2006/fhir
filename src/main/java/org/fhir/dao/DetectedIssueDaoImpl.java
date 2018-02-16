@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.DetectedIssueModel;
 import org.fhir.pojo.DetectedIssue;
 import org.fhir.pojo.DetectedIssueHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class DetectedIssueDaoImpl implements DetectedIssueDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class DetectedIssueDaoImpl implements DetectedIssueDao {
       final EntityManager em = entityManagerProvider.get();
       final DetectedIssueModel removed = em.find(DetectedIssueModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<DetectedIssue> findByAuthor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DetectedIssueModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DetectedIssue> findByImplicated(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DetectedIssueModel a, Reference b where a.implicated_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<DetectedIssue> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DetectedIssueModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<DetectedIssue> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, DetectedIssueModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<DetectedIssueModel> models = query.getResultList();
+    return DetectedIssueHelper.fromArray2Array(models);
   }
 }

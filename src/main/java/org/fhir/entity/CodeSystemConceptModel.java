@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
 */
 @Entity
 @Table(name="codesystemconcept")
 public class CodeSystemConceptModel  implements Serializable {
-	private static final long serialVersionUID = 151857669694487159L;
+	private static final long serialVersionUID = 151873631173988802L;
   /**
   * Description: "A code - a text symbol - that uniquely identifies the concept within the code system."
   */

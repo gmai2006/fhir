@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ProvenanceModel;
 import org.fhir.pojo.Provenance;
 import org.fhir.pojo.ProvenanceHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ProvenanceDaoImpl implements ProvenanceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class ProvenanceDaoImpl implements ProvenanceDao {
       final EntityManager em = entityManagerProvider.get();
       final ProvenanceModel removed = em.find(ProvenanceModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Provenance> findByAgent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProvenanceModel a, ProvenanceAgent b where a.agent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Provenance> findByLocation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProvenanceModel a, Reference b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Provenance> findByTarget(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProvenanceModel a, Reference b where a.target_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Provenance> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProvenanceModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Provenance> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ProvenanceModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ProvenanceModel> models = query.getResultList();
+    return ProvenanceHelper.fromArray2Array(models);
   }
 }

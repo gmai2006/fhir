@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ExplanationOfBenefit;
 /**
 * auto generated from SQL files
@@ -103,5 +104,55 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(ExplanationOfBenefit) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<ExplanationOfBenefit> findByField(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<ExplanationOfBenefit> findByClaim(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByClaim(queryBuilder);
+    logger.info("findByclaim - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByEnterer(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByEnterer(queryBuilder);
+    logger.info("findByenterer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByFacility(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByFacility(queryBuilder);
+    logger.info("findByfacility - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByPatient(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByPayee(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByPayee(queryBuilder);
+    logger.info("findBypayee - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByProvider(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByProvider(queryBuilder);
+    logger.info("findByprovider - exited - return value={} result ");
+    return result;
   }
 }

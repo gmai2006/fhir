@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.NamingSystem;
 
 public interface NamingSystemDao {
@@ -38,4 +39,8 @@ public interface NamingSystemDao {
 
   public NamingSystem update(NamingSystem e);
   public void delete(NamingSystem e);
+
+  public List<NamingSystem> findByField(QueryBuilder queryBuilder);
+
+  public List<NamingSystem> findByContact(QueryBuilder queryBuilder);
 }

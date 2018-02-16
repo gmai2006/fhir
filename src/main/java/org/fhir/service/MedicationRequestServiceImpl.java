@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MedicationRequest;
 /**
 * auto generated from SQL files
@@ -103,5 +104,31 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(MedicationRequest) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<MedicationRequest> findByField(QueryBuilder queryBuilder) {
+  	final List<MedicationRequest> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<MedicationRequest> findByContext(QueryBuilder queryBuilder) {
+  	final List<MedicationRequest> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationRequest> findByRequester(QueryBuilder queryBuilder) {
+  	final List<MedicationRequest> result = dao.findByRequester(queryBuilder);
+    logger.info("findByrequester - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationRequest> findBySubject(QueryBuilder queryBuilder) {
+  	final List<MedicationRequest> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

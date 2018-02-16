@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Encounter;
 /**
 * auto generated from SQL files
@@ -103,5 +104,43 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Encounter) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Encounter> findByField(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Encounter> findByAppointment(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByAppointment(queryBuilder);
+    logger.info("findByappointment - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByDiagnosis(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByDiagnosis(queryBuilder);
+    logger.info("findBydiagnosis - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByLocation(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByParticipant(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByParticipant(queryBuilder);
+    logger.info("findByparticipant - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

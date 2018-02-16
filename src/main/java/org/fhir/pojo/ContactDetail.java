@@ -31,40 +31,21 @@ import com.google.gson.GsonBuilder;
 /**
 * "Specifies contact information for a person or organization."
 */
-public class ContactDetail  {
+public class ContactDetail  extends Element  {
   /**
   * Description: "The name of an individual to contact."
   */
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "The contact details for the individual (if a name was provided) or the organization."
   */
-  private java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
 
   public ContactDetail() {
   }
@@ -73,9 +54,6 @@ public class ContactDetail  {
     this.id = o.getId();
     if (null != o.getName()) {
       this.name = o.getName();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -97,24 +75,6 @@ public class ContactDetail  {
   public java.util.List<ContactPoint> getTelecom() {
     return this.telecom;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -122,10 +82,7 @@ public class ContactDetail  {
     builder.append("[ContactDetail]:" + "\n");
      if(this.name != null) builder.append("name" + "->" + this.name.toString() + "\n"); 
      if(this._name != null) builder.append("_name" + "->" + this._name.toString() + "\n"); 
-     if(this.telecom != null) builder.append("telecom" + "->" + this.telecom.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.telecom != null) builder.append("telecom" + "->" + this.telecom.toString() + "\n"); ;
     return builder.toString();
   }
 

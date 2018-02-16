@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns."
 */
 @Entity
 @Table(name="medicationrequestsubstitution")
 public class MedicationRequestSubstitutionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669699643385L;
+	private static final long serialVersionUID = 151873631178479904L;
   /**
   * Description: "True if the prescriber allows a different drug to be dispensed from what was prescribed."
   */
@@ -100,7 +101,7 @@ public class MedicationRequestSubstitutionModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.allowed = o.getAllowed();
-    this.reason = CodeableConceptHelper.toJson(o.getReason());
+    this.reason = JsonUtils.toJson(o.getReason());
   }
 
   public Boolean getAllowed() {

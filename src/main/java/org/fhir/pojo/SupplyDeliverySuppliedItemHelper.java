@@ -53,19 +53,4 @@ public class SupplyDeliverySuppliedItemHelper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, SupplyDeliverySuppliedItem.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(SupplyDeliverySuppliedItem o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<SupplyDeliverySuppliedItem> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

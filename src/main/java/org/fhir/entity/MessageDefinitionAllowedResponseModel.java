@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted."
 */
 @Entity
 @Table(name="messagedefinitionallowedresponse")
 public class MessageDefinitionAllowedResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669653353539L;
+	private static final long serialVersionUID = 151873631119532886L;
   /**
   * Description: "A reference to the message definition that must be adhered to by this supported response."
   */

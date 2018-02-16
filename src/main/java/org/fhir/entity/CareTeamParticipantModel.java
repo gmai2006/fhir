@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care for a patient."
 */
 @Entity
 @Table(name="careteamparticipant")
 public class CareTeamParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 151857669705942611L;
+	private static final long serialVersionUID = 151873631184330087L;
   /**
   * Description: "Indicates specific responsibility of an individual within the care team, such as \"Primary care physician\", \"Trained social worker counselor\", \"Caregiver\", etc."
   * Actual type: String;
@@ -123,7 +124,7 @@ public class CareTeamParticipantModel  implements Serializable {
   public CareTeamParticipantModel(CareTeamParticipant o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.role = JsonUtils.toJson(o.getRole());
     if (null != o.getMember() ) {
     	this.member_id = "member" + this.parent_id;
     	this.member = ReferenceHelper.toModel(o.getMember(), this.member_id);
@@ -132,7 +133,7 @@ public class CareTeamParticipantModel  implements Serializable {
     	this.onbehalfof_id = "onbehalfof" + this.parent_id;
     	this.onBehalfOf = ReferenceHelper.toModel(o.getOnBehalfOf(), this.onbehalfof_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
   }
 
   public String getRole() {

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.VisionPrescription;
 
 public interface VisionPrescriptionDao {
@@ -38,4 +39,8 @@ public interface VisionPrescriptionDao {
 
   public VisionPrescription update(VisionPrescription e);
   public void delete(VisionPrescription e);
+
+  public List<VisionPrescription> findByField(QueryBuilder queryBuilder);
+
+  public List<VisionPrescription> findByPrescriber(QueryBuilder queryBuilder);
 }

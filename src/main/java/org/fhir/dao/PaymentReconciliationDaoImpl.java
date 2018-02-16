@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.PaymentReconciliationModel;
 import org.fhir.pojo.PaymentReconciliation;
 import org.fhir.pojo.PaymentReconciliationHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class PaymentReconciliationDaoImpl implements PaymentReconciliationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class PaymentReconciliationDaoImpl implements PaymentReconciliationDao {
       final EntityManager em = entityManagerProvider.get();
       final PaymentReconciliationModel removed = em.find(PaymentReconciliationModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<PaymentReconciliation> findByOrganization(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentReconciliationModel a, Reference b where a.organization_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PaymentReconciliation> findByRequest(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentReconciliationModel a, Reference b where a.request_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<PaymentReconciliation> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentReconciliationModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<PaymentReconciliation> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, PaymentReconciliationModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<PaymentReconciliationModel> models = query.getResultList();
+    return PaymentReconciliationHelper.fromArray2Array(models);
   }
 }

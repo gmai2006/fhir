@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitdiagnosis")
 public class ExplanationOfBenefitDiagnosisModel  implements Serializable {
-	private static final long serialVersionUID = 151857669694288771L;
+	private static final long serialVersionUID = 151873631173751376L;
   /**
   * Description: "Sequence of diagnosis which serves to provide a link."
   */
@@ -130,12 +131,12 @@ public class ExplanationOfBenefitDiagnosisModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.sequence = o.getSequence();
-    this.diagnosisCodeableConcept = CodeableConceptHelper.toJson(o.getDiagnosisCodeableConcept());
+    this.diagnosisCodeableConcept = JsonUtils.toJson(o.getDiagnosisCodeableConcept());
     if (null != o.getDiagnosisReference() ) {
     	this.diagnosisreference_id = "diagnosisreference" + this.parent_id;
     	this.diagnosisReference = ReferenceHelper.toModel(o.getDiagnosisReference(), this.diagnosisreference_id);
     }
-    this.packageCode = CodeableConceptHelper.toJson(o.getPackageCode());
+    this.packageCode = JsonUtils.toJson(o.getPackageCode());
   }
 
   public Float getSequence() {

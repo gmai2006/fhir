@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ResearchStudy;
 
 public interface ResearchStudyService {
@@ -35,4 +37,10 @@ public interface ResearchStudyService {
   public ResearchStudy create(ResearchStudy bean);
   public ResearchStudy update(ResearchStudy bean);
   public void delete(ResearchStudy bean);
+  public List<ResearchStudy> findByField(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByProtocol(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findBySite(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findBySponsor(QueryBuilder queryBuilder);
+
+
 }

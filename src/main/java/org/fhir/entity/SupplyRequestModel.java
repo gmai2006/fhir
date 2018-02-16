@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a request for a medication, substance or device used in the healthcare setting."
 */
 @Entity
 @Table(name="supplyrequest")
 public class SupplyRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669714358864L;
+	private static final long serialVersionUID = 151873631193780471L;
   /**
   * Description: "This is a SupplyRequest resource"
   */
@@ -279,17 +280,17 @@ public class SupplyRequestModel  implements Serializable {
   public SupplyRequestModel(SupplyRequest o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.status = o.getStatus();
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.category = JsonUtils.toJson(o.getCategory());
     this.priority = o.getPriority();
     if (null != o.getOrderedItem() ) {
     	this.ordereditem_id = "ordereditem" + this.id;
     	this.orderedItem = SupplyRequestOrderedItemHelper.toModel(o.getOrderedItem(), this.ordereditem_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = PeriodHelper.toJson(o.getOccurrencePeriod());
-    this.occurrenceTiming = TimingHelper.toJson(o.getOccurrenceTiming());
+    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
     this.authoredOn = o.getAuthoredOn();
     if (null != o.getRequester() ) {
     	this.requester_id = "requester" + this.id;
@@ -299,7 +300,7 @@ public class SupplyRequestModel  implements Serializable {
     	this.supplier_id = "supplier" + this.id;
     	this.supplier = ReferenceHelper.toModelFromArray(o.getSupplier(), this.supplier_id);
     }
-    this.reasonCodeableConcept = CodeableConceptHelper.toJson(o.getReasonCodeableConcept());
+    this.reasonCodeableConcept = JsonUtils.toJson(o.getReasonCodeableConcept());
     if (null != o.getReasonReference() ) {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModel(o.getReasonReference(), this.reasonreference_id);

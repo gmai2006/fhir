@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ServiceDefinition;
 
 public interface ServiceDefinitionDao {
@@ -38,4 +39,7 @@ public interface ServiceDefinitionDao {
 
   public ServiceDefinition update(ServiceDefinition e);
   public void delete(ServiceDefinition e);
+
+  public List<ServiceDefinition> findByField(QueryBuilder queryBuilder);
+
 }

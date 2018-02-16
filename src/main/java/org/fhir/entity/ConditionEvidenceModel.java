@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern."
 */
 @Entity
 @Table(name="conditionevidence")
 public class ConditionEvidenceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669713914477L;
+	private static final long serialVersionUID = 151873631193346869L;
   /**
   * Description: "A manifestation or symptom that led to the recording of this condition."
   * Actual type: List<String>;

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CarePlan;
 
 public interface CarePlanDao {
@@ -38,4 +39,12 @@ public interface CarePlanDao {
 
   public CarePlan update(CarePlan e);
   public void delete(CarePlan e);
+
+  public List<CarePlan> findByField(QueryBuilder queryBuilder);
+
+  public List<CarePlan> findByContext(QueryBuilder queryBuilder);
+  public List<CarePlan> findByDefinition(QueryBuilder queryBuilder);
+  public List<CarePlan> findByGoal(QueryBuilder queryBuilder);
+  public List<CarePlan> findByReplaces(QueryBuilder queryBuilder);
+  public List<CarePlan> findBySubject(QueryBuilder queryBuilder);
 }

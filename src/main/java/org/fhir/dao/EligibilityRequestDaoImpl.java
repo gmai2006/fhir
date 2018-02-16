@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.EligibilityRequestModel;
 import org.fhir.pojo.EligibilityRequest;
 import org.fhir.pojo.EligibilityRequestHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class EligibilityRequestDaoImpl implements EligibilityRequestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,55 @@ public class EligibilityRequestDaoImpl implements EligibilityRequestDao {
       final EntityManager em = entityManagerProvider.get();
       final EligibilityRequestModel removed = em.find(EligibilityRequestModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<EligibilityRequest> findByEnterer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EligibilityRequestModel a, Reference b where a.enterer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<EligibilityRequest> findByFacility(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EligibilityRequestModel a, Reference b where a.facility_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<EligibilityRequest> findByOrganization(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EligibilityRequestModel a, Reference b where a.organization_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<EligibilityRequest> findByPatient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EligibilityRequestModel a, Reference b where a.patient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<EligibilityRequest> findByProvider(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EligibilityRequestModel a, Reference b where a.provider_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<EligibilityRequest> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EligibilityRequestModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<EligibilityRequest> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, EligibilityRequestModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<EligibilityRequestModel> models = query.getResultList();
+    return EligibilityRequestHelper.fromArray2Array(models);
   }
 }

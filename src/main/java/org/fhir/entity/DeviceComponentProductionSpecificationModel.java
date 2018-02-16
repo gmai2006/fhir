@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The characteristics, operational status and capabilities of a medical-related component of a medical device."
 */
 @Entity
 @Table(name="devicecomponentproductionspecification")
 public class DeviceComponentProductionSpecificationModel  implements Serializable {
-	private static final long serialVersionUID = 15185766966579395L;
+	private static final long serialVersionUID = 151873631138258072L;
   /**
   * Description: "The specification type, such as, serial number, part number, hardware revision, software revision, etc."
   * Actual type: String;
@@ -108,8 +109,8 @@ public class DeviceComponentProductionSpecificationModel  implements Serializabl
   public DeviceComponentProductionSpecificationModel(DeviceComponentProductionSpecification o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.specType = CodeableConceptHelper.toJson(o.getSpecType());
-    this.componentId = IdentifierHelper.toJson(o.getComponentId());
+    this.specType = JsonUtils.toJson(o.getSpecType());
+    this.componentId = JsonUtils.toJson(o.getComponentId());
     this.productionSpec = o.getProductionSpec();
   }
 

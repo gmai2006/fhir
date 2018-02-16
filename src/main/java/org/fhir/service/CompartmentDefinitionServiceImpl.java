@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.CompartmentDefinition;
 /**
 * auto generated from SQL files
@@ -103,5 +104,19 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(CompartmentDefinition) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<CompartmentDefinition> findByField(QueryBuilder queryBuilder) {
+  	final List<CompartmentDefinition> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<CompartmentDefinition> findByResource(QueryBuilder queryBuilder) {
+  	final List<CompartmentDefinition> result = dao.findByResource(queryBuilder);
+    logger.info("findByresource - exited - return value={} result ");
+    return result;
   }
 }

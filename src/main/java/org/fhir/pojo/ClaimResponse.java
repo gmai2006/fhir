@@ -31,220 +31,144 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
-public class ClaimResponse  {
+public class ClaimResponse  extends DomainResource  {
   /**
   * Description: "This is a ClaimResponse resource"
   */
   @javax.validation.constraints.NotNull
-  private String resourceType;
+  protected String resourceType;
 
   /**
   * Description: "The Response business identifier."
   */
-  private java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
 
   /**
   * Description: "The status of the resource instance."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "Patient Resource."
   */
-  private Reference patient;
+  protected Reference patient;
 
   /**
   * Description: "The date when the enclosed suite of services were performed or completed."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String created;
+  protected String created;
 
   /**
   * Description: "Extensions for created"
   */
-  private transient Element _created;
+  protected transient Element _created;
 
   /**
   * Description: "The Insurer who produced this adjudicated response."
   */
-  private Reference insurer;
+  protected Reference insurer;
 
   /**
   * Description: "The practitioner who is responsible for the services rendered to the patient."
   */
-  private Reference requestProvider;
+  protected Reference requestProvider;
 
   /**
   * Description: "The organization which is responsible for the services rendered to the patient."
   */
-  private Reference requestOrganization;
+  protected Reference requestOrganization;
 
   /**
   * Description: "Original request resource referrence."
   */
-  private Reference request;
+  protected Reference request;
 
   /**
   * Description: "Processing outcome errror, partial or complete processing."
   */
-  private CodeableConcept outcome;
+  protected CodeableConcept outcome;
 
   /**
   * Description: "A description of the status of the adjudication."
   */
-  private String disposition;
+  protected String disposition;
 
   /**
   * Description: "Extensions for disposition"
   */
-  private transient Element _disposition;
+  protected transient Element _disposition;
 
   /**
   * Description: "Party to be reimbursed: Subscriber, provider, other."
   */
-  private CodeableConcept payeeType;
+  protected CodeableConcept payeeType;
 
   /**
   * Description: "The first tier service adjudications for submitted services."
   */
-  private java.util.List<ClaimResponseItem> item = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseItem> item = new java.util.ArrayList<>();
 
   /**
   * Description: "The first tier service adjudications for payor added services."
   */
-  private java.util.List<ClaimResponseAddItem> addItem = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseAddItem> addItem = new java.util.ArrayList<>();
 
   /**
   * Description: "Mutually exclusive with Services Provided (Item)."
   */
-  private java.util.List<ClaimResponseError> error = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseError> error = new java.util.ArrayList<>();
 
   /**
   * Description: "The total cost of the services reported."
   */
-  private Money totalCost;
+  protected Money totalCost;
 
   /**
   * Description: "The amount of deductible applied which was not allocated to any particular service line."
   */
-  private Money unallocDeductable;
+  protected Money unallocDeductable;
 
   /**
   * Description: "Total amount of benefit payable (Equal to sum of the Benefit amounts from all detail lines and additions less the Unallocated Deductible)."
   */
-  private Money totalBenefit;
+  protected Money totalBenefit;
 
   /**
   * Description: "Payment details for the claim if the claim has been paid."
   */
-  private ClaimResponsePayment payment;
+  protected ClaimResponsePayment payment;
 
   /**
   * Description: "Status of funds reservation (For provider, for Patient, None)."
   */
-  private Coding reserved;
+  protected Coding reserved;
 
   /**
   * Description: "The form to be used for printing the content."
   */
-  private CodeableConcept form;
+  protected CodeableConcept form;
 
   /**
   * Description: "Note text."
   */
-  private java.util.List<ClaimResponseProcessNote> processNote = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseProcessNote> processNote = new java.util.ArrayList<>();
 
   /**
   * Description: "Request for additional supporting or authorizing information, such as: documents, images or resources."
   */
-  private java.util.List<Reference> communicationRequest = new java.util.ArrayList<>();
+  protected java.util.List<Reference> communicationRequest = new java.util.ArrayList<>();
 
   /**
   * Description: "Financial instrument by which payment information for health care."
   */
-  private java.util.List<ClaimResponseInsurance> insurance = new java.util.ArrayList<>();
-
-  /**
-  * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
-   derived from DomainResource
-  */
-  private Narrative text;
-
-  /**
-  * Description: "These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope."
-   derived from DomainResource
-  */
-  private java.util.List<ResourceList> contained = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from DomainResource
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.NotNull
-  @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
-   derived from Resource
-   derived from DomainResource
-  */
-  private Meta meta;
-
-  /**
-  * Description: "A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content."
-   derived from Resource
-   derived from DomainResource
-  */
-  private String implicitRules;
-
-  /**
-  * Description: "Extensions for implicitRules"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _implicitRules;
-
-  /**
-  * Description: "The base language in which the resource is written."
-   derived from Resource
-   derived from DomainResource
-  */
-  @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String language;
-
-  /**
-  * Description: "Extensions for language"
-   derived from Resource
-   derived from DomainResource
-  */
-  private transient Element _language;
+  protected java.util.List<ClaimResponseInsurance> insurance = new java.util.ArrayList<>();
 
   public ClaimResponse() {
   }
@@ -289,9 +213,15 @@ public class ClaimResponse  {
     if (null != o.getError() && !o.getError().isEmpty()) {
     	this.error = ClaimResponseErrorHelper.fromArray2Array(o.getError());
     }
-    this.totalCost = MoneyHelper.fromJson(o.getTotalCost());
-    this.unallocDeductable = MoneyHelper.fromJson(o.getUnallocDeductable());
-    this.totalBenefit = MoneyHelper.fromJson(o.getTotalBenefit());
+    if (null != o.getTotalCost() && !o.getTotalCost().isEmpty()) {
+      this.totalCost = new Money(o.getTotalCost().get(0));
+    }
+    if (null != o.getUnallocDeductable() && !o.getUnallocDeductable().isEmpty()) {
+      this.unallocDeductable = new Money(o.getUnallocDeductable().get(0));
+    }
+    if (null != o.getTotalBenefit() && !o.getTotalBenefit().isEmpty()) {
+      this.totalBenefit = new Money(o.getTotalBenefit().get(0));
+    }
     if (null != o.getPayment() && !o.getPayment().isEmpty()) {
       this.payment = new ClaimResponsePayment(o.getPayment().get(0));
     }
@@ -305,21 +235,6 @@ public class ClaimResponse  {
     }
     if (null != o.getInsurance() && !o.getInsurance().isEmpty()) {
     	this.insurance = ClaimResponseInsuranceHelper.fromArray2Array(o.getInsurance());
-    }
-    if (null != o.getText() && !o.getText().isEmpty()) {
-      this.text = new Narrative(o.getText().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
-    if (null != o.getMeta() && !o.getMeta().isEmpty()) {
-      this.meta = new Meta(o.getMeta().get(0));
-    }
-    if (null != o.getImplicitRules()) {
-      this.implicitRules = o.getImplicitRules();
-    }
-    if (null != o.getLanguage()) {
-      this.language = o.getLanguage();
     }
   }
 
@@ -485,72 +400,6 @@ public class ClaimResponse  {
   public java.util.List<ClaimResponseInsurance> getInsurance() {
     return this.insurance;
   }
-  public void setText( Narrative value) {
-    this.text = value;
-  }
-  public Narrative getText() {
-    return this.text;
-  }
-  public void setContained( java.util.List<ResourceList> value) {
-    this.contained = value;
-  }
-  public java.util.List<ResourceList> getContained() {
-    return this.contained;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setMeta( Meta value) {
-    this.meta = value;
-  }
-  public Meta getMeta() {
-    return this.meta;
-  }
-  public void setImplicitRules( String value) {
-    this.implicitRules = value;
-  }
-  public String getImplicitRules() {
-    return this.implicitRules;
-  }
-  public void set_implicitRules( Element value) {
-    this._implicitRules = value;
-  }
-  public Element get_implicitRules() {
-    return this._implicitRules;
-  }
-  public void setLanguage( String value) {
-    this.language = value;
-  }
-  public String getLanguage() {
-    return this.language;
-  }
-  public void set_language( Element value) {
-    this._language = value;
-  }
-  public Element get_language() {
-    return this._language;
-  }
 
   @Override
   public String toString() {
@@ -582,18 +431,7 @@ public class ClaimResponse  {
      if(this.form != null) builder.append("form" + "->" + this.form.toString() + "\n"); 
      if(this.processNote != null) builder.append("processNote" + "->" + this.processNote.toString() + "\n"); 
      if(this.communicationRequest != null) builder.append("communicationRequest" + "->" + this.communicationRequest.toString() + "\n"); 
-     if(this.insurance != null) builder.append("insurance" + "->" + this.insurance.toString() + "\n"); 
-     if(this.text != null) builder.append("text" + "->" + this.text.toString() + "\n"); 
-     if(this.contained != null) builder.append("contained" + "->" + this.contained.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.meta != null) builder.append("meta" + "->" + this.meta.toString() + "\n"); 
-     if(this.implicitRules != null) builder.append("implicitRules" + "->" + this.implicitRules.toString() + "\n"); 
-     if(this._implicitRules != null) builder.append("_implicitRules" + "->" + this._implicitRules.toString() + "\n"); 
-     if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
-     if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); ;
+     if(this.insurance != null) builder.append("insurance" + "->" + this.insurance.toString() + "\n"); ;
     return builder.toString();
   }
 

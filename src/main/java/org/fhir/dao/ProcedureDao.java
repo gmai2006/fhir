@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Procedure;
 
 public interface ProcedureDao {
@@ -38,4 +39,12 @@ public interface ProcedureDao {
 
   public Procedure update(Procedure e);
   public void delete(Procedure e);
+
+  public List<Procedure> findByField(QueryBuilder queryBuilder);
+
+  public List<Procedure> findByContext(QueryBuilder queryBuilder);
+  public List<Procedure> findByDefinition(QueryBuilder queryBuilder);
+  public List<Procedure> findByLocation(QueryBuilder queryBuilder);
+  public List<Procedure> findByPerformer(QueryBuilder queryBuilder);
+  public List<Procedure> findBySubject(QueryBuilder queryBuilder);
 }

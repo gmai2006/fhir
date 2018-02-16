@@ -32,19 +32,4 @@ public class StructureDefinitionSnapshotHelper {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, StructureDefinitionSnapshot.class);
   }
-
-  public static java.util.List fromArray(String json) {
-    if (null == json) return null;
-    return new GsonBuilder().create().fromJson(json, java.util.List.class);
-  }
-
-  public static String toJson(StructureDefinitionSnapshot o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
-
-  public static String toJson(java.util.List<StructureDefinitionSnapshot> o) {
-    if (null == o) return null;
-    return new GsonBuilder().create().toJson(o);
-  }
 }

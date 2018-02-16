@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc."
 */
 @Entity
 @Table(name="detectedissuemitigation")
 public class DetectedIssueMitigationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669710343830L;
+	private static final long serialVersionUID = 151873631189156810L;
   /**
   * Description: "Describes the action that was taken or the observation that was made that reduces/eliminates the risk associated with the identified issue."
   * Actual type: String;
@@ -112,7 +113,7 @@ public class DetectedIssueMitigationModel  implements Serializable {
   public DetectedIssueMitigationModel(DetectedIssueMitigation o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.action = CodeableConceptHelper.toJson(o.getAction());
+    this.action = JsonUtils.toJson(o.getAction());
     this.date = o.getDate();
     if (null != o.getAuthor() ) {
     	this.author_id = "author" + this.parent_id;

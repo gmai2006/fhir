@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
 */
 @Entity
 @Table(name="immunizationvaccinationprotocol")
 public class ImmunizationVaccinationProtocolModel  implements Serializable {
-	private static final long serialVersionUID = 151857669648522217L;
+	private static final long serialVersionUID = 151873631111621749L;
   /**
   * Description: "Nominal position in a series."
   */
@@ -161,8 +162,8 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
     }
     this.series = o.getSeries();
     this.seriesDoses = o.getSeriesDoses();
-    this.doseStatus = CodeableConceptHelper.toJson(o.getDoseStatus());
-    this.doseStatusReason = CodeableConceptHelper.toJson(o.getDoseStatusReason());
+    this.doseStatus = JsonUtils.toJson(o.getDoseStatus());
+    this.doseStatusReason = JsonUtils.toJson(o.getDoseStatusReason());
   }
 
   public Float getDoseSequence() {

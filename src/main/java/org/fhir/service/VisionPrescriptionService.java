@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.VisionPrescription;
 
 public interface VisionPrescriptionService {
@@ -35,4 +37,8 @@ public interface VisionPrescriptionService {
   public VisionPrescription create(VisionPrescription bean);
   public VisionPrescription update(VisionPrescription bean);
   public void delete(VisionPrescription bean);
+  public List<VisionPrescription> findByField(QueryBuilder queryBuilder);
+  public List<VisionPrescription> findByPrescriber(QueryBuilder queryBuilder);
+
+
 }

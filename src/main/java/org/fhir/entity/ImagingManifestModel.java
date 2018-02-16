@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A text description of the DICOM SOP instances selected in the ImagingManifest; or the reason for, or significance of, the selection."
 */
 @Entity
 @Table(name="imagingmanifest")
 public class ImagingManifestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669667158466L;
+	private static final long serialVersionUID = 151873631139844918L;
   /**
   * Description: "This is a ImagingManifest resource"
   */
@@ -194,7 +195,7 @@ public class ImagingManifestModel  implements Serializable {
   public ImagingManifestModel(ImagingManifest o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);

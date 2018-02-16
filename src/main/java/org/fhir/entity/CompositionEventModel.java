@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
 */
 @Entity
 @Table(name="compositionevent")
 public class CompositionEventModel  implements Serializable {
-	private static final long serialVersionUID = 151857669714899328L;
+	private static final long serialVersionUID = 151873631194213486L;
   /**
   * Description: "This list of codes represents the main clinical acts, such as a colonoscopy or an appendectomy, being documented. In some cases, the event is inherent in the typeCode, such as a \"History and Physical Report\" in which the procedure being documented is necessarily a \"History and Physical\" act."
   * Actual type: List<String>;
@@ -112,7 +113,7 @@ public class CompositionEventModel  implements Serializable {
   public CompositionEventModel(CompositionEvent o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getDetail() && !o.getDetail().isEmpty()) {
     	this.detail_id = "detail" + this.parent_id;
     	this.detail = ReferenceHelper.toModelFromArray(o.getDetail(), this.detail_id);

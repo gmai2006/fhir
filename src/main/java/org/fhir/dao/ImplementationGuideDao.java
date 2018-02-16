@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImplementationGuide;
 
 public interface ImplementationGuideDao {
@@ -38,4 +39,8 @@ public interface ImplementationGuideDao {
 
   public ImplementationGuide update(ImplementationGuide e);
   public void delete(ImplementationGuide e);
+
+  public List<ImplementationGuide> findByField(QueryBuilder queryBuilder);
+
+  public List<ImplementationGuide> findByDependency(QueryBuilder queryBuilder);
 }

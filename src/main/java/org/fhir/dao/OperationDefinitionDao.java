@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.OperationDefinition;
 
 public interface OperationDefinitionDao {
@@ -38,4 +39,8 @@ public interface OperationDefinitionDao {
 
   public OperationDefinition update(OperationDefinition e);
   public void delete(OperationDefinition e);
+
+  public List<OperationDefinition> findByField(QueryBuilder queryBuilder);
+
+  public List<OperationDefinition> findByBase(QueryBuilder queryBuilder);
 }

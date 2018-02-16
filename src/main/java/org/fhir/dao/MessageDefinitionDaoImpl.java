@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.MessageDefinitionModel;
 import org.fhir.pojo.MessageDefinition;
 import org.fhir.pojo.MessageDefinitionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class MessageDefinitionDaoImpl implements MessageDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class MessageDefinitionDaoImpl implements MessageDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       final MessageDefinitionModel removed = em.find(MessageDefinitionModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<MessageDefinition> findByFocus(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageDefinitionModel a, MessageDefinitionFocus b where a.focus_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<MessageDefinition> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageDefinitionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<MessageDefinition> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, MessageDefinitionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<MessageDefinitionModel> models = query.getResultList();
+    return MessageDefinitionHelper.fromArray2Array(models);
   }
 }

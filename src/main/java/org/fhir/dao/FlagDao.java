@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Flag;
 
 public interface FlagDao {
@@ -38,4 +39,9 @@ public interface FlagDao {
 
   public Flag update(Flag e);
   public void delete(Flag e);
+
+  public List<Flag> findByField(QueryBuilder queryBuilder);
+
+  public List<Flag> findByAuthor(QueryBuilder queryBuilder);
+  public List<Flag> findBySubject(QueryBuilder queryBuilder);
 }

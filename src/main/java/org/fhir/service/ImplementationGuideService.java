@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImplementationGuide;
 
 public interface ImplementationGuideService {
@@ -35,4 +37,8 @@ public interface ImplementationGuideService {
   public ImplementationGuide create(ImplementationGuide bean);
   public ImplementationGuide update(ImplementationGuide bean);
   public void delete(ImplementationGuide bean);
+  public List<ImplementationGuide> findByField(QueryBuilder queryBuilder);
+  public List<ImplementationGuide> findByDependency(QueryBuilder queryBuilder);
+
+
 }

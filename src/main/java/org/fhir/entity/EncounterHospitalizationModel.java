@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
 @Entity
 @Table(name="encounterhospitalization")
 public class EncounterHospitalizationModel  implements Serializable {
-	private static final long serialVersionUID = 151857669695466283L;
+	private static final long serialVersionUID = 151873631175036206L;
   /**
   * Description: "Pre-admission identifier."
   * Actual type: String;
@@ -168,18 +169,18 @@ public class EncounterHospitalizationModel  implements Serializable {
   public EncounterHospitalizationModel(EncounterHospitalization o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.preAdmissionIdentifier = IdentifierHelper.toJson(o.getPreAdmissionIdentifier());
+    this.preAdmissionIdentifier = JsonUtils.toJson(o.getPreAdmissionIdentifier());
     if (null != o.getOrigin() ) {
     	this.origin_id = "origin" + this.parent_id;
     	this.origin = ReferenceHelper.toModel(o.getOrigin(), this.origin_id);
     }
-    this.admitSource = CodeableConceptHelper.toJson(o.getAdmitSource());
-    this.reAdmission = CodeableConceptHelper.toJson(o.getReAdmission());
+    this.admitSource = JsonUtils.toJson(o.getAdmitSource());
+    this.reAdmission = JsonUtils.toJson(o.getReAdmission());
     if (null != o.getDestination() ) {
     	this.destination_id = "destination" + this.parent_id;
     	this.destination = ReferenceHelper.toModel(o.getDestination(), this.destination_id);
     }
-    this.dischargeDisposition = CodeableConceptHelper.toJson(o.getDischargeDisposition());
+    this.dischargeDisposition = JsonUtils.toJson(o.getDischargeDisposition());
   }
 
   public String getPreAdmissionIdentifier() {

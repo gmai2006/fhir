@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Location;
 
 public interface LocationService {
@@ -35,4 +37,9 @@ public interface LocationService {
   public Location create(Location bean);
   public Location update(Location bean);
   public void delete(Location bean);
+  public List<Location> findByField(QueryBuilder queryBuilder);
+  public List<Location> findByAddress(QueryBuilder queryBuilder);
+  public List<Location> findByEndpoint(QueryBuilder queryBuilder);
+
+
 }

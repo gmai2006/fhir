@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Library;
 
 public interface LibraryDao {
@@ -38,4 +39,7 @@ public interface LibraryDao {
 
   public Library update(Library e);
   public void delete(Library e);
+
+  public List<Library> findByField(QueryBuilder queryBuilder);
+
 }

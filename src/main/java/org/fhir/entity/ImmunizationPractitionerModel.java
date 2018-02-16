@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
 */
 @Entity
 @Table(name="immunizationpractitioner")
 public class ImmunizationPractitionerModel  implements Serializable {
-	private static final long serialVersionUID = 151857669714259758L;
+	private static final long serialVersionUID = 151873631193633436L;
   /**
   * Description: "Describes the type of performance (e.g. ordering provider, administering provider, etc.)."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class ImmunizationPractitionerModel  implements Serializable {
   public ImmunizationPractitionerModel(ImmunizationPractitioner o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.role = CodeableConceptHelper.toJson(o.getRole());
+    this.role = JsonUtils.toJson(o.getRole());
     if (null != o.getActor() ) {
     	this.actor_id = "actor" + this.parent_id;
     	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);

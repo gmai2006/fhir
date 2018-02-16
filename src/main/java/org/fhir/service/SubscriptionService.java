@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Subscription;
 
 public interface SubscriptionService {
@@ -35,4 +37,7 @@ public interface SubscriptionService {
   public Subscription create(Subscription bean);
   public Subscription update(Subscription bean);
   public void delete(Subscription bean);
+  public List<Subscription> findByField(QueryBuilder queryBuilder);
+
+
 }

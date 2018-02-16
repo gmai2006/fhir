@@ -31,92 +31,64 @@ import com.google.gson.GsonBuilder;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
 */
-public class ImmunizationRecommendationRecommendation  {
+public class ImmunizationRecommendationRecommendation  extends BackboneElement  {
   /**
   * Description: "The date the immunization recommendation was created."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String date;
+  protected String date;
 
   /**
   * Description: "Extensions for date"
   */
-  private transient Element _date;
+  protected transient Element _date;
 
   /**
   * Description: "Vaccine that pertains to the recommendation."
   */
-  private CodeableConcept vaccineCode;
+  protected CodeableConcept vaccineCode;
 
   /**
   * Description: "The targeted disease for the recommendation."
   */
-  private CodeableConcept targetDisease;
+  protected CodeableConcept targetDisease;
 
   /**
   * Description: "The next recommended dose number (e.g. dose 2 is the next recommended dose)."
   */
   @javax.validation.constraints.Pattern(regexp="[1-9][0-9]*")
-  private Float doseNumber;
+  protected Float doseNumber;
 
   /**
   * Description: "Extensions for doseNumber"
   */
-  private transient Element _doseNumber;
+  protected transient Element _doseNumber;
 
   /**
   * Description: "Vaccine administration status."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept forecastStatus;
+  protected CodeableConcept forecastStatus;
 
   /**
   * Description: "Vaccine date recommendations.  For example, earliest date to administer, latest date to administer, etc."
   */
-  private java.util.List<ImmunizationRecommendationDateCriterion> dateCriterion = new java.util.ArrayList<>();
+  protected java.util.List<ImmunizationRecommendationDateCriterion> dateCriterion = new java.util.ArrayList<>();
 
   /**
   * Description: "Contains information about the protocol under which the vaccine was administered."
   */
-  private ImmunizationRecommendationProtocol protocol;
+  protected ImmunizationRecommendationProtocol protocol;
 
   /**
   * Description: "Immunization event history that supports the status and recommendation."
   */
-  private java.util.List<Reference> supportingImmunization = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingImmunization = new java.util.ArrayList<>();
 
   /**
   * Description: "Patient Information that supports the status and recommendation.  This includes patient observations, adverse reactions and allergy/intolerance information."
   */
-  private java.util.List<Reference> supportingPatientInformation = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingPatientInformation = new java.util.ArrayList<>();
 
   public ImmunizationRecommendationRecommendation() {
   }
@@ -143,9 +115,6 @@ public class ImmunizationRecommendationRecommendation  {
     }
     if (null != o.getSupportingPatientInformation() && !o.getSupportingPatientInformation().isEmpty()) {
     	this.supportingPatientInformation = ReferenceHelper.fromArray2Array(o.getSupportingPatientInformation());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -215,30 +184,6 @@ public class ImmunizationRecommendationRecommendation  {
   public java.util.List<Reference> getSupportingPatientInformation() {
     return this.supportingPatientInformation;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -254,11 +199,7 @@ public class ImmunizationRecommendationRecommendation  {
      if(this.dateCriterion != null) builder.append("dateCriterion" + "->" + this.dateCriterion.toString() + "\n"); 
      if(this.protocol != null) builder.append("protocol" + "->" + this.protocol.toString() + "\n"); 
      if(this.supportingImmunization != null) builder.append("supportingImmunization" + "->" + this.supportingImmunization.toString() + "\n"); 
-     if(this.supportingPatientInformation != null) builder.append("supportingPatientInformation" + "->" + this.supportingPatientInformation.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.supportingPatientInformation != null) builder.append("supportingPatientInformation" + "->" + this.supportingPatientInformation.toString() + "\n"); ;
     return builder.toString();
   }
 

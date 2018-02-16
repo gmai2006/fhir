@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.HealthcareService;
 
 public interface HealthcareServiceService {
@@ -35,4 +37,9 @@ public interface HealthcareServiceService {
   public HealthcareService create(HealthcareService bean);
   public HealthcareService update(HealthcareService bean);
   public void delete(HealthcareService bean);
+  public List<HealthcareService> findByField(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByEndpoint(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByLocation(QueryBuilder queryBuilder);
+
+
 }

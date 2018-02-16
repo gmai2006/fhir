@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ProcessRequest;
 
 public interface ProcessRequestService {
@@ -35,4 +37,9 @@ public interface ProcessRequestService {
   public ProcessRequest create(ProcessRequest bean);
   public ProcessRequest update(ProcessRequest bean);
   public void delete(ProcessRequest bean);
+  public List<ProcessRequest> findByField(QueryBuilder queryBuilder);
+  public List<ProcessRequest> findByOrganization(QueryBuilder queryBuilder);
+  public List<ProcessRequest> findByProvider(QueryBuilder queryBuilder);
+
+
 }

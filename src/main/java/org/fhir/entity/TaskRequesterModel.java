@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A task to be performed."
 */
 @Entity
 @Table(name="taskrequester")
 public class TaskRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151857669705579595L;
+	private static final long serialVersionUID = 151873631183890070L;
   /**
   * Description: "The device, practitioner, etc. who initiated the task."
   */

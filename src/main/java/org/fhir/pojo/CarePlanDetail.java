@@ -31,154 +31,126 @@ import com.google.gson.GsonBuilder;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
-public class CarePlanDetail  {
+public class CarePlanDetail  extends BackboneElement  {
   /**
   * Description: "High-level categorization of the type of activity in a care plan."
   */
-  private CodeableConcept category;
+  protected CodeableConcept category;
 
   /**
   * Description: "Identifies the protocol, questionnaire, guideline or other specification the planned activity should be conducted in accordance with."
   */
-  private Reference definition;
+  protected Reference definition;
 
   /**
   * Description: "Detailed description of the type of planned activity; e.g. What lab test, what procedure, what kind of encounter."
   */
-  private CodeableConcept code;
+  protected CodeableConcept code;
 
   /**
   * Description: "Provides the rationale that drove the inclusion of this particular activity as part of the plan or the reason why the activity was prohibited."
   */
-  private java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
 
   /**
   * Description: "Provides the health condition(s) that drove the inclusion of this particular activity as part of the plan."
   */
-  private java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
 
   /**
   * Description: "Internal reference that identifies the goals that this activity is intended to contribute towards meeting."
   */
-  private java.util.List<Reference> goal = new java.util.ArrayList<>();
+  protected java.util.List<Reference> goal = new java.util.ArrayList<>();
 
   /**
   * Description: "Identifies what progress is being made for the specific activity."
   */
-  private String status;
+  protected String status;
 
   /**
   * Description: "Extensions for status"
   */
-  private transient Element _status;
+  protected transient Element _status;
 
   /**
   * Description: "Provides reason why the activity isn't yet started, is on hold, was cancelled, etc."
   */
-  private String statusReason;
+  protected String statusReason;
 
   /**
   * Description: "Extensions for statusReason"
   */
-  private transient Element _statusReason;
+  protected transient Element _statusReason;
 
   /**
   * Description: "If true, indicates that the described activity is one that must NOT be engaged in when following the plan.  If false, indicates that the described activity is one that should be engaged in when following the plan."
   */
-  private Boolean prohibited;
+  protected Boolean prohibited;
 
   /**
   * Description: "Extensions for prohibited"
   */
-  private transient Element _prohibited;
+  protected transient Element _prohibited;
 
   /**
   * Description: "The period, timing or frequency upon which the described activity is to occur."
   */
-  private Timing scheduledTiming;
+  protected Timing scheduledTiming;
 
   /**
   * Description: "The period, timing or frequency upon which the described activity is to occur."
   */
-  private Period scheduledPeriod;
+  protected Period scheduledPeriod;
 
   /**
   * Description: "The period, timing or frequency upon which the described activity is to occur."
   */
-  private String scheduledString;
+  protected String scheduledString;
 
   /**
   * Description: "Extensions for scheduledString"
   */
-  private transient Element _scheduledString;
+  protected transient Element _scheduledString;
 
   /**
   * Description: "Identifies the facility where the activity will occur; e.g. home, hospital, specific clinic, etc."
   */
-  private Reference location;
+  protected Reference location;
 
   /**
   * Description: "Identifies who's expected to be involved in the activity."
   */
-  private java.util.List<Reference> performer = new java.util.ArrayList<>();
+  protected java.util.List<Reference> performer = new java.util.ArrayList<>();
 
   /**
   * Description: "Identifies the food, drug or other product to be consumed or supplied in the activity."
   */
-  private CodeableConcept productCodeableConcept;
+  protected CodeableConcept productCodeableConcept;
 
   /**
   * Description: "Identifies the food, drug or other product to be consumed or supplied in the activity."
   */
-  private Reference productReference;
+  protected Reference productReference;
 
   /**
   * Description: "Identifies the quantity expected to be consumed in a given day."
   */
-  private Quantity dailyAmount;
+  protected Quantity dailyAmount;
 
   /**
   * Description: "Identifies the quantity expected to be supplied, administered or consumed by the subject."
   */
-  private Quantity quantity;
+  protected Quantity quantity;
 
   /**
   * Description: "This provides a textual description of constraints on the intended activity occurrence, including relation to other activities.  It may also include objectives, pre-conditions and end-conditions.  Finally, it may convey specifics about the activity such as body site, method, route, etc."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _description;
 
   public CarePlanDetail() {
   }
@@ -220,13 +192,14 @@ public class CarePlanDetail  {
     if (null != o.getProductReference() && !o.getProductReference().isEmpty()) {
       this.productReference = new Reference(o.getProductReference().get(0));
     }
-    this.dailyAmount = QuantityHelper.fromJson(o.getDailyAmount());
-    this.quantity = QuantityHelper.fromJson(o.getQuantity());
+    if (null != o.getDailyAmount() && !o.getDailyAmount().isEmpty()) {
+      this.dailyAmount = new Quantity(o.getDailyAmount().get(0));
+    }
+    if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
+      this.quantity = new Quantity(o.getQuantity().get(0));
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -374,30 +347,6 @@ public class CarePlanDetail  {
   public Element get_description() {
     return this._description;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -426,11 +375,7 @@ public class CarePlanDetail  {
      if(this.dailyAmount != null) builder.append("dailyAmount" + "->" + this.dailyAmount.toString() + "\n"); 
      if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
      if(this.description != null) builder.append("description" + "->" + this.description.toString() + "\n"); 
-     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._description != null) builder.append("_description" + "->" + this._description.toString() + "\n"); ;
     return builder.toString();
   }
 

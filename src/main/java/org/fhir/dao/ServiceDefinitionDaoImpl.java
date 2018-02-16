@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ServiceDefinitionModel;
 import org.fhir.pojo.ServiceDefinition;
 import org.fhir.pojo.ServiceDefinitionHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ServiceDefinitionDaoImpl implements ServiceDefinitionDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class ServiceDefinitionDaoImpl implements ServiceDefinitionDao {
       final EntityManager em = entityManagerProvider.get();
       final ServiceDefinitionModel removed = em.find(ServiceDefinitionModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<ServiceDefinition> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ServiceDefinitionModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ServiceDefinition> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ServiceDefinitionModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ServiceDefinitionModel> models = query.getResultList();
+    return ServiceDefinitionHelper.fromArray2Array(models);
   }
 }

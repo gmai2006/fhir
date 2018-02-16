@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
 @Entity
 @Table(name="claimresponsedetail1")
 public class ClaimResponseDetail1Model  implements Serializable {
-	private static final long serialVersionUID = 1518576696784267L;
+	private static final long serialVersionUID = 151873631156099910L;
   /**
   * Description: "The type of reveneu or cost center providing the product and/or service."
   * Actual type: String;
@@ -76,12 +77,14 @@ public class ClaimResponseDetail1Model  implements Serializable {
 
   /**
   * Description: "The fee charged for the professional service or product.."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"fee\"", length = 16777215)
-  private String fee;
+  @Column(name="\"fee_id\"")
+  private String fee_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fee_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> fee;
 
   /**
   * Description: "A list of note references to the notes provided below."
@@ -146,10 +149,13 @@ public class ClaimResponseDetail1Model  implements Serializable {
   public ClaimResponseDetail1Model(ClaimResponseDetail1 o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.revenue = CodeableConceptHelper.toJson(o.getRevenue());
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.service = CodeableConceptHelper.toJson(o.getService());
-    this.fee = MoneyHelper.toJson(o.getFee());
+    this.revenue = JsonUtils.toJson(o.getRevenue());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.service = JsonUtils.toJson(o.getService());
+    if (null != o.getFee() ) {
+    	this.fee_id = "fee" + this.parent_id;
+    	this.fee = MoneyHelper.toModel(o.getFee(), this.fee_id);
+    }
     this.noteNumber = org.fhir.utils.JsonUtils.write2String(o.getNoteNumber());
     if (null != o.getAdjudication() && !o.getAdjudication().isEmpty()) {
     	this.adjudication_id = "adjudication" + this.parent_id;
@@ -181,10 +187,10 @@ public class ClaimResponseDetail1Model  implements Serializable {
   public void setModifier( String value) {
     this.modifier = value;
   }
-  public String getFee() {
+  public java.util.List<MoneyModel> getFee() {
     return this.fee;
   }
-  public void setFee( String value) {
+  public void setFee( java.util.List<MoneyModel> value) {
     this.fee = value;
   }
   public String getNoteNumber() {
@@ -232,7 +238,6 @@ public class ClaimResponseDetail1Model  implements Serializable {
      builder.append("category" + "->" + this.category + "\n"); 
      builder.append("service" + "->" + this.service + "\n"); 
      builder.append("modifier" + "->" + this.modifier + "\n"); 
-     builder.append("fee" + "->" + this.fee + "\n"); 
      builder.append("noteNumber" + "->" + this.noteNumber + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

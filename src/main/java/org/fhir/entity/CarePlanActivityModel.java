@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
 @Entity
 @Table(name="careplanactivity")
 public class CarePlanActivityModel  implements Serializable {
-	private static final long serialVersionUID = 151857669693272338L;
+	private static final long serialVersionUID = 15187363117269477L;
   /**
   * Description: "Identifies the outcome at the point when the status of the activity is assessed.  For example, the outcome of an education activity could be patient understands (or not)."
   * Actual type: List<String>;

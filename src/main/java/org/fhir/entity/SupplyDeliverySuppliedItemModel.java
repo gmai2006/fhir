@@ -31,21 +31,24 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Record of delivery of what is supplied."
 */
 @Entity
 @Table(name="supplydeliverysupplieditem")
 public class SupplyDeliverySuppliedItemModel  implements Serializable {
-	private static final long serialVersionUID = 151857669666468104L;
+	private static final long serialVersionUID = 151873631139095164L;
   /**
   * Description: "The amount of supply that has been dispensed. Includes unit of measure."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "Identifies the medication, substance or device being dispensed. This is either a link to a resource representing the details of the item or a code that identifies the item from a known list."
@@ -112,18 +115,21 @@ public class SupplyDeliverySuppliedItemModel  implements Serializable {
   public SupplyDeliverySuppliedItemModel(SupplyDeliverySuppliedItem o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
-    this.itemCodeableConcept = CodeableConceptHelper.toJson(o.getItemCodeableConcept());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.parent_id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
+    this.itemCodeableConcept = JsonUtils.toJson(o.getItemCodeableConcept());
     if (null != o.getItemReference() ) {
     	this.itemreference_id = "itemreference" + this.parent_id;
     	this.itemReference = ReferenceHelper.toModel(o.getItemReference(), this.itemreference_id);
     }
   }
 
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
   public String getItemCodeableConcept() {
@@ -167,7 +173,6 @@ public class SupplyDeliverySuppliedItemModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[SupplyDeliverySuppliedItemModel]:" + "\n");
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

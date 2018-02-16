@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
 @Entity
 @Table(name="encounterparticipant")
 public class EncounterParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 1518576696923377L;
+	private static final long serialVersionUID = 151873631171566700L;
   /**
   * Description: "Role of participant in encounter."
   * Actual type: List<String>;
@@ -112,7 +113,7 @@ public class EncounterParticipantModel  implements Serializable {
   public EncounterParticipantModel(EncounterParticipant o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getIndividual() ) {
     	this.individual_id = "individual" + this.parent_id;
     	this.individual = ReferenceHelper.toModel(o.getIndividual(), this.individual_id);

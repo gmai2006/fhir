@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
 */
 @Entity
 @Table(name="patient")
 public class PatientModel  implements Serializable {
-	private static final long serialVersionUID = 151857669690517559L;
+	private static final long serialVersionUID = 151873631169720059L;
   /**
   * Description: "This is a Patient resource"
   */
@@ -112,12 +113,14 @@ public class PatientModel  implements Serializable {
 
   /**
   * Description: "Addresses for the individual."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"address\"", length = 16777215)
-  private String address;
+  @Column(name="\"address_id\"")
+  private String address_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> address;
 
   /**
   * Description: "This field contains a patient's most recent marital (civil) status."
@@ -314,7 +317,11 @@ public class PatientModel  implements Serializable {
     this.birthDate = o.getBirthDate();
     this.deceasedBoolean = o.getDeceasedBoolean();
     this.deceasedDateTime = o.getDeceasedDateTime();
-    this.maritalStatus = CodeableConceptHelper.toJson(o.getMaritalStatus());
+    if (null != o.getAddress() && !o.getAddress().isEmpty()) {
+    	this.address_id = "address" + this.id;
+    	this.address = AddressHelper.toModelFromArray(o.getAddress(), this.address_id);
+    }
+    this.maritalStatus = JsonUtils.toJson(o.getMaritalStatus());
     this.multipleBirthBoolean = o.getMultipleBirthBoolean();
     this.multipleBirthInteger = o.getMultipleBirthInteger();
     if (null != o.getContact() && !o.getContact().isEmpty()) {
@@ -407,10 +414,10 @@ public class PatientModel  implements Serializable {
   public void setDeceasedDateTime( String value) {
     this.deceasedDateTime = value;
   }
-  public String getAddress() {
+  public java.util.List<AddressModel> getAddress() {
     return this.address;
   }
-  public void setAddress( String value) {
+  public void setAddress( java.util.List<AddressModel> value) {
     this.address = value;
   }
   public String getMaritalStatus() {
@@ -535,7 +542,6 @@ public class PatientModel  implements Serializable {
      builder.append("birthDate" + "->" + this.birthDate + "\n"); 
      builder.append("deceasedBoolean" + "->" + this.deceasedBoolean + "\n"); 
      builder.append("deceasedDateTime" + "->" + this.deceasedDateTime + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("maritalStatus" + "->" + this.maritalStatus + "\n"); 
      builder.append("multipleBirthBoolean" + "->" + this.multipleBirthBoolean + "\n"); 
      builder.append("multipleBirthInteger" + "->" + this.multipleBirthInteger + "\n"); 

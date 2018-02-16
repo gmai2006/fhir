@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Task;
 
 public interface TaskService {
@@ -35,4 +37,11 @@ public interface TaskService {
   public Task create(Task bean);
   public Task update(Task bean);
   public void delete(Task bean);
+  public List<Task> findByField(QueryBuilder queryBuilder);
+  public List<Task> findByContext(QueryBuilder queryBuilder);
+  public List<Task> findByFocus(QueryBuilder queryBuilder);
+  public List<Task> findByOwner(QueryBuilder queryBuilder);
+  public List<Task> findByRequester(QueryBuilder queryBuilder);
+
+
 }

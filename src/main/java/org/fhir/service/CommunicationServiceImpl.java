@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Communication;
 /**
 * auto generated from SQL files
@@ -103,5 +104,43 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Communication) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Communication> findByField(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Communication> findByContext(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByDefinition(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByDefinition(queryBuilder);
+    logger.info("findBydefinition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByRecipient(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByRecipient(queryBuilder);
+    logger.info("findByrecipient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findBySender(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findBySender(queryBuilder);
+    logger.info("findBysender - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

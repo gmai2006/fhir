@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImagingManifest;
 /**
 * auto generated from SQL files
@@ -103,5 +104,19 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(ImagingManifest) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<ImagingManifest> findByField(QueryBuilder queryBuilder) {
+  	final List<ImagingManifest> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<ImagingManifest> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<ImagingManifest> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
+    return result;
   }
 }

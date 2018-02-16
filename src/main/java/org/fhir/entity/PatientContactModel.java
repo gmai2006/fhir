@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
 */
 @Entity
 @Table(name="patientcontact")
 public class PatientContactModel  implements Serializable {
-	private static final long serialVersionUID = 151857669693751335L;
+	private static final long serialVersionUID = 15187363117324681L;
   /**
   * Description: "The nature of the relationship between the patient and the contact person."
   * Actual type: List<String>;
@@ -67,12 +68,14 @@ public class PatientContactModel  implements Serializable {
 
   /**
   * Description: "Address for the contact person."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"address\"", length = 16777215)
-  private String address;
+  @Column(name="\"address_id\"")
+  private String address_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> address;
 
   /**
   * Description: "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
@@ -146,14 +149,17 @@ public class PatientContactModel  implements Serializable {
   public PatientContactModel(PatientContact o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.name = HumanNameHelper.toJson(o.getName());
-    this.address = AddressHelper.toJson(o.getAddress());
+    this.name = JsonUtils.toJson(o.getName());
+    if (null != o.getAddress() ) {
+    	this.address_id = "address" + this.parent_id;
+    	this.address = AddressHelper.toModel(o.getAddress(), this.address_id);
+    }
     this.gender = o.getGender();
     if (null != o.getOrganization() ) {
     	this.organization_id = "organization" + this.parent_id;
     	this.organization = ReferenceHelper.toModel(o.getOrganization(), this.organization_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
   }
 
   public String getRelationship() {
@@ -174,10 +180,10 @@ public class PatientContactModel  implements Serializable {
   public void setTelecom( String value) {
     this.telecom = value;
   }
-  public String getAddress() {
+  public java.util.List<AddressModel> getAddress() {
     return this.address;
   }
-  public void setAddress( String value) {
+  public void setAddress( java.util.List<AddressModel> value) {
     this.address = value;
   }
   public String getGender() {
@@ -230,7 +236,6 @@ public class PatientContactModel  implements Serializable {
      builder.append("relationship" + "->" + this.relationship + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

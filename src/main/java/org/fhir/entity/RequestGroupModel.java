@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
 */
 @Entity
 @Table(name="requestgroup")
 public class RequestGroupModel  implements Serializable {
-	private static final long serialVersionUID = 151857669697123554L;
+	private static final long serialVersionUID = 151873631176771455L;
   /**
   * Description: "This is a RequestGroup resource"
   */
@@ -305,7 +306,7 @@ public class RequestGroupModel  implements Serializable {
     	this.replaces_id = "replaces" + this.id;
     	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
     }
-    this.groupIdentifier = IdentifierHelper.toJson(o.getGroupIdentifier());
+    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
     this.status = o.getStatus();
     this.intent = o.getIntent();
     this.priority = o.getPriority();
@@ -322,7 +323,7 @@ public class RequestGroupModel  implements Serializable {
     	this.author_id = "author" + this.id;
     	this.author = ReferenceHelper.toModel(o.getAuthor(), this.author_id);
     }
-    this.reasonCodeableConcept = CodeableConceptHelper.toJson(o.getReasonCodeableConcept());
+    this.reasonCodeableConcept = JsonUtils.toJson(o.getReasonCodeableConcept());
     if (null != o.getReasonReference() ) {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModel(o.getReasonReference(), this.reasonreference_id);

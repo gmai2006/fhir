@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AdverseEvent;
 
 public interface AdverseEventService {
@@ -35,4 +37,12 @@ public interface AdverseEventService {
   public AdverseEvent create(AdverseEvent bean);
   public AdverseEvent update(AdverseEvent bean);
   public void delete(AdverseEvent bean);
+  public List<AdverseEvent> findByField(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByLocation(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByReaction(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByRecorder(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByStudy(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findBySubject(QueryBuilder queryBuilder);
+
+
 }

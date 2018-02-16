@@ -31,79 +31,51 @@ import com.google.gson.GsonBuilder;
 /**
 * "A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a \"System\" used within the Identifier and Coding data types."
 */
-public class NamingSystemUniqueId  {
+public class NamingSystemUniqueId  extends BackboneElement  {
   /**
   * Description: "Identifies the unique identifier scheme used for this particular identifier."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "The string that should be sent over the wire to identify the code system or identifier system."
   */
-  private String value;
+  protected String value;
 
   /**
   * Description: "Extensions for value"
   */
-  private transient Element _value;
+  protected transient Element _value;
 
   /**
   * Description: "Indicates whether this identifier is the \"preferred\" identifier of this type."
   */
-  private Boolean preferred;
+  protected Boolean preferred;
 
   /**
   * Description: "Extensions for preferred"
   */
-  private transient Element _preferred;
+  protected transient Element _preferred;
 
   /**
   * Description: "Notes about the past or intended usage of this identifier."
   */
-  private String comment;
+  protected String comment;
 
   /**
   * Description: "Extensions for comment"
   */
-  private transient Element _comment;
+  protected transient Element _comment;
 
   /**
   * Description: "Identifies the period of time over which this identifier is considered appropriate to refer to the naming system.  Outside of this window, the identifier might be non-deterministic."
   */
-  private Period period;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Period period;
 
   public NamingSystemUniqueId() {
   }
@@ -123,9 +95,6 @@ public class NamingSystemUniqueId  {
       this.comment = o.getComment();
     }
     this.period = PeriodHelper.fromJson(o.getPeriod());
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
   }
 
   public void setType( String value) {
@@ -182,30 +151,6 @@ public class NamingSystemUniqueId  {
   public Period getPeriod() {
     return this.period;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -219,11 +164,7 @@ public class NamingSystemUniqueId  {
      if(this._preferred != null) builder.append("_preferred" + "->" + this._preferred.toString() + "\n"); 
      if(this.comment != null) builder.append("comment" + "->" + this.comment.toString() + "\n"); 
      if(this._comment != null) builder.append("_comment" + "->" + this._comment.toString() + "\n"); 
-     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.period != null) builder.append("period" + "->" + this.period.toString() + "\n"); ;
     return builder.toString();
   }
 

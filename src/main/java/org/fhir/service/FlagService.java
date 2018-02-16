@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Flag;
 
 public interface FlagService {
@@ -35,4 +37,9 @@ public interface FlagService {
   public Flag create(Flag bean);
   public Flag update(Flag bean);
   public void delete(Flag bean);
+  public List<Flag> findByField(QueryBuilder queryBuilder);
+  public List<Flag> findByAuthor(QueryBuilder queryBuilder);
+  public List<Flag> findBySubject(QueryBuilder queryBuilder);
+
+
 }

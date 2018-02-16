@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Encounter;
 
 public interface EncounterService {
@@ -35,4 +37,12 @@ public interface EncounterService {
   public Encounter create(Encounter bean);
   public Encounter update(Encounter bean);
   public void delete(Encounter bean);
+  public List<Encounter> findByField(QueryBuilder queryBuilder);
+  public List<Encounter> findByAppointment(QueryBuilder queryBuilder);
+  public List<Encounter> findByDiagnosis(QueryBuilder queryBuilder);
+  public List<Encounter> findByLocation(QueryBuilder queryBuilder);
+  public List<Encounter> findByParticipant(QueryBuilder queryBuilder);
+  public List<Encounter> findBySubject(QueryBuilder queryBuilder);
+
+
 }

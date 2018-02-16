@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Composition;
 
 public interface CompositionDao {
@@ -38,4 +39,11 @@ public interface CompositionDao {
 
   public Composition update(Composition e);
   public void delete(Composition e);
+
+  public List<Composition> findByField(QueryBuilder queryBuilder);
+
+  public List<Composition> findByAttester(QueryBuilder queryBuilder);
+  public List<Composition> findByAuthor(QueryBuilder queryBuilder);
+  public List<Composition> findBySection(QueryBuilder queryBuilder);
+  public List<Composition> findBySubject(QueryBuilder queryBuilder);
 }

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DataElement;
 
 public interface DataElementService {
@@ -35,4 +37,7 @@ public interface DataElementService {
   public DataElement create(DataElement bean);
   public DataElement update(DataElement bean);
   public void delete(DataElement bean);
+  public List<DataElement> findByField(QueryBuilder queryBuilder);
+
+
 }

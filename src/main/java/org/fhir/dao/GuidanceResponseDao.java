@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.GuidanceResponse;
 
 public interface GuidanceResponseDao {
@@ -38,4 +39,8 @@ public interface GuidanceResponseDao {
 
   public GuidanceResponse update(GuidanceResponse e);
   public void delete(GuidanceResponse e);
+
+  public List<GuidanceResponse> findByField(QueryBuilder queryBuilder);
+
+  public List<GuidanceResponse> findBySubject(QueryBuilder queryBuilder);
 }

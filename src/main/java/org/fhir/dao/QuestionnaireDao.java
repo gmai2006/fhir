@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Questionnaire;
 
 public interface QuestionnaireDao {
@@ -38,4 +39,7 @@ public interface QuestionnaireDao {
 
   public Questionnaire update(Questionnaire e);
   public void delete(Questionnaire e);
+
+  public List<Questionnaire> findByField(QueryBuilder queryBuilder);
+
 }

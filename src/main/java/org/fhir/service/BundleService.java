@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Bundle;
 
 public interface BundleService {
@@ -35,4 +37,7 @@ public interface BundleService {
   public Bundle create(Bundle bean);
   public Bundle update(Bundle bean);
   public void delete(Bundle bean);
+  public List<Bundle> findByField(QueryBuilder queryBuilder);
+
+
 }

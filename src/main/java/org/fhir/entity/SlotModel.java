@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A slot of time on a schedule that may be available for booking appointments."
 */
 @Entity
 @Table(name="slot")
 public class SlotModel  implements Serializable {
-	private static final long serialVersionUID = 151857669688224072L;
+	private static final long serialVersionUID = 151873631167480764L;
   /**
   * Description: "This is a Slot resource"
   */
@@ -228,8 +229,8 @@ public class SlotModel  implements Serializable {
   public SlotModel(Slot o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.serviceCategory = CodeableConceptHelper.toJson(o.getServiceCategory());
-    this.appointmentType = CodeableConceptHelper.toJson(o.getAppointmentType());
+    this.serviceCategory = JsonUtils.toJson(o.getServiceCategory());
+    this.appointmentType = JsonUtils.toJson(o.getAppointmentType());
     if (null != o.getSchedule() ) {
     	this.schedule_id = "schedule" + this.id;
     	this.schedule = ReferenceHelper.toModel(o.getSchedule(), this.schedule_id);

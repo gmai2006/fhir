@@ -31,122 +31,94 @@ import com.google.gson.GsonBuilder;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
-public class ObservationComponent  {
+public class ObservationComponent  extends BackboneElement  {
   /**
   * Description: "Describes what was observed. Sometimes this is called the observation \"code\"."
   */
   @javax.validation.constraints.NotNull
-  private CodeableConcept code;
+  protected CodeableConcept code;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Quantity valueQuantity;
+  protected Quantity valueQuantity;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private CodeableConcept valueCodeableConcept;
+  protected CodeableConcept valueCodeableConcept;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private String valueString;
+  protected String valueString;
 
   /**
   * Description: "Extensions for valueString"
   */
-  private transient Element _valueString;
+  protected transient Element _valueString;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Range valueRange;
+  protected Range valueRange;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Ratio valueRatio;
+  protected Ratio valueRatio;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private SampledData valueSampledData;
+  protected SampledData valueSampledData;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Attachment valueAttachment;
+  protected Attachment valueAttachment;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
   @javax.validation.constraints.Pattern(regexp="([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?")
-  private String valueTime;
+  protected String valueTime;
 
   /**
   * Description: "Extensions for valueTime"
   */
-  private transient Element _valueTime;
+  protected transient Element _valueTime;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String valueDateTime;
+  protected String valueDateTime;
 
   /**
   * Description: "Extensions for valueDateTime"
   */
-  private transient Element _valueDateTime;
+  protected transient Element _valueDateTime;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
   */
-  private Period valuePeriod;
+  protected Period valuePeriod;
 
   /**
   * Description: "Provides a reason why the expected value in the element Observation.value[x] is missing."
   */
-  private CodeableConcept dataAbsentReason;
+  protected CodeableConcept dataAbsentReason;
 
   /**
   * Description: "The assessment made based on the result of the observation.  Intended as a simple compact code often placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status of the result. Otherwise known as abnormal flag."
   */
-  private CodeableConcept interpretation;
+  protected CodeableConcept interpretation;
 
   /**
   * Description: "Guidance on how to interpret the value by comparison to a normal or recommended range."
   */
-  private java.util.List<ObservationReferenceRange> referenceRange = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ObservationReferenceRange> referenceRange = new java.util.ArrayList<>();
 
   public ObservationComponent() {
   }
@@ -154,7 +126,9 @@ public class ObservationComponent  {
   public ObservationComponent(ObservationComponentModel o) {
     this.id = o.getId();
     this.code = CodeableConceptHelper.fromJson(o.getCode());
-    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
+      this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
+    }
     this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
     if (null != o.getValueString()) {
       this.valueString = o.getValueString();
@@ -174,9 +148,6 @@ public class ObservationComponent  {
     this.interpretation = CodeableConceptHelper.fromJson(o.getInterpretation());
     if (null != o.getReferenceRange() && !o.getReferenceRange().isEmpty()) {
     	this.referenceRange = ObservationReferenceRangeHelper.fromArray2Array(o.getReferenceRange());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -282,30 +253,6 @@ public class ObservationComponent  {
   public java.util.List<ObservationReferenceRange> getReferenceRange() {
     return this.referenceRange;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -327,11 +274,7 @@ public class ObservationComponent  {
      if(this.valuePeriod != null) builder.append("valuePeriod" + "->" + this.valuePeriod.toString() + "\n"); 
      if(this.dataAbsentReason != null) builder.append("dataAbsentReason" + "->" + this.dataAbsentReason.toString() + "\n"); 
      if(this.interpretation != null) builder.append("interpretation" + "->" + this.interpretation.toString() + "\n"); 
-     if(this.referenceRange != null) builder.append("referenceRange" + "->" + this.referenceRange.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.referenceRange != null) builder.append("referenceRange" + "->" + this.referenceRange.toString() + "\n"); ;
     return builder.toString();
   }
 

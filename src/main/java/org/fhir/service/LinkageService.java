@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Linkage;
 
 public interface LinkageService {
@@ -35,4 +37,9 @@ public interface LinkageService {
   public Linkage create(Linkage bean);
   public Linkage update(Linkage bean);
   public void delete(Linkage bean);
+  public List<Linkage> findByField(QueryBuilder queryBuilder);
+  public List<Linkage> findByAuthor(QueryBuilder queryBuilder);
+  public List<Linkage> findByItem(QueryBuilder queryBuilder);
+
+
 }

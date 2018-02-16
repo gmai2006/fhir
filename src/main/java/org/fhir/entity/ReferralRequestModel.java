@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Used to record and send details about a request for referral service or transfer of a patient to the care of another provider or provider organization."
 */
 @Entity
 @Table(name="referralrequest")
 public class ReferralRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669689277391L;
+	private static final long serialVersionUID = 151873631168468032L;
   /**
   * Description: "This is a ReferralRequest resource"
   */
@@ -378,10 +379,10 @@ public class ReferralRequestModel  implements Serializable {
     	this.replaces_id = "replaces" + this.id;
     	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
     }
-    this.groupIdentifier = IdentifierHelper.toJson(o.getGroupIdentifier());
+    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
     this.status = o.getStatus();
     this.intent = o.getIntent();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.priority = o.getPriority();
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
@@ -392,13 +393,13 @@ public class ReferralRequestModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = PeriodHelper.toJson(o.getOccurrencePeriod());
+    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
     this.authoredOn = o.getAuthoredOn();
     if (null != o.getRequester() ) {
     	this.requester_id = "requester" + this.id;
     	this.requester = ReferralRequestRequesterHelper.toModel(o.getRequester(), this.requester_id);
     }
-    this.specialty = CodeableConceptHelper.toJson(o.getSpecialty());
+    this.specialty = JsonUtils.toJson(o.getSpecialty());
     if (null != o.getRecipient() && !o.getRecipient().isEmpty()) {
     	this.recipient_id = "recipient" + this.id;
     	this.recipient = ReferenceHelper.toModelFromArray(o.getRecipient(), this.recipient_id);

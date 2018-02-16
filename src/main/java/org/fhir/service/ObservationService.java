@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Observation;
 
 public interface ObservationService {
@@ -35,4 +37,13 @@ public interface ObservationService {
   public Observation create(Observation bean);
   public Observation update(Observation bean);
   public void delete(Observation bean);
+  public List<Observation> findByField(QueryBuilder queryBuilder);
+  public List<Observation> findByContext(QueryBuilder queryBuilder);
+  public List<Observation> findByDevice(QueryBuilder queryBuilder);
+  public List<Observation> findByPerformer(QueryBuilder queryBuilder);
+  public List<Observation> findByRelated(QueryBuilder queryBuilder);
+  public List<Observation> findBySpecimen(QueryBuilder queryBuilder);
+  public List<Observation> findBySubject(QueryBuilder queryBuilder);
+
+
 }

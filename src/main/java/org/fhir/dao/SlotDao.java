@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Slot;
 
 public interface SlotDao {
@@ -38,4 +39,8 @@ public interface SlotDao {
 
   public Slot update(Slot e);
   public void delete(Slot e);
+
+  public List<Slot> findByField(QueryBuilder queryBuilder);
+
+  public List<Slot> findBySchedule(QueryBuilder queryBuilder);
 }

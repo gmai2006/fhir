@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle."
 */
 @Entity
 @Table(name="messageheaderresponse")
 public class MessageHeaderResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669699373442L;
+	private static final long serialVersionUID = 151873631178171787L;
   /**
   * Description: "The MessageHeader.id of the message to which this message is a response."
   */

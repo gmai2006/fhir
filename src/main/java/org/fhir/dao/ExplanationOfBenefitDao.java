@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ExplanationOfBenefit;
 
 public interface ExplanationOfBenefitDao {
@@ -38,4 +39,14 @@ public interface ExplanationOfBenefitDao {
 
   public ExplanationOfBenefit update(ExplanationOfBenefit e);
   public void delete(ExplanationOfBenefit e);
+
+  public List<ExplanationOfBenefit> findByField(QueryBuilder queryBuilder);
+
+  public List<ExplanationOfBenefit> findByClaim(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByEnterer(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByFacility(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByOrganization(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByPatient(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByPayee(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByProvider(QueryBuilder queryBuilder);
 }

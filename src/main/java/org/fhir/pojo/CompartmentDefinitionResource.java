@@ -31,65 +31,37 @@ import com.google.gson.GsonBuilder;
 /**
 * "A compartment definition that defines how resources are accessed on a server."
 */
-public class CompartmentDefinitionResource  {
+public class CompartmentDefinitionResource  extends BackboneElement  {
   /**
   * Description: "The name of a resource supported by the server."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String code;
+  protected String code;
 
   /**
   * Description: "Extensions for code"
   */
-  private transient Element _code;
+  protected transient Element _code;
 
   /**
   * Description: "The name of a search parameter that represents the link to the compartment. More than one may be listed because a resource may be linked to a compartment in more than one way,."
   */
-  private java.util.List<String> param = new java.util.ArrayList<>();
+  protected java.util.List<String> param = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for param"
   */
-  private transient java.util.List<Element> _param = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _param = new java.util.ArrayList<>();
 
   /**
   * Description: "Additional documentation about the resource and compartment."
   */
-  private String documentation;
+  protected String documentation;
 
   /**
   * Description: "Extensions for documentation"
   */
-  private transient Element _documentation;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _documentation;
 
   public CompartmentDefinitionResource() {
   }
@@ -104,9 +76,6 @@ public class CompartmentDefinitionResource  {
     }
     if (null != o.getDocumentation()) {
       this.documentation = o.getDocumentation();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -146,30 +115,6 @@ public class CompartmentDefinitionResource  {
   public Element get_documentation() {
     return this._documentation;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -180,11 +125,7 @@ public class CompartmentDefinitionResource  {
      if(this.param != null) builder.append("param" + "->" + this.param.toString() + "\n"); 
      if(this._param != null) builder.append("_param" + "->" + this._param.toString() + "\n"); 
      if(this.documentation != null) builder.append("documentation" + "->" + this.documentation.toString() + "\n"); 
-     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._documentation != null) builder.append("_documentation" + "->" + this._documentation.toString() + "\n"); ;
     return builder.toString();
   }
 

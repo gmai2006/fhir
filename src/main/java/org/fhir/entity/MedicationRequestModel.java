@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns."
 */
 @Entity
 @Table(name="medicationrequest")
 public class MedicationRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669701889290L;
+	private static final long serialVersionUID = 151873631180519051L;
   /**
   * Description: "This is a MedicationRequest resource"
   */
@@ -393,12 +394,12 @@ public class MedicationRequestModel  implements Serializable {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
     }
-    this.groupIdentifier = IdentifierHelper.toJson(o.getGroupIdentifier());
+    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
     this.status = o.getStatus();
     this.intent = o.getIntent();
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.category = JsonUtils.toJson(o.getCategory());
     this.priority = o.getPriority();
-    this.medicationCodeableConcept = CodeableConceptHelper.toJson(o.getMedicationCodeableConcept());
+    this.medicationCodeableConcept = JsonUtils.toJson(o.getMedicationCodeableConcept());
     if (null != o.getMedicationReference() ) {
     	this.medicationreference_id = "medicationreference" + this.id;
     	this.medicationReference = ReferenceHelper.toModel(o.getMedicationReference(), this.medicationreference_id);

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ResearchSubject;
 
 public interface ResearchSubjectDao {
@@ -38,4 +39,8 @@ public interface ResearchSubjectDao {
 
   public ResearchSubject update(ResearchSubject e);
   public void delete(ResearchSubject e);
+
+  public List<ResearchSubject> findByField(QueryBuilder queryBuilder);
+
+  public List<ResearchSubject> findByIndividual(QueryBuilder queryBuilder);
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A task to be performed."
 */
 @Entity
 @Table(name="taskrestriction")
 public class TaskRestrictionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669661927433L;
+	private static final long serialVersionUID = 151873631132738507L;
   /**
   * Description: "Indicates the number of times the requested action should occur."
   */
@@ -112,7 +113,7 @@ public class TaskRestrictionModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.repetitions = o.getRepetitions();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getRecipient() && !o.getRecipient().isEmpty()) {
     	this.recipient_id = "recipient" + this.parent_id;
     	this.recipient = ReferenceHelper.toModelFromArray(o.getRecipient(), this.recipient_id);

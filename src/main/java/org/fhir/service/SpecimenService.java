@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Specimen;
 
 public interface SpecimenService {
@@ -35,4 +37,10 @@ public interface SpecimenService {
   public Specimen create(Specimen bean);
   public Specimen update(Specimen bean);
   public void delete(Specimen bean);
+  public List<Specimen> findByField(QueryBuilder queryBuilder);
+  public List<Specimen> findByContainer(QueryBuilder queryBuilder);
+  public List<Specimen> findByParent(QueryBuilder queryBuilder);
+  public List<Specimen> findBySubject(QueryBuilder queryBuilder);
+
+
 }

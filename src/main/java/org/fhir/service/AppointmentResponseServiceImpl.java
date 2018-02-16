@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AppointmentResponse;
 /**
 * auto generated from SQL files
@@ -103,5 +104,25 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(AppointmentResponse) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<AppointmentResponse> findByField(QueryBuilder queryBuilder) {
+  	final List<AppointmentResponse> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<AppointmentResponse> findByActor(QueryBuilder queryBuilder) {
+  	final List<AppointmentResponse> result = dao.findByActor(queryBuilder);
+    logger.info("findByactor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AppointmentResponse> findByAppointment(QueryBuilder queryBuilder) {
+  	final List<AppointmentResponse> result = dao.findByAppointment(queryBuilder);
+    logger.info("findByappointment - exited - return value={} result ");
+    return result;
   }
 }

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Schedule;
 
 public interface ScheduleService {
@@ -35,4 +37,8 @@ public interface ScheduleService {
   public Schedule create(Schedule bean);
   public Schedule update(Schedule bean);
   public void delete(Schedule bean);
+  public List<Schedule> findByField(QueryBuilder queryBuilder);
+  public List<Schedule> findByActor(QueryBuilder queryBuilder);
+
+
 }

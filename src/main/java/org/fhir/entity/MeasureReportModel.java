@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
 */
 @Entity
 @Table(name="measurereport")
 public class MeasureReportModel  implements Serializable {
-	private static final long serialVersionUID = 151857669650251487L;
+	private static final long serialVersionUID = 151873631114197310L;
   /**
   * Description: "This is a MeasureReport resource"
   */
@@ -233,7 +234,7 @@ public class MeasureReportModel  implements Serializable {
   public MeasureReportModel(MeasureReport o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.status = o.getStatus();
     this.type = o.getType();
     if (null != o.getMeasure() ) {
@@ -249,7 +250,7 @@ public class MeasureReportModel  implements Serializable {
     	this.reportingorganization_id = "reportingorganization" + this.id;
     	this.reportingOrganization = ReferenceHelper.toModel(o.getReportingOrganization(), this.reportingorganization_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getGroup() && !o.getGroup().isEmpty()) {
     	this.group_id = "group" + this.id;
     	this.group = MeasureReportGroupHelper.toModelFromArray(o.getGroup(), this.group_id);

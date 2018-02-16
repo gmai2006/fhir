@@ -31,74 +31,46 @@ import com.google.gson.GsonBuilder;
 /**
 * "The subscription resource is used to define a push based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined \"channel\" so that another system is able to take an appropriate action."
 */
-public class SubscriptionChannel  {
+public class SubscriptionChannel  extends BackboneElement  {
   /**
   * Description: "The type of channel to send notifications on."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "The uri that describes the actual end-point to send messages to."
   */
-  private String endpoint;
+  protected String endpoint;
 
   /**
   * Description: "Extensions for endpoint"
   */
-  private transient Element _endpoint;
+  protected transient Element _endpoint;
 
   /**
   * Description: "The mime type to send the payload in - either application/fhir+xml, or application/fhir+json. If the payload is not present, then there is no payload in the notification, just a notification."
   */
-  private String payload;
+  protected String payload;
 
   /**
   * Description: "Extensions for payload"
   */
-  private transient Element _payload;
+  protected transient Element _payload;
 
   /**
   * Description: "Additional headers / information to send as part of the notification."
   */
-  private java.util.List<String> header = new java.util.ArrayList<>();
+  protected java.util.List<String> header = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for header"
   */
-  private transient java.util.List<Element> _header = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _header = new java.util.ArrayList<>();
 
   public SubscriptionChannel() {
   }
@@ -116,9 +88,6 @@ public class SubscriptionChannel  {
     }
     if (o.getHeader() != null) {
     	this.header = org.fhir.utils.JsonUtils.json2Array(o.getHeader());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -170,30 +139,6 @@ public class SubscriptionChannel  {
   public java.util.List<Element> get_header() {
     return this._header;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -206,11 +151,7 @@ public class SubscriptionChannel  {
      if(this.payload != null) builder.append("payload" + "->" + this.payload.toString() + "\n"); 
      if(this._payload != null) builder.append("_payload" + "->" + this._payload.toString() + "\n"); 
      if(this.header != null) builder.append("header" + "->" + this.header.toString() + "\n"); 
-     if(this._header != null) builder.append("_header" + "->" + this._header.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._header != null) builder.append("_header" + "->" + this._header.toString() + "\n"); ;
     return builder.toString();
   }
 

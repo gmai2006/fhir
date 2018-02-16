@@ -31,235 +31,207 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
-public class PlanDefinitionAction  {
+public class PlanDefinitionAction  extends BackboneElement  {
   /**
   * Description: "A user-visible label for the action."
   */
-  private String label;
+  protected String label;
 
   /**
   * Description: "Extensions for label"
   */
-  private transient Element _label;
+  protected transient Element _label;
 
   /**
   * Description: "The title of the action displayed to a user."
   */
-  private String title;
+  protected String title;
 
   /**
   * Description: "Extensions for title"
   */
-  private transient Element _title;
+  protected transient Element _title;
 
   /**
   * Description: "A short description of the action used to provide a summary to display to the user."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "A text equivalent of the action to be performed. This provides a human-interpretable description of the action when the definition is consumed by a system that may not be capable of interpreting it dynamically."
   */
-  private String textEquivalent;
+  protected String textEquivalent;
 
   /**
   * Description: "Extensions for textEquivalent"
   */
-  private transient Element _textEquivalent;
+  protected transient Element _textEquivalent;
 
   /**
   * Description: "A code that provides meaning for the action or action group. For example, a section may have a LOINC code for a the section of a documentation template."
   */
-  private java.util.List<CodeableConcept> code = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> code = new java.util.ArrayList<>();
 
   /**
   * Description: "A description of why this action is necessary or appropriate."
   */
-  private java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
 
   /**
   * Description: "Didactic or other informational resources associated with the action that can be provided to the CDS recipient. Information resources can include inline text commentary and links to web resources."
   */
-  private java.util.List<RelatedArtifact> documentation = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> documentation = new java.util.ArrayList<>();
 
   /**
   * Description: "Identifies goals that this action supports. The reference must be to a goal element defined within this plan definition."
   */
-  private java.util.List<String> goalId = new java.util.ArrayList<>();
+  protected java.util.List<String> goalId = new java.util.ArrayList<>();
 
   /**
   * Description: "Extensions for goalId"
   */
-  private transient java.util.List<Element> _goalId = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _goalId = new java.util.ArrayList<>();
 
   /**
   * Description: "A description of when the action should be triggered."
   */
-  private java.util.List<TriggerDefinition> triggerDefinition = new java.util.ArrayList<>();
+  protected java.util.List<TriggerDefinition> triggerDefinition = new java.util.ArrayList<>();
 
   /**
   * Description: "An expression that describes applicability criteria, or start/stop conditions for the action."
   */
-  private java.util.List<PlanDefinitionCondition> condition = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionCondition> condition = new java.util.ArrayList<>();
 
   /**
   * Description: "Defines input data requirements for the action."
   */
-  private java.util.List<DataRequirement> input = new java.util.ArrayList<>();
+  protected java.util.List<DataRequirement> input = new java.util.ArrayList<>();
 
   /**
   * Description: "Defines the outputs of the action, if any."
   */
-  private java.util.List<DataRequirement> output = new java.util.ArrayList<>();
+  protected java.util.List<DataRequirement> output = new java.util.ArrayList<>();
 
   /**
   * Description: "A relationship to another action such as \"before\" or \"30-60 minutes after start of\"."
   */
-  private java.util.List<PlanDefinitionRelatedAction> relatedAction = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionRelatedAction> relatedAction = new java.util.ArrayList<>();
 
   /**
   * Description: "An optional value describing when the action should be performed."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String timingDateTime;
+  protected String timingDateTime;
 
   /**
   * Description: "Extensions for timingDateTime"
   */
-  private transient Element _timingDateTime;
+  protected transient Element _timingDateTime;
 
   /**
   * Description: "An optional value describing when the action should be performed."
   */
-  private Period timingPeriod;
+  protected Period timingPeriod;
 
   /**
   * Description: "An optional value describing when the action should be performed."
   */
-  private Duration timingDuration;
+  protected Duration timingDuration;
 
   /**
   * Description: "An optional value describing when the action should be performed."
   */
-  private Range timingRange;
+  protected Range timingRange;
 
   /**
   * Description: "An optional value describing when the action should be performed."
   */
-  private Timing timingTiming;
+  protected Timing timingTiming;
 
   /**
   * Description: "Indicates who should participate in performing the action described."
   */
-  private java.util.List<PlanDefinitionParticipant> participant = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionParticipant> participant = new java.util.ArrayList<>();
 
   /**
   * Description: "The type of action to perform (create, update, remove)."
   */
-  private Coding type;
+  protected Coding type;
 
   /**
   * Description: "Defines the grouping behavior for the action and its children."
   */
-  private String groupingBehavior;
+  protected String groupingBehavior;
 
   /**
   * Description: "Extensions for groupingBehavior"
   */
-  private transient Element _groupingBehavior;
+  protected transient Element _groupingBehavior;
 
   /**
   * Description: "Defines the selection behavior for the action and its children."
   */
-  private String selectionBehavior;
+  protected String selectionBehavior;
 
   /**
   * Description: "Extensions for selectionBehavior"
   */
-  private transient Element _selectionBehavior;
+  protected transient Element _selectionBehavior;
 
   /**
   * Description: "Defines the requiredness behavior for the action."
   */
-  private String requiredBehavior;
+  protected String requiredBehavior;
 
   /**
   * Description: "Extensions for requiredBehavior"
   */
-  private transient Element _requiredBehavior;
+  protected transient Element _requiredBehavior;
 
   /**
   * Description: "Defines whether the action should usually be preselected."
   */
-  private String precheckBehavior;
+  protected String precheckBehavior;
 
   /**
   * Description: "Extensions for precheckBehavior"
   */
-  private transient Element _precheckBehavior;
+  protected transient Element _precheckBehavior;
 
   /**
   * Description: "Defines whether the action can be selected multiple times."
   */
-  private String cardinalityBehavior;
+  protected String cardinalityBehavior;
 
   /**
   * Description: "Extensions for cardinalityBehavior"
   */
-  private transient Element _cardinalityBehavior;
+  protected transient Element _cardinalityBehavior;
 
   /**
   * Description: "A reference to an ActivityDefinition that describes the action to be taken in detail, or a PlanDefinition that describes a series of actions to be taken."
   */
-  private Reference definition;
+  protected Reference definition;
 
   /**
   * Description: "A reference to a StructureMap resource that defines a transform that can be executed to produce the intent resource using the ActivityDefinition instance as the input."
   */
-  private Reference transform;
+  protected Reference transform;
 
   /**
   * Description: "Customizations that should be applied to the statically defined resource. For example, if the dosage of a medication must be computed based on the patient's weight, a customization would be used to specify an expression that calculated the weight, and the path on the resource that would contain the result."
   */
-  private java.util.List<PlanDefinitionDynamicValue> dynamicValue = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionDynamicValue> dynamicValue = new java.util.ArrayList<>();
 
   /**
   * Description: "Sub actions that are contained within the action. The behavior of this action determines the functionality of the sub-actions. For example, a selection behavior of at-most-one indicates that of the sub-actions, at most one may be chosen as part of realizing the action definition."
   */
-  private java.util.List<PlanDefinitionAction> action = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionAction> action = new java.util.ArrayList<>();
 
   public PlanDefinitionAction() {
   }
@@ -336,9 +308,6 @@ public class PlanDefinitionAction  {
     }
     if (null != o.getAction() && !o.getAction().isEmpty()) {
     	this.action = PlanDefinitionActionHelper.fromArray2Array(o.getAction());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -582,30 +551,6 @@ public class PlanDefinitionAction  {
   public java.util.List<PlanDefinitionAction> getAction() {
     return this.action;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -650,11 +595,7 @@ public class PlanDefinitionAction  {
      if(this.definition != null) builder.append("definition" + "->" + this.definition.toString() + "\n"); 
      if(this.transform != null) builder.append("transform" + "->" + this.transform.toString() + "\n"); 
      if(this.dynamicValue != null) builder.append("dynamicValue" + "->" + this.dynamicValue.toString() + "\n"); 
-     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.action != null) builder.append("action" + "->" + this.action.toString() + "\n"); ;
     return builder.toString();
   }
 

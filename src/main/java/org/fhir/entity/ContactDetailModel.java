@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Specifies contact information for a person or organization."
 */
 @Entity
 @Table(name="contactdetail")
 public class ContactDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151857669699699435L;
+	private static final long serialVersionUID = 151873631178534568L;
   /**
   * Description: "The name of an individual to contact."
   */

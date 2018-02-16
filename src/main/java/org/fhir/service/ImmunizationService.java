@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Immunization;
 
 public interface ImmunizationService {
@@ -35,4 +37,11 @@ public interface ImmunizationService {
   public Immunization create(Immunization bean);
   public Immunization update(Immunization bean);
   public void delete(Immunization bean);
+  public List<Immunization> findByField(QueryBuilder queryBuilder);
+  public List<Immunization> findByLocation(QueryBuilder queryBuilder);
+  public List<Immunization> findByManufacturer(QueryBuilder queryBuilder);
+  public List<Immunization> findByPractitioner(QueryBuilder queryBuilder);
+  public List<Immunization> findByReaction(QueryBuilder queryBuilder);
+
+
 }

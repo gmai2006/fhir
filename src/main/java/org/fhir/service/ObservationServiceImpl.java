@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Observation;
 /**
 * auto generated from SQL files
@@ -103,5 +104,49 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Observation) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Observation> findByField(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Observation> findByContext(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByDevice(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByDevice(queryBuilder);
+    logger.info("findBydevice - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByPerformer(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByPerformer(queryBuilder);
+    logger.info("findByperformer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByRelated(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByRelated(queryBuilder);
+    logger.info("findByrelated - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findBySpecimen(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findBySpecimen(queryBuilder);
+    logger.info("findByspecimen - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

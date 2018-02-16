@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Library;
 
 public interface LibraryService {
@@ -35,4 +37,7 @@ public interface LibraryService {
   public Library create(Library bean);
   public Library update(Library bean);
   public void delete(Library bean);
+  public List<Library> findByField(QueryBuilder queryBuilder);
+
+
 }

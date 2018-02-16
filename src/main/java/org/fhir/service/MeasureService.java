@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Measure;
 
 public interface MeasureService {
@@ -35,4 +37,7 @@ public interface MeasureService {
   public Measure create(Measure bean);
   public Measure update(Measure bean);
   public void delete(Measure bean);
+  public List<Measure> findByField(QueryBuilder queryBuilder);
+
+
 }

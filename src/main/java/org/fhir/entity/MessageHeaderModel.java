@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle."
 */
 @Entity
 @Table(name="messageheader")
 public class MessageHeaderModel  implements Serializable {
-	private static final long serialVersionUID = 151857669696313111L;
+	private static final long serialVersionUID = 151873631176098101L;
   /**
   * Description: "This is a MessageHeader resource"
   */
@@ -262,7 +263,7 @@ public class MessageHeaderModel  implements Serializable {
   public MessageHeaderModel(MessageHeader o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.event = CodingHelper.toJson(o.getEvent());
+    this.event = JsonUtils.toJson(o.getEvent());
     if (null != o.getDestination() && !o.getDestination().isEmpty()) {
     	this.destination_id = "destination" + this.id;
     	this.destination = MessageHeaderDestinationHelper.toModelFromArray(o.getDestination(), this.destination_id);
@@ -292,7 +293,7 @@ public class MessageHeaderModel  implements Serializable {
     	this.responsible_id = "responsible" + this.id;
     	this.responsible = ReferenceHelper.toModel(o.getResponsible(), this.responsible_id);
     }
-    this.reason = CodeableConceptHelper.toJson(o.getReason());
+    this.reason = JsonUtils.toJson(o.getReason());
     if (null != o.getResponse() ) {
     	this.response_id = "response" + this.id;
     	this.response = MessageHeaderResponseHelper.toModel(o.getResponse(), this.response_id);

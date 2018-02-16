@@ -31,415 +31,387 @@ import com.google.gson.GsonBuilder;
 /**
 * "This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it."
 */
-public class ParametersParameter  {
+public class ParametersParameter  extends BackboneElement  {
   /**
   * Description: "The name of the parameter (reference to the operation definition)."
   */
-  private String name;
+  protected String name;
 
   /**
   * Description: "Extensions for name"
   */
-  private transient Element _name;
+  protected transient Element _name;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Boolean valueBoolean;
+  protected Boolean valueBoolean;
 
   /**
   * Description: "Extensions for valueBoolean"
   */
-  private transient Element _valueBoolean;
+  protected transient Element _valueBoolean;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float valueInteger;
+  protected Float valueInteger;
 
   /**
   * Description: "Extensions for valueInteger"
   */
-  private transient Element _valueInteger;
+  protected transient Element _valueInteger;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float valueDecimal;
+  protected Float valueDecimal;
 
   /**
   * Description: "Extensions for valueDecimal"
   */
-  private transient Element _valueDecimal;
+  protected transient Element _valueDecimal;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private String valueBase64Binary;
+  protected String valueBase64Binary;
 
   /**
   * Description: "Extensions for valueBase64Binary"
   */
-  private transient Element _valueBase64Binary;
+  protected transient Element _valueBase64Binary;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private String valueInstant;
+  protected String valueInstant;
 
   /**
   * Description: "Extensions for valueInstant"
   */
-  private transient Element _valueInstant;
+  protected transient Element _valueInstant;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private String valueString;
+  protected String valueString;
 
   /**
   * Description: "Extensions for valueString"
   */
-  private transient Element _valueString;
+  protected transient Element _valueString;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private String valueUri;
+  protected String valueUri;
 
   /**
   * Description: "Extensions for valueUri"
   */
-  private transient Element _valueUri;
+  protected transient Element _valueUri;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?")
-  private String valueDate;
+  protected String valueDate;
 
   /**
   * Description: "Extensions for valueDate"
   */
-  private transient Element _valueDate;
+  protected transient Element _valueDate;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String valueDateTime;
+  protected String valueDateTime;
 
   /**
   * Description: "Extensions for valueDateTime"
   */
-  private transient Element _valueDateTime;
+  protected transient Element _valueDateTime;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?")
-  private String valueTime;
+  protected String valueTime;
 
   /**
   * Description: "Extensions for valueTime"
   */
-  private transient Element _valueTime;
+  protected transient Element _valueTime;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String valueCode;
+  protected String valueCode;
 
   /**
   * Description: "Extensions for valueCode"
   */
-  private transient Element _valueCode;
+  protected transient Element _valueCode;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="urn:oid:(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*))*")
-  private String valueOid;
+  protected String valueOid;
 
   /**
   * Description: "Extensions for valueOid"
   */
-  private transient Element _valueOid;
+  protected transient Element _valueOid;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
-  private String valueUuid;
+  protected String valueUuid;
 
   /**
   * Description: "Extensions for valueUuid"
   */
-  private transient Element _valueUuid;
+  protected transient Element _valueUuid;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="[A-Za-z0-9\\-\\.]{1,64}")
-  private String valueId;
+  protected String valueId;
 
   /**
   * Description: "Extensions for valueId"
   */
-  private transient Element _valueId;
+  protected transient Element _valueId;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="[0]|([1-9][0-9]*)")
-  private Float valueUnsignedInt;
+  protected Float valueUnsignedInt;
 
   /**
   * Description: "Extensions for valueUnsignedInt"
   */
-  private transient Element _valueUnsignedInt;
+  protected transient Element _valueUnsignedInt;
 
   /**
   * Description: "If the parameter is a data type."
   */
   @javax.validation.constraints.Pattern(regexp="[1-9][0-9]*")
-  private Float valuePositiveInt;
+  protected Float valuePositiveInt;
 
   /**
   * Description: "Extensions for valuePositiveInt"
   */
-  private transient Element _valuePositiveInt;
+  protected transient Element _valuePositiveInt;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private String valueMarkdown;
+  protected String valueMarkdown;
 
   /**
   * Description: "Extensions for valueMarkdown"
   */
-  private transient Element _valueMarkdown;
+  protected transient Element _valueMarkdown;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Element valueElement;
+  protected Element valueElement;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Extension valueExtension;
+  protected Extension valueExtension;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private BackboneElement valueBackboneElement;
+  protected BackboneElement valueBackboneElement;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Narrative valueNarrative;
+  protected Narrative valueNarrative;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Annotation valueAnnotation;
+  protected Annotation valueAnnotation;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Attachment valueAttachment;
+  protected Attachment valueAttachment;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Identifier valueIdentifier;
+  protected Identifier valueIdentifier;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private CodeableConcept valueCodeableConcept;
+  protected CodeableConcept valueCodeableConcept;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Coding valueCoding;
+  protected Coding valueCoding;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Quantity valueQuantity;
+  protected Quantity valueQuantity;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Duration valueDuration;
+  protected Duration valueDuration;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Quantity valueSimpleQuantity;
+  protected Quantity valueSimpleQuantity;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Distance valueDistance;
+  protected Distance valueDistance;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Count valueCount;
+  protected Count valueCount;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Money valueMoney;
+  protected Money valueMoney;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Age valueAge;
+  protected Age valueAge;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Range valueRange;
+  protected Range valueRange;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Period valuePeriod;
+  protected Period valuePeriod;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Ratio valueRatio;
+  protected Ratio valueRatio;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Reference valueReference;
+  protected Reference valueReference;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private SampledData valueSampledData;
+  protected SampledData valueSampledData;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Signature valueSignature;
+  protected Signature valueSignature;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private HumanName valueHumanName;
+  protected HumanName valueHumanName;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Address valueAddress;
+  protected Address valueAddress;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private ContactPoint valueContactPoint;
+  protected ContactPoint valueContactPoint;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Timing valueTiming;
+  protected Timing valueTiming;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Meta valueMeta;
+  protected Meta valueMeta;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private ElementDefinition valueElementDefinition;
+  protected ElementDefinition valueElementDefinition;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private ContactDetail valueContactDetail;
+  protected ContactDetail valueContactDetail;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Contributor valueContributor;
+  protected Contributor valueContributor;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private Dosage valueDosage;
+  protected Dosage valueDosage;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private RelatedArtifact valueRelatedArtifact;
+  protected RelatedArtifact valueRelatedArtifact;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private UsageContext valueUsageContext;
+  protected UsageContext valueUsageContext;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private DataRequirement valueDataRequirement;
+  protected DataRequirement valueDataRequirement;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private ParameterDefinition valueParameterDefinition;
+  protected ParameterDefinition valueParameterDefinition;
 
   /**
   * Description: "If the parameter is a data type."
   */
-  private TriggerDefinition valueTriggerDefinition;
+  protected TriggerDefinition valueTriggerDefinition;
 
   /**
   * Description: "If the parameter is a whole resource."
   */
-  private ResourceList resource;
+  protected ResourceList resource;
 
   /**
   * Description: "A named part of a multi-part parameter."
   */
-  private java.util.List<ParametersParameter> part = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ParametersParameter> part = new java.util.ArrayList<>();
 
   public ParametersParameter() {
   }
@@ -511,14 +483,20 @@ public class ParametersParameter  {
     this.valueIdentifier = IdentifierHelper.fromJson(o.getValueIdentifier());
     this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
     this.valueCoding = CodingHelper.fromJson(o.getValueCoding());
-    this.valueQuantity = QuantityHelper.fromJson(o.getValueQuantity());
+    if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
+      this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
+    }
     this.valueDuration = DurationHelper.fromJson(o.getValueDuration());
-    this.valueSimpleQuantity = QuantityHelper.fromJson(o.getValueSimpleQuantity());
+    if (null != o.getValueSimpleQuantity() && !o.getValueSimpleQuantity().isEmpty()) {
+      this.valueSimpleQuantity = new Quantity(o.getValueSimpleQuantity().get(0));
+    }
     if (null != o.getValueDistance() && !o.getValueDistance().isEmpty()) {
       this.valueDistance = new Distance(o.getValueDistance().get(0));
     }
     this.valueCount = CountHelper.fromJson(o.getValueCount());
-    this.valueMoney = MoneyHelper.fromJson(o.getValueMoney());
+    if (null != o.getValueMoney() && !o.getValueMoney().isEmpty()) {
+      this.valueMoney = new Money(o.getValueMoney().get(0));
+    }
     this.valueAge = AgeHelper.fromJson(o.getValueAge());
     this.valueRange = RangeHelper.fromJson(o.getValueRange());
     this.valuePeriod = PeriodHelper.fromJson(o.getValuePeriod());
@@ -529,7 +507,9 @@ public class ParametersParameter  {
     this.valueSampledData = SampledDataHelper.fromJson(o.getValueSampledData());
     this.valueSignature = SignatureHelper.fromJson(o.getValueSignature());
     this.valueHumanName = HumanNameHelper.fromJson(o.getValueHumanName());
-    this.valueAddress = AddressHelper.fromJson(o.getValueAddress());
+    if (null != o.getValueAddress() && !o.getValueAddress().isEmpty()) {
+      this.valueAddress = new Address(o.getValueAddress().get(0));
+    }
     this.valueContactPoint = ContactPointHelper.fromJson(o.getValueContactPoint());
     this.valueTiming = TimingHelper.fromJson(o.getValueTiming());
     if (null != o.getValueMeta() && !o.getValueMeta().isEmpty()) {
@@ -561,9 +541,6 @@ public class ParametersParameter  {
     this.resource = ResourceListHelper.fromJson(o.getResource());
     if (null != o.getPart() && !o.getPart().isEmpty()) {
     	this.part = ParametersParameterHelper.fromArray2Array(o.getPart());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -1011,30 +988,6 @@ public class ParametersParameter  {
   public java.util.List<ParametersParameter> getPart() {
     return this.part;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -1113,11 +1066,7 @@ public class ParametersParameter  {
      if(this.valueParameterDefinition != null) builder.append("valueParameterDefinition" + "->" + this.valueParameterDefinition.toString() + "\n"); 
      if(this.valueTriggerDefinition != null) builder.append("valueTriggerDefinition" + "->" + this.valueTriggerDefinition.toString() + "\n"); 
      if(this.resource != null) builder.append("resource" + "->" + this.resource.toString() + "\n"); 
-     if(this.part != null) builder.append("part" + "->" + this.part.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.part != null) builder.append("part" + "->" + this.part.toString() + "\n"); ;
     return builder.toString();
   }
 

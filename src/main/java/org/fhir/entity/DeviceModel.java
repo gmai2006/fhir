@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc."
 */
 @Entity
 @Table(name="device")
 public class DeviceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669680574971L;
+	private static final long serialVersionUID = 151873631158850530L;
   /**
   * Description: "This is a Device resource"
   */
@@ -289,7 +290,7 @@ public class DeviceModel  implements Serializable {
     	this.udi = DeviceUdiHelper.toModel(o.getUdi(), this.udi_id);
     }
     this.status = o.getStatus();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.lotNumber = o.getLotNumber();
     this.manufacturer = o.getManufacturer();
     this.manufactureDate = o.getManufactureDate();

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.FamilyMemberHistory;
 
 public interface FamilyMemberHistoryDao {
@@ -38,4 +39,8 @@ public interface FamilyMemberHistoryDao {
 
   public FamilyMemberHistory update(FamilyMemberHistory e);
   public void delete(FamilyMemberHistory e);
+
+  public List<FamilyMemberHistory> findByField(QueryBuilder queryBuilder);
+
+  public List<FamilyMemberHistory> findByDefinition(QueryBuilder queryBuilder);
 }

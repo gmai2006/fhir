@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.QuestionnaireResponseModel;
 import org.fhir.pojo.QuestionnaireResponse;
 import org.fhir.pojo.QuestionnaireResponseHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class QuestionnaireResponseDaoImpl implements QuestionnaireResponseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,61 @@ public class QuestionnaireResponseDaoImpl implements QuestionnaireResponseDao {
       final EntityManager em = entityManagerProvider.get();
       final QuestionnaireResponseModel removed = em.find(QuestionnaireResponseModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<QuestionnaireResponse> findByAuthor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from QuestionnaireResponseModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<QuestionnaireResponse> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from QuestionnaireResponseModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<QuestionnaireResponse> findByParent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from QuestionnaireResponseModel a, Reference b where a.parent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<QuestionnaireResponse> findByQuestionnaire(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from QuestionnaireResponseModel a, Reference b where a.questionnaire_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<QuestionnaireResponse> findBySource(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from QuestionnaireResponseModel a, Reference b where a.source_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<QuestionnaireResponse> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from QuestionnaireResponseModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<QuestionnaireResponse> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from QuestionnaireResponseModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<QuestionnaireResponse> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, QuestionnaireResponseModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<QuestionnaireResponseModel> models = query.getResultList();
+    return QuestionnaireResponseHelper.fromArray2Array(models);
   }
 }

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
 @Entity
 @Table(name="explanationofbenefitpayee")
 public class ExplanationOfBenefitPayeeModel  implements Serializable {
-	private static final long serialVersionUID = 151857669684188520L;
+	private static final long serialVersionUID = 151873631162974250L;
   /**
   * Description: "Type of Party to be reimbursed: Subscriber, provider, other."
   * Actual type: String;
@@ -112,8 +113,8 @@ public class ExplanationOfBenefitPayeeModel  implements Serializable {
   public ExplanationOfBenefitPayeeModel(ExplanationOfBenefitPayee o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.resourceType = CodeableConceptHelper.toJson(o.getResourceType());
+    this.type = JsonUtils.toJson(o.getType());
+    this.resourceType = JsonUtils.toJson(o.getResourceType());
     if (null != o.getParty() ) {
     	this.party_id = "party" + this.parent_id;
     	this.party = ReferenceHelper.toModel(o.getParty(), this.party_id);

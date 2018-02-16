@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.DeviceRequestModel;
 import org.fhir.pojo.DeviceRequest;
 import org.fhir.pojo.DeviceRequestHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class DeviceRequestDaoImpl implements DeviceRequestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,49 @@ public class DeviceRequestDaoImpl implements DeviceRequestDao {
       final EntityManager em = entityManagerProvider.get();
       final DeviceRequestModel removed = em.find(DeviceRequestModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<DeviceRequest> findByDefinition(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.definition_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByPerformer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.performer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByRequester(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, DeviceRequestRequester b where a.requester_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<DeviceRequest> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<DeviceRequest> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, DeviceRequestModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<DeviceRequestModel> models = query.getResultList();
+    return DeviceRequestHelper.fromArray2Array(models);
   }
 }

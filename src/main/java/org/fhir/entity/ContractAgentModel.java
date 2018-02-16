@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
 @Entity
 @Table(name="contractagent")
 public class ContractAgentModel  implements Serializable {
-	private static final long serialVersionUID = 151857669672683285L;
+	private static final long serialVersionUID = 151873631146935786L;
   /**
   * Description: "Who or what parties are assigned roles in this Contract."
   */

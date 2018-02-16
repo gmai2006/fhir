@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ClaimResponse;
 
 public interface ClaimResponseDao {
@@ -38,4 +39,10 @@ public interface ClaimResponseDao {
 
   public ClaimResponse update(ClaimResponse e);
   public void delete(ClaimResponse e);
+
+  public List<ClaimResponse> findByField(QueryBuilder queryBuilder);
+
+  public List<ClaimResponse> findByInsurer(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByPatient(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByRequest(QueryBuilder queryBuilder);
 }

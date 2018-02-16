@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order."
 */
 @Entity
 @Table(name="medicationdispense")
 public class MedicationDispenseModel  implements Serializable {
-	private static final long serialVersionUID = 151857669668374165L;
+	private static final long serialVersionUID = 151873631141316629L;
   /**
   * Description: "This is a MedicationDispense resource"
   */
@@ -168,21 +169,25 @@ public class MedicationDispenseModel  implements Serializable {
 
   /**
   * Description: "The amount of medication that has been dispensed. Includes unit of measure."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "The amount of medication expressed as a timing amount."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"daysSupply\"", length = 16777215)
-  private String daysSupply;
+  @Column(name="\"dayssupply_id\"")
+  private String dayssupply_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dayssupply_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> daysSupply;
 
   /**
   * Description: "The time when the dispensed product was packaged and reviewed."
@@ -398,8 +403,8 @@ public class MedicationDispenseModel  implements Serializable {
     	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
     }
     this.status = o.getStatus();
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
-    this.medicationCodeableConcept = CodeableConceptHelper.toJson(o.getMedicationCodeableConcept());
+    this.category = JsonUtils.toJson(o.getCategory());
+    this.medicationCodeableConcept = JsonUtils.toJson(o.getMedicationCodeableConcept());
     if (null != o.getMedicationReference() ) {
     	this.medicationreference_id = "medicationreference" + this.id;
     	this.medicationReference = ReferenceHelper.toModel(o.getMedicationReference(), this.medicationreference_id);
@@ -424,9 +429,15 @@ public class MedicationDispenseModel  implements Serializable {
     	this.authorizingprescription_id = "authorizingprescription" + this.id;
     	this.authorizingPrescription = ReferenceHelper.toModelFromArray(o.getAuthorizingPrescription(), this.authorizingprescription_id);
     }
-    this.type = CodeableConceptHelper.toJson(o.getType());
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
-    this.daysSupply = QuantityHelper.toJson(o.getDaysSupply());
+    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
+    if (null != o.getDaysSupply() ) {
+    	this.dayssupply_id = "dayssupply" + this.id;
+    	this.daysSupply = QuantityHelper.toModel(o.getDaysSupply(), this.dayssupply_id);
+    }
     this.whenPrepared = o.getWhenPrepared();
     this.whenHandedOver = o.getWhenHandedOver();
     if (null != o.getDestination() ) {
@@ -450,7 +461,7 @@ public class MedicationDispenseModel  implements Serializable {
     	this.detectedIssue = ReferenceHelper.toModelFromArray(o.getDetectedIssue(), this.detectedissue_id);
     }
     this.notDone = o.getNotDone();
-    this.notDoneReasonCodeableConcept = CodeableConceptHelper.toJson(o.getNotDoneReasonCodeableConcept());
+    this.notDoneReasonCodeableConcept = JsonUtils.toJson(o.getNotDoneReasonCodeableConcept());
     if (null != o.getNotDoneReasonReference() ) {
     	this.notdonereasonreference_id = "notdonereasonreference" + this.id;
     	this.notDoneReasonReference = ReferenceHelper.toModel(o.getNotDoneReasonReference(), this.notdonereasonreference_id);
@@ -549,16 +560,16 @@ public class MedicationDispenseModel  implements Serializable {
   public void setType( String value) {
     this.type = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
-  public String getDaysSupply() {
+  public java.util.List<QuantityModel> getDaysSupply() {
     return this.daysSupply;
   }
-  public void setDaysSupply( String value) {
+  public void setDaysSupply( java.util.List<QuantityModel> value) {
     this.daysSupply = value;
   }
   public String getWhenPrepared() {
@@ -692,8 +703,6 @@ public class MedicationDispenseModel  implements Serializable {
      builder.append("category" + "->" + this.category + "\n"); 
      builder.append("medicationCodeableConcept" + "->" + this.medicationCodeableConcept + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("daysSupply" + "->" + this.daysSupply + "\n"); 
      builder.append("whenPrepared" + "->" + this.whenPrepared + "\n"); 
      builder.append("whenHandedOver" + "->" + this.whenHandedOver + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 

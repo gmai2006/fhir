@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DocumentReference;
 /**
 * auto generated from SQL files
@@ -103,5 +104,37 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(DocumentReference) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<DocumentReference> findByField(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<DocumentReference> findByAuthenticator(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByAuthenticator(queryBuilder);
+    logger.info("findByauthenticator - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentReference> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentReference> findByCustodian(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByCustodian(queryBuilder);
+    logger.info("findBycustodian - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentReference> findBySubject(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

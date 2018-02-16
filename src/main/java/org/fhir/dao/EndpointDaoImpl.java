@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.EndpointModel;
 import org.fhir.pojo.Endpoint;
 import org.fhir.pojo.EndpointHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class EndpointDaoImpl implements EndpointDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class EndpointDaoImpl implements EndpointDao {
       final EntityManager em = entityManagerProvider.get();
       final EndpointModel removed = em.find(EndpointModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<Endpoint> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EndpointModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Endpoint> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, EndpointModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<EndpointModel> models = query.getResultList();
+    return EndpointHelper.fromArray2Array(models);
   }
 }

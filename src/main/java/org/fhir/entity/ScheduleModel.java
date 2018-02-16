@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A container for slots of time that may be available for booking appointments."
 */
 @Entity
 @Table(name="schedule")
 public class ScheduleModel  implements Serializable {
-	private static final long serialVersionUID = 151857669695765340L;
+	private static final long serialVersionUID = 15187363117539227L;
   /**
   * Description: "This is a Schedule resource"
   */
@@ -208,12 +209,12 @@ public class ScheduleModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.active = o.getActive();
-    this.serviceCategory = CodeableConceptHelper.toJson(o.getServiceCategory());
+    this.serviceCategory = JsonUtils.toJson(o.getServiceCategory());
     if (null != o.getActor() && !o.getActor().isEmpty()) {
     	this.actor_id = "actor" + this.id;
     	this.actor = ReferenceHelper.toModelFromArray(o.getActor(), this.actor_id);
     }
-    this.planningHorizon = PeriodHelper.toJson(o.getPlanningHorizon());
+    this.planningHorizon = JsonUtils.toJson(o.getPlanningHorizon());
     this.comment = o.getComment();
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;

@@ -31,74 +31,46 @@ import com.google.gson.GsonBuilder;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
-public class PlanDefinitionDynamicValue  {
+public class PlanDefinitionDynamicValue  extends BackboneElement  {
   /**
   * Description: "A brief, natural language description of the intended semantics of the dynamic value."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "The path to the element to be customized. This is the path on the resource that will hold the result of the calculation defined by the expression."
   */
-  private String path;
+  protected String path;
 
   /**
   * Description: "Extensions for path"
   */
-  private transient Element _path;
+  protected transient Element _path;
 
   /**
   * Description: "The media type of the language for the expression."
   */
-  private String language;
+  protected String language;
 
   /**
   * Description: "Extensions for language"
   */
-  private transient Element _language;
+  protected transient Element _language;
 
   /**
   * Description: "An expression specifying the value of the customized element."
   */
-  private String expression;
+  protected String expression;
 
   /**
   * Description: "Extensions for expression"
   */
-  private transient Element _expression;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected transient Element _expression;
 
   public PlanDefinitionDynamicValue() {
   }
@@ -116,9 +88,6 @@ public class PlanDefinitionDynamicValue  {
     }
     if (null != o.getExpression()) {
       this.expression = o.getExpression();
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -170,30 +139,6 @@ public class PlanDefinitionDynamicValue  {
   public Element get_expression() {
     return this._expression;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -206,11 +151,7 @@ public class PlanDefinitionDynamicValue  {
      if(this.language != null) builder.append("language" + "->" + this.language.toString() + "\n"); 
      if(this._language != null) builder.append("_language" + "->" + this._language.toString() + "\n"); 
      if(this.expression != null) builder.append("expression" + "->" + this.expression.toString() + "\n"); 
-     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this._expression != null) builder.append("_expression" + "->" + this._expression.toString() + "\n"); ;
     return builder.toString();
   }
 

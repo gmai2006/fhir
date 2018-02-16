@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ChargeItem;
 /**
 * auto generated from SQL files
@@ -103,5 +104,49 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(ChargeItem) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<ChargeItem> findByField(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<ChargeItem> findByAccount(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByAccount(queryBuilder);
+    logger.info("findByaccount - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByContext(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByEnterer(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByEnterer(queryBuilder);
+    logger.info("findByenterer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByQuantity(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByQuantity(queryBuilder);
+    logger.info("findByquantity - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByService(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByService(queryBuilder);
+    logger.info("findByservice - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findBySubject(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }

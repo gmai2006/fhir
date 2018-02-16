@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Details and position information for a physical place where services are provided  and resources and participants may be stored, found, contained or accommodated."
 */
 @Entity
 @Table(name="locationposition")
 public class LocationPositionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669712016817L;
+	private static final long serialVersionUID = 151873631191018898L;
   /**
   * Description: "Longitude. The value domain and the interpretation are the same as for the text of the longitude element in KML (see notes below)."
   */

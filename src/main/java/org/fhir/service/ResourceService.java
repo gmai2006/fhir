@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Resource;
 
 public interface ResourceService {
@@ -35,4 +37,7 @@ public interface ResourceService {
   public Resource create(Resource bean);
   public Resource update(Resource bean);
   public void delete(Resource bean);
+  public List<Resource> findByField(QueryBuilder queryBuilder);
+
+
 }

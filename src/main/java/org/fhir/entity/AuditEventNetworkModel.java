@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
 */
 @Entity
 @Table(name="auditeventnetwork")
 public class AuditEventNetworkModel  implements Serializable {
-	private static final long serialVersionUID = 151857669684341448L;
+	private static final long serialVersionUID = 151873631163188144L;
   /**
   * Description: "An identifier for the network access point of the user device for the audit event."
   */

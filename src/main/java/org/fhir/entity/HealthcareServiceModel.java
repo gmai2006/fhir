@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The details of a healthcare service available at a location."
 */
 @Entity
 @Table(name="healthcareservice")
 public class HealthcareServiceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669656099232L;
+	private static final long serialVersionUID = 151873631124072524L;
   /**
   * Description: "This is a HealthcareService resource"
   */
@@ -354,7 +355,7 @@ public class HealthcareServiceModel  implements Serializable {
     	this.providedby_id = "providedby" + this.id;
     	this.providedBy = ReferenceHelper.toModel(o.getProvidedBy(), this.providedby_id);
     }
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.category = JsonUtils.toJson(o.getCategory());
     if (null != o.getLocation() && !o.getLocation().isEmpty()) {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModelFromArray(o.getLocation(), this.location_id);
@@ -362,12 +363,12 @@ public class HealthcareServiceModel  implements Serializable {
     this.name = o.getName();
     this.comment = o.getComment();
     this.extraDetails = o.getExtraDetails();
-    this.photo = AttachmentHelper.toJson(o.getPhoto());
+    this.photo = JsonUtils.toJson(o.getPhoto());
     if (null != o.getCoverageArea() && !o.getCoverageArea().isEmpty()) {
     	this.coveragearea_id = "coveragearea" + this.id;
     	this.coverageArea = ReferenceHelper.toModelFromArray(o.getCoverageArea(), this.coveragearea_id);
     }
-    this.eligibility = CodeableConceptHelper.toJson(o.getEligibility());
+    this.eligibility = JsonUtils.toJson(o.getEligibility());
     this.eligibilityNote = o.getEligibilityNote();
     this.programName = org.fhir.utils.JsonUtils.write2String(o.getProgramName());
     this.appointmentRequired = o.getAppointmentRequired();

@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MedicationDispense;
 
 public interface MedicationDispenseService {
@@ -35,4 +37,12 @@ public interface MedicationDispenseService {
   public MedicationDispense create(MedicationDispense bean);
   public MedicationDispense update(MedicationDispense bean);
   public void delete(MedicationDispense bean);
+  public List<MedicationDispense> findByField(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByContext(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByDestination(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByPerformer(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByReceiver(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findBySubject(QueryBuilder queryBuilder);
+
+
 }

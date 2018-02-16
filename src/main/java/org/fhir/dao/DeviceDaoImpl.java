@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.DeviceModel;
 import org.fhir.pojo.Device;
 import org.fhir.pojo.DeviceHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class DeviceDaoImpl implements DeviceDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class DeviceDaoImpl implements DeviceDao {
       final EntityManager em = entityManagerProvider.get();
       final DeviceModel removed = em.find(DeviceModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Device> findByLocation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceModel a, Reference b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Device> findByPatient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceModel a, Reference b where a.patient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Device> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Device> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, DeviceModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<DeviceModel> models = query.getResultList();
+    return DeviceHelper.fromArray2Array(models);
   }
 }

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.MessageHeader;
 
 public interface MessageHeaderDao {
@@ -38,4 +39,15 @@ public interface MessageHeaderDao {
 
   public MessageHeader update(MessageHeader e);
   public void delete(MessageHeader e);
+
+  public List<MessageHeader> findByField(QueryBuilder queryBuilder);
+
+  public List<MessageHeader> findByAuthor(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByDestination(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByEnterer(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByFocus(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByReceiver(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByResponsible(QueryBuilder queryBuilder);
+  public List<MessageHeader> findBySender(QueryBuilder queryBuilder);
+  public List<MessageHeader> findBySource(QueryBuilder queryBuilder);
 }

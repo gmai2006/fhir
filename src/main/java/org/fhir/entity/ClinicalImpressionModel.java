@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called \"ClinicalImpression\" rather than \"ClinicalAssessment\" to avoid confusion with the recording of assessment tools such as Apgar score."
 */
 @Entity
 @Table(name="clinicalimpression")
 public class ClinicalImpressionModel  implements Serializable {
-	private static final long serialVersionUID = 151857669661652666L;
+	private static final long serialVersionUID = 151873631132237323L;
   /**
   * Description: "This is a ClinicalImpression resource"
   */
@@ -326,7 +327,7 @@ public class ClinicalImpressionModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.code = CodeableConceptHelper.toJson(o.getCode());
+    this.code = JsonUtils.toJson(o.getCode());
     this.description = o.getDescription();
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
@@ -337,7 +338,7 @@ public class ClinicalImpressionModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.effectiveDateTime = o.getEffectiveDateTime();
-    this.effectivePeriod = PeriodHelper.toJson(o.getEffectivePeriod());
+    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
     this.date = o.getDate();
     if (null != o.getAssessor() ) {
     	this.assessor_id = "assessor" + this.id;

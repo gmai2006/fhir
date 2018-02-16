@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
 @Entity
 @Table(name="contractfriendly")
 public class ContractFriendlyModel  implements Serializable {
-	private static final long serialVersionUID = 151857669671714494L;
+	private static final long serialVersionUID = 151873631146153611L;
   /**
   * Description: "Human readable rendering of this Contract in a format and representation intended to enhance comprehension and ensure understandability."
   * Actual type: String;
@@ -103,7 +104,7 @@ public class ContractFriendlyModel  implements Serializable {
   public ContractFriendlyModel(ContractFriendly o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.contentAttachment = AttachmentHelper.toJson(o.getContentAttachment());
+    this.contentAttachment = JsonUtils.toJson(o.getContentAttachment());
     if (null != o.getContentReference() ) {
     	this.contentreference_id = "contentreference" + this.parent_id;
     	this.contentReference = ReferenceHelper.toModel(o.getContentReference(), this.contentreference_id);

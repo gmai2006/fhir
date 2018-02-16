@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AllergyIntolerance;
 
 public interface AllergyIntoleranceDao {
@@ -38,4 +39,9 @@ public interface AllergyIntoleranceDao {
 
   public AllergyIntolerance update(AllergyIntolerance e);
   public void delete(AllergyIntolerance e);
+
+  public List<AllergyIntolerance> findByField(QueryBuilder queryBuilder);
+
+  public List<AllergyIntolerance> findByAsserter(QueryBuilder queryBuilder);
+  public List<AllergyIntolerance> findByRecorder(QueryBuilder queryBuilder);
 }

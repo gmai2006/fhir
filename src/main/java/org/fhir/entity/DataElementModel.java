@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "The formal description of a single piece of information that can be gathered and reported."
 */
 @Entity
 @Table(name="dataelement")
 public class DataElementModel  implements Serializable {
-	private static final long serialVersionUID = 151857669716655710L;
+	private static final long serialVersionUID = 151873631196228019L;
   /**
   * Description: "This is a DataElement resource"
   */

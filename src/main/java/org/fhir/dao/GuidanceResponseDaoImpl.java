@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.GuidanceResponseModel;
 import org.fhir.pojo.GuidanceResponse;
 import org.fhir.pojo.GuidanceResponseHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class GuidanceResponseDaoImpl implements GuidanceResponseDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,31 @@ public class GuidanceResponseDaoImpl implements GuidanceResponseDao {
       final EntityManager em = entityManagerProvider.get();
       final GuidanceResponseModel removed = em.find(GuidanceResponseModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<GuidanceResponse> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from GuidanceResponseModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<GuidanceResponse> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from GuidanceResponseModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<GuidanceResponse> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, GuidanceResponseModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<GuidanceResponseModel> models = query.getResultList();
+    return GuidanceResponseHelper.fromArray2Array(models);
   }
 }

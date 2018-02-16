@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PractitionerRole;
 /**
 * auto generated from SQL files
@@ -103,5 +104,37 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(PractitionerRole) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<PractitionerRole> findByField(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<PractitionerRole> findByEndpoint(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByEndpoint(queryBuilder);
+    logger.info("findByendpoint - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findByLocation(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findByPractitioner(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByPractitioner(queryBuilder);
+    logger.info("findBypractitioner - exited - return value={} result ");
+    return result;
   }
 }

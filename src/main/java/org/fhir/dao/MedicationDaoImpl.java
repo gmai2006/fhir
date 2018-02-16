@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.MedicationModel;
 import org.fhir.pojo.Medication;
 import org.fhir.pojo.MedicationHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class MedicationDaoImpl implements MedicationDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class MedicationDaoImpl implements MedicationDao {
       final EntityManager em = entityManagerProvider.get();
       final MedicationModel removed = em.find(MedicationModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Medication> findByIngredient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationModel a, MedicationIngredient b where a.ingredient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Medication> findByManufacturer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationModel a, Reference b where a.manufacturer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Medication> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MedicationModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Medication> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, MedicationModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<MedicationModel> models = query.getResultList();
+    return MedicationHelper.fromArray2Array(models);
   }
 }

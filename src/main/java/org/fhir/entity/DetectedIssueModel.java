@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc."
 */
 @Entity
 @Table(name="detectedissue")
 public class DetectedIssueModel  implements Serializable {
-	private static final long serialVersionUID = 151857669708012117L;
+	private static final long serialVersionUID = 15187363118675699L;
   /**
   * Description: "This is a DetectedIssue resource"
   */
@@ -236,9 +237,9 @@ public class DetectedIssueModel  implements Serializable {
   public DetectedIssueModel(DetectedIssue o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.status = o.getStatus();
-    this.category = CodeableConceptHelper.toJson(o.getCategory());
+    this.category = JsonUtils.toJson(o.getCategory());
     this.severity = o.getSeverity();
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;

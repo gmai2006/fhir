@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.AppointmentResponse;
 
 public interface AppointmentResponseDao {
@@ -38,4 +39,9 @@ public interface AppointmentResponseDao {
 
   public AppointmentResponse update(AppointmentResponse e);
   public void delete(AppointmentResponse e);
+
+  public List<AppointmentResponse> findByField(QueryBuilder queryBuilder);
+
+  public List<AppointmentResponse> findByActor(QueryBuilder queryBuilder);
+  public List<AppointmentResponse> findByAppointment(QueryBuilder queryBuilder);
 }

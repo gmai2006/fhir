@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies."
 */
 @Entity
 @Table(name="provenance")
 public class ProvenanceModel  implements Serializable {
-	private static final long serialVersionUID = 1518576697077878L;
+	private static final long serialVersionUID = 151873631186397477L;
   /**
   * Description: "This is a Provenance resource"
   */
@@ -235,14 +236,14 @@ public class ProvenanceModel  implements Serializable {
     	this.target_id = "target" + this.id;
     	this.target = ReferenceHelper.toModelFromArray(o.getTarget(), this.target_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     this.recorded = o.getRecorded();
     this.policy = org.fhir.utils.JsonUtils.write2String(o.getPolicy());
     if (null != o.getLocation() ) {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
     }
-    this.activity = CodingHelper.toJson(o.getActivity());
+    this.activity = JsonUtils.toJson(o.getActivity());
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent_id = "agent" + this.id;
     	this.agent = ProvenanceAgentHelper.toModelFromArray(o.getAgent(), this.agent_id);

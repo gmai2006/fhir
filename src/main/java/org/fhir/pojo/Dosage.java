@@ -31,136 +31,117 @@ import com.google.gson.GsonBuilder;
 /**
 * "Indicates how the medication is/was taken or should be taken by the patient."
 */
-public class Dosage  {
+public class Dosage  extends Element  {
   /**
   * Description: "Indicates the order in which the dosage instructions should be applied or interpreted."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float sequence;
+  protected Float sequence;
 
   /**
   * Description: "Extensions for sequence"
   */
-  private transient Element _sequence;
+  protected transient Element _sequence;
 
   /**
   * Description: "Free text dosage instructions e.g. SIG."
   */
-  private String text;
+  protected String text;
 
   /**
   * Description: "Extensions for text"
   */
-  private transient Element _text;
+  protected transient Element _text;
 
   /**
   * Description: "Supplemental instruction - e.g. \"with meals\"."
   */
-  private java.util.List<CodeableConcept> additionalInstruction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> additionalInstruction = new java.util.ArrayList<>();
 
   /**
   * Description: "Instructions in terms that are understood by the patient or consumer."
   */
-  private String patientInstruction;
+  protected String patientInstruction;
 
   /**
   * Description: "Extensions for patientInstruction"
   */
-  private transient Element _patientInstruction;
+  protected transient Element _patientInstruction;
 
   /**
   * Description: "When medication should be administered."
   */
-  private Timing timing;
+  protected Timing timing;
 
   /**
   * Description: "Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept)."
   */
-  private Boolean asNeededBoolean;
+  protected Boolean asNeededBoolean;
 
   /**
   * Description: "Extensions for asNeededBoolean"
   */
-  private transient Element _asNeededBoolean;
+  protected transient Element _asNeededBoolean;
 
   /**
   * Description: "Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept)."
   */
-  private CodeableConcept asNeededCodeableConcept;
+  protected CodeableConcept asNeededCodeableConcept;
 
   /**
   * Description: "Body site to administer to."
   */
-  private CodeableConcept site;
+  protected CodeableConcept site;
 
   /**
   * Description: "How drug should enter body."
   */
-  private CodeableConcept route;
+  protected CodeableConcept route;
 
   /**
   * Description: "Technique for administering medication."
   */
-  private CodeableConcept method;
+  protected CodeableConcept method;
 
   /**
   * Description: "Amount of medication per dose."
   */
-  private Range doseRange;
+  protected Range doseRange;
 
   /**
   * Description: "Amount of medication per dose."
   */
-  private Quantity doseSimpleQuantity;
+  protected Quantity doseSimpleQuantity;
 
   /**
   * Description: "Upper limit on medication per unit of time."
   */
-  private Ratio maxDosePerPeriod;
+  protected Ratio maxDosePerPeriod;
 
   /**
   * Description: "Upper limit on medication per administration."
   */
-  private Quantity maxDosePerAdministration;
+  protected Quantity maxDosePerAdministration;
 
   /**
   * Description: "Upper limit on medication per lifetime of the patient."
   */
-  private Quantity maxDosePerLifetime;
+  protected Quantity maxDosePerLifetime;
 
   /**
   * Description: "Amount of medication per unit of time."
   */
-  private Ratio rateRatio;
+  protected Ratio rateRatio;
 
   /**
   * Description: "Amount of medication per unit of time."
   */
-  private Range rateRange;
+  protected Range rateRange;
 
   /**
   * Description: "Amount of medication per unit of time."
   */
-  private Quantity rateSimpleQuantity;
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Quantity rateSimpleQuantity;
 
   public Dosage() {
   }
@@ -185,15 +166,20 @@ public class Dosage  {
     this.route = CodeableConceptHelper.fromJson(o.getRoute());
     this.method = CodeableConceptHelper.fromJson(o.getMethod());
     this.doseRange = RangeHelper.fromJson(o.getDoseRange());
-    this.doseSimpleQuantity = QuantityHelper.fromJson(o.getDoseSimpleQuantity());
+    if (null != o.getDoseSimpleQuantity() && !o.getDoseSimpleQuantity().isEmpty()) {
+      this.doseSimpleQuantity = new Quantity(o.getDoseSimpleQuantity().get(0));
+    }
     this.maxDosePerPeriod = RatioHelper.fromJson(o.getMaxDosePerPeriod());
-    this.maxDosePerAdministration = QuantityHelper.fromJson(o.getMaxDosePerAdministration());
-    this.maxDosePerLifetime = QuantityHelper.fromJson(o.getMaxDosePerLifetime());
+    if (null != o.getMaxDosePerAdministration() && !o.getMaxDosePerAdministration().isEmpty()) {
+      this.maxDosePerAdministration = new Quantity(o.getMaxDosePerAdministration().get(0));
+    }
+    if (null != o.getMaxDosePerLifetime() && !o.getMaxDosePerLifetime().isEmpty()) {
+      this.maxDosePerLifetime = new Quantity(o.getMaxDosePerLifetime().get(0));
+    }
     this.rateRatio = RatioHelper.fromJson(o.getRateRatio());
     this.rateRange = RangeHelper.fromJson(o.getRateRange());
-    this.rateSimpleQuantity = QuantityHelper.fromJson(o.getRateSimpleQuantity());
-    if (null != o.getId()) {
-      this.id = o.getId();
+    if (null != o.getRateSimpleQuantity() && !o.getRateSimpleQuantity().isEmpty()) {
+      this.rateSimpleQuantity = new Quantity(o.getRateSimpleQuantity().get(0));
     }
   }
 
@@ -329,24 +315,6 @@ public class Dosage  {
   public Quantity getRateSimpleQuantity() {
     return this.rateSimpleQuantity;
   }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -373,10 +341,7 @@ public class Dosage  {
      if(this.maxDosePerLifetime != null) builder.append("maxDosePerLifetime" + "->" + this.maxDosePerLifetime.toString() + "\n"); 
      if(this.rateRatio != null) builder.append("rateRatio" + "->" + this.rateRatio.toString() + "\n"); 
      if(this.rateRange != null) builder.append("rateRange" + "->" + this.rateRange.toString() + "\n"); 
-     if(this.rateSimpleQuantity != null) builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.rateSimpleQuantity != null) builder.append("rateSimpleQuantity" + "->" + this.rateSimpleQuantity.toString() + "\n"); ;
     return builder.toString();
   }
 

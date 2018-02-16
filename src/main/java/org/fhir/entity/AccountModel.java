@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc."
 */
 @Entity
 @Table(name="account")
 public class AccountModel  implements Serializable {
-	private static final long serialVersionUID = 15185766971095286L;
+	private static final long serialVersionUID = 151873631189823160L;
   /**
   * Description: "This is a Account resource"
   */
@@ -109,12 +110,14 @@ public class AccountModel  implements Serializable {
 
   /**
   * Description: "Represents the sum of all credits less all debits associated with the account.  Might be positive, zero or negative."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"balance\"", length = 16777215)
-  private String balance;
+  @Column(name="\"balance_id\"")
+  private String balance_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="balance_id", insertable=false, updatable=false)
+  private java.util.List<MoneyModel> balance;
 
   /**
   * Description: "The party(s) that are responsible for covering the payment of this account, and what order should they be applied to the account."
@@ -248,15 +251,18 @@ public class AccountModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
-    this.type = CodeableConceptHelper.toJson(o.getType());
+    this.type = JsonUtils.toJson(o.getType());
     this.name = o.getName();
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
     }
-    this.period = PeriodHelper.toJson(o.getPeriod());
-    this.active = PeriodHelper.toJson(o.getActive());
-    this.balance = MoneyHelper.toJson(o.getBalance());
+    this.period = JsonUtils.toJson(o.getPeriod());
+    this.active = JsonUtils.toJson(o.getActive());
+    if (null != o.getBalance() ) {
+    	this.balance_id = "balance" + this.id;
+    	this.balance = MoneyHelper.toModel(o.getBalance(), this.balance_id);
+    }
     if (null != o.getCoverage() && !o.getCoverage().isEmpty()) {
     	this.coverage_id = "coverage" + this.id;
     	this.coverage = AccountCoverageHelper.toModelFromArray(o.getCoverage(), this.coverage_id);
@@ -330,10 +336,10 @@ public class AccountModel  implements Serializable {
   public void setActive( String value) {
     this.active = value;
   }
-  public String getBalance() {
+  public java.util.List<MoneyModel> getBalance() {
     return this.balance;
   }
-  public void setBalance( String value) {
+  public void setBalance( java.util.List<MoneyModel> value) {
     this.balance = value;
   }
   public java.util.List<AccountCoverageModel> getCoverage() {
@@ -420,7 +426,6 @@ public class AccountModel  implements Serializable {
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("balance" + "->" + this.balance + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

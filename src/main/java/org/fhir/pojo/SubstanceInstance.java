@@ -31,55 +31,27 @@ import com.google.gson.GsonBuilder;
 /**
 * "A homogeneous material with a definite composition."
 */
-public class SubstanceInstance  {
+public class SubstanceInstance  extends BackboneElement  {
   /**
   * Description: "Identifier associated with the package/container (usually a label affixed directly)."
   */
-  private Identifier identifier;
+  protected Identifier identifier;
 
   /**
   * Description: "When the substance is no longer valid to use. For some substances, a single arbitrary date is used for expiry."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String expiry;
+  protected String expiry;
 
   /**
   * Description: "Extensions for expiry"
   */
-  private transient Element _expiry;
+  protected transient Element _expiry;
 
   /**
   * Description: "The amount of the substance."
   */
-  private Quantity quantity;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Quantity quantity;
 
   public SubstanceInstance() {
   }
@@ -90,9 +62,8 @@ public class SubstanceInstance  {
     if (null != o.getExpiry()) {
       this.expiry = o.getExpiry();
     }
-    this.quantity = QuantityHelper.fromJson(o.getQuantity());
-    if (null != o.getId()) {
-      this.id = o.getId();
+    if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
+      this.quantity = new Quantity(o.getQuantity().get(0));
     }
   }
 
@@ -120,30 +91,6 @@ public class SubstanceInstance  {
   public Quantity getQuantity() {
     return this.quantity;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -152,11 +99,7 @@ public class SubstanceInstance  {
      if(this.identifier != null) builder.append("identifier" + "->" + this.identifier.toString() + "\n"); 
      if(this.expiry != null) builder.append("expiry" + "->" + this.expiry.toString() + "\n"); 
      if(this._expiry != null) builder.append("_expiry" + "->" + this._expiry.toString() + "\n"); 
-     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.quantity != null) builder.append("quantity" + "->" + this.quantity.toString() + "\n"); ;
     return builder.toString();
   }
 

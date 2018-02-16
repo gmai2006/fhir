@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.OperationDefinition;
 
 public interface OperationDefinitionService {
@@ -35,4 +37,8 @@ public interface OperationDefinitionService {
   public OperationDefinition create(OperationDefinition bean);
   public OperationDefinition update(OperationDefinition bean);
   public void delete(OperationDefinition bean);
+  public List<OperationDefinition> findByField(QueryBuilder queryBuilder);
+  public List<OperationDefinition> findByBase(QueryBuilder queryBuilder);
+
+
 }

@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.ChargeItemModel;
 import org.fhir.pojo.ChargeItem;
 import org.fhir.pojo.ChargeItemHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class ChargeItemDaoImpl implements ChargeItemDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,61 @@ public class ChargeItemDaoImpl implements ChargeItemDao {
       final EntityManager em = entityManagerProvider.get();
       final ChargeItemModel removed = em.find(ChargeItemModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<ChargeItem> findByAccount(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ChargeItemModel a, Reference b where a.account_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ChargeItem> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ChargeItemModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ChargeItem> findByEnterer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ChargeItemModel a, Reference b where a.enterer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ChargeItem> findByQuantity(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ChargeItemModel a, Quantity b where a.quantity_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ChargeItem> findByService(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ChargeItemModel a, Reference b where a.service_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ChargeItem> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ChargeItemModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<ChargeItem> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ChargeItemModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<ChargeItem> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, ChargeItemModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<ChargeItemModel> models = query.getResultList();
+    return ChargeItemHelper.fromArray2Array(models);
   }
 }

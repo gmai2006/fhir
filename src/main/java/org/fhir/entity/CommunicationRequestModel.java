@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition."
 */
 @Entity
 @Table(name="communicationrequest")
 public class CommunicationRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151857669667316071L;
+	private static final long serialVersionUID = 151873631140123087L;
   /**
   * Description: "This is a CommunicationRequest resource"
   */
@@ -350,7 +351,7 @@ public class CommunicationRequestModel  implements Serializable {
     	this.replaces_id = "replaces" + this.id;
     	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
     }
-    this.groupIdentifier = IdentifierHelper.toJson(o.getGroupIdentifier());
+    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
     this.status = o.getStatus();
     this.priority = o.getPriority();
     if (null != o.getSubject() ) {
@@ -374,7 +375,7 @@ public class CommunicationRequestModel  implements Serializable {
     	this.payload = CommunicationRequestPayloadHelper.toModelFromArray(o.getPayload(), this.payload_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = PeriodHelper.toJson(o.getOccurrencePeriod());
+    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
     this.authoredOn = o.getAuthoredOn();
     if (null != o.getSender() ) {
     	this.sender_id = "sender" + this.id;

@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc."
 */
 @Entity
 @Table(name="organization")
 public class OrganizationModel  implements Serializable {
-	private static final long serialVersionUID = 15185766969813553L;
+	private static final long serialVersionUID = 151873631177071292L;
   /**
   * Description: "This is a Organization resource"
   */
@@ -96,12 +97,14 @@ public class OrganizationModel  implements Serializable {
 
   /**
   * Description: "An address for the organization."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"address\"", length = 16777215)
-  private String address;
+  @Column(name="\"address_id\"")
+  private String address_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="address_id", insertable=false, updatable=false)
+  private java.util.List<AddressModel> address;
 
   /**
   * Description: "The organization of which this organization forms a part."
@@ -230,6 +233,10 @@ public class OrganizationModel  implements Serializable {
     this.active = o.getActive();
     this.name = o.getName();
     this.alias = org.fhir.utils.JsonUtils.write2String(o.getAlias());
+    if (null != o.getAddress() && !o.getAddress().isEmpty()) {
+    	this.address_id = "address" + this.id;
+    	this.address = AddressHelper.toModelFromArray(o.getAddress(), this.address_id);
+    }
     if (null != o.getPartOf() ) {
     	this.partof_id = "partof" + this.id;
     	this.partOf = ReferenceHelper.toModel(o.getPartOf(), this.partof_id);
@@ -296,10 +303,10 @@ public class OrganizationModel  implements Serializable {
   public void setTelecom( String value) {
     this.telecom = value;
   }
-  public String getAddress() {
+  public java.util.List<AddressModel> getAddress() {
     return this.address;
   }
-  public void setAddress( String value) {
+  public void setAddress( java.util.List<AddressModel> value) {
     this.address = value;
   }
   public java.util.List<ReferenceModel> getPartOf() {
@@ -380,7 +387,6 @@ public class OrganizationModel  implements Serializable {
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("alias" + "->" + this.alias + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("address" + "->" + this.address + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Provenance;
 
 public interface ProvenanceDao {
@@ -38,4 +39,10 @@ public interface ProvenanceDao {
 
   public Provenance update(Provenance e);
   public void delete(Provenance e);
+
+  public List<Provenance> findByField(QueryBuilder queryBuilder);
+
+  public List<Provenance> findByAgent(QueryBuilder queryBuilder);
+  public List<Provenance> findByLocation(QueryBuilder queryBuilder);
+  public List<Provenance> findByTarget(QueryBuilder queryBuilder);
 }

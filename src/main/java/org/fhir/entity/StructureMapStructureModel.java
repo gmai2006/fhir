@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
 */
 @Entity
 @Table(name="structuremapstructure")
 public class StructureMapStructureModel  implements Serializable {
-	private static final long serialVersionUID = 151857669684531789L;
+	private static final long serialVersionUID = 151873631163432292L;
   /**
   * Description: "The canonical URL that identifies the structure."
   */

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.GraphDefinition;
 
 public interface GraphDefinitionDao {
@@ -38,4 +39,7 @@ public interface GraphDefinitionDao {
 
   public GraphDefinition update(GraphDefinition e);
   public void delete(GraphDefinition e);
+
+  public List<GraphDefinition> findByField(QueryBuilder queryBuilder);
+
 }

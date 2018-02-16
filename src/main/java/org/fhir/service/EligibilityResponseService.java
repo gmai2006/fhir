@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.EligibilityResponse;
 
 public interface EligibilityResponseService {
@@ -35,4 +37,9 @@ public interface EligibilityResponseService {
   public EligibilityResponse create(EligibilityResponse bean);
   public EligibilityResponse update(EligibilityResponse bean);
   public void delete(EligibilityResponse bean);
+  public List<EligibilityResponse> findByField(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByInsurer(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByRequest(QueryBuilder queryBuilder);
+
+
 }

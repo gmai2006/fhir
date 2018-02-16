@@ -31,60 +31,32 @@ import com.google.gson.GsonBuilder;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
-public class ValueSetConcept  {
+public class ValueSetConcept  extends BackboneElement  {
   /**
   * Description: "Specifies a code for the concept to be included or excluded."
   */
   @javax.validation.constraints.Pattern(regexp="[^\\s]+([\\s]?[^\\s]+)*")
-  private String code;
+  protected String code;
 
   /**
   * Description: "Extensions for code"
   */
-  private transient Element _code;
+  protected transient Element _code;
 
   /**
   * Description: "The text to display to the user for this concept in the context of this valueset. If no display is provided, then applications using the value set use the display specified for the code by the system."
   */
-  private String display;
+  protected String display;
 
   /**
   * Description: "Extensions for display"
   */
-  private transient Element _display;
+  protected transient Element _display;
 
   /**
   * Description: "Additional representations for this concept when used in this value set - other languages, aliases, specialized purposes, used for particular purposes, etc."
   */
-  private java.util.List<ValueSetDesignation> designation = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetDesignation> designation = new java.util.ArrayList<>();
 
   public ValueSetConcept() {
   }
@@ -99,9 +71,6 @@ public class ValueSetConcept  {
     }
     if (null != o.getDesignation() && !o.getDesignation().isEmpty()) {
     	this.designation = ValueSetDesignationHelper.fromArray2Array(o.getDesignation());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -135,30 +104,6 @@ public class ValueSetConcept  {
   public java.util.List<ValueSetDesignation> getDesignation() {
     return this.designation;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -168,11 +113,7 @@ public class ValueSetConcept  {
      if(this._code != null) builder.append("_code" + "->" + this._code.toString() + "\n"); 
      if(this.display != null) builder.append("display" + "->" + this.display.toString() + "\n"); 
      if(this._display != null) builder.append("_display" + "->" + this._display.toString() + "\n"); 
-     if(this.designation != null) builder.append("designation" + "->" + this.designation.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.designation != null) builder.append("designation" + "->" + this.designation.toString() + "\n"); ;
     return builder.toString();
   }
 

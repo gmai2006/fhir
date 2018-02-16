@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.MeasureModel;
 import org.fhir.pojo.Measure;
 import org.fhir.pojo.MeasureHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class MeasureDaoImpl implements MeasureDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,25 @@ public class MeasureDaoImpl implements MeasureDao {
       final EntityManager em = entityManagerProvider.get();
       final MeasureModel removed = em.find(MeasureModel.class, e.getId());
       em.remove(removed);
+  }
+
+
+  @Override
+  public List<Measure> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MeasureModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Measure> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, MeasureModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<MeasureModel> models = query.getResultList();
+    return MeasureHelper.fromArray2Array(models);
   }
 }

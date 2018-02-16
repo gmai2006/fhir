@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ChargeItem;
 
 public interface ChargeItemService {
@@ -35,4 +37,13 @@ public interface ChargeItemService {
   public ChargeItem create(ChargeItem bean);
   public ChargeItem update(ChargeItem bean);
   public void delete(ChargeItem bean);
+  public List<ChargeItem> findByField(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByAccount(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByContext(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByEnterer(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByQuantity(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByService(QueryBuilder queryBuilder);
+  public List<ChargeItem> findBySubject(QueryBuilder queryBuilder);
+
+
 }

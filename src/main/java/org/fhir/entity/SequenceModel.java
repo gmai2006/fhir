@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Raw data describing a biological sequence."
 */
 @Entity
 @Table(name="sequence")
 public class SequenceModel  implements Serializable {
-	private static final long serialVersionUID = 151857669700444522L;
+	private static final long serialVersionUID = 151873631179319591L;
   /**
   * Description: "This is a Sequence resource"
   */
@@ -116,12 +117,14 @@ public class SequenceModel  implements Serializable {
 
   /**
   * Description: "The number of copies of the seqeunce of interest. (RNASeq)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"quantity\"", length = 16777215)
-  private String quantity;
+  @Column(name="\"quantity_id\"")
+  private String quantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="quantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> quantity;
 
   /**
   * Description: "A sequence that is used as a reference to describe variants that are present in a sequence analyzed."
@@ -302,7 +305,10 @@ public class SequenceModel  implements Serializable {
     	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);
     }
-    this.quantity = QuantityHelper.toJson(o.getQuantity());
+    if (null != o.getQuantity() ) {
+    	this.quantity_id = "quantity" + this.id;
+    	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
+    }
     if (null != o.getReferenceSeq() ) {
     	this.referenceseq_id = "referenceseq" + this.id;
     	this.referenceSeq = SequenceReferenceSeqHelper.toModel(o.getReferenceSeq(), this.referenceseq_id);
@@ -385,10 +391,10 @@ public class SequenceModel  implements Serializable {
   public void setPerformer( java.util.List<ReferenceModel> value) {
     this.performer = value;
   }
-  public String getQuantity() {
+  public java.util.List<QuantityModel> getQuantity() {
     return this.quantity;
   }
-  public void setQuantity( String value) {
+  public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
   public java.util.List<SequenceReferenceSeqModel> getReferenceSeq() {
@@ -490,7 +496,6 @@ public class SequenceModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("coordinateSystem" + "->" + this.coordinateSystem + "\n"); 
-     builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("observedSeq" + "->" + this.observedSeq + "\n"); 
      builder.append("readCoverage" + "->" + this.readCoverage + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

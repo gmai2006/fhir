@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ImagingStudy;
 
 public interface ImagingStudyDao {
@@ -38,4 +39,10 @@ public interface ImagingStudyDao {
 
   public ImagingStudy update(ImagingStudy e);
   public void delete(ImagingStudy e);
+
+  public List<ImagingStudy> findByField(QueryBuilder queryBuilder);
+
+  public List<ImagingStudy> findByContext(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByEndpoint(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findBySeries(QueryBuilder queryBuilder);
 }

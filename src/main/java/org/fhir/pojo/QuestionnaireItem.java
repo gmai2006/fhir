@@ -31,255 +31,227 @@ import com.google.gson.GsonBuilder;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
 */
-public class QuestionnaireItem  {
+public class QuestionnaireItem  extends BackboneElement  {
   /**
   * Description: "An identifier that is unique within the Questionnaire allowing linkage to the equivalent item in a QuestionnaireResponse resource."
   */
-  private String linkId;
+  protected String linkId;
 
   /**
   * Description: "Extensions for linkId"
   */
-  private transient Element _linkId;
+  protected transient Element _linkId;
 
   /**
   * Description: "A reference to an [[[ElementDefinition]]] that provides the details for the item. If a definition is provided, then the following element values can be inferred from the definition: \n\n* code (ElementDefinition.code)\n* type (ElementDefinition.type)\n* required (ElementDefinition.min)\n* repeats (ElementDefinition.max)\n* maxLength (ElementDefinition.maxLength)\n* options (ElementDefinition.binding)\n\nAny information provided in these elements on a Questionnaire Item overrides the information from the definition."
   */
-  private String definition;
+  protected String definition;
 
   /**
   * Description: "Extensions for definition"
   */
-  private transient Element _definition;
+  protected transient Element _definition;
 
   /**
   * Description: "A terminology code that corresponds to this group or question (e.g. a code from LOINC, which defines many questions and answers)."
   */
-  private java.util.List<Coding> code = new java.util.ArrayList<>();
+  protected java.util.List<Coding> code = new java.util.ArrayList<>();
 
   /**
   * Description: "A short label for a particular group, question or set of display text within the questionnaire used for reference by the individual completing the questionnaire."
   */
-  private String prefix;
+  protected String prefix;
 
   /**
   * Description: "Extensions for prefix"
   */
-  private transient Element _prefix;
+  protected transient Element _prefix;
 
   /**
   * Description: "The name of a section, the text of a question or text content for a display item."
   */
-  private String text;
+  protected String text;
 
   /**
   * Description: "Extensions for text"
   */
-  private transient Element _text;
+  protected transient Element _text;
 
   /**
   * Description: "The type of questionnaire item this is - whether text for display, a grouping of other items or a particular type of data to be captured (string, integer, coded choice, etc.)."
   */
-  private String type;
+  protected String type;
 
   /**
   * Description: "Extensions for type"
   */
-  private transient Element _type;
+  protected transient Element _type;
 
   /**
   * Description: "A constraint indicating that this item should only be enabled (displayed/allow answers to be captured) when the specified condition is true."
   */
-  private java.util.List<QuestionnaireEnableWhen> enableWhen = new java.util.ArrayList<>();
+  protected java.util.List<QuestionnaireEnableWhen> enableWhen = new java.util.ArrayList<>();
 
   /**
   * Description: "An indication, if true, that the item must be present in a \"completed\" QuestionnaireResponse.  If false, the item may be skipped when answering the questionnaire."
   */
-  private Boolean required;
+  protected Boolean required;
 
   /**
   * Description: "Extensions for required"
   */
-  private transient Element _required;
+  protected transient Element _required;
 
   /**
   * Description: "An indication, if true, that the item may occur multiple times in the response, collecting multiple answers answers for questions or multiple sets of answers for groups."
   */
-  private Boolean repeats;
+  protected Boolean repeats;
 
   /**
   * Description: "Extensions for repeats"
   */
-  private transient Element _repeats;
+  protected transient Element _repeats;
 
   /**
   * Description: "An indication, when true, that the value cannot be changed by a human respondent to the Questionnaire."
   */
-  private Boolean readOnly;
+  protected Boolean readOnly;
 
   /**
   * Description: "Extensions for readOnly"
   */
-  private transient Element _readOnly;
+  protected transient Element _readOnly;
 
   /**
   * Description: "The maximum number of characters that are permitted in the answer to be considered a \"valid\" QuestionnaireResponse."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float maxLength;
+  protected Float maxLength;
 
   /**
   * Description: "Extensions for maxLength"
   */
-  private transient Element _maxLength;
+  protected transient Element _maxLength;
 
   /**
   * Description: "A reference to a value set containing a list of codes representing permitted answers for a \"choice\" or \"open-choice\" question."
   */
-  private Reference options;
+  protected Reference options;
 
   /**
   * Description: "One of the permitted answers for a \"choice\" or \"open-choice\" question."
   */
-  private java.util.List<QuestionnaireOption> option = new java.util.ArrayList<>();
+  protected java.util.List<QuestionnaireOption> option = new java.util.ArrayList<>();
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
-  private Boolean initialBoolean;
+  protected Boolean initialBoolean;
 
   /**
   * Description: "Extensions for initialBoolean"
   */
-  private transient Element _initialBoolean;
+  protected transient Element _initialBoolean;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float initialDecimal;
+  protected Float initialDecimal;
 
   /**
   * Description: "Extensions for initialDecimal"
   */
-  private transient Element _initialDecimal;
+  protected transient Element _initialDecimal;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))")
-  private Float initialInteger;
+  protected Float initialInteger;
 
   /**
   * Description: "Extensions for initialInteger"
   */
-  private transient Element _initialInteger;
+  protected transient Element _initialInteger;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?")
-  private String initialDate;
+  protected String initialDate;
 
   /**
   * Description: "Extensions for initialDate"
   */
-  private transient Element _initialDate;
+  protected transient Element _initialDate;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String initialDateTime;
+  protected String initialDateTime;
 
   /**
   * Description: "Extensions for initialDateTime"
   */
-  private transient Element _initialDateTime;
+  protected transient Element _initialDateTime;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
   @javax.validation.constraints.Pattern(regexp="([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?")
-  private String initialTime;
+  protected String initialTime;
 
   /**
   * Description: "Extensions for initialTime"
   */
-  private transient Element _initialTime;
+  protected transient Element _initialTime;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
-  private String initialString;
+  protected String initialString;
 
   /**
   * Description: "Extensions for initialString"
   */
-  private transient Element _initialString;
+  protected transient Element _initialString;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
-  private String initialUri;
+  protected String initialUri;
 
   /**
   * Description: "Extensions for initialUri"
   */
-  private transient Element _initialUri;
+  protected transient Element _initialUri;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
-  private Attachment initialAttachment;
+  protected Attachment initialAttachment;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
-  private Coding initialCoding;
+  protected Coding initialCoding;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
-  private Quantity initialQuantity;
+  protected Quantity initialQuantity;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
   */
-  private Reference initialReference;
+  protected Reference initialReference;
 
   /**
   * Description: "Text, questions and other groups to be nested beneath a question or group."
   */
-  private java.util.List<QuestionnaireItem> item = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<QuestionnaireItem> item = new java.util.ArrayList<>();
 
   public QuestionnaireItem() {
   }
@@ -348,15 +320,14 @@ public class QuestionnaireItem  {
     }
     this.initialAttachment = AttachmentHelper.fromJson(o.getInitialAttachment());
     this.initialCoding = CodingHelper.fromJson(o.getInitialCoding());
-    this.initialQuantity = QuantityHelper.fromJson(o.getInitialQuantity());
+    if (null != o.getInitialQuantity() && !o.getInitialQuantity().isEmpty()) {
+      this.initialQuantity = new Quantity(o.getInitialQuantity().get(0));
+    }
     if (null != o.getInitialReference() && !o.getInitialReference().isEmpty()) {
       this.initialReference = new Reference(o.getInitialReference().get(0));
     }
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item = QuestionnaireItemHelper.fromArray2Array(o.getItem());
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -618,30 +589,6 @@ public class QuestionnaireItem  {
   public java.util.List<QuestionnaireItem> getItem() {
     return this.item;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -689,11 +636,7 @@ public class QuestionnaireItem  {
      if(this.initialCoding != null) builder.append("initialCoding" + "->" + this.initialCoding.toString() + "\n"); 
      if(this.initialQuantity != null) builder.append("initialQuantity" + "->" + this.initialQuantity.toString() + "\n"); 
      if(this.initialReference != null) builder.append("initialReference" + "->" + this.initialReference.toString() + "\n"); 
-     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.item != null) builder.append("item" + "->" + this.item.toString() + "\n"); ;
     return builder.toString();
   }
 

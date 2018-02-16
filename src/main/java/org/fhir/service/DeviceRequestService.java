@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.DeviceRequest;
 
 public interface DeviceRequestService {
@@ -35,4 +37,11 @@ public interface DeviceRequestService {
   public DeviceRequest create(DeviceRequest bean);
   public DeviceRequest update(DeviceRequest bean);
   public void delete(DeviceRequest bean);
+  public List<DeviceRequest> findByField(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByDefinition(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByPerformer(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findBySubject(QueryBuilder queryBuilder);
+
+
 }

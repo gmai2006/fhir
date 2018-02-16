@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Sequence;
 
 public interface SequenceDao {
@@ -38,4 +39,8 @@ public interface SequenceDao {
 
   public Sequence update(Sequence e);
   public void delete(Sequence e);
+
+  public List<Sequence> findByField(QueryBuilder queryBuilder);
+
+  public List<Sequence> findByPatient(QueryBuilder queryBuilder);
 }

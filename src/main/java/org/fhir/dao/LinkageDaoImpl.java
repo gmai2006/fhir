@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.LinkageModel;
 import org.fhir.pojo.Linkage;
 import org.fhir.pojo.LinkageHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class LinkageDaoImpl implements LinkageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class LinkageDaoImpl implements LinkageDao {
       final EntityManager em = entityManagerProvider.get();
       final LinkageModel removed = em.find(LinkageModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Linkage> findByAuthor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from LinkageModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Linkage> findByItem(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from LinkageModel a, LinkageItem b where a.item_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Linkage> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from LinkageModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Linkage> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, LinkageModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<LinkageModel> models = query.getResultList();
+    return LinkageHelper.fromArray2Array(models);
   }
 }

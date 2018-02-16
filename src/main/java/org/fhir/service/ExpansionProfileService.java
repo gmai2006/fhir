@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.ExpansionProfile;
 
 public interface ExpansionProfileService {
@@ -35,4 +37,7 @@ public interface ExpansionProfileService {
   public ExpansionProfile create(ExpansionProfile bean);
   public ExpansionProfile update(ExpansionProfile bean);
   public void delete(ExpansionProfile bean);
+  public List<ExpansionProfile> findByField(QueryBuilder queryBuilder);
+
+
 }

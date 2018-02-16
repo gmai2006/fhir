@@ -26,6 +26,8 @@
 
 package org.fhir.service;
 import java.util.List;
+
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Person;
 
 public interface PersonService {
@@ -35,4 +37,8 @@ public interface PersonService {
   public Person create(Person bean);
   public Person update(Person bean);
   public void delete(Person bean);
+  public List<Person> findByField(QueryBuilder queryBuilder);
+  public List<Person> findByLink(QueryBuilder queryBuilder);
+
+
 }

@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.PlanDefinition;
 
 public interface PlanDefinitionDao {
@@ -38,4 +39,7 @@ public interface PlanDefinitionDao {
 
   public PlanDefinition update(PlanDefinition e);
   public void delete(PlanDefinition e);
+
+  public List<PlanDefinition> findByField(QueryBuilder queryBuilder);
+
 }

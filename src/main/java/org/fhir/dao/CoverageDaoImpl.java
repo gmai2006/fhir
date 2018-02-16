@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.CoverageModel;
 import org.fhir.pojo.Coverage;
 import org.fhir.pojo.CoverageHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class CoverageDaoImpl implements CoverageDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,43 @@ public class CoverageDaoImpl implements CoverageDao {
       final EntityManager em = entityManagerProvider.get();
       final CoverageModel removed = em.find(CoverageModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<Coverage> findByBeneficiary(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CoverageModel a, Reference b where a.beneficiary_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Coverage> findByPayor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CoverageModel a, Reference b where a.payor_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Coverage> findBySubscriber(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CoverageModel a, Reference b where a.subscriber_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<Coverage> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CoverageModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<Coverage> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, CoverageModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<CoverageModel> models = query.getResultList();
+    return CoverageHelper.fromArray2Array(models);
   }
 }

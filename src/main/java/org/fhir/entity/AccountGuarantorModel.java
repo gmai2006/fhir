@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc."
 */
 @Entity
 @Table(name="accountguarantor")
 public class AccountGuarantorModel  implements Serializable {
-	private static final long serialVersionUID = 151857669706320948L;
+	private static final long serialVersionUID = 151873631184843830L;
   /**
   * Description: "The entity who is responsible."
   */
@@ -115,7 +116,7 @@ public class AccountGuarantorModel  implements Serializable {
     	this.party = ReferenceHelper.toModel(o.getParty(), this.party_id);
     }
     this.onHold = o.getOnHold();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
   }
 
   public java.util.List<ReferenceModel> getParty() {

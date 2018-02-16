@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects."
 */
 @Entity
 @Table(name="researchsubject")
 public class ResearchSubjectModel  implements Serializable {
-	private static final long serialVersionUID = 151857669668796091L;
+	private static final long serialVersionUID = 151873631141791748L;
   /**
   * Description: "This is a ResearchSubject resource"
   */
@@ -209,9 +210,9 @@ public class ResearchSubjectModel  implements Serializable {
   public ResearchSubjectModel(ResearchSubject o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = IdentifierHelper.toJson(o.getIdentifier());
+    this.identifier = JsonUtils.toJson(o.getIdentifier());
     this.status = o.getStatus();
-    this.period = PeriodHelper.toJson(o.getPeriod());
+    this.period = JsonUtils.toJson(o.getPeriod());
     if (null != o.getStudy() ) {
     	this.study_id = "study" + this.id;
     	this.study = ReferenceHelper.toModel(o.getStudy(), this.study_id);

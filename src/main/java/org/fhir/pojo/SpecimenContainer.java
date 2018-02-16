@@ -31,74 +31,46 @@ import com.google.gson.GsonBuilder;
 /**
 * "A sample to be used for analysis."
 */
-public class SpecimenContainer  {
+public class SpecimenContainer  extends BackboneElement  {
   /**
   * Description: "Id for container. There may be multiple; a manufacturer's bar code, lab assigned identifier, etc. The container ID may differ from the specimen id in some circumstances."
   */
-  private java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
 
   /**
   * Description: "Textual description of the container."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "The type of container associated with the specimen (e.g. slide, aliquot, etc.)."
   */
-  private CodeableConcept type;
+  protected CodeableConcept type;
 
   /**
   * Description: "The capacity (volume or other measure) the container may contain."
   */
-  private Quantity capacity;
+  protected Quantity capacity;
 
   /**
   * Description: "The quantity of specimen in the container; may be volume, dimensions, or other appropriate measurements, depending on the specimen type."
   */
-  private Quantity specimenQuantity;
+  protected Quantity specimenQuantity;
 
   /**
   * Description: "Introduced substance to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA."
   */
-  private CodeableConcept additiveCodeableConcept;
+  protected CodeableConcept additiveCodeableConcept;
 
   /**
   * Description: "Introduced substance to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA."
   */
-  private Reference additiveReference;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Reference additiveReference;
 
   public SpecimenContainer() {
   }
@@ -109,14 +81,15 @@ public class SpecimenContainer  {
       this.description = o.getDescription();
     }
     this.type = CodeableConceptHelper.fromJson(o.getType());
-    this.capacity = QuantityHelper.fromJson(o.getCapacity());
-    this.specimenQuantity = QuantityHelper.fromJson(o.getSpecimenQuantity());
+    if (null != o.getCapacity() && !o.getCapacity().isEmpty()) {
+      this.capacity = new Quantity(o.getCapacity().get(0));
+    }
+    if (null != o.getSpecimenQuantity() && !o.getSpecimenQuantity().isEmpty()) {
+      this.specimenQuantity = new Quantity(o.getSpecimenQuantity().get(0));
+    }
     this.additiveCodeableConcept = CodeableConceptHelper.fromJson(o.getAdditiveCodeableConcept());
     if (null != o.getAdditiveReference() && !o.getAdditiveReference().isEmpty()) {
       this.additiveReference = new Reference(o.getAdditiveReference().get(0));
-    }
-    if (null != o.getId()) {
-      this.id = o.getId();
     }
   }
 
@@ -168,30 +141,6 @@ public class SpecimenContainer  {
   public Reference getAdditiveReference() {
     return this.additiveReference;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -204,11 +153,7 @@ public class SpecimenContainer  {
      if(this.capacity != null) builder.append("capacity" + "->" + this.capacity.toString() + "\n"); 
      if(this.specimenQuantity != null) builder.append("specimenQuantity" + "->" + this.specimenQuantity.toString() + "\n"); 
      if(this.additiveCodeableConcept != null) builder.append("additiveCodeableConcept" + "->" + this.additiveCodeableConcept.toString() + "\n"); 
-     if(this.additiveReference != null) builder.append("additiveReference" + "->" + this.additiveReference.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.additiveReference != null) builder.append("additiveReference" + "->" + this.additiveReference.toString() + "\n"); ;
     return builder.toString();
   }
 

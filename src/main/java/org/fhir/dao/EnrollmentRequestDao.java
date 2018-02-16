@@ -26,6 +26,7 @@
 
 package org.fhir.dao;
 import java.util.List;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.EnrollmentRequest;
 
 public interface EnrollmentRequestDao {
@@ -38,4 +39,9 @@ public interface EnrollmentRequestDao {
 
   public EnrollmentRequest update(EnrollmentRequest e);
   public void delete(EnrollmentRequest e);
+
+  public List<EnrollmentRequest> findByField(QueryBuilder queryBuilder);
+
+  public List<EnrollmentRequest> findByOrganization(QueryBuilder queryBuilder);
+  public List<EnrollmentRequest> findBySubject(QueryBuilder queryBuilder);
 }

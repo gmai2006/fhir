@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "Specifies clinical/business/etc metadata that can be used to retrieve, index and/or categorize an artifact. This metadata can either be specific to the applicable population (e.g., age category, DRG) or the specific context of care (e.g., venue, care setting, provider of care)."
 */
 @Entity
 @Table(name="usagecontext")
 public class UsageContextModel  implements Serializable {
-	private static final long serialVersionUID = 15185766968484715L;
+	private static final long serialVersionUID = 151873631163677592L;
   /**
   * Description: "A code that identifies the type of context being specified by this usage context."
   * Actual type: String;
@@ -59,12 +60,14 @@ public class UsageContextModel  implements Serializable {
 
   /**
   * Description: "A value that defines the context specified in this context of use. The interpretation of the value is defined by the code."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueQuantity\"", length = 16777215)
-  private String valueQuantity;
+  @Column(name="\"valuequantity_id\"")
+  private String valuequantity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuequantity_id", insertable=false, updatable=false)
+  private java.util.List<QuantityModel> valueQuantity;
 
   /**
   * Description: "A value that defines the context specified in this context of use. The interpretation of the value is defined by the code."
@@ -108,10 +111,13 @@ public class UsageContextModel  implements Serializable {
   public UsageContextModel(UsageContext o, String parentId) {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = CodingHelper.toJson(o.getCode());
-    this.valueCodeableConcept = CodeableConceptHelper.toJson(o.getValueCodeableConcept());
-    this.valueQuantity = QuantityHelper.toJson(o.getValueQuantity());
-    this.valueRange = RangeHelper.toJson(o.getValueRange());
+    this.code = JsonUtils.toJson(o.getCode());
+    this.valueCodeableConcept = JsonUtils.toJson(o.getValueCodeableConcept());
+    if (null != o.getValueQuantity() ) {
+    	this.valuequantity_id = "valuequantity" + this.parent_id;
+    	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
+    }
+    this.valueRange = JsonUtils.toJson(o.getValueRange());
   }
 
   public String getCode() {
@@ -126,10 +132,10 @@ public class UsageContextModel  implements Serializable {
   public void setValueCodeableConcept( String value) {
     this.valueCodeableConcept = value;
   }
-  public String getValueQuantity() {
+  public java.util.List<QuantityModel> getValueQuantity() {
     return this.valueQuantity;
   }
-  public void setValueQuantity( String value) {
+  public void setValueQuantity( java.util.List<QuantityModel> value) {
     this.valueQuantity = value;
   }
   public String getValueRange() {
@@ -163,7 +169,6 @@ public class UsageContextModel  implements Serializable {
     builder.append("[UsageContextModel]:" + "\n");
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
-     builder.append("valueQuantity" + "->" + this.valueQuantity + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

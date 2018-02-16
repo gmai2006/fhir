@@ -31,13 +31,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.fhir.pojo.*;
 import java.io.Serializable;
+import org.fhir.utils.JsonUtils;
 /**
 * "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time."
 */
 @Entity
 @Table(name="practitionerrolenotavailable")
 public class PractitionerRoleNotAvailableModel  implements Serializable {
-	private static final long serialVersionUID = 15185766969894265L;
+	private static final long serialVersionUID = 151873631177880685L;
   /**
   * Description: "The reason that can be presented to the user as to why this time is not available."
   */
@@ -100,7 +101,7 @@ public class PractitionerRoleNotAvailableModel  implements Serializable {
   	this.parent_id = parentId;
   	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
     this.description = o.getDescription();
-    this.during = PeriodHelper.toJson(o.getDuring());
+    this.during = JsonUtils.toJson(o.getDuring());
   }
 
   public String getDescription() {

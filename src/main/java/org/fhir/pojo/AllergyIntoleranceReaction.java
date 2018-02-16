@@ -31,86 +31,58 @@ import com.google.gson.GsonBuilder;
 /**
 * "Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."
 */
-public class AllergyIntoleranceReaction  {
+public class AllergyIntoleranceReaction  extends BackboneElement  {
   /**
   * Description: "Identification of the specific substance (or pharmaceutical product) considered to be responsible for the Adverse Reaction event. Note: the substance for a specific reaction may be different from the substance identified as the cause of the risk, but it must be consistent with it. For instance, it may be a more specific substance (e.g. a brand medication) or a composite product that includes the identified substance. It must be clinically safe to only process the 'code' and ignore the 'reaction.substance'."
   */
-  private CodeableConcept substance;
+  protected CodeableConcept substance;
 
   /**
   * Description: "Clinical symptoms and/or signs that are observed or associated with the adverse reaction event."
   */
   @javax.validation.constraints.NotNull
-  private java.util.List<CodeableConcept> manifestation = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> manifestation = new java.util.ArrayList<>();
 
   /**
   * Description: "Text description about the reaction as a whole, including details of the manifestation if required."
   */
-  private String description;
+  protected String description;
 
   /**
   * Description: "Extensions for description"
   */
-  private transient Element _description;
+  protected transient Element _description;
 
   /**
   * Description: "Record of the date and/or time of the onset of the Reaction."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String onset;
+  protected String onset;
 
   /**
   * Description: "Extensions for onset"
   */
-  private transient Element _onset;
+  protected transient Element _onset;
 
   /**
   * Description: "Clinical assessment of the severity of the reaction event as a whole, potentially considering multiple different manifestations."
   */
-  private String severity;
+  protected String severity;
 
   /**
   * Description: "Extensions for severity"
   */
-  private transient Element _severity;
+  protected transient Element _severity;
 
   /**
   * Description: "Identification of the route by which the subject was exposed to the substance."
   */
-  private CodeableConcept exposureRoute;
+  protected CodeableConcept exposureRoute;
 
   /**
   * Description: "Additional text about the adverse reaction event not captured in other fields."
   */
-  private java.util.List<Annotation> note = new java.util.ArrayList<>();
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
 
   public AllergyIntoleranceReaction() {
   }
@@ -128,9 +100,6 @@ public class AllergyIntoleranceReaction  {
       this.severity = o.getSeverity();
     }
     this.exposureRoute = CodeableConceptHelper.fromJson(o.getExposureRoute());
-    if (null != o.getId()) {
-      this.id = o.getId();
-    }
   }
 
   public void setSubstance( CodeableConcept value) {
@@ -193,30 +162,6 @@ public class AllergyIntoleranceReaction  {
   public java.util.List<Annotation> getNote() {
     return this.note;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -231,11 +176,7 @@ public class AllergyIntoleranceReaction  {
      if(this.severity != null) builder.append("severity" + "->" + this.severity.toString() + "\n"); 
      if(this._severity != null) builder.append("_severity" + "->" + this._severity.toString() + "\n"); 
      if(this.exposureRoute != null) builder.append("exposureRoute" + "->" + this.exposureRoute.toString() + "\n"); 
-     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.note != null) builder.append("note" + "->" + this.note.toString() + "\n"); ;
     return builder.toString();
   }
 

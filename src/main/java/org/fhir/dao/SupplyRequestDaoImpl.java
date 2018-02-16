@@ -38,6 +38,7 @@ import com.google.inject.Provider;
 import org.fhir.entity.SupplyRequestModel;
 import org.fhir.pojo.SupplyRequest;
 import org.fhir.pojo.SupplyRequestHelper;
+import org.fhir.utils.QueryBuilder;
 
 public class SupplyRequestDaoImpl implements SupplyRequestDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,5 +94,37 @@ public class SupplyRequestDaoImpl implements SupplyRequestDao {
       final EntityManager em = entityManagerProvider.get();
       final SupplyRequestModel removed = em.find(SupplyRequestModel.class, e.getId());
       em.remove(removed);
+  }
+
+  @Override
+  public List<SupplyRequest> findByRequester(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SupplyRequestModel a, SupplyRequestRequester b where a.requester_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<SupplyRequest> findBySupplier(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SupplyRequestModel a, Reference b where a.supplier_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  @Override
+  public List<SupplyRequest> findByField(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from SupplyRequestModel a " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+
+  private List<SupplyRequest> findByQuery(QueryBuilder queryBuilder, String queryStr) {
+  	final EntityManager em = entityManagerProvider.get();
+    Query query = em.createQuery(queryStr, SupplyRequestModel.class);
+    java.util.Map<String, Object> params = queryBuilder.getParams();
+    params.keySet()
+      .stream()
+      .forEach(key -> query.setParameter(key, params.get(key)));
+
+    List<SupplyRequestModel> models = query.getResultList();
+    return SupplyRequestHelper.fromArray2Array(models);
   }
 }

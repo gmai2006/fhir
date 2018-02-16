@@ -31,97 +31,69 @@ import com.google.gson.GsonBuilder;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
-public class ContractValuedItem  {
+public class ContractValuedItem  extends BackboneElement  {
   /**
   * Description: "Specific type of Contract Valued Item that may be priced."
   */
-  private CodeableConcept entityCodeableConcept;
+  protected CodeableConcept entityCodeableConcept;
 
   /**
   * Description: "Specific type of Contract Valued Item that may be priced."
   */
-  private Reference entityReference;
+  protected Reference entityReference;
 
   /**
   * Description: "Identifies a Contract Valued Item instance."
   */
-  private Identifier identifier;
+  protected Identifier identifier;
 
   /**
   * Description: "Indicates the time during which this Contract ValuedItem information is effective."
   */
   @javax.validation.constraints.Pattern(regexp="-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?")
-  private String effectiveTime;
+  protected String effectiveTime;
 
   /**
   * Description: "Extensions for effectiveTime"
   */
-  private transient Element _effectiveTime;
+  protected transient Element _effectiveTime;
 
   /**
   * Description: "Specifies the units by which the Contract Valued Item is measured or counted, and quantifies the countable or measurable Contract Valued Item instances."
   */
-  private Quantity quantity;
+  protected Quantity quantity;
 
   /**
   * Description: "A Contract Valued Item unit valuation measure."
   */
-  private Money unitPrice;
+  protected Money unitPrice;
 
   /**
   * Description: "A real number that represents a multiplier used in determining the overall value of the Contract Valued Item delivered. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float factor;
+  protected Float factor;
 
   /**
   * Description: "Extensions for factor"
   */
-  private transient Element _factor;
+  protected transient Element _factor;
 
   /**
   * Description: "An amount that expresses the weighting (based on difficulty, cost and/or resource intensiveness) associated with the Contract Valued Item delivered. The concept of Points allows for assignment of point values for a Contract Valued Item, such that a monetary amount can be assigned to each point."
   */
   @javax.validation.constraints.Pattern(regexp="-?([0]|([1-9][0-9]*))(\\.[0-9]+)?")
-  private Float points;
+  protected Float points;
 
   /**
   * Description: "Extensions for points"
   */
-  private transient Element _points;
+  protected transient Element _points;
 
   /**
   * Description: "Expresses the product of the Contract Valued Item unitQuantity and the unitPriceAmt. For example, the formula: unit Quantity * unit Price (Cost per Point) * factor Number  * points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied."
   */
-  private Money net;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> modifierExtension = new java.util.ArrayList<>();
-
-  /**
-  * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
-   derived from Element
-   derived from BackboneElement
-  */
-  @javax.validation.constraints.NotNull
-  private String id;
-
-  /**
-  * Description: "Extensions for id"
-   derived from Element
-   derived from BackboneElement
-  */
-  private transient Element _id;
-
-  /**
-  * Description: "May be used to represent additional information that is not part of the basic definition of the element. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."
-   derived from Element
-   derived from BackboneElement
-  */
-  private java.util.List<Extension> extension = new java.util.ArrayList<>();
+  protected Money net;
 
   public ContractValuedItem() {
   }
@@ -136,17 +108,20 @@ public class ContractValuedItem  {
     if (null != o.getEffectiveTime()) {
       this.effectiveTime = o.getEffectiveTime();
     }
-    this.quantity = QuantityHelper.fromJson(o.getQuantity());
-    this.unitPrice = MoneyHelper.fromJson(o.getUnitPrice());
+    if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
+      this.quantity = new Quantity(o.getQuantity().get(0));
+    }
+    if (null != o.getUnitPrice() && !o.getUnitPrice().isEmpty()) {
+      this.unitPrice = new Money(o.getUnitPrice().get(0));
+    }
     if (null != o.getFactor()) {
       this.factor = o.getFactor();
     }
     if (null != o.getPoints()) {
       this.points = o.getPoints();
     }
-    this.net = MoneyHelper.fromJson(o.getNet());
-    if (null != o.getId()) {
-      this.id = o.getId();
+    if (null != o.getNet() && !o.getNet().isEmpty()) {
+      this.net = new Money(o.getNet().get(0));
     }
   }
 
@@ -222,30 +197,6 @@ public class ContractValuedItem  {
   public Money getNet() {
     return this.net;
   }
-  public void setModifierExtension( java.util.List<Extension> value) {
-    this.modifierExtension = value;
-  }
-  public java.util.List<Extension> getModifierExtension() {
-    return this.modifierExtension;
-  }
-  public void setId( String value) {
-    this.id = value;
-  }
-  public String getId() {
-    return this.id;
-  }
-  public void set_id( Element value) {
-    this._id = value;
-  }
-  public Element get_id() {
-    return this._id;
-  }
-  public void setExtension( java.util.List<Extension> value) {
-    this.extension = value;
-  }
-  public java.util.List<Extension> getExtension() {
-    return this.extension;
-  }
 
   @Override
   public String toString() {
@@ -262,11 +213,7 @@ public class ContractValuedItem  {
      if(this._factor != null) builder.append("_factor" + "->" + this._factor.toString() + "\n"); 
      if(this.points != null) builder.append("points" + "->" + this.points.toString() + "\n"); 
      if(this._points != null) builder.append("_points" + "->" + this._points.toString() + "\n"); 
-     if(this.net != null) builder.append("net" + "->" + this.net.toString() + "\n"); 
-     if(this.modifierExtension != null) builder.append("modifierExtension" + "->" + this.modifierExtension.toString() + "\n"); 
-     if(this.id != null) builder.append("id" + "->" + this.id.toString() + "\n"); 
-     if(this._id != null) builder.append("_id" + "->" + this._id.toString() + "\n"); 
-     if(this.extension != null) builder.append("extension" + "->" + this.extension.toString() + "\n"); ;
+     if(this.net != null) builder.append("net" + "->" + this.net.toString() + "\n"); ;
     return builder.toString();
   }
 

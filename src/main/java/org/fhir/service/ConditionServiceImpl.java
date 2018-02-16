@@ -36,6 +36,7 @@ import com.google.inject.persist.Transactional;
 
 import org.fhir.dao.*;
 import org.fhir.entity.*;
+import org.fhir.utils.QueryBuilder;
 import org.fhir.pojo.Condition;
 /**
 * auto generated from SQL files
@@ -103,5 +104,43 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     dao.delete(bean);
 
     logger.info("delete(Condition) - exited - return value={} result ");
+  }
+
+  @Override
+  public List<Condition> findByField(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByField(queryBuilder);
+    logger.info("findByField- exited - return value={} result ");
+    return result;
+  }
+
+  @Override
+  public List<Condition> findByAsserter(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByAsserter(queryBuilder);
+    logger.info("findByasserter - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Condition> findByContext(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Condition> findByEvidence(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByEvidence(queryBuilder);
+    logger.info("findByevidence - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Condition> findByStage(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByStage(queryBuilder);
+    logger.info("findBystage - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Condition> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
   }
 }
