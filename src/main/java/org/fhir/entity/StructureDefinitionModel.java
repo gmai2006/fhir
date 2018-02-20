@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="structuredefinition")
 public class StructureDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631165382699L;
+	private static final long serialVersionUID = 151910893741293479L;
   /**
   * Description: "This is a StructureDefinition resource"
   */
@@ -144,12 +143,14 @@ public class StructureDefinitionModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the structure definition is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "Explaination of why this structure definition is needed and why it has been designed as it has."
@@ -167,12 +168,14 @@ public class StructureDefinitionModel  implements Serializable {
 
   /**
   * Description: "A set of key words or terms from external terminologies that may be used to assist with indexing and searching of templates."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"keyword\"", length = 16777215)
-  private String keyword;
+  @Column(name="\"keyword_id\"")
+  private String keyword_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="keyword_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> keyword;
 
   /**
   * Description: "The version of the FHIR specification on which this StructureDefinition is based - this is the formal version of the specification, without the revision number, e.g. [publication].[major].[minor], which is 3.0.1 for this version."
@@ -358,6 +361,9 @@ public class StructureDefinitionModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.url = o.getUrl();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.version = o.getVersion();
     this.name = o.getName();
     this.title = o.getTitle();
@@ -374,22 +380,46 @@ public class StructureDefinitionModel  implements Serializable {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
     this.purpose = o.getPurpose();
     this.copyright = o.getCopyright();
+    if (null != o.getKeyword() && !o.getKeyword().isEmpty()) {
+    	this.keyword_id = "keyword" + this.id;
+    	this.keyword = CodingHelper.toModelFromArray(o.getKeyword(), this.keyword_id);
+    }
     this.fhirVersion = o.getFhirVersion();
+    if (null != o.getMapping()) {
+    	this.mapping = JsonUtils.toJson(o.getMapping());
+    }
     this.kind = o.getKind();
     this.FHIRabstract = o.getFHIRabstract();
     this.contextType = o.getContextType();
-    this.context = org.fhir.utils.JsonUtils.write2String(o.getContext());
-    this.contextInvariant = org.fhir.utils.JsonUtils.write2String(o.getContextInvariant());
+    this.context = org.fhir.utils.JsonUtils.toJson(o.getContext());
+    this.contextInvariant = org.fhir.utils.JsonUtils.toJson(o.getContextInvariant());
     this.type = o.getType();
     this.baseDefinition = o.getBaseDefinition();
     this.derivation = o.getDerivation();
-    this.snapshot = JsonUtils.toJson(o.getSnapshot());
-    this.differential = JsonUtils.toJson(o.getDifferential());
+    if (null != o.getSnapshot()) {
+    	this.snapshot = JsonUtils.toJson(o.getSnapshot());
+    }
+    if (null != o.getDifferential()) {
+    	this.differential = JsonUtils.toJson(o.getDifferential());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -477,10 +507,10 @@ public class StructureDefinitionModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public String getPurpose() {
@@ -495,10 +525,10 @@ public class StructureDefinitionModel  implements Serializable {
   public void setCopyright( String value) {
     this.copyright = value;
   }
-  public String getKeyword() {
+  public java.util.List<CodingModel> getKeyword() {
     return this.keyword;
   }
-  public void setKeyword( String value) {
+  public void setKeyword( java.util.List<CodingModel> value) {
     this.keyword = value;
   }
   public String getFhirVersion() {
@@ -637,10 +667,8 @@ public class StructureDefinitionModel  implements Serializable {
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
-     builder.append("keyword" + "->" + this.keyword + "\n"); 
      builder.append("fhirVersion" + "->" + this.fhirVersion + "\n"); 
      builder.append("mapping" + "->" + this.mapping + "\n"); 
      builder.append("kind" + "->" + this.kind + "\n"); 

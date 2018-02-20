@@ -135,7 +135,9 @@ public class SupplyDelivery  extends DomainResource  {
     if (null != o.getPatient() && !o.getPatient().isEmpty()) {
       this.patient = new Reference(o.getPatient().get(0));
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getSuppliedItem() && !o.getSuppliedItem().isEmpty()) {
       this.suppliedItem = new SupplyDeliverySuppliedItem(o.getSuppliedItem().get(0));
     }

@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.Medication;
 import org.fhir.service.MedicationService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/Medication")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class MedicationResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public Medication find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public Medication findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<Medication> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Medication> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Medication> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Medication> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Medication> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<Medication> findAll() {
   	return this.service.selectAll();
   }
@@ -107,35 +172,42 @@ public class MedicationResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Medication> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
-  /**
-  * Descr: The product contained
-  * Type: reference
-  */
-  @GET
-  @Path("ingredient/itemReference")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Medication> ingredient(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByIngredient(new QueryBuilder(params));
-  }
   /**
   * Descr: Manufacturer of the item
   * Type: reference
   */
   @GET
   @Path("manufacturer")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Medication> manufacturer(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<Medication> manufacturer(@QueryParam("manufacturer")String manufacturer) {
+  	java.util.Map<String, String> params = QueryParser.parse(manufacturer, VALID_FIELDS);
   	return this.service.findByManufacturer(new QueryBuilder(params));
+  }
+  /**
+  * Descr: active | inactive | entered-in-error
+  * Type: token
+  */
+  @GET
+  public List<Medication> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: True if medication does not require a prescription
+  * Type: token
+  */
+  @GET
+  public List<Medication> overthecounter(@QueryParam("overthecounter")String overthecounter) {
+  	java.util.Map<String, String> params = QueryParser.parse(overthecounter, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: powder | tablets | capsule +
+  * Type: token
+  */
+  @GET
+  public List<Medication> form(@QueryParam("form")String form) {
+  	java.util.Map<String, String> params = QueryParser.parse(form, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "code|container|form|ingredient|ingredientcode|manufacturer|overthecounter|packageitem|packageitemcode|status";

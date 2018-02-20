@@ -114,15 +114,57 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<FHIRList> findBySource(QueryBuilder queryBuilder) {
-  	final List<FHIRList> result = dao.findBySource(queryBuilder);
-    logger.info("findBysource - exited - return value={} result ");
+  public List<FHIRList> findByCode(QueryBuilder queryBuilder) {
+  	final List<FHIRList> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
     return result;
   }
   @Override
   public List<FHIRList> findBySubject(QueryBuilder queryBuilder) {
   	final List<FHIRList> result = dao.findBySubject(queryBuilder);
     logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FHIRList> findByEncounter(QueryBuilder queryBuilder) {
+  	final List<FHIRList> result = dao.findByEncounter(queryBuilder);
+    logger.info("findByencounter - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FHIRList> findBySource(QueryBuilder queryBuilder) {
+  	final List<FHIRList> result = dao.findBySource(queryBuilder);
+    logger.info("findBysource - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FHIRList> findByOrderedBy(QueryBuilder queryBuilder) {
+  	final List<FHIRList> result = dao.findByOrderedBy(queryBuilder);
+    logger.info("findByorderedBy - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FHIRList> findByEntry(QueryBuilder queryBuilder) {
+  	final List<FHIRList> result = dao.findByEntry(queryBuilder);
+    logger.info("findByentry - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FHIRList> findByEmptyReason(QueryBuilder queryBuilder) {
+  	final List<FHIRList> result = dao.findByEmptyReason(queryBuilder);
+    logger.info("findByemptyReason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FHIRList> findByText(QueryBuilder queryBuilder) {
+  	final List<FHIRList> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FHIRList> findByMeta(QueryBuilder queryBuilder) {
+  	final List<FHIRList> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

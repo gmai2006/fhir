@@ -38,7 +38,14 @@ public interface OperationDefinitionService {
   public OperationDefinition update(OperationDefinition bean);
   public void delete(OperationDefinition bean);
   public List<OperationDefinition> findByField(QueryBuilder queryBuilder);
+  public List<OperationDefinition> findByContact(QueryBuilder queryBuilder);
+  public List<OperationDefinition> findByUseContext(QueryBuilder queryBuilder);
+  public List<OperationDefinition> findByJurisdiction(QueryBuilder queryBuilder);
   public List<OperationDefinition> findByBase(QueryBuilder queryBuilder);
+  public List<OperationDefinition> findByParameter(QueryBuilder queryBuilder);
+  public List<OperationDefinition> findByOverload(QueryBuilder queryBuilder);
+  public List<OperationDefinition> findByText(QueryBuilder queryBuilder);
+  public List<OperationDefinition> findByMeta(QueryBuilder queryBuilder);
 
 
 }

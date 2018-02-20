@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="valuesetfilter")
 public class ValueSetFilterModel  implements Serializable {
-	private static final long serialVersionUID = 151873631121634032L;
+	private static final long serialVersionUID = 151910893698975508L;
   /**
   * Description: "A code that identifies a property defined in the code system."
   */
@@ -106,10 +105,18 @@ public class ValueSetFilterModel  implements Serializable {
 
   public ValueSetFilterModel(ValueSetFilter o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.property = o.getProperty();
     this.op = o.getOp();
     this.value = o.getValue();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getProperty() {

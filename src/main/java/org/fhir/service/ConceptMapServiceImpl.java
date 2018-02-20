@@ -113,4 +113,52 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<ConceptMap> findByContact(QueryBuilder queryBuilder) {
+  	final List<ConceptMap> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ConceptMap> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<ConceptMap> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ConceptMap> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<ConceptMap> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ConceptMap> findBySourceReference(QueryBuilder queryBuilder) {
+  	final List<ConceptMap> result = dao.findBySourceReference(queryBuilder);
+    logger.info("findBysourceReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ConceptMap> findByTargetReference(QueryBuilder queryBuilder) {
+  	final List<ConceptMap> result = dao.findByTargetReference(queryBuilder);
+    logger.info("findBytargetReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ConceptMap> findByGroup(QueryBuilder queryBuilder) {
+  	final List<ConceptMap> result = dao.findByGroup(queryBuilder);
+    logger.info("findBygroup - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ConceptMap> findByText(QueryBuilder queryBuilder) {
+  	final List<ConceptMap> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ConceptMap> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ConceptMap> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

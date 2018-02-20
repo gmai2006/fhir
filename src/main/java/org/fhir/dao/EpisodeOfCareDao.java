@@ -42,4 +42,15 @@ public interface EpisodeOfCareDao {
 
   public List<EpisodeOfCare> findByField(QueryBuilder queryBuilder);
 
+  public List<EpisodeOfCare> findByStatusHistory(QueryBuilder queryBuilder);
+  public List<EpisodeOfCare> findByType(QueryBuilder queryBuilder);
+  public List<EpisodeOfCare> findByDiagnosis(QueryBuilder queryBuilder);
+  public List<EpisodeOfCare> findByPatient(QueryBuilder queryBuilder);
+  public List<EpisodeOfCare> findByManagingOrganization(QueryBuilder queryBuilder);
+  public List<EpisodeOfCare> findByReferralRequest(QueryBuilder queryBuilder);
+  public List<EpisodeOfCare> findByCareManager(QueryBuilder queryBuilder);
+  public List<EpisodeOfCare> findByTeam(QueryBuilder queryBuilder);
+  public List<EpisodeOfCare> findByAccount(QueryBuilder queryBuilder);
+  public List<EpisodeOfCare> findByText(QueryBuilder queryBuilder);
+  public List<EpisodeOfCare> findByMeta(QueryBuilder queryBuilder);
 }

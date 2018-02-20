@@ -204,8 +204,12 @@ public class MedicationDispense  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
-    this.medicationCodeableConcept = CodeableConceptHelper.fromJson(o.getMedicationCodeableConcept());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getMedicationCodeableConcept() && !o.getMedicationCodeableConcept().isEmpty()) {
+      this.medicationCodeableConcept = new CodeableConcept(o.getMedicationCodeableConcept().get(0));
+    }
     if (null != o.getMedicationReference() && !o.getMedicationReference().isEmpty()) {
       this.medicationReference = new Reference(o.getMedicationReference().get(0));
     }
@@ -224,7 +228,9 @@ public class MedicationDispense  extends DomainResource  {
     if (null != o.getAuthorizingPrescription() && !o.getAuthorizingPrescription().isEmpty()) {
     	this.authorizingPrescription = ReferenceHelper.fromArray2Array(o.getAuthorizingPrescription());
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
       this.quantity = new Quantity(o.getQuantity().get(0));
     }
@@ -255,7 +261,9 @@ public class MedicationDispense  extends DomainResource  {
     if (null != o.getNotDone()) {
       this.notDone = o.getNotDone();
     }
-    this.notDoneReasonCodeableConcept = CodeableConceptHelper.fromJson(o.getNotDoneReasonCodeableConcept());
+    if (null != o.getNotDoneReasonCodeableConcept() && !o.getNotDoneReasonCodeableConcept().isEmpty()) {
+      this.notDoneReasonCodeableConcept = new CodeableConcept(o.getNotDoneReasonCodeableConcept().get(0));
+    }
     if (null != o.getNotDoneReasonReference() && !o.getNotDoneReasonReference().isEmpty()) {
       this.notDoneReasonReference = new Reference(o.getNotDoneReasonReference().get(0));
     }

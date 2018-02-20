@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="careplan")
 public class CarePlanModel  implements Serializable {
-	private static final long serialVersionUID = 151873631122048707L;
+	private static final long serialVersionUID = 151910893699143139L;
   /**
   * Description: "This is a CarePlan resource"
   */
@@ -116,12 +115,14 @@ public class CarePlanModel  implements Serializable {
 
   /**
   * Description: "Identifies what \"kind\" of plan this is to support differentiation between multiple co-existing plans; e.g. \"Home health\", \"psychiatric\", \"asthma\", \"disease management\", \"wellness plan\", etc."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "Human-friendly name for the CarePlan."
@@ -334,6 +335,9 @@ public class CarePlanModel  implements Serializable {
   public CarePlanModel(CarePlan o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition_id = "definition" + this.id;
     	this.definition = ReferenceHelper.toModelFromArray(o.getDefinition(), this.definition_id);
@@ -352,6 +356,10 @@ public class CarePlanModel  implements Serializable {
     }
     this.status = o.getStatus();
     this.intent = o.getIntent();
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModelFromArray(o.getCategory(), this.category_id);
+    }
     this.title = o.getTitle();
     this.description = o.getDescription();
     if (null != o.getSubject() ) {
@@ -362,7 +370,9 @@ public class CarePlanModel  implements Serializable {
     	this.context_id = "context" + this.id;
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getAuthor() && !o.getAuthor().isEmpty()) {
     	this.author_id = "author" + this.id;
     	this.author = ReferenceHelper.toModelFromArray(o.getAuthor(), this.author_id);
@@ -387,9 +397,21 @@ public class CarePlanModel  implements Serializable {
     	this.activity_id = "activity" + this.id;
     	this.activity = CarePlanActivityHelper.toModelFromArray(o.getActivity(), this.activity_id);
     }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -447,10 +469,10 @@ public class CarePlanModel  implements Serializable {
   public void setIntent( String value) {
     this.intent = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
   public String getTitle() {
@@ -582,7 +604,6 @@ public class CarePlanModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("intent" + "->" + this.intent + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
      builder.append("title" + "->" + this.title + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 

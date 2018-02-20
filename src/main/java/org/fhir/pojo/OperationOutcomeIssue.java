@@ -98,7 +98,9 @@ public class OperationOutcomeIssue  extends BackboneElement  {
     if (null != o.getCode()) {
       this.code = o.getCode();
     }
-    this.details = CodeableConceptHelper.fromJson(o.getDetails());
+    if (null != o.getDetails() && !o.getDetails().isEmpty()) {
+      this.details = new CodeableConcept(o.getDetails().get(0));
+    }
     if (null != o.getDiagnostics()) {
       this.diagnostics = o.getDiagnostics();
     }

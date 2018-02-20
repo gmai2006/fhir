@@ -198,9 +198,27 @@ public class Contract  extends DomainResource  {
     if (null != o.getDomain() && !o.getDomain().isEmpty()) {
     	this.domain = ReferenceHelper.fromArray2Array(o.getDomain());
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
-    this.decisionType = CodeableConceptHelper.fromJson(o.getDecisionType());
-    this.contentDerivative = CodeableConceptHelper.fromJson(o.getContentDerivative());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getSubType() && !o.getSubType().isEmpty()) {
+    	this.subType = CodeableConceptHelper.fromArray2Array(o.getSubType());
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action = CodeableConceptHelper.fromArray2Array(o.getAction());
+    }
+    if (null != o.getActionReason() && !o.getActionReason().isEmpty()) {
+    	this.actionReason = CodeableConceptHelper.fromArray2Array(o.getActionReason());
+    }
+    if (null != o.getDecisionType() && !o.getDecisionType().isEmpty()) {
+      this.decisionType = new CodeableConcept(o.getDecisionType().get(0));
+    }
+    if (null != o.getContentDerivative() && !o.getContentDerivative().isEmpty()) {
+      this.contentDerivative = new CodeableConcept(o.getContentDerivative().get(0));
+    }
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securityLabel = CodingHelper.fromArray2Array(o.getSecurityLabel());
+    }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent = ContractAgentHelper.fromArray2Array(o.getAgent());
     }

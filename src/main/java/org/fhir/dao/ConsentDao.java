@@ -42,7 +42,18 @@ public interface ConsentDao {
 
   public List<Consent> findByField(QueryBuilder queryBuilder);
 
+  public List<Consent> findByCategory(QueryBuilder queryBuilder);
+  public List<Consent> findByPatient(QueryBuilder queryBuilder);
+  public List<Consent> findByConsentingParty(QueryBuilder queryBuilder);
   public List<Consent> findByActor(QueryBuilder queryBuilder);
-  public List<Consent> findByData(QueryBuilder queryBuilder);
+  public List<Consent> findByAction(QueryBuilder queryBuilder);
   public List<Consent> findByOrganization(QueryBuilder queryBuilder);
+  public List<Consent> findBySourceReference(QueryBuilder queryBuilder);
+  public List<Consent> findByPolicy(QueryBuilder queryBuilder);
+  public List<Consent> findBySecurityLabel(QueryBuilder queryBuilder);
+  public List<Consent> findByPurpose(QueryBuilder queryBuilder);
+  public List<Consent> findByData(QueryBuilder queryBuilder);
+  public List<Consent> findByExcept(QueryBuilder queryBuilder);
+  public List<Consent> findByText(QueryBuilder queryBuilder);
+  public List<Consent> findByMeta(QueryBuilder queryBuilder);
 }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,25 +37,28 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="familymemberhistorycondition")
 public class FamilyMemberHistoryConditionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631170323429L;
+	private static final long serialVersionUID = 151910893745968429L;
   /**
   * Description: "The actual condition specified. Could be a coded condition (like MI or Diabetes) or a less specific string like 'cancer' depending on how much is known about the condition and the capabilities of the creating system."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "Indicates what happened as a result of this condition.  If the condition resulted in death, deceased date is captured on the relation."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"outcome\"", length = 16777215)
-  private String outcome;
+  @Column(name="\"outcome_id\"")
+  private String outcome_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> outcome;
 
   /**
   * Description: "Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence."
@@ -145,25 +147,48 @@ public class FamilyMemberHistoryConditionModel  implements Serializable {
 
   public FamilyMemberHistoryConditionModel(FamilyMemberHistoryCondition o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = JsonUtils.toJson(o.getCode());
-    this.outcome = JsonUtils.toJson(o.getOutcome());
-    this.onsetAge = JsonUtils.toJson(o.getOnsetAge());
-    this.onsetRange = JsonUtils.toJson(o.getOnsetRange());
-    this.onsetPeriod = JsonUtils.toJson(o.getOnsetPeriod());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
+    if (null != o.getOutcome() ) {
+    	this.outcome_id = "outcome" + this.parent_id;
+    	this.outcome = CodeableConceptHelper.toModel(o.getOutcome(), this.outcome_id);
+    }
+    if (null != o.getOnsetAge()) {
+    	this.onsetAge = JsonUtils.toJson(o.getOnsetAge());
+    }
+    if (null != o.getOnsetRange()) {
+    	this.onsetRange = JsonUtils.toJson(o.getOnsetRange());
+    }
+    if (null != o.getOnsetPeriod()) {
+    	this.onsetPeriod = JsonUtils.toJson(o.getOnsetPeriod());
+    }
     this.onsetString = o.getOnsetString();
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
-  public String getOutcome() {
+  public java.util.List<CodeableConceptModel> getOutcome() {
     return this.outcome;
   }
-  public void setOutcome( String value) {
+  public void setOutcome( java.util.List<CodeableConceptModel> value) {
     this.outcome = value;
   }
   public String getOnsetAge() {
@@ -225,8 +250,6 @@ public class FamilyMemberHistoryConditionModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[FamilyMemberHistoryConditionModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("onsetAge" + "->" + this.onsetAge + "\n"); 
      builder.append("onsetRange" + "->" + this.onsetRange + "\n"); 
      builder.append("onsetPeriod" + "->" + this.onsetPeriod + "\n"); 

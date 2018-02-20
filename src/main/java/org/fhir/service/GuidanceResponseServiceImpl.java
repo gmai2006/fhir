@@ -114,9 +114,75 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<GuidanceResponse> findByModule(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByModule(queryBuilder);
+    logger.info("findBymodule - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<GuidanceResponse> findBySubject(QueryBuilder queryBuilder) {
   	final List<GuidanceResponse> result = dao.findBySubject(queryBuilder);
     logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GuidanceResponse> findByContext(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GuidanceResponse> findByPerformer(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByPerformer(queryBuilder);
+    logger.info("findByperformer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GuidanceResponse> findByReasonCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByReasonCodeableConcept(queryBuilder);
+    logger.info("findByreasonCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GuidanceResponse> findByReasonReference(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByReasonReference(queryBuilder);
+    logger.info("findByreasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GuidanceResponse> findByEvaluationMessage(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByEvaluationMessage(queryBuilder);
+    logger.info("findByevaluationMessage - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GuidanceResponse> findByOutputParameters(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByOutputParameters(queryBuilder);
+    logger.info("findByoutputParameters - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GuidanceResponse> findByResult(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByResult(queryBuilder);
+    logger.info("findByresult - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GuidanceResponse> findByDataRequirement(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByDataRequirement(queryBuilder);
+    logger.info("findBydataRequirement - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GuidanceResponse> findByText(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GuidanceResponse> findByMeta(QueryBuilder queryBuilder) {
+  	final List<GuidanceResponse> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

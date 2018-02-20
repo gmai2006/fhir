@@ -151,7 +151,12 @@ public class DeviceUseStatement  extends DomainResource  {
     if (null != o.getDevice() && !o.getDevice().isEmpty()) {
       this.device = new Reference(o.getDevice().get(0));
     }
-    this.bodySite = CodeableConceptHelper.fromJson(o.getBodySite());
+    if (null != o.getIndication() && !o.getIndication().isEmpty()) {
+    	this.indication = CodeableConceptHelper.fromArray2Array(o.getIndication());
+    }
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+      this.bodySite = new CodeableConcept(o.getBodySite().get(0));
+    }
   }
 
   public void setResourceType( String value) {

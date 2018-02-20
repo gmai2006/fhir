@@ -91,7 +91,6 @@ public class TestAllServices {
   @Mock CarePlanDao careplanDao; 
   @Mock AllergyIntoleranceDao allergyintoleranceDao; 
   @Mock EpisodeOfCareDao episodeofcareDao; 
-  @Mock OperationOutcomeDao operationoutcomeDao; 
   @Mock ProcedureDao procedureDao; 
   @Mock ConceptMapDao conceptmapDao; 
   @Mock ValueSetDao valuesetDao; 
@@ -208,7 +207,6 @@ public class TestAllServices {
   @Mock CarePlanServiceImpl careplanService; 
   @Mock AllergyIntoleranceServiceImpl allergyintoleranceService; 
   @Mock EpisodeOfCareServiceImpl episodeofcareService; 
-  @Mock OperationOutcomeServiceImpl operationoutcomeService; 
   @Mock ProcedureServiceImpl procedureService; 
   @Mock ConceptMapServiceImpl conceptmapService; 
   @Mock ValueSetServiceImpl valuesetService; 
@@ -327,7 +325,6 @@ public class TestAllServices {
   	careplanService = new CarePlanServiceImpl(careplanDao); 
   	allergyintoleranceService = new AllergyIntoleranceServiceImpl(allergyintoleranceDao); 
   	episodeofcareService = new EpisodeOfCareServiceImpl(episodeofcareDao); 
-  	operationoutcomeService = new OperationOutcomeServiceImpl(operationoutcomeDao); 
   	procedureService = new ProcedureServiceImpl(procedureDao); 
   	conceptmapService = new ConceptMapServiceImpl(conceptmapDao); 
   	valuesetService = new ValueSetServiceImpl(valuesetDao); 
@@ -2364,21 +2361,6 @@ public class TestAllServices {
       List<StructureDefinition> result = structuredefinitionService.selectAll();
 
       assertEquals("Expect ", "Group", result.get(0).getId()); 
-    }
-    @Test
-    public void testLoadOperationOutcome1FromJson() throws Exception {
-     String inputFile = "../../fhir-data/examples-json/operationoutcome-example-break-the-glass.json";
-
-     String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
-     OperationOutcome operationoutcome = OperationOutcomeHelper.fromJson(json);
-
-     List<OperationOutcome> list = Arrays.asList(new OperationOutcome[] {operationoutcome});
-
-      when(operationoutcomeService.selectAll()).thenReturn(list);
-
-      List<OperationOutcome> result = operationoutcomeService.selectAll();
-
-      assertEquals("Expect ", "break-the-glass", result.get(0).getId()); 
     }
     @Test
     public void testLoadStructureDefinition35FromJson() throws Exception {
@@ -9956,21 +9938,6 @@ public class TestAllServices {
       assertEquals("Expect ", "cardiacdiet", result.get(0).getId()); 
     }
     @Test
-    public void testLoadOperationOutcome2FromJson() throws Exception {
-     String inputFile = "../../fhir-data/examples-json/operationoutcome-example-allok.json";
-
-     String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
-     OperationOutcome operationoutcome = OperationOutcomeHelper.fromJson(json);
-
-     List<OperationOutcome> list = Arrays.asList(new OperationOutcome[] {operationoutcome});
-
-      when(operationoutcomeService.selectAll()).thenReturn(list);
-
-      List<OperationOutcome> result = operationoutcomeService.selectAll();
-
-      assertEquals("Expect ", "allok", result.get(0).getId()); 
-    }
-    @Test
     public void testLoadCodeSystem104FromJson() throws Exception {
      String inputFile = "../../fhir-data/examples-json/codesystem-policyholder-relationship.json";
 
@@ -10629,21 +10596,6 @@ public class TestAllServices {
       List<CodeSystem> result = codesystemService.selectAll();
 
       assertEquals("Expect ", "fundsreserve", result.get(0).getId()); 
-    }
-    @Test
-    public void testLoadOperationOutcome3FromJson() throws Exception {
-     String inputFile = "../../fhir-data/examples-json/operationoutcome-example.json";
-
-     String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
-     OperationOutcome operationoutcome = OperationOutcomeHelper.fromJson(json);
-
-     List<OperationOutcome> list = Arrays.asList(new OperationOutcome[] {operationoutcome});
-
-      when(operationoutcomeService.selectAll()).thenReturn(list);
-
-      List<OperationOutcome> result = operationoutcomeService.selectAll();
-
-      assertEquals("Expect ", "101", result.get(0).getId()); 
     }
     @Test
     public void testLoadCodeSystem117FromJson() throws Exception {
@@ -15881,21 +15833,6 @@ public class TestAllServices {
       assertEquals("Expect ", "observation-vitalsignresult", result.get(0).getId()); 
     }
     @Test
-    public void testLoadOperationOutcome4FromJson() throws Exception {
-     String inputFile = "../../fhir-data/examples-json/operationoutcome-example-validationfail.json";
-
-     String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
-     OperationOutcome operationoutcome = OperationOutcomeHelper.fromJson(json);
-
-     List<OperationOutcome> list = Arrays.asList(new OperationOutcome[] {operationoutcome});
-
-      when(operationoutcomeService.selectAll()).thenReturn(list);
-
-      List<OperationOutcome> result = operationoutcomeService.selectAll();
-
-      assertEquals("Expect ", "validationfail", result.get(0).getId()); 
-    }
-    @Test
     public void testLoadClaim6FromJson() throws Exception {
      String inputFile = "../../fhir-data/examples-json/claim-example-oral-contained.json";
 
@@ -15924,21 +15861,6 @@ public class TestAllServices {
       List<Questionnaire> result = questionnaireService.selectAll();
 
       assertEquals("Expect ", "qs1", result.get(0).getId()); 
-    }
-    @Test
-    public void testLoadOperationOutcome5FromJson() throws Exception {
-     String inputFile = "../../fhir-data/examples-json/operationoutcome-example-searchfail.json";
-
-     String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
-     OperationOutcome operationoutcome = OperationOutcomeHelper.fromJson(json);
-
-     List<OperationOutcome> list = Arrays.asList(new OperationOutcome[] {operationoutcome});
-
-      when(operationoutcomeService.selectAll()).thenReturn(list);
-
-      List<OperationOutcome> result = operationoutcomeService.selectAll();
-
-      assertEquals("Expect ", "searchfail", result.get(0).getId()); 
     }
     @Test
     public void testLoadStructureDefinition259FromJson() throws Exception {
@@ -21279,21 +21201,6 @@ public class TestAllServices {
       List<StructureDefinition> result = structuredefinitionService.selectAll();
 
       assertEquals("Expect ", "bmi", result.get(0).getId()); 
-    }
-    @Test
-    public void testLoadOperationOutcome6FromJson() throws Exception {
-     String inputFile = "../../fhir-data/examples-json/operationoutcome-example-exception.json";
-
-     String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
-     OperationOutcome operationoutcome = OperationOutcomeHelper.fromJson(json);
-
-     List<OperationOutcome> list = Arrays.asList(new OperationOutcome[] {operationoutcome});
-
-      when(operationoutcomeService.selectAll()).thenReturn(list);
-
-      List<OperationOutcome> result = operationoutcomeService.selectAll();
-
-      assertEquals("Expect ", "exception", result.get(0).getId()); 
     }
     @Test
     public void testLoadValueSet306FromJson() throws Exception {

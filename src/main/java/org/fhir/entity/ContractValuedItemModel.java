@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="contractvalueditem")
 public class ContractValuedItemModel  implements Serializable {
-	private static final long serialVersionUID = 151873631198348991L;
+	private static final long serialVersionUID = 151910893775490673L;
   /**
   * Description: "Specific type of Contract Valued Item that may be priced."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"entityCodeableConcept\"", length = 16777215)
-  private String entityCodeableConcept;
+  @Column(name="\"entitycodeableconcept_id\"")
+  private String entitycodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="entitycodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> entityCodeableConcept;
 
   /**
   * Description: "Specific type of Contract Valued Item that may be priced."
@@ -169,13 +170,20 @@ public class ContractValuedItemModel  implements Serializable {
 
   public ContractValuedItemModel(ContractValuedItem o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.entityCodeableConcept = JsonUtils.toJson(o.getEntityCodeableConcept());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getEntityCodeableConcept() ) {
+    	this.entitycodeableconcept_id = "entitycodeableconcept" + this.parent_id;
+    	this.entityCodeableConcept = CodeableConceptHelper.toModel(o.getEntityCodeableConcept(), this.entitycodeableconcept_id);
+    }
     if (null != o.getEntityReference() ) {
     	this.entityreference_id = "entityreference" + this.parent_id;
     	this.entityReference = ReferenceHelper.toModel(o.getEntityReference(), this.entityreference_id);
     }
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.effectiveTime = o.getEffectiveTime();
     if (null != o.getQuantity() ) {
     	this.quantity_id = "quantity" + this.parent_id;
@@ -191,12 +199,18 @@ public class ContractValuedItemModel  implements Serializable {
     	this.net_id = "net" + this.parent_id;
     	this.net = MoneyHelper.toModel(o.getNet(), this.net_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getEntityCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getEntityCodeableConcept() {
     return this.entityCodeableConcept;
   }
-  public void setEntityCodeableConcept( String value) {
+  public void setEntityCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.entityCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getEntityReference() {
@@ -276,7 +290,6 @@ public class ContractValuedItemModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ContractValuedItemModel]:" + "\n");
-     builder.append("entityCodeableConcept" + "->" + this.entityCodeableConcept + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("effectiveTime" + "->" + this.effectiveTime + "\n"); 
      builder.append("factor" + "->" + this.factor + "\n"); 

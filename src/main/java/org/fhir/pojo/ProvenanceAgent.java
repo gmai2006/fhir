@@ -77,6 +77,9 @@ public class ProvenanceAgent  extends BackboneElement  {
 
   public ProvenanceAgent(ProvenanceAgentModel o) {
     this.id = o.getId();
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+    	this.role = CodeableConceptHelper.fromArray2Array(o.getRole());
+    }
     if (null != o.getWhoUri()) {
       this.whoUri = o.getWhoUri();
     }
@@ -89,7 +92,9 @@ public class ProvenanceAgent  extends BackboneElement  {
     if (null != o.getOnBehalfOfReference() && !o.getOnBehalfOfReference().isEmpty()) {
       this.onBehalfOfReference = new Reference(o.getOnBehalfOfReference().get(0));
     }
-    this.relatedAgentType = CodeableConceptHelper.fromJson(o.getRelatedAgentType());
+    if (null != o.getRelatedAgentType() && !o.getRelatedAgentType().isEmpty()) {
+      this.relatedAgentType = new CodeableConcept(o.getRelatedAgentType().get(0));
+    }
   }
 
   public void setRole( java.util.List<CodeableConcept> value) {

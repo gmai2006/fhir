@@ -42,6 +42,11 @@ public interface DeviceMetricDao {
 
   public List<DeviceMetric> findByField(QueryBuilder queryBuilder);
 
-  public List<DeviceMetric> findByParent(QueryBuilder queryBuilder);
+  public List<DeviceMetric> findByType(QueryBuilder queryBuilder);
+  public List<DeviceMetric> findByUnit(QueryBuilder queryBuilder);
   public List<DeviceMetric> findBySource(QueryBuilder queryBuilder);
+  public List<DeviceMetric> findByParent(QueryBuilder queryBuilder);
+  public List<DeviceMetric> findByCalibration(QueryBuilder queryBuilder);
+  public List<DeviceMetric> findByText(QueryBuilder queryBuilder);
+  public List<DeviceMetric> findByMeta(QueryBuilder queryBuilder);
 }

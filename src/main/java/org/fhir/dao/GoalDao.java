@@ -42,5 +42,16 @@ public interface GoalDao {
 
   public List<Goal> findByField(QueryBuilder queryBuilder);
 
+  public List<Goal> findByCategory(QueryBuilder queryBuilder);
+  public List<Goal> findByPriority(QueryBuilder queryBuilder);
+  public List<Goal> findByDescription(QueryBuilder queryBuilder);
   public List<Goal> findBySubject(QueryBuilder queryBuilder);
+  public List<Goal> findByStartCodeableConcept(QueryBuilder queryBuilder);
+  public List<Goal> findByTarget(QueryBuilder queryBuilder);
+  public List<Goal> findByExpressedBy(QueryBuilder queryBuilder);
+  public List<Goal> findByAddresses(QueryBuilder queryBuilder);
+  public List<Goal> findByOutcomeCode(QueryBuilder queryBuilder);
+  public List<Goal> findByOutcomeReference(QueryBuilder queryBuilder);
+  public List<Goal> findByText(QueryBuilder queryBuilder);
+  public List<Goal> findByMeta(QueryBuilder queryBuilder);
 }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="procedurerequest")
 public class ProcedureRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151873631189431108L;
+	private static final long serialVersionUID = 151910893766386853L;
   /**
   * Description: "This is a ProcedureRequest resource"
   */
@@ -131,22 +130,25 @@ public class ProcedureRequestModel  implements Serializable {
 
   /**
   * Description: "A code that classifies the procedure for searching, sorting and display purposes (e.g. \"Surgical Procedure\")."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "A code that identifies a particular procedure, diagnostic investigation, or panel of investigations, that have been requested."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "On whom or what the procedure or diagnostic is to be performed. This is usually a human patient, but can also be requested on animals, groups of humans or animals, devices such as dialysis machines, or even locations (typically for environmental scans)."
@@ -205,12 +207,14 @@ public class ProcedureRequestModel  implements Serializable {
 
   /**
   * Description: "If a CodeableConcept is present, it indicates the pre-condition for performing the procedure.  For example \"pain\", \"on flare-up\", etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"asNeededCodeableConcept\"", length = 16777215)
-  private String asNeededCodeableConcept;
+  @Column(name="\"asneededcodeableconcept_id\"")
+  private String asneededcodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="asneededcodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> asNeededCodeableConcept;
 
   /**
   * Description: "When the request transitioned to being actionable."
@@ -233,12 +237,14 @@ public class ProcedureRequestModel  implements Serializable {
 
   /**
   * Description: "Desired type of performer for doing the diagnostic testing."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"performerType\"", length = 16777215)
-  private String performerType;
+  @Column(name="\"performertype_id\"")
+  private String performertype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performertype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> performerType;
 
   /**
   * Description: "The desired perfomer for doing the diagnostic testing.  For example, the surgeon, dermatopathologist, endoscopist, etc."
@@ -253,12 +259,14 @@ public class ProcedureRequestModel  implements Serializable {
 
   /**
   * Description: "An explanation or justification for why this diagnostic investigation is being requested in coded or textual form.   This is often for billing purposes.  May relate to the resources referred to in supportingInformation."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonCode\"", length = 16777215)
-  private String reasonCode;
+  @Column(name="\"reasoncode_id\"")
+  private String reasoncode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonCode;
 
   /**
   * Description: "Indicates another resource that provides a justification for why this diagnostic investigation is being requested.   May relate to the resources referred to in supportingInformation."
@@ -295,12 +303,14 @@ public class ProcedureRequestModel  implements Serializable {
 
   /**
   * Description: "Anatomic location where the procedure should be performed. This is the target site."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"bodySite\"", length = 16777215)
-  private String bodySite;
+  @Column(name="\"bodysite_id\"")
+  private String bodysite_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> bodySite;
 
   /**
   * Description: "Any other notes and comments made about the service request. For example, letting provider know that \"patient hates needles\" or other provider instructions."
@@ -413,6 +423,9 @@ public class ProcedureRequestModel  implements Serializable {
   public ProcedureRequestModel(ProcedureRequest o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition_id = "definition" + this.id;
     	this.definition = ReferenceHelper.toModelFromArray(o.getDefinition(), this.definition_id);
@@ -425,12 +438,21 @@ public class ProcedureRequestModel  implements Serializable {
     	this.replaces_id = "replaces" + this.id;
     	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
     }
-    this.requisition = JsonUtils.toJson(o.getRequisition());
+    if (null != o.getRequisition()) {
+    	this.requisition = JsonUtils.toJson(o.getRequisition());
+    }
     this.status = o.getStatus();
     this.intent = o.getIntent();
     this.priority = o.getPriority();
     this.doNotPerform = o.getDoNotPerform();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModelFromArray(o.getCategory(), this.category_id);
+    }
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -440,19 +462,33 @@ public class ProcedureRequestModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
-    this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
+    if (null != o.getOccurrencePeriod()) {
+    	this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    }
+    if (null != o.getOccurrenceTiming()) {
+    	this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
+    }
     this.asNeededBoolean = o.getAsNeededBoolean();
-    this.asNeededCodeableConcept = JsonUtils.toJson(o.getAsNeededCodeableConcept());
+    if (null != o.getAsNeededCodeableConcept() ) {
+    	this.asneededcodeableconcept_id = "asneededcodeableconcept" + this.id;
+    	this.asNeededCodeableConcept = CodeableConceptHelper.toModel(o.getAsNeededCodeableConcept(), this.asneededcodeableconcept_id);
+    }
     this.authoredOn = o.getAuthoredOn();
     if (null != o.getRequester() ) {
     	this.requester_id = "requester" + this.id;
     	this.requester = ProcedureRequestRequesterHelper.toModel(o.getRequester(), this.requester_id);
     }
-    this.performerType = JsonUtils.toJson(o.getPerformerType());
+    if (null != o.getPerformerType() ) {
+    	this.performertype_id = "performertype" + this.id;
+    	this.performerType = CodeableConceptHelper.toModel(o.getPerformerType(), this.performertype_id);
+    }
     if (null != o.getPerformer() ) {
     	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasoncode_id = "reasoncode" + this.id;
+    	this.reasonCode = CodeableConceptHelper.toModelFromArray(o.getReasonCode(), this.reasoncode_id);
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonreference_id = "reasonreference" + this.id;
@@ -466,6 +502,13 @@ public class ProcedureRequestModel  implements Serializable {
     	this.specimen_id = "specimen" + this.id;
     	this.specimen = ReferenceHelper.toModelFromArray(o.getSpecimen(), this.specimen_id);
     }
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+    	this.bodysite_id = "bodysite" + this.id;
+    	this.bodySite = CodeableConceptHelper.toModelFromArray(o.getBodySite(), this.bodysite_id);
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getRelevantHistory() && !o.getRelevantHistory().isEmpty()) {
     	this.relevanthistory_id = "relevanthistory" + this.id;
     	this.relevantHistory = ReferenceHelper.toModelFromArray(o.getRelevantHistory(), this.relevanthistory_id);
@@ -473,6 +516,15 @@ public class ProcedureRequestModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -542,16 +594,16 @@ public class ProcedureRequestModel  implements Serializable {
   public void setDoNotPerform( Boolean value) {
     this.doNotPerform = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -590,10 +642,10 @@ public class ProcedureRequestModel  implements Serializable {
   public void setAsNeededBoolean( Boolean value) {
     this.asNeededBoolean = value;
   }
-  public String getAsNeededCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getAsNeededCodeableConcept() {
     return this.asNeededCodeableConcept;
   }
-  public void setAsNeededCodeableConcept( String value) {
+  public void setAsNeededCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.asNeededCodeableConcept = value;
   }
   public String getAuthoredOn() {
@@ -608,10 +660,10 @@ public class ProcedureRequestModel  implements Serializable {
   public void setRequester( java.util.List<ProcedureRequestRequesterModel> value) {
     this.requester = value;
   }
-  public String getPerformerType() {
+  public java.util.List<CodeableConceptModel> getPerformerType() {
     return this.performerType;
   }
-  public void setPerformerType( String value) {
+  public void setPerformerType( java.util.List<CodeableConceptModel> value) {
     this.performerType = value;
   }
   public java.util.List<ReferenceModel> getPerformer() {
@@ -620,10 +672,10 @@ public class ProcedureRequestModel  implements Serializable {
   public void setPerformer( java.util.List<ReferenceModel> value) {
     this.performer = value;
   }
-  public String getReasonCode() {
+  public java.util.List<CodeableConceptModel> getReasonCode() {
     return this.reasonCode;
   }
-  public void setReasonCode( String value) {
+  public void setReasonCode( java.util.List<CodeableConceptModel> value) {
     this.reasonCode = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
@@ -644,10 +696,10 @@ public class ProcedureRequestModel  implements Serializable {
   public void setSpecimen( java.util.List<ReferenceModel> value) {
     this.specimen = value;
   }
-  public String getBodySite() {
+  public java.util.List<CodeableConceptModel> getBodySite() {
     return this.bodySite;
   }
-  public void setBodySite( String value) {
+  public void setBodySite( java.util.List<CodeableConceptModel> value) {
     this.bodySite = value;
   }
   public String getNote() {
@@ -722,17 +774,11 @@ public class ProcedureRequestModel  implements Serializable {
      builder.append("intent" + "->" + this.intent + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
      builder.append("doNotPerform" + "->" + this.doNotPerform + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("occurrenceTiming" + "->" + this.occurrenceTiming + "\n"); 
      builder.append("asNeededBoolean" + "->" + this.asNeededBoolean + "\n"); 
-     builder.append("asNeededCodeableConcept" + "->" + this.asNeededCodeableConcept + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
-     builder.append("performerType" + "->" + this.performerType + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

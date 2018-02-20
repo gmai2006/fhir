@@ -162,11 +162,18 @@ public class Encounter  extends DomainResource  {
     if (null != o.getStatusHistory() && !o.getStatusHistory().isEmpty()) {
     	this.statusHistory = EncounterStatusHistoryHelper.fromArray2Array(o.getStatusHistory());
     }
-    this.FHIRclass = CodingHelper.fromJson(o.getFHIRclass());
+    if (null != o.getFHIRclass() && !o.getFHIRclass().isEmpty()) {
+      this.FHIRclass = new Coding(o.getFHIRclass().get(0));
+    }
     if (null != o.getClassHistory() && !o.getClassHistory().isEmpty()) {
     	this.classHistory = EncounterClassHistoryHelper.fromArray2Array(o.getClassHistory());
     }
-    this.priority = CodeableConceptHelper.fromJson(o.getPriority());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type = CodeableConceptHelper.fromArray2Array(o.getType());
+    }
+    if (null != o.getPriority() && !o.getPriority().isEmpty()) {
+      this.priority = new CodeableConcept(o.getPriority().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -184,6 +191,9 @@ public class Encounter  extends DomainResource  {
     }
     this.period = PeriodHelper.fromJson(o.getPeriod());
     this.length = DurationHelper.fromJson(o.getLength());
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason = CodeableConceptHelper.fromArray2Array(o.getReason());
+    }
     if (null != o.getDiagnosis() && !o.getDiagnosis().isEmpty()) {
     	this.diagnosis = EncounterDiagnosisHelper.fromArray2Array(o.getDiagnosis());
     }

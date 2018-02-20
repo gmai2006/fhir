@@ -272,7 +272,8 @@
       "type": "token",
       "expression": "Person.identifier",
       "code": "identifier",
-      "xpath": "identifier"
+      "xpath": "identifier",
+      "fieldName": "identifier"
     },
     {
       "name": "link",
@@ -280,7 +281,8 @@
       "type": "reference",
       "expression": "Person.link.target",
       "code": "link",
-      "xpath": "link/target"
+      "xpath": "link/target",
+      "fieldName": "target"
     },
     {
       "name": "name",
@@ -288,7 +290,8 @@
       "type": "string",
       "expression": "Person.name",
       "code": "name",
-      "xpath": "name"
+      "xpath": "name",
+      "fieldName": "name"
     },
     {
       "name": "organization",
@@ -296,7 +299,8 @@
       "type": "reference",
       "expression": "Person.managingOrganization",
       "code": "organization",
-      "xpath": "managingOrganization"
+      "xpath": "managingOrganization",
+      "fieldName": "managingOrganization"
     },
     {
       "name": "patient",
@@ -304,7 +308,8 @@
       "type": "reference",
       "expression": "Person.link.target",
       "code": "patient",
-      "xpath": "link/target"
+      "xpath": "link/target",
+      "fieldName": "target"
     },
     {
       "name": "practitioner",
@@ -312,7 +317,8 @@
       "type": "reference",
       "expression": "Person.link.target",
       "code": "practitioner",
-      "xpath": "link/target"
+      "xpath": "link/target",
+      "fieldName": "target"
     },
     {
       "name": "relatedperson",
@@ -320,7 +326,8 @@
       "type": "reference",
       "expression": "Person.link.target",
       "code": "relatedperson",
-      "xpath": "link/target"
+      "xpath": "link/target",
+      "fieldName": "target"
     }
   ]
 }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementmessaging")
 public class CapabilityStatementMessagingModel  implements Serializable {
-	private static final long serialVersionUID = 151873631123091821L;
+	private static final long serialVersionUID = 151910893699911117L;
   /**
   * Description: "An endpoint (network accessible address) to which messages and/or replies are to be sent."
   */
@@ -131,7 +130,9 @@ public class CapabilityStatementMessagingModel  implements Serializable {
 
   public CapabilityStatementMessagingModel(CapabilityStatementMessaging o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
     	this.endpoint_id = "endpoint" + this.parent_id;
     	this.endpoint = CapabilityStatementEndpointHelper.toModelFromArray(o.getEndpoint(), this.endpoint_id);
@@ -145,6 +146,12 @@ public class CapabilityStatementMessagingModel  implements Serializable {
     if (null != o.getEvent() && !o.getEvent().isEmpty()) {
     	this.event_id = "event" + this.parent_id;
     	this.event = CapabilityStatementEventHelper.toModelFromArray(o.getEvent(), this.event_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

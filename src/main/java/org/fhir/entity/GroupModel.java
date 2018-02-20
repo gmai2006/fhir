@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="fhirgroup")
 public class GroupModel  implements Serializable {
-	private static final long serialVersionUID = 151873631170122285L;
+	private static final long serialVersionUID = 15191089374583150L;
   /**
   * Description: "This is a Group resource"
   */
@@ -79,12 +78,14 @@ public class GroupModel  implements Serializable {
 
   /**
   * Description: "Provides a specific type of resource the group includes; e.g. \"cow\", \"syringe\", etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "A label assigned to the group for human identification and communication."
@@ -214,10 +215,16 @@ public class GroupModel  implements Serializable {
   public GroupModel(Group o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.active = o.getActive();
     this.type = o.getType();
     this.actual = o.getActual();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     this.name = o.getName();
     this.quantity = o.getQuantity();
     if (null != o.getCharacteristic() && !o.getCharacteristic().isEmpty()) {
@@ -231,6 +238,15 @@ public class GroupModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -270,10 +286,10 @@ public class GroupModel  implements Serializable {
   public void setActual( Boolean value) {
     this.actual = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public String getName() {
@@ -358,7 +374,6 @@ public class GroupModel  implements Serializable {
      builder.append("active" + "->" + this.active + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("actual" + "->" + this.actual + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("quantity" + "->" + this.quantity + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

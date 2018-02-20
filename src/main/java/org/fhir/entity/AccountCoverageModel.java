@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="accountcoverage")
 public class AccountCoverageModel  implements Serializable {
-	private static final long serialVersionUID = 151873631196989563L;
+	private static final long serialVersionUID = 151910893773793941L;
   /**
   * Description: "The party(s) that are responsible for payment (or part of) of charges applied to this account (including self-pay).\n\nA coverage may only be resposible for specific types of charges, and the sequence of the coverages in the account could be important when processing billing."
   */
@@ -102,12 +101,20 @@ public class AccountCoverageModel  implements Serializable {
 
   public AccountCoverageModel(AccountCoverage o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getCoverage() ) {
     	this.coverage_id = "coverage" + this.parent_id;
     	this.coverage = ReferenceHelper.toModel(o.getCoverage(), this.coverage_id);
     }
     this.priority = o.getPriority();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public java.util.List<ReferenceModel> getCoverage() {

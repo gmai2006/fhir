@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="enrollmentresponse")
 public class EnrollmentResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151873631154151823L;
+	private static final long serialVersionUID = 151910893730619694L;
   /**
   * Description: "This is a EnrollmentResponse resource"
   */
@@ -77,12 +76,14 @@ public class EnrollmentResponseModel  implements Serializable {
 
   /**
   * Description: "Processing status: error, complete."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"outcome\"", length = 16777215)
-  private String outcome;
+  @Column(name="\"outcome_id\"")
+  private String outcome_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> outcome;
 
   /**
   * Description: "A description of the status of the adjudication."
@@ -223,12 +224,18 @@ public class EnrollmentResponseModel  implements Serializable {
   public EnrollmentResponseModel(EnrollmentResponse o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     if (null != o.getRequest() ) {
     	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
-    this.outcome = JsonUtils.toJson(o.getOutcome());
+    if (null != o.getOutcome() ) {
+    	this.outcome_id = "outcome" + this.id;
+    	this.outcome = CodeableConceptHelper.toModel(o.getOutcome(), this.outcome_id);
+    }
     this.disposition = o.getDisposition();
     this.created = o.getCreated();
     if (null != o.getOrganization() ) {
@@ -246,6 +253,15 @@ public class EnrollmentResponseModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -279,10 +295,10 @@ public class EnrollmentResponseModel  implements Serializable {
   public void setRequest( java.util.List<ReferenceModel> value) {
     this.request = value;
   }
-  public String getOutcome() {
+  public java.util.List<CodeableConceptModel> getOutcome() {
     return this.outcome;
   }
-  public void setOutcome( String value) {
+  public void setOutcome( java.util.List<CodeableConceptModel> value) {
     this.outcome = value;
   }
   public String getDisposition() {
@@ -371,7 +387,6 @@ public class EnrollmentResponseModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("disposition" + "->" + this.disposition + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

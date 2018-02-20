@@ -97,15 +97,45 @@ public class AllergyIntoleranceDaoImpl implements AllergyIntoleranceDao {
   }
 
   @Override
-  public List<AllergyIntolerance> findByAsserter(QueryBuilder queryBuilder) {
+  public List<AllergyIntolerance> findByCode(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from AllergyIntoleranceModel a, Reference b where a.asserter_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from AllergyIntoleranceModel a, CodeableConcept b where a.code_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AllergyIntolerance> findByPatient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AllergyIntoleranceModel a, Reference b where a.patient_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
   public List<AllergyIntolerance> findByRecorder(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from AllergyIntoleranceModel a, Reference b where a.recorder_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AllergyIntolerance> findByAsserter(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AllergyIntoleranceModel a, Reference b where a.asserter_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AllergyIntolerance> findByReaction(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AllergyIntoleranceModel a, AllergyIntoleranceReaction b where a.reaction_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AllergyIntolerance> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AllergyIntoleranceModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AllergyIntolerance> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AllergyIntoleranceModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

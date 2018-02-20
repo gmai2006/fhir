@@ -97,21 +97,51 @@ public class ProcedureDaoImpl implements ProcedureDao {
   }
 
   @Override
-  public List<Procedure> findByContext(QueryBuilder queryBuilder) {
-  	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ProcedureModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
-    return findByQuery(queryBuilder, queryStr);
-  }
-  @Override
   public List<Procedure> findByDefinition(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from ProcedureModel a, Reference b where a.definition_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<Procedure> findByLocation(QueryBuilder queryBuilder) {
+  public List<Procedure> findByBasedOn(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ProcedureModel a, Reference b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from ProcedureModel a, Reference b where a.basedOn_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByPartOf(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, Reference b where a.partOf_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByNotDoneReason(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, CodeableConcept b where a.notDoneReason_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByCategory(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, CodeableConcept b where a.category_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByCode(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, CodeableConcept b where a.code_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -121,9 +151,87 @@ public class ProcedureDaoImpl implements ProcedureDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<Procedure> findBySubject(QueryBuilder queryBuilder) {
+  public List<Procedure> findByLocation(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ProcedureModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from ProcedureModel a, Reference b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByReasonCode(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, CodeableConcept b where a.reasonCode_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByReasonReference(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, Reference b where a.reasonReference_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByBodySite(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, CodeableConcept b where a.bodySite_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByOutcome(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, CodeableConcept b where a.outcome_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByReport(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, Reference b where a.report_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByComplication(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, CodeableConcept b where a.complication_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByComplicationDetail(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, Reference b where a.complicationDetail_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByFollowUp(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, CodeableConcept b where a.followUp_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByFocalDevice(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, ProcedureFocalDevice b where a.focalDevice_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByUsedReference(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, Reference b where a.usedReference_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByUsedCode(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, CodeableConcept b where a.usedCode_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Procedure> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProcedureModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

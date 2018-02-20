@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="testreportsetup")
 public class TestReportSetupModel  implements Serializable {
-	private static final long serialVersionUID = 151873631185117597L;
+	private static final long serialVersionUID = 151910893761963782L;
   /**
   * Description: "Action would contain either an operation or an assertion."
   */
@@ -94,10 +93,18 @@ public class TestReportSetupModel  implements Serializable {
 
   public TestReportSetupModel(TestReportSetup o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getAction() && !o.getAction().isEmpty()) {
     	this.action_id = "action" + this.parent_id;
     	this.action = TestReportActionHelper.toModelFromArray(o.getAction(), this.action_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

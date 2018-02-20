@@ -114,9 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<ResearchSubject> findByStudy(QueryBuilder queryBuilder) {
+  	final List<ResearchSubject> result = dao.findByStudy(queryBuilder);
+    logger.info("findBystudy - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<ResearchSubject> findByIndividual(QueryBuilder queryBuilder) {
   	final List<ResearchSubject> result = dao.findByIndividual(queryBuilder);
     logger.info("findByindividual - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchSubject> findByConsent(QueryBuilder queryBuilder) {
+  	final List<ResearchSubject> result = dao.findByConsent(queryBuilder);
+    logger.info("findByconsent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchSubject> findByText(QueryBuilder queryBuilder) {
+  	final List<ResearchSubject> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchSubject> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ResearchSubject> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

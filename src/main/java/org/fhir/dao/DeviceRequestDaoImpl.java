@@ -103,9 +103,45 @@ public class DeviceRequestDaoImpl implements DeviceRequestDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<DeviceRequest> findByPerformer(QueryBuilder queryBuilder) {
+  public List<DeviceRequest> findByBasedOn(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.performer_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.basedOn_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByPriorRequest(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.priorRequest_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByIntent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, CodeableConcept b where a.intent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByCodeReference(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.codeReference_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByCodeCodeableConcept(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, CodeableConcept b where a.codeCodeableConcept_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -115,9 +151,51 @@ public class DeviceRequestDaoImpl implements DeviceRequestDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<DeviceRequest> findBySubject(QueryBuilder queryBuilder) {
+  public List<DeviceRequest> findByPerformerType(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from DeviceRequestModel a, CodeableConcept b where a.performerType_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByPerformer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.performer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByReasonCode(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, CodeableConcept b where a.reasonCode_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByReasonReference(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.reasonReference_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findBySupportingInfo(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.supportingInfo_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByRelevantHistory(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Reference b where a.relevantHistory_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<DeviceRequest> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from DeviceRequestModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

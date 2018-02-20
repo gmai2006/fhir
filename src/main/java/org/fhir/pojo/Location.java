@@ -149,7 +149,9 @@ public class Location  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.operationalStatus = CodingHelper.fromJson(o.getOperationalStatus());
+    if (null != o.getOperationalStatus() && !o.getOperationalStatus().isEmpty()) {
+      this.operationalStatus = new Coding(o.getOperationalStatus().get(0));
+    }
     if (null != o.getName()) {
       this.name = o.getName();
     }
@@ -162,11 +164,15 @@ public class Location  extends DomainResource  {
     if (null != o.getMode()) {
       this.mode = o.getMode();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
       this.address = new Address(o.getAddress().get(0));
     }
-    this.physicalType = CodeableConceptHelper.fromJson(o.getPhysicalType());
+    if (null != o.getPhysicalType() && !o.getPhysicalType().isEmpty()) {
+      this.physicalType = new CodeableConcept(o.getPhysicalType().get(0));
+    }
     if (null != o.getPosition() && !o.getPosition().isEmpty()) {
       this.position = new LocationPosition(o.getPosition().get(0));
     }

@@ -97,7 +97,9 @@ public class QuestionnaireOption  extends BackboneElement  {
     if (null != o.getValueString()) {
       this.valueString = o.getValueString();
     }
-    this.valueCoding = CodingHelper.fromJson(o.getValueCoding());
+    if (null != o.getValueCoding() && !o.getValueCoding().isEmpty()) {
+      this.valueCoding = new Coding(o.getValueCoding().get(0));
+    }
   }
 
   public void setValueInteger( Float value) {

@@ -185,8 +185,14 @@ public class CommunicationRequest  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category = CodeableConceptHelper.fromArray2Array(o.getCategory());
+    }
     if (null != o.getPriority()) {
       this.priority = o.getPriority();
+    }
+    if (null != o.getMedium() && !o.getMedium().isEmpty()) {
+    	this.medium = CodeableConceptHelper.fromArray2Array(o.getMedium());
     }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
@@ -215,6 +221,9 @@ public class CommunicationRequest  extends DomainResource  {
     }
     if (null != o.getRequester() && !o.getRequester().isEmpty()) {
       this.requester = new CommunicationRequestRequester(o.getRequester().get(0));
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());

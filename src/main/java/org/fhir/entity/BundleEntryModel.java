@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="bundleentry")
 public class BundleEntryModel  implements Serializable {
-	private static final long serialVersionUID = 151873631170694002L;
+	private static final long serialVersionUID = 151910893746383467L;
   /**
   * Description: "A series of links that provide context to this entry."
   */
@@ -143,13 +142,17 @@ public class BundleEntryModel  implements Serializable {
 
   public BundleEntryModel(BundleEntry o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getLink() && !o.getLink().isEmpty()) {
     	this.link_id = "link" + this.parent_id;
     	this.link = BundleLinkHelper.toModelFromArray(o.getLink(), this.link_id);
     }
     this.fullUrl = o.getFullUrl();
-    this.resource = JsonUtils.toJson(o.getResource());
+    if (null != o.getResource()) {
+    	this.resource = JsonUtils.toJson(o.getResource());
+    }
     if (null != o.getSearch() ) {
     	this.search_id = "search" + this.parent_id;
     	this.search = BundleSearchHelper.toModel(o.getSearch(), this.search_id);
@@ -161,6 +164,12 @@ public class BundleEntryModel  implements Serializable {
     if (null != o.getResponse() ) {
     	this.response_id = "response" + this.parent_id;
     	this.response = BundleResponseHelper.toModel(o.getResponse(), this.response_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

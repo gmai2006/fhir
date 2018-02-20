@@ -39,9 +39,22 @@ public interface DeviceRequestService {
   public void delete(DeviceRequest bean);
   public List<DeviceRequest> findByField(QueryBuilder queryBuilder);
   public List<DeviceRequest> findByDefinition(QueryBuilder queryBuilder);
-  public List<DeviceRequest> findByPerformer(QueryBuilder queryBuilder);
-  public List<DeviceRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByBasedOn(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByPriorRequest(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByIntent(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByCodeReference(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByCodeCodeableConcept(QueryBuilder queryBuilder);
   public List<DeviceRequest> findBySubject(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByContext(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByPerformerType(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByPerformer(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByReasonCode(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByReasonReference(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findBySupportingInfo(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByRelevantHistory(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByText(QueryBuilder queryBuilder);
+  public List<DeviceRequest> findByMeta(QueryBuilder queryBuilder);
 
 
 }

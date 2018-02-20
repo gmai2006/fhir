@@ -43,4 +43,11 @@ public interface NamingSystemDao {
   public List<NamingSystem> findByField(QueryBuilder queryBuilder);
 
   public List<NamingSystem> findByContact(QueryBuilder queryBuilder);
+  public List<NamingSystem> findByType(QueryBuilder queryBuilder);
+  public List<NamingSystem> findByUseContext(QueryBuilder queryBuilder);
+  public List<NamingSystem> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<NamingSystem> findByUniqueId(QueryBuilder queryBuilder);
+  public List<NamingSystem> findByReplacedBy(QueryBuilder queryBuilder);
+  public List<NamingSystem> findByText(QueryBuilder queryBuilder);
+  public List<NamingSystem> findByMeta(QueryBuilder queryBuilder);
 }

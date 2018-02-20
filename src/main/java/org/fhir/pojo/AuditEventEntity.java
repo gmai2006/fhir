@@ -106,9 +106,18 @@ public class AuditEventEntity  extends BackboneElement  {
     if (null != o.getReference() && !o.getReference().isEmpty()) {
       this.reference = new Reference(o.getReference().get(0));
     }
-    this.type = CodingHelper.fromJson(o.getType());
-    this.role = CodingHelper.fromJson(o.getRole());
-    this.lifecycle = CodingHelper.fromJson(o.getLifecycle());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new Coding(o.getType().get(0));
+    }
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+      this.role = new Coding(o.getRole().get(0));
+    }
+    if (null != o.getLifecycle() && !o.getLifecycle().isEmpty()) {
+      this.lifecycle = new Coding(o.getLifecycle().get(0));
+    }
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securityLabel = CodingHelper.fromArray2Array(o.getSecurityLabel());
+    }
     if (null != o.getName()) {
       this.name = o.getName();
     }

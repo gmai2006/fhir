@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="codesystemdesignation")
 public class CodeSystemDesignationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631155172220L;
+	private static final long serialVersionUID = 15191089373141837L;
   /**
   * Description: "The language this designation is defined for."
   */
@@ -49,12 +48,14 @@ public class CodeSystemDesignationModel  implements Serializable {
 
   /**
   * Description: "A code that details how this designation would be used."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"use\"", length = 16777215)
-  private String use;
+  @Column(name="\"use_id\"")
+  private String use_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="use_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> use;
 
   /**
   * Description: "The text value for this designation."
@@ -107,10 +108,21 @@ public class CodeSystemDesignationModel  implements Serializable {
 
   public CodeSystemDesignationModel(CodeSystemDesignation o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.language = o.getLanguage();
-    this.use = JsonUtils.toJson(o.getUse());
+    if (null != o.getUse() ) {
+    	this.use_id = "use" + this.parent_id;
+    	this.use = CodingHelper.toModel(o.getUse(), this.use_id);
+    }
     this.value = o.getValue();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getLanguage() {
@@ -119,10 +131,10 @@ public class CodeSystemDesignationModel  implements Serializable {
   public void setLanguage( String value) {
     this.language = value;
   }
-  public String getUse() {
+  public java.util.List<CodingModel> getUse() {
     return this.use;
   }
-  public void setUse( String value) {
+  public void setUse( java.util.List<CodingModel> value) {
     this.use = value;
   }
   public String getValue() {
@@ -161,7 +173,6 @@ public class CodeSystemDesignationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[CodeSystemDesignationModel]:" + "\n");
      builder.append("language" + "->" + this.language + "\n"); 
-     builder.append("use" + "->" + this.use + "\n"); 
      builder.append("value" + "->" + this.value + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

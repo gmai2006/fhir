@@ -114,9 +114,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Schedule> findByServiceCategory(QueryBuilder queryBuilder) {
+  	final List<Schedule> result = dao.findByServiceCategory(queryBuilder);
+    logger.info("findByserviceCategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Schedule> findByServiceType(QueryBuilder queryBuilder) {
+  	final List<Schedule> result = dao.findByServiceType(queryBuilder);
+    logger.info("findByserviceType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Schedule> findBySpecialty(QueryBuilder queryBuilder) {
+  	final List<Schedule> result = dao.findBySpecialty(queryBuilder);
+    logger.info("findByspecialty - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Schedule> findByActor(QueryBuilder queryBuilder) {
   	final List<Schedule> result = dao.findByActor(queryBuilder);
     logger.info("findByactor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Schedule> findByText(QueryBuilder queryBuilder) {
+  	final List<Schedule> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Schedule> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Schedule> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

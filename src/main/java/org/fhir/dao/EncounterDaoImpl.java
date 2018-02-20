@@ -97,21 +97,51 @@ public class EncounterDaoImpl implements EncounterDao {
   }
 
   @Override
-  public List<Encounter> findByAppointment(QueryBuilder queryBuilder) {
+  public List<Encounter> findByStatusHistory(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from EncounterModel a, Reference b where a.appointment_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from EncounterModel a, EncounterStatusHistory b where a.statusHistory_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<Encounter> findByDiagnosis(QueryBuilder queryBuilder) {
+  public List<Encounter> findByFHIRclass(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from EncounterModel a, EncounterDiagnosis b where a.diagnosis_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from EncounterModel a, Coding b where a.FHIRclass_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<Encounter> findByLocation(QueryBuilder queryBuilder) {
+  public List<Encounter> findByClassHistory(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from EncounterModel a, EncounterLocation b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from EncounterModel a, EncounterClassHistory b where a.classHistory_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByType(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, CodeableConcept b where a.type_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByPriority(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, CodeableConcept b where a.priority_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByEpisodeOfCare(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, Reference b where a.episodeOfCare_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByIncomingReferral(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, Reference b where a.incomingReferral_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -121,9 +151,63 @@ public class EncounterDaoImpl implements EncounterDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<Encounter> findBySubject(QueryBuilder queryBuilder) {
+  public List<Encounter> findByAppointment(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from EncounterModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from EncounterModel a, Reference b where a.appointment_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByReason(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, CodeableConcept b where a.reason_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByDiagnosis(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, EncounterDiagnosis b where a.diagnosis_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByAccount(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, Reference b where a.account_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByHospitalization(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, EncounterHospitalization b where a.hospitalization_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByLocation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, EncounterLocation b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByServiceProvider(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, Reference b where a.serviceProvider_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByPartOf(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, Reference b where a.partOf_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Encounter> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EncounterModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

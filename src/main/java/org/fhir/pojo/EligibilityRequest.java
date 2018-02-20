@@ -152,7 +152,9 @@ public class EligibilityRequest  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.priority = CodeableConceptHelper.fromJson(o.getPriority());
+    if (null != o.getPriority() && !o.getPriority().isEmpty()) {
+      this.priority = new CodeableConcept(o.getPriority().get(0));
+    }
     if (null != o.getPatient() && !o.getPatient().isEmpty()) {
       this.patient = new Reference(o.getPatient().get(0));
     }
@@ -184,8 +186,12 @@ public class EligibilityRequest  extends DomainResource  {
     if (null != o.getBusinessArrangement()) {
       this.businessArrangement = o.getBusinessArrangement();
     }
-    this.benefitCategory = CodeableConceptHelper.fromJson(o.getBenefitCategory());
-    this.benefitSubCategory = CodeableConceptHelper.fromJson(o.getBenefitSubCategory());
+    if (null != o.getBenefitCategory() && !o.getBenefitCategory().isEmpty()) {
+      this.benefitCategory = new CodeableConcept(o.getBenefitCategory().get(0));
+    }
+    if (null != o.getBenefitSubCategory() && !o.getBenefitSubCategory().isEmpty()) {
+      this.benefitSubCategory = new CodeableConcept(o.getBenefitSubCategory().get(0));
+    }
   }
 
   public void setResourceType( String value) {

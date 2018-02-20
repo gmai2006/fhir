@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.RelatedPerson;
 import org.fhir.service.RelatedPersonService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/RelatedPerson")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class RelatedPersonResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public RelatedPerson find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public RelatedPerson findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<RelatedPerson> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<RelatedPerson> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<RelatedPerson> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<RelatedPerson> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<RelatedPerson> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<RelatedPerson> findAll() {
   	return this.service.selectAll();
   }
@@ -107,41 +172,33 @@ public class RelatedPersonResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<RelatedPerson> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
-  /**
-  * Descr: Multiple Resources: 
-
-  * [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text
-  * [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text
-  * [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text
-  * [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text
-
-  * Type: string
-  */
-  @GET
-  @Path("address | Practitioner/address | Person/address | Patient/address")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<RelatedPerson> address(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByAddress(new QueryBuilder(params));
-  }
   /**
   * Descr: The patient this related person is related to
   * Type: reference
   */
   @GET
   @Path("patient")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<RelatedPerson> patient(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<RelatedPerson> patient(@QueryParam("patient")String patient) {
+  	java.util.Map<String, String> params = QueryParser.parse(patient, VALID_FIELDS);
   	return this.service.findByPatient(new QueryBuilder(params));
+  }
+  /**
+  * Descr: An Identifier of the RelatedPerson
+  * Type: token
+  */
+  @GET
+  public List<RelatedPerson> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text
+  * Type: string
+  */
+  @GET
+  public List<RelatedPerson> name(@QueryParam("name")String name) {
+  	java.util.Map<String, String> params = QueryParser.parse(name, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "address|addresscity|addresscountry|addresspostalcode|addressstate|addressuse|birthdate|gender|phonetic|active|identifier|name|patient";

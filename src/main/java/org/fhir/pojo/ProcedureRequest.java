@@ -255,7 +255,12 @@ public class ProcedureRequest  extends DomainResource  {
     if (null != o.getDoNotPerform()) {
       this.doNotPerform = o.getDoNotPerform();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category = CodeableConceptHelper.fromArray2Array(o.getCategory());
+    }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -270,16 +275,23 @@ public class ProcedureRequest  extends DomainResource  {
     if (null != o.getAsNeededBoolean()) {
       this.asNeededBoolean = o.getAsNeededBoolean();
     }
-    this.asNeededCodeableConcept = CodeableConceptHelper.fromJson(o.getAsNeededCodeableConcept());
+    if (null != o.getAsNeededCodeableConcept() && !o.getAsNeededCodeableConcept().isEmpty()) {
+      this.asNeededCodeableConcept = new CodeableConcept(o.getAsNeededCodeableConcept().get(0));
+    }
     if (null != o.getAuthoredOn()) {
       this.authoredOn = o.getAuthoredOn();
     }
     if (null != o.getRequester() && !o.getRequester().isEmpty()) {
       this.requester = new ProcedureRequestRequester(o.getRequester().get(0));
     }
-    this.performerType = CodeableConceptHelper.fromJson(o.getPerformerType());
+    if (null != o.getPerformerType() && !o.getPerformerType().isEmpty()) {
+      this.performerType = new CodeableConcept(o.getPerformerType().get(0));
+    }
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
       this.performer = new Reference(o.getPerformer().get(0));
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
@@ -289,6 +301,9 @@ public class ProcedureRequest  extends DomainResource  {
     }
     if (null != o.getSpecimen() && !o.getSpecimen().isEmpty()) {
     	this.specimen = ReferenceHelper.fromArray2Array(o.getSpecimen());
+    }
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+    	this.bodySite = CodeableConceptHelper.fromArray2Array(o.getBodySite());
     }
     if (null != o.getRelevantHistory() && !o.getRelevantHistory().isEmpty()) {
     	this.relevantHistory = ReferenceHelper.fromArray2Array(o.getRelevantHistory());

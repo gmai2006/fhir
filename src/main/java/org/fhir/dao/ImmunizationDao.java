@@ -42,8 +42,19 @@ public interface ImmunizationDao {
 
   public List<Immunization> findByField(QueryBuilder queryBuilder);
 
+  public List<Immunization> findByVaccineCode(QueryBuilder queryBuilder);
+  public List<Immunization> findByPatient(QueryBuilder queryBuilder);
+  public List<Immunization> findByEncounter(QueryBuilder queryBuilder);
+  public List<Immunization> findByReportOrigin(QueryBuilder queryBuilder);
   public List<Immunization> findByLocation(QueryBuilder queryBuilder);
   public List<Immunization> findByManufacturer(QueryBuilder queryBuilder);
+  public List<Immunization> findBySite(QueryBuilder queryBuilder);
+  public List<Immunization> findByRoute(QueryBuilder queryBuilder);
+  public List<Immunization> findByDoseQuantity(QueryBuilder queryBuilder);
   public List<Immunization> findByPractitioner(QueryBuilder queryBuilder);
+  public List<Immunization> findByExplanation(QueryBuilder queryBuilder);
   public List<Immunization> findByReaction(QueryBuilder queryBuilder);
+  public List<Immunization> findByVaccinationProtocol(QueryBuilder queryBuilder);
+  public List<Immunization> findByText(QueryBuilder queryBuilder);
+  public List<Immunization> findByMeta(QueryBuilder queryBuilder);
 }

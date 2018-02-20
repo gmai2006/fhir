@@ -114,9 +114,69 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<MessageDefinition> findByContact(QueryBuilder queryBuilder) {
+  	final List<MessageDefinition> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageDefinition> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<MessageDefinition> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageDefinition> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<MessageDefinition> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageDefinition> findByBase(QueryBuilder queryBuilder) {
+  	final List<MessageDefinition> result = dao.findByBase(queryBuilder);
+    logger.info("findBybase - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageDefinition> findByParent(QueryBuilder queryBuilder) {
+  	final List<MessageDefinition> result = dao.findByParent(queryBuilder);
+    logger.info("findByparent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageDefinition> findByReplaces(QueryBuilder queryBuilder) {
+  	final List<MessageDefinition> result = dao.findByReplaces(queryBuilder);
+    logger.info("findByreplaces - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageDefinition> findByEvent(QueryBuilder queryBuilder) {
+  	final List<MessageDefinition> result = dao.findByEvent(queryBuilder);
+    logger.info("findByevent - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<MessageDefinition> findByFocus(QueryBuilder queryBuilder) {
   	final List<MessageDefinition> result = dao.findByFocus(queryBuilder);
     logger.info("findByfocus - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageDefinition> findByAllowedResponse(QueryBuilder queryBuilder) {
+  	final List<MessageDefinition> result = dao.findByAllowedResponse(queryBuilder);
+    logger.info("findByallowedResponse - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageDefinition> findByText(QueryBuilder queryBuilder) {
+  	final List<MessageDefinition> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageDefinition> findByMeta(QueryBuilder queryBuilder) {
+  	final List<MessageDefinition> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

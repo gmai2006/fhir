@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.DiagnosticReport;
 import org.fhir.service.DiagnosticReportService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/DiagnosticReport")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class DiagnosticReportResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public DiagnosticReport find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public DiagnosticReport findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<DiagnosticReport> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<DiagnosticReport> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<DiagnosticReport> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<DiagnosticReport> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<DiagnosticReport> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<DiagnosticReport> findAll() {
   	return this.service.selectAll();
   }
@@ -107,57 +172,25 @@ public class DiagnosticReportResource {
     return service.select(input);
   }
 
+  /**
+  * Descr: The subject of the report
+  * Type: reference
+  */
   @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DiagnosticReport> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
+  @Path("subject")
+  public List<DiagnosticReport> subject(@QueryParam("subject")String subject) {
+  	java.util.Map<String, String> params = QueryParser.parse(subject, VALID_FIELDS);
+  	return this.service.findBySubject(new QueryBuilder(params));
   }
-
   /**
   * Descr: Healthcare event (Episode of Care or Encounter) related to the report
   * Type: reference
   */
   @GET
   @Path("context")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DiagnosticReport> context(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<DiagnosticReport> context(@QueryParam("context")String context) {
+  	java.util.Map<String, String> params = QueryParser.parse(context, VALID_FIELDS);
   	return this.service.findByContext(new QueryBuilder(params));
-  }
-  /**
-  * Descr: A reference to the image source.
-  * Type: reference
-  */
-  @GET
-  @Path("image/link")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DiagnosticReport> image(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByImage(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Who was the source of the report (organization)
-  * Type: reference
-  */
-  @GET
-  @Path("performer/actor")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DiagnosticReport> performer(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByPerformer(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Link to an atomic result (observation resource)
-  * Type: reference
-  */
-  @GET
-  @Path("result")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DiagnosticReport> result(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByResult(new QueryBuilder(params));
   }
   /**
   * Descr: The specimen details
@@ -165,21 +198,55 @@ public class DiagnosticReportResource {
   */
   @GET
   @Path("specimen")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DiagnosticReport> specimen(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<DiagnosticReport> specimen(@QueryParam("specimen")String specimen) {
+  	java.util.Map<String, String> params = QueryParser.parse(specimen, VALID_FIELDS);
   	return this.service.findBySpecimen(new QueryBuilder(params));
   }
   /**
-  * Descr: The subject of the report
+  * Descr: Link to an atomic result (observation resource)
   * Type: reference
   */
   @GET
-  @Path("subject")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DiagnosticReport> subject(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findBySubject(new QueryBuilder(params));
+  @Path("result")
+  public List<DiagnosticReport> result(@QueryParam("result")String result) {
+  	java.util.Map<String, String> params = QueryParser.parse(result, VALID_FIELDS);
+  	return this.service.findByResult(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The status of the report
+  * Type: token
+  */
+  @GET
+  public List<DiagnosticReport> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Which diagnostic discipline/department created the report
+  * Type: token
+  */
+  @GET
+  public List<DiagnosticReport> category(@QueryParam("category")String category) {
+  	java.util.Map<String, String> params = QueryParser.parse(category, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: When the report was issued
+  * Type: date
+  */
+  @GET
+  public List<DiagnosticReport> issued(@QueryParam("issued")String issued) {
+  	java.util.Map<String, String> params = QueryParser.parse(issued, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: A coded diagnosis on the report
+  * Type: token
+  */
+  @GET
+  public List<DiagnosticReport> diagnosis(@QueryParam("diagnosis")String diagnosis) {
+  	java.util.Map<String, String> params = QueryParser.parse(diagnosis, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "basedon|category|context|diagnosis|image|issued|performer|result|specimen|status|subject";

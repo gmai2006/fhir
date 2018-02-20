@@ -114,15 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Medication> findByIngredient(QueryBuilder queryBuilder) {
-  	final List<Medication> result = dao.findByIngredient(queryBuilder);
-    logger.info("findByingredient - exited - return value={} result ");
+  public List<Medication> findByCode(QueryBuilder queryBuilder) {
+  	final List<Medication> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
     return result;
   }
   @Override
   public List<Medication> findByManufacturer(QueryBuilder queryBuilder) {
   	final List<Medication> result = dao.findByManufacturer(queryBuilder);
     logger.info("findBymanufacturer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Medication> findByForm(QueryBuilder queryBuilder) {
+  	final List<Medication> result = dao.findByForm(queryBuilder);
+    logger.info("findByform - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Medication> findByIngredient(QueryBuilder queryBuilder) {
+  	final List<Medication> result = dao.findByIngredient(queryBuilder);
+    logger.info("findByingredient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Medication> findByFHIRpackage(QueryBuilder queryBuilder) {
+  	final List<Medication> result = dao.findByFHIRpackage(queryBuilder);
+    logger.info("findByFHIRpackage - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Medication> findByText(QueryBuilder queryBuilder) {
+  	final List<Medication> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Medication> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Medication> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

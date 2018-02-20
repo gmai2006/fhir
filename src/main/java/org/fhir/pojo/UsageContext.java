@@ -58,8 +58,12 @@ public class UsageContext  extends Element  {
 
   public UsageContext(UsageContextModel o) {
     this.id = o.getId();
-    this.code = CodingHelper.fromJson(o.getCode());
-    this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new Coding(o.getCode().get(0));
+    }
+    if (null != o.getValueCodeableConcept() && !o.getValueCodeableConcept().isEmpty()) {
+      this.valueCodeableConcept = new CodeableConcept(o.getValueCodeableConcept().get(0));
+    }
     if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
       this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
     }

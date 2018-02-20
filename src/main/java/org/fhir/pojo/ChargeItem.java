@@ -216,7 +216,9 @@ public class ChargeItem  extends DomainResource  {
     if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
     	this.partOf = ReferenceHelper.fromArray2Array(o.getPartOf());
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -240,6 +242,9 @@ public class ChargeItem  extends DomainResource  {
     if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
       this.quantity = new Quantity(o.getQuantity().get(0));
     }
+    if (null != o.getBodysite() && !o.getBodysite().isEmpty()) {
+    	this.bodysite = CodeableConceptHelper.fromArray2Array(o.getBodysite());
+    }
     if (null != o.getFactorOverride()) {
       this.factorOverride = o.getFactorOverride();
     }
@@ -254,6 +259,9 @@ public class ChargeItem  extends DomainResource  {
     }
     if (null != o.getEnteredDate()) {
       this.enteredDate = o.getEnteredDate();
+    }
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason = CodeableConceptHelper.fromArray2Array(o.getReason());
     }
     if (null != o.getService() && !o.getService().isEmpty()) {
     	this.service = ReferenceHelper.fromArray2Array(o.getService());

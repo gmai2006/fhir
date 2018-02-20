@@ -38,7 +38,16 @@ public interface PatientService {
   public Patient update(Patient bean);
   public void delete(Patient bean);
   public List<Patient> findByField(QueryBuilder queryBuilder);
+  public List<Patient> findByAddress(QueryBuilder queryBuilder);
+  public List<Patient> findByMaritalStatus(QueryBuilder queryBuilder);
+  public List<Patient> findByContact(QueryBuilder queryBuilder);
+  public List<Patient> findByAnimal(QueryBuilder queryBuilder);
+  public List<Patient> findByCommunication(QueryBuilder queryBuilder);
+  public List<Patient> findByGeneralPractitioner(QueryBuilder queryBuilder);
+  public List<Patient> findByManagingOrganization(QueryBuilder queryBuilder);
   public List<Patient> findByLink(QueryBuilder queryBuilder);
+  public List<Patient> findByText(QueryBuilder queryBuilder);
+  public List<Patient> findByMeta(QueryBuilder queryBuilder);
 
 
 }

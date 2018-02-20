@@ -119,4 +119,52 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     logger.info("findBydefinition - exited - return value={} result ");
     return result;
   }
+  @Override
+  public List<FamilyMemberHistory> findByNotDoneReason(QueryBuilder queryBuilder) {
+  	final List<FamilyMemberHistory> result = dao.findByNotDoneReason(queryBuilder);
+    logger.info("findBynotDoneReason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FamilyMemberHistory> findByPatient(QueryBuilder queryBuilder) {
+  	final List<FamilyMemberHistory> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FamilyMemberHistory> findByRelationship(QueryBuilder queryBuilder) {
+  	final List<FamilyMemberHistory> result = dao.findByRelationship(queryBuilder);
+    logger.info("findByrelationship - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FamilyMemberHistory> findByReasonCode(QueryBuilder queryBuilder) {
+  	final List<FamilyMemberHistory> result = dao.findByReasonCode(queryBuilder);
+    logger.info("findByreasonCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FamilyMemberHistory> findByReasonReference(QueryBuilder queryBuilder) {
+  	final List<FamilyMemberHistory> result = dao.findByReasonReference(queryBuilder);
+    logger.info("findByreasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FamilyMemberHistory> findByCondition(QueryBuilder queryBuilder) {
+  	final List<FamilyMemberHistory> result = dao.findByCondition(queryBuilder);
+    logger.info("findBycondition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FamilyMemberHistory> findByText(QueryBuilder queryBuilder) {
+  	final List<FamilyMemberHistory> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<FamilyMemberHistory> findByMeta(QueryBuilder queryBuilder) {
+  	final List<FamilyMemberHistory> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

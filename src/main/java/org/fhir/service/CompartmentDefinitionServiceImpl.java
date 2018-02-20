@@ -114,9 +114,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<CompartmentDefinition> findByContact(QueryBuilder queryBuilder) {
+  	final List<CompartmentDefinition> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CompartmentDefinition> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<CompartmentDefinition> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CompartmentDefinition> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<CompartmentDefinition> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<CompartmentDefinition> findByResource(QueryBuilder queryBuilder) {
   	final List<CompartmentDefinition> result = dao.findByResource(queryBuilder);
     logger.info("findByresource - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CompartmentDefinition> findByText(QueryBuilder queryBuilder) {
+  	final List<CompartmentDefinition> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CompartmentDefinition> findByMeta(QueryBuilder queryBuilder) {
+  	final List<CompartmentDefinition> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

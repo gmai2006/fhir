@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="provenanceagent")
 public class ProvenanceAgentModel  implements Serializable {
-	private static final long serialVersionUID = 151873631149768870L;
+	private static final long serialVersionUID = 151910893726824859L;
   /**
   * Description: "The function of the agent with respect to the activity. The security role enabling the agent with respect to the activity."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"role\"", length = 16777215)
-  private String role;
+  @Column(name="\"role_id\"")
+  private String role_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> role;
 
   /**
   * Description: "The individual, device or organization that participated in the event."
@@ -86,12 +87,14 @@ public class ProvenanceAgentModel  implements Serializable {
 
   /**
   * Description: "The type of relationship between agents."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"relatedAgentType\"", length = 16777215)
-  private String relatedAgentType;
+  @Column(name="\"relatedagenttype_id\"")
+  private String relatedagenttype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relatedagenttype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> relatedAgentType;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -137,7 +140,13 @@ public class ProvenanceAgentModel  implements Serializable {
 
   public ProvenanceAgentModel(ProvenanceAgent o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+    	this.role_id = "role" + this.parent_id;
+    	this.role = CodeableConceptHelper.toModelFromArray(o.getRole(), this.role_id);
+    }
     this.whoUri = o.getWhoUri();
     if (null != o.getWhoReference() ) {
     	this.whoreference_id = "whoreference" + this.parent_id;
@@ -148,13 +157,22 @@ public class ProvenanceAgentModel  implements Serializable {
     	this.onbehalfofreference_id = "onbehalfofreference" + this.parent_id;
     	this.onBehalfOfReference = ReferenceHelper.toModel(o.getOnBehalfOfReference(), this.onbehalfofreference_id);
     }
-    this.relatedAgentType = JsonUtils.toJson(o.getRelatedAgentType());
+    if (null != o.getRelatedAgentType() ) {
+    	this.relatedagenttype_id = "relatedagenttype" + this.parent_id;
+    	this.relatedAgentType = CodeableConceptHelper.toModel(o.getRelatedAgentType(), this.relatedagenttype_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getRole() {
+  public java.util.List<CodeableConceptModel> getRole() {
     return this.role;
   }
-  public void setRole( String value) {
+  public void setRole( java.util.List<CodeableConceptModel> value) {
     this.role = value;
   }
   public String getWhoUri() {
@@ -181,10 +199,10 @@ public class ProvenanceAgentModel  implements Serializable {
   public void setOnBehalfOfReference( java.util.List<ReferenceModel> value) {
     this.onBehalfOfReference = value;
   }
-  public String getRelatedAgentType() {
+  public java.util.List<CodeableConceptModel> getRelatedAgentType() {
     return this.relatedAgentType;
   }
-  public void setRelatedAgentType( String value) {
+  public void setRelatedAgentType( java.util.List<CodeableConceptModel> value) {
     this.relatedAgentType = value;
   }
   public String getModifierExtension() {
@@ -216,10 +234,8 @@ public class ProvenanceAgentModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ProvenanceAgentModel]:" + "\n");
-     builder.append("role" + "->" + this.role + "\n"); 
      builder.append("whoUri" + "->" + this.whoUri + "\n"); 
      builder.append("onBehalfOfUri" + "->" + this.onBehalfOfUri + "\n"); 
-     builder.append("relatedAgentType" + "->" + this.relatedAgentType + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

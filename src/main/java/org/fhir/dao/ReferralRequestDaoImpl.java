@@ -97,21 +97,15 @@ public class ReferralRequestDaoImpl implements ReferralRequestDao {
   }
 
   @Override
-  public List<ReferralRequest> findByContext(QueryBuilder queryBuilder) {
-  	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ReferralRequestModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
-    return findByQuery(queryBuilder, queryStr);
-  }
-  @Override
   public List<ReferralRequest> findByDefinition(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from ReferralRequestModel a, Reference b where a.definition_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<ReferralRequest> findByRecipient(QueryBuilder queryBuilder) {
+  public List<ReferralRequest> findByBasedOn(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ReferralRequestModel a, Reference b where a.recipient_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from ReferralRequestModel a, Reference b where a.basedOn_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -121,15 +115,81 @@ public class ReferralRequestDaoImpl implements ReferralRequestDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<ReferralRequest> findByRequester(QueryBuilder queryBuilder) {
+  public List<ReferralRequest> findByType(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ReferralRequestModel a, ReferralRequestRequester b where a.requester_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from ReferralRequestModel a, CodeableConcept b where a.type_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findByServiceRequested(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, CodeableConcept b where a.serviceRequested_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
   public List<ReferralRequest> findBySubject(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from ReferralRequestModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findByRequester(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, ReferralRequestRequester b where a.requester_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findBySpecialty(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, CodeableConcept b where a.specialty_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findByRecipient(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, Reference b where a.recipient_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findByReasonCode(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, CodeableConcept b where a.reasonCode_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findByReasonReference(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, Reference b where a.reasonReference_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findBySupportingInfo(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, Reference b where a.supportingInfo_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findByRelevantHistory(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, Reference b where a.relevantHistory_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ReferralRequest> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ReferralRequestModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

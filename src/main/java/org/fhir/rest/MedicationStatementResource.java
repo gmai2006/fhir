@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.MedicationStatement;
 import org.fhir.service.MedicationStatementService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/MedicationStatement")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class MedicationStatementResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public MedicationStatement find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public MedicationStatement findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<MedicationStatement> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MedicationStatement> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MedicationStatement> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MedicationStatement> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MedicationStatement> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<MedicationStatement> findAll() {
   	return this.service.selectAll();
   }
@@ -107,24 +172,35 @@ public class MedicationStatementResource {
     return service.select(input);
   }
 
+  /**
+  * Descr: Returns statements that are part of another event.
+  * Type: reference
+  */
   @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MedicationStatement> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
+  @Path("partof")
+  public List<MedicationStatement> partof(@QueryParam("partof")String partof) {
+  	java.util.Map<String, String> params = QueryParser.parse(partof, VALID_FIELDS);
+  	return this.service.findByPartOf(new QueryBuilder(params));
   }
-
   /**
   * Descr: Returns statements for a specific context (episode or episode of Care).
   * Type: reference
   */
   @GET
   @Path("context")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MedicationStatement> context(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<MedicationStatement> context(@QueryParam("context")String context) {
+  	java.util.Map<String, String> params = QueryParser.parse(context, VALID_FIELDS);
   	return this.service.findByContext(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Who or where the information in the statement came from
+  * Type: reference
+  */
+  @GET
+  @Path("source")
+  public List<MedicationStatement> source(@QueryParam("source")String source) {
+  	java.util.Map<String, String> params = QueryParser.parse(source, VALID_FIELDS);
+  	return this.service.findByInformationSource(new QueryBuilder(params));
   }
   /**
   * Descr: The identity of a patient, animal or group to list statements for
@@ -132,9 +208,8 @@ public class MedicationStatementResource {
   */
   @GET
   @Path("subject")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MedicationStatement> subject(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<MedicationStatement> subject(@QueryParam("subject")String subject) {
+  	java.util.Map<String, String> params = QueryParser.parse(subject, VALID_FIELDS);
   	return this.service.findBySubject(new QueryBuilder(params));
   }
 

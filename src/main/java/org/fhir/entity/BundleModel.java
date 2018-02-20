@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="bundle")
 public class BundleModel  implements Serializable {
-	private static final long serialVersionUID = 151873631188263557L;
+	private static final long serialVersionUID = 15191089376518660L;
   /**
   * Description: "This is a Bundle resource"
   */
@@ -147,7 +146,9 @@ public class BundleModel  implements Serializable {
   public BundleModel(Bundle o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.type = o.getType();
     this.total = o.getTotal();
     if (null != o.getLink() && !o.getLink().isEmpty()) {
@@ -158,7 +159,9 @@ public class BundleModel  implements Serializable {
     	this.entry_id = "entry" + this.id;
     	this.entry = BundleEntryHelper.toModelFromArray(o.getEntry(), this.entry_id);
     }
-    this.signature = JsonUtils.toJson(o.getSignature());
+    if (null != o.getSignature()) {
+    	this.signature = JsonUtils.toJson(o.getSignature());
+    }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
     	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);

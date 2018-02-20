@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="devicemetric")
 public class DeviceMetricModel  implements Serializable {
-	private static final long serialVersionUID = 151873631136046560L;
+	private static final long serialVersionUID = 151910893711199026L;
   /**
   * Description: "This is a DeviceMetric resource"
   */
@@ -59,22 +58,25 @@ public class DeviceMetricModel  implements Serializable {
 
   /**
   * Description: "Describes the type of the metric. For example: Heart Rate, PEEP Setting, etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "Describes the unit that an observed value determined for this metric will have. For example: Percent, Seconds, etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"unit\"", length = 16777215)
-  private String unit;
+  @Column(name="\"unit_id\"")
+  private String unit_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unit_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> unit;
 
   /**
   * Description: "Describes the link to the  Device that this DeviceMetric belongs to and that contains administrative device information such as manufacturer, serial number, etc."
@@ -230,9 +232,17 @@ public class DeviceMetricModel  implements Serializable {
   public DeviceMetricModel(DeviceMetric o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
-    this.type = JsonUtils.toJson(o.getType());
-    this.unit = JsonUtils.toJson(o.getUnit());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getUnit() ) {
+    	this.unit_id = "unit" + this.id;
+    	this.unit = CodeableConceptHelper.toModel(o.getUnit(), this.unit_id);
+    }
     if (null != o.getSource() ) {
     	this.source_id = "source" + this.id;
     	this.source = ReferenceHelper.toModel(o.getSource(), this.source_id);
@@ -244,7 +254,9 @@ public class DeviceMetricModel  implements Serializable {
     this.operationalStatus = o.getOperationalStatus();
     this.color = o.getColor();
     this.category = o.getCategory();
-    this.measurementPeriod = JsonUtils.toJson(o.getMeasurementPeriod());
+    if (null != o.getMeasurementPeriod()) {
+    	this.measurementPeriod = JsonUtils.toJson(o.getMeasurementPeriod());
+    }
     if (null != o.getCalibration() && !o.getCalibration().isEmpty()) {
     	this.calibration_id = "calibration" + this.id;
     	this.calibration = DeviceMetricCalibrationHelper.toModelFromArray(o.getCalibration(), this.calibration_id);
@@ -252,6 +264,15 @@ public class DeviceMetricModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -273,16 +294,16 @@ public class DeviceMetricModel  implements Serializable {
   public void setIdentifier( String value) {
     this.identifier = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getUnit() {
+  public java.util.List<CodeableConceptModel> getUnit() {
     return this.unit;
   }
-  public void setUnit( String value) {
+  public void setUnit( java.util.List<CodeableConceptModel> value) {
     this.unit = value;
   }
   public java.util.List<ReferenceModel> getSource() {
@@ -382,8 +403,6 @@ public class DeviceMetricModel  implements Serializable {
     builder.append("[DeviceMetricModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("unit" + "->" + this.unit + "\n"); 
      builder.append("operationalStatus" + "->" + this.operationalStatus + "\n"); 
      builder.append("color" + "->" + this.color + "\n"); 
      builder.append("category" + "->" + this.category + "\n"); 

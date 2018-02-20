@@ -78,7 +78,9 @@ public class Basic  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }

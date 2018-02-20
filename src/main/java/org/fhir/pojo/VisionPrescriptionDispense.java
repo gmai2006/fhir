@@ -180,7 +180,9 @@ public class VisionPrescriptionDispense  extends BackboneElement  {
 
   public VisionPrescriptionDispense(VisionPrescriptionDispenseModel o) {
     this.id = o.getId();
-    this.product = CodeableConceptHelper.fromJson(o.getProduct());
+    if (null != o.getProduct() && !o.getProduct().isEmpty()) {
+      this.product = new CodeableConcept(o.getProduct().get(0));
+    }
     if (null != o.getEye()) {
       this.eye = o.getEye();
     }

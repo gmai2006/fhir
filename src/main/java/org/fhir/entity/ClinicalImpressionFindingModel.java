@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="clinicalimpressionfinding")
 public class ClinicalImpressionFindingModel  implements Serializable {
-	private static final long serialVersionUID = 151873631128969921L;
+	private static final long serialVersionUID = 151910893705566277L;
   /**
   * Description: "Specific text, code or reference for finding or diagnosis, which may include ruled-out or resolved conditions."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"itemCodeableConcept\"", length = 16777215)
-  private String itemCodeableConcept;
+  @Column(name="\"itemcodeableconcept_id\"")
+  private String itemcodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="itemcodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> itemCodeableConcept;
 
   /**
   * Description: "Specific text, code or reference for finding or diagnosis, which may include ruled-out or resolved conditions."
@@ -110,19 +111,30 @@ public class ClinicalImpressionFindingModel  implements Serializable {
 
   public ClinicalImpressionFindingModel(ClinicalImpressionFinding o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.itemCodeableConcept = JsonUtils.toJson(o.getItemCodeableConcept());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getItemCodeableConcept() ) {
+    	this.itemcodeableconcept_id = "itemcodeableconcept" + this.parent_id;
+    	this.itemCodeableConcept = CodeableConceptHelper.toModel(o.getItemCodeableConcept(), this.itemcodeableconcept_id);
+    }
     if (null != o.getItemReference() ) {
     	this.itemreference_id = "itemreference" + this.parent_id;
     	this.itemReference = ReferenceHelper.toModel(o.getItemReference(), this.itemreference_id);
     }
     this.basis = o.getBasis();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getItemCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getItemCodeableConcept() {
     return this.itemCodeableConcept;
   }
-  public void setItemCodeableConcept( String value) {
+  public void setItemCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.itemCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getItemReference() {
@@ -166,7 +178,6 @@ public class ClinicalImpressionFindingModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClinicalImpressionFindingModel]:" + "\n");
-     builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept + "\n"); 
      builder.append("basis" + "->" + this.basis + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

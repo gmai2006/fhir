@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="familymemberhistory")
 public class FamilyMemberHistoryModel  implements Serializable {
-	private static final long serialVersionUID = 15187363117042951L;
+	private static final long serialVersionUID = 151910893746148168L;
   /**
   * Description: "This is a FamilyMemberHistory resource"
   */
@@ -83,12 +82,14 @@ public class FamilyMemberHistoryModel  implements Serializable {
 
   /**
   * Description: "Describes why the family member's history is absent."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"notDoneReason\"", length = 16777215)
-  private String notDoneReason;
+  @Column(name="\"notdonereason_id\"")
+  private String notdonereason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="notdonereason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> notDoneReason;
 
   /**
   * Description: "The person who this history concerns."
@@ -118,13 +119,14 @@ public class FamilyMemberHistoryModel  implements Serializable {
 
   /**
   * Description: "The type of relationship this person has to the patient (father, mother, brother etc.)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"relationship\"", length = 16777215)
-  private String relationship;
+  @Column(name="\"relationship_id\"")
+  private String relationship_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relationship_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> relationship;
 
   /**
   * Description: "Administrative Gender - the gender that the relative is considered to have for administration and record keeping purposes."
@@ -231,12 +233,14 @@ public class FamilyMemberHistoryModel  implements Serializable {
 
   /**
   * Description: "Describes why the family member history occurred in coded or textual form."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonCode\"", length = 16777215)
-  private String reasonCode;
+  @Column(name="\"reasoncode_id\"")
+  private String reasoncode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonCode;
 
   /**
   * Description: "Indicates a Condition, Observation, AllergyIntolerance, or QuestionnaireResponse that justifies this family member history event."
@@ -360,36 +364,62 @@ public class FamilyMemberHistoryModel  implements Serializable {
   public FamilyMemberHistoryModel(FamilyMemberHistory o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition_id = "definition" + this.id;
     	this.definition = ReferenceHelper.toModelFromArray(o.getDefinition(), this.definition_id);
     }
     this.status = o.getStatus();
     this.notDone = o.getNotDone();
-    this.notDoneReason = JsonUtils.toJson(o.getNotDoneReason());
+    if (null != o.getNotDoneReason() ) {
+    	this.notdonereason_id = "notdonereason" + this.id;
+    	this.notDoneReason = CodeableConceptHelper.toModel(o.getNotDoneReason(), this.notdonereason_id);
+    }
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
     this.date = o.getDate();
     this.name = o.getName();
-    this.relationship = JsonUtils.toJson(o.getRelationship());
+    if (null != o.getRelationship() ) {
+    	this.relationship_id = "relationship" + this.id;
+    	this.relationship = CodeableConceptHelper.toModel(o.getRelationship(), this.relationship_id);
+    }
     this.gender = o.getGender();
-    this.bornPeriod = JsonUtils.toJson(o.getBornPeriod());
+    if (null != o.getBornPeriod()) {
+    	this.bornPeriod = JsonUtils.toJson(o.getBornPeriod());
+    }
     this.bornDate = o.getBornDate();
     this.bornString = o.getBornString();
-    this.ageAge = JsonUtils.toJson(o.getAgeAge());
-    this.ageRange = JsonUtils.toJson(o.getAgeRange());
+    if (null != o.getAgeAge()) {
+    	this.ageAge = JsonUtils.toJson(o.getAgeAge());
+    }
+    if (null != o.getAgeRange()) {
+    	this.ageRange = JsonUtils.toJson(o.getAgeRange());
+    }
     this.ageString = o.getAgeString();
     this.estimatedAge = o.getEstimatedAge();
     this.deceasedBoolean = o.getDeceasedBoolean();
-    this.deceasedAge = JsonUtils.toJson(o.getDeceasedAge());
-    this.deceasedRange = JsonUtils.toJson(o.getDeceasedRange());
+    if (null != o.getDeceasedAge()) {
+    	this.deceasedAge = JsonUtils.toJson(o.getDeceasedAge());
+    }
+    if (null != o.getDeceasedRange()) {
+    	this.deceasedRange = JsonUtils.toJson(o.getDeceasedRange());
+    }
     this.deceasedDate = o.getDeceasedDate();
     this.deceasedString = o.getDeceasedString();
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasoncode_id = "reasoncode" + this.id;
+    	this.reasonCode = CodeableConceptHelper.toModelFromArray(o.getReasonCode(), this.reasoncode_id);
+    }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModelFromArray(o.getReasonReference(), this.reasonreference_id);
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
     }
     if (null != o.getCondition() && !o.getCondition().isEmpty()) {
     	this.condition_id = "condition" + this.id;
@@ -398,6 +428,15 @@ public class FamilyMemberHistoryModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -437,10 +476,10 @@ public class FamilyMemberHistoryModel  implements Serializable {
   public void setNotDone( Boolean value) {
     this.notDone = value;
   }
-  public String getNotDoneReason() {
+  public java.util.List<CodeableConceptModel> getNotDoneReason() {
     return this.notDoneReason;
   }
-  public void setNotDoneReason( String value) {
+  public void setNotDoneReason( java.util.List<CodeableConceptModel> value) {
     this.notDoneReason = value;
   }
   public java.util.List<ReferenceModel> getPatient() {
@@ -461,10 +500,10 @@ public class FamilyMemberHistoryModel  implements Serializable {
   public void setName( String value) {
     this.name = value;
   }
-  public String getRelationship() {
+  public java.util.List<CodeableConceptModel> getRelationship() {
     return this.relationship;
   }
-  public void setRelationship( String value) {
+  public void setRelationship( java.util.List<CodeableConceptModel> value) {
     this.relationship = value;
   }
   public String getGender() {
@@ -545,10 +584,10 @@ public class FamilyMemberHistoryModel  implements Serializable {
   public void setDeceasedString( String value) {
     this.deceasedString = value;
   }
-  public String getReasonCode() {
+  public java.util.List<CodeableConceptModel> getReasonCode() {
     return this.reasonCode;
   }
-  public void setReasonCode( String value) {
+  public void setReasonCode( java.util.List<CodeableConceptModel> value) {
     this.reasonCode = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
@@ -626,10 +665,8 @@ public class FamilyMemberHistoryModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("notDone" + "->" + this.notDone + "\n"); 
-     builder.append("notDoneReason" + "->" + this.notDoneReason + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
-     builder.append("relationship" + "->" + this.relationship + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 
      builder.append("bornPeriod" + "->" + this.bornPeriod + "\n"); 
      builder.append("bornDate" + "->" + this.bornDate + "\n"); 
@@ -643,7 +680,6 @@ public class FamilyMemberHistoryModel  implements Serializable {
      builder.append("deceasedRange" + "->" + this.deceasedRange + "\n"); 
      builder.append("deceasedDate" + "->" + this.deceasedDate + "\n"); 
      builder.append("deceasedString" + "->" + this.deceasedString + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

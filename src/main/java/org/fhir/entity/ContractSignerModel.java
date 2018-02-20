@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,16 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="contractsigner")
 public class ContractSignerModel  implements Serializable {
-	private static final long serialVersionUID = 151873631135879042L;
+	private static final long serialVersionUID = 15191089371095054L;
   /**
   * Description: "Role of this Contract signer, e.g. notary, grantee."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> type;
 
   /**
   * Description: "Party which is a signator to this Contract."
@@ -114,18 +114,32 @@ public class ContractSignerModel  implements Serializable {
 
   public ContractSignerModel(ContractSigner o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = JsonUtils.toJson(o.getType());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodingHelper.toModel(o.getType(), this.type_id);
+    }
     if (null != o.getParty() ) {
     	this.party_id = "party" + this.parent_id;
     	this.party = ReferenceHelper.toModel(o.getParty(), this.party_id);
     }
+    if (null != o.getSignature()) {
+    	this.signature = JsonUtils.toJson(o.getSignature());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getType() {
+  public java.util.List<CodingModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodingModel> value) {
     this.type = value;
   }
   public java.util.List<ReferenceModel> getParty() {
@@ -169,7 +183,6 @@ public class ContractSignerModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ContractSignerModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("signature" + "->" + this.signature + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -48,7 +48,9 @@ public class EncounterClassHistory  extends BackboneElement  {
 
   public EncounterClassHistory(EncounterClassHistoryModel o) {
     this.id = o.getId();
-    this.FHIRclass = CodingHelper.fromJson(o.getFHIRclass());
+    if (null != o.getFHIRclass() && !o.getFHIRclass().isEmpty()) {
+      this.FHIRclass = new Coding(o.getFHIRclass().get(0));
+    }
     this.period = PeriodHelper.fromJson(o.getPeriod());
   }
 

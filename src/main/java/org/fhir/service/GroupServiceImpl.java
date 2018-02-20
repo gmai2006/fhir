@@ -114,6 +114,12 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Group> findByCode(QueryBuilder queryBuilder) {
+  	final List<Group> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Group> findByCharacteristic(QueryBuilder queryBuilder) {
   	final List<Group> result = dao.findByCharacteristic(queryBuilder);
     logger.info("findBycharacteristic - exited - return value={} result ");
@@ -123,6 +129,18 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   public List<Group> findByMember(QueryBuilder queryBuilder) {
   	final List<Group> result = dao.findByMember(queryBuilder);
     logger.info("findBymember - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Group> findByText(QueryBuilder queryBuilder) {
+  	final List<Group> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Group> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Group> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

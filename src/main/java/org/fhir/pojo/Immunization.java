@@ -192,7 +192,9 @@ public class Immunization  extends DomainResource  {
     if (null != o.getNotGiven()) {
       this.notGiven = o.getNotGiven();
     }
-    this.vaccineCode = CodeableConceptHelper.fromJson(o.getVaccineCode());
+    if (null != o.getVaccineCode() && !o.getVaccineCode().isEmpty()) {
+      this.vaccineCode = new CodeableConcept(o.getVaccineCode().get(0));
+    }
     if (null != o.getPatient() && !o.getPatient().isEmpty()) {
       this.patient = new Reference(o.getPatient().get(0));
     }
@@ -205,7 +207,9 @@ public class Immunization  extends DomainResource  {
     if (null != o.getPrimarySource()) {
       this.primarySource = o.getPrimarySource();
     }
-    this.reportOrigin = CodeableConceptHelper.fromJson(o.getReportOrigin());
+    if (null != o.getReportOrigin() && !o.getReportOrigin().isEmpty()) {
+      this.reportOrigin = new CodeableConcept(o.getReportOrigin().get(0));
+    }
     if (null != o.getLocation() && !o.getLocation().isEmpty()) {
       this.location = new Reference(o.getLocation().get(0));
     }
@@ -218,8 +222,12 @@ public class Immunization  extends DomainResource  {
     if (null != o.getExpirationDate()) {
       this.expirationDate = o.getExpirationDate();
     }
-    this.site = CodeableConceptHelper.fromJson(o.getSite());
-    this.route = CodeableConceptHelper.fromJson(o.getRoute());
+    if (null != o.getSite() && !o.getSite().isEmpty()) {
+      this.site = new CodeableConcept(o.getSite().get(0));
+    }
+    if (null != o.getRoute() && !o.getRoute().isEmpty()) {
+      this.route = new CodeableConcept(o.getRoute().get(0));
+    }
     if (null != o.getDoseQuantity() && !o.getDoseQuantity().isEmpty()) {
       this.doseQuantity = new Quantity(o.getDoseQuantity().get(0));
     }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="encounterparticipant")
 public class EncounterParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 151873631171566700L;
+	private static final long serialVersionUID = 151910893747334798L;
   /**
   * Description: "Role of participant in encounter."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The period of time that the specified participant participated in the encounter. These can overlap or be sub-sets of the overall encounter's period."
@@ -112,18 +113,32 @@ public class EncounterParticipantModel  implements Serializable {
 
   public EncounterParticipantModel(EncounterParticipant o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.period = JsonUtils.toJson(o.getPeriod());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModelFromArray(o.getType(), this.type_id);
+    }
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getIndividual() ) {
     	this.individual_id = "individual" + this.parent_id;
     	this.individual = ReferenceHelper.toModel(o.getIndividual(), this.individual_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public String getPeriod() {
@@ -167,7 +182,6 @@ public class EncounterParticipantModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[EncounterParticipantModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="media")
 public class MediaModel  implements Serializable {
-	private static final long serialVersionUID = 151873631150160321L;
+	private static final long serialVersionUID = 151910893727273320L;
   /**
   * Description: "This is a Media resource"
   */
@@ -76,21 +75,25 @@ public class MediaModel  implements Serializable {
 
   /**
   * Description: "Details of the type of the media - usually, how it was acquired (what type of device). If images sourced from a DICOM system, are wrapped in a Media resource, then this is the modality."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"subtype\"", length = 16777215)
-  private String subtype;
+  @Column(name="\"subtype_id\"")
+  private String subtype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subtype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> subtype;
 
   /**
   * Description: "The name of the imaging view e.g. Lateral or Antero-posterior (AP)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"view\"", length = 16777215)
-  private String view;
+  @Column(name="\"view_id\"")
+  private String view_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="view_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> view;
 
   /**
   * Description: "Who/What this Media is a record of."
@@ -144,21 +147,25 @@ public class MediaModel  implements Serializable {
 
   /**
   * Description: "Describes why the event occurred in coded or textual form."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonCode\"", length = 16777215)
-  private String reasonCode;
+  @Column(name="\"reasoncode_id\"")
+  private String reasoncode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonCode;
 
   /**
   * Description: "Indicates the site on the subject's body where the media was collected (i.e. the target site)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"bodySite\"", length = 16777215)
-  private String bodySite;
+  @Column(name="\"bodysite_id\"")
+  private String bodysite_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> bodySite;
 
   /**
   * Description: "The device used to collect the media."
@@ -313,13 +320,22 @@ public class MediaModel  implements Serializable {
   public MediaModel(Media o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
     }
     this.type = o.getType();
-    this.subtype = JsonUtils.toJson(o.getSubtype());
-    this.view = JsonUtils.toJson(o.getView());
+    if (null != o.getSubtype() ) {
+    	this.subtype_id = "subtype" + this.id;
+    	this.subtype = CodeableConceptHelper.toModel(o.getSubtype(), this.subtype_id);
+    }
+    if (null != o.getView() ) {
+    	this.view_id = "view" + this.id;
+    	this.view = CodeableConceptHelper.toModel(o.getView(), this.view_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -329,12 +345,21 @@ public class MediaModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    if (null != o.getOccurrencePeriod()) {
+    	this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    }
     if (null != o.getOperator() ) {
     	this.operator_id = "operator" + this.id;
     	this.operator = ReferenceHelper.toModel(o.getOperator(), this.operator_id);
     }
-    this.bodySite = JsonUtils.toJson(o.getBodySite());
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasoncode_id = "reasoncode" + this.id;
+    	this.reasonCode = CodeableConceptHelper.toModelFromArray(o.getReasonCode(), this.reasoncode_id);
+    }
+    if (null != o.getBodySite() ) {
+    	this.bodysite_id = "bodysite" + this.id;
+    	this.bodySite = CodeableConceptHelper.toModel(o.getBodySite(), this.bodysite_id);
+    }
     if (null != o.getDevice() ) {
     	this.device_id = "device" + this.id;
     	this.device = ReferenceHelper.toModel(o.getDevice(), this.device_id);
@@ -343,10 +368,24 @@ public class MediaModel  implements Serializable {
     this.width = o.getWidth();
     this.frames = o.getFrames();
     this.duration = o.getDuration();
-    this.content = JsonUtils.toJson(o.getContent());
+    if (null != o.getContent()) {
+    	this.content = JsonUtils.toJson(o.getContent());
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -380,16 +419,16 @@ public class MediaModel  implements Serializable {
   public void setType( String value) {
     this.type = value;
   }
-  public String getSubtype() {
+  public java.util.List<CodeableConceptModel> getSubtype() {
     return this.subtype;
   }
-  public void setSubtype( String value) {
+  public void setSubtype( java.util.List<CodeableConceptModel> value) {
     this.subtype = value;
   }
-  public String getView() {
+  public java.util.List<CodeableConceptModel> getView() {
     return this.view;
   }
-  public void setView( String value) {
+  public void setView( java.util.List<CodeableConceptModel> value) {
     this.view = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -422,16 +461,16 @@ public class MediaModel  implements Serializable {
   public void setOperator( java.util.List<ReferenceModel> value) {
     this.operator = value;
   }
-  public String getReasonCode() {
+  public java.util.List<CodeableConceptModel> getReasonCode() {
     return this.reasonCode;
   }
-  public void setReasonCode( String value) {
+  public void setReasonCode( java.util.List<CodeableConceptModel> value) {
     this.reasonCode = value;
   }
-  public String getBodySite() {
+  public java.util.List<CodeableConceptModel> getBodySite() {
     return this.bodySite;
   }
-  public void setBodySite( String value) {
+  public void setBodySite( java.util.List<CodeableConceptModel> value) {
     this.bodySite = value;
   }
   public java.util.List<ReferenceModel> getDevice() {
@@ -532,12 +571,8 @@ public class MediaModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subtype" + "->" + this.subtype + "\n"); 
-     builder.append("view" + "->" + this.view + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
      builder.append("height" + "->" + this.height + "\n"); 
      builder.append("width" + "->" + this.width + "\n"); 
      builder.append("frames" + "->" + this.frames + "\n"); 

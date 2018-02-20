@@ -167,6 +167,9 @@ public class Consent  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category = CodeableConceptHelper.fromArray2Array(o.getCategory());
+    }
     if (null != o.getPatient() && !o.getPatient().isEmpty()) {
       this.patient = new Reference(o.getPatient().get(0));
     }
@@ -179,6 +182,9 @@ public class Consent  extends DomainResource  {
     }
     if (null != o.getActor() && !o.getActor().isEmpty()) {
     	this.actor = ConsentActorHelper.fromArray2Array(o.getActor());
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action = CodeableConceptHelper.fromArray2Array(o.getAction());
     }
     if (null != o.getOrganization() && !o.getOrganization().isEmpty()) {
     	this.organization = ReferenceHelper.fromArray2Array(o.getOrganization());
@@ -193,6 +199,12 @@ public class Consent  extends DomainResource  {
     }
     if (null != o.getPolicyRule()) {
       this.policyRule = o.getPolicyRule();
+    }
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securityLabel = CodingHelper.fromArray2Array(o.getSecurityLabel());
+    }
+    if (null != o.getPurpose() && !o.getPurpose().isEmpty()) {
+    	this.purpose = CodingHelper.fromArray2Array(o.getPurpose());
     }
     this.dataPeriod = PeriodHelper.fromJson(o.getDataPeriod());
     if (null != o.getData() && !o.getData().isEmpty()) {

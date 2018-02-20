@@ -114,15 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<AppointmentResponse> findByAppointment(QueryBuilder queryBuilder) {
+  	final List<AppointmentResponse> result = dao.findByAppointment(queryBuilder);
+    logger.info("findByappointment - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AppointmentResponse> findByParticipantType(QueryBuilder queryBuilder) {
+  	final List<AppointmentResponse> result = dao.findByParticipantType(queryBuilder);
+    logger.info("findByparticipantType - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<AppointmentResponse> findByActor(QueryBuilder queryBuilder) {
   	final List<AppointmentResponse> result = dao.findByActor(queryBuilder);
     logger.info("findByactor - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<AppointmentResponse> findByAppointment(QueryBuilder queryBuilder) {
-  	final List<AppointmentResponse> result = dao.findByAppointment(queryBuilder);
-    logger.info("findByappointment - exited - return value={} result ");
+  public List<AppointmentResponse> findByText(QueryBuilder queryBuilder) {
+  	final List<AppointmentResponse> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AppointmentResponse> findByMeta(QueryBuilder queryBuilder) {
+  	final List<AppointmentResponse> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

@@ -241,7 +241,8 @@
       "type": "token",
       "expression": "EnrollmentRequest.identifier",
       "code": "identifier",
-      "xpath": "identifier"
+      "xpath": "identifier",
+      "fieldName": "identifier"
     },
     {
       "name": "organization",
@@ -249,7 +250,8 @@
       "type": "reference",
       "expression": "EnrollmentRequest.organization",
       "code": "organization",
-      "xpath": "organization"
+      "xpath": "organization",
+      "fieldName": "organization"
     },
     {
       "name": "patient",
@@ -257,7 +259,8 @@
       "type": "reference",
       "expression": "EnrollmentRequest.subject",
       "code": "patient",
-      "xpath": "subject"
+      "xpath": "subject",
+      "fieldName": "subject"
     },
     {
       "name": "subject",
@@ -265,7 +268,8 @@
       "type": "reference",
       "expression": "EnrollmentRequest.subject",
       "code": "subject",
-      "xpath": "subject"
+      "xpath": "subject",
+      "fieldName": "subject"
     }
   ]
 }

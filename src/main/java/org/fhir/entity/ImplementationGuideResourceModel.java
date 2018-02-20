@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="implementationguideresource")
 public class ImplementationGuideResourceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631183128393L;
+	private static final long serialVersionUID = 151910893759852406L;
   /**
   * Description: "Whether a resource is included in the guide as part of the rules defined by the guide, or just as an example of a resource that conforms to the rules and/or help implementers understand the intent of the guide."
   */
@@ -140,7 +139,9 @@ public class ImplementationGuideResourceModel  implements Serializable {
 
   public ImplementationGuideResourceModel(ImplementationGuideResource o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.example = o.getExample();
     this.name = o.getName();
     this.description = o.getDescription();
@@ -153,6 +154,12 @@ public class ImplementationGuideResourceModel  implements Serializable {
     if (null != o.getExampleFor() ) {
     	this.examplefor_id = "examplefor" + this.parent_id;
     	this.exampleFor = ReferenceHelper.toModel(o.getExampleFor(), this.examplefor_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

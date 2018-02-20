@@ -114,8 +114,12 @@ public class DeviceMetric  extends DomainResource  {
       this.resourceType = o.getResourceType();
     }
     this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
-    this.type = CodeableConceptHelper.fromJson(o.getType());
-    this.unit = CodeableConceptHelper.fromJson(o.getUnit());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getUnit() && !o.getUnit().isEmpty()) {
+      this.unit = new CodeableConcept(o.getUnit().get(0));
+    }
     if (null != o.getSource() && !o.getSource().isEmpty()) {
       this.source = new Reference(o.getSource().get(0));
     }

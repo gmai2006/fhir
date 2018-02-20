@@ -114,9 +114,15 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Contract> findByAgent(QueryBuilder queryBuilder) {
-  	final List<Contract> result = dao.findByAgent(queryBuilder);
-    logger.info("findByagent - exited - return value={} result ");
+  public List<Contract> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByTopic(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByTopic(queryBuilder);
+    logger.info("findBytopic - exited - return value={} result ");
     return result;
   }
   @Override
@@ -132,15 +138,105 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<Contract> findByType(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findBySubType(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findBySubType(queryBuilder);
+    logger.info("findBysubType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByAction(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByAction(queryBuilder);
+    logger.info("findByaction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByActionReason(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByActionReason(queryBuilder);
+    logger.info("findByactionReason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByDecisionType(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByDecisionType(queryBuilder);
+    logger.info("findBydecisionType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByContentDerivative(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByContentDerivative(queryBuilder);
+    logger.info("findBycontentDerivative - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findBySecurityLabel(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findBySecurityLabel(queryBuilder);
+    logger.info("findBysecurityLabel - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByAgent(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByAgent(queryBuilder);
+    logger.info("findByagent - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Contract> findBySigner(QueryBuilder queryBuilder) {
   	final List<Contract> result = dao.findBySigner(queryBuilder);
     logger.info("findBysigner - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<Contract> findBySubject(QueryBuilder queryBuilder) {
-  	final List<Contract> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<Contract> findByValuedItem(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByValuedItem(queryBuilder);
+    logger.info("findByvaluedItem - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByTerm(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByTerm(queryBuilder);
+    logger.info("findByterm - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByBindingReference(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByBindingReference(queryBuilder);
+    logger.info("findBybindingReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByFriendly(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByFriendly(queryBuilder);
+    logger.info("findByfriendly - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByLegal(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByLegal(queryBuilder);
+    logger.info("findBylegal - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByRule(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByRule(queryBuilder);
+    logger.info("findByrule - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByText(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Contract> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Contract> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

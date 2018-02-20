@@ -97,6 +97,42 @@ public class RiskAssessmentDaoImpl implements RiskAssessmentDao {
   }
 
   @Override
+  public List<RiskAssessment> findByBasedOn(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.basedOn_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findByParent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.parent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findByMethod(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, CodeableConcept b where a.method_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findByCode(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, CodeableConcept b where a.code_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findByContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
   public List<RiskAssessment> findByCondition(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.condition_id=b.parent_id " + queryBuilder.getWhereClause();
@@ -109,9 +145,39 @@ public class RiskAssessmentDaoImpl implements RiskAssessmentDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<RiskAssessment> findBySubject(QueryBuilder queryBuilder) {
+  public List<RiskAssessment> findByReasonCodeableConcept(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from RiskAssessmentModel a, CodeableConcept b where a.reasonCodeableConcept_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findByReasonReference(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.reasonReference_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findByBasis(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Reference b where a.basis_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findByPrediction(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, RiskAssessmentPrediction b where a.prediction_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RiskAssessment> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RiskAssessmentModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

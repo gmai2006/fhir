@@ -42,4 +42,16 @@ public interface PlanDefinitionDao {
 
   public List<PlanDefinition> findByField(QueryBuilder queryBuilder);
 
+  public List<PlanDefinition> findByType(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByUseContext(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByTopic(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByContributor(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByContact(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByRelatedArtifact(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByLibrary(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByGoal(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByAction(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByText(QueryBuilder queryBuilder);
+  public List<PlanDefinition> findByMeta(QueryBuilder queryBuilder);
 }

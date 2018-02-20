@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="contractrule")
 public class ContractRuleModel  implements Serializable {
-	private static final long serialVersionUID = 151873631188150239L;
+	private static final long serialVersionUID = 151910893765011628L;
   /**
   * Description: "Computable Contract conveyed using a policy rule language (e.g. XACML, DKAL, SecPal)."
   * Actual type: String;
@@ -103,11 +102,21 @@ public class ContractRuleModel  implements Serializable {
 
   public ContractRuleModel(ContractRule o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.contentAttachment = JsonUtils.toJson(o.getContentAttachment());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getContentAttachment()) {
+    	this.contentAttachment = JsonUtils.toJson(o.getContentAttachment());
+    }
     if (null != o.getContentReference() ) {
     	this.contentreference_id = "contentreference" + this.parent_id;
     	this.contentReference = ReferenceHelper.toModel(o.getContentReference(), this.contentreference_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

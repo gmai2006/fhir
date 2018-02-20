@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.EligibilityResponse;
 import org.fhir.service.EligibilityResponseService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/EligibilityResponse")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class EligibilityResponseResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public EligibilityResponse find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public EligibilityResponse findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<EligibilityResponse> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<EligibilityResponse> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<EligibilityResponse> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<EligibilityResponse> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<EligibilityResponse> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<EligibilityResponse> findAll() {
   	return this.service.selectAll();
   }
@@ -107,24 +172,25 @@ public class EligibilityResponseResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<EligibilityResponse> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
   /**
-  * Descr: The organization which generated this resource
+  * Descr: The EligibilityRequest provider
   * Type: reference
   */
   @GET
-  @Path("insurer")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<EligibilityResponse> insurer(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByInsurer(new QueryBuilder(params));
+  @Path("requestprovider")
+  public List<EligibilityResponse> requestprovider(@QueryParam("requestprovider")String requestprovider) {
+  	java.util.Map<String, String> params = QueryParser.parse(requestprovider, VALID_FIELDS);
+  	return this.service.findByRequestProvider(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The EligibilityRequest organization
+  * Type: reference
+  */
+  @GET
+  @Path("requestorganization")
+  public List<EligibilityResponse> requestorganization(@QueryParam("requestorganization")String requestorganization) {
+  	java.util.Map<String, String> params = QueryParser.parse(requestorganization, VALID_FIELDS);
+  	return this.service.findByRequestOrganization(new QueryBuilder(params));
   }
   /**
   * Descr: The EligibilityRequest reference
@@ -132,10 +198,46 @@ public class EligibilityResponseResource {
   */
   @GET
   @Path("request")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<EligibilityResponse> request(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<EligibilityResponse> request(@QueryParam("request")String request) {
+  	java.util.Map<String, String> params = QueryParser.parse(request, VALID_FIELDS);
   	return this.service.findByRequest(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The organization which generated this resource
+  * Type: reference
+  */
+  @GET
+  @Path("insurer")
+  public List<EligibilityResponse> insurer(@QueryParam("insurer")String insurer) {
+  	java.util.Map<String, String> params = QueryParser.parse(insurer, VALID_FIELDS);
+  	return this.service.findByInsurer(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The business identifier
+  * Type: token
+  */
+  @GET
+  public List<EligibilityResponse> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The processing outcome
+  * Type: token
+  */
+  @GET
+  public List<EligibilityResponse> outcome(@QueryParam("outcome")String outcome) {
+  	java.util.Map<String, String> params = QueryParser.parse(outcome, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The contents of the disposition message
+  * Type: string
+  */
+  @GET
+  public List<EligibilityResponse> disposition(@QueryParam("disposition")String disposition) {
+  	java.util.Map<String, String> params = QueryParser.parse(disposition, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "created|disposition|identifier|insurer|outcome|request|requestorganization|requestprovider";

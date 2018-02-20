@@ -114,6 +114,18 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<EnrollmentRequest> findByInsurer(QueryBuilder queryBuilder) {
+  	final List<EnrollmentRequest> result = dao.findByInsurer(queryBuilder);
+    logger.info("findByinsurer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EnrollmentRequest> findByProvider(QueryBuilder queryBuilder) {
+  	final List<EnrollmentRequest> result = dao.findByProvider(queryBuilder);
+    logger.info("findByprovider - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<EnrollmentRequest> findByOrganization(QueryBuilder queryBuilder) {
   	final List<EnrollmentRequest> result = dao.findByOrganization(queryBuilder);
     logger.info("findByorganization - exited - return value={} result ");
@@ -123,6 +135,24 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   public List<EnrollmentRequest> findBySubject(QueryBuilder queryBuilder) {
   	final List<EnrollmentRequest> result = dao.findBySubject(queryBuilder);
     logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EnrollmentRequest> findByCoverage(QueryBuilder queryBuilder) {
+  	final List<EnrollmentRequest> result = dao.findByCoverage(queryBuilder);
+    logger.info("findBycoverage - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EnrollmentRequest> findByText(QueryBuilder queryBuilder) {
+  	final List<EnrollmentRequest> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EnrollmentRequest> findByMeta(QueryBuilder queryBuilder) {
+  	final List<EnrollmentRequest> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

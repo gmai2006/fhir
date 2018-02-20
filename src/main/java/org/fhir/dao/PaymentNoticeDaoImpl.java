@@ -97,18 +97,6 @@ public class PaymentNoticeDaoImpl implements PaymentNoticeDao {
   }
 
   @Override
-  public List<PaymentNotice> findByOrganization(QueryBuilder queryBuilder) {
-  	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.organization_id=b.parent_id " + queryBuilder.getWhereClause();
-    return findByQuery(queryBuilder, queryStr);
-  }
-  @Override
-  public List<PaymentNotice> findByProvider(QueryBuilder queryBuilder) {
-  	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.provider_id=b.parent_id " + queryBuilder.getWhereClause();
-    return findByQuery(queryBuilder, queryStr);
-  }
-  @Override
   public List<PaymentNotice> findByRequest(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.request_id=b.parent_id " + queryBuilder.getWhereClause();
@@ -118,6 +106,42 @@ public class PaymentNoticeDaoImpl implements PaymentNoticeDao {
   public List<PaymentNotice> findByResponse(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.response_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PaymentNotice> findByTarget(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.target_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PaymentNotice> findByProvider(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.provider_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PaymentNotice> findByOrganization(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a, Reference b where a.organization_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PaymentNotice> findByPaymentStatus(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a, CodeableConcept b where a.paymentStatus_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PaymentNotice> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PaymentNotice> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PaymentNoticeModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

@@ -66,7 +66,8 @@
       "descr": "Search on the entire content of the resource",
       "type": "string",
       "code": "_content",
-      "xpath": "_content"
+      "xpath": "_content",
+      "fieldName": "_content"
     },
     {
       "name": "_id",
@@ -74,7 +75,8 @@
       "type": "token",
       "expression": "Resource.id",
       "code": "_id",
-      "xpath": "id"
+      "xpath": "id",
+      "fieldName": "id"
     },
     {
       "name": "_lastUpdated",
@@ -82,7 +84,8 @@
       "type": "date",
       "expression": "Resource.meta.lastUpdated",
       "code": "_lastUpdated",
-      "xpath": "meta/lastUpdated"
+      "xpath": "meta/lastUpdated",
+      "fieldName": "lastUpdated"
     },
     {
       "name": "_profile",
@@ -90,14 +93,16 @@
       "type": "uri",
       "expression": "Resource.meta.profile",
       "code": "_profile",
-      "xpath": "meta/profile"
+      "xpath": "meta/profile",
+      "fieldName": "profile"
     },
     {
       "name": "_query",
       "descr": "A custom search profile that describes a specific defined query operation",
       "type": "token",
       "code": "_query",
-      "xpath": "_query"
+      "xpath": "_query",
+      "fieldName": "_query"
     },
     {
       "name": "_security",
@@ -105,7 +110,8 @@
       "type": "token",
       "expression": "Resource.meta.security",
       "code": "_security",
-      "xpath": "meta/security"
+      "xpath": "meta/security",
+      "fieldName": "security"
     },
     {
       "name": "_tag",
@@ -113,7 +119,8 @@
       "type": "token",
       "expression": "Resource.meta.tag",
       "code": "_tag",
-      "xpath": "meta/tag"
+      "xpath": "meta/tag",
+      "fieldName": "tag"
     }
   ]
 }

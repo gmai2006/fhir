@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="person")
 public class PersonModel  implements Serializable {
-	private static final long serialVersionUID = 151873631171846835L;
+	private static final long serialVersionUID = 151910893747553956L;
   /**
   * Description: "This is a Person resource"
   */
@@ -229,13 +228,24 @@ public class PersonModel  implements Serializable {
   public PersonModel(Person o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
+    if (null != o.getName()) {
+    	this.name = JsonUtils.toJson(o.getName());
+    }
+    if (null != o.getTelecom()) {
+    	this.telecom = JsonUtils.toJson(o.getTelecom());
+    }
     this.gender = o.getGender();
     this.birthDate = o.getBirthDate();
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
     	this.address_id = "address" + this.id;
     	this.address = AddressHelper.toModelFromArray(o.getAddress(), this.address_id);
     }
-    this.photo = JsonUtils.toJson(o.getPhoto());
+    if (null != o.getPhoto()) {
+    	this.photo = JsonUtils.toJson(o.getPhoto());
+    }
     if (null != o.getManagingOrganization() ) {
     	this.managingorganization_id = "managingorganization" + this.id;
     	this.managingOrganization = ReferenceHelper.toModel(o.getManagingOrganization(), this.managingorganization_id);
@@ -248,6 +258,15 @@ public class PersonModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;

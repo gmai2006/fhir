@@ -18,17 +18,7 @@ public class JsonUtils {
 		if (null == gson) gson = new GsonBuilder().create();
 		return gson;
 	}
-	
-	public static String write2String(Object o) {
-		if (null == o) return null;
-		try {
-	    return getGson().toJson(o);
-		} catch (Exception ex) {
-			logger.severe("Unable to write object to json [" + ex.getMessage() + "]");
-			return "";
-		}
-	}
-	
+
 	public static JsonObject parseJson(Path inputFile) {
 		try {
 			return getGson().fromJson(new BufferedReader(new FileReader(inputFile.toFile())), JsonObject.class);

@@ -42,10 +42,19 @@ public interface CommunicationRequestDao {
 
   public List<CommunicationRequest> findByField(QueryBuilder queryBuilder);
 
-  public List<CommunicationRequest> findByContext(QueryBuilder queryBuilder);
-  public List<CommunicationRequest> findByRecipient(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByBasedOn(QueryBuilder queryBuilder);
   public List<CommunicationRequest> findByReplaces(QueryBuilder queryBuilder);
-  public List<CommunicationRequest> findByRequester(QueryBuilder queryBuilder);
-  public List<CommunicationRequest> findBySender(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByCategory(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByMedium(QueryBuilder queryBuilder);
   public List<CommunicationRequest> findBySubject(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByRecipient(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByTopic(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByContext(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByPayload(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findBySender(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByReasonCode(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByReasonReference(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByText(QueryBuilder queryBuilder);
+  public List<CommunicationRequest> findByMeta(QueryBuilder queryBuilder);
 }

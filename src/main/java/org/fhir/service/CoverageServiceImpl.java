@@ -114,9 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Coverage> findByType(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Coverage> findByPolicyHolder(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findByPolicyHolder(queryBuilder);
+    logger.info("findBypolicyHolder - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Coverage> findBySubscriber(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findBySubscriber(queryBuilder);
+    logger.info("findBysubscriber - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Coverage> findByBeneficiary(QueryBuilder queryBuilder) {
   	final List<Coverage> result = dao.findByBeneficiary(queryBuilder);
     logger.info("findBybeneficiary - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Coverage> findByRelationship(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findByRelationship(queryBuilder);
+    logger.info("findByrelationship - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,9 +150,27 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Coverage> findBySubscriber(QueryBuilder queryBuilder) {
-  	final List<Coverage> result = dao.findBySubscriber(queryBuilder);
-    logger.info("findBysubscriber - exited - return value={} result ");
+  public List<Coverage> findByGrouping(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findByGrouping(queryBuilder);
+    logger.info("findBygrouping - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Coverage> findByContract(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findByContract(queryBuilder);
+    logger.info("findBycontract - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Coverage> findByText(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Coverage> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Coverage> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

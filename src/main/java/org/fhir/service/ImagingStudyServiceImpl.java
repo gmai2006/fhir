@@ -114,9 +114,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<ImagingStudy> findByModalityList(QueryBuilder queryBuilder) {
+  	final List<ImagingStudy> result = dao.findByModalityList(queryBuilder);
+    logger.info("findBymodalityList - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingStudy> findByPatient(QueryBuilder queryBuilder) {
+  	final List<ImagingStudy> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<ImagingStudy> findByContext(QueryBuilder queryBuilder) {
   	final List<ImagingStudy> result = dao.findByContext(queryBuilder);
     logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingStudy> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<ImagingStudy> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingStudy> findByReferrer(QueryBuilder queryBuilder) {
+  	final List<ImagingStudy> result = dao.findByReferrer(queryBuilder);
+    logger.info("findByreferrer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingStudy> findByInterpreter(QueryBuilder queryBuilder) {
+  	final List<ImagingStudy> result = dao.findByInterpreter(queryBuilder);
+    logger.info("findByinterpreter - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,9 +156,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<ImagingStudy> findByProcedureReference(QueryBuilder queryBuilder) {
+  	final List<ImagingStudy> result = dao.findByProcedureReference(queryBuilder);
+    logger.info("findByprocedureReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingStudy> findByProcedureCode(QueryBuilder queryBuilder) {
+  	final List<ImagingStudy> result = dao.findByProcedureCode(queryBuilder);
+    logger.info("findByprocedureCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingStudy> findByReason(QueryBuilder queryBuilder) {
+  	final List<ImagingStudy> result = dao.findByReason(queryBuilder);
+    logger.info("findByreason - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<ImagingStudy> findBySeries(QueryBuilder queryBuilder) {
   	final List<ImagingStudy> result = dao.findBySeries(queryBuilder);
     logger.info("findByseries - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingStudy> findByText(QueryBuilder queryBuilder) {
+  	final List<ImagingStudy> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingStudy> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ImagingStudy> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

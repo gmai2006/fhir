@@ -42,5 +42,10 @@ public interface ScheduleDao {
 
   public List<Schedule> findByField(QueryBuilder queryBuilder);
 
+  public List<Schedule> findByServiceCategory(QueryBuilder queryBuilder);
+  public List<Schedule> findByServiceType(QueryBuilder queryBuilder);
+  public List<Schedule> findBySpecialty(QueryBuilder queryBuilder);
   public List<Schedule> findByActor(QueryBuilder queryBuilder);
+  public List<Schedule> findByText(QueryBuilder queryBuilder);
+  public List<Schedule> findByMeta(QueryBuilder queryBuilder);
 }

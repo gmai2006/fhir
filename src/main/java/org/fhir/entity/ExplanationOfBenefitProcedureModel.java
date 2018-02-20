@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="explanationofbenefitprocedure")
 public class ExplanationOfBenefitProcedureModel  implements Serializable {
-	private static final long serialVersionUID = 151873631187128638L;
+	private static final long serialVersionUID = 151910893763965647L;
   /**
   * Description: "Sequence of procedures which serves to order and provide a link."
   */
@@ -57,12 +56,14 @@ public class ExplanationOfBenefitProcedureModel  implements Serializable {
 
   /**
   * Description: "The procedure code."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"procedureCodeableConcept\"", length = 16777215)
-  private String procedureCodeableConcept;
+  @Column(name="\"procedurecodeableconcept_id\"")
+  private String procedurecodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="procedurecodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> procedureCodeableConcept;
 
   /**
   * Description: "The procedure code."
@@ -119,13 +120,24 @@ public class ExplanationOfBenefitProcedureModel  implements Serializable {
 
   public ExplanationOfBenefitProcedureModel(ExplanationOfBenefitProcedure o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.sequence = o.getSequence();
     this.date = o.getDate();
-    this.procedureCodeableConcept = JsonUtils.toJson(o.getProcedureCodeableConcept());
+    if (null != o.getProcedureCodeableConcept() ) {
+    	this.procedurecodeableconcept_id = "procedurecodeableconcept" + this.parent_id;
+    	this.procedureCodeableConcept = CodeableConceptHelper.toModel(o.getProcedureCodeableConcept(), this.procedurecodeableconcept_id);
+    }
     if (null != o.getProcedureReference() ) {
     	this.procedurereference_id = "procedurereference" + this.parent_id;
     	this.procedureReference = ReferenceHelper.toModel(o.getProcedureReference(), this.procedurereference_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -141,10 +153,10 @@ public class ExplanationOfBenefitProcedureModel  implements Serializable {
   public void setDate( String value) {
     this.date = value;
   }
-  public String getProcedureCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getProcedureCodeableConcept() {
     return this.procedureCodeableConcept;
   }
-  public void setProcedureCodeableConcept( String value) {
+  public void setProcedureCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.procedureCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getProcedureReference() {
@@ -184,7 +196,6 @@ public class ExplanationOfBenefitProcedureModel  implements Serializable {
     builder.append("[ExplanationOfBenefitProcedureModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("procedureCodeableConcept" + "->" + this.procedureCodeableConcept + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

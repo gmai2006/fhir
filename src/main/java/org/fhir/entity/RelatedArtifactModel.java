@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="relatedartifact")
 public class RelatedArtifactModel  implements Serializable {
-	private static final long serialVersionUID = 151873631185584739L;
+	private static final long serialVersionUID = 151910893762323523L;
   /**
   * Description: "The type of relationship to the related artifact."
   */
@@ -119,15 +118,22 @@ public class RelatedArtifactModel  implements Serializable {
 
   public RelatedArtifactModel(RelatedArtifact o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.type = o.getType();
     this.display = o.getDisplay();
     this.citation = o.getCitation();
     this.url = o.getUrl();
-    this.document = JsonUtils.toJson(o.getDocument());
+    if (null != o.getDocument()) {
+    	this.document = JsonUtils.toJson(o.getDocument());
+    }
     if (null != o.getResource() ) {
     	this.resource_id = "resource" + this.parent_id;
     	this.resource = ReferenceHelper.toModel(o.getResource(), this.resource_id);
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

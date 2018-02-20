@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="sequence")
 public class SequenceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631179319591L;
+	private static final long serialVersionUID = 151910893755757800L;
   /**
   * Description: "This is a Sequence resource"
   */
@@ -287,6 +286,9 @@ public class SequenceModel  implements Serializable {
   public SequenceModel(Sequence o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.type = o.getType();
     this.coordinateSystem = o.getCoordinateSystem();
     if (null != o.getPatient() ) {
@@ -334,6 +336,15 @@ public class SequenceModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;

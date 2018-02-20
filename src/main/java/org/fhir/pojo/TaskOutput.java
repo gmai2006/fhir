@@ -404,7 +404,9 @@ public class TaskOutput  extends BackboneElement  {
 
   public TaskOutput(TaskOutputModel o) {
     this.id = o.getId();
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getValueBoolean()) {
       this.valueBoolean = o.getValueBoolean();
     }
@@ -465,8 +467,12 @@ public class TaskOutput  extends BackboneElement  {
     this.valueAnnotation = AnnotationHelper.fromJson(o.getValueAnnotation());
     this.valueAttachment = AttachmentHelper.fromJson(o.getValueAttachment());
     this.valueIdentifier = IdentifierHelper.fromJson(o.getValueIdentifier());
-    this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
-    this.valueCoding = CodingHelper.fromJson(o.getValueCoding());
+    if (null != o.getValueCodeableConcept() && !o.getValueCodeableConcept().isEmpty()) {
+      this.valueCodeableConcept = new CodeableConcept(o.getValueCodeableConcept().get(0));
+    }
+    if (null != o.getValueCoding() && !o.getValueCoding().isEmpty()) {
+      this.valueCoding = new Coding(o.getValueCoding().get(0));
+    }
     if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
       this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
     }

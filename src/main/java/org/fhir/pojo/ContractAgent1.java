@@ -51,6 +51,9 @@ public class ContractAgent1  extends BackboneElement  {
     if (null != o.getActor() && !o.getActor().isEmpty()) {
       this.actor = new Reference(o.getActor().get(0));
     }
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+    	this.role = CodeableConceptHelper.fromArray2Array(o.getRole());
+    }
   }
 
   public void setActor( Reference value) {

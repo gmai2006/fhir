@@ -116,8 +116,15 @@ public class ImmunizationVaccinationProtocol  extends BackboneElement  {
     if (null != o.getSeriesDoses()) {
       this.seriesDoses = o.getSeriesDoses();
     }
-    this.doseStatus = CodeableConceptHelper.fromJson(o.getDoseStatus());
-    this.doseStatusReason = CodeableConceptHelper.fromJson(o.getDoseStatusReason());
+    if (null != o.getTargetDisease() && !o.getTargetDisease().isEmpty()) {
+    	this.targetDisease = CodeableConceptHelper.fromArray2Array(o.getTargetDisease());
+    }
+    if (null != o.getDoseStatus() && !o.getDoseStatus().isEmpty()) {
+      this.doseStatus = new CodeableConcept(o.getDoseStatus().get(0));
+    }
+    if (null != o.getDoseStatusReason() && !o.getDoseStatusReason().isEmpty()) {
+      this.doseStatusReason = new CodeableConcept(o.getDoseStatusReason().get(0));
+    }
   }
 
   public void setDoseSequence( Float value) {

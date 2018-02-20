@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="measurereportpopulation1")
 public class MeasureReportPopulation1Model  implements Serializable {
-	private static final long serialVersionUID = 151873631186624959L;
+	private static final long serialVersionUID = 151910893763447834L;
   /**
   * Description: "The identifier of the population being reported, as defined by the population element of the measure."
   * Actual type: String;
@@ -50,12 +49,14 @@ public class MeasureReportPopulation1Model  implements Serializable {
 
   /**
   * Description: "The type of the population."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The number of members of the population in this stratum."
@@ -120,13 +121,26 @@ public class MeasureReportPopulation1Model  implements Serializable {
 
   public MeasureReportPopulation1Model(MeasureReportPopulation1 o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
-    this.code = JsonUtils.toJson(o.getCode());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     this.count = o.getCount();
     if (null != o.getPatients() ) {
     	this.patients_id = "patients" + this.parent_id;
     	this.patients = ReferenceHelper.toModel(o.getPatients(), this.patients_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -136,10 +150,10 @@ public class MeasureReportPopulation1Model  implements Serializable {
   public void setIdentifier( String value) {
     this.identifier = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public Float getCount() {
@@ -184,7 +198,6 @@ public class MeasureReportPopulation1Model  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MeasureReportPopulation1Model]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("count" + "->" + this.count + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

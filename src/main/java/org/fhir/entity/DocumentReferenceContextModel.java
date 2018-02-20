@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="documentreferencecontext")
 public class DocumentReferenceContextModel  implements Serializable {
-	private static final long serialVersionUID = 151873631196622274L;
+	private static final long serialVersionUID = 151910893773437253L;
   /**
   * Description: "Describes the clinical encounter or type of care that the document content is associated with."
   */
@@ -52,12 +51,14 @@ public class DocumentReferenceContextModel  implements Serializable {
 
   /**
   * Description: "This list of codes represents the main clinical acts, such as a colonoscopy or an appendectomy, being documented. In some cases, the event is inherent in the typeCode, such as a \"History and Physical Report\" in which the procedure being documented is necessarily a \"History and Physical\" act."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"event\"", length = 16777215)
-  private String event;
+  @Column(name="\"event_id\"")
+  private String event_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="event_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> event;
 
   /**
   * Description: "The time period over which the service that is described by the document was provided."
@@ -70,21 +71,25 @@ public class DocumentReferenceContextModel  implements Serializable {
 
   /**
   * Description: "The kind of facility where the patient was seen."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"facilityType\"", length = 16777215)
-  private String facilityType;
+  @Column(name="\"facilitytype_id\"")
+  private String facilitytype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="facilitytype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> facilityType;
 
   /**
   * Description: "This property may convey specifics about the practice setting where the content was created, often reflecting the clinical specialty."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"practiceSetting\"", length = 16777215)
-  private String practiceSetting;
+  @Column(name="\"practicesetting_id\"")
+  private String practicesetting_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="practicesetting_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> practiceSetting;
 
   /**
   * Description: "The Patient Information as known when the document was published. May be a reference to a version specific, or contained."
@@ -152,14 +157,28 @@ public class DocumentReferenceContextModel  implements Serializable {
 
   public DocumentReferenceContextModel(DocumentReferenceContext o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getEncounter() ) {
     	this.encounter_id = "encounter" + this.parent_id;
     	this.encounter = ReferenceHelper.toModel(o.getEncounter(), this.encounter_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
-    this.facilityType = JsonUtils.toJson(o.getFacilityType());
-    this.practiceSetting = JsonUtils.toJson(o.getPracticeSetting());
+    if (null != o.getEvent() && !o.getEvent().isEmpty()) {
+    	this.event_id = "event" + this.parent_id;
+    	this.event = CodeableConceptHelper.toModelFromArray(o.getEvent(), this.event_id);
+    }
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
+    if (null != o.getFacilityType() ) {
+    	this.facilitytype_id = "facilitytype" + this.parent_id;
+    	this.facilityType = CodeableConceptHelper.toModel(o.getFacilityType(), this.facilitytype_id);
+    }
+    if (null != o.getPracticeSetting() ) {
+    	this.practicesetting_id = "practicesetting" + this.parent_id;
+    	this.practiceSetting = CodeableConceptHelper.toModel(o.getPracticeSetting(), this.practicesetting_id);
+    }
     if (null != o.getSourcePatientInfo() ) {
     	this.sourcepatientinfo_id = "sourcepatientinfo" + this.parent_id;
     	this.sourcePatientInfo = ReferenceHelper.toModel(o.getSourcePatientInfo(), this.sourcepatientinfo_id);
@@ -167,6 +186,12 @@ public class DocumentReferenceContextModel  implements Serializable {
     if (null != o.getRelated() && !o.getRelated().isEmpty()) {
     	this.related_id = "related" + this.parent_id;
     	this.related = DocumentReferenceRelatedHelper.toModelFromArray(o.getRelated(), this.related_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -176,10 +201,10 @@ public class DocumentReferenceContextModel  implements Serializable {
   public void setEncounter( java.util.List<ReferenceModel> value) {
     this.encounter = value;
   }
-  public String getEvent() {
+  public java.util.List<CodeableConceptModel> getEvent() {
     return this.event;
   }
-  public void setEvent( String value) {
+  public void setEvent( java.util.List<CodeableConceptModel> value) {
     this.event = value;
   }
   public String getPeriod() {
@@ -188,16 +213,16 @@ public class DocumentReferenceContextModel  implements Serializable {
   public void setPeriod( String value) {
     this.period = value;
   }
-  public String getFacilityType() {
+  public java.util.List<CodeableConceptModel> getFacilityType() {
     return this.facilityType;
   }
-  public void setFacilityType( String value) {
+  public void setFacilityType( java.util.List<CodeableConceptModel> value) {
     this.facilityType = value;
   }
-  public String getPracticeSetting() {
+  public java.util.List<CodeableConceptModel> getPracticeSetting() {
     return this.practiceSetting;
   }
-  public void setPracticeSetting( String value) {
+  public void setPracticeSetting( java.util.List<CodeableConceptModel> value) {
     this.practiceSetting = value;
   }
   public java.util.List<ReferenceModel> getSourcePatientInfo() {
@@ -241,10 +266,7 @@ public class DocumentReferenceContextModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[DocumentReferenceContextModel]:" + "\n");
-     builder.append("event" + "->" + this.event + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("facilityType" + "->" + this.facilityType + "\n"); 
-     builder.append("practiceSetting" + "->" + this.practiceSetting + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

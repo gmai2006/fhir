@@ -77,6 +77,9 @@ public class PatientContact  extends BackboneElement  {
 
   public PatientContact(PatientContactModel o) {
     this.id = o.getId();
+    if (null != o.getRelationship() && !o.getRelationship().isEmpty()) {
+    	this.relationship = CodeableConceptHelper.fromArray2Array(o.getRelationship());
+    }
     this.name = HumanNameHelper.fromJson(o.getName());
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
       this.address = new Address(o.getAddress().get(0));

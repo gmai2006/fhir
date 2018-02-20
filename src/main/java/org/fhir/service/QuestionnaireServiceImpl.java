@@ -113,4 +113,46 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<Questionnaire> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<Questionnaire> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Questionnaire> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<Questionnaire> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Questionnaire> findByContact(QueryBuilder queryBuilder) {
+  	final List<Questionnaire> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Questionnaire> findByCode(QueryBuilder queryBuilder) {
+  	final List<Questionnaire> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Questionnaire> findByItem(QueryBuilder queryBuilder) {
+  	final List<Questionnaire> result = dao.findByItem(queryBuilder);
+    logger.info("findByitem - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Questionnaire> findByText(QueryBuilder queryBuilder) {
+  	final List<Questionnaire> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Questionnaire> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Questionnaire> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

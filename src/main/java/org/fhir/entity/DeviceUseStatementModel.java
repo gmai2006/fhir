@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="deviceusestatement")
 public class DeviceUseStatementModel  implements Serializable {
-	private static final long serialVersionUID = 151873631143353599L;
+	private static final long serialVersionUID = 151910893720046519L;
   /**
   * Description: "This is a DeviceUseStatement resource"
   */
@@ -141,21 +140,25 @@ public class DeviceUseStatementModel  implements Serializable {
 
   /**
   * Description: "Reason or justification for the use of the device."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"indication\"", length = 16777215)
-  private String indication;
+  @Column(name="\"indication_id\"")
+  private String indication_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="indication_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> indication;
 
   /**
   * Description: "Indicates the site on the subject's body where the device was used ( i.e. the target site)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"bodySite\"", length = 16777215)
-  private String bodySite;
+  @Column(name="\"bodysite_id\"")
+  private String bodysite_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> bodySite;
 
   /**
   * Description: "Details about the device statement that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement."
@@ -257,14 +260,23 @@ public class DeviceUseStatementModel  implements Serializable {
   public DeviceUseStatementModel(DeviceUseStatement o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
     }
-    this.whenUsed = JsonUtils.toJson(o.getWhenUsed());
-    this.timingTiming = JsonUtils.toJson(o.getTimingTiming());
-    this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
+    if (null != o.getWhenUsed()) {
+    	this.whenUsed = JsonUtils.toJson(o.getWhenUsed());
+    }
+    if (null != o.getTimingTiming()) {
+    	this.timingTiming = JsonUtils.toJson(o.getTimingTiming());
+    }
+    if (null != o.getTimingPeriod()) {
+    	this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
+    }
     this.timingDateTime = o.getTimingDateTime();
     this.recordedOn = o.getRecordedOn();
     if (null != o.getSource() ) {
@@ -275,10 +287,29 @@ public class DeviceUseStatementModel  implements Serializable {
     	this.device_id = "device" + this.id;
     	this.device = ReferenceHelper.toModel(o.getDevice(), this.device_id);
     }
-    this.bodySite = JsonUtils.toJson(o.getBodySite());
+    if (null != o.getIndication() && !o.getIndication().isEmpty()) {
+    	this.indication_id = "indication" + this.id;
+    	this.indication = CodeableConceptHelper.toModelFromArray(o.getIndication(), this.indication_id);
+    }
+    if (null != o.getBodySite() ) {
+    	this.bodysite_id = "bodysite" + this.id;
+    	this.bodySite = CodeableConceptHelper.toModel(o.getBodySite(), this.bodysite_id);
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -354,16 +385,16 @@ public class DeviceUseStatementModel  implements Serializable {
   public void setDevice( java.util.List<ReferenceModel> value) {
     this.device = value;
   }
-  public String getIndication() {
+  public java.util.List<CodeableConceptModel> getIndication() {
     return this.indication;
   }
-  public void setIndication( String value) {
+  public void setIndication( java.util.List<CodeableConceptModel> value) {
     this.indication = value;
   }
-  public String getBodySite() {
+  public java.util.List<CodeableConceptModel> getBodySite() {
     return this.bodySite;
   }
-  public void setBodySite( String value) {
+  public void setBodySite( java.util.List<CodeableConceptModel> value) {
     this.bodySite = value;
   }
   public String getNote() {
@@ -433,8 +464,6 @@ public class DeviceUseStatementModel  implements Serializable {
      builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
      builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
      builder.append("recordedOn" + "->" + this.recordedOn + "\n"); 
-     builder.append("indication" + "->" + this.indication + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

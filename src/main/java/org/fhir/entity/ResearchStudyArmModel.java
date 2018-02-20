@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="researchstudyarm")
 public class ResearchStudyArmModel  implements Serializable {
-	private static final long serialVersionUID = 151873631179623570L;
+	private static final long serialVersionUID = 151910893756183231L;
   /**
   * Description: "Unique, human-readable label for this arm of the study."
   */
@@ -48,12 +47,14 @@ public class ResearchStudyArmModel  implements Serializable {
 
   /**
   * Description: "Categorization of study arm, e.g. experimental, active comparator, placebo comparater."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "A succinct description of the path through the study that would be followed by a subject adhering to this arm."
@@ -106,10 +107,21 @@ public class ResearchStudyArmModel  implements Serializable {
 
   public ResearchStudyArmModel(ResearchStudyArm o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.name = o.getName();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     this.description = o.getDescription();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getName() {
@@ -118,10 +130,10 @@ public class ResearchStudyArmModel  implements Serializable {
   public void setName( String value) {
     this.name = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public String getDescription() {
@@ -160,7 +172,6 @@ public class ResearchStudyArmModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ResearchStudyArmModel]:" + "\n");
      builder.append("name" + "->" + this.name + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.HealthcareService;
 import org.fhir.service.HealthcareServiceService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/HealthcareService")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class HealthcareServiceResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public HealthcareService find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public HealthcareService findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<HealthcareService> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<HealthcareService> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<HealthcareService> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<HealthcareService> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<HealthcareService> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<HealthcareService> findAll() {
   	return this.service.selectAll();
   }
@@ -107,24 +172,15 @@ public class HealthcareServiceResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<HealthcareService> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
   /**
-  * Descr: Technical endpoints providing access to services operated for the location
+  * Descr: The organization that provides this Healthcare Service
   * Type: reference
   */
   @GET
-  @Path("endpoint")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<HealthcareService> endpoint(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByEndpoint(new QueryBuilder(params));
+  @Path("organization")
+  public List<HealthcareService> organization(@QueryParam("organization")String organization) {
+  	java.util.Map<String, String> params = QueryParser.parse(organization, VALID_FIELDS);
+  	return this.service.findByProvidedBy(new QueryBuilder(params));
   }
   /**
   * Descr: The location of the Healthcare Service
@@ -132,10 +188,73 @@ public class HealthcareServiceResource {
   */
   @GET
   @Path("location")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<HealthcareService> location(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<HealthcareService> location(@QueryParam("location")String location) {
+  	java.util.Map<String, String> params = QueryParser.parse(location, VALID_FIELDS);
   	return this.service.findByLocation(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Technical endpoints providing access to services operated for the location
+  * Type: reference
+  */
+  @GET
+  @Path("endpoint")
+  public List<HealthcareService> endpoint(@QueryParam("endpoint")String endpoint) {
+  	java.util.Map<String, String> params = QueryParser.parse(endpoint, VALID_FIELDS);
+  	return this.service.findByEndpoint(new QueryBuilder(params));
+  }
+  /**
+  * Descr: External identifiers for this item
+  * Type: token
+  */
+  @GET
+  public List<HealthcareService> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Service Category of the Healthcare Service
+  * Type: token
+  */
+  @GET
+  public List<HealthcareService> category(@QueryParam("category")String category) {
+  	java.util.Map<String, String> params = QueryParser.parse(category, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The type of service provided by this healthcare service
+  * Type: token
+  */
+  @GET
+  public List<HealthcareService> type(@QueryParam("type")String type) {
+  	java.util.Map<String, String> params = QueryParser.parse(type, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: A portion of the Healthcare service name
+  * Type: string
+  */
+  @GET
+  public List<HealthcareService> name(@QueryParam("name")String name) {
+  	java.util.Map<String, String> params = QueryParser.parse(name, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: One of the Program Names serviced by this HealthcareService
+  * Type: string
+  */
+  @GET
+  public List<HealthcareService> programname(@QueryParam("programname")String programname) {
+  	java.util.Map<String, String> params = QueryParser.parse(programname, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: One of the HealthcareService's characteristics
+  * Type: token
+  */
+  @GET
+  public List<HealthcareService> characteristic(@QueryParam("characteristic")String characteristic) {
+  	java.util.Map<String, String> params = QueryParser.parse(characteristic, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "active|category|characteristic|endpoint|identifier|location|name|organization|programname|type";

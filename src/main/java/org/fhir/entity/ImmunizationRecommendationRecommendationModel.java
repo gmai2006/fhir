@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="immunizationrecommendationrecommendation")
 public class ImmunizationRecommendationRecommendationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631179542196L;
+	private static final long serialVersionUID = 151910893755965066L;
   /**
   * Description: "The date the immunization recommendation was created."
   */
@@ -49,21 +48,25 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
 
   /**
   * Description: "Vaccine that pertains to the recommendation."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"vaccineCode\"", length = 16777215)
-  private String vaccineCode;
+  @Column(name="\"vaccinecode_id\"")
+  private String vaccinecode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="vaccinecode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> vaccineCode;
 
   /**
   * Description: "The targeted disease for the recommendation."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"targetDisease\"", length = 16777215)
-  private String targetDisease;
+  @Column(name="\"targetdisease_id\"")
+  private String targetdisease_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="targetdisease_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> targetDisease;
 
   /**
   * Description: "The next recommended dose number (e.g. dose 2 is the next recommended dose)."
@@ -75,13 +78,14 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
 
   /**
   * Description: "Vaccine administration status."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"forecastStatus\"", length = 16777215)
-  private String forecastStatus;
+  @Column(name="\"forecaststatus_id\"")
+  private String forecaststatus_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="forecaststatus_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> forecastStatus;
 
   /**
   * Description: "Vaccine date recommendations.  For example, earliest date to administer, latest date to administer, etc."
@@ -171,12 +175,23 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
 
   public ImmunizationRecommendationRecommendationModel(ImmunizationRecommendationRecommendation o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.date = o.getDate();
-    this.vaccineCode = JsonUtils.toJson(o.getVaccineCode());
-    this.targetDisease = JsonUtils.toJson(o.getTargetDisease());
+    if (null != o.getVaccineCode() ) {
+    	this.vaccinecode_id = "vaccinecode" + this.parent_id;
+    	this.vaccineCode = CodeableConceptHelper.toModel(o.getVaccineCode(), this.vaccinecode_id);
+    }
+    if (null != o.getTargetDisease() ) {
+    	this.targetdisease_id = "targetdisease" + this.parent_id;
+    	this.targetDisease = CodeableConceptHelper.toModel(o.getTargetDisease(), this.targetdisease_id);
+    }
     this.doseNumber = o.getDoseNumber();
-    this.forecastStatus = JsonUtils.toJson(o.getForecastStatus());
+    if (null != o.getForecastStatus() ) {
+    	this.forecaststatus_id = "forecaststatus" + this.parent_id;
+    	this.forecastStatus = CodeableConceptHelper.toModel(o.getForecastStatus(), this.forecaststatus_id);
+    }
     if (null != o.getDateCriterion() && !o.getDateCriterion().isEmpty()) {
     	this.datecriterion_id = "datecriterion" + this.parent_id;
     	this.dateCriterion = ImmunizationRecommendationDateCriterionHelper.toModelFromArray(o.getDateCriterion(), this.datecriterion_id);
@@ -193,6 +208,12 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
     	this.supportingpatientinformation_id = "supportingpatientinformation" + this.parent_id;
     	this.supportingPatientInformation = ReferenceHelper.toModelFromArray(o.getSupportingPatientInformation(), this.supportingpatientinformation_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getDate() {
@@ -201,16 +222,16 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   public void setDate( String value) {
     this.date = value;
   }
-  public String getVaccineCode() {
+  public java.util.List<CodeableConceptModel> getVaccineCode() {
     return this.vaccineCode;
   }
-  public void setVaccineCode( String value) {
+  public void setVaccineCode( java.util.List<CodeableConceptModel> value) {
     this.vaccineCode = value;
   }
-  public String getTargetDisease() {
+  public java.util.List<CodeableConceptModel> getTargetDisease() {
     return this.targetDisease;
   }
-  public void setTargetDisease( String value) {
+  public void setTargetDisease( java.util.List<CodeableConceptModel> value) {
     this.targetDisease = value;
   }
   public Float getDoseNumber() {
@@ -219,10 +240,10 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
   public void setDoseNumber( Float value) {
     this.doseNumber = value;
   }
-  public String getForecastStatus() {
+  public java.util.List<CodeableConceptModel> getForecastStatus() {
     return this.forecastStatus;
   }
-  public void setForecastStatus( String value) {
+  public void setForecastStatus( java.util.List<CodeableConceptModel> value) {
     this.forecastStatus = value;
   }
   public java.util.List<ImmunizationRecommendationDateCriterionModel> getDateCriterion() {
@@ -279,10 +300,7 @@ public class ImmunizationRecommendationRecommendationModel  implements Serializa
     StringBuilder builder = new StringBuilder();
     builder.append("[ImmunizationRecommendationRecommendationModel]:" + "\n");
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("vaccineCode" + "->" + this.vaccineCode + "\n"); 
-     builder.append("targetDisease" + "->" + this.targetDisease + "\n"); 
      builder.append("doseNumber" + "->" + this.doseNumber + "\n"); 
-     builder.append("forecastStatus" + "->" + this.forecastStatus + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

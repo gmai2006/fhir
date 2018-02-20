@@ -42,10 +42,23 @@ public interface ObservationDao {
 
   public List<Observation> findByField(QueryBuilder queryBuilder);
 
-  public List<Observation> findByContext(QueryBuilder queryBuilder);
-  public List<Observation> findByDevice(QueryBuilder queryBuilder);
-  public List<Observation> findByPerformer(QueryBuilder queryBuilder);
-  public List<Observation> findByRelated(QueryBuilder queryBuilder);
-  public List<Observation> findBySpecimen(QueryBuilder queryBuilder);
+  public List<Observation> findByBasedOn(QueryBuilder queryBuilder);
+  public List<Observation> findByCategory(QueryBuilder queryBuilder);
+  public List<Observation> findByCode(QueryBuilder queryBuilder);
   public List<Observation> findBySubject(QueryBuilder queryBuilder);
+  public List<Observation> findByContext(QueryBuilder queryBuilder);
+  public List<Observation> findByPerformer(QueryBuilder queryBuilder);
+  public List<Observation> findByValueQuantity(QueryBuilder queryBuilder);
+  public List<Observation> findByValueCodeableConcept(QueryBuilder queryBuilder);
+  public List<Observation> findByDataAbsentReason(QueryBuilder queryBuilder);
+  public List<Observation> findByInterpretation(QueryBuilder queryBuilder);
+  public List<Observation> findByBodySite(QueryBuilder queryBuilder);
+  public List<Observation> findByMethod(QueryBuilder queryBuilder);
+  public List<Observation> findBySpecimen(QueryBuilder queryBuilder);
+  public List<Observation> findByDevice(QueryBuilder queryBuilder);
+  public List<Observation> findByReferenceRange(QueryBuilder queryBuilder);
+  public List<Observation> findByRelated(QueryBuilder queryBuilder);
+  public List<Observation> findByComponent(QueryBuilder queryBuilder);
+  public List<Observation> findByText(QueryBuilder queryBuilder);
+  public List<Observation> findByMeta(QueryBuilder queryBuilder);
 }

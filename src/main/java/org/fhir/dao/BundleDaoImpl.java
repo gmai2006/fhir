@@ -96,6 +96,24 @@ public class BundleDaoImpl implements BundleDao {
       em.remove(removed);
   }
 
+  @Override
+  public List<Bundle> findByLink(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BundleModel a, BundleLink b where a.link_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Bundle> findByEntry(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BundleModel a, BundleEntry b where a.entry_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Bundle> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BundleModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
 
   @Override
   public List<Bundle> findByField(QueryBuilder queryBuilder) {

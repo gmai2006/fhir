@@ -109,7 +109,9 @@ public class DeviceComponent  extends DomainResource  {
       this.resourceType = o.getResourceType();
     }
     this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getLastSystemChange()) {
       this.lastSystemChange = o.getLastSystemChange();
     }
@@ -119,14 +121,21 @@ public class DeviceComponent  extends DomainResource  {
     if (null != o.getParent() && !o.getParent().isEmpty()) {
       this.parent = new Reference(o.getParent().get(0));
     }
-    this.parameterGroup = CodeableConceptHelper.fromJson(o.getParameterGroup());
+    if (null != o.getOperationalStatus() && !o.getOperationalStatus().isEmpty()) {
+    	this.operationalStatus = CodeableConceptHelper.fromArray2Array(o.getOperationalStatus());
+    }
+    if (null != o.getParameterGroup() && !o.getParameterGroup().isEmpty()) {
+      this.parameterGroup = new CodeableConcept(o.getParameterGroup().get(0));
+    }
     if (null != o.getMeasurementPrinciple()) {
       this.measurementPrinciple = o.getMeasurementPrinciple();
     }
     if (null != o.getProductionSpecification() && !o.getProductionSpecification().isEmpty()) {
     	this.productionSpecification = DeviceComponentProductionSpecificationHelper.fromArray2Array(o.getProductionSpecification());
     }
-    this.languageCode = CodeableConceptHelper.fromJson(o.getLanguageCode());
+    if (null != o.getLanguageCode() && !o.getLanguageCode().isEmpty()) {
+      this.languageCode = new CodeableConcept(o.getLanguageCode().get(0));
+    }
   }
 
   public void setResourceType( String value) {

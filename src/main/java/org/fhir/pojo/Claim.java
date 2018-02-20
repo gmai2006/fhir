@@ -216,7 +216,12 @@ public class Claim  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getSubType() && !o.getSubType().isEmpty()) {
+    	this.subType = CodeableConceptHelper.fromArray2Array(o.getSubType());
+    }
     if (null != o.getUse()) {
       this.use = o.getUse();
     }
@@ -239,8 +244,12 @@ public class Claim  extends DomainResource  {
     if (null != o.getOrganization() && !o.getOrganization().isEmpty()) {
       this.organization = new Reference(o.getOrganization().get(0));
     }
-    this.priority = CodeableConceptHelper.fromJson(o.getPriority());
-    this.fundsReserve = CodeableConceptHelper.fromJson(o.getFundsReserve());
+    if (null != o.getPriority() && !o.getPriority().isEmpty()) {
+      this.priority = new CodeableConcept(o.getPriority().get(0));
+    }
+    if (null != o.getFundsReserve() && !o.getFundsReserve().isEmpty()) {
+      this.fundsReserve = new CodeableConcept(o.getFundsReserve().get(0));
+    }
     if (null != o.getRelated() && !o.getRelated().isEmpty()) {
     	this.related = ClaimRelatedHelper.fromArray2Array(o.getRelated());
     }

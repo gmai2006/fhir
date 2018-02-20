@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="healthcareservicenotavailable")
 public class HealthcareServiceNotAvailableModel  implements Serializable {
-	private static final long serialVersionUID = 1518736311462278L;
+	private static final long serialVersionUID = 151910893723317232L;
   /**
   * Description: "The reason that can be presented to the user as to why this time is not available."
   */
@@ -99,9 +98,19 @@ public class HealthcareServiceNotAvailableModel  implements Serializable {
 
   public HealthcareServiceNotAvailableModel(HealthcareServiceNotAvailable o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.description = o.getDescription();
-    this.during = JsonUtils.toJson(o.getDuring());
+    if (null != o.getDuring()) {
+    	this.during = JsonUtils.toJson(o.getDuring());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getDescription() {

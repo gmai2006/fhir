@@ -97,9 +97,33 @@ public class AuditEventDaoImpl implements AuditEventDao {
   }
 
   @Override
+  public List<AuditEvent> findByType(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AuditEventModel a, Coding b where a.type_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AuditEvent> findBySubtype(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AuditEventModel a, Coding b where a.subtype_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AuditEvent> findByPurposeOfEvent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AuditEventModel a, CodeableConcept b where a.purposeOfEvent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
   public List<AuditEvent> findByAgent(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from AuditEventModel a, AuditEventAgent b where a.agent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AuditEvent> findBySource(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AuditEventModel a, AuditEventSource b where a.source_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -109,9 +133,15 @@ public class AuditEventDaoImpl implements AuditEventDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<AuditEvent> findBySource(QueryBuilder queryBuilder) {
+  public List<AuditEvent> findByText(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from AuditEventModel a, AuditEventSource b where a.source_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from AuditEventModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AuditEvent> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AuditEventModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

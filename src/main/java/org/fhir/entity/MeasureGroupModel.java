@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="measuregroup")
 public class MeasureGroupModel  implements Serializable {
-	private static final long serialVersionUID = 15187363118222764L;
+	private static final long serialVersionUID = 15191089375896403L;
   /**
   * Description: "A unique identifier for the group. This identifier will used to report data for the group in the measure report."
   * Actual type: String;
@@ -129,8 +128,12 @@ public class MeasureGroupModel  implements Serializable {
 
   public MeasureGroupModel(MeasureGroup o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.name = o.getName();
     this.description = o.getDescription();
     if (null != o.getPopulation() && !o.getPopulation().isEmpty()) {
@@ -140,6 +143,12 @@ public class MeasureGroupModel  implements Serializable {
     if (null != o.getStratifier() && !o.getStratifier().isEmpty()) {
     	this.stratifier_id = "stratifier" + this.parent_id;
     	this.stratifier = MeasureStratifierHelper.toModelFromArray(o.getStratifier(), this.stratifier_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

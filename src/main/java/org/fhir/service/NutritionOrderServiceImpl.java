@@ -114,9 +114,69 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<NutritionOrder> findByPatient(QueryBuilder queryBuilder) {
+  	final List<NutritionOrder> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NutritionOrder> findByEncounter(QueryBuilder queryBuilder) {
+  	final List<NutritionOrder> result = dao.findByEncounter(queryBuilder);
+    logger.info("findByencounter - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NutritionOrder> findByOrderer(QueryBuilder queryBuilder) {
+  	final List<NutritionOrder> result = dao.findByOrderer(queryBuilder);
+    logger.info("findByorderer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NutritionOrder> findByAllergyIntolerance(QueryBuilder queryBuilder) {
+  	final List<NutritionOrder> result = dao.findByAllergyIntolerance(queryBuilder);
+    logger.info("findByallergyIntolerance - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NutritionOrder> findByFoodPreferenceModifier(QueryBuilder queryBuilder) {
+  	final List<NutritionOrder> result = dao.findByFoodPreferenceModifier(queryBuilder);
+    logger.info("findByfoodPreferenceModifier - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NutritionOrder> findByExcludeFoodModifier(QueryBuilder queryBuilder) {
+  	final List<NutritionOrder> result = dao.findByExcludeFoodModifier(queryBuilder);
+    logger.info("findByexcludeFoodModifier - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NutritionOrder> findByOralDiet(QueryBuilder queryBuilder) {
+  	final List<NutritionOrder> result = dao.findByOralDiet(queryBuilder);
+    logger.info("findByoralDiet - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<NutritionOrder> findBySupplement(QueryBuilder queryBuilder) {
   	final List<NutritionOrder> result = dao.findBySupplement(queryBuilder);
     logger.info("findBysupplement - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NutritionOrder> findByEnteralFormula(QueryBuilder queryBuilder) {
+  	final List<NutritionOrder> result = dao.findByEnteralFormula(queryBuilder);
+    logger.info("findByenteralFormula - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NutritionOrder> findByText(QueryBuilder queryBuilder) {
+  	final List<NutritionOrder> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NutritionOrder> findByMeta(QueryBuilder queryBuilder) {
+  	final List<NutritionOrder> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

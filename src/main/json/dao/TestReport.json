@@ -305,7 +305,8 @@
       "type": "token",
       "expression": "TestReport.identifier",
       "code": "identifier",
-      "xpath": "identifier"
+      "xpath": "identifier",
+      "fieldName": "identifier"
     },
     {
       "name": "issued",
@@ -313,7 +314,8 @@
       "type": "date",
       "expression": "TestReport.issued",
       "code": "issued",
-      "xpath": "issued"
+      "xpath": "issued",
+      "fieldName": "issued"
     },
     {
       "name": "participant",
@@ -321,7 +323,8 @@
       "type": "uri",
       "expression": "TestReport.participant.uri",
       "code": "participant",
-      "xpath": "participant/uri"
+      "xpath": "participant/uri",
+      "fieldName": "uri"
     },
     {
       "name": "result",
@@ -329,7 +332,8 @@
       "type": "token",
       "expression": "TestReport.result",
       "code": "result",
-      "xpath": "result"
+      "xpath": "result",
+      "fieldName": "result"
     },
     {
       "name": "tester",
@@ -337,7 +341,8 @@
       "type": "string",
       "expression": "TestReport.tester",
       "code": "tester",
-      "xpath": "tester"
+      "xpath": "tester",
+      "fieldName": "tester"
     },
     {
       "name": "testscript",
@@ -345,7 +350,8 @@
       "type": "reference",
       "expression": "TestReport.testScript",
       "code": "testscript",
-      "xpath": "testScript"
+      "xpath": "testScript",
+      "fieldName": "testScript"
     }
   ]
 }

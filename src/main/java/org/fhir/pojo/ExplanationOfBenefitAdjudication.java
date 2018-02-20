@@ -64,8 +64,12 @@ public class ExplanationOfBenefitAdjudication  extends BackboneElement  {
 
   public ExplanationOfBenefitAdjudication(ExplanationOfBenefitAdjudicationModel o) {
     this.id = o.getId();
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
-    this.reason = CodeableConceptHelper.fromJson(o.getReason());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+      this.reason = new CodeableConcept(o.getReason().get(0));
+    }
     if (null != o.getAmount() && !o.getAmount().isEmpty()) {
       this.amount = new Money(o.getAmount().get(0));
     }

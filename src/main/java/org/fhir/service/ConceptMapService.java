@@ -38,6 +38,14 @@ public interface ConceptMapService {
   public ConceptMap update(ConceptMap bean);
   public void delete(ConceptMap bean);
   public List<ConceptMap> findByField(QueryBuilder queryBuilder);
+  public List<ConceptMap> findByContact(QueryBuilder queryBuilder);
+  public List<ConceptMap> findByUseContext(QueryBuilder queryBuilder);
+  public List<ConceptMap> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<ConceptMap> findBySourceReference(QueryBuilder queryBuilder);
+  public List<ConceptMap> findByTargetReference(QueryBuilder queryBuilder);
+  public List<ConceptMap> findByGroup(QueryBuilder queryBuilder);
+  public List<ConceptMap> findByText(QueryBuilder queryBuilder);
+  public List<ConceptMap> findByMeta(QueryBuilder queryBuilder);
 
 
 }

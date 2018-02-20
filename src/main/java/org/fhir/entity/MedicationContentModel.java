@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationcontent")
 public class MedicationContentModel  implements Serializable {
-	private static final long serialVersionUID = 151873631189330249L;
+	private static final long serialVersionUID = 15191089376623204L;
   /**
   * Description: "Identifies one of the items in the package."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"itemCodeableConcept\"", length = 16777215)
-  private String itemCodeableConcept;
+  @Column(name="\"itemcodeableconcept_id\"")
+  private String itemcodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="itemcodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> itemCodeableConcept;
 
   /**
   * Description: "Identifies one of the items in the package."
@@ -114,8 +115,13 @@ public class MedicationContentModel  implements Serializable {
 
   public MedicationContentModel(MedicationContent o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.itemCodeableConcept = JsonUtils.toJson(o.getItemCodeableConcept());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getItemCodeableConcept() ) {
+    	this.itemcodeableconcept_id = "itemcodeableconcept" + this.parent_id;
+    	this.itemCodeableConcept = CodeableConceptHelper.toModel(o.getItemCodeableConcept(), this.itemcodeableconcept_id);
+    }
     if (null != o.getItemReference() ) {
     	this.itemreference_id = "itemreference" + this.parent_id;
     	this.itemReference = ReferenceHelper.toModel(o.getItemReference(), this.itemreference_id);
@@ -124,12 +130,18 @@ public class MedicationContentModel  implements Serializable {
     	this.amount_id = "amount" + this.parent_id;
     	this.amount = QuantityHelper.toModel(o.getAmount(), this.amount_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getItemCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getItemCodeableConcept() {
     return this.itemCodeableConcept;
   }
-  public void setItemCodeableConcept( String value) {
+  public void setItemCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.itemCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getItemReference() {
@@ -173,7 +185,6 @@ public class MedicationContentModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationContentModel]:" + "\n");
-     builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

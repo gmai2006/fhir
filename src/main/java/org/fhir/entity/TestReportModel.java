@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="testreport")
 public class TestReportModel  implements Serializable {
-	private static final long serialVersionUID = 151873631187776513L;
+	private static final long serialVersionUID = 151910893764695621L;
   /**
   * Description: "This is a TestReport resource"
   */
@@ -246,7 +245,9 @@ public class TestReportModel  implements Serializable {
   public TestReportModel(TestReport o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.name = o.getName();
     this.status = o.getStatus();
     if (null != o.getTestScript() ) {
@@ -276,6 +277,15 @@ public class TestReportModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;

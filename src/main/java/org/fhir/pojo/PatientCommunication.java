@@ -53,7 +53,9 @@ public class PatientCommunication  extends BackboneElement  {
 
   public PatientCommunication(PatientCommunicationModel o) {
     this.id = o.getId();
-    this.language = CodeableConceptHelper.fromJson(o.getLanguage());
+    if (null != o.getLanguage() && !o.getLanguage().isEmpty()) {
+      this.language = new CodeableConcept(o.getLanguage().get(0));
+    }
     if (null != o.getPreferred()) {
       this.preferred = o.getPreferred();
     }

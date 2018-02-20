@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="namingsystemuniqueid")
 public class NamingSystemUniqueIdModel  implements Serializable {
-	private static final long serialVersionUID = 151873631104651655L;
+	private static final long serialVersionUID = 151910893683699952L;
   /**
   * Description: "Identifies the unique identifier scheme used for this particular identifier."
   */
@@ -120,12 +119,22 @@ public class NamingSystemUniqueIdModel  implements Serializable {
 
   public NamingSystemUniqueIdModel(NamingSystemUniqueId o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.type = o.getType();
     this.value = o.getValue();
     this.preferred = o.getPreferred();
     this.comment = o.getComment();
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getType() {

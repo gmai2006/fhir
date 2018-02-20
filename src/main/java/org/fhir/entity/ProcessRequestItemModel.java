@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="processrequestitem")
 public class ProcessRequestItemModel  implements Serializable {
-	private static final long serialVersionUID = 151873631196918253L;
+	private static final long serialVersionUID = 151910893773668928L;
   /**
   * Description: "A service line number."
   */
@@ -91,8 +90,16 @@ public class ProcessRequestItemModel  implements Serializable {
 
   public ProcessRequestItemModel(ProcessRequestItem o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.sequenceLinkId = o.getSequenceLinkId();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Float getSequenceLinkId() {

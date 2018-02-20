@@ -338,7 +338,8 @@
       "type": "token",
       "expression": "ProcessRequest.action",
       "code": "action",
-      "xpath": "action"
+      "xpath": "action",
+      "fieldName": "action"
     },
     {
       "name": "identifier",
@@ -346,7 +347,8 @@
       "type": "token",
       "expression": "ProcessRequest.identifier",
       "code": "identifier",
-      "xpath": "identifier"
+      "xpath": "identifier",
+      "fieldName": "identifier"
     },
     {
       "name": "organization",
@@ -354,7 +356,8 @@
       "type": "reference",
       "expression": "ProcessRequest.organization",
       "code": "organization",
-      "xpath": "organization"
+      "xpath": "organization",
+      "fieldName": "organization"
     },
     {
       "name": "provider",
@@ -362,7 +365,8 @@
       "type": "reference",
       "expression": "ProcessRequest.provider",
       "code": "provider",
-      "xpath": "provider"
+      "xpath": "provider",
+      "fieldName": "provider"
     }
   ]
 }

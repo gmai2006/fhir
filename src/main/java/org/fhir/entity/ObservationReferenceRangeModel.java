@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="observationreferencerange")
 public class ObservationReferenceRangeModel  implements Serializable {
-	private static final long serialVersionUID = 151873631188857706L;
+	private static final long serialVersionUID = 151910893765711083L;
   /**
   * Description: "The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3)."
   */
@@ -63,21 +62,25 @@ public class ObservationReferenceRangeModel  implements Serializable {
 
   /**
   * Description: "Codes to indicate the what part of the targeted reference population it applies to. For example, the normal or therapeutic range."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "Codes to indicate the target population this reference range applies to.  For example, a reference range may be based on the normal population or a particular sex or race."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"appliesTo\"", length = 16777215)
-  private String appliesTo;
+  @Column(name="\"appliesto_id\"")
+  private String appliesto_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="appliesto_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> appliesTo;
 
   /**
   * Description: "The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so."
@@ -139,7 +142,9 @@ public class ObservationReferenceRangeModel  implements Serializable {
 
   public ObservationReferenceRangeModel(ObservationReferenceRange o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getLow() ) {
     	this.low_id = "low" + this.parent_id;
     	this.low = QuantityHelper.toModel(o.getLow(), this.low_id);
@@ -148,9 +153,24 @@ public class ObservationReferenceRangeModel  implements Serializable {
     	this.high_id = "high" + this.parent_id;
     	this.high = QuantityHelper.toModel(o.getHigh(), this.high_id);
     }
-    this.type = JsonUtils.toJson(o.getType());
-    this.age = JsonUtils.toJson(o.getAge());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getAppliesTo() && !o.getAppliesTo().isEmpty()) {
+    	this.appliesto_id = "appliesto" + this.parent_id;
+    	this.appliesTo = CodeableConceptHelper.toModelFromArray(o.getAppliesTo(), this.appliesto_id);
+    }
+    if (null != o.getAge()) {
+    	this.age = JsonUtils.toJson(o.getAge());
+    }
     this.text = o.getText();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public java.util.List<QuantityModel> getLow() {
@@ -165,16 +185,16 @@ public class ObservationReferenceRangeModel  implements Serializable {
   public void setHigh( java.util.List<QuantityModel> value) {
     this.high = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getAppliesTo() {
+  public java.util.List<CodeableConceptModel> getAppliesTo() {
     return this.appliesTo;
   }
-  public void setAppliesTo( String value) {
+  public void setAppliesTo( java.util.List<CodeableConceptModel> value) {
     this.appliesTo = value;
   }
   public String getAge() {
@@ -218,8 +238,6 @@ public class ObservationReferenceRangeModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ObservationReferenceRangeModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("appliesTo" + "->" + this.appliesTo + "\n"); 
      builder.append("age" + "->" + this.age + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

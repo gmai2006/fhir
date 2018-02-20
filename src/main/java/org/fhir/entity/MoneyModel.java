@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="money")
 public class MoneyModel  implements Serializable {
-	private static final long serialVersionUID = 151873631177860040L;
+	private static final long serialVersionUID = 151910893754191349L;
   /**
   * Description: "The value of the measured amount. The value includes an implicit precision in the presentation of the value."
    derived from Quantity
@@ -115,12 +114,17 @@ public class MoneyModel  implements Serializable {
 
   public MoneyModel(Money o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.value = o.getValue();
     this.comparator = o.getComparator();
     this.unit = o.getUnit();
     this.system = o.getSystem();
     this.code = o.getCode();
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Float getValue() {

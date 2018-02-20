@@ -42,6 +42,11 @@ public interface MedicationDao {
 
   public List<Medication> findByField(QueryBuilder queryBuilder);
 
-  public List<Medication> findByIngredient(QueryBuilder queryBuilder);
+  public List<Medication> findByCode(QueryBuilder queryBuilder);
   public List<Medication> findByManufacturer(QueryBuilder queryBuilder);
+  public List<Medication> findByForm(QueryBuilder queryBuilder);
+  public List<Medication> findByIngredient(QueryBuilder queryBuilder);
+  public List<Medication> findByFHIRpackage(QueryBuilder queryBuilder);
+  public List<Medication> findByText(QueryBuilder queryBuilder);
+  public List<Medication> findByMeta(QueryBuilder queryBuilder);
 }

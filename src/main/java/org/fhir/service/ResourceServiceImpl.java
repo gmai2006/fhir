@@ -113,4 +113,10 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<Resource> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Resource> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

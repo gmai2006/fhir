@@ -114,15 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Observation> findByContext(QueryBuilder queryBuilder) {
-  	final List<Observation> result = dao.findByContext(queryBuilder);
-    logger.info("findBycontext - exited - return value={} result ");
+  public List<Observation> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<Observation> findByDevice(QueryBuilder queryBuilder) {
-  	final List<Observation> result = dao.findByDevice(queryBuilder);
-    logger.info("findBydevice - exited - return value={} result ");
+  public List<Observation> findByCategory(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByCode(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByContext(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
     return result;
   }
   @Override
@@ -132,9 +150,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Observation> findByRelated(QueryBuilder queryBuilder) {
-  	final List<Observation> result = dao.findByRelated(queryBuilder);
-    logger.info("findByrelated - exited - return value={} result ");
+  public List<Observation> findByValueQuantity(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByValueQuantity(queryBuilder);
+    logger.info("findByvalueQuantity - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByValueCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByValueCodeableConcept(queryBuilder);
+    logger.info("findByvalueCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByDataAbsentReason(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByDataAbsentReason(queryBuilder);
+    logger.info("findBydataAbsentReason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByInterpretation(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByInterpretation(queryBuilder);
+    logger.info("findByinterpretation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByBodySite(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByBodySite(queryBuilder);
+    logger.info("findBybodySite - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByMethod(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByMethod(queryBuilder);
+    logger.info("findBymethod - exited - return value={} result ");
     return result;
   }
   @Override
@@ -144,9 +192,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Observation> findBySubject(QueryBuilder queryBuilder) {
-  	final List<Observation> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<Observation> findByDevice(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByDevice(queryBuilder);
+    logger.info("findBydevice - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByReferenceRange(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByReferenceRange(queryBuilder);
+    logger.info("findByreferenceRange - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByRelated(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByRelated(queryBuilder);
+    logger.info("findByrelated - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByComponent(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByComponent(queryBuilder);
+    logger.info("findBycomponent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByText(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Observation> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Observation> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

@@ -173,7 +173,8 @@
       "type": "reference",
       "expression": "Bundle.entry[0].resource",
       "code": "composition",
-      "xpath": "entry[0]/resource"
+      "xpath": "entry[0]/resource",
+      "fieldName": "resource"
     },
     {
       "name": "identifier",
@@ -181,7 +182,8 @@
       "type": "token",
       "expression": "Bundle.identifier",
       "code": "identifier",
-      "xpath": "identifier"
+      "xpath": "identifier",
+      "fieldName": "identifier"
     },
     {
       "name": "message",
@@ -189,7 +191,8 @@
       "type": "reference",
       "expression": "Bundle.entry[0].resource",
       "code": "message",
-      "xpath": "entry[0]/resource"
+      "xpath": "entry[0]/resource",
+      "fieldName": "resource"
     },
     {
       "name": "type",
@@ -197,7 +200,8 @@
       "type": "token",
       "expression": "Bundle.type",
       "code": "type",
-      "xpath": "type"
+      "xpath": "type",
+      "fieldName": "type"
     }
   ]
 }

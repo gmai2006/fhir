@@ -114,7 +114,9 @@ public class EnrollmentResponse  extends DomainResource  {
     if (null != o.getRequest() && !o.getRequest().isEmpty()) {
       this.request = new Reference(o.getRequest().get(0));
     }
-    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getOutcome() && !o.getOutcome().isEmpty()) {
+      this.outcome = new CodeableConcept(o.getOutcome().get(0));
+    }
     if (null != o.getDisposition()) {
       this.disposition = o.getDisposition();
     }

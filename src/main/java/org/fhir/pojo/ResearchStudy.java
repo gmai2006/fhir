@@ -173,11 +173,23 @@ public class ResearchStudy  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category = CodeableConceptHelper.fromArray2Array(o.getCategory());
+    }
+    if (null != o.getFocus() && !o.getFocus().isEmpty()) {
+    	this.focus = CodeableConceptHelper.fromArray2Array(o.getFocus());
+    }
     if (null != o.getContact() && !o.getContact().isEmpty()) {
     	this.contact = ContactDetailHelper.fromArray2Array(o.getContact());
     }
     if (null != o.getRelatedArtifact() && !o.getRelatedArtifact().isEmpty()) {
     	this.relatedArtifact = RelatedArtifactHelper.fromArray2Array(o.getRelatedArtifact());
+    }
+    if (null != o.getKeyword() && !o.getKeyword().isEmpty()) {
+    	this.keyword = CodeableConceptHelper.fromArray2Array(o.getKeyword());
+    }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction = CodeableConceptHelper.fromArray2Array(o.getJurisdiction());
     }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
@@ -195,7 +207,9 @@ public class ResearchStudy  extends DomainResource  {
     if (null != o.getSite() && !o.getSite().isEmpty()) {
     	this.site = ReferenceHelper.fromArray2Array(o.getSite());
     }
-    this.reasonStopped = CodeableConceptHelper.fromJson(o.getReasonStopped());
+    if (null != o.getReasonStopped() && !o.getReasonStopped().isEmpty()) {
+      this.reasonStopped = new CodeableConcept(o.getReasonStopped().get(0));
+    }
     if (null != o.getArm() && !o.getArm().isEmpty()) {
     	this.arm = ResearchStudyArmHelper.fromArray2Array(o.getArm());
     }

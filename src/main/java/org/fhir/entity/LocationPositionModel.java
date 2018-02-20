@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="locationposition")
 public class LocationPositionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631191018898L;
+	private static final long serialVersionUID = 151910893768094849L;
   /**
   * Description: "Longitude. The value domain and the interpretation are the same as for the text of the longitude element in KML (see notes below)."
   */
@@ -107,10 +106,18 @@ public class LocationPositionModel  implements Serializable {
 
   public LocationPositionModel(LocationPosition o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.longitude = o.getLongitude();
     this.latitude = o.getLatitude();
     this.altitude = o.getAltitude();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Float getLongitude() {

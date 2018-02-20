@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.fhir.entity.EndpointModel;
 import org.fhir.utils.FileUtils;
 import org.fhir.utils.JsonUtils;
 import org.junit.Test;
@@ -42,6 +43,17 @@ public class TestPojo {
 			Object result = gson.fromJson(new BufferedReader(new FileReader(inputPath.toFile())), clazz);
 			assertEquals("Expect name", "qs1", ((Questionnaire)result).getId());
 		} catch (Exception ex) {}
+	}
+	
+	@Test
+	public void loadEndPoint() throws Exception {
+		 String inputFile = "../../fhir-data/examples-json/endpoint-example-wadors.json";
+  	 String json = FileUtils.readFile2String(inputFile, Charset.defaultCharset());
+  	 Endpoint endpoint = EndpointHelper.fromJson(json);
+  	 EndpointModel model = new EndpointModel(endpoint);
+  	 System.out.println(endpoint);
+  	 System.out.println(model.debug());
+//  	 endpointDao.create(endpoint);
 	}
 	
 }

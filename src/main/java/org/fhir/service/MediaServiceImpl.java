@@ -114,15 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Media> findByContext(QueryBuilder queryBuilder) {
-  	final List<Media> result = dao.findByContext(queryBuilder);
-    logger.info("findBycontext - exited - return value={} result ");
+  public List<Media> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<Media> findByDevice(QueryBuilder queryBuilder) {
-  	final List<Media> result = dao.findByDevice(queryBuilder);
-    logger.info("findBydevice - exited - return value={} result ");
+  public List<Media> findBySubtype(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findBySubtype(queryBuilder);
+    logger.info("findBysubtype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Media> findByView(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByView(queryBuilder);
+    logger.info("findByview - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Media> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Media> findByContext(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
     return result;
   }
   @Override
@@ -132,9 +150,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Media> findBySubject(QueryBuilder queryBuilder) {
-  	final List<Media> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<Media> findByReasonCode(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByReasonCode(queryBuilder);
+    logger.info("findByreasonCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Media> findByBodySite(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByBodySite(queryBuilder);
+    logger.info("findBybodySite - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Media> findByDevice(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByDevice(queryBuilder);
+    logger.info("findBydevice - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Media> findByText(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Media> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Media> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

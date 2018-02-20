@@ -97,6 +97,18 @@ public class CareTeamDaoImpl implements CareTeamDao {
   }
 
   @Override
+  public List<CareTeam> findByCategory(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CareTeamModel a, CodeableConcept b where a.category_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CareTeam> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CareTeamModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
   public List<CareTeam> findByContext(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from CareTeamModel a, Reference b where a.context_id=b.parent_id " + queryBuilder.getWhereClause();
@@ -109,9 +121,33 @@ public class CareTeamDaoImpl implements CareTeamDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<CareTeam> findBySubject(QueryBuilder queryBuilder) {
+  public List<CareTeam> findByReasonCode(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from CareTeamModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from CareTeamModel a, CodeableConcept b where a.reasonCode_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CareTeam> findByReasonReference(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CareTeamModel a, Reference b where a.reasonReference_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CareTeam> findByManagingOrganization(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CareTeamModel a, Reference b where a.managingOrganization_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CareTeam> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CareTeamModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<CareTeam> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from CareTeamModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

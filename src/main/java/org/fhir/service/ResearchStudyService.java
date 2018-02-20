@@ -39,8 +39,21 @@ public interface ResearchStudyService {
   public void delete(ResearchStudy bean);
   public List<ResearchStudy> findByField(QueryBuilder queryBuilder);
   public List<ResearchStudy> findByProtocol(QueryBuilder queryBuilder);
-  public List<ResearchStudy> findBySite(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByPartOf(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByCategory(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByFocus(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByContact(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByRelatedArtifact(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByKeyword(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByEnrollment(QueryBuilder queryBuilder);
   public List<ResearchStudy> findBySponsor(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByPrincipalInvestigator(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findBySite(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByReasonStopped(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByArm(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByText(QueryBuilder queryBuilder);
+  public List<ResearchStudy> findByMeta(QueryBuilder queryBuilder);
 
 
 }

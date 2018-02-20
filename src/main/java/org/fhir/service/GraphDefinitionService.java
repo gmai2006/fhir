@@ -38,6 +38,12 @@ public interface GraphDefinitionService {
   public GraphDefinition update(GraphDefinition bean);
   public void delete(GraphDefinition bean);
   public List<GraphDefinition> findByField(QueryBuilder queryBuilder);
+  public List<GraphDefinition> findByContact(QueryBuilder queryBuilder);
+  public List<GraphDefinition> findByUseContext(QueryBuilder queryBuilder);
+  public List<GraphDefinition> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<GraphDefinition> findByLink(QueryBuilder queryBuilder);
+  public List<GraphDefinition> findByText(QueryBuilder queryBuilder);
+  public List<GraphDefinition> findByMeta(QueryBuilder queryBuilder);
 
 
 }

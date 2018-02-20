@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementresource")
 public class CapabilityStatementResourceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631180342523L;
+	private static final long serialVersionUID = 151910893756846897L;
   /**
   * Description: "A type of resource exposed via the restful interface."
   */
@@ -201,7 +200,9 @@ public class CapabilityStatementResourceModel  implements Serializable {
 
   public CapabilityStatementResourceModel(CapabilityStatementResource o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.type = o.getType();
     if (null != o.getProfile() ) {
     	this.profile_id = "profile" + this.parent_id;
@@ -219,12 +220,18 @@ public class CapabilityStatementResourceModel  implements Serializable {
     this.conditionalRead = o.getConditionalRead();
     this.conditionalUpdate = o.getConditionalUpdate();
     this.conditionalDelete = o.getConditionalDelete();
-    this.referencePolicy = org.fhir.utils.JsonUtils.write2String(o.getReferencePolicy());
-    this.searchInclude = org.fhir.utils.JsonUtils.write2String(o.getSearchInclude());
-    this.searchRevInclude = org.fhir.utils.JsonUtils.write2String(o.getSearchRevInclude());
+    this.referencePolicy = org.fhir.utils.JsonUtils.toJson(o.getReferencePolicy());
+    this.searchInclude = org.fhir.utils.JsonUtils.toJson(o.getSearchInclude());
+    this.searchRevInclude = org.fhir.utils.JsonUtils.toJson(o.getSearchRevInclude());
     if (null != o.getSearchParam() && !o.getSearchParam().isEmpty()) {
     	this.searchparam_id = "searchparam" + this.parent_id;
     	this.searchParam = CapabilityStatementSearchParamHelper.toModelFromArray(o.getSearchParam(), this.searchparam_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

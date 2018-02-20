@@ -113,4 +113,70 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<ServiceDefinition> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ServiceDefinition> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ServiceDefinition> findByTopic(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByTopic(queryBuilder);
+    logger.info("findBytopic - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ServiceDefinition> findByContributor(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByContributor(queryBuilder);
+    logger.info("findBycontributor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ServiceDefinition> findByContact(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ServiceDefinition> findByRelatedArtifact(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByRelatedArtifact(queryBuilder);
+    logger.info("findByrelatedArtifact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ServiceDefinition> findByTrigger(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByTrigger(queryBuilder);
+    logger.info("findBytrigger - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ServiceDefinition> findByDataRequirement(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByDataRequirement(queryBuilder);
+    logger.info("findBydataRequirement - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ServiceDefinition> findByOperationDefinition(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByOperationDefinition(queryBuilder);
+    logger.info("findByoperationDefinition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ServiceDefinition> findByText(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ServiceDefinition> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ServiceDefinition> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

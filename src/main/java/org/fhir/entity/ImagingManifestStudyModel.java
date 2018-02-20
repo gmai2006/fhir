@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="imagingmanifeststudy")
 public class ImagingManifestStudyModel  implements Serializable {
-	private static final long serialVersionUID = 151873631183073554L;
+	private static final long serialVersionUID = 151910893759795284L;
   /**
   * Description: "Study instance UID of the SOP instances in the selection."
   */
@@ -124,7 +123,9 @@ public class ImagingManifestStudyModel  implements Serializable {
 
   public ImagingManifestStudyModel(ImagingManifestStudy o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.uid = o.getUid();
     if (null != o.getImagingStudy() ) {
     	this.imagingstudy_id = "imagingstudy" + this.parent_id;
@@ -137,6 +138,12 @@ public class ImagingManifestStudyModel  implements Serializable {
     if (null != o.getSeries() && !o.getSeries().isEmpty()) {
     	this.series_id = "series" + this.parent_id;
     	this.series = ImagingManifestSeriesHelper.toModelFromArray(o.getSeries(), this.series_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

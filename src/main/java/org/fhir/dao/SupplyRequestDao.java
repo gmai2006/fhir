@@ -42,6 +42,14 @@ public interface SupplyRequestDao {
 
   public List<SupplyRequest> findByField(QueryBuilder queryBuilder);
 
+  public List<SupplyRequest> findByCategory(QueryBuilder queryBuilder);
+  public List<SupplyRequest> findByOrderedItem(QueryBuilder queryBuilder);
   public List<SupplyRequest> findByRequester(QueryBuilder queryBuilder);
   public List<SupplyRequest> findBySupplier(QueryBuilder queryBuilder);
+  public List<SupplyRequest> findByReasonCodeableConcept(QueryBuilder queryBuilder);
+  public List<SupplyRequest> findByReasonReference(QueryBuilder queryBuilder);
+  public List<SupplyRequest> findByDeliverFrom(QueryBuilder queryBuilder);
+  public List<SupplyRequest> findByDeliverTo(QueryBuilder queryBuilder);
+  public List<SupplyRequest> findByText(QueryBuilder queryBuilder);
+  public List<SupplyRequest> findByMeta(QueryBuilder queryBuilder);
 }

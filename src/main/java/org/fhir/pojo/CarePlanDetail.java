@@ -157,11 +157,18 @@ public class CarePlanDetail  extends BackboneElement  {
 
   public CarePlanDetail(CarePlanDetailModel o) {
     this.id = o.getId();
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
       this.definition = new Reference(o.getDefinition().get(0));
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
+    }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
     }
@@ -188,7 +195,9 @@ public class CarePlanDetail  extends BackboneElement  {
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
     	this.performer = ReferenceHelper.fromArray2Array(o.getPerformer());
     }
-    this.productCodeableConcept = CodeableConceptHelper.fromJson(o.getProductCodeableConcept());
+    if (null != o.getProductCodeableConcept() && !o.getProductCodeableConcept().isEmpty()) {
+      this.productCodeableConcept = new CodeableConcept(o.getProductCodeableConcept().get(0));
+    }
     if (null != o.getProductReference() && !o.getProductReference().isEmpty()) {
       this.productReference = new Reference(o.getProductReference().get(0));
     }

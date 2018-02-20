@@ -95,9 +95,18 @@ public class ClaimResponseAddItem  extends BackboneElement  {
     if (o.getSequenceLinkId() != null) {
     	this.sequenceLinkId = org.fhir.utils.JsonUtils.json2Array(o.getSequenceLinkId());
     }
-    this.revenue = CodeableConceptHelper.fromJson(o.getRevenue());
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
-    this.service = CodeableConceptHelper.fromJson(o.getService());
+    if (null != o.getRevenue() && !o.getRevenue().isEmpty()) {
+      this.revenue = new CodeableConcept(o.getRevenue().get(0));
+    }
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getService() && !o.getService().isEmpty()) {
+      this.service = new CodeableConcept(o.getService().get(0));
+    }
+    if (null != o.getModifier() && !o.getModifier().isEmpty()) {
+    	this.modifier = CodeableConceptHelper.fromArray2Array(o.getModifier());
+    }
     if (null != o.getFee() && !o.getFee().isEmpty()) {
       this.fee = new Money(o.getFee().get(0));
     }

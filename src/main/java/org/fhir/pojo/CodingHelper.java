@@ -24,10 +24,31 @@
  * then submit the template through our web interface.  
  */
 package org.fhir.pojo;
+import org.fhir.entity.CodingModel;
 import com.google.gson.GsonBuilder;
 
 public class CodingHelper {
+	public static java.util.List<Coding> fromArray2Array(java.util.List<CodingModel> list) {
+    return
+    		list.stream()
+    		.map(x -> new Coding(x))
+    		.collect(java.util.stream.Collectors.toList());
+  }
 
+  public static Coding fromArray2Object(java.util.List<CodingModel> list) {
+    return new Coding(list.get(0));
+  }
+
+  public static java.util.List<CodingModel> toModel(Coding reference, String parentId) {
+  	CodingModel model = new CodingModel(reference, parentId);
+  	return java.util.Arrays.asList(new CodingModel[] { model });
+  }
+
+  public static java.util.List<CodingModel> toModelFromArray(java.util.List<Coding> list, String parentId) {
+    return (java.util.List<CodingModel>)list.stream()
+    	.map(x -> new CodingModel(x, parentId))
+      .collect(java.util.stream.Collectors.toList());
+  }
   public static Coding fromJson(String json) {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, Coding.class);

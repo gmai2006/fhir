@@ -42,6 +42,14 @@ public interface SupplyDeliveryDao {
 
   public List<SupplyDelivery> findByField(QueryBuilder queryBuilder);
 
-  public List<SupplyDelivery> findByReceiver(QueryBuilder queryBuilder);
+  public List<SupplyDelivery> findByBasedOn(QueryBuilder queryBuilder);
+  public List<SupplyDelivery> findByPartOf(QueryBuilder queryBuilder);
+  public List<SupplyDelivery> findByPatient(QueryBuilder queryBuilder);
+  public List<SupplyDelivery> findByType(QueryBuilder queryBuilder);
+  public List<SupplyDelivery> findBySuppliedItem(QueryBuilder queryBuilder);
   public List<SupplyDelivery> findBySupplier(QueryBuilder queryBuilder);
+  public List<SupplyDelivery> findByDestination(QueryBuilder queryBuilder);
+  public List<SupplyDelivery> findByReceiver(QueryBuilder queryBuilder);
+  public List<SupplyDelivery> findByText(QueryBuilder queryBuilder);
+  public List<SupplyDelivery> findByMeta(QueryBuilder queryBuilder);
 }

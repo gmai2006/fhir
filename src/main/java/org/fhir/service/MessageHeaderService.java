@@ -38,14 +38,19 @@ public interface MessageHeaderService {
   public MessageHeader update(MessageHeader bean);
   public void delete(MessageHeader bean);
   public List<MessageHeader> findByField(QueryBuilder queryBuilder);
-  public List<MessageHeader> findByAuthor(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByEvent(QueryBuilder queryBuilder);
   public List<MessageHeader> findByDestination(QueryBuilder queryBuilder);
-  public List<MessageHeader> findByEnterer(QueryBuilder queryBuilder);
-  public List<MessageHeader> findByFocus(QueryBuilder queryBuilder);
   public List<MessageHeader> findByReceiver(QueryBuilder queryBuilder);
-  public List<MessageHeader> findByResponsible(QueryBuilder queryBuilder);
   public List<MessageHeader> findBySender(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByEnterer(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByAuthor(QueryBuilder queryBuilder);
   public List<MessageHeader> findBySource(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByResponsible(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByReason(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByResponse(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByFocus(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByText(QueryBuilder queryBuilder);
+  public List<MessageHeader> findByMeta(QueryBuilder queryBuilder);
 
 
 }

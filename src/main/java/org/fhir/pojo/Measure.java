@@ -392,6 +392,12 @@ public class Measure  extends DomainResource  {
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction = CodeableConceptHelper.fromArray2Array(o.getJurisdiction());
+    }
+    if (null != o.getTopic() && !o.getTopic().isEmpty()) {
+    	this.topic = CodeableConceptHelper.fromArray2Array(o.getTopic());
+    }
     if (null != o.getContributor() && !o.getContributor().isEmpty()) {
     	this.contributor = ContributorHelper.fromArray2Array(o.getContributor());
     }
@@ -410,8 +416,15 @@ public class Measure  extends DomainResource  {
     if (null != o.getDisclaimer()) {
       this.disclaimer = o.getDisclaimer();
     }
-    this.scoring = CodeableConceptHelper.fromJson(o.getScoring());
-    this.compositeScoring = CodeableConceptHelper.fromJson(o.getCompositeScoring());
+    if (null != o.getScoring() && !o.getScoring().isEmpty()) {
+      this.scoring = new CodeableConcept(o.getScoring().get(0));
+    }
+    if (null != o.getCompositeScoring() && !o.getCompositeScoring().isEmpty()) {
+      this.compositeScoring = new CodeableConcept(o.getCompositeScoring().get(0));
+    }
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type = CodeableConceptHelper.fromArray2Array(o.getType());
+    }
     if (null != o.getRiskAdjustment()) {
       this.riskAdjustment = o.getRiskAdjustment();
     }

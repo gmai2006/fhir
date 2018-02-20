@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="requestgroup")
 public class RequestGroupModel  implements Serializable {
-	private static final long serialVersionUID = 151873631176771455L;
+	private static final long serialVersionUID = 151910893753417393L;
   /**
   * Description: "This is a RequestGroup resource"
   */
@@ -165,12 +164,14 @@ public class RequestGroupModel  implements Serializable {
 
   /**
   * Description: "Indicates the reason the request group was created. This is typically provided as a parameter to the evaluation and echoed by the service, although for some use cases, such as subscription- or event-based scenarios, it may provide an indication of the cause for the response."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonCodeableConcept\"", length = 16777215)
-  private String reasonCodeableConcept;
+  @Column(name="\"reasoncodeableconcept_id\"")
+  private String reasoncodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonCodeableConcept;
 
   /**
   * Description: "Indicates the reason the request group was created. This is typically provided as a parameter to the evaluation and echoed by the service, although for some use cases, such as subscription- or event-based scenarios, it may provide an indication of the cause for the response."
@@ -294,6 +295,9 @@ public class RequestGroupModel  implements Serializable {
   public RequestGroupModel(RequestGroup o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition_id = "definition" + this.id;
     	this.definition = ReferenceHelper.toModelFromArray(o.getDefinition(), this.definition_id);
@@ -306,7 +310,9 @@ public class RequestGroupModel  implements Serializable {
     	this.replaces_id = "replaces" + this.id;
     	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
     }
-    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
+    if (null != o.getGroupIdentifier()) {
+    	this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
+    }
     this.status = o.getStatus();
     this.intent = o.getIntent();
     this.priority = o.getPriority();
@@ -323,10 +329,16 @@ public class RequestGroupModel  implements Serializable {
     	this.author_id = "author" + this.id;
     	this.author = ReferenceHelper.toModel(o.getAuthor(), this.author_id);
     }
-    this.reasonCodeableConcept = JsonUtils.toJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonCodeableConcept() ) {
+    	this.reasoncodeableconcept_id = "reasoncodeableconcept" + this.id;
+    	this.reasonCodeableConcept = CodeableConceptHelper.toModel(o.getReasonCodeableConcept(), this.reasoncodeableconcept_id);
+    }
     if (null != o.getReasonReference() ) {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModel(o.getReasonReference(), this.reasonreference_id);
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
     }
     if (null != o.getAction() && !o.getAction().isEmpty()) {
     	this.action_id = "action" + this.id;
@@ -335,6 +347,15 @@ public class RequestGroupModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -422,10 +443,10 @@ public class RequestGroupModel  implements Serializable {
   public void setAuthor( java.util.List<ReferenceModel> value) {
     this.author = value;
   }
-  public String getReasonCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getReasonCodeableConcept() {
     return this.reasonCodeableConcept;
   }
-  public void setReasonCodeableConcept( String value) {
+  public void setReasonCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.reasonCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
@@ -506,7 +527,6 @@ public class RequestGroupModel  implements Serializable {
      builder.append("intent" + "->" + this.intent + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
-     builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

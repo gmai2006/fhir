@@ -38,8 +38,21 @@ public interface MedicationStatementService {
   public MedicationStatement update(MedicationStatement bean);
   public void delete(MedicationStatement bean);
   public List<MedicationStatement> findByField(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByBasedOn(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByPartOf(QueryBuilder queryBuilder);
   public List<MedicationStatement> findByContext(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByCategory(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByMedicationCodeableConcept(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByMedicationReference(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByInformationSource(QueryBuilder queryBuilder);
   public List<MedicationStatement> findBySubject(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByDerivedFrom(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByReasonNotTaken(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByReasonCode(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByReasonReference(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByDosage(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByText(QueryBuilder queryBuilder);
+  public List<MedicationStatement> findByMeta(QueryBuilder queryBuilder);
 
 
 }

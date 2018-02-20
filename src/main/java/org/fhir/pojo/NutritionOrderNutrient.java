@@ -47,7 +47,9 @@ public class NutritionOrderNutrient  extends BackboneElement  {
 
   public NutritionOrderNutrient(NutritionOrderNutrientModel o) {
     this.id = o.getId();
-    this.modifier = CodeableConceptHelper.fromJson(o.getModifier());
+    if (null != o.getModifier() && !o.getModifier().isEmpty()) {
+      this.modifier = new CodeableConcept(o.getModifier().get(0));
+    }
     if (null != o.getAmount() && !o.getAmount().isEmpty()) {
       this.amount = new Quantity(o.getAmount().get(0));
     }

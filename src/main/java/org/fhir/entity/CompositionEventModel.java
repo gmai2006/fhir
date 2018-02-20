@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="compositionevent")
 public class CompositionEventModel  implements Serializable {
-	private static final long serialVersionUID = 151873631194213486L;
+	private static final long serialVersionUID = 151910893771163302L;
   /**
   * Description: "This list of codes represents the main clinical acts, such as a colonoscopy or an appendectomy, being documented. In some cases, the event is inherent in the typeCode, such as a \"History and Physical Report\" in which the procedure being documented is necessarily a \"History and Physical\" act."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The period of time covered by the documentation. There is no assertion that the documentation is a complete representation for this period, only that it documents events during this time."
@@ -112,18 +113,32 @@ public class CompositionEventModel  implements Serializable {
 
   public CompositionEventModel(CompositionEvent o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.period = JsonUtils.toJson(o.getPeriod());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModelFromArray(o.getCode(), this.code_id);
+    }
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getDetail() && !o.getDetail().isEmpty()) {
     	this.detail_id = "detail" + this.parent_id;
     	this.detail = ReferenceHelper.toModelFromArray(o.getDetail(), this.detail_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public String getPeriod() {
@@ -167,7 +182,6 @@ public class CompositionEventModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CompositionEventModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

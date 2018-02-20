@@ -42,10 +42,20 @@ public interface ReferralRequestDao {
 
   public List<ReferralRequest> findByField(QueryBuilder queryBuilder);
 
-  public List<ReferralRequest> findByContext(QueryBuilder queryBuilder);
   public List<ReferralRequest> findByDefinition(QueryBuilder queryBuilder);
-  public List<ReferralRequest> findByRecipient(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByBasedOn(QueryBuilder queryBuilder);
   public List<ReferralRequest> findByReplaces(QueryBuilder queryBuilder);
-  public List<ReferralRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByType(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByServiceRequested(QueryBuilder queryBuilder);
   public List<ReferralRequest> findBySubject(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByContext(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findBySpecialty(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByRecipient(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByReasonCode(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByReasonReference(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findBySupportingInfo(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByRelevantHistory(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByText(QueryBuilder queryBuilder);
+  public List<ReferralRequest> findByMeta(QueryBuilder queryBuilder);
 }

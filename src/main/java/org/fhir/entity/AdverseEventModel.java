@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="adverseevent")
 public class AdverseEventModel  implements Serializable {
-	private static final long serialVersionUID = 151873631197948382L;
+	private static final long serialVersionUID = 151910893774744909L;
   /**
   * Description: "This is a AdverseEvent resource"
   */
@@ -65,12 +64,14 @@ public class AdverseEventModel  implements Serializable {
 
   /**
   * Description: "This element defines the specific type of event that occurred or that was prevented from occurring."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "This subject or group impacted by the event.  With a prospective adverse event, there will be no subject as the adverse event was prevented."
@@ -115,21 +116,25 @@ public class AdverseEventModel  implements Serializable {
 
   /**
   * Description: "Describes the seriousness or severity of the adverse event."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"seriousness\"", length = 16777215)
-  private String seriousness;
+  @Column(name="\"seriousness_id\"")
+  private String seriousness_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="seriousness_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> seriousness;
 
   /**
   * Description: "Describes the type of outcome from the adverse event."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"outcome\"", length = 16777215)
-  private String outcome;
+  @Column(name="\"outcome_id\"")
+  private String outcome_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> outcome;
 
   /**
   * Description: "Information on who recorded the adverse event.  May be the patient or a practitioner."
@@ -295,9 +300,14 @@ public class AdverseEventModel  implements Serializable {
   public AdverseEventModel(AdverseEvent o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.category = o.getCategory();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -311,8 +321,14 @@ public class AdverseEventModel  implements Serializable {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
     }
-    this.seriousness = JsonUtils.toJson(o.getSeriousness());
-    this.outcome = JsonUtils.toJson(o.getOutcome());
+    if (null != o.getSeriousness() ) {
+    	this.seriousness_id = "seriousness" + this.id;
+    	this.seriousness = CodeableConceptHelper.toModel(o.getSeriousness(), this.seriousness_id);
+    }
+    if (null != o.getOutcome() ) {
+    	this.outcome_id = "outcome" + this.id;
+    	this.outcome = CodeableConceptHelper.toModel(o.getOutcome(), this.outcome_id);
+    }
     if (null != o.getRecorder() ) {
     	this.recorder_id = "recorder" + this.id;
     	this.recorder = ReferenceHelper.toModel(o.getRecorder(), this.recorder_id);
@@ -342,6 +358,15 @@ public class AdverseEventModel  implements Serializable {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
     }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
     	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
@@ -368,10 +393,10 @@ public class AdverseEventModel  implements Serializable {
   public void setCategory( String value) {
     this.category = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -398,16 +423,16 @@ public class AdverseEventModel  implements Serializable {
   public void setLocation( java.util.List<ReferenceModel> value) {
     this.location = value;
   }
-  public String getSeriousness() {
+  public java.util.List<CodeableConceptModel> getSeriousness() {
     return this.seriousness;
   }
-  public void setSeriousness( String value) {
+  public void setSeriousness( java.util.List<CodeableConceptModel> value) {
     this.seriousness = value;
   }
-  public String getOutcome() {
+  public java.util.List<CodeableConceptModel> getOutcome() {
     return this.outcome;
   }
-  public void setOutcome( String value) {
+  public void setOutcome( java.util.List<CodeableConceptModel> value) {
     this.outcome = value;
   }
   public java.util.List<ReferenceModel> getRecorder() {
@@ -508,10 +533,7 @@ public class AdverseEventModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("seriousness" + "->" + this.seriousness + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

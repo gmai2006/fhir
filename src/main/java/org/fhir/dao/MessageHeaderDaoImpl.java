@@ -97,9 +97,9 @@ public class MessageHeaderDaoImpl implements MessageHeaderDao {
   }
 
   @Override
-  public List<MessageHeader> findByAuthor(QueryBuilder queryBuilder) {
+  public List<MessageHeader> findByEvent(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from MessageHeaderModel a, Coding b where a.event_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -109,27 +109,9 @@ public class MessageHeaderDaoImpl implements MessageHeaderDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<MessageHeader> findByEnterer(QueryBuilder queryBuilder) {
-  	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.enterer_id=b.parent_id " + queryBuilder.getWhereClause();
-    return findByQuery(queryBuilder, queryStr);
-  }
-  @Override
-  public List<MessageHeader> findByFocus(QueryBuilder queryBuilder) {
-  	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.focus_id=b.parent_id " + queryBuilder.getWhereClause();
-    return findByQuery(queryBuilder, queryStr);
-  }
-  @Override
   public List<MessageHeader> findByReceiver(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.receiver_id=b.parent_id " + queryBuilder.getWhereClause();
-    return findByQuery(queryBuilder, queryStr);
-  }
-  @Override
-  public List<MessageHeader> findByResponsible(QueryBuilder queryBuilder) {
-  	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.responsible_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -139,9 +121,57 @@ public class MessageHeaderDaoImpl implements MessageHeaderDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
+  public List<MessageHeader> findByEnterer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.enterer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByAuthor(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
   public List<MessageHeader> findBySource(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from MessageHeaderModel a, MessageHeaderSource b where a.source_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByResponsible(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.responsible_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByReason(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, CodeableConcept b where a.reason_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByResponse(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, MessageHeaderResponse b where a.response_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByFocus(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Reference b where a.focus_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<MessageHeader> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from MessageHeaderModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

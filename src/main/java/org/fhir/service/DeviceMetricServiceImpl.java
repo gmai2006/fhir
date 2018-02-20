@@ -114,15 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<DeviceMetric> findByParent(QueryBuilder queryBuilder) {
-  	final List<DeviceMetric> result = dao.findByParent(queryBuilder);
-    logger.info("findByparent - exited - return value={} result ");
+  public List<DeviceMetric> findByType(QueryBuilder queryBuilder) {
+  	final List<DeviceMetric> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceMetric> findByUnit(QueryBuilder queryBuilder) {
+  	final List<DeviceMetric> result = dao.findByUnit(queryBuilder);
+    logger.info("findByunit - exited - return value={} result ");
     return result;
   }
   @Override
   public List<DeviceMetric> findBySource(QueryBuilder queryBuilder) {
   	final List<DeviceMetric> result = dao.findBySource(queryBuilder);
     logger.info("findBysource - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceMetric> findByParent(QueryBuilder queryBuilder) {
+  	final List<DeviceMetric> result = dao.findByParent(queryBuilder);
+    logger.info("findByparent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceMetric> findByCalibration(QueryBuilder queryBuilder) {
+  	final List<DeviceMetric> result = dao.findByCalibration(queryBuilder);
+    logger.info("findBycalibration - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceMetric> findByText(QueryBuilder queryBuilder) {
+  	final List<DeviceMetric> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceMetric> findByMeta(QueryBuilder queryBuilder) {
+  	final List<DeviceMetric> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

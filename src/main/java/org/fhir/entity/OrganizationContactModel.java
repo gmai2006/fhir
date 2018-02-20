@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="organizationcontact")
 public class OrganizationContactModel  implements Serializable {
-	private static final long serialVersionUID = 151873631183496861L;
+	private static final long serialVersionUID = 151910893760120321L;
   /**
   * Description: "Indicates a purpose for which the contact can be reached."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"purpose\"", length = 16777215)
-  private String purpose;
+  @Column(name="\"purpose_id\"")
+  private String purpose_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="purpose_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> purpose;
 
   /**
   * Description: "A name associated with the contact."
@@ -121,19 +122,35 @@ public class OrganizationContactModel  implements Serializable {
 
   public OrganizationContactModel(OrganizationContact o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.purpose = JsonUtils.toJson(o.getPurpose());
-    this.name = JsonUtils.toJson(o.getName());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getPurpose() ) {
+    	this.purpose_id = "purpose" + this.parent_id;
+    	this.purpose = CodeableConceptHelper.toModel(o.getPurpose(), this.purpose_id);
+    }
+    if (null != o.getName()) {
+    	this.name = JsonUtils.toJson(o.getName());
+    }
+    if (null != o.getTelecom()) {
+    	this.telecom = JsonUtils.toJson(o.getTelecom());
+    }
     if (null != o.getAddress() ) {
     	this.address_id = "address" + this.parent_id;
     	this.address = AddressHelper.toModel(o.getAddress(), this.address_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getPurpose() {
+  public java.util.List<CodeableConceptModel> getPurpose() {
     return this.purpose;
   }
-  public void setPurpose( String value) {
+  public void setPurpose( java.util.List<CodeableConceptModel> value) {
     this.purpose = value;
   }
   public String getName() {
@@ -183,7 +200,6 @@ public class OrganizationContactModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[OrganizationContactModel]:" + "\n");
-     builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

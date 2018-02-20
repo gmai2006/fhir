@@ -172,7 +172,9 @@ public class QuestionnaireResponseAnswer  extends BackboneElement  {
       this.valueUri = o.getValueUri();
     }
     this.valueAttachment = AttachmentHelper.fromJson(o.getValueAttachment());
-    this.valueCoding = CodingHelper.fromJson(o.getValueCoding());
+    if (null != o.getValueCoding() && !o.getValueCoding().isEmpty()) {
+      this.valueCoding = new Coding(o.getValueCoding().get(0));
+    }
     if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
       this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
     }

@@ -97,9 +97,27 @@ public class RequestGroupDaoImpl implements RequestGroupDao {
   }
 
   @Override
-  public List<RequestGroup> findByAuthor(QueryBuilder queryBuilder) {
+  public List<RequestGroup> findByDefinition(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from RequestGroupModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from RequestGroupModel a, Reference b where a.definition_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RequestGroup> findByBasedOn(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RequestGroupModel a, Reference b where a.basedOn_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RequestGroup> findByReplaces(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RequestGroupModel a, Reference b where a.replaces_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RequestGroup> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RequestGroupModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -109,15 +127,39 @@ public class RequestGroupDaoImpl implements RequestGroupDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<RequestGroup> findByDefinition(QueryBuilder queryBuilder) {
+  public List<RequestGroup> findByAuthor(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from RequestGroupModel a, Reference b where a.definition_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from RequestGroupModel a, Reference b where a.author_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<RequestGroup> findBySubject(QueryBuilder queryBuilder) {
+  public List<RequestGroup> findByReasonCodeableConcept(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from RequestGroupModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from RequestGroupModel a, CodeableConcept b where a.reasonCodeableConcept_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RequestGroup> findByReasonReference(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RequestGroupModel a, Reference b where a.reasonReference_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RequestGroup> findByAction(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RequestGroupModel a, RequestGroupAction b where a.action_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RequestGroup> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RequestGroupModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<RequestGroup> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from RequestGroupModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

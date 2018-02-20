@@ -38,6 +38,12 @@ public interface StructureDefinitionService {
   public StructureDefinition update(StructureDefinition bean);
   public void delete(StructureDefinition bean);
   public List<StructureDefinition> findByField(QueryBuilder queryBuilder);
+  public List<StructureDefinition> findByContact(QueryBuilder queryBuilder);
+  public List<StructureDefinition> findByUseContext(QueryBuilder queryBuilder);
+  public List<StructureDefinition> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<StructureDefinition> findByKeyword(QueryBuilder queryBuilder);
+  public List<StructureDefinition> findByText(QueryBuilder queryBuilder);
+  public List<StructureDefinition> findByMeta(QueryBuilder queryBuilder);
 
 
 }

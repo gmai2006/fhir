@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="library")
 public class LibraryModel  implements Serializable {
-	private static final long serialVersionUID = 151873631167627123L;
+	private static final long serialVersionUID = 15191089374324206L;
   /**
   * Description: "This is a Library resource"
   */
@@ -100,13 +99,14 @@ public class LibraryModel  implements Serializable {
 
   /**
   * Description: "Identifies the type of library such as a Logic Library, Model Definition, Asset Collection, or Module Definition."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The date  (and optionally time) when the library was published. The date must change if and when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the library changes."
@@ -182,21 +182,25 @@ public class LibraryModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the library is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "Descriptive topics related to the content of the library. Topics provide a high-level categorization of the library that can be useful for filtering and searching."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"topic\"", length = 16777215)
-  private String topic;
+  @Column(name="\"topic_id\"")
+  private String topic_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="topic_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> topic;
 
   /**
   * Description: "A contributor to the content of the library, including authors, editors, reviewers, and endorsers."
@@ -359,12 +363,18 @@ public class LibraryModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.url = o.getUrl();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.version = o.getVersion();
     this.name = o.getName();
     this.title = o.getTitle();
     this.status = o.getStatus();
     this.experimental = o.getExperimental();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     this.date = o.getDate();
     this.publisher = o.getPublisher();
     this.description = o.getDescription();
@@ -372,10 +382,20 @@ public class LibraryModel  implements Serializable {
     this.usage = o.getUsage();
     this.approvalDate = o.getApprovalDate();
     this.lastReviewDate = o.getLastReviewDate();
-    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
+    if (null != o.getEffectivePeriod()) {
+    	this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
+    }
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
+    }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
+    if (null != o.getTopic() && !o.getTopic().isEmpty()) {
+    	this.topic_id = "topic" + this.id;
+    	this.topic = CodeableConceptHelper.toModelFromArray(o.getTopic(), this.topic_id);
     }
     if (null != o.getContributor() && !o.getContributor().isEmpty()) {
     	this.contributor_id = "contributor" + this.id;
@@ -390,13 +410,28 @@ public class LibraryModel  implements Serializable {
     	this.relatedartifact_id = "relatedartifact" + this.id;
     	this.relatedArtifact = RelatedArtifactHelper.toModelFromArray(o.getRelatedArtifact(), this.relatedartifact_id);
     }
+    if (null != o.getParameter()) {
+    	this.parameter = JsonUtils.toJson(o.getParameter());
+    }
     if (null != o.getDataRequirement() && !o.getDataRequirement().isEmpty()) {
     	this.datarequirement_id = "datarequirement" + this.id;
     	this.dataRequirement = DataRequirementHelper.toModelFromArray(o.getDataRequirement(), this.datarequirement_id);
     }
+    if (null != o.getContent()) {
+    	this.content = JsonUtils.toJson(o.getContent());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -454,10 +489,10 @@ public class LibraryModel  implements Serializable {
   public void setExperimental( Boolean value) {
     this.experimental = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public String getDate() {
@@ -514,16 +549,16 @@ public class LibraryModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
-  public String getTopic() {
+  public java.util.List<CodeableConceptModel> getTopic() {
     return this.topic;
   }
-  public void setTopic( String value) {
+  public void setTopic( java.util.List<CodeableConceptModel> value) {
     this.topic = value;
   }
   public java.util.List<ContributorModel> getContributor() {
@@ -629,7 +664,6 @@ public class LibraryModel  implements Serializable {
      builder.append("title" + "->" + this.title + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("experimental" + "->" + this.experimental + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
@@ -638,8 +672,6 @@ public class LibraryModel  implements Serializable {
      builder.append("approvalDate" + "->" + this.approvalDate + "\n"); 
      builder.append("lastReviewDate" + "->" + this.lastReviewDate + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
-     builder.append("topic" + "->" + this.topic + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("parameter" + "->" + this.parameter + "\n"); 
      builder.append("content" + "->" + this.content + "\n"); 

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="questionnaireitem")
 public class QuestionnaireItemModel  implements Serializable {
-	private static final long serialVersionUID = 151873631172438989L;
+	private static final long serialVersionUID = 151910893748070358L;
   /**
   * Description: "An identifier that is unique within the Questionnaire allowing linkage to the equivalent item in a QuestionnaireResponse resource."
   */
@@ -55,12 +54,14 @@ public class QuestionnaireItemModel  implements Serializable {
 
   /**
   * Description: "A terminology code that corresponds to this group or question (e.g. a code from LOINC, which defines many questions and answers)."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> code;
 
   /**
   * Description: "A short label for a particular group, question or set of display text within the questionnaire used for reference by the individual completing the questionnaire."
@@ -217,12 +218,14 @@ public class QuestionnaireItemModel  implements Serializable {
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"initialCoding\"", length = 16777215)
-  private String initialCoding;
+  @Column(name="\"initialcoding_id\"")
+  private String initialcoding_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="initialcoding_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> initialCoding;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
@@ -301,9 +304,15 @@ public class QuestionnaireItemModel  implements Serializable {
 
   public QuestionnaireItemModel(QuestionnaireItem o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.linkId = o.getLinkId();
     this.definition = o.getDefinition();
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodingHelper.toModelFromArray(o.getCode(), this.code_id);
+    }
     this.prefix = o.getPrefix();
     this.text = o.getText();
     this.type = o.getType();
@@ -331,8 +340,13 @@ public class QuestionnaireItemModel  implements Serializable {
     this.initialTime = o.getInitialTime();
     this.initialString = o.getInitialString();
     this.initialUri = o.getInitialUri();
-    this.initialAttachment = JsonUtils.toJson(o.getInitialAttachment());
-    this.initialCoding = JsonUtils.toJson(o.getInitialCoding());
+    if (null != o.getInitialAttachment()) {
+    	this.initialAttachment = JsonUtils.toJson(o.getInitialAttachment());
+    }
+    if (null != o.getInitialCoding() ) {
+    	this.initialcoding_id = "initialcoding" + this.parent_id;
+    	this.initialCoding = CodingHelper.toModel(o.getInitialCoding(), this.initialcoding_id);
+    }
     if (null != o.getInitialQuantity() ) {
     	this.initialquantity_id = "initialquantity" + this.parent_id;
     	this.initialQuantity = QuantityHelper.toModel(o.getInitialQuantity(), this.initialquantity_id);
@@ -344,6 +358,12 @@ public class QuestionnaireItemModel  implements Serializable {
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item_id = "item" + this.parent_id;
     	this.item = QuestionnaireItemHelper.toModelFromArray(o.getItem(), this.item_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -359,10 +379,10 @@ public class QuestionnaireItemModel  implements Serializable {
   public void setDefinition( String value) {
     this.definition = value;
   }
-  public String getCode() {
+  public java.util.List<CodingModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodingModel> value) {
     this.code = value;
   }
   public String getPrefix() {
@@ -479,10 +499,10 @@ public class QuestionnaireItemModel  implements Serializable {
   public void setInitialAttachment( String value) {
     this.initialAttachment = value;
   }
-  public String getInitialCoding() {
+  public java.util.List<CodingModel> getInitialCoding() {
     return this.initialCoding;
   }
-  public void setInitialCoding( String value) {
+  public void setInitialCoding( java.util.List<CodingModel> value) {
     this.initialCoding = value;
   }
   public java.util.List<QuantityModel> getInitialQuantity() {
@@ -534,7 +554,6 @@ public class QuestionnaireItemModel  implements Serializable {
     builder.append("[QuestionnaireItemModel]:" + "\n");
      builder.append("linkId" + "->" + this.linkId + "\n"); 
      builder.append("definition" + "->" + this.definition + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("prefix" + "->" + this.prefix + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
      builder.append("type" + "->" + this.type + "\n"); 
@@ -551,7 +570,6 @@ public class QuestionnaireItemModel  implements Serializable {
      builder.append("initialString" + "->" + this.initialString + "\n"); 
      builder.append("initialUri" + "->" + this.initialUri + "\n"); 
      builder.append("initialAttachment" + "->" + this.initialAttachment + "\n"); 
-     builder.append("initialCoding" + "->" + this.initialCoding + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

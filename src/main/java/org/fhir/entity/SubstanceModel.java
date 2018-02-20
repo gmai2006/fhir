@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="substance")
 public class SubstanceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631161764028L;
+	private static final long serialVersionUID = 151910893737791243L;
   /**
   * Description: "This is a Substance resource"
   */
@@ -65,22 +64,25 @@ public class SubstanceModel  implements Serializable {
 
   /**
   * Description: "A code that classifies the general type of substance.  This is used  for searching, sorting and display purposes."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "A code (or set of codes) that identify this substance."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "A description of the substance - its appearance, handling requirements, and other usage notes."
@@ -202,8 +204,18 @@ public class SubstanceModel  implements Serializable {
   public SubstanceModel(Substance o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModelFromArray(o.getCategory(), this.category_id);
+    }
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     this.description = o.getDescription();
     if (null != o.getInstance() && !o.getInstance().isEmpty()) {
     	this.instance_id = "instance" + this.id;
@@ -216,6 +228,15 @@ public class SubstanceModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -243,16 +264,16 @@ public class SubstanceModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public String getDescription() {
@@ -329,8 +350,6 @@ public class SubstanceModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

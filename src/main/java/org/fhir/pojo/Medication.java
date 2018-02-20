@@ -106,7 +106,9 @@ public class Medication  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
@@ -119,7 +121,9 @@ public class Medication  extends DomainResource  {
     if (null != o.getManufacturer() && !o.getManufacturer().isEmpty()) {
       this.manufacturer = new Reference(o.getManufacturer().get(0));
     }
-    this.form = CodeableConceptHelper.fromJson(o.getForm());
+    if (null != o.getForm() && !o.getForm().isEmpty()) {
+      this.form = new CodeableConcept(o.getForm().get(0));
+    }
     if (null != o.getIngredient() && !o.getIngredient().isEmpty()) {
     	this.ingredient = MedicationIngredientHelper.fromArray2Array(o.getIngredient());
     }

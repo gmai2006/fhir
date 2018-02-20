@@ -98,12 +98,18 @@ public class ImmunizationRecommendationRecommendation  extends BackboneElement  
     if (null != o.getDate()) {
       this.date = o.getDate();
     }
-    this.vaccineCode = CodeableConceptHelper.fromJson(o.getVaccineCode());
-    this.targetDisease = CodeableConceptHelper.fromJson(o.getTargetDisease());
+    if (null != o.getVaccineCode() && !o.getVaccineCode().isEmpty()) {
+      this.vaccineCode = new CodeableConcept(o.getVaccineCode().get(0));
+    }
+    if (null != o.getTargetDisease() && !o.getTargetDisease().isEmpty()) {
+      this.targetDisease = new CodeableConcept(o.getTargetDisease().get(0));
+    }
     if (null != o.getDoseNumber()) {
       this.doseNumber = o.getDoseNumber();
     }
-    this.forecastStatus = CodeableConceptHelper.fromJson(o.getForecastStatus());
+    if (null != o.getForecastStatus() && !o.getForecastStatus().isEmpty()) {
+      this.forecastStatus = new CodeableConcept(o.getForecastStatus().get(0));
+    }
     if (null != o.getDateCriterion() && !o.getDateCriterion().isEmpty()) {
     	this.dateCriterion = ImmunizationRecommendationDateCriterionHelper.fromArray2Array(o.getDateCriterion());
     }

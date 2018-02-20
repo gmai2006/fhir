@@ -121,7 +121,7 @@
       "typeName": "string",
       "isArray": false,
       "isRequired": true,
-      "size": 64,
+      "size": 128,
       "isTransient": false,
       "type": "PRIMITIVE",
       "entityType": "PRIMITIVE",

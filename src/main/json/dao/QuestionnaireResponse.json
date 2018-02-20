@@ -286,7 +286,8 @@
       "type": "reference",
       "expression": "QuestionnaireResponse.author",
       "code": "author",
-      "xpath": "author"
+      "xpath": "author",
+      "fieldName": "author"
     },
     {
       "name": "authored",
@@ -294,7 +295,8 @@
       "type": "date",
       "expression": "QuestionnaireResponse.authored",
       "code": "authored",
-      "xpath": "authored"
+      "xpath": "authored",
+      "fieldName": "authored"
     },
     {
       "name": "basedon",
@@ -302,7 +304,8 @@
       "type": "reference",
       "expression": "QuestionnaireResponse.basedOn",
       "code": "basedon",
-      "xpath": "basedOn"
+      "xpath": "basedOn",
+      "fieldName": "basedOn"
     },
     {
       "name": "context",
@@ -310,7 +313,8 @@
       "type": "reference",
       "expression": "QuestionnaireResponse.context",
       "code": "context",
-      "xpath": "context"
+      "xpath": "context",
+      "fieldName": "context"
     },
     {
       "name": "identifier",
@@ -318,7 +322,8 @@
       "type": "token",
       "expression": "QuestionnaireResponse.identifier",
       "code": "identifier",
-      "xpath": "identifier"
+      "xpath": "identifier",
+      "fieldName": "identifier"
     },
     {
       "name": "parent",
@@ -326,7 +331,8 @@
       "type": "reference",
       "expression": "QuestionnaireResponse.parent",
       "code": "parent",
-      "xpath": "parent"
+      "xpath": "parent",
+      "fieldName": "parent"
     },
     {
       "name": "patient",
@@ -334,7 +340,8 @@
       "type": "reference",
       "expression": "QuestionnaireResponse.subject",
       "code": "patient",
-      "xpath": "subject"
+      "xpath": "subject",
+      "fieldName": "subject"
     },
     {
       "name": "questionnaire",
@@ -342,7 +349,8 @@
       "type": "reference",
       "expression": "QuestionnaireResponse.questionnaire",
       "code": "questionnaire",
-      "xpath": "questionnaire"
+      "xpath": "questionnaire",
+      "fieldName": "questionnaire"
     },
     {
       "name": "source",
@@ -350,7 +358,8 @@
       "type": "reference",
       "expression": "QuestionnaireResponse.source",
       "code": "source",
-      "xpath": "source"
+      "xpath": "source",
+      "fieldName": "source"
     },
     {
       "name": "status",
@@ -358,7 +367,8 @@
       "type": "token",
       "expression": "QuestionnaireResponse.status",
       "code": "status",
-      "xpath": "status"
+      "xpath": "status",
+      "fieldName": "status"
     },
     {
       "name": "subject",
@@ -366,7 +376,8 @@
       "type": "reference",
       "expression": "QuestionnaireResponse.subject",
       "code": "subject",
-      "xpath": "subject"
+      "xpath": "subject",
+      "fieldName": "subject"
     }
   ]
 }

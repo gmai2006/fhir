@@ -38,10 +38,14 @@ public interface PaymentNoticeService {
   public PaymentNotice update(PaymentNotice bean);
   public void delete(PaymentNotice bean);
   public List<PaymentNotice> findByField(QueryBuilder queryBuilder);
-  public List<PaymentNotice> findByOrganization(QueryBuilder queryBuilder);
-  public List<PaymentNotice> findByProvider(QueryBuilder queryBuilder);
   public List<PaymentNotice> findByRequest(QueryBuilder queryBuilder);
   public List<PaymentNotice> findByResponse(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByTarget(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByProvider(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByOrganization(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByPaymentStatus(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByText(QueryBuilder queryBuilder);
+  public List<PaymentNotice> findByMeta(QueryBuilder queryBuilder);
 
 
 }

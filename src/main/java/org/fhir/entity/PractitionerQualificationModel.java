@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="practitionerqualification")
 public class PractitionerQualificationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631113671405L;
+	private static final long serialVersionUID = 15191089369262344L;
   /**
   * Description: "An identifier that applies to this person's qualification in this role."
   * Actual type: List<String>;
@@ -50,13 +49,14 @@ public class PractitionerQualificationModel  implements Serializable {
 
   /**
   * Description: "Coded representation of the qualification."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "Period during which the qualification is valid."
@@ -122,12 +122,28 @@ public class PractitionerQualificationModel  implements Serializable {
 
   public PractitionerQualificationModel(PractitionerQualification o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = JsonUtils.toJson(o.getCode());
-    this.period = JsonUtils.toJson(o.getPeriod());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getIssuer() ) {
     	this.issuer_id = "issuer" + this.parent_id;
     	this.issuer = ReferenceHelper.toModel(o.getIssuer(), this.issuer_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -137,10 +153,10 @@ public class PractitionerQualificationModel  implements Serializable {
   public void setIdentifier( String value) {
     this.identifier = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public String getPeriod() {
@@ -185,7 +201,6 @@ public class PractitionerQualificationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[PractitionerQualificationModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -42,11 +42,37 @@ public interface ExplanationOfBenefitDao {
 
   public List<ExplanationOfBenefit> findByField(QueryBuilder queryBuilder);
 
-  public List<ExplanationOfBenefit> findByClaim(QueryBuilder queryBuilder);
-  public List<ExplanationOfBenefit> findByEnterer(QueryBuilder queryBuilder);
-  public List<ExplanationOfBenefit> findByFacility(QueryBuilder queryBuilder);
-  public List<ExplanationOfBenefit> findByOrganization(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByType(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findBySubType(QueryBuilder queryBuilder);
   public List<ExplanationOfBenefit> findByPatient(QueryBuilder queryBuilder);
-  public List<ExplanationOfBenefit> findByPayee(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByEnterer(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByInsurer(QueryBuilder queryBuilder);
   public List<ExplanationOfBenefit> findByProvider(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByOrganization(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByReferral(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByFacility(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByClaim(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByClaimResponse(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByOutcome(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByRelated(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByPrescription(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByOriginalPrescription(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByPayee(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByInformation(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByCareTeam(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByDiagnosis(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByProcedure(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByInsurance(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByAccident(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByItem(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByAddItem(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByTotalCost(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByUnallocDeductable(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByTotalBenefit(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByPayment(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByForm(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByProcessNote(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByBenefitBalance(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByText(QueryBuilder queryBuilder);
+  public List<ExplanationOfBenefit> findByMeta(QueryBuilder queryBuilder);
 }

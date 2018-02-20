@@ -52,8 +52,12 @@ public class ExplanationOfBenefitPayee  extends BackboneElement  {
 
   public ExplanationOfBenefitPayee(ExplanationOfBenefitPayeeModel o) {
     this.id = o.getId();
-    this.type = CodeableConceptHelper.fromJson(o.getType());
-    this.resourceType = CodeableConceptHelper.fromJson(o.getResourceType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getResourceType() && !o.getResourceType().isEmpty()) {
+      this.resourceType = new CodeableConcept(o.getResourceType().get(0));
+    }
     if (null != o.getParty() && !o.getParty().isEmpty()) {
       this.party = new Reference(o.getParty().get(0));
     }

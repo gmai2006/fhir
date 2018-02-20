@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="consent")
 public class ConsentModel  implements Serializable {
-	private static final long serialVersionUID = 151873631153498550L;
+	private static final long serialVersionUID = 151910893730033192L;
   /**
   * Description: "This is a Consent resource"
   */
@@ -65,12 +64,14 @@ public class ConsentModel  implements Serializable {
 
   /**
   * Description: "A classification of the type of consents found in the statement. This element supports indexing and retrieval of consent statements."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "The patient/healthcare consumer to whom this consent applies."
@@ -124,12 +125,14 @@ public class ConsentModel  implements Serializable {
 
   /**
   * Description: "Actions controlled by this consent."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"action\"", length = 16777215)
-  private String action;
+  @Column(name="\"action_id\"")
+  private String action_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> action;
 
   /**
   * Description: "The organization that manages the consent, and the framework within which it is executed."
@@ -191,21 +194,25 @@ public class ConsentModel  implements Serializable {
 
   /**
   * Description: "A set of security labels that define which resources are controlled by this consent. If more than one label is specified, all resources must have all the specified labels."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"securityLabel\"", length = 16777215)
-  private String securityLabel;
+  @Column(name="\"securitylabel_id\"")
+  private String securitylabel_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> securityLabel;
 
   /**
   * Description: "The context of the activities a user is taking - why the user is accessing the data - that are controlled by this consent."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"purpose\"", length = 16777215)
-  private String purpose;
+  @Column(name="\"purpose_id\"")
+  private String purpose_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="purpose_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> purpose;
 
   /**
   * Description: "Clinical or Operational Relevant period of time that bounds the data controlled by this consent."
@@ -329,13 +336,21 @@ public class ConsentModel  implements Serializable {
   public ConsentModel(Consent o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModelFromArray(o.getCategory(), this.category_id);
+    }
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     this.dateTime = o.getDateTime();
     if (null != o.getConsentingParty() && !o.getConsentingParty().isEmpty()) {
     	this.consentingparty_id = "consentingparty" + this.id;
@@ -345,12 +360,20 @@ public class ConsentModel  implements Serializable {
     	this.actor_id = "actor" + this.id;
     	this.actor = ConsentActorHelper.toModelFromArray(o.getActor(), this.actor_id);
     }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action_id = "action" + this.id;
+    	this.action = CodeableConceptHelper.toModelFromArray(o.getAction(), this.action_id);
+    }
     if (null != o.getOrganization() && !o.getOrganization().isEmpty()) {
     	this.organization_id = "organization" + this.id;
     	this.organization = ReferenceHelper.toModelFromArray(o.getOrganization(), this.organization_id);
     }
-    this.sourceAttachment = JsonUtils.toJson(o.getSourceAttachment());
-    this.sourceIdentifier = JsonUtils.toJson(o.getSourceIdentifier());
+    if (null != o.getSourceAttachment()) {
+    	this.sourceAttachment = JsonUtils.toJson(o.getSourceAttachment());
+    }
+    if (null != o.getSourceIdentifier()) {
+    	this.sourceIdentifier = JsonUtils.toJson(o.getSourceIdentifier());
+    }
     if (null != o.getSourceReference() ) {
     	this.sourcereference_id = "sourcereference" + this.id;
     	this.sourceReference = ReferenceHelper.toModel(o.getSourceReference(), this.sourcereference_id);
@@ -360,7 +383,17 @@ public class ConsentModel  implements Serializable {
     	this.policy = ConsentPolicyHelper.toModelFromArray(o.getPolicy(), this.policy_id);
     }
     this.policyRule = o.getPolicyRule();
-    this.dataPeriod = JsonUtils.toJson(o.getDataPeriod());
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securitylabel_id = "securitylabel" + this.id;
+    	this.securityLabel = CodingHelper.toModelFromArray(o.getSecurityLabel(), this.securitylabel_id);
+    }
+    if (null != o.getPurpose() && !o.getPurpose().isEmpty()) {
+    	this.purpose_id = "purpose" + this.id;
+    	this.purpose = CodingHelper.toModelFromArray(o.getPurpose(), this.purpose_id);
+    }
+    if (null != o.getDataPeriod()) {
+    	this.dataPeriod = JsonUtils.toJson(o.getDataPeriod());
+    }
     if (null != o.getData() && !o.getData().isEmpty()) {
     	this.data_id = "data" + this.id;
     	this.data = ConsentDataHelper.toModelFromArray(o.getData(), this.data_id);
@@ -372,6 +405,15 @@ public class ConsentModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -399,10 +441,10 @@ public class ConsentModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
   public java.util.List<ReferenceModel> getPatient() {
@@ -435,10 +477,10 @@ public class ConsentModel  implements Serializable {
   public void setActor( java.util.List<ConsentActorModel> value) {
     this.actor = value;
   }
-  public String getAction() {
+  public java.util.List<CodeableConceptModel> getAction() {
     return this.action;
   }
-  public void setAction( String value) {
+  public void setAction( java.util.List<CodeableConceptModel> value) {
     this.action = value;
   }
   public java.util.List<ReferenceModel> getOrganization() {
@@ -477,16 +519,16 @@ public class ConsentModel  implements Serializable {
   public void setPolicyRule( String value) {
     this.policyRule = value;
   }
-  public String getSecurityLabel() {
+  public java.util.List<CodingModel> getSecurityLabel() {
     return this.securityLabel;
   }
-  public void setSecurityLabel( String value) {
+  public void setSecurityLabel( java.util.List<CodingModel> value) {
     this.securityLabel = value;
   }
-  public String getPurpose() {
+  public java.util.List<CodingModel> getPurpose() {
     return this.purpose;
   }
-  public void setPurpose( String value) {
+  public void setPurpose( java.util.List<CodingModel> value) {
     this.purpose = value;
   }
   public String getDataPeriod() {
@@ -563,15 +605,11 @@ public class ConsentModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("dateTime" + "->" + this.dateTime + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
      builder.append("sourceAttachment" + "->" + this.sourceAttachment + "\n"); 
      builder.append("sourceIdentifier" + "->" + this.sourceIdentifier + "\n"); 
      builder.append("policyRule" + "->" + this.policyRule + "\n"); 
-     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
-     builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("dataPeriod" + "->" + this.dataPeriod + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

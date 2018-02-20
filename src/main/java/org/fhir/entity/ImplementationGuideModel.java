@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="implementationguide")
 public class ImplementationGuideModel  implements Serializable {
-	private static final long serialVersionUID = 151873631167294486L;
+	private static final long serialVersionUID = 151910893742856772L;
   /**
   * Description: "This is a ImplementationGuide resource"
   */
@@ -128,12 +127,14 @@ public class ImplementationGuideModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the implementation guide is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "A copyright statement relating to the implementation guide and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the implementation guide."
@@ -306,6 +307,10 @@ public class ImplementationGuideModel  implements Serializable {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
     this.copyright = o.getCopyright();
     this.fhirVersion = o.getFhirVersion();
     if (null != o.getDependency() && !o.getDependency().isEmpty()) {
@@ -320,11 +325,22 @@ public class ImplementationGuideModel  implements Serializable {
     	this.global_id = "global" + this.id;
     	this.global = ImplementationGuideGlobalHelper.toModelFromArray(o.getGlobal(), this.global_id);
     }
-    this.binary = org.fhir.utils.JsonUtils.write2String(o.getBinary());
-    this.page = JsonUtils.toJson(o.getPage());
+    this.binary = org.fhir.utils.JsonUtils.toJson(o.getBinary());
+    if (null != o.getPage()) {
+    	this.page = JsonUtils.toJson(o.getPage());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -400,10 +416,10 @@ public class ImplementationGuideModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public String getCopyright() {
@@ -510,7 +526,6 @@ public class ImplementationGuideModel  implements Serializable {
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("fhirVersion" + "->" + this.fhirVersion + "\n"); 
      builder.append("binary" + "->" + this.binary + "\n"); 

@@ -38,11 +38,18 @@ public interface EligibilityRequestService {
   public EligibilityRequest update(EligibilityRequest bean);
   public void delete(EligibilityRequest bean);
   public List<EligibilityRequest> findByField(QueryBuilder queryBuilder);
-  public List<EligibilityRequest> findByEnterer(QueryBuilder queryBuilder);
-  public List<EligibilityRequest> findByFacility(QueryBuilder queryBuilder);
-  public List<EligibilityRequest> findByOrganization(QueryBuilder queryBuilder);
+  public List<EligibilityRequest> findByPriority(QueryBuilder queryBuilder);
   public List<EligibilityRequest> findByPatient(QueryBuilder queryBuilder);
+  public List<EligibilityRequest> findByEnterer(QueryBuilder queryBuilder);
   public List<EligibilityRequest> findByProvider(QueryBuilder queryBuilder);
+  public List<EligibilityRequest> findByOrganization(QueryBuilder queryBuilder);
+  public List<EligibilityRequest> findByInsurer(QueryBuilder queryBuilder);
+  public List<EligibilityRequest> findByFacility(QueryBuilder queryBuilder);
+  public List<EligibilityRequest> findByCoverage(QueryBuilder queryBuilder);
+  public List<EligibilityRequest> findByBenefitCategory(QueryBuilder queryBuilder);
+  public List<EligibilityRequest> findByBenefitSubCategory(QueryBuilder queryBuilder);
+  public List<EligibilityRequest> findByText(QueryBuilder queryBuilder);
+  public List<EligibilityRequest> findByMeta(QueryBuilder queryBuilder);
 
 
 }

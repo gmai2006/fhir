@@ -114,9 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<TestReport> findByTestScript(QueryBuilder queryBuilder) {
+  	final List<TestReport> result = dao.findByTestScript(queryBuilder);
+    logger.info("findBytestScript - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<TestReport> findByParticipant(QueryBuilder queryBuilder) {
   	final List<TestReport> result = dao.findByParticipant(queryBuilder);
     logger.info("findByparticipant - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<TestReport> findBySetup(QueryBuilder queryBuilder) {
+  	final List<TestReport> result = dao.findBySetup(queryBuilder);
+    logger.info("findBysetup - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<TestReport> findByTest(QueryBuilder queryBuilder) {
+  	final List<TestReport> result = dao.findByTest(queryBuilder);
+    logger.info("findBytest - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<TestReport> findByTeardown(QueryBuilder queryBuilder) {
+  	final List<TestReport> result = dao.findByTeardown(queryBuilder);
+    logger.info("findByteardown - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<TestReport> findByText(QueryBuilder queryBuilder) {
+  	final List<TestReport> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<TestReport> findByMeta(QueryBuilder queryBuilder) {
+  	final List<TestReport> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

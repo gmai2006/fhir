@@ -38,6 +38,9 @@ public interface BundleService {
   public Bundle update(Bundle bean);
   public void delete(Bundle bean);
   public List<Bundle> findByField(QueryBuilder queryBuilder);
+  public List<Bundle> findByLink(QueryBuilder queryBuilder);
+  public List<Bundle> findByEntry(QueryBuilder queryBuilder);
+  public List<Bundle> findByMeta(QueryBuilder queryBuilder);
 
 
 }

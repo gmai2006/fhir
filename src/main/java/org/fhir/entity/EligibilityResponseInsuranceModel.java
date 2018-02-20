@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="eligibilityresponseinsurance")
 public class EligibilityResponseInsuranceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631126377622L;
+	private static final long serialVersionUID = 151910893703223092L;
   /**
   * Description: "A suite of updated or additional Coverages from the Insurer."
   */
@@ -116,7 +115,9 @@ public class EligibilityResponseInsuranceModel  implements Serializable {
 
   public EligibilityResponseInsuranceModel(EligibilityResponseInsurance o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getCoverage() ) {
     	this.coverage_id = "coverage" + this.parent_id;
     	this.coverage = ReferenceHelper.toModel(o.getCoverage(), this.coverage_id);
@@ -128,6 +129,12 @@ public class EligibilityResponseInsuranceModel  implements Serializable {
     if (null != o.getBenefitBalance() && !o.getBenefitBalance().isEmpty()) {
     	this.benefitbalance_id = "benefitbalance" + this.parent_id;
     	this.benefitBalance = EligibilityResponseBenefitBalanceHelper.toModelFromArray(o.getBenefitBalance(), this.benefitbalance_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

@@ -38,8 +38,13 @@ public interface AllergyIntoleranceService {
   public AllergyIntolerance update(AllergyIntolerance bean);
   public void delete(AllergyIntolerance bean);
   public List<AllergyIntolerance> findByField(QueryBuilder queryBuilder);
-  public List<AllergyIntolerance> findByAsserter(QueryBuilder queryBuilder);
+  public List<AllergyIntolerance> findByCode(QueryBuilder queryBuilder);
+  public List<AllergyIntolerance> findByPatient(QueryBuilder queryBuilder);
   public List<AllergyIntolerance> findByRecorder(QueryBuilder queryBuilder);
+  public List<AllergyIntolerance> findByAsserter(QueryBuilder queryBuilder);
+  public List<AllergyIntolerance> findByReaction(QueryBuilder queryBuilder);
+  public List<AllergyIntolerance> findByText(QueryBuilder queryBuilder);
+  public List<AllergyIntolerance> findByMeta(QueryBuilder queryBuilder);
 
 
 }

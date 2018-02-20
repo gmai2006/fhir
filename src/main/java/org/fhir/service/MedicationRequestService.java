@@ -38,9 +38,26 @@ public interface MedicationRequestService {
   public MedicationRequest update(MedicationRequest bean);
   public void delete(MedicationRequest bean);
   public List<MedicationRequest> findByField(QueryBuilder queryBuilder);
-  public List<MedicationRequest> findByContext(QueryBuilder queryBuilder);
-  public List<MedicationRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByDefinition(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByBasedOn(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByCategory(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByMedicationCodeableConcept(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByMedicationReference(QueryBuilder queryBuilder);
   public List<MedicationRequest> findBySubject(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByContext(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findBySupportingInformation(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByRecorder(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByReasonCode(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByReasonReference(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByDosageInstruction(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByDispenseRequest(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findBySubstitution(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByPriorPrescription(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByDetectedIssue(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByEventHistory(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByText(QueryBuilder queryBuilder);
+  public List<MedicationRequest> findByMeta(QueryBuilder queryBuilder);
 
 
 }

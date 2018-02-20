@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="explanationofbenefitprocessnote")
 public class ExplanationOfBenefitProcessNoteModel  implements Serializable {
-	private static final long serialVersionUID = 151873631182442929L;
+	private static final long serialVersionUID = 151910893759194063L;
   /**
   * Description: "An integer associated with each note which may be referred to from each service line item."
   */
@@ -49,12 +48,14 @@ public class ExplanationOfBenefitProcessNoteModel  implements Serializable {
 
   /**
   * Description: "The note purpose: Print/Display."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The note text."
@@ -65,12 +66,14 @@ public class ExplanationOfBenefitProcessNoteModel  implements Serializable {
 
   /**
   * Description: "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"language\"", length = 16777215)
-  private String language;
+  @Column(name="\"language_id\"")
+  private String language_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="language_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> language;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -116,11 +119,25 @@ public class ExplanationOfBenefitProcessNoteModel  implements Serializable {
 
   public ExplanationOfBenefitProcessNoteModel(ExplanationOfBenefitProcessNote o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.number = o.getNumber();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     this.text = o.getText();
-    this.language = JsonUtils.toJson(o.getLanguage());
+    if (null != o.getLanguage() ) {
+    	this.language_id = "language" + this.parent_id;
+    	this.language = CodeableConceptHelper.toModel(o.getLanguage(), this.language_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Float getNumber() {
@@ -129,10 +146,10 @@ public class ExplanationOfBenefitProcessNoteModel  implements Serializable {
   public void setNumber( Float value) {
     this.number = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public String getText() {
@@ -141,10 +158,10 @@ public class ExplanationOfBenefitProcessNoteModel  implements Serializable {
   public void setText( String value) {
     this.text = value;
   }
-  public String getLanguage() {
+  public java.util.List<CodeableConceptModel> getLanguage() {
     return this.language;
   }
-  public void setLanguage( String value) {
+  public void setLanguage( java.util.List<CodeableConceptModel> value) {
     this.language = value;
   }
   public String getModifierExtension() {
@@ -177,9 +194,7 @@ public class ExplanationOfBenefitProcessNoteModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ExplanationOfBenefitProcessNoteModel]:" + "\n");
      builder.append("number" + "->" + this.number + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
-     builder.append("language" + "->" + this.language + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

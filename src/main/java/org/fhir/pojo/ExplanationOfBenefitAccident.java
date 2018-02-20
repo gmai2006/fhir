@@ -66,7 +66,9 @@ public class ExplanationOfBenefitAccident  extends BackboneElement  {
     if (null != o.getDate()) {
       this.date = o.getDate();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getLocationAddress() && !o.getLocationAddress().isEmpty()) {
       this.locationAddress = new Address(o.getLocationAddress().get(0));
     }

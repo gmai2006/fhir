@@ -183,8 +183,12 @@ public class Media  extends DomainResource  {
     if (null != o.getType()) {
       this.type = o.getType();
     }
-    this.subtype = CodeableConceptHelper.fromJson(o.getSubtype());
-    this.view = CodeableConceptHelper.fromJson(o.getView());
+    if (null != o.getSubtype() && !o.getSubtype().isEmpty()) {
+      this.subtype = new CodeableConcept(o.getSubtype().get(0));
+    }
+    if (null != o.getView() && !o.getView().isEmpty()) {
+      this.view = new CodeableConcept(o.getView().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -198,7 +202,12 @@ public class Media  extends DomainResource  {
     if (null != o.getOperator() && !o.getOperator().isEmpty()) {
       this.operator = new Reference(o.getOperator().get(0));
     }
-    this.bodySite = CodeableConceptHelper.fromJson(o.getBodySite());
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
+    }
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+      this.bodySite = new CodeableConcept(o.getBodySite().get(0));
+    }
     if (null != o.getDevice() && !o.getDevice().isEmpty()) {
       this.device = new Reference(o.getDevice().get(0));
     }

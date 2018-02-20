@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="compartmentdefinition")
 public class CompartmentDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631160018889L;
+	private static final long serialVersionUID = 151910893736155497L;
   /**
   * Description: "This is a CompartmentDefinition resource"
   */
@@ -135,12 +134,14 @@ public class CompartmentDefinitionModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the compartment definition is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "Which compartment this definition describes."
@@ -275,6 +276,10 @@ public class CompartmentDefinitionModel  implements Serializable {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
     this.code = o.getCode();
     this.search = o.getSearch();
     if (null != o.getResource() && !o.getResource().isEmpty()) {
@@ -284,6 +289,15 @@ public class CompartmentDefinitionModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -365,10 +379,10 @@ public class CompartmentDefinitionModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public String getCode() {
@@ -452,7 +466,6 @@ public class CompartmentDefinitionModel  implements Serializable {
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("search" + "->" + this.search + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

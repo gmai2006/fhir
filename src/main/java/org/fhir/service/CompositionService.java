@@ -38,10 +38,18 @@ public interface CompositionService {
   public Composition update(Composition bean);
   public void delete(Composition bean);
   public List<Composition> findByField(QueryBuilder queryBuilder);
-  public List<Composition> findByAttester(QueryBuilder queryBuilder);
-  public List<Composition> findByAuthor(QueryBuilder queryBuilder);
-  public List<Composition> findBySection(QueryBuilder queryBuilder);
+  public List<Composition> findByType(QueryBuilder queryBuilder);
+  public List<Composition> findByFHIRclass(QueryBuilder queryBuilder);
   public List<Composition> findBySubject(QueryBuilder queryBuilder);
+  public List<Composition> findByEncounter(QueryBuilder queryBuilder);
+  public List<Composition> findByAuthor(QueryBuilder queryBuilder);
+  public List<Composition> findByAttester(QueryBuilder queryBuilder);
+  public List<Composition> findByCustodian(QueryBuilder queryBuilder);
+  public List<Composition> findByRelatesTo(QueryBuilder queryBuilder);
+  public List<Composition> findByEvent(QueryBuilder queryBuilder);
+  public List<Composition> findBySection(QueryBuilder queryBuilder);
+  public List<Composition> findByText(QueryBuilder queryBuilder);
+  public List<Composition> findByMeta(QueryBuilder queryBuilder);
 
 
 }

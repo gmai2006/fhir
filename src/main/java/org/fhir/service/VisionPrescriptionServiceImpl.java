@@ -114,9 +114,51 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<VisionPrescription> findByPatient(QueryBuilder queryBuilder) {
+  	final List<VisionPrescription> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<VisionPrescription> findByEncounter(QueryBuilder queryBuilder) {
+  	final List<VisionPrescription> result = dao.findByEncounter(queryBuilder);
+    logger.info("findByencounter - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<VisionPrescription> findByPrescriber(QueryBuilder queryBuilder) {
   	final List<VisionPrescription> result = dao.findByPrescriber(queryBuilder);
     logger.info("findByprescriber - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<VisionPrescription> findByReasonCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<VisionPrescription> result = dao.findByReasonCodeableConcept(queryBuilder);
+    logger.info("findByreasonCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<VisionPrescription> findByReasonReference(QueryBuilder queryBuilder) {
+  	final List<VisionPrescription> result = dao.findByReasonReference(queryBuilder);
+    logger.info("findByreasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<VisionPrescription> findByDispense(QueryBuilder queryBuilder) {
+  	final List<VisionPrescription> result = dao.findByDispense(queryBuilder);
+    logger.info("findBydispense - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<VisionPrescription> findByText(QueryBuilder queryBuilder) {
+  	final List<VisionPrescription> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<VisionPrescription> findByMeta(QueryBuilder queryBuilder) {
+  	final List<VisionPrescription> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

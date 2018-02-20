@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="compositionsection")
 public class CompositionSectionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631135297094L;
+	private static final long serialVersionUID = 151910893710453840L;
   /**
   * Description: "The label for this particular section.  This will be part of the rendered content for the document, and is often used to build a table of contents."
   */
@@ -48,12 +47,14 @@ public class CompositionSectionModel  implements Serializable {
 
   /**
   * Description: "A code identifying the kind of content contained within the section. This must be consistent with the section title."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "A human-readable narrative that contains the attested content of the section, used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative."
@@ -76,12 +77,14 @@ public class CompositionSectionModel  implements Serializable {
 
   /**
   * Description: "Specifies the order applied to the items in the section entries."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"orderedBy\"", length = 16777215)
-  private String orderedBy;
+  @Column(name="\"orderedby_id\"")
+  private String orderedby_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="orderedby_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> orderedBy;
 
   /**
   * Description: "A reference to the actual resource from which the narrative in the section is derived."
@@ -96,12 +99,14 @@ public class CompositionSectionModel  implements Serializable {
 
   /**
   * Description: "If the section is empty, why the list is empty. An empty section typically has some text explaining the empty reason."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"emptyReason\"", length = 16777215)
-  private String emptyReason;
+  @Column(name="\"emptyreason_id\"")
+  private String emptyreason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="emptyreason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> emptyReason;
 
   /**
   * Description: "A nested sub-section within this section."
@@ -158,23 +163,40 @@ public class CompositionSectionModel  implements Serializable {
 
   public CompositionSectionModel(CompositionSection o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.title = o.getTitle();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.parent_id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
     }
     this.mode = o.getMode();
-    this.orderedBy = JsonUtils.toJson(o.getOrderedBy());
+    if (null != o.getOrderedBy() ) {
+    	this.orderedby_id = "orderedby" + this.parent_id;
+    	this.orderedBy = CodeableConceptHelper.toModel(o.getOrderedBy(), this.orderedby_id);
+    }
     if (null != o.getEntry() && !o.getEntry().isEmpty()) {
     	this.entry_id = "entry" + this.parent_id;
     	this.entry = ReferenceHelper.toModelFromArray(o.getEntry(), this.entry_id);
     }
-    this.emptyReason = JsonUtils.toJson(o.getEmptyReason());
+    if (null != o.getEmptyReason() ) {
+    	this.emptyreason_id = "emptyreason" + this.parent_id;
+    	this.emptyReason = CodeableConceptHelper.toModel(o.getEmptyReason(), this.emptyreason_id);
+    }
     if (null != o.getSection() && !o.getSection().isEmpty()) {
     	this.section_id = "section" + this.parent_id;
     	this.section = CompositionSectionHelper.toModelFromArray(o.getSection(), this.section_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -184,10 +206,10 @@ public class CompositionSectionModel  implements Serializable {
   public void setTitle( String value) {
     this.title = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public java.util.List<NarrativeModel> getText() {
@@ -202,10 +224,10 @@ public class CompositionSectionModel  implements Serializable {
   public void setMode( String value) {
     this.mode = value;
   }
-  public String getOrderedBy() {
+  public java.util.List<CodeableConceptModel> getOrderedBy() {
     return this.orderedBy;
   }
-  public void setOrderedBy( String value) {
+  public void setOrderedBy( java.util.List<CodeableConceptModel> value) {
     this.orderedBy = value;
   }
   public java.util.List<ReferenceModel> getEntry() {
@@ -214,10 +236,10 @@ public class CompositionSectionModel  implements Serializable {
   public void setEntry( java.util.List<ReferenceModel> value) {
     this.entry = value;
   }
-  public String getEmptyReason() {
+  public java.util.List<CodeableConceptModel> getEmptyReason() {
     return this.emptyReason;
   }
-  public void setEmptyReason( String value) {
+  public void setEmptyReason( java.util.List<CodeableConceptModel> value) {
     this.emptyReason = value;
   }
   public java.util.List<CompositionSectionModel> getSection() {
@@ -256,10 +278,7 @@ public class CompositionSectionModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[CompositionSectionModel]:" + "\n");
      builder.append("title" + "->" + this.title + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("mode" + "->" + this.mode + "\n"); 
-     builder.append("orderedBy" + "->" + this.orderedBy + "\n"); 
-     builder.append("emptyReason" + "->" + this.emptyReason + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

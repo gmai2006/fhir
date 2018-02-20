@@ -182,7 +182,9 @@ public class ClinicalImpression  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }
@@ -219,6 +221,9 @@ public class ClinicalImpression  extends DomainResource  {
     }
     if (null != o.getFinding() && !o.getFinding().isEmpty()) {
     	this.finding = ClinicalImpressionFindingHelper.fromArray2Array(o.getFinding());
+    }
+    if (null != o.getPrognosisCodeableConcept() && !o.getPrognosisCodeableConcept().isEmpty()) {
+    	this.prognosisCodeableConcept = CodeableConceptHelper.fromArray2Array(o.getPrognosisCodeableConcept());
     }
     if (null != o.getPrognosisReference() && !o.getPrognosisReference().isEmpty()) {
     	this.prognosisReference = ReferenceHelper.fromArray2Array(o.getPrognosisReference());

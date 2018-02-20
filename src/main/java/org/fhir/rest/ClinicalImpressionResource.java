@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.ClinicalImpression;
 import org.fhir.service.ClinicalImpressionService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/ClinicalImpression")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class ClinicalImpressionResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public ClinicalImpression find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public ClinicalImpression findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<ClinicalImpression> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ClinicalImpression> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ClinicalImpression> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ClinicalImpression> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ClinicalImpression> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<ClinicalImpression> findAll() {
   	return this.service.selectAll();
   }
@@ -107,35 +172,15 @@ public class ClinicalImpressionResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<ClinicalImpression> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
   /**
-  * Descr: Action taken as part of assessment procedure
+  * Descr: Patient or group assessed
   * Type: reference
   */
   @GET
-  @Path("action")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<ClinicalImpression> action(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByAction(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The clinician performing the assessment
-  * Type: reference
-  */
-  @GET
-  @Path("assessor")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<ClinicalImpression> assessor(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByAssessor(new QueryBuilder(params));
+  @Path("subject")
+  public List<ClinicalImpression> subject(@QueryParam("subject")String subject) {
+  	java.util.Map<String, String> params = QueryParser.parse(subject, VALID_FIELDS);
+  	return this.service.findBySubject(new QueryBuilder(params));
   }
   /**
   * Descr: Encounter or Episode created from
@@ -143,21 +188,19 @@ public class ClinicalImpressionResource {
   */
   @GET
   @Path("context")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<ClinicalImpression> context(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<ClinicalImpression> context(@QueryParam("context")String context) {
+  	java.util.Map<String, String> params = QueryParser.parse(context, VALID_FIELDS);
   	return this.service.findByContext(new QueryBuilder(params));
   }
   /**
-  * Descr: Record of a specific investigation
+  * Descr: The clinician performing the assessment
   * Type: reference
   */
   @GET
-  @Path("investigation/item")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<ClinicalImpression> investigation(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByInvestigation(new QueryBuilder(params));
+  @Path("assessor")
+  public List<ClinicalImpression> assessor(@QueryParam("assessor")String assessor) {
+  	java.util.Map<String, String> params = QueryParser.parse(assessor, VALID_FIELDS);
+  	return this.service.findByAssessor(new QueryBuilder(params));
   }
   /**
   * Descr: Reference to last assessment
@@ -165,9 +208,8 @@ public class ClinicalImpressionResource {
   */
   @GET
   @Path("previous")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<ClinicalImpression> previous(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<ClinicalImpression> previous(@QueryParam("previous")String previous) {
+  	java.util.Map<String, String> params = QueryParser.parse(previous, VALID_FIELDS);
   	return this.service.findByPrevious(new QueryBuilder(params));
   }
   /**
@@ -176,21 +218,27 @@ public class ClinicalImpressionResource {
   */
   @GET
   @Path("problem")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<ClinicalImpression> problem(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<ClinicalImpression> problem(@QueryParam("problem")String problem) {
+  	java.util.Map<String, String> params = QueryParser.parse(problem, VALID_FIELDS);
   	return this.service.findByProblem(new QueryBuilder(params));
   }
   /**
-  * Descr: Patient or group assessed
-  * Type: reference
+  * Descr: Business identifier
+  * Type: token
   */
   @GET
-  @Path("subject")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<ClinicalImpression> subject(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findBySubject(new QueryBuilder(params));
+  public List<ClinicalImpression> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: draft | completed | entered-in-error
+  * Type: token
+  */
+  @GET
+  public List<ClinicalImpression> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "action|assessor|context|findingcode|findingref|identifier|investigation|previous|problem|status|subject";

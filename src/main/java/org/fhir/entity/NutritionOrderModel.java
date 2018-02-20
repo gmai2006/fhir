@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionorder")
 public class NutritionOrderModel  implements Serializable {
-	private static final long serialVersionUID = 151873631145161469L;
+	private static final long serialVersionUID = 151910893721894344L;
   /**
   * Description: "This is a NutritionOrder resource"
   */
@@ -117,21 +116,25 @@ public class NutritionOrderModel  implements Serializable {
 
   /**
   * Description: "This modifier is used to convey order-specific modifiers about the type of food that should be given. These can be derived from patient allergies, intolerances, or preferences such as Halal, Vegan or Kosher. This modifier applies to the entire nutrition order inclusive of the oral diet, nutritional supplements and enteral formula feedings."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"foodPreferenceModifier\"", length = 16777215)
-  private String foodPreferenceModifier;
+  @Column(name="\"foodpreferencemodifier_id\"")
+  private String foodpreferencemodifier_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="foodpreferencemodifier_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> foodPreferenceModifier;
 
   /**
   * Description: "This modifier is used to convey order-specific modifiers about the type of food that should NOT be given. These can be derived from patient allergies, intolerances, or preferences such as No Red Meat, No Soy or No Wheat or  Gluten-Free.  While it should not be necessary to repeat allergy or intolerance information captured in the referenced AllergyIntolerance resource in the excludeFoodModifier, this element may be used to convey additional specificity related to foods that should be eliminated from the patient’s diet for any reason.  This modifier applies to the entire nutrition order inclusive of the oral diet, nutritional supplements and enteral formula feedings."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"excludeFoodModifier\"", length = 16777215)
-  private String excludeFoodModifier;
+  @Column(name="\"excludefoodmodifier_id\"")
+  private String excludefoodmodifier_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="excludefoodmodifier_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> excludeFoodModifier;
 
   /**
   * Description: "Diet given orally in contrast to enteral (tube) feeding."
@@ -257,6 +260,9 @@ public class NutritionOrderModel  implements Serializable {
   public NutritionOrderModel(NutritionOrder o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
@@ -275,6 +281,14 @@ public class NutritionOrderModel  implements Serializable {
     	this.allergyintolerance_id = "allergyintolerance" + this.id;
     	this.allergyIntolerance = ReferenceHelper.toModelFromArray(o.getAllergyIntolerance(), this.allergyintolerance_id);
     }
+    if (null != o.getFoodPreferenceModifier() && !o.getFoodPreferenceModifier().isEmpty()) {
+    	this.foodpreferencemodifier_id = "foodpreferencemodifier" + this.id;
+    	this.foodPreferenceModifier = CodeableConceptHelper.toModelFromArray(o.getFoodPreferenceModifier(), this.foodpreferencemodifier_id);
+    }
+    if (null != o.getExcludeFoodModifier() && !o.getExcludeFoodModifier().isEmpty()) {
+    	this.excludefoodmodifier_id = "excludefoodmodifier" + this.id;
+    	this.excludeFoodModifier = CodeableConceptHelper.toModelFromArray(o.getExcludeFoodModifier(), this.excludefoodmodifier_id);
+    }
     if (null != o.getOralDiet() ) {
     	this.oraldiet_id = "oraldiet" + this.id;
     	this.oralDiet = NutritionOrderOralDietHelper.toModel(o.getOralDiet(), this.oraldiet_id);
@@ -290,6 +304,15 @@ public class NutritionOrderModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -347,16 +370,16 @@ public class NutritionOrderModel  implements Serializable {
   public void setAllergyIntolerance( java.util.List<ReferenceModel> value) {
     this.allergyIntolerance = value;
   }
-  public String getFoodPreferenceModifier() {
+  public java.util.List<CodeableConceptModel> getFoodPreferenceModifier() {
     return this.foodPreferenceModifier;
   }
-  public void setFoodPreferenceModifier( String value) {
+  public void setFoodPreferenceModifier( java.util.List<CodeableConceptModel> value) {
     this.foodPreferenceModifier = value;
   }
-  public String getExcludeFoodModifier() {
+  public java.util.List<CodeableConceptModel> getExcludeFoodModifier() {
     return this.excludeFoodModifier;
   }
-  public void setExcludeFoodModifier( String value) {
+  public void setExcludeFoodModifier( java.util.List<CodeableConceptModel> value) {
     this.excludeFoodModifier = value;
   }
   public java.util.List<NutritionOrderOralDietModel> getOralDiet() {
@@ -434,8 +457,6 @@ public class NutritionOrderModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("dateTime" + "->" + this.dateTime + "\n"); 
-     builder.append("foodPreferenceModifier" + "->" + this.foodPreferenceModifier + "\n"); 
-     builder.append("excludeFoodModifier" + "->" + this.excludeFoodModifier + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

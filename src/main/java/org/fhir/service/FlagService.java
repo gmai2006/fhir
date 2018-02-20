@@ -38,8 +38,13 @@ public interface FlagService {
   public Flag update(Flag bean);
   public void delete(Flag bean);
   public List<Flag> findByField(QueryBuilder queryBuilder);
-  public List<Flag> findByAuthor(QueryBuilder queryBuilder);
+  public List<Flag> findByCategory(QueryBuilder queryBuilder);
+  public List<Flag> findByCode(QueryBuilder queryBuilder);
   public List<Flag> findBySubject(QueryBuilder queryBuilder);
+  public List<Flag> findByEncounter(QueryBuilder queryBuilder);
+  public List<Flag> findByAuthor(QueryBuilder queryBuilder);
+  public List<Flag> findByText(QueryBuilder queryBuilder);
+  public List<Flag> findByMeta(QueryBuilder queryBuilder);
 
 
 }

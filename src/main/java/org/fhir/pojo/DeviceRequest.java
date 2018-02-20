@@ -205,14 +205,18 @@ public class DeviceRequest  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.intent = CodeableConceptHelper.fromJson(o.getIntent());
+    if (null != o.getIntent() && !o.getIntent().isEmpty()) {
+      this.intent = new CodeableConcept(o.getIntent().get(0));
+    }
     if (null != o.getPriority()) {
       this.priority = o.getPriority();
     }
     if (null != o.getCodeReference() && !o.getCodeReference().isEmpty()) {
       this.codeReference = new Reference(o.getCodeReference().get(0));
     }
-    this.codeCodeableConcept = CodeableConceptHelper.fromJson(o.getCodeCodeableConcept());
+    if (null != o.getCodeCodeableConcept() && !o.getCodeCodeableConcept().isEmpty()) {
+      this.codeCodeableConcept = new CodeableConcept(o.getCodeCodeableConcept().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -230,9 +234,14 @@ public class DeviceRequest  extends DomainResource  {
     if (null != o.getRequester() && !o.getRequester().isEmpty()) {
       this.requester = new DeviceRequestRequester(o.getRequester().get(0));
     }
-    this.performerType = CodeableConceptHelper.fromJson(o.getPerformerType());
+    if (null != o.getPerformerType() && !o.getPerformerType().isEmpty()) {
+      this.performerType = new CodeableConcept(o.getPerformerType().get(0));
+    }
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
       this.performer = new Reference(o.getPerformer().get(0));
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());

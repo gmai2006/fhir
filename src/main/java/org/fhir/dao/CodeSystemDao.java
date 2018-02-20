@@ -42,4 +42,12 @@ public interface CodeSystemDao {
 
   public List<CodeSystem> findByField(QueryBuilder queryBuilder);
 
+  public List<CodeSystem> findByContact(QueryBuilder queryBuilder);
+  public List<CodeSystem> findByUseContext(QueryBuilder queryBuilder);
+  public List<CodeSystem> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<CodeSystem> findByFilter(QueryBuilder queryBuilder);
+  public List<CodeSystem> findByProperty(QueryBuilder queryBuilder);
+  public List<CodeSystem> findByConcept(QueryBuilder queryBuilder);
+  public List<CodeSystem> findByText(QueryBuilder queryBuilder);
+  public List<CodeSystem> findByMeta(QueryBuilder queryBuilder);
 }

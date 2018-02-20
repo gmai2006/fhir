@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="plandefinitionaction")
 public class PlanDefinitionActionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631107233701L;
+	private static final long serialVersionUID = 151910893686261319L;
   /**
   * Description: "A user-visible label for the action."
   */
@@ -69,21 +68,25 @@ public class PlanDefinitionActionModel  implements Serializable {
 
   /**
   * Description: "A code that provides meaning for the action or action group. For example, a section may have a LOINC code for a the section of a documentation template."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "A description of why this action is necessary or appropriate."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reason;
 
   /**
   * Description: "Didactic or other informational resources associated with the action that can be provided to the CDS recipient. Information resources can include inline text commentary and links to web resources."
@@ -215,12 +218,14 @@ public class PlanDefinitionActionModel  implements Serializable {
 
   /**
   * Description: "The type of action to perform (create, update, remove)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> type;
 
   /**
   * Description: "Defines the grouping behavior for the action and its children."
@@ -345,16 +350,26 @@ public class PlanDefinitionActionModel  implements Serializable {
 
   public PlanDefinitionActionModel(PlanDefinitionAction o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.label = o.getLabel();
     this.title = o.getTitle();
     this.description = o.getDescription();
     this.textEquivalent = o.getTextEquivalent();
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModelFromArray(o.getCode(), this.code_id);
+    }
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason_id = "reason" + this.parent_id;
+    	this.reason = CodeableConceptHelper.toModelFromArray(o.getReason(), this.reason_id);
+    }
     if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
     	this.documentation_id = "documentation" + this.parent_id;
     	this.documentation = RelatedArtifactHelper.toModelFromArray(o.getDocumentation(), this.documentation_id);
     }
-    this.goalId = org.fhir.utils.JsonUtils.write2String(o.getGoalId());
+    this.goalId = org.fhir.utils.JsonUtils.toJson(o.getGoalId());
     if (null != o.getTriggerDefinition() && !o.getTriggerDefinition().isEmpty()) {
     	this.triggerdefinition_id = "triggerdefinition" + this.parent_id;
     	this.triggerDefinition = TriggerDefinitionHelper.toModelFromArray(o.getTriggerDefinition(), this.triggerdefinition_id);
@@ -376,15 +391,26 @@ public class PlanDefinitionActionModel  implements Serializable {
     	this.relatedAction = PlanDefinitionRelatedActionHelper.toModelFromArray(o.getRelatedAction(), this.relatedaction_id);
     }
     this.timingDateTime = o.getTimingDateTime();
-    this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
-    this.timingDuration = JsonUtils.toJson(o.getTimingDuration());
-    this.timingRange = JsonUtils.toJson(o.getTimingRange());
-    this.timingTiming = JsonUtils.toJson(o.getTimingTiming());
+    if (null != o.getTimingPeriod()) {
+    	this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
+    }
+    if (null != o.getTimingDuration()) {
+    	this.timingDuration = JsonUtils.toJson(o.getTimingDuration());
+    }
+    if (null != o.getTimingRange()) {
+    	this.timingRange = JsonUtils.toJson(o.getTimingRange());
+    }
+    if (null != o.getTimingTiming()) {
+    	this.timingTiming = JsonUtils.toJson(o.getTimingTiming());
+    }
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
     	this.participant_id = "participant" + this.parent_id;
     	this.participant = PlanDefinitionParticipantHelper.toModelFromArray(o.getParticipant(), this.participant_id);
     }
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodingHelper.toModel(o.getType(), this.type_id);
+    }
     this.groupingBehavior = o.getGroupingBehavior();
     this.selectionBehavior = o.getSelectionBehavior();
     this.requiredBehavior = o.getRequiredBehavior();
@@ -405,6 +431,12 @@ public class PlanDefinitionActionModel  implements Serializable {
     if (null != o.getAction() && !o.getAction().isEmpty()) {
     	this.action_id = "action" + this.parent_id;
     	this.action = PlanDefinitionActionHelper.toModelFromArray(o.getAction(), this.action_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -432,16 +464,16 @@ public class PlanDefinitionActionModel  implements Serializable {
   public void setTextEquivalent( String value) {
     this.textEquivalent = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
-  public String getReason() {
+  public java.util.List<CodeableConceptModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodeableConceptModel> value) {
     this.reason = value;
   }
   public java.util.List<RelatedArtifactModel> getDocumentation() {
@@ -522,10 +554,10 @@ public class PlanDefinitionActionModel  implements Serializable {
   public void setParticipant( java.util.List<PlanDefinitionParticipantModel> value) {
     this.participant = value;
   }
-  public String getType() {
+  public java.util.List<CodingModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodingModel> value) {
     this.type = value;
   }
   public String getGroupingBehavior() {
@@ -615,15 +647,12 @@ public class PlanDefinitionActionModel  implements Serializable {
      builder.append("title" + "->" + this.title + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("textEquivalent" + "->" + this.textEquivalent + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("goalId" + "->" + this.goalId + "\n"); 
      builder.append("timingDateTime" + "->" + this.timingDateTime + "\n"); 
      builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
      builder.append("timingDuration" + "->" + this.timingDuration + "\n"); 
      builder.append("timingRange" + "->" + this.timingRange + "\n"); 
      builder.append("timingTiming" + "->" + this.timingTiming + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("groupingBehavior" + "->" + this.groupingBehavior + "\n"); 
      builder.append("selectionBehavior" + "->" + this.selectionBehavior + "\n"); 
      builder.append("requiredBehavior" + "->" + this.requiredBehavior + "\n"); 

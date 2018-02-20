@@ -97,9 +97,9 @@ public class ProvenanceDaoImpl implements ProvenanceDao {
   }
 
   @Override
-  public List<Provenance> findByAgent(QueryBuilder queryBuilder) {
+  public List<Provenance> findByTarget(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ProvenanceModel a, ProvenanceAgent b where a.agent_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from ProvenanceModel a, Reference b where a.target_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -109,9 +109,39 @@ public class ProvenanceDaoImpl implements ProvenanceDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<Provenance> findByTarget(QueryBuilder queryBuilder) {
+  public List<Provenance> findByReason(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ProvenanceModel a, Reference b where a.target_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from ProvenanceModel a, Coding b where a.reason_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Provenance> findByActivity(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProvenanceModel a, Coding b where a.activity_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Provenance> findByAgent(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProvenanceModel a, ProvenanceAgent b where a.agent_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Provenance> findByEntity(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProvenanceModel a, ProvenanceEntity b where a.entity_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Provenance> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProvenanceModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Provenance> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ProvenanceModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

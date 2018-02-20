@@ -141,7 +141,9 @@ public class FHIRList  extends DomainResource  {
     if (null != o.getTitle()) {
       this.title = o.getTitle();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -154,11 +156,15 @@ public class FHIRList  extends DomainResource  {
     if (null != o.getSource() && !o.getSource().isEmpty()) {
       this.source = new Reference(o.getSource().get(0));
     }
-    this.orderedBy = CodeableConceptHelper.fromJson(o.getOrderedBy());
+    if (null != o.getOrderedBy() && !o.getOrderedBy().isEmpty()) {
+      this.orderedBy = new CodeableConcept(o.getOrderedBy().get(0));
+    }
     if (null != o.getEntry() && !o.getEntry().isEmpty()) {
     	this.entry = ListEntryHelper.fromArray2Array(o.getEntry());
     }
-    this.emptyReason = CodeableConceptHelper.fromJson(o.getEmptyReason());
+    if (null != o.getEmptyReason() && !o.getEmptyReason().isEmpty()) {
+      this.emptyReason = new CodeableConcept(o.getEmptyReason().get(0));
+    }
   }
 
   public void setResourceType( String value) {

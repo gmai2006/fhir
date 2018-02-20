@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="conceptmapgroup")
 public class ConceptMapGroupModel  implements Serializable {
-	private static final long serialVersionUID = 151873631192874666L;
+	private static final long serialVersionUID = 151910893769594082L;
   /**
   * Description: "An absolute URI that identifies the Code System (if the source is a value set that crosses more than one code system)."
   */
@@ -133,7 +132,9 @@ public class ConceptMapGroupModel  implements Serializable {
 
   public ConceptMapGroupModel(ConceptMapGroup o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.source = o.getSource();
     this.sourceVersion = o.getSourceVersion();
     this.target = o.getTarget();
@@ -145,6 +146,12 @@ public class ConceptMapGroupModel  implements Serializable {
     if (null != o.getUnmapped() ) {
     	this.unmapped_id = "unmapped" + this.parent_id;
     	this.unmapped = ConceptMapUnmappedHelper.toModel(o.getUnmapped(), this.unmapped_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

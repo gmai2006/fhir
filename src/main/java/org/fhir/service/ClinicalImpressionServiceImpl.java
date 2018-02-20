@@ -114,15 +114,15 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<ClinicalImpression> findByAction(QueryBuilder queryBuilder) {
-  	final List<ClinicalImpression> result = dao.findByAction(queryBuilder);
-    logger.info("findByaction - exited - return value={} result ");
+  public List<ClinicalImpression> findByCode(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<ClinicalImpression> findByAssessor(QueryBuilder queryBuilder) {
-  	final List<ClinicalImpression> result = dao.findByAssessor(queryBuilder);
-    logger.info("findByassessor - exited - return value={} result ");
+  public List<ClinicalImpression> findBySubject(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
     return result;
   }
   @Override
@@ -132,9 +132,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<ClinicalImpression> findByInvestigation(QueryBuilder queryBuilder) {
-  	final List<ClinicalImpression> result = dao.findByInvestigation(queryBuilder);
-    logger.info("findByinvestigation - exited - return value={} result ");
+  public List<ClinicalImpression> findByAssessor(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByAssessor(queryBuilder);
+    logger.info("findByassessor - exited - return value={} result ");
     return result;
   }
   @Override
@@ -150,9 +150,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<ClinicalImpression> findBySubject(QueryBuilder queryBuilder) {
-  	final List<ClinicalImpression> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<ClinicalImpression> findByInvestigation(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByInvestigation(queryBuilder);
+    logger.info("findByinvestigation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByFinding(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByFinding(queryBuilder);
+    logger.info("findByfinding - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByPrognosisCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByPrognosisCodeableConcept(queryBuilder);
+    logger.info("findByprognosisCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByPrognosisReference(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByPrognosisReference(queryBuilder);
+    logger.info("findByprognosisReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByAction(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByAction(queryBuilder);
+    logger.info("findByaction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByText(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClinicalImpression> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ClinicalImpression> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

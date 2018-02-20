@@ -130,6 +130,9 @@ public class Subscription  extends DomainResource  {
     if (null != o.getChannel() && !o.getChannel().isEmpty()) {
       this.channel = new SubscriptionChannel(o.getChannel().get(0));
     }
+    if (null != o.getTag() && !o.getTag().isEmpty()) {
+    	this.tag = CodingHelper.fromArray2Array(o.getTag());
+    }
   }
 
   public void setResourceType( String value) {

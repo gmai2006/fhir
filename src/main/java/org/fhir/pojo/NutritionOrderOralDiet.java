@@ -72,11 +72,17 @@ public class NutritionOrderOralDiet  extends BackboneElement  {
 
   public NutritionOrderOralDiet(NutritionOrderOralDietModel o) {
     this.id = o.getId();
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type = CodeableConceptHelper.fromArray2Array(o.getType());
+    }
     if (null != o.getNutrient() && !o.getNutrient().isEmpty()) {
     	this.nutrient = NutritionOrderNutrientHelper.fromArray2Array(o.getNutrient());
     }
     if (null != o.getTexture() && !o.getTexture().isEmpty()) {
     	this.texture = NutritionOrderTextureHelper.fromArray2Array(o.getTexture());
+    }
+    if (null != o.getFluidConsistencyType() && !o.getFluidConsistencyType().isEmpty()) {
+    	this.fluidConsistencyType = CodeableConceptHelper.fromArray2Array(o.getFluidConsistencyType());
     }
     if (null != o.getInstruction()) {
       this.instruction = o.getInstruction();

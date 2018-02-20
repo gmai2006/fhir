@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="detectedissue")
 public class DetectedIssueModel  implements Serializable {
-	private static final long serialVersionUID = 15187363118675699L;
+	private static final long serialVersionUID = 151910893763549734L;
   /**
   * Description: "This is a DetectedIssue resource"
   */
@@ -66,12 +65,14 @@ public class DetectedIssueModel  implements Serializable {
 
   /**
   * Description: "Identifies the general type of issue identified."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "Indicates the degree of importance associated with the identified issue based on the potential impact on the patient."
@@ -237,9 +238,14 @@ public class DetectedIssueModel  implements Serializable {
   public DetectedIssueModel(DetectedIssue o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.category = JsonUtils.toJson(o.getCategory());
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
     this.severity = o.getSeverity();
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
@@ -263,6 +269,15 @@ public class DetectedIssueModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -290,10 +305,10 @@ public class DetectedIssueModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
   public String getSeverity() {
@@ -400,7 +415,6 @@ public class DetectedIssueModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
      builder.append("severity" + "->" + this.severity + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("detail" + "->" + this.detail + "\n"); 

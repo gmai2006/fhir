@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.CodingModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -82,7 +83,27 @@ public class Coding  extends Element  {
   */
   protected transient Element _userSelected;
 
-  public Coding() {}
+  public Coding() {
+  }
+
+  public Coding(CodingModel o) {
+    this.id = o.getId();
+    if (null != o.getSystem()) {
+      this.system = o.getSystem();
+    }
+    if (null != o.getVersion()) {
+      this.version = o.getVersion();
+    }
+    if (null != o.getCode()) {
+      this.code = o.getCode();
+    }
+    if (null != o.getDisplay()) {
+      this.display = o.getDisplay();
+    }
+    if (null != o.getUserSelected()) {
+      this.userSelected = o.getUserSelected();
+    }
+  }
 
   public void setSystem( String value) {
     this.system = value;
@@ -161,5 +182,6 @@ public class Coding  extends Element  {
      if(this._userSelected != null) builder.append("_userSelected" + "->" + this._userSelected.toString() + "\n"); ;
     return builder.toString();
   }
+
 
 }

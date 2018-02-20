@@ -168,8 +168,12 @@ public class RiskAssessment  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.method = CodeableConceptHelper.fromJson(o.getMethod());
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getMethod() && !o.getMethod().isEmpty()) {
+      this.method = new CodeableConcept(o.getMethod().get(0));
+    }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -186,7 +190,9 @@ public class RiskAssessment  extends DomainResource  {
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
       this.performer = new Reference(o.getPerformer().get(0));
     }
-    this.reasonCodeableConcept = CodeableConceptHelper.fromJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonCodeableConcept() && !o.getReasonCodeableConcept().isEmpty()) {
+      this.reasonCodeableConcept = new CodeableConcept(o.getReasonCodeableConcept().get(0));
+    }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
       this.reasonReference = new Reference(o.getReasonReference().get(0));
     }

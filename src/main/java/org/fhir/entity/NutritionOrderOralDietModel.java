@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionorderoraldiet")
 public class NutritionOrderOralDietModel  implements Serializable {
-	private static final long serialVersionUID = 151873631163729119L;
+	private static final long serialVersionUID = 151910893739711945L;
   /**
   * Description: "The kind of diet or dietary restriction such as fiber restricted diet or diabetic diet."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The time period and frequency at which the diet should be given.  The diet should be given for the combination of all schedules if more than one schedule is present."
@@ -81,12 +82,14 @@ public class NutritionOrderOralDietModel  implements Serializable {
 
   /**
   * Description: "The required consistency (e.g. honey-thick, nectar-thick, thin, thickened.) of liquids or fluids served to the patient."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"fluidConsistencyType\"", length = 16777215)
-  private String fluidConsistencyType;
+  @Column(name="\"fluidconsistencytype_id\"")
+  private String fluidconsistencytype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fluidconsistencytype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> fluidConsistencyType;
 
   /**
   * Description: "Free text or additional instructions or information pertaining to the oral diet."
@@ -139,7 +142,16 @@ public class NutritionOrderOralDietModel  implements Serializable {
 
   public NutritionOrderOralDietModel(NutritionOrderOralDiet o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModelFromArray(o.getType(), this.type_id);
+    }
+    if (null != o.getSchedule()) {
+    	this.schedule = JsonUtils.toJson(o.getSchedule());
+    }
     if (null != o.getNutrient() && !o.getNutrient().isEmpty()) {
     	this.nutrient_id = "nutrient" + this.parent_id;
     	this.nutrient = NutritionOrderNutrientHelper.toModelFromArray(o.getNutrient(), this.nutrient_id);
@@ -148,13 +160,23 @@ public class NutritionOrderOralDietModel  implements Serializable {
     	this.texture_id = "texture" + this.parent_id;
     	this.texture = NutritionOrderTextureHelper.toModelFromArray(o.getTexture(), this.texture_id);
     }
+    if (null != o.getFluidConsistencyType() && !o.getFluidConsistencyType().isEmpty()) {
+    	this.fluidconsistencytype_id = "fluidconsistencytype" + this.parent_id;
+    	this.fluidConsistencyType = CodeableConceptHelper.toModelFromArray(o.getFluidConsistencyType(), this.fluidconsistencytype_id);
+    }
     this.instruction = o.getInstruction();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public String getSchedule() {
@@ -175,10 +197,10 @@ public class NutritionOrderOralDietModel  implements Serializable {
   public void setTexture( java.util.List<NutritionOrderTextureModel> value) {
     this.texture = value;
   }
-  public String getFluidConsistencyType() {
+  public java.util.List<CodeableConceptModel> getFluidConsistencyType() {
     return this.fluidConsistencyType;
   }
-  public void setFluidConsistencyType( String value) {
+  public void setFluidConsistencyType( java.util.List<CodeableConceptModel> value) {
     this.fluidConsistencyType = value;
   }
   public String getInstruction() {
@@ -216,9 +238,7 @@ public class NutritionOrderOralDietModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[NutritionOrderOralDietModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("schedule" + "->" + this.schedule + "\n"); 
-     builder.append("fluidConsistencyType" + "->" + this.fluidConsistencyType + "\n"); 
      builder.append("instruction" + "->" + this.instruction + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

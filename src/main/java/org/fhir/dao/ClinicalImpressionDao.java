@@ -42,11 +42,17 @@ public interface ClinicalImpressionDao {
 
   public List<ClinicalImpression> findByField(QueryBuilder queryBuilder);
 
-  public List<ClinicalImpression> findByAction(QueryBuilder queryBuilder);
-  public List<ClinicalImpression> findByAssessor(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByCode(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findBySubject(QueryBuilder queryBuilder);
   public List<ClinicalImpression> findByContext(QueryBuilder queryBuilder);
-  public List<ClinicalImpression> findByInvestigation(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByAssessor(QueryBuilder queryBuilder);
   public List<ClinicalImpression> findByPrevious(QueryBuilder queryBuilder);
   public List<ClinicalImpression> findByProblem(QueryBuilder queryBuilder);
-  public List<ClinicalImpression> findBySubject(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByInvestigation(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByFinding(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByPrognosisCodeableConcept(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByPrognosisReference(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByAction(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByText(QueryBuilder queryBuilder);
+  public List<ClinicalImpression> findByMeta(QueryBuilder queryBuilder);
 }

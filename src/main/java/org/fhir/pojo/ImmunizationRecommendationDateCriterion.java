@@ -54,7 +54,9 @@ public class ImmunizationRecommendationDateCriterion  extends BackboneElement  {
 
   public ImmunizationRecommendationDateCriterion(ImmunizationRecommendationDateCriterionModel o) {
     this.id = o.getId();
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getValue()) {
       this.value = o.getValue();
     }

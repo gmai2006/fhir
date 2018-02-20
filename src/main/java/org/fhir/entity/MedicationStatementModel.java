@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationstatement")
 public class MedicationStatementModel  implements Serializable {
-	private static final long serialVersionUID = 151873631137580875L;
+	private static final long serialVersionUID = 151910893712632201L;
   /**
   * Description: "This is a MedicationStatement resource"
   */
@@ -98,21 +97,25 @@ public class MedicationStatementModel  implements Serializable {
 
   /**
   * Description: "Indicates where type of medication statement and where the medication is expected to be consumed or administered."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "Identifies the medication being administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"medicationCodeableConcept\"", length = 16777215)
-  private String medicationCodeableConcept;
+  @Column(name="\"medicationcodeableconcept_id\"")
+  private String medicationcodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="medicationcodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> medicationCodeableConcept;
 
   /**
   * Description: "Identifies the medication being administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications."
@@ -192,21 +195,25 @@ public class MedicationStatementModel  implements Serializable {
 
   /**
   * Description: "A code indicating why the medication was not taken."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonNotTaken\"", length = 16777215)
-  private String reasonNotTaken;
+  @Column(name="\"reasonnottaken_id\"")
+  private String reasonnottaken_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonnottaken_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonNotTaken;
 
   /**
   * Description: "A reason for why the medication is being/was taken."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonCode\"", length = 16777215)
-  private String reasonCode;
+  @Column(name="\"reasoncode_id\"")
+  private String reasoncode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonCode;
 
   /**
   * Description: "Condition or observation that supports why the medication is being/was taken."
@@ -330,6 +337,9 @@ public class MedicationStatementModel  implements Serializable {
   public MedicationStatementModel(MedicationStatement o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
@@ -343,14 +353,22 @@ public class MedicationStatementModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.status = o.getStatus();
-    this.category = JsonUtils.toJson(o.getCategory());
-    this.medicationCodeableConcept = JsonUtils.toJson(o.getMedicationCodeableConcept());
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
+    if (null != o.getMedicationCodeableConcept() ) {
+    	this.medicationcodeableconcept_id = "medicationcodeableconcept" + this.id;
+    	this.medicationCodeableConcept = CodeableConceptHelper.toModel(o.getMedicationCodeableConcept(), this.medicationcodeableconcept_id);
+    }
     if (null != o.getMedicationReference() ) {
     	this.medicationreference_id = "medicationreference" + this.id;
     	this.medicationReference = ReferenceHelper.toModel(o.getMedicationReference(), this.medicationreference_id);
     }
     this.effectiveDateTime = o.getEffectiveDateTime();
-    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
+    if (null != o.getEffectivePeriod()) {
+    	this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
+    }
     this.dateAsserted = o.getDateAsserted();
     if (null != o.getInformationSource() ) {
     	this.informationsource_id = "informationsource" + this.id;
@@ -365,9 +383,20 @@ public class MedicationStatementModel  implements Serializable {
     	this.derivedFrom = ReferenceHelper.toModelFromArray(o.getDerivedFrom(), this.derivedfrom_id);
     }
     this.taken = o.getTaken();
+    if (null != o.getReasonNotTaken() && !o.getReasonNotTaken().isEmpty()) {
+    	this.reasonnottaken_id = "reasonnottaken" + this.id;
+    	this.reasonNotTaken = CodeableConceptHelper.toModelFromArray(o.getReasonNotTaken(), this.reasonnottaken_id);
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasoncode_id = "reasoncode" + this.id;
+    	this.reasonCode = CodeableConceptHelper.toModelFromArray(o.getReasonCode(), this.reasoncode_id);
+    }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModelFromArray(o.getReasonReference(), this.reasonreference_id);
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
     }
     if (null != o.getDosage() && !o.getDosage().isEmpty()) {
     	this.dosage_id = "dosage" + this.id;
@@ -376,6 +405,15 @@ public class MedicationStatementModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -421,16 +459,16 @@ public class MedicationStatementModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getMedicationCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getMedicationCodeableConcept() {
     return this.medicationCodeableConcept;
   }
-  public void setMedicationCodeableConcept( String value) {
+  public void setMedicationCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.medicationCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getMedicationReference() {
@@ -481,16 +519,16 @@ public class MedicationStatementModel  implements Serializable {
   public void setTaken( String value) {
     this.taken = value;
   }
-  public String getReasonNotTaken() {
+  public java.util.List<CodeableConceptModel> getReasonNotTaken() {
     return this.reasonNotTaken;
   }
-  public void setReasonNotTaken( String value) {
+  public void setReasonNotTaken( java.util.List<CodeableConceptModel> value) {
     this.reasonNotTaken = value;
   }
-  public String getReasonCode() {
+  public java.util.List<CodeableConceptModel> getReasonCode() {
     return this.reasonCode;
   }
-  public void setReasonCode( String value) {
+  public void setReasonCode( java.util.List<CodeableConceptModel> value) {
     this.reasonCode = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
@@ -567,14 +605,10 @@ public class MedicationStatementModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("medicationCodeableConcept" + "->" + this.medicationCodeableConcept + "\n"); 
      builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
      builder.append("dateAsserted" + "->" + this.dateAsserted + "\n"); 
      builder.append("taken" + "->" + this.taken + "\n"); 
-     builder.append("reasonNotTaken" + "->" + this.reasonNotTaken + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

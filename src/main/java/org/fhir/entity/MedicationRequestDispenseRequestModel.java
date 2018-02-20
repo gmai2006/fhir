@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationrequestdispenserequest")
 public class MedicationRequestDispenseRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151873631117520289L;
+	private static final long serialVersionUID = 151910893695912669L;
   /**
   * Description: "This indicates the validity period of a prescription (stale dating the Prescription)."
   * Actual type: String;
@@ -131,17 +130,29 @@ public class MedicationRequestDispenseRequestModel  implements Serializable {
 
   public MedicationRequestDispenseRequestModel(MedicationRequestDispenseRequest o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.validityPeriod = JsonUtils.toJson(o.getValidityPeriod());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getValidityPeriod()) {
+    	this.validityPeriod = JsonUtils.toJson(o.getValidityPeriod());
+    }
     this.numberOfRepeatsAllowed = o.getNumberOfRepeatsAllowed();
     if (null != o.getQuantity() ) {
     	this.quantity_id = "quantity" + this.parent_id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
     }
-    this.expectedSupplyDuration = JsonUtils.toJson(o.getExpectedSupplyDuration());
+    if (null != o.getExpectedSupplyDuration()) {
+    	this.expectedSupplyDuration = JsonUtils.toJson(o.getExpectedSupplyDuration());
+    }
     if (null != o.getPerformer() ) {
     	this.performer_id = "performer" + this.parent_id;
     	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

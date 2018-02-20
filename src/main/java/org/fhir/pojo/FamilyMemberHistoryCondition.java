@@ -78,8 +78,12 @@ public class FamilyMemberHistoryCondition  extends BackboneElement  {
 
   public FamilyMemberHistoryCondition(FamilyMemberHistoryConditionModel o) {
     this.id = o.getId();
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
-    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
+    if (null != o.getOutcome() && !o.getOutcome().isEmpty()) {
+      this.outcome = new CodeableConcept(o.getOutcome().get(0));
+    }
     this.onsetAge = AgeHelper.fromJson(o.getOnsetAge());
     this.onsetRange = RangeHelper.fromJson(o.getOnsetRange());
     this.onsetPeriod = PeriodHelper.fromJson(o.getOnsetPeriod());

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="codesystemconcept")
 public class CodeSystemConceptModel  implements Serializable {
-	private static final long serialVersionUID = 151873631173988802L;
+	private static final long serialVersionUID = 151910893749644471L;
   /**
   * Description: "A code - a text symbol - that uniquely identifies the concept within the code system."
   */
@@ -138,7 +137,9 @@ public class CodeSystemConceptModel  implements Serializable {
 
   public CodeSystemConceptModel(CodeSystemConcept o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.code = o.getCode();
     this.display = o.getDisplay();
     this.definition = o.getDefinition();
@@ -153,6 +154,12 @@ public class CodeSystemConceptModel  implements Serializable {
     if (null != o.getConcept() && !o.getConcept().isEmpty()) {
     	this.concept_id = "concept" + this.parent_id;
     	this.concept = CodeSystemConceptHelper.toModelFromArray(o.getConcept(), this.concept_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

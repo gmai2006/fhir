@@ -105,11 +105,15 @@ public class SequenceReferenceSeq  extends BackboneElement  {
 
   public SequenceReferenceSeq(SequenceReferenceSeqModel o) {
     this.id = o.getId();
-    this.chromosome = CodeableConceptHelper.fromJson(o.getChromosome());
+    if (null != o.getChromosome() && !o.getChromosome().isEmpty()) {
+      this.chromosome = new CodeableConcept(o.getChromosome().get(0));
+    }
     if (null != o.getGenomeBuild()) {
       this.genomeBuild = o.getGenomeBuild();
     }
-    this.referenceSeqId = CodeableConceptHelper.fromJson(o.getReferenceSeqId());
+    if (null != o.getReferenceSeqId() && !o.getReferenceSeqId().isEmpty()) {
+      this.referenceSeqId = new CodeableConcept(o.getReferenceSeqId().get(0));
+    }
     if (null != o.getReferenceSeqPointer() && !o.getReferenceSeqPointer().isEmpty()) {
       this.referenceSeqPointer = new Reference(o.getReferenceSeqPointer().get(0));
     }

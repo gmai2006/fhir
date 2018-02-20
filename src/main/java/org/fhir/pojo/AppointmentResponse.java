@@ -117,6 +117,9 @@ public class AppointmentResponse  extends DomainResource  {
     if (null != o.getEnd()) {
       this.end = o.getEnd();
     }
+    if (null != o.getParticipantType() && !o.getParticipantType().isEmpty()) {
+    	this.participantType = CodeableConceptHelper.fromArray2Array(o.getParticipantType());
+    }
     if (null != o.getActor() && !o.getActor().isEmpty()) {
       this.actor = new Reference(o.getActor().get(0));
     }

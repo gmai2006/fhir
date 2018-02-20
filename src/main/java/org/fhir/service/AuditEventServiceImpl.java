@@ -114,9 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<AuditEvent> findByType(QueryBuilder queryBuilder) {
+  	final List<AuditEvent> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AuditEvent> findBySubtype(QueryBuilder queryBuilder) {
+  	final List<AuditEvent> result = dao.findBySubtype(queryBuilder);
+    logger.info("findBysubtype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AuditEvent> findByPurposeOfEvent(QueryBuilder queryBuilder) {
+  	final List<AuditEvent> result = dao.findByPurposeOfEvent(queryBuilder);
+    logger.info("findBypurposeOfEvent - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<AuditEvent> findByAgent(QueryBuilder queryBuilder) {
   	final List<AuditEvent> result = dao.findByAgent(queryBuilder);
     logger.info("findByagent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AuditEvent> findBySource(QueryBuilder queryBuilder) {
+  	final List<AuditEvent> result = dao.findBySource(queryBuilder);
+    logger.info("findBysource - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,9 +150,15 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<AuditEvent> findBySource(QueryBuilder queryBuilder) {
-  	final List<AuditEvent> result = dao.findBySource(queryBuilder);
-    logger.info("findBysource - exited - return value={} result ");
+  public List<AuditEvent> findByText(QueryBuilder queryBuilder) {
+  	final List<AuditEvent> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AuditEvent> findByMeta(QueryBuilder queryBuilder) {
+  	final List<AuditEvent> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

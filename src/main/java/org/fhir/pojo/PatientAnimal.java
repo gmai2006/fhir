@@ -53,9 +53,15 @@ public class PatientAnimal  extends BackboneElement  {
 
   public PatientAnimal(PatientAnimalModel o) {
     this.id = o.getId();
-    this.species = CodeableConceptHelper.fromJson(o.getSpecies());
-    this.breed = CodeableConceptHelper.fromJson(o.getBreed());
-    this.genderStatus = CodeableConceptHelper.fromJson(o.getGenderStatus());
+    if (null != o.getSpecies() && !o.getSpecies().isEmpty()) {
+      this.species = new CodeableConcept(o.getSpecies().get(0));
+    }
+    if (null != o.getBreed() && !o.getBreed().isEmpty()) {
+      this.breed = new CodeableConcept(o.getBreed().get(0));
+    }
+    if (null != o.getGenderStatus() && !o.getGenderStatus().isEmpty()) {
+      this.genderStatus = new CodeableConcept(o.getGenderStatus().get(0));
+    }
   }
 
   public void setSpecies( CodeableConcept value) {

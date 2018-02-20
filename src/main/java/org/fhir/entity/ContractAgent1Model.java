@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="contractagent1")
 public class ContractAgent1Model  implements Serializable {
-	private static final long serialVersionUID = 151873631179981571L;
+	private static final long serialVersionUID = 151910893756457138L;
   /**
   * Description: "The agent assigned a role in this Contract Provision."
   */
@@ -52,12 +51,14 @@ public class ContractAgent1Model  implements Serializable {
 
   /**
   * Description: "Role played by the agent assigned this role in the execution of this Contract Provision."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"role\"", length = 16777215)
-  private String role;
+  @Column(name="\"role_id\"")
+  private String role_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> role;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -103,10 +104,22 @@ public class ContractAgent1Model  implements Serializable {
 
   public ContractAgent1Model(ContractAgent1 o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getActor() ) {
     	this.actor_id = "actor" + this.parent_id;
     	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);
+    }
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+    	this.role_id = "role" + this.parent_id;
+    	this.role = CodeableConceptHelper.toModelFromArray(o.getRole(), this.role_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -116,10 +129,10 @@ public class ContractAgent1Model  implements Serializable {
   public void setActor( java.util.List<ReferenceModel> value) {
     this.actor = value;
   }
-  public String getRole() {
+  public java.util.List<CodeableConceptModel> getRole() {
     return this.role;
   }
-  public void setRole( String value) {
+  public void setRole( java.util.List<CodeableConceptModel> value) {
     this.role = value;
   }
   public String getModifierExtension() {
@@ -151,7 +164,6 @@ public class ContractAgent1Model  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ContractAgent1Model]:" + "\n");
-     builder.append("role" + "->" + this.role + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

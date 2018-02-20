@@ -114,6 +114,30 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Immunization> findByVaccineCode(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByVaccineCode(queryBuilder);
+    logger.info("findByvaccineCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByPatient(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByEncounter(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByEncounter(queryBuilder);
+    logger.info("findByencounter - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByReportOrigin(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByReportOrigin(queryBuilder);
+    logger.info("findByreportOrigin - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Immunization> findByLocation(QueryBuilder queryBuilder) {
   	final List<Immunization> result = dao.findByLocation(queryBuilder);
     logger.info("findBylocation - exited - return value={} result ");
@@ -126,15 +150,57 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<Immunization> findBySite(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findBySite(queryBuilder);
+    logger.info("findBysite - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByRoute(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByRoute(queryBuilder);
+    logger.info("findByroute - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByDoseQuantity(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByDoseQuantity(queryBuilder);
+    logger.info("findBydoseQuantity - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Immunization> findByPractitioner(QueryBuilder queryBuilder) {
   	final List<Immunization> result = dao.findByPractitioner(queryBuilder);
     logger.info("findBypractitioner - exited - return value={} result ");
     return result;
   }
   @Override
+  public List<Immunization> findByExplanation(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByExplanation(queryBuilder);
+    logger.info("findByexplanation - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Immunization> findByReaction(QueryBuilder queryBuilder) {
   	final List<Immunization> result = dao.findByReaction(queryBuilder);
     logger.info("findByreaction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByVaccinationProtocol(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByVaccinationProtocol(queryBuilder);
+    logger.info("findByvaccinationProtocol - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByText(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Immunization> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Immunization> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

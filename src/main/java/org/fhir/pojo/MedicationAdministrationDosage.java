@@ -80,9 +80,15 @@ public class MedicationAdministrationDosage  extends BackboneElement  {
     if (null != o.getText()) {
       this.text = o.getText();
     }
-    this.site = CodeableConceptHelper.fromJson(o.getSite());
-    this.route = CodeableConceptHelper.fromJson(o.getRoute());
-    this.method = CodeableConceptHelper.fromJson(o.getMethod());
+    if (null != o.getSite() && !o.getSite().isEmpty()) {
+      this.site = new CodeableConcept(o.getSite().get(0));
+    }
+    if (null != o.getRoute() && !o.getRoute().isEmpty()) {
+      this.route = new CodeableConcept(o.getRoute().get(0));
+    }
+    if (null != o.getMethod() && !o.getMethod().isEmpty()) {
+      this.method = new CodeableConcept(o.getMethod().get(0));
+    }
     if (null != o.getDose() && !o.getDose().isEmpty()) {
       this.dose = new Quantity(o.getDose().get(0));
     }

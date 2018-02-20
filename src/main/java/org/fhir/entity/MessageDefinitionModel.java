@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="messagedefinition")
 public class MessageDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631184415753L;
+	private static final long serialVersionUID = 151910893761147689L;
   /**
   * Description: "This is a MessageDefinition resource"
   */
@@ -144,12 +143,14 @@ public class MessageDefinitionModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the message definition is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "Explaination of why this message definition is needed and why it has been designed as it has."
@@ -200,13 +201,14 @@ public class MessageDefinitionModel  implements Serializable {
 
   /**
   * Description: "A coded identifier of a supported messaging event."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"event\"", length = 16777215)
-  private String event;
+  @Column(name="\"event_id\"")
+  private String event_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="event_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> event;
 
   /**
   * Description: "The impact of the content of the message."
@@ -337,7 +339,9 @@ public class MessageDefinitionModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.url = o.getUrl();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.version = o.getVersion();
     this.name = o.getName();
     this.title = o.getTitle();
@@ -354,6 +358,10 @@ public class MessageDefinitionModel  implements Serializable {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
     this.purpose = o.getPurpose();
     this.copyright = o.getCopyright();
     if (null != o.getBase() ) {
@@ -368,7 +376,10 @@ public class MessageDefinitionModel  implements Serializable {
     	this.replaces_id = "replaces" + this.id;
     	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
     }
-    this.event = JsonUtils.toJson(o.getEvent());
+    if (null != o.getEvent() ) {
+    	this.event_id = "event" + this.id;
+    	this.event = CodingHelper.toModel(o.getEvent(), this.event_id);
+    }
     this.category = o.getCategory();
     if (null != o.getFocus() && !o.getFocus().isEmpty()) {
     	this.focus_id = "focus" + this.id;
@@ -382,6 +393,15 @@ public class MessageDefinitionModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -469,10 +489,10 @@ public class MessageDefinitionModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public String getPurpose() {
@@ -505,10 +525,10 @@ public class MessageDefinitionModel  implements Serializable {
   public void setReplaces( java.util.List<ReferenceModel> value) {
     this.replaces = value;
   }
-  public String getEvent() {
+  public java.util.List<CodingModel> getEvent() {
     return this.event;
   }
-  public void setEvent( String value) {
+  public void setEvent( java.util.List<CodingModel> value) {
     this.event = value;
   }
   public String getCategory() {
@@ -599,10 +619,8 @@ public class MessageDefinitionModel  implements Serializable {
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
-     builder.append("event" + "->" + this.event + "\n"); 
      builder.append("category" + "->" + this.category + "\n"); 
      builder.append("responseRequired" + "->" + this.responseRequired + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

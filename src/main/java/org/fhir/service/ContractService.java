@@ -38,11 +38,27 @@ public interface ContractService {
   public Contract update(Contract bean);
   public void delete(Contract bean);
   public List<Contract> findByField(QueryBuilder queryBuilder);
-  public List<Contract> findByAgent(QueryBuilder queryBuilder);
+  public List<Contract> findBySubject(QueryBuilder queryBuilder);
+  public List<Contract> findByTopic(QueryBuilder queryBuilder);
   public List<Contract> findByAuthority(QueryBuilder queryBuilder);
   public List<Contract> findByDomain(QueryBuilder queryBuilder);
+  public List<Contract> findByType(QueryBuilder queryBuilder);
+  public List<Contract> findBySubType(QueryBuilder queryBuilder);
+  public List<Contract> findByAction(QueryBuilder queryBuilder);
+  public List<Contract> findByActionReason(QueryBuilder queryBuilder);
+  public List<Contract> findByDecisionType(QueryBuilder queryBuilder);
+  public List<Contract> findByContentDerivative(QueryBuilder queryBuilder);
+  public List<Contract> findBySecurityLabel(QueryBuilder queryBuilder);
+  public List<Contract> findByAgent(QueryBuilder queryBuilder);
   public List<Contract> findBySigner(QueryBuilder queryBuilder);
-  public List<Contract> findBySubject(QueryBuilder queryBuilder);
+  public List<Contract> findByValuedItem(QueryBuilder queryBuilder);
+  public List<Contract> findByTerm(QueryBuilder queryBuilder);
+  public List<Contract> findByBindingReference(QueryBuilder queryBuilder);
+  public List<Contract> findByFriendly(QueryBuilder queryBuilder);
+  public List<Contract> findByLegal(QueryBuilder queryBuilder);
+  public List<Contract> findByRule(QueryBuilder queryBuilder);
+  public List<Contract> findByText(QueryBuilder queryBuilder);
+  public List<Contract> findByMeta(QueryBuilder queryBuilder);
 
 
 }

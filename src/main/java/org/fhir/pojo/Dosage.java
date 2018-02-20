@@ -154,6 +154,9 @@ public class Dosage  extends Element  {
     if (null != o.getText()) {
       this.text = o.getText();
     }
+    if (null != o.getAdditionalInstruction() && !o.getAdditionalInstruction().isEmpty()) {
+    	this.additionalInstruction = CodeableConceptHelper.fromArray2Array(o.getAdditionalInstruction());
+    }
     if (null != o.getPatientInstruction()) {
       this.patientInstruction = o.getPatientInstruction();
     }
@@ -161,10 +164,18 @@ public class Dosage  extends Element  {
     if (null != o.getAsNeededBoolean()) {
       this.asNeededBoolean = o.getAsNeededBoolean();
     }
-    this.asNeededCodeableConcept = CodeableConceptHelper.fromJson(o.getAsNeededCodeableConcept());
-    this.site = CodeableConceptHelper.fromJson(o.getSite());
-    this.route = CodeableConceptHelper.fromJson(o.getRoute());
-    this.method = CodeableConceptHelper.fromJson(o.getMethod());
+    if (null != o.getAsNeededCodeableConcept() && !o.getAsNeededCodeableConcept().isEmpty()) {
+      this.asNeededCodeableConcept = new CodeableConcept(o.getAsNeededCodeableConcept().get(0));
+    }
+    if (null != o.getSite() && !o.getSite().isEmpty()) {
+      this.site = new CodeableConcept(o.getSite().get(0));
+    }
+    if (null != o.getRoute() && !o.getRoute().isEmpty()) {
+      this.route = new CodeableConcept(o.getRoute().get(0));
+    }
+    if (null != o.getMethod() && !o.getMethod().isEmpty()) {
+      this.method = new CodeableConcept(o.getMethod().get(0));
+    }
     this.doseRange = RangeHelper.fromJson(o.getDoseRange());
     if (null != o.getDoseSimpleQuantity() && !o.getDoseSimpleQuantity().isEmpty()) {
       this.doseSimpleQuantity = new Quantity(o.getDoseSimpleQuantity().get(0));

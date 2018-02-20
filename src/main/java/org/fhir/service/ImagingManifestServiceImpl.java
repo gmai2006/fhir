@@ -114,9 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<ImagingManifest> findByPatient(QueryBuilder queryBuilder) {
+  	final List<ImagingManifest> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<ImagingManifest> findByAuthor(QueryBuilder queryBuilder) {
   	final List<ImagingManifest> result = dao.findByAuthor(queryBuilder);
     logger.info("findByauthor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingManifest> findByStudy(QueryBuilder queryBuilder) {
+  	final List<ImagingManifest> result = dao.findByStudy(queryBuilder);
+    logger.info("findBystudy - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingManifest> findByText(QueryBuilder queryBuilder) {
+  	final List<ImagingManifest> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImagingManifest> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ImagingManifest> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

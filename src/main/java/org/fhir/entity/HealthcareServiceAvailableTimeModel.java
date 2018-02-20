@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="healthcareserviceavailabletime")
 public class HealthcareServiceAvailableTimeModel  implements Serializable {
-	private static final long serialVersionUID = 151873631188060209L;
+	private static final long serialVersionUID = 151910893764964944L;
   /**
   * Description: "Indicates which days of the week are available between the start and end Times."
   */
@@ -113,11 +112,19 @@ public class HealthcareServiceAvailableTimeModel  implements Serializable {
 
   public HealthcareServiceAvailableTimeModel(HealthcareServiceAvailableTime o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.daysOfWeek = org.fhir.utils.JsonUtils.write2String(o.getDaysOfWeek());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    this.daysOfWeek = org.fhir.utils.JsonUtils.toJson(o.getDaysOfWeek());
     this.allDay = o.getAllDay();
     this.availableStartTime = o.getAvailableStartTime();
     this.availableEndTime = o.getAvailableEndTime();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getDaysOfWeek() {

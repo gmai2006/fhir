@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="documentreferencecontent")
 public class DocumentReferenceContentModel  implements Serializable {
-	private static final long serialVersionUID = 15187363117586980L;
+	private static final long serialVersionUID = 151910893752472752L;
   /**
   * Description: "The document or URL of the document along with critical metadata to prove content has integrity."
   * Actual type: String;
@@ -51,12 +50,14 @@ public class DocumentReferenceContentModel  implements Serializable {
 
   /**
   * Description: "An identifier of the document encoding, structure, and template that the document conforms to beyond the base format indicated in the mimeType."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"format\"", length = 16777215)
-  private String format;
+  @Column(name="\"format_id\"")
+  private String format_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="format_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> format;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -102,9 +103,22 @@ public class DocumentReferenceContentModel  implements Serializable {
 
   public DocumentReferenceContentModel(DocumentReferenceContent o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.attachment = JsonUtils.toJson(o.getAttachment());
-    this.format = JsonUtils.toJson(o.getFormat());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getAttachment()) {
+    	this.attachment = JsonUtils.toJson(o.getAttachment());
+    }
+    if (null != o.getFormat() ) {
+    	this.format_id = "format" + this.parent_id;
+    	this.format = CodingHelper.toModel(o.getFormat(), this.format_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getAttachment() {
@@ -113,10 +127,10 @@ public class DocumentReferenceContentModel  implements Serializable {
   public void setAttachment( String value) {
     this.attachment = value;
   }
-  public String getFormat() {
+  public java.util.List<CodingModel> getFormat() {
     return this.format;
   }
-  public void setFormat( String value) {
+  public void setFormat( java.util.List<CodingModel> value) {
     this.format = value;
   }
   public String getModifierExtension() {
@@ -149,7 +163,6 @@ public class DocumentReferenceContentModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[DocumentReferenceContentModel]:" + "\n");
      builder.append("attachment" + "->" + this.attachment + "\n"); 
-     builder.append("format" + "->" + this.format + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

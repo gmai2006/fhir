@@ -125,4 +125,16 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     logger.info("findByitem - exited - return value={} result ");
     return result;
   }
+  @Override
+  public List<Linkage> findByText(QueryBuilder queryBuilder) {
+  	final List<Linkage> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Linkage> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Linkage> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

@@ -42,4 +42,5 @@ public interface ResourceDao {
 
   public List<Resource> findByField(QueryBuilder queryBuilder);
 
+  public List<Resource> findByMeta(QueryBuilder queryBuilder);
 }

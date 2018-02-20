@@ -100,7 +100,9 @@ public class ContractValuedItem  extends BackboneElement  {
 
   public ContractValuedItem(ContractValuedItemModel o) {
     this.id = o.getId();
-    this.entityCodeableConcept = CodeableConceptHelper.fromJson(o.getEntityCodeableConcept());
+    if (null != o.getEntityCodeableConcept() && !o.getEntityCodeableConcept().isEmpty()) {
+      this.entityCodeableConcept = new CodeableConcept(o.getEntityCodeableConcept().get(0));
+    }
     if (null != o.getEntityReference() && !o.getEntityReference().isEmpty()) {
       this.entityReference = new Reference(o.getEntityReference().get(0));
     }

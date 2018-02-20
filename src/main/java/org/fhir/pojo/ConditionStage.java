@@ -47,7 +47,9 @@ public class ConditionStage  extends BackboneElement  {
 
   public ConditionStage(ConditionStageModel o) {
     this.id = o.getId();
-    this.summary = CodeableConceptHelper.fromJson(o.getSummary());
+    if (null != o.getSummary() && !o.getSummary().isEmpty()) {
+      this.summary = new CodeableConcept(o.getSummary().get(0));
+    }
     if (null != o.getAssessment() && !o.getAssessment().isEmpty()) {
     	this.assessment = ReferenceHelper.fromArray2Array(o.getAssessment());
     }

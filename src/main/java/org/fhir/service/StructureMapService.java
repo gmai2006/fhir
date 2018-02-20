@@ -38,6 +38,13 @@ public interface StructureMapService {
   public StructureMap update(StructureMap bean);
   public void delete(StructureMap bean);
   public List<StructureMap> findByField(QueryBuilder queryBuilder);
+  public List<StructureMap> findByContact(QueryBuilder queryBuilder);
+  public List<StructureMap> findByUseContext(QueryBuilder queryBuilder);
+  public List<StructureMap> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<StructureMap> findByStructure(QueryBuilder queryBuilder);
+  public List<StructureMap> findByGroup(QueryBuilder queryBuilder);
+  public List<StructureMap> findByText(QueryBuilder queryBuilder);
+  public List<StructureMap> findByMeta(QueryBuilder queryBuilder);
 
 
 }

@@ -119,6 +119,9 @@ public class CareTeam  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category = CodeableConceptHelper.fromArray2Array(o.getCategory());
+    }
     if (null != o.getName()) {
       this.name = o.getName();
     }
@@ -131,6 +134,9 @@ public class CareTeam  extends DomainResource  {
     this.period = PeriodHelper.fromJson(o.getPeriod());
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
     	this.participant = CareTeamParticipantHelper.fromArray2Array(o.getParticipant());
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());

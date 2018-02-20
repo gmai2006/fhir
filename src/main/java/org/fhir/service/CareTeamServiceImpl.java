@@ -114,6 +114,18 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<CareTeam> findByCategory(QueryBuilder queryBuilder) {
+  	final List<CareTeam> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CareTeam> findBySubject(QueryBuilder queryBuilder) {
+  	final List<CareTeam> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<CareTeam> findByContext(QueryBuilder queryBuilder) {
   	final List<CareTeam> result = dao.findByContext(queryBuilder);
     logger.info("findBycontext - exited - return value={} result ");
@@ -126,9 +138,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<CareTeam> findBySubject(QueryBuilder queryBuilder) {
-  	final List<CareTeam> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<CareTeam> findByReasonCode(QueryBuilder queryBuilder) {
+  	final List<CareTeam> result = dao.findByReasonCode(queryBuilder);
+    logger.info("findByreasonCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CareTeam> findByReasonReference(QueryBuilder queryBuilder) {
+  	final List<CareTeam> result = dao.findByReasonReference(queryBuilder);
+    logger.info("findByreasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CareTeam> findByManagingOrganization(QueryBuilder queryBuilder) {
+  	final List<CareTeam> result = dao.findByManagingOrganization(queryBuilder);
+    logger.info("findBymanagingOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CareTeam> findByText(QueryBuilder queryBuilder) {
+  	final List<CareTeam> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CareTeam> findByMeta(QueryBuilder queryBuilder) {
+  	final List<CareTeam> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

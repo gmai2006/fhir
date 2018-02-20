@@ -364,6 +364,12 @@ public class ActivityDefinition  extends DomainResource  {
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction = CodeableConceptHelper.fromArray2Array(o.getJurisdiction());
+    }
+    if (null != o.getTopic() && !o.getTopic().isEmpty()) {
+    	this.topic = CodeableConceptHelper.fromArray2Array(o.getTopic());
+    }
     if (null != o.getContributor() && !o.getContributor().isEmpty()) {
     	this.contributor = ContributorHelper.fromArray2Array(o.getContributor());
     }
@@ -382,7 +388,9 @@ public class ActivityDefinition  extends DomainResource  {
     if (null != o.getKind()) {
       this.kind = o.getKind();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     this.timingTiming = TimingHelper.fromJson(o.getTimingTiming());
     if (null != o.getTimingDateTime()) {
       this.timingDateTime = o.getTimingDateTime();
@@ -398,12 +406,17 @@ public class ActivityDefinition  extends DomainResource  {
     if (null != o.getProductReference() && !o.getProductReference().isEmpty()) {
       this.productReference = new Reference(o.getProductReference().get(0));
     }
-    this.productCodeableConcept = CodeableConceptHelper.fromJson(o.getProductCodeableConcept());
+    if (null != o.getProductCodeableConcept() && !o.getProductCodeableConcept().isEmpty()) {
+      this.productCodeableConcept = new CodeableConcept(o.getProductCodeableConcept().get(0));
+    }
     if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
       this.quantity = new Quantity(o.getQuantity().get(0));
     }
     if (null != o.getDosage() && !o.getDosage().isEmpty()) {
     	this.dosage = DosageHelper.fromArray2Array(o.getDosage());
+    }
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+    	this.bodySite = CodeableConceptHelper.fromArray2Array(o.getBodySite());
     }
     if (null != o.getTransform() && !o.getTransform().isEmpty()) {
       this.transform = new Reference(o.getTransform().get(0));

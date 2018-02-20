@@ -114,15 +114,63 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<EligibilityResponse> findByInsurer(QueryBuilder queryBuilder) {
-  	final List<EligibilityResponse> result = dao.findByInsurer(queryBuilder);
-    logger.info("findByinsurer - exited - return value={} result ");
+  public List<EligibilityResponse> findByRequestProvider(QueryBuilder queryBuilder) {
+  	final List<EligibilityResponse> result = dao.findByRequestProvider(queryBuilder);
+    logger.info("findByrequestProvider - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityResponse> findByRequestOrganization(QueryBuilder queryBuilder) {
+  	final List<EligibilityResponse> result = dao.findByRequestOrganization(queryBuilder);
+    logger.info("findByrequestOrganization - exited - return value={} result ");
     return result;
   }
   @Override
   public List<EligibilityResponse> findByRequest(QueryBuilder queryBuilder) {
   	final List<EligibilityResponse> result = dao.findByRequest(queryBuilder);
     logger.info("findByrequest - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityResponse> findByOutcome(QueryBuilder queryBuilder) {
+  	final List<EligibilityResponse> result = dao.findByOutcome(queryBuilder);
+    logger.info("findByoutcome - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityResponse> findByInsurer(QueryBuilder queryBuilder) {
+  	final List<EligibilityResponse> result = dao.findByInsurer(queryBuilder);
+    logger.info("findByinsurer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityResponse> findByInsurance(QueryBuilder queryBuilder) {
+  	final List<EligibilityResponse> result = dao.findByInsurance(queryBuilder);
+    logger.info("findByinsurance - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityResponse> findByForm(QueryBuilder queryBuilder) {
+  	final List<EligibilityResponse> result = dao.findByForm(queryBuilder);
+    logger.info("findByform - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityResponse> findByError(QueryBuilder queryBuilder) {
+  	final List<EligibilityResponse> result = dao.findByError(queryBuilder);
+    logger.info("findByerror - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityResponse> findByText(QueryBuilder queryBuilder) {
+  	final List<EligibilityResponse> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EligibilityResponse> findByMeta(QueryBuilder queryBuilder) {
+  	final List<EligibilityResponse> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

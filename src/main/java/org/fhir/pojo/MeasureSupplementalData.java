@@ -68,6 +68,9 @@ public class MeasureSupplementalData  extends BackboneElement  {
   public MeasureSupplementalData(MeasureSupplementalDataModel o) {
     this.id = o.getId();
     this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getUsage() && !o.getUsage().isEmpty()) {
+    	this.usage = CodeableConceptHelper.fromArray2Array(o.getUsage());
+    }
     if (null != o.getCriteria()) {
       this.criteria = o.getCriteria();
     }

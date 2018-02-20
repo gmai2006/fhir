@@ -114,9 +114,51 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<ImplementationGuide> findByContact(QueryBuilder queryBuilder) {
+  	final List<ImplementationGuide> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImplementationGuide> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<ImplementationGuide> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImplementationGuide> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<ImplementationGuide> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<ImplementationGuide> findByDependency(QueryBuilder queryBuilder) {
   	final List<ImplementationGuide> result = dao.findByDependency(queryBuilder);
     logger.info("findBydependency - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImplementationGuide> findByFHIRpackage(QueryBuilder queryBuilder) {
+  	final List<ImplementationGuide> result = dao.findByFHIRpackage(queryBuilder);
+    logger.info("findByFHIRpackage - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImplementationGuide> findByGlobal(QueryBuilder queryBuilder) {
+  	final List<ImplementationGuide> result = dao.findByGlobal(queryBuilder);
+    logger.info("findByglobal - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImplementationGuide> findByText(QueryBuilder queryBuilder) {
+  	final List<ImplementationGuide> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImplementationGuide> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ImplementationGuide> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

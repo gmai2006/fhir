@@ -114,6 +114,9 @@ public class Organization  extends DomainResource  {
     if (null != o.getActive()) {
       this.active = o.getActive();
     }
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type = CodeableConceptHelper.fromArray2Array(o.getType());
+    }
     if (null != o.getName()) {
       this.name = o.getName();
     }

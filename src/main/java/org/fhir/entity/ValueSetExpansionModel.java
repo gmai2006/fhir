@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="valuesetexpansion")
 public class ValueSetExpansionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631180234092L;
+	private static final long serialVersionUID = 151910893756759854L;
   /**
   * Description: "An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so."
   */
@@ -136,7 +135,9 @@ public class ValueSetExpansionModel  implements Serializable {
 
   public ValueSetExpansionModel(ValueSetExpansion o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.identifier = o.getIdentifier();
     this.timestamp = o.getTimestamp();
     this.total = o.getTotal();
@@ -148,6 +149,12 @@ public class ValueSetExpansionModel  implements Serializable {
     if (null != o.getContains() && !o.getContains().isEmpty()) {
     	this.contains_id = "contains" + this.parent_id;
     	this.contains = ValueSetContainsHelper.toModelFromArray(o.getContains(), this.contains_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

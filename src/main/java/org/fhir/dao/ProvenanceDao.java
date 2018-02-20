@@ -42,7 +42,12 @@ public interface ProvenanceDao {
 
   public List<Provenance> findByField(QueryBuilder queryBuilder);
 
-  public List<Provenance> findByAgent(QueryBuilder queryBuilder);
-  public List<Provenance> findByLocation(QueryBuilder queryBuilder);
   public List<Provenance> findByTarget(QueryBuilder queryBuilder);
+  public List<Provenance> findByLocation(QueryBuilder queryBuilder);
+  public List<Provenance> findByReason(QueryBuilder queryBuilder);
+  public List<Provenance> findByActivity(QueryBuilder queryBuilder);
+  public List<Provenance> findByAgent(QueryBuilder queryBuilder);
+  public List<Provenance> findByEntity(QueryBuilder queryBuilder);
+  public List<Provenance> findByText(QueryBuilder queryBuilder);
+  public List<Provenance> findByMeta(QueryBuilder queryBuilder);
 }

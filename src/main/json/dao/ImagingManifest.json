@@ -214,7 +214,8 @@
       "type": "reference",
       "expression": "ImagingManifest.author",
       "code": "author",
-      "xpath": "author"
+      "xpath": "author",
+      "fieldName": "author"
     },
     {
       "name": "authoringtime",
@@ -222,7 +223,8 @@
       "type": "date",
       "expression": "ImagingManifest.authoringTime",
       "code": "authoringtime",
-      "xpath": "authoringTime"
+      "xpath": "authoringTime",
+      "fieldName": "authoringTime"
     },
     {
       "name": "endpoint",
@@ -230,7 +232,8 @@
       "type": "reference",
       "expression": "ImagingManifest.study.endpoint | ImagingManifest.study.series.endpoint",
       "code": "endpoint",
-      "xpath": "study/endpoint | study/series/endpoint"
+      "xpath": "study/endpoint | study/series/endpoint",
+      "fieldName": "endpoint"
     },
     {
       "name": "identifier",
@@ -238,7 +241,8 @@
       "type": "token",
       "expression": "ImagingManifest.identifier",
       "code": "identifier",
-      "xpath": "identifier"
+      "xpath": "identifier",
+      "fieldName": "identifier"
     },
     {
       "name": "imagingstudy",
@@ -246,7 +250,8 @@
       "type": "reference",
       "expression": "ImagingManifest.study.imagingStudy",
       "code": "imagingstudy",
-      "xpath": "study/imagingStudy"
+      "xpath": "study/imagingStudy",
+      "fieldName": "imagingStudy"
     },
     {
       "name": "selectedstudy",
@@ -254,7 +259,8 @@
       "type": "uri",
       "expression": "ImagingManifest.study.uid",
       "code": "selectedstudy",
-      "xpath": "study/uid"
+      "xpath": "study/uid",
+      "fieldName": "uid"
     }
   ]
 }

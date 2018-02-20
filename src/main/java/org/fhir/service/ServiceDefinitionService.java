@@ -38,6 +38,17 @@ public interface ServiceDefinitionService {
   public ServiceDefinition update(ServiceDefinition bean);
   public void delete(ServiceDefinition bean);
   public List<ServiceDefinition> findByField(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByUseContext(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByTopic(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByContributor(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByContact(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByRelatedArtifact(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByTrigger(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByDataRequirement(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByOperationDefinition(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByText(QueryBuilder queryBuilder);
+  public List<ServiceDefinition> findByMeta(QueryBuilder queryBuilder);
 
 
 }

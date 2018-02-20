@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.ExpansionProfile;
 import org.fhir.service.ExpansionProfileService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/ExpansionProfile")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class ExpansionProfileResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public ExpansionProfile find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public ExpansionProfile findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<ExpansionProfile> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ExpansionProfile> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ExpansionProfile> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ExpansionProfile> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ExpansionProfile> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<ExpansionProfile> findAll() {
   	return this.service.selectAll();
   }
@@ -107,14 +172,78 @@ public class ExpansionProfileResource {
     return service.select(input);
   }
 
+  /**
+  * Descr: The uri that identifies the expansion profile
+  * Type: uri
+  */
   @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<ExpansionProfile> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<ExpansionProfile> url(@QueryParam("url")String url) {
+  	java.util.Map<String, String> params = QueryParser.parse(url, VALID_FIELDS);
   	return this.service.findByField(new QueryBuilder(params));
   }
-
+  /**
+  * Descr: External identifier for the expansion profile
+  * Type: token
+  */
+  @GET
+  public List<ExpansionProfile> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The business version of the expansion profile
+  * Type: token
+  */
+  @GET
+  public List<ExpansionProfile> version(@QueryParam("version")String version) {
+  	java.util.Map<String, String> params = QueryParser.parse(version, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Computationally friendly name of the expansion profile
+  * Type: string
+  */
+  @GET
+  public List<ExpansionProfile> name(@QueryParam("name")String name) {
+  	java.util.Map<String, String> params = QueryParser.parse(name, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The current status of the expansion profile
+  * Type: token
+  */
+  @GET
+  public List<ExpansionProfile> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Name of the publisher of the expansion profile
+  * Type: string
+  */
+  @GET
+  public List<ExpansionProfile> publisher(@QueryParam("publisher")String publisher) {
+  	java.util.Map<String, String> params = QueryParser.parse(publisher, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The description of the expansion profile
+  * Type: string
+  */
+  @GET
+  public List<ExpansionProfile> description(@QueryParam("description")String description) {
+  	java.util.Map<String, String> params = QueryParser.parse(description, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Intended jurisdiction for the expansion profile
+  * Type: token
+  */
+  @GET
+  public List<ExpansionProfile> jurisdiction(@QueryParam("jurisdiction")String jurisdiction) {
+  	java.util.Map<String, String> params = QueryParser.parse(jurisdiction, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
 
   private static final String VALID_FIELDS = "date|description|identifier|jurisdiction|name|publisher|status|url|version";
 }

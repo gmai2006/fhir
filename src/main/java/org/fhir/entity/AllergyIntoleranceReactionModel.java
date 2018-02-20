@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,25 +37,28 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="allergyintolerancereaction")
 public class AllergyIntoleranceReactionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631169640360L;
+	private static final long serialVersionUID = 151910893745363714L;
   /**
   * Description: "Identification of the specific substance (or pharmaceutical product) considered to be responsible for the Adverse Reaction event. Note: the substance for a specific reaction may be different from the substance identified as the cause of the risk, but it must be consistent with it. For instance, it may be a more specific substance (e.g. a brand medication) or a composite product that includes the identified substance. It must be clinically safe to only process the 'code' and ignore the 'reaction.substance'."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"substance\"", length = 16777215)
-  private String substance;
+  @Column(name="\"substance_id\"")
+  private String substance_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="substance_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> substance;
 
   /**
   * Description: "Clinical symptoms and/or signs that are observed or associated with the adverse reaction event."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"manifestation\"", length = 16777215)
-  private String manifestation;
+  @Column(name="\"manifestation_id\"")
+  private String manifestation_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="manifestation_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> manifestation;
 
   /**
   * Description: "Text description about the reaction as a whole, including details of the manifestation if required."
@@ -82,12 +84,14 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
 
   /**
   * Description: "Identification of the route by which the subject was exposed to the substance."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"exposureRoute\"", length = 16777215)
-  private String exposureRoute;
+  @Column(name="\"exposureroute_id\"")
+  private String exposureroute_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="exposureroute_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> exposureRoute;
 
   /**
   * Description: "Additional text about the adverse reaction event not captured in other fields."
@@ -142,24 +146,45 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
 
   public AllergyIntoleranceReactionModel(AllergyIntoleranceReaction o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.substance = JsonUtils.toJson(o.getSubstance());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getSubstance() ) {
+    	this.substance_id = "substance" + this.parent_id;
+    	this.substance = CodeableConceptHelper.toModel(o.getSubstance(), this.substance_id);
+    }
+    if (null != o.getManifestation() && !o.getManifestation().isEmpty()) {
+    	this.manifestation_id = "manifestation" + this.parent_id;
+    	this.manifestation = CodeableConceptHelper.toModelFromArray(o.getManifestation(), this.manifestation_id);
+    }
     this.description = o.getDescription();
     this.onset = o.getOnset();
     this.severity = o.getSeverity();
-    this.exposureRoute = JsonUtils.toJson(o.getExposureRoute());
+    if (null != o.getExposureRoute() ) {
+    	this.exposureroute_id = "exposureroute" + this.parent_id;
+    	this.exposureRoute = CodeableConceptHelper.toModel(o.getExposureRoute(), this.exposureroute_id);
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getSubstance() {
+  public java.util.List<CodeableConceptModel> getSubstance() {
     return this.substance;
   }
-  public void setSubstance( String value) {
+  public void setSubstance( java.util.List<CodeableConceptModel> value) {
     this.substance = value;
   }
-  public String getManifestation() {
+  public java.util.List<CodeableConceptModel> getManifestation() {
     return this.manifestation;
   }
-  public void setManifestation( String value) {
+  public void setManifestation( java.util.List<CodeableConceptModel> value) {
     this.manifestation = value;
   }
   public String getDescription() {
@@ -180,10 +205,10 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
   public void setSeverity( String value) {
     this.severity = value;
   }
-  public String getExposureRoute() {
+  public java.util.List<CodeableConceptModel> getExposureRoute() {
     return this.exposureRoute;
   }
-  public void setExposureRoute( String value) {
+  public void setExposureRoute( java.util.List<CodeableConceptModel> value) {
     this.exposureRoute = value;
   }
   public String getNote() {
@@ -221,12 +246,9 @@ public class AllergyIntoleranceReactionModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[AllergyIntoleranceReactionModel]:" + "\n");
-     builder.append("substance" + "->" + this.substance + "\n"); 
-     builder.append("manifestation" + "->" + this.manifestation + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("onset" + "->" + this.onset + "\n"); 
      builder.append("severity" + "->" + this.severity + "\n"); 
-     builder.append("exposureRoute" + "->" + this.exposureRoute + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

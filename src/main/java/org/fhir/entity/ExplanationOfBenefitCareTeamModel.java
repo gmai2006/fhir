@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="explanationofbenefitcareteam")
 public class ExplanationOfBenefitCareTeamModel  implements Serializable {
-	private static final long serialVersionUID = 151873631187313382L;
+	private static final long serialVersionUID = 15191089376412266L;
   /**
   * Description: "Sequence of careteam which serves to order and provide a link."
   */
@@ -67,21 +66,25 @@ public class ExplanationOfBenefitCareTeamModel  implements Serializable {
 
   /**
   * Description: "The lead, assisting or supervising practitioner and their discipline if a multidisiplinary team."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"role\"", length = 16777215)
-  private String role;
+  @Column(name="\"role_id\"")
+  private String role_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> role;
 
   /**
   * Description: "The qualification which is applicable for this service."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"qualification\"", length = 16777215)
-  private String qualification;
+  @Column(name="\"qualification_id\"")
+  private String qualification_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="qualification_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> qualification;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -127,15 +130,29 @@ public class ExplanationOfBenefitCareTeamModel  implements Serializable {
 
   public ExplanationOfBenefitCareTeamModel(ExplanationOfBenefitCareTeam o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.sequence = o.getSequence();
     if (null != o.getProvider() ) {
     	this.provider_id = "provider" + this.parent_id;
     	this.provider = ReferenceHelper.toModel(o.getProvider(), this.provider_id);
     }
     this.responsible = o.getResponsible();
-    this.role = JsonUtils.toJson(o.getRole());
-    this.qualification = JsonUtils.toJson(o.getQualification());
+    if (null != o.getRole() ) {
+    	this.role_id = "role" + this.parent_id;
+    	this.role = CodeableConceptHelper.toModel(o.getRole(), this.role_id);
+    }
+    if (null != o.getQualification() ) {
+    	this.qualification_id = "qualification" + this.parent_id;
+    	this.qualification = CodeableConceptHelper.toModel(o.getQualification(), this.qualification_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Float getSequence() {
@@ -156,16 +173,16 @@ public class ExplanationOfBenefitCareTeamModel  implements Serializable {
   public void setResponsible( Boolean value) {
     this.responsible = value;
   }
-  public String getRole() {
+  public java.util.List<CodeableConceptModel> getRole() {
     return this.role;
   }
-  public void setRole( String value) {
+  public void setRole( java.util.List<CodeableConceptModel> value) {
     this.role = value;
   }
-  public String getQualification() {
+  public java.util.List<CodeableConceptModel> getQualification() {
     return this.qualification;
   }
-  public void setQualification( String value) {
+  public void setQualification( java.util.List<CodeableConceptModel> value) {
     this.qualification = value;
   }
   public String getModifierExtension() {
@@ -199,8 +216,6 @@ public class ExplanationOfBenefitCareTeamModel  implements Serializable {
     builder.append("[ExplanationOfBenefitCareTeamModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
      builder.append("responsible" + "->" + this.responsible + "\n"); 
-     builder.append("role" + "->" + this.role + "\n"); 
-     builder.append("qualification" + "->" + this.qualification + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

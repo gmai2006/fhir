@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="organization")
 public class OrganizationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631177071292L;
+	private static final long serialVersionUID = 151910893753865679L;
   /**
   * Description: "This is a Organization resource"
   */
@@ -65,12 +64,14 @@ public class OrganizationModel  implements Serializable {
 
   /**
   * Description: "The kind(s) of organization that this is."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "A name associated with the organization."
@@ -230,9 +231,19 @@ public class OrganizationModel  implements Serializable {
   public OrganizationModel(Organization o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.active = o.getActive();
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModelFromArray(o.getType(), this.type_id);
+    }
     this.name = o.getName();
-    this.alias = org.fhir.utils.JsonUtils.write2String(o.getAlias());
+    this.alias = org.fhir.utils.JsonUtils.toJson(o.getAlias());
+    if (null != o.getTelecom()) {
+    	this.telecom = JsonUtils.toJson(o.getTelecom());
+    }
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
     	this.address_id = "address" + this.id;
     	this.address = AddressHelper.toModelFromArray(o.getAddress(), this.address_id);
@@ -252,6 +263,15 @@ public class OrganizationModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -279,10 +299,10 @@ public class OrganizationModel  implements Serializable {
   public void setActive( Boolean value) {
     this.active = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public String getName() {
@@ -383,7 +403,6 @@ public class OrganizationModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("alias" + "->" + this.alias + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 

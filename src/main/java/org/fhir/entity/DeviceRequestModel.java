@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="devicerequest")
 public class DeviceRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151873631109669439L;
+	private static final long serialVersionUID = 151910893688440768L;
   /**
   * Description: "This is a DeviceRequest resource"
   */
@@ -108,13 +107,14 @@ public class DeviceRequestModel  implements Serializable {
 
   /**
   * Description: "Whether the request is a proposal, plan, an original order or a reflex order."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"intent\"", length = 16777215)
-  private String intent;
+  @Column(name="\"intent_id\"")
+  private String intent_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="intent_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> intent;
 
   /**
   * Description: "Indicates how quickly the {{title}} should be addressed with respect to other requests."
@@ -137,12 +137,14 @@ public class DeviceRequestModel  implements Serializable {
 
   /**
   * Description: "The details of the device to be used."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"codeCodeableConcept\"", length = 16777215)
-  private String codeCodeableConcept;
+  @Column(name="\"codecodeableconcept_id\"")
+  private String codecodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="codecodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> codeCodeableConcept;
 
   /**
   * Description: "The patient who will use the device."
@@ -213,12 +215,14 @@ public class DeviceRequestModel  implements Serializable {
 
   /**
   * Description: "Desired type of performer for doing the diagnostic testing."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"performerType\"", length = 16777215)
-  private String performerType;
+  @Column(name="\"performertype_id\"")
+  private String performertype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performertype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> performerType;
 
   /**
   * Description: "The desired perfomer for doing the diagnostic testing."
@@ -233,12 +237,14 @@ public class DeviceRequestModel  implements Serializable {
 
   /**
   * Description: "Reason or justification for the use of this device."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonCode\"", length = 16777215)
-  private String reasonCode;
+  @Column(name="\"reasoncode_id\"")
+  private String reasoncode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonCode;
 
   /**
   * Description: "Reason or justification for the use of this device."
@@ -373,6 +379,9 @@ public class DeviceRequestModel  implements Serializable {
   public DeviceRequestModel(DeviceRequest o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition_id = "definition" + this.id;
     	this.definition = ReferenceHelper.toModelFromArray(o.getDefinition(), this.definition_id);
@@ -385,15 +394,23 @@ public class DeviceRequestModel  implements Serializable {
     	this.priorrequest_id = "priorrequest" + this.id;
     	this.priorRequest = ReferenceHelper.toModelFromArray(o.getPriorRequest(), this.priorrequest_id);
     }
-    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
+    if (null != o.getGroupIdentifier()) {
+    	this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
+    }
     this.status = o.getStatus();
-    this.intent = JsonUtils.toJson(o.getIntent());
+    if (null != o.getIntent() ) {
+    	this.intent_id = "intent" + this.id;
+    	this.intent = CodeableConceptHelper.toModel(o.getIntent(), this.intent_id);
+    }
     this.priority = o.getPriority();
     if (null != o.getCodeReference() ) {
     	this.codereference_id = "codereference" + this.id;
     	this.codeReference = ReferenceHelper.toModel(o.getCodeReference(), this.codereference_id);
     }
-    this.codeCodeableConcept = JsonUtils.toJson(o.getCodeCodeableConcept());
+    if (null != o.getCodeCodeableConcept() ) {
+    	this.codecodeableconcept_id = "codecodeableconcept" + this.id;
+    	this.codeCodeableConcept = CodeableConceptHelper.toModel(o.getCodeCodeableConcept(), this.codecodeableconcept_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -403,17 +420,28 @@ public class DeviceRequestModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
-    this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
+    if (null != o.getOccurrencePeriod()) {
+    	this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    }
+    if (null != o.getOccurrenceTiming()) {
+    	this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
+    }
     this.authoredOn = o.getAuthoredOn();
     if (null != o.getRequester() ) {
     	this.requester_id = "requester" + this.id;
     	this.requester = DeviceRequestRequesterHelper.toModel(o.getRequester(), this.requester_id);
     }
-    this.performerType = JsonUtils.toJson(o.getPerformerType());
+    if (null != o.getPerformerType() ) {
+    	this.performertype_id = "performertype" + this.id;
+    	this.performerType = CodeableConceptHelper.toModel(o.getPerformerType(), this.performertype_id);
+    }
     if (null != o.getPerformer() ) {
     	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasoncode_id = "reasoncode" + this.id;
+    	this.reasonCode = CodeableConceptHelper.toModelFromArray(o.getReasonCode(), this.reasoncode_id);
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonreference_id = "reasonreference" + this.id;
@@ -423,6 +451,9 @@ public class DeviceRequestModel  implements Serializable {
     	this.supportinginfo_id = "supportinginfo" + this.id;
     	this.supportingInfo = ReferenceHelper.toModelFromArray(o.getSupportingInfo(), this.supportinginfo_id);
     }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getRelevantHistory() && !o.getRelevantHistory().isEmpty()) {
     	this.relevanthistory_id = "relevanthistory" + this.id;
     	this.relevantHistory = ReferenceHelper.toModelFromArray(o.getRelevantHistory(), this.relevanthistory_id);
@@ -430,6 +461,15 @@ public class DeviceRequestModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -481,10 +521,10 @@ public class DeviceRequestModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getIntent() {
+  public java.util.List<CodeableConceptModel> getIntent() {
     return this.intent;
   }
-  public void setIntent( String value) {
+  public void setIntent( java.util.List<CodeableConceptModel> value) {
     this.intent = value;
   }
   public String getPriority() {
@@ -499,10 +539,10 @@ public class DeviceRequestModel  implements Serializable {
   public void setCodeReference( java.util.List<ReferenceModel> value) {
     this.codeReference = value;
   }
-  public String getCodeCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getCodeCodeableConcept() {
     return this.codeCodeableConcept;
   }
-  public void setCodeCodeableConcept( String value) {
+  public void setCodeCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.codeCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -547,10 +587,10 @@ public class DeviceRequestModel  implements Serializable {
   public void setRequester( java.util.List<DeviceRequestRequesterModel> value) {
     this.requester = value;
   }
-  public String getPerformerType() {
+  public java.util.List<CodeableConceptModel> getPerformerType() {
     return this.performerType;
   }
-  public void setPerformerType( String value) {
+  public void setPerformerType( java.util.List<CodeableConceptModel> value) {
     this.performerType = value;
   }
   public java.util.List<ReferenceModel> getPerformer() {
@@ -559,10 +599,10 @@ public class DeviceRequestModel  implements Serializable {
   public void setPerformer( java.util.List<ReferenceModel> value) {
     this.performer = value;
   }
-  public String getReasonCode() {
+  public java.util.List<CodeableConceptModel> getReasonCode() {
     return this.reasonCode;
   }
-  public void setReasonCode( String value) {
+  public void setReasonCode( java.util.List<CodeableConceptModel> value) {
     this.reasonCode = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
@@ -646,15 +686,11 @@ public class DeviceRequestModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("groupIdentifier" + "->" + this.groupIdentifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("intent" + "->" + this.intent + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("codeCodeableConcept" + "->" + this.codeCodeableConcept + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("occurrenceTiming" + "->" + this.occurrenceTiming + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
-     builder.append("performerType" + "->" + this.performerType + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="immunizationreaction")
 public class ImmunizationReactionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631143886559L;
+	private static final long serialVersionUID = 151910893720513191L;
   /**
   * Description: "Date of reaction to the immunization."
   */
@@ -109,13 +108,21 @@ public class ImmunizationReactionModel  implements Serializable {
 
   public ImmunizationReactionModel(ImmunizationReaction o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.date = o.getDate();
     if (null != o.getDetail() ) {
     	this.detail_id = "detail" + this.parent_id;
     	this.detail = ReferenceHelper.toModel(o.getDetail(), this.detail_id);
     }
     this.reported = o.getReported();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getDate() {

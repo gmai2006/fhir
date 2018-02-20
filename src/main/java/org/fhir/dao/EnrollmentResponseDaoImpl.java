@@ -97,15 +97,45 @@ public class EnrollmentResponseDaoImpl implements EnrollmentResponseDao {
   }
 
   @Override
+  public List<EnrollmentResponse> findByRequest(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EnrollmentResponseModel a, Reference b where a.request_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<EnrollmentResponse> findByOutcome(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EnrollmentResponseModel a, CodeableConcept b where a.outcome_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
   public List<EnrollmentResponse> findByOrganization(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from EnrollmentResponseModel a, Reference b where a.organization_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<EnrollmentResponse> findByRequest(QueryBuilder queryBuilder) {
+  public List<EnrollmentResponse> findByRequestProvider(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from EnrollmentResponseModel a, Reference b where a.request_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from EnrollmentResponseModel a, Reference b where a.requestProvider_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<EnrollmentResponse> findByRequestOrganization(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EnrollmentResponseModel a, Reference b where a.requestOrganization_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<EnrollmentResponse> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EnrollmentResponseModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<EnrollmentResponse> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from EnrollmentResponseModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="immunizationrecommendationprotocol")
 public class ImmunizationRecommendationProtocolModel  implements Serializable {
-	private static final long serialVersionUID = 151873631155873139L;
+	private static final long serialVersionUID = 151910893732373706L;
   /**
   * Description: "Indicates the nominal position in a series of the next dose.  This is the recommended dose number as per a specified protocol."
   */
@@ -116,7 +115,9 @@ public class ImmunizationRecommendationProtocolModel  implements Serializable {
 
   public ImmunizationRecommendationProtocolModel(ImmunizationRecommendationProtocol o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.doseSequence = o.getDoseSequence();
     this.description = o.getDescription();
     if (null != o.getAuthority() ) {
@@ -124,6 +125,12 @@ public class ImmunizationRecommendationProtocolModel  implements Serializable {
     	this.authority = ReferenceHelper.toModel(o.getAuthority(), this.authority_id);
     }
     this.series = o.getSeries();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Float getDoseSequence() {

@@ -113,7 +113,9 @@ public class MessageHeader  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
-    this.event = CodingHelper.fromJson(o.getEvent());
+    if (null != o.getEvent() && !o.getEvent().isEmpty()) {
+      this.event = new Coding(o.getEvent().get(0));
+    }
     if (null != o.getDestination() && !o.getDestination().isEmpty()) {
     	this.destination = MessageHeaderDestinationHelper.fromArray2Array(o.getDestination());
     }
@@ -138,7 +140,9 @@ public class MessageHeader  extends DomainResource  {
     if (null != o.getResponsible() && !o.getResponsible().isEmpty()) {
       this.responsible = new Reference(o.getResponsible().get(0));
     }
-    this.reason = CodeableConceptHelper.fromJson(o.getReason());
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+      this.reason = new CodeableConcept(o.getReason().get(0));
+    }
     if (null != o.getResponse() && !o.getResponse().isEmpty()) {
       this.response = new MessageHeaderResponse(o.getResponse().get(0));
     }

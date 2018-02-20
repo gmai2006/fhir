@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claimresponse")
 public class ClaimResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151873631163948448L;
+	private static final long serialVersionUID = 151910893739996495L;
   /**
   * Description: "This is a ClaimResponse resource"
   */
@@ -129,12 +128,14 @@ public class ClaimResponseModel  implements Serializable {
 
   /**
   * Description: "Processing outcome errror, partial or complete processing."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"outcome\"", length = 16777215)
-  private String outcome;
+  @Column(name="\"outcome_id\"")
+  private String outcome_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> outcome;
 
   /**
   * Description: "A description of the status of the adjudication."
@@ -145,12 +146,14 @@ public class ClaimResponseModel  implements Serializable {
 
   /**
   * Description: "Party to be reimbursed: Subscriber, provider, other."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"payeeType\"", length = 16777215)
-  private String payeeType;
+  @Column(name="\"payeetype_id\"")
+  private String payeetype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payeetype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> payeeType;
 
   /**
   * Description: "The first tier service adjudications for submitted services."
@@ -231,21 +234,25 @@ public class ClaimResponseModel  implements Serializable {
 
   /**
   * Description: "Status of funds reservation (For provider, for Patient, None)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reserved\"", length = 16777215)
-  private String reserved;
+  @Column(name="\"reserved_id\"")
+  private String reserved_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reserved_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> reserved;
 
   /**
   * Description: "The form to be used for printing the content."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"form\"", length = 16777215)
-  private String form;
+  @Column(name="\"form_id\"")
+  private String form_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> form;
 
   /**
   * Description: "Note text."
@@ -371,6 +378,9 @@ public class ClaimResponseModel  implements Serializable {
   public ClaimResponseModel(ClaimResponse o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
@@ -393,9 +403,15 @@ public class ClaimResponseModel  implements Serializable {
     	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
-    this.outcome = JsonUtils.toJson(o.getOutcome());
+    if (null != o.getOutcome() ) {
+    	this.outcome_id = "outcome" + this.id;
+    	this.outcome = CodeableConceptHelper.toModel(o.getOutcome(), this.outcome_id);
+    }
     this.disposition = o.getDisposition();
-    this.payeeType = JsonUtils.toJson(o.getPayeeType());
+    if (null != o.getPayeeType() ) {
+    	this.payeetype_id = "payeetype" + this.id;
+    	this.payeeType = CodeableConceptHelper.toModel(o.getPayeeType(), this.payeetype_id);
+    }
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item_id = "item" + this.id;
     	this.item = ClaimResponseItemHelper.toModelFromArray(o.getItem(), this.item_id);
@@ -424,8 +440,14 @@ public class ClaimResponseModel  implements Serializable {
     	this.payment_id = "payment" + this.id;
     	this.payment = ClaimResponsePaymentHelper.toModel(o.getPayment(), this.payment_id);
     }
-    this.reserved = JsonUtils.toJson(o.getReserved());
-    this.form = JsonUtils.toJson(o.getForm());
+    if (null != o.getReserved() ) {
+    	this.reserved_id = "reserved" + this.id;
+    	this.reserved = CodingHelper.toModel(o.getReserved(), this.reserved_id);
+    }
+    if (null != o.getForm() ) {
+    	this.form_id = "form" + this.id;
+    	this.form = CodeableConceptHelper.toModel(o.getForm(), this.form_id);
+    }
     if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
     	this.processnote_id = "processnote" + this.id;
     	this.processNote = ClaimResponseProcessNoteHelper.toModelFromArray(o.getProcessNote(), this.processnote_id);
@@ -441,6 +463,15 @@ public class ClaimResponseModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -504,10 +535,10 @@ public class ClaimResponseModel  implements Serializable {
   public void setRequest( java.util.List<ReferenceModel> value) {
     this.request = value;
   }
-  public String getOutcome() {
+  public java.util.List<CodeableConceptModel> getOutcome() {
     return this.outcome;
   }
-  public void setOutcome( String value) {
+  public void setOutcome( java.util.List<CodeableConceptModel> value) {
     this.outcome = value;
   }
   public String getDisposition() {
@@ -516,10 +547,10 @@ public class ClaimResponseModel  implements Serializable {
   public void setDisposition( String value) {
     this.disposition = value;
   }
-  public String getPayeeType() {
+  public java.util.List<CodeableConceptModel> getPayeeType() {
     return this.payeeType;
   }
-  public void setPayeeType( String value) {
+  public void setPayeeType( java.util.List<CodeableConceptModel> value) {
     this.payeeType = value;
   }
   public java.util.List<ClaimResponseItemModel> getItem() {
@@ -564,16 +595,16 @@ public class ClaimResponseModel  implements Serializable {
   public void setPayment( java.util.List<ClaimResponsePaymentModel> value) {
     this.payment = value;
   }
-  public String getReserved() {
+  public java.util.List<CodingModel> getReserved() {
     return this.reserved;
   }
-  public void setReserved( String value) {
+  public void setReserved( java.util.List<CodingModel> value) {
     this.reserved = value;
   }
-  public String getForm() {
+  public java.util.List<CodeableConceptModel> getForm() {
     return this.form;
   }
-  public void setForm( String value) {
+  public void setForm( java.util.List<CodeableConceptModel> value) {
     this.form = value;
   }
   public java.util.List<ClaimResponseProcessNoteModel> getProcessNote() {
@@ -651,11 +682,7 @@ public class ClaimResponseModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("disposition" + "->" + this.disposition + "\n"); 
-     builder.append("payeeType" + "->" + this.payeeType + "\n"); 
-     builder.append("reserved" + "->" + this.reserved + "\n"); 
-     builder.append("form" + "->" + this.form + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

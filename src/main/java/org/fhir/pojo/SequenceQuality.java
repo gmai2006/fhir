@@ -175,7 +175,9 @@ public class SequenceQuality  extends BackboneElement  {
     if (null != o.getType()) {
       this.type = o.getType();
     }
-    this.standardSequence = CodeableConceptHelper.fromJson(o.getStandardSequence());
+    if (null != o.getStandardSequence() && !o.getStandardSequence().isEmpty()) {
+      this.standardSequence = new CodeableConcept(o.getStandardSequence().get(0));
+    }
     if (null != o.getStart()) {
       this.start = o.getStart();
     }
@@ -185,7 +187,9 @@ public class SequenceQuality  extends BackboneElement  {
     if (null != o.getScore() && !o.getScore().isEmpty()) {
       this.score = new Quantity(o.getScore().get(0));
     }
-    this.method = CodeableConceptHelper.fromJson(o.getMethod());
+    if (null != o.getMethod() && !o.getMethod().isEmpty()) {
+      this.method = new CodeableConcept(o.getMethod().get(0));
+    }
     if (null != o.getTruthTP()) {
       this.truthTP = o.getTruthTP();
     }

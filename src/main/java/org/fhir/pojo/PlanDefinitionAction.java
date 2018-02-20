@@ -250,6 +250,12 @@ public class PlanDefinitionAction  extends BackboneElement  {
     if (null != o.getTextEquivalent()) {
       this.textEquivalent = o.getTextEquivalent();
     }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code = CodeableConceptHelper.fromArray2Array(o.getCode());
+    }
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason = CodeableConceptHelper.fromArray2Array(o.getReason());
+    }
     if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
     	this.documentation = RelatedArtifactHelper.fromArray2Array(o.getDocumentation());
     }
@@ -281,7 +287,9 @@ public class PlanDefinitionAction  extends BackboneElement  {
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
     	this.participant = PlanDefinitionParticipantHelper.fromArray2Array(o.getParticipant());
     }
-    this.type = CodingHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new Coding(o.getType().get(0));
+    }
     if (null != o.getGroupingBehavior()) {
       this.groupingBehavior = o.getGroupingBehavior();
     }

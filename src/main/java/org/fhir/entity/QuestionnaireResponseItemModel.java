@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="questionnaireresponseitem")
 public class QuestionnaireResponseItemModel  implements Serializable {
-	private static final long serialVersionUID = 151873631156889272L;
+	private static final long serialVersionUID = 151910893732972153L;
   /**
   * Description: "The item from the Questionnaire that corresponds to this item in the QuestionnaireResponse resource."
   */
@@ -137,7 +136,9 @@ public class QuestionnaireResponseItemModel  implements Serializable {
 
   public QuestionnaireResponseItemModel(QuestionnaireResponseItem o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.linkId = o.getLinkId();
     this.definition = o.getDefinition();
     this.text = o.getText();
@@ -152,6 +153,12 @@ public class QuestionnaireResponseItemModel  implements Serializable {
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item_id = "item" + this.parent_id;
     	this.item = QuestionnaireResponseItemHelper.toModelFromArray(o.getItem(), this.item_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

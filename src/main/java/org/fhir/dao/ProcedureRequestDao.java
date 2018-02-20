@@ -42,11 +42,23 @@ public interface ProcedureRequestDao {
 
   public List<ProcedureRequest> findByField(QueryBuilder queryBuilder);
 
-  public List<ProcedureRequest> findByContext(QueryBuilder queryBuilder);
   public List<ProcedureRequest> findByDefinition(QueryBuilder queryBuilder);
-  public List<ProcedureRequest> findByPerformer(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByBasedOn(QueryBuilder queryBuilder);
   public List<ProcedureRequest> findByReplaces(QueryBuilder queryBuilder);
-  public List<ProcedureRequest> findByRequester(QueryBuilder queryBuilder);
-  public List<ProcedureRequest> findBySpecimen(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByCategory(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByCode(QueryBuilder queryBuilder);
   public List<ProcedureRequest> findBySubject(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByContext(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByAsNeededCodeableConcept(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByRequester(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByPerformerType(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByPerformer(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByReasonCode(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByReasonReference(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findBySupportingInfo(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findBySpecimen(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByBodySite(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByRelevantHistory(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByText(QueryBuilder queryBuilder);
+  public List<ProcedureRequest> findByMeta(QueryBuilder queryBuilder);
 }

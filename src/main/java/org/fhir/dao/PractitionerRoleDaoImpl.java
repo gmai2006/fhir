@@ -97,15 +97,9 @@ public class PractitionerRoleDaoImpl implements PractitionerRoleDao {
   }
 
   @Override
-  public List<PractitionerRole> findByEndpoint(QueryBuilder queryBuilder) {
+  public List<PractitionerRole> findByPractitioner(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.endpoint_id=b.parent_id " + queryBuilder.getWhereClause();
-    return findByQuery(queryBuilder, queryStr);
-  }
-  @Override
-  public List<PractitionerRole> findByLocation(QueryBuilder queryBuilder) {
-  	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.practitioner_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -115,9 +109,57 @@ public class PractitionerRoleDaoImpl implements PractitionerRoleDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<PractitionerRole> findByPractitioner(QueryBuilder queryBuilder) {
+  public List<PractitionerRole> findByCode(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.practitioner_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from PractitionerRoleModel a, CodeableConcept b where a.code_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findBySpecialty(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, CodeableConcept b where a.specialty_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findByLocation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findByHealthcareService(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.healthcareService_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findByAvailableTime(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, PractitionerRoleAvailableTime b where a.availableTime_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findByNotAvailable(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, PractitionerRoleNotAvailable b where a.notAvailable_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findByEndpoint(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, Reference b where a.endpoint_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<PractitionerRole> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from PractitionerRoleModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

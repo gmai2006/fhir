@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionordersupplement")
 public class NutritionOrderSupplementModel  implements Serializable {
-	private static final long serialVersionUID = 151873631111074946L;
+	private static final long serialVersionUID = 151910893690064157L;
   /**
   * Description: "The kind of nutritional supplement product required such as a high protein or pediatric clear liquid supplement."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The product or brand name of the nutritional supplement such as \"Acme Protein Shake\"."
@@ -126,20 +127,34 @@ public class NutritionOrderSupplementModel  implements Serializable {
 
   public NutritionOrderSupplementModel(NutritionOrderSupplement o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = JsonUtils.toJson(o.getType());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     this.productName = o.getProductName();
+    if (null != o.getSchedule()) {
+    	this.schedule = JsonUtils.toJson(o.getSchedule());
+    }
     if (null != o.getQuantity() ) {
     	this.quantity_id = "quantity" + this.parent_id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
     }
     this.instruction = o.getInstruction();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public String getProductName() {
@@ -195,7 +210,6 @@ public class NutritionOrderSupplementModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[NutritionOrderSupplementModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("productName" + "->" + this.productName + "\n"); 
      builder.append("schedule" + "->" + this.schedule + "\n"); 
      builder.append("instruction" + "->" + this.instruction + "\n"); 

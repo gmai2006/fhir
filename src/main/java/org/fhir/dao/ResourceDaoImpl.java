@@ -96,6 +96,12 @@ public class ResourceDaoImpl implements ResourceDao {
       em.remove(removed);
   }
 
+  @Override
+  public List<Resource> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ResourceModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
 
   @Override
   public List<Resource> findByField(QueryBuilder queryBuilder) {

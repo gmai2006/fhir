@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="immunizationvaccinationprotocol")
 public class ImmunizationVaccinationProtocolModel  implements Serializable {
-	private static final long serialVersionUID = 151873631111621749L;
+	private static final long serialVersionUID = 151910893690756654L;
   /**
   * Description: "Nominal position in a series."
   */
@@ -82,32 +81,36 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
 
   /**
   * Description: "The targeted disease."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"targetDisease\"", length = 16777215)
-  private String targetDisease;
+  @Column(name="\"targetdisease_id\"")
+  private String targetdisease_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="targetdisease_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> targetDisease;
 
   /**
   * Description: "Indicates if the immunization event should \"count\" against  the protocol."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"doseStatus\"", length = 16777215)
-  private String doseStatus;
+  @Column(name="\"dosestatus_id\"")
+  private String dosestatus_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dosestatus_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> doseStatus;
 
   /**
   * Description: "Provides an explanation as to why an immunization event should or should not count against the protocol."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"doseStatusReason\"", length = 16777215)
-  private String doseStatusReason;
+  @Column(name="\"dosestatusreason_id\"")
+  private String dosestatusreason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dosestatusreason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> doseStatusReason;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -153,7 +156,9 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
 
   public ImmunizationVaccinationProtocolModel(ImmunizationVaccinationProtocol o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.doseSequence = o.getDoseSequence();
     this.description = o.getDescription();
     if (null != o.getAuthority() ) {
@@ -162,8 +167,24 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
     }
     this.series = o.getSeries();
     this.seriesDoses = o.getSeriesDoses();
-    this.doseStatus = JsonUtils.toJson(o.getDoseStatus());
-    this.doseStatusReason = JsonUtils.toJson(o.getDoseStatusReason());
+    if (null != o.getTargetDisease() && !o.getTargetDisease().isEmpty()) {
+    	this.targetdisease_id = "targetdisease" + this.parent_id;
+    	this.targetDisease = CodeableConceptHelper.toModelFromArray(o.getTargetDisease(), this.targetdisease_id);
+    }
+    if (null != o.getDoseStatus() ) {
+    	this.dosestatus_id = "dosestatus" + this.parent_id;
+    	this.doseStatus = CodeableConceptHelper.toModel(o.getDoseStatus(), this.dosestatus_id);
+    }
+    if (null != o.getDoseStatusReason() ) {
+    	this.dosestatusreason_id = "dosestatusreason" + this.parent_id;
+    	this.doseStatusReason = CodeableConceptHelper.toModel(o.getDoseStatusReason(), this.dosestatusreason_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Float getDoseSequence() {
@@ -196,22 +217,22 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
   public void setSeriesDoses( Float value) {
     this.seriesDoses = value;
   }
-  public String getTargetDisease() {
+  public java.util.List<CodeableConceptModel> getTargetDisease() {
     return this.targetDisease;
   }
-  public void setTargetDisease( String value) {
+  public void setTargetDisease( java.util.List<CodeableConceptModel> value) {
     this.targetDisease = value;
   }
-  public String getDoseStatus() {
+  public java.util.List<CodeableConceptModel> getDoseStatus() {
     return this.doseStatus;
   }
-  public void setDoseStatus( String value) {
+  public void setDoseStatus( java.util.List<CodeableConceptModel> value) {
     this.doseStatus = value;
   }
-  public String getDoseStatusReason() {
+  public java.util.List<CodeableConceptModel> getDoseStatusReason() {
     return this.doseStatusReason;
   }
-  public void setDoseStatusReason( String value) {
+  public void setDoseStatusReason( java.util.List<CodeableConceptModel> value) {
     this.doseStatusReason = value;
   }
   public String getModifierExtension() {
@@ -247,9 +268,6 @@ public class ImmunizationVaccinationProtocolModel  implements Serializable {
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("series" + "->" + this.series + "\n"); 
      builder.append("seriesDoses" + "->" + this.seriesDoses + "\n"); 
-     builder.append("targetDisease" + "->" + this.targetDisease + "\n"); 
-     builder.append("doseStatus" + "->" + this.doseStatus + "\n"); 
-     builder.append("doseStatusReason" + "->" + this.doseStatusReason + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

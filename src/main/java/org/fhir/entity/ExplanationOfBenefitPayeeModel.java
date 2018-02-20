@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,24 +37,28 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="explanationofbenefitpayee")
 public class ExplanationOfBenefitPayeeModel  implements Serializable {
-	private static final long serialVersionUID = 151873631162974250L;
+	private static final long serialVersionUID = 15191089373898976L;
   /**
   * Description: "Type of Party to be reimbursed: Subscriber, provider, other."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "organization | patient | practitioner | relatedperson."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"resourceType\"", length = 16777215)
-  private String resourceType;
+  @Column(name="\"resourcetype_id\"")
+  private String resourcetype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="resourcetype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> resourceType;
 
   /**
   * Description: "Party to be reimbursed: Subscriber, provider, other."
@@ -112,25 +115,39 @@ public class ExplanationOfBenefitPayeeModel  implements Serializable {
 
   public ExplanationOfBenefitPayeeModel(ExplanationOfBenefitPayee o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.type = JsonUtils.toJson(o.getType());
-    this.resourceType = JsonUtils.toJson(o.getResourceType());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getResourceType() ) {
+    	this.resourcetype_id = "resourcetype" + this.parent_id;
+    	this.resourceType = CodeableConceptHelper.toModel(o.getResourceType(), this.resourcetype_id);
+    }
     if (null != o.getParty() ) {
     	this.party_id = "party" + this.parent_id;
     	this.party = ReferenceHelper.toModel(o.getParty(), this.party_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getResourceType() {
+  public java.util.List<CodeableConceptModel> getResourceType() {
     return this.resourceType;
   }
-  public void setResourceType( String value) {
+  public void setResourceType( java.util.List<CodeableConceptModel> value) {
     this.resourceType = value;
   }
   public java.util.List<ReferenceModel> getParty() {
@@ -168,8 +185,6 @@ public class ExplanationOfBenefitPayeeModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ExplanationOfBenefitPayeeModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

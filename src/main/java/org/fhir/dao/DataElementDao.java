@@ -42,4 +42,10 @@ public interface DataElementDao {
 
   public List<DataElement> findByField(QueryBuilder queryBuilder);
 
+  public List<DataElement> findByContact(QueryBuilder queryBuilder);
+  public List<DataElement> findByUseContext(QueryBuilder queryBuilder);
+  public List<DataElement> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<DataElement> findByMapping(QueryBuilder queryBuilder);
+  public List<DataElement> findByText(QueryBuilder queryBuilder);
+  public List<DataElement> findByMeta(QueryBuilder queryBuilder);
 }

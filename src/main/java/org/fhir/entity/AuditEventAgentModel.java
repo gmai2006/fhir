@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="auditeventagent")
 public class AuditEventAgentModel  implements Serializable {
-	private static final long serialVersionUID = 151873631138550919L;
+	private static final long serialVersionUID = 151910893713880813L;
   /**
   * Description: "The security role that the user was acting under, that come from local codes defined by the access control security system (e.g. RBAC, ABAC) used in the local context."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"role\"", length = 16777215)
-  private String role;
+  @Column(name="\"role_id\"")
+  private String role_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> role;
 
   /**
   * Description: "Direct reference to a resource that identifies the agent."
@@ -109,12 +110,14 @@ public class AuditEventAgentModel  implements Serializable {
 
   /**
   * Description: "Type of media involved. Used when the event is about exporting/importing onto media."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"media\"", length = 16777215)
-  private String media;
+  @Column(name="\"media_id\"")
+  private String media_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="media_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> media;
 
   /**
   * Description: "Logical network location for application activity, if the activity has a network location."
@@ -129,12 +132,14 @@ public class AuditEventAgentModel  implements Serializable {
 
   /**
   * Description: "The reason (purpose of use), specific to this agent, that was used during the event being recorded."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"purposeOfUse\"", length = 16777215)
-  private String purposeOfUse;
+  @Column(name="\"purposeofuse_id\"")
+  private String purposeofuse_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="purposeofuse_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> purposeOfUse;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -180,12 +185,20 @@ public class AuditEventAgentModel  implements Serializable {
 
   public AuditEventAgentModel(AuditEventAgent o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+    	this.role_id = "role" + this.parent_id;
+    	this.role = CodeableConceptHelper.toModelFromArray(o.getRole(), this.role_id);
+    }
     if (null != o.getReference() ) {
     	this.reference_id = "reference" + this.parent_id;
     	this.reference = ReferenceHelper.toModel(o.getReference(), this.reference_id);
     }
-    this.userId = JsonUtils.toJson(o.getUserId());
+    if (null != o.getUserId()) {
+    	this.userId = JsonUtils.toJson(o.getUserId());
+    }
     this.altId = o.getAltId();
     this.name = o.getName();
     this.requestor = o.getRequestor();
@@ -193,18 +206,31 @@ public class AuditEventAgentModel  implements Serializable {
     	this.location_id = "location" + this.parent_id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
     }
-    this.policy = org.fhir.utils.JsonUtils.write2String(o.getPolicy());
-    this.media = JsonUtils.toJson(o.getMedia());
+    this.policy = org.fhir.utils.JsonUtils.toJson(o.getPolicy());
+    if (null != o.getMedia() ) {
+    	this.media_id = "media" + this.parent_id;
+    	this.media = CodingHelper.toModel(o.getMedia(), this.media_id);
+    }
     if (null != o.getNetwork() ) {
     	this.network_id = "network" + this.parent_id;
     	this.network = AuditEventNetworkHelper.toModel(o.getNetwork(), this.network_id);
     }
+    if (null != o.getPurposeOfUse() && !o.getPurposeOfUse().isEmpty()) {
+    	this.purposeofuse_id = "purposeofuse" + this.parent_id;
+    	this.purposeOfUse = CodeableConceptHelper.toModelFromArray(o.getPurposeOfUse(), this.purposeofuse_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getRole() {
+  public java.util.List<CodeableConceptModel> getRole() {
     return this.role;
   }
-  public void setRole( String value) {
+  public void setRole( java.util.List<CodeableConceptModel> value) {
     this.role = value;
   }
   public java.util.List<ReferenceModel> getReference() {
@@ -249,10 +275,10 @@ public class AuditEventAgentModel  implements Serializable {
   public void setPolicy( String value) {
     this.policy = value;
   }
-  public String getMedia() {
+  public java.util.List<CodingModel> getMedia() {
     return this.media;
   }
-  public void setMedia( String value) {
+  public void setMedia( java.util.List<CodingModel> value) {
     this.media = value;
   }
   public java.util.List<AuditEventNetworkModel> getNetwork() {
@@ -261,10 +287,10 @@ public class AuditEventAgentModel  implements Serializable {
   public void setNetwork( java.util.List<AuditEventNetworkModel> value) {
     this.network = value;
   }
-  public String getPurposeOfUse() {
+  public java.util.List<CodeableConceptModel> getPurposeOfUse() {
     return this.purposeOfUse;
   }
-  public void setPurposeOfUse( String value) {
+  public void setPurposeOfUse( java.util.List<CodeableConceptModel> value) {
     this.purposeOfUse = value;
   }
   public String getModifierExtension() {
@@ -296,14 +322,11 @@ public class AuditEventAgentModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[AuditEventAgentModel]:" + "\n");
-     builder.append("role" + "->" + this.role + "\n"); 
      builder.append("userId" + "->" + this.userId + "\n"); 
      builder.append("altId" + "->" + this.altId + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("requestor" + "->" + this.requestor + "\n"); 
      builder.append("policy" + "->" + this.policy + "\n"); 
-     builder.append("media" + "->" + this.media + "\n"); 
-     builder.append("purposeOfUse" + "->" + this.purposeOfUse + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

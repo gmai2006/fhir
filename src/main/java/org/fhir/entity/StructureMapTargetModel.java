@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="structuremaptarget")
 public class StructureMapTargetModel  implements Serializable {
-	private static final long serialVersionUID = 151873631137992220L;
+	private static final long serialVersionUID = 15191089371316235L;
   /**
   * Description: "Type or variable this rule applies to."
   */
@@ -146,17 +145,25 @@ public class StructureMapTargetModel  implements Serializable {
 
   public StructureMapTargetModel(StructureMapTarget o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.context = o.getContext();
     this.contextType = o.getContextType();
     this.element = o.getElement();
     this.variable = o.getVariable();
-    this.listMode = org.fhir.utils.JsonUtils.write2String(o.getListMode());
+    this.listMode = org.fhir.utils.JsonUtils.toJson(o.getListMode());
     this.listRuleId = o.getListRuleId();
     this.transform = o.getTransform();
     if (null != o.getParameter() && !o.getParameter().isEmpty()) {
     	this.parameter_id = "parameter" + this.parent_id;
     	this.parameter = StructureMapParameterHelper.toModelFromArray(o.getParameter(), this.parameter_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

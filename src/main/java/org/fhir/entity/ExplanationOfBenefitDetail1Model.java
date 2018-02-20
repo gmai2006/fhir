@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,42 +37,50 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="explanationofbenefitdetail1")
 public class ExplanationOfBenefitDetail1Model  implements Serializable {
-	private static final long serialVersionUID = 151873631181663744L;
+	private static final long serialVersionUID = 151910893758223003L;
   /**
   * Description: "The type of reveneu or cost center providing the product and/or service."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"revenue\"", length = 16777215)
-  private String revenue;
+  @Column(name="\"revenue_id\"")
+  private String revenue_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="revenue_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> revenue;
 
   /**
   * Description: "Health Care Service Type Codes  to identify the classification of service or benefits."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "A code to indicate the Professional Service or Product supplied (eg. CTP, HCPCS,USCLS,ICD10, NCPDP,DIN,ACHI,CCI)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"service\"", length = 16777215)
-  private String service;
+  @Column(name="\"service_id\"")
+  private String service_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="service_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> service;
 
   /**
   * Description: "Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"modifier\"", length = 16777215)
-  private String modifier;
+  @Column(name="\"modifier_id\"")
+  private String modifier_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="modifier_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> modifier;
 
   /**
   * Description: "The fee charged for the professional service or product."
@@ -148,43 +155,64 @@ public class ExplanationOfBenefitDetail1Model  implements Serializable {
 
   public ExplanationOfBenefitDetail1Model(ExplanationOfBenefitDetail1 o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.revenue = JsonUtils.toJson(o.getRevenue());
-    this.category = JsonUtils.toJson(o.getCategory());
-    this.service = JsonUtils.toJson(o.getService());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getRevenue() ) {
+    	this.revenue_id = "revenue" + this.parent_id;
+    	this.revenue = CodeableConceptHelper.toModel(o.getRevenue(), this.revenue_id);
+    }
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.parent_id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
+    if (null != o.getService() ) {
+    	this.service_id = "service" + this.parent_id;
+    	this.service = CodeableConceptHelper.toModel(o.getService(), this.service_id);
+    }
+    if (null != o.getModifier() && !o.getModifier().isEmpty()) {
+    	this.modifier_id = "modifier" + this.parent_id;
+    	this.modifier = CodeableConceptHelper.toModelFromArray(o.getModifier(), this.modifier_id);
+    }
     if (null != o.getFee() ) {
     	this.fee_id = "fee" + this.parent_id;
     	this.fee = MoneyHelper.toModel(o.getFee(), this.fee_id);
     }
-    this.noteNumber = org.fhir.utils.JsonUtils.write2String(o.getNoteNumber());
+    this.noteNumber = org.fhir.utils.JsonUtils.toJson(o.getNoteNumber());
     if (null != o.getAdjudication() && !o.getAdjudication().isEmpty()) {
     	this.adjudication_id = "adjudication" + this.parent_id;
     	this.adjudication = ExplanationOfBenefitAdjudicationHelper.toModelFromArray(o.getAdjudication(), this.adjudication_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getRevenue() {
+  public java.util.List<CodeableConceptModel> getRevenue() {
     return this.revenue;
   }
-  public void setRevenue( String value) {
+  public void setRevenue( java.util.List<CodeableConceptModel> value) {
     this.revenue = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getService() {
+  public java.util.List<CodeableConceptModel> getService() {
     return this.service;
   }
-  public void setService( String value) {
+  public void setService( java.util.List<CodeableConceptModel> value) {
     this.service = value;
   }
-  public String getModifier() {
+  public java.util.List<CodeableConceptModel> getModifier() {
     return this.modifier;
   }
-  public void setModifier( String value) {
+  public void setModifier( java.util.List<CodeableConceptModel> value) {
     this.modifier = value;
   }
   public java.util.List<MoneyModel> getFee() {
@@ -234,10 +262,6 @@ public class ExplanationOfBenefitDetail1Model  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ExplanationOfBenefitDetail1Model]:" + "\n");
-     builder.append("revenue" + "->" + this.revenue + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("service" + "->" + this.service + "\n"); 
-     builder.append("modifier" + "->" + this.modifier + "\n"); 
      builder.append("noteNumber" + "->" + this.noteNumber + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

@@ -114,9 +114,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Provenance> findByAgent(QueryBuilder queryBuilder) {
-  	final List<Provenance> result = dao.findByAgent(queryBuilder);
-    logger.info("findByagent - exited - return value={} result ");
+  public List<Provenance> findByTarget(QueryBuilder queryBuilder) {
+  	final List<Provenance> result = dao.findByTarget(queryBuilder);
+    logger.info("findBytarget - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,9 +126,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Provenance> findByTarget(QueryBuilder queryBuilder) {
-  	final List<Provenance> result = dao.findByTarget(queryBuilder);
-    logger.info("findBytarget - exited - return value={} result ");
+  public List<Provenance> findByReason(QueryBuilder queryBuilder) {
+  	final List<Provenance> result = dao.findByReason(queryBuilder);
+    logger.info("findByreason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Provenance> findByActivity(QueryBuilder queryBuilder) {
+  	final List<Provenance> result = dao.findByActivity(queryBuilder);
+    logger.info("findByactivity - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Provenance> findByAgent(QueryBuilder queryBuilder) {
+  	final List<Provenance> result = dao.findByAgent(queryBuilder);
+    logger.info("findByagent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Provenance> findByEntity(QueryBuilder queryBuilder) {
+  	final List<Provenance> result = dao.findByEntity(queryBuilder);
+    logger.info("findByentity - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Provenance> findByText(QueryBuilder queryBuilder) {
+  	final List<Provenance> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Provenance> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Provenance> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

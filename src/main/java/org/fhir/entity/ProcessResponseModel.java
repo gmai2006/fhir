@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="processresponse")
 public class ProcessResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151873631158697493L;
+	private static final long serialVersionUID = 151910893734745115L;
   /**
   * Description: "This is a ProcessResponse resource"
   */
@@ -96,12 +95,14 @@ public class ProcessResponseModel  implements Serializable {
 
   /**
   * Description: "Transaction status: error, complete, held."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"outcome\"", length = 16777215)
-  private String outcome;
+  @Column(name="\"outcome_id\"")
+  private String outcome_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> outcome;
 
   /**
   * Description: "A description of the status of the adjudication or processing."
@@ -134,12 +135,14 @@ public class ProcessResponseModel  implements Serializable {
 
   /**
   * Description: "The form to be used for printing the content."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"form\"", length = 16777215)
-  private String form;
+  @Column(name="\"form_id\"")
+  private String form_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> form;
 
   /**
   * Description: "Suite of processing notes or additional requirements if the processing has been held."
@@ -154,12 +157,14 @@ public class ProcessResponseModel  implements Serializable {
 
   /**
   * Description: "Processing errors."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"error\"", length = 16777215)
-  private String error;
+  @Column(name="\"error_id\"")
+  private String error_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="error_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> error;
 
   /**
   * Description: "Request for additional supporting or authorizing information, such as: documents, images or resources."
@@ -263,6 +268,9 @@ public class ProcessResponseModel  implements Serializable {
   public ProcessResponseModel(ProcessResponse o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     this.created = o.getCreated();
     if (null != o.getOrganization() ) {
@@ -273,7 +281,10 @@ public class ProcessResponseModel  implements Serializable {
     	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
-    this.outcome = JsonUtils.toJson(o.getOutcome());
+    if (null != o.getOutcome() ) {
+    	this.outcome_id = "outcome" + this.id;
+    	this.outcome = CodeableConceptHelper.toModel(o.getOutcome(), this.outcome_id);
+    }
     this.disposition = o.getDisposition();
     if (null != o.getRequestProvider() ) {
     	this.requestprovider_id = "requestprovider" + this.id;
@@ -283,10 +294,17 @@ public class ProcessResponseModel  implements Serializable {
     	this.requestorganization_id = "requestorganization" + this.id;
     	this.requestOrganization = ReferenceHelper.toModel(o.getRequestOrganization(), this.requestorganization_id);
     }
-    this.form = JsonUtils.toJson(o.getForm());
+    if (null != o.getForm() ) {
+    	this.form_id = "form" + this.id;
+    	this.form = CodeableConceptHelper.toModel(o.getForm(), this.form_id);
+    }
     if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
     	this.processnote_id = "processnote" + this.id;
     	this.processNote = ProcessResponseProcessNoteHelper.toModelFromArray(o.getProcessNote(), this.processnote_id);
+    }
+    if (null != o.getError() && !o.getError().isEmpty()) {
+    	this.error_id = "error" + this.id;
+    	this.error = CodeableConceptHelper.toModelFromArray(o.getError(), this.error_id);
     }
     if (null != o.getCommunicationRequest() && !o.getCommunicationRequest().isEmpty()) {
     	this.communicationrequest_id = "communicationrequest" + this.id;
@@ -295,6 +313,15 @@ public class ProcessResponseModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -340,10 +367,10 @@ public class ProcessResponseModel  implements Serializable {
   public void setRequest( java.util.List<ReferenceModel> value) {
     this.request = value;
   }
-  public String getOutcome() {
+  public java.util.List<CodeableConceptModel> getOutcome() {
     return this.outcome;
   }
-  public void setOutcome( String value) {
+  public void setOutcome( java.util.List<CodeableConceptModel> value) {
     this.outcome = value;
   }
   public String getDisposition() {
@@ -364,10 +391,10 @@ public class ProcessResponseModel  implements Serializable {
   public void setRequestOrganization( java.util.List<ReferenceModel> value) {
     this.requestOrganization = value;
   }
-  public String getForm() {
+  public java.util.List<CodeableConceptModel> getForm() {
     return this.form;
   }
-  public void setForm( String value) {
+  public void setForm( java.util.List<CodeableConceptModel> value) {
     this.form = value;
   }
   public java.util.List<ProcessResponseProcessNoteModel> getProcessNote() {
@@ -376,10 +403,10 @@ public class ProcessResponseModel  implements Serializable {
   public void setProcessNote( java.util.List<ProcessResponseProcessNoteModel> value) {
     this.processNote = value;
   }
-  public String getError() {
+  public java.util.List<CodeableConceptModel> getError() {
     return this.error;
   }
-  public void setError( String value) {
+  public void setError( java.util.List<CodeableConceptModel> value) {
     this.error = value;
   }
   public java.util.List<ReferenceModel> getCommunicationRequest() {
@@ -445,10 +472,7 @@ public class ProcessResponseModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("disposition" + "->" + this.disposition + "\n"); 
-     builder.append("form" + "->" + this.form + "\n"); 
-     builder.append("error" + "->" + this.error + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

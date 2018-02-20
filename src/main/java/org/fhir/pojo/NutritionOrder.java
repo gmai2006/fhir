@@ -136,6 +136,12 @@ public class NutritionOrder  extends DomainResource  {
     if (null != o.getAllergyIntolerance() && !o.getAllergyIntolerance().isEmpty()) {
     	this.allergyIntolerance = ReferenceHelper.fromArray2Array(o.getAllergyIntolerance());
     }
+    if (null != o.getFoodPreferenceModifier() && !o.getFoodPreferenceModifier().isEmpty()) {
+    	this.foodPreferenceModifier = CodeableConceptHelper.fromArray2Array(o.getFoodPreferenceModifier());
+    }
+    if (null != o.getExcludeFoodModifier() && !o.getExcludeFoodModifier().isEmpty()) {
+    	this.excludeFoodModifier = CodeableConceptHelper.fromArray2Array(o.getExcludeFoodModifier());
+    }
     if (null != o.getOralDiet() && !o.getOralDiet().isEmpty()) {
       this.oralDiet = new NutritionOrderOralDiet(o.getOralDiet().get(0));
     }

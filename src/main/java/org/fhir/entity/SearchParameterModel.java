@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="searchparameter")
 public class SearchParameterModel  implements Serializable {
-	private static final long serialVersionUID = 151873631185721073L;
+	private static final long serialVersionUID = 151910893762619456L;
   /**
   * Description: "This is a SearchParameter resource"
   */
@@ -121,12 +120,14 @@ public class SearchParameterModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the search parameter is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "Explaination of why this search parameter is needed and why it has been designed as it has."
@@ -337,19 +338,23 @@ public class SearchParameterModel  implements Serializable {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
     this.purpose = o.getPurpose();
     this.code = o.getCode();
-    this.base = org.fhir.utils.JsonUtils.write2String(o.getBase());
+    this.base = org.fhir.utils.JsonUtils.toJson(o.getBase());
     this.type = o.getType();
     this.derivedFrom = o.getDerivedFrom();
     this.description = o.getDescription();
     this.expression = o.getExpression();
     this.xpath = o.getXpath();
     this.xpathUsage = o.getXpathUsage();
-    this.target = org.fhir.utils.JsonUtils.write2String(o.getTarget());
-    this.comparator = org.fhir.utils.JsonUtils.write2String(o.getComparator());
-    this.modifier = org.fhir.utils.JsonUtils.write2String(o.getModifier());
-    this.chain = org.fhir.utils.JsonUtils.write2String(o.getChain());
+    this.target = org.fhir.utils.JsonUtils.toJson(o.getTarget());
+    this.comparator = org.fhir.utils.JsonUtils.toJson(o.getComparator());
+    this.modifier = org.fhir.utils.JsonUtils.toJson(o.getModifier());
+    this.chain = org.fhir.utils.JsonUtils.toJson(o.getChain());
     if (null != o.getComponent() && !o.getComponent().isEmpty()) {
     	this.component_id = "component" + this.id;
     	this.component = SearchParameterComponentHelper.toModelFromArray(o.getComponent(), this.component_id);
@@ -357,6 +362,15 @@ public class SearchParameterModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -426,10 +440,10 @@ public class SearchParameterModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public String getPurpose() {
@@ -577,7 +591,6 @@ public class SearchParameterModel  implements Serializable {
      builder.append("experimental" + "->" + this.experimental + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("base" + "->" + this.base + "\n"); 

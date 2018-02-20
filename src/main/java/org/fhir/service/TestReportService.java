@@ -38,7 +38,13 @@ public interface TestReportService {
   public TestReport update(TestReport bean);
   public void delete(TestReport bean);
   public List<TestReport> findByField(QueryBuilder queryBuilder);
+  public List<TestReport> findByTestScript(QueryBuilder queryBuilder);
   public List<TestReport> findByParticipant(QueryBuilder queryBuilder);
+  public List<TestReport> findBySetup(QueryBuilder queryBuilder);
+  public List<TestReport> findByTest(QueryBuilder queryBuilder);
+  public List<TestReport> findByTeardown(QueryBuilder queryBuilder);
+  public List<TestReport> findByText(QueryBuilder queryBuilder);
+  public List<TestReport> findByMeta(QueryBuilder queryBuilder);
 
 
 }

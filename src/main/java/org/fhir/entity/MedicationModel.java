@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medication")
 public class MedicationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631194615994L;
+	private static final long serialVersionUID = 151910893771589941L;
   /**
   * Description: "This is a Medication resource"
   */
@@ -49,12 +48,14 @@ public class MedicationModel  implements Serializable {
 
   /**
   * Description: "A code (or set of codes) that specify this medication, or a textual description if no code is available. Usage note: This could be a standard medication code such as a code from RxNorm, SNOMED CT, IDMP etc. It could also be a national or local formulary code, optionally with translations to other code systems."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "A code to indicate if the medication is in active use."
@@ -90,12 +91,14 @@ public class MedicationModel  implements Serializable {
 
   /**
   * Description: "Describes the form of the item.  Powder; tablets; capsule."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"form\"", length = 16777215)
-  private String form;
+  @Column(name="\"form_id\"")
+  private String form_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> form;
 
   /**
   * Description: "Identifies a particular constituent of interest in the product."
@@ -219,7 +222,10 @@ public class MedicationModel  implements Serializable {
   public MedicationModel(Medication o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     this.status = o.getStatus();
     this.isBrand = o.getIsBrand();
     this.isOverTheCounter = o.getIsOverTheCounter();
@@ -227,7 +233,10 @@ public class MedicationModel  implements Serializable {
     	this.manufacturer_id = "manufacturer" + this.id;
     	this.manufacturer = ReferenceHelper.toModel(o.getManufacturer(), this.manufacturer_id);
     }
-    this.form = JsonUtils.toJson(o.getForm());
+    if (null != o.getForm() ) {
+    	this.form_id = "form" + this.id;
+    	this.form = CodeableConceptHelper.toModel(o.getForm(), this.form_id);
+    }
     if (null != o.getIngredient() && !o.getIngredient().isEmpty()) {
     	this.ingredient_id = "ingredient" + this.id;
     	this.ingredient = MedicationIngredientHelper.toModelFromArray(o.getIngredient(), this.ingredient_id);
@@ -236,9 +245,21 @@ public class MedicationModel  implements Serializable {
     	this.fhirpackage_id = "fhirpackage" + this.id;
     	this.FHIRpackage = MedicationPackageHelper.toModel(o.getFHIRpackage(), this.fhirpackage_id);
     }
+    if (null != o.getImage()) {
+    	this.image = JsonUtils.toJson(o.getImage());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -254,10 +275,10 @@ public class MedicationModel  implements Serializable {
   public void setResourceType( String value) {
     this.resourceType = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public String getStatus() {
@@ -284,10 +305,10 @@ public class MedicationModel  implements Serializable {
   public void setManufacturer( java.util.List<ReferenceModel> value) {
     this.manufacturer = value;
   }
-  public String getForm() {
+  public java.util.List<CodeableConceptModel> getForm() {
     return this.form;
   }
-  public void setForm( String value) {
+  public void setForm( java.util.List<CodeableConceptModel> value) {
     this.form = value;
   }
   public java.util.List<MedicationIngredientModel> getIngredient() {
@@ -362,11 +383,9 @@ public class MedicationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("isBrand" + "->" + this.isBrand + "\n"); 
      builder.append("isOverTheCounter" + "->" + this.isOverTheCounter + "\n"); 
-     builder.append("form" + "->" + this.form + "\n"); 
      builder.append("image" + "->" + this.image + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

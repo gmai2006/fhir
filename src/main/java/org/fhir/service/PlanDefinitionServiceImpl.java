@@ -113,4 +113,76 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<PlanDefinition> findByType(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByTopic(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByTopic(queryBuilder);
+    logger.info("findBytopic - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByContributor(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByContributor(queryBuilder);
+    logger.info("findBycontributor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByContact(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByRelatedArtifact(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByRelatedArtifact(queryBuilder);
+    logger.info("findByrelatedArtifact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByLibrary(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByLibrary(queryBuilder);
+    logger.info("findBylibrary - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByGoal(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByGoal(queryBuilder);
+    logger.info("findBygoal - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByAction(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByAction(queryBuilder);
+    logger.info("findByaction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByText(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PlanDefinition> findByMeta(QueryBuilder queryBuilder) {
+  	final List<PlanDefinition> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

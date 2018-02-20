@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatement")
 public class CapabilityStatementModel  implements Serializable {
-	private static final long serialVersionUID = 151873631164750736L;
+	private static final long serialVersionUID = 151910893740713224L;
   /**
   * Description: "This is a CapabilityStatement resource"
   */
@@ -135,12 +134,14 @@ public class CapabilityStatementModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the capability statement is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "Explaination of why this capability statement is needed and why it has been designed as it has."
@@ -380,10 +381,14 @@ public class CapabilityStatementModel  implements Serializable {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
     this.purpose = o.getPurpose();
     this.copyright = o.getCopyright();
     this.kind = o.getKind();
-    this.instantiates = org.fhir.utils.JsonUtils.write2String(o.getInstantiates());
+    this.instantiates = org.fhir.utils.JsonUtils.toJson(o.getInstantiates());
     if (null != o.getSoftware() ) {
     	this.software_id = "software" + this.id;
     	this.software = CapabilityStatementSoftwareHelper.toModel(o.getSoftware(), this.software_id);
@@ -394,9 +399,9 @@ public class CapabilityStatementModel  implements Serializable {
     }
     this.fhirVersion = o.getFhirVersion();
     this.acceptUnknown = o.getAcceptUnknown();
-    this.format = org.fhir.utils.JsonUtils.write2String(o.getFormat());
-    this.patchFormat = org.fhir.utils.JsonUtils.write2String(o.getPatchFormat());
-    this.implementationGuide = org.fhir.utils.JsonUtils.write2String(o.getImplementationGuide());
+    this.format = org.fhir.utils.JsonUtils.toJson(o.getFormat());
+    this.patchFormat = org.fhir.utils.JsonUtils.toJson(o.getPatchFormat());
+    this.implementationGuide = org.fhir.utils.JsonUtils.toJson(o.getImplementationGuide());
     if (null != o.getProfile() && !o.getProfile().isEmpty()) {
     	this.profile_id = "profile" + this.id;
     	this.profile = ReferenceHelper.toModelFromArray(o.getProfile(), this.profile_id);
@@ -416,6 +421,15 @@ public class CapabilityStatementModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -497,10 +511,10 @@ public class CapabilityStatementModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public String getPurpose() {
@@ -656,7 +670,6 @@ public class CapabilityStatementModel  implements Serializable {
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("kind" + "->" + this.kind + "\n"); 

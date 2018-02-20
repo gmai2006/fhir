@@ -42,6 +42,11 @@ public interface DeviceUseStatementDao {
 
   public List<DeviceUseStatement> findByField(QueryBuilder queryBuilder);
 
-  public List<DeviceUseStatement> findByDevice(QueryBuilder queryBuilder);
   public List<DeviceUseStatement> findBySubject(QueryBuilder queryBuilder);
+  public List<DeviceUseStatement> findBySource(QueryBuilder queryBuilder);
+  public List<DeviceUseStatement> findByDevice(QueryBuilder queryBuilder);
+  public List<DeviceUseStatement> findByIndication(QueryBuilder queryBuilder);
+  public List<DeviceUseStatement> findByBodySite(QueryBuilder queryBuilder);
+  public List<DeviceUseStatement> findByText(QueryBuilder queryBuilder);
+  public List<DeviceUseStatement> findByMeta(QueryBuilder queryBuilder);
 }

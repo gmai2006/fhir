@@ -114,9 +114,15 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<AdverseEvent> findByLocation(QueryBuilder queryBuilder) {
-  	final List<AdverseEvent> result = dao.findByLocation(queryBuilder);
-    logger.info("findBylocation - exited - return value={} result ");
+  public List<AdverseEvent> findByType(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findBySubject(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,9 +132,51 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<AdverseEvent> findByLocation(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findBySeriousness(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findBySeriousness(queryBuilder);
+    logger.info("findByseriousness - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findByOutcome(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByOutcome(queryBuilder);
+    logger.info("findByoutcome - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<AdverseEvent> findByRecorder(QueryBuilder queryBuilder) {
   	final List<AdverseEvent> result = dao.findByRecorder(queryBuilder);
     logger.info("findByrecorder - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findByEventParticipant(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByEventParticipant(queryBuilder);
+    logger.info("findByeventParticipant - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findBySuspectEntity(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findBySuspectEntity(queryBuilder);
+    logger.info("findBysuspectEntity - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findBySubjectMedicalHistory(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findBySubjectMedicalHistory(queryBuilder);
+    logger.info("findBysubjectMedicalHistory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findByReferenceDocument(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByReferenceDocument(queryBuilder);
+    logger.info("findByreferenceDocument - exited - return value={} result ");
     return result;
   }
   @Override
@@ -138,9 +186,15 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<AdverseEvent> findBySubject(QueryBuilder queryBuilder) {
-  	final List<AdverseEvent> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<AdverseEvent> findByText(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AdverseEvent> findByMeta(QueryBuilder queryBuilder) {
+  	final List<AdverseEvent> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

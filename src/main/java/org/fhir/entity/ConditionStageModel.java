@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="conditionstage")
 public class ConditionStageModel  implements Serializable {
-	private static final long serialVersionUID = 15187363118118499L;
+	private static final long serialVersionUID = 15191089375784615L;
   /**
   * Description: "A simple summary of the stage such as \"Stage 3\". The determination of the stage is disease-specific."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"summary\"", length = 16777215)
-  private String summary;
+  @Column(name="\"summary_id\"")
+  private String summary_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="summary_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> summary;
 
   /**
   * Description: "Reference to a formal record of the evidence on which the staging assessment is based."
@@ -103,18 +104,29 @@ public class ConditionStageModel  implements Serializable {
 
   public ConditionStageModel(ConditionStage o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.summary = JsonUtils.toJson(o.getSummary());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getSummary() ) {
+    	this.summary_id = "summary" + this.parent_id;
+    	this.summary = CodeableConceptHelper.toModel(o.getSummary(), this.summary_id);
+    }
     if (null != o.getAssessment() && !o.getAssessment().isEmpty()) {
     	this.assessment_id = "assessment" + this.parent_id;
     	this.assessment = ReferenceHelper.toModelFromArray(o.getAssessment(), this.assessment_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getSummary() {
+  public java.util.List<CodeableConceptModel> getSummary() {
     return this.summary;
   }
-  public void setSummary( String value) {
+  public void setSummary( java.util.List<CodeableConceptModel> value) {
     this.summary = value;
   }
   public java.util.List<ReferenceModel> getAssessment() {
@@ -152,7 +164,6 @@ public class ConditionStageModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ConditionStageModel]:" + "\n");
-     builder.append("summary" + "->" + this.summary + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

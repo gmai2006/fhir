@@ -114,6 +114,18 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<DetectedIssue> findByCategory(QueryBuilder queryBuilder) {
+  	final List<DetectedIssue> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DetectedIssue> findByPatient(QueryBuilder queryBuilder) {
+  	final List<DetectedIssue> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<DetectedIssue> findByAuthor(QueryBuilder queryBuilder) {
   	final List<DetectedIssue> result = dao.findByAuthor(queryBuilder);
     logger.info("findByauthor - exited - return value={} result ");
@@ -123,6 +135,24 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   public List<DetectedIssue> findByImplicated(QueryBuilder queryBuilder) {
   	final List<DetectedIssue> result = dao.findByImplicated(queryBuilder);
     logger.info("findByimplicated - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DetectedIssue> findByMitigation(QueryBuilder queryBuilder) {
+  	final List<DetectedIssue> result = dao.findByMitigation(queryBuilder);
+    logger.info("findBymitigation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DetectedIssue> findByText(QueryBuilder queryBuilder) {
+  	final List<DetectedIssue> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DetectedIssue> findByMeta(QueryBuilder queryBuilder) {
+  	final List<DetectedIssue> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

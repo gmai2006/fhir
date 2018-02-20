@@ -42,5 +42,9 @@ public interface ResearchSubjectDao {
 
   public List<ResearchSubject> findByField(QueryBuilder queryBuilder);
 
+  public List<ResearchSubject> findByStudy(QueryBuilder queryBuilder);
   public List<ResearchSubject> findByIndividual(QueryBuilder queryBuilder);
+  public List<ResearchSubject> findByConsent(QueryBuilder queryBuilder);
+  public List<ResearchSubject> findByText(QueryBuilder queryBuilder);
+  public List<ResearchSubject> findByMeta(QueryBuilder queryBuilder);
 }

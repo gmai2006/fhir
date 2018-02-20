@@ -42,6 +42,9 @@ public interface AppointmentResponseDao {
 
   public List<AppointmentResponse> findByField(QueryBuilder queryBuilder);
 
-  public List<AppointmentResponse> findByActor(QueryBuilder queryBuilder);
   public List<AppointmentResponse> findByAppointment(QueryBuilder queryBuilder);
+  public List<AppointmentResponse> findByParticipantType(QueryBuilder queryBuilder);
+  public List<AppointmentResponse> findByActor(QueryBuilder queryBuilder);
+  public List<AppointmentResponse> findByText(QueryBuilder queryBuilder);
+  public List<AppointmentResponse> findByMeta(QueryBuilder queryBuilder);
 }

@@ -42,9 +42,22 @@ public interface MedicationAdministrationDao {
 
   public List<MedicationAdministration> findByField(QueryBuilder queryBuilder);
 
-  public List<MedicationAdministration> findByContext(QueryBuilder queryBuilder);
-  public List<MedicationAdministration> findByDevice(QueryBuilder queryBuilder);
-  public List<MedicationAdministration> findByPerformer(QueryBuilder queryBuilder);
-  public List<MedicationAdministration> findByPrescription(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByDefinition(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByPartOf(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByCategory(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByMedicationCodeableConcept(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByMedicationReference(QueryBuilder queryBuilder);
   public List<MedicationAdministration> findBySubject(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByContext(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findBySupportingInformation(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByPerformer(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByReasonNotGiven(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByReasonCode(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByReasonReference(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByPrescription(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByDevice(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByDosage(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByEventHistory(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByText(QueryBuilder queryBuilder);
+  public List<MedicationAdministration> findByMeta(QueryBuilder queryBuilder);
 }

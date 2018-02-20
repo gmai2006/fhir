@@ -38,6 +38,20 @@ public interface MeasureService {
   public Measure update(Measure bean);
   public void delete(Measure bean);
   public List<Measure> findByField(QueryBuilder queryBuilder);
+  public List<Measure> findByUseContext(QueryBuilder queryBuilder);
+  public List<Measure> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<Measure> findByTopic(QueryBuilder queryBuilder);
+  public List<Measure> findByContributor(QueryBuilder queryBuilder);
+  public List<Measure> findByContact(QueryBuilder queryBuilder);
+  public List<Measure> findByRelatedArtifact(QueryBuilder queryBuilder);
+  public List<Measure> findByLibrary(QueryBuilder queryBuilder);
+  public List<Measure> findByScoring(QueryBuilder queryBuilder);
+  public List<Measure> findByCompositeScoring(QueryBuilder queryBuilder);
+  public List<Measure> findByType(QueryBuilder queryBuilder);
+  public List<Measure> findByGroup(QueryBuilder queryBuilder);
+  public List<Measure> findBySupplementalData(QueryBuilder queryBuilder);
+  public List<Measure> findByText(QueryBuilder queryBuilder);
+  public List<Measure> findByMeta(QueryBuilder queryBuilder);
 
 
 }

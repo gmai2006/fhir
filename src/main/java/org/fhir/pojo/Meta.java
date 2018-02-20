@@ -87,6 +87,12 @@ public class Meta  extends Element  {
     if (o.getProfile() != null) {
     	this.profile = org.fhir.utils.JsonUtils.json2Array(o.getProfile());
     }
+    if (null != o.getSecurity() && !o.getSecurity().isEmpty()) {
+    	this.security = CodingHelper.fromArray2Array(o.getSecurity());
+    }
+    if (null != o.getTag() && !o.getTag().isEmpty()) {
+    	this.tag = CodingHelper.fromArray2Array(o.getTag());
+    }
   }
 
   public void setVersionId( String value) {

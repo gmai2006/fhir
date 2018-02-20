@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,16 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementevent")
 public class CapabilityStatementEventModel  implements Serializable {
-	private static final long serialVersionUID = 151873631194958843L;
+	private static final long serialVersionUID = 151910893771833003L;
   /**
   * Description: "A coded identifier of a supported messaging event."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> code;
 
   /**
   * Description: "The impact of the content of the message."
@@ -144,8 +144,13 @@ public class CapabilityStatementEventModel  implements Serializable {
 
   public CapabilityStatementEventModel(CapabilityStatementEvent o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = JsonUtils.toJson(o.getCode());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodingHelper.toModel(o.getCode(), this.code_id);
+    }
     this.category = o.getCategory();
     this.mode = o.getMode();
     this.focus = o.getFocus();
@@ -158,12 +163,18 @@ public class CapabilityStatementEventModel  implements Serializable {
     	this.response = ReferenceHelper.toModel(o.getResponse(), this.response_id);
     }
     this.documentation = o.getDocumentation();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getCode() {
+  public java.util.List<CodingModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodingModel> value) {
     this.code = value;
   }
   public String getCategory() {
@@ -231,7 +242,6 @@ public class CapabilityStatementEventModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CapabilityStatementEventModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("category" + "->" + this.category + "\n"); 
      builder.append("mode" + "->" + this.mode + "\n"); 
      builder.append("focus" + "->" + this.focus + "\n"); 

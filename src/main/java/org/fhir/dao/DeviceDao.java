@@ -42,6 +42,12 @@ public interface DeviceDao {
 
   public List<Device> findByField(QueryBuilder queryBuilder);
 
-  public List<Device> findByLocation(QueryBuilder queryBuilder);
+  public List<Device> findByUdi(QueryBuilder queryBuilder);
+  public List<Device> findByType(QueryBuilder queryBuilder);
   public List<Device> findByPatient(QueryBuilder queryBuilder);
+  public List<Device> findByOwner(QueryBuilder queryBuilder);
+  public List<Device> findByLocation(QueryBuilder queryBuilder);
+  public List<Device> findBySafety(QueryBuilder queryBuilder);
+  public List<Device> findByText(QueryBuilder queryBuilder);
+  public List<Device> findByMeta(QueryBuilder queryBuilder);
 }

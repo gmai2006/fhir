@@ -266,7 +266,12 @@ public class ExplanationOfBenefit  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getSubType() && !o.getSubType().isEmpty()) {
+    	this.subType = CodeableConceptHelper.fromArray2Array(o.getSubType());
+    }
     if (null != o.getPatient() && !o.getPatient().isEmpty()) {
       this.patient = new Reference(o.getPatient().get(0));
     }
@@ -298,7 +303,9 @@ public class ExplanationOfBenefit  extends DomainResource  {
     if (null != o.getClaimResponse() && !o.getClaimResponse().isEmpty()) {
       this.claimResponse = new Reference(o.getClaimResponse().get(0));
     }
-    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getOutcome() && !o.getOutcome().isEmpty()) {
+      this.outcome = new CodeableConcept(o.getOutcome().get(0));
+    }
     if (null != o.getDisposition()) {
       this.disposition = o.getDisposition();
     }
@@ -355,7 +362,9 @@ public class ExplanationOfBenefit  extends DomainResource  {
     if (null != o.getPayment() && !o.getPayment().isEmpty()) {
       this.payment = new ExplanationOfBenefitPayment(o.getPayment().get(0));
     }
-    this.form = CodeableConceptHelper.fromJson(o.getForm());
+    if (null != o.getForm() && !o.getForm().isEmpty()) {
+      this.form = new CodeableConcept(o.getForm().get(0));
+    }
     if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
     	this.processNote = ExplanationOfBenefitProcessNoteHelper.fromArray2Array(o.getProcessNote());
     }

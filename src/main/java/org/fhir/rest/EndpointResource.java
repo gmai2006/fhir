@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.Endpoint;
 import org.fhir.service.EndpointService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/Endpoint")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class EndpointResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public Endpoint find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public Endpoint findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<Endpoint> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Endpoint> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Endpoint> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Endpoint> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Endpoint> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<Endpoint> findAll() {
   	return this.service.selectAll();
   }
@@ -107,14 +172,52 @@ public class EndpointResource {
     return service.select(input);
   }
 
+  /**
+  * Descr: The organization that is managing the endpoint
+  * Type: reference
+  */
   @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Endpoint> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  @Path("organization")
+  public List<Endpoint> organization(@QueryParam("organization")String organization) {
+  	java.util.Map<String, String> params = QueryParser.parse(organization, VALID_FIELDS);
+  	return this.service.findByManagingOrganization(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Identifies this endpoint across multiple systems
+  * Type: token
+  */
+  @GET
+  public List<Endpoint> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
   	return this.service.findByField(new QueryBuilder(params));
   }
-
+  /**
+  * Descr: The current status of the Endpoint (usually expected to be active)
+  * Type: token
+  */
+  @GET
+  public List<Endpoint> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: A name that this endpoint can be identified by
+  * Type: string
+  */
+  @GET
+  public List<Endpoint> name(@QueryParam("name")String name) {
+  	java.util.Map<String, String> params = QueryParser.parse(name, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The type of content that may be used at this endpoint (e.g. XDS Discharge summaries)
+  * Type: token
+  */
+  @GET
+  public List<Endpoint> payloadtype(@QueryParam("payloadtype")String payloadtype) {
+  	java.util.Map<String, String> params = QueryParser.parse(payloadtype, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
 
   private static final String VALID_FIELDS = "connectiontype|identifier|name|organization|payloadtype|status";
 }

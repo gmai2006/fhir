@@ -136,6 +136,12 @@ public class PractitionerRole  extends DomainResource  {
     if (null != o.getOrganization() && !o.getOrganization().isEmpty()) {
       this.organization = new Reference(o.getOrganization().get(0));
     }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code = CodeableConceptHelper.fromArray2Array(o.getCode());
+    }
+    if (null != o.getSpecialty() && !o.getSpecialty().isEmpty()) {
+    	this.specialty = CodeableConceptHelper.fromArray2Array(o.getSpecialty());
+    }
     if (null != o.getLocation() && !o.getLocation().isEmpty()) {
     	this.location = ReferenceHelper.fromArray2Array(o.getLocation());
     }

@@ -38,12 +38,23 @@ public interface ChargeItemService {
   public ChargeItem update(ChargeItem bean);
   public void delete(ChargeItem bean);
   public List<ChargeItem> findByField(QueryBuilder queryBuilder);
-  public List<ChargeItem> findByAccount(QueryBuilder queryBuilder);
-  public List<ChargeItem> findByContext(QueryBuilder queryBuilder);
-  public List<ChargeItem> findByEnterer(QueryBuilder queryBuilder);
-  public List<ChargeItem> findByQuantity(QueryBuilder queryBuilder);
-  public List<ChargeItem> findByService(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByPartOf(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByCode(QueryBuilder queryBuilder);
   public List<ChargeItem> findBySubject(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByContext(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByParticipant(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByPerformingOrganization(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByRequestingOrganization(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByQuantity(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByBodysite(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByPriceOverride(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByEnterer(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByReason(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByService(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByAccount(QueryBuilder queryBuilder);
+  public List<ChargeItem> findBySupportingInformation(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByText(QueryBuilder queryBuilder);
+  public List<ChargeItem> findByMeta(QueryBuilder queryBuilder);
 
 
 }

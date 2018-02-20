@@ -25,6 +25,7 @@
  */
 
 package org.fhir.pojo;
+import org.fhir.entity.CodeableConceptModel;
 import com.google.gson.GsonBuilder;
 
 /**
@@ -46,7 +47,18 @@ public class CodeableConcept  extends Element  {
   */
   protected transient Element _text;
 
-  public CodeableConcept() {}
+  public CodeableConcept() {
+  }
+
+  public CodeableConcept(CodeableConceptModel o) {
+    this.id = o.getId();
+    if (null != o.getCoding() && !o.getCoding().isEmpty()) {
+    	this.coding = CodingHelper.fromArray2Array(o.getCoding());
+    }
+    if (null != o.getText()) {
+      this.text = o.getText();
+    }
+  }
 
   public void setCoding( java.util.List<Coding> value) {
     this.coding = value;
@@ -76,5 +88,6 @@ public class CodeableConcept  extends Element  {
      if(this._text != null) builder.append("_text" + "->" + this._text.toString() + "\n"); ;
     return builder.toString();
   }
+
 
 }

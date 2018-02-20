@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="consentdata1")
 public class ConsentData1Model  implements Serializable {
-	private static final long serialVersionUID = 151873631144379868L;
+	private static final long serialVersionUID = 151910893720956479L;
   /**
   * Description: "How the resource reference is interpreted when testing consent restrictions."
   */
@@ -101,11 +100,19 @@ public class ConsentData1Model  implements Serializable {
 
   public ConsentData1Model(ConsentData1 o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.meaning = o.getMeaning();
     if (null != o.getReference() ) {
     	this.reference_id = "reference" + this.parent_id;
     	this.reference = ReferenceHelper.toModel(o.getReference(), this.reference_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

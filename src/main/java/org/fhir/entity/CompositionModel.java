@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="composition")
 public class CompositionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631181986006L;
+	private static final long serialVersionUID = 151910893758665803L;
   /**
   * Description: "This is a Composition resource"
   */
@@ -65,22 +64,25 @@ public class CompositionModel  implements Serializable {
 
   /**
   * Description: "Specifies the particular kind of composition (e.g. History and Physical, Discharge Summary, Progress Note). This usually equates to the purpose of making the composition."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "A categorization for the type of the composition - helps for indexing and searching. This may be implied by or derived from the code specified in the Composition Type."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"FHIRclass\"", length = 16777215)
-  private String FHIRclass;
+  @Column(name="\"fhirclass_id\"")
+  private String fhirclass_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> FHIRclass;
 
   /**
   * Description: "Who or what the composition is about. The composition can be about a person, (patient or healthcare practitioner), a device (e.g. a machine) or even a group of subjects (such as a document about a herd of livestock, or a set of patients that share a common exposure)."
@@ -284,10 +286,18 @@ public class CompositionModel  implements Serializable {
   public CompositionModel(Composition o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.type = JsonUtils.toJson(o.getType());
-    this.FHIRclass = JsonUtils.toJson(o.getFHIRclass());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getFHIRclass() ) {
+    	this.fhirclass_id = "fhirclass" + this.id;
+    	this.FHIRclass = CodeableConceptHelper.toModel(o.getFHIRclass(), this.fhirclass_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -327,6 +337,15 @@ public class CompositionModel  implements Serializable {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
     }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
     	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
@@ -353,16 +372,16 @@ public class CompositionModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getFHIRclass() {
+  public java.util.List<CodeableConceptModel> getFHIRclass() {
     return this.FHIRclass;
   }
-  public void setFHIRclass( String value) {
+  public void setFHIRclass( java.util.List<CodeableConceptModel> value) {
     this.FHIRclass = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -487,8 +506,6 @@ public class CompositionModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("FHIRclass" + "->" + this.FHIRclass + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("title" + "->" + this.title + "\n"); 
      builder.append("confidentiality" + "->" + this.confidentiality + "\n"); 

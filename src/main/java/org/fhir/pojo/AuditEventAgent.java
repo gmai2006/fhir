@@ -112,6 +112,9 @@ public class AuditEventAgent  extends BackboneElement  {
 
   public AuditEventAgent(AuditEventAgentModel o) {
     this.id = o.getId();
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+    	this.role = CodeableConceptHelper.fromArray2Array(o.getRole());
+    }
     if (null != o.getReference() && !o.getReference().isEmpty()) {
       this.reference = new Reference(o.getReference().get(0));
     }
@@ -131,9 +134,14 @@ public class AuditEventAgent  extends BackboneElement  {
     if (o.getPolicy() != null) {
     	this.policy = org.fhir.utils.JsonUtils.json2Array(o.getPolicy());
     }
-    this.media = CodingHelper.fromJson(o.getMedia());
+    if (null != o.getMedia() && !o.getMedia().isEmpty()) {
+      this.media = new Coding(o.getMedia().get(0));
+    }
     if (null != o.getNetwork() && !o.getNetwork().isEmpty()) {
       this.network = new AuditEventNetwork(o.getNetwork().get(0));
+    }
+    if (null != o.getPurposeOfUse() && !o.getPurposeOfUse().isEmpty()) {
+    	this.purposeOfUse = CodeableConceptHelper.fromArray2Array(o.getPurposeOfUse());
     }
   }
 

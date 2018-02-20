@@ -96,6 +96,18 @@ public class BinaryDaoImpl implements BinaryDao {
       em.remove(removed);
   }
 
+  @Override
+  public List<Binary> findBySecurityContext(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BinaryModel a, Reference b where a.securityContext_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<Binary> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from BinaryModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
 
   @Override
   public List<Binary> findByField(QueryBuilder queryBuilder) {

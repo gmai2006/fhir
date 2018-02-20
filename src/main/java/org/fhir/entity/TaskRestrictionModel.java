@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="taskrestriction")
 public class TaskRestrictionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631132738507L;
+	private static final long serialVersionUID = 151910893708499845L;
   /**
   * Description: "Indicates the number of times the requested action should occur."
   */
@@ -111,12 +110,22 @@ public class TaskRestrictionModel  implements Serializable {
 
   public TaskRestrictionModel(TaskRestriction o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.repetitions = o.getRepetitions();
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getRecipient() && !o.getRecipient().isEmpty()) {
     	this.recipient_id = "recipient" + this.parent_id;
     	this.recipient = ReferenceHelper.toModelFromArray(o.getRecipient(), this.recipient_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

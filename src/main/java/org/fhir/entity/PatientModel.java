@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="patient")
 public class PatientModel  implements Serializable {
-	private static final long serialVersionUID = 151873631169720059L;
+	private static final long serialVersionUID = 151910893745481614L;
   /**
   * Description: "This is a Patient resource"
   */
@@ -124,12 +123,14 @@ public class PatientModel  implements Serializable {
 
   /**
   * Description: "This field contains a patient's most recent marital (civil) status."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"maritalStatus\"", length = 16777215)
-  private String maritalStatus;
+  @Column(name="\"maritalstatus_id\"")
+  private String maritalstatus_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="maritalstatus_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> maritalStatus;
 
   /**
   * Description: "Indicates whether the patient is part of a multiple (bool) or indicates the actual birth order (integer)."
@@ -312,7 +313,16 @@ public class PatientModel  implements Serializable {
   public PatientModel(Patient o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.active = o.getActive();
+    if (null != o.getName()) {
+    	this.name = JsonUtils.toJson(o.getName());
+    }
+    if (null != o.getTelecom()) {
+    	this.telecom = JsonUtils.toJson(o.getTelecom());
+    }
     this.gender = o.getGender();
     this.birthDate = o.getBirthDate();
     this.deceasedBoolean = o.getDeceasedBoolean();
@@ -321,9 +331,15 @@ public class PatientModel  implements Serializable {
     	this.address_id = "address" + this.id;
     	this.address = AddressHelper.toModelFromArray(o.getAddress(), this.address_id);
     }
-    this.maritalStatus = JsonUtils.toJson(o.getMaritalStatus());
+    if (null != o.getMaritalStatus() ) {
+    	this.maritalstatus_id = "maritalstatus" + this.id;
+    	this.maritalStatus = CodeableConceptHelper.toModel(o.getMaritalStatus(), this.maritalstatus_id);
+    }
     this.multipleBirthBoolean = o.getMultipleBirthBoolean();
     this.multipleBirthInteger = o.getMultipleBirthInteger();
+    if (null != o.getPhoto()) {
+    	this.photo = JsonUtils.toJson(o.getPhoto());
+    }
     if (null != o.getContact() && !o.getContact().isEmpty()) {
     	this.contact_id = "contact" + this.id;
     	this.contact = PatientContactHelper.toModelFromArray(o.getContact(), this.contact_id);
@@ -351,6 +367,15 @@ public class PatientModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -420,10 +445,10 @@ public class PatientModel  implements Serializable {
   public void setAddress( java.util.List<AddressModel> value) {
     this.address = value;
   }
-  public String getMaritalStatus() {
+  public java.util.List<CodeableConceptModel> getMaritalStatus() {
     return this.maritalStatus;
   }
-  public void setMaritalStatus( String value) {
+  public void setMaritalStatus( java.util.List<CodeableConceptModel> value) {
     this.maritalStatus = value;
   }
   public Boolean getMultipleBirthBoolean() {
@@ -542,7 +567,6 @@ public class PatientModel  implements Serializable {
      builder.append("birthDate" + "->" + this.birthDate + "\n"); 
      builder.append("deceasedBoolean" + "->" + this.deceasedBoolean + "\n"); 
      builder.append("deceasedDateTime" + "->" + this.deceasedDateTime + "\n"); 
-     builder.append("maritalStatus" + "->" + this.maritalStatus + "\n"); 
      builder.append("multipleBirthBoolean" + "->" + this.multipleBirthBoolean + "\n"); 
      builder.append("multipleBirthInteger" + "->" + this.multipleBirthInteger + "\n"); 
      builder.append("photo" + "->" + this.photo + "\n"); 

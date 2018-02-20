@@ -193,8 +193,21 @@ public class Appointment  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.serviceCategory = CodeableConceptHelper.fromJson(o.getServiceCategory());
-    this.appointmentType = CodeableConceptHelper.fromJson(o.getAppointmentType());
+    if (null != o.getServiceCategory() && !o.getServiceCategory().isEmpty()) {
+      this.serviceCategory = new CodeableConcept(o.getServiceCategory().get(0));
+    }
+    if (null != o.getServiceType() && !o.getServiceType().isEmpty()) {
+    	this.serviceType = CodeableConceptHelper.fromArray2Array(o.getServiceType());
+    }
+    if (null != o.getSpecialty() && !o.getSpecialty().isEmpty()) {
+    	this.specialty = CodeableConceptHelper.fromArray2Array(o.getSpecialty());
+    }
+    if (null != o.getAppointmentType() && !o.getAppointmentType().isEmpty()) {
+      this.appointmentType = new CodeableConcept(o.getAppointmentType().get(0));
+    }
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason = CodeableConceptHelper.fromArray2Array(o.getReason());
+    }
     if (null != o.getIndication() && !o.getIndication().isEmpty()) {
     	this.indication = ReferenceHelper.fromArray2Array(o.getIndication());
     }

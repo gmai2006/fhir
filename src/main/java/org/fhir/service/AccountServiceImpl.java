@@ -114,9 +114,27 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Account> findByType(QueryBuilder queryBuilder) {
+  	final List<Account> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Account> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Account> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Account> findByBalance(QueryBuilder queryBuilder) {
   	final List<Account> result = dao.findByBalance(queryBuilder);
     logger.info("findBybalance - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Account> findByCoverage(QueryBuilder queryBuilder) {
+  	final List<Account> result = dao.findByCoverage(queryBuilder);
+    logger.info("findBycoverage - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,9 +144,21 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Account> findBySubject(QueryBuilder queryBuilder) {
-  	final List<Account> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<Account> findByGuarantor(QueryBuilder queryBuilder) {
+  	final List<Account> result = dao.findByGuarantor(queryBuilder);
+    logger.info("findByguarantor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Account> findByText(QueryBuilder queryBuilder) {
+  	final List<Account> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Account> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Account> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

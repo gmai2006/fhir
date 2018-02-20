@@ -114,9 +114,27 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<RequestGroup> findByAuthor(QueryBuilder queryBuilder) {
-  	final List<RequestGroup> result = dao.findByAuthor(queryBuilder);
-    logger.info("findByauthor - exited - return value={} result ");
+  public List<RequestGroup> findByDefinition(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByDefinition(queryBuilder);
+    logger.info("findBydefinition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RequestGroup> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RequestGroup> findByReplaces(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByReplaces(queryBuilder);
+    logger.info("findByreplaces - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RequestGroup> findBySubject(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,15 +144,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<RequestGroup> findByDefinition(QueryBuilder queryBuilder) {
-  	final List<RequestGroup> result = dao.findByDefinition(queryBuilder);
-    logger.info("findBydefinition - exited - return value={} result ");
+  public List<RequestGroup> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<RequestGroup> findBySubject(QueryBuilder queryBuilder) {
-  	final List<RequestGroup> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<RequestGroup> findByReasonCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByReasonCodeableConcept(queryBuilder);
+    logger.info("findByreasonCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RequestGroup> findByReasonReference(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByReasonReference(queryBuilder);
+    logger.info("findByreasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RequestGroup> findByAction(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByAction(queryBuilder);
+    logger.info("findByaction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RequestGroup> findByText(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RequestGroup> findByMeta(QueryBuilder queryBuilder) {
+  	final List<RequestGroup> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

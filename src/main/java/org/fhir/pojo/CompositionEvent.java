@@ -52,6 +52,9 @@ public class CompositionEvent  extends BackboneElement  {
 
   public CompositionEvent(CompositionEventModel o) {
     this.id = o.getId();
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code = CodeableConceptHelper.fromArray2Array(o.getCode());
+    }
     this.period = PeriodHelper.fromJson(o.getPeriod());
     if (null != o.getDetail() && !o.getDetail().isEmpty()) {
     	this.detail = ReferenceHelper.fromArray2Array(o.getDetail());

@@ -47,6 +47,9 @@ public class ConditionEvidence  extends BackboneElement  {
 
   public ConditionEvidence(ConditionEvidenceModel o) {
     this.id = o.getId();
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code = CodeableConceptHelper.fromArray2Array(o.getCode());
+    }
     if (null != o.getDetail() && !o.getDetail().isEmpty()) {
     	this.detail = ReferenceHelper.fromArray2Array(o.getDetail());
     }

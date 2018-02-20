@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="practitioner")
 public class PractitionerModel  implements Serializable {
-	private static final long serialVersionUID = 151873631188967091L;
+	private static final long serialVersionUID = 151910893765821261L;
   /**
   * Description: "This is a Practitioner resource"
   */
@@ -129,12 +128,14 @@ public class PractitionerModel  implements Serializable {
 
   /**
   * Description: "A language the practitioner is able to use in patient communication."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"communication\"", length = 16777215)
-  private String communication;
+  @Column(name="\"communication_id\"")
+  private String communication_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="communication_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> communication;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -227,20 +228,45 @@ public class PractitionerModel  implements Serializable {
   public PractitionerModel(Practitioner o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.active = o.getActive();
+    if (null != o.getName()) {
+    	this.name = JsonUtils.toJson(o.getName());
+    }
+    if (null != o.getTelecom()) {
+    	this.telecom = JsonUtils.toJson(o.getTelecom());
+    }
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
     	this.address_id = "address" + this.id;
     	this.address = AddressHelper.toModelFromArray(o.getAddress(), this.address_id);
     }
     this.gender = o.getGender();
     this.birthDate = o.getBirthDate();
+    if (null != o.getPhoto()) {
+    	this.photo = JsonUtils.toJson(o.getPhoto());
+    }
     if (null != o.getQualification() && !o.getQualification().isEmpty()) {
     	this.qualification_id = "qualification" + this.id;
     	this.qualification = PractitionerQualificationHelper.toModelFromArray(o.getQualification(), this.qualification_id);
     }
+    if (null != o.getCommunication() && !o.getCommunication().isEmpty()) {
+    	this.communication_id = "communication" + this.id;
+    	this.communication = CodeableConceptHelper.toModelFromArray(o.getCommunication(), this.communication_id);
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -310,10 +336,10 @@ public class PractitionerModel  implements Serializable {
   public void setQualification( java.util.List<PractitionerQualificationModel> value) {
     this.qualification = value;
   }
-  public String getCommunication() {
+  public java.util.List<CodeableConceptModel> getCommunication() {
     return this.communication;
   }
-  public void setCommunication( String value) {
+  public void setCommunication( java.util.List<CodeableConceptModel> value) {
     this.communication = value;
   }
   public java.util.List<NarrativeModel> getText() {
@@ -377,7 +403,6 @@ public class PractitionerModel  implements Serializable {
      builder.append("gender" + "->" + this.gender + "\n"); 
      builder.append("birthDate" + "->" + this.birthDate + "\n"); 
      builder.append("photo" + "->" + this.photo + "\n"); 
-     builder.append("communication" + "->" + this.communication + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

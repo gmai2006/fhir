@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claiminsurance")
 public class ClaimInsuranceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631124769885L;
+	private static final long serialVersionUID = 1519108937014139L;
   /**
   * Description: "Sequence of coverage which serves to provide a link and convey coordination of benefit order."
   */
@@ -134,7 +133,9 @@ public class ClaimInsuranceModel  implements Serializable {
 
   public ClaimInsuranceModel(ClaimInsurance o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.sequence = o.getSequence();
     this.focal = o.getFocal();
     if (null != o.getCoverage() ) {
@@ -142,10 +143,16 @@ public class ClaimInsuranceModel  implements Serializable {
     	this.coverage = ReferenceHelper.toModel(o.getCoverage(), this.coverage_id);
     }
     this.businessArrangement = o.getBusinessArrangement();
-    this.preAuthRef = org.fhir.utils.JsonUtils.write2String(o.getPreAuthRef());
+    this.preAuthRef = org.fhir.utils.JsonUtils.toJson(o.getPreAuthRef());
     if (null != o.getClaimResponse() ) {
     	this.claimresponse_id = "claimresponse" + this.parent_id;
     	this.claimResponse = ReferenceHelper.toModel(o.getClaimResponse(), this.claimresponse_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

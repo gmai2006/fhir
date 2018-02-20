@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="explanationofbenefitinformation")
 public class ExplanationOfBenefitInformationModel  implements Serializable {
-	private static final long serialVersionUID = 15187363115165456L;
+	private static final long serialVersionUID = 15191089372887409L;
   /**
   * Description: "Sequence of the information element which serves to provide a link."
   */
@@ -49,22 +48,25 @@ public class ExplanationOfBenefitInformationModel  implements Serializable {
 
   /**
   * Description: "The general class of the information supplied: information; exception; accident, employment; onset, etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "System and code pertaining to the specific information regarding special conditions relating to the setting, treatment or patient  for which care is sought which may influence the adjudication."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The date when or period to which this information refers."
@@ -123,12 +125,14 @@ public class ExplanationOfBenefitInformationModel  implements Serializable {
 
   /**
   * Description: "For example, provides the reason for: the additional stay, or missing tooth or any other situation where a reason code is required in addition to the content."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> reason;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -174,23 +178,44 @@ public class ExplanationOfBenefitInformationModel  implements Serializable {
 
   public ExplanationOfBenefitInformationModel(ExplanationOfBenefitInformation o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.sequence = o.getSequence();
-    this.category = JsonUtils.toJson(o.getCategory());
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.parent_id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     this.timingDate = o.getTimingDate();
-    this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
+    if (null != o.getTimingPeriod()) {
+    	this.timingPeriod = JsonUtils.toJson(o.getTimingPeriod());
+    }
     this.valueString = o.getValueString();
     if (null != o.getValueQuantity() ) {
     	this.valuequantity_id = "valuequantity" + this.parent_id;
     	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
     }
-    this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
+    if (null != o.getValueAttachment()) {
+    	this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
+    }
     if (null != o.getValueReference() ) {
     	this.valuereference_id = "valuereference" + this.parent_id;
     	this.valueReference = ReferenceHelper.toModel(o.getValueReference(), this.valuereference_id);
     }
-    this.reason = JsonUtils.toJson(o.getReason());
+    if (null != o.getReason() ) {
+    	this.reason_id = "reason" + this.parent_id;
+    	this.reason = CodingHelper.toModel(o.getReason(), this.reason_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Float getSequence() {
@@ -199,16 +224,16 @@ public class ExplanationOfBenefitInformationModel  implements Serializable {
   public void setSequence( Float value) {
     this.sequence = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public String getTimingDate() {
@@ -247,10 +272,10 @@ public class ExplanationOfBenefitInformationModel  implements Serializable {
   public void setValueReference( java.util.List<ReferenceModel> value) {
     this.valueReference = value;
   }
-  public String getReason() {
+  public java.util.List<CodingModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodingModel> value) {
     this.reason = value;
   }
   public String getModifierExtension() {
@@ -283,13 +308,10 @@ public class ExplanationOfBenefitInformationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ExplanationOfBenefitInformationModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("timingDate" + "->" + this.timingDate + "\n"); 
      builder.append("timingPeriod" + "->" + this.timingPeriod + "\n"); 
      builder.append("valueString" + "->" + this.valueString + "\n"); 
      builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

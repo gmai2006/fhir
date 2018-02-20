@@ -96,7 +96,9 @@ public class CapabilityStatementEvent  extends BackboneElement  {
 
   public CapabilityStatementEvent(CapabilityStatementEventModel o) {
     this.id = o.getId();
-    this.code = CodingHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new Coding(o.getCode().get(0));
+    }
     if (null != o.getCategory()) {
       this.category = o.getCategory();
     }

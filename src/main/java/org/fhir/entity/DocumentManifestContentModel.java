@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="documentmanifestcontent")
 public class DocumentManifestContentModel  implements Serializable {
-	private static final long serialVersionUID = 151873631159871416L;
+	private static final long serialVersionUID = 15191089373595528L;
   /**
   * Description: "The list of references to document content, or Attachment that consist of the parts of this document manifest. Usually, these would be document references, but direct references to Media or Attachments are also allowed."
   * Actual type: String;
@@ -103,11 +102,21 @@ public class DocumentManifestContentModel  implements Serializable {
 
   public DocumentManifestContentModel(DocumentManifestContent o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.pAttachment = JsonUtils.toJson(o.getPAttachment());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getPAttachment()) {
+    	this.pAttachment = JsonUtils.toJson(o.getPAttachment());
+    }
     if (null != o.getPReference() ) {
     	this.preference_id = "preference" + this.parent_id;
     	this.pReference = ReferenceHelper.toModel(o.getPReference(), this.preference_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

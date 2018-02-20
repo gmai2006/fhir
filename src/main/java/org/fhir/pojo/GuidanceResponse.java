@@ -161,7 +161,9 @@ public class GuidanceResponse  extends DomainResource  {
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
       this.performer = new Reference(o.getPerformer().get(0));
     }
-    this.reasonCodeableConcept = CodeableConceptHelper.fromJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonCodeableConcept() && !o.getReasonCodeableConcept().isEmpty()) {
+      this.reasonCodeableConcept = new CodeableConcept(o.getReasonCodeableConcept().get(0));
+    }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
       this.reasonReference = new Reference(o.getReasonReference().get(0));
     }

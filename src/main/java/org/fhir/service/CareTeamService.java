@@ -38,9 +38,15 @@ public interface CareTeamService {
   public CareTeam update(CareTeam bean);
   public void delete(CareTeam bean);
   public List<CareTeam> findByField(QueryBuilder queryBuilder);
+  public List<CareTeam> findByCategory(QueryBuilder queryBuilder);
+  public List<CareTeam> findBySubject(QueryBuilder queryBuilder);
   public List<CareTeam> findByContext(QueryBuilder queryBuilder);
   public List<CareTeam> findByParticipant(QueryBuilder queryBuilder);
-  public List<CareTeam> findBySubject(QueryBuilder queryBuilder);
+  public List<CareTeam> findByReasonCode(QueryBuilder queryBuilder);
+  public List<CareTeam> findByReasonReference(QueryBuilder queryBuilder);
+  public List<CareTeam> findByManagingOrganization(QueryBuilder queryBuilder);
+  public List<CareTeam> findByText(QueryBuilder queryBuilder);
+  public List<CareTeam> findByMeta(QueryBuilder queryBuilder);
 
 
 }

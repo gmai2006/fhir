@@ -193,7 +193,9 @@ public class QuestionnaireEnableWhen  extends BackboneElement  {
       this.answerUri = o.getAnswerUri();
     }
     this.answerAttachment = AttachmentHelper.fromJson(o.getAnswerAttachment());
-    this.answerCoding = CodingHelper.fromJson(o.getAnswerCoding());
+    if (null != o.getAnswerCoding() && !o.getAnswerCoding().isEmpty()) {
+      this.answerCoding = new Coding(o.getAnswerCoding().get(0));
+    }
     if (null != o.getAnswerQuantity() && !o.getAnswerQuantity().isEmpty()) {
       this.answerQuantity = new Quantity(o.getAnswerQuantity().get(0));
     }

@@ -42,5 +42,11 @@ public interface MeasureReportDao {
 
   public List<MeasureReport> findByField(QueryBuilder queryBuilder);
 
+  public List<MeasureReport> findByMeasure(QueryBuilder queryBuilder);
   public List<MeasureReport> findByPatient(QueryBuilder queryBuilder);
+  public List<MeasureReport> findByReportingOrganization(QueryBuilder queryBuilder);
+  public List<MeasureReport> findByGroup(QueryBuilder queryBuilder);
+  public List<MeasureReport> findByEvaluatedResources(QueryBuilder queryBuilder);
+  public List<MeasureReport> findByText(QueryBuilder queryBuilder);
+  public List<MeasureReport> findByMeta(QueryBuilder queryBuilder);
 }

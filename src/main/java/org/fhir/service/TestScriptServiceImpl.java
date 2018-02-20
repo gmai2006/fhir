@@ -113,4 +113,40 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<TestScript> findByContact(QueryBuilder queryBuilder) {
+  	final List<TestScript> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<TestScript> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<TestScript> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<TestScript> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<TestScript> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<TestScript> findByProfile(QueryBuilder queryBuilder) {
+  	final List<TestScript> result = dao.findByProfile(queryBuilder);
+    logger.info("findByprofile - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<TestScript> findByText(QueryBuilder queryBuilder) {
+  	final List<TestScript> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<TestScript> findByMeta(QueryBuilder queryBuilder) {
+  	final List<TestScript> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

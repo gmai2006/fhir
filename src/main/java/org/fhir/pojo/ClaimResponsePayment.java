@@ -73,11 +73,15 @@ public class ClaimResponsePayment  extends BackboneElement  {
 
   public ClaimResponsePayment(ClaimResponsePaymentModel o) {
     this.id = o.getId();
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getAdjustment() && !o.getAdjustment().isEmpty()) {
       this.adjustment = new Money(o.getAdjustment().get(0));
     }
-    this.adjustmentReason = CodeableConceptHelper.fromJson(o.getAdjustmentReason());
+    if (null != o.getAdjustmentReason() && !o.getAdjustmentReason().isEmpty()) {
+      this.adjustmentReason = new CodeableConcept(o.getAdjustmentReason().get(0));
+    }
     if (null != o.getDate()) {
       this.date = o.getDate();
     }

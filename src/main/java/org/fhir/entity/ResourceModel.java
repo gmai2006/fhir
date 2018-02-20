@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="resource")
 public class ResourceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631177613205L;
+	private static final long serialVersionUID = 151910893753975304L;
   /**
   * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
   */

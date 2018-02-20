@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="device")
 public class DeviceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631158850530L;
+	private static final long serialVersionUID = 151910893735012664L;
   /**
   * Description: "This is a Device resource"
   */
@@ -76,12 +75,14 @@ public class DeviceModel  implements Serializable {
 
   /**
   * Description: "Code or identifier to identify a kind of device."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "Lot number assigned by the manufacturer."
@@ -187,12 +188,14 @@ public class DeviceModel  implements Serializable {
 
   /**
   * Description: "Provides additional safety characteristics about a medical device.  For example devices containing latex."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"safety\"", length = 16777215)
-  private String safety;
+  @Column(name="\"safety_id\"")
+  private String safety_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="safety_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> safety;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -285,12 +288,18 @@ public class DeviceModel  implements Serializable {
   public DeviceModel(Device o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getUdi() ) {
     	this.udi_id = "udi" + this.id;
     	this.udi = DeviceUdiHelper.toModel(o.getUdi(), this.udi_id);
     }
     this.status = o.getStatus();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     this.lotNumber = o.getLotNumber();
     this.manufacturer = o.getManufacturer();
     this.manufactureDate = o.getManufactureDate();
@@ -305,14 +314,33 @@ public class DeviceModel  implements Serializable {
     	this.owner_id = "owner" + this.id;
     	this.owner = ReferenceHelper.toModel(o.getOwner(), this.owner_id);
     }
+    if (null != o.getContact()) {
+    	this.contact = JsonUtils.toJson(o.getContact());
+    }
     if (null != o.getLocation() ) {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
     }
     this.url = o.getUrl();
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
+    if (null != o.getSafety() && !o.getSafety().isEmpty()) {
+    	this.safety_id = "safety" + this.id;
+    	this.safety = CodeableConceptHelper.toModelFromArray(o.getSafety(), this.safety_id);
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -346,10 +374,10 @@ public class DeviceModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public String getLotNumber() {
@@ -424,10 +452,10 @@ public class DeviceModel  implements Serializable {
   public void setNote( String value) {
     this.note = value;
   }
-  public String getSafety() {
+  public java.util.List<CodeableConceptModel> getSafety() {
     return this.safety;
   }
-  public void setSafety( String value) {
+  public void setSafety( java.util.List<CodeableConceptModel> value) {
     this.safety = value;
   }
   public java.util.List<NarrativeModel> getText() {
@@ -486,7 +514,6 @@ public class DeviceModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("lotNumber" + "->" + this.lotNumber + "\n"); 
      builder.append("manufacturer" + "->" + this.manufacturer + "\n"); 
      builder.append("manufactureDate" + "->" + this.manufactureDate + "\n"); 
@@ -496,7 +523,6 @@ public class DeviceModel  implements Serializable {
      builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("url" + "->" + this.url + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("safety" + "->" + this.safety + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

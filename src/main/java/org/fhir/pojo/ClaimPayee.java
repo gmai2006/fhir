@@ -53,8 +53,12 @@ public class ClaimPayee  extends BackboneElement  {
 
   public ClaimPayee(ClaimPayeeModel o) {
     this.id = o.getId();
-    this.type = CodeableConceptHelper.fromJson(o.getType());
-    this.resourceType = CodingHelper.fromJson(o.getResourceType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getResourceType() && !o.getResourceType().isEmpty()) {
+      this.resourceType = new Coding(o.getResourceType().get(0));
+    }
     if (null != o.getParty() && !o.getParty().isEmpty()) {
       this.party = new Reference(o.getParty().get(0));
     }

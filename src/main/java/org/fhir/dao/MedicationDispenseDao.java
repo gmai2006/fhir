@@ -42,9 +42,26 @@ public interface MedicationDispenseDao {
 
   public List<MedicationDispense> findByField(QueryBuilder queryBuilder);
 
-  public List<MedicationDispense> findByContext(QueryBuilder queryBuilder);
-  public List<MedicationDispense> findByDestination(QueryBuilder queryBuilder);
-  public List<MedicationDispense> findByPerformer(QueryBuilder queryBuilder);
-  public List<MedicationDispense> findByReceiver(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByPartOf(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByCategory(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByMedicationCodeableConcept(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByMedicationReference(QueryBuilder queryBuilder);
   public List<MedicationDispense> findBySubject(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByContext(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findBySupportingInformation(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByPerformer(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByAuthorizingPrescription(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByType(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByQuantity(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByDaysSupply(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByDestination(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByReceiver(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByDosageInstruction(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findBySubstitution(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByDetectedIssue(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByNotDoneReasonCodeableConcept(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByNotDoneReasonReference(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByEventHistory(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByText(QueryBuilder queryBuilder);
+  public List<MedicationDispense> findByMeta(QueryBuilder queryBuilder);
 }

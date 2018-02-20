@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="groupmember")
 public class GroupMemberModel  implements Serializable {
-	private static final long serialVersionUID = 151873631191384074L;
+	private static final long serialVersionUID = 151910893768315774L;
   /**
   * Description: "A reference to the entity that is a member of the group. Must be consistent with Group.type."
   */
@@ -110,13 +109,23 @@ public class GroupMemberModel  implements Serializable {
 
   public GroupMemberModel(GroupMember o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getEntity() ) {
     	this.entity_id = "entity" + this.parent_id;
     	this.entity = ReferenceHelper.toModel(o.getEntity(), this.entity_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     this.inactive = o.getInactive();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public java.util.List<ReferenceModel> getEntity() {

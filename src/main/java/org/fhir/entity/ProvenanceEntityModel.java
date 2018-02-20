@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="provenanceentity")
 public class ProvenanceEntityModel  implements Serializable {
-	private static final long serialVersionUID = 151873631186558552L;
+	private static final long serialVersionUID = 15191089376339662L;
   /**
   * Description: "How the entity was used during the activity."
   */
@@ -128,17 +127,27 @@ public class ProvenanceEntityModel  implements Serializable {
 
   public ProvenanceEntityModel(ProvenanceEntity o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.role = o.getRole();
     this.whatUri = o.getWhatUri();
     if (null != o.getWhatReference() ) {
     	this.whatreference_id = "whatreference" + this.parent_id;
     	this.whatReference = ReferenceHelper.toModel(o.getWhatReference(), this.whatreference_id);
     }
-    this.whatIdentifier = JsonUtils.toJson(o.getWhatIdentifier());
+    if (null != o.getWhatIdentifier()) {
+    	this.whatIdentifier = JsonUtils.toJson(o.getWhatIdentifier());
+    }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent_id = "agent" + this.parent_id;
     	this.agent = ProvenanceAgentHelper.toModelFromArray(o.getAgent(), this.agent_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

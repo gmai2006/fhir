@@ -264,6 +264,9 @@ public class QuestionnaireItem  extends BackboneElement  {
     if (null != o.getDefinition()) {
       this.definition = o.getDefinition();
     }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code = CodingHelper.fromArray2Array(o.getCode());
+    }
     if (null != o.getPrefix()) {
       this.prefix = o.getPrefix();
     }
@@ -319,7 +322,9 @@ public class QuestionnaireItem  extends BackboneElement  {
       this.initialUri = o.getInitialUri();
     }
     this.initialAttachment = AttachmentHelper.fromJson(o.getInitialAttachment());
-    this.initialCoding = CodingHelper.fromJson(o.getInitialCoding());
+    if (null != o.getInitialCoding() && !o.getInitialCoding().isEmpty()) {
+      this.initialCoding = new Coding(o.getInitialCoding().get(0));
+    }
     if (null != o.getInitialQuantity() && !o.getInitialQuantity().isEmpty()) {
       this.initialQuantity = new Quantity(o.getInitialQuantity().get(0));
     }

@@ -215,6 +215,9 @@ public class RequestGroupAction  extends BackboneElement  {
     if (null != o.getTextEquivalent()) {
       this.textEquivalent = o.getTextEquivalent();
     }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code = CodeableConceptHelper.fromArray2Array(o.getCode());
+    }
     if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
     	this.documentation = RelatedArtifactHelper.fromArray2Array(o.getDocumentation());
     }
@@ -234,7 +237,9 @@ public class RequestGroupAction  extends BackboneElement  {
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
     	this.participant = ReferenceHelper.fromArray2Array(o.getParticipant());
     }
-    this.type = CodingHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new Coding(o.getType().get(0));
+    }
     if (null != o.getGroupingBehavior()) {
       this.groupingBehavior = o.getGroupingBehavior();
     }

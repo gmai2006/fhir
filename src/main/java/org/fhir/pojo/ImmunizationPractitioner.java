@@ -48,7 +48,9 @@ public class ImmunizationPractitioner  extends BackboneElement  {
 
   public ImmunizationPractitioner(ImmunizationPractitionerModel o) {
     this.id = o.getId();
-    this.role = CodeableConceptHelper.fromJson(o.getRole());
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+      this.role = new CodeableConcept(o.getRole().get(0));
+    }
     if (null != o.getActor() && !o.getActor().isEmpty()) {
       this.actor = new Reference(o.getActor().get(0));
     }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="account")
 public class AccountModel  implements Serializable {
-	private static final long serialVersionUID = 151873631189823160L;
+	private static final long serialVersionUID = 151910893766777594L;
   /**
   * Description: "This is a Account resource"
   */
@@ -65,12 +64,14 @@ public class AccountModel  implements Serializable {
 
   /**
   * Description: "Categorizes the account for reporting and searching purposes."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "Name used for the account when displaying it to humans in reports, etc."
@@ -250,15 +251,25 @@ public class AccountModel  implements Serializable {
   public AccountModel(Account o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     this.name = o.getName();
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
-    this.active = JsonUtils.toJson(o.getActive());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
+    if (null != o.getActive()) {
+    	this.active = JsonUtils.toJson(o.getActive());
+    }
     if (null != o.getBalance() ) {
     	this.balance_id = "balance" + this.id;
     	this.balance = MoneyHelper.toModel(o.getBalance(), this.balance_id);
@@ -279,6 +290,15 @@ public class AccountModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -306,10 +326,10 @@ public class AccountModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public String getName() {
@@ -422,7 +442,6 @@ public class AccountModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 

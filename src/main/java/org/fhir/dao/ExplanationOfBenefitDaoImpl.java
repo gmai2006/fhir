@@ -97,27 +97,15 @@ public class ExplanationOfBenefitDaoImpl implements ExplanationOfBenefitDao {
   }
 
   @Override
-  public List<ExplanationOfBenefit> findByClaim(QueryBuilder queryBuilder) {
+  public List<ExplanationOfBenefit> findByType(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.claim_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, CodeableConcept b where a.type_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<ExplanationOfBenefit> findByEnterer(QueryBuilder queryBuilder) {
+  public List<ExplanationOfBenefit> findBySubType(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.enterer_id=b.parent_id " + queryBuilder.getWhereClause();
-    return findByQuery(queryBuilder, queryStr);
-  }
-  @Override
-  public List<ExplanationOfBenefit> findByFacility(QueryBuilder queryBuilder) {
-  	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.facility_id=b.parent_id " + queryBuilder.getWhereClause();
-    return findByQuery(queryBuilder, queryStr);
-  }
-  @Override
-  public List<ExplanationOfBenefit> findByOrganization(QueryBuilder queryBuilder) {
-  	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.organization_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, CodeableConcept b where a.subType_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -127,15 +115,183 @@ public class ExplanationOfBenefitDaoImpl implements ExplanationOfBenefitDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<ExplanationOfBenefit> findByPayee(QueryBuilder queryBuilder) {
+  public List<ExplanationOfBenefit> findByEnterer(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitPayee b where a.payee_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.enterer_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByInsurer(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.insurer_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
   public List<ExplanationOfBenefit> findByProvider(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.provider_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByOrganization(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.organization_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByReferral(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.referral_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByFacility(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.facility_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByClaim(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.claim_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByClaimResponse(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.claimResponse_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByOutcome(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, CodeableConcept b where a.outcome_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByRelated(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitRelated b where a.related_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByPrescription(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.prescription_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByOriginalPrescription(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Reference b where a.originalPrescription_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByPayee(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitPayee b where a.payee_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByInformation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitInformation b where a.information_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByCareTeam(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitCareTeam b where a.careTeam_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByDiagnosis(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitDiagnosis b where a.diagnosis_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByProcedure(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitProcedure b where a.procedure_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByInsurance(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitInsurance b where a.insurance_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByAccident(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitAccident b where a.accident_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByItem(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitItem b where a.item_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByAddItem(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitAddItem b where a.addItem_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByTotalCost(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Money b where a.totalCost_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByUnallocDeductable(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Money b where a.unallocDeductable_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByTotalBenefit(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Money b where a.totalBenefit_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByPayment(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitPayment b where a.payment_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByForm(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, CodeableConcept b where a.form_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByProcessNote(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitProcessNote b where a.processNote_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByBenefitBalance(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, ExplanationOfBenefitBenefitBalance b where a.benefitBalance_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ExplanationOfBenefitModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

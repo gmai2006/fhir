@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="personlink")
 public class PersonLinkModel  implements Serializable {
-	private static final long serialVersionUID = 151873631145414696L;
+	private static final long serialVersionUID = 15191089372225195L;
   /**
   * Description: "The resource to which this actual person is associated."
   */
@@ -101,12 +100,20 @@ public class PersonLinkModel  implements Serializable {
 
   public PersonLinkModel(PersonLink o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getTarget() ) {
     	this.target_id = "target" + this.parent_id;
     	this.target = ReferenceHelper.toModel(o.getTarget(), this.target_id);
     }
     this.assurance = o.getAssurance();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public java.util.List<ReferenceModel> getTarget() {

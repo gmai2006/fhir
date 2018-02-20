@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="datarequirementcodefilter")
 public class DataRequirementCodeFilterModel  implements Serializable {
-	private static final long serialVersionUID = 15187363115498160L;
+	private static final long serialVersionUID = 151910893731222771L;
   /**
   * Description: "The code-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type code, Coding, or CodeableConcept."
   */
@@ -73,21 +72,25 @@ public class DataRequirementCodeFilterModel  implements Serializable {
 
   /**
   * Description: "The Codings for the code filter. Only one of valueSet, valueCode, valueConding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified Codings."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueCoding\"", length = 16777215)
-  private String valueCoding;
+  @Column(name="\"valuecoding_id\"")
+  private String valuecoding_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecoding_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> valueCoding;
 
   /**
   * Description: "The CodeableConcepts for the code filter. Only one of valueSet, valueCode, valueConding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified CodeableConcepts."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueCodeableConcept\"", length = 16777215)
-  private String valueCodeableConcept;
+  @Column(name="\"valuecodeableconcept_id\"")
+  private String valuecodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> valueCodeableConcept;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -133,14 +136,30 @@ public class DataRequirementCodeFilterModel  implements Serializable {
 
   public DataRequirementCodeFilterModel(DataRequirementCodeFilter o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.path = o.getPath();
     this.valueSetString = o.getValueSetString();
     if (null != o.getValueSetReference() ) {
     	this.valuesetreference_id = "valuesetreference" + this.parent_id;
     	this.valueSetReference = ReferenceHelper.toModel(o.getValueSetReference(), this.valuesetreference_id);
     }
-    this.valueCode = org.fhir.utils.JsonUtils.write2String(o.getValueCode());
+    this.valueCode = org.fhir.utils.JsonUtils.toJson(o.getValueCode());
+    if (null != o.getValueCoding() && !o.getValueCoding().isEmpty()) {
+    	this.valuecoding_id = "valuecoding" + this.parent_id;
+    	this.valueCoding = CodingHelper.toModelFromArray(o.getValueCoding(), this.valuecoding_id);
+    }
+    if (null != o.getValueCodeableConcept() && !o.getValueCodeableConcept().isEmpty()) {
+    	this.valuecodeableconcept_id = "valuecodeableconcept" + this.parent_id;
+    	this.valueCodeableConcept = CodeableConceptHelper.toModelFromArray(o.getValueCodeableConcept(), this.valuecodeableconcept_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getPath() {
@@ -167,16 +186,16 @@ public class DataRequirementCodeFilterModel  implements Serializable {
   public void setValueCode( String value) {
     this.valueCode = value;
   }
-  public String getValueCoding() {
+  public java.util.List<CodingModel> getValueCoding() {
     return this.valueCoding;
   }
-  public void setValueCoding( String value) {
+  public void setValueCoding( java.util.List<CodingModel> value) {
     this.valueCoding = value;
   }
-  public String getValueCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getValueCodeableConcept() {
     return this.valueCodeableConcept;
   }
-  public void setValueCodeableConcept( String value) {
+  public void setValueCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.valueCodeableConcept = value;
   }
   public String getModifierExtension() {
@@ -211,8 +230,6 @@ public class DataRequirementCodeFilterModel  implements Serializable {
      builder.append("path" + "->" + this.path + "\n"); 
      builder.append("valueSetString" + "->" + this.valueSetString + "\n"); 
      builder.append("valueCode" + "->" + this.valueCode + "\n"); 
-     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
-     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

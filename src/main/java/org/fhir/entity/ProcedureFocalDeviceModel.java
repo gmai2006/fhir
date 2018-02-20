@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="procedurefocaldevice")
 public class ProcedureFocalDeviceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631195685627L;
+	private static final long serialVersionUID = 151910893772442771L;
   /**
   * Description: "The kind of change that happened to the device during the procedure."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"action\"", length = 16777215)
-  private String action;
+  @Column(name="\"action_id\"")
+  private String action_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> action;
 
   /**
   * Description: "The device that was manipulated (changed) during the procedure."
@@ -103,18 +104,29 @@ public class ProcedureFocalDeviceModel  implements Serializable {
 
   public ProcedureFocalDeviceModel(ProcedureFocalDevice o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.action = JsonUtils.toJson(o.getAction());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getAction() ) {
+    	this.action_id = "action" + this.parent_id;
+    	this.action = CodeableConceptHelper.toModel(o.getAction(), this.action_id);
+    }
     if (null != o.getManipulated() ) {
     	this.manipulated_id = "manipulated" + this.parent_id;
     	this.manipulated = ReferenceHelper.toModel(o.getManipulated(), this.manipulated_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getAction() {
+  public java.util.List<CodeableConceptModel> getAction() {
     return this.action;
   }
-  public void setAction( String value) {
+  public void setAction( java.util.List<CodeableConceptModel> value) {
     this.action = value;
   }
   public java.util.List<ReferenceModel> getManipulated() {
@@ -152,7 +164,6 @@ public class ProcedureFocalDeviceModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ProcedureFocalDeviceModel]:" + "\n");
-     builder.append("action" + "->" + this.action + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

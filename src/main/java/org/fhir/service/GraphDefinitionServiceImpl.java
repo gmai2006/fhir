@@ -113,4 +113,40 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<GraphDefinition> findByContact(QueryBuilder queryBuilder) {
+  	final List<GraphDefinition> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GraphDefinition> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<GraphDefinition> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GraphDefinition> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<GraphDefinition> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GraphDefinition> findByLink(QueryBuilder queryBuilder) {
+  	final List<GraphDefinition> result = dao.findByLink(queryBuilder);
+    logger.info("findBylink - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GraphDefinition> findByText(QueryBuilder queryBuilder) {
+  	final List<GraphDefinition> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<GraphDefinition> findByMeta(QueryBuilder queryBuilder) {
+  	final List<GraphDefinition> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

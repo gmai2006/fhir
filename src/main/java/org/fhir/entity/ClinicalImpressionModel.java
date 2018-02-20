@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="clinicalimpression")
 public class ClinicalImpressionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631132237323L;
+	private static final long serialVersionUID = 15191089370797139L;
   /**
   * Description: "This is a ClinicalImpression resource"
   */
@@ -65,12 +64,14 @@ public class ClinicalImpressionModel  implements Serializable {
 
   /**
   * Description: "Categorizes the type of clinical assessment performed."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "A summary of the context and/or cause of the assessment - why / where was it performed, and what patient events/status prompted it."
@@ -197,12 +198,14 @@ public class ClinicalImpressionModel  implements Serializable {
 
   /**
   * Description: "Estimate of likely outcome."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"prognosisCodeableConcept\"", length = 16777215)
-  private String prognosisCodeableConcept;
+  @Column(name="\"prognosiscodeableconcept_id\"")
+  private String prognosiscodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="prognosiscodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> prognosisCodeableConcept;
 
   /**
   * Description: "RiskAssessment expressing likely outcome."
@@ -326,8 +329,14 @@ public class ClinicalImpressionModel  implements Serializable {
   public ClinicalImpressionModel(ClinicalImpression o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     this.description = o.getDescription();
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
@@ -338,7 +347,9 @@ public class ClinicalImpressionModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.effectiveDateTime = o.getEffectiveDateTime();
-    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
+    if (null != o.getEffectivePeriod()) {
+    	this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
+    }
     this.date = o.getDate();
     if (null != o.getAssessor() ) {
     	this.assessor_id = "assessor" + this.id;
@@ -356,11 +367,15 @@ public class ClinicalImpressionModel  implements Serializable {
     	this.investigation_id = "investigation" + this.id;
     	this.investigation = ClinicalImpressionInvestigationHelper.toModelFromArray(o.getInvestigation(), this.investigation_id);
     }
-    this.protocol = org.fhir.utils.JsonUtils.write2String(o.getProtocol());
+    this.protocol = org.fhir.utils.JsonUtils.toJson(o.getProtocol());
     this.summary = o.getSummary();
     if (null != o.getFinding() && !o.getFinding().isEmpty()) {
     	this.finding_id = "finding" + this.id;
     	this.finding = ClinicalImpressionFindingHelper.toModelFromArray(o.getFinding(), this.finding_id);
+    }
+    if (null != o.getPrognosisCodeableConcept() && !o.getPrognosisCodeableConcept().isEmpty()) {
+    	this.prognosiscodeableconcept_id = "prognosiscodeableconcept" + this.id;
+    	this.prognosisCodeableConcept = CodeableConceptHelper.toModelFromArray(o.getPrognosisCodeableConcept(), this.prognosiscodeableconcept_id);
     }
     if (null != o.getPrognosisReference() && !o.getPrognosisReference().isEmpty()) {
     	this.prognosisreference_id = "prognosisreference" + this.id;
@@ -370,9 +385,21 @@ public class ClinicalImpressionModel  implements Serializable {
     	this.action_id = "action" + this.id;
     	this.action = ReferenceHelper.toModelFromArray(o.getAction(), this.action_id);
     }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -400,10 +427,10 @@ public class ClinicalImpressionModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public String getDescription() {
@@ -484,10 +511,10 @@ public class ClinicalImpressionModel  implements Serializable {
   public void setFinding( java.util.List<ClinicalImpressionFindingModel> value) {
     this.finding = value;
   }
-  public String getPrognosisCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getPrognosisCodeableConcept() {
     return this.prognosisCodeableConcept;
   }
-  public void setPrognosisCodeableConcept( String value) {
+  public void setPrognosisCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.prognosisCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getPrognosisReference() {
@@ -564,14 +591,12 @@ public class ClinicalImpressionModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("protocol" + "->" + this.protocol + "\n"); 
      builder.append("summary" + "->" + this.summary + "\n"); 
-     builder.append("prognosisCodeableConcept" + "->" + this.prognosisCodeableConcept + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

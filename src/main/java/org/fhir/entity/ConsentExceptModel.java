@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="consentexcept")
 public class ConsentExceptModel  implements Serializable {
-	private static final long serialVersionUID = 151873631160979881L;
+	private static final long serialVersionUID = 151910893736873905L;
   /**
   * Description: "Action  to take - permit or deny - when the exception conditions are met."
   */
@@ -68,48 +67,58 @@ public class ConsentExceptModel  implements Serializable {
 
   /**
   * Description: "Actions controlled by this Exception."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"action\"", length = 16777215)
-  private String action;
+  @Column(name="\"action_id\"")
+  private String action_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> action;
 
   /**
   * Description: "A set of security labels that define which resources are controlled by this exception. If more than one label is specified, all resources must have all the specified labels."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"securityLabel\"", length = 16777215)
-  private String securityLabel;
+  @Column(name="\"securitylabel_id\"")
+  private String securitylabel_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> securityLabel;
 
   /**
   * Description: "The context of the activities a user is taking - why the user is accessing the data - that are controlled by this exception."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"purpose\"", length = 16777215)
-  private String purpose;
+  @Column(name="\"purpose_id\"")
+  private String purpose_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="purpose_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> purpose;
 
   /**
   * Description: "The class of information covered by this exception. The type can be a FHIR resource type, a profile on a type, or a CDA document, or some other type that indicates what sort of information the consent relates to."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"FHIRclass\"", length = 16777215)
-  private String FHIRclass;
+  @Column(name="\"fhirclass_id\"")
+  private String fhirclass_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> FHIRclass;
 
   /**
   * Description: "If this code is found in an instance, then the exception applies."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> code;
 
   /**
   * Description: "Clinical or Operational Relevant period of time that bounds the data controlled by this exception."
@@ -175,17 +184,49 @@ public class ConsentExceptModel  implements Serializable {
 
   public ConsentExceptModel(ConsentExcept o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.type = o.getType();
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getActor() && !o.getActor().isEmpty()) {
     	this.actor_id = "actor" + this.parent_id;
     	this.actor = ConsentActor1Helper.toModelFromArray(o.getActor(), this.actor_id);
     }
-    this.dataPeriod = JsonUtils.toJson(o.getDataPeriod());
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action_id = "action" + this.parent_id;
+    	this.action = CodeableConceptHelper.toModelFromArray(o.getAction(), this.action_id);
+    }
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securitylabel_id = "securitylabel" + this.parent_id;
+    	this.securityLabel = CodingHelper.toModelFromArray(o.getSecurityLabel(), this.securitylabel_id);
+    }
+    if (null != o.getPurpose() && !o.getPurpose().isEmpty()) {
+    	this.purpose_id = "purpose" + this.parent_id;
+    	this.purpose = CodingHelper.toModelFromArray(o.getPurpose(), this.purpose_id);
+    }
+    if (null != o.getFHIRclass() && !o.getFHIRclass().isEmpty()) {
+    	this.fhirclass_id = "fhirclass" + this.parent_id;
+    	this.FHIRclass = CodingHelper.toModelFromArray(o.getFHIRclass(), this.fhirclass_id);
+    }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodingHelper.toModelFromArray(o.getCode(), this.code_id);
+    }
+    if (null != o.getDataPeriod()) {
+    	this.dataPeriod = JsonUtils.toJson(o.getDataPeriod());
+    }
     if (null != o.getData() && !o.getData().isEmpty()) {
     	this.data_id = "data" + this.parent_id;
     	this.data = ConsentData1Helper.toModelFromArray(o.getData(), this.data_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -207,34 +248,34 @@ public class ConsentExceptModel  implements Serializable {
   public void setActor( java.util.List<ConsentActor1Model> value) {
     this.actor = value;
   }
-  public String getAction() {
+  public java.util.List<CodeableConceptModel> getAction() {
     return this.action;
   }
-  public void setAction( String value) {
+  public void setAction( java.util.List<CodeableConceptModel> value) {
     this.action = value;
   }
-  public String getSecurityLabel() {
+  public java.util.List<CodingModel> getSecurityLabel() {
     return this.securityLabel;
   }
-  public void setSecurityLabel( String value) {
+  public void setSecurityLabel( java.util.List<CodingModel> value) {
     this.securityLabel = value;
   }
-  public String getPurpose() {
+  public java.util.List<CodingModel> getPurpose() {
     return this.purpose;
   }
-  public void setPurpose( String value) {
+  public void setPurpose( java.util.List<CodingModel> value) {
     this.purpose = value;
   }
-  public String getFHIRclass() {
+  public java.util.List<CodingModel> getFHIRclass() {
     return this.FHIRclass;
   }
-  public void setFHIRclass( String value) {
+  public void setFHIRclass( java.util.List<CodingModel> value) {
     this.FHIRclass = value;
   }
-  public String getCode() {
+  public java.util.List<CodingModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodingModel> value) {
     this.code = value;
   }
   public String getDataPeriod() {
@@ -280,11 +321,6 @@ public class ConsentExceptModel  implements Serializable {
     builder.append("[ConsentExceptModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
-     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
-     builder.append("purpose" + "->" + this.purpose + "\n"); 
-     builder.append("FHIRclass" + "->" + this.FHIRclass + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("dataPeriod" + "->" + this.dataPeriod + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

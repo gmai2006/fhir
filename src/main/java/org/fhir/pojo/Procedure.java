@@ -214,9 +214,15 @@ public class Procedure  extends DomainResource  {
     if (null != o.getNotDone()) {
       this.notDone = o.getNotDone();
     }
-    this.notDoneReason = CodeableConceptHelper.fromJson(o.getNotDoneReason());
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getNotDoneReason() && !o.getNotDoneReason().isEmpty()) {
+      this.notDoneReason = new CodeableConcept(o.getNotDoneReason().get(0));
+    }
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -233,21 +239,38 @@ public class Procedure  extends DomainResource  {
     if (null != o.getLocation() && !o.getLocation().isEmpty()) {
       this.location = new Reference(o.getLocation().get(0));
     }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
+    }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());
     }
-    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+    	this.bodySite = CodeableConceptHelper.fromArray2Array(o.getBodySite());
+    }
+    if (null != o.getOutcome() && !o.getOutcome().isEmpty()) {
+      this.outcome = new CodeableConcept(o.getOutcome().get(0));
+    }
     if (null != o.getReport() && !o.getReport().isEmpty()) {
     	this.report = ReferenceHelper.fromArray2Array(o.getReport());
     }
+    if (null != o.getComplication() && !o.getComplication().isEmpty()) {
+    	this.complication = CodeableConceptHelper.fromArray2Array(o.getComplication());
+    }
     if (null != o.getComplicationDetail() && !o.getComplicationDetail().isEmpty()) {
     	this.complicationDetail = ReferenceHelper.fromArray2Array(o.getComplicationDetail());
+    }
+    if (null != o.getFollowUp() && !o.getFollowUp().isEmpty()) {
+    	this.followUp = CodeableConceptHelper.fromArray2Array(o.getFollowUp());
     }
     if (null != o.getFocalDevice() && !o.getFocalDevice().isEmpty()) {
     	this.focalDevice = ProcedureFocalDeviceHelper.fromArray2Array(o.getFocalDevice());
     }
     if (null != o.getUsedReference() && !o.getUsedReference().isEmpty()) {
     	this.usedReference = ReferenceHelper.fromArray2Array(o.getUsedReference());
+    }
+    if (null != o.getUsedCode() && !o.getUsedCode().isEmpty()) {
+    	this.usedCode = CodeableConceptHelper.fromArray2Array(o.getUsedCode());
     }
   }
 

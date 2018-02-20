@@ -184,7 +184,15 @@ public class Communication  extends DomainResource  {
     if (null != o.getNotDone()) {
       this.notDone = o.getNotDone();
     }
-    this.notDoneReason = CodeableConceptHelper.fromJson(o.getNotDoneReason());
+    if (null != o.getNotDoneReason() && !o.getNotDoneReason().isEmpty()) {
+      this.notDoneReason = new CodeableConcept(o.getNotDoneReason().get(0));
+    }
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category = CodeableConceptHelper.fromArray2Array(o.getCategory());
+    }
+    if (null != o.getMedium() && !o.getMedium().isEmpty()) {
+    	this.medium = CodeableConceptHelper.fromArray2Array(o.getMedium());
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -205,6 +213,9 @@ public class Communication  extends DomainResource  {
     }
     if (null != o.getSender() && !o.getSender().isEmpty()) {
       this.sender = new Reference(o.getSender().get(0));
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());

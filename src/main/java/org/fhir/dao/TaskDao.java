@@ -42,8 +42,22 @@ public interface TaskDao {
 
   public List<Task> findByField(QueryBuilder queryBuilder);
 
-  public List<Task> findByContext(QueryBuilder queryBuilder);
+  public List<Task> findByDefinitionReference(QueryBuilder queryBuilder);
+  public List<Task> findByBasedOn(QueryBuilder queryBuilder);
+  public List<Task> findByPartOf(QueryBuilder queryBuilder);
+  public List<Task> findByStatusReason(QueryBuilder queryBuilder);
+  public List<Task> findByBusinessStatus(QueryBuilder queryBuilder);
+  public List<Task> findByCode(QueryBuilder queryBuilder);
   public List<Task> findByFocus(QueryBuilder queryBuilder);
-  public List<Task> findByOwner(QueryBuilder queryBuilder);
+  public List<Task> findByFHIRfor(QueryBuilder queryBuilder);
+  public List<Task> findByContext(QueryBuilder queryBuilder);
   public List<Task> findByRequester(QueryBuilder queryBuilder);
+  public List<Task> findByPerformerType(QueryBuilder queryBuilder);
+  public List<Task> findByOwner(QueryBuilder queryBuilder);
+  public List<Task> findByReason(QueryBuilder queryBuilder);
+  public List<Task> findByRelevantHistory(QueryBuilder queryBuilder);
+  public List<Task> findByRestriction(QueryBuilder queryBuilder);
+  public List<Task> findByOutput(QueryBuilder queryBuilder);
+  public List<Task> findByText(QueryBuilder queryBuilder);
+  public List<Task> findByMeta(QueryBuilder queryBuilder);
 }

@@ -38,7 +38,17 @@ public interface MessageDefinitionService {
   public MessageDefinition update(MessageDefinition bean);
   public void delete(MessageDefinition bean);
   public List<MessageDefinition> findByField(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByContact(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByUseContext(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByBase(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByParent(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByReplaces(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByEvent(QueryBuilder queryBuilder);
   public List<MessageDefinition> findByFocus(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByAllowedResponse(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByText(QueryBuilder queryBuilder);
+  public List<MessageDefinition> findByMeta(QueryBuilder queryBuilder);
 
 
 }

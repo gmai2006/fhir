@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.MedicationDispense;
 import org.fhir.service.MedicationDispenseService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/MedicationDispense")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class MedicationDispenseResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public MedicationDispense find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public MedicationDispense findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<MedicationDispense> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MedicationDispense> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MedicationDispense> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MedicationDispense> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MedicationDispense> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<MedicationDispense> findAll() {
   	return this.service.selectAll();
   }
@@ -107,24 +172,15 @@ public class MedicationDispenseResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MedicationDispense> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
   /**
-  * Descr: Returns dispenses with a specific context (episode or episode of care)
+  * Descr: The identity of a patient to list dispenses  for
   * Type: reference
   */
   @GET
-  @Path("context")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MedicationDispense> context(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByContext(new QueryBuilder(params));
+  @Path("subject")
+  public List<MedicationDispense> subject(@QueryParam("subject")String subject) {
+  	java.util.Map<String, String> params = QueryParser.parse(subject, VALID_FIELDS);
+  	return this.service.findBySubject(new QueryBuilder(params));
   }
   /**
   * Descr: Return dispenses that should be sent to a specific destination
@@ -132,21 +188,9 @@ public class MedicationDispenseResource {
   */
   @GET
   @Path("destination")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MedicationDispense> destination(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<MedicationDispense> destination(@QueryParam("destination")String destination) {
+  	java.util.Map<String, String> params = QueryParser.parse(destination, VALID_FIELDS);
   	return this.service.findByDestination(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Return dispenses performed by a specific individual
-  * Type: reference
-  */
-  @GET
-  @Path("performer/actor")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MedicationDispense> performer(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByPerformer(new QueryBuilder(params));
   }
   /**
   * Descr: The identity of a receiver to list dispenses for
@@ -154,21 +198,36 @@ public class MedicationDispenseResource {
   */
   @GET
   @Path("receiver")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MedicationDispense> receiver(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<MedicationDispense> receiver(@QueryParam("receiver")String receiver) {
+  	java.util.Map<String, String> params = QueryParser.parse(receiver, VALID_FIELDS);
   	return this.service.findByReceiver(new QueryBuilder(params));
   }
   /**
-  * Descr: The identity of a patient to list dispenses  for
-  * Type: reference
+  * Descr: Return dispenses of a specific type
+  * Type: token
   */
   @GET
-  @Path("subject")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MedicationDispense> subject(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findBySubject(new QueryBuilder(params));
+  public List<MedicationDispense> type(@QueryParam("type")String type) {
+  	java.util.Map<String, String> params = QueryParser.parse(type, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Returns dispenses prepared on this date
+  * Type: date
+  */
+  @GET
+  public List<MedicationDispense> whenprepared(@QueryParam("whenprepared")String whenprepared) {
+  	java.util.Map<String, String> params = QueryParser.parse(whenprepared, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Returns dispenses handed over on this date
+  * Type: date
+  */
+  @GET
+  public List<MedicationDispense> whenhandedover(@QueryParam("whenhandedover")String whenhandedover) {
+  	java.util.Map<String, String> params = QueryParser.parse(whenhandedover, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "context|destination|performer|receiver|responsibleparty|subject|type|whenhandedover|whenprepared";

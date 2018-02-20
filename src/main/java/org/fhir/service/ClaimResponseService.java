@@ -38,9 +38,27 @@ public interface ClaimResponseService {
   public ClaimResponse update(ClaimResponse bean);
   public void delete(ClaimResponse bean);
   public List<ClaimResponse> findByField(QueryBuilder queryBuilder);
-  public List<ClaimResponse> findByInsurer(QueryBuilder queryBuilder);
   public List<ClaimResponse> findByPatient(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByInsurer(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByRequestProvider(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByRequestOrganization(QueryBuilder queryBuilder);
   public List<ClaimResponse> findByRequest(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByOutcome(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByPayeeType(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByItem(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByAddItem(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByError(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByTotalCost(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByUnallocDeductable(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByTotalBenefit(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByPayment(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByReserved(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByForm(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByProcessNote(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByCommunicationRequest(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByInsurance(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByText(QueryBuilder queryBuilder);
+  public List<ClaimResponse> findByMeta(QueryBuilder queryBuilder);
 
 
 }

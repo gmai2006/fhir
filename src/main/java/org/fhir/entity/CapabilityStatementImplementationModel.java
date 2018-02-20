@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementimplementation")
 public class CapabilityStatementImplementationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631184128476L;
+	private static final long serialVersionUID = 151910893760871102L;
   /**
   * Description: "Information about the specific installation that this capability statement relates to."
   */
@@ -97,9 +96,17 @@ public class CapabilityStatementImplementationModel  implements Serializable {
 
   public CapabilityStatementImplementationModel(CapabilityStatementImplementation o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.description = o.getDescription();
     this.url = o.getUrl();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getDescription() {

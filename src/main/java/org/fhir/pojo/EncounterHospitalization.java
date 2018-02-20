@@ -86,12 +86,27 @@ public class EncounterHospitalization  extends BackboneElement  {
     if (null != o.getOrigin() && !o.getOrigin().isEmpty()) {
       this.origin = new Reference(o.getOrigin().get(0));
     }
-    this.admitSource = CodeableConceptHelper.fromJson(o.getAdmitSource());
-    this.reAdmission = CodeableConceptHelper.fromJson(o.getReAdmission());
+    if (null != o.getAdmitSource() && !o.getAdmitSource().isEmpty()) {
+      this.admitSource = new CodeableConcept(o.getAdmitSource().get(0));
+    }
+    if (null != o.getReAdmission() && !o.getReAdmission().isEmpty()) {
+      this.reAdmission = new CodeableConcept(o.getReAdmission().get(0));
+    }
+    if (null != o.getDietPreference() && !o.getDietPreference().isEmpty()) {
+    	this.dietPreference = CodeableConceptHelper.fromArray2Array(o.getDietPreference());
+    }
+    if (null != o.getSpecialCourtesy() && !o.getSpecialCourtesy().isEmpty()) {
+    	this.specialCourtesy = CodeableConceptHelper.fromArray2Array(o.getSpecialCourtesy());
+    }
+    if (null != o.getSpecialArrangement() && !o.getSpecialArrangement().isEmpty()) {
+    	this.specialArrangement = CodeableConceptHelper.fromArray2Array(o.getSpecialArrangement());
+    }
     if (null != o.getDestination() && !o.getDestination().isEmpty()) {
       this.destination = new Reference(o.getDestination().get(0));
     }
-    this.dischargeDisposition = CodeableConceptHelper.fromJson(o.getDischargeDisposition());
+    if (null != o.getDischargeDisposition() && !o.getDischargeDisposition().isEmpty()) {
+      this.dischargeDisposition = new CodeableConcept(o.getDischargeDisposition().get(0));
+    }
   }
 
   public void setPreAdmissionIdentifier( Identifier value) {

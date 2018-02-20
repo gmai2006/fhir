@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="codesystemfilter")
 public class CodeSystemFilterModel  implements Serializable {
-	private static final long serialVersionUID = 151873631177767859L;
+	private static final long serialVersionUID = 151910893754022391L;
   /**
   * Description: "The code that identifies this filter when it is used in the instance."
   */
@@ -112,11 +111,19 @@ public class CodeSystemFilterModel  implements Serializable {
 
   public CodeSystemFilterModel(CodeSystemFilter o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.code = o.getCode();
     this.description = o.getDescription();
-    this.operator = org.fhir.utils.JsonUtils.write2String(o.getOperator());
+    this.operator = org.fhir.utils.JsonUtils.toJson(o.getOperator());
     this.value = o.getValue();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getCode() {

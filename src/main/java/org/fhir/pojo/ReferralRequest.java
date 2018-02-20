@@ -218,9 +218,14 @@ public class ReferralRequest  extends DomainResource  {
     if (null != o.getIntent()) {
       this.intent = o.getIntent();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getPriority()) {
       this.priority = o.getPriority();
+    }
+    if (null != o.getServiceRequested() && !o.getServiceRequested().isEmpty()) {
+    	this.serviceRequested = CodeableConceptHelper.fromArray2Array(o.getServiceRequested());
     }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
@@ -238,9 +243,14 @@ public class ReferralRequest  extends DomainResource  {
     if (null != o.getRequester() && !o.getRequester().isEmpty()) {
       this.requester = new ReferralRequestRequester(o.getRequester().get(0));
     }
-    this.specialty = CodeableConceptHelper.fromJson(o.getSpecialty());
+    if (null != o.getSpecialty() && !o.getSpecialty().isEmpty()) {
+      this.specialty = new CodeableConcept(o.getSpecialty().get(0));
+    }
     if (null != o.getRecipient() && !o.getRecipient().isEmpty()) {
     	this.recipient = ReferenceHelper.fromArray2Array(o.getRecipient());
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());

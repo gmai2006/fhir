@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="structuremapsource")
 public class StructureMapSourceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631165999358L;
+	private static final long serialVersionUID = 151910893741893039L;
   /**
   * Description: "Type or variable this rule applies to."
   */
@@ -266,21 +265,25 @@ public class StructureMapSourceModel  implements Serializable {
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"defaultValueCodeableConcept\"", length = 16777215)
-  private String defaultValueCodeableConcept;
+  @Column(name="\"defaultvaluecodeableconcept_id\"")
+  private String defaultvaluecodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluecodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> defaultValueCodeableConcept;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"defaultValueCoding\"", length = 16777215)
-  private String defaultValueCoding;
+  @Column(name="\"defaultvaluecoding_id\"")
+  private String defaultvaluecoding_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="defaultvaluecoding_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> defaultValueCoding;
 
   /**
   * Description: "A value to use if there is no existing value in the source object."
@@ -633,7 +636,9 @@ public class StructureMapSourceModel  implements Serializable {
 
   public StructureMapSourceModel(StructureMapSource o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.context = o.getContext();
     this.min = o.getMin();
     this.max = o.getMax();
@@ -655,23 +660,43 @@ public class StructureMapSourceModel  implements Serializable {
     this.defaultValueUnsignedInt = o.getDefaultValueUnsignedInt();
     this.defaultValuePositiveInt = o.getDefaultValuePositiveInt();
     this.defaultValueMarkdown = o.getDefaultValueMarkdown();
-    this.defaultValueElement = JsonUtils.toJson(o.getDefaultValueElement());
-    this.defaultValueExtension = JsonUtils.toJson(o.getDefaultValueExtension());
-    this.defaultValueBackboneElement = JsonUtils.toJson(o.getDefaultValueBackboneElement());
+    if (null != o.getDefaultValueElement()) {
+    	this.defaultValueElement = JsonUtils.toJson(o.getDefaultValueElement());
+    }
+    if (null != o.getDefaultValueExtension()) {
+    	this.defaultValueExtension = JsonUtils.toJson(o.getDefaultValueExtension());
+    }
+    if (null != o.getDefaultValueBackboneElement()) {
+    	this.defaultValueBackboneElement = JsonUtils.toJson(o.getDefaultValueBackboneElement());
+    }
     if (null != o.getDefaultValueNarrative() ) {
     	this.defaultvaluenarrative_id = "defaultvaluenarrative" + this.parent_id;
     	this.defaultValueNarrative = NarrativeHelper.toModel(o.getDefaultValueNarrative(), this.defaultvaluenarrative_id);
     }
-    this.defaultValueAnnotation = JsonUtils.toJson(o.getDefaultValueAnnotation());
-    this.defaultValueAttachment = JsonUtils.toJson(o.getDefaultValueAttachment());
-    this.defaultValueIdentifier = JsonUtils.toJson(o.getDefaultValueIdentifier());
-    this.defaultValueCodeableConcept = JsonUtils.toJson(o.getDefaultValueCodeableConcept());
-    this.defaultValueCoding = JsonUtils.toJson(o.getDefaultValueCoding());
+    if (null != o.getDefaultValueAnnotation()) {
+    	this.defaultValueAnnotation = JsonUtils.toJson(o.getDefaultValueAnnotation());
+    }
+    if (null != o.getDefaultValueAttachment()) {
+    	this.defaultValueAttachment = JsonUtils.toJson(o.getDefaultValueAttachment());
+    }
+    if (null != o.getDefaultValueIdentifier()) {
+    	this.defaultValueIdentifier = JsonUtils.toJson(o.getDefaultValueIdentifier());
+    }
+    if (null != o.getDefaultValueCodeableConcept() ) {
+    	this.defaultvaluecodeableconcept_id = "defaultvaluecodeableconcept" + this.parent_id;
+    	this.defaultValueCodeableConcept = CodeableConceptHelper.toModel(o.getDefaultValueCodeableConcept(), this.defaultvaluecodeableconcept_id);
+    }
+    if (null != o.getDefaultValueCoding() ) {
+    	this.defaultvaluecoding_id = "defaultvaluecoding" + this.parent_id;
+    	this.defaultValueCoding = CodingHelper.toModel(o.getDefaultValueCoding(), this.defaultvaluecoding_id);
+    }
     if (null != o.getDefaultValueQuantity() ) {
     	this.defaultvaluequantity_id = "defaultvaluequantity" + this.parent_id;
     	this.defaultValueQuantity = QuantityHelper.toModel(o.getDefaultValueQuantity(), this.defaultvaluequantity_id);
     }
-    this.defaultValueDuration = JsonUtils.toJson(o.getDefaultValueDuration());
+    if (null != o.getDefaultValueDuration()) {
+    	this.defaultValueDuration = JsonUtils.toJson(o.getDefaultValueDuration());
+    }
     if (null != o.getDefaultValueSimpleQuantity() ) {
     	this.defaultvaluesimplequantity_id = "defaultvaluesimplequantity" + this.parent_id;
     	this.defaultValueSimpleQuantity = QuantityHelper.toModel(o.getDefaultValueSimpleQuantity(), this.defaultvaluesimplequantity_id);
@@ -680,33 +705,55 @@ public class StructureMapSourceModel  implements Serializable {
     	this.defaultvaluedistance_id = "defaultvaluedistance" + this.parent_id;
     	this.defaultValueDistance = DistanceHelper.toModel(o.getDefaultValueDistance(), this.defaultvaluedistance_id);
     }
-    this.defaultValueCount = JsonUtils.toJson(o.getDefaultValueCount());
+    if (null != o.getDefaultValueCount()) {
+    	this.defaultValueCount = JsonUtils.toJson(o.getDefaultValueCount());
+    }
     if (null != o.getDefaultValueMoney() ) {
     	this.defaultvaluemoney_id = "defaultvaluemoney" + this.parent_id;
     	this.defaultValueMoney = MoneyHelper.toModel(o.getDefaultValueMoney(), this.defaultvaluemoney_id);
     }
-    this.defaultValueAge = JsonUtils.toJson(o.getDefaultValueAge());
-    this.defaultValueRange = JsonUtils.toJson(o.getDefaultValueRange());
-    this.defaultValuePeriod = JsonUtils.toJson(o.getDefaultValuePeriod());
-    this.defaultValueRatio = JsonUtils.toJson(o.getDefaultValueRatio());
+    if (null != o.getDefaultValueAge()) {
+    	this.defaultValueAge = JsonUtils.toJson(o.getDefaultValueAge());
+    }
+    if (null != o.getDefaultValueRange()) {
+    	this.defaultValueRange = JsonUtils.toJson(o.getDefaultValueRange());
+    }
+    if (null != o.getDefaultValuePeriod()) {
+    	this.defaultValuePeriod = JsonUtils.toJson(o.getDefaultValuePeriod());
+    }
+    if (null != o.getDefaultValueRatio()) {
+    	this.defaultValueRatio = JsonUtils.toJson(o.getDefaultValueRatio());
+    }
     if (null != o.getDefaultValueReference() ) {
     	this.defaultvaluereference_id = "defaultvaluereference" + this.parent_id;
     	this.defaultValueReference = ReferenceHelper.toModel(o.getDefaultValueReference(), this.defaultvaluereference_id);
     }
-    this.defaultValueSampledData = JsonUtils.toJson(o.getDefaultValueSampledData());
-    this.defaultValueSignature = JsonUtils.toJson(o.getDefaultValueSignature());
-    this.defaultValueHumanName = JsonUtils.toJson(o.getDefaultValueHumanName());
+    if (null != o.getDefaultValueSampledData()) {
+    	this.defaultValueSampledData = JsonUtils.toJson(o.getDefaultValueSampledData());
+    }
+    if (null != o.getDefaultValueSignature()) {
+    	this.defaultValueSignature = JsonUtils.toJson(o.getDefaultValueSignature());
+    }
+    if (null != o.getDefaultValueHumanName()) {
+    	this.defaultValueHumanName = JsonUtils.toJson(o.getDefaultValueHumanName());
+    }
     if (null != o.getDefaultValueAddress() ) {
     	this.defaultvalueaddress_id = "defaultvalueaddress" + this.parent_id;
     	this.defaultValueAddress = AddressHelper.toModel(o.getDefaultValueAddress(), this.defaultvalueaddress_id);
     }
-    this.defaultValueContactPoint = JsonUtils.toJson(o.getDefaultValueContactPoint());
-    this.defaultValueTiming = JsonUtils.toJson(o.getDefaultValueTiming());
+    if (null != o.getDefaultValueContactPoint()) {
+    	this.defaultValueContactPoint = JsonUtils.toJson(o.getDefaultValueContactPoint());
+    }
+    if (null != o.getDefaultValueTiming()) {
+    	this.defaultValueTiming = JsonUtils.toJson(o.getDefaultValueTiming());
+    }
     if (null != o.getDefaultValueMeta() ) {
     	this.defaultvaluemeta_id = "defaultvaluemeta" + this.parent_id;
     	this.defaultValueMeta = MetaHelper.toModel(o.getDefaultValueMeta(), this.defaultvaluemeta_id);
     }
-    this.defaultValueElementDefinition = JsonUtils.toJson(o.getDefaultValueElementDefinition());
+    if (null != o.getDefaultValueElementDefinition()) {
+    	this.defaultValueElementDefinition = JsonUtils.toJson(o.getDefaultValueElementDefinition());
+    }
     if (null != o.getDefaultValueContactDetail() ) {
     	this.defaultvaluecontactdetail_id = "defaultvaluecontactdetail" + this.parent_id;
     	this.defaultValueContactDetail = ContactDetailHelper.toModel(o.getDefaultValueContactDetail(), this.defaultvaluecontactdetail_id);
@@ -731,7 +778,9 @@ public class StructureMapSourceModel  implements Serializable {
     	this.defaultvaluedatarequirement_id = "defaultvaluedatarequirement" + this.parent_id;
     	this.defaultValueDataRequirement = DataRequirementHelper.toModel(o.getDefaultValueDataRequirement(), this.defaultvaluedatarequirement_id);
     }
-    this.defaultValueParameterDefinition = JsonUtils.toJson(o.getDefaultValueParameterDefinition());
+    if (null != o.getDefaultValueParameterDefinition()) {
+    	this.defaultValueParameterDefinition = JsonUtils.toJson(o.getDefaultValueParameterDefinition());
+    }
     if (null != o.getDefaultValueTriggerDefinition() ) {
     	this.defaultvaluetriggerdefinition_id = "defaultvaluetriggerdefinition" + this.parent_id;
     	this.defaultValueTriggerDefinition = TriggerDefinitionHelper.toModel(o.getDefaultValueTriggerDefinition(), this.defaultvaluetriggerdefinition_id);
@@ -741,6 +790,12 @@ public class StructureMapSourceModel  implements Serializable {
     this.variable = o.getVariable();
     this.condition = o.getCondition();
     this.check = o.getCheck();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getContext() {
@@ -911,16 +966,16 @@ public class StructureMapSourceModel  implements Serializable {
   public void setDefaultValueIdentifier( String value) {
     this.defaultValueIdentifier = value;
   }
-  public String getDefaultValueCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getDefaultValueCodeableConcept() {
     return this.defaultValueCodeableConcept;
   }
-  public void setDefaultValueCodeableConcept( String value) {
+  public void setDefaultValueCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.defaultValueCodeableConcept = value;
   }
-  public String getDefaultValueCoding() {
+  public java.util.List<CodingModel> getDefaultValueCoding() {
     return this.defaultValueCoding;
   }
-  public void setDefaultValueCoding( String value) {
+  public void setDefaultValueCoding( java.util.List<CodingModel> value) {
     this.defaultValueCoding = value;
   }
   public java.util.List<QuantityModel> getDefaultValueQuantity() {
@@ -1171,8 +1226,6 @@ public class StructureMapSourceModel  implements Serializable {
      builder.append("defaultValueAnnotation" + "->" + this.defaultValueAnnotation + "\n"); 
      builder.append("defaultValueAttachment" + "->" + this.defaultValueAttachment + "\n"); 
      builder.append("defaultValueIdentifier" + "->" + this.defaultValueIdentifier + "\n"); 
-     builder.append("defaultValueCodeableConcept" + "->" + this.defaultValueCodeableConcept + "\n"); 
-     builder.append("defaultValueCoding" + "->" + this.defaultValueCoding + "\n"); 
      builder.append("defaultValueDuration" + "->" + this.defaultValueDuration + "\n"); 
      builder.append("defaultValueCount" + "->" + this.defaultValueCount + "\n"); 
      builder.append("defaultValueAge" + "->" + this.defaultValueAge + "\n"); 

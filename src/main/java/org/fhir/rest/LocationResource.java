@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.Location;
 import org.fhir.service.LocationService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/Location")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class LocationResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public Location find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public Location findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<Location> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Location> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Location> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Location> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Location> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<Location> findAll() {
   	return this.service.selectAll();
   }
@@ -107,24 +172,37 @@ public class LocationResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Location> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
   /**
-  * Descr: A (part of the) address of the location
-  * Type: string
+  * Descr: A distance quantity to limit the near search to locations within a specific distance
+
+  Requires the near parameter to also be included
+  * Type: quantity
   */
   @GET
-  @Path("address")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Location> address(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByAddress(new QueryBuilder(params));
+  @Path("neardistance")
+  public List<Location> neardistance(@QueryParam("neardistance")String neardistance) {
+  	java.util.Map<String, String> params = QueryParser.parse(neardistance, VALID_FIELDS);
+  	return this.service.findByPosition(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Searches for locations that are managed by the provided organization
+  * Type: reference
+  */
+  @GET
+  @Path("organization")
+  public List<Location> organization(@QueryParam("organization")String organization) {
+  	java.util.Map<String, String> params = QueryParser.parse(organization, VALID_FIELDS);
+  	return this.service.findByManagingOrganization(new QueryBuilder(params));
+  }
+  /**
+  * Descr: A location of which this location is a part
+  * Type: reference
+  */
+  @GET
+  @Path("partof")
+  public List<Location> partof(@QueryParam("partof")String partof) {
+  	java.util.Map<String, String> params = QueryParser.parse(partof, VALID_FIELDS);
+  	return this.service.findByPartOf(new QueryBuilder(params));
   }
   /**
   * Descr: Technical endpoints providing access to services operated for the location
@@ -132,10 +210,45 @@ public class LocationResource {
   */
   @GET
   @Path("endpoint")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Location> endpoint(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<Location> endpoint(@QueryParam("endpoint")String endpoint) {
+  	java.util.Map<String, String> params = QueryParser.parse(endpoint, VALID_FIELDS);
   	return this.service.findByEndpoint(new QueryBuilder(params));
+  }
+  /**
+  * Descr: An identifier for the location
+  * Type: token
+  */
+  @GET
+  public List<Location> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Searches for locations with a specific kind of status
+  * Type: token
+  */
+  @GET
+  public List<Location> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Searches for locations (typically bed/room) that have an operational status (e.g. contaminated, housekeeping)
+  * Type: token
+  */
+  @GET
+  public List<Location> operationalstatus(@QueryParam("operationalstatus")String operationalstatus) {
+  	java.util.Map<String, String> params = QueryParser.parse(operationalstatus, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: A code for the type of location
+  * Type: token
+  */
+  @GET
+  public List<Location> type(@QueryParam("type")String type) {
+  	java.util.Map<String, String> params = QueryParser.parse(type, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "address|addresscity|addresscountry|addresspostalcode|addressstate|addressuse|endpoint|identifier|name|near|neardistance|operationalstatus|organization|partof|status|type";

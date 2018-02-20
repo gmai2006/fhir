@@ -179,7 +179,9 @@ public class Device  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getLotNumber()) {
       this.lotNumber = o.getLotNumber();
     }
@@ -209,6 +211,9 @@ public class Device  extends DomainResource  {
     }
     if (null != o.getUrl()) {
       this.url = o.getUrl();
+    }
+    if (null != o.getSafety() && !o.getSafety().isEmpty()) {
+    	this.safety = CodeableConceptHelper.fromArray2Array(o.getSafety());
     }
   }
 

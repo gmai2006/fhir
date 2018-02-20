@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="substanceingredient")
 public class SubstanceIngredientModel  implements Serializable {
-	private static final long serialVersionUID = 151873631152327770L;
+	private static final long serialVersionUID = 151910893729159943L;
   /**
   * Description: "The amount of the ingredient in the substance - a concentration ratio."
   * Actual type: String;
@@ -50,12 +49,14 @@ public class SubstanceIngredientModel  implements Serializable {
 
   /**
   * Description: "Another substance that is a component of this substance."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"substanceCodeableConcept\"", length = 16777215)
-  private String substanceCodeableConcept;
+  @Column(name="\"substancecodeableconcept_id\"")
+  private String substancecodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="substancecodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> substanceCodeableConcept;
 
   /**
   * Description: "Another substance that is a component of this substance."
@@ -112,12 +113,25 @@ public class SubstanceIngredientModel  implements Serializable {
 
   public SubstanceIngredientModel(SubstanceIngredient o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.quantity = JsonUtils.toJson(o.getQuantity());
-    this.substanceCodeableConcept = JsonUtils.toJson(o.getSubstanceCodeableConcept());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getQuantity()) {
+    	this.quantity = JsonUtils.toJson(o.getQuantity());
+    }
+    if (null != o.getSubstanceCodeableConcept() ) {
+    	this.substancecodeableconcept_id = "substancecodeableconcept" + this.parent_id;
+    	this.substanceCodeableConcept = CodeableConceptHelper.toModel(o.getSubstanceCodeableConcept(), this.substancecodeableconcept_id);
+    }
     if (null != o.getSubstanceReference() ) {
     	this.substancereference_id = "substancereference" + this.parent_id;
     	this.substanceReference = ReferenceHelper.toModel(o.getSubstanceReference(), this.substancereference_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -127,10 +141,10 @@ public class SubstanceIngredientModel  implements Serializable {
   public void setQuantity( String value) {
     this.quantity = value;
   }
-  public String getSubstanceCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getSubstanceCodeableConcept() {
     return this.substanceCodeableConcept;
   }
-  public void setSubstanceCodeableConcept( String value) {
+  public void setSubstanceCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.substanceCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getSubstanceReference() {
@@ -169,7 +183,6 @@ public class SubstanceIngredientModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[SubstanceIngredientModel]:" + "\n");
      builder.append("quantity" + "->" + this.quantity + "\n"); 
-     builder.append("substanceCodeableConcept" + "->" + this.substanceCodeableConcept + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

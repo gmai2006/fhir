@@ -261,7 +261,9 @@ public class PlanDefinition  extends DomainResource  {
     if (null != o.getTitle()) {
       this.title = o.getTitle();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
@@ -292,6 +294,12 @@ public class PlanDefinition  extends DomainResource  {
     this.effectivePeriod = PeriodHelper.fromJson(o.getEffectivePeriod());
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
+    }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction = CodeableConceptHelper.fromArray2Array(o.getJurisdiction());
+    }
+    if (null != o.getTopic() && !o.getTopic().isEmpty()) {
+    	this.topic = CodeableConceptHelper.fromArray2Array(o.getTopic());
     }
     if (null != o.getContributor() && !o.getContributor().isEmpty()) {
     	this.contributor = ContributorHelper.fromArray2Array(o.getContributor());

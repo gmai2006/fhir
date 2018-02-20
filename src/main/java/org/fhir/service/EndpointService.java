@@ -38,6 +38,11 @@ public interface EndpointService {
   public Endpoint update(Endpoint bean);
   public void delete(Endpoint bean);
   public List<Endpoint> findByField(QueryBuilder queryBuilder);
+  public List<Endpoint> findByConnectionType(QueryBuilder queryBuilder);
+  public List<Endpoint> findByManagingOrganization(QueryBuilder queryBuilder);
+  public List<Endpoint> findByPayloadType(QueryBuilder queryBuilder);
+  public List<Endpoint> findByText(QueryBuilder queryBuilder);
+  public List<Endpoint> findByMeta(QueryBuilder queryBuilder);
 
 
 }

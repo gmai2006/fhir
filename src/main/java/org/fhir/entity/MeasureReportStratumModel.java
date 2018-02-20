@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="measurereportstratum")
 public class MeasureReportStratumModel  implements Serializable {
-	private static final long serialVersionUID = 151873631160720836L;
+	private static final long serialVersionUID = 151910893736766053L;
   /**
   * Description: "The value for this stratum, expressed as a string. When defining stratifiers on complex values, the value must be rendered such that the value for each stratum within the stratifier is unique."
   */
@@ -109,13 +108,21 @@ public class MeasureReportStratumModel  implements Serializable {
 
   public MeasureReportStratumModel(MeasureReportStratum o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.value = o.getValue();
     if (null != o.getPopulation() && !o.getPopulation().isEmpty()) {
     	this.population_id = "population" + this.parent_id;
     	this.population = MeasureReportPopulation1Helper.toModelFromArray(o.getPopulation(), this.population_id);
     }
     this.measureScore = o.getMeasureScore();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getValue() {

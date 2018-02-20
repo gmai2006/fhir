@@ -114,9 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<BodySite> findByCode(QueryBuilder queryBuilder) {
+  	final List<BodySite> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<BodySite> findByQualifier(QueryBuilder queryBuilder) {
+  	final List<BodySite> result = dao.findByQualifier(queryBuilder);
+    logger.info("findByqualifier - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<BodySite> findByPatient(QueryBuilder queryBuilder) {
   	final List<BodySite> result = dao.findByPatient(queryBuilder);
     logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<BodySite> findByText(QueryBuilder queryBuilder) {
+  	final List<BodySite> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<BodySite> findByMeta(QueryBuilder queryBuilder) {
+  	final List<BodySite> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

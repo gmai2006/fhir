@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,16 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="observationcomponent")
 public class ObservationComponentModel  implements Serializable {
-	private static final long serialVersionUID = 151873631135521551L;
+	private static final long serialVersionUID = 151910893710634601L;
   /**
   * Description: "Describes what was observed. Sometimes this is called the observation \"code\"."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
@@ -62,12 +62,14 @@ public class ObservationComponentModel  implements Serializable {
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueCodeableConcept\"", length = 16777215)
-  private String valueCodeableConcept;
+  @Column(name="\"valuecodeableconcept_id\"")
+  private String valuecodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> valueCodeableConcept;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
@@ -139,21 +141,25 @@ public class ObservationComponentModel  implements Serializable {
 
   /**
   * Description: "Provides a reason why the expected value in the element Observation.value[x] is missing."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"dataAbsentReason\"", length = 16777215)
-  private String dataAbsentReason;
+  @Column(name="\"dataabsentreason_id\"")
+  private String dataabsentreason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dataabsentreason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> dataAbsentReason;
 
   /**
   * Description: "The assessment made based on the result of the observation.  Intended as a simple compact code often placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status of the result. Otherwise known as abnormal flag."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"interpretation\"", length = 16777215)
-  private String interpretation;
+  @Column(name="\"interpretation_id\"")
+  private String interpretation_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="interpretation_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> interpretation;
 
   /**
   * Description: "Guidance on how to interpret the value by comparison to a normal or recommended range."
@@ -210,33 +216,63 @@ public class ObservationComponentModel  implements Serializable {
 
   public ObservationComponentModel(ObservationComponent o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = JsonUtils.toJson(o.getCode());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     if (null != o.getValueQuantity() ) {
     	this.valuequantity_id = "valuequantity" + this.parent_id;
     	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
     }
-    this.valueCodeableConcept = JsonUtils.toJson(o.getValueCodeableConcept());
+    if (null != o.getValueCodeableConcept() ) {
+    	this.valuecodeableconcept_id = "valuecodeableconcept" + this.parent_id;
+    	this.valueCodeableConcept = CodeableConceptHelper.toModel(o.getValueCodeableConcept(), this.valuecodeableconcept_id);
+    }
     this.valueString = o.getValueString();
-    this.valueRange = JsonUtils.toJson(o.getValueRange());
-    this.valueRatio = JsonUtils.toJson(o.getValueRatio());
-    this.valueSampledData = JsonUtils.toJson(o.getValueSampledData());
-    this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
+    if (null != o.getValueRange()) {
+    	this.valueRange = JsonUtils.toJson(o.getValueRange());
+    }
+    if (null != o.getValueRatio()) {
+    	this.valueRatio = JsonUtils.toJson(o.getValueRatio());
+    }
+    if (null != o.getValueSampledData()) {
+    	this.valueSampledData = JsonUtils.toJson(o.getValueSampledData());
+    }
+    if (null != o.getValueAttachment()) {
+    	this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
+    }
     this.valueTime = o.getValueTime();
     this.valueDateTime = o.getValueDateTime();
-    this.valuePeriod = JsonUtils.toJson(o.getValuePeriod());
-    this.dataAbsentReason = JsonUtils.toJson(o.getDataAbsentReason());
-    this.interpretation = JsonUtils.toJson(o.getInterpretation());
+    if (null != o.getValuePeriod()) {
+    	this.valuePeriod = JsonUtils.toJson(o.getValuePeriod());
+    }
+    if (null != o.getDataAbsentReason() ) {
+    	this.dataabsentreason_id = "dataabsentreason" + this.parent_id;
+    	this.dataAbsentReason = CodeableConceptHelper.toModel(o.getDataAbsentReason(), this.dataabsentreason_id);
+    }
+    if (null != o.getInterpretation() ) {
+    	this.interpretation_id = "interpretation" + this.parent_id;
+    	this.interpretation = CodeableConceptHelper.toModel(o.getInterpretation(), this.interpretation_id);
+    }
     if (null != o.getReferenceRange() && !o.getReferenceRange().isEmpty()) {
     	this.referencerange_id = "referencerange" + this.parent_id;
     	this.referenceRange = ObservationReferenceRangeHelper.toModelFromArray(o.getReferenceRange(), this.referencerange_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public java.util.List<QuantityModel> getValueQuantity() {
@@ -245,10 +281,10 @@ public class ObservationComponentModel  implements Serializable {
   public void setValueQuantity( java.util.List<QuantityModel> value) {
     this.valueQuantity = value;
   }
-  public String getValueCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getValueCodeableConcept() {
     return this.valueCodeableConcept;
   }
-  public void setValueCodeableConcept( String value) {
+  public void setValueCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.valueCodeableConcept = value;
   }
   public String getValueString() {
@@ -299,16 +335,16 @@ public class ObservationComponentModel  implements Serializable {
   public void setValuePeriod( String value) {
     this.valuePeriod = value;
   }
-  public String getDataAbsentReason() {
+  public java.util.List<CodeableConceptModel> getDataAbsentReason() {
     return this.dataAbsentReason;
   }
-  public void setDataAbsentReason( String value) {
+  public void setDataAbsentReason( java.util.List<CodeableConceptModel> value) {
     this.dataAbsentReason = value;
   }
-  public String getInterpretation() {
+  public java.util.List<CodeableConceptModel> getInterpretation() {
     return this.interpretation;
   }
-  public void setInterpretation( String value) {
+  public void setInterpretation( java.util.List<CodeableConceptModel> value) {
     this.interpretation = value;
   }
   public java.util.List<ObservationReferenceRangeModel> getReferenceRange() {
@@ -346,8 +382,6 @@ public class ObservationComponentModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ObservationComponentModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("valueString" + "->" + this.valueString + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 
      builder.append("valueRatio" + "->" + this.valueRatio + "\n"); 
@@ -356,8 +390,6 @@ public class ObservationComponentModel  implements Serializable {
      builder.append("valueTime" + "->" + this.valueTime + "\n"); 
      builder.append("valueDateTime" + "->" + this.valueDateTime + "\n"); 
      builder.append("valuePeriod" + "->" + this.valuePeriod + "\n"); 
-     builder.append("dataAbsentReason" + "->" + this.dataAbsentReason + "\n"); 
-     builder.append("interpretation" + "->" + this.interpretation + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

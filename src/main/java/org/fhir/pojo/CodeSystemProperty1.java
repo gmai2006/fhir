@@ -112,7 +112,9 @@ public class CodeSystemProperty1  extends BackboneElement  {
     if (null != o.getValueCode()) {
       this.valueCode = o.getValueCode();
     }
-    this.valueCoding = CodingHelper.fromJson(o.getValueCoding());
+    if (null != o.getValueCoding() && !o.getValueCoding().isEmpty()) {
+      this.valueCoding = new Coding(o.getValueCoding().get(0));
+    }
     if (null != o.getValueString()) {
       this.valueString = o.getValueString();
     }

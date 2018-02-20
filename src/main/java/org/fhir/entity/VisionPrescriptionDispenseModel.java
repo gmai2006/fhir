@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="visionprescriptiondispense")
 public class VisionPrescriptionDispenseModel  implements Serializable {
-	private static final long serialVersionUID = 151873631193931737L;
+	private static final long serialVersionUID = 151910893770787080L;
   /**
   * Description: "Identifies the type of vision correction product which is required for the patient."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"product\"", length = 16777215)
-  private String product;
+  @Column(name="\"product_id\"")
+  private String product_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="product_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> product;
 
   /**
   * Description: "The eye for which the lens applies."
@@ -204,8 +205,13 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
 
   public VisionPrescriptionDispenseModel(VisionPrescriptionDispense o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.product = JsonUtils.toJson(o.getProduct());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getProduct() ) {
+    	this.product_id = "product" + this.parent_id;
+    	this.product = CodeableConceptHelper.toModel(o.getProduct(), this.product_id);
+    }
     this.eye = o.getEye();
     this.sphere = o.getSphere();
     this.cylinder = o.getCylinder();
@@ -222,12 +228,21 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
     }
     this.color = o.getColor();
     this.brand = o.getBrand();
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getProduct() {
+  public java.util.List<CodeableConceptModel> getProduct() {
     return this.product;
   }
-  public void setProduct( String value) {
+  public void setProduct( java.util.List<CodeableConceptModel> value) {
     this.product = value;
   }
   public String getEye() {
@@ -343,7 +358,6 @@ public class VisionPrescriptionDispenseModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[VisionPrescriptionDispenseModel]:" + "\n");
-     builder.append("product" + "->" + this.product + "\n"); 
      builder.append("eye" + "->" + this.eye + "\n"); 
      builder.append("sphere" + "->" + this.sphere + "\n"); 
      builder.append("cylinder" + "->" + this.cylinder + "\n"); 

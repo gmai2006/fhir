@@ -42,8 +42,15 @@ public interface MediaDao {
 
   public List<Media> findByField(QueryBuilder queryBuilder);
 
-  public List<Media> findByContext(QueryBuilder queryBuilder);
-  public List<Media> findByDevice(QueryBuilder queryBuilder);
-  public List<Media> findByOperator(QueryBuilder queryBuilder);
+  public List<Media> findByBasedOn(QueryBuilder queryBuilder);
+  public List<Media> findBySubtype(QueryBuilder queryBuilder);
+  public List<Media> findByView(QueryBuilder queryBuilder);
   public List<Media> findBySubject(QueryBuilder queryBuilder);
+  public List<Media> findByContext(QueryBuilder queryBuilder);
+  public List<Media> findByOperator(QueryBuilder queryBuilder);
+  public List<Media> findByReasonCode(QueryBuilder queryBuilder);
+  public List<Media> findByBodySite(QueryBuilder queryBuilder);
+  public List<Media> findByDevice(QueryBuilder queryBuilder);
+  public List<Media> findByText(QueryBuilder queryBuilder);
+  public List<Media> findByMeta(QueryBuilder queryBuilder);
 }

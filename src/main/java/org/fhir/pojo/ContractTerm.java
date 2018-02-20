@@ -118,10 +118,23 @@ public class ContractTerm  extends BackboneElement  {
       this.issued = o.getIssued();
     }
     this.applies = PeriodHelper.fromJson(o.getApplies());
-    this.type = CodeableConceptHelper.fromJson(o.getType());
-    this.subType = CodeableConceptHelper.fromJson(o.getSubType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getSubType() && !o.getSubType().isEmpty()) {
+      this.subType = new CodeableConcept(o.getSubType().get(0));
+    }
     if (null != o.getTopic() && !o.getTopic().isEmpty()) {
     	this.topic = ReferenceHelper.fromArray2Array(o.getTopic());
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action = CodeableConceptHelper.fromArray2Array(o.getAction());
+    }
+    if (null != o.getActionReason() && !o.getActionReason().isEmpty()) {
+    	this.actionReason = CodeableConceptHelper.fromArray2Array(o.getActionReason());
+    }
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securityLabel = CodingHelper.fromArray2Array(o.getSecurityLabel());
     }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent = ContractAgent1Helper.fromArray2Array(o.getAgent());

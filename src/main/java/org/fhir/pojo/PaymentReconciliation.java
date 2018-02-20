@@ -146,7 +146,9 @@ public class PaymentReconciliation  extends DomainResource  {
     if (null != o.getRequest() && !o.getRequest().isEmpty()) {
       this.request = new Reference(o.getRequest().get(0));
     }
-    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getOutcome() && !o.getOutcome().isEmpty()) {
+      this.outcome = new CodeableConcept(o.getOutcome().get(0));
+    }
     if (null != o.getDisposition()) {
       this.disposition = o.getDisposition();
     }
@@ -159,7 +161,9 @@ public class PaymentReconciliation  extends DomainResource  {
     if (null != o.getDetail() && !o.getDetail().isEmpty()) {
     	this.detail = PaymentReconciliationDetailHelper.fromArray2Array(o.getDetail());
     }
-    this.form = CodeableConceptHelper.fromJson(o.getForm());
+    if (null != o.getForm() && !o.getForm().isEmpty()) {
+      this.form = new CodeableConcept(o.getForm().get(0));
+    }
     if (null != o.getTotal() && !o.getTotal().isEmpty()) {
       this.total = new Money(o.getTotal().get(0));
     }

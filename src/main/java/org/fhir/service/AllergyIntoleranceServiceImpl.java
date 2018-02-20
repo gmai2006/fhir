@@ -114,15 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<AllergyIntolerance> findByAsserter(QueryBuilder queryBuilder) {
-  	final List<AllergyIntolerance> result = dao.findByAsserter(queryBuilder);
-    logger.info("findByasserter - exited - return value={} result ");
+  public List<AllergyIntolerance> findByCode(QueryBuilder queryBuilder) {
+  	final List<AllergyIntolerance> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AllergyIntolerance> findByPatient(QueryBuilder queryBuilder) {
+  	final List<AllergyIntolerance> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
     return result;
   }
   @Override
   public List<AllergyIntolerance> findByRecorder(QueryBuilder queryBuilder) {
   	final List<AllergyIntolerance> result = dao.findByRecorder(queryBuilder);
     logger.info("findByrecorder - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AllergyIntolerance> findByAsserter(QueryBuilder queryBuilder) {
+  	final List<AllergyIntolerance> result = dao.findByAsserter(queryBuilder);
+    logger.info("findByasserter - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AllergyIntolerance> findByReaction(QueryBuilder queryBuilder) {
+  	final List<AllergyIntolerance> result = dao.findByReaction(queryBuilder);
+    logger.info("findByreaction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AllergyIntolerance> findByText(QueryBuilder queryBuilder) {
+  	final List<AllergyIntolerance> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<AllergyIntolerance> findByMeta(QueryBuilder queryBuilder) {
+  	final List<AllergyIntolerance> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

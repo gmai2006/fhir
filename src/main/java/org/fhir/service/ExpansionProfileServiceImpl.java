@@ -113,4 +113,52 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<ExpansionProfile> findByContact(QueryBuilder queryBuilder) {
+  	final List<ExpansionProfile> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExpansionProfile> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<ExpansionProfile> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExpansionProfile> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<ExpansionProfile> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExpansionProfile> findByFixedVersion(QueryBuilder queryBuilder) {
+  	final List<ExpansionProfile> result = dao.findByFixedVersion(queryBuilder);
+    logger.info("findByfixedVersion - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExpansionProfile> findByExcludedSystem(QueryBuilder queryBuilder) {
+  	final List<ExpansionProfile> result = dao.findByExcludedSystem(queryBuilder);
+    logger.info("findByexcludedSystem - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExpansionProfile> findByDesignation(QueryBuilder queryBuilder) {
+  	final List<ExpansionProfile> result = dao.findByDesignation(queryBuilder);
+    logger.info("findBydesignation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExpansionProfile> findByText(QueryBuilder queryBuilder) {
+  	final List<ExpansionProfile> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExpansionProfile> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ExpansionProfile> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

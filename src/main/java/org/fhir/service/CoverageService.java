@@ -38,9 +38,16 @@ public interface CoverageService {
   public Coverage update(Coverage bean);
   public void delete(Coverage bean);
   public List<Coverage> findByField(QueryBuilder queryBuilder);
-  public List<Coverage> findByBeneficiary(QueryBuilder queryBuilder);
-  public List<Coverage> findByPayor(QueryBuilder queryBuilder);
+  public List<Coverage> findByType(QueryBuilder queryBuilder);
+  public List<Coverage> findByPolicyHolder(QueryBuilder queryBuilder);
   public List<Coverage> findBySubscriber(QueryBuilder queryBuilder);
+  public List<Coverage> findByBeneficiary(QueryBuilder queryBuilder);
+  public List<Coverage> findByRelationship(QueryBuilder queryBuilder);
+  public List<Coverage> findByPayor(QueryBuilder queryBuilder);
+  public List<Coverage> findByGrouping(QueryBuilder queryBuilder);
+  public List<Coverage> findByContract(QueryBuilder queryBuilder);
+  public List<Coverage> findByText(QueryBuilder queryBuilder);
+  public List<Coverage> findByMeta(QueryBuilder queryBuilder);
 
 
 }

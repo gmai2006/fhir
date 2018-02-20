@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="task")
 public class TaskModel  implements Serializable {
-	private static final long serialVersionUID = 151873631182663991L;
+	private static final long serialVersionUID = 151910893759390835L;
   /**
   * Description: "This is a Task resource"
   */
@@ -114,21 +113,25 @@ public class TaskModel  implements Serializable {
 
   /**
   * Description: "An explanation as to why this task is held, failed, was refused, etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"statusReason\"", length = 16777215)
-  private String statusReason;
+  @Column(name="\"statusreason_id\"")
+  private String statusreason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="statusreason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> statusReason;
 
   /**
   * Description: "Contains business-specific nuances of the business state."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"businessStatus\"", length = 16777215)
-  private String businessStatus;
+  @Column(name="\"businessstatus_id\"")
+  private String businessstatus_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="businessstatus_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> businessStatus;
 
   /**
   * Description: "Indicates the \"level\" of actionability associated with the Task.  I.e. Is this a proposed task, a planned task, an actionable task, etc."
@@ -148,12 +151,14 @@ public class TaskModel  implements Serializable {
 
   /**
   * Description: "A name or code (or both) briefly describing what the task involves."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "A free-text description of what is to be performed."
@@ -233,12 +238,14 @@ public class TaskModel  implements Serializable {
 
   /**
   * Description: "The type of participant that can execute the task."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"performerType\"", length = 16777215)
-  private String performerType;
+  @Column(name="\"performertype_id\"")
+  private String performertype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="performertype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> performerType;
 
   /**
   * Description: "Individual organization or Device currently responsible for task execution."
@@ -253,12 +260,14 @@ public class TaskModel  implements Serializable {
 
   /**
   * Description: "A description or code indicating why this task needs to be performed."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reason;
 
   /**
   * Description: "Free-text information captured about the task as it progresses."
@@ -402,6 +411,9 @@ public class TaskModel  implements Serializable {
   public TaskModel(Task o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.definitionUri = o.getDefinitionUri();
     if (null != o.getDefinitionReference() ) {
     	this.definitionreference_id = "definitionreference" + this.id;
@@ -411,17 +423,28 @@ public class TaskModel  implements Serializable {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
     }
-    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
+    if (null != o.getGroupIdentifier()) {
+    	this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
+    }
     if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
     	this.partof_id = "partof" + this.id;
     	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
     }
     this.status = o.getStatus();
-    this.statusReason = JsonUtils.toJson(o.getStatusReason());
-    this.businessStatus = JsonUtils.toJson(o.getBusinessStatus());
+    if (null != o.getStatusReason() ) {
+    	this.statusreason_id = "statusreason" + this.id;
+    	this.statusReason = CodeableConceptHelper.toModel(o.getStatusReason(), this.statusreason_id);
+    }
+    if (null != o.getBusinessStatus() ) {
+    	this.businessstatus_id = "businessstatus" + this.id;
+    	this.businessStatus = CodeableConceptHelper.toModel(o.getBusinessStatus(), this.businessstatus_id);
+    }
     this.intent = o.getIntent();
     this.priority = o.getPriority();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     this.description = o.getDescription();
     if (null != o.getFocus() ) {
     	this.focus_id = "focus" + this.id;
@@ -435,18 +458,30 @@ public class TaskModel  implements Serializable {
     	this.context_id = "context" + this.id;
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
-    this.executionPeriod = JsonUtils.toJson(o.getExecutionPeriod());
+    if (null != o.getExecutionPeriod()) {
+    	this.executionPeriod = JsonUtils.toJson(o.getExecutionPeriod());
+    }
     this.authoredOn = o.getAuthoredOn();
     this.lastModified = o.getLastModified();
     if (null != o.getRequester() ) {
     	this.requester_id = "requester" + this.id;
     	this.requester = TaskRequesterHelper.toModel(o.getRequester(), this.requester_id);
     }
+    if (null != o.getPerformerType() && !o.getPerformerType().isEmpty()) {
+    	this.performertype_id = "performertype" + this.id;
+    	this.performerType = CodeableConceptHelper.toModelFromArray(o.getPerformerType(), this.performertype_id);
+    }
     if (null != o.getOwner() ) {
     	this.owner_id = "owner" + this.id;
     	this.owner = ReferenceHelper.toModel(o.getOwner(), this.owner_id);
     }
-    this.reason = JsonUtils.toJson(o.getReason());
+    if (null != o.getReason() ) {
+    	this.reason_id = "reason" + this.id;
+    	this.reason = CodeableConceptHelper.toModel(o.getReason(), this.reason_id);
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getRelevantHistory() && !o.getRelevantHistory().isEmpty()) {
     	this.relevanthistory_id = "relevanthistory" + this.id;
     	this.relevantHistory = ReferenceHelper.toModelFromArray(o.getRelevantHistory(), this.relevanthistory_id);
@@ -455,6 +490,9 @@ public class TaskModel  implements Serializable {
     	this.restriction_id = "restriction" + this.id;
     	this.restriction = TaskRestrictionHelper.toModel(o.getRestriction(), this.restriction_id);
     }
+    if (null != o.getInput()) {
+    	this.input = JsonUtils.toJson(o.getInput());
+    }
     if (null != o.getOutput() && !o.getOutput().isEmpty()) {
     	this.output_id = "output" + this.id;
     	this.output = TaskOutputHelper.toModelFromArray(o.getOutput(), this.output_id);
@@ -462,6 +500,15 @@ public class TaskModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -519,16 +566,16 @@ public class TaskModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getStatusReason() {
+  public java.util.List<CodeableConceptModel> getStatusReason() {
     return this.statusReason;
   }
-  public void setStatusReason( String value) {
+  public void setStatusReason( java.util.List<CodeableConceptModel> value) {
     this.statusReason = value;
   }
-  public String getBusinessStatus() {
+  public java.util.List<CodeableConceptModel> getBusinessStatus() {
     return this.businessStatus;
   }
-  public void setBusinessStatus( String value) {
+  public void setBusinessStatus( java.util.List<CodeableConceptModel> value) {
     this.businessStatus = value;
   }
   public String getIntent() {
@@ -543,10 +590,10 @@ public class TaskModel  implements Serializable {
   public void setPriority( String value) {
     this.priority = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public String getDescription() {
@@ -597,10 +644,10 @@ public class TaskModel  implements Serializable {
   public void setRequester( java.util.List<TaskRequesterModel> value) {
     this.requester = value;
   }
-  public String getPerformerType() {
+  public java.util.List<CodeableConceptModel> getPerformerType() {
     return this.performerType;
   }
-  public void setPerformerType( String value) {
+  public void setPerformerType( java.util.List<CodeableConceptModel> value) {
     this.performerType = value;
   }
   public java.util.List<ReferenceModel> getOwner() {
@@ -609,10 +656,10 @@ public class TaskModel  implements Serializable {
   public void setOwner( java.util.List<ReferenceModel> value) {
     this.owner = value;
   }
-  public String getReason() {
+  public java.util.List<CodeableConceptModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodeableConceptModel> value) {
     this.reason = value;
   }
   public String getNote() {
@@ -703,17 +750,12 @@ public class TaskModel  implements Serializable {
      builder.append("definitionUri" + "->" + this.definitionUri + "\n"); 
      builder.append("groupIdentifier" + "->" + this.groupIdentifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("statusReason" + "->" + this.statusReason + "\n"); 
-     builder.append("businessStatus" + "->" + this.businessStatus + "\n"); 
      builder.append("intent" + "->" + this.intent + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("executionPeriod" + "->" + this.executionPeriod + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
      builder.append("lastModified" + "->" + this.lastModified + "\n"); 
-     builder.append("performerType" + "->" + this.performerType + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("input" + "->" + this.input + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

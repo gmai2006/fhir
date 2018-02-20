@@ -114,15 +114,57 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<DeviceComponent> findByParent(QueryBuilder queryBuilder) {
-  	final List<DeviceComponent> result = dao.findByParent(queryBuilder);
-    logger.info("findByparent - exited - return value={} result ");
+  public List<DeviceComponent> findByType(QueryBuilder queryBuilder) {
+  	final List<DeviceComponent> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
     return result;
   }
   @Override
   public List<DeviceComponent> findBySource(QueryBuilder queryBuilder) {
   	final List<DeviceComponent> result = dao.findBySource(queryBuilder);
     logger.info("findBysource - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceComponent> findByParent(QueryBuilder queryBuilder) {
+  	final List<DeviceComponent> result = dao.findByParent(queryBuilder);
+    logger.info("findByparent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceComponent> findByOperationalStatus(QueryBuilder queryBuilder) {
+  	final List<DeviceComponent> result = dao.findByOperationalStatus(queryBuilder);
+    logger.info("findByoperationalStatus - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceComponent> findByParameterGroup(QueryBuilder queryBuilder) {
+  	final List<DeviceComponent> result = dao.findByParameterGroup(queryBuilder);
+    logger.info("findByparameterGroup - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceComponent> findByProductionSpecification(QueryBuilder queryBuilder) {
+  	final List<DeviceComponent> result = dao.findByProductionSpecification(queryBuilder);
+    logger.info("findByproductionSpecification - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceComponent> findByLanguageCode(QueryBuilder queryBuilder) {
+  	final List<DeviceComponent> result = dao.findByLanguageCode(queryBuilder);
+    logger.info("findBylanguageCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceComponent> findByText(QueryBuilder queryBuilder) {
+  	final List<DeviceComponent> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DeviceComponent> findByMeta(QueryBuilder queryBuilder) {
+  	final List<DeviceComponent> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

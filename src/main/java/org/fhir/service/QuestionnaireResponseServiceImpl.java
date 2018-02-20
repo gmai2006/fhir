@@ -114,15 +114,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<QuestionnaireResponse> findByAuthor(QueryBuilder queryBuilder) {
-  	final List<QuestionnaireResponse> result = dao.findByAuthor(queryBuilder);
-    logger.info("findByauthor - exited - return value={} result ");
-    return result;
-  }
-  @Override
-  public List<QuestionnaireResponse> findByContext(QueryBuilder queryBuilder) {
-  	final List<QuestionnaireResponse> result = dao.findByContext(queryBuilder);
-    logger.info("findBycontext - exited - return value={} result ");
+  public List<QuestionnaireResponse> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
     return result;
   }
   @Override
@@ -138,15 +132,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<QuestionnaireResponse> findBySubject(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<QuestionnaireResponse> findByContext(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<QuestionnaireResponse> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<QuestionnaireResponse> findBySource(QueryBuilder queryBuilder) {
   	final List<QuestionnaireResponse> result = dao.findBySource(queryBuilder);
     logger.info("findBysource - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<QuestionnaireResponse> findBySubject(QueryBuilder queryBuilder) {
-  	final List<QuestionnaireResponse> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<QuestionnaireResponse> findByItem(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByItem(queryBuilder);
+    logger.info("findByitem - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<QuestionnaireResponse> findByText(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<QuestionnaireResponse> findByMeta(QueryBuilder queryBuilder) {
+  	final List<QuestionnaireResponse> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

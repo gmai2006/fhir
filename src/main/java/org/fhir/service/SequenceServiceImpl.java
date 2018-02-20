@@ -119,4 +119,70 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     logger.info("findBypatient - exited - return value={} result ");
     return result;
   }
+  @Override
+  public List<Sequence> findBySpecimen(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findBySpecimen(queryBuilder);
+    logger.info("findByspecimen - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Sequence> findByDevice(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findByDevice(queryBuilder);
+    logger.info("findBydevice - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Sequence> findByPerformer(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findByPerformer(queryBuilder);
+    logger.info("findByperformer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Sequence> findByQuantity(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findByQuantity(queryBuilder);
+    logger.info("findByquantity - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Sequence> findByReferenceSeq(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findByReferenceSeq(queryBuilder);
+    logger.info("findByreferenceSeq - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Sequence> findByVariant(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findByVariant(queryBuilder);
+    logger.info("findByvariant - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Sequence> findByQuality(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findByQuality(queryBuilder);
+    logger.info("findByquality - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Sequence> findByRepository(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findByRepository(queryBuilder);
+    logger.info("findByrepository - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Sequence> findByPointer(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findByPointer(queryBuilder);
+    logger.info("findBypointer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Sequence> findByText(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Sequence> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Sequence> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

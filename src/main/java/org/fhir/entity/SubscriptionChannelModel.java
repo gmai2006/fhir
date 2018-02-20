@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="subscriptionchannel")
 public class SubscriptionChannelModel  implements Serializable {
-	private static final long serialVersionUID = 151873631173660012L;
+	private static final long serialVersionUID = 151910893749329505L;
   /**
   * Description: "The type of channel to send notifications on."
   */
@@ -111,11 +110,19 @@ public class SubscriptionChannelModel  implements Serializable {
 
   public SubscriptionChannelModel(SubscriptionChannel o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.type = o.getType();
     this.endpoint = o.getEndpoint();
     this.payload = o.getPayload();
-    this.header = org.fhir.utils.JsonUtils.write2String(o.getHeader());
+    this.header = org.fhir.utils.JsonUtils.toJson(o.getHeader());
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getType() {

@@ -113,4 +113,64 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<Library> findByType(QueryBuilder queryBuilder) {
+  	final List<Library> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Library> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<Library> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Library> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<Library> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Library> findByTopic(QueryBuilder queryBuilder) {
+  	final List<Library> result = dao.findByTopic(queryBuilder);
+    logger.info("findBytopic - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Library> findByContributor(QueryBuilder queryBuilder) {
+  	final List<Library> result = dao.findByContributor(queryBuilder);
+    logger.info("findBycontributor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Library> findByContact(QueryBuilder queryBuilder) {
+  	final List<Library> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Library> findByRelatedArtifact(QueryBuilder queryBuilder) {
+  	final List<Library> result = dao.findByRelatedArtifact(queryBuilder);
+    logger.info("findByrelatedArtifact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Library> findByDataRequirement(QueryBuilder queryBuilder) {
+  	final List<Library> result = dao.findByDataRequirement(queryBuilder);
+    logger.info("findBydataRequirement - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Library> findByText(QueryBuilder queryBuilder) {
+  	final List<Library> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Library> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Library> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

@@ -337,7 +337,8 @@
       "type": "token",
       "expression": "Sequence.referenceSeq.chromosome",
       "code": "chromosome",
-      "xpath": "referenceSeq/chromosome"
+      "xpath": "referenceSeq/chromosome",
+      "fieldName": "chromosome"
     },
     {
       "name": "coordinate",
@@ -345,7 +346,8 @@
       "type": "composite",
       "expression": "Sequence.variant",
       "code": "coordinate",
-      "xpath": "coordinate"
+      "xpath": "coordinate",
+      "fieldName": "coordinate"
     },
     {
       "name": "end",
@@ -353,7 +355,8 @@
       "type": "number",
       "expression": "Sequence.referenceSeq.windowEnd",
       "code": "end",
-      "xpath": "referenceSeq/windowEnd"
+      "xpath": "referenceSeq/windowEnd",
+      "fieldName": "windowEnd"
     },
     {
       "name": "identifier",
@@ -361,7 +364,8 @@
       "type": "token",
       "expression": "Sequence.identifier",
       "code": "identifier",
-      "xpath": "identifier"
+      "xpath": "identifier",
+      "fieldName": "identifier"
     },
     {
       "name": "patient",
@@ -369,7 +373,8 @@
       "type": "reference",
       "expression": "Sequence.patient",
       "code": "patient",
-      "xpath": "patient"
+      "xpath": "patient",
+      "fieldName": "patient"
     },
     {
       "name": "start",
@@ -377,7 +382,8 @@
       "type": "number",
       "expression": "Sequence.referenceSeq.windowStart",
       "code": "start",
-      "xpath": "referenceSeq/windowStart"
+      "xpath": "referenceSeq/windowStart",
+      "fieldName": "windowStart"
     },
     {
       "name": "type",
@@ -385,7 +391,8 @@
       "type": "token",
       "expression": "Sequence.type",
       "code": "type",
-      "xpath": "type"
+      "xpath": "type",
+      "fieldName": "type"
     }
   ]
 }

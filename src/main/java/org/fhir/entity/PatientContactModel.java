@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="patientcontact")
 public class PatientContactModel  implements Serializable {
-	private static final long serialVersionUID = 15187363117324681L;
+	private static final long serialVersionUID = 151910893748878384L;
   /**
   * Description: "The nature of the relationship between the patient and the contact person."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"relationship\"", length = 16777215)
-  private String relationship;
+  @Column(name="\"relationship_id\"")
+  private String relationship_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relationship_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> relationship;
 
   /**
   * Description: "A name associated with the contact person."
@@ -148,8 +149,19 @@ public class PatientContactModel  implements Serializable {
 
   public PatientContactModel(PatientContact o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.name = JsonUtils.toJson(o.getName());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getRelationship() && !o.getRelationship().isEmpty()) {
+    	this.relationship_id = "relationship" + this.parent_id;
+    	this.relationship = CodeableConceptHelper.toModelFromArray(o.getRelationship(), this.relationship_id);
+    }
+    if (null != o.getName()) {
+    	this.name = JsonUtils.toJson(o.getName());
+    }
+    if (null != o.getTelecom()) {
+    	this.telecom = JsonUtils.toJson(o.getTelecom());
+    }
     if (null != o.getAddress() ) {
     	this.address_id = "address" + this.parent_id;
     	this.address = AddressHelper.toModel(o.getAddress(), this.address_id);
@@ -159,13 +171,21 @@ public class PatientContactModel  implements Serializable {
     	this.organization_id = "organization" + this.parent_id;
     	this.organization = ReferenceHelper.toModel(o.getOrganization(), this.organization_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getRelationship() {
+  public java.util.List<CodeableConceptModel> getRelationship() {
     return this.relationship;
   }
-  public void setRelationship( String value) {
+  public void setRelationship( java.util.List<CodeableConceptModel> value) {
     this.relationship = value;
   }
   public String getName() {
@@ -233,7 +253,6 @@ public class PatientContactModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PatientContactModel]:" + "\n");
-     builder.append("relationship" + "->" + this.relationship + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 

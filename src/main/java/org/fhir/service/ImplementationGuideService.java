@@ -38,7 +38,14 @@ public interface ImplementationGuideService {
   public ImplementationGuide update(ImplementationGuide bean);
   public void delete(ImplementationGuide bean);
   public List<ImplementationGuide> findByField(QueryBuilder queryBuilder);
+  public List<ImplementationGuide> findByContact(QueryBuilder queryBuilder);
+  public List<ImplementationGuide> findByUseContext(QueryBuilder queryBuilder);
+  public List<ImplementationGuide> findByJurisdiction(QueryBuilder queryBuilder);
   public List<ImplementationGuide> findByDependency(QueryBuilder queryBuilder);
+  public List<ImplementationGuide> findByFHIRpackage(QueryBuilder queryBuilder);
+  public List<ImplementationGuide> findByGlobal(QueryBuilder queryBuilder);
+  public List<ImplementationGuide> findByText(QueryBuilder queryBuilder);
+  public List<ImplementationGuide> findByMeta(QueryBuilder queryBuilder);
 
 
 }

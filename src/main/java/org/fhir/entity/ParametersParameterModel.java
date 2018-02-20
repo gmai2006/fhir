@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="parametersparameter")
 public class ParametersParameterModel  implements Serializable {
-	private static final long serialVersionUID = 151873631145688162L;
+	private static final long serialVersionUID = 151910893722582903L;
   /**
   * Description: "The name of the parameter (reference to the operation definition)."
   */
@@ -243,21 +242,25 @@ public class ParametersParameterModel  implements Serializable {
 
   /**
   * Description: "If the parameter is a data type."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueCodeableConcept\"", length = 16777215)
-  private String valueCodeableConcept;
+  @Column(name="\"valuecodeableconcept_id\"")
+  private String valuecodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> valueCodeableConcept;
 
   /**
   * Description: "If the parameter is a data type."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueCoding\"", length = 16777215)
-  private String valueCoding;
+  @Column(name="\"valuecoding_id\"")
+  private String valuecoding_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecoding_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> valueCoding;
 
   /**
   * Description: "If the parameter is a data type."
@@ -594,7 +597,9 @@ public class ParametersParameterModel  implements Serializable {
 
   public ParametersParameterModel(ParametersParameter o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.name = o.getName();
     this.valueBoolean = o.getValueBoolean();
     this.valueInteger = o.getValueInteger();
@@ -613,23 +618,43 @@ public class ParametersParameterModel  implements Serializable {
     this.valueUnsignedInt = o.getValueUnsignedInt();
     this.valuePositiveInt = o.getValuePositiveInt();
     this.valueMarkdown = o.getValueMarkdown();
-    this.valueElement = JsonUtils.toJson(o.getValueElement());
-    this.valueExtension = JsonUtils.toJson(o.getValueExtension());
-    this.valueBackboneElement = JsonUtils.toJson(o.getValueBackboneElement());
+    if (null != o.getValueElement()) {
+    	this.valueElement = JsonUtils.toJson(o.getValueElement());
+    }
+    if (null != o.getValueExtension()) {
+    	this.valueExtension = JsonUtils.toJson(o.getValueExtension());
+    }
+    if (null != o.getValueBackboneElement()) {
+    	this.valueBackboneElement = JsonUtils.toJson(o.getValueBackboneElement());
+    }
     if (null != o.getValueNarrative() ) {
     	this.valuenarrative_id = "valuenarrative" + this.parent_id;
     	this.valueNarrative = NarrativeHelper.toModel(o.getValueNarrative(), this.valuenarrative_id);
     }
-    this.valueAnnotation = JsonUtils.toJson(o.getValueAnnotation());
-    this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
-    this.valueIdentifier = JsonUtils.toJson(o.getValueIdentifier());
-    this.valueCodeableConcept = JsonUtils.toJson(o.getValueCodeableConcept());
-    this.valueCoding = JsonUtils.toJson(o.getValueCoding());
+    if (null != o.getValueAnnotation()) {
+    	this.valueAnnotation = JsonUtils.toJson(o.getValueAnnotation());
+    }
+    if (null != o.getValueAttachment()) {
+    	this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
+    }
+    if (null != o.getValueIdentifier()) {
+    	this.valueIdentifier = JsonUtils.toJson(o.getValueIdentifier());
+    }
+    if (null != o.getValueCodeableConcept() ) {
+    	this.valuecodeableconcept_id = "valuecodeableconcept" + this.parent_id;
+    	this.valueCodeableConcept = CodeableConceptHelper.toModel(o.getValueCodeableConcept(), this.valuecodeableconcept_id);
+    }
+    if (null != o.getValueCoding() ) {
+    	this.valuecoding_id = "valuecoding" + this.parent_id;
+    	this.valueCoding = CodingHelper.toModel(o.getValueCoding(), this.valuecoding_id);
+    }
     if (null != o.getValueQuantity() ) {
     	this.valuequantity_id = "valuequantity" + this.parent_id;
     	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
     }
-    this.valueDuration = JsonUtils.toJson(o.getValueDuration());
+    if (null != o.getValueDuration()) {
+    	this.valueDuration = JsonUtils.toJson(o.getValueDuration());
+    }
     if (null != o.getValueSimpleQuantity() ) {
     	this.valuesimplequantity_id = "valuesimplequantity" + this.parent_id;
     	this.valueSimpleQuantity = QuantityHelper.toModel(o.getValueSimpleQuantity(), this.valuesimplequantity_id);
@@ -638,33 +663,55 @@ public class ParametersParameterModel  implements Serializable {
     	this.valuedistance_id = "valuedistance" + this.parent_id;
     	this.valueDistance = DistanceHelper.toModel(o.getValueDistance(), this.valuedistance_id);
     }
-    this.valueCount = JsonUtils.toJson(o.getValueCount());
+    if (null != o.getValueCount()) {
+    	this.valueCount = JsonUtils.toJson(o.getValueCount());
+    }
     if (null != o.getValueMoney() ) {
     	this.valuemoney_id = "valuemoney" + this.parent_id;
     	this.valueMoney = MoneyHelper.toModel(o.getValueMoney(), this.valuemoney_id);
     }
-    this.valueAge = JsonUtils.toJson(o.getValueAge());
-    this.valueRange = JsonUtils.toJson(o.getValueRange());
-    this.valuePeriod = JsonUtils.toJson(o.getValuePeriod());
-    this.valueRatio = JsonUtils.toJson(o.getValueRatio());
+    if (null != o.getValueAge()) {
+    	this.valueAge = JsonUtils.toJson(o.getValueAge());
+    }
+    if (null != o.getValueRange()) {
+    	this.valueRange = JsonUtils.toJson(o.getValueRange());
+    }
+    if (null != o.getValuePeriod()) {
+    	this.valuePeriod = JsonUtils.toJson(o.getValuePeriod());
+    }
+    if (null != o.getValueRatio()) {
+    	this.valueRatio = JsonUtils.toJson(o.getValueRatio());
+    }
     if (null != o.getValueReference() ) {
     	this.valuereference_id = "valuereference" + this.parent_id;
     	this.valueReference = ReferenceHelper.toModel(o.getValueReference(), this.valuereference_id);
     }
-    this.valueSampledData = JsonUtils.toJson(o.getValueSampledData());
-    this.valueSignature = JsonUtils.toJson(o.getValueSignature());
-    this.valueHumanName = JsonUtils.toJson(o.getValueHumanName());
+    if (null != o.getValueSampledData()) {
+    	this.valueSampledData = JsonUtils.toJson(o.getValueSampledData());
+    }
+    if (null != o.getValueSignature()) {
+    	this.valueSignature = JsonUtils.toJson(o.getValueSignature());
+    }
+    if (null != o.getValueHumanName()) {
+    	this.valueHumanName = JsonUtils.toJson(o.getValueHumanName());
+    }
     if (null != o.getValueAddress() ) {
     	this.valueaddress_id = "valueaddress" + this.parent_id;
     	this.valueAddress = AddressHelper.toModel(o.getValueAddress(), this.valueaddress_id);
     }
-    this.valueContactPoint = JsonUtils.toJson(o.getValueContactPoint());
-    this.valueTiming = JsonUtils.toJson(o.getValueTiming());
+    if (null != o.getValueContactPoint()) {
+    	this.valueContactPoint = JsonUtils.toJson(o.getValueContactPoint());
+    }
+    if (null != o.getValueTiming()) {
+    	this.valueTiming = JsonUtils.toJson(o.getValueTiming());
+    }
     if (null != o.getValueMeta() ) {
     	this.valuemeta_id = "valuemeta" + this.parent_id;
     	this.valueMeta = MetaHelper.toModel(o.getValueMeta(), this.valuemeta_id);
     }
-    this.valueElementDefinition = JsonUtils.toJson(o.getValueElementDefinition());
+    if (null != o.getValueElementDefinition()) {
+    	this.valueElementDefinition = JsonUtils.toJson(o.getValueElementDefinition());
+    }
     if (null != o.getValueContactDetail() ) {
     	this.valuecontactdetail_id = "valuecontactdetail" + this.parent_id;
     	this.valueContactDetail = ContactDetailHelper.toModel(o.getValueContactDetail(), this.valuecontactdetail_id);
@@ -689,15 +736,25 @@ public class ParametersParameterModel  implements Serializable {
     	this.valuedatarequirement_id = "valuedatarequirement" + this.parent_id;
     	this.valueDataRequirement = DataRequirementHelper.toModel(o.getValueDataRequirement(), this.valuedatarequirement_id);
     }
-    this.valueParameterDefinition = JsonUtils.toJson(o.getValueParameterDefinition());
+    if (null != o.getValueParameterDefinition()) {
+    	this.valueParameterDefinition = JsonUtils.toJson(o.getValueParameterDefinition());
+    }
     if (null != o.getValueTriggerDefinition() ) {
     	this.valuetriggerdefinition_id = "valuetriggerdefinition" + this.parent_id;
     	this.valueTriggerDefinition = TriggerDefinitionHelper.toModel(o.getValueTriggerDefinition(), this.valuetriggerdefinition_id);
     }
-    this.resource = JsonUtils.toJson(o.getResource());
+    if (null != o.getResource()) {
+    	this.resource = JsonUtils.toJson(o.getResource());
+    }
     if (null != o.getPart() && !o.getPart().isEmpty()) {
     	this.part_id = "part" + this.parent_id;
     	this.part = ParametersParameterHelper.toModelFromArray(o.getPart(), this.part_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -851,16 +908,16 @@ public class ParametersParameterModel  implements Serializable {
   public void setValueIdentifier( String value) {
     this.valueIdentifier = value;
   }
-  public String getValueCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getValueCodeableConcept() {
     return this.valueCodeableConcept;
   }
-  public void setValueCodeableConcept( String value) {
+  public void setValueCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.valueCodeableConcept = value;
   }
-  public String getValueCoding() {
+  public java.util.List<CodingModel> getValueCoding() {
     return this.valueCoding;
   }
-  public void setValueCoding( String value) {
+  public void setValueCoding( java.util.List<CodingModel> value) {
     this.valueCoding = value;
   }
   public java.util.List<QuantityModel> getValueQuantity() {
@@ -1090,8 +1147,6 @@ public class ParametersParameterModel  implements Serializable {
      builder.append("valueAnnotation" + "->" + this.valueAnnotation + "\n"); 
      builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
      builder.append("valueIdentifier" + "->" + this.valueIdentifier + "\n"); 
-     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
-     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
      builder.append("valueDuration" + "->" + this.valueDuration + "\n"); 
      builder.append("valueCount" + "->" + this.valueCount + "\n"); 
      builder.append("valueAge" + "->" + this.valueAge + "\n"); 

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="imagingstudy")
 public class ImagingStudyModel  implements Serializable {
-	private static final long serialVersionUID = 151873631146589323L;
+	private static final long serialVersionUID = 151910893723595689L;
   /**
   * Description: "This is a ImagingStudy resource"
   */
@@ -82,12 +81,14 @@ public class ImagingStudyModel  implements Serializable {
 
   /**
   * Description: "A list of all the Series.ImageModality values that are actual acquisition modalities, i.e. those in the DICOM Context Group 29 (value set OID 1.2.840.10008.6.1.19)."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"modalityList\"", length = 16777215)
-  private String modalityList;
+  @Column(name="\"modalitylist_id\"")
+  private String modalitylist_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="modalitylist_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> modalityList;
 
   /**
   * Description: "The patient imaged in the study."
@@ -192,21 +193,25 @@ public class ImagingStudyModel  implements Serializable {
 
   /**
   * Description: "The code for the performed procedure type."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"procedureCode\"", length = 16777215)
-  private String procedureCode;
+  @Column(name="\"procedurecode_id\"")
+  private String procedurecode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="procedurecode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> procedureCode;
 
   /**
   * Description: "Description of clinical condition indicating why the ImagingStudy was requested."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reason;
 
   /**
   * Description: "Institution-generated description or classification of the Study performed."
@@ -318,8 +323,17 @@ public class ImagingStudyModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.uid = o.getUid();
-    this.accession = JsonUtils.toJson(o.getAccession());
+    if (null != o.getAccession()) {
+    	this.accession = JsonUtils.toJson(o.getAccession());
+    }
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.availability = o.getAvailability();
+    if (null != o.getModalityList() && !o.getModalityList().isEmpty()) {
+    	this.modalitylist_id = "modalitylist" + this.id;
+    	this.modalityList = CodingHelper.toModelFromArray(o.getModalityList(), this.modalitylist_id);
+    }
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
@@ -351,7 +365,14 @@ public class ImagingStudyModel  implements Serializable {
     	this.procedurereference_id = "procedurereference" + this.id;
     	this.procedureReference = ReferenceHelper.toModelFromArray(o.getProcedureReference(), this.procedurereference_id);
     }
-    this.reason = JsonUtils.toJson(o.getReason());
+    if (null != o.getProcedureCode() && !o.getProcedureCode().isEmpty()) {
+    	this.procedurecode_id = "procedurecode" + this.id;
+    	this.procedureCode = CodeableConceptHelper.toModelFromArray(o.getProcedureCode(), this.procedurecode_id);
+    }
+    if (null != o.getReason() ) {
+    	this.reason_id = "reason" + this.id;
+    	this.reason = CodeableConceptHelper.toModel(o.getReason(), this.reason_id);
+    }
     this.description = o.getDescription();
     if (null != o.getSeries() && !o.getSeries().isEmpty()) {
     	this.series_id = "series" + this.id;
@@ -360,6 +381,15 @@ public class ImagingStudyModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -399,10 +429,10 @@ public class ImagingStudyModel  implements Serializable {
   public void setAvailability( String value) {
     this.availability = value;
   }
-  public String getModalityList() {
+  public java.util.List<CodingModel> getModalityList() {
     return this.modalityList;
   }
-  public void setModalityList( String value) {
+  public void setModalityList( java.util.List<CodingModel> value) {
     this.modalityList = value;
   }
   public java.util.List<ReferenceModel> getPatient() {
@@ -465,16 +495,16 @@ public class ImagingStudyModel  implements Serializable {
   public void setProcedureReference( java.util.List<ReferenceModel> value) {
     this.procedureReference = value;
   }
-  public String getProcedureCode() {
+  public java.util.List<CodeableConceptModel> getProcedureCode() {
     return this.procedureCode;
   }
-  public void setProcedureCode( String value) {
+  public void setProcedureCode( java.util.List<CodeableConceptModel> value) {
     this.procedureCode = value;
   }
-  public String getReason() {
+  public java.util.List<CodeableConceptModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodeableConceptModel> value) {
     this.reason = value;
   }
   public String getDescription() {
@@ -547,12 +577,9 @@ public class ImagingStudyModel  implements Serializable {
      builder.append("accession" + "->" + this.accession + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("availability" + "->" + this.availability + "\n"); 
-     builder.append("modalityList" + "->" + this.modalityList + "\n"); 
      builder.append("started" + "->" + this.started + "\n"); 
      builder.append("numberOfSeries" + "->" + this.numberOfSeries + "\n"); 
      builder.append("numberOfInstances" + "->" + this.numberOfInstances + "\n"); 
-     builder.append("procedureCode" + "->" + this.procedureCode + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

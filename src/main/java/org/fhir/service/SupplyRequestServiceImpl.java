@@ -114,6 +114,18 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<SupplyRequest> findByCategory(QueryBuilder queryBuilder) {
+  	final List<SupplyRequest> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SupplyRequest> findByOrderedItem(QueryBuilder queryBuilder) {
+  	final List<SupplyRequest> result = dao.findByOrderedItem(queryBuilder);
+    logger.info("findByorderedItem - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<SupplyRequest> findByRequester(QueryBuilder queryBuilder) {
   	final List<SupplyRequest> result = dao.findByRequester(queryBuilder);
     logger.info("findByrequester - exited - return value={} result ");
@@ -123,6 +135,42 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   public List<SupplyRequest> findBySupplier(QueryBuilder queryBuilder) {
   	final List<SupplyRequest> result = dao.findBySupplier(queryBuilder);
     logger.info("findBysupplier - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SupplyRequest> findByReasonCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<SupplyRequest> result = dao.findByReasonCodeableConcept(queryBuilder);
+    logger.info("findByreasonCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SupplyRequest> findByReasonReference(QueryBuilder queryBuilder) {
+  	final List<SupplyRequest> result = dao.findByReasonReference(queryBuilder);
+    logger.info("findByreasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SupplyRequest> findByDeliverFrom(QueryBuilder queryBuilder) {
+  	final List<SupplyRequest> result = dao.findByDeliverFrom(queryBuilder);
+    logger.info("findBydeliverFrom - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SupplyRequest> findByDeliverTo(QueryBuilder queryBuilder) {
+  	final List<SupplyRequest> result = dao.findByDeliverTo(queryBuilder);
+    logger.info("findBydeliverTo - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SupplyRequest> findByText(QueryBuilder queryBuilder) {
+  	final List<SupplyRequest> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SupplyRequest> findByMeta(QueryBuilder queryBuilder) {
+  	final List<SupplyRequest> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

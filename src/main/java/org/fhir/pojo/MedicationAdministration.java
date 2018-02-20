@@ -182,8 +182,12 @@ public class MedicationAdministration  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
-    this.medicationCodeableConcept = CodeableConceptHelper.fromJson(o.getMedicationCodeableConcept());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getMedicationCodeableConcept() && !o.getMedicationCodeableConcept().isEmpty()) {
+      this.medicationCodeableConcept = new CodeableConcept(o.getMedicationCodeableConcept().get(0));
+    }
     if (null != o.getMedicationReference() && !o.getMedicationReference().isEmpty()) {
       this.medicationReference = new Reference(o.getMedicationReference().get(0));
     }
@@ -205,6 +209,12 @@ public class MedicationAdministration  extends DomainResource  {
     }
     if (null != o.getNotGiven()) {
       this.notGiven = o.getNotGiven();
+    }
+    if (null != o.getReasonNotGiven() && !o.getReasonNotGiven().isEmpty()) {
+    	this.reasonNotGiven = CodeableConceptHelper.fromArray2Array(o.getReasonNotGiven());
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());

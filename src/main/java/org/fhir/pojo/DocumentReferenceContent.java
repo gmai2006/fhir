@@ -49,7 +49,9 @@ public class DocumentReferenceContent  extends BackboneElement  {
   public DocumentReferenceContent(DocumentReferenceContentModel o) {
     this.id = o.getId();
     this.attachment = AttachmentHelper.fromJson(o.getAttachment());
-    this.format = CodingHelper.fromJson(o.getFormat());
+    if (null != o.getFormat() && !o.getFormat().isEmpty()) {
+      this.format = new Coding(o.getFormat().get(0));
+    }
   }
 
   public void setAttachment( Attachment value) {

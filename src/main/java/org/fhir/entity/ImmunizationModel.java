@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="immunization")
 public class ImmunizationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631168143404L;
+	private static final long serialVersionUID = 151910893743877921L;
   /**
   * Description: "This is a Immunization resource"
   */
@@ -73,13 +72,14 @@ public class ImmunizationModel  implements Serializable {
 
   /**
   * Description: "Vaccine that was administered or was to be administered."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"vaccineCode\"", length = 16777215)
-  private String vaccineCode;
+  @Column(name="\"vaccinecode_id\"")
+  private String vaccinecode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="vaccinecode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> vaccineCode;
 
   /**
   * Description: "The patient who either received or did not receive the immunization."
@@ -120,12 +120,14 @@ public class ImmunizationModel  implements Serializable {
 
   /**
   * Description: "The source of the data when the report of the immunization event is not based on information from the person who administered the vaccine."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reportOrigin\"", length = 16777215)
-  private String reportOrigin;
+  @Column(name="\"reportorigin_id\"")
+  private String reportorigin_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reportorigin_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reportOrigin;
 
   /**
   * Description: "The service delivery location where the vaccine administration occurred."
@@ -166,21 +168,25 @@ public class ImmunizationModel  implements Serializable {
 
   /**
   * Description: "Body site where vaccine was administered."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"site\"", length = 16777215)
-  private String site;
+  @Column(name="\"site_id\"")
+  private String site_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> site;
 
   /**
   * Description: "The path by which the vaccine product is taken into the body."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"route\"", length = 16777215)
-  private String route;
+  @Column(name="\"route_id\"")
+  private String route_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="route_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> route;
 
   /**
   * Description: "The quantity of vaccine product that was administered."
@@ -337,9 +343,15 @@ public class ImmunizationModel  implements Serializable {
   public ImmunizationModel(Immunization o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     this.notGiven = o.getNotGiven();
-    this.vaccineCode = JsonUtils.toJson(o.getVaccineCode());
+    if (null != o.getVaccineCode() ) {
+    	this.vaccinecode_id = "vaccinecode" + this.id;
+    	this.vaccineCode = CodeableConceptHelper.toModel(o.getVaccineCode(), this.vaccinecode_id);
+    }
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
@@ -350,7 +362,10 @@ public class ImmunizationModel  implements Serializable {
     }
     this.date = o.getDate();
     this.primarySource = o.getPrimarySource();
-    this.reportOrigin = JsonUtils.toJson(o.getReportOrigin());
+    if (null != o.getReportOrigin() ) {
+    	this.reportorigin_id = "reportorigin" + this.id;
+    	this.reportOrigin = CodeableConceptHelper.toModel(o.getReportOrigin(), this.reportorigin_id);
+    }
     if (null != o.getLocation() ) {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
@@ -361,8 +376,14 @@ public class ImmunizationModel  implements Serializable {
     }
     this.lotNumber = o.getLotNumber();
     this.expirationDate = o.getExpirationDate();
-    this.site = JsonUtils.toJson(o.getSite());
-    this.route = JsonUtils.toJson(o.getRoute());
+    if (null != o.getSite() ) {
+    	this.site_id = "site" + this.id;
+    	this.site = CodeableConceptHelper.toModel(o.getSite(), this.site_id);
+    }
+    if (null != o.getRoute() ) {
+    	this.route_id = "route" + this.id;
+    	this.route = CodeableConceptHelper.toModel(o.getRoute(), this.route_id);
+    }
     if (null != o.getDoseQuantity() ) {
     	this.dosequantity_id = "dosequantity" + this.id;
     	this.doseQuantity = QuantityHelper.toModel(o.getDoseQuantity(), this.dosequantity_id);
@@ -370,6 +391,9 @@ public class ImmunizationModel  implements Serializable {
     if (null != o.getPractitioner() && !o.getPractitioner().isEmpty()) {
     	this.practitioner_id = "practitioner" + this.id;
     	this.practitioner = ImmunizationPractitionerHelper.toModelFromArray(o.getPractitioner(), this.practitioner_id);
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
     }
     if (null != o.getExplanation() ) {
     	this.explanation_id = "explanation" + this.id;
@@ -386,6 +410,15 @@ public class ImmunizationModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -419,10 +452,10 @@ public class ImmunizationModel  implements Serializable {
   public void setNotGiven( Boolean value) {
     this.notGiven = value;
   }
-  public String getVaccineCode() {
+  public java.util.List<CodeableConceptModel> getVaccineCode() {
     return this.vaccineCode;
   }
-  public void setVaccineCode( String value) {
+  public void setVaccineCode( java.util.List<CodeableConceptModel> value) {
     this.vaccineCode = value;
   }
   public java.util.List<ReferenceModel> getPatient() {
@@ -449,10 +482,10 @@ public class ImmunizationModel  implements Serializable {
   public void setPrimarySource( Boolean value) {
     this.primarySource = value;
   }
-  public String getReportOrigin() {
+  public java.util.List<CodeableConceptModel> getReportOrigin() {
     return this.reportOrigin;
   }
-  public void setReportOrigin( String value) {
+  public void setReportOrigin( java.util.List<CodeableConceptModel> value) {
     this.reportOrigin = value;
   }
   public java.util.List<ReferenceModel> getLocation() {
@@ -479,16 +512,16 @@ public class ImmunizationModel  implements Serializable {
   public void setExpirationDate( String value) {
     this.expirationDate = value;
   }
-  public String getSite() {
+  public java.util.List<CodeableConceptModel> getSite() {
     return this.site;
   }
-  public void setSite( String value) {
+  public void setSite( java.util.List<CodeableConceptModel> value) {
     this.site = value;
   }
-  public String getRoute() {
+  public java.util.List<CodeableConceptModel> getRoute() {
     return this.route;
   }
-  public void setRoute( String value) {
+  public void setRoute( java.util.List<CodeableConceptModel> value) {
     this.route = value;
   }
   public java.util.List<QuantityModel> getDoseQuantity() {
@@ -584,14 +617,10 @@ public class ImmunizationModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("notGiven" + "->" + this.notGiven + "\n"); 
-     builder.append("vaccineCode" + "->" + this.vaccineCode + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("primarySource" + "->" + this.primarySource + "\n"); 
-     builder.append("reportOrigin" + "->" + this.reportOrigin + "\n"); 
      builder.append("lotNumber" + "->" + this.lotNumber + "\n"); 
      builder.append("expirationDate" + "->" + this.expirationDate + "\n"); 
-     builder.append("site" + "->" + this.site + "\n"); 
-     builder.append("route" + "->" + this.route + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

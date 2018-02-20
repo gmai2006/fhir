@@ -42,6 +42,13 @@ public interface DeviceComponentDao {
 
   public List<DeviceComponent> findByField(QueryBuilder queryBuilder);
 
-  public List<DeviceComponent> findByParent(QueryBuilder queryBuilder);
+  public List<DeviceComponent> findByType(QueryBuilder queryBuilder);
   public List<DeviceComponent> findBySource(QueryBuilder queryBuilder);
+  public List<DeviceComponent> findByParent(QueryBuilder queryBuilder);
+  public List<DeviceComponent> findByOperationalStatus(QueryBuilder queryBuilder);
+  public List<DeviceComponent> findByParameterGroup(QueryBuilder queryBuilder);
+  public List<DeviceComponent> findByProductionSpecification(QueryBuilder queryBuilder);
+  public List<DeviceComponent> findByLanguageCode(QueryBuilder queryBuilder);
+  public List<DeviceComponent> findByText(QueryBuilder queryBuilder);
+  public List<DeviceComponent> findByMeta(QueryBuilder queryBuilder);
 }

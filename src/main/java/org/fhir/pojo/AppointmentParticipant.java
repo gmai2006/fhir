@@ -67,6 +67,9 @@ public class AppointmentParticipant  extends BackboneElement  {
 
   public AppointmentParticipant(AppointmentParticipantModel o) {
     this.id = o.getId();
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type = CodeableConceptHelper.fromArray2Array(o.getType());
+    }
     if (null != o.getActor() && !o.getActor().isEmpty()) {
       this.actor = new Reference(o.getActor().get(0));
     }

@@ -114,9 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Person> findByAddress(QueryBuilder queryBuilder) {
+  	final List<Person> result = dao.findByAddress(queryBuilder);
+    logger.info("findByaddress - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Person> findByManagingOrganization(QueryBuilder queryBuilder) {
+  	final List<Person> result = dao.findByManagingOrganization(queryBuilder);
+    logger.info("findBymanagingOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Person> findByLink(QueryBuilder queryBuilder) {
   	final List<Person> result = dao.findByLink(queryBuilder);
     logger.info("findBylink - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Person> findByText(QueryBuilder queryBuilder) {
+  	final List<Person> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Person> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Person> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

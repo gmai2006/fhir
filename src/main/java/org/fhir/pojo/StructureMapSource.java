@@ -563,8 +563,12 @@ public class StructureMapSource  extends BackboneElement  {
     this.defaultValueAnnotation = AnnotationHelper.fromJson(o.getDefaultValueAnnotation());
     this.defaultValueAttachment = AttachmentHelper.fromJson(o.getDefaultValueAttachment());
     this.defaultValueIdentifier = IdentifierHelper.fromJson(o.getDefaultValueIdentifier());
-    this.defaultValueCodeableConcept = CodeableConceptHelper.fromJson(o.getDefaultValueCodeableConcept());
-    this.defaultValueCoding = CodingHelper.fromJson(o.getDefaultValueCoding());
+    if (null != o.getDefaultValueCodeableConcept() && !o.getDefaultValueCodeableConcept().isEmpty()) {
+      this.defaultValueCodeableConcept = new CodeableConcept(o.getDefaultValueCodeableConcept().get(0));
+    }
+    if (null != o.getDefaultValueCoding() && !o.getDefaultValueCoding().isEmpty()) {
+      this.defaultValueCoding = new Coding(o.getDefaultValueCoding().get(0));
+    }
     if (null != o.getDefaultValueQuantity() && !o.getDefaultValueQuantity().isEmpty()) {
       this.defaultValueQuantity = new Quantity(o.getDefaultValueQuantity().get(0));
     }

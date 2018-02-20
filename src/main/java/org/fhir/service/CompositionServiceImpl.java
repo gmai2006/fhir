@@ -114,9 +114,27 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Composition> findByAttester(QueryBuilder queryBuilder) {
-  	final List<Composition> result = dao.findByAttester(queryBuilder);
-    logger.info("findByattester - exited - return value={} result ");
+  public List<Composition> findByType(QueryBuilder queryBuilder) {
+  	final List<Composition> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Composition> findByFHIRclass(QueryBuilder queryBuilder) {
+  	final List<Composition> result = dao.findByFHIRclass(queryBuilder);
+    logger.info("findByFHIRclass - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Composition> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Composition> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Composition> findByEncounter(QueryBuilder queryBuilder) {
+  	final List<Composition> result = dao.findByEncounter(queryBuilder);
+    logger.info("findByencounter - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,15 +144,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<Composition> findByAttester(QueryBuilder queryBuilder) {
+  	final List<Composition> result = dao.findByAttester(queryBuilder);
+    logger.info("findByattester - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Composition> findByCustodian(QueryBuilder queryBuilder) {
+  	final List<Composition> result = dao.findByCustodian(queryBuilder);
+    logger.info("findBycustodian - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Composition> findByRelatesTo(QueryBuilder queryBuilder) {
+  	final List<Composition> result = dao.findByRelatesTo(queryBuilder);
+    logger.info("findByrelatesTo - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Composition> findByEvent(QueryBuilder queryBuilder) {
+  	final List<Composition> result = dao.findByEvent(queryBuilder);
+    logger.info("findByevent - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Composition> findBySection(QueryBuilder queryBuilder) {
   	final List<Composition> result = dao.findBySection(queryBuilder);
     logger.info("findBysection - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<Composition> findBySubject(QueryBuilder queryBuilder) {
-  	final List<Composition> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<Composition> findByText(QueryBuilder queryBuilder) {
+  	final List<Composition> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Composition> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Composition> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

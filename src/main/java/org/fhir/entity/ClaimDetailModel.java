@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claimdetail")
 public class ClaimDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151873631174137486L;
+	private static final long serialVersionUID = 151910893749718425L;
   /**
   * Description: "A service line number."
   */
@@ -49,48 +48,58 @@ public class ClaimDetailModel  implements Serializable {
 
   /**
   * Description: "The type of reveneu or cost center providing the product and/or service."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"revenue\"", length = 16777215)
-  private String revenue;
+  @Column(name="\"revenue_id\"")
+  private String revenue_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="revenue_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> revenue;
 
   /**
   * Description: "Health Care Service Type Codes  to identify the classification of service or benefits."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "If this is an actual service or product line, ie. not a Group, then use code to indicate the Professional Service or Product supplied (eg. CTP, HCPCS,USCLS,ICD10, NCPDP,DIN,ACHI,CCI). If a grouping item then use a group code to indicate the type of thing being grouped eg. 'glasses' or 'compound'."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"service\"", length = 16777215)
-  private String service;
+  @Column(name="\"service_id\"")
+  private String service_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="service_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> service;
 
   /**
   * Description: "Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"modifier\"", length = 16777215)
-  private String modifier;
+  @Column(name="\"modifier_id\"")
+  private String modifier_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="modifier_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> modifier;
 
   /**
   * Description: "For programs which require reson codes for the inclusion, covering, of this billed item under the program or sub-program."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"programCode\"", length = 16777215)
-  private String programCode;
+  @Column(name="\"programcode_id\"")
+  private String programcode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="programcode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> programCode;
 
   /**
   * Description: "The number of repetitions of a service or product."
@@ -199,11 +208,30 @@ public class ClaimDetailModel  implements Serializable {
 
   public ClaimDetailModel(ClaimDetail o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.sequence = o.getSequence();
-    this.revenue = JsonUtils.toJson(o.getRevenue());
-    this.category = JsonUtils.toJson(o.getCategory());
-    this.service = JsonUtils.toJson(o.getService());
+    if (null != o.getRevenue() ) {
+    	this.revenue_id = "revenue" + this.parent_id;
+    	this.revenue = CodeableConceptHelper.toModel(o.getRevenue(), this.revenue_id);
+    }
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.parent_id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
+    if (null != o.getService() ) {
+    	this.service_id = "service" + this.parent_id;
+    	this.service = CodeableConceptHelper.toModel(o.getService(), this.service_id);
+    }
+    if (null != o.getModifier() && !o.getModifier().isEmpty()) {
+    	this.modifier_id = "modifier" + this.parent_id;
+    	this.modifier = CodeableConceptHelper.toModelFromArray(o.getModifier(), this.modifier_id);
+    }
+    if (null != o.getProgramCode() && !o.getProgramCode().isEmpty()) {
+    	this.programcode_id = "programcode" + this.parent_id;
+    	this.programCode = CodeableConceptHelper.toModelFromArray(o.getProgramCode(), this.programcode_id);
+    }
     if (null != o.getQuantity() ) {
     	this.quantity_id = "quantity" + this.parent_id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
@@ -225,6 +253,12 @@ public class ClaimDetailModel  implements Serializable {
     	this.subdetail_id = "subdetail" + this.parent_id;
     	this.subDetail = ClaimSubDetailHelper.toModelFromArray(o.getSubDetail(), this.subdetail_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Float getSequence() {
@@ -233,34 +267,34 @@ public class ClaimDetailModel  implements Serializable {
   public void setSequence( Float value) {
     this.sequence = value;
   }
-  public String getRevenue() {
+  public java.util.List<CodeableConceptModel> getRevenue() {
     return this.revenue;
   }
-  public void setRevenue( String value) {
+  public void setRevenue( java.util.List<CodeableConceptModel> value) {
     this.revenue = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getService() {
+  public java.util.List<CodeableConceptModel> getService() {
     return this.service;
   }
-  public void setService( String value) {
+  public void setService( java.util.List<CodeableConceptModel> value) {
     this.service = value;
   }
-  public String getModifier() {
+  public java.util.List<CodeableConceptModel> getModifier() {
     return this.modifier;
   }
-  public void setModifier( String value) {
+  public void setModifier( java.util.List<CodeableConceptModel> value) {
     this.modifier = value;
   }
-  public String getProgramCode() {
+  public java.util.List<CodeableConceptModel> getProgramCode() {
     return this.programCode;
   }
-  public void setProgramCode( String value) {
+  public void setProgramCode( java.util.List<CodeableConceptModel> value) {
     this.programCode = value;
   }
   public java.util.List<QuantityModel> getQuantity() {
@@ -329,11 +363,6 @@ public class ClaimDetailModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClaimDetailModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
-     builder.append("revenue" + "->" + this.revenue + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("service" + "->" + this.service + "\n"); 
-     builder.append("modifier" + "->" + this.modifier + "\n"); 
-     builder.append("programCode" + "->" + this.programCode + "\n"); 
      builder.append("factor" + "->" + this.factor + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

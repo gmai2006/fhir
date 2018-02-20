@@ -42,4 +42,16 @@ public interface AppointmentDao {
 
   public List<Appointment> findByField(QueryBuilder queryBuilder);
 
+  public List<Appointment> findByServiceCategory(QueryBuilder queryBuilder);
+  public List<Appointment> findByServiceType(QueryBuilder queryBuilder);
+  public List<Appointment> findBySpecialty(QueryBuilder queryBuilder);
+  public List<Appointment> findByAppointmentType(QueryBuilder queryBuilder);
+  public List<Appointment> findByReason(QueryBuilder queryBuilder);
+  public List<Appointment> findByIndication(QueryBuilder queryBuilder);
+  public List<Appointment> findBySupportingInformation(QueryBuilder queryBuilder);
+  public List<Appointment> findBySlot(QueryBuilder queryBuilder);
+  public List<Appointment> findByIncomingReferral(QueryBuilder queryBuilder);
+  public List<Appointment> findByParticipant(QueryBuilder queryBuilder);
+  public List<Appointment> findByText(QueryBuilder queryBuilder);
+  public List<Appointment> findByMeta(QueryBuilder queryBuilder);
 }

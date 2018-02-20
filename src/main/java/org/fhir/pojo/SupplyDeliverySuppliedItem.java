@@ -55,7 +55,9 @@ public class SupplyDeliverySuppliedItem  extends BackboneElement  {
     if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
       this.quantity = new Quantity(o.getQuantity().get(0));
     }
-    this.itemCodeableConcept = CodeableConceptHelper.fromJson(o.getItemCodeableConcept());
+    if (null != o.getItemCodeableConcept() && !o.getItemCodeableConcept().isEmpty()) {
+      this.itemCodeableConcept = new CodeableConcept(o.getItemCodeableConcept().get(0));
+    }
     if (null != o.getItemReference() && !o.getItemReference().isEmpty()) {
       this.itemReference = new Reference(o.getItemReference().get(0));
     }

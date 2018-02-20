@@ -125,11 +125,15 @@ public class ObservationComponent  extends BackboneElement  {
 
   public ObservationComponent(ObservationComponentModel o) {
     this.id = o.getId();
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
       this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
     }
-    this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
+    if (null != o.getValueCodeableConcept() && !o.getValueCodeableConcept().isEmpty()) {
+      this.valueCodeableConcept = new CodeableConcept(o.getValueCodeableConcept().get(0));
+    }
     if (null != o.getValueString()) {
       this.valueString = o.getValueString();
     }
@@ -144,8 +148,12 @@ public class ObservationComponent  extends BackboneElement  {
       this.valueDateTime = o.getValueDateTime();
     }
     this.valuePeriod = PeriodHelper.fromJson(o.getValuePeriod());
-    this.dataAbsentReason = CodeableConceptHelper.fromJson(o.getDataAbsentReason());
-    this.interpretation = CodeableConceptHelper.fromJson(o.getInterpretation());
+    if (null != o.getDataAbsentReason() && !o.getDataAbsentReason().isEmpty()) {
+      this.dataAbsentReason = new CodeableConcept(o.getDataAbsentReason().get(0));
+    }
+    if (null != o.getInterpretation() && !o.getInterpretation().isEmpty()) {
+      this.interpretation = new CodeableConcept(o.getInterpretation().get(0));
+    }
     if (null != o.getReferenceRange() && !o.getReferenceRange().isEmpty()) {
     	this.referenceRange = ObservationReferenceRangeHelper.fromArray2Array(o.getReferenceRange());
     }

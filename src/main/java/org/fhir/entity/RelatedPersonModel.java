@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="relatedperson")
 public class RelatedPersonModel  implements Serializable {
-	private static final long serialVersionUID = 151873631144895629L;
+	private static final long serialVersionUID = 151910893721448259L;
   /**
   * Description: "This is a RelatedPerson resource"
   */
@@ -76,12 +75,14 @@ public class RelatedPersonModel  implements Serializable {
 
   /**
   * Description: "The nature of the relationship between a patient and the related person."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"relationship\"", length = 16777215)
-  private String relationship;
+  @Column(name="\"relationship_id\"")
+  private String relationship_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relationship_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> relationship;
 
   /**
   * Description: "A name associated with the person."
@@ -236,22 +237,48 @@ public class RelatedPersonModel  implements Serializable {
   public RelatedPersonModel(RelatedPerson o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.active = o.getActive();
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
-    this.relationship = JsonUtils.toJson(o.getRelationship());
+    if (null != o.getRelationship() ) {
+    	this.relationship_id = "relationship" + this.id;
+    	this.relationship = CodeableConceptHelper.toModel(o.getRelationship(), this.relationship_id);
+    }
+    if (null != o.getName()) {
+    	this.name = JsonUtils.toJson(o.getName());
+    }
+    if (null != o.getTelecom()) {
+    	this.telecom = JsonUtils.toJson(o.getTelecom());
+    }
     this.gender = o.getGender();
     this.birthDate = o.getBirthDate();
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
     	this.address_id = "address" + this.id;
     	this.address = AddressHelper.toModelFromArray(o.getAddress(), this.address_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPhoto()) {
+    	this.photo = JsonUtils.toJson(o.getPhoto());
+    }
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -285,10 +312,10 @@ public class RelatedPersonModel  implements Serializable {
   public void setPatient( java.util.List<ReferenceModel> value) {
     this.patient = value;
   }
-  public String getRelationship() {
+  public java.util.List<CodeableConceptModel> getRelationship() {
     return this.relationship;
   }
-  public void setRelationship( String value) {
+  public void setRelationship( java.util.List<CodeableConceptModel> value) {
     this.relationship = value;
   }
   public String getName() {
@@ -389,7 +416,6 @@ public class RelatedPersonModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("relationship" + "->" + this.relationship + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
      builder.append("gender" + "->" + this.gender + "\n"); 

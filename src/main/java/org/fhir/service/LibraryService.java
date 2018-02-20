@@ -38,6 +38,16 @@ public interface LibraryService {
   public Library update(Library bean);
   public void delete(Library bean);
   public List<Library> findByField(QueryBuilder queryBuilder);
+  public List<Library> findByType(QueryBuilder queryBuilder);
+  public List<Library> findByUseContext(QueryBuilder queryBuilder);
+  public List<Library> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<Library> findByTopic(QueryBuilder queryBuilder);
+  public List<Library> findByContributor(QueryBuilder queryBuilder);
+  public List<Library> findByContact(QueryBuilder queryBuilder);
+  public List<Library> findByRelatedArtifact(QueryBuilder queryBuilder);
+  public List<Library> findByDataRequirement(QueryBuilder queryBuilder);
+  public List<Library> findByText(QueryBuilder queryBuilder);
+  public List<Library> findByMeta(QueryBuilder queryBuilder);
 
 
 }

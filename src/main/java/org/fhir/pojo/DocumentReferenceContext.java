@@ -75,9 +75,16 @@ public class DocumentReferenceContext  extends BackboneElement  {
     if (null != o.getEncounter() && !o.getEncounter().isEmpty()) {
       this.encounter = new Reference(o.getEncounter().get(0));
     }
+    if (null != o.getEvent() && !o.getEvent().isEmpty()) {
+    	this.event = CodeableConceptHelper.fromArray2Array(o.getEvent());
+    }
     this.period = PeriodHelper.fromJson(o.getPeriod());
-    this.facilityType = CodeableConceptHelper.fromJson(o.getFacilityType());
-    this.practiceSetting = CodeableConceptHelper.fromJson(o.getPracticeSetting());
+    if (null != o.getFacilityType() && !o.getFacilityType().isEmpty()) {
+      this.facilityType = new CodeableConcept(o.getFacilityType().get(0));
+    }
+    if (null != o.getPracticeSetting() && !o.getPracticeSetting().isEmpty()) {
+      this.practiceSetting = new CodeableConcept(o.getPracticeSetting().get(0));
+    }
     if (null != o.getSourcePatientInfo() && !o.getSourcePatientInfo().isEmpty()) {
       this.sourcePatientInfo = new Reference(o.getSourcePatientInfo().get(0));
     }

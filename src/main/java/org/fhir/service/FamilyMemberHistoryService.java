@@ -39,6 +39,14 @@ public interface FamilyMemberHistoryService {
   public void delete(FamilyMemberHistory bean);
   public List<FamilyMemberHistory> findByField(QueryBuilder queryBuilder);
   public List<FamilyMemberHistory> findByDefinition(QueryBuilder queryBuilder);
+  public List<FamilyMemberHistory> findByNotDoneReason(QueryBuilder queryBuilder);
+  public List<FamilyMemberHistory> findByPatient(QueryBuilder queryBuilder);
+  public List<FamilyMemberHistory> findByRelationship(QueryBuilder queryBuilder);
+  public List<FamilyMemberHistory> findByReasonCode(QueryBuilder queryBuilder);
+  public List<FamilyMemberHistory> findByReasonReference(QueryBuilder queryBuilder);
+  public List<FamilyMemberHistory> findByCondition(QueryBuilder queryBuilder);
+  public List<FamilyMemberHistory> findByText(QueryBuilder queryBuilder);
+  public List<FamilyMemberHistory> findByMeta(QueryBuilder queryBuilder);
 
 
 }

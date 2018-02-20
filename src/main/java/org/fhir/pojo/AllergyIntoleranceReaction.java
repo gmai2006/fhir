@@ -89,7 +89,12 @@ public class AllergyIntoleranceReaction  extends BackboneElement  {
 
   public AllergyIntoleranceReaction(AllergyIntoleranceReactionModel o) {
     this.id = o.getId();
-    this.substance = CodeableConceptHelper.fromJson(o.getSubstance());
+    if (null != o.getSubstance() && !o.getSubstance().isEmpty()) {
+      this.substance = new CodeableConcept(o.getSubstance().get(0));
+    }
+    if (null != o.getManifestation() && !o.getManifestation().isEmpty()) {
+    	this.manifestation = CodeableConceptHelper.fromArray2Array(o.getManifestation());
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }
@@ -99,7 +104,9 @@ public class AllergyIntoleranceReaction  extends BackboneElement  {
     if (null != o.getSeverity()) {
       this.severity = o.getSeverity();
     }
-    this.exposureRoute = CodeableConceptHelper.fromJson(o.getExposureRoute());
+    if (null != o.getExposureRoute() && !o.getExposureRoute().isEmpty()) {
+      this.exposureRoute = new CodeableConcept(o.getExposureRoute().get(0));
+    }
   }
 
   public void setSubstance( CodeableConcept value) {

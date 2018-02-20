@@ -121,7 +121,12 @@ public class Provenance  extends DomainResource  {
     if (null != o.getLocation() && !o.getLocation().isEmpty()) {
       this.location = new Reference(o.getLocation().get(0));
     }
-    this.activity = CodingHelper.fromJson(o.getActivity());
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason = CodingHelper.fromArray2Array(o.getReason());
+    }
+    if (null != o.getActivity() && !o.getActivity().isEmpty()) {
+      this.activity = new Coding(o.getActivity().get(0));
+    }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent = ProvenanceAgentHelper.fromArray2Array(o.getAgent());
     }

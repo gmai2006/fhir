@@ -73,10 +73,21 @@ public class PlanDefinitionGoal  extends BackboneElement  {
 
   public PlanDefinitionGoal(PlanDefinitionGoalModel o) {
     this.id = o.getId();
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
-    this.description = CodeableConceptHelper.fromJson(o.getDescription());
-    this.priority = CodeableConceptHelper.fromJson(o.getPriority());
-    this.start = CodeableConceptHelper.fromJson(o.getStart());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getDescription() && !o.getDescription().isEmpty()) {
+      this.description = new CodeableConcept(o.getDescription().get(0));
+    }
+    if (null != o.getPriority() && !o.getPriority().isEmpty()) {
+      this.priority = new CodeableConcept(o.getPriority().get(0));
+    }
+    if (null != o.getStart() && !o.getStart().isEmpty()) {
+      this.start = new CodeableConcept(o.getStart().get(0));
+    }
+    if (null != o.getAddresses() && !o.getAddresses().isEmpty()) {
+    	this.addresses = CodeableConceptHelper.fromArray2Array(o.getAddresses());
+    }
     if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
     	this.documentation = RelatedArtifactHelper.fromArray2Array(o.getDocumentation());
     }

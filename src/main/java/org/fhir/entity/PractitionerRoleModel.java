@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="practitionerrole")
 public class PractitionerRoleModel  implements Serializable {
-	private static final long serialVersionUID = 151873631190488471L;
+	private static final long serialVersionUID = 151910893767447700L;
   /**
   * Description: "This is a PractitionerRole resource"
   */
@@ -96,21 +95,25 @@ public class PractitionerRoleModel  implements Serializable {
 
   /**
   * Description: "Roles which this practitioner is authorized to perform for the organization."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "Specific specialty of the practitioner."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"specialty\"", length = 16777215)
-  private String specialty;
+  @Column(name="\"specialty_id\"")
+  private String specialty_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> specialty;
 
   /**
   * Description: "The location(s) at which this practitioner provides care."
@@ -274,8 +277,13 @@ public class PractitionerRoleModel  implements Serializable {
   public PractitionerRoleModel(PractitionerRole o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.active = o.getActive();
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getPractitioner() ) {
     	this.practitioner_id = "practitioner" + this.id;
     	this.practitioner = ReferenceHelper.toModel(o.getPractitioner(), this.practitioner_id);
@@ -284,6 +292,14 @@ public class PractitionerRoleModel  implements Serializable {
     	this.organization_id = "organization" + this.id;
     	this.organization = ReferenceHelper.toModel(o.getOrganization(), this.organization_id);
     }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModelFromArray(o.getCode(), this.code_id);
+    }
+    if (null != o.getSpecialty() && !o.getSpecialty().isEmpty()) {
+    	this.specialty_id = "specialty" + this.id;
+    	this.specialty = CodeableConceptHelper.toModelFromArray(o.getSpecialty(), this.specialty_id);
+    }
     if (null != o.getLocation() && !o.getLocation().isEmpty()) {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModelFromArray(o.getLocation(), this.location_id);
@@ -291,6 +307,9 @@ public class PractitionerRoleModel  implements Serializable {
     if (null != o.getHealthcareService() && !o.getHealthcareService().isEmpty()) {
     	this.healthcareservice_id = "healthcareservice" + this.id;
     	this.healthcareService = ReferenceHelper.toModelFromArray(o.getHealthcareService(), this.healthcareservice_id);
+    }
+    if (null != o.getTelecom()) {
+    	this.telecom = JsonUtils.toJson(o.getTelecom());
     }
     if (null != o.getAvailableTime() && !o.getAvailableTime().isEmpty()) {
     	this.availabletime_id = "availabletime" + this.id;
@@ -308,6 +327,15 @@ public class PractitionerRoleModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -353,16 +381,16 @@ public class PractitionerRoleModel  implements Serializable {
   public void setOrganization( java.util.List<ReferenceModel> value) {
     this.organization = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
-  public String getSpecialty() {
+  public java.util.List<CodeableConceptModel> getSpecialty() {
     return this.specialty;
   }
-  public void setSpecialty( String value) {
+  public void setSpecialty( java.util.List<CodeableConceptModel> value) {
     this.specialty = value;
   }
   public java.util.List<ReferenceModel> getLocation() {
@@ -464,8 +492,6 @@ public class PractitionerRoleModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("specialty" + "->" + this.specialty + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
      builder.append("availabilityExceptions" + "->" + this.availabilityExceptions + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

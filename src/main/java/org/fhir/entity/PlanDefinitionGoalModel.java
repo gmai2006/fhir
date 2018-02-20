@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,52 +37,61 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="plandefinitiongoal")
 public class PlanDefinitionGoalModel  implements Serializable {
-	private static final long serialVersionUID = 151873631176599866L;
+	private static final long serialVersionUID = 151910893753215851L;
   /**
   * Description: "Indicates a category the goal falls within."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "Human-readable and/or coded description of a specific desired objective of care, such as \"control blood pressure\" or \"negotiate an obstacle course\" or \"dance with child at wedding\"."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"description\"", length = 16777215)
-  private String description;
+  @Column(name="\"description_id\"")
+  private String description_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="description_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> description;
 
   /**
   * Description: "Identifies the expected level of importance associated with reaching/sustaining the defined goal."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"priority\"", length = 16777215)
-  private String priority;
+  @Column(name="\"priority_id\"")
+  private String priority_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="priority_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> priority;
 
   /**
   * Description: "The event after which the goal should begin being pursued."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"start\"", length = 16777215)
-  private String start;
+  @Column(name="\"start_id\"")
+  private String start_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="start_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> start;
 
   /**
   * Description: "Identifies problems, conditions, issues, or concerns the goal is intended to address."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"addresses\"", length = 16777215)
-  private String addresses;
+  @Column(name="\"addresses_id\"")
+  private String addresses_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="addresses_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> addresses;
 
   /**
   * Description: "Didactic or other informational resources associated with the goal that provide further supporting information about the goal. Information resources can include inline text commentary and links to web resources."
@@ -151,11 +159,29 @@ public class PlanDefinitionGoalModel  implements Serializable {
 
   public PlanDefinitionGoalModel(PlanDefinitionGoal o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.category = JsonUtils.toJson(o.getCategory());
-    this.description = JsonUtils.toJson(o.getDescription());
-    this.priority = JsonUtils.toJson(o.getPriority());
-    this.start = JsonUtils.toJson(o.getStart());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.parent_id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
+    if (null != o.getDescription() ) {
+    	this.description_id = "description" + this.parent_id;
+    	this.description = CodeableConceptHelper.toModel(o.getDescription(), this.description_id);
+    }
+    if (null != o.getPriority() ) {
+    	this.priority_id = "priority" + this.parent_id;
+    	this.priority = CodeableConceptHelper.toModel(o.getPriority(), this.priority_id);
+    }
+    if (null != o.getStart() ) {
+    	this.start_id = "start" + this.parent_id;
+    	this.start = CodeableConceptHelper.toModel(o.getStart(), this.start_id);
+    }
+    if (null != o.getAddresses() && !o.getAddresses().isEmpty()) {
+    	this.addresses_id = "addresses" + this.parent_id;
+    	this.addresses = CodeableConceptHelper.toModelFromArray(o.getAddresses(), this.addresses_id);
+    }
     if (null != o.getDocumentation() && !o.getDocumentation().isEmpty()) {
     	this.documentation_id = "documentation" + this.parent_id;
     	this.documentation = RelatedArtifactHelper.toModelFromArray(o.getDocumentation(), this.documentation_id);
@@ -164,36 +190,42 @@ public class PlanDefinitionGoalModel  implements Serializable {
     	this.target_id = "target" + this.parent_id;
     	this.target = PlanDefinitionTargetHelper.toModelFromArray(o.getTarget(), this.target_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getDescription() {
+  public java.util.List<CodeableConceptModel> getDescription() {
     return this.description;
   }
-  public void setDescription( String value) {
+  public void setDescription( java.util.List<CodeableConceptModel> value) {
     this.description = value;
   }
-  public String getPriority() {
+  public java.util.List<CodeableConceptModel> getPriority() {
     return this.priority;
   }
-  public void setPriority( String value) {
+  public void setPriority( java.util.List<CodeableConceptModel> value) {
     this.priority = value;
   }
-  public String getStart() {
+  public java.util.List<CodeableConceptModel> getStart() {
     return this.start;
   }
-  public void setStart( String value) {
+  public void setStart( java.util.List<CodeableConceptModel> value) {
     this.start = value;
   }
-  public String getAddresses() {
+  public java.util.List<CodeableConceptModel> getAddresses() {
     return this.addresses;
   }
-  public void setAddresses( String value) {
+  public void setAddresses( java.util.List<CodeableConceptModel> value) {
     this.addresses = value;
   }
   public java.util.List<RelatedArtifactModel> getDocumentation() {
@@ -237,11 +269,6 @@ public class PlanDefinitionGoalModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PlanDefinitionGoalModel]:" + "\n");
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("start" + "->" + this.start + "\n"); 
-     builder.append("addresses" + "->" + this.addresses + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

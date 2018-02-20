@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="appointmentparticipant")
 public class AppointmentParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 151873631136968948L;
+	private static final long serialVersionUID = 15191089371193558L;
   /**
   * Description: "Role of participant in the appointment."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "A Person, Location/HealthcareService or Device that is participating in the appointment."
@@ -117,19 +118,31 @@ public class AppointmentParticipantModel  implements Serializable {
 
   public AppointmentParticipantModel(AppointmentParticipant o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModelFromArray(o.getType(), this.type_id);
+    }
     if (null != o.getActor() ) {
     	this.actor_id = "actor" + this.parent_id;
     	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);
     }
     this.required = o.getRequired();
     this.status = o.getStatus();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public java.util.List<ReferenceModel> getActor() {
@@ -179,7 +192,6 @@ public class AppointmentParticipantModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[AppointmentParticipantModel]:" + "\n");
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("required" + "->" + this.required + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

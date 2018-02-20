@@ -95,7 +95,12 @@ public class BodySite  extends DomainResource  {
     if (null != o.getActive()) {
       this.active = o.getActive();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
+    if (null != o.getQualifier() && !o.getQualifier().isEmpty()) {
+    	this.qualifier = CodeableConceptHelper.fromArray2Array(o.getQualifier());
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }

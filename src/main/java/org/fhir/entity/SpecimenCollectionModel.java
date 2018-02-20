@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="specimencollection")
 public class SpecimenCollectionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631134655944L;
+	private static final long serialVersionUID = 151910893709966833L;
   /**
   * Description: "Person who collected the specimen."
   */
@@ -80,21 +79,25 @@ public class SpecimenCollectionModel  implements Serializable {
 
   /**
   * Description: "A coded value specifying the technique that is used to perform the procedure."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"method\"", length = 16777215)
-  private String method;
+  @Column(name="\"method_id\"")
+  private String method_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> method;
 
   /**
   * Description: "Anatomical location from which the specimen was collected (if subject is a patient). This is the target site.  This element is not used for environmental specimens."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"bodySite\"", length = 16777215)
-  private String bodySite;
+  @Column(name="\"bodysite_id\"")
+  private String bodysite_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> bodySite;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -140,19 +143,35 @@ public class SpecimenCollectionModel  implements Serializable {
 
   public SpecimenCollectionModel(SpecimenCollection o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getCollector() ) {
     	this.collector_id = "collector" + this.parent_id;
     	this.collector = ReferenceHelper.toModel(o.getCollector(), this.collector_id);
     }
     this.collectedDateTime = o.getCollectedDateTime();
-    this.collectedPeriod = JsonUtils.toJson(o.getCollectedPeriod());
+    if (null != o.getCollectedPeriod()) {
+    	this.collectedPeriod = JsonUtils.toJson(o.getCollectedPeriod());
+    }
     if (null != o.getQuantity() ) {
     	this.quantity_id = "quantity" + this.parent_id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
     }
-    this.method = JsonUtils.toJson(o.getMethod());
-    this.bodySite = JsonUtils.toJson(o.getBodySite());
+    if (null != o.getMethod() ) {
+    	this.method_id = "method" + this.parent_id;
+    	this.method = CodeableConceptHelper.toModel(o.getMethod(), this.method_id);
+    }
+    if (null != o.getBodySite() ) {
+    	this.bodysite_id = "bodysite" + this.parent_id;
+    	this.bodySite = CodeableConceptHelper.toModel(o.getBodySite(), this.bodysite_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public java.util.List<ReferenceModel> getCollector() {
@@ -179,16 +198,16 @@ public class SpecimenCollectionModel  implements Serializable {
   public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
-  public String getMethod() {
+  public java.util.List<CodeableConceptModel> getMethod() {
     return this.method;
   }
-  public void setMethod( String value) {
+  public void setMethod( java.util.List<CodeableConceptModel> value) {
     this.method = value;
   }
-  public String getBodySite() {
+  public java.util.List<CodeableConceptModel> getBodySite() {
     return this.bodySite;
   }
-  public void setBodySite( String value) {
+  public void setBodySite( java.util.List<CodeableConceptModel> value) {
     this.bodySite = value;
   }
   public String getModifierExtension() {
@@ -222,8 +241,6 @@ public class SpecimenCollectionModel  implements Serializable {
     builder.append("[SpecimenCollectionModel]:" + "\n");
      builder.append("collectedDateTime" + "->" + this.collectedDateTime + "\n"); 
      builder.append("collectedPeriod" + "->" + this.collectedPeriod + "\n"); 
-     builder.append("method" + "->" + this.method + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

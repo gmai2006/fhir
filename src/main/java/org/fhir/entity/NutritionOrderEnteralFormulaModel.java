@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionorderenteralformula")
 public class NutritionOrderEnteralFormulaModel  implements Serializable {
-	private static final long serialVersionUID = 151873631175638492L;
+	private static final long serialVersionUID = 151910893752180231L;
   /**
   * Description: "The type of enteral or infant formula such as an adult standard formula with fiber or a soy-based infant formula."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"baseFormulaType\"", length = 16777215)
-  private String baseFormulaType;
+  @Column(name="\"baseformulatype_id\"")
+  private String baseformulatype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="baseformulatype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> baseFormulaType;
 
   /**
   * Description: "The product or brand name of the enteral or infant formula product such as \"ACME Adult Standard Formula\"."
@@ -57,12 +58,14 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
 
   /**
   * Description: "Indicates the type of modular component such as protein, carbohydrate, fat or fiber to be provided in addition to or mixed with the base formula."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"additiveType\"", length = 16777215)
-  private String additiveType;
+  @Column(name="\"additivetype_id\"")
+  private String additivetype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="additivetype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> additiveType;
 
   /**
   * Description: "The product or brand name of the type of modular component to be added to the formula."
@@ -84,12 +87,14 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
 
   /**
   * Description: "The route or physiological path of administration into the patient's gastrointestinal  tract for purposes of providing the formula feeding, e.g. nasogastric tube."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"routeofAdministration\"", length = 16777215)
-  private String routeofAdministration;
+  @Column(name="\"routeofadministration_id\"")
+  private String routeofadministration_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="routeofadministration_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> routeofAdministration;
 
   /**
   * Description: "Formula administration instructions as structured data.  This repeating structure allows for changing the administration rate or volume over time for both bolus and continuous feeding.  An example of this would be an instruction to increase the rate of continuous feeding every 2 hours."
@@ -164,16 +169,27 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
 
   public NutritionOrderEnteralFormulaModel(NutritionOrderEnteralFormula o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.baseFormulaType = JsonUtils.toJson(o.getBaseFormulaType());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getBaseFormulaType() ) {
+    	this.baseformulatype_id = "baseformulatype" + this.parent_id;
+    	this.baseFormulaType = CodeableConceptHelper.toModel(o.getBaseFormulaType(), this.baseformulatype_id);
+    }
     this.baseFormulaProductName = o.getBaseFormulaProductName();
-    this.additiveType = JsonUtils.toJson(o.getAdditiveType());
+    if (null != o.getAdditiveType() ) {
+    	this.additivetype_id = "additivetype" + this.parent_id;
+    	this.additiveType = CodeableConceptHelper.toModel(o.getAdditiveType(), this.additivetype_id);
+    }
     this.additiveProductName = o.getAdditiveProductName();
     if (null != o.getCaloricDensity() ) {
     	this.caloricdensity_id = "caloricdensity" + this.parent_id;
     	this.caloricDensity = QuantityHelper.toModel(o.getCaloricDensity(), this.caloricdensity_id);
     }
-    this.routeofAdministration = JsonUtils.toJson(o.getRouteofAdministration());
+    if (null != o.getRouteofAdministration() ) {
+    	this.routeofadministration_id = "routeofadministration" + this.parent_id;
+    	this.routeofAdministration = CodeableConceptHelper.toModel(o.getRouteofAdministration(), this.routeofadministration_id);
+    }
     if (null != o.getAdministration() && !o.getAdministration().isEmpty()) {
     	this.administration_id = "administration" + this.parent_id;
     	this.administration = NutritionOrderAdministrationHelper.toModelFromArray(o.getAdministration(), this.administration_id);
@@ -183,12 +199,18 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
     	this.maxVolumeToDeliver = QuantityHelper.toModel(o.getMaxVolumeToDeliver(), this.maxvolumetodeliver_id);
     }
     this.administrationInstruction = o.getAdministrationInstruction();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getBaseFormulaType() {
+  public java.util.List<CodeableConceptModel> getBaseFormulaType() {
     return this.baseFormulaType;
   }
-  public void setBaseFormulaType( String value) {
+  public void setBaseFormulaType( java.util.List<CodeableConceptModel> value) {
     this.baseFormulaType = value;
   }
   public String getBaseFormulaProductName() {
@@ -197,10 +219,10 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   public void setBaseFormulaProductName( String value) {
     this.baseFormulaProductName = value;
   }
-  public String getAdditiveType() {
+  public java.util.List<CodeableConceptModel> getAdditiveType() {
     return this.additiveType;
   }
-  public void setAdditiveType( String value) {
+  public void setAdditiveType( java.util.List<CodeableConceptModel> value) {
     this.additiveType = value;
   }
   public String getAdditiveProductName() {
@@ -215,10 +237,10 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   public void setCaloricDensity( java.util.List<QuantityModel> value) {
     this.caloricDensity = value;
   }
-  public String getRouteofAdministration() {
+  public java.util.List<CodeableConceptModel> getRouteofAdministration() {
     return this.routeofAdministration;
   }
-  public void setRouteofAdministration( String value) {
+  public void setRouteofAdministration( java.util.List<CodeableConceptModel> value) {
     this.routeofAdministration = value;
   }
   public java.util.List<NutritionOrderAdministrationModel> getAdministration() {
@@ -268,11 +290,8 @@ public class NutritionOrderEnteralFormulaModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[NutritionOrderEnteralFormulaModel]:" + "\n");
-     builder.append("baseFormulaType" + "->" + this.baseFormulaType + "\n"); 
      builder.append("baseFormulaProductName" + "->" + this.baseFormulaProductName + "\n"); 
-     builder.append("additiveType" + "->" + this.additiveType + "\n"); 
      builder.append("additiveProductName" + "->" + this.additiveProductName + "\n"); 
-     builder.append("routeofAdministration" + "->" + this.routeofAdministration + "\n"); 
      builder.append("administrationInstruction" + "->" + this.administrationInstruction + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

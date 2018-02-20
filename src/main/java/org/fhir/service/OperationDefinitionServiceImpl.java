@@ -114,9 +114,51 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<OperationDefinition> findByContact(QueryBuilder queryBuilder) {
+  	final List<OperationDefinition> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<OperationDefinition> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<OperationDefinition> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<OperationDefinition> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<OperationDefinition> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<OperationDefinition> findByBase(QueryBuilder queryBuilder) {
   	final List<OperationDefinition> result = dao.findByBase(queryBuilder);
     logger.info("findBybase - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<OperationDefinition> findByParameter(QueryBuilder queryBuilder) {
+  	final List<OperationDefinition> result = dao.findByParameter(queryBuilder);
+    logger.info("findByparameter - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<OperationDefinition> findByOverload(QueryBuilder queryBuilder) {
+  	final List<OperationDefinition> result = dao.findByOverload(queryBuilder);
+    logger.info("findByoverload - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<OperationDefinition> findByText(QueryBuilder queryBuilder) {
+  	final List<OperationDefinition> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<OperationDefinition> findByMeta(QueryBuilder queryBuilder) {
+  	final List<OperationDefinition> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

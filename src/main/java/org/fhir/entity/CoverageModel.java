@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="coverage")
 public class CoverageModel  implements Serializable {
-	private static final long serialVersionUID = 151873631116123891L;
+	private static final long serialVersionUID = 151910893695087314L;
   /**
   * Description: "This is a Coverage resource"
   */
@@ -66,12 +65,14 @@ public class CoverageModel  implements Serializable {
 
   /**
   * Description: "The type of coverage: social program, medical plan, accident coverage (workers compensation, auto), group health or payment by an individual or organization."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The party who 'owns' the insurance policy,  may be an individual, corporation or the subscriber's employer."
@@ -115,12 +116,14 @@ public class CoverageModel  implements Serializable {
 
   /**
   * Description: "The relationship of beneficiary (patient) to the subscriber."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"relationship\"", length = 16777215)
-  private String relationship;
+  @Column(name="\"relationship_id\"")
+  private String relationship_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relationship_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> relationship;
 
   /**
   * Description: "Time period during which the coverage is in force. A missing start date indicates the start date isn't known, a missing end date means the coverage is continuing to be in force."
@@ -284,8 +287,14 @@ public class CoverageModel  implements Serializable {
   public CoverageModel(Coverage o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     if (null != o.getPolicyHolder() ) {
     	this.policyholder_id = "policyholder" + this.id;
     	this.policyHolder = ReferenceHelper.toModel(o.getPolicyHolder(), this.policyholder_id);
@@ -299,8 +308,13 @@ public class CoverageModel  implements Serializable {
     	this.beneficiary_id = "beneficiary" + this.id;
     	this.beneficiary = ReferenceHelper.toModel(o.getBeneficiary(), this.beneficiary_id);
     }
-    this.relationship = JsonUtils.toJson(o.getRelationship());
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getRelationship() ) {
+    	this.relationship_id = "relationship" + this.id;
+    	this.relationship = CodeableConceptHelper.toModel(o.getRelationship(), this.relationship_id);
+    }
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getPayor() && !o.getPayor().isEmpty()) {
     	this.payor_id = "payor" + this.id;
     	this.payor = ReferenceHelper.toModelFromArray(o.getPayor(), this.payor_id);
@@ -320,6 +334,15 @@ public class CoverageModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -347,10 +370,10 @@ public class CoverageModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public java.util.List<ReferenceModel> getPolicyHolder() {
@@ -377,10 +400,10 @@ public class CoverageModel  implements Serializable {
   public void setBeneficiary( java.util.List<ReferenceModel> value) {
     this.beneficiary = value;
   }
-  public String getRelationship() {
+  public java.util.List<CodeableConceptModel> getRelationship() {
     return this.relationship;
   }
-  public void setRelationship( String value) {
+  public void setRelationship( java.util.List<CodeableConceptModel> value) {
     this.relationship = value;
   }
   public String getPeriod() {
@@ -487,9 +510,7 @@ public class CoverageModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("subscriberId" + "->" + this.subscriberId + "\n"); 
-     builder.append("relationship" + "->" + this.relationship + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("dependent" + "->" + this.dependent + "\n"); 
      builder.append("sequence" + "->" + this.sequence + "\n"); 

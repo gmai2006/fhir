@@ -114,9 +114,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<SearchParameter> findByContact(QueryBuilder queryBuilder) {
+  	final List<SearchParameter> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SearchParameter> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<SearchParameter> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SearchParameter> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<SearchParameter> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<SearchParameter> findByComponent(QueryBuilder queryBuilder) {
   	final List<SearchParameter> result = dao.findByComponent(queryBuilder);
     logger.info("findBycomponent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SearchParameter> findByText(QueryBuilder queryBuilder) {
+  	final List<SearchParameter> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<SearchParameter> findByMeta(QueryBuilder queryBuilder) {
+  	final List<SearchParameter> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

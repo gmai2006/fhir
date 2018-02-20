@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="encounterstatushistory")
 public class EncounterStatusHistoryModel  implements Serializable {
-	private static final long serialVersionUID = 151873631165117225L;
+	private static final long serialVersionUID = 151910893741029738L;
   /**
   * Description: "planned | arrived | triaged | in-progress | onleave | finished | cancelled +."
   */
@@ -100,9 +99,19 @@ public class EncounterStatusHistoryModel  implements Serializable {
 
   public EncounterStatusHistoryModel(EncounterStatusHistory o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.status = o.getStatus();
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getStatus() {

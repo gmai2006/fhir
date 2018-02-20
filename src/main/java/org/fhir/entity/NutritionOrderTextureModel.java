@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,24 +37,28 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionordertexture")
 public class NutritionOrderTextureModel  implements Serializable {
-	private static final long serialVersionUID = 151873631124568519L;
+	private static final long serialVersionUID = 151910893701153446L;
   /**
   * Description: "Any texture modifications (for solid foods) that should be made, e.g. easy to chew, chopped, ground, and pureed."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"modifier\"", length = 16777215)
-  private String modifier;
+  @Column(name="\"modifier_id\"")
+  private String modifier_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="modifier_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> modifier;
 
   /**
   * Description: "The food type(s) (e.g. meats, all foods)  that the texture modification applies to.  This could be all foods types."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"foodType\"", length = 16777215)
-  private String foodType;
+  @Column(name="\"foodtype_id\"")
+  private String foodtype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="foodtype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> foodType;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -101,21 +104,35 @@ public class NutritionOrderTextureModel  implements Serializable {
 
   public NutritionOrderTextureModel(NutritionOrderTexture o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.modifier = JsonUtils.toJson(o.getModifier());
-    this.foodType = JsonUtils.toJson(o.getFoodType());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getModifier() ) {
+    	this.modifier_id = "modifier" + this.parent_id;
+    	this.modifier = CodeableConceptHelper.toModel(o.getModifier(), this.modifier_id);
+    }
+    if (null != o.getFoodType() ) {
+    	this.foodtype_id = "foodtype" + this.parent_id;
+    	this.foodType = CodeableConceptHelper.toModel(o.getFoodType(), this.foodtype_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getModifier() {
+  public java.util.List<CodeableConceptModel> getModifier() {
     return this.modifier;
   }
-  public void setModifier( String value) {
+  public void setModifier( java.util.List<CodeableConceptModel> value) {
     this.modifier = value;
   }
-  public String getFoodType() {
+  public java.util.List<CodeableConceptModel> getFoodType() {
     return this.foodType;
   }
-  public void setFoodType( String value) {
+  public void setFoodType( java.util.List<CodeableConceptModel> value) {
     this.foodType = value;
   }
   public String getModifierExtension() {
@@ -147,8 +164,6 @@ public class NutritionOrderTextureModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[NutritionOrderTextureModel]:" + "\n");
-     builder.append("modifier" + "->" + this.modifier + "\n"); 
-     builder.append("foodType" + "->" + this.foodType + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

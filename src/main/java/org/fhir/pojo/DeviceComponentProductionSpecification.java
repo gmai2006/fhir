@@ -57,7 +57,9 @@ public class DeviceComponentProductionSpecification  extends BackboneElement  {
 
   public DeviceComponentProductionSpecification(DeviceComponentProductionSpecificationModel o) {
     this.id = o.getId();
-    this.specType = CodeableConceptHelper.fromJson(o.getSpecType());
+    if (null != o.getSpecType() && !o.getSpecType().isEmpty()) {
+      this.specType = new CodeableConcept(o.getSpecType().get(0));
+    }
     this.componentId = IdentifierHelper.fromJson(o.getComponentId());
     if (null != o.getProductionSpec()) {
       this.productionSpec = o.getProductionSpec();

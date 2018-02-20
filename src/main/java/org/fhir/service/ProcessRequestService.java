@@ -38,8 +38,14 @@ public interface ProcessRequestService {
   public ProcessRequest update(ProcessRequest bean);
   public void delete(ProcessRequest bean);
   public List<ProcessRequest> findByField(QueryBuilder queryBuilder);
-  public List<ProcessRequest> findByOrganization(QueryBuilder queryBuilder);
+  public List<ProcessRequest> findByTarget(QueryBuilder queryBuilder);
   public List<ProcessRequest> findByProvider(QueryBuilder queryBuilder);
+  public List<ProcessRequest> findByOrganization(QueryBuilder queryBuilder);
+  public List<ProcessRequest> findByRequest(QueryBuilder queryBuilder);
+  public List<ProcessRequest> findByResponse(QueryBuilder queryBuilder);
+  public List<ProcessRequest> findByItem(QueryBuilder queryBuilder);
+  public List<ProcessRequest> findByText(QueryBuilder queryBuilder);
+  public List<ProcessRequest> findByMeta(QueryBuilder queryBuilder);
 
 
 }

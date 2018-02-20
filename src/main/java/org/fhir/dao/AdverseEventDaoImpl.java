@@ -97,9 +97,15 @@ public class AdverseEventDaoImpl implements AdverseEventDao {
   }
 
   @Override
-  public List<AdverseEvent> findByLocation(QueryBuilder queryBuilder) {
+  public List<AdverseEvent> findByType(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from AdverseEventModel a, Reference b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from AdverseEventModel a, CodeableConcept b where a.type_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AdverseEvent> findBySubject(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AdverseEventModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -109,9 +115,51 @@ public class AdverseEventDaoImpl implements AdverseEventDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
+  public List<AdverseEvent> findByLocation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AdverseEventModel a, Reference b where a.location_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AdverseEvent> findBySeriousness(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AdverseEventModel a, CodeableConcept b where a.seriousness_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AdverseEvent> findByOutcome(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AdverseEventModel a, CodeableConcept b where a.outcome_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
   public List<AdverseEvent> findByRecorder(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from AdverseEventModel a, Reference b where a.recorder_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AdverseEvent> findByEventParticipant(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AdverseEventModel a, Reference b where a.eventParticipant_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AdverseEvent> findBySuspectEntity(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AdverseEventModel a, AdverseEventSuspectEntity b where a.suspectEntity_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AdverseEvent> findBySubjectMedicalHistory(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AdverseEventModel a, Reference b where a.subjectMedicalHistory_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AdverseEvent> findByReferenceDocument(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AdverseEventModel a, Reference b where a.referenceDocument_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
@@ -121,9 +169,15 @@ public class AdverseEventDaoImpl implements AdverseEventDao {
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<AdverseEvent> findBySubject(QueryBuilder queryBuilder) {
+  public List<AdverseEvent> findByText(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from AdverseEventModel a, Reference b where a.subject_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from AdverseEventModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AdverseEvent> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AdverseEventModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

@@ -42,5 +42,15 @@ public interface CapabilityStatementDao {
 
   public List<CapabilityStatement> findByField(QueryBuilder queryBuilder);
 
+  public List<CapabilityStatement> findByContact(QueryBuilder queryBuilder);
+  public List<CapabilityStatement> findByUseContext(QueryBuilder queryBuilder);
+  public List<CapabilityStatement> findByJurisdiction(QueryBuilder queryBuilder);
   public List<CapabilityStatement> findBySoftware(QueryBuilder queryBuilder);
+  public List<CapabilityStatement> findByImplementation(QueryBuilder queryBuilder);
+  public List<CapabilityStatement> findByProfile(QueryBuilder queryBuilder);
+  public List<CapabilityStatement> findByRest(QueryBuilder queryBuilder);
+  public List<CapabilityStatement> findByMessaging(QueryBuilder queryBuilder);
+  public List<CapabilityStatement> findByDocument(QueryBuilder queryBuilder);
+  public List<CapabilityStatement> findByText(QueryBuilder queryBuilder);
+  public List<CapabilityStatement> findByMeta(QueryBuilder queryBuilder);
 }

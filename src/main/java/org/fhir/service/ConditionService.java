@@ -38,11 +38,17 @@ public interface ConditionService {
   public Condition update(Condition bean);
   public void delete(Condition bean);
   public List<Condition> findByField(QueryBuilder queryBuilder);
-  public List<Condition> findByAsserter(QueryBuilder queryBuilder);
-  public List<Condition> findByContext(QueryBuilder queryBuilder);
-  public List<Condition> findByEvidence(QueryBuilder queryBuilder);
-  public List<Condition> findByStage(QueryBuilder queryBuilder);
+  public List<Condition> findByCategory(QueryBuilder queryBuilder);
+  public List<Condition> findBySeverity(QueryBuilder queryBuilder);
+  public List<Condition> findByCode(QueryBuilder queryBuilder);
+  public List<Condition> findByBodySite(QueryBuilder queryBuilder);
   public List<Condition> findBySubject(QueryBuilder queryBuilder);
+  public List<Condition> findByContext(QueryBuilder queryBuilder);
+  public List<Condition> findByAsserter(QueryBuilder queryBuilder);
+  public List<Condition> findByStage(QueryBuilder queryBuilder);
+  public List<Condition> findByEvidence(QueryBuilder queryBuilder);
+  public List<Condition> findByText(QueryBuilder queryBuilder);
+  public List<Condition> findByMeta(QueryBuilder queryBuilder);
 
 
 }

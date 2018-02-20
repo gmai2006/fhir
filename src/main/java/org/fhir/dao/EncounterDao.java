@@ -42,9 +42,23 @@ public interface EncounterDao {
 
   public List<Encounter> findByField(QueryBuilder queryBuilder);
 
-  public List<Encounter> findByAppointment(QueryBuilder queryBuilder);
-  public List<Encounter> findByDiagnosis(QueryBuilder queryBuilder);
-  public List<Encounter> findByLocation(QueryBuilder queryBuilder);
-  public List<Encounter> findByParticipant(QueryBuilder queryBuilder);
+  public List<Encounter> findByStatusHistory(QueryBuilder queryBuilder);
+  public List<Encounter> findByFHIRclass(QueryBuilder queryBuilder);
+  public List<Encounter> findByClassHistory(QueryBuilder queryBuilder);
+  public List<Encounter> findByType(QueryBuilder queryBuilder);
+  public List<Encounter> findByPriority(QueryBuilder queryBuilder);
   public List<Encounter> findBySubject(QueryBuilder queryBuilder);
+  public List<Encounter> findByEpisodeOfCare(QueryBuilder queryBuilder);
+  public List<Encounter> findByIncomingReferral(QueryBuilder queryBuilder);
+  public List<Encounter> findByParticipant(QueryBuilder queryBuilder);
+  public List<Encounter> findByAppointment(QueryBuilder queryBuilder);
+  public List<Encounter> findByReason(QueryBuilder queryBuilder);
+  public List<Encounter> findByDiagnosis(QueryBuilder queryBuilder);
+  public List<Encounter> findByAccount(QueryBuilder queryBuilder);
+  public List<Encounter> findByHospitalization(QueryBuilder queryBuilder);
+  public List<Encounter> findByLocation(QueryBuilder queryBuilder);
+  public List<Encounter> findByServiceProvider(QueryBuilder queryBuilder);
+  public List<Encounter> findByPartOf(QueryBuilder queryBuilder);
+  public List<Encounter> findByText(QueryBuilder queryBuilder);
+  public List<Encounter> findByMeta(QueryBuilder queryBuilder);
 }

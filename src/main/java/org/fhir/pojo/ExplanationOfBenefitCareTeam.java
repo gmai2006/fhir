@@ -83,8 +83,12 @@ public class ExplanationOfBenefitCareTeam  extends BackboneElement  {
     if (null != o.getResponsible()) {
       this.responsible = o.getResponsible();
     }
-    this.role = CodeableConceptHelper.fromJson(o.getRole());
-    this.qualification = CodeableConceptHelper.fromJson(o.getQualification());
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+      this.role = new CodeableConcept(o.getRole().get(0));
+    }
+    if (null != o.getQualification() && !o.getQualification().isEmpty()) {
+      this.qualification = new CodeableConcept(o.getQualification().get(0));
+    }
   }
 
   public void setSequence( Float value) {

@@ -42,6 +42,11 @@ public interface EnrollmentRequestDao {
 
   public List<EnrollmentRequest> findByField(QueryBuilder queryBuilder);
 
+  public List<EnrollmentRequest> findByInsurer(QueryBuilder queryBuilder);
+  public List<EnrollmentRequest> findByProvider(QueryBuilder queryBuilder);
   public List<EnrollmentRequest> findByOrganization(QueryBuilder queryBuilder);
   public List<EnrollmentRequest> findBySubject(QueryBuilder queryBuilder);
+  public List<EnrollmentRequest> findByCoverage(QueryBuilder queryBuilder);
+  public List<EnrollmentRequest> findByText(QueryBuilder queryBuilder);
+  public List<EnrollmentRequest> findByMeta(QueryBuilder queryBuilder);
 }

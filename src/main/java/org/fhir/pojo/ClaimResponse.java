@@ -199,11 +199,15 @@ public class ClaimResponse  extends DomainResource  {
     if (null != o.getRequest() && !o.getRequest().isEmpty()) {
       this.request = new Reference(o.getRequest().get(0));
     }
-    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getOutcome() && !o.getOutcome().isEmpty()) {
+      this.outcome = new CodeableConcept(o.getOutcome().get(0));
+    }
     if (null != o.getDisposition()) {
       this.disposition = o.getDisposition();
     }
-    this.payeeType = CodeableConceptHelper.fromJson(o.getPayeeType());
+    if (null != o.getPayeeType() && !o.getPayeeType().isEmpty()) {
+      this.payeeType = new CodeableConcept(o.getPayeeType().get(0));
+    }
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item = ClaimResponseItemHelper.fromArray2Array(o.getItem());
     }
@@ -225,8 +229,12 @@ public class ClaimResponse  extends DomainResource  {
     if (null != o.getPayment() && !o.getPayment().isEmpty()) {
       this.payment = new ClaimResponsePayment(o.getPayment().get(0));
     }
-    this.reserved = CodingHelper.fromJson(o.getReserved());
-    this.form = CodeableConceptHelper.fromJson(o.getForm());
+    if (null != o.getReserved() && !o.getReserved().isEmpty()) {
+      this.reserved = new Coding(o.getReserved().get(0));
+    }
+    if (null != o.getForm() && !o.getForm().isEmpty()) {
+      this.form = new CodeableConcept(o.getForm().get(0));
+    }
     if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
     	this.processNote = ClaimResponseProcessNoteHelper.fromArray2Array(o.getProcessNote());
     }

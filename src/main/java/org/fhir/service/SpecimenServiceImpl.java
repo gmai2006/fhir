@@ -114,9 +114,15 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Specimen> findByContainer(QueryBuilder queryBuilder) {
-  	final List<Specimen> result = dao.findByContainer(queryBuilder);
-    logger.info("findBycontainer - exited - return value={} result ");
+  public List<Specimen> findByType(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Specimen> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,9 +132,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Specimen> findBySubject(QueryBuilder queryBuilder) {
-  	final List<Specimen> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<Specimen> findByRequest(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findByRequest(queryBuilder);
+    logger.info("findByrequest - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Specimen> findByCollection(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findByCollection(queryBuilder);
+    logger.info("findBycollection - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Specimen> findByProcessing(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findByProcessing(queryBuilder);
+    logger.info("findByprocessing - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Specimen> findByContainer(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findByContainer(queryBuilder);
+    logger.info("findBycontainer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Specimen> findByText(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Specimen> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Specimen> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

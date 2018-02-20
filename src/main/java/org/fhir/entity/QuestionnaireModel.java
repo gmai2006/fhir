@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="questionnaire")
 public class QuestionnaireModel  implements Serializable {
-	private static final long serialVersionUID = 151873631190760072L;
+	private static final long serialVersionUID = 151910893767747935L;
   /**
   * Description: "This is a Questionnaire resource"
   */
@@ -165,12 +164,14 @@ public class QuestionnaireModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the questionnaire is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
@@ -192,12 +193,14 @@ public class QuestionnaireModel  implements Serializable {
 
   /**
   * Description: "An identifier for this question or group of questions in a particular terminology such as LOINC."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> code;
 
   /**
   * Description: "The types of subjects that can be the subject of responses created for the questionnaire."
@@ -309,6 +312,9 @@ public class QuestionnaireModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.url = o.getUrl();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.version = o.getVersion();
     this.name = o.getName();
     this.title = o.getTitle();
@@ -320,17 +326,27 @@ public class QuestionnaireModel  implements Serializable {
     this.purpose = o.getPurpose();
     this.approvalDate = o.getApprovalDate();
     this.lastReviewDate = o.getLastReviewDate();
-    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
+    if (null != o.getEffectivePeriod()) {
+    	this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
+    }
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
+    }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
     }
     if (null != o.getContact() && !o.getContact().isEmpty()) {
     	this.contact_id = "contact" + this.id;
     	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
     }
     this.copyright = o.getCopyright();
-    this.subjectType = org.fhir.utils.JsonUtils.write2String(o.getSubjectType());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodingHelper.toModelFromArray(o.getCode(), this.code_id);
+    }
+    this.subjectType = org.fhir.utils.JsonUtils.toJson(o.getSubjectType());
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item_id = "item" + this.id;
     	this.item = QuestionnaireItemHelper.toModelFromArray(o.getItem(), this.item_id);
@@ -338,6 +354,15 @@ public class QuestionnaireModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -443,10 +468,10 @@ public class QuestionnaireModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public java.util.List<ContactDetailModel> getContact() {
@@ -461,10 +486,10 @@ public class QuestionnaireModel  implements Serializable {
   public void setCopyright( String value) {
     this.copyright = value;
   }
-  public String getCode() {
+  public java.util.List<CodingModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodingModel> value) {
     this.code = value;
   }
   public String getSubjectType() {
@@ -547,9 +572,7 @@ public class QuestionnaireModel  implements Serializable {
      builder.append("approvalDate" + "->" + this.approvalDate + "\n"); 
      builder.append("lastReviewDate" + "->" + this.lastReviewDate + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("subjectType" + "->" + this.subjectType + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

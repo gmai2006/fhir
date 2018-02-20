@@ -48,7 +48,9 @@ public class ClinicalImpressionInvestigation  extends BackboneElement  {
 
   public ClinicalImpressionInvestigation(ClinicalImpressionInvestigationModel o) {
     this.id = o.getId();
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item = ReferenceHelper.fromArray2Array(o.getItem());
     }

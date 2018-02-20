@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="bundleresponse")
 public class BundleResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151873631176951765L;
+	private static final long serialVersionUID = 151910893753750026L;
   /**
   * Description: "The status code returned by processing this entry. The status SHALL start with a 3 digit HTTP code (e.g. 404) and may contain the standard HTTP description associated with the status code."
   */
@@ -120,12 +119,22 @@ public class BundleResponseModel  implements Serializable {
 
   public BundleResponseModel(BundleResponse o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.status = o.getStatus();
     this.location = o.getLocation();
     this.etag = o.getEtag();
     this.lastModified = o.getLastModified();
-    this.outcome = JsonUtils.toJson(o.getOutcome());
+    if (null != o.getOutcome()) {
+    	this.outcome = JsonUtils.toJson(o.getOutcome());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getStatus() {

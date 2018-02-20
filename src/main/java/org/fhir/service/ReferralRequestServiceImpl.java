@@ -114,21 +114,15 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<ReferralRequest> findByContext(QueryBuilder queryBuilder) {
-  	final List<ReferralRequest> result = dao.findByContext(queryBuilder);
-    logger.info("findBycontext - exited - return value={} result ");
-    return result;
-  }
-  @Override
   public List<ReferralRequest> findByDefinition(QueryBuilder queryBuilder) {
   	final List<ReferralRequest> result = dao.findByDefinition(queryBuilder);
     logger.info("findBydefinition - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<ReferralRequest> findByRecipient(QueryBuilder queryBuilder) {
-  	final List<ReferralRequest> result = dao.findByRecipient(queryBuilder);
-    logger.info("findByrecipient - exited - return value={} result ");
+  public List<ReferralRequest> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
     return result;
   }
   @Override
@@ -138,15 +132,81 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<ReferralRequest> findByRequester(QueryBuilder queryBuilder) {
-  	final List<ReferralRequest> result = dao.findByRequester(queryBuilder);
-    logger.info("findByrequester - exited - return value={} result ");
+  public List<ReferralRequest> findByType(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByServiceRequested(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByServiceRequested(queryBuilder);
+    logger.info("findByserviceRequested - exited - return value={} result ");
     return result;
   }
   @Override
   public List<ReferralRequest> findBySubject(QueryBuilder queryBuilder) {
   	final List<ReferralRequest> result = dao.findBySubject(queryBuilder);
     logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByContext(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByRequester(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByRequester(queryBuilder);
+    logger.info("findByrequester - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findBySpecialty(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findBySpecialty(queryBuilder);
+    logger.info("findByspecialty - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByRecipient(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByRecipient(queryBuilder);
+    logger.info("findByrecipient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByReasonCode(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByReasonCode(queryBuilder);
+    logger.info("findByreasonCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByReasonReference(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByReasonReference(queryBuilder);
+    logger.info("findByreasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findBySupportingInfo(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findBySupportingInfo(queryBuilder);
+    logger.info("findBysupportingInfo - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByRelevantHistory(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByRelevantHistory(queryBuilder);
+    logger.info("findByrelevantHistory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByText(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ReferralRequest> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ReferralRequest> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

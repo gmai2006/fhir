@@ -42,6 +42,14 @@ public interface LocationDao {
 
   public List<Location> findByField(QueryBuilder queryBuilder);
 
+  public List<Location> findByOperationalStatus(QueryBuilder queryBuilder);
+  public List<Location> findByType(QueryBuilder queryBuilder);
   public List<Location> findByAddress(QueryBuilder queryBuilder);
+  public List<Location> findByPhysicalType(QueryBuilder queryBuilder);
+  public List<Location> findByPosition(QueryBuilder queryBuilder);
+  public List<Location> findByManagingOrganization(QueryBuilder queryBuilder);
+  public List<Location> findByPartOf(QueryBuilder queryBuilder);
   public List<Location> findByEndpoint(QueryBuilder queryBuilder);
+  public List<Location> findByText(QueryBuilder queryBuilder);
+  public List<Location> findByMeta(QueryBuilder queryBuilder);
 }

@@ -75,7 +75,9 @@ public class ExplanationOfBenefitProcedure  extends BackboneElement  {
     if (null != o.getDate()) {
       this.date = o.getDate();
     }
-    this.procedureCodeableConcept = CodeableConceptHelper.fromJson(o.getProcedureCodeableConcept());
+    if (null != o.getProcedureCodeableConcept() && !o.getProcedureCodeableConcept().isEmpty()) {
+      this.procedureCodeableConcept = new CodeableConcept(o.getProcedureCodeableConcept().get(0));
+    }
     if (null != o.getProcedureReference() && !o.getProcedureReference().isEmpty()) {
       this.procedureReference = new Reference(o.getProcedureReference().get(0));
     }

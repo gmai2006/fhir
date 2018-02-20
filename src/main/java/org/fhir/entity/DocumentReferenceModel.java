@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="documentreference")
 public class DocumentReferenceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631181289909L;
+	private static final long serialVersionUID = 151910893757987973L;
   /**
   * Description: "This is a DocumentReference resource"
   */
@@ -82,22 +81,25 @@ public class DocumentReferenceModel  implements Serializable {
 
   /**
   * Description: "Specifies the particular kind of document referenced  (e.g. History and Physical, Discharge Summary, Progress Note). This usually equates to the purpose of making the document referenced."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "A categorization for the type of document referenced - helps for indexing and searching. This may be implied by or derived from the code specified in the DocumentReference.type."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"FHIRclass\"", length = 16777215)
-  private String FHIRclass;
+  @Column(name="\"fhirclass_id\"")
+  private String fhirclass_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> FHIRclass;
 
   /**
   * Description: "Who or what the document is about. The document can be about a person, (patient or healthcare practitioner), a device (e.g. a machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure)."
@@ -178,12 +180,14 @@ public class DocumentReferenceModel  implements Serializable {
 
   /**
   * Description: "A set of Security-Tag codes specifying the level of privacy/security of the Document. Note that DocumentReference.meta.security contains the security labels of the \"reference\" to the document, while DocumentReference.securityLabel contains a snapshot of the security labels on the document the reference refers to."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"securityLabel\"", length = 16777215)
-  private String securityLabel;
+  @Column(name="\"securitylabel_id\"")
+  private String securitylabel_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> securityLabel;
 
   /**
   * Description: "The document and format referenced. There may be multiple content element repetitions, each with a different format."
@@ -298,11 +302,22 @@ public class DocumentReferenceModel  implements Serializable {
   public DocumentReferenceModel(DocumentReference o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.masterIdentifier = JsonUtils.toJson(o.getMasterIdentifier());
+    if (null != o.getMasterIdentifier()) {
+    	this.masterIdentifier = JsonUtils.toJson(o.getMasterIdentifier());
+    }
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     this.docStatus = o.getDocStatus();
-    this.type = JsonUtils.toJson(o.getType());
-    this.FHIRclass = JsonUtils.toJson(o.getFHIRclass());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getFHIRclass() ) {
+    	this.fhirclass_id = "fhirclass" + this.id;
+    	this.FHIRclass = CodeableConceptHelper.toModel(o.getFHIRclass(), this.fhirclass_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -326,6 +341,10 @@ public class DocumentReferenceModel  implements Serializable {
     	this.relatesTo = DocumentReferenceRelatesToHelper.toModelFromArray(o.getRelatesTo(), this.relatesto_id);
     }
     this.description = o.getDescription();
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securitylabel_id = "securitylabel" + this.id;
+    	this.securityLabel = CodeableConceptHelper.toModelFromArray(o.getSecurityLabel(), this.securitylabel_id);
+    }
     if (null != o.getContent() && !o.getContent().isEmpty()) {
     	this.content_id = "content" + this.id;
     	this.content = DocumentReferenceContentHelper.toModelFromArray(o.getContent(), this.content_id);
@@ -337,6 +356,15 @@ public class DocumentReferenceModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -376,16 +404,16 @@ public class DocumentReferenceModel  implements Serializable {
   public void setDocStatus( String value) {
     this.docStatus = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getFHIRclass() {
+  public java.util.List<CodeableConceptModel> getFHIRclass() {
     return this.FHIRclass;
   }
-  public void setFHIRclass( String value) {
+  public void setFHIRclass( java.util.List<CodeableConceptModel> value) {
     this.FHIRclass = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -436,10 +464,10 @@ public class DocumentReferenceModel  implements Serializable {
   public void setDescription( String value) {
     this.description = value;
   }
-  public String getSecurityLabel() {
+  public java.util.List<CodeableConceptModel> getSecurityLabel() {
     return this.securityLabel;
   }
-  public void setSecurityLabel( String value) {
+  public void setSecurityLabel( java.util.List<CodeableConceptModel> value) {
     this.securityLabel = value;
   }
   public java.util.List<DocumentReferenceContentModel> getContent() {
@@ -512,12 +540,9 @@ public class DocumentReferenceModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("docStatus" + "->" + this.docStatus + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("FHIRclass" + "->" + this.FHIRclass + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
      builder.append("indexed" + "->" + this.indexed + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

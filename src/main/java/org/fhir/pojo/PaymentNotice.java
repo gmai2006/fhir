@@ -138,7 +138,9 @@ public class PaymentNotice  extends DomainResource  {
     if (null != o.getOrganization() && !o.getOrganization().isEmpty()) {
       this.organization = new Reference(o.getOrganization().get(0));
     }
-    this.paymentStatus = CodeableConceptHelper.fromJson(o.getPaymentStatus());
+    if (null != o.getPaymentStatus() && !o.getPaymentStatus().isEmpty()) {
+      this.paymentStatus = new CodeableConcept(o.getPaymentStatus().get(0));
+    }
   }
 
   public void setResourceType( String value) {

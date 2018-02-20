@@ -100,7 +100,15 @@ public class Schedule  extends DomainResource  {
     if (null != o.getActive()) {
       this.active = o.getActive();
     }
-    this.serviceCategory = CodeableConceptHelper.fromJson(o.getServiceCategory());
+    if (null != o.getServiceCategory() && !o.getServiceCategory().isEmpty()) {
+      this.serviceCategory = new CodeableConcept(o.getServiceCategory().get(0));
+    }
+    if (null != o.getServiceType() && !o.getServiceType().isEmpty()) {
+    	this.serviceType = CodeableConceptHelper.fromArray2Array(o.getServiceType());
+    }
+    if (null != o.getSpecialty() && !o.getSpecialty().isEmpty()) {
+    	this.specialty = CodeableConceptHelper.fromArray2Array(o.getSpecialty());
+    }
     if (null != o.getActor() && !o.getActor().isEmpty()) {
     	this.actor = ReferenceHelper.fromArray2Array(o.getActor());
     }

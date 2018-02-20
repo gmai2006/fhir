@@ -69,7 +69,9 @@ public class ListEntry  extends BackboneElement  {
 
   public ListEntry(ListEntryModel o) {
     this.id = o.getId();
-    this.flag = CodeableConceptHelper.fromJson(o.getFlag());
+    if (null != o.getFlag() && !o.getFlag().isEmpty()) {
+      this.flag = new CodeableConcept(o.getFlag().get(0));
+    }
     if (null != o.getDeleted()) {
       this.deleted = o.getDeleted();
     }

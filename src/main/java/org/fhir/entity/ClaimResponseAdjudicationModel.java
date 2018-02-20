@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,25 +37,28 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claimresponseadjudication")
 public class ClaimResponseAdjudicationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631173134711L;
+	private static final long serialVersionUID = 151910893748766091L;
   /**
   * Description: "Code indicating: Co-Pay, deductible, eligible, benefit, tax, etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "Adjudication reason such as limit reached."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reason;
 
   /**
   * Description: "Monetary amount associated with the code."
@@ -121,26 +123,40 @@ public class ClaimResponseAdjudicationModel  implements Serializable {
 
   public ClaimResponseAdjudicationModel(ClaimResponseAdjudication o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.category = JsonUtils.toJson(o.getCategory());
-    this.reason = JsonUtils.toJson(o.getReason());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.parent_id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
+    if (null != o.getReason() ) {
+    	this.reason_id = "reason" + this.parent_id;
+    	this.reason = CodeableConceptHelper.toModel(o.getReason(), this.reason_id);
+    }
     if (null != o.getAmount() ) {
     	this.amount_id = "amount" + this.parent_id;
     	this.amount = MoneyHelper.toModel(o.getAmount(), this.amount_id);
     }
     this.value = o.getValue();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getReason() {
+  public java.util.List<CodeableConceptModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodeableConceptModel> value) {
     this.reason = value;
   }
   public java.util.List<MoneyModel> getAmount() {
@@ -184,8 +200,6 @@ public class ClaimResponseAdjudicationModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClaimResponseAdjudicationModel]:" + "\n");
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("value" + "->" + this.value + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

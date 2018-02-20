@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claimrelated")
 public class ClaimRelatedModel  implements Serializable {
-	private static final long serialVersionUID = 151873631181083269L;
+	private static final long serialVersionUID = 151910893757717109L;
   /**
   * Description: "Other claims which are related to this claim such as prior claim versions or for related services."
   */
@@ -52,12 +51,14 @@ public class ClaimRelatedModel  implements Serializable {
 
   /**
   * Description: "For example prior or umbrella."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"relationship\"", length = 16777215)
-  private String relationship;
+  @Column(name="\"relationship_id\"")
+  private String relationship_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="relationship_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> relationship;
 
   /**
   * Description: "An alternate organizational reference to the case or file to which this particular claim pertains - eg Property/Casualy insurer claim # or Workers Compensation case # ."
@@ -112,13 +113,26 @@ public class ClaimRelatedModel  implements Serializable {
 
   public ClaimRelatedModel(ClaimRelated o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getClaim() ) {
     	this.claim_id = "claim" + this.parent_id;
     	this.claim = ReferenceHelper.toModel(o.getClaim(), this.claim_id);
     }
-    this.relationship = JsonUtils.toJson(o.getRelationship());
-    this.reference = JsonUtils.toJson(o.getReference());
+    if (null != o.getRelationship() ) {
+    	this.relationship_id = "relationship" + this.parent_id;
+    	this.relationship = CodeableConceptHelper.toModel(o.getRelationship(), this.relationship_id);
+    }
+    if (null != o.getReference()) {
+    	this.reference = JsonUtils.toJson(o.getReference());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public java.util.List<ReferenceModel> getClaim() {
@@ -127,10 +141,10 @@ public class ClaimRelatedModel  implements Serializable {
   public void setClaim( java.util.List<ReferenceModel> value) {
     this.claim = value;
   }
-  public String getRelationship() {
+  public java.util.List<CodeableConceptModel> getRelationship() {
     return this.relationship;
   }
-  public void setRelationship( String value) {
+  public void setRelationship( java.util.List<CodeableConceptModel> value) {
     this.relationship = value;
   }
   public String getReference() {
@@ -168,7 +182,6 @@ public class ClaimRelatedModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClaimRelatedModel]:" + "\n");
-     builder.append("relationship" + "->" + this.relationship + "\n"); 
      builder.append("reference" + "->" + this.reference + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

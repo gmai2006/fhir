@@ -148,7 +148,9 @@ public class EligibilityResponse  extends DomainResource  {
     if (null != o.getRequest() && !o.getRequest().isEmpty()) {
       this.request = new Reference(o.getRequest().get(0));
     }
-    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getOutcome() && !o.getOutcome().isEmpty()) {
+      this.outcome = new CodeableConcept(o.getOutcome().get(0));
+    }
     if (null != o.getDisposition()) {
       this.disposition = o.getDisposition();
     }
@@ -161,7 +163,9 @@ public class EligibilityResponse  extends DomainResource  {
     if (null != o.getInsurance() && !o.getInsurance().isEmpty()) {
     	this.insurance = EligibilityResponseInsuranceHelper.fromArray2Array(o.getInsurance());
     }
-    this.form = CodeableConceptHelper.fromJson(o.getForm());
+    if (null != o.getForm() && !o.getForm().isEmpty()) {
+      this.form = new CodeableConcept(o.getForm().get(0));
+    }
     if (null != o.getError() && !o.getError().isEmpty()) {
     	this.error = EligibilityResponseErrorHelper.fromArray2Array(o.getError());
     }

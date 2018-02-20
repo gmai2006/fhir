@@ -42,4 +42,11 @@ public interface QuestionnaireDao {
 
   public List<Questionnaire> findByField(QueryBuilder queryBuilder);
 
+  public List<Questionnaire> findByUseContext(QueryBuilder queryBuilder);
+  public List<Questionnaire> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<Questionnaire> findByContact(QueryBuilder queryBuilder);
+  public List<Questionnaire> findByCode(QueryBuilder queryBuilder);
+  public List<Questionnaire> findByItem(QueryBuilder queryBuilder);
+  public List<Questionnaire> findByText(QueryBuilder queryBuilder);
+  public List<Questionnaire> findByMeta(QueryBuilder queryBuilder);
 }

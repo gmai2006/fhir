@@ -99,6 +99,21 @@ public class ConsentExcept  extends BackboneElement  {
     if (null != o.getActor() && !o.getActor().isEmpty()) {
     	this.actor = ConsentActor1Helper.fromArray2Array(o.getActor());
     }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action = CodeableConceptHelper.fromArray2Array(o.getAction());
+    }
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securityLabel = CodingHelper.fromArray2Array(o.getSecurityLabel());
+    }
+    if (null != o.getPurpose() && !o.getPurpose().isEmpty()) {
+    	this.purpose = CodingHelper.fromArray2Array(o.getPurpose());
+    }
+    if (null != o.getFHIRclass() && !o.getFHIRclass().isEmpty()) {
+    	this.FHIRclass = CodingHelper.fromArray2Array(o.getFHIRclass());
+    }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code = CodingHelper.fromArray2Array(o.getCode());
+    }
     this.dataPeriod = PeriodHelper.fromJson(o.getDataPeriod());
     if (null != o.getData() && !o.getData().isEmpty()) {
     	this.data = ConsentData1Helper.fromArray2Array(o.getData());

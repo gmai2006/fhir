@@ -114,9 +114,21 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<ChargeItem> findByAccount(QueryBuilder queryBuilder) {
-  	final List<ChargeItem> result = dao.findByAccount(queryBuilder);
-    logger.info("findByaccount - exited - return value={} result ");
+  public List<ChargeItem> findByPartOf(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByPartOf(queryBuilder);
+    logger.info("findBypartOf - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByCode(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findBySubject(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,9 +138,21 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<ChargeItem> findByEnterer(QueryBuilder queryBuilder) {
-  	final List<ChargeItem> result = dao.findByEnterer(queryBuilder);
-    logger.info("findByenterer - exited - return value={} result ");
+  public List<ChargeItem> findByParticipant(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByParticipant(queryBuilder);
+    logger.info("findByparticipant - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByPerformingOrganization(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByPerformingOrganization(queryBuilder);
+    logger.info("findByperformingOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByRequestingOrganization(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByRequestingOrganization(queryBuilder);
+    logger.info("findByrequestingOrganization - exited - return value={} result ");
     return result;
   }
   @Override
@@ -138,15 +162,57 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<ChargeItem> findByBodysite(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByBodysite(queryBuilder);
+    logger.info("findBybodysite - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByPriceOverride(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByPriceOverride(queryBuilder);
+    logger.info("findBypriceOverride - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByEnterer(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByEnterer(queryBuilder);
+    logger.info("findByenterer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByReason(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByReason(queryBuilder);
+    logger.info("findByreason - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<ChargeItem> findByService(QueryBuilder queryBuilder) {
   	final List<ChargeItem> result = dao.findByService(queryBuilder);
     logger.info("findByservice - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<ChargeItem> findBySubject(QueryBuilder queryBuilder) {
-  	final List<ChargeItem> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<ChargeItem> findByAccount(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByAccount(queryBuilder);
+    logger.info("findByaccount - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findBySupportingInformation(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findBySupportingInformation(queryBuilder);
+    logger.info("findBysupportingInformation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByText(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ChargeItem> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ChargeItem> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

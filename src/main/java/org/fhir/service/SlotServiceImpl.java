@@ -114,9 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Slot> findByServiceCategory(QueryBuilder queryBuilder) {
+  	final List<Slot> result = dao.findByServiceCategory(queryBuilder);
+    logger.info("findByserviceCategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Slot> findByServiceType(QueryBuilder queryBuilder) {
+  	final List<Slot> result = dao.findByServiceType(queryBuilder);
+    logger.info("findByserviceType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Slot> findBySpecialty(QueryBuilder queryBuilder) {
+  	final List<Slot> result = dao.findBySpecialty(queryBuilder);
+    logger.info("findByspecialty - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Slot> findByAppointmentType(QueryBuilder queryBuilder) {
+  	final List<Slot> result = dao.findByAppointmentType(queryBuilder);
+    logger.info("findByappointmentType - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Slot> findBySchedule(QueryBuilder queryBuilder) {
   	final List<Slot> result = dao.findBySchedule(queryBuilder);
     logger.info("findByschedule - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Slot> findByText(QueryBuilder queryBuilder) {
+  	final List<Slot> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Slot> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Slot> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

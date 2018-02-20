@@ -64,7 +64,9 @@ public class MeasureReportPopulation1  extends BackboneElement  {
   public MeasureReportPopulation1(MeasureReportPopulation1Model o) {
     this.id = o.getId();
     this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getCount()) {
       this.count = o.getCount();
     }

@@ -114,15 +114,63 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Location> findByOperationalStatus(QueryBuilder queryBuilder) {
+  	final List<Location> result = dao.findByOperationalStatus(queryBuilder);
+    logger.info("findByoperationalStatus - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Location> findByType(QueryBuilder queryBuilder) {
+  	final List<Location> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Location> findByAddress(QueryBuilder queryBuilder) {
   	final List<Location> result = dao.findByAddress(queryBuilder);
     logger.info("findByaddress - exited - return value={} result ");
     return result;
   }
   @Override
+  public List<Location> findByPhysicalType(QueryBuilder queryBuilder) {
+  	final List<Location> result = dao.findByPhysicalType(queryBuilder);
+    logger.info("findByphysicalType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Location> findByPosition(QueryBuilder queryBuilder) {
+  	final List<Location> result = dao.findByPosition(queryBuilder);
+    logger.info("findByposition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Location> findByManagingOrganization(QueryBuilder queryBuilder) {
+  	final List<Location> result = dao.findByManagingOrganization(queryBuilder);
+    logger.info("findBymanagingOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Location> findByPartOf(QueryBuilder queryBuilder) {
+  	final List<Location> result = dao.findByPartOf(queryBuilder);
+    logger.info("findBypartOf - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Location> findByEndpoint(QueryBuilder queryBuilder) {
   	final List<Location> result = dao.findByEndpoint(queryBuilder);
     logger.info("findByendpoint - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Location> findByText(QueryBuilder queryBuilder) {
+  	final List<Location> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Location> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Location> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

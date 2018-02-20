@@ -42,9 +42,27 @@ public interface ProcedureDao {
 
   public List<Procedure> findByField(QueryBuilder queryBuilder);
 
-  public List<Procedure> findByContext(QueryBuilder queryBuilder);
   public List<Procedure> findByDefinition(QueryBuilder queryBuilder);
-  public List<Procedure> findByLocation(QueryBuilder queryBuilder);
-  public List<Procedure> findByPerformer(QueryBuilder queryBuilder);
+  public List<Procedure> findByBasedOn(QueryBuilder queryBuilder);
+  public List<Procedure> findByPartOf(QueryBuilder queryBuilder);
+  public List<Procedure> findByNotDoneReason(QueryBuilder queryBuilder);
+  public List<Procedure> findByCategory(QueryBuilder queryBuilder);
+  public List<Procedure> findByCode(QueryBuilder queryBuilder);
   public List<Procedure> findBySubject(QueryBuilder queryBuilder);
+  public List<Procedure> findByContext(QueryBuilder queryBuilder);
+  public List<Procedure> findByPerformer(QueryBuilder queryBuilder);
+  public List<Procedure> findByLocation(QueryBuilder queryBuilder);
+  public List<Procedure> findByReasonCode(QueryBuilder queryBuilder);
+  public List<Procedure> findByReasonReference(QueryBuilder queryBuilder);
+  public List<Procedure> findByBodySite(QueryBuilder queryBuilder);
+  public List<Procedure> findByOutcome(QueryBuilder queryBuilder);
+  public List<Procedure> findByReport(QueryBuilder queryBuilder);
+  public List<Procedure> findByComplication(QueryBuilder queryBuilder);
+  public List<Procedure> findByComplicationDetail(QueryBuilder queryBuilder);
+  public List<Procedure> findByFollowUp(QueryBuilder queryBuilder);
+  public List<Procedure> findByFocalDevice(QueryBuilder queryBuilder);
+  public List<Procedure> findByUsedReference(QueryBuilder queryBuilder);
+  public List<Procedure> findByUsedCode(QueryBuilder queryBuilder);
+  public List<Procedure> findByText(QueryBuilder queryBuilder);
+  public List<Procedure> findByMeta(QueryBuilder queryBuilder);
 }

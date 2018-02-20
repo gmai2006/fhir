@@ -102,6 +102,24 @@ public class ImmunizationRecommendationDaoImpl implements ImmunizationRecommenda
   	final String queryStr = "select a from ImmunizationRecommendationModel a, Reference b where a.patient_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
+  @Override
+  public List<ImmunizationRecommendation> findByRecommendation(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImmunizationRecommendationModel a, ImmunizationRecommendationRecommendation b where a.recommendation_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ImmunizationRecommendation> findByText(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImmunizationRecommendationModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<ImmunizationRecommendation> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from ImmunizationRecommendationModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
 
   @Override
   public List<ImmunizationRecommendation> findByField(QueryBuilder queryBuilder) {

@@ -83,8 +83,12 @@ public class GroupCharacteristic  extends BackboneElement  {
 
   public GroupCharacteristic(GroupCharacteristicModel o) {
     this.id = o.getId();
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
-    this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
+    if (null != o.getValueCodeableConcept() && !o.getValueCodeableConcept().isEmpty()) {
+      this.valueCodeableConcept = new CodeableConcept(o.getValueCodeableConcept().get(0));
+    }
     if (null != o.getValueBoolean()) {
       this.valueBoolean = o.getValueBoolean();
     }

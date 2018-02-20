@@ -132,7 +132,9 @@ public class DetectedIssue  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
     if (null != o.getSeverity()) {
       this.severity = o.getSeverity();
     }

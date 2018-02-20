@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="referralrequest")
 public class ReferralRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151873631168468032L;
+	private static final long serialVersionUID = 151910893744028188L;
   /**
   * Description: "This is a ReferralRequest resource"
   */
@@ -116,12 +115,14 @@ public class ReferralRequestModel  implements Serializable {
 
   /**
   * Description: "An indication of the type of referral (or where applicable the type of transfer of care) request."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "An indication of the urgency of referral (or where applicable the type of transfer of care) request."
@@ -133,12 +134,14 @@ public class ReferralRequestModel  implements Serializable {
 
   /**
   * Description: "The service(s) that is/are requested to be provided to the patient.  For example: cardiac pacemaker insertion."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"serviceRequested\"", length = 16777215)
-  private String serviceRequested;
+  @Column(name="\"servicerequested_id\"")
+  private String servicerequested_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="servicerequested_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> serviceRequested;
 
   /**
   * Description: "The patient who is the subject of a referral or transfer of care request."
@@ -200,12 +203,14 @@ public class ReferralRequestModel  implements Serializable {
 
   /**
   * Description: "Indication of the clinical domain or discipline to which the referral or transfer of care request is sent.  For example: Cardiology Gastroenterology Diabetology."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"specialty\"", length = 16777215)
-  private String specialty;
+  @Column(name="\"specialty_id\"")
+  private String specialty_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> specialty;
 
   /**
   * Description: "The healthcare provider(s) or provider organization(s) who/which is to receive the referral/transfer of care request."
@@ -220,12 +225,14 @@ public class ReferralRequestModel  implements Serializable {
 
   /**
   * Description: "Description of clinical condition indicating why referral/transfer of care is requested.  For example:  Pathological Anomalies, Disabled (physical or mental),  Behavioral Management."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonCode\"", length = 16777215)
-  private String reasonCode;
+  @Column(name="\"reasoncode_id\"")
+  private String reasoncode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonCode;
 
   /**
   * Description: "Indicates another resource whose existence justifies this request."
@@ -367,6 +374,9 @@ public class ReferralRequestModel  implements Serializable {
   public ReferralRequestModel(ReferralRequest o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getDefinition() && !o.getDefinition().isEmpty()) {
     	this.definition_id = "definition" + this.id;
     	this.definition = ReferenceHelper.toModelFromArray(o.getDefinition(), this.definition_id);
@@ -379,11 +389,20 @@ public class ReferralRequestModel  implements Serializable {
     	this.replaces_id = "replaces" + this.id;
     	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
     }
-    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
+    if (null != o.getGroupIdentifier()) {
+    	this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
+    }
     this.status = o.getStatus();
     this.intent = o.getIntent();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     this.priority = o.getPriority();
+    if (null != o.getServiceRequested() && !o.getServiceRequested().isEmpty()) {
+    	this.servicerequested_id = "servicerequested" + this.id;
+    	this.serviceRequested = CodeableConceptHelper.toModelFromArray(o.getServiceRequested(), this.servicerequested_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -393,16 +412,25 @@ public class ReferralRequestModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    if (null != o.getOccurrencePeriod()) {
+    	this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    }
     this.authoredOn = o.getAuthoredOn();
     if (null != o.getRequester() ) {
     	this.requester_id = "requester" + this.id;
     	this.requester = ReferralRequestRequesterHelper.toModel(o.getRequester(), this.requester_id);
     }
-    this.specialty = JsonUtils.toJson(o.getSpecialty());
+    if (null != o.getSpecialty() ) {
+    	this.specialty_id = "specialty" + this.id;
+    	this.specialty = CodeableConceptHelper.toModel(o.getSpecialty(), this.specialty_id);
+    }
     if (null != o.getRecipient() && !o.getRecipient().isEmpty()) {
     	this.recipient_id = "recipient" + this.id;
     	this.recipient = ReferenceHelper.toModelFromArray(o.getRecipient(), this.recipient_id);
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasoncode_id = "reasoncode" + this.id;
+    	this.reasonCode = CodeableConceptHelper.toModelFromArray(o.getReasonCode(), this.reasoncode_id);
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonreference_id = "reasonreference" + this.id;
@@ -413,6 +441,9 @@ public class ReferralRequestModel  implements Serializable {
     	this.supportinginfo_id = "supportinginfo" + this.id;
     	this.supportingInfo = ReferenceHelper.toModelFromArray(o.getSupportingInfo(), this.supportinginfo_id);
     }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getRelevantHistory() && !o.getRelevantHistory().isEmpty()) {
     	this.relevanthistory_id = "relevanthistory" + this.id;
     	this.relevantHistory = ReferenceHelper.toModelFromArray(o.getRelevantHistory(), this.relevanthistory_id);
@@ -420,6 +451,15 @@ public class ReferralRequestModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -477,10 +517,10 @@ public class ReferralRequestModel  implements Serializable {
   public void setIntent( String value) {
     this.intent = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public String getPriority() {
@@ -489,10 +529,10 @@ public class ReferralRequestModel  implements Serializable {
   public void setPriority( String value) {
     this.priority = value;
   }
-  public String getServiceRequested() {
+  public java.util.List<CodeableConceptModel> getServiceRequested() {
     return this.serviceRequested;
   }
-  public void setServiceRequested( String value) {
+  public void setServiceRequested( java.util.List<CodeableConceptModel> value) {
     this.serviceRequested = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -531,10 +571,10 @@ public class ReferralRequestModel  implements Serializable {
   public void setRequester( java.util.List<ReferralRequestRequesterModel> value) {
     this.requester = value;
   }
-  public String getSpecialty() {
+  public java.util.List<CodeableConceptModel> getSpecialty() {
     return this.specialty;
   }
-  public void setSpecialty( String value) {
+  public void setSpecialty( java.util.List<CodeableConceptModel> value) {
     this.specialty = value;
   }
   public java.util.List<ReferenceModel> getRecipient() {
@@ -543,10 +583,10 @@ public class ReferralRequestModel  implements Serializable {
   public void setRecipient( java.util.List<ReferenceModel> value) {
     this.recipient = value;
   }
-  public String getReasonCode() {
+  public java.util.List<CodeableConceptModel> getReasonCode() {
     return this.reasonCode;
   }
-  public void setReasonCode( String value) {
+  public void setReasonCode( java.util.List<CodeableConceptModel> value) {
     this.reasonCode = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
@@ -637,14 +677,10 @@ public class ReferralRequestModel  implements Serializable {
      builder.append("groupIdentifier" + "->" + this.groupIdentifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("intent" + "->" + this.intent + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("serviceRequested" + "->" + this.serviceRequested + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
-     builder.append("specialty" + "->" + this.specialty + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

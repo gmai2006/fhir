@@ -263,6 +263,9 @@ public class MessageDefinition  extends DomainResource  {
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction = CodeableConceptHelper.fromArray2Array(o.getJurisdiction());
+    }
     if (null != o.getPurpose()) {
       this.purpose = o.getPurpose();
     }
@@ -278,7 +281,9 @@ public class MessageDefinition  extends DomainResource  {
     if (null != o.getReplaces() && !o.getReplaces().isEmpty()) {
     	this.replaces = ReferenceHelper.fromArray2Array(o.getReplaces());
     }
-    this.event = CodingHelper.fromJson(o.getEvent());
+    if (null != o.getEvent() && !o.getEvent().isEmpty()) {
+      this.event = new Coding(o.getEvent().get(0));
+    }
     if (null != o.getCategory()) {
       this.category = o.getCategory();
     }

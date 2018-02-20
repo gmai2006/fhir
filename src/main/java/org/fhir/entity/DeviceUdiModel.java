@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="deviceudi")
 public class DeviceUdiModel  implements Serializable {
-	private static final long serialVersionUID = 151873631159271885L;
+	private static final long serialVersionUID = 151910893735489678L;
   /**
   * Description: "The device identifier (DI) is a mandatory, fixed portion of a UDI that identifies the labeler and the specific version or model of a device."
   */
@@ -132,7 +131,9 @@ public class DeviceUdiModel  implements Serializable {
 
   public DeviceUdiModel(DeviceUdi o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.deviceIdentifier = o.getDeviceIdentifier();
     this.name = o.getName();
     this.jurisdiction = o.getJurisdiction();
@@ -140,6 +141,12 @@ public class DeviceUdiModel  implements Serializable {
     this.carrierAIDC = o.getCarrierAIDC();
     this.issuer = o.getIssuer();
     this.entryType = o.getEntryType();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getDeviceIdentifier() {

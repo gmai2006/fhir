@@ -52,7 +52,9 @@ public class MedicationPackage  extends BackboneElement  {
 
   public MedicationPackage(MedicationPackageModel o) {
     this.id = o.getId();
-    this.container = CodeableConceptHelper.fromJson(o.getContainer());
+    if (null != o.getContainer() && !o.getContainer().isEmpty()) {
+      this.container = new CodeableConcept(o.getContainer().get(0));
+    }
     if (null != o.getContent() && !o.getContent().isEmpty()) {
     	this.content = MedicationContentHelper.fromArray2Array(o.getContent());
     }

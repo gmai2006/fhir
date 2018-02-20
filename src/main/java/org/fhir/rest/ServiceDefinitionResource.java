@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.ServiceDefinition;
 import org.fhir.service.ServiceDefinitionService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/ServiceDefinition")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class ServiceDefinitionResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public ServiceDefinition find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public ServiceDefinition findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<ServiceDefinition> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ServiceDefinition> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ServiceDefinition> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ServiceDefinition> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<ServiceDefinition> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<ServiceDefinition> findAll() {
   	return this.service.selectAll();
   }
@@ -107,14 +172,105 @@ public class ServiceDefinitionResource {
     return service.select(input);
   }
 
+  /**
+  * Descr: The uri that identifies the service definition
+  * Type: uri
+  */
   @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<ServiceDefinition> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<ServiceDefinition> url(@QueryParam("url")String url) {
+  	java.util.Map<String, String> params = QueryParser.parse(url, VALID_FIELDS);
   	return this.service.findByField(new QueryBuilder(params));
   }
-
+  /**
+  * Descr: External identifier for the service definition
+  * Type: token
+  */
+  @GET
+  public List<ServiceDefinition> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The business version of the service definition
+  * Type: token
+  */
+  @GET
+  public List<ServiceDefinition> version(@QueryParam("version")String version) {
+  	java.util.Map<String, String> params = QueryParser.parse(version, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Computationally friendly name of the service definition
+  * Type: string
+  */
+  @GET
+  public List<ServiceDefinition> name(@QueryParam("name")String name) {
+  	java.util.Map<String, String> params = QueryParser.parse(name, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The human-friendly name of the service definition
+  * Type: string
+  */
+  @GET
+  public List<ServiceDefinition> title(@QueryParam("title")String title) {
+  	java.util.Map<String, String> params = QueryParser.parse(title, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The current status of the service definition
+  * Type: token
+  */
+  @GET
+  public List<ServiceDefinition> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Name of the publisher of the service definition
+  * Type: string
+  */
+  @GET
+  public List<ServiceDefinition> publisher(@QueryParam("publisher")String publisher) {
+  	java.util.Map<String, String> params = QueryParser.parse(publisher, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The description of the service definition
+  * Type: string
+  */
+  @GET
+  public List<ServiceDefinition> description(@QueryParam("description")String description) {
+  	java.util.Map<String, String> params = QueryParser.parse(description, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The time during which the service definition is intended to be in use
+  * Type: date
+  */
+  @GET
+  public List<ServiceDefinition> effective(@QueryParam("effective")String effective) {
+  	java.util.Map<String, String> params = QueryParser.parse(effective, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Intended jurisdiction for the service definition
+  * Type: token
+  */
+  @GET
+  public List<ServiceDefinition> jurisdiction(@QueryParam("jurisdiction")String jurisdiction) {
+  	java.util.Map<String, String> params = QueryParser.parse(jurisdiction, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Topics associated with the module
+  * Type: token
+  */
+  @GET
+  public List<ServiceDefinition> topic(@QueryParam("topic")String topic) {
+  	java.util.Map<String, String> params = QueryParser.parse(topic, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
 
   private static final String VALID_FIELDS = "composedof|date|dependson|derivedfrom|description|effective|identifier|jurisdiction|name|predecessor|publisher|status|successor|title|topic|url|version";
 }

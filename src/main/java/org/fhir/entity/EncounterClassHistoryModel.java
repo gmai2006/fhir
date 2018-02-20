@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="encounterclasshistory")
 public class EncounterClassHistoryModel  implements Serializable {
-	private static final long serialVersionUID = 151873631169257489L;
+	private static final long serialVersionUID = 151910893745083021L;
   /**
   * Description: "inpatient | outpatient | ambulatory | emergency +."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"FHIRclass\"", length = 16777215)
-  private String FHIRclass;
+  @Column(name="\"fhirclass_id\"")
+  private String fhirclass_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> FHIRclass;
 
   /**
   * Description: "The time that the episode was in the specified class."
@@ -102,15 +103,28 @@ public class EncounterClassHistoryModel  implements Serializable {
 
   public EncounterClassHistoryModel(EncounterClassHistory o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.FHIRclass = JsonUtils.toJson(o.getFHIRclass());
-    this.period = JsonUtils.toJson(o.getPeriod());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getFHIRclass() ) {
+    	this.fhirclass_id = "fhirclass" + this.parent_id;
+    	this.FHIRclass = CodingHelper.toModel(o.getFHIRclass(), this.fhirclass_id);
+    }
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getFHIRclass() {
+  public java.util.List<CodingModel> getFHIRclass() {
     return this.FHIRclass;
   }
-  public void setFHIRclass( String value) {
+  public void setFHIRclass( java.util.List<CodingModel> value) {
     this.FHIRclass = value;
   }
   public String getPeriod() {
@@ -148,7 +162,6 @@ public class EncounterClassHistoryModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[EncounterClassHistoryModel]:" + "\n");
-     builder.append("FHIRclass" + "->" + this.FHIRclass + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

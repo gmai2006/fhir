@@ -114,15 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<DiagnosticReport> findByContext(QueryBuilder queryBuilder) {
-  	final List<DiagnosticReport> result = dao.findByContext(queryBuilder);
-    logger.info("findBycontext - exited - return value={} result ");
+  public List<DiagnosticReport> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<DiagnosticReport> findByImage(QueryBuilder queryBuilder) {
-  	final List<DiagnosticReport> result = dao.findByImage(queryBuilder);
-    logger.info("findByimage - exited - return value={} result ");
+  public List<DiagnosticReport> findByCategory(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findByCode(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findBySubject(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findByContext(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
     return result;
   }
   @Override
@@ -132,21 +150,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<DiagnosticReport> findByResult(QueryBuilder queryBuilder) {
-  	final List<DiagnosticReport> result = dao.findByResult(queryBuilder);
-    logger.info("findByresult - exited - return value={} result ");
-    return result;
-  }
-  @Override
   public List<DiagnosticReport> findBySpecimen(QueryBuilder queryBuilder) {
   	final List<DiagnosticReport> result = dao.findBySpecimen(queryBuilder);
     logger.info("findByspecimen - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<DiagnosticReport> findBySubject(QueryBuilder queryBuilder) {
-  	final List<DiagnosticReport> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<DiagnosticReport> findByResult(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByResult(queryBuilder);
+    logger.info("findByresult - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findByImagingStudy(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByImagingStudy(queryBuilder);
+    logger.info("findByimagingStudy - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findByImage(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByImage(queryBuilder);
+    logger.info("findByimage - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findByCodedDiagnosis(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByCodedDiagnosis(queryBuilder);
+    logger.info("findBycodedDiagnosis - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findByText(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DiagnosticReport> findByMeta(QueryBuilder queryBuilder) {
+  	final List<DiagnosticReport> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

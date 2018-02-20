@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="expansionprofileinclude")
 public class ExpansionProfileIncludeModel  implements Serializable {
-	private static final long serialVersionUID = 15187363117599156L;
+	private static final long serialVersionUID = 15191089375253807L;
   /**
   * Description: "A data group for each designation to be included."
   */
@@ -94,10 +93,18 @@ public class ExpansionProfileIncludeModel  implements Serializable {
 
   public ExpansionProfileIncludeModel(ExpansionProfileInclude o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getDesignation() && !o.getDesignation().isEmpty()) {
     	this.designation_id = "designation" + this.parent_id;
     	this.designation = ExpansionProfileDesignation1Helper.toModelFromArray(o.getDesignation(), this.designation_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

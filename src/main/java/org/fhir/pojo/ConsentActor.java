@@ -49,7 +49,9 @@ public class ConsentActor  extends BackboneElement  {
 
   public ConsentActor(ConsentActorModel o) {
     this.id = o.getId();
-    this.role = CodeableConceptHelper.fromJson(o.getRole());
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+      this.role = new CodeableConcept(o.getRole().get(0));
+    }
     if (null != o.getReference() && !o.getReference().isEmpty()) {
       this.reference = new Reference(o.getReference().get(0));
     }

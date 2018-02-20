@@ -174,7 +174,8 @@
       "type": "date",
       "expression": "ImmunizationRecommendation.recommendation.date",
       "code": "date",
-      "xpath": "recommendation/date"
+      "xpath": "recommendation/date",
+      "fieldName": "date"
     },
     {
       "name": "dosenumber",
@@ -182,7 +183,8 @@
       "type": "number",
       "expression": "ImmunizationRecommendation.recommendation.doseNumber",
       "code": "dosenumber",
-      "xpath": "recommendation/doseNumber"
+      "xpath": "recommendation/doseNumber",
+      "fieldName": "doseNumber"
     },
     {
       "name": "dosesequence",
@@ -190,7 +192,8 @@
       "type": "number",
       "expression": "ImmunizationRecommendation.recommendation.protocol.doseSequence",
       "code": "dosesequence",
-      "xpath": "recommendation/protocol/doseSequence"
+      "xpath": "recommendation/protocol/doseSequence",
+      "fieldName": "doseSequence"
     },
     {
       "name": "identifier",
@@ -198,7 +201,8 @@
       "type": "token",
       "expression": "ImmunizationRecommendation.identifier",
       "code": "identifier",
-      "xpath": "identifier"
+      "xpath": "identifier",
+      "fieldName": "identifier"
     },
     {
       "name": "information",
@@ -206,7 +210,8 @@
       "type": "reference",
       "expression": "ImmunizationRecommendation.recommendation.supportingPatientInformation",
       "code": "information",
-      "xpath": "recommendation/supportingPatientInformation"
+      "xpath": "recommendation/supportingPatientInformation",
+      "fieldName": "supportingPatientInformation"
     },
     {
       "name": "patient",
@@ -214,7 +219,8 @@
       "type": "reference",
       "expression": "ImmunizationRecommendation.patient",
       "code": "patient",
-      "xpath": "patient"
+      "xpath": "patient",
+      "fieldName": "patient"
     },
     {
       "name": "status",
@@ -222,7 +228,8 @@
       "type": "token",
       "expression": "ImmunizationRecommendation.recommendation.forecastStatus",
       "code": "status",
-      "xpath": "recommendation/forecastStatus"
+      "xpath": "recommendation/forecastStatus",
+      "fieldName": "forecastStatus"
     },
     {
       "name": "support",
@@ -230,7 +237,8 @@
       "type": "reference",
       "expression": "ImmunizationRecommendation.recommendation.supportingImmunization",
       "code": "support",
-      "xpath": "recommendation/supportingImmunization"
+      "xpath": "recommendation/supportingImmunization",
+      "fieldName": "supportingImmunization"
     },
     {
       "name": "targetdisease",
@@ -238,7 +246,8 @@
       "type": "token",
       "expression": "ImmunizationRecommendation.recommendation.targetDisease",
       "code": "targetdisease",
-      "xpath": "recommendation/targetDisease"
+      "xpath": "recommendation/targetDisease",
+      "fieldName": "targetDisease"
     },
     {
       "name": "vaccinetype",
@@ -246,7 +255,8 @@
       "type": "token",
       "expression": "ImmunizationRecommendation.recommendation.vaccineCode",
       "code": "vaccinetype",
-      "xpath": "recommendation/vaccineCode"
+      "xpath": "recommendation/vaccineCode",
+      "fieldName": "vaccineCode"
     }
   ]
 }

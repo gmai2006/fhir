@@ -65,7 +65,12 @@ public class MedicationDispenseSubstitution  extends BackboneElement  {
     if (null != o.getWasSubstituted()) {
       this.wasSubstituted = o.getWasSubstituted();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason = CodeableConceptHelper.fromArray2Array(o.getReason());
+    }
     if (null != o.getResponsibleParty() && !o.getResponsibleParty().isEmpty()) {
     	this.responsibleParty = ReferenceHelper.fromArray2Array(o.getResponsibleParty());
     }

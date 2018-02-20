@@ -256,7 +256,12 @@ public class Observation  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category = CodeableConceptHelper.fromArray2Array(o.getCategory());
+    }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -276,7 +281,9 @@ public class Observation  extends DomainResource  {
     if (null != o.getValueQuantity() && !o.getValueQuantity().isEmpty()) {
       this.valueQuantity = new Quantity(o.getValueQuantity().get(0));
     }
-    this.valueCodeableConcept = CodeableConceptHelper.fromJson(o.getValueCodeableConcept());
+    if (null != o.getValueCodeableConcept() && !o.getValueCodeableConcept().isEmpty()) {
+      this.valueCodeableConcept = new CodeableConcept(o.getValueCodeableConcept().get(0));
+    }
     if (null != o.getValueString()) {
       this.valueString = o.getValueString();
     }
@@ -294,13 +301,21 @@ public class Observation  extends DomainResource  {
       this.valueDateTime = o.getValueDateTime();
     }
     this.valuePeriod = PeriodHelper.fromJson(o.getValuePeriod());
-    this.dataAbsentReason = CodeableConceptHelper.fromJson(o.getDataAbsentReason());
-    this.interpretation = CodeableConceptHelper.fromJson(o.getInterpretation());
+    if (null != o.getDataAbsentReason() && !o.getDataAbsentReason().isEmpty()) {
+      this.dataAbsentReason = new CodeableConcept(o.getDataAbsentReason().get(0));
+    }
+    if (null != o.getInterpretation() && !o.getInterpretation().isEmpty()) {
+      this.interpretation = new CodeableConcept(o.getInterpretation().get(0));
+    }
     if (null != o.getComment()) {
       this.comment = o.getComment();
     }
-    this.bodySite = CodeableConceptHelper.fromJson(o.getBodySite());
-    this.method = CodeableConceptHelper.fromJson(o.getMethod());
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+      this.bodySite = new CodeableConcept(o.getBodySite().get(0));
+    }
+    if (null != o.getMethod() && !o.getMethod().isEmpty()) {
+      this.method = new CodeableConcept(o.getMethod().get(0));
+    }
     if (null != o.getSpecimen() && !o.getSpecimen().isEmpty()) {
       this.specimen = new Reference(o.getSpecimen().get(0));
     }

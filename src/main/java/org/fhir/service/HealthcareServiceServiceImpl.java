@@ -114,15 +114,93 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<HealthcareService> findByEndpoint(QueryBuilder queryBuilder) {
-  	final List<HealthcareService> result = dao.findByEndpoint(queryBuilder);
-    logger.info("findByendpoint - exited - return value={} result ");
+  public List<HealthcareService> findByProvidedBy(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByProvidedBy(queryBuilder);
+    logger.info("findByprovidedBy - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByCategory(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByType(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findBySpecialty(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findBySpecialty(queryBuilder);
+    logger.info("findByspecialty - exited - return value={} result ");
     return result;
   }
   @Override
   public List<HealthcareService> findByLocation(QueryBuilder queryBuilder) {
   	final List<HealthcareService> result = dao.findByLocation(queryBuilder);
     logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByCoverageArea(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByCoverageArea(queryBuilder);
+    logger.info("findBycoverageArea - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByServiceProvisionCode(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByServiceProvisionCode(queryBuilder);
+    logger.info("findByserviceProvisionCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByEligibility(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByEligibility(queryBuilder);
+    logger.info("findByeligibility - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByCharacteristic(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByCharacteristic(queryBuilder);
+    logger.info("findBycharacteristic - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByReferralMethod(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByReferralMethod(queryBuilder);
+    logger.info("findByreferralMethod - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByAvailableTime(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByAvailableTime(queryBuilder);
+    logger.info("findByavailableTime - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByNotAvailable(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByNotAvailable(queryBuilder);
+    logger.info("findBynotAvailable - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByEndpoint(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByEndpoint(queryBuilder);
+    logger.info("findByendpoint - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByText(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<HealthcareService> findByMeta(QueryBuilder queryBuilder) {
+  	final List<HealthcareService> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,34 +37,39 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="patientanimal")
 public class PatientAnimalModel  implements Serializable {
-	private static final long serialVersionUID = 151873631147213244L;
+	private static final long serialVersionUID = 15191089372478799L;
   /**
   * Description: "Identifies the high level taxonomic categorization of the kind of animal."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"species\"", length = 16777215)
-  private String species;
+  @Column(name="\"species_id\"")
+  private String species_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="species_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> species;
 
   /**
   * Description: "Identifies the detailed categorization of the kind of animal."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"breed\"", length = 16777215)
-  private String breed;
+  @Column(name="\"breed_id\"")
+  private String breed_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="breed_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> breed;
 
   /**
   * Description: "Indicates the current state of the animal's reproductive organs."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"genderStatus\"", length = 16777215)
-  private String genderStatus;
+  @Column(name="\"genderstatus_id\"")
+  private String genderstatus_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="genderstatus_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> genderStatus;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -111,28 +115,45 @@ public class PatientAnimalModel  implements Serializable {
 
   public PatientAnimalModel(PatientAnimal o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.species = JsonUtils.toJson(o.getSpecies());
-    this.breed = JsonUtils.toJson(o.getBreed());
-    this.genderStatus = JsonUtils.toJson(o.getGenderStatus());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getSpecies() ) {
+    	this.species_id = "species" + this.parent_id;
+    	this.species = CodeableConceptHelper.toModel(o.getSpecies(), this.species_id);
+    }
+    if (null != o.getBreed() ) {
+    	this.breed_id = "breed" + this.parent_id;
+    	this.breed = CodeableConceptHelper.toModel(o.getBreed(), this.breed_id);
+    }
+    if (null != o.getGenderStatus() ) {
+    	this.genderstatus_id = "genderstatus" + this.parent_id;
+    	this.genderStatus = CodeableConceptHelper.toModel(o.getGenderStatus(), this.genderstatus_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getSpecies() {
+  public java.util.List<CodeableConceptModel> getSpecies() {
     return this.species;
   }
-  public void setSpecies( String value) {
+  public void setSpecies( java.util.List<CodeableConceptModel> value) {
     this.species = value;
   }
-  public String getBreed() {
+  public java.util.List<CodeableConceptModel> getBreed() {
     return this.breed;
   }
-  public void setBreed( String value) {
+  public void setBreed( java.util.List<CodeableConceptModel> value) {
     this.breed = value;
   }
-  public String getGenderStatus() {
+  public java.util.List<CodeableConceptModel> getGenderStatus() {
     return this.genderStatus;
   }
-  public void setGenderStatus( String value) {
+  public void setGenderStatus( java.util.List<CodeableConceptModel> value) {
     this.genderStatus = value;
   }
   public String getModifierExtension() {
@@ -164,9 +185,6 @@ public class PatientAnimalModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PatientAnimalModel]:" + "\n");
-     builder.append("species" + "->" + this.species + "\n"); 
-     builder.append("breed" + "->" + this.breed + "\n"); 
-     builder.append("genderStatus" + "->" + this.genderStatus + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

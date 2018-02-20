@@ -114,21 +114,15 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<CarePlan> findByContext(QueryBuilder queryBuilder) {
-  	final List<CarePlan> result = dao.findByContext(queryBuilder);
-    logger.info("findBycontext - exited - return value={} result ");
-    return result;
-  }
-  @Override
   public List<CarePlan> findByDefinition(QueryBuilder queryBuilder) {
   	final List<CarePlan> result = dao.findByDefinition(queryBuilder);
     logger.info("findBydefinition - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<CarePlan> findByGoal(QueryBuilder queryBuilder) {
-  	final List<CarePlan> result = dao.findByGoal(queryBuilder);
-    logger.info("findBygoal - exited - return value={} result ");
+  public List<CarePlan> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
     return result;
   }
   @Override
@@ -138,9 +132,75 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<CarePlan> findByPartOf(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByPartOf(queryBuilder);
+    logger.info("findBypartOf - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByCategory(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<CarePlan> findBySubject(QueryBuilder queryBuilder) {
   	final List<CarePlan> result = dao.findBySubject(queryBuilder);
     logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByContext(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByCareTeam(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByCareTeam(queryBuilder);
+    logger.info("findBycareTeam - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByAddresses(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByAddresses(queryBuilder);
+    logger.info("findByaddresses - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findBySupportingInfo(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findBySupportingInfo(queryBuilder);
+    logger.info("findBysupportingInfo - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByGoal(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByGoal(queryBuilder);
+    logger.info("findBygoal - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByActivity(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByActivity(queryBuilder);
+    logger.info("findByactivity - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByText(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CarePlan> findByMeta(QueryBuilder queryBuilder) {
+  	final List<CarePlan> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

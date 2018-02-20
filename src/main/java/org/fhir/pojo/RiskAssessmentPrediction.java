@@ -95,12 +95,16 @@ public class RiskAssessmentPrediction  extends BackboneElement  {
 
   public RiskAssessmentPrediction(RiskAssessmentPredictionModel o) {
     this.id = o.getId();
-    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getOutcome() && !o.getOutcome().isEmpty()) {
+      this.outcome = new CodeableConcept(o.getOutcome().get(0));
+    }
     if (null != o.getProbabilityDecimal()) {
       this.probabilityDecimal = o.getProbabilityDecimal();
     }
     this.probabilityRange = RangeHelper.fromJson(o.getProbabilityRange());
-    this.qualitativeRisk = CodeableConceptHelper.fromJson(o.getQualitativeRisk());
+    if (null != o.getQualitativeRisk() && !o.getQualitativeRisk().isEmpty()) {
+      this.qualitativeRisk = new CodeableConcept(o.getQualitativeRisk().get(0));
+    }
     if (null != o.getRelativeRisk()) {
       this.relativeRisk = o.getRelativeRisk();
     }

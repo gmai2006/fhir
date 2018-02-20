@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,24 +37,28 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="immunizationexplanation")
 public class ImmunizationExplanationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631182927404L;
+	private static final long serialVersionUID = 151910893759618788L;
   /**
   * Description: "Reasons why a vaccine was administered."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reason;
 
   /**
   * Description: "Reason why a vaccine was not administered."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonNotGiven\"", length = 16777215)
-  private String reasonNotGiven;
+  @Column(name="\"reasonnotgiven_id\"")
+  private String reasonnotgiven_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonnotgiven_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonNotGiven;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -101,19 +104,35 @@ public class ImmunizationExplanationModel  implements Serializable {
 
   public ImmunizationExplanationModel(ImmunizationExplanation o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason_id = "reason" + this.parent_id;
+    	this.reason = CodeableConceptHelper.toModelFromArray(o.getReason(), this.reason_id);
+    }
+    if (null != o.getReasonNotGiven() && !o.getReasonNotGiven().isEmpty()) {
+    	this.reasonnotgiven_id = "reasonnotgiven" + this.parent_id;
+    	this.reasonNotGiven = CodeableConceptHelper.toModelFromArray(o.getReasonNotGiven(), this.reasonnotgiven_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getReason() {
+  public java.util.List<CodeableConceptModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodeableConceptModel> value) {
     this.reason = value;
   }
-  public String getReasonNotGiven() {
+  public java.util.List<CodeableConceptModel> getReasonNotGiven() {
     return this.reasonNotGiven;
   }
-  public void setReasonNotGiven( String value) {
+  public void setReasonNotGiven( java.util.List<CodeableConceptModel> value) {
     this.reasonNotGiven = value;
   }
   public String getModifierExtension() {
@@ -145,8 +164,6 @@ public class ImmunizationExplanationModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ImmunizationExplanationModel]:" + "\n");
-     builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("reasonNotGiven" + "->" + this.reasonNotGiven + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

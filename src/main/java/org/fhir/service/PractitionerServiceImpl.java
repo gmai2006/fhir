@@ -113,4 +113,34 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<Practitioner> findByAddress(QueryBuilder queryBuilder) {
+  	final List<Practitioner> result = dao.findByAddress(queryBuilder);
+    logger.info("findByaddress - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Practitioner> findByQualification(QueryBuilder queryBuilder) {
+  	final List<Practitioner> result = dao.findByQualification(queryBuilder);
+    logger.info("findByqualification - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Practitioner> findByCommunication(QueryBuilder queryBuilder) {
+  	final List<Practitioner> result = dao.findByCommunication(queryBuilder);
+    logger.info("findBycommunication - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Practitioner> findByText(QueryBuilder queryBuilder) {
+  	final List<Practitioner> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Practitioner> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Practitioner> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

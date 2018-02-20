@@ -42,10 +42,14 @@ public interface QuestionnaireResponseDao {
 
   public List<QuestionnaireResponse> findByField(QueryBuilder queryBuilder);
 
-  public List<QuestionnaireResponse> findByAuthor(QueryBuilder queryBuilder);
-  public List<QuestionnaireResponse> findByContext(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByBasedOn(QueryBuilder queryBuilder);
   public List<QuestionnaireResponse> findByParent(QueryBuilder queryBuilder);
   public List<QuestionnaireResponse> findByQuestionnaire(QueryBuilder queryBuilder);
-  public List<QuestionnaireResponse> findBySource(QueryBuilder queryBuilder);
   public List<QuestionnaireResponse> findBySubject(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByContext(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByAuthor(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findBySource(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByItem(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByText(QueryBuilder queryBuilder);
+  public List<QuestionnaireResponse> findByMeta(QueryBuilder queryBuilder);
 }

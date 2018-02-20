@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="sequencequality")
 public class SequenceQualityModel  implements Serializable {
-	private static final long serialVersionUID = 151873631180035118L;
+	private static final long serialVersionUID = 151910893756574376L;
   /**
   * Description: "INDEL / SNP / Undefined variant."
   */
@@ -48,12 +47,14 @@ public class SequenceQualityModel  implements Serializable {
 
   /**
   * Description: "Gold standard sequence used for comparing against."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"standardSequence\"", length = 16777215)
-  private String standardSequence;
+  @Column(name="\"standardsequence_id\"")
+  private String standardsequence_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="standardsequence_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> standardSequence;
 
   /**
   * Description: "Start position of the sequence. If the coordinate system is either 0-based or 1-based, then start position is inclusive."
@@ -84,12 +85,14 @@ public class SequenceQualityModel  implements Serializable {
 
   /**
   * Description: "Which method is used to get sequence quality."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"method\"", length = 16777215)
-  private String method;
+  @Column(name="\"method_id\"")
+  private String method_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> method;
 
   /**
   * Description: "True positives, from the perspective of the truth data, i.e. the number of sites in the Truth Call Set for which there are paths through the Query Call Set that are consistent with all of the alleles at this site, and for which there is an accurate genotype call for the event."
@@ -199,16 +202,24 @@ public class SequenceQualityModel  implements Serializable {
 
   public SequenceQualityModel(SequenceQuality o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.type = o.getType();
-    this.standardSequence = JsonUtils.toJson(o.getStandardSequence());
+    if (null != o.getStandardSequence() ) {
+    	this.standardsequence_id = "standardsequence" + this.parent_id;
+    	this.standardSequence = CodeableConceptHelper.toModel(o.getStandardSequence(), this.standardsequence_id);
+    }
     this.start = o.getStart();
     this.end = o.getEnd();
     if (null != o.getScore() ) {
     	this.score_id = "score" + this.parent_id;
     	this.score = QuantityHelper.toModel(o.getScore(), this.score_id);
     }
-    this.method = JsonUtils.toJson(o.getMethod());
+    if (null != o.getMethod() ) {
+    	this.method_id = "method" + this.parent_id;
+    	this.method = CodeableConceptHelper.toModel(o.getMethod(), this.method_id);
+    }
     this.truthTP = o.getTruthTP();
     this.queryTP = o.getQueryTP();
     this.truthFN = o.getTruthFN();
@@ -217,6 +228,12 @@ public class SequenceQualityModel  implements Serializable {
     this.precision = o.getPrecision();
     this.recall = o.getRecall();
     this.fScore = o.getFScore();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getType() {
@@ -225,10 +242,10 @@ public class SequenceQualityModel  implements Serializable {
   public void setType( String value) {
     this.type = value;
   }
-  public String getStandardSequence() {
+  public java.util.List<CodeableConceptModel> getStandardSequence() {
     return this.standardSequence;
   }
-  public void setStandardSequence( String value) {
+  public void setStandardSequence( java.util.List<CodeableConceptModel> value) {
     this.standardSequence = value;
   }
   public Float getStart() {
@@ -249,10 +266,10 @@ public class SequenceQualityModel  implements Serializable {
   public void setScore( java.util.List<QuantityModel> value) {
     this.score = value;
   }
-  public String getMethod() {
+  public java.util.List<CodeableConceptModel> getMethod() {
     return this.method;
   }
-  public void setMethod( String value) {
+  public void setMethod( java.util.List<CodeableConceptModel> value) {
     this.method = value;
   }
   public Float getTruthTP() {
@@ -333,10 +350,8 @@ public class SequenceQualityModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[SequenceQualityModel]:" + "\n");
      builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("standardSequence" + "->" + this.standardSequence + "\n"); 
      builder.append("start" + "->" + this.start + "\n"); 
      builder.append("end" + "->" + this.end + "\n"); 
-     builder.append("method" + "->" + this.method + "\n"); 
      builder.append("truthTP" + "->" + this.truthTP + "\n"); 
      builder.append("queryTP" + "->" + this.queryTP + "\n"); 
      builder.append("truthFN" + "->" + this.truthFN + "\n"); 

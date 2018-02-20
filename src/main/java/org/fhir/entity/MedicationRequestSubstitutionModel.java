@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationrequestsubstitution")
 public class MedicationRequestSubstitutionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631178479904L;
+	private static final long serialVersionUID = 151910893754896321L;
   /**
   * Description: "True if the prescriber allows a different drug to be dispensed from what was prescribed."
   */
@@ -48,12 +47,14 @@ public class MedicationRequestSubstitutionModel  implements Serializable {
 
   /**
   * Description: "Indicates the reason for the substitution, or why substitution must or must not be performed."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reason;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -99,9 +100,20 @@ public class MedicationRequestSubstitutionModel  implements Serializable {
 
   public MedicationRequestSubstitutionModel(MedicationRequestSubstitution o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.allowed = o.getAllowed();
-    this.reason = JsonUtils.toJson(o.getReason());
+    if (null != o.getReason() ) {
+    	this.reason_id = "reason" + this.parent_id;
+    	this.reason = CodeableConceptHelper.toModel(o.getReason(), this.reason_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Boolean getAllowed() {
@@ -110,10 +122,10 @@ public class MedicationRequestSubstitutionModel  implements Serializable {
   public void setAllowed( Boolean value) {
     this.allowed = value;
   }
-  public String getReason() {
+  public java.util.List<CodeableConceptModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodeableConceptModel> value) {
     this.reason = value;
   }
   public String getModifierExtension() {
@@ -146,7 +158,6 @@ public class MedicationRequestSubstitutionModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationRequestSubstitutionModel]:" + "\n");
      builder.append("allowed" + "->" + this.allowed + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

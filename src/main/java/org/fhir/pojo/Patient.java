@@ -197,7 +197,9 @@ public class Patient  extends DomainResource  {
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
     	this.address = AddressHelper.fromArray2Array(o.getAddress());
     }
-    this.maritalStatus = CodeableConceptHelper.fromJson(o.getMaritalStatus());
+    if (null != o.getMaritalStatus() && !o.getMaritalStatus().isEmpty()) {
+      this.maritalStatus = new CodeableConcept(o.getMaritalStatus().get(0));
+    }
     if (null != o.getMultipleBirthBoolean()) {
       this.multipleBirthBoolean = o.getMultipleBirthBoolean();
     }

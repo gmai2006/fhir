@@ -38,9 +38,14 @@ public interface AccountService {
   public Account update(Account bean);
   public void delete(Account bean);
   public List<Account> findByField(QueryBuilder queryBuilder);
-  public List<Account> findByBalance(QueryBuilder queryBuilder);
-  public List<Account> findByOwner(QueryBuilder queryBuilder);
+  public List<Account> findByType(QueryBuilder queryBuilder);
   public List<Account> findBySubject(QueryBuilder queryBuilder);
+  public List<Account> findByBalance(QueryBuilder queryBuilder);
+  public List<Account> findByCoverage(QueryBuilder queryBuilder);
+  public List<Account> findByOwner(QueryBuilder queryBuilder);
+  public List<Account> findByGuarantor(QueryBuilder queryBuilder);
+  public List<Account> findByText(QueryBuilder queryBuilder);
+  public List<Account> findByMeta(QueryBuilder queryBuilder);
 
 
 }

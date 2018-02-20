@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.CommunicationRequest;
 import org.fhir.service.CommunicationRequestService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/CommunicationRequest")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class CommunicationRequestResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public CommunicationRequest find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public CommunicationRequest findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<CommunicationRequest> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<CommunicationRequest> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<CommunicationRequest> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<CommunicationRequest> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<CommunicationRequest> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<CommunicationRequest> findAll() {
   	return this.service.selectAll();
   }
@@ -107,35 +172,15 @@ public class CommunicationRequestResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<CommunicationRequest> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
   /**
-  * Descr: Encounter or episode leading to message
+  * Descr: Fulfills plan or proposal
   * Type: reference
   */
   @GET
-  @Path("context")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<CommunicationRequest> context(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByContext(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Message recipient
-  * Type: reference
-  */
-  @GET
-  @Path("recipient")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<CommunicationRequest> recipient(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByRecipient(new QueryBuilder(params));
+  @Path("basedon")
+  public List<CommunicationRequest> basedon(@QueryParam("basedon")String basedon) {
+  	java.util.Map<String, String> params = QueryParser.parse(basedon, VALID_FIELDS);
+  	return this.service.findByBasedOn(new QueryBuilder(params));
   }
   /**
   * Descr: Request(s) replaced by this request
@@ -143,21 +188,39 @@ public class CommunicationRequestResource {
   */
   @GET
   @Path("replaces")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<CommunicationRequest> replaces(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<CommunicationRequest> replaces(@QueryParam("replaces")String replaces) {
+  	java.util.Map<String, String> params = QueryParser.parse(replaces, VALID_FIELDS);
   	return this.service.findByReplaces(new QueryBuilder(params));
   }
   /**
-  * Descr: Individual making the request
+  * Descr: Focus of message
   * Type: reference
   */
   @GET
-  @Path("requester/agent")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<CommunicationRequest> requester(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByRequester(new QueryBuilder(params));
+  @Path("patient")
+  public List<CommunicationRequest> patient(@QueryParam("patient")String patient) {
+  	java.util.Map<String, String> params = QueryParser.parse(patient, VALID_FIELDS);
+  	return this.service.findBySubject(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Message recipient
+  * Type: reference
+  */
+  @GET
+  @Path("recipient")
+  public List<CommunicationRequest> recipient(@QueryParam("recipient")String recipient) {
+  	java.util.Map<String, String> params = QueryParser.parse(recipient, VALID_FIELDS);
+  	return this.service.findByRecipient(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Encounter or episode leading to message
+  * Type: reference
+  */
+  @GET
+  @Path("context")
+  public List<CommunicationRequest> context(@QueryParam("context")String context) {
+  	java.util.Map<String, String> params = QueryParser.parse(context, VALID_FIELDS);
+  	return this.service.findByContext(new QueryBuilder(params));
   }
   /**
   * Descr: Message sender
@@ -165,21 +228,72 @@ public class CommunicationRequestResource {
   */
   @GET
   @Path("sender")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<CommunicationRequest> sender(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<CommunicationRequest> sender(@QueryParam("sender")String sender) {
+  	java.util.Map<String, String> params = QueryParser.parse(sender, VALID_FIELDS);
   	return this.service.findBySender(new QueryBuilder(params));
   }
   /**
-  * Descr: Focus of message
-  * Type: reference
+  * Descr: Unique identifier
+  * Type: token
   */
   @GET
-  @Path("subject")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<CommunicationRequest> subject(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findBySubject(new QueryBuilder(params));
+  public List<CommunicationRequest> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Composite request this is part of
+  * Type: token
+  */
+  @GET
+  public List<CommunicationRequest> groupidentifier(@QueryParam("groupidentifier")String groupidentifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(groupidentifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: draft | active | suspended | cancelled | completed | entered-in-error | unknown
+  * Type: token
+  */
+  @GET
+  public List<CommunicationRequest> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Message category
+  * Type: token
+  */
+  @GET
+  public List<CommunicationRequest> category(@QueryParam("category")String category) {
+  	java.util.Map<String, String> params = QueryParser.parse(category, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Message urgency
+  * Type: token
+  */
+  @GET
+  public List<CommunicationRequest> priority(@QueryParam("priority")String priority) {
+  	java.util.Map<String, String> params = QueryParser.parse(priority, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: A channel of communication
+  * Type: token
+  */
+  @GET
+  public List<CommunicationRequest> medium(@QueryParam("medium")String medium) {
+  	java.util.Map<String, String> params = QueryParser.parse(medium, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: When scheduled
+  * Type: date
+  */
+  @GET
+  public List<CommunicationRequest> occurrence(@QueryParam("occurrence")String occurrence) {
+  	java.util.Map<String, String> params = QueryParser.parse(occurrence, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "authored|basedon|category|context|encounter|groupidentifier|identifier|medium|occurrence|patient|priority|recipient|replaces|requester|sender|status|subject";

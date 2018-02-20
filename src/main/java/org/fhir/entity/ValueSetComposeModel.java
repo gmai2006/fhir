@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="valuesetcompose")
 public class ValueSetComposeModel  implements Serializable {
-	private static final long serialVersionUID = 151873631168919318L;
+	private static final long serialVersionUID = 151910893744626875L;
   /**
   * Description: "If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined."
   */
@@ -120,7 +119,9 @@ public class ValueSetComposeModel  implements Serializable {
 
   public ValueSetComposeModel(ValueSetCompose o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.lockedDate = o.getLockedDate();
     this.inactive = o.getInactive();
     if (null != o.getInclude() && !o.getInclude().isEmpty()) {
@@ -130,6 +131,12 @@ public class ValueSetComposeModel  implements Serializable {
     if (null != o.getExclude() && !o.getExclude().isEmpty()) {
     	this.exclude_id = "exclude" + this.parent_id;
     	this.exclude = ValueSetIncludeHelper.toModelFromArray(o.getExclude(), this.exclude_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

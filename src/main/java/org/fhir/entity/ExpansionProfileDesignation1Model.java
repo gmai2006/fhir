@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="expansionprofiledesignation1")
 public class ExpansionProfileDesignation1Model  implements Serializable {
-	private static final long serialVersionUID = 151873631142054528L;
+	private static final long serialVersionUID = 151910893717834854L;
   /**
   * Description: "The language this designation is defined for."
   */
@@ -49,12 +48,14 @@ public class ExpansionProfileDesignation1Model  implements Serializable {
 
   /**
   * Description: "Which kinds of designation to include in the expansion."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"use\"", length = 16777215)
-  private String use;
+  @Column(name="\"use_id\"")
+  private String use_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="use_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> use;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -100,9 +101,20 @@ public class ExpansionProfileDesignation1Model  implements Serializable {
 
   public ExpansionProfileDesignation1Model(ExpansionProfileDesignation1 o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.language = o.getLanguage();
-    this.use = JsonUtils.toJson(o.getUse());
+    if (null != o.getUse() ) {
+    	this.use_id = "use" + this.parent_id;
+    	this.use = CodingHelper.toModel(o.getUse(), this.use_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getLanguage() {
@@ -111,10 +123,10 @@ public class ExpansionProfileDesignation1Model  implements Serializable {
   public void setLanguage( String value) {
     this.language = value;
   }
-  public String getUse() {
+  public java.util.List<CodingModel> getUse() {
     return this.use;
   }
-  public void setUse( String value) {
+  public void setUse( java.util.List<CodingModel> value) {
     this.use = value;
   }
   public String getModifierExtension() {
@@ -147,7 +159,6 @@ public class ExpansionProfileDesignation1Model  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ExpansionProfileDesignation1Model]:" + "\n");
      builder.append("language" + "->" + this.language + "\n"); 
-     builder.append("use" + "->" + this.use + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

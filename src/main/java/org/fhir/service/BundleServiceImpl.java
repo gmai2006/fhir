@@ -113,4 +113,22 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<Bundle> findByLink(QueryBuilder queryBuilder) {
+  	final List<Bundle> result = dao.findByLink(queryBuilder);
+    logger.info("findBylink - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Bundle> findByEntry(QueryBuilder queryBuilder) {
+  	final List<Bundle> result = dao.findByEntry(queryBuilder);
+    logger.info("findByentry - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Bundle> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Bundle> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationdispensesubstitution")
 public class MedicationDispenseSubstitutionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631108848367L;
+	private static final long serialVersionUID = 151910893687679896L;
   /**
   * Description: "True if the dispenser dispensed a different drug or product from what was prescribed."
   */
@@ -48,21 +47,25 @@ public class MedicationDispenseSubstitutionModel  implements Serializable {
 
   /**
   * Description: "A code signifying whether a different drug was dispensed from what was prescribed."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "Indicates the reason for the substitution of (or lack of substitution) from what was prescribed."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reason;
 
   /**
   * Description: "The person or organization that has primary responsibility for the substitution."
@@ -119,12 +122,27 @@ public class MedicationDispenseSubstitutionModel  implements Serializable {
 
   public MedicationDispenseSubstitutionModel(MedicationDispenseSubstitution o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.wasSubstituted = o.getWasSubstituted();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason_id = "reason" + this.parent_id;
+    	this.reason = CodeableConceptHelper.toModelFromArray(o.getReason(), this.reason_id);
+    }
     if (null != o.getResponsibleParty() && !o.getResponsibleParty().isEmpty()) {
     	this.responsibleparty_id = "responsibleparty" + this.parent_id;
     	this.responsibleParty = ReferenceHelper.toModelFromArray(o.getResponsibleParty(), this.responsibleparty_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -134,16 +152,16 @@ public class MedicationDispenseSubstitutionModel  implements Serializable {
   public void setWasSubstituted( Boolean value) {
     this.wasSubstituted = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getReason() {
+  public java.util.List<CodeableConceptModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodeableConceptModel> value) {
     this.reason = value;
   }
   public java.util.List<ReferenceModel> getResponsibleParty() {
@@ -182,8 +200,6 @@ public class MedicationDispenseSubstitutionModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationDispenseSubstitutionModel]:" + "\n");
      builder.append("wasSubstituted" + "->" + this.wasSubstituted + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

@@ -42,7 +42,18 @@ public interface RiskAssessmentDao {
 
   public List<RiskAssessment> findByField(QueryBuilder queryBuilder);
 
+  public List<RiskAssessment> findByBasedOn(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByParent(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByMethod(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByCode(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findBySubject(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByContext(QueryBuilder queryBuilder);
   public List<RiskAssessment> findByCondition(QueryBuilder queryBuilder);
   public List<RiskAssessment> findByPerformer(QueryBuilder queryBuilder);
-  public List<RiskAssessment> findBySubject(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByReasonCodeableConcept(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByReasonReference(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByBasis(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByPrediction(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByText(QueryBuilder queryBuilder);
+  public List<RiskAssessment> findByMeta(QueryBuilder queryBuilder);
 }

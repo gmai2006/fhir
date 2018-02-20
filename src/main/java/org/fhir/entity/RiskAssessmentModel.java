@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="riskassessment")
 public class RiskAssessmentModel  implements Serializable {
-	private static final long serialVersionUID = 151873631191661713L;
+	private static final long serialVersionUID = 151910893768696458L;
   /**
   * Description: "This is a RiskAssessment resource"
   */
@@ -88,21 +87,25 @@ public class RiskAssessmentModel  implements Serializable {
 
   /**
   * Description: "The algorithm, process or mechanism used to evaluate the risk."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"method\"", length = 16777215)
-  private String method;
+  @Column(name="\"method_id\"")
+  private String method_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> method;
 
   /**
   * Description: "The type of the risk assessment performed."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The patient or group the risk assessment applies to."
@@ -167,12 +170,14 @@ public class RiskAssessmentModel  implements Serializable {
 
   /**
   * Description: "The reason the risk assessment was performed."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonCodeableConcept\"", length = 16777215)
-  private String reasonCodeableConcept;
+  @Column(name="\"reasoncodeableconcept_id\"")
+  private String reasoncodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonCodeableConcept;
 
   /**
   * Description: "The reason the risk assessment was performed."
@@ -312,7 +317,9 @@ public class RiskAssessmentModel  implements Serializable {
   public RiskAssessmentModel(RiskAssessment o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getBasedOn() ) {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModel(o.getBasedOn(), this.basedon_id);
@@ -322,8 +329,14 @@ public class RiskAssessmentModel  implements Serializable {
     	this.parent = ReferenceHelper.toModel(o.getParent(), this.parent_id);
     }
     this.status = o.getStatus();
-    this.method = JsonUtils.toJson(o.getMethod());
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getMethod() ) {
+    	this.method_id = "method" + this.id;
+    	this.method = CodeableConceptHelper.toModel(o.getMethod(), this.method_id);
+    }
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -333,7 +346,9 @@ public class RiskAssessmentModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    if (null != o.getOccurrencePeriod()) {
+    	this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    }
     if (null != o.getCondition() ) {
     	this.condition_id = "condition" + this.id;
     	this.condition = ReferenceHelper.toModel(o.getCondition(), this.condition_id);
@@ -342,7 +357,10 @@ public class RiskAssessmentModel  implements Serializable {
     	this.performer_id = "performer" + this.id;
     	this.performer = ReferenceHelper.toModel(o.getPerformer(), this.performer_id);
     }
-    this.reasonCodeableConcept = JsonUtils.toJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonCodeableConcept() ) {
+    	this.reasoncodeableconcept_id = "reasoncodeableconcept" + this.id;
+    	this.reasonCodeableConcept = CodeableConceptHelper.toModel(o.getReasonCodeableConcept(), this.reasoncodeableconcept_id);
+    }
     if (null != o.getReasonReference() ) {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModel(o.getReasonReference(), this.reasonreference_id);
@@ -360,6 +378,15 @@ public class RiskAssessmentModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -399,16 +426,16 @@ public class RiskAssessmentModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getMethod() {
+  public java.util.List<CodeableConceptModel> getMethod() {
     return this.method;
   }
-  public void setMethod( String value) {
+  public void setMethod( java.util.List<CodeableConceptModel> value) {
     this.method = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -447,10 +474,10 @@ public class RiskAssessmentModel  implements Serializable {
   public void setPerformer( java.util.List<ReferenceModel> value) {
     this.performer = value;
   }
-  public String getReasonCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getReasonCodeableConcept() {
     return this.reasonCodeableConcept;
   }
-  public void setReasonCodeableConcept( String value) {
+  public void setReasonCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.reasonCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
@@ -539,11 +566,8 @@ public class RiskAssessmentModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("method" + "->" + this.method + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
-     builder.append("reasonCodeableConcept" + "->" + this.reasonCodeableConcept + "\n"); 
      builder.append("mitigation" + "->" + this.mitigation + "\n"); 
      builder.append("comment" + "->" + this.comment + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

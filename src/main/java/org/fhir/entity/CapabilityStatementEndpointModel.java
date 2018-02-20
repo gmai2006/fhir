@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,16 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementendpoint")
 public class CapabilityStatementEndpointModel  implements Serializable {
-	private static final long serialVersionUID = 151873631198226508L;
+	private static final long serialVersionUID = 151910893775084102L;
   /**
   * Description: "A list of the messaging transport protocol(s) identifiers, supported by this endpoint."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"protocol\"", length = 16777215)
-  private String protocol;
+  @Column(name="\"protocol_id\"")
+  private String protocol_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="protocol_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> protocol;
 
   /**
   * Description: "The network address of the end-point. For solutions that do not use network addresses for routing, it can be just an identifier."
@@ -100,15 +100,26 @@ public class CapabilityStatementEndpointModel  implements Serializable {
 
   public CapabilityStatementEndpointModel(CapabilityStatementEndpoint o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.protocol = JsonUtils.toJson(o.getProtocol());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getProtocol() ) {
+    	this.protocol_id = "protocol" + this.parent_id;
+    	this.protocol = CodingHelper.toModel(o.getProtocol(), this.protocol_id);
+    }
     this.address = o.getAddress();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getProtocol() {
+  public java.util.List<CodingModel> getProtocol() {
     return this.protocol;
   }
-  public void setProtocol( String value) {
+  public void setProtocol( java.util.List<CodingModel> value) {
     this.protocol = value;
   }
   public String getAddress() {
@@ -146,7 +157,6 @@ public class CapabilityStatementEndpointModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CapabilityStatementEndpointModel]:" + "\n");
-     builder.append("protocol" + "->" + this.protocol + "\n"); 
      builder.append("address" + "->" + this.address + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

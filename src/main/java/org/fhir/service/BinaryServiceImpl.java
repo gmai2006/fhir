@@ -113,4 +113,16 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<Binary> findBySecurityContext(QueryBuilder queryBuilder) {
+  	final List<Binary> result = dao.findBySecurityContext(queryBuilder);
+    logger.info("findBysecurityContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Binary> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Binary> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

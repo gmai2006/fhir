@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="observationrelated")
 public class ObservationRelatedModel  implements Serializable {
-	private static final long serialVersionUID = 151873631189718632L;
+	private static final long serialVersionUID = 151910893766686283L;
   /**
   * Description: "A code specifying the kind of relationship that exists with the target resource."
   */
@@ -101,11 +100,19 @@ public class ObservationRelatedModel  implements Serializable {
 
   public ObservationRelatedModel(ObservationRelated o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.type = o.getType();
     if (null != o.getTarget() ) {
     	this.target_id = "target" + this.parent_id;
     	this.target = ReferenceHelper.toModel(o.getTarget(), this.target_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

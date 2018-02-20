@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="supplydeliverysupplieditem")
 public class SupplyDeliverySuppliedItemModel  implements Serializable {
-	private static final long serialVersionUID = 151873631139095164L;
+	private static final long serialVersionUID = 151910893714452094L;
   /**
   * Description: "The amount of supply that has been dispensed. Includes unit of measure."
   */
@@ -52,12 +51,14 @@ public class SupplyDeliverySuppliedItemModel  implements Serializable {
 
   /**
   * Description: "Identifies the medication, substance or device being dispensed. This is either a link to a resource representing the details of the item or a code that identifies the item from a known list."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"itemCodeableConcept\"", length = 16777215)
-  private String itemCodeableConcept;
+  @Column(name="\"itemcodeableconcept_id\"")
+  private String itemcodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="itemcodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> itemCodeableConcept;
 
   /**
   * Description: "Identifies the medication, substance or device being dispensed. This is either a link to a resource representing the details of the item or a code that identifies the item from a known list."
@@ -114,15 +115,26 @@ public class SupplyDeliverySuppliedItemModel  implements Serializable {
 
   public SupplyDeliverySuppliedItemModel(SupplyDeliverySuppliedItem o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getQuantity() ) {
     	this.quantity_id = "quantity" + this.parent_id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
     }
-    this.itemCodeableConcept = JsonUtils.toJson(o.getItemCodeableConcept());
+    if (null != o.getItemCodeableConcept() ) {
+    	this.itemcodeableconcept_id = "itemcodeableconcept" + this.parent_id;
+    	this.itemCodeableConcept = CodeableConceptHelper.toModel(o.getItemCodeableConcept(), this.itemcodeableconcept_id);
+    }
     if (null != o.getItemReference() ) {
     	this.itemreference_id = "itemreference" + this.parent_id;
     	this.itemReference = ReferenceHelper.toModel(o.getItemReference(), this.itemreference_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -132,10 +144,10 @@ public class SupplyDeliverySuppliedItemModel  implements Serializable {
   public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
-  public String getItemCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getItemCodeableConcept() {
     return this.itemCodeableConcept;
   }
-  public void setItemCodeableConcept( String value) {
+  public void setItemCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.itemCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getItemReference() {
@@ -173,7 +185,6 @@ public class SupplyDeliverySuppliedItemModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[SupplyDeliverySuppliedItemModel]:" + "\n");
-     builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

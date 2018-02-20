@@ -114,15 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Organization> findByType(QueryBuilder queryBuilder) {
+  	final List<Organization> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Organization> findByAddress(QueryBuilder queryBuilder) {
   	final List<Organization> result = dao.findByAddress(queryBuilder);
     logger.info("findByaddress - exited - return value={} result ");
     return result;
   }
   @Override
+  public List<Organization> findByPartOf(QueryBuilder queryBuilder) {
+  	final List<Organization> result = dao.findByPartOf(queryBuilder);
+    logger.info("findBypartOf - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Organization> findByContact(QueryBuilder queryBuilder) {
+  	final List<Organization> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Organization> findByEndpoint(QueryBuilder queryBuilder) {
   	final List<Organization> result = dao.findByEndpoint(queryBuilder);
     logger.info("findByendpoint - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Organization> findByText(QueryBuilder queryBuilder) {
+  	final List<Organization> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Organization> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Organization> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

@@ -167,8 +167,12 @@ public class DocumentReference  extends DomainResource  {
     if (null != o.getDocStatus()) {
       this.docStatus = o.getDocStatus();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
-    this.FHIRclass = CodeableConceptHelper.fromJson(o.getFHIRclass());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getFHIRclass() && !o.getFHIRclass().isEmpty()) {
+      this.FHIRclass = new CodeableConcept(o.getFHIRclass().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -192,6 +196,9 @@ public class DocumentReference  extends DomainResource  {
     }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
+    }
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securityLabel = CodeableConceptHelper.fromArray2Array(o.getSecurityLabel());
     }
     if (null != o.getContent() && !o.getContent().isEmpty()) {
     	this.content = DocumentReferenceContentHelper.fromArray2Array(o.getContent());

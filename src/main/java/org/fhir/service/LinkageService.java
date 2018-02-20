@@ -40,6 +40,8 @@ public interface LinkageService {
   public List<Linkage> findByField(QueryBuilder queryBuilder);
   public List<Linkage> findByAuthor(QueryBuilder queryBuilder);
   public List<Linkage> findByItem(QueryBuilder queryBuilder);
+  public List<Linkage> findByText(QueryBuilder queryBuilder);
+  public List<Linkage> findByMeta(QueryBuilder queryBuilder);
 
 
 }

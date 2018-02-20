@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="careteamparticipant")
 public class CareTeamParticipantModel  implements Serializable {
-	private static final long serialVersionUID = 151873631184330087L;
+	private static final long serialVersionUID = 151910893761032784L;
   /**
   * Description: "Indicates specific responsibility of an individual within the care team, such as \"Primary care physician\", \"Trained social worker counselor\", \"Caregiver\", etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"role\"", length = 16777215)
-  private String role;
+  @Column(name="\"role_id\"")
+  private String role_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="role_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> role;
 
   /**
   * Description: "The specific person or organization who is participating/expected to participate in the care team."
@@ -123,8 +124,13 @@ public class CareTeamParticipantModel  implements Serializable {
 
   public CareTeamParticipantModel(CareTeamParticipant o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.role = JsonUtils.toJson(o.getRole());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getRole() ) {
+    	this.role_id = "role" + this.parent_id;
+    	this.role = CodeableConceptHelper.toModel(o.getRole(), this.role_id);
+    }
     if (null != o.getMember() ) {
     	this.member_id = "member" + this.parent_id;
     	this.member = ReferenceHelper.toModel(o.getMember(), this.member_id);
@@ -133,13 +139,21 @@ public class CareTeamParticipantModel  implements Serializable {
     	this.onbehalfof_id = "onbehalfof" + this.parent_id;
     	this.onBehalfOf = ReferenceHelper.toModel(o.getOnBehalfOf(), this.onbehalfof_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getRole() {
+  public java.util.List<CodeableConceptModel> getRole() {
     return this.role;
   }
-  public void setRole( String value) {
+  public void setRole( java.util.List<CodeableConceptModel> value) {
     this.role = value;
   }
   public java.util.List<ReferenceModel> getMember() {
@@ -189,7 +203,6 @@ public class CareTeamParticipantModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CareTeamParticipantModel]:" + "\n");
-     builder.append("role" + "->" + this.role + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

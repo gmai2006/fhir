@@ -113,4 +113,76 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<Appointment> findByServiceCategory(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findByServiceCategory(queryBuilder);
+    logger.info("findByserviceCategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findByServiceType(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findByServiceType(queryBuilder);
+    logger.info("findByserviceType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findBySpecialty(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findBySpecialty(queryBuilder);
+    logger.info("findByspecialty - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findByAppointmentType(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findByAppointmentType(queryBuilder);
+    logger.info("findByappointmentType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findByReason(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findByReason(queryBuilder);
+    logger.info("findByreason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findByIndication(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findByIndication(queryBuilder);
+    logger.info("findByindication - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findBySupportingInformation(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findBySupportingInformation(queryBuilder);
+    logger.info("findBysupportingInformation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findBySlot(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findBySlot(queryBuilder);
+    logger.info("findByslot - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findByIncomingReferral(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findByIncomingReferral(queryBuilder);
+    logger.info("findByincomingReferral - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findByParticipant(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findByParticipant(queryBuilder);
+    logger.info("findByparticipant - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findByText(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Appointment> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Appointment> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

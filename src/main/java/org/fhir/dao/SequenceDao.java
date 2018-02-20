@@ -43,4 +43,15 @@ public interface SequenceDao {
   public List<Sequence> findByField(QueryBuilder queryBuilder);
 
   public List<Sequence> findByPatient(QueryBuilder queryBuilder);
+  public List<Sequence> findBySpecimen(QueryBuilder queryBuilder);
+  public List<Sequence> findByDevice(QueryBuilder queryBuilder);
+  public List<Sequence> findByPerformer(QueryBuilder queryBuilder);
+  public List<Sequence> findByQuantity(QueryBuilder queryBuilder);
+  public List<Sequence> findByReferenceSeq(QueryBuilder queryBuilder);
+  public List<Sequence> findByVariant(QueryBuilder queryBuilder);
+  public List<Sequence> findByQuality(QueryBuilder queryBuilder);
+  public List<Sequence> findByRepository(QueryBuilder queryBuilder);
+  public List<Sequence> findByPointer(QueryBuilder queryBuilder);
+  public List<Sequence> findByText(QueryBuilder queryBuilder);
+  public List<Sequence> findByMeta(QueryBuilder queryBuilder);
 }

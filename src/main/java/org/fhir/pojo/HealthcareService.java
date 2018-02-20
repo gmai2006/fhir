@@ -212,7 +212,15 @@ public class HealthcareService  extends DomainResource  {
     if (null != o.getProvidedBy() && !o.getProvidedBy().isEmpty()) {
       this.providedBy = new Reference(o.getProvidedBy().get(0));
     }
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type = CodeableConceptHelper.fromArray2Array(o.getType());
+    }
+    if (null != o.getSpecialty() && !o.getSpecialty().isEmpty()) {
+    	this.specialty = CodeableConceptHelper.fromArray2Array(o.getSpecialty());
+    }
     if (null != o.getLocation() && !o.getLocation().isEmpty()) {
     	this.location = ReferenceHelper.fromArray2Array(o.getLocation());
     }
@@ -229,12 +237,23 @@ public class HealthcareService  extends DomainResource  {
     if (null != o.getCoverageArea() && !o.getCoverageArea().isEmpty()) {
     	this.coverageArea = ReferenceHelper.fromArray2Array(o.getCoverageArea());
     }
-    this.eligibility = CodeableConceptHelper.fromJson(o.getEligibility());
+    if (null != o.getServiceProvisionCode() && !o.getServiceProvisionCode().isEmpty()) {
+    	this.serviceProvisionCode = CodeableConceptHelper.fromArray2Array(o.getServiceProvisionCode());
+    }
+    if (null != o.getEligibility() && !o.getEligibility().isEmpty()) {
+      this.eligibility = new CodeableConcept(o.getEligibility().get(0));
+    }
     if (null != o.getEligibilityNote()) {
       this.eligibilityNote = o.getEligibilityNote();
     }
     if (o.getProgramName() != null) {
     	this.programName = org.fhir.utils.JsonUtils.json2Array(o.getProgramName());
+    }
+    if (null != o.getCharacteristic() && !o.getCharacteristic().isEmpty()) {
+    	this.characteristic = CodeableConceptHelper.fromArray2Array(o.getCharacteristic());
+    }
+    if (null != o.getReferralMethod() && !o.getReferralMethod().isEmpty()) {
+    	this.referralMethod = CodeableConceptHelper.fromArray2Array(o.getReferralMethod());
     }
     if (null != o.getAppointmentRequired()) {
       this.appointmentRequired = o.getAppointmentRequired();

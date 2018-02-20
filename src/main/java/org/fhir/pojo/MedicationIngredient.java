@@ -62,7 +62,9 @@ public class MedicationIngredient  extends BackboneElement  {
 
   public MedicationIngredient(MedicationIngredientModel o) {
     this.id = o.getId();
-    this.itemCodeableConcept = CodeableConceptHelper.fromJson(o.getItemCodeableConcept());
+    if (null != o.getItemCodeableConcept() && !o.getItemCodeableConcept().isEmpty()) {
+      this.itemCodeableConcept = new CodeableConcept(o.getItemCodeableConcept().get(0));
+    }
     if (null != o.getItemReference() && !o.getItemReference().isEmpty()) {
       this.itemReference = new Reference(o.getItemReference().get(0));
     }

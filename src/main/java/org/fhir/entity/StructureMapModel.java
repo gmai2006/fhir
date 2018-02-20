@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="structuremap")
 public class StructureMapModel  implements Serializable {
-	private static final long serialVersionUID = 151873631125156356L;
+	private static final long serialVersionUID = 151910893701729250L;
   /**
   * Description: "This is a StructureMap resource"
   */
@@ -144,12 +143,14 @@ public class StructureMapModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the structure map is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "Explaination of why this structure map is needed and why it has been designed as it has."
@@ -286,6 +287,9 @@ public class StructureMapModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.url = o.getUrl();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.version = o.getVersion();
     this.name = o.getName();
     this.title = o.getTitle();
@@ -302,13 +306,17 @@ public class StructureMapModel  implements Serializable {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
     this.purpose = o.getPurpose();
     this.copyright = o.getCopyright();
     if (null != o.getStructure() && !o.getStructure().isEmpty()) {
     	this.structure_id = "structure" + this.id;
     	this.structure = StructureMapStructureHelper.toModelFromArray(o.getStructure(), this.structure_id);
     }
-    this.FHIRimport = org.fhir.utils.JsonUtils.write2String(o.getFHIRimport());
+    this.FHIRimport = org.fhir.utils.JsonUtils.toJson(o.getFHIRimport());
     if (null != o.getGroup() && !o.getGroup().isEmpty()) {
     	this.group_id = "group" + this.id;
     	this.group = StructureMapGroupHelper.toModelFromArray(o.getGroup(), this.group_id);
@@ -316,6 +324,15 @@ public class StructureMapModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -403,10 +420,10 @@ public class StructureMapModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public String getPurpose() {
@@ -503,7 +520,6 @@ public class StructureMapModel  implements Serializable {
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("FHIRimport" + "->" + this.FHIRimport + "\n"); 

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claimaccident")
 public class ClaimAccidentModel  implements Serializable {
-	private static final long serialVersionUID = 151873631197664414L;
+	private static final long serialVersionUID = 151910893774377543L;
   /**
   * Description: "Date of an accident which these services are addressing."
   */
@@ -49,12 +48,14 @@ public class ClaimAccidentModel  implements Serializable {
 
   /**
   * Description: "Type of accident: work, auto, etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "Accident Place."
@@ -122,9 +123,14 @@ public class ClaimAccidentModel  implements Serializable {
 
   public ClaimAccidentModel(ClaimAccident o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.date = o.getDate();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     if (null != o.getLocationAddress() ) {
     	this.locationaddress_id = "locationaddress" + this.parent_id;
     	this.locationAddress = AddressHelper.toModel(o.getLocationAddress(), this.locationaddress_id);
@@ -132,6 +138,12 @@ public class ClaimAccidentModel  implements Serializable {
     if (null != o.getLocationReference() ) {
     	this.locationreference_id = "locationreference" + this.parent_id;
     	this.locationReference = ReferenceHelper.toModel(o.getLocationReference(), this.locationreference_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -141,10 +153,10 @@ public class ClaimAccidentModel  implements Serializable {
   public void setDate( String value) {
     this.date = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public java.util.List<AddressModel> getLocationAddress() {
@@ -189,7 +201,6 @@ public class ClaimAccidentModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[ClaimAccidentModel]:" + "\n");
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

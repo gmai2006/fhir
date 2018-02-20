@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationdispenseperformer")
 public class MedicationDispensePerformerModel  implements Serializable {
-	private static final long serialVersionUID = 15187363113713990L;
+	private static final long serialVersionUID = 151910893712178475L;
   /**
   * Description: "The device, practitioner, etc. who performed the action.  It should be assumed that the actor is the dispenser of the medication."
   */
@@ -105,7 +104,9 @@ public class MedicationDispensePerformerModel  implements Serializable {
 
   public MedicationDispensePerformerModel(MedicationDispensePerformer o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getActor() ) {
     	this.actor_id = "actor" + this.parent_id;
     	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);
@@ -113,6 +114,12 @@ public class MedicationDispensePerformerModel  implements Serializable {
     if (null != o.getOnBehalfOf() ) {
     	this.onbehalfof_id = "onbehalfof" + this.parent_id;
     	this.onBehalfOf = ReferenceHelper.toModel(o.getOnBehalfOf(), this.onbehalfof_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

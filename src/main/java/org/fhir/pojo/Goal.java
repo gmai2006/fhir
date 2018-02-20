@@ -152,15 +152,24 @@ public class Goal  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.priority = CodeableConceptHelper.fromJson(o.getPriority());
-    this.description = CodeableConceptHelper.fromJson(o.getDescription());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category = CodeableConceptHelper.fromArray2Array(o.getCategory());
+    }
+    if (null != o.getPriority() && !o.getPriority().isEmpty()) {
+      this.priority = new CodeableConcept(o.getPriority().get(0));
+    }
+    if (null != o.getDescription() && !o.getDescription().isEmpty()) {
+      this.description = new CodeableConcept(o.getDescription().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
     if (null != o.getStartDate()) {
       this.startDate = o.getStartDate();
     }
-    this.startCodeableConcept = CodeableConceptHelper.fromJson(o.getStartCodeableConcept());
+    if (null != o.getStartCodeableConcept() && !o.getStartCodeableConcept().isEmpty()) {
+      this.startCodeableConcept = new CodeableConcept(o.getStartCodeableConcept().get(0));
+    }
     if (null != o.getTarget() && !o.getTarget().isEmpty()) {
       this.target = new GoalTarget(o.getTarget().get(0));
     }
@@ -175,6 +184,9 @@ public class Goal  extends DomainResource  {
     }
     if (null != o.getAddresses() && !o.getAddresses().isEmpty()) {
     	this.addresses = ReferenceHelper.fromArray2Array(o.getAddresses());
+    }
+    if (null != o.getOutcomeCode() && !o.getOutcomeCode().isEmpty()) {
+    	this.outcomeCode = CodeableConceptHelper.fromArray2Array(o.getOutcomeCode());
     }
     if (null != o.getOutcomeReference() && !o.getOutcomeReference().isEmpty()) {
     	this.outcomeReference = ReferenceHelper.fromArray2Array(o.getOutcomeReference());

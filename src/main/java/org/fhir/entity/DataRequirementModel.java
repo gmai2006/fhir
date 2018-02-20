@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="datarequirement")
 public class DataRequirementModel  implements Serializable {
-	private static final long serialVersionUID = 151873631158337369L;
+	private static final long serialVersionUID = 151910893734563671L;
   /**
   * Description: "The type of the required data, specified as the type name of a resource. For profiles, this value is set to the type of the base resource of the profile."
   */
@@ -115,10 +114,12 @@ public class DataRequirementModel  implements Serializable {
 
   public DataRequirementModel(DataRequirement o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.type = o.getType();
-    this.profile = org.fhir.utils.JsonUtils.write2String(o.getProfile());
-    this.mustSupport = org.fhir.utils.JsonUtils.write2String(o.getMustSupport());
+    this.profile = org.fhir.utils.JsonUtils.toJson(o.getProfile());
+    this.mustSupport = org.fhir.utils.JsonUtils.toJson(o.getMustSupport());
     if (null != o.getCodeFilter() && !o.getCodeFilter().isEmpty()) {
     	this.codefilter_id = "codefilter" + this.parent_id;
     	this.codeFilter = DataRequirementCodeFilterHelper.toModelFromArray(o.getCodeFilter(), this.codefilter_id);
@@ -126,6 +127,9 @@ public class DataRequirementModel  implements Serializable {
     if (null != o.getDateFilter() && !o.getDateFilter().isEmpty()) {
     	this.datefilter_id = "datefilter" + this.parent_id;
     	this.dateFilter = DataRequirementDateFilterHelper.toModelFromArray(o.getDateFilter(), this.datefilter_id);
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

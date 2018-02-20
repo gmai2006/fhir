@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationingredient")
 public class MedicationIngredientModel  implements Serializable {
-	private static final long serialVersionUID = 151873631133084165L;
+	private static final long serialVersionUID = 15191089370866806L;
   /**
   * Description: "The actual ingredient - either a substance (simple ingredient) or another medication."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"itemCodeableConcept\"", length = 16777215)
-  private String itemCodeableConcept;
+  @Column(name="\"itemcodeableconcept_id\"")
+  private String itemcodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="itemcodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> itemCodeableConcept;
 
   /**
   * Description: "The actual ingredient - either a substance (simple ingredient) or another medication."
@@ -119,20 +120,33 @@ public class MedicationIngredientModel  implements Serializable {
 
   public MedicationIngredientModel(MedicationIngredient o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.itemCodeableConcept = JsonUtils.toJson(o.getItemCodeableConcept());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getItemCodeableConcept() ) {
+    	this.itemcodeableconcept_id = "itemcodeableconcept" + this.parent_id;
+    	this.itemCodeableConcept = CodeableConceptHelper.toModel(o.getItemCodeableConcept(), this.itemcodeableconcept_id);
+    }
     if (null != o.getItemReference() ) {
     	this.itemreference_id = "itemreference" + this.parent_id;
     	this.itemReference = ReferenceHelper.toModel(o.getItemReference(), this.itemreference_id);
     }
     this.isActive = o.getIsActive();
-    this.amount = JsonUtils.toJson(o.getAmount());
+    if (null != o.getAmount()) {
+    	this.amount = JsonUtils.toJson(o.getAmount());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getItemCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getItemCodeableConcept() {
     return this.itemCodeableConcept;
   }
-  public void setItemCodeableConcept( String value) {
+  public void setItemCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.itemCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getItemReference() {
@@ -182,7 +196,6 @@ public class MedicationIngredientModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationIngredientModel]:" + "\n");
-     builder.append("itemCodeableConcept" + "->" + this.itemCodeableConcept + "\n"); 
      builder.append("isActive" + "->" + this.isActive + "\n"); 
      builder.append("amount" + "->" + this.amount + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

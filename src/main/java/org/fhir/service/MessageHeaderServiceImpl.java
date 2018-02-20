@@ -114,9 +114,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<MessageHeader> findByAuthor(QueryBuilder queryBuilder) {
-  	final List<MessageHeader> result = dao.findByAuthor(queryBuilder);
-    logger.info("findByauthor - exited - return value={} result ");
+  public List<MessageHeader> findByEvent(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByEvent(queryBuilder);
+    logger.info("findByevent - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,27 +126,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<MessageHeader> findByEnterer(QueryBuilder queryBuilder) {
-  	final List<MessageHeader> result = dao.findByEnterer(queryBuilder);
-    logger.info("findByenterer - exited - return value={} result ");
-    return result;
-  }
-  @Override
-  public List<MessageHeader> findByFocus(QueryBuilder queryBuilder) {
-  	final List<MessageHeader> result = dao.findByFocus(queryBuilder);
-    logger.info("findByfocus - exited - return value={} result ");
-    return result;
-  }
-  @Override
   public List<MessageHeader> findByReceiver(QueryBuilder queryBuilder) {
   	final List<MessageHeader> result = dao.findByReceiver(queryBuilder);
     logger.info("findByreceiver - exited - return value={} result ");
-    return result;
-  }
-  @Override
-  public List<MessageHeader> findByResponsible(QueryBuilder queryBuilder) {
-  	final List<MessageHeader> result = dao.findByResponsible(queryBuilder);
-    logger.info("findByresponsible - exited - return value={} result ");
     return result;
   }
   @Override
@@ -156,9 +138,57 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<MessageHeader> findByEnterer(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByEnterer(queryBuilder);
+    logger.info("findByenterer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<MessageHeader> findBySource(QueryBuilder queryBuilder) {
   	final List<MessageHeader> result = dao.findBySource(queryBuilder);
     logger.info("findBysource - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByResponsible(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByResponsible(queryBuilder);
+    logger.info("findByresponsible - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByReason(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByReason(queryBuilder);
+    logger.info("findByreason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByResponse(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByResponse(queryBuilder);
+    logger.info("findByresponse - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByFocus(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByFocus(queryBuilder);
+    logger.info("findByfocus - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByText(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MessageHeader> findByMeta(QueryBuilder queryBuilder) {
+  	final List<MessageHeader> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="messageheader")
 public class MessageHeaderModel  implements Serializable {
-	private static final long serialVersionUID = 151873631176098101L;
+	private static final long serialVersionUID = 151910893752646187L;
   /**
   * Description: "This is a MessageHeader resource"
   */
@@ -49,13 +48,14 @@ public class MessageHeaderModel  implements Serializable {
 
   /**
   * Description: "Code that identifies the event this message represents and connects it with its definition. Events defined as part of the FHIR specification have the system value \"http://hl7.org/fhir/message-events\"."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"event\"", length = 16777215)
-  private String event;
+  @Column(name="\"event_id\"")
+  private String event_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="event_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> event;
 
   /**
   * Description: "The destination application which the message is intended for."
@@ -143,12 +143,14 @@ public class MessageHeaderModel  implements Serializable {
 
   /**
   * Description: "Coded indication of the cause for the event - indicates  a reason for the occurrence of the event that is a focus of this message."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reason;
 
   /**
   * Description: "Information about the message that this message is a response to.  Only present if this message is a response."
@@ -263,7 +265,10 @@ public class MessageHeaderModel  implements Serializable {
   public MessageHeaderModel(MessageHeader o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.event = JsonUtils.toJson(o.getEvent());
+    if (null != o.getEvent() ) {
+    	this.event_id = "event" + this.id;
+    	this.event = CodingHelper.toModel(o.getEvent(), this.event_id);
+    }
     if (null != o.getDestination() && !o.getDestination().isEmpty()) {
     	this.destination_id = "destination" + this.id;
     	this.destination = MessageHeaderDestinationHelper.toModelFromArray(o.getDestination(), this.destination_id);
@@ -293,7 +298,10 @@ public class MessageHeaderModel  implements Serializable {
     	this.responsible_id = "responsible" + this.id;
     	this.responsible = ReferenceHelper.toModel(o.getResponsible(), this.responsible_id);
     }
-    this.reason = JsonUtils.toJson(o.getReason());
+    if (null != o.getReason() ) {
+    	this.reason_id = "reason" + this.id;
+    	this.reason = CodeableConceptHelper.toModel(o.getReason(), this.reason_id);
+    }
     if (null != o.getResponse() ) {
     	this.response_id = "response" + this.id;
     	this.response = MessageHeaderResponseHelper.toModel(o.getResponse(), this.response_id);
@@ -305,6 +313,15 @@ public class MessageHeaderModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -320,10 +337,10 @@ public class MessageHeaderModel  implements Serializable {
   public void setResourceType( String value) {
     this.resourceType = value;
   }
-  public String getEvent() {
+  public java.util.List<CodingModel> getEvent() {
     return this.event;
   }
-  public void setEvent( String value) {
+  public void setEvent( java.util.List<CodingModel> value) {
     this.event = value;
   }
   public java.util.List<MessageHeaderDestinationModel> getDestination() {
@@ -374,10 +391,10 @@ public class MessageHeaderModel  implements Serializable {
   public void setResponsible( java.util.List<ReferenceModel> value) {
     this.responsible = value;
   }
-  public String getReason() {
+  public java.util.List<CodeableConceptModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodeableConceptModel> value) {
     this.reason = value;
   }
   public java.util.List<MessageHeaderResponseModel> getResponse() {
@@ -446,9 +463,7 @@ public class MessageHeaderModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MessageHeaderModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
-     builder.append("event" + "->" + this.event + "\n"); 
      builder.append("timestamp" + "->" + this.timestamp + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

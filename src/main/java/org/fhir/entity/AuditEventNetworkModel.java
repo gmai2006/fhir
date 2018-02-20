@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="auditeventnetwork")
 public class AuditEventNetworkModel  implements Serializable {
-	private static final long serialVersionUID = 151873631163188144L;
+	private static final long serialVersionUID = 151910893739112879L;
   /**
   * Description: "An identifier for the network access point of the user device for the audit event."
   */
@@ -97,9 +96,17 @@ public class AuditEventNetworkModel  implements Serializable {
 
   public AuditEventNetworkModel(AuditEventNetwork o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.address = o.getAddress();
     this.type = o.getType();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getAddress() {

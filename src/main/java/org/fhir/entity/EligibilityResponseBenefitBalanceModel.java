@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,25 +37,28 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="eligibilityresponsebenefitbalance")
 public class EligibilityResponseBenefitBalanceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631184962804L;
+	private static final long serialVersionUID = 151910893761688172L;
   /**
   * Description: "Dental, Vision, Medical, Pharmacy, Rehab etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "Dental: basic, major, ortho; Vision exam, glasses, contacts; etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"subCategory\"", length = 16777215)
-  private String subCategory;
+  @Column(name="\"subcategory_id\"")
+  private String subcategory_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subcategory_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> subCategory;
 
   /**
   * Description: "True if the indicated class of service is excluded from the plan, missing or False indicated the service is included in the coverage."
@@ -81,30 +83,36 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
 
   /**
   * Description: "Network designation."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"network\"", length = 16777215)
-  private String network;
+  @Column(name="\"network_id\"")
+  private String network_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="network_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> network;
 
   /**
   * Description: "Unit designation: individual or family."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"unit\"", length = 16777215)
-  private String unit;
+  @Column(name="\"unit_id\"")
+  private String unit_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="unit_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> unit;
 
   /**
   * Description: "The term or period of the values such as 'maximum lifetime benefit' or 'maximum annual vistis'."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"term\"", length = 16777215)
-  private String term;
+  @Column(name="\"term_id\"")
+  private String term_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="term_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> term;
 
   /**
   * Description: "Benefits Used to date."
@@ -161,31 +169,54 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
 
   public EligibilityResponseBenefitBalanceModel(EligibilityResponseBenefitBalance o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.category = JsonUtils.toJson(o.getCategory());
-    this.subCategory = JsonUtils.toJson(o.getSubCategory());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.parent_id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
+    if (null != o.getSubCategory() ) {
+    	this.subcategory_id = "subcategory" + this.parent_id;
+    	this.subCategory = CodeableConceptHelper.toModel(o.getSubCategory(), this.subcategory_id);
+    }
     this.excluded = o.getExcluded();
     this.name = o.getName();
     this.description = o.getDescription();
-    this.network = JsonUtils.toJson(o.getNetwork());
-    this.unit = JsonUtils.toJson(o.getUnit());
-    this.term = JsonUtils.toJson(o.getTerm());
+    if (null != o.getNetwork() ) {
+    	this.network_id = "network" + this.parent_id;
+    	this.network = CodeableConceptHelper.toModel(o.getNetwork(), this.network_id);
+    }
+    if (null != o.getUnit() ) {
+    	this.unit_id = "unit" + this.parent_id;
+    	this.unit = CodeableConceptHelper.toModel(o.getUnit(), this.unit_id);
+    }
+    if (null != o.getTerm() ) {
+    	this.term_id = "term" + this.parent_id;
+    	this.term = CodeableConceptHelper.toModel(o.getTerm(), this.term_id);
+    }
     if (null != o.getFinancial() && !o.getFinancial().isEmpty()) {
     	this.financial_id = "financial" + this.parent_id;
     	this.financial = EligibilityResponseFinancialHelper.toModelFromArray(o.getFinancial(), this.financial_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getSubCategory() {
+  public java.util.List<CodeableConceptModel> getSubCategory() {
     return this.subCategory;
   }
-  public void setSubCategory( String value) {
+  public void setSubCategory( java.util.List<CodeableConceptModel> value) {
     this.subCategory = value;
   }
   public Boolean getExcluded() {
@@ -206,22 +237,22 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
   public void setDescription( String value) {
     this.description = value;
   }
-  public String getNetwork() {
+  public java.util.List<CodeableConceptModel> getNetwork() {
     return this.network;
   }
-  public void setNetwork( String value) {
+  public void setNetwork( java.util.List<CodeableConceptModel> value) {
     this.network = value;
   }
-  public String getUnit() {
+  public java.util.List<CodeableConceptModel> getUnit() {
     return this.unit;
   }
-  public void setUnit( String value) {
+  public void setUnit( java.util.List<CodeableConceptModel> value) {
     this.unit = value;
   }
-  public String getTerm() {
+  public java.util.List<CodeableConceptModel> getTerm() {
     return this.term;
   }
-  public void setTerm( String value) {
+  public void setTerm( java.util.List<CodeableConceptModel> value) {
     this.term = value;
   }
   public java.util.List<EligibilityResponseFinancialModel> getFinancial() {
@@ -259,14 +290,9 @@ public class EligibilityResponseBenefitBalanceModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[EligibilityResponseBenefitBalanceModel]:" + "\n");
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("subCategory" + "->" + this.subCategory + "\n"); 
      builder.append("excluded" + "->" + this.excluded + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("network" + "->" + this.network + "\n"); 
-     builder.append("unit" + "->" + this.unit + "\n"); 
-     builder.append("term" + "->" + this.term + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

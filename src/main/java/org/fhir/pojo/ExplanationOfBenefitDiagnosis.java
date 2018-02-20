@@ -71,11 +71,18 @@ public class ExplanationOfBenefitDiagnosis  extends BackboneElement  {
     if (null != o.getSequence()) {
       this.sequence = o.getSequence();
     }
-    this.diagnosisCodeableConcept = CodeableConceptHelper.fromJson(o.getDiagnosisCodeableConcept());
+    if (null != o.getDiagnosisCodeableConcept() && !o.getDiagnosisCodeableConcept().isEmpty()) {
+      this.diagnosisCodeableConcept = new CodeableConcept(o.getDiagnosisCodeableConcept().get(0));
+    }
     if (null != o.getDiagnosisReference() && !o.getDiagnosisReference().isEmpty()) {
       this.diagnosisReference = new Reference(o.getDiagnosisReference().get(0));
     }
-    this.packageCode = CodeableConceptHelper.fromJson(o.getPackageCode());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type = CodeableConceptHelper.fromArray2Array(o.getType());
+    }
+    if (null != o.getPackageCode() && !o.getPackageCode().isEmpty()) {
+      this.packageCode = new CodeableConcept(o.getPackageCode().get(0));
+    }
   }
 
   public void setSequence( Float value) {

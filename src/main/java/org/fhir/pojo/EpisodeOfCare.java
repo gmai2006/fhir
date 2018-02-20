@@ -118,6 +118,9 @@ public class EpisodeOfCare  extends DomainResource  {
     if (null != o.getStatusHistory() && !o.getStatusHistory().isEmpty()) {
     	this.statusHistory = EpisodeOfCareStatusHistoryHelper.fromArray2Array(o.getStatusHistory());
     }
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type = CodeableConceptHelper.fromArray2Array(o.getType());
+    }
     if (null != o.getDiagnosis() && !o.getDiagnosis().isEmpty()) {
     	this.diagnosis = EpisodeOfCareDiagnosisHelper.fromArray2Array(o.getDiagnosis());
     }

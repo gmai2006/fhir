@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="fhirlist")
 public class FHIRListModel  implements Serializable {
-	private static final long serialVersionUID = 151873631123445802L;
+	private static final long serialVersionUID = 151910893700295910L;
   /**
   * Description: "This is a List resource"
   */
@@ -79,12 +78,14 @@ public class FHIRListModel  implements Serializable {
 
   /**
   * Description: "This code defines the purpose of the list - why it was created."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The common subject (or patient) of the resources that are in the list, if there is one."
@@ -129,12 +130,14 @@ public class FHIRListModel  implements Serializable {
 
   /**
   * Description: "What order applies to the items in the list."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"orderedBy\"", length = 16777215)
-  private String orderedBy;
+  @Column(name="\"orderedby_id\"")
+  private String orderedby_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="orderedby_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> orderedBy;
 
   /**
   * Description: "Comments that apply to the overall list."
@@ -158,12 +161,14 @@ public class FHIRListModel  implements Serializable {
 
   /**
   * Description: "If the list is empty, why the list is empty."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"emptyReason\"", length = 16777215)
-  private String emptyReason;
+  @Column(name="\"emptyreason_id\"")
+  private String emptyreason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="emptyreason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> emptyReason;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -256,10 +261,16 @@ public class FHIRListModel  implements Serializable {
   public FHIRListModel(FHIRList o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     this.mode = o.getMode();
     this.title = o.getTitle();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -273,15 +284,33 @@ public class FHIRListModel  implements Serializable {
     	this.source_id = "source" + this.id;
     	this.source = ReferenceHelper.toModel(o.getSource(), this.source_id);
     }
-    this.orderedBy = JsonUtils.toJson(o.getOrderedBy());
+    if (null != o.getOrderedBy() ) {
+    	this.orderedby_id = "orderedby" + this.id;
+    	this.orderedBy = CodeableConceptHelper.toModel(o.getOrderedBy(), this.orderedby_id);
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getEntry() && !o.getEntry().isEmpty()) {
     	this.entry_id = "entry" + this.id;
     	this.entry = ListEntryHelper.toModelFromArray(o.getEntry(), this.entry_id);
     }
-    this.emptyReason = JsonUtils.toJson(o.getEmptyReason());
+    if (null != o.getEmptyReason() ) {
+    	this.emptyreason_id = "emptyreason" + this.id;
+    	this.emptyReason = CodeableConceptHelper.toModel(o.getEmptyReason(), this.emptyreason_id);
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -321,10 +350,10 @@ public class FHIRListModel  implements Serializable {
   public void setTitle( String value) {
     this.title = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -351,10 +380,10 @@ public class FHIRListModel  implements Serializable {
   public void setSource( java.util.List<ReferenceModel> value) {
     this.source = value;
   }
-  public String getOrderedBy() {
+  public java.util.List<CodeableConceptModel> getOrderedBy() {
     return this.orderedBy;
   }
-  public void setOrderedBy( String value) {
+  public void setOrderedBy( java.util.List<CodeableConceptModel> value) {
     this.orderedBy = value;
   }
   public String getNote() {
@@ -369,10 +398,10 @@ public class FHIRListModel  implements Serializable {
   public void setEntry( java.util.List<ListEntryModel> value) {
     this.entry = value;
   }
-  public String getEmptyReason() {
+  public java.util.List<CodeableConceptModel> getEmptyReason() {
     return this.emptyReason;
   }
-  public void setEmptyReason( String value) {
+  public void setEmptyReason( java.util.List<CodeableConceptModel> value) {
     this.emptyReason = value;
   }
   public java.util.List<NarrativeModel> getText() {
@@ -433,11 +462,8 @@ public class FHIRListModel  implements Serializable {
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("mode" + "->" + this.mode + "\n"); 
      builder.append("title" + "->" + this.title + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
-     builder.append("orderedBy" + "->" + this.orderedBy + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("emptyReason" + "->" + this.emptyReason + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

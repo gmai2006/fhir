@@ -222,8 +222,18 @@ public class Condition  extends DomainResource  {
     if (null != o.getVerificationStatus()) {
       this.verificationStatus = o.getVerificationStatus();
     }
-    this.severity = CodeableConceptHelper.fromJson(o.getSeverity());
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category = CodeableConceptHelper.fromArray2Array(o.getCategory());
+    }
+    if (null != o.getSeverity() && !o.getSeverity().isEmpty()) {
+      this.severity = new CodeableConcept(o.getSeverity().get(0));
+    }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+    	this.bodySite = CodeableConceptHelper.fromArray2Array(o.getBodySite());
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }

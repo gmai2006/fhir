@@ -62,6 +62,9 @@ public class AuditEventSource  extends BackboneElement  {
       this.site = o.getSite();
     }
     this.identifier = IdentifierHelper.fromJson(o.getIdentifier());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type = CodingHelper.fromArray2Array(o.getType());
+    }
   }
 
   public void setSite( String value) {

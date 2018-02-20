@@ -38,6 +38,12 @@ public interface SubstanceService {
   public Substance update(Substance bean);
   public void delete(Substance bean);
   public List<Substance> findByField(QueryBuilder queryBuilder);
+  public List<Substance> findByCategory(QueryBuilder queryBuilder);
+  public List<Substance> findByCode(QueryBuilder queryBuilder);
+  public List<Substance> findByInstance(QueryBuilder queryBuilder);
+  public List<Substance> findByIngredient(QueryBuilder queryBuilder);
+  public List<Substance> findByText(QueryBuilder queryBuilder);
+  public List<Substance> findByMeta(QueryBuilder queryBuilder);
 
 
 }

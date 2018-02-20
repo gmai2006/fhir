@@ -38,12 +38,19 @@ public interface DiagnosticReportService {
   public DiagnosticReport update(DiagnosticReport bean);
   public void delete(DiagnosticReport bean);
   public List<DiagnosticReport> findByField(QueryBuilder queryBuilder);
-  public List<DiagnosticReport> findByContext(QueryBuilder queryBuilder);
-  public List<DiagnosticReport> findByImage(QueryBuilder queryBuilder);
-  public List<DiagnosticReport> findByPerformer(QueryBuilder queryBuilder);
-  public List<DiagnosticReport> findByResult(QueryBuilder queryBuilder);
-  public List<DiagnosticReport> findBySpecimen(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByBasedOn(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByCategory(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByCode(QueryBuilder queryBuilder);
   public List<DiagnosticReport> findBySubject(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByContext(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByPerformer(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findBySpecimen(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByResult(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByImagingStudy(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByImage(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByCodedDiagnosis(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByText(QueryBuilder queryBuilder);
+  public List<DiagnosticReport> findByMeta(QueryBuilder queryBuilder);
 
 
 }

@@ -114,9 +114,75 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Goal> findByCategory(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Goal> findByPriority(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByPriority(queryBuilder);
+    logger.info("findBypriority - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Goal> findByDescription(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByDescription(queryBuilder);
+    logger.info("findBydescription - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Goal> findBySubject(QueryBuilder queryBuilder) {
   	final List<Goal> result = dao.findBySubject(queryBuilder);
     logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Goal> findByStartCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByStartCodeableConcept(queryBuilder);
+    logger.info("findBystartCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Goal> findByTarget(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByTarget(queryBuilder);
+    logger.info("findBytarget - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Goal> findByExpressedBy(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByExpressedBy(queryBuilder);
+    logger.info("findByexpressedBy - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Goal> findByAddresses(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByAddresses(queryBuilder);
+    logger.info("findByaddresses - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Goal> findByOutcomeCode(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByOutcomeCode(queryBuilder);
+    logger.info("findByoutcomeCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Goal> findByOutcomeReference(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByOutcomeReference(queryBuilder);
+    logger.info("findByoutcomeReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Goal> findByText(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Goal> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Goal> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

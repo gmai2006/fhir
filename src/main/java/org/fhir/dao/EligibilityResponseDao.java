@@ -42,6 +42,14 @@ public interface EligibilityResponseDao {
 
   public List<EligibilityResponse> findByField(QueryBuilder queryBuilder);
 
-  public List<EligibilityResponse> findByInsurer(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByRequestProvider(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByRequestOrganization(QueryBuilder queryBuilder);
   public List<EligibilityResponse> findByRequest(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByOutcome(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByInsurer(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByInsurance(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByForm(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByError(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByText(QueryBuilder queryBuilder);
+  public List<EligibilityResponse> findByMeta(QueryBuilder queryBuilder);
 }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="imagingstudyseries")
 public class ImagingStudySeriesModel  implements Serializable {
-	private static final long serialVersionUID = 151873631137354299L;
+	private static final long serialVersionUID = 151910893712334260L;
   /**
   * Description: "Formal identifier for this series."
   */
@@ -57,13 +56,14 @@ public class ImagingStudySeriesModel  implements Serializable {
 
   /**
   * Description: "The modality of this series sequence."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"modality\"", length = 16777215)
-  private String modality;
+  @Column(name="\"modality_id\"")
+  private String modality_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="modality_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> modality;
 
   /**
   * Description: "A description of the series."
@@ -100,21 +100,25 @@ public class ImagingStudySeriesModel  implements Serializable {
 
   /**
   * Description: "The anatomic structures examined. See DICOM Part 16 Annex L (http://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_L.html) for DICOM to SNOMED-CT mappings. The bodySite may indicate the laterality of body part imaged; if so, it shall be consistent with any content of ImagingStudy.series.laterality."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"bodySite\"", length = 16777215)
-  private String bodySite;
+  @Column(name="\"bodysite_id\"")
+  private String bodysite_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> bodySite;
 
   /**
   * Description: "The laterality of the (possibly paired) anatomic structures examined. E.g., the left knee, both lungs, or unpaired abdomen. If present, shall be consistent with any laterality information indicated in ImagingStudy.series.bodySite."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"laterality\"", length = 16777215)
-  private String laterality;
+  @Column(name="\"laterality_id\"")
+  private String laterality_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="laterality_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> laterality;
 
   /**
   * Description: "The date and time the series was started."
@@ -190,10 +194,15 @@ public class ImagingStudySeriesModel  implements Serializable {
 
   public ImagingStudySeriesModel(ImagingStudySeries o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.uid = o.getUid();
     this.number = o.getNumber();
-    this.modality = JsonUtils.toJson(o.getModality());
+    if (null != o.getModality() ) {
+    	this.modality_id = "modality" + this.parent_id;
+    	this.modality = CodingHelper.toModel(o.getModality(), this.modality_id);
+    }
     this.description = o.getDescription();
     this.numberOfInstances = o.getNumberOfInstances();
     this.availability = o.getAvailability();
@@ -201,8 +210,14 @@ public class ImagingStudySeriesModel  implements Serializable {
     	this.endpoint_id = "endpoint" + this.parent_id;
     	this.endpoint = ReferenceHelper.toModelFromArray(o.getEndpoint(), this.endpoint_id);
     }
-    this.bodySite = JsonUtils.toJson(o.getBodySite());
-    this.laterality = JsonUtils.toJson(o.getLaterality());
+    if (null != o.getBodySite() ) {
+    	this.bodysite_id = "bodysite" + this.parent_id;
+    	this.bodySite = CodingHelper.toModel(o.getBodySite(), this.bodysite_id);
+    }
+    if (null != o.getLaterality() ) {
+    	this.laterality_id = "laterality" + this.parent_id;
+    	this.laterality = CodingHelper.toModel(o.getLaterality(), this.laterality_id);
+    }
     this.started = o.getStarted();
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
     	this.performer_id = "performer" + this.parent_id;
@@ -211,6 +226,12 @@ public class ImagingStudySeriesModel  implements Serializable {
     if (null != o.getInstance() && !o.getInstance().isEmpty()) {
     	this.instance_id = "instance" + this.parent_id;
     	this.instance = ImagingStudyInstanceHelper.toModelFromArray(o.getInstance(), this.instance_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -226,10 +247,10 @@ public class ImagingStudySeriesModel  implements Serializable {
   public void setNumber( Float value) {
     this.number = value;
   }
-  public String getModality() {
+  public java.util.List<CodingModel> getModality() {
     return this.modality;
   }
-  public void setModality( String value) {
+  public void setModality( java.util.List<CodingModel> value) {
     this.modality = value;
   }
   public String getDescription() {
@@ -256,16 +277,16 @@ public class ImagingStudySeriesModel  implements Serializable {
   public void setEndpoint( java.util.List<ReferenceModel> value) {
     this.endpoint = value;
   }
-  public String getBodySite() {
+  public java.util.List<CodingModel> getBodySite() {
     return this.bodySite;
   }
-  public void setBodySite( String value) {
+  public void setBodySite( java.util.List<CodingModel> value) {
     this.bodySite = value;
   }
-  public String getLaterality() {
+  public java.util.List<CodingModel> getLaterality() {
     return this.laterality;
   }
-  public void setLaterality( String value) {
+  public void setLaterality( java.util.List<CodingModel> value) {
     this.laterality = value;
   }
   public String getStarted() {
@@ -317,12 +338,9 @@ public class ImagingStudySeriesModel  implements Serializable {
     builder.append("[ImagingStudySeriesModel]:" + "\n");
      builder.append("uid" + "->" + this.uid + "\n"); 
      builder.append("number" + "->" + this.number + "\n"); 
-     builder.append("modality" + "->" + this.modality + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("numberOfInstances" + "->" + this.numberOfInstances + "\n"); 
      builder.append("availability" + "->" + this.availability + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
-     builder.append("laterality" + "->" + this.laterality + "\n"); 
      builder.append("started" + "->" + this.started + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

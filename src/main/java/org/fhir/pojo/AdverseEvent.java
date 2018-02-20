@@ -146,7 +146,9 @@ public class AdverseEvent  extends DomainResource  {
     if (null != o.getCategory()) {
       this.category = o.getCategory();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
       this.subject = new Reference(o.getSubject().get(0));
     }
@@ -159,8 +161,12 @@ public class AdverseEvent  extends DomainResource  {
     if (null != o.getLocation() && !o.getLocation().isEmpty()) {
       this.location = new Reference(o.getLocation().get(0));
     }
-    this.seriousness = CodeableConceptHelper.fromJson(o.getSeriousness());
-    this.outcome = CodeableConceptHelper.fromJson(o.getOutcome());
+    if (null != o.getSeriousness() && !o.getSeriousness().isEmpty()) {
+      this.seriousness = new CodeableConcept(o.getSeriousness().get(0));
+    }
+    if (null != o.getOutcome() && !o.getOutcome().isEmpty()) {
+      this.outcome = new CodeableConcept(o.getOutcome().get(0));
+    }
     if (null != o.getRecorder() && !o.getRecorder().isEmpty()) {
       this.recorder = new Reference(o.getRecorder().get(0));
     }

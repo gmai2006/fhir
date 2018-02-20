@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="listentry")
 public class ListEntryModel  implements Serializable {
-	private static final long serialVersionUID = 151873631177953174L;
+	private static final long serialVersionUID = 151910893754397367L;
   /**
   * Description: "The flag allows the system constructing the list to indicate the role and significance of the item in the list."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"flag\"", length = 16777215)
-  private String flag;
+  @Column(name="\"flag_id\"")
+  private String flag_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="flag_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> flag;
 
   /**
   * Description: "True if this item is marked as deleted in the list."
@@ -118,20 +119,31 @@ public class ListEntryModel  implements Serializable {
 
   public ListEntryModel(ListEntry o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.flag = JsonUtils.toJson(o.getFlag());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getFlag() ) {
+    	this.flag_id = "flag" + this.parent_id;
+    	this.flag = CodeableConceptHelper.toModel(o.getFlag(), this.flag_id);
+    }
     this.deleted = o.getDeleted();
     this.date = o.getDate();
     if (null != o.getItem() ) {
     	this.item_id = "item" + this.parent_id;
     	this.item = ReferenceHelper.toModel(o.getItem(), this.item_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getFlag() {
+  public java.util.List<CodeableConceptModel> getFlag() {
     return this.flag;
   }
-  public void setFlag( String value) {
+  public void setFlag( java.util.List<CodeableConceptModel> value) {
     this.flag = value;
   }
   public Boolean getDeleted() {
@@ -181,7 +193,6 @@ public class ListEntryModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ListEntryModel]:" + "\n");
-     builder.append("flag" + "->" + this.flag + "\n"); 
      builder.append("deleted" + "->" + this.deleted + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

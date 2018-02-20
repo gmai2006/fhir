@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="structuremaprule")
 public class StructureMapRuleModel  implements Serializable {
-	private static final long serialVersionUID = 151873631171623776L;
+	private static final long serialVersionUID = 151910893747441073L;
   /**
   * Description: "Name of the rule for internal references."
   */
@@ -142,7 +141,9 @@ public class StructureMapRuleModel  implements Serializable {
 
   public StructureMapRuleModel(StructureMapRule o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.name = o.getName();
     if (null != o.getSource() && !o.getSource().isEmpty()) {
     	this.source_id = "source" + this.parent_id;
@@ -161,6 +162,12 @@ public class StructureMapRuleModel  implements Serializable {
     	this.dependent = StructureMapDependentHelper.toModelFromArray(o.getDependent(), this.dependent_id);
     }
     this.documentation = o.getDocumentation();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getName() {

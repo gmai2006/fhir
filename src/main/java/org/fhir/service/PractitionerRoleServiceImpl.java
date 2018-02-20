@@ -114,15 +114,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<PractitionerRole> findByEndpoint(QueryBuilder queryBuilder) {
-  	final List<PractitionerRole> result = dao.findByEndpoint(queryBuilder);
-    logger.info("findByendpoint - exited - return value={} result ");
-    return result;
-  }
-  @Override
-  public List<PractitionerRole> findByLocation(QueryBuilder queryBuilder) {
-  	final List<PractitionerRole> result = dao.findByLocation(queryBuilder);
-    logger.info("findBylocation - exited - return value={} result ");
+  public List<PractitionerRole> findByPractitioner(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByPractitioner(queryBuilder);
+    logger.info("findBypractitioner - exited - return value={} result ");
     return result;
   }
   @Override
@@ -132,9 +126,57 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<PractitionerRole> findByPractitioner(QueryBuilder queryBuilder) {
-  	final List<PractitionerRole> result = dao.findByPractitioner(queryBuilder);
-    logger.info("findBypractitioner - exited - return value={} result ");
+  public List<PractitionerRole> findByCode(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findBySpecialty(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findBySpecialty(queryBuilder);
+    logger.info("findByspecialty - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findByLocation(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findByHealthcareService(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByHealthcareService(queryBuilder);
+    logger.info("findByhealthcareService - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findByAvailableTime(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByAvailableTime(queryBuilder);
+    logger.info("findByavailableTime - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findByNotAvailable(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByNotAvailable(queryBuilder);
+    logger.info("findBynotAvailable - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findByEndpoint(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByEndpoint(queryBuilder);
+    logger.info("findByendpoint - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findByText(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PractitionerRole> findByMeta(QueryBuilder queryBuilder) {
+  	final List<PractitionerRole> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

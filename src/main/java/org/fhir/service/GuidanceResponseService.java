@@ -38,7 +38,18 @@ public interface GuidanceResponseService {
   public GuidanceResponse update(GuidanceResponse bean);
   public void delete(GuidanceResponse bean);
   public List<GuidanceResponse> findByField(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByModule(QueryBuilder queryBuilder);
   public List<GuidanceResponse> findBySubject(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByContext(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByPerformer(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByReasonCodeableConcept(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByReasonReference(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByEvaluationMessage(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByOutputParameters(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByResult(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByDataRequirement(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByText(QueryBuilder queryBuilder);
+  public List<GuidanceResponse> findByMeta(QueryBuilder queryBuilder);
 
 
 }

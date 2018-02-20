@@ -148,7 +148,9 @@ public class SupplyRequest  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
     if (null != o.getPriority()) {
       this.priority = o.getPriority();
     }
@@ -169,7 +171,9 @@ public class SupplyRequest  extends DomainResource  {
     if (null != o.getSupplier() && !o.getSupplier().isEmpty()) {
     	this.supplier = ReferenceHelper.fromArray2Array(o.getSupplier());
     }
-    this.reasonCodeableConcept = CodeableConceptHelper.fromJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonCodeableConcept() && !o.getReasonCodeableConcept().isEmpty()) {
+      this.reasonCodeableConcept = new CodeableConcept(o.getReasonCodeableConcept().get(0));
+    }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
       this.reasonReference = new Reference(o.getReasonReference().get(0));
     }

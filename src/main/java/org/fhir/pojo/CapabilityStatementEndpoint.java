@@ -53,7 +53,9 @@ public class CapabilityStatementEndpoint  extends BackboneElement  {
 
   public CapabilityStatementEndpoint(CapabilityStatementEndpointModel o) {
     this.id = o.getId();
-    this.protocol = CodingHelper.fromJson(o.getProtocol());
+    if (null != o.getProtocol() && !o.getProtocol().isEmpty()) {
+      this.protocol = new Coding(o.getProtocol().get(0));
+    }
     if (null != o.getAddress()) {
       this.address = o.getAddress();
     }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,16 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="riskassessmentprediction")
 public class RiskAssessmentPredictionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631179147167L;
+	private static final long serialVersionUID = 15191089375557077L;
   /**
   * Description: "One of the potential outcomes for the patient (e.g. remission, death,  a particular condition)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"outcome\"", length = 16777215)
-  private String outcome;
+  @Column(name="\"outcome_id\"")
+  private String outcome_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> outcome;
 
   /**
   * Description: "How likely is the outcome (in the specified timeframe)."
@@ -68,12 +68,14 @@ public class RiskAssessmentPredictionModel  implements Serializable {
 
   /**
   * Description: "How likely is the outcome (in the specified timeframe), expressed as a qualitative value (e.g. low, medium, high)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"qualitativeRisk\"", length = 16777215)
-  private String qualitativeRisk;
+  @Column(name="\"qualitativerisk_id\"")
+  private String qualitativerisk_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="qualitativerisk_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> qualitativeRisk;
 
   /**
   * Description: "Indicates the risk for this particular subject (with their specific characteristics) divided by the risk of the population in general.  (Numbers greater than 1 = higher risk than the population, numbers less than 1 = lower risk.)."
@@ -152,21 +154,41 @@ public class RiskAssessmentPredictionModel  implements Serializable {
 
   public RiskAssessmentPredictionModel(RiskAssessmentPrediction o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.outcome = JsonUtils.toJson(o.getOutcome());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getOutcome() ) {
+    	this.outcome_id = "outcome" + this.parent_id;
+    	this.outcome = CodeableConceptHelper.toModel(o.getOutcome(), this.outcome_id);
+    }
     this.probabilityDecimal = o.getProbabilityDecimal();
-    this.probabilityRange = JsonUtils.toJson(o.getProbabilityRange());
-    this.qualitativeRisk = JsonUtils.toJson(o.getQualitativeRisk());
+    if (null != o.getProbabilityRange()) {
+    	this.probabilityRange = JsonUtils.toJson(o.getProbabilityRange());
+    }
+    if (null != o.getQualitativeRisk() ) {
+    	this.qualitativerisk_id = "qualitativerisk" + this.parent_id;
+    	this.qualitativeRisk = CodeableConceptHelper.toModel(o.getQualitativeRisk(), this.qualitativerisk_id);
+    }
     this.relativeRisk = o.getRelativeRisk();
-    this.whenPeriod = JsonUtils.toJson(o.getWhenPeriod());
-    this.whenRange = JsonUtils.toJson(o.getWhenRange());
+    if (null != o.getWhenPeriod()) {
+    	this.whenPeriod = JsonUtils.toJson(o.getWhenPeriod());
+    }
+    if (null != o.getWhenRange()) {
+    	this.whenRange = JsonUtils.toJson(o.getWhenRange());
+    }
     this.rationale = o.getRationale();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getOutcome() {
+  public java.util.List<CodeableConceptModel> getOutcome() {
     return this.outcome;
   }
-  public void setOutcome( String value) {
+  public void setOutcome( java.util.List<CodeableConceptModel> value) {
     this.outcome = value;
   }
   public Float getProbabilityDecimal() {
@@ -181,10 +203,10 @@ public class RiskAssessmentPredictionModel  implements Serializable {
   public void setProbabilityRange( String value) {
     this.probabilityRange = value;
   }
-  public String getQualitativeRisk() {
+  public java.util.List<CodeableConceptModel> getQualitativeRisk() {
     return this.qualitativeRisk;
   }
-  public void setQualitativeRisk( String value) {
+  public void setQualitativeRisk( java.util.List<CodeableConceptModel> value) {
     this.qualitativeRisk = value;
   }
   public Float getRelativeRisk() {
@@ -240,10 +262,8 @@ public class RiskAssessmentPredictionModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[RiskAssessmentPredictionModel]:" + "\n");
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("probabilityDecimal" + "->" + this.probabilityDecimal + "\n"); 
      builder.append("probabilityRange" + "->" + this.probabilityRange + "\n"); 
-     builder.append("qualitativeRisk" + "->" + this.qualitativeRisk + "\n"); 
      builder.append("relativeRisk" + "->" + this.relativeRisk + "\n"); 
      builder.append("whenPeriod" + "->" + this.whenPeriod + "\n"); 
      builder.append("whenRange" + "->" + this.whenRange + "\n"); 

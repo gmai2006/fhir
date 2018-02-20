@@ -38,13 +38,31 @@ public interface ClaimService {
   public Claim update(Claim bean);
   public void delete(Claim bean);
   public List<Claim> findByField(QueryBuilder queryBuilder);
-  public List<Claim> findByEnterer(QueryBuilder queryBuilder);
-  public List<Claim> findByFacility(QueryBuilder queryBuilder);
-  public List<Claim> findByInsurer(QueryBuilder queryBuilder);
-  public List<Claim> findByOrganization(QueryBuilder queryBuilder);
+  public List<Claim> findByType(QueryBuilder queryBuilder);
+  public List<Claim> findBySubType(QueryBuilder queryBuilder);
   public List<Claim> findByPatient(QueryBuilder queryBuilder);
-  public List<Claim> findByPayee(QueryBuilder queryBuilder);
+  public List<Claim> findByEnterer(QueryBuilder queryBuilder);
+  public List<Claim> findByInsurer(QueryBuilder queryBuilder);
   public List<Claim> findByProvider(QueryBuilder queryBuilder);
+  public List<Claim> findByOrganization(QueryBuilder queryBuilder);
+  public List<Claim> findByPriority(QueryBuilder queryBuilder);
+  public List<Claim> findByFundsReserve(QueryBuilder queryBuilder);
+  public List<Claim> findByRelated(QueryBuilder queryBuilder);
+  public List<Claim> findByPrescription(QueryBuilder queryBuilder);
+  public List<Claim> findByOriginalPrescription(QueryBuilder queryBuilder);
+  public List<Claim> findByPayee(QueryBuilder queryBuilder);
+  public List<Claim> findByReferral(QueryBuilder queryBuilder);
+  public List<Claim> findByFacility(QueryBuilder queryBuilder);
+  public List<Claim> findByCareTeam(QueryBuilder queryBuilder);
+  public List<Claim> findByInformation(QueryBuilder queryBuilder);
+  public List<Claim> findByDiagnosis(QueryBuilder queryBuilder);
+  public List<Claim> findByProcedure(QueryBuilder queryBuilder);
+  public List<Claim> findByInsurance(QueryBuilder queryBuilder);
+  public List<Claim> findByAccident(QueryBuilder queryBuilder);
+  public List<Claim> findByItem(QueryBuilder queryBuilder);
+  public List<Claim> findByTotal(QueryBuilder queryBuilder);
+  public List<Claim> findByText(QueryBuilder queryBuilder);
+  public List<Claim> findByMeta(QueryBuilder queryBuilder);
 
 
 }

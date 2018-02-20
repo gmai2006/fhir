@@ -179,12 +179,17 @@ public class NamingSystem  extends DomainResource  {
     if (null != o.getResponsible()) {
       this.responsible = o.getResponsible();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
+    }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction = CodeableConceptHelper.fromArray2Array(o.getJurisdiction());
     }
     if (null != o.getUsage()) {
       this.usage = o.getUsage();

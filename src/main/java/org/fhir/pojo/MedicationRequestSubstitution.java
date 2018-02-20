@@ -55,7 +55,9 @@ public class MedicationRequestSubstitution  extends BackboneElement  {
     if (null != o.getAllowed()) {
       this.allowed = o.getAllowed();
     }
-    this.reason = CodeableConceptHelper.fromJson(o.getReason());
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+      this.reason = new CodeableConcept(o.getReason().get(0));
+    }
   }
 
   public void setAllowed( Boolean value) {

@@ -40,6 +40,15 @@ public interface ProcessResponseService {
   public List<ProcessResponse> findByField(QueryBuilder queryBuilder);
   public List<ProcessResponse> findByOrganization(QueryBuilder queryBuilder);
   public List<ProcessResponse> findByRequest(QueryBuilder queryBuilder);
+  public List<ProcessResponse> findByOutcome(QueryBuilder queryBuilder);
+  public List<ProcessResponse> findByRequestProvider(QueryBuilder queryBuilder);
+  public List<ProcessResponse> findByRequestOrganization(QueryBuilder queryBuilder);
+  public List<ProcessResponse> findByForm(QueryBuilder queryBuilder);
+  public List<ProcessResponse> findByProcessNote(QueryBuilder queryBuilder);
+  public List<ProcessResponse> findByError(QueryBuilder queryBuilder);
+  public List<ProcessResponse> findByCommunicationRequest(QueryBuilder queryBuilder);
+  public List<ProcessResponse> findByText(QueryBuilder queryBuilder);
+  public List<ProcessResponse> findByMeta(QueryBuilder queryBuilder);
 
 
 }

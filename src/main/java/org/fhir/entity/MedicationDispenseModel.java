@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationdispense")
 public class MedicationDispenseModel  implements Serializable {
-	private static final long serialVersionUID = 151873631141316629L;
+	private static final long serialVersionUID = 151910893717076652L;
   /**
   * Description: "This is a MedicationDispense resource"
   */
@@ -76,21 +75,25 @@ public class MedicationDispenseModel  implements Serializable {
 
   /**
   * Description: "Indicates type of medication dispense and where the medication is expected to be consumed or administered."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "Identifies the medication being administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"medicationCodeableConcept\"", length = 16777215)
-  private String medicationCodeableConcept;
+  @Column(name="\"medicationcodeableconcept_id\"")
+  private String medicationcodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="medicationcodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> medicationCodeableConcept;
 
   /**
   * Description: "Identifies the medication being administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications."
@@ -160,12 +163,14 @@ public class MedicationDispenseModel  implements Serializable {
 
   /**
   * Description: "Indicates the type of dispensing event that is performed. For example, Trial Fill, Completion of Trial, Partial Fill, Emergency Fill, Samples, etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The amount of medication that has been dispensed. Includes unit of measure."
@@ -278,12 +283,14 @@ public class MedicationDispenseModel  implements Serializable {
 
   /**
   * Description: "Indicates the reason why a dispense was not performed."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"notDoneReasonCodeableConcept\"", length = 16777215)
-  private String notDoneReasonCodeableConcept;
+  @Column(name="\"notdonereasoncodeableconcept_id\"")
+  private String notdonereasoncodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="notdonereasoncodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> notDoneReasonCodeableConcept;
 
   /**
   * Description: "Indicates the reason why a dispense was not performed."
@@ -398,13 +405,22 @@ public class MedicationDispenseModel  implements Serializable {
   public MedicationDispenseModel(MedicationDispense o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
     	this.partof_id = "partof" + this.id;
     	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
     }
     this.status = o.getStatus();
-    this.category = JsonUtils.toJson(o.getCategory());
-    this.medicationCodeableConcept = JsonUtils.toJson(o.getMedicationCodeableConcept());
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
+    if (null != o.getMedicationCodeableConcept() ) {
+    	this.medicationcodeableconcept_id = "medicationcodeableconcept" + this.id;
+    	this.medicationCodeableConcept = CodeableConceptHelper.toModel(o.getMedicationCodeableConcept(), this.medicationcodeableconcept_id);
+    }
     if (null != o.getMedicationReference() ) {
     	this.medicationreference_id = "medicationreference" + this.id;
     	this.medicationReference = ReferenceHelper.toModel(o.getMedicationReference(), this.medicationreference_id);
@@ -429,7 +445,10 @@ public class MedicationDispenseModel  implements Serializable {
     	this.authorizingprescription_id = "authorizingprescription" + this.id;
     	this.authorizingPrescription = ReferenceHelper.toModelFromArray(o.getAuthorizingPrescription(), this.authorizingprescription_id);
     }
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     if (null != o.getQuantity() ) {
     	this.quantity_id = "quantity" + this.id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
@@ -448,6 +467,9 @@ public class MedicationDispenseModel  implements Serializable {
     	this.receiver_id = "receiver" + this.id;
     	this.receiver = ReferenceHelper.toModelFromArray(o.getReceiver(), this.receiver_id);
     }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getDosageInstruction() && !o.getDosageInstruction().isEmpty()) {
     	this.dosageinstruction_id = "dosageinstruction" + this.id;
     	this.dosageInstruction = DosageHelper.toModelFromArray(o.getDosageInstruction(), this.dosageinstruction_id);
@@ -461,7 +483,10 @@ public class MedicationDispenseModel  implements Serializable {
     	this.detectedIssue = ReferenceHelper.toModelFromArray(o.getDetectedIssue(), this.detectedissue_id);
     }
     this.notDone = o.getNotDone();
-    this.notDoneReasonCodeableConcept = JsonUtils.toJson(o.getNotDoneReasonCodeableConcept());
+    if (null != o.getNotDoneReasonCodeableConcept() ) {
+    	this.notdonereasoncodeableconcept_id = "notdonereasoncodeableconcept" + this.id;
+    	this.notDoneReasonCodeableConcept = CodeableConceptHelper.toModel(o.getNotDoneReasonCodeableConcept(), this.notdonereasoncodeableconcept_id);
+    }
     if (null != o.getNotDoneReasonReference() ) {
     	this.notdonereasonreference_id = "notdonereasonreference" + this.id;
     	this.notDoneReasonReference = ReferenceHelper.toModel(o.getNotDoneReasonReference(), this.notdonereasonreference_id);
@@ -473,6 +498,15 @@ public class MedicationDispenseModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -506,16 +540,16 @@ public class MedicationDispenseModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getMedicationCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getMedicationCodeableConcept() {
     return this.medicationCodeableConcept;
   }
-  public void setMedicationCodeableConcept( String value) {
+  public void setMedicationCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.medicationCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getMedicationReference() {
@@ -554,10 +588,10 @@ public class MedicationDispenseModel  implements Serializable {
   public void setAuthorizingPrescription( java.util.List<ReferenceModel> value) {
     this.authorizingPrescription = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public java.util.List<QuantityModel> getQuantity() {
@@ -626,10 +660,10 @@ public class MedicationDispenseModel  implements Serializable {
   public void setNotDone( Boolean value) {
     this.notDone = value;
   }
-  public String getNotDoneReasonCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getNotDoneReasonCodeableConcept() {
     return this.notDoneReasonCodeableConcept;
   }
-  public void setNotDoneReasonCodeableConcept( String value) {
+  public void setNotDoneReasonCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.notDoneReasonCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getNotDoneReasonReference() {
@@ -700,14 +734,10 @@ public class MedicationDispenseModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("medicationCodeableConcept" + "->" + this.medicationCodeableConcept + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("whenPrepared" + "->" + this.whenPrepared + "\n"); 
      builder.append("whenHandedOver" + "->" + this.whenHandedOver + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("notDone" + "->" + this.notDone + "\n"); 
-     builder.append("notDoneReasonCodeableConcept" + "->" + this.notDoneReasonCodeableConcept + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

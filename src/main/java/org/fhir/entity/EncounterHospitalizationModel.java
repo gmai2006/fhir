@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="encounterhospitalization")
 public class EncounterHospitalizationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631175036206L;
+	private static final long serialVersionUID = 151910893750750772L;
   /**
   * Description: "Pre-admission identifier."
   * Actual type: String;
@@ -61,48 +60,58 @@ public class EncounterHospitalizationModel  implements Serializable {
 
   /**
   * Description: "From where patient was admitted (physician referral, transfer)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"admitSource\"", length = 16777215)
-  private String admitSource;
+  @Column(name="\"admitsource_id\"")
+  private String admitsource_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="admitsource_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> admitSource;
 
   /**
   * Description: "Whether this hospitalization is a readmission and why if known."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reAdmission\"", length = 16777215)
-  private String reAdmission;
+  @Column(name="\"readmission_id\"")
+  private String readmission_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="readmission_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reAdmission;
 
   /**
   * Description: "Diet preferences reported by the patient."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"dietPreference\"", length = 16777215)
-  private String dietPreference;
+  @Column(name="\"dietpreference_id\"")
+  private String dietpreference_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dietpreference_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> dietPreference;
 
   /**
   * Description: "Special courtesies (VIP, board member)."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"specialCourtesy\"", length = 16777215)
-  private String specialCourtesy;
+  @Column(name="\"specialcourtesy_id\"")
+  private String specialcourtesy_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specialcourtesy_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> specialCourtesy;
 
   /**
   * Description: "Any special requests that have been made for this hospitalization encounter, such as the provision of specific equipment or other things."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"specialArrangement\"", length = 16777215)
-  private String specialArrangement;
+  @Column(name="\"specialarrangement_id\"")
+  private String specialarrangement_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specialarrangement_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> specialArrangement;
 
   /**
   * Description: "Location to which the patient is discharged."
@@ -117,12 +126,14 @@ public class EncounterHospitalizationModel  implements Serializable {
 
   /**
   * Description: "Category or kind of location after discharge."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"dischargeDisposition\"", length = 16777215)
-  private String dischargeDisposition;
+  @Column(name="\"dischargedisposition_id\"")
+  private String dischargedisposition_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="dischargedisposition_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> dischargeDisposition;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -168,19 +179,50 @@ public class EncounterHospitalizationModel  implements Serializable {
 
   public EncounterHospitalizationModel(EncounterHospitalization o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.preAdmissionIdentifier = JsonUtils.toJson(o.getPreAdmissionIdentifier());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getPreAdmissionIdentifier()) {
+    	this.preAdmissionIdentifier = JsonUtils.toJson(o.getPreAdmissionIdentifier());
+    }
     if (null != o.getOrigin() ) {
     	this.origin_id = "origin" + this.parent_id;
     	this.origin = ReferenceHelper.toModel(o.getOrigin(), this.origin_id);
     }
-    this.admitSource = JsonUtils.toJson(o.getAdmitSource());
-    this.reAdmission = JsonUtils.toJson(o.getReAdmission());
+    if (null != o.getAdmitSource() ) {
+    	this.admitsource_id = "admitsource" + this.parent_id;
+    	this.admitSource = CodeableConceptHelper.toModel(o.getAdmitSource(), this.admitsource_id);
+    }
+    if (null != o.getReAdmission() ) {
+    	this.readmission_id = "readmission" + this.parent_id;
+    	this.reAdmission = CodeableConceptHelper.toModel(o.getReAdmission(), this.readmission_id);
+    }
+    if (null != o.getDietPreference() && !o.getDietPreference().isEmpty()) {
+    	this.dietpreference_id = "dietpreference" + this.parent_id;
+    	this.dietPreference = CodeableConceptHelper.toModelFromArray(o.getDietPreference(), this.dietpreference_id);
+    }
+    if (null != o.getSpecialCourtesy() && !o.getSpecialCourtesy().isEmpty()) {
+    	this.specialcourtesy_id = "specialcourtesy" + this.parent_id;
+    	this.specialCourtesy = CodeableConceptHelper.toModelFromArray(o.getSpecialCourtesy(), this.specialcourtesy_id);
+    }
+    if (null != o.getSpecialArrangement() && !o.getSpecialArrangement().isEmpty()) {
+    	this.specialarrangement_id = "specialarrangement" + this.parent_id;
+    	this.specialArrangement = CodeableConceptHelper.toModelFromArray(o.getSpecialArrangement(), this.specialarrangement_id);
+    }
     if (null != o.getDestination() ) {
     	this.destination_id = "destination" + this.parent_id;
     	this.destination = ReferenceHelper.toModel(o.getDestination(), this.destination_id);
     }
-    this.dischargeDisposition = JsonUtils.toJson(o.getDischargeDisposition());
+    if (null != o.getDischargeDisposition() ) {
+    	this.dischargedisposition_id = "dischargedisposition" + this.parent_id;
+    	this.dischargeDisposition = CodeableConceptHelper.toModel(o.getDischargeDisposition(), this.dischargedisposition_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getPreAdmissionIdentifier() {
@@ -195,34 +237,34 @@ public class EncounterHospitalizationModel  implements Serializable {
   public void setOrigin( java.util.List<ReferenceModel> value) {
     this.origin = value;
   }
-  public String getAdmitSource() {
+  public java.util.List<CodeableConceptModel> getAdmitSource() {
     return this.admitSource;
   }
-  public void setAdmitSource( String value) {
+  public void setAdmitSource( java.util.List<CodeableConceptModel> value) {
     this.admitSource = value;
   }
-  public String getReAdmission() {
+  public java.util.List<CodeableConceptModel> getReAdmission() {
     return this.reAdmission;
   }
-  public void setReAdmission( String value) {
+  public void setReAdmission( java.util.List<CodeableConceptModel> value) {
     this.reAdmission = value;
   }
-  public String getDietPreference() {
+  public java.util.List<CodeableConceptModel> getDietPreference() {
     return this.dietPreference;
   }
-  public void setDietPreference( String value) {
+  public void setDietPreference( java.util.List<CodeableConceptModel> value) {
     this.dietPreference = value;
   }
-  public String getSpecialCourtesy() {
+  public java.util.List<CodeableConceptModel> getSpecialCourtesy() {
     return this.specialCourtesy;
   }
-  public void setSpecialCourtesy( String value) {
+  public void setSpecialCourtesy( java.util.List<CodeableConceptModel> value) {
     this.specialCourtesy = value;
   }
-  public String getSpecialArrangement() {
+  public java.util.List<CodeableConceptModel> getSpecialArrangement() {
     return this.specialArrangement;
   }
-  public void setSpecialArrangement( String value) {
+  public void setSpecialArrangement( java.util.List<CodeableConceptModel> value) {
     this.specialArrangement = value;
   }
   public java.util.List<ReferenceModel> getDestination() {
@@ -231,10 +273,10 @@ public class EncounterHospitalizationModel  implements Serializable {
   public void setDestination( java.util.List<ReferenceModel> value) {
     this.destination = value;
   }
-  public String getDischargeDisposition() {
+  public java.util.List<CodeableConceptModel> getDischargeDisposition() {
     return this.dischargeDisposition;
   }
-  public void setDischargeDisposition( String value) {
+  public void setDischargeDisposition( java.util.List<CodeableConceptModel> value) {
     this.dischargeDisposition = value;
   }
   public String getModifierExtension() {
@@ -267,12 +309,6 @@ public class EncounterHospitalizationModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[EncounterHospitalizationModel]:" + "\n");
      builder.append("preAdmissionIdentifier" + "->" + this.preAdmissionIdentifier + "\n"); 
-     builder.append("admitSource" + "->" + this.admitSource + "\n"); 
-     builder.append("reAdmission" + "->" + this.reAdmission + "\n"); 
-     builder.append("dietPreference" + "->" + this.dietPreference + "\n"); 
-     builder.append("specialCourtesy" + "->" + this.specialCourtesy + "\n"); 
-     builder.append("specialArrangement" + "->" + this.specialArrangement + "\n"); 
-     builder.append("dischargeDisposition" + "->" + this.dischargeDisposition + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

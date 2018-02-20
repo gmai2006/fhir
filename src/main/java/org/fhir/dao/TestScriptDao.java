@@ -42,4 +42,10 @@ public interface TestScriptDao {
 
   public List<TestScript> findByField(QueryBuilder queryBuilder);
 
+  public List<TestScript> findByContact(QueryBuilder queryBuilder);
+  public List<TestScript> findByUseContext(QueryBuilder queryBuilder);
+  public List<TestScript> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<TestScript> findByProfile(QueryBuilder queryBuilder);
+  public List<TestScript> findByText(QueryBuilder queryBuilder);
+  public List<TestScript> findByMeta(QueryBuilder queryBuilder);
 }

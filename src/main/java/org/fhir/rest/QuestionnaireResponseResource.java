@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.QuestionnaireResponse;
 import org.fhir.service.QuestionnaireResponseService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/QuestionnaireResponse")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class QuestionnaireResponseResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public QuestionnaireResponse find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public QuestionnaireResponse findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<QuestionnaireResponse> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<QuestionnaireResponse> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<QuestionnaireResponse> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<QuestionnaireResponse> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<QuestionnaireResponse> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<QuestionnaireResponse> findAll() {
   	return this.service.selectAll();
   }
@@ -107,35 +172,15 @@ public class QuestionnaireResponseResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<QuestionnaireResponse> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
   /**
-  * Descr: The author of the questionnaire response
+  * Descr: Plan/proposal/order fulfilled by this questionnaire response
   * Type: reference
   */
   @GET
-  @Path("author")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<QuestionnaireResponse> author(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByAuthor(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Encounter or episode associated with the questionnaire response
-  * Type: reference
-  */
-  @GET
-  @Path("context")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<QuestionnaireResponse> context(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByContext(new QueryBuilder(params));
+  @Path("basedon")
+  public List<QuestionnaireResponse> basedon(@QueryParam("basedon")String basedon) {
+  	java.util.Map<String, String> params = QueryParser.parse(basedon, VALID_FIELDS);
+  	return this.service.findByBasedOn(new QueryBuilder(params));
   }
   /**
   * Descr: Procedure or observation this questionnaire response was performed as a part of
@@ -143,9 +188,8 @@ public class QuestionnaireResponseResource {
   */
   @GET
   @Path("parent")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<QuestionnaireResponse> parent(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<QuestionnaireResponse> parent(@QueryParam("parent")String parent) {
+  	java.util.Map<String, String> params = QueryParser.parse(parent, VALID_FIELDS);
   	return this.service.findByParent(new QueryBuilder(params));
   }
   /**
@@ -154,10 +198,29 @@ public class QuestionnaireResponseResource {
   */
   @GET
   @Path("questionnaire")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<QuestionnaireResponse> questionnaire(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<QuestionnaireResponse> questionnaire(@QueryParam("questionnaire")String questionnaire) {
+  	java.util.Map<String, String> params = QueryParser.parse(questionnaire, VALID_FIELDS);
   	return this.service.findByQuestionnaire(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The patient that is the subject of the questionnaire response
+  * Type: reference
+  */
+  @GET
+  @Path("patient")
+  public List<QuestionnaireResponse> patient(@QueryParam("patient")String patient) {
+  	java.util.Map<String, String> params = QueryParser.parse(patient, VALID_FIELDS);
+  	return this.service.findBySubject(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Encounter or episode associated with the questionnaire response
+  * Type: reference
+  */
+  @GET
+  @Path("context")
+  public List<QuestionnaireResponse> context(@QueryParam("context")String context) {
+  	java.util.Map<String, String> params = QueryParser.parse(context, VALID_FIELDS);
+  	return this.service.findByContext(new QueryBuilder(params));
   }
   /**
   * Descr: The individual providing the information reflected in the questionnaire respose
@@ -165,21 +228,36 @@ public class QuestionnaireResponseResource {
   */
   @GET
   @Path("source")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<QuestionnaireResponse> source(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<QuestionnaireResponse> source(@QueryParam("source")String source) {
+  	java.util.Map<String, String> params = QueryParser.parse(source, VALID_FIELDS);
   	return this.service.findBySource(new QueryBuilder(params));
   }
   /**
-  * Descr: The subject of the questionnaire response
-  * Type: reference
+  * Descr: The unique identifier for the questionnaire response
+  * Type: token
   */
   @GET
-  @Path("subject")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<QuestionnaireResponse> subject(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findBySubject(new QueryBuilder(params));
+  public List<QuestionnaireResponse> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The status of the questionnaire response
+  * Type: token
+  */
+  @GET
+  public List<QuestionnaireResponse> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: When the questionnaire response was last changed
+  * Type: date
+  */
+  @GET
+  public List<QuestionnaireResponse> authored(@QueryParam("authored")String authored) {
+  	java.util.Map<String, String> params = QueryParser.parse(authored, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "author|authored|basedon|context|identifier|parent|patient|questionnaire|source|status|subject";

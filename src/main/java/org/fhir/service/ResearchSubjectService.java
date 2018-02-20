@@ -38,7 +38,11 @@ public interface ResearchSubjectService {
   public ResearchSubject update(ResearchSubject bean);
   public void delete(ResearchSubject bean);
   public List<ResearchSubject> findByField(QueryBuilder queryBuilder);
+  public List<ResearchSubject> findByStudy(QueryBuilder queryBuilder);
   public List<ResearchSubject> findByIndividual(QueryBuilder queryBuilder);
+  public List<ResearchSubject> findByConsent(QueryBuilder queryBuilder);
+  public List<ResearchSubject> findByText(QueryBuilder queryBuilder);
+  public List<ResearchSubject> findByMeta(QueryBuilder queryBuilder);
 
 
 }

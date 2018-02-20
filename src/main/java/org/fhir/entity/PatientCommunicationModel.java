@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,16 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="patientcommunication")
 public class PatientCommunicationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631156624861L;
+	private static final long serialVersionUID = 151910893732819962L;
   /**
   * Description: "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"language\"", length = 16777215)
-  private String language;
+  @Column(name="\"language_id\"")
+  private String language_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="language_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> language;
 
   /**
   * Description: "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
@@ -100,15 +100,26 @@ public class PatientCommunicationModel  implements Serializable {
 
   public PatientCommunicationModel(PatientCommunication o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.language = JsonUtils.toJson(o.getLanguage());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getLanguage() ) {
+    	this.language_id = "language" + this.parent_id;
+    	this.language = CodeableConceptHelper.toModel(o.getLanguage(), this.language_id);
+    }
     this.preferred = o.getPreferred();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getLanguage() {
+  public java.util.List<CodeableConceptModel> getLanguage() {
     return this.language;
   }
-  public void setLanguage( String value) {
+  public void setLanguage( java.util.List<CodeableConceptModel> value) {
     this.language = value;
   }
   public Boolean getPreferred() {
@@ -146,7 +157,6 @@ public class PatientCommunicationModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[PatientCommunicationModel]:" + "\n");
-     builder.append("language" + "->" + this.language + "\n"); 
      builder.append("preferred" + "->" + this.preferred + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

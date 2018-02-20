@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="triggerdefinition")
 public class TriggerDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 15187363116683735L;
+	private static final long serialVersionUID = 151910893742489120L;
   /**
   * Description: "The type of triggering event."
   */
@@ -132,10 +131,14 @@ public class TriggerDefinitionModel  implements Serializable {
 
   public TriggerDefinitionModel(TriggerDefinition o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.type = o.getType();
     this.eventName = o.getEventName();
-    this.eventTimingTiming = JsonUtils.toJson(o.getEventTimingTiming());
+    if (null != o.getEventTimingTiming()) {
+    	this.eventTimingTiming = JsonUtils.toJson(o.getEventTimingTiming());
+    }
     if (null != o.getEventTimingReference() ) {
     	this.eventtimingreference_id = "eventtimingreference" + this.parent_id;
     	this.eventTimingReference = ReferenceHelper.toModel(o.getEventTimingReference(), this.eventtimingreference_id);
@@ -145,6 +148,9 @@ public class TriggerDefinitionModel  implements Serializable {
     if (null != o.getEventData() ) {
     	this.eventdata_id = "eventdata" + this.parent_id;
     	this.eventData = DataRequirementHelper.toModel(o.getEventData(), this.eventdata_id);
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

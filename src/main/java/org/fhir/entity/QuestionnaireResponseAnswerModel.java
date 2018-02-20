@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="questionnaireresponseanswer")
 public class QuestionnaireResponseAnswerModel  implements Serializable {
-	private static final long serialVersionUID = 151873631171133125L;
+	private static final long serialVersionUID = 151910893746994440L;
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
   */
@@ -111,12 +110,14 @@ public class QuestionnaireResponseAnswerModel  implements Serializable {
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueCoding\"", length = 16777215)
-  private String valueCoding;
+  @Column(name="\"valuecoding_id\"")
+  private String valuecoding_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecoding_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> valueCoding;
 
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
@@ -195,7 +196,9 @@ public class QuestionnaireResponseAnswerModel  implements Serializable {
 
   public QuestionnaireResponseAnswerModel(QuestionnaireResponseAnswer o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.valueBoolean = o.getValueBoolean();
     this.valueDecimal = o.getValueDecimal();
     this.valueInteger = o.getValueInteger();
@@ -204,8 +207,13 @@ public class QuestionnaireResponseAnswerModel  implements Serializable {
     this.valueTime = o.getValueTime();
     this.valueString = o.getValueString();
     this.valueUri = o.getValueUri();
-    this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
-    this.valueCoding = JsonUtils.toJson(o.getValueCoding());
+    if (null != o.getValueAttachment()) {
+    	this.valueAttachment = JsonUtils.toJson(o.getValueAttachment());
+    }
+    if (null != o.getValueCoding() ) {
+    	this.valuecoding_id = "valuecoding" + this.parent_id;
+    	this.valueCoding = CodingHelper.toModel(o.getValueCoding(), this.valuecoding_id);
+    }
     if (null != o.getValueQuantity() ) {
     	this.valuequantity_id = "valuequantity" + this.parent_id;
     	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
@@ -217,6 +225,12 @@ public class QuestionnaireResponseAnswerModel  implements Serializable {
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item_id = "item" + this.parent_id;
     	this.item = QuestionnaireResponseItemHelper.toModelFromArray(o.getItem(), this.item_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -274,10 +288,10 @@ public class QuestionnaireResponseAnswerModel  implements Serializable {
   public void setValueAttachment( String value) {
     this.valueAttachment = value;
   }
-  public String getValueCoding() {
+  public java.util.List<CodingModel> getValueCoding() {
     return this.valueCoding;
   }
-  public void setValueCoding( String value) {
+  public void setValueCoding( java.util.List<CodingModel> value) {
     this.valueCoding = value;
   }
   public java.util.List<QuantityModel> getValueQuantity() {
@@ -336,7 +350,6 @@ public class QuestionnaireResponseAnswerModel  implements Serializable {
      builder.append("valueString" + "->" + this.valueString + "\n"); 
      builder.append("valueUri" + "->" + this.valueUri + "\n"); 
      builder.append("valueAttachment" + "->" + this.valueAttachment + "\n"); 
-     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

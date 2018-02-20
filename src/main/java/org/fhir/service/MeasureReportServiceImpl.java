@@ -114,9 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<MeasureReport> findByMeasure(QueryBuilder queryBuilder) {
+  	final List<MeasureReport> result = dao.findByMeasure(queryBuilder);
+    logger.info("findBymeasure - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<MeasureReport> findByPatient(QueryBuilder queryBuilder) {
   	final List<MeasureReport> result = dao.findByPatient(queryBuilder);
     logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MeasureReport> findByReportingOrganization(QueryBuilder queryBuilder) {
+  	final List<MeasureReport> result = dao.findByReportingOrganization(queryBuilder);
+    logger.info("findByreportingOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MeasureReport> findByGroup(QueryBuilder queryBuilder) {
+  	final List<MeasureReport> result = dao.findByGroup(queryBuilder);
+    logger.info("findBygroup - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MeasureReport> findByEvaluatedResources(QueryBuilder queryBuilder) {
+  	final List<MeasureReport> result = dao.findByEvaluatedResources(queryBuilder);
+    logger.info("findByevaluatedResources - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MeasureReport> findByText(QueryBuilder queryBuilder) {
+  	final List<MeasureReport> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MeasureReport> findByMeta(QueryBuilder queryBuilder) {
+  	final List<MeasureReport> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

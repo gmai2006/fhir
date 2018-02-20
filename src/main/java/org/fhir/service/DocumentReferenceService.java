@@ -38,10 +38,18 @@ public interface DocumentReferenceService {
   public DocumentReference update(DocumentReference bean);
   public void delete(DocumentReference bean);
   public List<DocumentReference> findByField(QueryBuilder queryBuilder);
-  public List<DocumentReference> findByAuthenticator(QueryBuilder queryBuilder);
-  public List<DocumentReference> findByAuthor(QueryBuilder queryBuilder);
-  public List<DocumentReference> findByCustodian(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByType(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByFHIRclass(QueryBuilder queryBuilder);
   public List<DocumentReference> findBySubject(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByAuthor(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByAuthenticator(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByCustodian(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByRelatesTo(QueryBuilder queryBuilder);
+  public List<DocumentReference> findBySecurityLabel(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByContent(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByContext(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByText(QueryBuilder queryBuilder);
+  public List<DocumentReference> findByMeta(QueryBuilder queryBuilder);
 
 
 }

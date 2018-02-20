@@ -114,15 +114,51 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Device> findByLocation(QueryBuilder queryBuilder) {
-  	final List<Device> result = dao.findByLocation(queryBuilder);
-    logger.info("findBylocation - exited - return value={} result ");
+  public List<Device> findByUdi(QueryBuilder queryBuilder) {
+  	final List<Device> result = dao.findByUdi(queryBuilder);
+    logger.info("findByudi - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Device> findByType(QueryBuilder queryBuilder) {
+  	final List<Device> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
     return result;
   }
   @Override
   public List<Device> findByPatient(QueryBuilder queryBuilder) {
   	final List<Device> result = dao.findByPatient(queryBuilder);
     logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Device> findByOwner(QueryBuilder queryBuilder) {
+  	final List<Device> result = dao.findByOwner(queryBuilder);
+    logger.info("findByowner - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Device> findByLocation(QueryBuilder queryBuilder) {
+  	final List<Device> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Device> findBySafety(QueryBuilder queryBuilder) {
+  	final List<Device> result = dao.findBySafety(queryBuilder);
+    logger.info("findBysafety - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Device> findByText(QueryBuilder queryBuilder) {
+  	final List<Device> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Device> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Device> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

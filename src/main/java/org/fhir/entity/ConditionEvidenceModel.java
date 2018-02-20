@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="conditionevidence")
 public class ConditionEvidenceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631193346869L;
+	private static final long serialVersionUID = 151910893770146665L;
   /**
   * Description: "A manifestation or symptom that led to the recording of this condition."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "Links to other relevant information, including pathology reports."
@@ -103,17 +104,29 @@ public class ConditionEvidenceModel  implements Serializable {
 
   public ConditionEvidenceModel(ConditionEvidence o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModelFromArray(o.getCode(), this.code_id);
+    }
     if (null != o.getDetail() && !o.getDetail().isEmpty()) {
     	this.detail_id = "detail" + this.parent_id;
     	this.detail = ReferenceHelper.toModelFromArray(o.getDetail(), this.detail_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public java.util.List<ReferenceModel> getDetail() {
@@ -151,7 +164,6 @@ public class ConditionEvidenceModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[ConditionEvidenceModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

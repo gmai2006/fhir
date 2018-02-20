@@ -1,6 +1,6 @@
 {
   "className": "Coding",
-  "type": "COMPLEX",
+  "type": "OBJECT",
   "descr": "\"A reference to a code defined by a terminology system.\"",
   "parent": "Element",
   "isInnerClass": true,

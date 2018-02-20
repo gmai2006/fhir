@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="operationoutcomeissue")
 public class OperationOutcomeIssueModel  implements Serializable {
-	private static final long serialVersionUID = 151873631167837150L;
+	private static final long serialVersionUID = 151910893743562639L;
   /**
   * Description: "Indicates whether the issue indicates a variation from successful processing."
   */
@@ -55,12 +54,14 @@ public class OperationOutcomeIssueModel  implements Serializable {
 
   /**
   * Description: "Additional details about the error. This may be a text description of the error, or a system code that identifies the error."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"details\"", length = 16777215)
-  private String details;
+  @Column(name="\"details_id\"")
+  private String details_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="details_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> details;
 
   /**
   * Description: "Additional diagnostic information about the issue.  Typically, this may be a description of how a value is erroneous, or a stack dump to help trace the issue."
@@ -127,13 +128,24 @@ public class OperationOutcomeIssueModel  implements Serializable {
 
   public OperationOutcomeIssueModel(OperationOutcomeIssue o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.severity = o.getSeverity();
     this.code = o.getCode();
-    this.details = JsonUtils.toJson(o.getDetails());
+    if (null != o.getDetails() ) {
+    	this.details_id = "details" + this.parent_id;
+    	this.details = CodeableConceptHelper.toModel(o.getDetails(), this.details_id);
+    }
     this.diagnostics = o.getDiagnostics();
-    this.location = org.fhir.utils.JsonUtils.write2String(o.getLocation());
-    this.expression = org.fhir.utils.JsonUtils.write2String(o.getExpression());
+    this.location = org.fhir.utils.JsonUtils.toJson(o.getLocation());
+    this.expression = org.fhir.utils.JsonUtils.toJson(o.getExpression());
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getSeverity() {
@@ -148,10 +160,10 @@ public class OperationOutcomeIssueModel  implements Serializable {
   public void setCode( String value) {
     this.code = value;
   }
-  public String getDetails() {
+  public java.util.List<CodeableConceptModel> getDetails() {
     return this.details;
   }
-  public void setDetails( String value) {
+  public void setDetails( java.util.List<CodeableConceptModel> value) {
     this.details = value;
   }
   public String getDiagnostics() {
@@ -203,7 +215,6 @@ public class OperationOutcomeIssueModel  implements Serializable {
     builder.append("[OperationOutcomeIssueModel]:" + "\n");
      builder.append("severity" + "->" + this.severity + "\n"); 
      builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("details" + "->" + this.details + "\n"); 
      builder.append("diagnostics" + "->" + this.diagnostics + "\n"); 
      builder.append("location" + "->" + this.location + "\n"); 
      builder.append("expression" + "->" + this.expression + "\n"); 

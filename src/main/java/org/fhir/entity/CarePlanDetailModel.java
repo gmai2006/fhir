@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="careplandetail")
 public class CarePlanDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151873631186943800L;
+	private static final long serialVersionUID = 151910893763772491L;
   /**
   * Description: "High-level categorization of the type of activity in a care plan."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "Identifies the protocol, questionnaire, guideline or other specification the planned activity should be conducted in accordance with."
@@ -61,21 +62,25 @@ public class CarePlanDetailModel  implements Serializable {
 
   /**
   * Description: "Detailed description of the type of planned activity; e.g. What lab test, what procedure, what kind of encounter."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "Provides the rationale that drove the inclusion of this particular activity as part of the plan or the reason why the activity was prohibited."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonCode\"", length = 16777215)
-  private String reasonCode;
+  @Column(name="\"reasoncode_id\"")
+  private String reasoncode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonCode;
 
   /**
   * Description: "Provides the health condition(s) that drove the inclusion of this particular activity as part of the plan."
@@ -169,12 +174,14 @@ public class CarePlanDetailModel  implements Serializable {
 
   /**
   * Description: "Identifies the food, drug or other product to be consumed or supplied in the activity."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"productCodeableConcept\"", length = 16777215)
-  private String productCodeableConcept;
+  @Column(name="\"productcodeableconcept_id\"")
+  private String productcodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="productcodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> productCodeableConcept;
 
   /**
   * Description: "Identifies the food, drug or other product to be consumed or supplied in the activity."
@@ -260,13 +267,25 @@ public class CarePlanDetailModel  implements Serializable {
 
   public CarePlanDetailModel(CarePlanDetail o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.category = JsonUtils.toJson(o.getCategory());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.parent_id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
     if (null != o.getDefinition() ) {
     	this.definition_id = "definition" + this.parent_id;
     	this.definition = ReferenceHelper.toModel(o.getDefinition(), this.definition_id);
     }
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasoncode_id = "reasoncode" + this.parent_id;
+    	this.reasonCode = CodeableConceptHelper.toModelFromArray(o.getReasonCode(), this.reasoncode_id);
+    }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonreference_id = "reasonreference" + this.parent_id;
     	this.reasonReference = ReferenceHelper.toModelFromArray(o.getReasonReference(), this.reasonreference_id);
@@ -278,8 +297,12 @@ public class CarePlanDetailModel  implements Serializable {
     this.status = o.getStatus();
     this.statusReason = o.getStatusReason();
     this.prohibited = o.getProhibited();
-    this.scheduledTiming = JsonUtils.toJson(o.getScheduledTiming());
-    this.scheduledPeriod = JsonUtils.toJson(o.getScheduledPeriod());
+    if (null != o.getScheduledTiming()) {
+    	this.scheduledTiming = JsonUtils.toJson(o.getScheduledTiming());
+    }
+    if (null != o.getScheduledPeriod()) {
+    	this.scheduledPeriod = JsonUtils.toJson(o.getScheduledPeriod());
+    }
     this.scheduledString = o.getScheduledString();
     if (null != o.getLocation() ) {
     	this.location_id = "location" + this.parent_id;
@@ -289,7 +312,10 @@ public class CarePlanDetailModel  implements Serializable {
     	this.performer_id = "performer" + this.parent_id;
     	this.performer = ReferenceHelper.toModelFromArray(o.getPerformer(), this.performer_id);
     }
-    this.productCodeableConcept = JsonUtils.toJson(o.getProductCodeableConcept());
+    if (null != o.getProductCodeableConcept() ) {
+    	this.productcodeableconcept_id = "productcodeableconcept" + this.parent_id;
+    	this.productCodeableConcept = CodeableConceptHelper.toModel(o.getProductCodeableConcept(), this.productcodeableconcept_id);
+    }
     if (null != o.getProductReference() ) {
     	this.productreference_id = "productreference" + this.parent_id;
     	this.productReference = ReferenceHelper.toModel(o.getProductReference(), this.productreference_id);
@@ -303,12 +329,18 @@ public class CarePlanDetailModel  implements Serializable {
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
     }
     this.description = o.getDescription();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
   public java.util.List<ReferenceModel> getDefinition() {
@@ -317,16 +349,16 @@ public class CarePlanDetailModel  implements Serializable {
   public void setDefinition( java.util.List<ReferenceModel> value) {
     this.definition = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
-  public String getReasonCode() {
+  public java.util.List<CodeableConceptModel> getReasonCode() {
     return this.reasonCode;
   }
-  public void setReasonCode( String value) {
+  public void setReasonCode( java.util.List<CodeableConceptModel> value) {
     this.reasonCode = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
@@ -389,10 +421,10 @@ public class CarePlanDetailModel  implements Serializable {
   public void setPerformer( java.util.List<ReferenceModel> value) {
     this.performer = value;
   }
-  public String getProductCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getProductCodeableConcept() {
     return this.productCodeableConcept;
   }
-  public void setProductCodeableConcept( String value) {
+  public void setProductCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.productCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getProductReference() {
@@ -448,16 +480,12 @@ public class CarePlanDetailModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CarePlanDetailModel]:" + "\n");
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("statusReason" + "->" + this.statusReason + "\n"); 
      builder.append("prohibited" + "->" + this.prohibited + "\n"); 
      builder.append("scheduledTiming" + "->" + this.scheduledTiming + "\n"); 
      builder.append("scheduledPeriod" + "->" + this.scheduledPeriod + "\n"); 
      builder.append("scheduledString" + "->" + this.scheduledString + "\n"); 
-     builder.append("productCodeableConcept" + "->" + this.productCodeableConcept + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

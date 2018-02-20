@@ -113,4 +113,40 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<Substance> findByCategory(QueryBuilder queryBuilder) {
+  	final List<Substance> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Substance> findByCode(QueryBuilder queryBuilder) {
+  	final List<Substance> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Substance> findByInstance(QueryBuilder queryBuilder) {
+  	final List<Substance> result = dao.findByInstance(queryBuilder);
+    logger.info("findByinstance - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Substance> findByIngredient(QueryBuilder queryBuilder) {
+  	final List<Substance> result = dao.findByIngredient(queryBuilder);
+    logger.info("findByingredient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Substance> findByText(QueryBuilder queryBuilder) {
+  	final List<Substance> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Substance> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Substance> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

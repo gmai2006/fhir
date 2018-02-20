@@ -114,21 +114,51 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Encounter> findByAppointment(QueryBuilder queryBuilder) {
-  	final List<Encounter> result = dao.findByAppointment(queryBuilder);
-    logger.info("findByappointment - exited - return value={} result ");
+  public List<Encounter> findByStatusHistory(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByStatusHistory(queryBuilder);
+    logger.info("findBystatusHistory - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<Encounter> findByDiagnosis(QueryBuilder queryBuilder) {
-  	final List<Encounter> result = dao.findByDiagnosis(queryBuilder);
-    logger.info("findBydiagnosis - exited - return value={} result ");
+  public List<Encounter> findByFHIRclass(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByFHIRclass(queryBuilder);
+    logger.info("findByFHIRclass - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<Encounter> findByLocation(QueryBuilder queryBuilder) {
-  	final List<Encounter> result = dao.findByLocation(queryBuilder);
-    logger.info("findBylocation - exited - return value={} result ");
+  public List<Encounter> findByClassHistory(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByClassHistory(queryBuilder);
+    logger.info("findByclassHistory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByType(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByPriority(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByPriority(queryBuilder);
+    logger.info("findBypriority - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByEpisodeOfCare(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByEpisodeOfCare(queryBuilder);
+    logger.info("findByepisodeOfCare - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByIncomingReferral(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByIncomingReferral(queryBuilder);
+    logger.info("findByincomingReferral - exited - return value={} result ");
     return result;
   }
   @Override
@@ -138,9 +168,63 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Encounter> findBySubject(QueryBuilder queryBuilder) {
-  	final List<Encounter> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<Encounter> findByAppointment(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByAppointment(queryBuilder);
+    logger.info("findByappointment - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByReason(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByReason(queryBuilder);
+    logger.info("findByreason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByDiagnosis(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByDiagnosis(queryBuilder);
+    logger.info("findBydiagnosis - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByAccount(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByAccount(queryBuilder);
+    logger.info("findByaccount - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByHospitalization(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByHospitalization(queryBuilder);
+    logger.info("findByhospitalization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByLocation(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByServiceProvider(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByServiceProvider(queryBuilder);
+    logger.info("findByserviceProvider - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByPartOf(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByPartOf(queryBuilder);
+    logger.info("findBypartOf - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByText(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Encounter> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Encounter> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

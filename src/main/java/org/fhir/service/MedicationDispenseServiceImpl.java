@@ -114,15 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<MedicationDispense> findByPartOf(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByPartOf(queryBuilder);
+    logger.info("findBypartOf - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByCategory(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByMedicationCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByMedicationCodeableConcept(queryBuilder);
+    logger.info("findBymedicationCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByMedicationReference(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByMedicationReference(queryBuilder);
+    logger.info("findBymedicationReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findBySubject(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<MedicationDispense> findByContext(QueryBuilder queryBuilder) {
   	final List<MedicationDispense> result = dao.findByContext(queryBuilder);
     logger.info("findBycontext - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<MedicationDispense> findByDestination(QueryBuilder queryBuilder) {
-  	final List<MedicationDispense> result = dao.findByDestination(queryBuilder);
-    logger.info("findBydestination - exited - return value={} result ");
+  public List<MedicationDispense> findBySupportingInformation(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findBySupportingInformation(queryBuilder);
+    logger.info("findBysupportingInformation - exited - return value={} result ");
     return result;
   }
   @Override
@@ -132,15 +162,87 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<MedicationDispense> findByAuthorizingPrescription(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByAuthorizingPrescription(queryBuilder);
+    logger.info("findByauthorizingPrescription - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByType(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByQuantity(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByQuantity(queryBuilder);
+    logger.info("findByquantity - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByDaysSupply(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByDaysSupply(queryBuilder);
+    logger.info("findBydaysSupply - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByDestination(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByDestination(queryBuilder);
+    logger.info("findBydestination - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<MedicationDispense> findByReceiver(QueryBuilder queryBuilder) {
   	final List<MedicationDispense> result = dao.findByReceiver(queryBuilder);
     logger.info("findByreceiver - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<MedicationDispense> findBySubject(QueryBuilder queryBuilder) {
-  	final List<MedicationDispense> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<MedicationDispense> findByDosageInstruction(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByDosageInstruction(queryBuilder);
+    logger.info("findBydosageInstruction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findBySubstitution(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findBySubstitution(queryBuilder);
+    logger.info("findBysubstitution - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByDetectedIssue(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByDetectedIssue(queryBuilder);
+    logger.info("findBydetectedIssue - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByNotDoneReasonCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByNotDoneReasonCodeableConcept(queryBuilder);
+    logger.info("findBynotDoneReasonCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByNotDoneReasonReference(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByNotDoneReasonReference(queryBuilder);
+    logger.info("findBynotDoneReasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByEventHistory(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByEventHistory(queryBuilder);
+    logger.info("findByeventHistory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByText(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<MedicationDispense> findByMeta(QueryBuilder queryBuilder) {
+  	final List<MedicationDispense> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

@@ -118,7 +118,9 @@ public class VisionPrescription  extends DomainResource  {
     if (null != o.getPrescriber() && !o.getPrescriber().isEmpty()) {
       this.prescriber = new Reference(o.getPrescriber().get(0));
     }
-    this.reasonCodeableConcept = CodeableConceptHelper.fromJson(o.getReasonCodeableConcept());
+    if (null != o.getReasonCodeableConcept() && !o.getReasonCodeableConcept().isEmpty()) {
+      this.reasonCodeableConcept = new CodeableConcept(o.getReasonCodeableConcept().get(0));
+    }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
       this.reasonReference = new Reference(o.getReasonReference().get(0));
     }

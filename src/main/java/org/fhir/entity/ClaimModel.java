@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claim")
 public class ClaimModel  implements Serializable {
-	private static final long serialVersionUID = 151873631118686211L;
+	private static final long serialVersionUID = 151910893696776194L;
   /**
   * Description: "This is a Claim resource"
   */
@@ -66,21 +65,25 @@ public class ClaimModel  implements Serializable {
 
   /**
   * Description: "The category of claim, eg, oral, pharmacy, vision, insitutional, professional."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "A finer grained suite of claim subtype codes which may convey Inpatient vs Outpatient and/or a specialty service. In the US the BillType."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"subType\"", length = 16777215)
-  private String subType;
+  @Column(name="\"subtype_id\"")
+  private String subtype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subtype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> subType;
 
   /**
   * Description: "Complete (Bill or Claim), Proposed (Pre-Authorization), Exploratory (Pre-determination)."
@@ -163,21 +166,25 @@ public class ClaimModel  implements Serializable {
 
   /**
   * Description: "Immediate (STAT), best effort (NORMAL), deferred (DEFER)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"priority\"", length = 16777215)
-  private String priority;
+  @Column(name="\"priority_id\"")
+  private String priority_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="priority_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> priority;
 
   /**
   * Description: "In the case of a Pre-Determination/Pre-Authorization the provider may request that funds in the amount of the expected Benefit be reserved ('Patient' or 'Provider') to pay for the Benefits determined on the subsequent claim(s). 'None' explicitly indicates no funds reserving is requested."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"fundsReserve\"", length = 16777215)
-  private String fundsReserve;
+  @Column(name="\"fundsreserve_id\"")
+  private String fundsreserve_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fundsreserve_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> fundsReserve;
 
   /**
   * Description: "Other claims which are related to this claim such as prior claim versions or for related services."
@@ -442,14 +449,26 @@ public class ClaimModel  implements Serializable {
   public ClaimModel(Claim o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getSubType() && !o.getSubType().isEmpty()) {
+    	this.subtype_id = "subtype" + this.id;
+    	this.subType = CodeableConceptHelper.toModelFromArray(o.getSubType(), this.subtype_id);
+    }
     this.use = o.getUse();
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
-    this.billablePeriod = JsonUtils.toJson(o.getBillablePeriod());
+    if (null != o.getBillablePeriod()) {
+    	this.billablePeriod = JsonUtils.toJson(o.getBillablePeriod());
+    }
     this.created = o.getCreated();
     if (null != o.getEnterer() ) {
     	this.enterer_id = "enterer" + this.id;
@@ -467,8 +486,14 @@ public class ClaimModel  implements Serializable {
     	this.organization_id = "organization" + this.id;
     	this.organization = ReferenceHelper.toModel(o.getOrganization(), this.organization_id);
     }
-    this.priority = JsonUtils.toJson(o.getPriority());
-    this.fundsReserve = JsonUtils.toJson(o.getFundsReserve());
+    if (null != o.getPriority() ) {
+    	this.priority_id = "priority" + this.id;
+    	this.priority = CodeableConceptHelper.toModel(o.getPriority(), this.priority_id);
+    }
+    if (null != o.getFundsReserve() ) {
+    	this.fundsreserve_id = "fundsreserve" + this.id;
+    	this.fundsReserve = CodeableConceptHelper.toModel(o.getFundsReserve(), this.fundsreserve_id);
+    }
     if (null != o.getRelated() && !o.getRelated().isEmpty()) {
     	this.related_id = "related" + this.id;
     	this.related = ClaimRelatedHelper.toModelFromArray(o.getRelated(), this.related_id);
@@ -517,8 +542,12 @@ public class ClaimModel  implements Serializable {
     	this.accident_id = "accident" + this.id;
     	this.accident = ClaimAccidentHelper.toModel(o.getAccident(), this.accident_id);
     }
-    this.employmentImpacted = JsonUtils.toJson(o.getEmploymentImpacted());
-    this.hospitalization = JsonUtils.toJson(o.getHospitalization());
+    if (null != o.getEmploymentImpacted()) {
+    	this.employmentImpacted = JsonUtils.toJson(o.getEmploymentImpacted());
+    }
+    if (null != o.getHospitalization()) {
+    	this.hospitalization = JsonUtils.toJson(o.getHospitalization());
+    }
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item_id = "item" + this.id;
     	this.item = ClaimItemHelper.toModelFromArray(o.getItem(), this.item_id);
@@ -530,6 +559,15 @@ public class ClaimModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -557,16 +595,16 @@ public class ClaimModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getSubType() {
+  public java.util.List<CodeableConceptModel> getSubType() {
     return this.subType;
   }
-  public void setSubType( String value) {
+  public void setSubType( java.util.List<CodeableConceptModel> value) {
     this.subType = value;
   }
   public String getUse() {
@@ -617,16 +655,16 @@ public class ClaimModel  implements Serializable {
   public void setOrganization( java.util.List<ReferenceModel> value) {
     this.organization = value;
   }
-  public String getPriority() {
+  public java.util.List<CodeableConceptModel> getPriority() {
     return this.priority;
   }
-  public void setPriority( String value) {
+  public void setPriority( java.util.List<CodeableConceptModel> value) {
     this.priority = value;
   }
-  public String getFundsReserve() {
+  public java.util.List<CodeableConceptModel> getFundsReserve() {
     return this.fundsReserve;
   }
-  public void setFundsReserve( String value) {
+  public void setFundsReserve( java.util.List<CodeableConceptModel> value) {
     this.fundsReserve = value;
   }
   public java.util.List<ClaimRelatedModel> getRelated() {
@@ -781,13 +819,9 @@ public class ClaimModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subType" + "->" + this.subType + "\n"); 
      builder.append("use" + "->" + this.use + "\n"); 
      builder.append("billablePeriod" + "->" + this.billablePeriod + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("fundsReserve" + "->" + this.fundsReserve + "\n"); 
      builder.append("employmentImpacted" + "->" + this.employmentImpacted + "\n"); 
      builder.append("hospitalization" + "->" + this.hospitalization + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

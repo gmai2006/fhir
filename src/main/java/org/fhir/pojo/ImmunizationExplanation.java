@@ -47,6 +47,12 @@ public class ImmunizationExplanation  extends BackboneElement  {
 
   public ImmunizationExplanation(ImmunizationExplanationModel o) {
     this.id = o.getId();
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason = CodeableConceptHelper.fromArray2Array(o.getReason());
+    }
+    if (null != o.getReasonNotGiven() && !o.getReasonNotGiven().isEmpty()) {
+    	this.reasonNotGiven = CodeableConceptHelper.fromArray2Array(o.getReasonNotGiven());
+    }
   }
 
   public void setReason( java.util.List<CodeableConcept> value) {

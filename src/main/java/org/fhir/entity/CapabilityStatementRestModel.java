@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementrest")
 public class CapabilityStatementRestModel  implements Serializable {
-	private static final long serialVersionUID = 151873631183963155L;
+	private static final long serialVersionUID = 151910893760630714L;
   /**
   * Description: "Identifies whether this portion of the statement is describing the ability to initiate or receive restful operations."
   */
@@ -159,7 +158,9 @@ public class CapabilityStatementRestModel  implements Serializable {
 
   public CapabilityStatementRestModel(CapabilityStatementRest o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.mode = o.getMode();
     this.documentation = o.getDocumentation();
     if (null != o.getSecurity() ) {
@@ -182,7 +183,13 @@ public class CapabilityStatementRestModel  implements Serializable {
     	this.operation_id = "operation" + this.parent_id;
     	this.operation = CapabilityStatementOperationHelper.toModelFromArray(o.getOperation(), this.operation_id);
     }
-    this.compartment = org.fhir.utils.JsonUtils.write2String(o.getCompartment());
+    this.compartment = org.fhir.utils.JsonUtils.toJson(o.getCompartment());
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getMode() {

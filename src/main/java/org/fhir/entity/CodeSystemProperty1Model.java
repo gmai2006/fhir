@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="codesystemproperty1")
 public class CodeSystemProperty1Model  implements Serializable {
-	private static final long serialVersionUID = 151873631161696592L;
+	private static final long serialVersionUID = 15191089373752008L;
   /**
   * Description: "A code that is a reference to CodeSystem.property.code."
   */
@@ -57,12 +56,14 @@ public class CodeSystemProperty1Model  implements Serializable {
 
   /**
   * Description: "The value of this property."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueCoding\"", length = 16777215)
-  private String valueCoding;
+  @Column(name="\"valuecoding_id\"")
+  private String valuecoding_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecoding_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> valueCoding;
 
   /**
   * Description: "The value of this property."
@@ -138,14 +139,25 @@ public class CodeSystemProperty1Model  implements Serializable {
 
   public CodeSystemProperty1Model(CodeSystemProperty1 o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.code = o.getCode();
     this.valueCode = o.getValueCode();
-    this.valueCoding = JsonUtils.toJson(o.getValueCoding());
+    if (null != o.getValueCoding() ) {
+    	this.valuecoding_id = "valuecoding" + this.parent_id;
+    	this.valueCoding = CodingHelper.toModel(o.getValueCoding(), this.valuecoding_id);
+    }
     this.valueString = o.getValueString();
     this.valueInteger = o.getValueInteger();
     this.valueBoolean = o.getValueBoolean();
     this.valueDateTime = o.getValueDateTime();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getCode() {
@@ -160,10 +172,10 @@ public class CodeSystemProperty1Model  implements Serializable {
   public void setValueCode( String value) {
     this.valueCode = value;
   }
-  public String getValueCoding() {
+  public java.util.List<CodingModel> getValueCoding() {
     return this.valueCoding;
   }
-  public void setValueCoding( String value) {
+  public void setValueCoding( java.util.List<CodingModel> value) {
     this.valueCoding = value;
   }
   public String getValueString() {
@@ -221,7 +233,6 @@ public class CodeSystemProperty1Model  implements Serializable {
     builder.append("[CodeSystemProperty1Model]:" + "\n");
      builder.append("code" + "->" + this.code + "\n"); 
      builder.append("valueCode" + "->" + this.valueCode + "\n"); 
-     builder.append("valueCoding" + "->" + this.valueCoding + "\n"); 
      builder.append("valueString" + "->" + this.valueString + "\n"); 
      builder.append("valueInteger" + "->" + this.valueInteger + "\n"); 
      builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 

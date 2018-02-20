@@ -80,14 +80,18 @@ public class SpecimenContainer  extends BackboneElement  {
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getCapacity() && !o.getCapacity().isEmpty()) {
       this.capacity = new Quantity(o.getCapacity().get(0));
     }
     if (null != o.getSpecimenQuantity() && !o.getSpecimenQuantity().isEmpty()) {
       this.specimenQuantity = new Quantity(o.getSpecimenQuantity().get(0));
     }
-    this.additiveCodeableConcept = CodeableConceptHelper.fromJson(o.getAdditiveCodeableConcept());
+    if (null != o.getAdditiveCodeableConcept() && !o.getAdditiveCodeableConcept().isEmpty()) {
+      this.additiveCodeableConcept = new CodeableConcept(o.getAdditiveCodeableConcept().get(0));
+    }
     if (null != o.getAdditiveReference() && !o.getAdditiveReference().isEmpty()) {
       this.additiveReference = new Reference(o.getAdditiveReference().get(0));
     }

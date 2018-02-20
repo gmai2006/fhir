@@ -113,4 +113,46 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<StructureMap> findByContact(QueryBuilder queryBuilder) {
+  	final List<StructureMap> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<StructureMap> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<StructureMap> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<StructureMap> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<StructureMap> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<StructureMap> findByStructure(QueryBuilder queryBuilder) {
+  	final List<StructureMap> result = dao.findByStructure(queryBuilder);
+    logger.info("findBystructure - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<StructureMap> findByGroup(QueryBuilder queryBuilder) {
+  	final List<StructureMap> result = dao.findByGroup(queryBuilder);
+    logger.info("findBygroup - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<StructureMap> findByText(QueryBuilder queryBuilder) {
+  	final List<StructureMap> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<StructureMap> findByMeta(QueryBuilder queryBuilder) {
+  	final List<StructureMap> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

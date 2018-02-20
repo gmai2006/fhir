@@ -42,6 +42,9 @@ public interface BasicDao {
 
   public List<Basic> findByField(QueryBuilder queryBuilder);
 
-  public List<Basic> findByAuthor(QueryBuilder queryBuilder);
+  public List<Basic> findByCode(QueryBuilder queryBuilder);
   public List<Basic> findBySubject(QueryBuilder queryBuilder);
+  public List<Basic> findByAuthor(QueryBuilder queryBuilder);
+  public List<Basic> findByText(QueryBuilder queryBuilder);
+  public List<Basic> findByMeta(QueryBuilder queryBuilder);
 }

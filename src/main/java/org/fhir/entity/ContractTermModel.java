@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="contractterm")
 public class ContractTermModel  implements Serializable {
-	private static final long serialVersionUID = 151873631164212857L;
+	private static final long serialVersionUID = 151910893740351448L;
   /**
   * Description: "Unique identifier for this particular Contract Provision."
   * Actual type: String;
@@ -67,21 +66,25 @@ public class ContractTermModel  implements Serializable {
 
   /**
   * Description: "Type of Contract Provision such as specific requirements, purposes for actions, obligations, prohibitions, e.g. life time maximum benefit."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "Subtype of this Contract Provision, e.g. life time maximum payment for a contract term for specific valued item, e.g. disability payment."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"subType\"", length = 16777215)
-  private String subType;
+  @Column(name="\"subtype_id\"")
+  private String subtype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subtype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> subType;
 
   /**
   * Description: "The matter of concern in the context of this provision of the agrement."
@@ -96,30 +99,36 @@ public class ContractTermModel  implements Serializable {
 
   /**
   * Description: "Action stipulated by this Contract Provision."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"action\"", length = 16777215)
-  private String action;
+  @Column(name="\"action_id\"")
+  private String action_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> action;
 
   /**
   * Description: "Reason or purpose for the action stipulated by this Contract Provision."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"actionReason\"", length = 16777215)
-  private String actionReason;
+  @Column(name="\"actionreason_id\"")
+  private String actionreason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="actionreason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> actionReason;
 
   /**
   * Description: "A set of security labels that define which terms are controlled by this condition."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"securityLabel\"", length = 16777215)
-  private String securityLabel;
+  @Column(name="\"securitylabel_id\"")
+  private String securitylabel_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> securityLabel;
 
   /**
   * Description: "An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place."
@@ -205,15 +214,39 @@ public class ContractTermModel  implements Serializable {
 
   public ContractTermModel(ContractTerm o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.issued = o.getIssued();
-    this.applies = JsonUtils.toJson(o.getApplies());
-    this.type = JsonUtils.toJson(o.getType());
-    this.subType = JsonUtils.toJson(o.getSubType());
+    if (null != o.getApplies()) {
+    	this.applies = JsonUtils.toJson(o.getApplies());
+    }
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getSubType() ) {
+    	this.subtype_id = "subtype" + this.parent_id;
+    	this.subType = CodeableConceptHelper.toModel(o.getSubType(), this.subtype_id);
+    }
     if (null != o.getTopic() && !o.getTopic().isEmpty()) {
     	this.topic_id = "topic" + this.parent_id;
     	this.topic = ReferenceHelper.toModelFromArray(o.getTopic(), this.topic_id);
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action_id = "action" + this.parent_id;
+    	this.action = CodeableConceptHelper.toModelFromArray(o.getAction(), this.action_id);
+    }
+    if (null != o.getActionReason() && !o.getActionReason().isEmpty()) {
+    	this.actionreason_id = "actionreason" + this.parent_id;
+    	this.actionReason = CodeableConceptHelper.toModelFromArray(o.getActionReason(), this.actionreason_id);
+    }
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securitylabel_id = "securitylabel" + this.parent_id;
+    	this.securityLabel = CodingHelper.toModelFromArray(o.getSecurityLabel(), this.securitylabel_id);
     }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent_id = "agent" + this.parent_id;
@@ -227,6 +260,12 @@ public class ContractTermModel  implements Serializable {
     if (null != o.getGroup() && !o.getGroup().isEmpty()) {
     	this.group_id = "group" + this.parent_id;
     	this.group = ContractTermHelper.toModelFromArray(o.getGroup(), this.group_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -248,16 +287,16 @@ public class ContractTermModel  implements Serializable {
   public void setApplies( String value) {
     this.applies = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getSubType() {
+  public java.util.List<CodeableConceptModel> getSubType() {
     return this.subType;
   }
-  public void setSubType( String value) {
+  public void setSubType( java.util.List<CodeableConceptModel> value) {
     this.subType = value;
   }
   public java.util.List<ReferenceModel> getTopic() {
@@ -266,22 +305,22 @@ public class ContractTermModel  implements Serializable {
   public void setTopic( java.util.List<ReferenceModel> value) {
     this.topic = value;
   }
-  public String getAction() {
+  public java.util.List<CodeableConceptModel> getAction() {
     return this.action;
   }
-  public void setAction( String value) {
+  public void setAction( java.util.List<CodeableConceptModel> value) {
     this.action = value;
   }
-  public String getActionReason() {
+  public java.util.List<CodeableConceptModel> getActionReason() {
     return this.actionReason;
   }
-  public void setActionReason( String value) {
+  public void setActionReason( java.util.List<CodeableConceptModel> value) {
     this.actionReason = value;
   }
-  public String getSecurityLabel() {
+  public java.util.List<CodingModel> getSecurityLabel() {
     return this.securityLabel;
   }
-  public void setSecurityLabel( String value) {
+  public void setSecurityLabel( java.util.List<CodingModel> value) {
     this.securityLabel = value;
   }
   public java.util.List<ContractAgent1Model> getAgent() {
@@ -340,11 +379,6 @@ public class ContractTermModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("issued" + "->" + this.issued + "\n"); 
      builder.append("applies" + "->" + this.applies + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subType" + "->" + this.subType + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
-     builder.append("actionReason" + "->" + this.actionReason + "\n"); 
-     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

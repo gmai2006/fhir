@@ -241,15 +241,21 @@ public class Task  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.statusReason = CodeableConceptHelper.fromJson(o.getStatusReason());
-    this.businessStatus = CodeableConceptHelper.fromJson(o.getBusinessStatus());
+    if (null != o.getStatusReason() && !o.getStatusReason().isEmpty()) {
+      this.statusReason = new CodeableConcept(o.getStatusReason().get(0));
+    }
+    if (null != o.getBusinessStatus() && !o.getBusinessStatus().isEmpty()) {
+      this.businessStatus = new CodeableConcept(o.getBusinessStatus().get(0));
+    }
     if (null != o.getIntent()) {
       this.intent = o.getIntent();
     }
     if (null != o.getPriority()) {
       this.priority = o.getPriority();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }
@@ -272,10 +278,15 @@ public class Task  extends DomainResource  {
     if (null != o.getRequester() && !o.getRequester().isEmpty()) {
       this.requester = new TaskRequester(o.getRequester().get(0));
     }
+    if (null != o.getPerformerType() && !o.getPerformerType().isEmpty()) {
+    	this.performerType = CodeableConceptHelper.fromArray2Array(o.getPerformerType());
+    }
     if (null != o.getOwner() && !o.getOwner().isEmpty()) {
       this.owner = new Reference(o.getOwner().get(0));
     }
-    this.reason = CodeableConceptHelper.fromJson(o.getReason());
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+      this.reason = new CodeableConcept(o.getReason().get(0));
+    }
     if (null != o.getRelevantHistory() && !o.getRelevantHistory().isEmpty()) {
     	this.relevantHistory = ReferenceHelper.fromArray2Array(o.getRelevantHistory());
     }

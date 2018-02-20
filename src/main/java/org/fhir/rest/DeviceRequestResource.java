@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.DeviceRequest;
 import org.fhir.service.DeviceRequestService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/DeviceRequest")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class DeviceRequestResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public DeviceRequest find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public DeviceRequest findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<DeviceRequest> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<DeviceRequest> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<DeviceRequest> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<DeviceRequest> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<DeviceRequest> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<DeviceRequest> findAll() {
   	return this.service.selectAll();
   }
@@ -107,46 +172,45 @@ public class DeviceRequestResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DeviceRequest> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
   /**
   * Descr: Protocol or definition followed by this request
   * Type: reference
   */
   @GET
   @Path("definition")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DeviceRequest> definition(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<DeviceRequest> definition(@QueryParam("definition")String definition) {
+  	java.util.Map<String, String> params = QueryParser.parse(definition, VALID_FIELDS);
   	return this.service.findByDefinition(new QueryBuilder(params));
   }
   /**
-  * Descr: Desired performer for service
+  * Descr: Plan/proposal/order fulfilled by this request
   * Type: reference
   */
   @GET
-  @Path("performer")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DeviceRequest> performer(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByPerformer(new QueryBuilder(params));
+  @Path("basedon")
+  public List<DeviceRequest> basedon(@QueryParam("basedon")String basedon) {
+  	java.util.Map<String, String> params = QueryParser.parse(basedon, VALID_FIELDS);
+  	return this.service.findByBasedOn(new QueryBuilder(params));
   }
   /**
-  * Descr: Who/what is requesting service 
+  * Descr: Request takes the place of referenced completed or terminated requests
   * Type: reference
   */
   @GET
-  @Path("requester/agent")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DeviceRequest> requester(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByRequester(new QueryBuilder(params));
+  @Path("priorrequest")
+  public List<DeviceRequest> priorrequest(@QueryParam("priorrequest")String priorrequest) {
+  	java.util.Map<String, String> params = QueryParser.parse(priorrequest, VALID_FIELDS);
+  	return this.service.findByPriorRequest(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Reference to resource that is being requested/ordered
+  * Type: reference
+  */
+  @GET
+  @Path("device")
+  public List<DeviceRequest> device(@QueryParam("device")String device) {
+  	java.util.Map<String, String> params = QueryParser.parse(device, VALID_FIELDS);
+  	return this.service.findByCodeReference(new QueryBuilder(params));
   }
   /**
   * Descr: Individual the service is ordered for
@@ -154,10 +218,46 @@ public class DeviceRequestResource {
   */
   @GET
   @Path("subject")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<DeviceRequest> subject(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<DeviceRequest> subject(@QueryParam("subject")String subject) {
+  	java.util.Map<String, String> params = QueryParser.parse(subject, VALID_FIELDS);
   	return this.service.findBySubject(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Desired performer for service
+  * Type: reference
+  */
+  @GET
+  @Path("performer")
+  public List<DeviceRequest> performer(@QueryParam("performer")String performer) {
+  	java.util.Map<String, String> params = QueryParser.parse(performer, VALID_FIELDS);
+  	return this.service.findByPerformer(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Composite request this is part of
+  * Type: token
+  */
+  @GET
+  public List<DeviceRequest> groupidentifier(@QueryParam("groupidentifier")String groupidentifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(groupidentifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: entered-in-error | draft | active |suspended | completed 
+  * Type: token
+  */
+  @GET
+  public List<DeviceRequest> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: proposal | plan | original-order |reflex-order
+  * Type: token
+  */
+  @GET
+  public List<DeviceRequest> intent(@QueryParam("intent")String intent) {
+  	java.util.Map<String, String> params = QueryParser.parse(intent, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "authoredon|basedon|definition|device|eventdate|groupidentifier|intent|performer|priorrequest|requester|status|subject";

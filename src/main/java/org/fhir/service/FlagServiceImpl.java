@@ -114,15 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Flag> findByAuthor(QueryBuilder queryBuilder) {
-  	final List<Flag> result = dao.findByAuthor(queryBuilder);
-    logger.info("findByauthor - exited - return value={} result ");
+  public List<Flag> findByCategory(QueryBuilder queryBuilder) {
+  	final List<Flag> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Flag> findByCode(QueryBuilder queryBuilder) {
+  	final List<Flag> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
     return result;
   }
   @Override
   public List<Flag> findBySubject(QueryBuilder queryBuilder) {
   	final List<Flag> result = dao.findBySubject(queryBuilder);
     logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Flag> findByEncounter(QueryBuilder queryBuilder) {
+  	final List<Flag> result = dao.findByEncounter(queryBuilder);
+    logger.info("findByencounter - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Flag> findByAuthor(QueryBuilder queryBuilder) {
+  	final List<Flag> result = dao.findByAuthor(queryBuilder);
+    logger.info("findByauthor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Flag> findByText(QueryBuilder queryBuilder) {
+  	final List<Flag> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Flag> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Flag> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

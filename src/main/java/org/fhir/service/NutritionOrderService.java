@@ -38,7 +38,17 @@ public interface NutritionOrderService {
   public NutritionOrder update(NutritionOrder bean);
   public void delete(NutritionOrder bean);
   public List<NutritionOrder> findByField(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findByPatient(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findByEncounter(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findByOrderer(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findByAllergyIntolerance(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findByFoodPreferenceModifier(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findByExcludeFoodModifier(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findByOralDiet(QueryBuilder queryBuilder);
   public List<NutritionOrder> findBySupplement(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findByEnteralFormula(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findByText(QueryBuilder queryBuilder);
+  public List<NutritionOrder> findByMeta(QueryBuilder queryBuilder);
 
 
 }

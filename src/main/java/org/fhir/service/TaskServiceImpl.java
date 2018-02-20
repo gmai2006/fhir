@@ -114,9 +114,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Task> findByContext(QueryBuilder queryBuilder) {
-  	final List<Task> result = dao.findByContext(queryBuilder);
-    logger.info("findBycontext - exited - return value={} result ");
+  public List<Task> findByDefinitionReference(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByDefinitionReference(queryBuilder);
+    logger.info("findBydefinitionReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByPartOf(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByPartOf(queryBuilder);
+    logger.info("findBypartOf - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByStatusReason(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByStatusReason(queryBuilder);
+    logger.info("findBystatusReason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByBusinessStatus(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByBusinessStatus(queryBuilder);
+    logger.info("findBybusinessStatus - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByCode(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,15 +156,69 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Task> findByOwner(QueryBuilder queryBuilder) {
-  	final List<Task> result = dao.findByOwner(queryBuilder);
-    logger.info("findByowner - exited - return value={} result ");
+  public List<Task> findByFHIRfor(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByFHIRfor(queryBuilder);
+    logger.info("findByFHIRfor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByContext(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
     return result;
   }
   @Override
   public List<Task> findByRequester(QueryBuilder queryBuilder) {
   	final List<Task> result = dao.findByRequester(queryBuilder);
     logger.info("findByrequester - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByPerformerType(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByPerformerType(queryBuilder);
+    logger.info("findByperformerType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByOwner(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByOwner(queryBuilder);
+    logger.info("findByowner - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByReason(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByReason(queryBuilder);
+    logger.info("findByreason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByRelevantHistory(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByRelevantHistory(queryBuilder);
+    logger.info("findByrelevantHistory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByRestriction(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByRestriction(queryBuilder);
+    logger.info("findByrestriction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByOutput(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByOutput(queryBuilder);
+    logger.info("findByoutput - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByText(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Task> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Task> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

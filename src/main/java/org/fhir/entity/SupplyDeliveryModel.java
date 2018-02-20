@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="supplydelivery")
 public class SupplyDeliveryModel  implements Serializable {
-	private static final long serialVersionUID = 151873631181730773L;
+	private static final long serialVersionUID = 1519108937583168L;
   /**
   * Description: "This is a SupplyDelivery resource"
   */
@@ -98,12 +97,14 @@ public class SupplyDeliveryModel  implements Serializable {
 
   /**
   * Description: "Indicates the type of dispensing event that is performed. Examples include: Trial Fill, Completion of Trial, Partial Fill, Emergency Fill, Samples, etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The item that is being delivered or has been supplied."
@@ -266,7 +267,9 @@ public class SupplyDeliveryModel  implements Serializable {
   public SupplyDeliveryModel(SupplyDelivery o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
@@ -280,14 +283,21 @@ public class SupplyDeliveryModel  implements Serializable {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     if (null != o.getSuppliedItem() ) {
     	this.supplieditem_id = "supplieditem" + this.id;
     	this.suppliedItem = SupplyDeliverySuppliedItemHelper.toModel(o.getSuppliedItem(), this.supplieditem_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
-    this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
+    if (null != o.getOccurrencePeriod()) {
+    	this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    }
+    if (null != o.getOccurrenceTiming()) {
+    	this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
+    }
     if (null != o.getSupplier() ) {
     	this.supplier_id = "supplier" + this.id;
     	this.supplier = ReferenceHelper.toModel(o.getSupplier(), this.supplier_id);
@@ -303,6 +313,15 @@ public class SupplyDeliveryModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -348,10 +367,10 @@ public class SupplyDeliveryModel  implements Serializable {
   public void setPatient( java.util.List<ReferenceModel> value) {
     this.patient = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public java.util.List<SupplyDeliverySuppliedItemModel> getSuppliedItem() {
@@ -452,7 +471,6 @@ public class SupplyDeliveryModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("occurrenceTiming" + "->" + this.occurrenceTiming + "\n"); 

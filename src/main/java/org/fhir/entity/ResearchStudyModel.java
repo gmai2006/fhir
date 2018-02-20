@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="researchstudy")
 public class ResearchStudyModel  implements Serializable {
-	private static final long serialVersionUID = 151873631187497120L;
+	private static final long serialVersionUID = 151910893764280328L;
   /**
   * Description: "This is a ResearchStudy resource"
   */
@@ -94,21 +93,25 @@ public class ResearchStudyModel  implements Serializable {
 
   /**
   * Description: "Codes categorizing the type of study such as investigational vs. observational, type of blinding, type of randomization, safety vs. efficacy, etc."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "The condition(s), medication(s), food(s), therapy(ies), device(s) or other concerns or interventions that the study is seeking to gain more information about."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"focus\"", length = 16777215)
-  private String focus;
+  @Column(name="\"focus_id\"")
+  private String focus_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="focus_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> focus;
 
   /**
   * Description: "Contact details to assist a user in learning more about or engaging with the study."
@@ -134,21 +137,25 @@ public class ResearchStudyModel  implements Serializable {
 
   /**
   * Description: "Key terms to aid in searching for or filtering the study."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"keyword\"", length = 16777215)
-  private String keyword;
+  @Column(name="\"keyword_id\"")
+  private String keyword_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="keyword_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> keyword;
 
   /**
   * Description: "Indicates a country, state or other region where the study is taking place."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "A full description of how the study is being conducted."
@@ -212,12 +219,14 @@ public class ResearchStudyModel  implements Serializable {
 
   /**
   * Description: "A description and/or code explaining the premature termination of the study."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonStopped\"", length = 16777215)
-  private String reasonStopped;
+  @Column(name="\"reasonstopped_id\"")
+  private String reasonstopped_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasonstopped_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonStopped;
 
   /**
   * Description: "Comments made about the event by the performer, subject or other participants."
@@ -330,6 +339,9 @@ public class ResearchStudyModel  implements Serializable {
   public ResearchStudyModel(ResearchStudy o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.title = o.getTitle();
     if (null != o.getProtocol() && !o.getProtocol().isEmpty()) {
     	this.protocol_id = "protocol" + this.id;
@@ -340,6 +352,14 @@ public class ResearchStudyModel  implements Serializable {
     	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
     }
     this.status = o.getStatus();
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModelFromArray(o.getCategory(), this.category_id);
+    }
+    if (null != o.getFocus() && !o.getFocus().isEmpty()) {
+    	this.focus_id = "focus" + this.id;
+    	this.focus = CodeableConceptHelper.toModelFromArray(o.getFocus(), this.focus_id);
+    }
     if (null != o.getContact() && !o.getContact().isEmpty()) {
     	this.contact_id = "contact" + this.id;
     	this.contact = ContactDetailHelper.toModelFromArray(o.getContact(), this.contact_id);
@@ -348,12 +368,22 @@ public class ResearchStudyModel  implements Serializable {
     	this.relatedartifact_id = "relatedartifact" + this.id;
     	this.relatedArtifact = RelatedArtifactHelper.toModelFromArray(o.getRelatedArtifact(), this.relatedartifact_id);
     }
+    if (null != o.getKeyword() && !o.getKeyword().isEmpty()) {
+    	this.keyword_id = "keyword" + this.id;
+    	this.keyword = CodeableConceptHelper.toModelFromArray(o.getKeyword(), this.keyword_id);
+    }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
     this.description = o.getDescription();
     if (null != o.getEnrollment() && !o.getEnrollment().isEmpty()) {
     	this.enrollment_id = "enrollment" + this.id;
     	this.enrollment = ReferenceHelper.toModelFromArray(o.getEnrollment(), this.enrollment_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getSponsor() ) {
     	this.sponsor_id = "sponsor" + this.id;
     	this.sponsor = ReferenceHelper.toModel(o.getSponsor(), this.sponsor_id);
@@ -366,7 +396,13 @@ public class ResearchStudyModel  implements Serializable {
     	this.site_id = "site" + this.id;
     	this.site = ReferenceHelper.toModelFromArray(o.getSite(), this.site_id);
     }
-    this.reasonStopped = JsonUtils.toJson(o.getReasonStopped());
+    if (null != o.getReasonStopped() ) {
+    	this.reasonstopped_id = "reasonstopped" + this.id;
+    	this.reasonStopped = CodeableConceptHelper.toModel(o.getReasonStopped(), this.reasonstopped_id);
+    }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getArm() && !o.getArm().isEmpty()) {
     	this.arm_id = "arm" + this.id;
     	this.arm = ResearchStudyArmHelper.toModelFromArray(o.getArm(), this.arm_id);
@@ -374,6 +410,15 @@ public class ResearchStudyModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -419,16 +464,16 @@ public class ResearchStudyModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getFocus() {
+  public java.util.List<CodeableConceptModel> getFocus() {
     return this.focus;
   }
-  public void setFocus( String value) {
+  public void setFocus( java.util.List<CodeableConceptModel> value) {
     this.focus = value;
   }
   public java.util.List<ContactDetailModel> getContact() {
@@ -443,16 +488,16 @@ public class ResearchStudyModel  implements Serializable {
   public void setRelatedArtifact( java.util.List<RelatedArtifactModel> value) {
     this.relatedArtifact = value;
   }
-  public String getKeyword() {
+  public java.util.List<CodeableConceptModel> getKeyword() {
     return this.keyword;
   }
-  public void setKeyword( String value) {
+  public void setKeyword( java.util.List<CodeableConceptModel> value) {
     this.keyword = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public String getDescription() {
@@ -491,10 +536,10 @@ public class ResearchStudyModel  implements Serializable {
   public void setSite( java.util.List<ReferenceModel> value) {
     this.site = value;
   }
-  public String getReasonStopped() {
+  public java.util.List<CodeableConceptModel> getReasonStopped() {
     return this.reasonStopped;
   }
-  public void setReasonStopped( String value) {
+  public void setReasonStopped( java.util.List<CodeableConceptModel> value) {
     this.reasonStopped = value;
   }
   public String getNote() {
@@ -566,13 +611,8 @@ public class ResearchStudyModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("title" + "->" + this.title + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("focus" + "->" + this.focus + "\n"); 
-     builder.append("keyword" + "->" + this.keyword + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("reasonStopped" + "->" + this.reasonStopped + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

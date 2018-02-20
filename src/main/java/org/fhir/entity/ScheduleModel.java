@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="schedule")
 public class ScheduleModel  implements Serializable {
-	private static final long serialVersionUID = 15187363117539227L;
+	private static final long serialVersionUID = 151910893751493981L;
   /**
   * Description: "This is a Schedule resource"
   */
@@ -65,30 +64,36 @@ public class ScheduleModel  implements Serializable {
 
   /**
   * Description: "A broad categorisation of the service that is to be performed during this appointment."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"serviceCategory\"", length = 16777215)
-  private String serviceCategory;
+  @Column(name="\"servicecategory_id\"")
+  private String servicecategory_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="servicecategory_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> serviceCategory;
 
   /**
   * Description: "The specific service that is to be performed during this appointment."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"serviceType\"", length = 16777215)
-  private String serviceType;
+  @Column(name="\"servicetype_id\"")
+  private String servicetype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="servicetype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> serviceType;
 
   /**
   * Description: "The specialty of a practitioner that would be required to perform the service requested in this appointment."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"specialty\"", length = 16777215)
-  private String specialty;
+  @Column(name="\"specialty_id\"")
+  private String specialty_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> specialty;
 
   /**
   * Description: "The resource this Schedule resource is providing availability information for. These are expected to usually be one of HealthcareService, Location, Practitioner, PractitionerRole, Device, Patient or RelatedPerson."
@@ -208,17 +213,42 @@ public class ScheduleModel  implements Serializable {
   public ScheduleModel(Schedule o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.active = o.getActive();
-    this.serviceCategory = JsonUtils.toJson(o.getServiceCategory());
+    if (null != o.getServiceCategory() ) {
+    	this.servicecategory_id = "servicecategory" + this.id;
+    	this.serviceCategory = CodeableConceptHelper.toModel(o.getServiceCategory(), this.servicecategory_id);
+    }
+    if (null != o.getServiceType() && !o.getServiceType().isEmpty()) {
+    	this.servicetype_id = "servicetype" + this.id;
+    	this.serviceType = CodeableConceptHelper.toModelFromArray(o.getServiceType(), this.servicetype_id);
+    }
+    if (null != o.getSpecialty() && !o.getSpecialty().isEmpty()) {
+    	this.specialty_id = "specialty" + this.id;
+    	this.specialty = CodeableConceptHelper.toModelFromArray(o.getSpecialty(), this.specialty_id);
+    }
     if (null != o.getActor() && !o.getActor().isEmpty()) {
     	this.actor_id = "actor" + this.id;
     	this.actor = ReferenceHelper.toModelFromArray(o.getActor(), this.actor_id);
     }
-    this.planningHorizon = JsonUtils.toJson(o.getPlanningHorizon());
+    if (null != o.getPlanningHorizon()) {
+    	this.planningHorizon = JsonUtils.toJson(o.getPlanningHorizon());
+    }
     this.comment = o.getComment();
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -246,22 +276,22 @@ public class ScheduleModel  implements Serializable {
   public void setActive( Boolean value) {
     this.active = value;
   }
-  public String getServiceCategory() {
+  public java.util.List<CodeableConceptModel> getServiceCategory() {
     return this.serviceCategory;
   }
-  public void setServiceCategory( String value) {
+  public void setServiceCategory( java.util.List<CodeableConceptModel> value) {
     this.serviceCategory = value;
   }
-  public String getServiceType() {
+  public java.util.List<CodeableConceptModel> getServiceType() {
     return this.serviceType;
   }
-  public void setServiceType( String value) {
+  public void setServiceType( java.util.List<CodeableConceptModel> value) {
     this.serviceType = value;
   }
-  public String getSpecialty() {
+  public java.util.List<CodeableConceptModel> getSpecialty() {
     return this.specialty;
   }
-  public void setSpecialty( String value) {
+  public void setSpecialty( java.util.List<CodeableConceptModel> value) {
     this.specialty = value;
   }
   public java.util.List<ReferenceModel> getActor() {
@@ -338,9 +368,6 @@ public class ScheduleModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("serviceCategory" + "->" + this.serviceCategory + "\n"); 
-     builder.append("serviceType" + "->" + this.serviceType + "\n"); 
-     builder.append("specialty" + "->" + this.specialty + "\n"); 
      builder.append("planningHorizon" + "->" + this.planningHorizon + "\n"); 
      builder.append("comment" + "->" + this.comment + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

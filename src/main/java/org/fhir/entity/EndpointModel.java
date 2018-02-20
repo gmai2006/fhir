@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="endpoint")
 public class EndpointModel  implements Serializable {
-	private static final long serialVersionUID = 151873631131758215L;
+	private static final long serialVersionUID = 151910893707554558L;
   /**
   * Description: "This is a Endpoint resource"
   */
@@ -65,13 +64,14 @@ public class EndpointModel  implements Serializable {
 
   /**
   * Description: "A coded value that represents the technical details of the usage of this endpoint, such as what WSDLs should be used in what way. (e.g. XDS.b/DICOM/cds-hook)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"connectionType\"", length = 16777215)
-  private String connectionType;
+  @Column(name="\"connectiontype_id\"")
+  private String connectiontype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="connectiontype_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> connectionType;
 
   /**
   * Description: "A friendly name that this endpoint can be referred to with."
@@ -111,13 +111,14 @@ public class EndpointModel  implements Serializable {
 
   /**
   * Description: "The payload type describes the acceptable content that can be communicated on the endpoint."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"payloadType\"", length = 16777215)
-  private String payloadType;
+  @Column(name="\"payloadtype_id\"")
+  private String payloadtype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="payloadtype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> payloadType;
 
   /**
   * Description: "The mime type to send the payload in - e.g. application/fhir+xml, application/fhir+json. If the mime type is not specified, then the sender could send any content (including no content depending on the connectionType)."
@@ -231,20 +232,44 @@ public class EndpointModel  implements Serializable {
   public EndpointModel(Endpoint o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.connectionType = JsonUtils.toJson(o.getConnectionType());
+    if (null != o.getConnectionType() ) {
+    	this.connectiontype_id = "connectiontype" + this.id;
+    	this.connectionType = CodingHelper.toModel(o.getConnectionType(), this.connectiontype_id);
+    }
     this.name = o.getName();
     if (null != o.getManagingOrganization() ) {
     	this.managingorganization_id = "managingorganization" + this.id;
     	this.managingOrganization = ReferenceHelper.toModel(o.getManagingOrganization(), this.managingorganization_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
-    this.payloadMimeType = org.fhir.utils.JsonUtils.write2String(o.getPayloadMimeType());
+    if (null != o.getContact()) {
+    	this.contact = JsonUtils.toJson(o.getContact());
+    }
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
+    if (null != o.getPayloadType() && !o.getPayloadType().isEmpty()) {
+    	this.payloadtype_id = "payloadtype" + this.id;
+    	this.payloadType = CodeableConceptHelper.toModelFromArray(o.getPayloadType(), this.payloadtype_id);
+    }
+    this.payloadMimeType = org.fhir.utils.JsonUtils.toJson(o.getPayloadMimeType());
     this.address = o.getAddress();
-    this.header = org.fhir.utils.JsonUtils.write2String(o.getHeader());
+    this.header = org.fhir.utils.JsonUtils.toJson(o.getHeader());
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -272,10 +297,10 @@ public class EndpointModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getConnectionType() {
+  public java.util.List<CodingModel> getConnectionType() {
     return this.connectionType;
   }
-  public void setConnectionType( String value) {
+  public void setConnectionType( java.util.List<CodingModel> value) {
     this.connectionType = value;
   }
   public String getName() {
@@ -302,10 +327,10 @@ public class EndpointModel  implements Serializable {
   public void setPeriod( String value) {
     this.period = value;
   }
-  public String getPayloadType() {
+  public java.util.List<CodeableConceptModel> getPayloadType() {
     return this.payloadType;
   }
-  public void setPayloadType( String value) {
+  public void setPayloadType( java.util.List<CodeableConceptModel> value) {
     this.payloadType = value;
   }
   public String getPayloadMimeType() {
@@ -382,11 +407,9 @@ public class EndpointModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("connectionType" + "->" + this.connectionType + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("contact" + "->" + this.contact + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
-     builder.append("payloadType" + "->" + this.payloadType + "\n"); 
      builder.append("payloadMimeType" + "->" + this.payloadMimeType + "\n"); 
      builder.append("address" + "->" + this.address + "\n"); 
      builder.append("header" + "->" + this.header + "\n"); 

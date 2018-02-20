@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="conceptmapelement")
 public class ConceptMapElementModel  implements Serializable {
-	private static final long serialVersionUID = 151873631154497458L;
+	private static final long serialVersionUID = 151910893730891883L;
   /**
   * Description: "Identity (code or path) or the element/item being mapped."
   */
@@ -109,12 +108,20 @@ public class ConceptMapElementModel  implements Serializable {
 
   public ConceptMapElementModel(ConceptMapElement o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.code = o.getCode();
     this.display = o.getDisplay();
     if (null != o.getTarget() && !o.getTarget().isEmpty()) {
     	this.target_id = "target" + this.parent_id;
     	this.target = ConceptMapTargetHelper.toModelFromArray(o.getTarget(), this.target_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

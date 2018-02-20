@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="measuresupplementaldata")
 public class MeasureSupplementalDataModel  implements Serializable {
-	private static final long serialVersionUID = 15187363118528588L;
+	private static final long serialVersionUID = 151910893762071921L;
   /**
   * Description: "An identifier for the supplemental data."
   * Actual type: String;
@@ -50,12 +49,14 @@ public class MeasureSupplementalDataModel  implements Serializable {
 
   /**
   * Description: "An indicator of the intended usage for the supplemental data element. Supplemental data indicates the data is additional information requested to augment the measure information. Risk adjustment factor indicates the data is additional information used to calculate risk adjustment factors when applying a risk model to the measure calculation."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"usage\"", length = 16777215)
-  private String usage;
+  @Column(name="\"usage_id\"")
+  private String usage_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="usage_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> usage;
 
   /**
   * Description: "The criteria for the supplemental data. This must be the name of a valid expression defined within a referenced library, and defines the data to be returned for this element."
@@ -115,10 +116,24 @@ public class MeasureSupplementalDataModel  implements Serializable {
 
   public MeasureSupplementalDataModel(MeasureSupplementalData o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
+    if (null != o.getUsage() && !o.getUsage().isEmpty()) {
+    	this.usage_id = "usage" + this.parent_id;
+    	this.usage = CodeableConceptHelper.toModelFromArray(o.getUsage(), this.usage_id);
+    }
     this.criteria = o.getCriteria();
     this.path = o.getPath();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getIdentifier() {
@@ -127,10 +142,10 @@ public class MeasureSupplementalDataModel  implements Serializable {
   public void setIdentifier( String value) {
     this.identifier = value;
   }
-  public String getUsage() {
+  public java.util.List<CodeableConceptModel> getUsage() {
     return this.usage;
   }
-  public void setUsage( String value) {
+  public void setUsage( java.util.List<CodeableConceptModel> value) {
     this.usage = value;
   }
   public String getCriteria() {
@@ -175,7 +190,6 @@ public class MeasureSupplementalDataModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MeasureSupplementalDataModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("usage" + "->" + this.usage + "\n"); 
      builder.append("criteria" + "->" + this.criteria + "\n"); 
      builder.append("path" + "->" + this.path + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

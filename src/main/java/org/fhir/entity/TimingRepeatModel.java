@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="timingrepeat")
 public class TimingRepeatModel  implements Serializable {
-	private static final long serialVersionUID = 151873631194110946L;
+	private static final long serialVersionUID = 151910893770956151L;
   /**
   * Description: "Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule."
   * Actual type: String;
@@ -217,10 +216,18 @@ public class TimingRepeatModel  implements Serializable {
 
   public TimingRepeatModel(TimingRepeat o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.boundsDuration = JsonUtils.toJson(o.getBoundsDuration());
-    this.boundsRange = JsonUtils.toJson(o.getBoundsRange());
-    this.boundsPeriod = JsonUtils.toJson(o.getBoundsPeriod());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getBoundsDuration()) {
+    	this.boundsDuration = JsonUtils.toJson(o.getBoundsDuration());
+    }
+    if (null != o.getBoundsRange()) {
+    	this.boundsRange = JsonUtils.toJson(o.getBoundsRange());
+    }
+    if (null != o.getBoundsPeriod()) {
+    	this.boundsPeriod = JsonUtils.toJson(o.getBoundsPeriod());
+    }
     this.count = o.getCount();
     this.countMax = o.getCountMax();
     this.duration = o.getDuration();
@@ -231,10 +238,16 @@ public class TimingRepeatModel  implements Serializable {
     this.period = o.getPeriod();
     this.periodMax = o.getPeriodMax();
     this.periodUnit = o.getPeriodUnit();
-    this.dayOfWeek = org.fhir.utils.JsonUtils.write2String(o.getDayOfWeek());
-    this.timeOfDay = org.fhir.utils.JsonUtils.write2String(o.getTimeOfDay());
-    this.when = org.fhir.utils.JsonUtils.write2String(o.getWhen());
+    this.dayOfWeek = org.fhir.utils.JsonUtils.toJson(o.getDayOfWeek());
+    this.timeOfDay = org.fhir.utils.JsonUtils.toJson(o.getTimeOfDay());
+    this.when = org.fhir.utils.JsonUtils.toJson(o.getWhen());
     this.offset = o.getOffset();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getBoundsDuration() {

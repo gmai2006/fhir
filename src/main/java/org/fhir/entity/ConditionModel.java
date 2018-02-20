@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="fhircondition")
 public class ConditionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631140849609L;
+	private static final long serialVersionUID = 151910893716553318L;
   /**
   * Description: "This is a Condition resource"
   */
@@ -73,39 +72,47 @@ public class ConditionModel  implements Serializable {
 
   /**
   * Description: "A category assigned to the condition."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "A subjective assessment of the severity of the condition as evaluated by the clinician."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"severity\"", length = 16777215)
-  private String severity;
+  @Column(name="\"severity_id\"")
+  private String severity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="severity_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> severity;
 
   /**
   * Description: "Identification of the condition, problem or diagnosis."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The anatomical location where this condition manifests itself."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"bodySite\"", length = 16777215)
-  private String bodySite;
+  @Column(name="\"bodysite_id\"")
+  private String bodysite_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> bodySite;
 
   /**
   * Description: "Indicates the patient or group who the condition record is associated with."
@@ -361,10 +368,27 @@ public class ConditionModel  implements Serializable {
   public ConditionModel(Condition o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.clinicalStatus = o.getClinicalStatus();
     this.verificationStatus = o.getVerificationStatus();
-    this.severity = JsonUtils.toJson(o.getSeverity());
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModelFromArray(o.getCategory(), this.category_id);
+    }
+    if (null != o.getSeverity() ) {
+    	this.severity_id = "severity" + this.id;
+    	this.severity = CodeableConceptHelper.toModel(o.getSeverity(), this.severity_id);
+    }
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+    	this.bodysite_id = "bodysite" + this.id;
+    	this.bodySite = CodeableConceptHelper.toModelFromArray(o.getBodySite(), this.bodysite_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -374,15 +398,27 @@ public class ConditionModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.onsetDateTime = o.getOnsetDateTime();
-    this.onsetAge = JsonUtils.toJson(o.getOnsetAge());
-    this.onsetPeriod = JsonUtils.toJson(o.getOnsetPeriod());
-    this.onsetRange = JsonUtils.toJson(o.getOnsetRange());
+    if (null != o.getOnsetAge()) {
+    	this.onsetAge = JsonUtils.toJson(o.getOnsetAge());
+    }
+    if (null != o.getOnsetPeriod()) {
+    	this.onsetPeriod = JsonUtils.toJson(o.getOnsetPeriod());
+    }
+    if (null != o.getOnsetRange()) {
+    	this.onsetRange = JsonUtils.toJson(o.getOnsetRange());
+    }
     this.onsetString = o.getOnsetString();
     this.abatementDateTime = o.getAbatementDateTime();
-    this.abatementAge = JsonUtils.toJson(o.getAbatementAge());
+    if (null != o.getAbatementAge()) {
+    	this.abatementAge = JsonUtils.toJson(o.getAbatementAge());
+    }
     this.abatementBoolean = o.getAbatementBoolean();
-    this.abatementPeriod = JsonUtils.toJson(o.getAbatementPeriod());
-    this.abatementRange = JsonUtils.toJson(o.getAbatementRange());
+    if (null != o.getAbatementPeriod()) {
+    	this.abatementPeriod = JsonUtils.toJson(o.getAbatementPeriod());
+    }
+    if (null != o.getAbatementRange()) {
+    	this.abatementRange = JsonUtils.toJson(o.getAbatementRange());
+    }
     this.abatementString = o.getAbatementString();
     this.assertedDate = o.getAssertedDate();
     if (null != o.getAsserter() ) {
@@ -397,9 +433,21 @@ public class ConditionModel  implements Serializable {
     	this.evidence_id = "evidence" + this.id;
     	this.evidence = ConditionEvidenceHelper.toModelFromArray(o.getEvidence(), this.evidence_id);
     }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -433,28 +481,28 @@ public class ConditionModel  implements Serializable {
   public void setVerificationStatus( String value) {
     this.verificationStatus = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getSeverity() {
+  public java.util.List<CodeableConceptModel> getSeverity() {
     return this.severity;
   }
-  public void setSeverity( String value) {
+  public void setSeverity( java.util.List<CodeableConceptModel> value) {
     this.severity = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
-  public String getBodySite() {
+  public java.util.List<CodeableConceptModel> getBodySite() {
     return this.bodySite;
   }
-  public void setBodySite( String value) {
+  public void setBodySite( java.util.List<CodeableConceptModel> value) {
     this.bodySite = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -622,10 +670,6 @@ public class ConditionModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("clinicalStatus" + "->" + this.clinicalStatus + "\n"); 
      builder.append("verificationStatus" + "->" + this.verificationStatus + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("severity" + "->" + this.severity + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("bodySite" + "->" + this.bodySite + "\n"); 
      builder.append("onsetDateTime" + "->" + this.onsetDateTime + "\n"); 
      builder.append("onsetAge" + "->" + this.onsetAge + "\n"); 
      builder.append("onsetPeriod" + "->" + this.onsetPeriod + "\n"); 

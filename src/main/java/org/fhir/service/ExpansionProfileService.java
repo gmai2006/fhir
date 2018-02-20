@@ -38,6 +38,14 @@ public interface ExpansionProfileService {
   public ExpansionProfile update(ExpansionProfile bean);
   public void delete(ExpansionProfile bean);
   public List<ExpansionProfile> findByField(QueryBuilder queryBuilder);
+  public List<ExpansionProfile> findByContact(QueryBuilder queryBuilder);
+  public List<ExpansionProfile> findByUseContext(QueryBuilder queryBuilder);
+  public List<ExpansionProfile> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<ExpansionProfile> findByFixedVersion(QueryBuilder queryBuilder);
+  public List<ExpansionProfile> findByExcludedSystem(QueryBuilder queryBuilder);
+  public List<ExpansionProfile> findByDesignation(QueryBuilder queryBuilder);
+  public List<ExpansionProfile> findByText(QueryBuilder queryBuilder);
+  public List<ExpansionProfile> findByMeta(QueryBuilder queryBuilder);
 
 
 }

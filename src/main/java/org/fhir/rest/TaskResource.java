@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.Task;
 import org.fhir.service.TaskService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/Task")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class TaskResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public Task find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public Task findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<Task> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Task> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Task> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Task> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Task> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<Task> findAll() {
   	return this.service.selectAll();
   }
@@ -107,24 +172,25 @@ public class TaskResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Task> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
   /**
-  * Descr: Search by encounter or episode
+  * Descr: Search by requests this task is based on
   * Type: reference
   */
   @GET
-  @Path("context")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Task> context(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByContext(new QueryBuilder(params));
+  @Path("basedon")
+  public List<Task> basedon(@QueryParam("basedon")String basedon) {
+  	java.util.Map<String, String> params = QueryParser.parse(basedon, VALID_FIELDS);
+  	return this.service.findByBasedOn(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by task this task is part of
+  * Type: reference
+  */
+  @GET
+  @Path("partof")
+  public List<Task> partof(@QueryParam("partof")String partof) {
+  	java.util.Map<String, String> params = QueryParser.parse(partof, VALID_FIELDS);
+  	return this.service.findByPartOf(new QueryBuilder(params));
   }
   /**
   * Descr: Search by task focus
@@ -132,10 +198,19 @@ public class TaskResource {
   */
   @GET
   @Path("focus")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Task> focus(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<Task> focus(@QueryParam("focus")String focus) {
+  	java.util.Map<String, String> params = QueryParser.parse(focus, VALID_FIELDS);
   	return this.service.findByFocus(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by encounter or episode
+  * Type: reference
+  */
+  @GET
+  @Path("context")
+  public List<Task> context(@QueryParam("context")String context) {
+  	java.util.Map<String, String> params = QueryParser.parse(context, VALID_FIELDS);
+  	return this.service.findByContext(new QueryBuilder(params));
   }
   /**
   * Descr: Search by task owner
@@ -143,21 +218,99 @@ public class TaskResource {
   */
   @GET
   @Path("owner")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Task> owner(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<Task> owner(@QueryParam("owner")String owner) {
+  	java.util.Map<String, String> params = QueryParser.parse(owner, VALID_FIELDS);
   	return this.service.findByOwner(new QueryBuilder(params));
   }
   /**
-  * Descr: Search by task requester
-  * Type: reference
+  * Descr: Search for a task instance by its business identifier
+  * Type: token
   */
   @GET
-  @Path("requester/agent")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Task> requester(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByRequester(new QueryBuilder(params));
+  public List<Task> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by group identifier
+  * Type: token
+  */
+  @GET
+  public List<Task> groupidentifier(@QueryParam("groupidentifier")String groupidentifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(groupidentifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by task status
+  * Type: token
+  */
+  @GET
+  public List<Task> status(@QueryParam("status")String status) {
+  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by business status
+  * Type: token
+  */
+  @GET
+  public List<Task> businessstatus(@QueryParam("businessstatus")String businessstatus) {
+  	java.util.Map<String, String> params = QueryParser.parse(businessstatus, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by task intent
+  * Type: token
+  */
+  @GET
+  public List<Task> intent(@QueryParam("intent")String intent) {
+  	java.util.Map<String, String> params = QueryParser.parse(intent, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by task priority
+  * Type: token
+  */
+  @GET
+  public List<Task> priority(@QueryParam("priority")String priority) {
+  	java.util.Map<String, String> params = QueryParser.parse(priority, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by task code
+  * Type: token
+  */
+  @GET
+  public List<Task> code(@QueryParam("code")String code) {
+  	java.util.Map<String, String> params = QueryParser.parse(code, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by period Task is/was underway
+  * Type: date
+  */
+  @GET
+  public List<Task> period(@QueryParam("period")String period) {
+  	java.util.Map<String, String> params = QueryParser.parse(period, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by last modification date
+  * Type: date
+  */
+  @GET
+  public List<Task> modified(@QueryParam("modified")String modified) {
+  	java.util.Map<String, String> params = QueryParser.parse(modified, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Search by recommended type of performer (e.g., Requester, Performer, Scheduler).
+  * Type: token
+  */
+  @GET
+  public List<Task> performer(@QueryParam("performer")String performer) {
+  	java.util.Map<String, String> params = QueryParser.parse(performer, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "authoredon|basedon|businessstatus|code|context|focus|groupidentifier|identifier|intent|modified|organization|owner|partof|patient|performer|period|priority|requester|status|subject";

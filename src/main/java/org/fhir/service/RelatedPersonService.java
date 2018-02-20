@@ -38,8 +38,11 @@ public interface RelatedPersonService {
   public RelatedPerson update(RelatedPerson bean);
   public void delete(RelatedPerson bean);
   public List<RelatedPerson> findByField(QueryBuilder queryBuilder);
-  public List<RelatedPerson> findByAddress(QueryBuilder queryBuilder);
   public List<RelatedPerson> findByPatient(QueryBuilder queryBuilder);
+  public List<RelatedPerson> findByRelationship(QueryBuilder queryBuilder);
+  public List<RelatedPerson> findByAddress(QueryBuilder queryBuilder);
+  public List<RelatedPerson> findByText(QueryBuilder queryBuilder);
+  public List<RelatedPerson> findByMeta(QueryBuilder queryBuilder);
 
 
 }

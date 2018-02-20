@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="eligibilityresponse")
 public class EligibilityResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151873631157043218L;
+	private static final long serialVersionUID = 151910893733120286L;
   /**
   * Description: "This is a EligibilityResponse resource"
   */
@@ -107,12 +106,14 @@ public class EligibilityResponseModel  implements Serializable {
 
   /**
   * Description: "Transaction status: error, complete."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"outcome\"", length = 16777215)
-  private String outcome;
+  @Column(name="\"outcome_id\"")
+  private String outcome_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> outcome;
 
   /**
   * Description: "A description of the status of the adjudication."
@@ -152,12 +153,14 @@ public class EligibilityResponseModel  implements Serializable {
 
   /**
   * Description: "The form to be used for printing the content."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"form\"", length = 16777215)
-  private String form;
+  @Column(name="\"form_id\"")
+  private String form_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> form;
 
   /**
   * Description: "Mutually exclusive with Services Provided (Item)."
@@ -261,6 +264,9 @@ public class EligibilityResponseModel  implements Serializable {
   public EligibilityResponseModel(EligibilityResponse o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     this.created = o.getCreated();
     if (null != o.getRequestProvider() ) {
@@ -275,7 +281,10 @@ public class EligibilityResponseModel  implements Serializable {
     	this.request_id = "request" + this.id;
     	this.request = ReferenceHelper.toModel(o.getRequest(), this.request_id);
     }
-    this.outcome = JsonUtils.toJson(o.getOutcome());
+    if (null != o.getOutcome() ) {
+    	this.outcome_id = "outcome" + this.id;
+    	this.outcome = CodeableConceptHelper.toModel(o.getOutcome(), this.outcome_id);
+    }
     this.disposition = o.getDisposition();
     if (null != o.getInsurer() ) {
     	this.insurer_id = "insurer" + this.id;
@@ -286,7 +295,10 @@ public class EligibilityResponseModel  implements Serializable {
     	this.insurance_id = "insurance" + this.id;
     	this.insurance = EligibilityResponseInsuranceHelper.toModelFromArray(o.getInsurance(), this.insurance_id);
     }
-    this.form = JsonUtils.toJson(o.getForm());
+    if (null != o.getForm() ) {
+    	this.form_id = "form" + this.id;
+    	this.form = CodeableConceptHelper.toModel(o.getForm(), this.form_id);
+    }
     if (null != o.getError() && !o.getError().isEmpty()) {
     	this.error_id = "error" + this.id;
     	this.error = EligibilityResponseErrorHelper.toModelFromArray(o.getError(), this.error_id);
@@ -294,6 +306,15 @@ public class EligibilityResponseModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -345,10 +366,10 @@ public class EligibilityResponseModel  implements Serializable {
   public void setRequest( java.util.List<ReferenceModel> value) {
     this.request = value;
   }
-  public String getOutcome() {
+  public java.util.List<CodeableConceptModel> getOutcome() {
     return this.outcome;
   }
-  public void setOutcome( String value) {
+  public void setOutcome( java.util.List<CodeableConceptModel> value) {
     this.outcome = value;
   }
   public String getDisposition() {
@@ -375,10 +396,10 @@ public class EligibilityResponseModel  implements Serializable {
   public void setInsurance( java.util.List<EligibilityResponseInsuranceModel> value) {
     this.insurance = value;
   }
-  public String getForm() {
+  public java.util.List<CodeableConceptModel> getForm() {
     return this.form;
   }
-  public void setForm( String value) {
+  public void setForm( java.util.List<CodeableConceptModel> value) {
     this.form = value;
   }
   public java.util.List<EligibilityResponseErrorModel> getError() {
@@ -444,10 +465,8 @@ public class EligibilityResponseModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("disposition" + "->" + this.disposition + "\n"); 
      builder.append("inforce" + "->" + this.inforce + "\n"); 
-     builder.append("form" + "->" + this.form + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

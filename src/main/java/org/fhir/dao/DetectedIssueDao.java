@@ -42,6 +42,11 @@ public interface DetectedIssueDao {
 
   public List<DetectedIssue> findByField(QueryBuilder queryBuilder);
 
+  public List<DetectedIssue> findByCategory(QueryBuilder queryBuilder);
+  public List<DetectedIssue> findByPatient(QueryBuilder queryBuilder);
   public List<DetectedIssue> findByAuthor(QueryBuilder queryBuilder);
   public List<DetectedIssue> findByImplicated(QueryBuilder queryBuilder);
+  public List<DetectedIssue> findByMitigation(QueryBuilder queryBuilder);
+  public List<DetectedIssue> findByText(QueryBuilder queryBuilder);
+  public List<DetectedIssue> findByMeta(QueryBuilder queryBuilder);
 }

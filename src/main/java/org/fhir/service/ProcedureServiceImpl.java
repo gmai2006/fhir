@@ -114,21 +114,51 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Procedure> findByContext(QueryBuilder queryBuilder) {
-  	final List<Procedure> result = dao.findByContext(queryBuilder);
-    logger.info("findBycontext - exited - return value={} result ");
-    return result;
-  }
-  @Override
   public List<Procedure> findByDefinition(QueryBuilder queryBuilder) {
   	final List<Procedure> result = dao.findByDefinition(queryBuilder);
     logger.info("findBydefinition - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<Procedure> findByLocation(QueryBuilder queryBuilder) {
-  	final List<Procedure> result = dao.findByLocation(queryBuilder);
-    logger.info("findBylocation - exited - return value={} result ");
+  public List<Procedure> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByPartOf(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByPartOf(queryBuilder);
+    logger.info("findBypartOf - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByNotDoneReason(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByNotDoneReason(queryBuilder);
+    logger.info("findBynotDoneReason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByCategory(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByCode(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByContext(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
     return result;
   }
   @Override
@@ -138,9 +168,87 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Procedure> findBySubject(QueryBuilder queryBuilder) {
-  	final List<Procedure> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<Procedure> findByLocation(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByReasonCode(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByReasonCode(queryBuilder);
+    logger.info("findByreasonCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByReasonReference(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByReasonReference(queryBuilder);
+    logger.info("findByreasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByBodySite(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByBodySite(queryBuilder);
+    logger.info("findBybodySite - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByOutcome(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByOutcome(queryBuilder);
+    logger.info("findByoutcome - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByReport(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByReport(queryBuilder);
+    logger.info("findByreport - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByComplication(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByComplication(queryBuilder);
+    logger.info("findBycomplication - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByComplicationDetail(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByComplicationDetail(queryBuilder);
+    logger.info("findBycomplicationDetail - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByFollowUp(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByFollowUp(queryBuilder);
+    logger.info("findByfollowUp - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByFocalDevice(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByFocalDevice(queryBuilder);
+    logger.info("findByfocalDevice - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByUsedReference(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByUsedReference(queryBuilder);
+    logger.info("findByusedReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByUsedCode(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByUsedCode(queryBuilder);
+    logger.info("findByusedCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByText(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Procedure> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Procedure> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

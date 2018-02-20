@@ -42,4 +42,9 @@ public interface PractitionerDao {
 
   public List<Practitioner> findByField(QueryBuilder queryBuilder);
 
+  public List<Practitioner> findByAddress(QueryBuilder queryBuilder);
+  public List<Practitioner> findByQualification(QueryBuilder queryBuilder);
+  public List<Practitioner> findByCommunication(QueryBuilder queryBuilder);
+  public List<Practitioner> findByText(QueryBuilder queryBuilder);
+  public List<Practitioner> findByMeta(QueryBuilder queryBuilder);
 }

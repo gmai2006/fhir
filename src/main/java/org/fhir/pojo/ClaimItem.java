@@ -210,14 +210,28 @@ public class ClaimItem  extends BackboneElement  {
     if (o.getInformationLinkId() != null) {
     	this.informationLinkId = org.fhir.utils.JsonUtils.json2Array(o.getInformationLinkId());
     }
-    this.revenue = CodeableConceptHelper.fromJson(o.getRevenue());
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
-    this.service = CodeableConceptHelper.fromJson(o.getService());
+    if (null != o.getRevenue() && !o.getRevenue().isEmpty()) {
+      this.revenue = new CodeableConcept(o.getRevenue().get(0));
+    }
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getService() && !o.getService().isEmpty()) {
+      this.service = new CodeableConcept(o.getService().get(0));
+    }
+    if (null != o.getModifier() && !o.getModifier().isEmpty()) {
+    	this.modifier = CodeableConceptHelper.fromArray2Array(o.getModifier());
+    }
+    if (null != o.getProgramCode() && !o.getProgramCode().isEmpty()) {
+    	this.programCode = CodeableConceptHelper.fromArray2Array(o.getProgramCode());
+    }
     if (null != o.getServicedDate()) {
       this.servicedDate = o.getServicedDate();
     }
     this.servicedPeriod = PeriodHelper.fromJson(o.getServicedPeriod());
-    this.locationCodeableConcept = CodeableConceptHelper.fromJson(o.getLocationCodeableConcept());
+    if (null != o.getLocationCodeableConcept() && !o.getLocationCodeableConcept().isEmpty()) {
+      this.locationCodeableConcept = new CodeableConcept(o.getLocationCodeableConcept().get(0));
+    }
     if (null != o.getLocationAddress() && !o.getLocationAddress().isEmpty()) {
       this.locationAddress = new Address(o.getLocationAddress().get(0));
     }
@@ -239,7 +253,12 @@ public class ClaimItem  extends BackboneElement  {
     if (null != o.getUdi() && !o.getUdi().isEmpty()) {
     	this.udi = ReferenceHelper.fromArray2Array(o.getUdi());
     }
-    this.bodySite = CodeableConceptHelper.fromJson(o.getBodySite());
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+      this.bodySite = new CodeableConcept(o.getBodySite().get(0));
+    }
+    if (null != o.getSubSite() && !o.getSubSite().isEmpty()) {
+    	this.subSite = CodeableConceptHelper.fromArray2Array(o.getSubSite());
+    }
     if (null != o.getEncounter() && !o.getEncounter().isEmpty()) {
     	this.encounter = ReferenceHelper.fromArray2Array(o.getEncounter());
     }

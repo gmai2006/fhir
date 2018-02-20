@@ -185,6 +185,9 @@ public class CarePlan  extends DomainResource  {
     if (null != o.getIntent()) {
       this.intent = o.getIntent();
     }
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category = CodeableConceptHelper.fromArray2Array(o.getCategory());
+    }
     if (null != o.getTitle()) {
       this.title = o.getTitle();
     }

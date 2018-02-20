@@ -52,6 +52,9 @@ public class EncounterParticipant  extends BackboneElement  {
 
   public EncounterParticipant(EncounterParticipantModel o) {
     this.id = o.getId();
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type = CodeableConceptHelper.fromArray2Array(o.getType());
+    }
     this.period = PeriodHelper.fromJson(o.getPeriod());
     if (null != o.getIndividual() && !o.getIndividual().isEmpty()) {
       this.individual = new Reference(o.getIndividual().get(0));

@@ -38,7 +38,11 @@ public interface BodySiteService {
   public BodySite update(BodySite bean);
   public void delete(BodySite bean);
   public List<BodySite> findByField(QueryBuilder queryBuilder);
+  public List<BodySite> findByCode(QueryBuilder queryBuilder);
+  public List<BodySite> findByQualifier(QueryBuilder queryBuilder);
   public List<BodySite> findByPatient(QueryBuilder queryBuilder);
+  public List<BodySite> findByText(QueryBuilder queryBuilder);
+  public List<BodySite> findByMeta(QueryBuilder queryBuilder);
 
 
 }

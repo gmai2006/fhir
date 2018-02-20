@@ -85,7 +85,9 @@ public class ExplanationOfBenefitFinancial  extends BackboneElement  {
 
   public ExplanationOfBenefitFinancial(ExplanationOfBenefitFinancialModel o) {
     this.id = o.getId();
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getAllowedUnsignedInt()) {
       this.allowedUnsignedInt = o.getAllowedUnsignedInt();
     }

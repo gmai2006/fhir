@@ -127,6 +127,9 @@ public class Practitioner  extends DomainResource  {
     if (null != o.getQualification() && !o.getQualification().isEmpty()) {
     	this.qualification = PractitionerQualificationHelper.fromArray2Array(o.getQualification());
     }
+    if (null != o.getCommunication() && !o.getCommunication().isEmpty()) {
+    	this.communication = CodeableConceptHelper.fromArray2Array(o.getCommunication());
+    }
   }
 
   public void setResourceType( String value) {

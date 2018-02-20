@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="careplanactivity")
 public class CarePlanActivityModel  implements Serializable {
-	private static final long serialVersionUID = 15187363117269477L;
+	private static final long serialVersionUID = 151910893748279203L;
   /**
   * Description: "Identifies the outcome at the point when the status of the activity is assessed.  For example, the outcome of an education activity could be patient understands (or not)."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"outcomeCodeableConcept\"", length = 16777215)
-  private String outcomeCodeableConcept;
+  @Column(name="\"outcomecodeableconcept_id\"")
+  private String outcomecodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcomecodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> outcomeCodeableConcept;
 
   /**
   * Description: "Details of the outcome or action resulting from the activity.  The reference to an \"event\" resource, such as Procedure or Encounter or Observation, is the result/outcome of the activity itself.  The activity can be conveyed using CarePlan.activity.detail OR using the CarePlan.activity.reference (a reference to a “request” resource)."
@@ -134,10 +135,19 @@ public class CarePlanActivityModel  implements Serializable {
 
   public CarePlanActivityModel(CarePlanActivity o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getOutcomeCodeableConcept() && !o.getOutcomeCodeableConcept().isEmpty()) {
+    	this.outcomecodeableconcept_id = "outcomecodeableconcept" + this.parent_id;
+    	this.outcomeCodeableConcept = CodeableConceptHelper.toModelFromArray(o.getOutcomeCodeableConcept(), this.outcomecodeableconcept_id);
+    }
     if (null != o.getOutcomeReference() && !o.getOutcomeReference().isEmpty()) {
     	this.outcomereference_id = "outcomereference" + this.parent_id;
     	this.outcomeReference = ReferenceHelper.toModelFromArray(o.getOutcomeReference(), this.outcomereference_id);
+    }
+    if (null != o.getProgress()) {
+    	this.progress = JsonUtils.toJson(o.getProgress());
     }
     if (null != o.getReference() ) {
     	this.reference_id = "reference" + this.parent_id;
@@ -147,12 +157,18 @@ public class CarePlanActivityModel  implements Serializable {
     	this.detail_id = "detail" + this.parent_id;
     	this.detail = CarePlanDetailHelper.toModel(o.getDetail(), this.detail_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getOutcomeCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getOutcomeCodeableConcept() {
     return this.outcomeCodeableConcept;
   }
-  public void setOutcomeCodeableConcept( String value) {
+  public void setOutcomeCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.outcomeCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getOutcomeReference() {
@@ -208,7 +224,6 @@ public class CarePlanActivityModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[CarePlanActivityModel]:" + "\n");
-     builder.append("outcomeCodeableConcept" + "->" + this.outcomeCodeableConcept + "\n"); 
      builder.append("progress" + "->" + this.progress + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

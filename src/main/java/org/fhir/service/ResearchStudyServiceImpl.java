@@ -120,15 +120,93 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<ResearchStudy> findBySite(QueryBuilder queryBuilder) {
-  	final List<ResearchStudy> result = dao.findBySite(queryBuilder);
-    logger.info("findBysite - exited - return value={} result ");
+  public List<ResearchStudy> findByPartOf(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByPartOf(queryBuilder);
+    logger.info("findBypartOf - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByCategory(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByFocus(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByFocus(queryBuilder);
+    logger.info("findByfocus - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByContact(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByRelatedArtifact(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByRelatedArtifact(queryBuilder);
+    logger.info("findByrelatedArtifact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByKeyword(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByKeyword(queryBuilder);
+    logger.info("findBykeyword - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByEnrollment(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByEnrollment(queryBuilder);
+    logger.info("findByenrollment - exited - return value={} result ");
     return result;
   }
   @Override
   public List<ResearchStudy> findBySponsor(QueryBuilder queryBuilder) {
   	final List<ResearchStudy> result = dao.findBySponsor(queryBuilder);
     logger.info("findBysponsor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByPrincipalInvestigator(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByPrincipalInvestigator(queryBuilder);
+    logger.info("findByprincipalInvestigator - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findBySite(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findBySite(queryBuilder);
+    logger.info("findBysite - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByReasonStopped(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByReasonStopped(queryBuilder);
+    logger.info("findByreasonStopped - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByArm(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByArm(queryBuilder);
+    logger.info("findByarm - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByText(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ResearchStudy> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ResearchStudy> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="bodysite")
 public class BodySiteModel  implements Serializable {
-	private static final long serialVersionUID = 151873631142696720L;
+	private static final long serialVersionUID = 151910893718989330L;
   /**
   * Description: "This is a BodySite resource"
   */
@@ -65,21 +64,25 @@ public class BodySiteModel  implements Serializable {
 
   /**
   * Description: "Named anatomical location - ideally coded where possible."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "Qualifier to refine the anatomical location.  These include qualifiers for laterality, relative location, directionality, number, and plane."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"qualifier\"", length = 16777215)
-  private String qualifier;
+  @Column(name="\"qualifier_id\"")
+  private String qualifier_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="qualifier_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> qualifier;
 
   /**
   * Description: "A summary, charactarization or explanation of the anatomic location."
@@ -199,9 +202,22 @@ public class BodySiteModel  implements Serializable {
   public BodySiteModel(BodySite o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.active = o.getActive();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
+    if (null != o.getQualifier() && !o.getQualifier().isEmpty()) {
+    	this.qualifier_id = "qualifier" + this.id;
+    	this.qualifier = CodeableConceptHelper.toModelFromArray(o.getQualifier(), this.qualifier_id);
+    }
     this.description = o.getDescription();
+    if (null != o.getImage()) {
+    	this.image = JsonUtils.toJson(o.getImage());
+    }
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
@@ -209,6 +225,15 @@ public class BodySiteModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -236,16 +261,16 @@ public class BodySiteModel  implements Serializable {
   public void setActive( Boolean value) {
     this.active = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
-  public String getQualifier() {
+  public java.util.List<CodeableConceptModel> getQualifier() {
     return this.qualifier;
   }
-  public void setQualifier( String value) {
+  public void setQualifier( java.util.List<CodeableConceptModel> value) {
     this.qualifier = value;
   }
   public String getDescription() {
@@ -322,8 +347,6 @@ public class BodySiteModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("qualifier" + "->" + this.qualifier + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("image" + "->" + this.image + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

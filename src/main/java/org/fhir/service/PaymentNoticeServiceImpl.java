@@ -114,18 +114,6 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<PaymentNotice> findByOrganization(QueryBuilder queryBuilder) {
-  	final List<PaymentNotice> result = dao.findByOrganization(queryBuilder);
-    logger.info("findByorganization - exited - return value={} result ");
-    return result;
-  }
-  @Override
-  public List<PaymentNotice> findByProvider(QueryBuilder queryBuilder) {
-  	final List<PaymentNotice> result = dao.findByProvider(queryBuilder);
-    logger.info("findByprovider - exited - return value={} result ");
-    return result;
-  }
-  @Override
   public List<PaymentNotice> findByRequest(QueryBuilder queryBuilder) {
   	final List<PaymentNotice> result = dao.findByRequest(queryBuilder);
     logger.info("findByrequest - exited - return value={} result ");
@@ -135,6 +123,42 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   public List<PaymentNotice> findByResponse(QueryBuilder queryBuilder) {
   	final List<PaymentNotice> result = dao.findByResponse(queryBuilder);
     logger.info("findByresponse - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentNotice> findByTarget(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByTarget(queryBuilder);
+    logger.info("findBytarget - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentNotice> findByProvider(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByProvider(queryBuilder);
+    logger.info("findByprovider - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentNotice> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentNotice> findByPaymentStatus(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByPaymentStatus(queryBuilder);
+    logger.info("findBypaymentStatus - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentNotice> findByText(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentNotice> findByMeta(QueryBuilder queryBuilder) {
+  	final List<PaymentNotice> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

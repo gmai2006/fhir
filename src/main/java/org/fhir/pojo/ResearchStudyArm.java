@@ -65,7 +65,9 @@ public class ResearchStudyArm  extends BackboneElement  {
     if (null != o.getName()) {
       this.name = o.getName();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }

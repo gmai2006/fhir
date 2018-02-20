@@ -42,4 +42,8 @@ public interface SubscriptionDao {
 
   public List<Subscription> findByField(QueryBuilder queryBuilder);
 
+  public List<Subscription> findByChannel(QueryBuilder queryBuilder);
+  public List<Subscription> findByTag(QueryBuilder queryBuilder);
+  public List<Subscription> findByText(QueryBuilder queryBuilder);
+  public List<Subscription> findByMeta(QueryBuilder queryBuilder);
 }

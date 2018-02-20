@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="sequencereferenceseq")
 public class SequenceReferenceSeqModel  implements Serializable {
-	private static final long serialVersionUID = 151873631175567916L;
+	private static final long serialVersionUID = 151910893751970385L;
   /**
   * Description: "Structural unit composed of a nucleic acid molecule which controls its own replication through the interaction of specific proteins at one or more origins of replication ([SO:0000340](http://www.sequenceontology.org/browser/current_svn/term/SO:0000340))."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"chromosome\"", length = 16777215)
-  private String chromosome;
+  @Column(name="\"chromosome_id\"")
+  private String chromosome_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="chromosome_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> chromosome;
 
   /**
   * Description: "The Genome Build used for reference, following GRCh build versions e.g. 'GRCh 37'.  Version number must be included if a versioned release of a primary build was used."
@@ -57,12 +58,14 @@ public class SequenceReferenceSeqModel  implements Serializable {
 
   /**
   * Description: "Reference identifier of reference sequence submitted to NCBI. It must match the type in the Sequence.type field. For example, the prefix, “NG_” identifies reference sequence for genes, “NM_” for messenger RNA transcripts, and “NP_” for amino acid sequences."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"referenceSeqId\"", length = 16777215)
-  private String referenceSeqId;
+  @Column(name="\"referenceseqid_id\"")
+  private String referenceseqid_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="referenceseqid_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> referenceSeqId;
 
   /**
   * Description: "A Pointer to another Sequence entity as reference sequence."
@@ -150,10 +153,18 @@ public class SequenceReferenceSeqModel  implements Serializable {
 
   public SequenceReferenceSeqModel(SequenceReferenceSeq o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.chromosome = JsonUtils.toJson(o.getChromosome());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getChromosome() ) {
+    	this.chromosome_id = "chromosome" + this.parent_id;
+    	this.chromosome = CodeableConceptHelper.toModel(o.getChromosome(), this.chromosome_id);
+    }
     this.genomeBuild = o.getGenomeBuild();
-    this.referenceSeqId = JsonUtils.toJson(o.getReferenceSeqId());
+    if (null != o.getReferenceSeqId() ) {
+    	this.referenceseqid_id = "referenceseqid" + this.parent_id;
+    	this.referenceSeqId = CodeableConceptHelper.toModel(o.getReferenceSeqId(), this.referenceseqid_id);
+    }
     if (null != o.getReferenceSeqPointer() ) {
     	this.referenceseqpointer_id = "referenceseqpointer" + this.parent_id;
     	this.referenceSeqPointer = ReferenceHelper.toModel(o.getReferenceSeqPointer(), this.referenceseqpointer_id);
@@ -162,12 +173,18 @@ public class SequenceReferenceSeqModel  implements Serializable {
     this.strand = o.getStrand();
     this.windowStart = o.getWindowStart();
     this.windowEnd = o.getWindowEnd();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getChromosome() {
+  public java.util.List<CodeableConceptModel> getChromosome() {
     return this.chromosome;
   }
-  public void setChromosome( String value) {
+  public void setChromosome( java.util.List<CodeableConceptModel> value) {
     this.chromosome = value;
   }
   public String getGenomeBuild() {
@@ -176,10 +193,10 @@ public class SequenceReferenceSeqModel  implements Serializable {
   public void setGenomeBuild( String value) {
     this.genomeBuild = value;
   }
-  public String getReferenceSeqId() {
+  public java.util.List<CodeableConceptModel> getReferenceSeqId() {
     return this.referenceSeqId;
   }
-  public void setReferenceSeqId( String value) {
+  public void setReferenceSeqId( java.util.List<CodeableConceptModel> value) {
     this.referenceSeqId = value;
   }
   public java.util.List<ReferenceModel> getReferenceSeqPointer() {
@@ -241,9 +258,7 @@ public class SequenceReferenceSeqModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[SequenceReferenceSeqModel]:" + "\n");
-     builder.append("chromosome" + "->" + this.chromosome + "\n"); 
      builder.append("genomeBuild" + "->" + this.genomeBuild + "\n"); 
-     builder.append("referenceSeqId" + "->" + this.referenceSeqId + "\n"); 
      builder.append("referenceSeqString" + "->" + this.referenceSeqString + "\n"); 
      builder.append("strand" + "->" + this.strand + "\n"); 
      builder.append("windowStart" + "->" + this.windowStart + "\n"); 

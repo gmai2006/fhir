@@ -76,7 +76,9 @@ public class SpecimenProcessing  extends BackboneElement  {
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }
-    this.procedure = CodeableConceptHelper.fromJson(o.getProcedure());
+    if (null != o.getProcedure() && !o.getProcedure().isEmpty()) {
+      this.procedure = new CodeableConcept(o.getProcedure().get(0));
+    }
     if (null != o.getAdditive() && !o.getAdditive().isEmpty()) {
     	this.additive = ReferenceHelper.fromArray2Array(o.getAdditive());
     }

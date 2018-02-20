@@ -79,7 +79,9 @@ public class PaymentReconciliationDetail  extends BackboneElement  {
 
   public PaymentReconciliationDetail(PaymentReconciliationDetailModel o) {
     this.id = o.getId();
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getRequest() && !o.getRequest().isEmpty()) {
       this.request = new Reference(o.getRequest().get(0));
     }

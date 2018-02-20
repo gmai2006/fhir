@@ -42,6 +42,11 @@ public interface OrganizationDao {
 
   public List<Organization> findByField(QueryBuilder queryBuilder);
 
+  public List<Organization> findByType(QueryBuilder queryBuilder);
   public List<Organization> findByAddress(QueryBuilder queryBuilder);
+  public List<Organization> findByPartOf(QueryBuilder queryBuilder);
+  public List<Organization> findByContact(QueryBuilder queryBuilder);
   public List<Organization> findByEndpoint(QueryBuilder queryBuilder);
+  public List<Organization> findByText(QueryBuilder queryBuilder);
+  public List<Organization> findByMeta(QueryBuilder queryBuilder);
 }

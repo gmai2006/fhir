@@ -71,11 +71,15 @@ public class ClaimResponseProcessNote  extends BackboneElement  {
     if (null != o.getNumber()) {
       this.number = o.getNumber();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getText()) {
       this.text = o.getText();
     }
-    this.language = CodeableConceptHelper.fromJson(o.getLanguage());
+    if (null != o.getLanguage() && !o.getLanguage().isEmpty()) {
+      this.language = new CodeableConcept(o.getLanguage().get(0));
+    }
   }
 
   public void setNumber( Float value) {

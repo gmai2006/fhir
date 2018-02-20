@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="communicationrequestpayload")
 public class CommunicationRequestPayloadModel  implements Serializable {
-	private static final long serialVersionUID = 151873631149178994L;
+	private static final long serialVersionUID = 151910893726275453L;
   /**
   * Description: "The communicated content (or for multi-part communications, one portion of the communication)."
   */
@@ -110,12 +109,22 @@ public class CommunicationRequestPayloadModel  implements Serializable {
 
   public CommunicationRequestPayloadModel(CommunicationRequestPayload o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.contentString = o.getContentString();
-    this.contentAttachment = JsonUtils.toJson(o.getContentAttachment());
+    if (null != o.getContentAttachment()) {
+    	this.contentAttachment = JsonUtils.toJson(o.getContentAttachment());
+    }
     if (null != o.getContentReference() ) {
     	this.contentreference_id = "contentreference" + this.parent_id;
     	this.contentReference = ReferenceHelper.toModel(o.getContentReference(), this.contentreference_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

@@ -114,15 +114,51 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<ProcessRequest> findByOrganization(QueryBuilder queryBuilder) {
-  	final List<ProcessRequest> result = dao.findByOrganization(queryBuilder);
-    logger.info("findByorganization - exited - return value={} result ");
+  public List<ProcessRequest> findByTarget(QueryBuilder queryBuilder) {
+  	final List<ProcessRequest> result = dao.findByTarget(queryBuilder);
+    logger.info("findBytarget - exited - return value={} result ");
     return result;
   }
   @Override
   public List<ProcessRequest> findByProvider(QueryBuilder queryBuilder) {
   	final List<ProcessRequest> result = dao.findByProvider(queryBuilder);
     logger.info("findByprovider - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ProcessRequest> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<ProcessRequest> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ProcessRequest> findByRequest(QueryBuilder queryBuilder) {
+  	final List<ProcessRequest> result = dao.findByRequest(queryBuilder);
+    logger.info("findByrequest - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ProcessRequest> findByResponse(QueryBuilder queryBuilder) {
+  	final List<ProcessRequest> result = dao.findByResponse(queryBuilder);
+    logger.info("findByresponse - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ProcessRequest> findByItem(QueryBuilder queryBuilder) {
+  	final List<ProcessRequest> result = dao.findByItem(queryBuilder);
+    logger.info("findByitem - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ProcessRequest> findByText(QueryBuilder queryBuilder) {
+  	final List<ProcessRequest> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ProcessRequest> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ProcessRequest> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

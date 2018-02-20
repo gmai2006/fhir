@@ -114,9 +114,33 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Condition> findByAsserter(QueryBuilder queryBuilder) {
-  	final List<Condition> result = dao.findByAsserter(queryBuilder);
-    logger.info("findByasserter - exited - return value={} result ");
+  public List<Condition> findByCategory(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Condition> findBySeverity(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findBySeverity(queryBuilder);
+    logger.info("findByseverity - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Condition> findByCode(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Condition> findByBodySite(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByBodySite(queryBuilder);
+    logger.info("findBybodySite - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Condition> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,9 +150,9 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Condition> findByEvidence(QueryBuilder queryBuilder) {
-  	final List<Condition> result = dao.findByEvidence(queryBuilder);
-    logger.info("findByevidence - exited - return value={} result ");
+  public List<Condition> findByAsserter(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByAsserter(queryBuilder);
+    logger.info("findByasserter - exited - return value={} result ");
     return result;
   }
   @Override
@@ -138,9 +162,21 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Condition> findBySubject(QueryBuilder queryBuilder) {
-  	final List<Condition> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<Condition> findByEvidence(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByEvidence(queryBuilder);
+    logger.info("findByevidence - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Condition> findByText(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Condition> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Condition> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

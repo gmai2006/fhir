@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="healthcareservice")
 public class HealthcareServiceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631124072524L;
+	private static final long serialVersionUID = 151910893700658383L;
   /**
   * Description: "This is a HealthcareService resource"
   */
@@ -76,30 +75,36 @@ public class HealthcareServiceModel  implements Serializable {
 
   /**
   * Description: "Identifies the broad category of service being performed or delivered."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "The specific type of service that may be delivered or performed."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "Collection of specialties handled by the service site. This is more of a medical term."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"specialty\"", length = 16777215)
-  private String specialty;
+  @Column(name="\"specialty_id\"")
+  private String specialty_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="specialty_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> specialty;
 
   /**
   * Description: "The location(s) where this healthcare service may be provided."
@@ -164,21 +169,25 @@ public class HealthcareServiceModel  implements Serializable {
 
   /**
   * Description: "The code(s) that detail the conditions under which the healthcare service is available/offered."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"serviceProvisionCode\"", length = 16777215)
-  private String serviceProvisionCode;
+  @Column(name="\"serviceprovisioncode_id\"")
+  private String serviceprovisioncode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="serviceprovisioncode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> serviceProvisionCode;
 
   /**
   * Description: "Does this service have specific eligibility requirements that need to be met in order to use the service?"
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"eligibility\"", length = 16777215)
-  private String eligibility;
+  @Column(name="\"eligibility_id\"")
+  private String eligibility_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="eligibility_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> eligibility;
 
   /**
   * Description: "Describes the eligibility conditions for the service."
@@ -196,21 +205,25 @@ public class HealthcareServiceModel  implements Serializable {
 
   /**
   * Description: "Collection of characteristics (attributes)."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"characteristic\"", length = 16777215)
-  private String characteristic;
+  @Column(name="\"characteristic_id\"")
+  private String characteristic_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="characteristic_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> characteristic;
 
   /**
   * Description: "Ways that the service accepts referrals, if this is not provided then it is implied that no referral is required."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"referralMethod\"", length = 16777215)
-  private String referralMethod;
+  @Column(name="\"referralmethod_id\"")
+  private String referralmethod_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="referralmethod_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> referralMethod;
 
   /**
   * Description: "Indicates whether or not a prospective consumer will require an appointment for a particular service at a site to be provided by the Organization. Indicates if an appointment is required for access to this service."
@@ -350,12 +363,26 @@ public class HealthcareServiceModel  implements Serializable {
   public HealthcareServiceModel(HealthcareService o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.active = o.getActive();
     if (null != o.getProvidedBy() ) {
     	this.providedby_id = "providedby" + this.id;
     	this.providedBy = ReferenceHelper.toModel(o.getProvidedBy(), this.providedby_id);
     }
-    this.category = JsonUtils.toJson(o.getCategory());
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModelFromArray(o.getType(), this.type_id);
+    }
+    if (null != o.getSpecialty() && !o.getSpecialty().isEmpty()) {
+    	this.specialty_id = "specialty" + this.id;
+    	this.specialty = CodeableConceptHelper.toModelFromArray(o.getSpecialty(), this.specialty_id);
+    }
     if (null != o.getLocation() && !o.getLocation().isEmpty()) {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModelFromArray(o.getLocation(), this.location_id);
@@ -363,14 +390,34 @@ public class HealthcareServiceModel  implements Serializable {
     this.name = o.getName();
     this.comment = o.getComment();
     this.extraDetails = o.getExtraDetails();
-    this.photo = JsonUtils.toJson(o.getPhoto());
+    if (null != o.getPhoto()) {
+    	this.photo = JsonUtils.toJson(o.getPhoto());
+    }
+    if (null != o.getTelecom()) {
+    	this.telecom = JsonUtils.toJson(o.getTelecom());
+    }
     if (null != o.getCoverageArea() && !o.getCoverageArea().isEmpty()) {
     	this.coveragearea_id = "coveragearea" + this.id;
     	this.coverageArea = ReferenceHelper.toModelFromArray(o.getCoverageArea(), this.coveragearea_id);
     }
-    this.eligibility = JsonUtils.toJson(o.getEligibility());
+    if (null != o.getServiceProvisionCode() && !o.getServiceProvisionCode().isEmpty()) {
+    	this.serviceprovisioncode_id = "serviceprovisioncode" + this.id;
+    	this.serviceProvisionCode = CodeableConceptHelper.toModelFromArray(o.getServiceProvisionCode(), this.serviceprovisioncode_id);
+    }
+    if (null != o.getEligibility() ) {
+    	this.eligibility_id = "eligibility" + this.id;
+    	this.eligibility = CodeableConceptHelper.toModel(o.getEligibility(), this.eligibility_id);
+    }
     this.eligibilityNote = o.getEligibilityNote();
-    this.programName = org.fhir.utils.JsonUtils.write2String(o.getProgramName());
+    this.programName = org.fhir.utils.JsonUtils.toJson(o.getProgramName());
+    if (null != o.getCharacteristic() && !o.getCharacteristic().isEmpty()) {
+    	this.characteristic_id = "characteristic" + this.id;
+    	this.characteristic = CodeableConceptHelper.toModelFromArray(o.getCharacteristic(), this.characteristic_id);
+    }
+    if (null != o.getReferralMethod() && !o.getReferralMethod().isEmpty()) {
+    	this.referralmethod_id = "referralmethod" + this.id;
+    	this.referralMethod = CodeableConceptHelper.toModelFromArray(o.getReferralMethod(), this.referralmethod_id);
+    }
     this.appointmentRequired = o.getAppointmentRequired();
     if (null != o.getAvailableTime() && !o.getAvailableTime().isEmpty()) {
     	this.availabletime_id = "availabletime" + this.id;
@@ -388,6 +435,15 @@ public class HealthcareServiceModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -421,22 +477,22 @@ public class HealthcareServiceModel  implements Serializable {
   public void setProvidedBy( java.util.List<ReferenceModel> value) {
     this.providedBy = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getSpecialty() {
+  public java.util.List<CodeableConceptModel> getSpecialty() {
     return this.specialty;
   }
-  public void setSpecialty( String value) {
+  public void setSpecialty( java.util.List<CodeableConceptModel> value) {
     this.specialty = value;
   }
   public java.util.List<ReferenceModel> getLocation() {
@@ -481,16 +537,16 @@ public class HealthcareServiceModel  implements Serializable {
   public void setCoverageArea( java.util.List<ReferenceModel> value) {
     this.coverageArea = value;
   }
-  public String getServiceProvisionCode() {
+  public java.util.List<CodeableConceptModel> getServiceProvisionCode() {
     return this.serviceProvisionCode;
   }
-  public void setServiceProvisionCode( String value) {
+  public void setServiceProvisionCode( java.util.List<CodeableConceptModel> value) {
     this.serviceProvisionCode = value;
   }
-  public String getEligibility() {
+  public java.util.List<CodeableConceptModel> getEligibility() {
     return this.eligibility;
   }
-  public void setEligibility( String value) {
+  public void setEligibility( java.util.List<CodeableConceptModel> value) {
     this.eligibility = value;
   }
   public String getEligibilityNote() {
@@ -505,16 +561,16 @@ public class HealthcareServiceModel  implements Serializable {
   public void setProgramName( String value) {
     this.programName = value;
   }
-  public String getCharacteristic() {
+  public java.util.List<CodeableConceptModel> getCharacteristic() {
     return this.characteristic;
   }
-  public void setCharacteristic( String value) {
+  public void setCharacteristic( java.util.List<CodeableConceptModel> value) {
     this.characteristic = value;
   }
-  public String getReferralMethod() {
+  public java.util.List<CodeableConceptModel> getReferralMethod() {
     return this.referralMethod;
   }
-  public void setReferralMethod( String value) {
+  public void setReferralMethod( java.util.List<CodeableConceptModel> value) {
     this.referralMethod = value;
   }
   public Boolean getAppointmentRequired() {
@@ -603,20 +659,13 @@ public class HealthcareServiceModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("active" + "->" + this.active + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("specialty" + "->" + this.specialty + "\n"); 
      builder.append("name" + "->" + this.name + "\n"); 
      builder.append("comment" + "->" + this.comment + "\n"); 
      builder.append("extraDetails" + "->" + this.extraDetails + "\n"); 
      builder.append("photo" + "->" + this.photo + "\n"); 
      builder.append("telecom" + "->" + this.telecom + "\n"); 
-     builder.append("serviceProvisionCode" + "->" + this.serviceProvisionCode + "\n"); 
-     builder.append("eligibility" + "->" + this.eligibility + "\n"); 
      builder.append("eligibilityNote" + "->" + this.eligibilityNote + "\n"); 
      builder.append("programName" + "->" + this.programName + "\n"); 
-     builder.append("characteristic" + "->" + this.characteristic + "\n"); 
-     builder.append("referralMethod" + "->" + this.referralMethod + "\n"); 
      builder.append("appointmentRequired" + "->" + this.appointmentRequired + "\n"); 
      builder.append("availabilityExceptions" + "->" + this.availabilityExceptions + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

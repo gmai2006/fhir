@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="communicationrequest")
 public class CommunicationRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151873631140123087L;
+	private static final long serialVersionUID = 151910893715732350L;
   /**
   * Description: "This is a CommunicationRequest resource"
   */
@@ -97,12 +96,14 @@ public class CommunicationRequestModel  implements Serializable {
 
   /**
   * Description: "The type of message to be sent such as alert, notification, reminder, instruction, etc."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "Characterizes how quickly the proposed act must be initiated. Includes concepts such as stat, urgent, routine."
@@ -114,12 +115,14 @@ public class CommunicationRequestModel  implements Serializable {
 
   /**
   * Description: "A channel that was used for this communication (e.g. email, fax)."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"medium\"", length = 16777215)
-  private String medium;
+  @Column(name="\"medium_id\"")
+  private String medium_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="medium_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> medium;
 
   /**
   * Description: "The patient or group that is the focus of this communication request."
@@ -225,12 +228,14 @@ public class CommunicationRequestModel  implements Serializable {
 
   /**
   * Description: "Describes why the request is being made in coded or textual form."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reasonCode\"", length = 16777215)
-  private String reasonCode;
+  @Column(name="\"reasoncode_id\"")
+  private String reasoncode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reasoncode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reasonCode;
 
   /**
   * Description: "Indicates another resource whose existence justifies this request."
@@ -343,6 +348,9 @@ public class CommunicationRequestModel  implements Serializable {
   public CommunicationRequestModel(CommunicationRequest o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
@@ -351,9 +359,19 @@ public class CommunicationRequestModel  implements Serializable {
     	this.replaces_id = "replaces" + this.id;
     	this.replaces = ReferenceHelper.toModelFromArray(o.getReplaces(), this.replaces_id);
     }
-    this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
+    if (null != o.getGroupIdentifier()) {
+    	this.groupIdentifier = JsonUtils.toJson(o.getGroupIdentifier());
+    }
     this.status = o.getStatus();
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModelFromArray(o.getCategory(), this.category_id);
+    }
     this.priority = o.getPriority();
+    if (null != o.getMedium() && !o.getMedium().isEmpty()) {
+    	this.medium_id = "medium" + this.id;
+    	this.medium = CodeableConceptHelper.toModelFromArray(o.getMedium(), this.medium_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -375,7 +393,9 @@ public class CommunicationRequestModel  implements Serializable {
     	this.payload = CommunicationRequestPayloadHelper.toModelFromArray(o.getPayload(), this.payload_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    if (null != o.getOccurrencePeriod()) {
+    	this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    }
     this.authoredOn = o.getAuthoredOn();
     if (null != o.getSender() ) {
     	this.sender_id = "sender" + this.id;
@@ -385,13 +405,29 @@ public class CommunicationRequestModel  implements Serializable {
     	this.requester_id = "requester" + this.id;
     	this.requester = CommunicationRequestRequesterHelper.toModel(o.getRequester(), this.requester_id);
     }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasoncode_id = "reasoncode" + this.id;
+    	this.reasonCode = CodeableConceptHelper.toModelFromArray(o.getReasonCode(), this.reasoncode_id);
+    }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonreference_id = "reasonreference" + this.id;
     	this.reasonReference = ReferenceHelper.toModelFromArray(o.getReasonReference(), this.reasonreference_id);
     }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -437,10 +473,10 @@ public class CommunicationRequestModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
   public String getPriority() {
@@ -449,10 +485,10 @@ public class CommunicationRequestModel  implements Serializable {
   public void setPriority( String value) {
     this.priority = value;
   }
-  public String getMedium() {
+  public java.util.List<CodeableConceptModel> getMedium() {
     return this.medium;
   }
-  public void setMedium( String value) {
+  public void setMedium( java.util.List<CodeableConceptModel> value) {
     this.medium = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -515,10 +551,10 @@ public class CommunicationRequestModel  implements Serializable {
   public void setRequester( java.util.List<CommunicationRequestRequesterModel> value) {
     this.requester = value;
   }
-  public String getReasonCode() {
+  public java.util.List<CodeableConceptModel> getReasonCode() {
     return this.reasonCode;
   }
-  public void setReasonCode( String value) {
+  public void setReasonCode( java.util.List<CodeableConceptModel> value) {
     this.reasonCode = value;
   }
   public java.util.List<ReferenceModel> getReasonReference() {
@@ -590,13 +626,10 @@ public class CommunicationRequestModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("groupIdentifier" + "->" + this.groupIdentifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
      builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("medium" + "->" + this.medium + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("authoredOn" + "->" + this.authoredOn + "\n"); 
-     builder.append("reasonCode" + "->" + this.reasonCode + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

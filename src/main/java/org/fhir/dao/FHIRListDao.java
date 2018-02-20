@@ -42,6 +42,13 @@ public interface FHIRListDao {
 
   public List<FHIRList> findByField(QueryBuilder queryBuilder);
 
-  public List<FHIRList> findBySource(QueryBuilder queryBuilder);
+  public List<FHIRList> findByCode(QueryBuilder queryBuilder);
   public List<FHIRList> findBySubject(QueryBuilder queryBuilder);
+  public List<FHIRList> findByEncounter(QueryBuilder queryBuilder);
+  public List<FHIRList> findBySource(QueryBuilder queryBuilder);
+  public List<FHIRList> findByOrderedBy(QueryBuilder queryBuilder);
+  public List<FHIRList> findByEntry(QueryBuilder queryBuilder);
+  public List<FHIRList> findByEmptyReason(QueryBuilder queryBuilder);
+  public List<FHIRList> findByText(QueryBuilder queryBuilder);
+  public List<FHIRList> findByMeta(QueryBuilder queryBuilder);
 }

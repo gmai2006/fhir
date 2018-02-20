@@ -42,5 +42,11 @@ public interface SlotDao {
 
   public List<Slot> findByField(QueryBuilder queryBuilder);
 
+  public List<Slot> findByServiceCategory(QueryBuilder queryBuilder);
+  public List<Slot> findByServiceType(QueryBuilder queryBuilder);
+  public List<Slot> findBySpecialty(QueryBuilder queryBuilder);
+  public List<Slot> findByAppointmentType(QueryBuilder queryBuilder);
   public List<Slot> findBySchedule(QueryBuilder queryBuilder);
+  public List<Slot> findByText(QueryBuilder queryBuilder);
+  public List<Slot> findByMeta(QueryBuilder queryBuilder);
 }

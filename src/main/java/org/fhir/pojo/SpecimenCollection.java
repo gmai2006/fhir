@@ -83,8 +83,12 @@ public class SpecimenCollection  extends BackboneElement  {
     if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
       this.quantity = new Quantity(o.getQuantity().get(0));
     }
-    this.method = CodeableConceptHelper.fromJson(o.getMethod());
-    this.bodySite = CodeableConceptHelper.fromJson(o.getBodySite());
+    if (null != o.getMethod() && !o.getMethod().isEmpty()) {
+      this.method = new CodeableConcept(o.getMethod().get(0));
+    }
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+      this.bodySite = new CodeableConcept(o.getBodySite().get(0));
+    }
   }
 
   public void setCollector( Reference value) {

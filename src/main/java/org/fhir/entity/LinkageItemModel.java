@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="linkageitem")
 public class LinkageItemModel  implements Serializable {
-	private static final long serialVersionUID = 151873631174286616L;
+	private static final long serialVersionUID = 151910893749943310L;
   /**
   * Description: "Distinguishes which item is \"source of truth\" (if any) and which items are no longer considered to be current representations."
   */
@@ -101,11 +100,19 @@ public class LinkageItemModel  implements Serializable {
 
   public LinkageItemModel(LinkageItem o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.type = o.getType();
     if (null != o.getResource() ) {
     	this.resource_id = "resource" + this.parent_id;
     	this.resource = ReferenceHelper.toModel(o.getResource(), this.resource_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

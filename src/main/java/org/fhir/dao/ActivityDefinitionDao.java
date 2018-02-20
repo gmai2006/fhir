@@ -42,4 +42,23 @@ public interface ActivityDefinitionDao {
 
   public List<ActivityDefinition> findByField(QueryBuilder queryBuilder);
 
+  public List<ActivityDefinition> findByUseContext(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByTopic(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByContributor(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByContact(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByRelatedArtifact(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByLibrary(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByCode(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByLocation(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByParticipant(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByProductReference(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByProductCodeableConcept(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByQuantity(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByDosage(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByBodySite(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByTransform(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByDynamicValue(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByText(QueryBuilder queryBuilder);
+  public List<ActivityDefinition> findByMeta(QueryBuilder queryBuilder);
 }

@@ -59,7 +59,9 @@ public class DetectedIssueMitigation  extends BackboneElement  {
 
   public DetectedIssueMitigation(DetectedIssueMitigationModel o) {
     this.id = o.getId();
-    this.action = CodeableConceptHelper.fromJson(o.getAction());
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+      this.action = new CodeableConcept(o.getAction().get(0));
+    }
     if (null != o.getDate()) {
       this.date = o.getDate();
     }

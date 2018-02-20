@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="operationdefinitionoverload")
 public class OperationDefinitionOverloadModel  implements Serializable {
-	private static final long serialVersionUID = 15187363116523969L;
+	private static final long serialVersionUID = 15191089374115104L;
   /**
   * Description: "Name of parameter to include in overload."
   */
@@ -97,9 +96,17 @@ public class OperationDefinitionOverloadModel  implements Serializable {
 
   public OperationDefinitionOverloadModel(OperationDefinitionOverload o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.parameterName = org.fhir.utils.JsonUtils.write2String(o.getParameterName());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    this.parameterName = org.fhir.utils.JsonUtils.toJson(o.getParameterName());
     this.comment = o.getComment();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getParameterName() {

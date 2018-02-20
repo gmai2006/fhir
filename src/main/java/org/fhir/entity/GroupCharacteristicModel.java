@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,25 +37,28 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="groupcharacteristic")
 public class GroupCharacteristicModel  implements Serializable {
-	private static final long serialVersionUID = 151873631155455113L;
+	private static final long serialVersionUID = 151910893731787283L;
   /**
   * Description: "A code that identifies the kind of trait being asserted."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The value of the trait that holds (or does not hold - see 'exclude') for members of the group."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"valueCodeableConcept\"", length = 16777215)
-  private String valueCodeableConcept;
+  @Column(name="\"valuecodeableconcept_id\"")
+  private String valuecodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="valuecodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> valueCodeableConcept;
 
   /**
   * Description: "The value of the trait that holds (or does not hold - see 'exclude') for members of the group."
@@ -145,29 +147,47 @@ public class GroupCharacteristicModel  implements Serializable {
 
   public GroupCharacteristicModel(GroupCharacteristic o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.code = JsonUtils.toJson(o.getCode());
-    this.valueCodeableConcept = JsonUtils.toJson(o.getValueCodeableConcept());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
+    if (null != o.getValueCodeableConcept() ) {
+    	this.valuecodeableconcept_id = "valuecodeableconcept" + this.parent_id;
+    	this.valueCodeableConcept = CodeableConceptHelper.toModel(o.getValueCodeableConcept(), this.valuecodeableconcept_id);
+    }
     this.valueBoolean = o.getValueBoolean();
     if (null != o.getValueQuantity() ) {
     	this.valuequantity_id = "valuequantity" + this.parent_id;
     	this.valueQuantity = QuantityHelper.toModel(o.getValueQuantity(), this.valuequantity_id);
     }
-    this.valueRange = JsonUtils.toJson(o.getValueRange());
+    if (null != o.getValueRange()) {
+    	this.valueRange = JsonUtils.toJson(o.getValueRange());
+    }
     this.exclude = o.getExclude();
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
-  public String getValueCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getValueCodeableConcept() {
     return this.valueCodeableConcept;
   }
-  public void setValueCodeableConcept( String value) {
+  public void setValueCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.valueCodeableConcept = value;
   }
   public Boolean getValueBoolean() {
@@ -229,8 +249,6 @@ public class GroupCharacteristicModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[GroupCharacteristicModel]:" + "\n");
-     builder.append("code" + "->" + this.code + "\n"); 
-     builder.append("valueCodeableConcept" + "->" + this.valueCodeableConcept + "\n"); 
      builder.append("valueBoolean" + "->" + this.valueBoolean + "\n"); 
      builder.append("valueRange" + "->" + this.valueRange + "\n"); 
      builder.append("exclude" + "->" + this.exclude + "\n"); 

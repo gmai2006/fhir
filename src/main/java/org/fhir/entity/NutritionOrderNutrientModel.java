@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionordernutrient")
 public class NutritionOrderNutrientModel  implements Serializable {
-	private static final long serialVersionUID = 151873631168654925L;
+	private static final long serialVersionUID = 151910893744333122L;
   /**
   * Description: "The nutrient that is being modified such as carbohydrate or sodium."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"modifier\"", length = 16777215)
-  private String modifier;
+  @Column(name="\"modifier_id\"")
+  private String modifier_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="modifier_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> modifier;
 
   /**
   * Description: "The quantity of the specified nutrient to include in diet."
@@ -103,18 +104,29 @@ public class NutritionOrderNutrientModel  implements Serializable {
 
   public NutritionOrderNutrientModel(NutritionOrderNutrient o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.modifier = JsonUtils.toJson(o.getModifier());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getModifier() ) {
+    	this.modifier_id = "modifier" + this.parent_id;
+    	this.modifier = CodeableConceptHelper.toModel(o.getModifier(), this.modifier_id);
+    }
     if (null != o.getAmount() ) {
     	this.amount_id = "amount" + this.parent_id;
     	this.amount = QuantityHelper.toModel(o.getAmount(), this.amount_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getModifier() {
+  public java.util.List<CodeableConceptModel> getModifier() {
     return this.modifier;
   }
-  public void setModifier( String value) {
+  public void setModifier( java.util.List<CodeableConceptModel> value) {
     this.modifier = value;
   }
   public java.util.List<QuantityModel> getAmount() {
@@ -152,7 +164,6 @@ public class NutritionOrderNutrientModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[NutritionOrderNutrientModel]:" + "\n");
-     builder.append("modifier" + "->" + this.modifier + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

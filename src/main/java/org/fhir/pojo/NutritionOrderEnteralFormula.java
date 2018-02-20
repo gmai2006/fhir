@@ -97,18 +97,24 @@ public class NutritionOrderEnteralFormula  extends BackboneElement  {
 
   public NutritionOrderEnteralFormula(NutritionOrderEnteralFormulaModel o) {
     this.id = o.getId();
-    this.baseFormulaType = CodeableConceptHelper.fromJson(o.getBaseFormulaType());
+    if (null != o.getBaseFormulaType() && !o.getBaseFormulaType().isEmpty()) {
+      this.baseFormulaType = new CodeableConcept(o.getBaseFormulaType().get(0));
+    }
     if (null != o.getBaseFormulaProductName()) {
       this.baseFormulaProductName = o.getBaseFormulaProductName();
     }
-    this.additiveType = CodeableConceptHelper.fromJson(o.getAdditiveType());
+    if (null != o.getAdditiveType() && !o.getAdditiveType().isEmpty()) {
+      this.additiveType = new CodeableConcept(o.getAdditiveType().get(0));
+    }
     if (null != o.getAdditiveProductName()) {
       this.additiveProductName = o.getAdditiveProductName();
     }
     if (null != o.getCaloricDensity() && !o.getCaloricDensity().isEmpty()) {
       this.caloricDensity = new Quantity(o.getCaloricDensity().get(0));
     }
-    this.routeofAdministration = CodeableConceptHelper.fromJson(o.getRouteofAdministration());
+    if (null != o.getRouteofAdministration() && !o.getRouteofAdministration().isEmpty()) {
+      this.routeofAdministration = new CodeableConcept(o.getRouteofAdministration().get(0));
+    }
     if (null != o.getAdministration() && !o.getAdministration().isEmpty()) {
     	this.administration = NutritionOrderAdministrationHelper.fromArray2Array(o.getAdministration());
     }

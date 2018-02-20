@@ -114,21 +114,129 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<ClaimResponse> findByInsurer(QueryBuilder queryBuilder) {
-  	final List<ClaimResponse> result = dao.findByInsurer(queryBuilder);
-    logger.info("findByinsurer - exited - return value={} result ");
-    return result;
-  }
-  @Override
   public List<ClaimResponse> findByPatient(QueryBuilder queryBuilder) {
   	final List<ClaimResponse> result = dao.findByPatient(queryBuilder);
     logger.info("findBypatient - exited - return value={} result ");
     return result;
   }
   @Override
+  public List<ClaimResponse> findByInsurer(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByInsurer(queryBuilder);
+    logger.info("findByinsurer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByRequestProvider(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByRequestProvider(queryBuilder);
+    logger.info("findByrequestProvider - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByRequestOrganization(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByRequestOrganization(queryBuilder);
+    logger.info("findByrequestOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<ClaimResponse> findByRequest(QueryBuilder queryBuilder) {
   	final List<ClaimResponse> result = dao.findByRequest(queryBuilder);
     logger.info("findByrequest - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByOutcome(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByOutcome(queryBuilder);
+    logger.info("findByoutcome - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByPayeeType(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByPayeeType(queryBuilder);
+    logger.info("findBypayeeType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByItem(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByItem(queryBuilder);
+    logger.info("findByitem - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByAddItem(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByAddItem(queryBuilder);
+    logger.info("findByaddItem - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByError(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByError(queryBuilder);
+    logger.info("findByerror - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByTotalCost(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByTotalCost(queryBuilder);
+    logger.info("findBytotalCost - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByUnallocDeductable(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByUnallocDeductable(queryBuilder);
+    logger.info("findByunallocDeductable - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByTotalBenefit(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByTotalBenefit(queryBuilder);
+    logger.info("findBytotalBenefit - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByPayment(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByPayment(queryBuilder);
+    logger.info("findBypayment - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByReserved(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByReserved(queryBuilder);
+    logger.info("findByreserved - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByForm(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByForm(queryBuilder);
+    logger.info("findByform - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByProcessNote(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByProcessNote(queryBuilder);
+    logger.info("findByprocessNote - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByCommunicationRequest(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByCommunicationRequest(queryBuilder);
+    logger.info("findBycommunicationRequest - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByInsurance(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByInsurance(queryBuilder);
+    logger.info("findByinsurance - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByText(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ClaimResponse> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ClaimResponse> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

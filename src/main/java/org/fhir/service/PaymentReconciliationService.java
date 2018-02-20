@@ -40,6 +40,15 @@ public interface PaymentReconciliationService {
   public List<PaymentReconciliation> findByField(QueryBuilder queryBuilder);
   public List<PaymentReconciliation> findByOrganization(QueryBuilder queryBuilder);
   public List<PaymentReconciliation> findByRequest(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByOutcome(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByRequestProvider(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByRequestOrganization(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByDetail(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByForm(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByTotal(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByProcessNote(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByText(QueryBuilder queryBuilder);
+  public List<PaymentReconciliation> findByMeta(QueryBuilder queryBuilder);
 
 
 }

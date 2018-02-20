@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.Coverage;
 import org.fhir.service.CoverageService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/Coverage")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class CoverageResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public Coverage find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public Coverage findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<Coverage> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Coverage> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Coverage> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Coverage> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<Coverage> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<Coverage> findAll() {
   	return this.service.selectAll();
   }
@@ -107,35 +172,15 @@ public class CoverageResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Coverage> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
   /**
-  * Descr: Covered party
+  * Descr: Reference to the policyholder
   * Type: reference
   */
   @GET
-  @Path("beneficiary")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Coverage> beneficiary(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByBeneficiary(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The identity of the insurer or party paying for services
-  * Type: reference
-  */
-  @GET
-  @Path("payor")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Coverage> payor(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByPayor(new QueryBuilder(params));
+  @Path("policyholder")
+  public List<Coverage> policyholder(@QueryParam("policyholder")String policyholder) {
+  	java.util.Map<String, String> params = QueryParser.parse(policyholder, VALID_FIELDS);
+  	return this.service.findByPolicyHolder(new QueryBuilder(params));
   }
   /**
   * Descr: Reference to the subscriber
@@ -143,10 +188,55 @@ public class CoverageResource {
   */
   @GET
   @Path("subscriber")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<Coverage> subscriber(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<Coverage> subscriber(@QueryParam("subscriber")String subscriber) {
+  	java.util.Map<String, String> params = QueryParser.parse(subscriber, VALID_FIELDS);
   	return this.service.findBySubscriber(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The identity of the insurer or party paying for services
+  * Type: reference
+  */
+  @GET
+  @Path("payor")
+  public List<Coverage> payor(@QueryParam("payor")String payor) {
+  	java.util.Map<String, String> params = QueryParser.parse(payor, VALID_FIELDS);
+  	return this.service.findByPayor(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The primary identifier of the insured and the coverage
+  * Type: token
+  */
+  @GET
+  public List<Coverage> identifier(@QueryParam("identifier")String identifier) {
+  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The kind of coverage (health plan, auto, Workers Compensation)
+  * Type: token
+  */
+  @GET
+  public List<Coverage> type(@QueryParam("type")String type) {
+  	java.util.Map<String, String> params = QueryParser.parse(type, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Dependent number
+  * Type: string
+  */
+  @GET
+  public List<Coverage> dependent(@QueryParam("dependent")String dependent) {
+  	java.util.Map<String, String> params = QueryParser.parse(dependent, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Sequence number
+  * Type: string
+  */
+  @GET
+  public List<Coverage> sequence(@QueryParam("sequence")String sequence) {
+  	java.util.Map<String, String> params = QueryParser.parse(sequence, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "beneficiary|FHIRclass|dependent|group|identifier|payor|plan|policyholder|sequence|subclass|subgroup|subplan|subscriber|type";

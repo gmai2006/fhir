@@ -114,9 +114,21 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<DocumentReference> findByAuthenticator(QueryBuilder queryBuilder) {
-  	final List<DocumentReference> result = dao.findByAuthenticator(queryBuilder);
-    logger.info("findByauthenticator - exited - return value={} result ");
+  public List<DocumentReference> findByType(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentReference> findByFHIRclass(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByFHIRclass(queryBuilder);
+    logger.info("findByFHIRclass - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentReference> findBySubject(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,15 +138,51 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<DocumentReference> findByAuthenticator(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByAuthenticator(queryBuilder);
+    logger.info("findByauthenticator - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<DocumentReference> findByCustodian(QueryBuilder queryBuilder) {
   	final List<DocumentReference> result = dao.findByCustodian(queryBuilder);
     logger.info("findBycustodian - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<DocumentReference> findBySubject(QueryBuilder queryBuilder) {
-  	final List<DocumentReference> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<DocumentReference> findByRelatesTo(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByRelatesTo(queryBuilder);
+    logger.info("findByrelatesTo - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentReference> findBySecurityLabel(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findBySecurityLabel(queryBuilder);
+    logger.info("findBysecurityLabel - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentReference> findByContent(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByContent(queryBuilder);
+    logger.info("findBycontent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentReference> findByContext(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentReference> findByText(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentReference> findByMeta(QueryBuilder queryBuilder) {
+  	final List<DocumentReference> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

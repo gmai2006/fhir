@@ -127,8 +127,18 @@ public class Slot  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
-    this.serviceCategory = CodeableConceptHelper.fromJson(o.getServiceCategory());
-    this.appointmentType = CodeableConceptHelper.fromJson(o.getAppointmentType());
+    if (null != o.getServiceCategory() && !o.getServiceCategory().isEmpty()) {
+      this.serviceCategory = new CodeableConcept(o.getServiceCategory().get(0));
+    }
+    if (null != o.getServiceType() && !o.getServiceType().isEmpty()) {
+    	this.serviceType = CodeableConceptHelper.fromArray2Array(o.getServiceType());
+    }
+    if (null != o.getSpecialty() && !o.getSpecialty().isEmpty()) {
+    	this.specialty = CodeableConceptHelper.fromArray2Array(o.getSpecialty());
+    }
+    if (null != o.getAppointmentType() && !o.getAppointmentType().isEmpty()) {
+      this.appointmentType = new CodeableConcept(o.getAppointmentType().get(0));
+    }
     if (null != o.getSchedule() && !o.getSchedule().isEmpty()) {
       this.schedule = new Reference(o.getSchedule().get(0));
     }

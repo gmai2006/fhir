@@ -114,15 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<Communication> findByContext(QueryBuilder queryBuilder) {
-  	final List<Communication> result = dao.findByContext(queryBuilder);
-    logger.info("findBycontext - exited - return value={} result ");
-    return result;
-  }
-  @Override
   public List<Communication> findByDefinition(QueryBuilder queryBuilder) {
   	final List<Communication> result = dao.findByDefinition(queryBuilder);
     logger.info("findBydefinition - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByPartOf(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByPartOf(queryBuilder);
+    logger.info("findBypartOf - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByNotDoneReason(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByNotDoneReason(queryBuilder);
+    logger.info("findBynotDoneReason - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByCategory(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByMedium(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByMedium(queryBuilder);
+    logger.info("findBymedium - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findBySubject(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
     return result;
   }
   @Override
@@ -132,15 +162,51 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
+  public List<Communication> findByTopic(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByTopic(queryBuilder);
+    logger.info("findBytopic - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByContext(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Communication> findBySender(QueryBuilder queryBuilder) {
   	final List<Communication> result = dao.findBySender(queryBuilder);
     logger.info("findBysender - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<Communication> findBySubject(QueryBuilder queryBuilder) {
-  	final List<Communication> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<Communication> findByReasonCode(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByReasonCode(queryBuilder);
+    logger.info("findByreasonCode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByReasonReference(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByReasonReference(queryBuilder);
+    logger.info("findByreasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByPayload(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByPayload(queryBuilder);
+    logger.info("findBypayload - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByText(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Communication> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Communication> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

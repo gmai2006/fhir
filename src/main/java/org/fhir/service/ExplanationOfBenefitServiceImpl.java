@@ -114,27 +114,15 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
-  public List<ExplanationOfBenefit> findByClaim(QueryBuilder queryBuilder) {
-  	final List<ExplanationOfBenefit> result = dao.findByClaim(queryBuilder);
-    logger.info("findByclaim - exited - return value={} result ");
+  public List<ExplanationOfBenefit> findByType(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<ExplanationOfBenefit> findByEnterer(QueryBuilder queryBuilder) {
-  	final List<ExplanationOfBenefit> result = dao.findByEnterer(queryBuilder);
-    logger.info("findByenterer - exited - return value={} result ");
-    return result;
-  }
-  @Override
-  public List<ExplanationOfBenefit> findByFacility(QueryBuilder queryBuilder) {
-  	final List<ExplanationOfBenefit> result = dao.findByFacility(queryBuilder);
-    logger.info("findByfacility - exited - return value={} result ");
-    return result;
-  }
-  @Override
-  public List<ExplanationOfBenefit> findByOrganization(QueryBuilder queryBuilder) {
-  	final List<ExplanationOfBenefit> result = dao.findByOrganization(queryBuilder);
-    logger.info("findByorganization - exited - return value={} result ");
+  public List<ExplanationOfBenefit> findBySubType(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findBySubType(queryBuilder);
+    logger.info("findBysubType - exited - return value={} result ");
     return result;
   }
   @Override
@@ -144,15 +132,183 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<ExplanationOfBenefit> findByPayee(QueryBuilder queryBuilder) {
-  	final List<ExplanationOfBenefit> result = dao.findByPayee(queryBuilder);
-    logger.info("findBypayee - exited - return value={} result ");
+  public List<ExplanationOfBenefit> findByEnterer(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByEnterer(queryBuilder);
+    logger.info("findByenterer - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByInsurer(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByInsurer(queryBuilder);
+    logger.info("findByinsurer - exited - return value={} result ");
     return result;
   }
   @Override
   public List<ExplanationOfBenefit> findByProvider(QueryBuilder queryBuilder) {
   	final List<ExplanationOfBenefit> result = dao.findByProvider(queryBuilder);
     logger.info("findByprovider - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByReferral(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByReferral(queryBuilder);
+    logger.info("findByreferral - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByFacility(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByFacility(queryBuilder);
+    logger.info("findByfacility - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByClaim(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByClaim(queryBuilder);
+    logger.info("findByclaim - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByClaimResponse(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByClaimResponse(queryBuilder);
+    logger.info("findByclaimResponse - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByOutcome(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByOutcome(queryBuilder);
+    logger.info("findByoutcome - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByRelated(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByRelated(queryBuilder);
+    logger.info("findByrelated - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByPrescription(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByPrescription(queryBuilder);
+    logger.info("findByprescription - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByOriginalPrescription(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByOriginalPrescription(queryBuilder);
+    logger.info("findByoriginalPrescription - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByPayee(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByPayee(queryBuilder);
+    logger.info("findBypayee - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByInformation(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByInformation(queryBuilder);
+    logger.info("findByinformation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByCareTeam(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByCareTeam(queryBuilder);
+    logger.info("findBycareTeam - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByDiagnosis(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByDiagnosis(queryBuilder);
+    logger.info("findBydiagnosis - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByProcedure(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByProcedure(queryBuilder);
+    logger.info("findByprocedure - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByInsurance(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByInsurance(queryBuilder);
+    logger.info("findByinsurance - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByAccident(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByAccident(queryBuilder);
+    logger.info("findByaccident - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByItem(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByItem(queryBuilder);
+    logger.info("findByitem - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByAddItem(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByAddItem(queryBuilder);
+    logger.info("findByaddItem - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByTotalCost(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByTotalCost(queryBuilder);
+    logger.info("findBytotalCost - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByUnallocDeductable(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByUnallocDeductable(queryBuilder);
+    logger.info("findByunallocDeductable - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByTotalBenefit(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByTotalBenefit(queryBuilder);
+    logger.info("findBytotalBenefit - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByPayment(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByPayment(queryBuilder);
+    logger.info("findBypayment - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByForm(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByForm(queryBuilder);
+    logger.info("findByform - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByProcessNote(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByProcessNote(queryBuilder);
+    logger.info("findByprocessNote - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByBenefitBalance(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByBenefitBalance(queryBuilder);
+    logger.info("findBybenefitBalance - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByText(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ExplanationOfBenefit> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ExplanationOfBenefit> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

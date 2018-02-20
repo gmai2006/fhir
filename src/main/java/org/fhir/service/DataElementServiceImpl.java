@@ -113,4 +113,40 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<DataElement> findByContact(QueryBuilder queryBuilder) {
+  	final List<DataElement> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DataElement> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<DataElement> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DataElement> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<DataElement> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DataElement> findByMapping(QueryBuilder queryBuilder) {
+  	final List<DataElement> result = dao.findByMapping(queryBuilder);
+    logger.info("findBymapping - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DataElement> findByText(QueryBuilder queryBuilder) {
+  	final List<DataElement> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DataElement> findByMeta(QueryBuilder queryBuilder) {
+  	final List<DataElement> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

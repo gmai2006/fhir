@@ -38,9 +38,19 @@ public interface ImagingStudyService {
   public ImagingStudy update(ImagingStudy bean);
   public void delete(ImagingStudy bean);
   public List<ImagingStudy> findByField(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByModalityList(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByPatient(QueryBuilder queryBuilder);
   public List<ImagingStudy> findByContext(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByBasedOn(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByReferrer(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByInterpreter(QueryBuilder queryBuilder);
   public List<ImagingStudy> findByEndpoint(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByProcedureReference(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByProcedureCode(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByReason(QueryBuilder queryBuilder);
   public List<ImagingStudy> findBySeries(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByText(QueryBuilder queryBuilder);
+  public List<ImagingStudy> findByMeta(QueryBuilder queryBuilder);
 
 
 }

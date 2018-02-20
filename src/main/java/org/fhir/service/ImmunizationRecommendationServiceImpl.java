@@ -119,4 +119,22 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     logger.info("findBypatient - exited - return value={} result ");
     return result;
   }
+  @Override
+  public List<ImmunizationRecommendation> findByRecommendation(QueryBuilder queryBuilder) {
+  	final List<ImmunizationRecommendation> result = dao.findByRecommendation(queryBuilder);
+    logger.info("findByrecommendation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImmunizationRecommendation> findByText(QueryBuilder queryBuilder) {
+  	final List<ImmunizationRecommendation> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ImmunizationRecommendation> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ImmunizationRecommendation> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="eligibilityrequest")
 public class EligibilityRequestModel  implements Serializable {
-	private static final long serialVersionUID = 151873631191133011L;
+	private static final long serialVersionUID = 151910893768167951L;
   /**
   * Description: "This is a EligibilityRequest resource"
   */
@@ -66,12 +65,14 @@ public class EligibilityRequestModel  implements Serializable {
 
   /**
   * Description: "Immediate (STAT), best effort (NORMAL), deferred (DEFER)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"priority\"", length = 16777215)
-  private String priority;
+  @Column(name="\"priority_id\"")
+  private String priority_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="priority_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> priority;
 
   /**
   * Description: "Patient Resource."
@@ -184,21 +185,25 @@ public class EligibilityRequestModel  implements Serializable {
 
   /**
   * Description: "Dental, Vision, Medical, Pharmacy, Rehab etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"benefitCategory\"", length = 16777215)
-  private String benefitCategory;
+  @Column(name="\"benefitcategory_id\"")
+  private String benefitcategory_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="benefitcategory_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> benefitCategory;
 
   /**
   * Description: "Dental: basic, major, ortho; Vision exam, glasses, contacts; etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"benefitSubCategory\"", length = 16777215)
-  private String benefitSubCategory;
+  @Column(name="\"benefitsubcategory_id\"")
+  private String benefitsubcategory_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="benefitsubcategory_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> benefitSubCategory;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -291,14 +296,22 @@ public class EligibilityRequestModel  implements Serializable {
   public EligibilityRequestModel(EligibilityRequest o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.priority = JsonUtils.toJson(o.getPriority());
+    if (null != o.getPriority() ) {
+    	this.priority_id = "priority" + this.id;
+    	this.priority = CodeableConceptHelper.toModel(o.getPriority(), this.priority_id);
+    }
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
     this.servicedDate = o.getServicedDate();
-    this.servicedPeriod = JsonUtils.toJson(o.getServicedPeriod());
+    if (null != o.getServicedPeriod()) {
+    	this.servicedPeriod = JsonUtils.toJson(o.getServicedPeriod());
+    }
     this.created = o.getCreated();
     if (null != o.getEnterer() ) {
     	this.enterer_id = "enterer" + this.id;
@@ -325,11 +338,26 @@ public class EligibilityRequestModel  implements Serializable {
     	this.coverage = ReferenceHelper.toModel(o.getCoverage(), this.coverage_id);
     }
     this.businessArrangement = o.getBusinessArrangement();
-    this.benefitCategory = JsonUtils.toJson(o.getBenefitCategory());
-    this.benefitSubCategory = JsonUtils.toJson(o.getBenefitSubCategory());
+    if (null != o.getBenefitCategory() ) {
+    	this.benefitcategory_id = "benefitcategory" + this.id;
+    	this.benefitCategory = CodeableConceptHelper.toModel(o.getBenefitCategory(), this.benefitcategory_id);
+    }
+    if (null != o.getBenefitSubCategory() ) {
+    	this.benefitsubcategory_id = "benefitsubcategory" + this.id;
+    	this.benefitSubCategory = CodeableConceptHelper.toModel(o.getBenefitSubCategory(), this.benefitsubcategory_id);
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -357,10 +385,10 @@ public class EligibilityRequestModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getPriority() {
+  public java.util.List<CodeableConceptModel> getPriority() {
     return this.priority;
   }
-  public void setPriority( String value) {
+  public void setPriority( java.util.List<CodeableConceptModel> value) {
     this.priority = value;
   }
   public java.util.List<ReferenceModel> getPatient() {
@@ -429,16 +457,16 @@ public class EligibilityRequestModel  implements Serializable {
   public void setBusinessArrangement( String value) {
     this.businessArrangement = value;
   }
-  public String getBenefitCategory() {
+  public java.util.List<CodeableConceptModel> getBenefitCategory() {
     return this.benefitCategory;
   }
-  public void setBenefitCategory( String value) {
+  public void setBenefitCategory( java.util.List<CodeableConceptModel> value) {
     this.benefitCategory = value;
   }
-  public String getBenefitSubCategory() {
+  public java.util.List<CodeableConceptModel> getBenefitSubCategory() {
     return this.benefitSubCategory;
   }
-  public void setBenefitSubCategory( String value) {
+  public void setBenefitSubCategory( java.util.List<CodeableConceptModel> value) {
     this.benefitSubCategory = value;
   }
   public java.util.List<NarrativeModel> getText() {
@@ -497,13 +525,10 @@ public class EligibilityRequestModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("priority" + "->" + this.priority + "\n"); 
      builder.append("servicedDate" + "->" + this.servicedDate + "\n"); 
      builder.append("servicedPeriod" + "->" + this.servicedPeriod + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
      builder.append("businessArrangement" + "->" + this.businessArrangement + "\n"); 
-     builder.append("benefitCategory" + "->" + this.benefitCategory + "\n"); 
-     builder.append("benefitSubCategory" + "->" + this.benefitSubCategory + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

@@ -38,9 +38,15 @@ public interface SpecimenService {
   public Specimen update(Specimen bean);
   public void delete(Specimen bean);
   public List<Specimen> findByField(QueryBuilder queryBuilder);
-  public List<Specimen> findByContainer(QueryBuilder queryBuilder);
-  public List<Specimen> findByParent(QueryBuilder queryBuilder);
+  public List<Specimen> findByType(QueryBuilder queryBuilder);
   public List<Specimen> findBySubject(QueryBuilder queryBuilder);
+  public List<Specimen> findByParent(QueryBuilder queryBuilder);
+  public List<Specimen> findByRequest(QueryBuilder queryBuilder);
+  public List<Specimen> findByCollection(QueryBuilder queryBuilder);
+  public List<Specimen> findByProcessing(QueryBuilder queryBuilder);
+  public List<Specimen> findByContainer(QueryBuilder queryBuilder);
+  public List<Specimen> findByText(QueryBuilder queryBuilder);
+  public List<Specimen> findByMeta(QueryBuilder queryBuilder);
 
 
 }

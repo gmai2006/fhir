@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="specimen")
 public class SpecimenModel  implements Serializable {
-	private static final long serialVersionUID = 151873631172284030L;
+	private static final long serialVersionUID = 151910893747895383L;
   /**
   * Description: "This is a Specimen resource"
   */
@@ -74,12 +73,14 @@ public class SpecimenModel  implements Serializable {
 
   /**
   * Description: "The kind of material that forms the specimen."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "Where the specimen came from. This may be from the patient(s) or from the environment or a device."
@@ -255,9 +256,17 @@ public class SpecimenModel  implements Serializable {
   public SpecimenModel(Specimen o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.accessionIdentifier = JsonUtils.toJson(o.getAccessionIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
+    if (null != o.getAccessionIdentifier()) {
+    	this.accessionIdentifier = JsonUtils.toJson(o.getAccessionIdentifier());
+    }
     this.status = o.getStatus();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -283,9 +292,21 @@ public class SpecimenModel  implements Serializable {
     	this.container_id = "container" + this.id;
     	this.container = SpecimenContainerHelper.toModelFromArray(o.getContainer(), this.container_id);
     }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -319,10 +340,10 @@ public class SpecimenModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -430,7 +451,6 @@ public class SpecimenModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("accessionIdentifier" + "->" + this.accessionIdentifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("receivedTime" + "->" + this.receivedTime + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

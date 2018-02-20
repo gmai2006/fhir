@@ -114,6 +114,18 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<DocumentManifest> findByType(QueryBuilder queryBuilder) {
+  	final List<DocumentManifest> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentManifest> findBySubject(QueryBuilder queryBuilder) {
+  	final List<DocumentManifest> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<DocumentManifest> findByAuthor(QueryBuilder queryBuilder) {
   	final List<DocumentManifest> result = dao.findByAuthor(queryBuilder);
     logger.info("findByauthor - exited - return value={} result ");
@@ -126,9 +138,27 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<DocumentManifest> findBySubject(QueryBuilder queryBuilder) {
-  	final List<DocumentManifest> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<DocumentManifest> findByContent(QueryBuilder queryBuilder) {
+  	final List<DocumentManifest> result = dao.findByContent(queryBuilder);
+    logger.info("findBycontent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentManifest> findByRelated(QueryBuilder queryBuilder) {
+  	final List<DocumentManifest> result = dao.findByRelated(queryBuilder);
+    logger.info("findByrelated - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentManifest> findByText(QueryBuilder queryBuilder) {
+  	final List<DocumentManifest> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<DocumentManifest> findByMeta(QueryBuilder queryBuilder) {
+  	final List<DocumentManifest> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

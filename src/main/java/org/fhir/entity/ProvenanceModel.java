@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="provenance")
 public class ProvenanceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631186397477L;
+	private static final long serialVersionUID = 151910893763157934L;
   /**
   * Description: "This is a Provenance resource"
   */
@@ -94,21 +93,25 @@ public class ProvenanceModel  implements Serializable {
 
   /**
   * Description: "The reason that the activity was taking place."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> reason;
 
   /**
   * Description: "An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"activity\"", length = 16777215)
-  private String activity;
+  @Column(name="\"activity_id\"")
+  private String activity_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="activity_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> activity;
 
   /**
   * Description: "An actor taking a role in an activity  for which it can be assigned some degree of responsibility for the activity taking place."
@@ -236,14 +239,23 @@ public class ProvenanceModel  implements Serializable {
     	this.target_id = "target" + this.id;
     	this.target = ReferenceHelper.toModelFromArray(o.getTarget(), this.target_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     this.recorded = o.getRecorded();
-    this.policy = org.fhir.utils.JsonUtils.write2String(o.getPolicy());
+    this.policy = org.fhir.utils.JsonUtils.toJson(o.getPolicy());
     if (null != o.getLocation() ) {
     	this.location_id = "location" + this.id;
     	this.location = ReferenceHelper.toModel(o.getLocation(), this.location_id);
     }
-    this.activity = JsonUtils.toJson(o.getActivity());
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason_id = "reason" + this.id;
+    	this.reason = CodingHelper.toModelFromArray(o.getReason(), this.reason_id);
+    }
+    if (null != o.getActivity() ) {
+    	this.activity_id = "activity" + this.id;
+    	this.activity = CodingHelper.toModel(o.getActivity(), this.activity_id);
+    }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent_id = "agent" + this.id;
     	this.agent = ProvenanceAgentHelper.toModelFromArray(o.getAgent(), this.agent_id);
@@ -252,9 +264,21 @@ public class ProvenanceModel  implements Serializable {
     	this.entity_id = "entity" + this.id;
     	this.entity = ProvenanceEntityHelper.toModelFromArray(o.getEntity(), this.entity_id);
     }
+    if (null != o.getSignature()) {
+    	this.signature = JsonUtils.toJson(o.getSignature());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -300,16 +324,16 @@ public class ProvenanceModel  implements Serializable {
   public void setLocation( java.util.List<ReferenceModel> value) {
     this.location = value;
   }
-  public String getReason() {
+  public java.util.List<CodingModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodingModel> value) {
     this.reason = value;
   }
-  public String getActivity() {
+  public java.util.List<CodingModel> getActivity() {
     return this.activity;
   }
-  public void setActivity( String value) {
+  public void setActivity( java.util.List<CodingModel> value) {
     this.activity = value;
   }
   public java.util.List<ProvenanceAgentModel> getAgent() {
@@ -387,8 +411,6 @@ public class ProvenanceModel  implements Serializable {
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("recorded" + "->" + this.recorded + "\n"); 
      builder.append("policy" + "->" + this.policy + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
-     builder.append("activity" + "->" + this.activity + "\n"); 
      builder.append("signature" + "->" + this.signature + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

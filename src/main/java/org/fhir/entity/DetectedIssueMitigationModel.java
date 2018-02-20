@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,16 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="detectedissuemitigation")
 public class DetectedIssueMitigationModel  implements Serializable {
-	private static final long serialVersionUID = 151873631189156810L;
+	private static final long serialVersionUID = 151910893766073166L;
   /**
   * Description: "Describes the action that was taken or the observation that was made that reduces/eliminates the risk associated with the identified issue."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"action\"", length = 16777215)
-  private String action;
+  @Column(name="\"action_id\"")
+  private String action_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> action;
 
   /**
   * Description: "Indicates when the mitigating action was documented."
@@ -112,19 +112,30 @@ public class DetectedIssueMitigationModel  implements Serializable {
 
   public DetectedIssueMitigationModel(DetectedIssueMitigation o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.action = JsonUtils.toJson(o.getAction());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getAction() ) {
+    	this.action_id = "action" + this.parent_id;
+    	this.action = CodeableConceptHelper.toModel(o.getAction(), this.action_id);
+    }
     this.date = o.getDate();
     if (null != o.getAuthor() ) {
     	this.author_id = "author" + this.parent_id;
     	this.author = ReferenceHelper.toModel(o.getAuthor(), this.author_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getAction() {
+  public java.util.List<CodeableConceptModel> getAction() {
     return this.action;
   }
-  public void setAction( String value) {
+  public void setAction( java.util.List<CodeableConceptModel> value) {
     this.action = value;
   }
   public String getDate() {
@@ -168,7 +179,6 @@ public class DetectedIssueMitigationModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[DetectedIssueMitigationModel]:" + "\n");
-     builder.append("action" + "->" + this.action + "\n"); 
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

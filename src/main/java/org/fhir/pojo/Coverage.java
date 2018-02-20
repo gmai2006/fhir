@@ -161,7 +161,9 @@ public class Coverage  extends DomainResource  {
     if (null != o.getStatus()) {
       this.status = o.getStatus();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
     if (null != o.getPolicyHolder() && !o.getPolicyHolder().isEmpty()) {
       this.policyHolder = new Reference(o.getPolicyHolder().get(0));
     }
@@ -174,7 +176,9 @@ public class Coverage  extends DomainResource  {
     if (null != o.getBeneficiary() && !o.getBeneficiary().isEmpty()) {
       this.beneficiary = new Reference(o.getBeneficiary().get(0));
     }
-    this.relationship = CodeableConceptHelper.fromJson(o.getRelationship());
+    if (null != o.getRelationship() && !o.getRelationship().isEmpty()) {
+      this.relationship = new CodeableConcept(o.getRelationship().get(0));
+    }
     this.period = PeriodHelper.fromJson(o.getPeriod());
     if (null != o.getPayor() && !o.getPayor().isEmpty()) {
     	this.payor = ReferenceHelper.fromArray2Array(o.getPayor());

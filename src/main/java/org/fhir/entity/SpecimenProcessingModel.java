@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="specimenprocessing")
 public class SpecimenProcessingModel  implements Serializable {
-	private static final long serialVersionUID = 151873631193591974L;
+	private static final long serialVersionUID = 151910893770358586L;
   /**
   * Description: "Textual description of procedure."
   */
@@ -48,12 +47,14 @@ public class SpecimenProcessingModel  implements Serializable {
 
   /**
   * Description: "A coded value specifying the procedure used to process the specimen."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"procedure\"", length = 16777215)
-  private String procedure;
+  @Column(name="\"procedure_id\"")
+  private String procedure_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="procedure_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> procedure;
 
   /**
   * Description: "Material used in the processing step."
@@ -127,15 +128,28 @@ public class SpecimenProcessingModel  implements Serializable {
 
   public SpecimenProcessingModel(SpecimenProcessing o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.description = o.getDescription();
-    this.procedure = JsonUtils.toJson(o.getProcedure());
+    if (null != o.getProcedure() ) {
+    	this.procedure_id = "procedure" + this.parent_id;
+    	this.procedure = CodeableConceptHelper.toModel(o.getProcedure(), this.procedure_id);
+    }
     if (null != o.getAdditive() && !o.getAdditive().isEmpty()) {
     	this.additive_id = "additive" + this.parent_id;
     	this.additive = ReferenceHelper.toModelFromArray(o.getAdditive(), this.additive_id);
     }
     this.timeDateTime = o.getTimeDateTime();
-    this.timePeriod = JsonUtils.toJson(o.getTimePeriod());
+    if (null != o.getTimePeriod()) {
+    	this.timePeriod = JsonUtils.toJson(o.getTimePeriod());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getDescription() {
@@ -144,10 +158,10 @@ public class SpecimenProcessingModel  implements Serializable {
   public void setDescription( String value) {
     this.description = value;
   }
-  public String getProcedure() {
+  public java.util.List<CodeableConceptModel> getProcedure() {
     return this.procedure;
   }
-  public void setProcedure( String value) {
+  public void setProcedure( java.util.List<CodeableConceptModel> value) {
     this.procedure = value;
   }
   public java.util.List<ReferenceModel> getAdditive() {
@@ -198,7 +212,6 @@ public class SpecimenProcessingModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[SpecimenProcessingModel]:" + "\n");
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("procedure" + "->" + this.procedure + "\n"); 
      builder.append("timeDateTime" + "->" + this.timeDateTime + "\n"); 
      builder.append("timePeriod" + "->" + this.timePeriod + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

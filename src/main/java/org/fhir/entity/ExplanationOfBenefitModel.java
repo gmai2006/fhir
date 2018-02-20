@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="explanationofbenefit")
 public class ExplanationOfBenefitModel  implements Serializable {
-	private static final long serialVersionUID = 151873631170889174L;
+	private static final long serialVersionUID = 151910893746567711L;
   /**
   * Description: "This is a ExplanationOfBenefit resource"
   */
@@ -65,21 +64,25 @@ public class ExplanationOfBenefitModel  implements Serializable {
 
   /**
   * Description: "The category of claim, eg, oral, pharmacy, vision, insitutional, professional."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "A finer grained suite of claim subtype codes which may convey Inpatient vs Outpatient and/or a specialty service. In the US the BillType."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"subType\"", length = 16777215)
-  private String subType;
+  @Column(name="\"subtype_id\"")
+  private String subtype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subtype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> subType;
 
   /**
   * Description: "Patient Resource."
@@ -199,12 +202,14 @@ public class ExplanationOfBenefitModel  implements Serializable {
 
   /**
   * Description: "Processing outcome errror, partial or complete processing."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"outcome\"", length = 16777215)
-  private String outcome;
+  @Column(name="\"outcome_id\"")
+  private String outcome_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcome_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> outcome;
 
   /**
   * Description: "A description of the status of the adjudication."
@@ -417,12 +422,14 @@ public class ExplanationOfBenefitModel  implements Serializable {
 
   /**
   * Description: "The form to be used for printing the content."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"form\"", length = 16777215)
-  private String form;
+  @Column(name="\"form_id\"")
+  private String form_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="form_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> form;
 
   /**
   * Description: "Note text."
@@ -537,13 +544,25 @@ public class ExplanationOfBenefitModel  implements Serializable {
   public ExplanationOfBenefitModel(ExplanationOfBenefit o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getSubType() && !o.getSubType().isEmpty()) {
+    	this.subtype_id = "subtype" + this.id;
+    	this.subType = CodeableConceptHelper.toModelFromArray(o.getSubType(), this.subtype_id);
+    }
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
-    this.billablePeriod = JsonUtils.toJson(o.getBillablePeriod());
+    if (null != o.getBillablePeriod()) {
+    	this.billablePeriod = JsonUtils.toJson(o.getBillablePeriod());
+    }
     this.created = o.getCreated();
     if (null != o.getEnterer() ) {
     	this.enterer_id = "enterer" + this.id;
@@ -577,7 +596,10 @@ public class ExplanationOfBenefitModel  implements Serializable {
     	this.claimresponse_id = "claimresponse" + this.id;
     	this.claimResponse = ReferenceHelper.toModel(o.getClaimResponse(), this.claimresponse_id);
     }
-    this.outcome = JsonUtils.toJson(o.getOutcome());
+    if (null != o.getOutcome() ) {
+    	this.outcome_id = "outcome" + this.id;
+    	this.outcome = CodeableConceptHelper.toModel(o.getOutcome(), this.outcome_id);
+    }
     this.disposition = o.getDisposition();
     if (null != o.getRelated() && !o.getRelated().isEmpty()) {
     	this.related_id = "related" + this.id;
@@ -620,8 +642,12 @@ public class ExplanationOfBenefitModel  implements Serializable {
     	this.accident_id = "accident" + this.id;
     	this.accident = ExplanationOfBenefitAccidentHelper.toModel(o.getAccident(), this.accident_id);
     }
-    this.employmentImpacted = JsonUtils.toJson(o.getEmploymentImpacted());
-    this.hospitalization = JsonUtils.toJson(o.getHospitalization());
+    if (null != o.getEmploymentImpacted()) {
+    	this.employmentImpacted = JsonUtils.toJson(o.getEmploymentImpacted());
+    }
+    if (null != o.getHospitalization()) {
+    	this.hospitalization = JsonUtils.toJson(o.getHospitalization());
+    }
     if (null != o.getItem() && !o.getItem().isEmpty()) {
     	this.item_id = "item" + this.id;
     	this.item = ExplanationOfBenefitItemHelper.toModelFromArray(o.getItem(), this.item_id);
@@ -646,7 +672,10 @@ public class ExplanationOfBenefitModel  implements Serializable {
     	this.payment_id = "payment" + this.id;
     	this.payment = ExplanationOfBenefitPaymentHelper.toModel(o.getPayment(), this.payment_id);
     }
-    this.form = JsonUtils.toJson(o.getForm());
+    if (null != o.getForm() ) {
+    	this.form_id = "form" + this.id;
+    	this.form = CodeableConceptHelper.toModel(o.getForm(), this.form_id);
+    }
     if (null != o.getProcessNote() && !o.getProcessNote().isEmpty()) {
     	this.processnote_id = "processnote" + this.id;
     	this.processNote = ExplanationOfBenefitProcessNoteHelper.toModelFromArray(o.getProcessNote(), this.processnote_id);
@@ -658,6 +687,15 @@ public class ExplanationOfBenefitModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -685,16 +723,16 @@ public class ExplanationOfBenefitModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getSubType() {
+  public java.util.List<CodeableConceptModel> getSubType() {
     return this.subType;
   }
-  public void setSubType( String value) {
+  public void setSubType( java.util.List<CodeableConceptModel> value) {
     this.subType = value;
   }
   public java.util.List<ReferenceModel> getPatient() {
@@ -763,10 +801,10 @@ public class ExplanationOfBenefitModel  implements Serializable {
   public void setClaimResponse( java.util.List<ReferenceModel> value) {
     this.claimResponse = value;
   }
-  public String getOutcome() {
+  public java.util.List<CodeableConceptModel> getOutcome() {
     return this.outcome;
   }
-  public void setOutcome( String value) {
+  public void setOutcome( java.util.List<CodeableConceptModel> value) {
     this.outcome = value;
   }
   public String getDisposition() {
@@ -889,10 +927,10 @@ public class ExplanationOfBenefitModel  implements Serializable {
   public void setPayment( java.util.List<ExplanationOfBenefitPaymentModel> value) {
     this.payment = value;
   }
-  public String getForm() {
+  public java.util.List<CodeableConceptModel> getForm() {
     return this.form;
   }
-  public void setForm( String value) {
+  public void setForm( java.util.List<CodeableConceptModel> value) {
     this.form = value;
   }
   public java.util.List<ExplanationOfBenefitProcessNoteModel> getProcessNote() {
@@ -963,16 +1001,12 @@ public class ExplanationOfBenefitModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subType" + "->" + this.subType + "\n"); 
      builder.append("billablePeriod" + "->" + this.billablePeriod + "\n"); 
      builder.append("created" + "->" + this.created + "\n"); 
-     builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("disposition" + "->" + this.disposition + "\n"); 
      builder.append("precedence" + "->" + this.precedence + "\n"); 
      builder.append("employmentImpacted" + "->" + this.employmentImpacted + "\n"); 
      builder.append("hospitalization" + "->" + this.hospitalization + "\n"); 
-     builder.append("form" + "->" + this.form + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

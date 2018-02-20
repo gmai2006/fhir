@@ -98,8 +98,12 @@ public class ExplanationOfBenefitBenefitBalance  extends BackboneElement  {
 
   public ExplanationOfBenefitBenefitBalance(ExplanationOfBenefitBenefitBalanceModel o) {
     this.id = o.getId();
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
-    this.subCategory = CodeableConceptHelper.fromJson(o.getSubCategory());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getSubCategory() && !o.getSubCategory().isEmpty()) {
+      this.subCategory = new CodeableConcept(o.getSubCategory().get(0));
+    }
     if (null != o.getExcluded()) {
       this.excluded = o.getExcluded();
     }
@@ -109,9 +113,15 @@ public class ExplanationOfBenefitBenefitBalance  extends BackboneElement  {
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }
-    this.network = CodeableConceptHelper.fromJson(o.getNetwork());
-    this.unit = CodeableConceptHelper.fromJson(o.getUnit());
-    this.term = CodeableConceptHelper.fromJson(o.getTerm());
+    if (null != o.getNetwork() && !o.getNetwork().isEmpty()) {
+      this.network = new CodeableConcept(o.getNetwork().get(0));
+    }
+    if (null != o.getUnit() && !o.getUnit().isEmpty()) {
+      this.unit = new CodeableConcept(o.getUnit().get(0));
+    }
+    if (null != o.getTerm() && !o.getTerm().isEmpty()) {
+      this.term = new CodeableConcept(o.getTerm().get(0));
+    }
     if (null != o.getFinancial() && !o.getFinancial().isEmpty()) {
     	this.financial = ExplanationOfBenefitFinancialHelper.fromArray2Array(o.getFinancial());
     }

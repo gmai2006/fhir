@@ -250,7 +250,9 @@ public class FamilyMemberHistory  extends DomainResource  {
     if (null != o.getNotDone()) {
       this.notDone = o.getNotDone();
     }
-    this.notDoneReason = CodeableConceptHelper.fromJson(o.getNotDoneReason());
+    if (null != o.getNotDoneReason() && !o.getNotDoneReason().isEmpty()) {
+      this.notDoneReason = new CodeableConcept(o.getNotDoneReason().get(0));
+    }
     if (null != o.getPatient() && !o.getPatient().isEmpty()) {
       this.patient = new Reference(o.getPatient().get(0));
     }
@@ -260,7 +262,9 @@ public class FamilyMemberHistory  extends DomainResource  {
     if (null != o.getName()) {
       this.name = o.getName();
     }
-    this.relationship = CodeableConceptHelper.fromJson(o.getRelationship());
+    if (null != o.getRelationship() && !o.getRelationship().isEmpty()) {
+      this.relationship = new CodeableConcept(o.getRelationship().get(0));
+    }
     if (null != o.getGender()) {
       this.gender = o.getGender();
     }
@@ -289,6 +293,9 @@ public class FamilyMemberHistory  extends DomainResource  {
     }
     if (null != o.getDeceasedString()) {
       this.deceasedString = o.getDeceasedString();
+    }
+    if (null != o.getReasonCode() && !o.getReasonCode().isEmpty()) {
+    	this.reasonCode = CodeableConceptHelper.fromArray2Array(o.getReasonCode());
     }
     if (null != o.getReasonReference() && !o.getReasonReference().isEmpty()) {
     	this.reasonReference = ReferenceHelper.fromArray2Array(o.getReasonReference());

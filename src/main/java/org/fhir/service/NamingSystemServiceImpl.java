@@ -119,4 +119,46 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     logger.info("findBycontact - exited - return value={} result ");
     return result;
   }
+  @Override
+  public List<NamingSystem> findByType(QueryBuilder queryBuilder) {
+  	final List<NamingSystem> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NamingSystem> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<NamingSystem> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NamingSystem> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<NamingSystem> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NamingSystem> findByUniqueId(QueryBuilder queryBuilder) {
+  	final List<NamingSystem> result = dao.findByUniqueId(queryBuilder);
+    logger.info("findByuniqueId - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NamingSystem> findByReplacedBy(QueryBuilder queryBuilder) {
+  	final List<NamingSystem> result = dao.findByReplacedBy(queryBuilder);
+    logger.info("findByreplacedBy - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NamingSystem> findByText(QueryBuilder queryBuilder) {
+  	final List<NamingSystem> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<NamingSystem> findByMeta(QueryBuilder queryBuilder) {
+  	final List<NamingSystem> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

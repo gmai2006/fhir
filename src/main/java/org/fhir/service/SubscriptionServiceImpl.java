@@ -113,4 +113,28 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<Subscription> findByChannel(QueryBuilder queryBuilder) {
+  	final List<Subscription> result = dao.findByChannel(queryBuilder);
+    logger.info("findBychannel - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Subscription> findByTag(QueryBuilder queryBuilder) {
+  	final List<Subscription> result = dao.findByTag(queryBuilder);
+    logger.info("findBytag - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Subscription> findByText(QueryBuilder queryBuilder) {
+  	final List<Subscription> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Subscription> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Subscription> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

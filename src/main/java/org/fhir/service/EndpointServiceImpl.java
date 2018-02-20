@@ -113,4 +113,34 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<Endpoint> findByConnectionType(QueryBuilder queryBuilder) {
+  	final List<Endpoint> result = dao.findByConnectionType(queryBuilder);
+    logger.info("findByconnectionType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Endpoint> findByManagingOrganization(QueryBuilder queryBuilder) {
+  	final List<Endpoint> result = dao.findByManagingOrganization(queryBuilder);
+    logger.info("findBymanagingOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Endpoint> findByPayloadType(QueryBuilder queryBuilder) {
+  	final List<Endpoint> result = dao.findByPayloadType(queryBuilder);
+    logger.info("findBypayloadType - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Endpoint> findByText(QueryBuilder queryBuilder) {
+  	final List<Endpoint> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Endpoint> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Endpoint> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

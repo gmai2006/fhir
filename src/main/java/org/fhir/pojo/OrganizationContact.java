@@ -57,7 +57,9 @@ public class OrganizationContact  extends BackboneElement  {
 
   public OrganizationContact(OrganizationContactModel o) {
     this.id = o.getId();
-    this.purpose = CodeableConceptHelper.fromJson(o.getPurpose());
+    if (null != o.getPurpose() && !o.getPurpose().isEmpty()) {
+      this.purpose = new CodeableConcept(o.getPurpose().get(0));
+    }
     this.name = HumanNameHelper.fromJson(o.getName());
     if (null != o.getAddress() && !o.getAddress().isEmpty()) {
       this.address = new Address(o.getAddress().get(0));

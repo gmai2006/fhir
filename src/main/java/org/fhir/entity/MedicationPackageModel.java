@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,15 +37,17 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationpackage")
 public class MedicationPackageModel  implements Serializable {
-	private static final long serialVersionUID = 151873631150693911L;
+	private static final long serialVersionUID = 151910893727732309L;
   /**
   * Description: "The kind of container that this package comes as."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"container\"", length = 16777215)
-  private String container;
+  @Column(name="\"container_id\"")
+  private String container_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="container_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> container;
 
   /**
   * Description: "A set of components that go to make up the described item."
@@ -114,8 +115,13 @@ public class MedicationPackageModel  implements Serializable {
 
   public MedicationPackageModel(MedicationPackage o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.container = JsonUtils.toJson(o.getContainer());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getContainer() ) {
+    	this.container_id = "container" + this.parent_id;
+    	this.container = CodeableConceptHelper.toModel(o.getContainer(), this.container_id);
+    }
     if (null != o.getContent() && !o.getContent().isEmpty()) {
     	this.content_id = "content" + this.parent_id;
     	this.content = MedicationContentHelper.toModelFromArray(o.getContent(), this.content_id);
@@ -124,12 +130,18 @@ public class MedicationPackageModel  implements Serializable {
     	this.batch_id = "batch" + this.parent_id;
     	this.batch = MedicationBatchHelper.toModelFromArray(o.getBatch(), this.batch_id);
     }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
-  public String getContainer() {
+  public java.util.List<CodeableConceptModel> getContainer() {
     return this.container;
   }
-  public void setContainer( String value) {
+  public void setContainer( java.util.List<CodeableConceptModel> value) {
     this.container = value;
   }
   public java.util.List<MedicationContentModel> getContent() {
@@ -173,7 +185,6 @@ public class MedicationPackageModel  implements Serializable {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationPackageModel]:" + "\n");
-     builder.append("container" + "->" + this.container + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

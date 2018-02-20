@@ -27,6 +27,7 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
+import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ import org.fhir.pojo.MessageHeader;
 import org.fhir.service.MessageHeaderService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
+import org.fhir.pojo.Narrative;
+import org.fhir.pojo.OperationOutcome;
 
 @Path("/MessageHeader")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -82,15 +85,77 @@ public class MessageHeaderResource {
 
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("{id}")
   public MessageHeader find(@PathParam("id") String id) {
   	return this.service.find(id);
   }
 
   @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("")
+  public MessageHeader findById(@QueryParam("_id") String id) {
+  	return this.service.find(id);
+  }
+
+  @GET
+  public List<MessageHeader> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
+  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MessageHeader> findByTag(@QueryParam("_tag") String _tag) {
+  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MessageHeader> findByProfile(@QueryParam("_profile") String _profile) {
+  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MessageHeader> findBySecurity(@QueryParam("_security") String _security) {
+  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
+  	return this.service.findByMeta(new QueryBuilder(params));
+  }
+
+  @GET
+  public List<MessageHeader> findByText(@QueryParam("_text") String _text) {
+  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
+  	return this.service.findByText(new QueryBuilder(params));
+  }
+
+  @GET
+  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByList(@QueryParam("_list") String _list) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
+  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
+  	OperationOutcome result = new OperationOutcome();
+  	Narrative narrative = new Narrative();
+  	narrative.setStatus("draft");
+  	narrative.setDiv("<div>this function is not supported yet</div>");
+  	result.setText(narrative);
+  	return result;
+  }
+
+  @GET
   public List<MessageHeader> findAll() {
   	return this.service.selectAll();
   }
@@ -107,79 +172,15 @@ public class MessageHeaderResource {
     return service.select(input);
   }
 
-  @GET
-  @Path("")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MessageHeader> findByField(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-
-  /**
-  * Descr: The source of the decision
-  * Type: reference
-  */
-  @GET
-  @Path("author")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MessageHeader> author(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByAuthor(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Name of system
-  * Type: string
-  */
-  @GET
-  @Path("destination/name")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MessageHeader> destination(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByDestination(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The source of the data entry
-  * Type: reference
-  */
-  @GET
-  @Path("enterer")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MessageHeader> enterer(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByEnterer(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The actual content of the message
-  * Type: reference
-  */
-  @GET
-  @Path("focus")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MessageHeader> focus(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByFocus(new QueryBuilder(params));
-  }
   /**
   * Descr: Intended "real-world" recipient for the data
   * Type: reference
   */
   @GET
   @Path("receiver")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MessageHeader> receiver(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<MessageHeader> receiver(@QueryParam("receiver")String receiver) {
+  	java.util.Map<String, String> params = QueryParser.parse(receiver, VALID_FIELDS);
   	return this.service.findByReceiver(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Final responsibility for event
-  * Type: reference
-  */
-  @GET
-  @Path("responsible")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MessageHeader> responsible(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findByResponsible(new QueryBuilder(params));
   }
   /**
   * Descr: Real world sender of the message
@@ -187,21 +188,57 @@ public class MessageHeaderResource {
   */
   @GET
   @Path("sender")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MessageHeader> sender(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
+  public List<MessageHeader> sender(@QueryParam("sender")String sender) {
+  	java.util.Map<String, String> params = QueryParser.parse(sender, VALID_FIELDS);
   	return this.service.findBySender(new QueryBuilder(params));
   }
   /**
-  * Descr: Name of system
-  * Type: string
+  * Descr: The source of the data entry
+  * Type: reference
   */
   @GET
-  @Path("source/name")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
-  public List<MessageHeader> source(@QueryParam("parameter")String parameter) {
-  	java.util.Map<String, String> params = QueryParser.parse(parameter, VALID_FIELDS);
-  	return this.service.findBySource(new QueryBuilder(params));
+  @Path("enterer")
+  public List<MessageHeader> enterer(@QueryParam("enterer")String enterer) {
+  	java.util.Map<String, String> params = QueryParser.parse(enterer, VALID_FIELDS);
+  	return this.service.findByEnterer(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Final responsibility for event
+  * Type: reference
+  */
+  @GET
+  @Path("responsible")
+  public List<MessageHeader> responsible(@QueryParam("responsible")String responsible) {
+  	java.util.Map<String, String> params = QueryParser.parse(responsible, VALID_FIELDS);
+  	return this.service.findByResponsible(new QueryBuilder(params));
+  }
+  /**
+  * Descr: The actual content of the message
+  * Type: reference
+  */
+  @GET
+  @Path("focus")
+  public List<MessageHeader> focus(@QueryParam("focus")String focus) {
+  	java.util.Map<String, String> params = QueryParser.parse(focus, VALID_FIELDS);
+  	return this.service.findByFocus(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Code for the event this message represents
+  * Type: token
+  */
+  @GET
+  public List<MessageHeader> event(@QueryParam("event")String event) {
+  	java.util.Map<String, String> params = QueryParser.parse(event, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
+  }
+  /**
+  * Descr: Time that the message was sent
+  * Type: date
+  */
+  @GET
+  public List<MessageHeader> timestamp(@QueryParam("timestamp")String timestamp) {
+  	java.util.Map<String, String> params = QueryParser.parse(timestamp, VALID_FIELDS);
+  	return this.service.findByField(new QueryBuilder(params));
   }
 
   private static final String VALID_FIELDS = "author|code|destination|destinationuri|enterer|event|focus|receiver|responseid|responsible|sender|source|sourceuri|target|timestamp";

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="implementationguidepackage")
 public class ImplementationGuidePackageModel  implements Serializable {
-	private static final long serialVersionUID = 151873631169336867L;
+	private static final long serialVersionUID = 1519108937451484L;
   /**
   * Description: "The name for the group, as used in page.package."
   */
@@ -108,12 +107,20 @@ public class ImplementationGuidePackageModel  implements Serializable {
 
   public ImplementationGuidePackageModel(ImplementationGuidePackage o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.name = o.getName();
     this.description = o.getDescription();
     if (null != o.getResource() && !o.getResource().isEmpty()) {
     	this.resource_id = "resource" + this.parent_id;
     	this.resource = ImplementationGuideResourceHelper.toModelFromArray(o.getResource(), this.resource_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

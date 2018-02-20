@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementdocument")
 public class CapabilityStatementDocumentModel  implements Serializable {
-	private static final long serialVersionUID = 151873631163510109L;
+	private static final long serialVersionUID = 15191089373946683L;
   /**
   * Description: "Mode of this document declaration - whether an application is a producer or consumer."
   */
@@ -108,12 +107,20 @@ public class CapabilityStatementDocumentModel  implements Serializable {
 
   public CapabilityStatementDocumentModel(CapabilityStatementDocument o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.mode = o.getMode();
     this.documentation = o.getDocumentation();
     if (null != o.getProfile() ) {
     	this.profile_id = "profile" + this.parent_id;
     	this.profile = ReferenceHelper.toModel(o.getProfile(), this.profile_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

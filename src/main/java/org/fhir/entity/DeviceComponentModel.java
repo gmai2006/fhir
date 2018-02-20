@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="devicecomponent")
 public class DeviceComponentModel  implements Serializable {
-	private static final long serialVersionUID = 151873631148716259L;
+	private static final long serialVersionUID = 151910893725824825L;
   /**
   * Description: "This is a DeviceComponent resource"
   */
@@ -59,13 +58,14 @@ public class DeviceComponentModel  implements Serializable {
 
   /**
   * Description: "The component type as defined in the object-oriented or metric nomenclature partition."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The timestamp for the most recent system change which includes device configuration or setting change."
@@ -98,21 +98,25 @@ public class DeviceComponentModel  implements Serializable {
 
   /**
   * Description: "The current operational status of the device. For example: On, Off, Standby, etc."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"operationalStatus\"", length = 16777215)
-  private String operationalStatus;
+  @Column(name="\"operationalstatus_id\"")
+  private String operationalstatus_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="operationalstatus_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> operationalStatus;
 
   /**
   * Description: "The parameter group supported by the current device component that is based on some nomenclature, e.g. cardiovascular."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"parameterGroup\"", length = 16777215)
-  private String parameterGroup;
+  @Column(name="\"parametergroup_id\"")
+  private String parametergroup_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="parametergroup_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> parameterGroup;
 
   /**
   * Description: "The physical principle of the measurement. For example: thermal, chemical, acoustical, etc."
@@ -134,12 +138,14 @@ public class DeviceComponentModel  implements Serializable {
 
   /**
   * Description: "The language code for the human-readable text string produced by the device. This language code will follow the IETF language tag. Example: en-US."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"languageCode\"", length = 16777215)
-  private String languageCode;
+  @Column(name="\"languagecode_id\"")
+  private String languagecode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="languagecode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> languageCode;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -232,8 +238,13 @@ public class DeviceComponentModel  implements Serializable {
   public DeviceComponentModel(DeviceComponent o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     this.lastSystemChange = o.getLastSystemChange();
     if (null != o.getSource() ) {
     	this.source_id = "source" + this.id;
@@ -243,16 +254,35 @@ public class DeviceComponentModel  implements Serializable {
     	this.parent_id = "parent" + this.id;
     	this.parent = ReferenceHelper.toModel(o.getParent(), this.parent_id);
     }
-    this.parameterGroup = JsonUtils.toJson(o.getParameterGroup());
+    if (null != o.getOperationalStatus() && !o.getOperationalStatus().isEmpty()) {
+    	this.operationalstatus_id = "operationalstatus" + this.id;
+    	this.operationalStatus = CodeableConceptHelper.toModelFromArray(o.getOperationalStatus(), this.operationalstatus_id);
+    }
+    if (null != o.getParameterGroup() ) {
+    	this.parametergroup_id = "parametergroup" + this.id;
+    	this.parameterGroup = CodeableConceptHelper.toModel(o.getParameterGroup(), this.parametergroup_id);
+    }
     this.measurementPrinciple = o.getMeasurementPrinciple();
     if (null != o.getProductionSpecification() && !o.getProductionSpecification().isEmpty()) {
     	this.productionspecification_id = "productionspecification" + this.id;
     	this.productionSpecification = DeviceComponentProductionSpecificationHelper.toModelFromArray(o.getProductionSpecification(), this.productionspecification_id);
     }
-    this.languageCode = JsonUtils.toJson(o.getLanguageCode());
+    if (null != o.getLanguageCode() ) {
+    	this.languagecode_id = "languagecode" + this.id;
+    	this.languageCode = CodeableConceptHelper.toModel(o.getLanguageCode(), this.languagecode_id);
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -274,10 +304,10 @@ public class DeviceComponentModel  implements Serializable {
   public void setIdentifier( String value) {
     this.identifier = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public String getLastSystemChange() {
@@ -298,16 +328,16 @@ public class DeviceComponentModel  implements Serializable {
   public void setParent( java.util.List<ReferenceModel> value) {
     this.parent = value;
   }
-  public String getOperationalStatus() {
+  public java.util.List<CodeableConceptModel> getOperationalStatus() {
     return this.operationalStatus;
   }
-  public void setOperationalStatus( String value) {
+  public void setOperationalStatus( java.util.List<CodeableConceptModel> value) {
     this.operationalStatus = value;
   }
-  public String getParameterGroup() {
+  public java.util.List<CodeableConceptModel> getParameterGroup() {
     return this.parameterGroup;
   }
-  public void setParameterGroup( String value) {
+  public void setParameterGroup( java.util.List<CodeableConceptModel> value) {
     this.parameterGroup = value;
   }
   public String getMeasurementPrinciple() {
@@ -322,10 +352,10 @@ public class DeviceComponentModel  implements Serializable {
   public void setProductionSpecification( java.util.List<DeviceComponentProductionSpecificationModel> value) {
     this.productionSpecification = value;
   }
-  public String getLanguageCode() {
+  public java.util.List<CodeableConceptModel> getLanguageCode() {
     return this.languageCode;
   }
-  public void setLanguageCode( String value) {
+  public void setLanguageCode( java.util.List<CodeableConceptModel> value) {
     this.languageCode = value;
   }
   public java.util.List<NarrativeModel> getText() {
@@ -383,12 +413,8 @@ public class DeviceComponentModel  implements Serializable {
     builder.append("[DeviceComponentModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("lastSystemChange" + "->" + this.lastSystemChange + "\n"); 
-     builder.append("operationalStatus" + "->" + this.operationalStatus + "\n"); 
-     builder.append("parameterGroup" + "->" + this.parameterGroup + "\n"); 
      builder.append("measurementPrinciple" + "->" + this.measurementPrinciple + "\n"); 
-     builder.append("languageCode" + "->" + this.languageCode + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

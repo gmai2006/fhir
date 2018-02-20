@@ -114,9 +114,69 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<CapabilityStatement> findByContact(QueryBuilder queryBuilder) {
+  	final List<CapabilityStatement> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CapabilityStatement> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<CapabilityStatement> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CapabilityStatement> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<CapabilityStatement> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<CapabilityStatement> findBySoftware(QueryBuilder queryBuilder) {
   	final List<CapabilityStatement> result = dao.findBySoftware(queryBuilder);
     logger.info("findBysoftware - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CapabilityStatement> findByImplementation(QueryBuilder queryBuilder) {
+  	final List<CapabilityStatement> result = dao.findByImplementation(queryBuilder);
+    logger.info("findByimplementation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CapabilityStatement> findByProfile(QueryBuilder queryBuilder) {
+  	final List<CapabilityStatement> result = dao.findByProfile(queryBuilder);
+    logger.info("findByprofile - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CapabilityStatement> findByRest(QueryBuilder queryBuilder) {
+  	final List<CapabilityStatement> result = dao.findByRest(queryBuilder);
+    logger.info("findByrest - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CapabilityStatement> findByMessaging(QueryBuilder queryBuilder) {
+  	final List<CapabilityStatement> result = dao.findByMessaging(queryBuilder);
+    logger.info("findBymessaging - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CapabilityStatement> findByDocument(QueryBuilder queryBuilder) {
+  	final List<CapabilityStatement> result = dao.findByDocument(queryBuilder);
+    logger.info("findBydocument - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CapabilityStatement> findByText(QueryBuilder queryBuilder) {
+  	final List<CapabilityStatement> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CapabilityStatement> findByMeta(QueryBuilder queryBuilder) {
+  	final List<CapabilityStatement> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

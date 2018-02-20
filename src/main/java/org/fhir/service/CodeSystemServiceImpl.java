@@ -113,4 +113,52 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<CodeSystem> findByContact(QueryBuilder queryBuilder) {
+  	final List<CodeSystem> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CodeSystem> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<CodeSystem> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CodeSystem> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<CodeSystem> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CodeSystem> findByFilter(QueryBuilder queryBuilder) {
+  	final List<CodeSystem> result = dao.findByFilter(queryBuilder);
+    logger.info("findByfilter - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CodeSystem> findByProperty(QueryBuilder queryBuilder) {
+  	final List<CodeSystem> result = dao.findByProperty(queryBuilder);
+    logger.info("findByproperty - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CodeSystem> findByConcept(QueryBuilder queryBuilder) {
+  	final List<CodeSystem> result = dao.findByConcept(queryBuilder);
+    logger.info("findByconcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CodeSystem> findByText(QueryBuilder queryBuilder) {
+  	final List<CodeSystem> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<CodeSystem> findByMeta(QueryBuilder queryBuilder) {
+  	final List<CodeSystem> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

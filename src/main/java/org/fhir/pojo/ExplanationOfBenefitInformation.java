@@ -108,8 +108,12 @@ public class ExplanationOfBenefitInformation  extends BackboneElement  {
     if (null != o.getSequence()) {
       this.sequence = o.getSequence();
     }
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getTimingDate()) {
       this.timingDate = o.getTimingDate();
     }
@@ -124,7 +128,9 @@ public class ExplanationOfBenefitInformation  extends BackboneElement  {
     if (null != o.getValueReference() && !o.getValueReference().isEmpty()) {
       this.valueReference = new Reference(o.getValueReference().get(0));
     }
-    this.reason = CodingHelper.fromJson(o.getReason());
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+      this.reason = new Coding(o.getReason().get(0));
+    }
   }
 
   public void setSequence( Float value) {

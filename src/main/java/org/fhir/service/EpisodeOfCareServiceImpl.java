@@ -113,4 +113,70 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<EpisodeOfCare> findByStatusHistory(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByStatusHistory(queryBuilder);
+    logger.info("findBystatusHistory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EpisodeOfCare> findByType(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByType(queryBuilder);
+    logger.info("findBytype - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EpisodeOfCare> findByDiagnosis(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByDiagnosis(queryBuilder);
+    logger.info("findBydiagnosis - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EpisodeOfCare> findByPatient(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EpisodeOfCare> findByManagingOrganization(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByManagingOrganization(queryBuilder);
+    logger.info("findBymanagingOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EpisodeOfCare> findByReferralRequest(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByReferralRequest(queryBuilder);
+    logger.info("findByreferralRequest - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EpisodeOfCare> findByCareManager(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByCareManager(queryBuilder);
+    logger.info("findBycareManager - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EpisodeOfCare> findByTeam(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByTeam(queryBuilder);
+    logger.info("findByteam - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EpisodeOfCare> findByAccount(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByAccount(queryBuilder);
+    logger.info("findByaccount - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EpisodeOfCare> findByText(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EpisodeOfCare> findByMeta(QueryBuilder queryBuilder) {
+  	final List<EpisodeOfCare> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

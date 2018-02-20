@@ -57,7 +57,9 @@ public class CareTeamParticipant  extends BackboneElement  {
 
   public CareTeamParticipant(CareTeamParticipantModel o) {
     this.id = o.getId();
-    this.role = CodeableConceptHelper.fromJson(o.getRole());
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+      this.role = new CodeableConcept(o.getRole().get(0));
+    }
     if (null != o.getMember() && !o.getMember().isEmpty()) {
       this.member = new Reference(o.getMember().get(0));
     }

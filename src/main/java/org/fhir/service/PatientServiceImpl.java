@@ -114,9 +114,63 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Patient> findByAddress(QueryBuilder queryBuilder) {
+  	final List<Patient> result = dao.findByAddress(queryBuilder);
+    logger.info("findByaddress - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Patient> findByMaritalStatus(QueryBuilder queryBuilder) {
+  	final List<Patient> result = dao.findByMaritalStatus(queryBuilder);
+    logger.info("findBymaritalStatus - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Patient> findByContact(QueryBuilder queryBuilder) {
+  	final List<Patient> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Patient> findByAnimal(QueryBuilder queryBuilder) {
+  	final List<Patient> result = dao.findByAnimal(queryBuilder);
+    logger.info("findByanimal - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Patient> findByCommunication(QueryBuilder queryBuilder) {
+  	final List<Patient> result = dao.findByCommunication(queryBuilder);
+    logger.info("findBycommunication - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Patient> findByGeneralPractitioner(QueryBuilder queryBuilder) {
+  	final List<Patient> result = dao.findByGeneralPractitioner(queryBuilder);
+    logger.info("findBygeneralPractitioner - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Patient> findByManagingOrganization(QueryBuilder queryBuilder) {
+  	final List<Patient> result = dao.findByManagingOrganization(queryBuilder);
+    logger.info("findBymanagingOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Patient> findByLink(QueryBuilder queryBuilder) {
   	final List<Patient> result = dao.findByLink(queryBuilder);
     logger.info("findBylink - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Patient> findByText(QueryBuilder queryBuilder) {
+  	final List<Patient> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Patient> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Patient> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

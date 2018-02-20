@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="specimencontainer")
 public class SpecimenContainerModel  implements Serializable {
-	private static final long serialVersionUID = 151873631178982336L;
+	private static final long serialVersionUID = 151910893755348548L;
   /**
   * Description: "Id for container. There may be multiple; a manufacturer's bar code, lab assigned identifier, etc. The container ID may differ from the specimen id in some circumstances."
   * Actual type: List<String>;
@@ -57,12 +56,14 @@ public class SpecimenContainerModel  implements Serializable {
 
   /**
   * Description: "The type of container associated with the specimen (e.g. slide, aliquot, etc.)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The capacity (volume or other measure) the container may contain."
@@ -88,12 +89,14 @@ public class SpecimenContainerModel  implements Serializable {
 
   /**
   * Description: "Introduced substance to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"additiveCodeableConcept\"", length = 16777215)
-  private String additiveCodeableConcept;
+  @Column(name="\"additivecodeableconcept_id\"")
+  private String additivecodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="additivecodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> additiveCodeableConcept;
 
   /**
   * Description: "Introduced substance to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA."
@@ -150,9 +153,17 @@ public class SpecimenContainerModel  implements Serializable {
 
   public SpecimenContainerModel(SpecimenContainer o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.description = o.getDescription();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.parent_id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
     if (null != o.getCapacity() ) {
     	this.capacity_id = "capacity" + this.parent_id;
     	this.capacity = QuantityHelper.toModel(o.getCapacity(), this.capacity_id);
@@ -161,10 +172,19 @@ public class SpecimenContainerModel  implements Serializable {
     	this.specimenquantity_id = "specimenquantity" + this.parent_id;
     	this.specimenQuantity = QuantityHelper.toModel(o.getSpecimenQuantity(), this.specimenquantity_id);
     }
-    this.additiveCodeableConcept = JsonUtils.toJson(o.getAdditiveCodeableConcept());
+    if (null != o.getAdditiveCodeableConcept() ) {
+    	this.additivecodeableconcept_id = "additivecodeableconcept" + this.parent_id;
+    	this.additiveCodeableConcept = CodeableConceptHelper.toModel(o.getAdditiveCodeableConcept(), this.additivecodeableconcept_id);
+    }
     if (null != o.getAdditiveReference() ) {
     	this.additivereference_id = "additivereference" + this.parent_id;
     	this.additiveReference = ReferenceHelper.toModel(o.getAdditiveReference(), this.additivereference_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -180,10 +200,10 @@ public class SpecimenContainerModel  implements Serializable {
   public void setDescription( String value) {
     this.description = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public java.util.List<QuantityModel> getCapacity() {
@@ -198,10 +218,10 @@ public class SpecimenContainerModel  implements Serializable {
   public void setSpecimenQuantity( java.util.List<QuantityModel> value) {
     this.specimenQuantity = value;
   }
-  public String getAdditiveCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getAdditiveCodeableConcept() {
     return this.additiveCodeableConcept;
   }
-  public void setAdditiveCodeableConcept( String value) {
+  public void setAdditiveCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.additiveCodeableConcept = value;
   }
   public java.util.List<ReferenceModel> getAdditiveReference() {
@@ -241,8 +261,6 @@ public class SpecimenContainerModel  implements Serializable {
     builder.append("[SpecimenContainerModel]:" + "\n");
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("additiveCodeableConcept" + "->" + this.additiveCodeableConcept + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

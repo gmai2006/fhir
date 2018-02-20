@@ -247,7 +247,8 @@
       "type": "date",
       "expression": "ResearchSubject.period",
       "code": "date",
-      "xpath": "period"
+      "xpath": "period",
+      "fieldName": "period"
     },
     {
       "name": "identifier",
@@ -255,7 +256,8 @@
       "type": "token",
       "expression": "ResearchSubject.identifier",
       "code": "identifier",
-      "xpath": "identifier"
+      "xpath": "identifier",
+      "fieldName": "identifier"
     },
     {
       "name": "individual",
@@ -263,7 +265,8 @@
       "type": "reference",
       "expression": "ResearchSubject.individual",
       "code": "individual",
-      "xpath": "individual"
+      "xpath": "individual",
+      "fieldName": "individual"
     },
     {
       "name": "patient",
@@ -271,7 +274,8 @@
       "type": "reference",
       "expression": "ResearchSubject.individual",
       "code": "patient",
-      "xpath": "individual"
+      "xpath": "individual",
+      "fieldName": "individual"
     },
     {
       "name": "status",
@@ -279,7 +283,8 @@
       "type": "token",
       "expression": "ResearchSubject.status",
       "code": "status",
-      "xpath": "status"
+      "xpath": "status",
+      "fieldName": "status"
     }
   ]
 }

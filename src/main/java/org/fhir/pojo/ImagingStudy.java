@@ -183,6 +183,9 @@ public class ImagingStudy  extends DomainResource  {
     if (null != o.getAvailability()) {
       this.availability = o.getAvailability();
     }
+    if (null != o.getModalityList() && !o.getModalityList().isEmpty()) {
+    	this.modalityList = CodingHelper.fromArray2Array(o.getModalityList());
+    }
     if (null != o.getPatient() && !o.getPatient().isEmpty()) {
       this.patient = new Reference(o.getPatient().get(0));
     }
@@ -213,7 +216,12 @@ public class ImagingStudy  extends DomainResource  {
     if (null != o.getProcedureReference() && !o.getProcedureReference().isEmpty()) {
     	this.procedureReference = ReferenceHelper.fromArray2Array(o.getProcedureReference());
     }
-    this.reason = CodeableConceptHelper.fromJson(o.getReason());
+    if (null != o.getProcedureCode() && !o.getProcedureCode().isEmpty()) {
+    	this.procedureCode = CodeableConceptHelper.fromArray2Array(o.getProcedureCode());
+    }
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+      this.reason = new CodeableConcept(o.getReason().get(0));
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }

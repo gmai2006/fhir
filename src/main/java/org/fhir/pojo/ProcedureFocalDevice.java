@@ -48,7 +48,9 @@ public class ProcedureFocalDevice  extends BackboneElement  {
 
   public ProcedureFocalDevice(ProcedureFocalDeviceModel o) {
     this.id = o.getId();
-    this.action = CodeableConceptHelper.fromJson(o.getAction());
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+      this.action = new CodeableConcept(o.getAction().get(0));
+    }
     if (null != o.getManipulated() && !o.getManipulated().isEmpty()) {
       this.manipulated = new Reference(o.getManipulated().get(0));
     }

@@ -125,4 +125,58 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     logger.info("findByrequest - exited - return value={} result ");
     return result;
   }
+  @Override
+  public List<PaymentReconciliation> findByOutcome(QueryBuilder queryBuilder) {
+  	final List<PaymentReconciliation> result = dao.findByOutcome(queryBuilder);
+    logger.info("findByoutcome - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentReconciliation> findByRequestProvider(QueryBuilder queryBuilder) {
+  	final List<PaymentReconciliation> result = dao.findByRequestProvider(queryBuilder);
+    logger.info("findByrequestProvider - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentReconciliation> findByRequestOrganization(QueryBuilder queryBuilder) {
+  	final List<PaymentReconciliation> result = dao.findByRequestOrganization(queryBuilder);
+    logger.info("findByrequestOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentReconciliation> findByDetail(QueryBuilder queryBuilder) {
+  	final List<PaymentReconciliation> result = dao.findByDetail(queryBuilder);
+    logger.info("findBydetail - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentReconciliation> findByForm(QueryBuilder queryBuilder) {
+  	final List<PaymentReconciliation> result = dao.findByForm(queryBuilder);
+    logger.info("findByform - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentReconciliation> findByTotal(QueryBuilder queryBuilder) {
+  	final List<PaymentReconciliation> result = dao.findByTotal(queryBuilder);
+    logger.info("findBytotal - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentReconciliation> findByProcessNote(QueryBuilder queryBuilder) {
+  	final List<PaymentReconciliation> result = dao.findByProcessNote(queryBuilder);
+    logger.info("findByprocessNote - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentReconciliation> findByText(QueryBuilder queryBuilder) {
+  	final List<PaymentReconciliation> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<PaymentReconciliation> findByMeta(QueryBuilder queryBuilder) {
+  	final List<PaymentReconciliation> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

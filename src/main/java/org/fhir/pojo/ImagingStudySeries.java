@@ -138,7 +138,9 @@ public class ImagingStudySeries  extends BackboneElement  {
     if (null != o.getNumber()) {
       this.number = o.getNumber();
     }
-    this.modality = CodingHelper.fromJson(o.getModality());
+    if (null != o.getModality() && !o.getModality().isEmpty()) {
+      this.modality = new Coding(o.getModality().get(0));
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }
@@ -151,8 +153,12 @@ public class ImagingStudySeries  extends BackboneElement  {
     if (null != o.getEndpoint() && !o.getEndpoint().isEmpty()) {
     	this.endpoint = ReferenceHelper.fromArray2Array(o.getEndpoint());
     }
-    this.bodySite = CodingHelper.fromJson(o.getBodySite());
-    this.laterality = CodingHelper.fromJson(o.getLaterality());
+    if (null != o.getBodySite() && !o.getBodySite().isEmpty()) {
+      this.bodySite = new Coding(o.getBodySite().get(0));
+    }
+    if (null != o.getLaterality() && !o.getLaterality().isEmpty()) {
+      this.laterality = new Coding(o.getLaterality().get(0));
+    }
     if (null != o.getStarted()) {
       this.started = o.getStarted();
     }

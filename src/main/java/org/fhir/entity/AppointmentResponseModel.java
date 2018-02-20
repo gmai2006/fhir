@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="appointmentresponse")
 public class AppointmentResponseModel  implements Serializable {
-	private static final long serialVersionUID = 151873631192659052L;
+	private static final long serialVersionUID = 151910893769483099L;
   /**
   * Description: "This is a AppointmentResponse resource"
   */
@@ -83,12 +82,14 @@ public class AppointmentResponseModel  implements Serializable {
 
   /**
   * Description: "Role of participant in the appointment."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"participantType\"", length = 16777215)
-  private String participantType;
+  @Column(name="\"participanttype_id\"")
+  private String participanttype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="participanttype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> participantType;
 
   /**
   * Description: "A Person, Location/HealthcareService or Device that is participating in the appointment."
@@ -207,12 +208,19 @@ public class AppointmentResponseModel  implements Serializable {
   public AppointmentResponseModel(AppointmentResponse o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getAppointment() ) {
     	this.appointment_id = "appointment" + this.id;
     	this.appointment = ReferenceHelper.toModel(o.getAppointment(), this.appointment_id);
     }
     this.start = o.getStart();
     this.end = o.getEnd();
+    if (null != o.getParticipantType() && !o.getParticipantType().isEmpty()) {
+    	this.participanttype_id = "participanttype" + this.id;
+    	this.participantType = CodeableConceptHelper.toModelFromArray(o.getParticipantType(), this.participanttype_id);
+    }
     if (null != o.getActor() ) {
     	this.actor_id = "actor" + this.id;
     	this.actor = ReferenceHelper.toModel(o.getActor(), this.actor_id);
@@ -222,6 +230,15 @@ public class AppointmentResponseModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -261,10 +278,10 @@ public class AppointmentResponseModel  implements Serializable {
   public void setEnd( String value) {
     this.end = value;
   }
-  public String getParticipantType() {
+  public java.util.List<CodeableConceptModel> getParticipantType() {
     return this.participantType;
   }
-  public void setParticipantType( String value) {
+  public void setParticipantType( java.util.List<CodeableConceptModel> value) {
     this.participantType = value;
   }
   public java.util.List<ReferenceModel> getActor() {
@@ -342,7 +359,6 @@ public class AppointmentResponseModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("start" + "->" + this.start + "\n"); 
      builder.append("end" + "->" + this.end + "\n"); 
-     builder.append("participantType" + "->" + this.participantType + "\n"); 
      builder.append("participantStatus" + "->" + this.participantStatus + "\n"); 
      builder.append("comment" + "->" + this.comment + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 

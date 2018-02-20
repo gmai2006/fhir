@@ -264,11 +264,17 @@ public class Questionnaire  extends DomainResource  {
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction = CodeableConceptHelper.fromArray2Array(o.getJurisdiction());
+    }
     if (null != o.getContact() && !o.getContact().isEmpty()) {
     	this.contact = ContactDetailHelper.fromArray2Array(o.getContact());
     }
     if (null != o.getCopyright()) {
       this.copyright = o.getCopyright();
+    }
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+    	this.code = CodingHelper.fromArray2Array(o.getCode());
     }
     if (o.getSubjectType() != null) {
     	this.subjectType = org.fhir.utils.JsonUtils.json2Array(o.getSubjectType());

@@ -42,7 +42,12 @@ public interface AuditEventDao {
 
   public List<AuditEvent> findByField(QueryBuilder queryBuilder);
 
+  public List<AuditEvent> findByType(QueryBuilder queryBuilder);
+  public List<AuditEvent> findBySubtype(QueryBuilder queryBuilder);
+  public List<AuditEvent> findByPurposeOfEvent(QueryBuilder queryBuilder);
   public List<AuditEvent> findByAgent(QueryBuilder queryBuilder);
-  public List<AuditEvent> findByEntity(QueryBuilder queryBuilder);
   public List<AuditEvent> findBySource(QueryBuilder queryBuilder);
+  public List<AuditEvent> findByEntity(QueryBuilder queryBuilder);
+  public List<AuditEvent> findByText(QueryBuilder queryBuilder);
+  public List<AuditEvent> findByMeta(QueryBuilder queryBuilder);
 }

@@ -97,15 +97,33 @@ public class AppointmentResponseDaoImpl implements AppointmentResponseDao {
   }
 
   @Override
+  public List<AppointmentResponse> findByAppointment(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AppointmentResponseModel a, Reference b where a.appointment_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AppointmentResponse> findByParticipantType(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AppointmentResponseModel a, CodeableConcept b where a.participantType_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
   public List<AppointmentResponse> findByActor(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
   	final String queryStr = "select a from AppointmentResponseModel a, Reference b where a.actor_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
   @Override
-  public List<AppointmentResponse> findByAppointment(QueryBuilder queryBuilder) {
+  public List<AppointmentResponse> findByText(QueryBuilder queryBuilder) {
   	final EntityManager em = entityManagerProvider.get();
-  	final String queryStr = "select a from AppointmentResponseModel a, Reference b where a.appointment_id=b.parent_id " + queryBuilder.getWhereClause();
+  	final String queryStr = "select a from AppointmentResponseModel a, Narrative b where a.text_id=b.parent_id " + queryBuilder.getWhereClause();
+    return findByQuery(queryBuilder, queryStr);
+  }
+  @Override
+  public List<AppointmentResponse> findByMeta(QueryBuilder queryBuilder) {
+  	final EntityManager em = entityManagerProvider.get();
+  	final String queryStr = "select a from AppointmentResponseModel a, Meta b where a.meta_id=b.parent_id " + queryBuilder.getWhereClause();
     return findByQuery(queryBuilder, queryStr);
   }
 

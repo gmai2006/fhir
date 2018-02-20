@@ -89,15 +89,21 @@ public class AdverseEventSuspectEntity  extends BackboneElement  {
     if (null != o.getCausality()) {
       this.causality = o.getCausality();
     }
-    this.causalityAssessment = CodeableConceptHelper.fromJson(o.getCausalityAssessment());
+    if (null != o.getCausalityAssessment() && !o.getCausalityAssessment().isEmpty()) {
+      this.causalityAssessment = new CodeableConcept(o.getCausalityAssessment().get(0));
+    }
     if (null != o.getCausalityProductRelatedness()) {
       this.causalityProductRelatedness = o.getCausalityProductRelatedness();
     }
-    this.causalityMethod = CodeableConceptHelper.fromJson(o.getCausalityMethod());
+    if (null != o.getCausalityMethod() && !o.getCausalityMethod().isEmpty()) {
+      this.causalityMethod = new CodeableConcept(o.getCausalityMethod().get(0));
+    }
     if (null != o.getCausalityAuthor() && !o.getCausalityAuthor().isEmpty()) {
       this.causalityAuthor = new Reference(o.getCausalityAuthor().get(0));
     }
-    this.causalityResult = CodeableConceptHelper.fromJson(o.getCausalityResult());
+    if (null != o.getCausalityResult() && !o.getCausalityResult().isEmpty()) {
+      this.causalityResult = new CodeableConcept(o.getCausalityResult().get(0));
+    }
   }
 
   public void setInstance( Reference value) {

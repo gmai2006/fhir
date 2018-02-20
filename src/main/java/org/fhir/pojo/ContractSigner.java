@@ -55,7 +55,9 @@ public class ContractSigner  extends BackboneElement  {
 
   public ContractSigner(ContractSignerModel o) {
     this.id = o.getId();
-    this.type = CodingHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new Coding(o.getType().get(0));
+    }
     if (null != o.getParty() && !o.getParty().isEmpty()) {
       this.party = new Reference(o.getParty().get(0));
     }

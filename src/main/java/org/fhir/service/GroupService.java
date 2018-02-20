@@ -38,8 +38,11 @@ public interface GroupService {
   public Group update(Group bean);
   public void delete(Group bean);
   public List<Group> findByField(QueryBuilder queryBuilder);
+  public List<Group> findByCode(QueryBuilder queryBuilder);
   public List<Group> findByCharacteristic(QueryBuilder queryBuilder);
   public List<Group> findByMember(QueryBuilder queryBuilder);
+  public List<Group> findByText(QueryBuilder queryBuilder);
+  public List<Group> findByMeta(QueryBuilder queryBuilder);
 
 
 }

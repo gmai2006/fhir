@@ -42,9 +42,19 @@ public interface CarePlanDao {
 
   public List<CarePlan> findByField(QueryBuilder queryBuilder);
 
-  public List<CarePlan> findByContext(QueryBuilder queryBuilder);
   public List<CarePlan> findByDefinition(QueryBuilder queryBuilder);
-  public List<CarePlan> findByGoal(QueryBuilder queryBuilder);
+  public List<CarePlan> findByBasedOn(QueryBuilder queryBuilder);
   public List<CarePlan> findByReplaces(QueryBuilder queryBuilder);
+  public List<CarePlan> findByPartOf(QueryBuilder queryBuilder);
+  public List<CarePlan> findByCategory(QueryBuilder queryBuilder);
   public List<CarePlan> findBySubject(QueryBuilder queryBuilder);
+  public List<CarePlan> findByContext(QueryBuilder queryBuilder);
+  public List<CarePlan> findByAuthor(QueryBuilder queryBuilder);
+  public List<CarePlan> findByCareTeam(QueryBuilder queryBuilder);
+  public List<CarePlan> findByAddresses(QueryBuilder queryBuilder);
+  public List<CarePlan> findBySupportingInfo(QueryBuilder queryBuilder);
+  public List<CarePlan> findByGoal(QueryBuilder queryBuilder);
+  public List<CarePlan> findByActivity(QueryBuilder queryBuilder);
+  public List<CarePlan> findByText(QueryBuilder queryBuilder);
+  public List<CarePlan> findByMeta(QueryBuilder queryBuilder);
 }

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="encounter")
 public class EncounterModel  implements Serializable {
-	private static final long serialVersionUID = 151873631162450049L;
+	private static final long serialVersionUID = 151910893738456658L;
   /**
   * Description: "This is a Encounter resource"
   */
@@ -76,12 +75,14 @@ public class EncounterModel  implements Serializable {
 
   /**
   * Description: "inpatient | outpatient | ambulatory | emergency +."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"FHIRclass\"", length = 16777215)
-  private String FHIRclass;
+  @Column(name="\"fhirclass_id\"")
+  private String fhirclass_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="fhirclass_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> FHIRclass;
 
   /**
   * Description: "The class history permits the tracking of the encounters transitions without needing to go  through the resource history.\n\nThis would be used for a case where an admission starts of as an emergency encounter, then transisions into an inpatient scenario. Doing this and not restarting a new encounter ensures that any lab/diagnostic results can more easily follow the patient and not require re-processing and not get lost or cancelled during a kindof discharge from emergency to inpatient."
@@ -96,21 +97,25 @@ public class EncounterModel  implements Serializable {
 
   /**
   * Description: "Specific type of encounter (e.g. e-mail consultation, surgical day-care, skilled nursing, rehabilitation)."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "Indicates the urgency of the encounter."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"priority\"", length = 16777215)
-  private String priority;
+  @Column(name="\"priority_id\"")
+  private String priority_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="priority_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> priority;
 
   /**
   * Description: "The patient ro group present at the encounter."
@@ -187,12 +192,14 @@ public class EncounterModel  implements Serializable {
 
   /**
   * Description: "Reason the encounter takes place, expressed as a code. For admissions, this can be used for a coded admission diagnosis."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reason;
 
   /**
   * Description: "The list of diagnosis relevant to this encounter."
@@ -351,17 +358,30 @@ public class EncounterModel  implements Serializable {
   public EncounterModel(Encounter o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     if (null != o.getStatusHistory() && !o.getStatusHistory().isEmpty()) {
     	this.statushistory_id = "statushistory" + this.id;
     	this.statusHistory = EncounterStatusHistoryHelper.toModelFromArray(o.getStatusHistory(), this.statushistory_id);
     }
-    this.FHIRclass = JsonUtils.toJson(o.getFHIRclass());
+    if (null != o.getFHIRclass() ) {
+    	this.fhirclass_id = "fhirclass" + this.id;
+    	this.FHIRclass = CodingHelper.toModel(o.getFHIRclass(), this.fhirclass_id);
+    }
     if (null != o.getClassHistory() && !o.getClassHistory().isEmpty()) {
     	this.classhistory_id = "classhistory" + this.id;
     	this.classHistory = EncounterClassHistoryHelper.toModelFromArray(o.getClassHistory(), this.classhistory_id);
     }
-    this.priority = JsonUtils.toJson(o.getPriority());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModelFromArray(o.getType(), this.type_id);
+    }
+    if (null != o.getPriority() ) {
+    	this.priority_id = "priority" + this.id;
+    	this.priority = CodeableConceptHelper.toModel(o.getPriority(), this.priority_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -382,8 +402,16 @@ public class EncounterModel  implements Serializable {
     	this.appointment_id = "appointment" + this.id;
     	this.appointment = ReferenceHelper.toModel(o.getAppointment(), this.appointment_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
-    this.length = JsonUtils.toJson(o.getLength());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
+    if (null != o.getLength()) {
+    	this.length = JsonUtils.toJson(o.getLength());
+    }
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason_id = "reason" + this.id;
+    	this.reason = CodeableConceptHelper.toModelFromArray(o.getReason(), this.reason_id);
+    }
     if (null != o.getDiagnosis() && !o.getDiagnosis().isEmpty()) {
     	this.diagnosis_id = "diagnosis" + this.id;
     	this.diagnosis = EncounterDiagnosisHelper.toModelFromArray(o.getDiagnosis(), this.diagnosis_id);
@@ -411,6 +439,15 @@ public class EncounterModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -444,10 +481,10 @@ public class EncounterModel  implements Serializable {
   public void setStatusHistory( java.util.List<EncounterStatusHistoryModel> value) {
     this.statusHistory = value;
   }
-  public String getFHIRclass() {
+  public java.util.List<CodingModel> getFHIRclass() {
     return this.FHIRclass;
   }
-  public void setFHIRclass( String value) {
+  public void setFHIRclass( java.util.List<CodingModel> value) {
     this.FHIRclass = value;
   }
   public java.util.List<EncounterClassHistoryModel> getClassHistory() {
@@ -456,16 +493,16 @@ public class EncounterModel  implements Serializable {
   public void setClassHistory( java.util.List<EncounterClassHistoryModel> value) {
     this.classHistory = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getPriority() {
+  public java.util.List<CodeableConceptModel> getPriority() {
     return this.priority;
   }
-  public void setPriority( String value) {
+  public void setPriority( java.util.List<CodeableConceptModel> value) {
     this.priority = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -510,10 +547,10 @@ public class EncounterModel  implements Serializable {
   public void setLength( String value) {
     this.length = value;
   }
-  public String getReason() {
+  public java.util.List<CodeableConceptModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodeableConceptModel> value) {
     this.reason = value;
   }
   public java.util.List<EncounterDiagnosisModel> getDiagnosis() {
@@ -608,12 +645,8 @@ public class EncounterModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("FHIRclass" + "->" + this.FHIRclass + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("priority" + "->" + this.priority + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("length" + "->" + this.length + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="episodeofcare")
 public class EpisodeOfCareModel  implements Serializable {
-	private static final long serialVersionUID = 151873631129385861L;
+	private static final long serialVersionUID = 151910893705756627L;
   /**
   * Description: "This is a EpisodeOfCare resource"
   */
@@ -76,12 +75,14 @@ public class EpisodeOfCareModel  implements Serializable {
 
   /**
   * Description: "A classification of the type of episode of care; e.g. specialist referral, disease management, type of funded care."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "The list of diagnosis relevant to this episode of care."
@@ -260,10 +261,17 @@ public class EpisodeOfCareModel  implements Serializable {
   public EpisodeOfCareModel(EpisodeOfCare o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     if (null != o.getStatusHistory() && !o.getStatusHistory().isEmpty()) {
     	this.statushistory_id = "statushistory" + this.id;
     	this.statusHistory = EpisodeOfCareStatusHistoryHelper.toModelFromArray(o.getStatusHistory(), this.statushistory_id);
+    }
+    if (null != o.getType() && !o.getType().isEmpty()) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModelFromArray(o.getType(), this.type_id);
     }
     if (null != o.getDiagnosis() && !o.getDiagnosis().isEmpty()) {
     	this.diagnosis_id = "diagnosis" + this.id;
@@ -277,7 +285,9 @@ public class EpisodeOfCareModel  implements Serializable {
     	this.managingorganization_id = "managingorganization" + this.id;
     	this.managingOrganization = ReferenceHelper.toModel(o.getManagingOrganization(), this.managingorganization_id);
     }
-    this.period = JsonUtils.toJson(o.getPeriod());
+    if (null != o.getPeriod()) {
+    	this.period = JsonUtils.toJson(o.getPeriod());
+    }
     if (null != o.getReferralRequest() && !o.getReferralRequest().isEmpty()) {
     	this.referralrequest_id = "referralrequest" + this.id;
     	this.referralRequest = ReferenceHelper.toModelFromArray(o.getReferralRequest(), this.referralrequest_id);
@@ -297,6 +307,15 @@ public class EpisodeOfCareModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -330,10 +349,10 @@ public class EpisodeOfCareModel  implements Serializable {
   public void setStatusHistory( java.util.List<EpisodeOfCareStatusHistoryModel> value) {
     this.statusHistory = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
   public java.util.List<EpisodeOfCareDiagnosisModel> getDiagnosis() {
@@ -440,7 +459,6 @@ public class EpisodeOfCareModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
      builder.append("period" + "->" + this.period + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

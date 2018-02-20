@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claimresponseitem")
 public class ClaimResponseItemModel  implements Serializable {
-	private static final long serialVersionUID = 151873631191558864L;
+	private static final long serialVersionUID = 151910893768548117L;
   /**
   * Description: "A service line number."
   */
@@ -120,9 +119,11 @@ public class ClaimResponseItemModel  implements Serializable {
 
   public ClaimResponseItemModel(ClaimResponseItem o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.sequenceLinkId = o.getSequenceLinkId();
-    this.noteNumber = org.fhir.utils.JsonUtils.write2String(o.getNoteNumber());
+    this.noteNumber = org.fhir.utils.JsonUtils.toJson(o.getNoteNumber());
     if (null != o.getAdjudication() && !o.getAdjudication().isEmpty()) {
     	this.adjudication_id = "adjudication" + this.parent_id;
     	this.adjudication = ClaimResponseAdjudicationHelper.toModelFromArray(o.getAdjudication(), this.adjudication_id);
@@ -130,6 +131,12 @@ public class ClaimResponseItemModel  implements Serializable {
     if (null != o.getDetail() && !o.getDetail().isEmpty()) {
     	this.detail_id = "detail" + this.parent_id;
     	this.detail = ClaimResponseDetailHelper.toModelFromArray(o.getDetail(), this.detail_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

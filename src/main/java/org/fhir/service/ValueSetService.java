@@ -38,7 +38,13 @@ public interface ValueSetService {
   public ValueSet update(ValueSet bean);
   public void delete(ValueSet bean);
   public List<ValueSet> findByField(QueryBuilder queryBuilder);
+  public List<ValueSet> findByContact(QueryBuilder queryBuilder);
+  public List<ValueSet> findByUseContext(QueryBuilder queryBuilder);
+  public List<ValueSet> findByJurisdiction(QueryBuilder queryBuilder);
+  public List<ValueSet> findByCompose(QueryBuilder queryBuilder);
   public List<ValueSet> findByExpansion(QueryBuilder queryBuilder);
+  public List<ValueSet> findByText(QueryBuilder queryBuilder);
+  public List<ValueSet> findByMeta(QueryBuilder queryBuilder);
 
 
 }

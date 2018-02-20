@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="meta")
 public class MetaModel  implements Serializable {
-	private static final long serialVersionUID = 151873631151274643L;
+	private static final long serialVersionUID = 151910893728586516L;
   /**
   * Description: "The version specific identifier, as it appears in the version portion of the URL. This values changes when the resource is created, updated, or deleted."
   */
@@ -63,21 +62,25 @@ public class MetaModel  implements Serializable {
 
   /**
   * Description: "Security labels applied to this resource. These tags connect specific resources to the overall security policy and infrastructure."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"security\"", length = 16777215)
-  private String security;
+  @Column(name="\"security_id\"")
+  private String security_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="security_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> security;
 
   /**
   * Description: "Tags applied to this resource. Tags are intended to be used to identify and relate resources to process and workflow, and applications are not required to consider the tags when interpreting the meaning of a resource."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"tag\"", length = 16777215)
-  private String tag;
+  @Column(name="\"tag_id\"")
+  private String tag_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="tag_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> tag;
 
   /**
   * Description: "unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."
@@ -111,10 +114,23 @@ public class MetaModel  implements Serializable {
 
   public MetaModel(Meta o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.versionId = o.getVersionId();
     this.lastUpdated = o.getLastUpdated();
-    this.profile = org.fhir.utils.JsonUtils.write2String(o.getProfile());
+    this.profile = org.fhir.utils.JsonUtils.toJson(o.getProfile());
+    if (null != o.getSecurity() && !o.getSecurity().isEmpty()) {
+    	this.security_id = "security" + this.parent_id;
+    	this.security = CodingHelper.toModelFromArray(o.getSecurity(), this.security_id);
+    }
+    if (null != o.getTag() && !o.getTag().isEmpty()) {
+    	this.tag_id = "tag" + this.parent_id;
+    	this.tag = CodingHelper.toModelFromArray(o.getTag(), this.tag_id);
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getVersionId() {
@@ -135,16 +151,16 @@ public class MetaModel  implements Serializable {
   public void setProfile( String value) {
     this.profile = value;
   }
-  public String getSecurity() {
+  public java.util.List<CodingModel> getSecurity() {
     return this.security;
   }
-  public void setSecurity( String value) {
+  public void setSecurity( java.util.List<CodingModel> value) {
     this.security = value;
   }
-  public String getTag() {
+  public java.util.List<CodingModel> getTag() {
     return this.tag;
   }
-  public void setTag( String value) {
+  public void setTag( java.util.List<CodingModel> value) {
     this.tag = value;
   }
   public String getId() {
@@ -173,8 +189,6 @@ public class MetaModel  implements Serializable {
      builder.append("versionId" + "->" + this.versionId + "\n"); 
      builder.append("lastUpdated" + "->" + this.lastUpdated + "\n"); 
      builder.append("profile" + "->" + this.profile + "\n"); 
-     builder.append("security" + "->" + this.security + "\n"); 
-     builder.append("tag" + "->" + this.tag + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("parent_id" + "->" + this.parent_id + "\n"); ;

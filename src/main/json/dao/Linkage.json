@@ -174,7 +174,8 @@
       "type": "reference",
       "expression": "Linkage.author",
       "code": "author",
-      "xpath": "author"
+      "xpath": "author",
+      "fieldName": "author"
     },
     {
       "name": "item",
@@ -182,7 +183,8 @@
       "type": "reference",
       "expression": "Linkage.item.resource",
       "code": "item",
-      "xpath": "item/resource"
+      "xpath": "item/resource",
+      "fieldName": "resource"
     },
     {
       "name": "source",
@@ -190,7 +192,8 @@
       "type": "reference",
       "expression": "Linkage.item.resource",
       "code": "source",
-      "xpath": "item/resource"
+      "xpath": "item/resource",
+      "fieldName": "resource"
     }
   ]
 }

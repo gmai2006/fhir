@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="contract")
 public class ContractModel  implements Serializable {
-	private static final long serialVersionUID = 151873631131037460L;
+	private static final long serialVersionUID = 151910893707029853L;
   /**
   * Description: "This is a Contract resource"
   */
@@ -127,66 +126,80 @@ public class ContractModel  implements Serializable {
 
   /**
   * Description: "Type of Contract such as an insurance policy, real estate contract, a will, power of attorny, Privacy or Security policy , trust framework agreement, etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> type;
 
   /**
   * Description: "More specific type or specialization of an overarching or more general contract such as auto insurance, home owner  insurance, prenupial agreement, Advanced-Directive, or privacy consent."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"subType\"", length = 16777215)
-  private String subType;
+  @Column(name="\"subtype_id\"")
+  private String subtype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subtype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> subType;
 
   /**
   * Description: "Action stipulated by this Contract."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"action\"", length = 16777215)
-  private String action;
+  @Column(name="\"action_id\"")
+  private String action_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="action_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> action;
 
   /**
   * Description: "Reason for action stipulated by this Contract."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"actionReason\"", length = 16777215)
-  private String actionReason;
+  @Column(name="\"actionreason_id\"")
+  private String actionreason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="actionreason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> actionReason;
 
   /**
   * Description: "The type of decision made by a grantor with respect to an offer made by a grantee."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"decisionType\"", length = 16777215)
-  private String decisionType;
+  @Column(name="\"decisiontype_id\"")
+  private String decisiontype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="decisiontype_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> decisionType;
 
   /**
   * Description: "The minimal content derived from the basal information source at a specific stage in its lifecycle."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"contentDerivative\"", length = 16777215)
-  private String contentDerivative;
+  @Column(name="\"contentderivative_id\"")
+  private String contentderivative_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="contentderivative_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> contentDerivative;
 
   /**
   * Description: "A set of security labels that define which resources are controlled by this consent. If more than one label is specified, all resources must have all the specified labels."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"securityLabel\"", length = 16777215)
-  private String securityLabel;
+  @Column(name="\"securitylabel_id\"")
+  private String securitylabel_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="securitylabel_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> securityLabel;
 
   /**
   * Description: "An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place."
@@ -376,10 +389,14 @@ public class ContractModel  implements Serializable {
   public ContractModel(Contract o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
     this.issued = o.getIssued();
-    this.applies = JsonUtils.toJson(o.getApplies());
+    if (null != o.getApplies()) {
+    	this.applies = JsonUtils.toJson(o.getApplies());
+    }
     if (null != o.getSubject() && !o.getSubject().isEmpty()) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModelFromArray(o.getSubject(), this.subject_id);
@@ -396,9 +413,34 @@ public class ContractModel  implements Serializable {
     	this.domain_id = "domain" + this.id;
     	this.domain = ReferenceHelper.toModelFromArray(o.getDomain(), this.domain_id);
     }
-    this.type = JsonUtils.toJson(o.getType());
-    this.decisionType = JsonUtils.toJson(o.getDecisionType());
-    this.contentDerivative = JsonUtils.toJson(o.getContentDerivative());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodeableConceptHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getSubType() && !o.getSubType().isEmpty()) {
+    	this.subtype_id = "subtype" + this.id;
+    	this.subType = CodeableConceptHelper.toModelFromArray(o.getSubType(), this.subtype_id);
+    }
+    if (null != o.getAction() && !o.getAction().isEmpty()) {
+    	this.action_id = "action" + this.id;
+    	this.action = CodeableConceptHelper.toModelFromArray(o.getAction(), this.action_id);
+    }
+    if (null != o.getActionReason() && !o.getActionReason().isEmpty()) {
+    	this.actionreason_id = "actionreason" + this.id;
+    	this.actionReason = CodeableConceptHelper.toModelFromArray(o.getActionReason(), this.actionreason_id);
+    }
+    if (null != o.getDecisionType() ) {
+    	this.decisiontype_id = "decisiontype" + this.id;
+    	this.decisionType = CodeableConceptHelper.toModel(o.getDecisionType(), this.decisiontype_id);
+    }
+    if (null != o.getContentDerivative() ) {
+    	this.contentderivative_id = "contentderivative" + this.id;
+    	this.contentDerivative = CodeableConceptHelper.toModel(o.getContentDerivative(), this.contentderivative_id);
+    }
+    if (null != o.getSecurityLabel() && !o.getSecurityLabel().isEmpty()) {
+    	this.securitylabel_id = "securitylabel" + this.id;
+    	this.securityLabel = CodingHelper.toModelFromArray(o.getSecurityLabel(), this.securitylabel_id);
+    }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent_id = "agent" + this.id;
     	this.agent = ContractAgentHelper.toModelFromArray(o.getAgent(), this.agent_id);
@@ -415,7 +457,9 @@ public class ContractModel  implements Serializable {
     	this.term_id = "term" + this.id;
     	this.term = ContractTermHelper.toModelFromArray(o.getTerm(), this.term_id);
     }
-    this.bindingAttachment = JsonUtils.toJson(o.getBindingAttachment());
+    if (null != o.getBindingAttachment()) {
+    	this.bindingAttachment = JsonUtils.toJson(o.getBindingAttachment());
+    }
     if (null != o.getBindingReference() ) {
     	this.bindingreference_id = "bindingreference" + this.id;
     	this.bindingReference = ReferenceHelper.toModel(o.getBindingReference(), this.bindingreference_id);
@@ -435,6 +479,15 @@ public class ContractModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -498,46 +551,46 @@ public class ContractModel  implements Serializable {
   public void setDomain( java.util.List<ReferenceModel> value) {
     this.domain = value;
   }
-  public String getType() {
+  public java.util.List<CodeableConceptModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodeableConceptModel> value) {
     this.type = value;
   }
-  public String getSubType() {
+  public java.util.List<CodeableConceptModel> getSubType() {
     return this.subType;
   }
-  public void setSubType( String value) {
+  public void setSubType( java.util.List<CodeableConceptModel> value) {
     this.subType = value;
   }
-  public String getAction() {
+  public java.util.List<CodeableConceptModel> getAction() {
     return this.action;
   }
-  public void setAction( String value) {
+  public void setAction( java.util.List<CodeableConceptModel> value) {
     this.action = value;
   }
-  public String getActionReason() {
+  public java.util.List<CodeableConceptModel> getActionReason() {
     return this.actionReason;
   }
-  public void setActionReason( String value) {
+  public void setActionReason( java.util.List<CodeableConceptModel> value) {
     this.actionReason = value;
   }
-  public String getDecisionType() {
+  public java.util.List<CodeableConceptModel> getDecisionType() {
     return this.decisionType;
   }
-  public void setDecisionType( String value) {
+  public void setDecisionType( java.util.List<CodeableConceptModel> value) {
     this.decisionType = value;
   }
-  public String getContentDerivative() {
+  public java.util.List<CodeableConceptModel> getContentDerivative() {
     return this.contentDerivative;
   }
-  public void setContentDerivative( String value) {
+  public void setContentDerivative( java.util.List<CodeableConceptModel> value) {
     this.contentDerivative = value;
   }
-  public String getSecurityLabel() {
+  public java.util.List<CodingModel> getSecurityLabel() {
     return this.securityLabel;
   }
-  public void setSecurityLabel( String value) {
+  public void setSecurityLabel( java.util.List<CodingModel> value) {
     this.securityLabel = value;
   }
   public java.util.List<ContractAgentModel> getAgent() {
@@ -652,13 +705,6 @@ public class ContractModel  implements Serializable {
      builder.append("status" + "->" + this.status + "\n"); 
      builder.append("issued" + "->" + this.issued + "\n"); 
      builder.append("applies" + "->" + this.applies + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subType" + "->" + this.subType + "\n"); 
-     builder.append("action" + "->" + this.action + "\n"); 
-     builder.append("actionReason" + "->" + this.actionReason + "\n"); 
-     builder.append("decisionType" + "->" + this.decisionType + "\n"); 
-     builder.append("contentDerivative" + "->" + this.contentDerivative + "\n"); 
-     builder.append("securityLabel" + "->" + this.securityLabel + "\n"); 
      builder.append("bindingAttachment" + "->" + this.bindingAttachment + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

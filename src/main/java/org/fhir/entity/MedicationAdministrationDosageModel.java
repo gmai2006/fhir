@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="medicationadministrationdosage")
 public class MedicationAdministrationDosageModel  implements Serializable {
-	private static final long serialVersionUID = 151873631160453955L;
+	private static final long serialVersionUID = 151910893736438107L;
   /**
   * Description: "Free text dosage can be used for cases where the dosage administered is too complex to code. When coded dosage is present, the free text dosage may still be present for display to humans.\r\rThe dosage instructions should reflect the dosage of the medication that was administered."
   */
@@ -48,30 +47,36 @@ public class MedicationAdministrationDosageModel  implements Serializable {
 
   /**
   * Description: "A coded specification of the anatomic site where the medication first entered the body.  For example, \"left arm\"."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"site\"", length = 16777215)
-  private String site;
+  @Column(name="\"site_id\"")
+  private String site_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> site;
 
   /**
   * Description: "A code specifying the route or physiological path of administration of a therapeutic agent into or onto the patient.  For example, topical, intravenous, etc."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"route\"", length = 16777215)
-  private String route;
+  @Column(name="\"route_id\"")
+  private String route_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="route_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> route;
 
   /**
   * Description: "A coded value indicating the method by which the medication is intended to be or was introduced into or on the body.  This attribute will most often NOT be populated.  It is most commonly used for injections.  For example, Slow Push, Deep IV."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"method\"", length = 16777215)
-  private String method;
+  @Column(name="\"method_id\"")
+  private String method_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> method;
 
   /**
   * Description: "The amount of the medication given at one administration event.   Use this value when the administration is essentially an instantaneous event such as a swallowing a tablet or giving an injection."
@@ -148,19 +153,38 @@ public class MedicationAdministrationDosageModel  implements Serializable {
 
   public MedicationAdministrationDosageModel(MedicationAdministrationDosage o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.text = o.getText();
-    this.site = JsonUtils.toJson(o.getSite());
-    this.route = JsonUtils.toJson(o.getRoute());
-    this.method = JsonUtils.toJson(o.getMethod());
+    if (null != o.getSite() ) {
+    	this.site_id = "site" + this.parent_id;
+    	this.site = CodeableConceptHelper.toModel(o.getSite(), this.site_id);
+    }
+    if (null != o.getRoute() ) {
+    	this.route_id = "route" + this.parent_id;
+    	this.route = CodeableConceptHelper.toModel(o.getRoute(), this.route_id);
+    }
+    if (null != o.getMethod() ) {
+    	this.method_id = "method" + this.parent_id;
+    	this.method = CodeableConceptHelper.toModel(o.getMethod(), this.method_id);
+    }
     if (null != o.getDose() ) {
     	this.dose_id = "dose" + this.parent_id;
     	this.dose = QuantityHelper.toModel(o.getDose(), this.dose_id);
     }
-    this.rateRatio = JsonUtils.toJson(o.getRateRatio());
+    if (null != o.getRateRatio()) {
+    	this.rateRatio = JsonUtils.toJson(o.getRateRatio());
+    }
     if (null != o.getRateSimpleQuantity() ) {
     	this.ratesimplequantity_id = "ratesimplequantity" + this.parent_id;
     	this.rateSimpleQuantity = QuantityHelper.toModel(o.getRateSimpleQuantity(), this.ratesimplequantity_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -170,22 +194,22 @@ public class MedicationAdministrationDosageModel  implements Serializable {
   public void setText( String value) {
     this.text = value;
   }
-  public String getSite() {
+  public java.util.List<CodeableConceptModel> getSite() {
     return this.site;
   }
-  public void setSite( String value) {
+  public void setSite( java.util.List<CodeableConceptModel> value) {
     this.site = value;
   }
-  public String getRoute() {
+  public java.util.List<CodeableConceptModel> getRoute() {
     return this.route;
   }
-  public void setRoute( String value) {
+  public void setRoute( java.util.List<CodeableConceptModel> value) {
     this.route = value;
   }
-  public String getMethod() {
+  public java.util.List<CodeableConceptModel> getMethod() {
     return this.method;
   }
-  public void setMethod( String value) {
+  public void setMethod( java.util.List<CodeableConceptModel> value) {
     this.method = value;
   }
   public java.util.List<QuantityModel> getDose() {
@@ -236,9 +260,6 @@ public class MedicationAdministrationDosageModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[MedicationAdministrationDosageModel]:" + "\n");
      builder.append("text" + "->" + this.text + "\n"); 
-     builder.append("site" + "->" + this.site + "\n"); 
-     builder.append("route" + "->" + this.route + "\n"); 
-     builder.append("method" + "->" + this.method + "\n"); 
      builder.append("rateRatio" + "->" + this.rateRatio + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

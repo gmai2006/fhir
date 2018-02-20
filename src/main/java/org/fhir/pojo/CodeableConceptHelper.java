@@ -24,10 +24,31 @@
  * then submit the template through our web interface.  
  */
 package org.fhir.pojo;
+import org.fhir.entity.CodeableConceptModel;
 import com.google.gson.GsonBuilder;
 
 public class CodeableConceptHelper {
+	public static java.util.List<CodeableConcept> fromArray2Array(java.util.List<CodeableConceptModel> list) {
+    return
+    		list.stream()
+    		.map(x -> new CodeableConcept(x))
+    		.collect(java.util.stream.Collectors.toList());
+  }
 
+  public static CodeableConcept fromArray2Object(java.util.List<CodeableConceptModel> list) {
+    return new CodeableConcept(list.get(0));
+  }
+
+  public static java.util.List<CodeableConceptModel> toModel(CodeableConcept reference, String parentId) {
+  	CodeableConceptModel model = new CodeableConceptModel(reference, parentId);
+  	return java.util.Arrays.asList(new CodeableConceptModel[] { model });
+  }
+
+  public static java.util.List<CodeableConceptModel> toModelFromArray(java.util.List<CodeableConcept> list, String parentId) {
+    return (java.util.List<CodeableConceptModel>)list.stream()
+    	.map(x -> new CodeableConceptModel(x, parentId))
+      .collect(java.util.stream.Collectors.toList());
+  }
   public static CodeableConcept fromJson(String json) {
     if (null == json) return null;
     return new GsonBuilder().create().fromJson(json, CodeableConcept.class);

@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="claimresponseerror")
 public class ClaimResponseErrorModel  implements Serializable {
-	private static final long serialVersionUID = 151873631157277885L;
+	private static final long serialVersionUID = 151910893733357646L;
   /**
   * Description: "The sequence number of the line item submitted which contains the error. This value is omitted when the error is elsewhere."
   */
@@ -65,13 +64,14 @@ public class ClaimResponseErrorModel  implements Serializable {
 
   /**
   * Description: "An error code,from a specified code system, which details why the claim could not be adjudicated."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions."
@@ -117,11 +117,22 @@ public class ClaimResponseErrorModel  implements Serializable {
 
   public ClaimResponseErrorModel(ClaimResponseError o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.sequenceLinkId = o.getSequenceLinkId();
     this.detailSequenceLinkId = o.getDetailSequenceLinkId();
     this.subdetailSequenceLinkId = o.getSubdetailSequenceLinkId();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.parent_id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public Float getSequenceLinkId() {
@@ -142,10 +153,10 @@ public class ClaimResponseErrorModel  implements Serializable {
   public void setSubdetailSequenceLinkId( Float value) {
     this.subdetailSequenceLinkId = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public String getModifierExtension() {
@@ -180,7 +191,6 @@ public class ClaimResponseErrorModel  implements Serializable {
      builder.append("sequenceLinkId" + "->" + this.sequenceLinkId + "\n"); 
      builder.append("detailSequenceLinkId" + "->" + this.detailSequenceLinkId + "\n"); 
      builder.append("subdetailSequenceLinkId" + "->" + this.subdetailSequenceLinkId + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

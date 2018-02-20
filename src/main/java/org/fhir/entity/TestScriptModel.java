@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="testscript")
 public class TestScriptModel  implements Serializable {
-	private static final long serialVersionUID = 15187363116132915L;
+	private static final long serialVersionUID = 15191089373731697L;
   /**
   * Description: "This is a TestScript resource"
   */
@@ -144,12 +143,14 @@ public class TestScriptModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the test script is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "Explaination of why this test script is needed and why it has been designed as it has."
@@ -358,7 +359,9 @@ public class TestScriptModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.url = o.getUrl();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.version = o.getVersion();
     this.name = o.getName();
     this.title = o.getTitle();
@@ -375,18 +378,58 @@ public class TestScriptModel  implements Serializable {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
     this.purpose = o.getPurpose();
     this.copyright = o.getCopyright();
-    this.metadata = JsonUtils.toJson(o.getMetadata());
+    if (null != o.getOrigin()) {
+    	this.origin = JsonUtils.toJson(o.getOrigin());
+    }
+    if (null != o.getDestination()) {
+    	this.destination = JsonUtils.toJson(o.getDestination());
+    }
+    if (null != o.getMetadata()) {
+    	this.metadata = JsonUtils.toJson(o.getMetadata());
+    }
+    if (null != o.getFixture()) {
+    	this.fixture = JsonUtils.toJson(o.getFixture());
+    }
     if (null != o.getProfile() && !o.getProfile().isEmpty()) {
     	this.profile_id = "profile" + this.id;
     	this.profile = ReferenceHelper.toModelFromArray(o.getProfile(), this.profile_id);
     }
-    this.setup = JsonUtils.toJson(o.getSetup());
-    this.teardown = JsonUtils.toJson(o.getTeardown());
+    if (null != o.getVariable()) {
+    	this.variable = JsonUtils.toJson(o.getVariable());
+    }
+    if (null != o.getRule()) {
+    	this.rule = JsonUtils.toJson(o.getRule());
+    }
+    if (null != o.getRuleset()) {
+    	this.ruleset = JsonUtils.toJson(o.getRuleset());
+    }
+    if (null != o.getSetup()) {
+    	this.setup = JsonUtils.toJson(o.getSetup());
+    }
+    if (null != o.getTest()) {
+    	this.test = JsonUtils.toJson(o.getTest());
+    }
+    if (null != o.getTeardown()) {
+    	this.teardown = JsonUtils.toJson(o.getTeardown());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -474,10 +517,10 @@ public class TestScriptModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public String getPurpose() {
@@ -622,7 +665,6 @@ public class TestScriptModel  implements Serializable {
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("copyright" + "->" + this.copyright + "\n"); 
      builder.append("origin" + "->" + this.origin + "\n"); 

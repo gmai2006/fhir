@@ -114,9 +114,63 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<Consent> findByCategory(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByCategory(queryBuilder);
+    logger.info("findBycategory - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findByPatient(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByPatient(queryBuilder);
+    logger.info("findBypatient - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findByConsentingParty(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByConsentingParty(queryBuilder);
+    logger.info("findByconsentingParty - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<Consent> findByActor(QueryBuilder queryBuilder) {
   	final List<Consent> result = dao.findByActor(queryBuilder);
     logger.info("findByactor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findByAction(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByAction(queryBuilder);
+    logger.info("findByaction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findByOrganization(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByOrganization(queryBuilder);
+    logger.info("findByorganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findBySourceReference(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findBySourceReference(queryBuilder);
+    logger.info("findBysourceReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findByPolicy(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByPolicy(queryBuilder);
+    logger.info("findBypolicy - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findBySecurityLabel(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findBySecurityLabel(queryBuilder);
+    logger.info("findBysecurityLabel - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findByPurpose(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByPurpose(queryBuilder);
+    logger.info("findBypurpose - exited - return value={} result ");
     return result;
   }
   @Override
@@ -126,9 +180,21 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<Consent> findByOrganization(QueryBuilder queryBuilder) {
-  	final List<Consent> result = dao.findByOrganization(queryBuilder);
-    logger.info("findByorganization - exited - return value={} result ");
+  public List<Consent> findByExcept(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByExcept(queryBuilder);
+    logger.info("findByexcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findByText(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<Consent> findByMeta(QueryBuilder queryBuilder) {
+  	final List<Consent> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

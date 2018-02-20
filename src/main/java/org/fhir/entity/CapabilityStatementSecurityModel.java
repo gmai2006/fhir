@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="capabilitystatementsecurity")
 public class CapabilityStatementSecurityModel  implements Serializable {
-	private static final long serialVersionUID = 151873631195245310L;
+	private static final long serialVersionUID = 151910893772012547L;
   /**
   * Description: "Server adds CORS headers when responding to requests - this enables javascript applications to use the server."
   */
@@ -48,12 +47,14 @@ public class CapabilityStatementSecurityModel  implements Serializable {
 
   /**
   * Description: "Types of security services that are supported/required by the system."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"service\"", length = 16777215)
-  private String service;
+  @Column(name="\"service_id\"")
+  private String service_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="service_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> service;
 
   /**
   * Description: "General description of how security works."
@@ -117,12 +118,24 @@ public class CapabilityStatementSecurityModel  implements Serializable {
 
   public CapabilityStatementSecurityModel(CapabilityStatementSecurity o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.cors = o.getCors();
+    if (null != o.getService() && !o.getService().isEmpty()) {
+    	this.service_id = "service" + this.parent_id;
+    	this.service = CodeableConceptHelper.toModelFromArray(o.getService(), this.service_id);
+    }
     this.description = o.getDescription();
     if (null != o.getCertificate() && !o.getCertificate().isEmpty()) {
     	this.certificate_id = "certificate" + this.parent_id;
     	this.certificate = CapabilityStatementCertificateHelper.toModelFromArray(o.getCertificate(), this.certificate_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -132,10 +145,10 @@ public class CapabilityStatementSecurityModel  implements Serializable {
   public void setCors( Boolean value) {
     this.cors = value;
   }
-  public String getService() {
+  public java.util.List<CodeableConceptModel> getService() {
     return this.service;
   }
-  public void setService( String value) {
+  public void setService( java.util.List<CodeableConceptModel> value) {
     this.service = value;
   }
   public String getDescription() {
@@ -180,7 +193,6 @@ public class CapabilityStatementSecurityModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[CapabilityStatementSecurityModel]:" + "\n");
      builder.append("cors" + "->" + this.cors + "\n"); 
-     builder.append("service" + "->" + this.service + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 
      builder.append("id" + "->" + this.id + "\n"); 

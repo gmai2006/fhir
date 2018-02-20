@@ -55,7 +55,9 @@ public class ClaimRelated  extends BackboneElement  {
     if (null != o.getClaim() && !o.getClaim().isEmpty()) {
       this.claim = new Reference(o.getClaim().get(0));
     }
-    this.relationship = CodeableConceptHelper.fromJson(o.getRelationship());
+    if (null != o.getRelationship() && !o.getRelationship().isEmpty()) {
+      this.relationship = new CodeableConcept(o.getRelationship().get(0));
+    }
     this.reference = IdentifierHelper.fromJson(o.getReference());
   }
 

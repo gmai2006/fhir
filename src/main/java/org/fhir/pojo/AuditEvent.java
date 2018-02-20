@@ -119,7 +119,12 @@ public class AuditEvent  extends DomainResource  {
     if (null != o.getResourceType()) {
       this.resourceType = o.getResourceType();
     }
-    this.type = CodingHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new Coding(o.getType().get(0));
+    }
+    if (null != o.getSubtype() && !o.getSubtype().isEmpty()) {
+    	this.subtype = CodingHelper.fromArray2Array(o.getSubtype());
+    }
     if (null != o.getAction()) {
       this.action = o.getAction();
     }
@@ -131,6 +136,9 @@ public class AuditEvent  extends DomainResource  {
     }
     if (null != o.getOutcomeDesc()) {
       this.outcomeDesc = o.getOutcomeDesc();
+    }
+    if (null != o.getPurposeOfEvent() && !o.getPurposeOfEvent().isEmpty()) {
+    	this.purposeOfEvent = CodeableConceptHelper.fromArray2Array(o.getPurposeOfEvent());
     }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent = AuditEventAgentHelper.fromArray2Array(o.getAgent());

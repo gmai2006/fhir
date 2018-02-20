@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="allergyintolerance")
 public class AllergyIntoleranceModel  implements Serializable {
-	private static final long serialVersionUID = 151873631171391248L;
+	private static final long serialVersionUID = 151910893747011353L;
   /**
   * Description: "This is a AllergyIntolerance resource"
   */
@@ -93,12 +92,14 @@ public class AllergyIntoleranceModel  implements Serializable {
 
   /**
   * Description: "Code for an allergy or intolerance statement (either a positive or a negated/excluded statement).  This may be a code for a substance or pharmaceutical product that is considered to be responsible for the adverse reaction risk (e.g., \"Latex\"), an allergy or intolerance condition (e.g., \"Latex allergy\"), or a negated/excluded code for a specific substance or class (e.g., \"No latex allergy\") or a general or categorical negated statement (e.g.,  \"No known allergy\", \"No known drug allergies\")."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The patient who has the allergy or intolerance."
@@ -302,20 +303,32 @@ public class AllergyIntoleranceModel  implements Serializable {
   public AllergyIntoleranceModel(AllergyIntolerance o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.clinicalStatus = o.getClinicalStatus();
     this.verificationStatus = o.getVerificationStatus();
     this.type = o.getType();
-    this.category = org.fhir.utils.JsonUtils.write2String(o.getCategory());
+    this.category = org.fhir.utils.JsonUtils.toJson(o.getCategory());
     this.criticality = o.getCriticality();
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     if (null != o.getPatient() ) {
     	this.patient_id = "patient" + this.id;
     	this.patient = ReferenceHelper.toModel(o.getPatient(), this.patient_id);
     }
     this.onsetDateTime = o.getOnsetDateTime();
-    this.onsetAge = JsonUtils.toJson(o.getOnsetAge());
-    this.onsetPeriod = JsonUtils.toJson(o.getOnsetPeriod());
-    this.onsetRange = JsonUtils.toJson(o.getOnsetRange());
+    if (null != o.getOnsetAge()) {
+    	this.onsetAge = JsonUtils.toJson(o.getOnsetAge());
+    }
+    if (null != o.getOnsetPeriod()) {
+    	this.onsetPeriod = JsonUtils.toJson(o.getOnsetPeriod());
+    }
+    if (null != o.getOnsetRange()) {
+    	this.onsetRange = JsonUtils.toJson(o.getOnsetRange());
+    }
     this.onsetString = o.getOnsetString();
     this.assertedDate = o.getAssertedDate();
     if (null != o.getRecorder() ) {
@@ -327,6 +340,9 @@ public class AllergyIntoleranceModel  implements Serializable {
     	this.asserter = ReferenceHelper.toModel(o.getAsserter(), this.asserter_id);
     }
     this.lastOccurrence = o.getLastOccurrence();
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getReaction() && !o.getReaction().isEmpty()) {
     	this.reaction_id = "reaction" + this.id;
     	this.reaction = AllergyIntoleranceReactionHelper.toModelFromArray(o.getReaction(), this.reaction_id);
@@ -334,6 +350,15 @@ public class AllergyIntoleranceModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -385,10 +410,10 @@ public class AllergyIntoleranceModel  implements Serializable {
   public void setCriticality( String value) {
     this.criticality = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public java.util.List<ReferenceModel> getPatient() {
@@ -523,7 +548,6 @@ public class AllergyIntoleranceModel  implements Serializable {
      builder.append("type" + "->" + this.type + "\n"); 
      builder.append("category" + "->" + this.category + "\n"); 
      builder.append("criticality" + "->" + this.criticality + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("onsetDateTime" + "->" + this.onsetDateTime + "\n"); 
      builder.append("onsetAge" + "->" + this.onsetAge + "\n"); 
      builder.append("onsetPeriod" + "->" + this.onsetPeriod + "\n"); 

@@ -73,12 +73,16 @@ public class GoalTarget  extends BackboneElement  {
 
   public GoalTarget(GoalTargetModel o) {
     this.id = o.getId();
-    this.measure = CodeableConceptHelper.fromJson(o.getMeasure());
+    if (null != o.getMeasure() && !o.getMeasure().isEmpty()) {
+      this.measure = new CodeableConcept(o.getMeasure().get(0));
+    }
     if (null != o.getDetailQuantity() && !o.getDetailQuantity().isEmpty()) {
       this.detailQuantity = new Quantity(o.getDetailQuantity().get(0));
     }
     this.detailRange = RangeHelper.fromJson(o.getDetailRange());
-    this.detailCodeableConcept = CodeableConceptHelper.fromJson(o.getDetailCodeableConcept());
+    if (null != o.getDetailCodeableConcept() && !o.getDetailCodeableConcept().isEmpty()) {
+      this.detailCodeableConcept = new CodeableConcept(o.getDetailCodeableConcept().get(0));
+    }
     if (null != o.getDueDate()) {
       this.dueDate = o.getDueDate();
     }

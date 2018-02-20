@@ -124,7 +124,9 @@ public class RelatedPerson  extends DomainResource  {
     if (null != o.getPatient() && !o.getPatient().isEmpty()) {
       this.patient = new Reference(o.getPatient().get(0));
     }
-    this.relationship = CodeableConceptHelper.fromJson(o.getRelationship());
+    if (null != o.getRelationship() && !o.getRelationship().isEmpty()) {
+      this.relationship = new CodeableConcept(o.getRelationship().get(0));
+    }
     if (null != o.getGender()) {
       this.gender = o.getGender();
     }

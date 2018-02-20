@@ -38,11 +38,20 @@ public interface AdverseEventService {
   public AdverseEvent update(AdverseEvent bean);
   public void delete(AdverseEvent bean);
   public List<AdverseEvent> findByField(QueryBuilder queryBuilder);
-  public List<AdverseEvent> findByLocation(QueryBuilder queryBuilder);
-  public List<AdverseEvent> findByReaction(QueryBuilder queryBuilder);
-  public List<AdverseEvent> findByRecorder(QueryBuilder queryBuilder);
-  public List<AdverseEvent> findByStudy(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByType(QueryBuilder queryBuilder);
   public List<AdverseEvent> findBySubject(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByReaction(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByLocation(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findBySeriousness(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByOutcome(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByRecorder(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByEventParticipant(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findBySuspectEntity(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findBySubjectMedicalHistory(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByReferenceDocument(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByStudy(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByText(QueryBuilder queryBuilder);
+  public List<AdverseEvent> findByMeta(QueryBuilder queryBuilder);
 
 
 }

@@ -114,15 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<EnrollmentResponse> findByRequest(QueryBuilder queryBuilder) {
+  	final List<EnrollmentResponse> result = dao.findByRequest(queryBuilder);
+    logger.info("findByrequest - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EnrollmentResponse> findByOutcome(QueryBuilder queryBuilder) {
+  	final List<EnrollmentResponse> result = dao.findByOutcome(queryBuilder);
+    logger.info("findByoutcome - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<EnrollmentResponse> findByOrganization(QueryBuilder queryBuilder) {
   	final List<EnrollmentResponse> result = dao.findByOrganization(queryBuilder);
     logger.info("findByorganization - exited - return value={} result ");
     return result;
   }
   @Override
-  public List<EnrollmentResponse> findByRequest(QueryBuilder queryBuilder) {
-  	final List<EnrollmentResponse> result = dao.findByRequest(queryBuilder);
-    logger.info("findByrequest - exited - return value={} result ");
+  public List<EnrollmentResponse> findByRequestProvider(QueryBuilder queryBuilder) {
+  	final List<EnrollmentResponse> result = dao.findByRequestProvider(queryBuilder);
+    logger.info("findByrequestProvider - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EnrollmentResponse> findByRequestOrganization(QueryBuilder queryBuilder) {
+  	final List<EnrollmentResponse> result = dao.findByRequestOrganization(queryBuilder);
+    logger.info("findByrequestOrganization - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EnrollmentResponse> findByText(QueryBuilder queryBuilder) {
+  	final List<EnrollmentResponse> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<EnrollmentResponse> findByMeta(QueryBuilder queryBuilder) {
+  	final List<EnrollmentResponse> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

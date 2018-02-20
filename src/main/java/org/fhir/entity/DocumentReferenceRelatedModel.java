@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="documentreferencerelated")
 public class DocumentReferenceRelatedModel  implements Serializable {
-	private static final long serialVersionUID = 151873631147588453L;
+	private static final long serialVersionUID = 151910893725035716L;
   /**
   * Description: "Related identifier to this DocumentReference. If both id and ref are present they shall refer to the same thing."
   * Actual type: String;
@@ -103,11 +102,21 @@ public class DocumentReferenceRelatedModel  implements Serializable {
 
   public DocumentReferenceRelatedModel(DocumentReferenceRelated o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getRef() ) {
     	this.ref_id = "ref" + this.parent_id;
     	this.ref = ReferenceHelper.toModel(o.getRef(), this.ref_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

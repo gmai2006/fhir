@@ -38,8 +38,21 @@ public interface HealthcareServiceService {
   public HealthcareService update(HealthcareService bean);
   public void delete(HealthcareService bean);
   public List<HealthcareService> findByField(QueryBuilder queryBuilder);
-  public List<HealthcareService> findByEndpoint(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByProvidedBy(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByCategory(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByType(QueryBuilder queryBuilder);
+  public List<HealthcareService> findBySpecialty(QueryBuilder queryBuilder);
   public List<HealthcareService> findByLocation(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByCoverageArea(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByServiceProvisionCode(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByEligibility(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByCharacteristic(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByReferralMethod(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByAvailableTime(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByNotAvailable(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByEndpoint(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByText(QueryBuilder queryBuilder);
+  public List<HealthcareService> findByMeta(QueryBuilder queryBuilder);
 
 
 }

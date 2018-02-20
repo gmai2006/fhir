@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="goal")
 public class GoalModel  implements Serializable {
-	private static final long serialVersionUID = 151873631176197224L;
+	private static final long serialVersionUID = 151910893752898073L;
   /**
   * Description: "This is a Goal resource"
   */
@@ -65,31 +64,36 @@ public class GoalModel  implements Serializable {
 
   /**
   * Description: "Indicates a category the goal falls within."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "Identifies the mutually agreed level of importance associated with reaching/sustaining the goal."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"priority\"", length = 16777215)
-  private String priority;
+  @Column(name="\"priority_id\"")
+  private String priority_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="priority_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> priority;
 
   /**
   * Description: "Human-readable and/or coded description of a specific desired objective of care, such as \"control blood pressure\" or \"negotiate an obstacle course\" or \"dance with child at wedding\"."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"description\"", length = 16777215)
-  private String description;
+  @Column(name="\"description_id\"")
+  private String description_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="description_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> description;
 
   /**
   * Description: "Identifies the patient, group or organization for whom the goal is being established."
@@ -112,12 +116,14 @@ public class GoalModel  implements Serializable {
 
   /**
   * Description: "The date or event after which the goal should begin being pursued."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"startCodeableConcept\"", length = 16777215)
-  private String startCodeableConcept;
+  @Column(name="\"startcodeableconcept_id\"")
+  private String startcodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="startcodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> startCodeableConcept;
 
   /**
   * Description: "Indicates what should be done by when."
@@ -178,12 +184,14 @@ public class GoalModel  implements Serializable {
 
   /**
   * Description: "Identifies the change (or lack of change) at the point when the status of the goal is assessed."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"outcomeCode\"", length = 16777215)
-  private String outcomeCode;
+  @Column(name="\"outcomecode_id\"")
+  private String outcomecode_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="outcomecode_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> outcomeCode;
 
   /**
   * Description: "Details of what's changed (or not changed)."
@@ -287,15 +295,31 @@ public class GoalModel  implements Serializable {
   public GoalModel(Goal o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     this.status = o.getStatus();
-    this.priority = JsonUtils.toJson(o.getPriority());
-    this.description = JsonUtils.toJson(o.getDescription());
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModelFromArray(o.getCategory(), this.category_id);
+    }
+    if (null != o.getPriority() ) {
+    	this.priority_id = "priority" + this.id;
+    	this.priority = CodeableConceptHelper.toModel(o.getPriority(), this.priority_id);
+    }
+    if (null != o.getDescription() ) {
+    	this.description_id = "description" + this.id;
+    	this.description = CodeableConceptHelper.toModel(o.getDescription(), this.description_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
     }
     this.startDate = o.getStartDate();
-    this.startCodeableConcept = JsonUtils.toJson(o.getStartCodeableConcept());
+    if (null != o.getStartCodeableConcept() ) {
+    	this.startcodeableconcept_id = "startcodeableconcept" + this.id;
+    	this.startCodeableConcept = CodeableConceptHelper.toModel(o.getStartCodeableConcept(), this.startcodeableconcept_id);
+    }
     if (null != o.getTarget() ) {
     	this.target_id = "target" + this.id;
     	this.target = GoalTargetHelper.toModel(o.getTarget(), this.target_id);
@@ -310,6 +334,13 @@ public class GoalModel  implements Serializable {
     	this.addresses_id = "addresses" + this.id;
     	this.addresses = ReferenceHelper.toModelFromArray(o.getAddresses(), this.addresses_id);
     }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
+    if (null != o.getOutcomeCode() && !o.getOutcomeCode().isEmpty()) {
+    	this.outcomecode_id = "outcomecode" + this.id;
+    	this.outcomeCode = CodeableConceptHelper.toModelFromArray(o.getOutcomeCode(), this.outcomecode_id);
+    }
     if (null != o.getOutcomeReference() && !o.getOutcomeReference().isEmpty()) {
     	this.outcomereference_id = "outcomereference" + this.id;
     	this.outcomeReference = ReferenceHelper.toModelFromArray(o.getOutcomeReference(), this.outcomereference_id);
@@ -317,6 +348,15 @@ public class GoalModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -344,22 +384,22 @@ public class GoalModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getPriority() {
+  public java.util.List<CodeableConceptModel> getPriority() {
     return this.priority;
   }
-  public void setPriority( String value) {
+  public void setPriority( java.util.List<CodeableConceptModel> value) {
     this.priority = value;
   }
-  public String getDescription() {
+  public java.util.List<CodeableConceptModel> getDescription() {
     return this.description;
   }
-  public void setDescription( String value) {
+  public void setDescription( java.util.List<CodeableConceptModel> value) {
     this.description = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -374,10 +414,10 @@ public class GoalModel  implements Serializable {
   public void setStartDate( String value) {
     this.startDate = value;
   }
-  public String getStartCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getStartCodeableConcept() {
     return this.startCodeableConcept;
   }
-  public void setStartCodeableConcept( String value) {
+  public void setStartCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.startCodeableConcept = value;
   }
   public java.util.List<GoalTargetModel> getTarget() {
@@ -416,10 +456,10 @@ public class GoalModel  implements Serializable {
   public void setNote( String value) {
     this.note = value;
   }
-  public String getOutcomeCode() {
+  public java.util.List<CodeableConceptModel> getOutcomeCode() {
     return this.outcomeCode;
   }
-  public void setOutcomeCode( String value) {
+  public void setOutcomeCode( java.util.List<CodeableConceptModel> value) {
     this.outcomeCode = value;
   }
   public java.util.List<ReferenceModel> getOutcomeReference() {
@@ -484,15 +524,10 @@ public class GoalModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("priority" + "->" + this.priority + "\n"); 
-     builder.append("description" + "->" + this.description + "\n"); 
      builder.append("startDate" + "->" + this.startDate + "\n"); 
-     builder.append("startCodeableConcept" + "->" + this.startCodeableConcept + "\n"); 
      builder.append("statusDate" + "->" + this.statusDate + "\n"); 
      builder.append("statusReason" + "->" + this.statusReason + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
-     builder.append("outcomeCode" + "->" + this.outcomeCode + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

@@ -38,7 +38,12 @@ public interface CompartmentDefinitionService {
   public CompartmentDefinition update(CompartmentDefinition bean);
   public void delete(CompartmentDefinition bean);
   public List<CompartmentDefinition> findByField(QueryBuilder queryBuilder);
+  public List<CompartmentDefinition> findByContact(QueryBuilder queryBuilder);
+  public List<CompartmentDefinition> findByUseContext(QueryBuilder queryBuilder);
+  public List<CompartmentDefinition> findByJurisdiction(QueryBuilder queryBuilder);
   public List<CompartmentDefinition> findByResource(QueryBuilder queryBuilder);
+  public List<CompartmentDefinition> findByText(QueryBuilder queryBuilder);
+  public List<CompartmentDefinition> findByMeta(QueryBuilder queryBuilder);
 
 
 }

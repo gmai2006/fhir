@@ -42,5 +42,12 @@ public interface VisionPrescriptionDao {
 
   public List<VisionPrescription> findByField(QueryBuilder queryBuilder);
 
+  public List<VisionPrescription> findByPatient(QueryBuilder queryBuilder);
+  public List<VisionPrescription> findByEncounter(QueryBuilder queryBuilder);
   public List<VisionPrescription> findByPrescriber(QueryBuilder queryBuilder);
+  public List<VisionPrescription> findByReasonCodeableConcept(QueryBuilder queryBuilder);
+  public List<VisionPrescription> findByReasonReference(QueryBuilder queryBuilder);
+  public List<VisionPrescription> findByDispense(QueryBuilder queryBuilder);
+  public List<VisionPrescription> findByText(QueryBuilder queryBuilder);
+  public List<VisionPrescription> findByMeta(QueryBuilder queryBuilder);
 }

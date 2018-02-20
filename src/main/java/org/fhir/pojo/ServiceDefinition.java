@@ -287,6 +287,12 @@ public class ServiceDefinition  extends DomainResource  {
     if (null != o.getUseContext() && !o.getUseContext().isEmpty()) {
     	this.useContext = UsageContextHelper.fromArray2Array(o.getUseContext());
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction = CodeableConceptHelper.fromArray2Array(o.getJurisdiction());
+    }
+    if (null != o.getTopic() && !o.getTopic().isEmpty()) {
+    	this.topic = CodeableConceptHelper.fromArray2Array(o.getTopic());
+    }
     if (null != o.getContributor() && !o.getContributor().isEmpty()) {
     	this.contributor = ContributorHelper.fromArray2Array(o.getContributor());
     }

@@ -94,6 +94,12 @@ public class DataRequirementCodeFilter  extends BackboneElement  {
     if (o.getValueCode() != null) {
     	this.valueCode = org.fhir.utils.JsonUtils.json2Array(o.getValueCode());
     }
+    if (null != o.getValueCoding() && !o.getValueCoding().isEmpty()) {
+    	this.valueCoding = CodingHelper.fromArray2Array(o.getValueCoding());
+    }
+    if (null != o.getValueCodeableConcept() && !o.getValueCodeableConcept().isEmpty()) {
+    	this.valueCodeableConcept = CodeableConceptHelper.fromArray2Array(o.getValueCodeableConcept());
+    }
   }
 
   public void setPath( String value) {

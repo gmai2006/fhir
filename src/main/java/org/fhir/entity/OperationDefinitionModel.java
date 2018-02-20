@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="operationdefinition")
 public class OperationDefinitionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631178682963L;
+	private static final long serialVersionUID = 151910893755012935L;
   /**
   * Description: "This is a OperationDefinition resource"
   */
@@ -135,12 +134,14 @@ public class OperationDefinitionModel  implements Serializable {
 
   /**
   * Description: "A legal or geographic region in which the operation definition is intended to be used."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"jurisdiction\"", length = 16777215)
-  private String jurisdiction;
+  @Column(name="\"jurisdiction_id\"")
+  private String jurisdiction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="jurisdiction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> jurisdiction;
 
   /**
   * Description: "Explaination of why this operation definition is needed and why it has been designed as it has."
@@ -340,6 +341,10 @@ public class OperationDefinitionModel  implements Serializable {
     	this.usecontext_id = "usecontext" + this.id;
     	this.useContext = UsageContextHelper.toModelFromArray(o.getUseContext(), this.usecontext_id);
     }
+    if (null != o.getJurisdiction() && !o.getJurisdiction().isEmpty()) {
+    	this.jurisdiction_id = "jurisdiction" + this.id;
+    	this.jurisdiction = CodeableConceptHelper.toModelFromArray(o.getJurisdiction(), this.jurisdiction_id);
+    }
     this.purpose = o.getPurpose();
     this.idempotent = o.getIdempotent();
     this.code = o.getCode();
@@ -348,7 +353,7 @@ public class OperationDefinitionModel  implements Serializable {
     	this.base_id = "base" + this.id;
     	this.base = ReferenceHelper.toModel(o.getBase(), this.base_id);
     }
-    this.resource = org.fhir.utils.JsonUtils.write2String(o.getResource());
+    this.resource = org.fhir.utils.JsonUtils.toJson(o.getResource());
     this.system = o.getSystem();
     this.type = o.getType();
     this.instance = o.getInstance();
@@ -363,6 +368,15 @@ public class OperationDefinitionModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -444,10 +458,10 @@ public class OperationDefinitionModel  implements Serializable {
   public void setUseContext( java.util.List<UsageContextModel> value) {
     this.useContext = value;
   }
-  public String getJurisdiction() {
+  public java.util.List<CodeableConceptModel> getJurisdiction() {
     return this.jurisdiction;
   }
-  public void setJurisdiction( String value) {
+  public void setJurisdiction( java.util.List<CodeableConceptModel> value) {
     this.jurisdiction = value;
   }
   public String getPurpose() {
@@ -579,7 +593,6 @@ public class OperationDefinitionModel  implements Serializable {
      builder.append("date" + "->" + this.date + "\n"); 
      builder.append("publisher" + "->" + this.publisher + "\n"); 
      builder.append("description" + "->" + this.description + "\n"); 
-     builder.append("jurisdiction" + "->" + this.jurisdiction + "\n"); 
      builder.append("purpose" + "->" + this.purpose + "\n"); 
      builder.append("idempotent" + "->" + this.idempotent + "\n"); 
      builder.append("code" + "->" + this.code + "\n"); 

@@ -53,7 +53,9 @@ public class SubstanceIngredient  extends BackboneElement  {
   public SubstanceIngredient(SubstanceIngredientModel o) {
     this.id = o.getId();
     this.quantity = RatioHelper.fromJson(o.getQuantity());
-    this.substanceCodeableConcept = CodeableConceptHelper.fromJson(o.getSubstanceCodeableConcept());
+    if (null != o.getSubstanceCodeableConcept() && !o.getSubstanceCodeableConcept().isEmpty()) {
+      this.substanceCodeableConcept = new CodeableConcept(o.getSubstanceCodeableConcept().get(0));
+    }
     if (null != o.getSubstanceReference() && !o.getSubstanceReference().isEmpty()) {
       this.substanceReference = new Reference(o.getSubstanceReference().get(0));
     }

@@ -85,7 +85,9 @@ public class ClaimResponseError  extends BackboneElement  {
     if (null != o.getSubdetailSequenceLinkId()) {
       this.subdetailSequenceLinkId = o.getSubdetailSequenceLinkId();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
   }
 
   public void setSequenceLinkId( Float value) {

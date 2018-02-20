@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="referralrequestrequester")
 public class ReferralRequestRequesterModel  implements Serializable {
-	private static final long serialVersionUID = 151873631190183233L;
+	private static final long serialVersionUID = 151910893767065924L;
   /**
   * Description: "The device, practitioner, etc. who initiated the request."
   */
@@ -105,7 +104,9 @@ public class ReferralRequestRequesterModel  implements Serializable {
 
   public ReferralRequestRequesterModel(ReferralRequestRequester o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     if (null != o.getAgent() ) {
     	this.agent_id = "agent" + this.parent_id;
     	this.agent = ReferenceHelper.toModel(o.getAgent(), this.agent_id);
@@ -113,6 +114,12 @@ public class ReferralRequestRequesterModel  implements Serializable {
     if (null != o.getOnBehalfOf() ) {
     	this.onbehalfof_id = "onbehalfof" + this.parent_id;
     	this.onBehalfOf = ReferenceHelper.toModel(o.getOnBehalfOf(), this.onbehalfof_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

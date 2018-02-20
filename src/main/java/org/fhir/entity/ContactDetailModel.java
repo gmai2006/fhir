@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="contactdetail")
 public class ContactDetailModel  implements Serializable {
-	private static final long serialVersionUID = 151873631178534568L;
+	private static final long serialVersionUID = 151910893754940957L;
   /**
   * Description: "The name of an individual to contact."
   */
@@ -87,8 +86,16 @@ public class ContactDetailModel  implements Serializable {
 
   public ContactDetailModel(ContactDetail o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.name = o.getName();
+    if (null != o.getTelecom()) {
+    	this.telecom = JsonUtils.toJson(o.getTelecom());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getName() {

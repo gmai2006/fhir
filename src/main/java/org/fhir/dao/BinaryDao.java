@@ -42,4 +42,6 @@ public interface BinaryDao {
 
   public List<Binary> findByField(QueryBuilder queryBuilder);
 
+  public List<Binary> findBySecurityContext(QueryBuilder queryBuilder);
+  public List<Binary> findByMeta(QueryBuilder queryBuilder);
 }

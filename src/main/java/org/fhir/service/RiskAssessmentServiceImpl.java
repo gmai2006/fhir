@@ -114,6 +114,42 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<RiskAssessment> findByBasedOn(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByBasedOn(queryBuilder);
+    logger.info("findBybasedOn - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findByParent(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByParent(queryBuilder);
+    logger.info("findByparent - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findByMethod(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByMethod(queryBuilder);
+    logger.info("findBymethod - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findByCode(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findBySubject(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findBySubject(queryBuilder);
+    logger.info("findBysubject - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findByContext(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByContext(queryBuilder);
+    logger.info("findBycontext - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<RiskAssessment> findByCondition(QueryBuilder queryBuilder) {
   	final List<RiskAssessment> result = dao.findByCondition(queryBuilder);
     logger.info("findBycondition - exited - return value={} result ");
@@ -126,9 +162,39 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
   @Override
-  public List<RiskAssessment> findBySubject(QueryBuilder queryBuilder) {
-  	final List<RiskAssessment> result = dao.findBySubject(queryBuilder);
-    logger.info("findBysubject - exited - return value={} result ");
+  public List<RiskAssessment> findByReasonCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByReasonCodeableConcept(queryBuilder);
+    logger.info("findByreasonCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findByReasonReference(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByReasonReference(queryBuilder);
+    logger.info("findByreasonReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findByBasis(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByBasis(queryBuilder);
+    logger.info("findBybasis - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findByPrediction(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByPrediction(queryBuilder);
+    logger.info("findByprediction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findByText(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<RiskAssessment> findByMeta(QueryBuilder queryBuilder) {
+  	final List<RiskAssessment> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

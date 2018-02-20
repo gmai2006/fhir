@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="subscription")
 public class SubscriptionModel  implements Serializable {
-	private static final long serialVersionUID = 151873631149855964L;
+	private static final long serialVersionUID = 151910893727013106L;
   /**
   * Description: "This is a Subscription resource"
   */
@@ -104,12 +103,14 @@ public class SubscriptionModel  implements Serializable {
 
   /**
   * Description: "A tag to add to any resource that matches the criteria, after the subscription is processed."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"tag\"", length = 16777215)
-  private String tag;
+  @Column(name="\"tag_id\"")
+  private String tag_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="tag_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> tag;
 
   /**
   * Description: "A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety."
@@ -203,6 +204,9 @@ public class SubscriptionModel  implements Serializable {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
     this.status = o.getStatus();
+    if (null != o.getContact()) {
+    	this.contact = JsonUtils.toJson(o.getContact());
+    }
     this.end = o.getEnd();
     this.reason = o.getReason();
     this.criteria = o.getCriteria();
@@ -211,9 +215,22 @@ public class SubscriptionModel  implements Serializable {
     	this.channel_id = "channel" + this.id;
     	this.channel = SubscriptionChannelHelper.toModel(o.getChannel(), this.channel_id);
     }
+    if (null != o.getTag() && !o.getTag().isEmpty()) {
+    	this.tag_id = "tag" + this.id;
+    	this.tag = CodingHelper.toModelFromArray(o.getTag(), this.tag_id);
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -271,10 +288,10 @@ public class SubscriptionModel  implements Serializable {
   public void setChannel( java.util.List<SubscriptionChannelModel> value) {
     this.channel = value;
   }
-  public String getTag() {
+  public java.util.List<CodingModel> getTag() {
     return this.tag;
   }
-  public void setTag( String value) {
+  public void setTag( java.util.List<CodingModel> value) {
     this.tag = value;
   }
   public java.util.List<NarrativeModel> getText() {
@@ -337,7 +354,6 @@ public class SubscriptionModel  implements Serializable {
      builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("criteria" + "->" + this.criteria + "\n"); 
      builder.append("error" + "->" + this.error + "\n"); 
-     builder.append("tag" + "->" + this.tag + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

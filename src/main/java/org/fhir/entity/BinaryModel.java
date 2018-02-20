@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="fhirbinary")
 public class BinaryModel  implements Serializable {
-	private static final long serialVersionUID = 151873631136447571L;
+	private static final long serialVersionUID = 151910893711547890L;
   /**
   * Description: "This is a Binary resource"
   */

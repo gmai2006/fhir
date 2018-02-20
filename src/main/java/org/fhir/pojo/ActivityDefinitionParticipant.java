@@ -56,7 +56,9 @@ public class ActivityDefinitionParticipant  extends BackboneElement  {
     if (null != o.getType()) {
       this.type = o.getType();
     }
-    this.role = CodeableConceptHelper.fromJson(o.getRole());
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+      this.role = new CodeableConcept(o.getRole().get(0));
+    }
   }
 
   public void setType( String value) {

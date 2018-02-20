@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="operationdefinitionbinding")
 public class OperationDefinitionBindingModel  implements Serializable {
-	private static final long serialVersionUID = 151873631150810888L;
+	private static final long serialVersionUID = 151910893728021335L;
   /**
   * Description: "Indicates the degree of conformance expectations associated with this binding - that is, the degree to which the provided value set must be adhered to in the instances."
   */
@@ -108,12 +107,20 @@ public class OperationDefinitionBindingModel  implements Serializable {
 
   public OperationDefinitionBindingModel(OperationDefinitionBinding o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.strength = o.getStrength();
     this.valueSetUri = o.getValueSetUri();
     if (null != o.getValueSetReference() ) {
     	this.valuesetreference_id = "valuesetreference" + this.parent_id;
     	this.valueSetReference = ReferenceHelper.toModel(o.getValueSetReference(), this.valuesetreference_id);
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 

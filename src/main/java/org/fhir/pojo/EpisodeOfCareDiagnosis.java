@@ -62,7 +62,9 @@ public class EpisodeOfCareDiagnosis  extends BackboneElement  {
     if (null != o.getCondition() && !o.getCondition().isEmpty()) {
       this.condition = new Reference(o.getCondition().get(0));
     }
-    this.role = CodeableConceptHelper.fromJson(o.getRole());
+    if (null != o.getRole() && !o.getRole().isEmpty()) {
+      this.role = new CodeableConcept(o.getRole().get(0));
+    }
     if (null != o.getRank()) {
       this.rank = o.getRank();
     }

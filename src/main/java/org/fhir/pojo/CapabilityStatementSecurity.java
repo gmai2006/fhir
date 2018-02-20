@@ -70,6 +70,9 @@ public class CapabilityStatementSecurity  extends BackboneElement  {
     if (null != o.getCors()) {
       this.cors = o.getCors();
     }
+    if (null != o.getService() && !o.getService().isEmpty()) {
+    	this.service = CodeableConceptHelper.fromArray2Array(o.getService());
+    }
     if (null != o.getDescription()) {
       this.description = o.getDescription();
     }

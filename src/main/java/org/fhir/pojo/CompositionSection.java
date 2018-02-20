@@ -91,18 +91,24 @@ public class CompositionSection  extends BackboneElement  {
     if (null != o.getTitle()) {
       this.title = o.getTitle();
     }
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     if (null != o.getText() && !o.getText().isEmpty()) {
       this.text = new Narrative(o.getText().get(0));
     }
     if (null != o.getMode()) {
       this.mode = o.getMode();
     }
-    this.orderedBy = CodeableConceptHelper.fromJson(o.getOrderedBy());
+    if (null != o.getOrderedBy() && !o.getOrderedBy().isEmpty()) {
+      this.orderedBy = new CodeableConcept(o.getOrderedBy().get(0));
+    }
     if (null != o.getEntry() && !o.getEntry().isEmpty()) {
     	this.entry = ReferenceHelper.fromArray2Array(o.getEntry());
     }
-    this.emptyReason = CodeableConceptHelper.fromJson(o.getEmptyReason());
+    if (null != o.getEmptyReason() && !o.getEmptyReason().isEmpty()) {
+      this.emptyReason = new CodeableConcept(o.getEmptyReason().get(0));
+    }
     if (null != o.getSection() && !o.getSection().isEmpty()) {
     	this.section = CompositionSectionHelper.fromArray2Array(o.getSection());
     }

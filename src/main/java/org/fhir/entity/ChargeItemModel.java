@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="chargeitem")
 public class ChargeItemModel  implements Serializable {
-	private static final long serialVersionUID = 151873631188415550L;
+	private static final long serialVersionUID = 1519108937653454L;
   /**
   * Description: "This is a ChargeItem resource"
   */
@@ -83,13 +82,14 @@ public class ChargeItemModel  implements Serializable {
 
   /**
   * Description: "A code that identifies the charge, like a billing code."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The individual or set of individuals the action is being or was performed on."
@@ -185,12 +185,14 @@ public class ChargeItemModel  implements Serializable {
 
   /**
   * Description: "The anatomical location where the related service has been applied."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"bodysite\"", length = 16777215)
-  private String bodysite;
+  @Column(name="\"bodysite_id\"")
+  private String bodysite_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="bodysite_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> bodysite;
 
   /**
   * Description: "Factor overriding the factor determined by the rules associated with the code."
@@ -239,12 +241,14 @@ public class ChargeItemModel  implements Serializable {
 
   /**
   * Description: "Describes why the event occurred in coded or textual form."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"reason\"", length = 16777215)
-  private String reason;
+  @Column(name="\"reason_id\"")
+  private String reason_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="reason_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> reason;
 
   /**
   * Description: "Indicated the rendered service that caused this charge."
@@ -379,14 +383,19 @@ public class ChargeItemModel  implements Serializable {
   public ChargeItemModel(ChargeItem o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.identifier = JsonUtils.toJson(o.getIdentifier());
-    this.definition = org.fhir.utils.JsonUtils.write2String(o.getDefinition());
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
+    this.definition = org.fhir.utils.JsonUtils.toJson(o.getDefinition());
     this.status = o.getStatus();
     if (null != o.getPartOf() && !o.getPartOf().isEmpty()) {
     	this.partof_id = "partof" + this.id;
     	this.partOf = ReferenceHelper.toModelFromArray(o.getPartOf(), this.partof_id);
     }
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -396,8 +405,12 @@ public class ChargeItemModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.occurrenceDateTime = o.getOccurrenceDateTime();
-    this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
-    this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
+    if (null != o.getOccurrencePeriod()) {
+    	this.occurrencePeriod = JsonUtils.toJson(o.getOccurrencePeriod());
+    }
+    if (null != o.getOccurrenceTiming()) {
+    	this.occurrenceTiming = JsonUtils.toJson(o.getOccurrenceTiming());
+    }
     if (null != o.getParticipant() && !o.getParticipant().isEmpty()) {
     	this.participant_id = "participant" + this.id;
     	this.participant = ChargeItemParticipantHelper.toModelFromArray(o.getParticipant(), this.participant_id);
@@ -414,6 +427,10 @@ public class ChargeItemModel  implements Serializable {
     	this.quantity_id = "quantity" + this.id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
     }
+    if (null != o.getBodysite() && !o.getBodysite().isEmpty()) {
+    	this.bodysite_id = "bodysite" + this.id;
+    	this.bodysite = CodeableConceptHelper.toModelFromArray(o.getBodysite(), this.bodysite_id);
+    }
     this.factorOverride = o.getFactorOverride();
     if (null != o.getPriceOverride() ) {
     	this.priceoverride_id = "priceoverride" + this.id;
@@ -425,6 +442,10 @@ public class ChargeItemModel  implements Serializable {
     	this.enterer = ReferenceHelper.toModel(o.getEnterer(), this.enterer_id);
     }
     this.enteredDate = o.getEnteredDate();
+    if (null != o.getReason() && !o.getReason().isEmpty()) {
+    	this.reason_id = "reason" + this.id;
+    	this.reason = CodeableConceptHelper.toModelFromArray(o.getReason(), this.reason_id);
+    }
     if (null != o.getService() && !o.getService().isEmpty()) {
     	this.service_id = "service" + this.id;
     	this.service = ReferenceHelper.toModelFromArray(o.getService(), this.service_id);
@@ -433,6 +454,9 @@ public class ChargeItemModel  implements Serializable {
     	this.account_id = "account" + this.id;
     	this.account = ReferenceHelper.toModelFromArray(o.getAccount(), this.account_id);
     }
+    if (null != o.getNote()) {
+    	this.note = JsonUtils.toJson(o.getNote());
+    }
     if (null != o.getSupportingInformation() && !o.getSupportingInformation().isEmpty()) {
     	this.supportinginformation_id = "supportinginformation" + this.id;
     	this.supportingInformation = ReferenceHelper.toModelFromArray(o.getSupportingInformation(), this.supportinginformation_id);
@@ -440,6 +464,15 @@ public class ChargeItemModel  implements Serializable {
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -479,10 +512,10 @@ public class ChargeItemModel  implements Serializable {
   public void setPartOf( java.util.List<ReferenceModel> value) {
     this.partOf = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -539,10 +572,10 @@ public class ChargeItemModel  implements Serializable {
   public void setQuantity( java.util.List<QuantityModel> value) {
     this.quantity = value;
   }
-  public String getBodysite() {
+  public java.util.List<CodeableConceptModel> getBodysite() {
     return this.bodysite;
   }
-  public void setBodysite( String value) {
+  public void setBodysite( java.util.List<CodeableConceptModel> value) {
     this.bodysite = value;
   }
   public Float getFactorOverride() {
@@ -575,10 +608,10 @@ public class ChargeItemModel  implements Serializable {
   public void setEnteredDate( String value) {
     this.enteredDate = value;
   }
-  public String getReason() {
+  public java.util.List<CodeableConceptModel> getReason() {
     return this.reason;
   }
-  public void setReason( String value) {
+  public void setReason( java.util.List<CodeableConceptModel> value) {
     this.reason = value;
   }
   public java.util.List<ReferenceModel> getService() {
@@ -662,15 +695,12 @@ public class ChargeItemModel  implements Serializable {
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("definition" + "->" + this.definition + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("occurrenceDateTime" + "->" + this.occurrenceDateTime + "\n"); 
      builder.append("occurrencePeriod" + "->" + this.occurrencePeriod + "\n"); 
      builder.append("occurrenceTiming" + "->" + this.occurrenceTiming + "\n"); 
-     builder.append("bodysite" + "->" + this.bodysite + "\n"); 
      builder.append("factorOverride" + "->" + this.factorOverride + "\n"); 
      builder.append("overrideReason" + "->" + this.overrideReason + "\n"); 
      builder.append("enteredDate" + "->" + this.enteredDate + "\n"); 
-     builder.append("reason" + "->" + this.reason + "\n"); 
      builder.append("note" + "->" + this.note + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

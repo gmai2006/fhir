@@ -114,9 +114,45 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
   }
 
   @Override
+  public List<ValueSet> findByContact(QueryBuilder queryBuilder) {
+  	final List<ValueSet> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ValueSet> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<ValueSet> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ValueSet> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<ValueSet> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ValueSet> findByCompose(QueryBuilder queryBuilder) {
+  	final List<ValueSet> result = dao.findByCompose(queryBuilder);
+    logger.info("findBycompose - exited - return value={} result ");
+    return result;
+  }
+  @Override
   public List<ValueSet> findByExpansion(QueryBuilder queryBuilder) {
   	final List<ValueSet> result = dao.findByExpansion(queryBuilder);
     logger.info("findByexpansion - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ValueSet> findByText(QueryBuilder queryBuilder) {
+  	final List<ValueSet> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ValueSet> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ValueSet> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
     return result;
   }
 }

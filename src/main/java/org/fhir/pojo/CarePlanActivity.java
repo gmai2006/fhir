@@ -62,6 +62,9 @@ public class CarePlanActivity  extends BackboneElement  {
 
   public CarePlanActivity(CarePlanActivityModel o) {
     this.id = o.getId();
+    if (null != o.getOutcomeCodeableConcept() && !o.getOutcomeCodeableConcept().isEmpty()) {
+    	this.outcomeCodeableConcept = CodeableConceptHelper.fromArray2Array(o.getOutcomeCodeableConcept());
+    }
     if (null != o.getOutcomeReference() && !o.getOutcomeReference().isEmpty()) {
     	this.outcomeReference = ReferenceHelper.fromArray2Array(o.getOutcomeReference());
     }

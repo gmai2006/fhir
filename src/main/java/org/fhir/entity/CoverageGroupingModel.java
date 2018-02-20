@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="coveragegrouping")
 public class CoverageGroupingModel  implements Serializable {
-	private static final long serialVersionUID = 151873631195193799L;
+	private static final long serialVersionUID = 151910893771912251L;
   /**
   * Description: "Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify an employer group. May also be referred to as a Policy or Group ID."
   */
@@ -167,7 +166,9 @@ public class CoverageGroupingModel  implements Serializable {
 
   public CoverageGroupingModel(CoverageGrouping o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.group = o.getGroup();
     this.groupDisplay = o.getGroupDisplay();
     this.subGroup = o.getSubGroup();
@@ -180,6 +181,12 @@ public class CoverageGroupingModel  implements Serializable {
     this.classDisplay = o.getClassDisplay();
     this.subClass = o.getSubClass();
     this.subClassDisplay = o.getSubClassDisplay();
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getGroup() {

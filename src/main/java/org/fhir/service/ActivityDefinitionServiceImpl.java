@@ -113,4 +113,118 @@ private final Logger logger = Logger.getLogger(this.getClass().getName());
     return result;
   }
 
+  @Override
+  public List<ActivityDefinition> findByUseContext(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByUseContext(queryBuilder);
+    logger.info("findByuseContext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByJurisdiction(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByJurisdiction(queryBuilder);
+    logger.info("findByjurisdiction - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByTopic(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByTopic(queryBuilder);
+    logger.info("findBytopic - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByContributor(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByContributor(queryBuilder);
+    logger.info("findBycontributor - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByContact(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByContact(queryBuilder);
+    logger.info("findBycontact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByRelatedArtifact(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByRelatedArtifact(queryBuilder);
+    logger.info("findByrelatedArtifact - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByLibrary(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByLibrary(queryBuilder);
+    logger.info("findBylibrary - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByCode(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByCode(queryBuilder);
+    logger.info("findBycode - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByLocation(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByLocation(queryBuilder);
+    logger.info("findBylocation - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByParticipant(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByParticipant(queryBuilder);
+    logger.info("findByparticipant - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByProductReference(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByProductReference(queryBuilder);
+    logger.info("findByproductReference - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByProductCodeableConcept(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByProductCodeableConcept(queryBuilder);
+    logger.info("findByproductCodeableConcept - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByQuantity(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByQuantity(queryBuilder);
+    logger.info("findByquantity - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByDosage(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByDosage(queryBuilder);
+    logger.info("findBydosage - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByBodySite(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByBodySite(queryBuilder);
+    logger.info("findBybodySite - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByTransform(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByTransform(queryBuilder);
+    logger.info("findBytransform - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByDynamicValue(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByDynamicValue(queryBuilder);
+    logger.info("findBydynamicValue - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByText(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByText(queryBuilder);
+    logger.info("findBytext - exited - return value={} result ");
+    return result;
+  }
+  @Override
+  public List<ActivityDefinition> findByMeta(QueryBuilder queryBuilder) {
+  	final List<ActivityDefinition> result = dao.findByMeta(queryBuilder);
+    logger.info("findBymeta - exited - return value={} result ");
+    return result;
+  }
 }

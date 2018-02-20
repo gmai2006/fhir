@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="auditevent")
 public class AuditEventModel  implements Serializable {
-	private static final long serialVersionUID = 151873631139416268L;
+	private static final long serialVersionUID = 151910893714776180L;
   /**
   * Description: "This is a AuditEvent resource"
   */
@@ -49,22 +48,25 @@ public class AuditEventModel  implements Serializable {
 
   /**
   * Description: "Identifier for a family of the event.  For example, a menu item, program, rule, policy, function code, application name or URL. It identifies the performed function."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"type\"", length = 16777215)
-  private String type;
+  @Column(name="\"type_id\"")
+  private String type_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="type_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> type;
 
   /**
   * Description: "Identifier for the category of event."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"subtype\"", length = 16777215)
-  private String subtype;
+  @Column(name="\"subtype_id\"")
+  private String subtype_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="subtype_id", insertable=false, updatable=false)
+  private java.util.List<CodingModel> subtype;
 
   /**
   * Description: "Indicator for type of action performed during the event that generated the audit."
@@ -96,12 +98,14 @@ public class AuditEventModel  implements Serializable {
 
   /**
   * Description: "The purposeOfUse (reason) that was used during the event being recorded."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"purposeOfEvent\"", length = 16777215)
-  private String purposeOfEvent;
+  @Column(name="\"purposeofevent_id\"")
+  private String purposeofevent_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="purposeofevent_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> purposeOfEvent;
 
   /**
   * Description: "An actor taking an active role in the event or activity that is logged."
@@ -227,11 +231,22 @@ public class AuditEventModel  implements Serializable {
   public AuditEventModel(AuditEvent o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
-    this.type = JsonUtils.toJson(o.getType());
+    if (null != o.getType() ) {
+    	this.type_id = "type" + this.id;
+    	this.type = CodingHelper.toModel(o.getType(), this.type_id);
+    }
+    if (null != o.getSubtype() && !o.getSubtype().isEmpty()) {
+    	this.subtype_id = "subtype" + this.id;
+    	this.subtype = CodingHelper.toModelFromArray(o.getSubtype(), this.subtype_id);
+    }
     this.action = o.getAction();
     this.recorded = o.getRecorded();
     this.outcome = o.getOutcome();
     this.outcomeDesc = o.getOutcomeDesc();
+    if (null != o.getPurposeOfEvent() && !o.getPurposeOfEvent().isEmpty()) {
+    	this.purposeofevent_id = "purposeofevent" + this.id;
+    	this.purposeOfEvent = CodeableConceptHelper.toModelFromArray(o.getPurposeOfEvent(), this.purposeofevent_id);
+    }
     if (null != o.getAgent() && !o.getAgent().isEmpty()) {
     	this.agent_id = "agent" + this.id;
     	this.agent = AuditEventAgentHelper.toModelFromArray(o.getAgent(), this.agent_id);
@@ -248,6 +263,15 @@ public class AuditEventModel  implements Serializable {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
     }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
     	this.meta = MetaHelper.toModel(o.getMeta(), this.meta_id);
@@ -262,16 +286,16 @@ public class AuditEventModel  implements Serializable {
   public void setResourceType( String value) {
     this.resourceType = value;
   }
-  public String getType() {
+  public java.util.List<CodingModel> getType() {
     return this.type;
   }
-  public void setType( String value) {
+  public void setType( java.util.List<CodingModel> value) {
     this.type = value;
   }
-  public String getSubtype() {
+  public java.util.List<CodingModel> getSubtype() {
     return this.subtype;
   }
-  public void setSubtype( String value) {
+  public void setSubtype( java.util.List<CodingModel> value) {
     this.subtype = value;
   }
   public String getAction() {
@@ -298,10 +322,10 @@ public class AuditEventModel  implements Serializable {
   public void setOutcomeDesc( String value) {
     this.outcomeDesc = value;
   }
-  public String getPurposeOfEvent() {
+  public java.util.List<CodeableConceptModel> getPurposeOfEvent() {
     return this.purposeOfEvent;
   }
-  public void setPurposeOfEvent( String value) {
+  public void setPurposeOfEvent( java.util.List<CodeableConceptModel> value) {
     this.purposeOfEvent = value;
   }
   public java.util.List<AuditEventAgentModel> getAgent() {
@@ -376,13 +400,10 @@ public class AuditEventModel  implements Serializable {
     StringBuilder builder = new StringBuilder();
     builder.append("[AuditEventModel]:" + "\n");
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
-     builder.append("type" + "->" + this.type + "\n"); 
-     builder.append("subtype" + "->" + this.subtype + "\n"); 
      builder.append("action" + "->" + this.action + "\n"); 
      builder.append("recorded" + "->" + this.recorded + "\n"); 
      builder.append("outcome" + "->" + this.outcome + "\n"); 
      builder.append("outcomeDesc" + "->" + this.outcomeDesc + "\n"); 
-     builder.append("purposeOfEvent" + "->" + this.purposeOfEvent + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 
      builder.append("modifierExtension" + "->" + this.modifierExtension + "\n"); 

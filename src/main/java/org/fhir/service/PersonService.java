@@ -38,7 +38,11 @@ public interface PersonService {
   public Person update(Person bean);
   public void delete(Person bean);
   public List<Person> findByField(QueryBuilder queryBuilder);
+  public List<Person> findByAddress(QueryBuilder queryBuilder);
+  public List<Person> findByManagingOrganization(QueryBuilder queryBuilder);
   public List<Person> findByLink(QueryBuilder queryBuilder);
+  public List<Person> findByText(QueryBuilder queryBuilder);
+  public List<Person> findByMeta(QueryBuilder queryBuilder);
 
 
 }

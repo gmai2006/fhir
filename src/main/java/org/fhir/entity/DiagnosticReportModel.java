@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="diagnosticreport")
 public class DiagnosticReportModel  implements Serializable {
-	private static final long serialVersionUID = 151873631127065102L;
+	private static final long serialVersionUID = 151910893703764975L;
   /**
   * Description: "This is a DiagnosticReport resource"
   */
@@ -76,22 +75,25 @@ public class DiagnosticReportModel  implements Serializable {
 
   /**
   * Description: "A code that classifies the clinical discipline, department or diagnostic service that created the report (e.g. cardiology, biochemistry, hematology, MRI). This is used for searching, sorting and display purposes."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"category\"", length = 16777215)
-  private String category;
+  @Column(name="\"category_id\"")
+  private String category_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="category_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> category;
 
   /**
   * Description: "A code or name that describes this diagnostic report."
-  * Actual type: String;
-  * Store this type as a string in db
   */
-  @javax.validation.constraints.NotNull
   @javax.persistence.Basic
-  @Column(name="\"code\"", length = 16777215)
-  private String code;
+  @Column(name="\"code_id\"")
+  private String code_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="code_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> code;
 
   /**
   * Description: "The subject of the report. Usually, but not always, this is a patient. However diagnostic services also perform analyses on specimens collected from a variety of other sources."
@@ -203,12 +205,14 @@ public class DiagnosticReportModel  implements Serializable {
 
   /**
   * Description: "Codes for the conclusion."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"codedDiagnosis\"", length = 16777215)
-  private String codedDiagnosis;
+  @Column(name="\"codeddiagnosis_id\"")
+  private String codeddiagnosis_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="codeddiagnosis_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> codedDiagnosis;
 
   /**
   * Description: "Rich text representation of the entire result as issued by the diagnostic service. Multiple formats are allowed but they SHALL be semantically equivalent."
@@ -310,13 +314,22 @@ public class DiagnosticReportModel  implements Serializable {
   public DiagnosticReportModel(DiagnosticReport o) {
   	this.id = o.getId();
     this.resourceType = o.getResourceType();
+    if (null != o.getIdentifier()) {
+    	this.identifier = JsonUtils.toJson(o.getIdentifier());
+    }
     if (null != o.getBasedOn() && !o.getBasedOn().isEmpty()) {
     	this.basedon_id = "basedon" + this.id;
     	this.basedOn = ReferenceHelper.toModelFromArray(o.getBasedOn(), this.basedon_id);
     }
     this.status = o.getStatus();
-    this.category = JsonUtils.toJson(o.getCategory());
-    this.code = JsonUtils.toJson(o.getCode());
+    if (null != o.getCategory() ) {
+    	this.category_id = "category" + this.id;
+    	this.category = CodeableConceptHelper.toModel(o.getCategory(), this.category_id);
+    }
+    if (null != o.getCode() ) {
+    	this.code_id = "code" + this.id;
+    	this.code = CodeableConceptHelper.toModel(o.getCode(), this.code_id);
+    }
     if (null != o.getSubject() ) {
     	this.subject_id = "subject" + this.id;
     	this.subject = ReferenceHelper.toModel(o.getSubject(), this.subject_id);
@@ -326,7 +339,9 @@ public class DiagnosticReportModel  implements Serializable {
     	this.context = ReferenceHelper.toModel(o.getContext(), this.context_id);
     }
     this.effectiveDateTime = o.getEffectiveDateTime();
-    this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
+    if (null != o.getEffectivePeriod()) {
+    	this.effectivePeriod = JsonUtils.toJson(o.getEffectivePeriod());
+    }
     this.issued = o.getIssued();
     if (null != o.getPerformer() && !o.getPerformer().isEmpty()) {
     	this.performer_id = "performer" + this.id;
@@ -349,9 +364,25 @@ public class DiagnosticReportModel  implements Serializable {
     	this.image = DiagnosticReportImageHelper.toModelFromArray(o.getImage(), this.image_id);
     }
     this.conclusion = o.getConclusion();
+    if (null != o.getCodedDiagnosis() && !o.getCodedDiagnosis().isEmpty()) {
+    	this.codeddiagnosis_id = "codeddiagnosis" + this.id;
+    	this.codedDiagnosis = CodeableConceptHelper.toModelFromArray(o.getCodedDiagnosis(), this.codeddiagnosis_id);
+    }
+    if (null != o.getPresentedForm()) {
+    	this.presentedForm = JsonUtils.toJson(o.getPresentedForm());
+    }
     if (null != o.getText() ) {
     	this.text_id = "text" + this.id;
     	this.text = NarrativeHelper.toModel(o.getText(), this.text_id);
+    }
+    if (null != o.getContained()) {
+    	this.contained = JsonUtils.toJson(o.getContained());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
     }
     if (null != o.getMeta() ) {
     	this.meta_id = "meta" + this.id;
@@ -385,16 +416,16 @@ public class DiagnosticReportModel  implements Serializable {
   public void setStatus( String value) {
     this.status = value;
   }
-  public String getCategory() {
+  public java.util.List<CodeableConceptModel> getCategory() {
     return this.category;
   }
-  public void setCategory( String value) {
+  public void setCategory( java.util.List<CodeableConceptModel> value) {
     this.category = value;
   }
-  public String getCode() {
+  public java.util.List<CodeableConceptModel> getCode() {
     return this.code;
   }
-  public void setCode( String value) {
+  public void setCode( java.util.List<CodeableConceptModel> value) {
     this.code = value;
   }
   public java.util.List<ReferenceModel> getSubject() {
@@ -463,10 +494,10 @@ public class DiagnosticReportModel  implements Serializable {
   public void setConclusion( String value) {
     this.conclusion = value;
   }
-  public String getCodedDiagnosis() {
+  public java.util.List<CodeableConceptModel> getCodedDiagnosis() {
     return this.codedDiagnosis;
   }
-  public void setCodedDiagnosis( String value) {
+  public void setCodedDiagnosis( java.util.List<CodeableConceptModel> value) {
     this.codedDiagnosis = value;
   }
   public String getPresentedForm() {
@@ -531,13 +562,10 @@ public class DiagnosticReportModel  implements Serializable {
      builder.append("resourceType" + "->" + this.resourceType + "\n"); 
      builder.append("identifier" + "->" + this.identifier + "\n"); 
      builder.append("status" + "->" + this.status + "\n"); 
-     builder.append("category" + "->" + this.category + "\n"); 
-     builder.append("code" + "->" + this.code + "\n"); 
      builder.append("effectiveDateTime" + "->" + this.effectiveDateTime + "\n"); 
      builder.append("effectivePeriod" + "->" + this.effectivePeriod + "\n"); 
      builder.append("issued" + "->" + this.issued + "\n"); 
      builder.append("conclusion" + "->" + this.conclusion + "\n"); 
-     builder.append("codedDiagnosis" + "->" + this.codedDiagnosis + "\n"); 
      builder.append("presentedForm" + "->" + this.presentedForm + "\n"); 
      builder.append("contained" + "->" + this.contained + "\n"); 
      builder.append("extension" + "->" + this.extension + "\n"); 

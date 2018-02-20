@@ -42,8 +42,15 @@ public interface RequestGroupDao {
 
   public List<RequestGroup> findByField(QueryBuilder queryBuilder);
 
-  public List<RequestGroup> findByAuthor(QueryBuilder queryBuilder);
-  public List<RequestGroup> findByContext(QueryBuilder queryBuilder);
   public List<RequestGroup> findByDefinition(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByBasedOn(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByReplaces(QueryBuilder queryBuilder);
   public List<RequestGroup> findBySubject(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByContext(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByAuthor(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByReasonCodeableConcept(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByReasonReference(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByAction(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByText(QueryBuilder queryBuilder);
+  public List<RequestGroup> findByMeta(QueryBuilder queryBuilder);
 }

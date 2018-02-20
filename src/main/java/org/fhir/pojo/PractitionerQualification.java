@@ -58,7 +58,9 @@ public class PractitionerQualification  extends BackboneElement  {
 
   public PractitionerQualification(PractitionerQualificationModel o) {
     this.id = o.getId();
-    this.code = CodeableConceptHelper.fromJson(o.getCode());
+    if (null != o.getCode() && !o.getCode().isEmpty()) {
+      this.code = new CodeableConcept(o.getCode().get(0));
+    }
     this.period = PeriodHelper.fromJson(o.getPeriod());
     if (null != o.getIssuer() && !o.getIssuer().isEmpty()) {
       this.issuer = new Reference(o.getIssuer().get(0));

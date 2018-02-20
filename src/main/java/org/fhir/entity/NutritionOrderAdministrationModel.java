@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="nutritionorderadministration")
 public class NutritionOrderAdministrationModel  implements Serializable {
-	private static final long serialVersionUID = 15187363115075061L;
+	private static final long serialVersionUID = 151910893727844260L;
   /**
   * Description: "The time period and frequency at which the enteral formula should be delivered to the patient."
   * Actual type: String;
@@ -123,8 +122,12 @@ public class NutritionOrderAdministrationModel  implements Serializable {
 
   public NutritionOrderAdministrationModel(NutritionOrderAdministration o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
-    this.schedule = JsonUtils.toJson(o.getSchedule());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
+    if (null != o.getSchedule()) {
+    	this.schedule = JsonUtils.toJson(o.getSchedule());
+    }
     if (null != o.getQuantity() ) {
     	this.quantity_id = "quantity" + this.parent_id;
     	this.quantity = QuantityHelper.toModel(o.getQuantity(), this.quantity_id);
@@ -133,7 +136,15 @@ public class NutritionOrderAdministrationModel  implements Serializable {
     	this.ratesimplequantity_id = "ratesimplequantity" + this.parent_id;
     	this.rateSimpleQuantity = QuantityHelper.toModel(o.getRateSimpleQuantity(), this.ratesimplequantity_id);
     }
-    this.rateRatio = JsonUtils.toJson(o.getRateRatio());
+    if (null != o.getRateRatio()) {
+    	this.rateRatio = JsonUtils.toJson(o.getRateRatio());
+    }
+    if (null != o.getModifierExtension()) {
+    	this.modifierExtension = JsonUtils.toJson(o.getModifierExtension());
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
+    }
   }
 
   public String getSchedule() {

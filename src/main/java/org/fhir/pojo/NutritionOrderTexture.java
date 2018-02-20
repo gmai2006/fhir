@@ -47,8 +47,12 @@ public class NutritionOrderTexture  extends BackboneElement  {
 
   public NutritionOrderTexture(NutritionOrderTextureModel o) {
     this.id = o.getId();
-    this.modifier = CodeableConceptHelper.fromJson(o.getModifier());
-    this.foodType = CodeableConceptHelper.fromJson(o.getFoodType());
+    if (null != o.getModifier() && !o.getModifier().isEmpty()) {
+      this.modifier = new CodeableConcept(o.getModifier().get(0));
+    }
+    if (null != o.getFoodType() && !o.getFoodType().isEmpty()) {
+      this.foodType = new CodeableConcept(o.getFoodType().get(0));
+    }
   }
 
   public void setModifier( CodeableConcept value) {

@@ -42,7 +42,12 @@ public interface DocumentManifestDao {
 
   public List<DocumentManifest> findByField(QueryBuilder queryBuilder);
 
+  public List<DocumentManifest> findByType(QueryBuilder queryBuilder);
+  public List<DocumentManifest> findBySubject(QueryBuilder queryBuilder);
   public List<DocumentManifest> findByAuthor(QueryBuilder queryBuilder);
   public List<DocumentManifest> findByRecipient(QueryBuilder queryBuilder);
-  public List<DocumentManifest> findBySubject(QueryBuilder queryBuilder);
+  public List<DocumentManifest> findByContent(QueryBuilder queryBuilder);
+  public List<DocumentManifest> findByRelated(QueryBuilder queryBuilder);
+  public List<DocumentManifest> findByText(QueryBuilder queryBuilder);
+  public List<DocumentManifest> findByMeta(QueryBuilder queryBuilder);
 }

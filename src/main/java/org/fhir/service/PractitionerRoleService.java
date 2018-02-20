@@ -38,10 +38,17 @@ public interface PractitionerRoleService {
   public PractitionerRole update(PractitionerRole bean);
   public void delete(PractitionerRole bean);
   public List<PractitionerRole> findByField(QueryBuilder queryBuilder);
-  public List<PractitionerRole> findByEndpoint(QueryBuilder queryBuilder);
-  public List<PractitionerRole> findByLocation(QueryBuilder queryBuilder);
-  public List<PractitionerRole> findByOrganization(QueryBuilder queryBuilder);
   public List<PractitionerRole> findByPractitioner(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByOrganization(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByCode(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findBySpecialty(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByLocation(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByHealthcareService(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByAvailableTime(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByNotAvailable(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByEndpoint(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByText(QueryBuilder queryBuilder);
+  public List<PractitionerRole> findByMeta(QueryBuilder queryBuilder);
 
 
 }

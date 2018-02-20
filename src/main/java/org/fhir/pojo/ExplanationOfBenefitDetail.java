@@ -133,10 +133,24 @@ public class ExplanationOfBenefitDetail  extends BackboneElement  {
     if (null != o.getSequence()) {
       this.sequence = o.getSequence();
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
-    this.revenue = CodeableConceptHelper.fromJson(o.getRevenue());
-    this.category = CodeableConceptHelper.fromJson(o.getCategory());
-    this.service = CodeableConceptHelper.fromJson(o.getService());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getRevenue() && !o.getRevenue().isEmpty()) {
+      this.revenue = new CodeableConcept(o.getRevenue().get(0));
+    }
+    if (null != o.getCategory() && !o.getCategory().isEmpty()) {
+      this.category = new CodeableConcept(o.getCategory().get(0));
+    }
+    if (null != o.getService() && !o.getService().isEmpty()) {
+      this.service = new CodeableConcept(o.getService().get(0));
+    }
+    if (null != o.getModifier() && !o.getModifier().isEmpty()) {
+    	this.modifier = CodeableConceptHelper.fromArray2Array(o.getModifier());
+    }
+    if (null != o.getProgramCode() && !o.getProgramCode().isEmpty()) {
+    	this.programCode = CodeableConceptHelper.fromArray2Array(o.getProgramCode());
+    }
     if (null != o.getQuantity() && !o.getQuantity().isEmpty()) {
       this.quantity = new Quantity(o.getQuantity().get(0));
     }

@@ -78,7 +78,12 @@ public class ObservationReferenceRange  extends BackboneElement  {
     if (null != o.getHigh() && !o.getHigh().isEmpty()) {
       this.high = new Quantity(o.getHigh().get(0));
     }
-    this.type = CodeableConceptHelper.fromJson(o.getType());
+    if (null != o.getType() && !o.getType().isEmpty()) {
+      this.type = new CodeableConcept(o.getType().get(0));
+    }
+    if (null != o.getAppliesTo() && !o.getAppliesTo().isEmpty()) {
+    	this.appliesTo = CodeableConceptHelper.fromArray2Array(o.getAppliesTo());
+    }
     this.age = RangeHelper.fromJson(o.getAge());
     if (null != o.getText()) {
       this.text = o.getText();

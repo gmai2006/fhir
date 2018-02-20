@@ -23,7 +23,6 @@
  * If you need new features or function or changes please update the templates
  * then submit the template through our web interface.  
  */
-
 package org.fhir.entity;
 
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ import org.fhir.utils.JsonUtils;
 @Entity
 @Table(name="dosage")
 public class DosageModel  implements Serializable {
-	private static final long serialVersionUID = 15187363119703036L;
+	private static final long serialVersionUID = 151910893773848667L;
   /**
   * Description: "Indicates the order in which the dosage instructions should be applied or interpreted."
   */
@@ -56,12 +55,14 @@ public class DosageModel  implements Serializable {
 
   /**
   * Description: "Supplemental instruction - e.g. \"with meals\"."
-  * Actual type: List<String>;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"additionalInstruction\"", length = 16777215)
-  private String additionalInstruction;
+  @Column(name="\"additionalinstruction_id\"")
+  private String additionalinstruction_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="additionalinstruction_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> additionalInstruction;
 
   /**
   * Description: "Instructions in terms that are understood by the patient or consumer."
@@ -88,39 +89,47 @@ public class DosageModel  implements Serializable {
 
   /**
   * Description: "Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept)."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"asNeededCodeableConcept\"", length = 16777215)
-  private String asNeededCodeableConcept;
+  @Column(name="\"asneededcodeableconcept_id\"")
+  private String asneededcodeableconcept_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="asneededcodeableconcept_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> asNeededCodeableConcept;
 
   /**
   * Description: "Body site to administer to."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"site\"", length = 16777215)
-  private String site;
+  @Column(name="\"site_id\"")
+  private String site_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="site_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> site;
 
   /**
   * Description: "How drug should enter body."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"route\"", length = 16777215)
-  private String route;
+  @Column(name="\"route_id\"")
+  private String route_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="route_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> route;
 
   /**
   * Description: "Technique for administering medication."
-  * Actual type: String;
-  * Store this type as a string in db
   */
   @javax.persistence.Basic
-  @Column(name="\"method\"", length = 16777215)
-  private String method;
+  @Column(name="\"method_id\"")
+  private String method_id;
+
+  @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL)
+  @javax.persistence.JoinColumn(name = "\"parent_id\"", referencedColumnName="method_id", insertable=false, updatable=false)
+  private java.util.List<CodeableConceptModel> method;
 
   /**
   * Description: "Amount of medication per dose."
@@ -234,22 +243,46 @@ public class DosageModel  implements Serializable {
 
   public DosageModel(Dosage o, String parentId) {
   	this.parent_id = parentId;
-  	this.id = String.valueOf(System.currentTimeMillis() + org.fhir.utils.EntityUtils.generateRandom());
+  	if (null == this.id) {
+  		this.id = String.valueOf(System.nanoTime() + org.fhir.utils.EntityUtils.generateRandomString(10));
+  	}
     this.sequence = o.getSequence();
     this.text = o.getText();
+    if (null != o.getAdditionalInstruction() && !o.getAdditionalInstruction().isEmpty()) {
+    	this.additionalinstruction_id = "additionalinstruction" + this.parent_id;
+    	this.additionalInstruction = CodeableConceptHelper.toModelFromArray(o.getAdditionalInstruction(), this.additionalinstruction_id);
+    }
     this.patientInstruction = o.getPatientInstruction();
-    this.timing = JsonUtils.toJson(o.getTiming());
+    if (null != o.getTiming()) {
+    	this.timing = JsonUtils.toJson(o.getTiming());
+    }
     this.asNeededBoolean = o.getAsNeededBoolean();
-    this.asNeededCodeableConcept = JsonUtils.toJson(o.getAsNeededCodeableConcept());
-    this.site = JsonUtils.toJson(o.getSite());
-    this.route = JsonUtils.toJson(o.getRoute());
-    this.method = JsonUtils.toJson(o.getMethod());
-    this.doseRange = JsonUtils.toJson(o.getDoseRange());
+    if (null != o.getAsNeededCodeableConcept() ) {
+    	this.asneededcodeableconcept_id = "asneededcodeableconcept" + this.parent_id;
+    	this.asNeededCodeableConcept = CodeableConceptHelper.toModel(o.getAsNeededCodeableConcept(), this.asneededcodeableconcept_id);
+    }
+    if (null != o.getSite() ) {
+    	this.site_id = "site" + this.parent_id;
+    	this.site = CodeableConceptHelper.toModel(o.getSite(), this.site_id);
+    }
+    if (null != o.getRoute() ) {
+    	this.route_id = "route" + this.parent_id;
+    	this.route = CodeableConceptHelper.toModel(o.getRoute(), this.route_id);
+    }
+    if (null != o.getMethod() ) {
+    	this.method_id = "method" + this.parent_id;
+    	this.method = CodeableConceptHelper.toModel(o.getMethod(), this.method_id);
+    }
+    if (null != o.getDoseRange()) {
+    	this.doseRange = JsonUtils.toJson(o.getDoseRange());
+    }
     if (null != o.getDoseSimpleQuantity() ) {
     	this.dosesimplequantity_id = "dosesimplequantity" + this.parent_id;
     	this.doseSimpleQuantity = QuantityHelper.toModel(o.getDoseSimpleQuantity(), this.dosesimplequantity_id);
     }
-    this.maxDosePerPeriod = JsonUtils.toJson(o.getMaxDosePerPeriod());
+    if (null != o.getMaxDosePerPeriod()) {
+    	this.maxDosePerPeriod = JsonUtils.toJson(o.getMaxDosePerPeriod());
+    }
     if (null != o.getMaxDosePerAdministration() ) {
     	this.maxdoseperadministration_id = "maxdoseperadministration" + this.parent_id;
     	this.maxDosePerAdministration = QuantityHelper.toModel(o.getMaxDosePerAdministration(), this.maxdoseperadministration_id);
@@ -258,11 +291,18 @@ public class DosageModel  implements Serializable {
     	this.maxdoseperlifetime_id = "maxdoseperlifetime" + this.parent_id;
     	this.maxDosePerLifetime = QuantityHelper.toModel(o.getMaxDosePerLifetime(), this.maxdoseperlifetime_id);
     }
-    this.rateRatio = JsonUtils.toJson(o.getRateRatio());
-    this.rateRange = JsonUtils.toJson(o.getRateRange());
+    if (null != o.getRateRatio()) {
+    	this.rateRatio = JsonUtils.toJson(o.getRateRatio());
+    }
+    if (null != o.getRateRange()) {
+    	this.rateRange = JsonUtils.toJson(o.getRateRange());
+    }
     if (null != o.getRateSimpleQuantity() ) {
     	this.ratesimplequantity_id = "ratesimplequantity" + this.parent_id;
     	this.rateSimpleQuantity = QuantityHelper.toModel(o.getRateSimpleQuantity(), this.ratesimplequantity_id);
+    }
+    if (null != o.getExtension()) {
+    	this.extension = JsonUtils.toJson(o.getExtension());
     }
   }
 
@@ -278,10 +318,10 @@ public class DosageModel  implements Serializable {
   public void setText( String value) {
     this.text = value;
   }
-  public String getAdditionalInstruction() {
+  public java.util.List<CodeableConceptModel> getAdditionalInstruction() {
     return this.additionalInstruction;
   }
-  public void setAdditionalInstruction( String value) {
+  public void setAdditionalInstruction( java.util.List<CodeableConceptModel> value) {
     this.additionalInstruction = value;
   }
   public String getPatientInstruction() {
@@ -302,28 +342,28 @@ public class DosageModel  implements Serializable {
   public void setAsNeededBoolean( Boolean value) {
     this.asNeededBoolean = value;
   }
-  public String getAsNeededCodeableConcept() {
+  public java.util.List<CodeableConceptModel> getAsNeededCodeableConcept() {
     return this.asNeededCodeableConcept;
   }
-  public void setAsNeededCodeableConcept( String value) {
+  public void setAsNeededCodeableConcept( java.util.List<CodeableConceptModel> value) {
     this.asNeededCodeableConcept = value;
   }
-  public String getSite() {
+  public java.util.List<CodeableConceptModel> getSite() {
     return this.site;
   }
-  public void setSite( String value) {
+  public void setSite( java.util.List<CodeableConceptModel> value) {
     this.site = value;
   }
-  public String getRoute() {
+  public java.util.List<CodeableConceptModel> getRoute() {
     return this.route;
   }
-  public void setRoute( String value) {
+  public void setRoute( java.util.List<CodeableConceptModel> value) {
     this.route = value;
   }
-  public String getMethod() {
+  public java.util.List<CodeableConceptModel> getMethod() {
     return this.method;
   }
-  public void setMethod( String value) {
+  public void setMethod( java.util.List<CodeableConceptModel> value) {
     this.method = value;
   }
   public String getDoseRange() {
@@ -399,14 +439,9 @@ public class DosageModel  implements Serializable {
     builder.append("[DosageModel]:" + "\n");
      builder.append("sequence" + "->" + this.sequence + "\n"); 
      builder.append("text" + "->" + this.text + "\n"); 
-     builder.append("additionalInstruction" + "->" + this.additionalInstruction + "\n"); 
      builder.append("patientInstruction" + "->" + this.patientInstruction + "\n"); 
      builder.append("timing" + "->" + this.timing + "\n"); 
      builder.append("asNeededBoolean" + "->" + this.asNeededBoolean + "\n"); 
-     builder.append("asNeededCodeableConcept" + "->" + this.asNeededCodeableConcept + "\n"); 
-     builder.append("site" + "->" + this.site + "\n"); 
-     builder.append("route" + "->" + this.route + "\n"); 
-     builder.append("method" + "->" + this.method + "\n"); 
      builder.append("doseRange" + "->" + this.doseRange + "\n"); 
      builder.append("maxDosePerPeriod" + "->" + this.maxDosePerPeriod + "\n"); 
      builder.append("rateRatio" + "->" + this.rateRatio + "\n"); 

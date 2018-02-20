@@ -66,7 +66,9 @@ public class CodeSystemDesignation  extends BackboneElement  {
     if (null != o.getLanguage()) {
       this.language = o.getLanguage();
     }
-    this.use = CodingHelper.fromJson(o.getUse());
+    if (null != o.getUse() && !o.getUse().isEmpty()) {
+      this.use = new Coding(o.getUse().get(0));
+    }
     if (null != o.getValue()) {
       this.value = o.getValue();
     }
