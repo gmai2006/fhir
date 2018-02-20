@@ -1,15 +1,15 @@
-# FHIR - BETA version
+# [FHIR](www.FHIR.org) - BETA version
 Update:
 - Added REST layer validator
+- 
 
 An implementation of the Fast Healthcare Interoperability Resources (FHIR) version 3.0.1.
 
 This implentation is 100% auto generated
 
-Please see here for more information about the FHIR
-https://www.hl7.org/fhir/overview.html
+For more information about the FHIR please visit [https://www.hl7.org/fhir/overview.html](https://www.hl7.org/fhir/overview.html)
 
-This implementation includes a full relational database, Dao, service and RESTful layers
+This implementation includes a relational database, Dao, service and RESTful layers
 
 It has 2321 unit tests, 2321 integration tests. All passed.
 
@@ -23,13 +23,15 @@ if have questions please email: gmai2006@gmail.com
 -----------------------------------------------------------------------------------
 Language                         files          blank        comment           code
 -----------------------------------------------------------------------------------
-Java                              2617          78928         129015         321543
-JSON                               490              0              0          94743
-SQL                                  3              4           1605           6978
-XML                                  5              4              6            842
-Groovy                               1             31              8             69
-Visualforce Component                1              0              0              9
+Java                              2004          50790          97986         327274
+JSON                              1525              0              0         314856
+SQL                                  4            434           1725          19054
+XML                                  6              8              6            910
+Groovy                               1             24              5             57
+Markdown                             1              8              0             27
+Python                               1              2              0             21
+Visualforce Component                1              0              0             11
 -----------------------------------------------------------------------------------
-SUM:                              3117          78967         130634         424184
+SUM:                              3543          51266          99722         662210
 -----------------------------------------------------------------------------------
 </pre>
