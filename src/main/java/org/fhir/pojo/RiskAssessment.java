@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.RiskAssessmentModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RiskAssessment  extends DomainResource  {
   /**
   * Description: "This is a RiskAssessment resource"
@@ -123,12 +128,12 @@ public class RiskAssessment  extends DomainResource  {
   /**
   * Description: "Indicates the source data considered as part of the assessment (FamilyHistory, Observations, Procedures, Conditions, etc.)."
   */
-  protected java.util.List<Reference> basis = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basis;
 
   /**
   * Description: "Describes the expected outcome for the subject."
   */
-  protected java.util.List<RiskAssessmentPrediction> prediction = new java.util.ArrayList<>();
+  protected java.util.List<RiskAssessmentPrediction> prediction;
 
   /**
   * Description: "A description of the steps that might be taken to reduce the identified risk(s)."

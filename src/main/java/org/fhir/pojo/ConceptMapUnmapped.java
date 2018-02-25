@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ConceptMapUnmappedModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ConceptMapUnmapped  extends BackboneElement  {
   /**
   * Description: "Defines which action to take if there is no match in the group. One of 3 actions is possible: use the unmapped code (this is useful when doing a mapping between versions, and only a few codes have changed), use a fixed code (a default code), or alternatively, a reference to a different concept map can be provided (by canonical URL)."

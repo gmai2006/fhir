@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ConsentModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Consent  extends DomainResource  {
   /**
   * Description: "This is a Consent resource"
@@ -56,7 +61,7 @@ public class Consent  extends DomainResource  {
   /**
   * Description: "A classification of the type of consents found in the statement. This element supports indexing and retrieval of consent statements."
   */
-  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category;
 
   /**
   * Description: "The patient/healthcare consumer to whom this consent applies."
@@ -83,22 +88,22 @@ public class Consent  extends DomainResource  {
   /**
   * Description: "Either the Grantor, which is the entity responsible for granting the rights listed in a Consent Directive or the Grantee, which is the entity responsible for complying with the Consent Directive, including any obligations or limitations on authorizations and enforcement of prohibitions."
   */
-  protected java.util.List<Reference> consentingParty = new java.util.ArrayList<>();
+  protected java.util.List<Reference> consentingParty;
 
   /**
   * Description: "Who or what is controlled by this consent. Use group to identify a set of actors by some property they share (e.g. 'admitting officers')."
   */
-  protected java.util.List<ConsentActor> actor = new java.util.ArrayList<>();
+  protected java.util.List<ConsentActor> actor;
 
   /**
   * Description: "Actions controlled by this consent."
   */
-  protected java.util.List<CodeableConcept> action = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> action;
 
   /**
   * Description: "The organization that manages the consent, and the framework within which it is executed."
   */
-  protected java.util.List<Reference> organization = new java.util.ArrayList<>();
+  protected java.util.List<Reference> organization;
 
   /**
   * Description: "The source on which this consent statement is based. The source might be a scanned original paper form, or a reference to a consent that links back to such a source, a reference to a document repository (e.g. XDS) that stores the original consent document."
@@ -118,7 +123,7 @@ public class Consent  extends DomainResource  {
   /**
   * Description: "The references to the policies that are included in this consent scope. Policies may be organizational, but are often defined jurisdictionally, or in law."
   */
-  protected java.util.List<ConsentPolicy> policy = new java.util.ArrayList<>();
+  protected java.util.List<ConsentPolicy> policy;
 
   /**
   * Description: "A referece to the specific computable policy."
@@ -133,12 +138,12 @@ public class Consent  extends DomainResource  {
   /**
   * Description: "A set of security labels that define which resources are controlled by this consent. If more than one label is specified, all resources must have all the specified labels."
   */
-  protected java.util.List<Coding> securityLabel = new java.util.ArrayList<>();
+  protected java.util.List<Coding> securityLabel;
 
   /**
   * Description: "The context of the activities a user is taking - why the user is accessing the data - that are controlled by this consent."
   */
-  protected java.util.List<Coding> purpose = new java.util.ArrayList<>();
+  protected java.util.List<Coding> purpose;
 
   /**
   * Description: "Clinical or Operational Relevant period of time that bounds the data controlled by this consent."
@@ -148,12 +153,12 @@ public class Consent  extends DomainResource  {
   /**
   * Description: "The resources controlled by this consent, if specific resources are referenced."
   */
-  protected java.util.List<ConsentData> data = new java.util.ArrayList<>();
+  protected java.util.List<ConsentData> data;
 
   /**
   * Description: "An exception to the base policy of this consent. An exception can be an addition or removal of access permissions."
   */
-  protected java.util.List<ConsentExcept> except = new java.util.ArrayList<>();
+  protected java.util.List<ConsentExcept> except;
 
   public Consent() {
   }

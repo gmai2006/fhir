@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DeviceComponentProductionSpecificationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The characteristics, operational status and capabilities of a medical-related component of a medical device."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceComponentProductionSpecification  extends BackboneElement  {
   /**
   * Description: "The specification type, such as, serial number, part number, hardware revision, software revision, etc."

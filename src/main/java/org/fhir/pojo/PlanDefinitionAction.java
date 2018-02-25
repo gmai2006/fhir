@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PlanDefinitionActionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PlanDefinitionAction  extends BackboneElement  {
   /**
   * Description: "A user-visible label for the action."
@@ -75,52 +80,52 @@ public class PlanDefinitionAction  extends BackboneElement  {
   /**
   * Description: "A code that provides meaning for the action or action group. For example, a section may have a LOINC code for a the section of a documentation template."
   */
-  protected java.util.List<CodeableConcept> code = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> code;
 
   /**
   * Description: "A description of why this action is necessary or appropriate."
   */
-  protected java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reason;
 
   /**
   * Description: "Didactic or other informational resources associated with the action that can be provided to the CDS recipient. Information resources can include inline text commentary and links to web resources."
   */
-  protected java.util.List<RelatedArtifact> documentation = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> documentation;
 
   /**
   * Description: "Identifies goals that this action supports. The reference must be to a goal element defined within this plan definition."
   */
-  protected java.util.List<String> goalId = new java.util.ArrayList<>();
+  protected java.util.List<String> goalId;
 
   /**
   * Description: "Extensions for goalId"
   */
-  protected transient java.util.List<Element> _goalId = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _goalId;
 
   /**
   * Description: "A description of when the action should be triggered."
   */
-  protected java.util.List<TriggerDefinition> triggerDefinition = new java.util.ArrayList<>();
+  protected java.util.List<TriggerDefinition> triggerDefinition;
 
   /**
   * Description: "An expression that describes applicability criteria, or start/stop conditions for the action."
   */
-  protected java.util.List<PlanDefinitionCondition> condition = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionCondition> condition;
 
   /**
   * Description: "Defines input data requirements for the action."
   */
-  protected java.util.List<DataRequirement> input = new java.util.ArrayList<>();
+  protected java.util.List<DataRequirement> input;
 
   /**
   * Description: "Defines the outputs of the action, if any."
   */
-  protected java.util.List<DataRequirement> output = new java.util.ArrayList<>();
+  protected java.util.List<DataRequirement> output;
 
   /**
   * Description: "A relationship to another action such as \"before\" or \"30-60 minutes after start of\"."
   */
-  protected java.util.List<PlanDefinitionRelatedAction> relatedAction = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionRelatedAction> relatedAction;
 
   /**
   * Description: "An optional value describing when the action should be performed."
@@ -156,7 +161,7 @@ public class PlanDefinitionAction  extends BackboneElement  {
   /**
   * Description: "Indicates who should participate in performing the action described."
   */
-  protected java.util.List<PlanDefinitionParticipant> participant = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionParticipant> participant;
 
   /**
   * Description: "The type of action to perform (create, update, remove)."
@@ -226,12 +231,12 @@ public class PlanDefinitionAction  extends BackboneElement  {
   /**
   * Description: "Customizations that should be applied to the statically defined resource. For example, if the dosage of a medication must be computed based on the patient's weight, a customization would be used to specify an expression that calculated the weight, and the path on the resource that would contain the result."
   */
-  protected java.util.List<PlanDefinitionDynamicValue> dynamicValue = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionDynamicValue> dynamicValue;
 
   /**
   * Description: "Sub actions that are contained within the action. The behavior of this action determines the functionality of the sub-actions. For example, a selection behavior of at-most-one indicates that of the sub-actions, at most one may be chosen as part of realizing the action definition."
   */
-  protected java.util.List<PlanDefinitionAction> action = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionAction> action;
 
   public PlanDefinitionAction() {
   }

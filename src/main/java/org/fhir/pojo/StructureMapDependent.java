@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.StructureMapDependentModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class StructureMapDependent  extends BackboneElement  {
   /**
   * Description: "Name of a rule or group to apply."
@@ -46,12 +51,12 @@ public class StructureMapDependent  extends BackboneElement  {
   /**
   * Description: "Variable to pass to the rule or group."
   */
-  protected java.util.List<String> variable = new java.util.ArrayList<>();
+  protected java.util.List<String> variable;
 
   /**
   * Description: "Extensions for variable"
   */
-  protected transient java.util.List<Element> _variable = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _variable;
 
   public StructureMapDependent() {
   }

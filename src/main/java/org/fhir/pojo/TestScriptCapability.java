@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TestScriptCapability  extends BackboneElement  {
   /**
   * Description: "Whether or not the test execution will require the given capabilities of the server in order for this test script to execute."
@@ -64,12 +65,12 @@ public class TestScriptCapability  extends BackboneElement  {
   /**
   * Description: "Which origin server these requirements apply to."
   */
-  protected java.util.List<Float> origin = new java.util.ArrayList<>();
+  protected java.util.List<Float> origin;
 
   /**
   * Description: "Extensions for origin"
   */
-  protected transient java.util.List<Element> _origin = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _origin;
 
   /**
   * Description: "Which server these requirements apply to."
@@ -85,12 +86,12 @@ public class TestScriptCapability  extends BackboneElement  {
   /**
   * Description: "Links to the FHIR specification that describes this interaction and the resources involved in more detail."
   */
-  protected java.util.List<String> link = new java.util.ArrayList<>();
+  protected java.util.List<String> link;
 
   /**
   * Description: "Extensions for link"
   */
-  protected transient java.util.List<Element> _link = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _link;
 
   /**
   * Description: "Minimum capabilities required of server for test script to execute successfully.   If server does not meet at a minimum the referenced capability statement, then all tests in this script are skipped."

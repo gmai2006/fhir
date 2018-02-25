@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.StructureMapTargetModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class StructureMapTarget  extends BackboneElement  {
   /**
   * Description: "Type or variable this rule applies to."
@@ -77,12 +82,12 @@ public class StructureMapTarget  extends BackboneElement  {
   /**
   * Description: "If field is a list, how to manage the list."
   */
-  protected java.util.List<String> listMode = new java.util.ArrayList<>();
+  protected java.util.List<String> listMode;
 
   /**
   * Description: "Extensions for listMode"
   */
-  protected transient java.util.List<Element> _listMode = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _listMode;
 
   /**
   * Description: "Internal rule reference for shared list items."
@@ -108,7 +113,7 @@ public class StructureMapTarget  extends BackboneElement  {
   /**
   * Description: "Parameters to the transform."
   */
-  protected java.util.List<StructureMapParameter> parameter = new java.util.ArrayList<>();
+  protected java.util.List<StructureMapParameter> parameter;
 
   public StructureMapTarget() {
   }

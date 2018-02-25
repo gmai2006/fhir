@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MedicationAdministrationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Describes the event of a patient consuming or otherwise being administered a medication.  This may be as simple as swallowing a tablet or it may be a long running infusion.  Related resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MedicationAdministration  extends DomainResource  {
   /**
   * Description: "This is a MedicationAdministration resource"
@@ -41,17 +46,17 @@ public class MedicationAdministration  extends DomainResource  {
   /**
   * Description: "External identifier - FHIR will generate its own internal identifiers (probably URLs) which do not need to be explicitly managed by the resource.  The identifier here is one that would be used by another non-FHIR system - for example an automated medication pump would provide a record each time it operated; an administration while the patient was off the ward might be made with a different system and entered after the event.  Particularly important if these records have to be updated."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A protocol, guideline, orderset or other definition that was adhered to in whole or in part by this event."
   */
-  protected java.util.List<Reference> definition = new java.util.ArrayList<>();
+  protected java.util.List<Reference> definition;
 
   /**
   * Description: "A larger event of which this particular event is a component or step."
   */
-  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf;
 
   /**
   * Description: "Will generally be set to show that the administration has been completed.  For some long running administrations such as infusions it is possible for an administration to be started but not completed or it may be paused while some other process is under way."
@@ -92,7 +97,7 @@ public class MedicationAdministration  extends DomainResource  {
   /**
   * Description: "Additional information (for example, patient height and weight) that supports the administration of the medication."
   */
-  protected java.util.List<Reference> supportingInformation = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingInformation;
 
   /**
   * Description: "A specific date/time or interval of time during which the administration took place (or did not take place, when the 'notGiven' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate."
@@ -113,7 +118,7 @@ public class MedicationAdministration  extends DomainResource  {
   /**
   * Description: "The individual who was responsible for giving the medication to the patient."
   */
-  protected java.util.List<MedicationAdministrationPerformer> performer = new java.util.ArrayList<>();
+  protected java.util.List<MedicationAdministrationPerformer> performer;
 
   /**
   * Description: "Set this to true if the record is saying that the medication was NOT administered."
@@ -128,17 +133,17 @@ public class MedicationAdministration  extends DomainResource  {
   /**
   * Description: "A code indicating why the administration was not performed."
   */
-  protected java.util.List<CodeableConcept> reasonNotGiven = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonNotGiven;
 
   /**
   * Description: "A code indicating why the medication was given."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "Condition or observation that supports why the medication was administered."
   */
-  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference;
 
   /**
   * Description: "The original request, instruction or authority to perform the administration."
@@ -148,12 +153,12 @@ public class MedicationAdministration  extends DomainResource  {
   /**
   * Description: "The device used in administering the medication to the patient.  For example, a particular infusion pump."
   */
-  protected java.util.List<Reference> device = new java.util.ArrayList<>();
+  protected java.util.List<Reference> device;
 
   /**
   * Description: "Extra information about the medication administration that is not conveyed by the other attributes."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Describes the medication dosage information details e.g. dose, rate, site, route, etc."
@@ -163,7 +168,7 @@ public class MedicationAdministration  extends DomainResource  {
   /**
   * Description: "A summary of the events of interest that have occurred, such as when the administration was verified."
   */
-  protected java.util.List<Reference> eventHistory = new java.util.ArrayList<>();
+  protected java.util.List<Reference> eventHistory;
 
   public MedicationAdministration() {
   }

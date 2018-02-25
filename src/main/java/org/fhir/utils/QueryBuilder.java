@@ -3,6 +3,9 @@ package org.fhir.utils;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class QueryBuilder {
 	Map<String, Object> params;
@@ -16,18 +19,22 @@ public class QueryBuilder {
 	}
 	
 	public String getWhereClause() {
-		StringBuilder builder = new StringBuilder(" where ");
 		if (params.isEmpty()) return "";
+		StringBuilder builder = new StringBuilder(" where ");
 		params.keySet().stream()
+		.filter(key -> null != params.get(key) && StringUtils.isNoneEmpty((String)params.get(key)))
 		.forEach(key -> {
-			builder.append(" " + key + "=" + params.get(key) + " and ");
+			builder.append(" " + key + OperatorUtils.buildQueryRhs(key, (String)params.get(key)) + " and ");
 		});
+		
 		String result = builder.toString().trim();
-		if (result.endsWith("and")) result.substring(result.length() - "and".length());
+		if (result.endsWith("and")) result = result.substring(0, result.length() - "and".length());
 		return result;
 	}
 	
 	public Map<String, Object> getParams() {
-		return params;
+		return params.entrySet().stream()
+		.collect(Collectors.toMap(entry -> (String)entry.getKey() 
+				, entry -> OperatorUtils.buildValue(entry.getKey(), (String)entry.getValue())));
 	}	
 }

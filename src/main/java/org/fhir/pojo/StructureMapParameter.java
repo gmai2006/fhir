@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.StructureMapParameterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class StructureMapParameter  extends BackboneElement  {
   /**
   * Description: "Parameter value - variable or literal."

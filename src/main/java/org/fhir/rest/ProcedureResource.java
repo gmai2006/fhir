@@ -27,7 +27,6 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
-import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.DELETE;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,19 +44,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.PUT;
-
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Context;
 import com.google.inject.Inject;
 
 import org.fhir.pojo.Procedure;
 import org.fhir.service.ProcedureService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
-import org.fhir.pojo.Narrative;
-import org.fhir.pojo.OperationOutcome;
+import org.fhir.utils.FhirConstant;
 
 @Path("/Procedure")
 @Consumes(MediaType.APPLICATION_JSON)
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_JSON})
 /**
  * Auto generated RESTful class
  */
@@ -83,93 +83,61 @@ public class ProcedureResource {
 		return this.service.update(obj);
 	}
 
-
   @GET
   @Path("{id}")
-  public Procedure find(@PathParam("id") String id) {
-  	return this.service.find(id);
-  }
-
-  @GET
-  public Procedure findById(@QueryParam("_id") String id) {
-  	return this.service.find(id);
-  }
-
-  @GET
-  public List<Procedure> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
-  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<Procedure> findByTag(@QueryParam("_tag") String _tag) {
-  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<Procedure> findByProfile(@QueryParam("_profile") String _profile) {
-  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<Procedure> findBySecurity(@QueryParam("_security") String _security) {
-  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<Procedure> findByText(@QueryParam("_text") String _text) {
-  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
-  	return this.service.findByText(new QueryBuilder(params));
-  }
-
-  @GET
-  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public OperationOutcome findByList(@QueryParam("_list") String _list) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public List<Procedure> findAll() {
-  	return this.service.selectAll();
+  public Response find(@PathParam("id") String id) {
+  	Procedure result = this.service.find(id);
+  	if (null == result) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
 
   @GET
   @Path("select/{max}")
-  public List<Procedure> findWithLimit(@PathParam("max") String max) {
+  public Response findWithLimit(@PathParam("max") String max) {
   	Integer input = null;
   	try {
   		input = Integer.valueOf(max);
   	} catch (Exception ex) {
   		throw new WebApplicationException(Response.Status.BAD_REQUEST);
   	}
-    return service.select(input);
+  	List<Procedure> result = service.select(input);
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
+
+  @GET
+  public Response findByField(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.META_FIELDS.contains(first)
+  			&& !FhirConstant.ACCOUNT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	}
+
+  	List<Procedure> result = null;
+
+  	if (FhirConstant.META_FIELDS.contains(first)) {
+  		java.util.Map<String, String> params = QueryParser.parse(str);
+  		result = this.service.findByMeta(new QueryBuilder(params));
+  	}
+  	else if (FhirConstant.PROCEDURE_FIELDS.contains(first)) {
+  		java.util.Map<String, String> params = QueryParser.parse(str);
+  		result = this.service.findByField(new QueryBuilder(params));
+  	} 
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
 
   /**
@@ -178,9 +146,25 @@ public class ProcedureResource {
   */
   @GET
   @Path("definition")
-  public List<Procedure> definition(@QueryParam("definition")String definition) {
-  	java.util.Map<String, String> params = QueryParser.parse(definition, VALID_FIELDS);
-  	return this.service.findByDefinition(new QueryBuilder(params));
+  public Response definition(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<Procedure> result = this.service.findByDefinition(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Part of referenced event
@@ -188,9 +172,51 @@ public class ProcedureResource {
   */
   @GET
   @Path("partof")
-  public List<Procedure> partof(@QueryParam("partof")String partof) {
-  	java.util.Map<String, String> params = QueryParser.parse(partof, VALID_FIELDS);
-  	return this.service.findByPartOf(new QueryBuilder(params));
+  public Response partof(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<Procedure> result = this.service.findByPartOf(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
+  /**
+  * Descr: Classification of the procedure
+  * Type: token
+  */
+  @GET
+  @Path("category")
+  public Response category(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.CODEABLECONCEPT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<Procedure> result = this.service.findByCategory(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Search by subject
@@ -198,9 +224,25 @@ public class ProcedureResource {
   */
   @GET
   @Path("subject")
-  public List<Procedure> subject(@QueryParam("subject")String subject) {
-  	java.util.Map<String, String> params = QueryParser.parse(subject, VALID_FIELDS);
-  	return this.service.findBySubject(new QueryBuilder(params));
+  public Response subject(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<Procedure> result = this.service.findBySubject(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Encounter or episode associated with the procedure
@@ -208,9 +250,25 @@ public class ProcedureResource {
   */
   @GET
   @Path("context")
-  public List<Procedure> context(@QueryParam("context")String context) {
-  	java.util.Map<String, String> params = QueryParser.parse(context, VALID_FIELDS);
-  	return this.service.findByContext(new QueryBuilder(params));
+  public Response context(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<Procedure> result = this.service.findByContext(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Where the procedure happened
@@ -218,28 +276,24 @@ public class ProcedureResource {
   */
   @GET
   @Path("location")
-  public List<Procedure> location(@QueryParam("location")String location) {
-  	java.util.Map<String, String> params = QueryParser.parse(location, VALID_FIELDS);
-  	return this.service.findByLocation(new QueryBuilder(params));
-  }
-  /**
-  * Descr: preparation | in-progress | suspended | aborted | completed | entered-in-error | unknown
-  * Type: token
-  */
-  @GET
-  public List<Procedure> status(@QueryParam("status")String status) {
-  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Classification of the procedure
-  * Type: token
-  */
-  @GET
-  public List<Procedure> category(@QueryParam("category")String category) {
-  	java.util.Map<String, String> params = QueryParser.parse(category, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
+  public Response location(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
 
-  private static final String VALID_FIELDS = "basedon|category|context|definition|location|partof|performer|status|subject";
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<Procedure> result = this.service.findByLocation(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
 }

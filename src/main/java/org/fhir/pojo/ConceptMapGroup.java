@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ConceptMapGroupModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ConceptMapGroup  extends BackboneElement  {
   /**
   * Description: "An absolute URI that identifies the Code System (if the source is a value set that crosses more than one code system)."
@@ -76,7 +81,7 @@ public class ConceptMapGroup  extends BackboneElement  {
   * Description: "Mappings for an individual concept in the source to one or more concepts in the target."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<ConceptMapElement> element = new java.util.ArrayList<>();
+  protected java.util.List<ConceptMapElement> element;
 
   /**
   * Description: "What to do when there is no match in the mappings in the group."

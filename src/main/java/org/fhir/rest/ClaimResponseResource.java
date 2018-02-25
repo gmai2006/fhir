@@ -27,7 +27,6 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
-import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.DELETE;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,19 +44,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.PUT;
-
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Context;
 import com.google.inject.Inject;
 
 import org.fhir.pojo.ClaimResponse;
 import org.fhir.service.ClaimResponseService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
-import org.fhir.pojo.Narrative;
-import org.fhir.pojo.OperationOutcome;
+import org.fhir.utils.FhirConstant;
 
 @Path("/ClaimResponse")
 @Consumes(MediaType.APPLICATION_JSON)
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_JSON})
 /**
  * Auto generated RESTful class
  */
@@ -83,93 +83,61 @@ public class ClaimResponseResource {
 		return this.service.update(obj);
 	}
 
-
   @GET
   @Path("{id}")
-  public ClaimResponse find(@PathParam("id") String id) {
-  	return this.service.find(id);
-  }
-
-  @GET
-  public ClaimResponse findById(@QueryParam("_id") String id) {
-  	return this.service.find(id);
-  }
-
-  @GET
-  public List<ClaimResponse> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
-  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<ClaimResponse> findByTag(@QueryParam("_tag") String _tag) {
-  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<ClaimResponse> findByProfile(@QueryParam("_profile") String _profile) {
-  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<ClaimResponse> findBySecurity(@QueryParam("_security") String _security) {
-  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<ClaimResponse> findByText(@QueryParam("_text") String _text) {
-  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
-  	return this.service.findByText(new QueryBuilder(params));
-  }
-
-  @GET
-  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public OperationOutcome findByList(@QueryParam("_list") String _list) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public List<ClaimResponse> findAll() {
-  	return this.service.selectAll();
+  public Response find(@PathParam("id") String id) {
+  	ClaimResponse result = this.service.find(id);
+  	if (null == result) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
 
   @GET
   @Path("select/{max}")
-  public List<ClaimResponse> findWithLimit(@PathParam("max") String max) {
+  public Response findWithLimit(@PathParam("max") String max) {
   	Integer input = null;
   	try {
   		input = Integer.valueOf(max);
   	} catch (Exception ex) {
   		throw new WebApplicationException(Response.Status.BAD_REQUEST);
   	}
-    return service.select(input);
+  	List<ClaimResponse> result = service.select(input);
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
+
+  @GET
+  public Response findByField(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.META_FIELDS.contains(first)
+  			&& !FhirConstant.ACCOUNT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	}
+
+  	List<ClaimResponse> result = null;
+
+  	if (FhirConstant.META_FIELDS.contains(first)) {
+  		java.util.Map<String, String> params = QueryParser.parse(str);
+  		result = this.service.findByMeta(new QueryBuilder(params));
+  	}
+  	else if (FhirConstant.CLAIMRESPONSE_FIELDS.contains(first)) {
+  		java.util.Map<String, String> params = QueryParser.parse(str);
+  		result = this.service.findByField(new QueryBuilder(params));
+  	} 
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
 
   /**
@@ -178,9 +146,25 @@ public class ClaimResponseResource {
   */
   @GET
   @Path("patient")
-  public List<ClaimResponse> patient(@QueryParam("patient")String patient) {
-  	java.util.Map<String, String> params = QueryParser.parse(patient, VALID_FIELDS);
-  	return this.service.findByPatient(new QueryBuilder(params));
+  public Response patient(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ClaimResponse> result = this.service.findByPatient(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: The organization who generated this resource
@@ -188,9 +172,25 @@ public class ClaimResponseResource {
   */
   @GET
   @Path("insurer")
-  public List<ClaimResponse> insurer(@QueryParam("insurer")String insurer) {
-  	java.util.Map<String, String> params = QueryParser.parse(insurer, VALID_FIELDS);
-  	return this.service.findByInsurer(new QueryBuilder(params));
+  public Response insurer(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ClaimResponse> result = this.service.findByInsurer(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: The Provider of the claim
@@ -198,9 +198,25 @@ public class ClaimResponseResource {
   */
   @GET
   @Path("requestprovider")
-  public List<ClaimResponse> requestprovider(@QueryParam("requestprovider")String requestprovider) {
-  	java.util.Map<String, String> params = QueryParser.parse(requestprovider, VALID_FIELDS);
-  	return this.service.findByRequestProvider(new QueryBuilder(params));
+  public Response requestprovider(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ClaimResponse> result = this.service.findByRequestProvider(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: The claim reference
@@ -208,37 +224,50 @@ public class ClaimResponseResource {
   */
   @GET
   @Path("request")
-  public List<ClaimResponse> request(@QueryParam("request")String request) {
-  	java.util.Map<String, String> params = QueryParser.parse(request, VALID_FIELDS);
-  	return this.service.findByRequest(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The identity of the claimresponse
-  * Type: token
-  */
-  @GET
-  public List<ClaimResponse> identifier(@QueryParam("identifier")String identifier) {
-  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
+  public Response request(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ClaimResponse> result = this.service.findByRequest(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: The processing outcome
   * Type: token
   */
   @GET
-  public List<ClaimResponse> outcome(@QueryParam("outcome")String outcome) {
-  	java.util.Map<String, String> params = QueryParser.parse(outcome, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The contents of the disposition message
-  * Type: string
-  */
-  @GET
-  public List<ClaimResponse> disposition(@QueryParam("disposition")String disposition) {
-  	java.util.Map<String, String> params = QueryParser.parse(disposition, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
+  @Path("outcome")
+  public Response outcome(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
 
-  private static final String VALID_FIELDS = "created|disposition|identifier|insurer|outcome|patient|paymentdate|request|requestprovider";
+  	if (!FhirConstant.CODEABLECONCEPT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ClaimResponse> result = this.service.findByOutcome(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
 }

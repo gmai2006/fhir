@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DocumentReferenceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A reference to a document."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DocumentReference  extends DomainResource  {
   /**
   * Description: "This is a DocumentReference resource"
@@ -46,7 +51,7 @@ public class DocumentReference  extends DomainResource  {
   /**
   * Description: "Other identifiers associated with the document, including version independent identifiers."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of this document reference."
@@ -109,7 +114,7 @@ public class DocumentReference  extends DomainResource  {
   /**
   * Description: "Identifies who is responsible for adding the information to the document."
   */
-  protected java.util.List<Reference> author = new java.util.ArrayList<>();
+  protected java.util.List<Reference> author;
 
   /**
   * Description: "Which person or organization authenticates that this document is valid."
@@ -124,7 +129,7 @@ public class DocumentReference  extends DomainResource  {
   /**
   * Description: "Relationships that this document has with other document references that already exist."
   */
-  protected java.util.List<DocumentReferenceRelatesTo> relatesTo = new java.util.ArrayList<>();
+  protected java.util.List<DocumentReferenceRelatesTo> relatesTo;
 
   /**
   * Description: "Human-readable description of the source document. This is sometimes known as the \"title\"."
@@ -139,13 +144,13 @@ public class DocumentReference  extends DomainResource  {
   /**
   * Description: "A set of Security-Tag codes specifying the level of privacy/security of the Document. Note that DocumentReference.meta.security contains the security labels of the \"reference\" to the document, while DocumentReference.securityLabel contains a snapshot of the security labels on the document the reference refers to."
   */
-  protected java.util.List<CodeableConcept> securityLabel = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> securityLabel;
 
   /**
   * Description: "The document and format referenced. There may be multiple content element repetitions, each with a different format."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<DocumentReferenceContent> content = new java.util.ArrayList<>();
+  protected java.util.List<DocumentReferenceContent> content;
 
   /**
   * Description: "The clinical context in which the document was prepared."

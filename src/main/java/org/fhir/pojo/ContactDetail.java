@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ContactDetailModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Specifies contact information for a person or organization."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ContactDetail  extends Element  {
   /**
   * Description: "The name of an individual to contact."
@@ -45,7 +50,7 @@ public class ContactDetail  extends Element  {
   /**
   * Description: "The contact details for the individual (if a name was provided) or the organization."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   public ContactDetail() {
   }

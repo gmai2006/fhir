@@ -26,16 +26,21 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CompositionEventModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CompositionEvent  extends BackboneElement  {
   /**
   * Description: "This list of codes represents the main clinical acts, such as a colonoscopy or an appendectomy, being documented. In some cases, the event is inherent in the typeCode, such as a \"History and Physical Report\" in which the procedure being documented is necessarily a \"History and Physical\" act."
   */
-  protected java.util.List<CodeableConcept> code = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> code;
 
   /**
   * Description: "The period of time covered by the documentation. There is no assertion that the documentation is a complete representation for this period, only that it documents events during this time."
@@ -45,7 +50,7 @@ public class CompositionEvent  extends BackboneElement  {
   /**
   * Description: "The description and/or reference of the event(s) being documented. For example, this could be used to document such a colonoscopy or an appendectomy."
   */
-  protected java.util.List<Reference> detail = new java.util.ArrayList<>();
+  protected java.util.List<Reference> detail;
 
   public CompositionEvent() {
   }

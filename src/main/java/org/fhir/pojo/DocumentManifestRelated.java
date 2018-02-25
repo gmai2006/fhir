@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DocumentManifestRelatedModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A collection of documents compiled for a purpose together with metadata that applies to the collection."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DocumentManifestRelated  extends BackboneElement  {
   /**
   * Description: "Related identifier to this DocumentManifest.  For example, Order numbers, accession numbers, XDW workflow numbers."

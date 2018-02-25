@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.TestReportModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A summary of information based on the results of executing a TestScript."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TestReport  extends DomainResource  {
   /**
   * Description: "This is a TestReport resource"
@@ -114,7 +119,7 @@ public class TestReport  extends DomainResource  {
   /**
   * Description: "A participant in the test execution, either the execution engine, a client, or a server."
   */
-  protected java.util.List<TestReportParticipant> participant = new java.util.ArrayList<>();
+  protected java.util.List<TestReportParticipant> participant;
 
   /**
   * Description: "The results of the series of required setup operations before the tests were executed."
@@ -124,7 +129,7 @@ public class TestReport  extends DomainResource  {
   /**
   * Description: "A test executed from the test script."
   */
-  protected java.util.List<TestReportTest> test = new java.util.ArrayList<>();
+  protected java.util.List<TestReportTest> test;
 
   /**
   * Description: "The results of the series of operations required to clean up after the all the tests were executed (successfully or otherwise)."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ExpansionProfileDesignationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ExpansionProfileDesignation  extends BackboneElement  {
   /**
   * Description: "Designations to be included."

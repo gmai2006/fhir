@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AllergyIntoleranceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AllergyIntolerance  extends DomainResource  {
   /**
   * Description: "This is a AllergyIntolerance resource"
@@ -41,7 +46,7 @@ public class AllergyIntolerance  extends DomainResource  {
   /**
   * Description: "This records identifiers associated with this allergy/intolerance concern that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The clinical status of the allergy or intolerance."
@@ -76,12 +81,12 @@ public class AllergyIntolerance  extends DomainResource  {
   /**
   * Description: "Category of the identified substance."
   */
-  protected java.util.List<String> category = new java.util.ArrayList<>();
+  protected java.util.List<String> category;
 
   /**
   * Description: "Extensions for category"
   */
-  protected transient java.util.List<Element> _category = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _category;
 
   /**
   * Description: "Estimate of the potential clinical harm, or seriousness, of the reaction to the identified substance."
@@ -175,12 +180,12 @@ public class AllergyIntolerance  extends DomainResource  {
   /**
   * Description: "Additional narrative about the propensity for the Adverse Reaction, not captured in other fields."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Details about each adverse reaction event linked to exposure to the identified substance."
   */
-  protected java.util.List<AllergyIntoleranceReaction> reaction = new java.util.ArrayList<>();
+  protected java.util.List<AllergyIntoleranceReaction> reaction;
 
   public AllergyIntolerance() {
   }

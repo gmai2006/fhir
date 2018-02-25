@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DiagnosticReportImageModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DiagnosticReportImage  extends BackboneElement  {
   /**
   * Description: "A comment about the image. Typically, this is used to provide an explanation for why the image is included, or to draw the viewer's attention to important features."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MeasureReportPopulation1Model;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MeasureReportPopulation1  extends BackboneElement  {
   /**
   * Description: "The identifier of the population being reported, as defined by the population element of the measure."

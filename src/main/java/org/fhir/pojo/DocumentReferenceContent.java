@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DocumentReferenceContentModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A reference to a document."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DocumentReferenceContent  extends BackboneElement  {
   /**
   * Description: "The document or URL of the document along with critical metadata to prove content has integrity."

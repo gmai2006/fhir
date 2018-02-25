@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ExpansionProfileModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Resource to define constraints on the Expansion of a FHIR ValueSet."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ExpansionProfile  extends DomainResource  {
   /**
   * Description: "This is a ExpansionProfile resource"
@@ -117,7 +122,7 @@ public class ExpansionProfile  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A free text natural language description of the expansion profile from a consumer's perspective."
@@ -132,17 +137,17 @@ public class ExpansionProfile  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate expansion profile instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the expansion profile is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Fix use of a particular code system to a particular version."
   */
-  protected java.util.List<ExpansionProfileFixedVersion> fixedVersion = new java.util.ArrayList<>();
+  protected java.util.List<ExpansionProfileFixedVersion> fixedVersion;
 
   /**
   * Description: "Code system, or a particular version of a code system to be excluded from value set expansions."

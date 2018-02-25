@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TestScriptAssert  extends BackboneElement  {
   /**
   * Description: "The label would be used for tracking/logging purposes by test engines."

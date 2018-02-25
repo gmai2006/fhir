@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Optional Extension Element - found in all resources."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Extension  extends Element  {
   /**
   * Description: "Source of the definition for the extension code - a logical name or a URL."

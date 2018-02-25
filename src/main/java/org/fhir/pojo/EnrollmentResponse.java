@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EnrollmentResponseModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides enrollment and plan details from the processing of an Enrollment resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class EnrollmentResponse  extends DomainResource  {
   /**
   * Description: "This is a EnrollmentResponse resource"
@@ -41,7 +46,7 @@ public class EnrollmentResponse  extends DomainResource  {
   /**
   * Description: "The Response business identifier."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."

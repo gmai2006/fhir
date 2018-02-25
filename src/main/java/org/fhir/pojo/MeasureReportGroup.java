@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MeasureReportGroupModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MeasureReportGroup  extends BackboneElement  {
   /**
   * Description: "The identifier of the population group as defined in the measure definition."
@@ -41,7 +46,7 @@ public class MeasureReportGroup  extends BackboneElement  {
   /**
   * Description: "The populations that make up the population group, one for each type of population appropriate for the measure."
   */
-  protected java.util.List<MeasureReportPopulation> population = new java.util.ArrayList<>();
+  protected java.util.List<MeasureReportPopulation> population;
 
   /**
   * Description: "The measure score for this population group, calculated as appropriate for the measure type and scoring method, and based on the contents of the populations defined in the group."
@@ -57,7 +62,7 @@ public class MeasureReportGroup  extends BackboneElement  {
   /**
   * Description: "When a measure includes multiple stratifiers, there will be a stratifier group for each stratifier defined by the measure."
   */
-  protected java.util.List<MeasureReportStratifier> stratifier = new java.util.ArrayList<>();
+  protected java.util.List<MeasureReportStratifier> stratifier;
 
   public MeasureReportGroup() {
   }

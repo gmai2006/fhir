@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A set of ordered Quantities defined by a low and high limit."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Range  extends Element  {
   /**
   * Description: "The low limit. The boundary is inclusive."

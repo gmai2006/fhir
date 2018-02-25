@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EpisodeOfCareModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class EpisodeOfCare  extends DomainResource  {
   /**
   * Description: "This is a EpisodeOfCare resource"
@@ -41,7 +46,7 @@ public class EpisodeOfCare  extends DomainResource  {
   /**
   * Description: "The EpisodeOfCare may be known by different identifiers for different contexts of use, such as when an external agency is tracking the Episode for funding purposes."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "planned | waitlist | active | onhold | finished | cancelled."
@@ -56,17 +61,17 @@ public class EpisodeOfCare  extends DomainResource  {
   /**
   * Description: "The history of statuses that the EpisodeOfCare has been through (without requiring processing the history of the resource)."
   */
-  protected java.util.List<EpisodeOfCareStatusHistory> statusHistory = new java.util.ArrayList<>();
+  protected java.util.List<EpisodeOfCareStatusHistory> statusHistory;
 
   /**
   * Description: "A classification of the type of episode of care; e.g. specialist referral, disease management, type of funded care."
   */
-  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type;
 
   /**
   * Description: "The list of diagnosis relevant to this episode of care."
   */
-  protected java.util.List<EpisodeOfCareDiagnosis> diagnosis = new java.util.ArrayList<>();
+  protected java.util.List<EpisodeOfCareDiagnosis> diagnosis;
 
   /**
   * Description: "The patient who is the focus of this episode of care."
@@ -87,7 +92,7 @@ public class EpisodeOfCare  extends DomainResource  {
   /**
   * Description: "Referral Request(s) that are fulfilled by this EpisodeOfCare, incoming referrals."
   */
-  protected java.util.List<Reference> referralRequest = new java.util.ArrayList<>();
+  protected java.util.List<Reference> referralRequest;
 
   /**
   * Description: "The practitioner that is the care manager/care co-ordinator for this patient."
@@ -97,12 +102,12 @@ public class EpisodeOfCare  extends DomainResource  {
   /**
   * Description: "The list of practitioners that may be facilitating this episode of care for specific purposes."
   */
-  protected java.util.List<Reference> team = new java.util.ArrayList<>();
+  protected java.util.List<Reference> team;
 
   /**
   * Description: "The set of accounts that may be used for billing for this EpisodeOfCare."
   */
-  protected java.util.List<Reference> account = new java.util.ArrayList<>();
+  protected java.util.List<Reference> account;
 
   public EpisodeOfCare() {
   }

@@ -26,21 +26,26 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.OperationDefinitionOverloadModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class OperationDefinitionOverload  extends BackboneElement  {
   /**
   * Description: "Name of parameter to include in overload."
   */
-  protected java.util.List<String> parameterName = new java.util.ArrayList<>();
+  protected java.util.List<String> parameterName;
 
   /**
   * Description: "Extensions for parameterName"
   */
-  protected transient java.util.List<Element> _parameterName = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _parameterName;
 
   /**
   * Description: "Comments to go on overload."

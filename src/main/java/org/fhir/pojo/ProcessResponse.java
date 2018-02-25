@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ProcessResponseModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides processing status, errors and notes from the processing of a resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProcessResponse  extends DomainResource  {
   /**
   * Description: "This is a ProcessResponse resource"
@@ -41,7 +46,7 @@ public class ProcessResponse  extends DomainResource  {
   /**
   * Description: "The Response business identifier."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."
@@ -108,17 +113,17 @@ public class ProcessResponse  extends DomainResource  {
   /**
   * Description: "Suite of processing notes or additional requirements if the processing has been held."
   */
-  protected java.util.List<ProcessResponseProcessNote> processNote = new java.util.ArrayList<>();
+  protected java.util.List<ProcessResponseProcessNote> processNote;
 
   /**
   * Description: "Processing errors."
   */
-  protected java.util.List<CodeableConcept> error = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> error;
 
   /**
   * Description: "Request for additional supporting or authorizing information, such as: documents, images or resources."
   */
-  protected java.util.List<Reference> communicationRequest = new java.util.ArrayList<>();
+  protected java.util.List<Reference> communicationRequest;
 
   public ProcessResponse() {
   }

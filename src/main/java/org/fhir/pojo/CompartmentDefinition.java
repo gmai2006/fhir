@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CompartmentDefinitionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A compartment definition that defines how resources are accessed on a server."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CompartmentDefinition  extends DomainResource  {
   /**
   * Description: "This is a CompartmentDefinition resource"
@@ -112,7 +117,7 @@ public class CompartmentDefinition  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A free text natural language description of the compartment definition from a consumer's perspective."
@@ -137,12 +142,12 @@ public class CompartmentDefinition  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate compartment definition instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the compartment definition is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Which compartment this definition describes."
@@ -167,7 +172,7 @@ public class CompartmentDefinition  extends DomainResource  {
   /**
   * Description: "Information about how a resource is related to the compartment."
   */
-  protected java.util.List<CompartmentDefinitionResource> resource = new java.util.ArrayList<>();
+  protected java.util.List<CompartmentDefinitionResource> resource;
 
   public CompartmentDefinition() {
   }

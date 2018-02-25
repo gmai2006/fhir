@@ -27,7 +27,6 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
-import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.DELETE;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,19 +44,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.PUT;
-
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Context;
 import com.google.inject.Inject;
 
 import org.fhir.pojo.ChargeItem;
 import org.fhir.service.ChargeItemService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
-import org.fhir.pojo.Narrative;
-import org.fhir.pojo.OperationOutcome;
+import org.fhir.utils.FhirConstant;
 
 @Path("/ChargeItem")
 @Consumes(MediaType.APPLICATION_JSON)
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_JSON})
 /**
  * Auto generated RESTful class
  */
@@ -83,104 +83,114 @@ public class ChargeItemResource {
 		return this.service.update(obj);
 	}
 
-
   @GET
   @Path("{id}")
-  public ChargeItem find(@PathParam("id") String id) {
-  	return this.service.find(id);
-  }
-
-  @GET
-  public ChargeItem findById(@QueryParam("_id") String id) {
-  	return this.service.find(id);
-  }
-
-  @GET
-  public List<ChargeItem> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
-  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<ChargeItem> findByTag(@QueryParam("_tag") String _tag) {
-  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<ChargeItem> findByProfile(@QueryParam("_profile") String _profile) {
-  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<ChargeItem> findBySecurity(@QueryParam("_security") String _security) {
-  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<ChargeItem> findByText(@QueryParam("_text") String _text) {
-  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
-  	return this.service.findByText(new QueryBuilder(params));
-  }
-
-  @GET
-  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public OperationOutcome findByList(@QueryParam("_list") String _list) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public List<ChargeItem> findAll() {
-  	return this.service.selectAll();
+  public Response find(@PathParam("id") String id) {
+  	ChargeItem result = this.service.find(id);
+  	if (null == result) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
 
   @GET
   @Path("select/{max}")
-  public List<ChargeItem> findWithLimit(@PathParam("max") String max) {
+  public Response findWithLimit(@PathParam("max") String max) {
   	Integer input = null;
   	try {
   		input = Integer.valueOf(max);
   	} catch (Exception ex) {
   		throw new WebApplicationException(Response.Status.BAD_REQUEST);
   	}
-    return service.select(input);
+  	List<ChargeItem> result = service.select(input);
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
 
+  @GET
+  public Response findByField(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.META_FIELDS.contains(first)
+  			&& !FhirConstant.ACCOUNT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	}
+
+  	List<ChargeItem> result = null;
+
+  	if (FhirConstant.META_FIELDS.contains(first)) {
+  		java.util.Map<String, String> params = QueryParser.parse(str);
+  		result = this.service.findByMeta(new QueryBuilder(params));
+  	}
+  	else if (FhirConstant.CHARGEITEM_FIELDS.contains(first)) {
+  		java.util.Map<String, String> params = QueryParser.parse(str);
+  		result = this.service.findByField(new QueryBuilder(params));
+  	} 
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
+
+  /**
+  * Descr: A code that identifies the charge, like a billing code
+  * Type: token
+  */
+  @GET
+  @Path("code")
+  public Response code(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.CODEABLECONCEPT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ChargeItem> result = this.service.findByCode(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
   /**
   * Descr: Individual service was done for/to
   * Type: reference
   */
   @GET
   @Path("patient")
-  public List<ChargeItem> patient(@QueryParam("patient")String patient) {
-  	java.util.Map<String, String> params = QueryParser.parse(patient, VALID_FIELDS);
-  	return this.service.findBySubject(new QueryBuilder(params));
+  public Response patient(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ChargeItem> result = this.service.findBySubject(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Encounter / Episode associated with event
@@ -188,9 +198,25 @@ public class ChargeItemResource {
   */
   @GET
   @Path("context")
-  public List<ChargeItem> context(@QueryParam("context")String context) {
-  	java.util.Map<String, String> params = QueryParser.parse(context, VALID_FIELDS);
-  	return this.service.findByContext(new QueryBuilder(params));
+  public Response context(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ChargeItem> result = this.service.findByContext(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Organization providing the charged sevice
@@ -198,9 +224,25 @@ public class ChargeItemResource {
   */
   @GET
   @Path("performingorganization")
-  public List<ChargeItem> performingorganization(@QueryParam("performingorganization")String performingorganization) {
-  	java.util.Map<String, String> params = QueryParser.parse(performingorganization, VALID_FIELDS);
-  	return this.service.findByPerformingOrganization(new QueryBuilder(params));
+  public Response performingorganization(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ChargeItem> result = this.service.findByPerformingOrganization(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Organization requesting the charged service
@@ -208,9 +250,25 @@ public class ChargeItemResource {
   */
   @GET
   @Path("requestingorganization")
-  public List<ChargeItem> requestingorganization(@QueryParam("requestingorganization")String requestingorganization) {
-  	java.util.Map<String, String> params = QueryParser.parse(requestingorganization, VALID_FIELDS);
-  	return this.service.findByRequestingOrganization(new QueryBuilder(params));
+  public Response requestingorganization(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ChargeItem> result = this.service.findByRequestingOrganization(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Quantity of which the charge item has been serviced
@@ -218,9 +276,25 @@ public class ChargeItemResource {
   */
   @GET
   @Path("quantity")
-  public List<ChargeItem> quantity(@QueryParam("quantity")String quantity) {
-  	java.util.Map<String, String> params = QueryParser.parse(quantity, VALID_FIELDS);
-  	return this.service.findByQuantity(new QueryBuilder(params));
+  public Response quantity(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.QUANTITY_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ChargeItem> result = this.service.findByQuantity(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Price overriding the associated rules
@@ -228,9 +302,25 @@ public class ChargeItemResource {
   */
   @GET
   @Path("priceoverride")
-  public List<ChargeItem> priceoverride(@QueryParam("priceoverride")String priceoverride) {
-  	java.util.Map<String, String> params = QueryParser.parse(priceoverride, VALID_FIELDS);
-  	return this.service.findByPriceOverride(new QueryBuilder(params));
+  public Response priceoverride(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.MONEY_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ChargeItem> result = this.service.findByPriceOverride(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Individual who was entering
@@ -238,9 +328,25 @@ public class ChargeItemResource {
   */
   @GET
   @Path("enterer")
-  public List<ChargeItem> enterer(@QueryParam("enterer")String enterer) {
-  	java.util.Map<String, String> params = QueryParser.parse(enterer, VALID_FIELDS);
-  	return this.service.findByEnterer(new QueryBuilder(params));
+  public Response enterer(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ChargeItem> result = this.service.findByEnterer(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Which rendered service is being charged?
@@ -248,46 +354,24 @@ public class ChargeItemResource {
   */
   @GET
   @Path("service")
-  public List<ChargeItem> service(@QueryParam("service")String service) {
-  	java.util.Map<String, String> params = QueryParser.parse(service, VALID_FIELDS);
-  	return this.service.findByService(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Business Identifier for item
-  * Type: token
-  */
-  @GET
-  public List<ChargeItem> identifier(@QueryParam("identifier")String identifier) {
-  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: A code that identifies the charge, like a billing code
-  * Type: token
-  */
-  @GET
-  public List<ChargeItem> code(@QueryParam("code")String code) {
-  	java.util.Map<String, String> params = QueryParser.parse(code, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Factor overriding the associated rules
-  * Type: number
-  */
-  @GET
-  public List<ChargeItem> factoroverride(@QueryParam("factoroverride")String factoroverride) {
-  	java.util.Map<String, String> params = QueryParser.parse(factoroverride, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Date the charge item was entered
-  * Type: date
-  */
-  @GET
-  public List<ChargeItem> entereddate(@QueryParam("entereddate")String entereddate) {
-  	java.util.Map<String, String> params = QueryParser.parse(entereddate, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
+  public Response service(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
 
-  private static final String VALID_FIELDS = "account|code|context|entereddate|enterer|factoroverride|identifier|occurrence|participantactor|participantrole|patient|performingorganization|priceoverride|quantity|requestingorganization|service|subject";
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<ChargeItem> result = this.service.findByService(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
 }

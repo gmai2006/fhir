@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.QuestionnaireResponseModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class QuestionnaireResponse  extends DomainResource  {
   /**
   * Description: "This is a QuestionnaireResponse resource"
@@ -46,12 +51,12 @@ public class QuestionnaireResponse  extends DomainResource  {
   /**
   * Description: "The order, proposal or plan that is fulfilled in whole or in part by this QuestionnaireResponse.  For example, a ProcedureRequest seeking an intake assessment or a decision support recommendation to assess for post-partum depression."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "A procedure or observation that this questionnaire was performed as part of the execution of.  For example, the surgery a checklist was executed as part of."
   */
-  protected java.util.List<Reference> parent = new java.util.ArrayList<>();
+  protected java.util.List<Reference> parent;
 
   /**
   * Description: "The Questionnaire that defines and organizes the questions for which answers are being provided."
@@ -102,7 +107,7 @@ public class QuestionnaireResponse  extends DomainResource  {
   /**
   * Description: "A group or question item from the original questionnaire for which answers are provided."
   */
-  protected java.util.List<QuestionnaireResponseItem> item = new java.util.ArrayList<>();
+  protected java.util.List<QuestionnaireResponseItem> item;
 
   public QuestionnaireResponse() {
   }

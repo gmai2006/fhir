@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Captures constraints on each element within the resource, profile, or extension."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ElementDefinitionExample  extends BackboneElement  {
   /**
   * Description: "Describes the purpose of this example amoung the set of examples."

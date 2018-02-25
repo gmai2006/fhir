@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ProcedureRequestRequesterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of a request for diagnostic investigations, treatments, or operations to be performed."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProcedureRequestRequester  extends BackboneElement  {
   /**
   * Description: "The device, practitioner or organization who initiated the request."

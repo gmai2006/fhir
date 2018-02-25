@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MetaModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The metadata about a resource. This is content in the resource that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Meta  extends Element  {
   /**
   * Description: "The version specific identifier, as it appears in the version portion of the URL. This values changes when the resource is created, updated, or deleted."
@@ -56,22 +61,22 @@ public class Meta  extends Element  {
   /**
   * Description: "A list of profiles (references to [[[StructureDefinition]]] resources) that this resource claims to conform to. The URL is a reference to [[[StructureDefinition.url]]]."
   */
-  protected java.util.List<String> profile = new java.util.ArrayList<>();
+  protected java.util.List<String> profile;
 
   /**
   * Description: "Extensions for profile"
   */
-  protected transient java.util.List<Element> _profile = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _profile;
 
   /**
   * Description: "Security labels applied to this resource. These tags connect specific resources to the overall security policy and infrastructure."
   */
-  protected java.util.List<Coding> security = new java.util.ArrayList<>();
+  protected java.util.List<Coding> security;
 
   /**
   * Description: "Tags applied to this resource. Tags are intended to be used to identify and relate resources to process and workflow, and applications are not required to consider the tags when interpreting the meaning of a resource."
   */
-  protected java.util.List<Coding> tag = new java.util.ArrayList<>();
+  protected java.util.List<Coding> tag;
 
   public Meta() {
   }

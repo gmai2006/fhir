@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.TriggerDefinitionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A description of a triggering event."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TriggerDefinition  extends Element  {
   /**
   * Description: "The type of triggering event."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ClaimResponseDetail1Model;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ClaimResponseDetail1  extends BackboneElement  {
   /**
   * Description: "The type of reveneu or cost center providing the product and/or service."
@@ -50,7 +55,7 @@ public class ClaimResponseDetail1  extends BackboneElement  {
   /**
   * Description: "Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours."
   */
-  protected java.util.List<CodeableConcept> modifier = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> modifier;
 
   /**
   * Description: "The fee charged for the professional service or product.."
@@ -60,17 +65,17 @@ public class ClaimResponseDetail1  extends BackboneElement  {
   /**
   * Description: "A list of note references to the notes provided below."
   */
-  protected java.util.List<Float> noteNumber = new java.util.ArrayList<>();
+  protected java.util.List<Float> noteNumber;
 
   /**
   * Description: "Extensions for noteNumber"
   */
-  protected transient java.util.List<Element> _noteNumber = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _noteNumber;
 
   /**
   * Description: "The adjudications results."
   */
-  protected java.util.List<ClaimResponseAdjudication> adjudication = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseAdjudication> adjudication;
 
   public ClaimResponseDetail1() {
   }

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PractitionerModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A person who is directly or indirectly involved in the provisioning of healthcare."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Practitioner  extends DomainResource  {
   /**
   * Description: "This is a Practitioner resource"
@@ -41,7 +46,7 @@ public class Practitioner  extends DomainResource  {
   /**
   * Description: "An identifier that applies to this person in this role."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Whether this practitioner's record is in active use."
@@ -56,17 +61,17 @@ public class Practitioner  extends DomainResource  {
   /**
   * Description: "The name(s) associated with the practitioner."
   */
-  protected java.util.List<HumanName> name = new java.util.ArrayList<>();
+  protected java.util.List<HumanName> name;
 
   /**
   * Description: "A contact detail for the practitioner, e.g. a telephone number or an email address."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   /**
   * Description: "Address(es) of the practitioner that are not role specific (typically home address). \rWork addresses are not typically entered in this property as they are usually role dependent."
   */
-  protected java.util.List<Address> address = new java.util.ArrayList<>();
+  protected java.util.List<Address> address;
 
   /**
   * Description: "Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes."
@@ -92,17 +97,17 @@ public class Practitioner  extends DomainResource  {
   /**
   * Description: "Image of the person."
   */
-  protected java.util.List<Attachment> photo = new java.util.ArrayList<>();
+  protected java.util.List<Attachment> photo;
 
   /**
   * Description: "Qualifications obtained by training and certification."
   */
-  protected java.util.List<PractitionerQualification> qualification = new java.util.ArrayList<>();
+  protected java.util.List<PractitionerQualification> qualification;
 
   /**
   * Description: "A language the practitioner is able to use in patient communication."
   */
-  protected java.util.List<CodeableConcept> communication = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> communication;
 
   public Practitioner() {
   }

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.VisionPrescriptionDispenseModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An authorization for the supply of glasses and/or contact lenses to a patient."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class VisionPrescriptionDispense  extends BackboneElement  {
   /**
   * Description: "Identifies the type of vision correction product which is required for the patient."
@@ -173,7 +178,7 @@ public class VisionPrescriptionDispense  extends BackboneElement  {
   /**
   * Description: "Notes for special requirements such as coatings and lens materials."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   public VisionPrescriptionDispense() {
   }

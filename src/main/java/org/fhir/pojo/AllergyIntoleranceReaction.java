@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AllergyIntoleranceReactionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AllergyIntoleranceReaction  extends BackboneElement  {
   /**
   * Description: "Identification of the specific substance (or pharmaceutical product) considered to be responsible for the Adverse Reaction event. Note: the substance for a specific reaction may be different from the substance identified as the cause of the risk, but it must be consistent with it. For instance, it may be a more specific substance (e.g. a brand medication) or a composite product that includes the identified substance. It must be clinically safe to only process the 'code' and ignore the 'reaction.substance'."
@@ -41,7 +46,7 @@ public class AllergyIntoleranceReaction  extends BackboneElement  {
   * Description: "Clinical symptoms and/or signs that are observed or associated with the adverse reaction event."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<CodeableConcept> manifestation = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> manifestation;
 
   /**
   * Description: "Text description about the reaction as a whole, including details of the manifestation if required."
@@ -82,7 +87,7 @@ public class AllergyIntoleranceReaction  extends BackboneElement  {
   /**
   * Description: "Additional text about the adverse reaction event not captured in other fields."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   public AllergyIntoleranceReaction() {
   }

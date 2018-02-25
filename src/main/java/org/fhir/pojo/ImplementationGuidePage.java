@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ImplementationGuidePage  extends BackboneElement  {
   /**
   * Description: "The source address for the page."
@@ -64,22 +65,22 @@ public class ImplementationGuidePage  extends BackboneElement  {
   /**
   * Description: "For constructed pages, what kind of resources to include in the list."
   */
-  protected java.util.List<String> type = new java.util.ArrayList<>();
+  protected java.util.List<String> type;
 
   /**
   * Description: "Extensions for type"
   */
-  protected transient java.util.List<Element> _type = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _type;
 
   /**
   * Description: "For constructed pages, a list of packages to include in the page (or else empty for everything)."
   */
-  protected java.util.List<String> FHIRpackage = new java.util.ArrayList<>();
+  protected java.util.List<String> FHIRpackage;
 
   /**
   * Description: "Extensions for package"
   */
-  protected transient java.util.List<Element> _package = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _package;
 
   /**
   * Description: "The format of the page."
@@ -95,7 +96,7 @@ public class ImplementationGuidePage  extends BackboneElement  {
   /**
   * Description: "Nested Pages/Sections under this page."
   */
-  protected java.util.List<ImplementationGuidePage> page = new java.util.ArrayList<>();
+  protected java.util.List<ImplementationGuidePage> page;
 
   public ImplementationGuidePage() {}
 

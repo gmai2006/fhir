@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ProcedureFocalDeviceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProcedureFocalDevice  extends BackboneElement  {
   /**
   * Description: "The kind of change that happened to the device during the procedure."

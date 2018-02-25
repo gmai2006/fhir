@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ObservationReferenceRangeModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ObservationReferenceRange  extends BackboneElement  {
   /**
   * Description: "The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3)."
@@ -50,7 +55,7 @@ public class ObservationReferenceRange  extends BackboneElement  {
   /**
   * Description: "Codes to indicate the target population this reference range applies to.  For example, a reference range may be based on the normal population or a particular sex or race."
   */
-  protected java.util.List<CodeableConcept> appliesTo = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> appliesTo;
 
   /**
   * Description: "The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so."

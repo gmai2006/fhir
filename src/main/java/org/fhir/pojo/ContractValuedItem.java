@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ContractValuedItemModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ContractValuedItem  extends BackboneElement  {
   /**
   * Description: "Specific type of Contract Valued Item that may be priced."

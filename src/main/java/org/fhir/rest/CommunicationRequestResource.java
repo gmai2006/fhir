@@ -27,7 +27,6 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
-import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.DELETE;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,19 +44,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.PUT;
-
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Context;
 import com.google.inject.Inject;
 
 import org.fhir.pojo.CommunicationRequest;
 import org.fhir.service.CommunicationRequestService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
-import org.fhir.pojo.Narrative;
-import org.fhir.pojo.OperationOutcome;
+import org.fhir.utils.FhirConstant;
 
 @Path("/CommunicationRequest")
 @Consumes(MediaType.APPLICATION_JSON)
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_JSON})
 /**
  * Auto generated RESTful class
  */
@@ -83,93 +83,61 @@ public class CommunicationRequestResource {
 		return this.service.update(obj);
 	}
 
-
   @GET
   @Path("{id}")
-  public CommunicationRequest find(@PathParam("id") String id) {
-  	return this.service.find(id);
-  }
-
-  @GET
-  public CommunicationRequest findById(@QueryParam("_id") String id) {
-  	return this.service.find(id);
-  }
-
-  @GET
-  public List<CommunicationRequest> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
-  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<CommunicationRequest> findByTag(@QueryParam("_tag") String _tag) {
-  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<CommunicationRequest> findByProfile(@QueryParam("_profile") String _profile) {
-  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<CommunicationRequest> findBySecurity(@QueryParam("_security") String _security) {
-  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<CommunicationRequest> findByText(@QueryParam("_text") String _text) {
-  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
-  	return this.service.findByText(new QueryBuilder(params));
-  }
-
-  @GET
-  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public OperationOutcome findByList(@QueryParam("_list") String _list) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public List<CommunicationRequest> findAll() {
-  	return this.service.selectAll();
+  public Response find(@PathParam("id") String id) {
+  	CommunicationRequest result = this.service.find(id);
+  	if (null == result) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
 
   @GET
   @Path("select/{max}")
-  public List<CommunicationRequest> findWithLimit(@PathParam("max") String max) {
+  public Response findWithLimit(@PathParam("max") String max) {
   	Integer input = null;
   	try {
   		input = Integer.valueOf(max);
   	} catch (Exception ex) {
   		throw new WebApplicationException(Response.Status.BAD_REQUEST);
   	}
-    return service.select(input);
+  	List<CommunicationRequest> result = service.select(input);
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
+
+  @GET
+  public Response findByField(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.META_FIELDS.contains(first)
+  			&& !FhirConstant.ACCOUNT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	}
+
+  	List<CommunicationRequest> result = null;
+
+  	if (FhirConstant.META_FIELDS.contains(first)) {
+  		java.util.Map<String, String> params = QueryParser.parse(str);
+  		result = this.service.findByMeta(new QueryBuilder(params));
+  	}
+  	else if (FhirConstant.COMMUNICATIONREQUEST_FIELDS.contains(first)) {
+  		java.util.Map<String, String> params = QueryParser.parse(str);
+  		result = this.service.findByField(new QueryBuilder(params));
+  	} 
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
 
   /**
@@ -178,9 +146,25 @@ public class CommunicationRequestResource {
   */
   @GET
   @Path("basedon")
-  public List<CommunicationRequest> basedon(@QueryParam("basedon")String basedon) {
-  	java.util.Map<String, String> params = QueryParser.parse(basedon, VALID_FIELDS);
-  	return this.service.findByBasedOn(new QueryBuilder(params));
+  public Response basedon(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<CommunicationRequest> result = this.service.findByBasedOn(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Request(s) replaced by this request
@@ -188,9 +172,77 @@ public class CommunicationRequestResource {
   */
   @GET
   @Path("replaces")
-  public List<CommunicationRequest> replaces(@QueryParam("replaces")String replaces) {
-  	java.util.Map<String, String> params = QueryParser.parse(replaces, VALID_FIELDS);
-  	return this.service.findByReplaces(new QueryBuilder(params));
+  public Response replaces(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<CommunicationRequest> result = this.service.findByReplaces(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
+  /**
+  * Descr: Message category
+  * Type: token
+  */
+  @GET
+  @Path("category")
+  public Response category(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.CODEABLECONCEPT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<CommunicationRequest> result = this.service.findByCategory(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
+  /**
+  * Descr: A channel of communication
+  * Type: token
+  */
+  @GET
+  @Path("medium")
+  public Response medium(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.CODEABLECONCEPT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<CommunicationRequest> result = this.service.findByMedium(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Focus of message
@@ -198,9 +250,25 @@ public class CommunicationRequestResource {
   */
   @GET
   @Path("patient")
-  public List<CommunicationRequest> patient(@QueryParam("patient")String patient) {
-  	java.util.Map<String, String> params = QueryParser.parse(patient, VALID_FIELDS);
-  	return this.service.findBySubject(new QueryBuilder(params));
+  public Response patient(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<CommunicationRequest> result = this.service.findBySubject(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Message recipient
@@ -208,9 +276,25 @@ public class CommunicationRequestResource {
   */
   @GET
   @Path("recipient")
-  public List<CommunicationRequest> recipient(@QueryParam("recipient")String recipient) {
-  	java.util.Map<String, String> params = QueryParser.parse(recipient, VALID_FIELDS);
-  	return this.service.findByRecipient(new QueryBuilder(params));
+  public Response recipient(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<CommunicationRequest> result = this.service.findByRecipient(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Encounter or episode leading to message
@@ -218,9 +302,25 @@ public class CommunicationRequestResource {
   */
   @GET
   @Path("context")
-  public List<CommunicationRequest> context(@QueryParam("context")String context) {
-  	java.util.Map<String, String> params = QueryParser.parse(context, VALID_FIELDS);
-  	return this.service.findByContext(new QueryBuilder(params));
+  public Response context(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<CommunicationRequest> result = this.service.findByContext(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: Message sender
@@ -228,73 +328,24 @@ public class CommunicationRequestResource {
   */
   @GET
   @Path("sender")
-  public List<CommunicationRequest> sender(@QueryParam("sender")String sender) {
-  	java.util.Map<String, String> params = QueryParser.parse(sender, VALID_FIELDS);
-  	return this.service.findBySender(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Unique identifier
-  * Type: token
-  */
-  @GET
-  public List<CommunicationRequest> identifier(@QueryParam("identifier")String identifier) {
-  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Composite request this is part of
-  * Type: token
-  */
-  @GET
-  public List<CommunicationRequest> groupidentifier(@QueryParam("groupidentifier")String groupidentifier) {
-  	java.util.Map<String, String> params = QueryParser.parse(groupidentifier, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: draft | active | suspended | cancelled | completed | entered-in-error | unknown
-  * Type: token
-  */
-  @GET
-  public List<CommunicationRequest> status(@QueryParam("status")String status) {
-  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Message category
-  * Type: token
-  */
-  @GET
-  public List<CommunicationRequest> category(@QueryParam("category")String category) {
-  	java.util.Map<String, String> params = QueryParser.parse(category, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Message urgency
-  * Type: token
-  */
-  @GET
-  public List<CommunicationRequest> priority(@QueryParam("priority")String priority) {
-  	java.util.Map<String, String> params = QueryParser.parse(priority, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: A channel of communication
-  * Type: token
-  */
-  @GET
-  public List<CommunicationRequest> medium(@QueryParam("medium")String medium) {
-  	java.util.Map<String, String> params = QueryParser.parse(medium, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: When scheduled
-  * Type: date
-  */
-  @GET
-  public List<CommunicationRequest> occurrence(@QueryParam("occurrence")String occurrence) {
-  	java.util.Map<String, String> params = QueryParser.parse(occurrence, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
+  public Response sender(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
 
-  private static final String VALID_FIELDS = "authored|basedon|category|context|encounter|groupidentifier|identifier|medium|occurrence|patient|priority|recipient|replaces|requester|sender|status|subject";
+  	if (!FhirConstant.REFERENCE_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<CommunicationRequest> result = this.service.findBySender(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
 }

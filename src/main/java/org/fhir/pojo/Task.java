@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.TaskModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A task to be performed."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Task  extends DomainResource  {
   /**
   * Description: "This is a Task resource"
@@ -41,7 +46,7 @@ public class Task  extends DomainResource  {
   /**
   * Description: "The business identifier for this task."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A reference to a formal or informal definition of the task.  For example, a protocol, a step within a defined workflow definition, etc."
@@ -61,7 +66,7 @@ public class Task  extends DomainResource  {
   /**
   * Description: "BasedOn refers to a higher-level authorization that triggered the creation of the task.  It references a \"request\" resource such as a ProcedureRequest, MedicationRequest, ProcedureRequest, CarePlan, etc. which is distinct from the \"request\" resource the task is seeking to fulfil.  This latter resource is referenced by FocusOn.  For example, based on a ProcedureRequest (= BasedOn), a task is created to fulfil a procedureRequest ( = FocusOn ) to collect a specimen from a patient."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "An identifier that links together multiple tasks and other requests that were created in the same context."
@@ -71,7 +76,7 @@ public class Task  extends DomainResource  {
   /**
   * Description: "Task that this particular task is part of."
   */
-  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf;
 
   /**
   * Description: "The current status of the task."
@@ -180,7 +185,7 @@ public class Task  extends DomainResource  {
   /**
   * Description: "The type of participant that can execute the task."
   */
-  protected java.util.List<CodeableConcept> performerType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> performerType;
 
   /**
   * Description: "Individual organization or Device currently responsible for task execution."
@@ -195,12 +200,12 @@ public class Task  extends DomainResource  {
   /**
   * Description: "Free-text information captured about the task as it progresses."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Links to Provenance records for past versions of this Task that identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the task."
   */
-  protected java.util.List<Reference> relevantHistory = new java.util.ArrayList<>();
+  protected java.util.List<Reference> relevantHistory;
 
   /**
   * Description: "If the Task.focus is a request resource and the task is seeking fulfillment (i.e is asking for the request to be actioned), this element identifies any limitations on what parts of the referenced request should be actioned."
@@ -210,12 +215,12 @@ public class Task  extends DomainResource  {
   /**
   * Description: "Additional information that may be needed in the execution of the task."
   */
-  protected java.util.List<TaskInput> input = new java.util.ArrayList<>();
+  protected java.util.List<TaskInput> input;
 
   /**
   * Description: "Outputs produced by the Task."
   */
-  protected java.util.List<TaskOutput> output = new java.util.ArrayList<>();
+  protected java.util.List<TaskOutput> output;
 
   public Task() {
   }

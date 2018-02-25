@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ContributorModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A contributor to the content of a knowledge asset, including authors, editors, reviewers, and endorsers."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Contributor  extends Element  {
   /**
   * Description: "The type of contributor."
@@ -55,7 +60,7 @@ public class Contributor  extends Element  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the contributor."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   public Contributor() {
   }

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EncounterStatusHistoryModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class EncounterStatusHistory  extends BackboneElement  {
   /**
   * Description: "planned | arrived | triaged | in-progress | onleave | finished | cancelled +."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.NutritionOrderEnteralFormulaModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class NutritionOrderEnteralFormula  extends BackboneElement  {
   /**
   * Description: "The type of enteral or infant formula such as an adult standard formula with fiber or a soy-based infant formula."
@@ -75,7 +80,7 @@ public class NutritionOrderEnteralFormula  extends BackboneElement  {
   /**
   * Description: "Formula administration instructions as structured data.  This repeating structure allows for changing the administration rate or volume over time for both bolus and continuous feeding.  An example of this would be an instruction to increase the rate of continuous feeding every 2 hours."
   */
-  protected java.util.List<NutritionOrderAdministration> administration = new java.util.ArrayList<>();
+  protected java.util.List<NutritionOrderAdministration> administration;
 
   /**
   * Description: "The maximum total quantity of formula that may be administered to a subject over the period of time, e.g. 1440 mL over 24 hours."

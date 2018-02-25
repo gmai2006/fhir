@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EligibilityResponseModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides eligibility and plan details from the processing of an Eligibility resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class EligibilityResponse  extends DomainResource  {
   /**
   * Description: "This is a EligibilityResponse resource"
@@ -41,7 +46,7 @@ public class EligibilityResponse  extends DomainResource  {
   /**
   * Description: "The Response business identifier."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."
@@ -113,7 +118,7 @@ public class EligibilityResponse  extends DomainResource  {
   /**
   * Description: "The insurer may provide both the details for the requested coverage as well as details for additional coverages known to the insurer."
   */
-  protected java.util.List<EligibilityResponseInsurance> insurance = new java.util.ArrayList<>();
+  protected java.util.List<EligibilityResponseInsurance> insurance;
 
   /**
   * Description: "The form to be used for printing the content."
@@ -123,7 +128,7 @@ public class EligibilityResponse  extends DomainResource  {
   /**
   * Description: "Mutually exclusive with Services Provided (Item)."
   */
-  protected java.util.List<EligibilityResponseError> error = new java.util.ArrayList<>();
+  protected java.util.List<EligibilityResponseError> error;
 
   public EligibilityResponse() {
   }

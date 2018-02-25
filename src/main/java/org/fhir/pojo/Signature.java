@@ -26,16 +26,17 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A digital signature along with supporting context. The signature may be electronic/cryptographic in nature, or a graphical image representing a hand-written signature, or a signature process. Different signature approaches have different utilities."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Signature  extends Element  {
   /**
   * Description: "An indication of the reason that the entity signed this document. This may be explicitly included as part of the signature information and can be used when determining accountability for various actions concerning the document."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<Coding> type = new java.util.ArrayList<>();
+  protected java.util.List<Coding> type;
 
   /**
   * Description: "When the digital signature was signed."

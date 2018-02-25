@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CapabilityStatementSecurityModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CapabilityStatementSecurity  extends BackboneElement  {
   /**
   * Description: "Server adds CORS headers when responding to requests - this enables javascript applications to use the server."
@@ -45,7 +50,7 @@ public class CapabilityStatementSecurity  extends BackboneElement  {
   /**
   * Description: "Types of security services that are supported/required by the system."
   */
-  protected java.util.List<CodeableConcept> service = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> service;
 
   /**
   * Description: "General description of how security works."
@@ -60,7 +65,7 @@ public class CapabilityStatementSecurity  extends BackboneElement  {
   /**
   * Description: "Certificates associated with security profiles."
   */
-  protected java.util.List<CapabilityStatementCertificate> certificate = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementCertificate> certificate;
 
   public CapabilityStatementSecurity() {
   }

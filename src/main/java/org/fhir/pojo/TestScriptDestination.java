@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TestScriptDestination  extends BackboneElement  {
   /**
   * Description: "Abstract name given to a destination server in this test script.  The name is provided as a number starting at 1."

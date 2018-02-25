@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.StructureDefinitionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A definition of a FHIR structure. This resource is used to describe the underlying resources, data types defined in FHIR, and also for describing extensions and constraints on resources and data types."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class StructureDefinition  extends DomainResource  {
   /**
   * Description: "This is a StructureDefinition resource"
@@ -51,7 +56,7 @@ public class StructureDefinition  extends DomainResource  {
   /**
   * Description: "A formal identifier that is used to identify this structure definition when it is represented in other formats, or referenced in a specification, model, design or an instance."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The identifier that is used to identify this version of the structure definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the structure definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
@@ -127,7 +132,7 @@ public class StructureDefinition  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A free text natural language description of the structure definition from a consumer's perspective."
@@ -142,12 +147,12 @@ public class StructureDefinition  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate structure definition instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the structure definition is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Explaination of why this structure definition is needed and why it has been designed as it has."
@@ -172,7 +177,7 @@ public class StructureDefinition  extends DomainResource  {
   /**
   * Description: "A set of key words or terms from external terminologies that may be used to assist with indexing and searching of templates."
   */
-  protected java.util.List<Coding> keyword = new java.util.ArrayList<>();
+  protected java.util.List<Coding> keyword;
 
   /**
   * Description: "The version of the FHIR specification on which this StructureDefinition is based - this is the formal version of the specification, without the revision number, e.g. [publication].[major].[minor], which is 3.0.1 for this version."
@@ -188,7 +193,7 @@ public class StructureDefinition  extends DomainResource  {
   /**
   * Description: "An external specification that the content is mapped to."
   */
-  protected java.util.List<StructureDefinitionMapping> mapping = new java.util.ArrayList<>();
+  protected java.util.List<StructureDefinitionMapping> mapping;
 
   /**
   * Description: "Defines the kind of structure that this definition is describing."
@@ -223,22 +228,22 @@ public class StructureDefinition  extends DomainResource  {
   /**
   * Description: "Identifies the types of resource or data type elements to which the extension can be applied."
   */
-  protected java.util.List<String> context = new java.util.ArrayList<>();
+  protected java.util.List<String> context;
 
   /**
   * Description: "Extensions for context"
   */
-  protected transient java.util.List<Element> _context = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _context;
 
   /**
   * Description: "A set of rules as Fluent Invariants about when the extension can be used (e.g. co-occurrence variants for the extension)."
   */
-  protected java.util.List<String> contextInvariant = new java.util.ArrayList<>();
+  protected java.util.List<String> contextInvariant;
 
   /**
   * Description: "Extensions for contextInvariant"
   */
-  protected transient java.util.List<Element> _contextInvariant = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _contextInvariant;
 
   /**
   * Description: "The type this structure describes. If the derivation kind is 'specialization' then this is the master definition for a type, and there is always one of these (a data type, an extension, a resource, including abstract ones). Otherwise the structure definition is a constraint on the stated type (and in this case, the type cannot be an abstract type)."

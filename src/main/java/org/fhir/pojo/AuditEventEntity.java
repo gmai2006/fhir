@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AuditEventEntityModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AuditEventEntity  extends BackboneElement  {
   /**
   * Description: "Identifies a specific instance of the entity. The reference should always be version specific."
@@ -60,7 +65,7 @@ public class AuditEventEntity  extends BackboneElement  {
   /**
   * Description: "Security labels for the identified entity."
   */
-  protected java.util.List<Coding> securityLabel = new java.util.ArrayList<>();
+  protected java.util.List<Coding> securityLabel;
 
   /**
   * Description: "A name of the entity in the audit event."
@@ -95,7 +100,7 @@ public class AuditEventEntity  extends BackboneElement  {
   /**
   * Description: "Tagged value pairs for conveying additional information about the entity."
   */
-  protected java.util.List<AuditEventDetail> detail = new java.util.ArrayList<>();
+  protected java.util.List<AuditEventDetail> detail;
 
   public AuditEventEntity() {
   }

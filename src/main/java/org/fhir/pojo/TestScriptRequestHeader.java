@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TestScriptRequestHeader  extends BackboneElement  {
   /**
   * Description: "The HTTP header field e.g. \"Accept\"."

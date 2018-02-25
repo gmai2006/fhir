@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.GraphDefinitionTargetModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GraphDefinitionTarget  extends BackboneElement  {
   /**
   * Description: "Type of resource this link refers to."
@@ -56,12 +61,12 @@ public class GraphDefinitionTarget  extends BackboneElement  {
   /**
   * Description: "Compartment Consistency Rules."
   */
-  protected java.util.List<GraphDefinitionCompartment> compartment = new java.util.ArrayList<>();
+  protected java.util.List<GraphDefinitionCompartment> compartment;
 
   /**
   * Description: "Additional links from target resource."
   */
-  protected java.util.List<GraphDefinitionLink> link = new java.util.ArrayList<>();
+  protected java.util.List<GraphDefinitionLink> link;
 
   public GraphDefinitionTarget() {
   }

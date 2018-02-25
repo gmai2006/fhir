@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ReferralRequestModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Used to record and send details about a request for referral service or transfer of a patient to the care of another provider or provider organization."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ReferralRequest  extends DomainResource  {
   /**
   * Description: "This is a ReferralRequest resource"
@@ -41,22 +46,22 @@ public class ReferralRequest  extends DomainResource  {
   /**
   * Description: "Business identifier that uniquely identifies the referral/care transfer request instance."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A protocol, guideline, orderset or other definition that is adhered to in whole or in part by this request."
   */
-  protected java.util.List<Reference> definition = new java.util.ArrayList<>();
+  protected java.util.List<Reference> definition;
 
   /**
   * Description: "Indicates any plans, proposals or orders that this request is intended to satisfy - in whole or in part."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "Completed or terminated request(s) whose function is taken by this new request."
   */
-  protected java.util.List<Reference> replaces = new java.util.ArrayList<>();
+  protected java.util.List<Reference> replaces;
 
   /**
   * Description: "The business identifier of the logical \"grouping\" request/order that this referral is a part of."
@@ -104,7 +109,7 @@ public class ReferralRequest  extends DomainResource  {
   /**
   * Description: "The service(s) that is/are requested to be provided to the patient.  For example: cardiac pacemaker insertion."
   */
-  protected java.util.List<CodeableConcept> serviceRequested = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> serviceRequested;
 
   /**
   * Description: "The patient who is the subject of a referral or transfer of care request."
@@ -157,17 +162,17 @@ public class ReferralRequest  extends DomainResource  {
   /**
   * Description: "The healthcare provider(s) or provider organization(s) who/which is to receive the referral/transfer of care request."
   */
-  protected java.util.List<Reference> recipient = new java.util.ArrayList<>();
+  protected java.util.List<Reference> recipient;
 
   /**
   * Description: "Description of clinical condition indicating why referral/transfer of care is requested.  For example:  Pathological Anomalies, Disabled (physical or mental),  Behavioral Management."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "Indicates another resource whose existence justifies this request."
   */
-  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference;
 
   /**
   * Description: "The reason element gives a short description of why the referral is being made, the description expands on this to support a more complete clinical summary."
@@ -182,17 +187,17 @@ public class ReferralRequest  extends DomainResource  {
   /**
   * Description: "Any additional (administrative, financial or clinical) information required to support request for referral or transfer of care.  For example: Presenting problems/chief complaints Medical History Family History Alerts Allergy/Intolerance and Adverse Reactions Medications Observations/Assessments (may include cognitive and fundtional assessments) Diagnostic Reports Care Plan."
   */
-  protected java.util.List<Reference> supportingInfo = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingInfo;
 
   /**
   * Description: "Comments made about the referral request by any of the participants."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Links to Provenance records for past versions of this resource or fulfilling request or event resources that identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the resource."
   */
-  protected java.util.List<Reference> relevantHistory = new java.util.ArrayList<>();
+  protected java.util.List<Reference> relevantHistory;
 
   public ReferralRequest() {
   }

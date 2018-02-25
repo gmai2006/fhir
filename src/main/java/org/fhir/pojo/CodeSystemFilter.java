@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CodeSystemFilterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CodeSystemFilter  extends BackboneElement  {
   /**
   * Description: "The code that identifies this filter when it is used in the instance."
@@ -56,12 +61,12 @@ public class CodeSystemFilter  extends BackboneElement  {
   /**
   * Description: "A list of operators that can be used with the filter."
   */
-  protected java.util.List<String> operator = new java.util.ArrayList<>();
+  protected java.util.List<String> operator;
 
   /**
   * Description: "Extensions for operator"
   */
-  protected transient java.util.List<Element> _operator = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _operator;
 
   /**
   * Description: "A description of what the value for the filter should be."

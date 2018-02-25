@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.GuidanceResponseModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GuidanceResponse  extends DomainResource  {
   /**
   * Description: "This is a GuidanceResponse resource"
@@ -109,12 +114,12 @@ public class GuidanceResponse  extends DomainResource  {
   /**
   * Description: "Provides a mechanism to communicate additional information about the response."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Messages resulting from the evaluation of the artifact or artifacts. As part of evaluating the request, the engine may produce informational or warning messages. These messages will be provided by this element."
   */
-  protected java.util.List<Reference> evaluationMessage = new java.util.ArrayList<>();
+  protected java.util.List<Reference> evaluationMessage;
 
   /**
   * Description: "The output parameters of the evaluation, if any. Many modules will result in the return of specific resources such as procedure or communication requests that are returned as part of the operation result. However, modules may define specific outputs that would be returned as the result of the evaluation, and these would be returned in this element."
@@ -129,7 +134,7 @@ public class GuidanceResponse  extends DomainResource  {
   /**
   * Description: "If the evaluation could not be completed due to lack of information, or additional information would potentially result in a more accurate response, this element will a description of the data required in order to proceed with the evaluation. A subsequent request to the service should include this data."
   */
-  protected java.util.List<DataRequirement> dataRequirement = new java.util.ArrayList<>();
+  protected java.util.List<DataRequirement> dataRequirement;
 
   public GuidanceResponse() {
   }

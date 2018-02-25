@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ServiceDefinitionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The ServiceDefinition describes a unit of decision support functionality that is made available as a service, such as immunization modules or drug-drug interaction checking."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ServiceDefinition  extends DomainResource  {
   /**
   * Description: "This is a ServiceDefinition resource"
@@ -51,7 +56,7 @@ public class ServiceDefinition  extends DomainResource  {
   /**
   * Description: "A formal identifier that is used to identify this service definition when it is represented in other formats, or referenced in a specification, model, design or an instance. This is used for CMS or NQF identifiers for a measure artifact. Note that at least one identifier is required for non-experimental active artifacts."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The identifier that is used to identify this version of the service definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the service definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
@@ -184,27 +189,27 @@ public class ServiceDefinition  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate service definition instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the service definition is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Descriptive topics related to the module. Topics provide a high-level categorization of the module that can be useful for filtering and searching."
   */
-  protected java.util.List<CodeableConcept> topic = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> topic;
 
   /**
   * Description: "A contributor to the content of the module, including authors, editors, reviewers, and endorsers."
   */
-  protected java.util.List<Contributor> contributor = new java.util.ArrayList<>();
+  protected java.util.List<Contributor> contributor;
 
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A copyright statement relating to the service definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the service definition."
@@ -219,17 +224,17 @@ public class ServiceDefinition  extends DomainResource  {
   /**
   * Description: "Related resources such as additional documentation, justification, or bibliographic references."
   */
-  protected java.util.List<RelatedArtifact> relatedArtifact = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> relatedArtifact;
 
   /**
   * Description: "The trigger element defines when the rule should be invoked. This information is used by consumers of the rule to determine how to integrate the rule into a specific workflow."
   */
-  protected java.util.List<TriggerDefinition> trigger = new java.util.ArrayList<>();
+  protected java.util.List<TriggerDefinition> trigger;
 
   /**
   * Description: "Data requirements are a machine processable description of the data required by the module in order to perform a successful evaluation."
   */
-  protected java.util.List<DataRequirement> dataRequirement = new java.util.ArrayList<>();
+  protected java.util.List<DataRequirement> dataRequirement;
 
   /**
   * Description: "A reference to the operation that is used to invoke this service."

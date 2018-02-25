@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ImplementationGuidePackageModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImplementationGuidePackage  extends BackboneElement  {
   /**
   * Description: "The name for the group, as used in page.package."
@@ -56,7 +61,7 @@ public class ImplementationGuidePackage  extends BackboneElement  {
   * Description: "A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<ImplementationGuideResource> resource = new java.util.ArrayList<>();
+  protected java.util.List<ImplementationGuideResource> resource;
 
   public ImplementationGuidePackage() {
   }

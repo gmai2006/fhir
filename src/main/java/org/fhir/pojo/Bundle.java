@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.BundleModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A container for a collection of resources."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Bundle  extends Resource  {
   /**
   * Description: "This is a Bundle resource"
@@ -67,12 +72,12 @@ public class Bundle  extends Resource  {
   /**
   * Description: "A series of links that provide context to this bundle."
   */
-  protected java.util.List<BundleLink> link = new java.util.ArrayList<>();
+  protected java.util.List<BundleLink> link;
 
   /**
   * Description: "An entry in a bundle resource - will either contain a resource, or information about a resource (transactions and history only)."
   */
-  protected java.util.List<BundleEntry> entry = new java.util.ArrayList<>();
+  protected java.util.List<BundleEntry> entry;
 
   /**
   * Description: "Digital Signature - base64 encoded. XML-DSIg or a JWT."

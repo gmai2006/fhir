@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.LocationPositionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Details and position information for a physical place where services are provided  and resources and participants may be stored, found, contained or accommodated."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class LocationPosition  extends BackboneElement  {
   /**
   * Description: "Longitude. The value domain and the interpretation are the same as for the text of the longitude element in KML (see notes below)."

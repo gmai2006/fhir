@@ -26,16 +26,21 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AuditEventAgentModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AuditEventAgent  extends BackboneElement  {
   /**
   * Description: "The security role that the user was acting under, that come from local codes defined by the access control security system (e.g. RBAC, ABAC) used in the local context."
   */
-  protected java.util.List<CodeableConcept> role = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> role;
 
   /**
   * Description: "Direct reference to a resource that identifies the agent."
@@ -85,12 +90,12 @@ public class AuditEventAgent  extends BackboneElement  {
   /**
   * Description: "The policy or plan that authorized the activity being recorded. Typically, a single activity may have multiple applicable policies, such as patient consent, guarantor funding, etc. The policy would also indicate the security token used."
   */
-  protected java.util.List<String> policy = new java.util.ArrayList<>();
+  protected java.util.List<String> policy;
 
   /**
   * Description: "Extensions for policy"
   */
-  protected transient java.util.List<Element> _policy = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _policy;
 
   /**
   * Description: "Type of media involved. Used when the event is about exporting/importing onto media."
@@ -105,7 +110,7 @@ public class AuditEventAgent  extends BackboneElement  {
   /**
   * Description: "The reason (purpose of use), specific to this agent, that was used during the event being recorded."
   */
-  protected java.util.List<CodeableConcept> purposeOfUse = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> purposeOfUse;
 
   public AuditEventAgent() {
   }

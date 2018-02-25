@@ -26,36 +26,41 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.NutritionOrderOralDietModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class NutritionOrderOralDiet  extends BackboneElement  {
   /**
   * Description: "The kind of diet or dietary restriction such as fiber restricted diet or diabetic diet."
   */
-  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type;
 
   /**
   * Description: "The time period and frequency at which the diet should be given.  The diet should be given for the combination of all schedules if more than one schedule is present."
   */
-  protected java.util.List<Timing> schedule = new java.util.ArrayList<>();
+  protected java.util.List<Timing> schedule;
 
   /**
   * Description: "Class that defines the quantity and type of nutrient modifications (for example carbohydrate, fiber or sodium) required for the oral diet."
   */
-  protected java.util.List<NutritionOrderNutrient> nutrient = new java.util.ArrayList<>();
+  protected java.util.List<NutritionOrderNutrient> nutrient;
 
   /**
   * Description: "Class that describes any texture modifications required for the patient to safely consume various types of solid foods."
   */
-  protected java.util.List<NutritionOrderTexture> texture = new java.util.ArrayList<>();
+  protected java.util.List<NutritionOrderTexture> texture;
 
   /**
   * Description: "The required consistency (e.g. honey-thick, nectar-thick, thin, thickened.) of liquids or fluids served to the patient."
   */
-  protected java.util.List<CodeableConcept> fluidConsistencyType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> fluidConsistencyType;
 
   /**
   * Description: "Free text or additional instructions or information pertaining to the oral diet."

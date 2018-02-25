@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MedicationDispensePerformerModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MedicationDispensePerformer  extends BackboneElement  {
   /**
   * Description: "The device, practitioner, etc. who performed the action.  It should be assumed that the actor is the dispenser of the medication."

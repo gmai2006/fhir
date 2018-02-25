@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ImagingManifestSeriesModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A text description of the DICOM SOP instances selected in the ImagingManifest; or the reason for, or significance of, the selection."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImagingManifestSeries  extends BackboneElement  {
   /**
   * Description: "Series instance UID of the SOP instances in the selection."
@@ -46,13 +51,13 @@ public class ImagingManifestSeries  extends BackboneElement  {
   /**
   * Description: "The network service providing access (e.g., query, view, or retrieval) for this series. See implementation notes for information about using DICOM endpoints. A series-level endpoint, if present, has precedence over a study-level endpoint with the same Endpoint.type."
   */
-  protected java.util.List<Reference> endpoint = new java.util.ArrayList<>();
+  protected java.util.List<Reference> endpoint;
 
   /**
   * Description: "Identity and locating information of the selected DICOM SOP instances."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<ImagingManifestInstance> instance = new java.util.ArrayList<>();
+  protected java.util.List<ImagingManifestInstance> instance;
 
   public ImagingManifestSeries() {
   }

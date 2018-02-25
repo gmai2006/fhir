@@ -26,16 +26,21 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PatientContactModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PatientContact  extends BackboneElement  {
   /**
   * Description: "The nature of the relationship between the patient and the contact person."
   */
-  protected java.util.List<CodeableConcept> relationship = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> relationship;
 
   /**
   * Description: "A name associated with the contact person."
@@ -45,7 +50,7 @@ public class PatientContact  extends BackboneElement  {
   /**
   * Description: "A contact detail for the person, e.g. a telephone number or an email address."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   /**
   * Description: "Address for the contact person."

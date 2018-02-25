@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PatientModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Patient  extends DomainResource  {
   /**
   * Description: "This is a Patient resource"
@@ -41,7 +46,7 @@ public class Patient  extends DomainResource  {
   /**
   * Description: "An identifier for this patient."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Whether this patient record is in active use."
@@ -56,12 +61,12 @@ public class Patient  extends DomainResource  {
   /**
   * Description: "A name associated with the individual."
   */
-  protected java.util.List<HumanName> name = new java.util.ArrayList<>();
+  protected java.util.List<HumanName> name;
 
   /**
   * Description: "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   /**
   * Description: "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
@@ -108,7 +113,7 @@ public class Patient  extends DomainResource  {
   /**
   * Description: "Addresses for the individual."
   */
-  protected java.util.List<Address> address = new java.util.ArrayList<>();
+  protected java.util.List<Address> address;
 
   /**
   * Description: "This field contains a patient's most recent marital (civil) status."
@@ -139,12 +144,12 @@ public class Patient  extends DomainResource  {
   /**
   * Description: "Image of the patient."
   */
-  protected java.util.List<Attachment> photo = new java.util.ArrayList<>();
+  protected java.util.List<Attachment> photo;
 
   /**
   * Description: "A contact party (e.g. guardian, partner, friend) for the patient."
   */
-  protected java.util.List<PatientContact> contact = new java.util.ArrayList<>();
+  protected java.util.List<PatientContact> contact;
 
   /**
   * Description: "This patient is known to be an animal."
@@ -154,12 +159,12 @@ public class Patient  extends DomainResource  {
   /**
   * Description: "Languages which may be used to communicate with the patient about his or her health."
   */
-  protected java.util.List<PatientCommunication> communication = new java.util.ArrayList<>();
+  protected java.util.List<PatientCommunication> communication;
 
   /**
   * Description: "Patient's nominated care provider."
   */
-  protected java.util.List<Reference> generalPractitioner = new java.util.ArrayList<>();
+  protected java.util.List<Reference> generalPractitioner;
 
   /**
   * Description: "Organization that is the custodian of the patient record."
@@ -169,7 +174,7 @@ public class Patient  extends DomainResource  {
   /**
   * Description: "Link to another patient resource that concerns the same actual patient."
   */
-  protected java.util.List<PatientLink> link = new java.util.ArrayList<>();
+  protected java.util.List<PatientLink> link;
 
   public Patient() {
   }

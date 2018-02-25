@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ChargeItemModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ChargeItem  extends DomainResource  {
   /**
   * Description: "This is a ChargeItem resource"
@@ -46,12 +51,12 @@ public class ChargeItem  extends DomainResource  {
   /**
   * Description: "References the source of pricing information, rules of application for the code this ChargeItem uses."
   */
-  protected java.util.List<String> definition = new java.util.ArrayList<>();
+  protected java.util.List<String> definition;
 
   /**
   * Description: "Extensions for definition"
   */
-  protected transient java.util.List<Element> _definition = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _definition;
 
   /**
   * Description: "The current state of the ChargeItem."
@@ -66,7 +71,7 @@ public class ChargeItem  extends DomainResource  {
   /**
   * Description: "ChargeItems can be grouped to larger ChargeItems covering the whole set."
   */
-  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf;
 
   /**
   * Description: "A code that identifies the charge, like a billing code."
@@ -109,7 +114,7 @@ public class ChargeItem  extends DomainResource  {
   /**
   * Description: "Indicates who or what performed or participated in the charged service."
   */
-  protected java.util.List<ChargeItemParticipant> participant = new java.util.ArrayList<>();
+  protected java.util.List<ChargeItemParticipant> participant;
 
   /**
   * Description: "The organization requesting the service."
@@ -129,7 +134,7 @@ public class ChargeItem  extends DomainResource  {
   /**
   * Description: "The anatomical location where the related service has been applied."
   */
-  protected java.util.List<CodeableConcept> bodysite = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> bodysite;
 
   /**
   * Description: "Factor overriding the factor determined by the rules associated with the code."
@@ -176,27 +181,27 @@ public class ChargeItem  extends DomainResource  {
   /**
   * Description: "Describes why the event occurred in coded or textual form."
   */
-  protected java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reason;
 
   /**
   * Description: "Indicated the rendered service that caused this charge."
   */
-  protected java.util.List<Reference> service = new java.util.ArrayList<>();
+  protected java.util.List<Reference> service;
 
   /**
   * Description: "Account into which this ChargeItems belongs."
   */
-  protected java.util.List<Reference> account = new java.util.ArrayList<>();
+  protected java.util.List<Reference> account;
 
   /**
   * Description: "Comments made about the event by the performer, subject or other participants."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Further information supporting the this charge."
   */
-  protected java.util.List<Reference> supportingInformation = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingInformation;
 
   public ChargeItem() {
   }

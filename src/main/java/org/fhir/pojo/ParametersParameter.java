@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ParametersParameterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ParametersParameter  extends BackboneElement  {
   /**
   * Description: "The name of the parameter (reference to the operation definition)."
@@ -411,7 +416,7 @@ public class ParametersParameter  extends BackboneElement  {
   /**
   * Description: "A named part of a multi-part parameter."
   */
-  protected java.util.List<ParametersParameter> part = new java.util.ArrayList<>();
+  protected java.util.List<ParametersParameter> part;
 
   public ParametersParameter() {
   }

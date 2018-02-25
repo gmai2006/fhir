@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MeasurePopulationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The Measure resource provides the definition of a quality measure."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MeasurePopulation  extends BackboneElement  {
   /**
   * Description: "A unique identifier for the population criteria. This identifier is used to report data against this criteria within the measure report."

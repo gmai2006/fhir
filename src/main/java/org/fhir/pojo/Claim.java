@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ClaimModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Claim  extends DomainResource  {
   /**
   * Description: "This is a Claim resource"
@@ -41,7 +46,7 @@ public class Claim  extends DomainResource  {
   /**
   * Description: "The business identifier for the instance: claim number, pre-determination or pre-authorization number."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."
@@ -62,7 +67,7 @@ public class Claim  extends DomainResource  {
   /**
   * Description: "A finer grained suite of claim subtype codes which may convey Inpatient vs Outpatient and/or a specialty service. In the US the BillType."
   */
-  protected java.util.List<CodeableConcept> subType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> subType;
 
   /**
   * Description: "Complete (Bill or Claim), Proposed (Pre-Authorization), Exploratory (Pre-determination)."
@@ -128,7 +133,7 @@ public class Claim  extends DomainResource  {
   /**
   * Description: "Other claims which are related to this claim such as prior claim versions or for related services."
   */
-  protected java.util.List<ClaimRelated> related = new java.util.ArrayList<>();
+  protected java.util.List<ClaimRelated> related;
 
   /**
   * Description: "Prescription to support the dispensing of Pharmacy or Vision products."
@@ -158,27 +163,27 @@ public class Claim  extends DomainResource  {
   /**
   * Description: "The members of the team who provided the overall service as well as their role and whether responsible and qualifications."
   */
-  protected java.util.List<ClaimCareTeam> careTeam = new java.util.ArrayList<>();
+  protected java.util.List<ClaimCareTeam> careTeam;
 
   /**
   * Description: "Additional information codes regarding exceptions, special considerations, the condition, situation, prior or concurrent issues. Often there are mutiple jurisdiction specific valuesets which are required."
   */
-  protected java.util.List<ClaimInformation> information = new java.util.ArrayList<>();
+  protected java.util.List<ClaimInformation> information;
 
   /**
   * Description: "List of patient diagnosis for which care is sought."
   */
-  protected java.util.List<ClaimDiagnosis> diagnosis = new java.util.ArrayList<>();
+  protected java.util.List<ClaimDiagnosis> diagnosis;
 
   /**
   * Description: "Ordered list of patient procedures performed to support the adjudication."
   */
-  protected java.util.List<ClaimProcedure> procedure = new java.util.ArrayList<>();
+  protected java.util.List<ClaimProcedure> procedure;
 
   /**
   * Description: "Financial instrument by which payment information for health care."
   */
-  protected java.util.List<ClaimInsurance> insurance = new java.util.ArrayList<>();
+  protected java.util.List<ClaimInsurance> insurance;
 
   /**
   * Description: "An accident which resulted in the need for healthcare services."
@@ -198,7 +203,7 @@ public class Claim  extends DomainResource  {
   /**
   * Description: "First tier of goods and services."
   */
-  protected java.util.List<ClaimItem> item = new java.util.ArrayList<>();
+  protected java.util.List<ClaimItem> item;
 
   /**
   * Description: "The total value of the claim."

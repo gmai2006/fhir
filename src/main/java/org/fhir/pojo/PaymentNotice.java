@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PaymentNoticeModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides the status of the payment for goods and services rendered, and the request and response resource references."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PaymentNotice  extends DomainResource  {
   /**
   * Description: "This is a PaymentNotice resource"
@@ -41,7 +46,7 @@ public class PaymentNotice  extends DomainResource  {
   /**
   * Description: "The notice business identifier."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."

@@ -26,26 +26,31 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CarePlanActivityModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CarePlanActivity  extends BackboneElement  {
   /**
   * Description: "Identifies the outcome at the point when the status of the activity is assessed.  For example, the outcome of an education activity could be patient understands (or not)."
   */
-  protected java.util.List<CodeableConcept> outcomeCodeableConcept = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> outcomeCodeableConcept;
 
   /**
   * Description: "Details of the outcome or action resulting from the activity.  The reference to an \"event\" resource, such as Procedure or Encounter or Observation, is the result/outcome of the activity itself.  The activity can be conveyed using CarePlan.activity.detail OR using the CarePlan.activity.reference (a reference to a “request” resource)."
   */
-  protected java.util.List<Reference> outcomeReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> outcomeReference;
 
   /**
   * Description: "Notes about the adherence/status/progress of the activity."
   */
-  protected java.util.List<Annotation> progress = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> progress;
 
   /**
   * Description: "The details of the proposed activity represented in a specific resource."

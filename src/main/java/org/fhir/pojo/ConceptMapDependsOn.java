@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ConceptMapDependsOnModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ConceptMapDependsOn  extends BackboneElement  {
   /**
   * Description: "A reference to an element that holds a coded value that corresponds to a code system property. The idea is that the information model carries an element somwhere that is labeled to correspond with a code system property."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MedicationDispenseSubstitutionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MedicationDispenseSubstitution  extends BackboneElement  {
   /**
   * Description: "True if the dispenser dispensed a different drug or product from what was prescribed."
@@ -50,12 +55,12 @@ public class MedicationDispenseSubstitution  extends BackboneElement  {
   /**
   * Description: "Indicates the reason for the substitution of (or lack of substitution) from what was prescribed."
   */
-  protected java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reason;
 
   /**
   * Description: "The person or organization that has primary responsibility for the substitution."
   */
-  protected java.util.List<Reference> responsibleParty = new java.util.ArrayList<>();
+  protected java.util.List<Reference> responsibleParty;
 
   public MedicationDispenseSubstitution() {
   }

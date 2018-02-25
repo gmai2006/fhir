@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CodeSystemConceptModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CodeSystemConcept  extends BackboneElement  {
   /**
   * Description: "A code - a text symbol - that uniquely identifies the concept within the code system."
@@ -66,17 +71,17 @@ public class CodeSystemConcept  extends BackboneElement  {
   /**
   * Description: "Additional representations for the concept - other languages, aliases, specialized purposes, used for particular purposes, etc."
   */
-  protected java.util.List<CodeSystemDesignation> designation = new java.util.ArrayList<>();
+  protected java.util.List<CodeSystemDesignation> designation;
 
   /**
   * Description: "A property value for this concept."
   */
-  protected java.util.List<CodeSystemProperty1> property = new java.util.ArrayList<>();
+  protected java.util.List<CodeSystemProperty1> property;
 
   /**
   * Description: "Defines children of a concept to produce a hierarchy of concepts. The nature of the relationships is variable (is-a/contains/categorizes) - see hierarchyMeaning."
   */
-  protected java.util.List<CodeSystemConcept> concept = new java.util.ArrayList<>();
+  protected java.util.List<CodeSystemConcept> concept;
 
   public CodeSystemConcept() {
   }

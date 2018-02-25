@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CareTeamModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care for a patient."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CareTeam  extends DomainResource  {
   /**
   * Description: "This is a CareTeam resource"
@@ -41,7 +46,7 @@ public class CareTeam  extends DomainResource  {
   /**
   * Description: "This records identifiers associated with this care team that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Indicates the current state of the care team."
@@ -56,7 +61,7 @@ public class CareTeam  extends DomainResource  {
   /**
   * Description: "Identifies what kind of team.  This is to support differentiation between multiple co-existing teams, such as care plan team, episode of care team, longitudinal care team."
   */
-  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category;
 
   /**
   * Description: "A label for human use intended to distinguish like teams.  E.g. the \"red\" vs. \"green\" trauma teams."
@@ -86,27 +91,27 @@ public class CareTeam  extends DomainResource  {
   /**
   * Description: "Identifies all people and organizations who are expected to be involved in the care team."
   */
-  protected java.util.List<CareTeamParticipant> participant = new java.util.ArrayList<>();
+  protected java.util.List<CareTeamParticipant> participant;
 
   /**
   * Description: "Describes why the care team exists."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "Condition(s) that this care team addresses."
   */
-  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference;
 
   /**
   * Description: "The organization responsible for the care team."
   */
-  protected java.util.List<Reference> managingOrganization = new java.util.ArrayList<>();
+  protected java.util.List<Reference> managingOrganization;
 
   /**
   * Description: "Comments made about the CareTeam."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   public CareTeam() {
   }

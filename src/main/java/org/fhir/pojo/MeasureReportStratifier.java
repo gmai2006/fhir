@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MeasureReportStratifierModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MeasureReportStratifier  extends BackboneElement  {
   /**
   * Description: "The identifier of this stratifier, as defined in the measure definition."
@@ -40,7 +45,7 @@ public class MeasureReportStratifier  extends BackboneElement  {
   /**
   * Description: "This element contains the results for a single stratum within the stratifier. For example, when stratifying on administrative gender, there will be four strata, one for each possible gender value."
   */
-  protected java.util.List<MeasureReportStratum> stratum = new java.util.ArrayList<>();
+  protected java.util.List<MeasureReportStratum> stratum;
 
   public MeasureReportStratifier() {
   }

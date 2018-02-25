@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CompositionSectionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CompositionSection  extends BackboneElement  {
   /**
   * Description: "The label for this particular section.  This will be part of the rendered content for the document, and is often used to build a table of contents."
@@ -71,7 +76,7 @@ public class CompositionSection  extends BackboneElement  {
   /**
   * Description: "A reference to the actual resource from which the narrative in the section is derived."
   */
-  protected java.util.List<Reference> entry = new java.util.ArrayList<>();
+  protected java.util.List<Reference> entry;
 
   /**
   * Description: "If the section is empty, why the list is empty. An empty section typically has some text explaining the empty reason."
@@ -81,7 +86,7 @@ public class CompositionSection  extends BackboneElement  {
   /**
   * Description: "A nested sub-section within this section."
   */
-  protected java.util.List<CompositionSection> section = new java.util.ArrayList<>();
+  protected java.util.List<CompositionSection> section;
 
   public CompositionSection() {
   }

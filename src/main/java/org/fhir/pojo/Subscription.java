@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SubscriptionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The subscription resource is used to define a push based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined \"channel\" so that another system is able to take an appropriate action."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Subscription  extends DomainResource  {
   /**
   * Description: "This is a Subscription resource"
@@ -51,7 +56,7 @@ public class Subscription  extends DomainResource  {
   /**
   * Description: "Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting."
   */
-  protected java.util.List<ContactPoint> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> contact;
 
   /**
   * Description: "The time for the server to turn the subscription off."
@@ -102,7 +107,7 @@ public class Subscription  extends DomainResource  {
   /**
   * Description: "A tag to add to any resource that matches the criteria, after the subscription is processed."
   */
-  protected java.util.List<Coding> tag = new java.util.ArrayList<>();
+  protected java.util.List<Coding> tag;
 
   public Subscription() {
   }

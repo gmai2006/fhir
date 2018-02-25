@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ObservationRelatedModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ObservationRelated  extends BackboneElement  {
   /**
   * Description: "A code specifying the kind of relationship that exists with the target resource."

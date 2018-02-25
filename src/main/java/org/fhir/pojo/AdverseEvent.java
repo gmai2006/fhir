@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AdverseEventModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AdverseEvent  extends DomainResource  {
   /**
   * Description: "This is a AdverseEvent resource"
@@ -77,7 +82,7 @@ public class AdverseEvent  extends DomainResource  {
   /**
   * Description: "Includes information about the reaction that occurred as a result of exposure to a substance (for example, a drug or a chemical)."
   */
-  protected java.util.List<Reference> reaction = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reaction;
 
   /**
   * Description: "The information about where the adverse event occurred."
@@ -117,22 +122,22 @@ public class AdverseEvent  extends DomainResource  {
   /**
   * Description: "Describes the entity that is suspected to have caused the adverse event."
   */
-  protected java.util.List<AdverseEventSuspectEntity> suspectEntity = new java.util.ArrayList<>();
+  protected java.util.List<AdverseEventSuspectEntity> suspectEntity;
 
   /**
   * Description: "AdverseEvent.subjectMedicalHistory."
   */
-  protected java.util.List<Reference> subjectMedicalHistory = new java.util.ArrayList<>();
+  protected java.util.List<Reference> subjectMedicalHistory;
 
   /**
   * Description: "AdverseEvent.referenceDocument."
   */
-  protected java.util.List<Reference> referenceDocument = new java.util.ArrayList<>();
+  protected java.util.List<Reference> referenceDocument;
 
   /**
   * Description: "AdverseEvent.study."
   */
-  protected java.util.List<Reference> study = new java.util.ArrayList<>();
+  protected java.util.List<Reference> study;
 
   public AdverseEvent() {
   }

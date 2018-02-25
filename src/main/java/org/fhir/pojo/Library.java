@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.LibraryModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The Library resource is a general-purpose container for knowledge asset definitions. It can be used to describe and expose existing knowledge assets such as logic libraries and information model descriptions, as well as to describe a collection of knowledge assets."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Library  extends DomainResource  {
   /**
   * Description: "This is a Library resource"
@@ -51,7 +56,7 @@ public class Library  extends DomainResource  {
   /**
   * Description: "A formal identifier that is used to identify this library when it is represented in other formats, or referenced in a specification, model, design or an instance. e.g. CMS or NQF identifiers for a measure artifact. Note that at least one identifier is required for non-experimental active artifacts."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The identifier that is used to identify this version of the library when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the library author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active artifacts."
@@ -190,27 +195,27 @@ public class Library  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate library instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the library is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Descriptive topics related to the content of the library. Topics provide a high-level categorization of the library that can be useful for filtering and searching."
   */
-  protected java.util.List<CodeableConcept> topic = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> topic;
 
   /**
   * Description: "A contributor to the content of the library, including authors, editors, reviewers, and endorsers."
   */
-  protected java.util.List<Contributor> contributor = new java.util.ArrayList<>();
+  protected java.util.List<Contributor> contributor;
 
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A copyright statement relating to the library and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the library."
@@ -225,22 +230,22 @@ public class Library  extends DomainResource  {
   /**
   * Description: "Related artifacts such as additional documentation, justification, or bibliographic references."
   */
-  protected java.util.List<RelatedArtifact> relatedArtifact = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> relatedArtifact;
 
   /**
   * Description: "The parameter element defines parameters used by the library."
   */
-  protected java.util.List<ParameterDefinition> parameter = new java.util.ArrayList<>();
+  protected java.util.List<ParameterDefinition> parameter;
 
   /**
   * Description: "Describes a set of data that must be provided in order to be able to successfully perform the computations defined by the library."
   */
-  protected java.util.List<DataRequirement> dataRequirement = new java.util.ArrayList<>();
+  protected java.util.List<DataRequirement> dataRequirement;
 
   /**
   * Description: "The content of the library as an Attachment. The content may be a reference to a url, or may be directly embedded as a base-64 string. Either way, the contentType of the attachment determines how to interpret the content."
   */
-  protected java.util.List<Attachment> content = new java.util.ArrayList<>();
+  protected java.util.List<Attachment> content;
 
   public Library() {
   }

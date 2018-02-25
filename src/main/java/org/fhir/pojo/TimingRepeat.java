@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.TimingRepeatModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TimingRepeat  extends BackboneElement  {
   /**
   * Description: "Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule."
@@ -158,32 +163,32 @@ public class TimingRepeat  extends BackboneElement  {
   /**
   * Description: "If one or more days of week is provided, then the action happens only on the specified day(s)."
   */
-  protected java.util.List<String> dayOfWeek = new java.util.ArrayList<>();
+  protected java.util.List<String> dayOfWeek;
 
   /**
   * Description: "Extensions for dayOfWeek"
   */
-  protected transient java.util.List<Element> _dayOfWeek = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _dayOfWeek;
 
   /**
   * Description: "Specified time of day for action to take place."
   */
-  protected java.util.List<String> timeOfDay = new java.util.ArrayList<>();
+  protected java.util.List<String> timeOfDay;
 
   /**
   * Description: "Extensions for timeOfDay"
   */
-  protected transient java.util.List<Element> _timeOfDay = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _timeOfDay;
 
   /**
   * Description: "Real world events that the occurrence of the event should be tied to."
   */
-  protected java.util.List<String> when = new java.util.ArrayList<>();
+  protected java.util.List<String> when;
 
   /**
   * Description: "Extensions for when"
   */
-  protected transient java.util.List<Element> _when = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _when;
 
   /**
   * Description: "The number of minutes from the event. If the event code does not indicate whether the minutes is before or after the event, then the offset is assumed to be after the event."

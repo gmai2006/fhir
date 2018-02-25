@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.QuestionnaireItemModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class QuestionnaireItem  extends BackboneElement  {
   /**
   * Description: "An identifier that is unique within the Questionnaire allowing linkage to the equivalent item in a QuestionnaireResponse resource."
@@ -55,7 +60,7 @@ public class QuestionnaireItem  extends BackboneElement  {
   /**
   * Description: "A terminology code that corresponds to this group or question (e.g. a code from LOINC, which defines many questions and answers)."
   */
-  protected java.util.List<Coding> code = new java.util.ArrayList<>();
+  protected java.util.List<Coding> code;
 
   /**
   * Description: "A short label for a particular group, question or set of display text within the questionnaire used for reference by the individual completing the questionnaire."
@@ -90,7 +95,7 @@ public class QuestionnaireItem  extends BackboneElement  {
   /**
   * Description: "A constraint indicating that this item should only be enabled (displayed/allow answers to be captured) when the specified condition is true."
   */
-  protected java.util.List<QuestionnaireEnableWhen> enableWhen = new java.util.ArrayList<>();
+  protected java.util.List<QuestionnaireEnableWhen> enableWhen;
 
   /**
   * Description: "An indication, if true, that the item must be present in a \"completed\" QuestionnaireResponse.  If false, the item may be skipped when answering the questionnaire."
@@ -141,7 +146,7 @@ public class QuestionnaireItem  extends BackboneElement  {
   /**
   * Description: "One of the permitted answers for a \"choice\" or \"open-choice\" question."
   */
-  protected java.util.List<QuestionnaireOption> option = new java.util.ArrayList<>();
+  protected java.util.List<QuestionnaireOption> option;
 
   /**
   * Description: "The value that should be defaulted when initially rendering the questionnaire for user input."
@@ -251,7 +256,7 @@ public class QuestionnaireItem  extends BackboneElement  {
   /**
   * Description: "Text, questions and other groups to be nested beneath a question or group."
   */
-  protected java.util.List<QuestionnaireItem> item = new java.util.ArrayList<>();
+  protected java.util.List<QuestionnaireItem> item;
 
   public QuestionnaireItem() {
   }

@@ -26,16 +26,21 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AppointmentParticipantModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s)."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AppointmentParticipant  extends BackboneElement  {
   /**
   * Description: "Role of participant in the appointment."
   */
-  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type;
 
   /**
   * Description: "A Person, Location/HealthcareService or Device that is participating in the appointment."

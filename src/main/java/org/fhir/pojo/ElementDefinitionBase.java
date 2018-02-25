@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Captures constraints on each element within the resource, profile, or extension."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ElementDefinitionBase  extends BackboneElement  {
   /**
   * Description: "The Path that identifies the base element - this matches the ElementDefinition.path for that element. Across FHIR, there is only one base definition of any element - that is, an element definition on a [[[StructureDefinition]]] without a StructureDefinition.base."

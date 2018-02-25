@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.BinaryModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A binary resource can contain any content, whether text, image, pdf, zip archive, etc."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Binary  extends Resource  {
   /**
   * Description: "This is a Binary resource"

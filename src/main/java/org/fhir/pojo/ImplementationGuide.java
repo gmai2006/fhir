@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ImplementationGuideModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImplementationGuide  extends DomainResource  {
   /**
   * Description: "This is a ImplementationGuide resource"
@@ -112,7 +117,7 @@ public class ImplementationGuide  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A free text natural language description of the implementation guide from a consumer's perspective."
@@ -127,12 +132,12 @@ public class ImplementationGuide  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate implementation guide instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the implementation guide is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "A copyright statement relating to the implementation guide and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the implementation guide."
@@ -158,27 +163,27 @@ public class ImplementationGuide  extends DomainResource  {
   /**
   * Description: "Another implementation guide that this implementation depends on. Typically, an implementation guide uses value sets, profiles etc.defined in other implementation guides."
   */
-  protected java.util.List<ImplementationGuideDependency> dependency = new java.util.ArrayList<>();
+  protected java.util.List<ImplementationGuideDependency> dependency;
 
   /**
   * Description: "A logical group of resources. Logical groups can be used when building pages."
   */
-  protected java.util.List<ImplementationGuidePackage> FHIRpackage = new java.util.ArrayList<>();
+  protected java.util.List<ImplementationGuidePackage> FHIRpackage;
 
   /**
   * Description: "A set of profiles that all resources covered by this implementation guide must conform to."
   */
-  protected java.util.List<ImplementationGuideGlobal> global = new java.util.ArrayList<>();
+  protected java.util.List<ImplementationGuideGlobal> global;
 
   /**
   * Description: "A binary file that is included in the  implementation guide when it is published."
   */
-  protected java.util.List<String> binary = new java.util.ArrayList<>();
+  protected java.util.List<String> binary;
 
   /**
   * Description: "Extensions for binary"
   */
-  protected transient java.util.List<Element> _binary = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _binary;
 
   /**
   * Description: "A page / section in the implementation guide. The root page is the implementation guide home page."

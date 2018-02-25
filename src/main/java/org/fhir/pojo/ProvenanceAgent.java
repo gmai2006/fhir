@@ -26,16 +26,21 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ProvenanceAgentModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProvenanceAgent  extends BackboneElement  {
   /**
   * Description: "The function of the agent with respect to the activity. The security role enabling the agent with respect to the activity."
   */
-  protected java.util.List<CodeableConcept> role = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> role;
 
   /**
   * Description: "The individual, device or organization that participated in the event."

@@ -26,16 +26,21 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CapabilityStatementMessagingModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CapabilityStatementMessaging  extends BackboneElement  {
   /**
   * Description: "An endpoint (network accessible address) to which messages and/or replies are to be sent."
   */
-  protected java.util.List<CapabilityStatementEndpoint> endpoint = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementEndpoint> endpoint;
 
   /**
   * Description: "Length if the receiver's reliable messaging cache in minutes (if a receiver) or how long the cache length on the receiver should be (if a sender)."
@@ -61,12 +66,12 @@ public class CapabilityStatementMessaging  extends BackboneElement  {
   /**
   * Description: "References to message definitions for messages this system can send or receive."
   */
-  protected java.util.List<CapabilityStatementSupportedMessage> supportedMessage = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementSupportedMessage> supportedMessage;
 
   /**
   * Description: "A description of the solution's support for an event at this end-point."
   */
-  protected java.util.List<CapabilityStatementEvent> event = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementEvent> event;
 
   public CapabilityStatementMessaging() {
   }

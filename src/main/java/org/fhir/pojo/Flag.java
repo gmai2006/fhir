@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.FlagModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Prospective warnings of potential issues when providing care to the patient."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Flag  extends DomainResource  {
   /**
   * Description: "This is a Flag resource"
@@ -41,7 +46,7 @@ public class Flag  extends DomainResource  {
   /**
   * Description: "Identifier assigned to the flag for external use (outside the FHIR environment)."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Supports basic workflow."

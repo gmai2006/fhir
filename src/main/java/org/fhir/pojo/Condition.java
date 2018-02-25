@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ConditionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Condition  extends DomainResource  {
   /**
   * Description: "This is a Condition resource"
@@ -41,7 +46,7 @@ public class Condition  extends DomainResource  {
   /**
   * Description: "This records identifiers associated with this condition that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The clinical status of the condition."
@@ -67,7 +72,7 @@ public class Condition  extends DomainResource  {
   /**
   * Description: "A category assigned to the condition."
   */
-  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category;
 
   /**
   * Description: "A subjective assessment of the severity of the condition as evaluated by the clinician."
@@ -82,7 +87,7 @@ public class Condition  extends DomainResource  {
   /**
   * Description: "The anatomical location where this condition manifests itself."
   */
-  protected java.util.List<CodeableConcept> bodySite = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> bodySite;
 
   /**
   * Description: "Indicates the patient or group who the condition record is associated with."
@@ -201,12 +206,12 @@ public class Condition  extends DomainResource  {
   /**
   * Description: "Supporting Evidence / manifestations that are the basis on which this condition is suspected or confirmed."
   */
-  protected java.util.List<ConditionEvidence> evidence = new java.util.ArrayList<>();
+  protected java.util.List<ConditionEvidence> evidence;
 
   /**
   * Description: "Additional information about the Condition. This is a general notes/comments entry  for description of the Condition, its diagnosis and prognosis."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   public Condition() {
   }

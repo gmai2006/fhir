@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.LinkageModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Identifies two or more records (resource instances) that are referring to the same real-world \"occurrence\"."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Linkage  extends DomainResource  {
   /**
   * Description: "This is a Linkage resource"
@@ -57,7 +62,7 @@ public class Linkage  extends DomainResource  {
   * Description: "Identifies one of the records that is considered to refer to the same real-world occurrence as well as how the items hould be evaluated within the collection of linked items."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<LinkageItem> item = new java.util.ArrayList<>();
+  protected java.util.List<LinkageItem> item;
 
   public Linkage() {
   }

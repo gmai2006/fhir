@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SpecimenModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A sample to be used for analysis."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Specimen  extends DomainResource  {
   /**
   * Description: "This is a Specimen resource"
@@ -41,7 +46,7 @@ public class Specimen  extends DomainResource  {
   /**
   * Description: "Id for specimen."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The identifier assigned by the lab when accessioning specimen(s). This is not necessarily the same as the specimen identifier, depending on local lab procedures."
@@ -83,12 +88,12 @@ public class Specimen  extends DomainResource  {
   /**
   * Description: "Reference to the parent (source) specimen which is used when the specimen was either derived from or a component of another specimen."
   */
-  protected java.util.List<Reference> parent = new java.util.ArrayList<>();
+  protected java.util.List<Reference> parent;
 
   /**
   * Description: "Details concerning a test or procedure request that required a specimen to be collected."
   */
-  protected java.util.List<Reference> request = new java.util.ArrayList<>();
+  protected java.util.List<Reference> request;
 
   /**
   * Description: "Details concerning the specimen collection."
@@ -98,17 +103,17 @@ public class Specimen  extends DomainResource  {
   /**
   * Description: "Details concerning processing and processing steps for the specimen."
   */
-  protected java.util.List<SpecimenProcessing> processing = new java.util.ArrayList<>();
+  protected java.util.List<SpecimenProcessing> processing;
 
   /**
   * Description: "The container holding the specimen.  The recursive nature of containers; i.e. blood in tube in tray in rack is not addressed here."
   */
-  protected java.util.List<SpecimenContainer> container = new java.util.ArrayList<>();
+  protected java.util.List<SpecimenContainer> container;
 
   /**
   * Description: "To communicate any details or issues about the specimen or during the specimen collection. (for example: broken vial, sent with patient, frozen)."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   public Specimen() {
   }

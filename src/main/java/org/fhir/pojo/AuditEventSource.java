@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AuditEventSourceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AuditEventSource  extends BackboneElement  {
   /**
   * Description: "Logical source location within the healthcare enterprise network.  For example, a hospital or other provider location within a multi-entity provider group."
@@ -51,7 +56,7 @@ public class AuditEventSource  extends BackboneElement  {
   /**
   * Description: "Code specifying the type of source where event originated."
   */
-  protected java.util.List<Coding> type = new java.util.ArrayList<>();
+  protected java.util.List<Coding> type;
 
   public AuditEventSource() {
   }

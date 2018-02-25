@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.BasicModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Basic is used for handling concepts not yet defined in FHIR, narrative-only resources that don't map to an existing resource, and custom resources not appropriate for inclusion in the FHIR specification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Basic  extends DomainResource  {
   /**
   * Description: "This is a Basic resource"
@@ -41,7 +46,7 @@ public class Basic  extends DomainResource  {
   /**
   * Description: "Identifier assigned to the resource for business purposes, outside the context of FHIR."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Identifies the 'type' of resource - equivalent to the resource name for other resources."

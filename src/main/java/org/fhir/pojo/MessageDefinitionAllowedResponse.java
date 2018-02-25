@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MessageDefinitionAllowedResponseModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MessageDefinitionAllowedResponse  extends BackboneElement  {
   /**
   * Description: "A reference to the message definition that must be adhered to by this supported response."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SubstanceInstanceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A homogeneous material with a definite composition."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SubstanceInstance  extends BackboneElement  {
   /**
   * Description: "Identifier associated with the package/container (usually a label affixed directly)."

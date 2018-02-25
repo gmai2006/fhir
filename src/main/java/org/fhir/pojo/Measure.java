@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MeasureModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The Measure resource provides the definition of a quality measure."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Measure  extends DomainResource  {
   /**
   * Description: "This is a Measure resource"
@@ -51,7 +56,7 @@ public class Measure  extends DomainResource  {
   /**
   * Description: "A formal identifier that is used to identify this measure when it is represented in other formats, or referenced in a specification, model, design or an instance."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The identifier that is used to identify this version of the measure when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the measure author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active artifacts."
@@ -184,27 +189,27 @@ public class Measure  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate measure instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the measure is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Descriptive topics related to the content of the measure. Topics provide a high-level categorization of the type of the measure that can be useful for filtering and searching."
   */
-  protected java.util.List<CodeableConcept> topic = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> topic;
 
   /**
   * Description: "A contributor to the content of the measure, including authors, editors, reviewers, and endorsers."
   */
-  protected java.util.List<Contributor> contributor = new java.util.ArrayList<>();
+  protected java.util.List<Contributor> contributor;
 
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A copyright statement relating to the measure and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the measure."
@@ -219,12 +224,12 @@ public class Measure  extends DomainResource  {
   /**
   * Description: "Related artifacts such as additional documentation, justification, or bibliographic references."
   */
-  protected java.util.List<RelatedArtifact> relatedArtifact = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> relatedArtifact;
 
   /**
   * Description: "A reference to a Library resource containing the formal logic used by the measure."
   */
-  protected java.util.List<Reference> library = new java.util.ArrayList<>();
+  protected java.util.List<Reference> library;
 
   /**
   * Description: "Notices and disclaimers regarding the use of the measure, or related to intellectual property (such as code systems) referenced by the measure."
@@ -249,7 +254,7 @@ public class Measure  extends DomainResource  {
   /**
   * Description: "Indicates whether the measure is used to examine a process, an outcome over time, a patient-reported outcome, or a structure measure such as utilization."
   */
-  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type;
 
   /**
   * Description: "A description of the risk adjustment factors that may impact the resulting score for the measure and how they may be accounted for when computing and reporting measure results."
@@ -304,12 +309,12 @@ public class Measure  extends DomainResource  {
   /**
   * Description: "Provides a description of an individual term used within the measure."
   */
-  protected java.util.List<String> definition = new java.util.ArrayList<>();
+  protected java.util.List<String> definition;
 
   /**
   * Description: "Extensions for definition"
   */
-  protected transient java.util.List<Element> _definition = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _definition;
 
   /**
   * Description: "Additional guidance for the measure including how it can be used in a clinical context, and the intent of the measure."
@@ -334,12 +339,12 @@ public class Measure  extends DomainResource  {
   /**
   * Description: "A group of population criteria for the measure."
   */
-  protected java.util.List<MeasureGroup> group = new java.util.ArrayList<>();
+  protected java.util.List<MeasureGroup> group;
 
   /**
   * Description: "The supplemental data criteria for the measure report, specified as either the name of a valid CQL expression within a referenced library, or a valid FHIR Resource Path."
   */
-  protected java.util.List<MeasureSupplementalData> supplementalData = new java.util.ArrayList<>();
+  protected java.util.List<MeasureSupplementalData> supplementalData;
 
   public Measure() {
   }

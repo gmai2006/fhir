@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CompositionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Composition  extends DomainResource  {
   /**
   * Description: "This is a Composition resource"
@@ -90,7 +95,7 @@ public class Composition  extends DomainResource  {
   * Description: "Identifies who is responsible for the information in the composition, not necessarily who typed it in."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<Reference> author = new java.util.ArrayList<>();
+  protected java.util.List<Reference> author;
 
   /**
   * Description: "Official human-readable label for the composition."
@@ -116,7 +121,7 @@ public class Composition  extends DomainResource  {
   /**
   * Description: "A participant who has attested to the accuracy of the composition/document."
   */
-  protected java.util.List<CompositionAttester> attester = new java.util.ArrayList<>();
+  protected java.util.List<CompositionAttester> attester;
 
   /**
   * Description: "Identifies the organization or group who is responsible for ongoing maintenance of and access to the composition/document information."
@@ -126,17 +131,17 @@ public class Composition  extends DomainResource  {
   /**
   * Description: "Relationships that this composition has with other compositions or documents that already exist."
   */
-  protected java.util.List<CompositionRelatesTo> relatesTo = new java.util.ArrayList<>();
+  protected java.util.List<CompositionRelatesTo> relatesTo;
 
   /**
   * Description: "The clinical service, such as a colonoscopy or an appendectomy, being documented."
   */
-  protected java.util.List<CompositionEvent> event = new java.util.ArrayList<>();
+  protected java.util.List<CompositionEvent> event;
 
   /**
   * Description: "The root of the sections that make up the composition."
   */
-  protected java.util.List<CompositionSection> section = new java.util.ArrayList<>();
+  protected java.util.List<CompositionSection> section;
 
   public Composition() {
   }

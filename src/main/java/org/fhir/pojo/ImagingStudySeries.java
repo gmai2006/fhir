@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ImagingStudySeriesModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImagingStudySeries  extends BackboneElement  {
   /**
   * Description: "Formal identifier for this series."
@@ -94,7 +99,7 @@ public class ImagingStudySeries  extends BackboneElement  {
   /**
   * Description: "The network service providing access (e.g., query, view, or retrieval) for this series. See implementation notes for information about using DICOM endpoints. A series-level endpoint, if present, has precedence over a study-level endpoint with the same Endpoint.type."
   */
-  protected java.util.List<Reference> endpoint = new java.util.ArrayList<>();
+  protected java.util.List<Reference> endpoint;
 
   /**
   * Description: "The anatomic structures examined. See DICOM Part 16 Annex L (http://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_L.html) for DICOM to SNOMED-CT mappings. The bodySite may indicate the laterality of body part imaged; if so, it shall be consistent with any content of ImagingStudy.series.laterality."
@@ -120,12 +125,12 @@ public class ImagingStudySeries  extends BackboneElement  {
   /**
   * Description: "The physician or operator (often the radiology technician)  who performed the series. The performer is recorded at the series level, since each series in a study may be performed by a different practitioner, at different times, and using different devices. A series may be performed by multiple practitioners."
   */
-  protected java.util.List<Reference> performer = new java.util.ArrayList<>();
+  protected java.util.List<Reference> performer;
 
   /**
   * Description: "A single SOP instance within the series, e.g. an image, or presentation state."
   */
-  protected java.util.List<ImagingStudyInstance> instance = new java.util.ArrayList<>();
+  protected java.util.List<ImagingStudyInstance> instance;
 
   public ImagingStudySeries() {
   }

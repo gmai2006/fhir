@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MedicationStatementModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now, or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains \r\rThe primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MedicationStatement  extends DomainResource  {
   /**
   * Description: "This is a MedicationStatement resource"
@@ -41,17 +46,17 @@ public class MedicationStatement  extends DomainResource  {
   /**
   * Description: "External identifier - FHIR will generate its own internal identifiers (probably URLs) which do not need to be explicitly managed by the resource.  The identifier here is one that would be used by another non-FHIR system - for example an automated medication pump would provide a record each time it operated; an administration while the patient was off the ward might be made with a different system and entered after the event.  Particularly important if these records have to be updated."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A plan, proposal or order that is fulfilled in whole or in part by this event."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "A larger event of which this particular event is a component or step."
   */
-  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf;
 
   /**
   * Description: "The encounter or episode of care that establishes the context for this MedicationStatement."
@@ -124,7 +129,7 @@ public class MedicationStatement  extends DomainResource  {
   /**
   * Description: "Allows linking the MedicationStatement to the underlying MedicationRequest, or to other information that supports or is used to derive the MedicationStatement."
   */
-  protected java.util.List<Reference> derivedFrom = new java.util.ArrayList<>();
+  protected java.util.List<Reference> derivedFrom;
 
   /**
   * Description: "Indicator of the certainty of whether the medication was taken by the patient."
@@ -139,27 +144,27 @@ public class MedicationStatement  extends DomainResource  {
   /**
   * Description: "A code indicating why the medication was not taken."
   */
-  protected java.util.List<CodeableConcept> reasonNotTaken = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonNotTaken;
 
   /**
   * Description: "A reason for why the medication is being/was taken."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "Condition or observation that supports why the medication is being/was taken."
   */
-  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference;
 
   /**
   * Description: "Provides extra information about the medication statement that is not conveyed by the other attributes."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Indicates how the medication is/was or should be taken by the patient."
   */
-  protected java.util.List<Dosage> dosage = new java.util.ArrayList<>();
+  protected java.util.List<Dosage> dosage;
 
   public MedicationStatement() {
   }

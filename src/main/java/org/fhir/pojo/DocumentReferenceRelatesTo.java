@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DocumentReferenceRelatesToModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A reference to a document."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DocumentReferenceRelatesTo  extends BackboneElement  {
   /**
   * Description: "The type of relationship that this document has with anther document."

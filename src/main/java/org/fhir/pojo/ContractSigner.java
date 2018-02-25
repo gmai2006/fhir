@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ContractSignerModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ContractSigner  extends BackboneElement  {
   /**
   * Description: "Role of this Contract signer, e.g. notary, grantee."
@@ -48,7 +53,7 @@ public class ContractSigner  extends BackboneElement  {
   * Description: "Legally binding Contract DSIG signature contents in Base64."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<Signature> signature = new java.util.ArrayList<>();
+  protected java.util.List<Signature> signature;
 
   public ContractSigner() {
   }

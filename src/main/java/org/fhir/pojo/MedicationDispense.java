@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MedicationDispenseModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MedicationDispense  extends DomainResource  {
   /**
   * Description: "This is a MedicationDispense resource"
@@ -41,12 +46,12 @@ public class MedicationDispense  extends DomainResource  {
   /**
   * Description: "Identifier assigned by the dispensing facility - this is an identifier assigned outside FHIR."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The procedure that the dispense is done because of."
   */
-  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf;
 
   /**
   * Description: "A code specifying the state of the set of dispense events."
@@ -86,17 +91,17 @@ public class MedicationDispense  extends DomainResource  {
   /**
   * Description: "Additional information that supports the medication being dispensed."
   */
-  protected java.util.List<Reference> supportingInformation = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingInformation;
 
   /**
   * Description: "Indicates who or what performed the event.  It should be assumed that the performer is the dispenser of the medication."
   */
-  protected java.util.List<MedicationDispensePerformer> performer = new java.util.ArrayList<>();
+  protected java.util.List<MedicationDispensePerformer> performer;
 
   /**
   * Description: "Indicates the medication order that is being dispensed against."
   */
-  protected java.util.List<Reference> authorizingPrescription = new java.util.ArrayList<>();
+  protected java.util.List<Reference> authorizingPrescription;
 
   /**
   * Description: "Indicates the type of dispensing event that is performed. For example, Trial Fill, Completion of Trial, Partial Fill, Emergency Fill, Samples, etc."
@@ -143,17 +148,17 @@ public class MedicationDispense  extends DomainResource  {
   /**
   * Description: "Identifies the person who picked up the medication.  This will usually be a patient or their caregiver, but some cases exist where it can be a healthcare professional."
   */
-  protected java.util.List<Reference> receiver = new java.util.ArrayList<>();
+  protected java.util.List<Reference> receiver;
 
   /**
   * Description: "Extra information about the dispense that could not be conveyed in the other attributes."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Indicates how the medication is to be used by the patient."
   */
-  protected java.util.List<Dosage> dosageInstruction = new java.util.ArrayList<>();
+  protected java.util.List<Dosage> dosageInstruction;
 
   /**
   * Description: "Indicates whether or not substitution was made as part of the dispense.  In some cases substitution will be expected but does not happen, in other cases substitution is not expected but does happen.  This block explains what substitution did or did not happen and why.  If nothing is specified, substitution was not done."
@@ -163,7 +168,7 @@ public class MedicationDispense  extends DomainResource  {
   /**
   * Description: "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, duplicate therapy, dosage alert etc."
   */
-  protected java.util.List<Reference> detectedIssue = new java.util.ArrayList<>();
+  protected java.util.List<Reference> detectedIssue;
 
   /**
   * Description: "True if the dispense was not performed for some reason."
@@ -188,7 +193,7 @@ public class MedicationDispense  extends DomainResource  {
   /**
   * Description: "A summary of the events of interest that have occurred, such as when the dispense was verified."
   */
-  protected java.util.List<Reference> eventHistory = new java.util.ArrayList<>();
+  protected java.util.List<Reference> eventHistory;
 
   public MedicationDispense() {
   }

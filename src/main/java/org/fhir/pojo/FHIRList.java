@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.FHIRListModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A set of information summarized from a list of other resources."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class FHIRList  extends DomainResource  {
   /**
   * Description: "This is a List resource"
@@ -41,7 +46,7 @@ public class FHIRList  extends DomainResource  {
   /**
   * Description: "Identifier for the List assigned for business purposes outside the context of FHIR."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Indicates the current state of this list."
@@ -112,12 +117,12 @@ public class FHIRList  extends DomainResource  {
   /**
   * Description: "Comments that apply to the overall list."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Entries in this list."
   */
-  protected java.util.List<ListEntry> entry = new java.util.ArrayList<>();
+  protected java.util.List<ListEntry> entry;
 
   /**
   * Description: "If the list is empty, why the list is empty."

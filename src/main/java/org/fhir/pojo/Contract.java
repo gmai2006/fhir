@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ContractModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Contract  extends DomainResource  {
   /**
   * Description: "This is a Contract resource"
@@ -73,22 +78,22 @@ public class Contract  extends DomainResource  {
   /**
   * Description: "The target entity impacted by or of interest to parties to the agreement."
   */
-  protected java.util.List<Reference> subject = new java.util.ArrayList<>();
+  protected java.util.List<Reference> subject;
 
   /**
   * Description: "The matter of concern in the context of this agreement."
   */
-  protected java.util.List<Reference> topic = new java.util.ArrayList<>();
+  protected java.util.List<Reference> topic;
 
   /**
   * Description: "A formally or informally recognized grouping of people, principals, organizations, or jurisdictions formed for the purpose of achieving some form of collective action such as the promulgation, administration and enforcement of contracts and policies."
   */
-  protected java.util.List<Reference> authority = new java.util.ArrayList<>();
+  protected java.util.List<Reference> authority;
 
   /**
   * Description: "Recognized governance framework or system operating with a circumscribed scope in accordance with specified principles, policies, processes or procedures for managing rights, actions, or behaviors of parties or principals relative to resources."
   */
-  protected java.util.List<Reference> domain = new java.util.ArrayList<>();
+  protected java.util.List<Reference> domain;
 
   /**
   * Description: "Type of Contract such as an insurance policy, real estate contract, a will, power of attorny, Privacy or Security policy , trust framework agreement, etc."
@@ -98,17 +103,17 @@ public class Contract  extends DomainResource  {
   /**
   * Description: "More specific type or specialization of an overarching or more general contract such as auto insurance, home owner  insurance, prenupial agreement, Advanced-Directive, or privacy consent."
   */
-  protected java.util.List<CodeableConcept> subType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> subType;
 
   /**
   * Description: "Action stipulated by this Contract."
   */
-  protected java.util.List<CodeableConcept> action = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> action;
 
   /**
   * Description: "Reason for action stipulated by this Contract."
   */
-  protected java.util.List<CodeableConcept> actionReason = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> actionReason;
 
   /**
   * Description: "The type of decision made by a grantor with respect to an offer made by a grantee."
@@ -123,27 +128,27 @@ public class Contract  extends DomainResource  {
   /**
   * Description: "A set of security labels that define which resources are controlled by this consent. If more than one label is specified, all resources must have all the specified labels."
   */
-  protected java.util.List<Coding> securityLabel = new java.util.ArrayList<>();
+  protected java.util.List<Coding> securityLabel;
 
   /**
   * Description: "An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place."
   */
-  protected java.util.List<ContractAgent> agent = new java.util.ArrayList<>();
+  protected java.util.List<ContractAgent> agent;
 
   /**
   * Description: "Parties with legal standing in the Contract, including the principal parties, the grantor(s) and grantee(s), which are any person or organization bound by the contract, and any ancillary parties, which facilitate the execution of the contract such as a notary or witness."
   */
-  protected java.util.List<ContractSigner> signer = new java.util.ArrayList<>();
+  protected java.util.List<ContractSigner> signer;
 
   /**
   * Description: "Contract Valued Item List."
   */
-  protected java.util.List<ContractValuedItem> valuedItem = new java.util.ArrayList<>();
+  protected java.util.List<ContractValuedItem> valuedItem;
 
   /**
   * Description: "One or more Contract Provisions, which may be related and conveyed as a group, and may contain nested groups."
   */
-  protected java.util.List<ContractTerm> term = new java.util.ArrayList<>();
+  protected java.util.List<ContractTerm> term;
 
   /**
   * Description: "Legally binding Contract: This is the signed and legally recognized representation of the Contract, which is considered the \"source of truth\" and which would be the basis for legal action related to enforcement of this Contract."
@@ -158,17 +163,17 @@ public class Contract  extends DomainResource  {
   /**
   * Description: "The \"patient friendly language\" versionof the Contract in whole or in parts. \"Patient friendly language\" means the representation of the Contract and Contract Provisions in a manner that is readily accessible and understandable by a layperson in accordance with best practices for communication styles that ensure that those agreeing to or signing the Contract understand the roles, actions, obligations, responsibilities, and implication of the agreement."
   */
-  protected java.util.List<ContractFriendly> friendly = new java.util.ArrayList<>();
+  protected java.util.List<ContractFriendly> friendly;
 
   /**
   * Description: "List of Legal expressions or representations of this Contract."
   */
-  protected java.util.List<ContractLegal> legal = new java.util.ArrayList<>();
+  protected java.util.List<ContractLegal> legal;
 
   /**
   * Description: "List of Computable Policy Rule Language Representations of this Contract."
   */
-  protected java.util.List<ContractRule> rule = new java.util.ArrayList<>();
+  protected java.util.List<ContractRule> rule;
 
   public Contract() {
   }

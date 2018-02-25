@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MeasureGroupModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The Measure resource provides the definition of a quality measure."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MeasureGroup  extends BackboneElement  {
   /**
   * Description: "A unique identifier for the group. This identifier will used to report data for the group in the measure report."
@@ -61,12 +66,12 @@ public class MeasureGroup  extends BackboneElement  {
   /**
   * Description: "A population criteria for the measure."
   */
-  protected java.util.List<MeasurePopulation> population = new java.util.ArrayList<>();
+  protected java.util.List<MeasurePopulation> population;
 
   /**
   * Description: "The stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library, or a valid FHIR Resource Path."
   */
-  protected java.util.List<MeasureStratifier> stratifier = new java.util.ArrayList<>();
+  protected java.util.List<MeasureStratifier> stratifier;
 
   public MeasureGroup() {
   }

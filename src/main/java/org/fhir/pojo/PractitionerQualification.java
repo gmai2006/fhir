@@ -26,16 +26,21 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PractitionerQualificationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A person who is directly or indirectly involved in the provisioning of healthcare."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PractitionerQualification  extends BackboneElement  {
   /**
   * Description: "An identifier that applies to this person's qualification in this role."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Coded representation of the qualification."

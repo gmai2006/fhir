@@ -26,16 +26,21 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CodeableConceptModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A concept that may be defined by a formal reference to a terminology or ontology or may be provided by text."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CodeableConcept  extends Element  {
   /**
   * Description: "A reference to a code defined by a terminology system."
   */
-  protected java.util.List<Coding> coding = new java.util.ArrayList<>();
+  protected java.util.List<Coding> coding;
 
   /**
   * Description: "A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user."

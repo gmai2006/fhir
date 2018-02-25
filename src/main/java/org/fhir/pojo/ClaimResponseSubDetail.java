@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ClaimResponseSubDetailModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ClaimResponseSubDetail  extends BackboneElement  {
   /**
   * Description: "A service line number."
@@ -46,17 +51,17 @@ public class ClaimResponseSubDetail  extends BackboneElement  {
   /**
   * Description: "A list of note references to the notes provided below."
   */
-  protected java.util.List<Float> noteNumber = new java.util.ArrayList<>();
+  protected java.util.List<Float> noteNumber;
 
   /**
   * Description: "Extensions for noteNumber"
   */
-  protected transient java.util.List<Element> _noteNumber = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _noteNumber;
 
   /**
   * Description: "The adjudications results."
   */
-  protected java.util.List<ClaimResponseAdjudication> adjudication = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseAdjudication> adjudication;
 
   public ClaimResponseSubDetail() {
   }

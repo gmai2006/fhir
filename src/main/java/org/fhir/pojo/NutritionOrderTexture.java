@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.NutritionOrderTextureModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class NutritionOrderTexture  extends BackboneElement  {
   /**
   * Description: "Any texture modifications (for solid foods) that should be made, e.g. easy to chew, chopped, ground, and pureed."

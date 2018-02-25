@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ConceptMapTargetModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ConceptMapTarget  extends BackboneElement  {
   /**
   * Description: "Identity (code or path) or the element/item that the map refers to."
@@ -76,12 +81,12 @@ public class ConceptMapTarget  extends BackboneElement  {
   /**
   * Description: "A set of additional dependencies for this mapping to hold. This mapping is only applicable if the specified element can be resolved, and it has the specified value."
   */
-  protected java.util.List<ConceptMapDependsOn> dependsOn = new java.util.ArrayList<>();
+  protected java.util.List<ConceptMapDependsOn> dependsOn;
 
   /**
   * Description: "A set of additional outcomes from this mapping to other elements. To properly execute this mapping, the specified element must be mapped to some data element or source that is in context. The mapping may still be useful without a place for the additional data elements, but the equivalence cannot be relied on."
   */
-  protected java.util.List<ConceptMapDependsOn> product = new java.util.ArrayList<>();
+  protected java.util.List<ConceptMapDependsOn> product;
 
   public ConceptMapTarget() {
   }

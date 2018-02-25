@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A task to be performed."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TaskInput  extends BackboneElement  {
   /**
   * Description: "A code or description indicating how the input is intended to be used as part of the task execution."

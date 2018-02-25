@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.GroupModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Group  extends DomainResource  {
   /**
   * Description: "This is a Group resource"
@@ -41,7 +46,7 @@ public class Group  extends DomainResource  {
   /**
   * Description: "A unique business identifier for this group."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Indicates whether the record for the group is available for use or is merely being retained for historical purposes."
@@ -102,12 +107,12 @@ public class Group  extends DomainResource  {
   /**
   * Description: "Identifies the traits shared by members of the group."
   */
-  protected java.util.List<GroupCharacteristic> characteristic = new java.util.ArrayList<>();
+  protected java.util.List<GroupCharacteristic> characteristic;
 
   /**
   * Description: "Identifies the resource instances that are members of the group."
   */
-  protected java.util.List<GroupMember> member = new java.util.ArrayList<>();
+  protected java.util.List<GroupMember> member;
 
   public Group() {
   }

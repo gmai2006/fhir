@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ProcessResponseProcessNoteModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides processing status, errors and notes from the processing of a resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProcessResponseProcessNote  extends BackboneElement  {
   /**
   * Description: "The note purpose: Print/Display."

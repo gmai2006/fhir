@@ -26,15 +26,16 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Captures constraints on each element within the resource, profile, or extension."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ElementDefinitionSlicing  extends BackboneElement  {
   /**
   * Description: "Designates which child elements are used to discriminate between the slices when processing an instance. If one or more discriminators are provided, the value of the child elements in the instance data SHALL completely distinguish which slice the element in the resource matches based on the allowed values for those elements in each of the slices."
   */
-  protected java.util.List<ElementDefinitionDiscriminator> discriminator = new java.util.ArrayList<>();
+  protected java.util.List<ElementDefinitionDiscriminator> discriminator;
 
   /**
   * Description: "A human-readable text description of how the slicing works. If there is no discriminator, this is required to be present to provide whatever information is possible about how the slices can be differentiated."

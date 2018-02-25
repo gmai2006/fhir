@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.StructureMapGroupModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class StructureMapGroup  extends BackboneElement  {
   /**
   * Description: "A unique name for the group for the convenience of human readers."
@@ -78,13 +83,13 @@ public class StructureMapGroup  extends BackboneElement  {
   * Description: "A name assigned to an instance of data. The instance must be provided when the mapping is invoked."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<StructureMapInput> input = new java.util.ArrayList<>();
+  protected java.util.List<StructureMapInput> input;
 
   /**
   * Description: "Transform Rule from source to target."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<StructureMapRule> rule = new java.util.ArrayList<>();
+  protected java.util.List<StructureMapRule> rule;
 
   public StructureMapGroup() {
   }

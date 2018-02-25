@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.FamilyMemberHistoryConditionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Significant health events and conditions for a person related to the patient relevant in the context of care for the patient."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class FamilyMemberHistoryCondition  extends BackboneElement  {
   /**
   * Description: "The actual condition specified. Could be a coded condition (like MI or Diabetes) or a less specific string like 'cancer' depending on how much is known about the condition and the capabilities of the creating system."
@@ -71,7 +76,7 @@ public class FamilyMemberHistoryCondition  extends BackboneElement  {
   /**
   * Description: "An area where general notes can be placed about this specific condition."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   public FamilyMemberHistoryCondition() {
   }

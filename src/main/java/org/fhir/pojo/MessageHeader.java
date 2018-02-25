@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MessageHeaderModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MessageHeader  extends DomainResource  {
   /**
   * Description: "This is a MessageHeader resource"
@@ -47,7 +52,7 @@ public class MessageHeader  extends DomainResource  {
   /**
   * Description: "The destination application which the message is intended for."
   */
-  protected java.util.List<MessageHeaderDestination> destination = new java.util.ArrayList<>();
+  protected java.util.List<MessageHeaderDestination> destination;
 
   /**
   * Description: "Allows data conveyed by a message to be addressed to a particular person or department when routing to a specific application isn't sufficient."
@@ -103,7 +108,7 @@ public class MessageHeader  extends DomainResource  {
   /**
   * Description: "The actual data of the message - a reference to the root/focus class of the event."
   */
-  protected java.util.List<Reference> focus = new java.util.ArrayList<>();
+  protected java.util.List<Reference> focus;
 
   public MessageHeader() {
   }

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DeviceRequestModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceRequest  extends DomainResource  {
   /**
   * Description: "This is a DeviceRequest resource"
@@ -41,22 +46,22 @@ public class DeviceRequest  extends DomainResource  {
   /**
   * Description: "Identifiers assigned to this order by the orderer or by the receiver."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Protocol or definition followed by this request. For example: The proposed act must be performed if the indicated conditions occur, e.g.., shortness of breath, SpO2 less than x%."
   */
-  protected java.util.List<Reference> definition = new java.util.ArrayList<>();
+  protected java.util.List<Reference> definition;
 
   /**
   * Description: "Plan/proposal/order fulfilled by this request."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "The request takes the place of the referenced completed or terminated request(s)."
   */
-  protected java.util.List<Reference> priorRequest = new java.util.ArrayList<>();
+  protected java.util.List<Reference> priorRequest;
 
   /**
   * Description: "Composite request this is part of."
@@ -162,27 +167,27 @@ public class DeviceRequest  extends DomainResource  {
   /**
   * Description: "Reason or justification for the use of this device."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "Reason or justification for the use of this device."
   */
-  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference;
 
   /**
   * Description: "Additional clinical information about the patient that may influence the request fulfilment.  For example, this may includes body where on the subject's the device will be used ( i.e. the target site)."
   */
-  protected java.util.List<Reference> supportingInfo = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingInfo;
 
   /**
   * Description: "Details about this request that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Key events in the history of the request."
   */
-  protected java.util.List<Reference> relevantHistory = new java.util.ArrayList<>();
+  protected java.util.List<Reference> relevantHistory;
 
   public DeviceRequest() {
   }

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AddressModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An address expressed using postal conventions (as opposed to GPS or other location definition formats).  This data type may be used to convey addresses for use in delivering mail as well as for visiting locations which might not be valid for mail delivery.  There are a variety of postal address formats defined around the world."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Address  extends Element  {
   /**
   * Description: "The purpose of this address."
@@ -65,12 +70,12 @@ public class Address  extends Element  {
   /**
   * Description: "This component contains the house number, apartment number, street name, street direction,  P.O. Box number, delivery hints, and similar address information."
   */
-  protected java.util.List<String> line = new java.util.ArrayList<>();
+  protected java.util.List<String> line;
 
   /**
   * Description: "Extensions for line"
   */
-  protected transient java.util.List<Element> _line = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _line;
 
   /**
   * Description: "The name of the city, town, village or other community or delivery center."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.TestReportParticipantModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A summary of information based on the results of executing a TestScript."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TestReportParticipant  extends BackboneElement  {
   /**
   * Description: "The type of participant."

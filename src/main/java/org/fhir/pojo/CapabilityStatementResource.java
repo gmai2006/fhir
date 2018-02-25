@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CapabilityStatementResourceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CapabilityStatementResource  extends BackboneElement  {
   /**
   * Description: "A type of resource exposed via the restful interface."
@@ -62,7 +67,7 @@ public class CapabilityStatementResource  extends BackboneElement  {
   * Description: "Identifies a restful operation supported by the solution."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<CapabilityStatementInteraction> interaction = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementInteraction> interaction;
 
   /**
   * Description: "This field is set to no-version to specify that the system does not support (server) or use (client) versioning for this resource type. If this has some other value, the server must at least correctly track and populate the versionId meta-property on resources. If the value is 'versioned-update', then the server supports all the versioning features, including using e-tags for version integrity in the API."
@@ -137,37 +142,37 @@ public class CapabilityStatementResource  extends BackboneElement  {
   /**
   * Description: "A set of flags that defines how references are supported."
   */
-  protected java.util.List<String> referencePolicy = new java.util.ArrayList<>();
+  protected java.util.List<String> referencePolicy;
 
   /**
   * Description: "Extensions for referencePolicy"
   */
-  protected transient java.util.List<Element> _referencePolicy = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _referencePolicy;
 
   /**
   * Description: "A list of _include values supported by the server."
   */
-  protected java.util.List<String> searchInclude = new java.util.ArrayList<>();
+  protected java.util.List<String> searchInclude;
 
   /**
   * Description: "Extensions for searchInclude"
   */
-  protected transient java.util.List<Element> _searchInclude = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _searchInclude;
 
   /**
   * Description: "A list of _revinclude (reverse include) values supported by the server."
   */
-  protected java.util.List<String> searchRevInclude = new java.util.ArrayList<>();
+  protected java.util.List<String> searchRevInclude;
 
   /**
   * Description: "Extensions for searchRevInclude"
   */
-  protected transient java.util.List<Element> _searchRevInclude = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _searchRevInclude;
 
   /**
   * Description: "Search parameters for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation."
   */
-  protected java.util.List<CapabilityStatementSearchParam> searchParam = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementSearchParam> searchParam;
 
   public CapabilityStatementResource() {
   }

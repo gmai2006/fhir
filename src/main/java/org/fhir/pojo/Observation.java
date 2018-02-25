@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ObservationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Observation  extends DomainResource  {
   /**
   * Description: "This is a Observation resource"
@@ -41,12 +46,12 @@ public class Observation  extends DomainResource  {
   /**
   * Description: "A unique identifier assigned to this observation."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A plan, proposal or order that is fulfilled in whole or in part by this event."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "The status of the result value."
@@ -61,7 +66,7 @@ public class Observation  extends DomainResource  {
   /**
   * Description: "A code that classifies the general type of observation being made."
   */
-  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category;
 
   /**
   * Description: "Describes what was observed. Sometimes this is called the observation \"name\"."
@@ -108,7 +113,7 @@ public class Observation  extends DomainResource  {
   /**
   * Description: "Who was responsible for asserting the observed value as \"true\"."
   */
-  protected java.util.List<Reference> performer = new java.util.ArrayList<>();
+  protected java.util.List<Reference> performer;
 
   /**
   * Description: "The information determined as a result of making the observation, if the information has a simple value."
@@ -230,17 +235,17 @@ public class Observation  extends DomainResource  {
   /**
   * Description: "Guidance on how to interpret the value by comparison to a normal or recommended range."
   */
-  protected java.util.List<ObservationReferenceRange> referenceRange = new java.util.ArrayList<>();
+  protected java.util.List<ObservationReferenceRange> referenceRange;
 
   /**
   * Description: "A  reference to another resource (usually another Observation) whose relationship is defined by the relationship type code."
   */
-  protected java.util.List<ObservationRelated> related = new java.util.ArrayList<>();
+  protected java.util.List<ObservationRelated> related;
 
   /**
   * Description: "Some observations have multiple component observations.  These component observations are expressed as separate code value pairs that share the same attributes.  Examples include systolic and diastolic component observations for blood pressure measurement and multiple component observations for genetics observations."
   */
-  protected java.util.List<ObservationComponent> component = new java.util.ArrayList<>();
+  protected java.util.List<ObservationComponent> component;
 
   public Observation() {
   }

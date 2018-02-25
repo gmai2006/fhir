@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PaymentReconciliationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides payment details and claim references supporting a bulk payment."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PaymentReconciliation  extends DomainResource  {
   /**
   * Description: "This is a PaymentReconciliation resource"
@@ -41,7 +46,7 @@ public class PaymentReconciliation  extends DomainResource  {
   /**
   * Description: "The Response business identifier."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."
@@ -108,7 +113,7 @@ public class PaymentReconciliation  extends DomainResource  {
   /**
   * Description: "List of individual settlement amounts and the corresponding transaction."
   */
-  protected java.util.List<PaymentReconciliationDetail> detail = new java.util.ArrayList<>();
+  protected java.util.List<PaymentReconciliationDetail> detail;
 
   /**
   * Description: "The form to be used for printing the content."
@@ -123,7 +128,7 @@ public class PaymentReconciliation  extends DomainResource  {
   /**
   * Description: "Suite of notes."
   */
-  protected java.util.List<PaymentReconciliationProcessNote> processNote = new java.util.ArrayList<>();
+  protected java.util.List<PaymentReconciliationProcessNote> processNote;
 
   public PaymentReconciliation() {
   }

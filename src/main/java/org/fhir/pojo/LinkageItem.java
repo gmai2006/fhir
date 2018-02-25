@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.LinkageItemModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Identifies two or more records (resource instances) that are referring to the same real-world \"occurrence\"."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class LinkageItem  extends BackboneElement  {
   /**
   * Description: "Distinguishes which item is \"source of truth\" (if any) and which items are no longer considered to be current representations."

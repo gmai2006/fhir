@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SupplyDeliverySuppliedItemModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Record of delivery of what is supplied."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SupplyDeliverySuppliedItem  extends BackboneElement  {
   /**
   * Description: "The amount of supply that has been dispensed. Includes unit of measure."

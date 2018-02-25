@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ClaimSubDetailModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ClaimSubDetail  extends BackboneElement  {
   /**
   * Description: "A service line number."
@@ -61,12 +66,12 @@ public class ClaimSubDetail  extends BackboneElement  {
   /**
   * Description: "Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours."
   */
-  protected java.util.List<CodeableConcept> modifier = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> modifier;
 
   /**
   * Description: "For programs which require reson codes for the inclusion, covering, of this billed item under the program or sub-program."
   */
-  protected java.util.List<CodeableConcept> programCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> programCode;
 
   /**
   * Description: "The number of repetitions of a service or product."
@@ -97,7 +102,7 @@ public class ClaimSubDetail  extends BackboneElement  {
   /**
   * Description: "List of Unique Device Identifiers associated with this line item."
   */
-  protected java.util.List<Reference> udi = new java.util.ArrayList<>();
+  protected java.util.List<Reference> udi;
 
   public ClaimSubDetail() {
   }

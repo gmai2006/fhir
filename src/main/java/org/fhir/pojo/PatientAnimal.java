@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PatientAnimalModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Demographics and other administrative information about an individual or animal receiving care or other health-related services."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PatientAnimal  extends BackboneElement  {
   /**
   * Description: "Identifies the high level taxonomic categorization of the kind of animal."

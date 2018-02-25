@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EligibilityResponseErrorModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides eligibility and plan details from the processing of an Eligibility resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class EligibilityResponseError  extends BackboneElement  {
   /**
   * Description: "An error code,from a specified code system, which details why the eligibility check could not be performed."

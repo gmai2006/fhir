@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.RequestGroupActionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RequestGroupAction  extends BackboneElement  {
   /**
   * Description: "A user-visible label for the action."
@@ -75,22 +80,22 @@ public class RequestGroupAction  extends BackboneElement  {
   /**
   * Description: "A code that provides meaning for the action or action group. For example, a section may have a LOINC code for a the section of a documentation template."
   */
-  protected java.util.List<CodeableConcept> code = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> code;
 
   /**
   * Description: "Didactic or other informational resources associated with the action that can be provided to the CDS recipient. Information resources can include inline text commentary and links to web resources."
   */
-  protected java.util.List<RelatedArtifact> documentation = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> documentation;
 
   /**
   * Description: "An expression that describes applicability criteria, or start/stop conditions for the action."
   */
-  protected java.util.List<RequestGroupCondition> condition = new java.util.ArrayList<>();
+  protected java.util.List<RequestGroupCondition> condition;
 
   /**
   * Description: "A relationship to another action such as \"before\" or \"30-60 minutes after start of\"."
   */
-  protected java.util.List<RequestGroupRelatedAction> relatedAction = new java.util.ArrayList<>();
+  protected java.util.List<RequestGroupRelatedAction> relatedAction;
 
   /**
   * Description: "An optional value describing when the action should be performed."
@@ -126,7 +131,7 @@ public class RequestGroupAction  extends BackboneElement  {
   /**
   * Description: "The participant that should perform or be responsible for this action."
   */
-  protected java.util.List<Reference> participant = new java.util.ArrayList<>();
+  protected java.util.List<Reference> participant;
 
   /**
   * Description: "The type of action to perform (create, update, remove)."
@@ -196,7 +201,7 @@ public class RequestGroupAction  extends BackboneElement  {
   /**
   * Description: "Sub actions."
   */
-  protected java.util.List<RequestGroupAction> action = new java.util.ArrayList<>();
+  protected java.util.List<RequestGroupAction> action;
 
   public RequestGroupAction() {
   }

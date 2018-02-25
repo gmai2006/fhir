@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ProvenanceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Provenance  extends DomainResource  {
   /**
   * Description: "This is a Provenance resource"
@@ -42,7 +47,7 @@ public class Provenance  extends DomainResource  {
   * Description: "The Reference(s) that were generated or updated by  the activity described in this resource. A provenance can point to more than one target if multiple resources were created/updated by the same activity."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<Reference> target = new java.util.ArrayList<>();
+  protected java.util.List<Reference> target;
 
   /**
   * Description: "The period during which the activity occurred."
@@ -62,12 +67,12 @@ public class Provenance  extends DomainResource  {
   /**
   * Description: "Policy or plan the activity was defined by. Typically, a single activity may have multiple applicable policy documents, such as patient consent, guarantor funding, etc."
   */
-  protected java.util.List<String> policy = new java.util.ArrayList<>();
+  protected java.util.List<String> policy;
 
   /**
   * Description: "Extensions for policy"
   */
-  protected transient java.util.List<Element> _policy = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _policy;
 
   /**
   * Description: "Where the activity occurred, if relevant."
@@ -77,7 +82,7 @@ public class Provenance  extends DomainResource  {
   /**
   * Description: "The reason that the activity was taking place."
   */
-  protected java.util.List<Coding> reason = new java.util.ArrayList<>();
+  protected java.util.List<Coding> reason;
 
   /**
   * Description: "An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities."
@@ -88,17 +93,17 @@ public class Provenance  extends DomainResource  {
   * Description: "An actor taking a role in an activity  for which it can be assigned some degree of responsibility for the activity taking place."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<ProvenanceAgent> agent = new java.util.ArrayList<>();
+  protected java.util.List<ProvenanceAgent> agent;
 
   /**
   * Description: "An entity used in this activity."
   */
-  protected java.util.List<ProvenanceEntity> entity = new java.util.ArrayList<>();
+  protected java.util.List<ProvenanceEntity> entity;
 
   /**
   * Description: "A digital signature on the target Reference(s). The signer should match a Provenance.agent. The purpose of the signature is indicated."
   */
-  protected java.util.List<Signature> signature = new java.util.ArrayList<>();
+  protected java.util.List<Signature> signature;
 
   public Provenance() {
   }

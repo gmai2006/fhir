@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CapabilityStatementRestModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CapabilityStatementRest  extends BackboneElement  {
   /**
   * Description: "Identifies whether this portion of the statement is describing the ability to initiate or receive restful operations."
@@ -60,32 +65,32 @@ public class CapabilityStatementRest  extends BackboneElement  {
   /**
   * Description: "A specification of the restful capabilities of the solution for a specific resource type."
   */
-  protected java.util.List<CapabilityStatementResource> resource = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementResource> resource;
 
   /**
   * Description: "A specification of restful operations supported by the system."
   */
-  protected java.util.List<CapabilityStatementInteraction1> interaction = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementInteraction1> interaction;
 
   /**
   * Description: "Search parameters that are supported for searching all resources for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation."
   */
-  protected java.util.List<CapabilityStatementSearchParam> searchParam = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementSearchParam> searchParam;
 
   /**
   * Description: "Definition of an operation or a named query together with its parameters and their meaning and type."
   */
-  protected java.util.List<CapabilityStatementOperation> operation = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementOperation> operation;
 
   /**
   * Description: "An absolute URI which is a reference to the definition of a compartment that the system supports. The reference is to a CompartmentDefinition resource by its canonical URL ."
   */
-  protected java.util.List<String> compartment = new java.util.ArrayList<>();
+  protected java.util.List<String> compartment;
 
   /**
   * Description: "Extensions for compartment"
   */
-  protected transient java.util.List<Element> _compartment = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _compartment;
 
   public CapabilityStatementRest() {
   }

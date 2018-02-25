@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.BodySiteModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Record details about the anatomical location of a specimen or body part.  This resource may be used when a coded concept does not provide the necessary detail needed for the use case."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BodySite  extends DomainResource  {
   /**
   * Description: "This is a BodySite resource"
@@ -41,7 +46,7 @@ public class BodySite  extends DomainResource  {
   /**
   * Description: "Identifier for this instance of the anatomical location."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Whether this body site is in active use."
@@ -61,7 +66,7 @@ public class BodySite  extends DomainResource  {
   /**
   * Description: "Qualifier to refine the anatomical location.  These include qualifiers for laterality, relative location, directionality, number, and plane."
   */
-  protected java.util.List<CodeableConcept> qualifier = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> qualifier;
 
   /**
   * Description: "A summary, charactarization or explanation of the anatomic location."
@@ -76,7 +81,7 @@ public class BodySite  extends DomainResource  {
   /**
   * Description: "Image or images used to identify a location."
   */
-  protected java.util.List<Attachment> image = new java.util.ArrayList<>();
+  protected java.util.List<Attachment> image;
 
   /**
   * Description: "The person to which the body site belongs."

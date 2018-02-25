@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ConceptMapElementModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ConceptMapElement  extends BackboneElement  {
   /**
   * Description: "Identity (code or path) or the element/item being mapped."
@@ -56,7 +61,7 @@ public class ConceptMapElement  extends BackboneElement  {
   /**
   * Description: "A concept from the target value set that this concept maps to."
   */
-  protected java.util.List<ConceptMapTarget> target = new java.util.ArrayList<>();
+  protected java.util.List<ConceptMapTarget> target;
 
   public ConceptMapElement() {
   }

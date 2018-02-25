@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DiagnosticReportModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DiagnosticReport  extends DomainResource  {
   /**
   * Description: "This is a DiagnosticReport resource"
@@ -41,12 +46,12 @@ public class DiagnosticReport  extends DomainResource  {
   /**
   * Description: "Identifiers assigned to this report by the performer or other systems."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Details concerning a test or procedure requested."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "The status of the diagnostic report as a whole."
@@ -108,27 +113,27 @@ public class DiagnosticReport  extends DomainResource  {
   /**
   * Description: "Indicates who or what participated in producing the report."
   */
-  protected java.util.List<DiagnosticReportPerformer> performer = new java.util.ArrayList<>();
+  protected java.util.List<DiagnosticReportPerformer> performer;
 
   /**
   * Description: "Details about the specimens on which this diagnostic report is based."
   */
-  protected java.util.List<Reference> specimen = new java.util.ArrayList<>();
+  protected java.util.List<Reference> specimen;
 
   /**
   * Description: "Observations that are part of this diagnostic report. Observations can be simple name/value pairs (e.g. \"atomic\" results), or they can be grouping observations that include references to other members of the group (e.g. \"panels\")."
   */
-  protected java.util.List<Reference> result = new java.util.ArrayList<>();
+  protected java.util.List<Reference> result;
 
   /**
   * Description: "One or more links to full details of any imaging performed during the diagnostic investigation. Typically, this is imaging performed by DICOM enabled modalities, but this is not required. A fully enabled PACS viewer can use this information to provide views of the source images."
   */
-  protected java.util.List<Reference> imagingStudy = new java.util.ArrayList<>();
+  protected java.util.List<Reference> imagingStudy;
 
   /**
   * Description: "A list of key images associated with this report. The images are generally created during the diagnostic process, and may be directly of the patient, or of treated specimens (i.e. slides of interest)."
   */
-  protected java.util.List<DiagnosticReportImage> image = new java.util.ArrayList<>();
+  protected java.util.List<DiagnosticReportImage> image;
 
   /**
   * Description: "Concise and clinically contextualized impression / summary of the diagnostic report."
@@ -143,12 +148,12 @@ public class DiagnosticReport  extends DomainResource  {
   /**
   * Description: "Codes for the conclusion."
   */
-  protected java.util.List<CodeableConcept> codedDiagnosis = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> codedDiagnosis;
 
   /**
   * Description: "Rich text representation of the entire result as issued by the diagnostic service. Multiple formats are allowed but they SHALL be semantically equivalent."
   */
-  protected java.util.List<Attachment> presentedForm = new java.util.ArrayList<>();
+  protected java.util.List<Attachment> presentedForm;
 
   public DiagnosticReport() {
   }

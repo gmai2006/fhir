@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A  text note which also  contains information about who made the statement and when."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Annotation  extends Element  {
   /**
   * Description: "The individual responsible for making the annotation."

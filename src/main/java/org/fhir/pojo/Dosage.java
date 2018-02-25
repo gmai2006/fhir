@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DosageModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Indicates how the medication is/was taken or should be taken by the patient."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Dosage  extends Element  {
   /**
   * Description: "Indicates the order in which the dosage instructions should be applied or interpreted."
@@ -56,7 +61,7 @@ public class Dosage  extends Element  {
   /**
   * Description: "Supplemental instruction - e.g. \"with meals\"."
   */
-  protected java.util.List<CodeableConcept> additionalInstruction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> additionalInstruction;
 
   /**
   * Description: "Instructions in terms that are understood by the patient or consumer."

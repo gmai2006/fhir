@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.HealthcareServiceNotAvailableModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The details of a healthcare service available at a location."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class HealthcareServiceNotAvailable  extends BackboneElement  {
   /**
   * Description: "The reason that can be presented to the user as to why this time is not available."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.RelatedPersonModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Information about a person that is involved in the care for a patient, but who is not the target of healthcare, nor has a formal responsibility in the care process."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RelatedPerson  extends DomainResource  {
   /**
   * Description: "This is a RelatedPerson resource"
@@ -41,7 +46,7 @@ public class RelatedPerson  extends DomainResource  {
   /**
   * Description: "Identifier for a person within a particular scope."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Whether this related person record is in active use."
@@ -67,12 +72,12 @@ public class RelatedPerson  extends DomainResource  {
   /**
   * Description: "A name associated with the person."
   */
-  protected java.util.List<HumanName> name = new java.util.ArrayList<>();
+  protected java.util.List<HumanName> name;
 
   /**
   * Description: "A contact detail for the person, e.g. a telephone number or an email address."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   /**
   * Description: "Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes."
@@ -98,12 +103,12 @@ public class RelatedPerson  extends DomainResource  {
   /**
   * Description: "Address where the related person can be contacted or visited."
   */
-  protected java.util.List<Address> address = new java.util.ArrayList<>();
+  protected java.util.List<Address> address;
 
   /**
   * Description: "Image of the person."
   */
-  protected java.util.List<Attachment> photo = new java.util.ArrayList<>();
+  protected java.util.List<Attachment> photo;
 
   /**
   * Description: "The period of time that this relationship is considered to be valid. If there are no dates defined, then the interval is unknown."

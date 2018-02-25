@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.OrganizationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization  extends DomainResource  {
   /**
   * Description: "This is a Organization resource"
@@ -41,7 +46,7 @@ public class Organization  extends DomainResource  {
   /**
   * Description: "Identifier for the organization that is used to identify the organization across multiple disparate systems."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Whether the organization's record is still in active use."
@@ -56,7 +61,7 @@ public class Organization  extends DomainResource  {
   /**
   * Description: "The kind(s) of organization that this is."
   */
-  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type;
 
   /**
   * Description: "A name associated with the organization."
@@ -71,22 +76,22 @@ public class Organization  extends DomainResource  {
   /**
   * Description: "A list of alternate names that the organization is known as, or was known as in the past."
   */
-  protected java.util.List<String> alias = new java.util.ArrayList<>();
+  protected java.util.List<String> alias;
 
   /**
   * Description: "Extensions for alias"
   */
-  protected transient java.util.List<Element> _alias = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _alias;
 
   /**
   * Description: "A contact detail for the organization."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   /**
   * Description: "An address for the organization."
   */
-  protected java.util.List<Address> address = new java.util.ArrayList<>();
+  protected java.util.List<Address> address;
 
   /**
   * Description: "The organization of which this organization forms a part."
@@ -96,12 +101,12 @@ public class Organization  extends DomainResource  {
   /**
   * Description: "Contact for the organization for a certain purpose."
   */
-  protected java.util.List<OrganizationContact> contact = new java.util.ArrayList<>();
+  protected java.util.List<OrganizationContact> contact;
 
   /**
   * Description: "Technical endpoints providing access to services operated for the organization."
   */
-  protected java.util.List<Reference> endpoint = new java.util.ArrayList<>();
+  protected java.util.List<Reference> endpoint;
 
   public Organization() {
   }

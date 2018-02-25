@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EligibilityResponseBenefitBalanceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides eligibility and plan details from the processing of an Eligibility resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class EligibilityResponseBenefitBalance  extends BackboneElement  {
   /**
   * Description: "Dental, Vision, Medical, Pharmacy, Rehab etc."
@@ -91,7 +96,7 @@ public class EligibilityResponseBenefitBalance  extends BackboneElement  {
   /**
   * Description: "Benefits Used to date."
   */
-  protected java.util.List<EligibilityResponseFinancial> financial = new java.util.ArrayList<>();
+  protected java.util.List<EligibilityResponseFinancial> financial;
 
   public EligibilityResponseBenefitBalance() {
   }

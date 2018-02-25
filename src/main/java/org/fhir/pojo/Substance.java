@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SubstanceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A homogeneous material with a definite composition."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Substance  extends DomainResource  {
   /**
   * Description: "This is a Substance resource"
@@ -41,7 +46,7 @@ public class Substance  extends DomainResource  {
   /**
   * Description: "Unique identifier for the substance."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A code to indicate if the substance is actively used."
@@ -56,7 +61,7 @@ public class Substance  extends DomainResource  {
   /**
   * Description: "A code that classifies the general type of substance.  This is used  for searching, sorting and display purposes."
   */
-  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category;
 
   /**
   * Description: "A code (or set of codes) that identify this substance."
@@ -77,12 +82,12 @@ public class Substance  extends DomainResource  {
   /**
   * Description: "Substance may be used to describe a kind of substance, or a specific package/container of the substance: an instance."
   */
-  protected java.util.List<SubstanceInstance> instance = new java.util.ArrayList<>();
+  protected java.util.List<SubstanceInstance> instance;
 
   /**
   * Description: "A substance can be composed of other substances."
   */
-  protected java.util.List<SubstanceIngredient> ingredient = new java.util.ArrayList<>();
+  protected java.util.List<SubstanceIngredient> ingredient;
 
   public Substance() {
   }

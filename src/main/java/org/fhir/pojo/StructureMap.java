@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.StructureMapModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class StructureMap  extends DomainResource  {
   /**
   * Description: "This is a StructureMap resource"
@@ -51,7 +56,7 @@ public class StructureMap  extends DomainResource  {
   /**
   * Description: "A formal identifier that is used to identify this structure map when it is represented in other formats, or referenced in a specification, model, design or an instance."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The identifier that is used to identify this version of the structure map when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the structure map author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
@@ -127,7 +132,7 @@ public class StructureMap  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A free text natural language description of the structure map from a consumer's perspective."
@@ -142,12 +147,12 @@ public class StructureMap  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate structure map instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the structure map is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Explaination of why this structure map is needed and why it has been designed as it has."
@@ -172,23 +177,23 @@ public class StructureMap  extends DomainResource  {
   /**
   * Description: "A structure definition used by this map. The structure definition may describe instances that are converted, or the instances that are produced."
   */
-  protected java.util.List<StructureMapStructure> structure = new java.util.ArrayList<>();
+  protected java.util.List<StructureMapStructure> structure;
 
   /**
   * Description: "Other maps used by this map (canonical URLs)."
   */
-  protected java.util.List<String> FHIRimport = new java.util.ArrayList<>();
+  protected java.util.List<String> FHIRimport;
 
   /**
   * Description: "Extensions for import"
   */
-  protected transient java.util.List<Element> _import = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _import;
 
   /**
   * Description: "Organizes the mapping into managable chunks for human review/ease of maintenance."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<StructureMapGroup> group = new java.util.ArrayList<>();
+  protected java.util.List<StructureMapGroup> group;
 
   public StructureMap() {
   }

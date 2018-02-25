@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DeviceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Device  extends DomainResource  {
   /**
   * Description: "This is a Device resource"
@@ -41,7 +46,7 @@ public class Device  extends DomainResource  {
   /**
   * Description: "Unique instance identifiers assigned to a device by manufacturers other organizations or owners."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "[Unique device identifier (UDI)](device.html#5.11.3.2.2) assigned to device label or package."
@@ -138,7 +143,7 @@ public class Device  extends DomainResource  {
   /**
   * Description: "Contact details for an organization or a particular human that is responsible for the device."
   */
-  protected java.util.List<ContactPoint> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> contact;
 
   /**
   * Description: "The place where the device can be found."
@@ -158,12 +163,12 @@ public class Device  extends DomainResource  {
   /**
   * Description: "Descriptive information, usage information or implantation information that is not captured in an existing element."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Provides additional safety characteristics about a medical device.  For example devices containing latex."
   */
-  protected java.util.List<CodeableConcept> safety = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> safety;
 
   public Device() {
   }

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ValueSetComposeModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ValueSetCompose  extends BackboneElement  {
   /**
   * Description: "If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined."
@@ -57,12 +62,12 @@ public class ValueSetCompose  extends BackboneElement  {
   * Description: "Include one or more codes from a code system or other value set(s)."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<ValueSetInclude> include = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetInclude> include;
 
   /**
   * Description: "Exclude one or more codes from the value set based on code system filters and/or other value sets."
   */
-  protected java.util.List<ValueSetInclude> exclude = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetInclude> exclude;
 
   public ValueSetCompose() {
   }

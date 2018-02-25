@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AccountModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Account  extends DomainResource  {
   /**
   * Description: "This is a Account resource"
@@ -41,7 +46,7 @@ public class Account  extends DomainResource  {
   /**
   * Description: "Unique identifier used to reference the account.  May or may not be intended for human use (e.g. credit card number)."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Indicates whether the account is presently used/usable or not."
@@ -91,7 +96,7 @@ public class Account  extends DomainResource  {
   /**
   * Description: "The party(s) that are responsible for covering the payment of this account, and what order should they be applied to the account."
   */
-  protected java.util.List<AccountCoverage> coverage = new java.util.ArrayList<>();
+  protected java.util.List<AccountCoverage> coverage;
 
   /**
   * Description: "Indicates the organization, department, etc. with responsibility for the account."
@@ -111,7 +116,7 @@ public class Account  extends DomainResource  {
   /**
   * Description: "Parties financially responsible for the account."
   */
-  protected java.util.List<AccountGuarantor> guarantor = new java.util.ArrayList<>();
+  protected java.util.List<AccountGuarantor> guarantor;
 
   public Account() {
   }

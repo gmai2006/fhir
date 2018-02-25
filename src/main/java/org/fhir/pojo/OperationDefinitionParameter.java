@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.OperationDefinitionParameterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class OperationDefinitionParameter  extends BackboneElement  {
   /**
   * Description: "The name of used to identify the parameter."
@@ -118,7 +123,7 @@ public class OperationDefinitionParameter  extends BackboneElement  {
   /**
   * Description: "The parts of a nested Parameter."
   */
-  protected java.util.List<OperationDefinitionParameter> part = new java.util.ArrayList<>();
+  protected java.util.List<OperationDefinitionParameter> part;
 
   public OperationDefinitionParameter() {
   }

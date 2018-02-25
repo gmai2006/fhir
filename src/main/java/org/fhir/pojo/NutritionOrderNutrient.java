@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.NutritionOrderNutrientModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class NutritionOrderNutrient  extends BackboneElement  {
   /**
   * Description: "The nutrient that is being modified such as carbohydrate or sodium."

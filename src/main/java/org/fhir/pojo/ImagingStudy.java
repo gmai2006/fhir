@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ImagingStudyModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImagingStudy  extends DomainResource  {
   /**
   * Description: "This is a ImagingStudy resource"
@@ -57,7 +62,7 @@ public class ImagingStudy  extends DomainResource  {
   /**
   * Description: "Other identifiers for the study."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Availability of study (online, offline, or nearline)."
@@ -72,7 +77,7 @@ public class ImagingStudy  extends DomainResource  {
   /**
   * Description: "A list of all the Series.ImageModality values that are actual acquisition modalities, i.e. those in the DICOM Context Group 29 (value set OID 1.2.840.10008.6.1.19)."
   */
-  protected java.util.List<Coding> modalityList = new java.util.ArrayList<>();
+  protected java.util.List<Coding> modalityList;
 
   /**
   * Description: "The patient imaged in the study."
@@ -99,7 +104,7 @@ public class ImagingStudy  extends DomainResource  {
   /**
   * Description: "A list of the diagnostic requests that resulted in this imaging study being performed."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "The requesting/referring physician."
@@ -109,12 +114,12 @@ public class ImagingStudy  extends DomainResource  {
   /**
   * Description: "Who read the study and interpreted the images or other content."
   */
-  protected java.util.List<Reference> interpreter = new java.util.ArrayList<>();
+  protected java.util.List<Reference> interpreter;
 
   /**
   * Description: "The network service providing access (e.g., query, view, or retrieval) for the study. See implementation notes for information about using DICOM endpoints. A study-level endpoint applies to each series in the study, unless overridden by a series-level endpoint with the same Endpoint.type."
   */
-  protected java.util.List<Reference> endpoint = new java.util.ArrayList<>();
+  protected java.util.List<Reference> endpoint;
 
   /**
   * Description: "Number of Series in the Study. This value given may be larger than the number of series elements this Resource contains due to resource availability, security, or other factors. This element should be present if any series elements are present."
@@ -141,12 +146,12 @@ public class ImagingStudy  extends DomainResource  {
   /**
   * Description: "A reference to the performed Procedure."
   */
-  protected java.util.List<Reference> procedureReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> procedureReference;
 
   /**
   * Description: "The code for the performed procedure type."
   */
-  protected java.util.List<CodeableConcept> procedureCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> procedureCode;
 
   /**
   * Description: "Description of clinical condition indicating why the ImagingStudy was requested."
@@ -166,7 +171,7 @@ public class ImagingStudy  extends DomainResource  {
   /**
   * Description: "Each study has one or more series of images or other content."
   */
-  protected java.util.List<ImagingStudySeries> series = new java.util.ArrayList<>();
+  protected java.util.List<ImagingStudySeries> series;
 
   public ImagingStudy() {
   }

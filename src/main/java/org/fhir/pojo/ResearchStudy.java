@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ResearchStudyModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ResearchStudy  extends DomainResource  {
   /**
   * Description: "This is a ResearchStudy resource"
@@ -41,7 +46,7 @@ public class ResearchStudy  extends DomainResource  {
   /**
   * Description: "Identifiers assigned to this research study by the sponsor or other systems."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A short, descriptive user-friendly label for the study."
@@ -56,12 +61,12 @@ public class ResearchStudy  extends DomainResource  {
   /**
   * Description: "The set of steps expected to be performed as part of the execution of the study."
   */
-  protected java.util.List<Reference> protocol = new java.util.ArrayList<>();
+  protected java.util.List<Reference> protocol;
 
   /**
   * Description: "A larger research study of which this particular study is a component or step."
   */
-  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf;
 
   /**
   * Description: "The current state of the study."
@@ -76,32 +81,32 @@ public class ResearchStudy  extends DomainResource  {
   /**
   * Description: "Codes categorizing the type of study such as investigational vs. observational, type of blinding, type of randomization, safety vs. efficacy, etc."
   */
-  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category;
 
   /**
   * Description: "The condition(s), medication(s), food(s), therapy(ies), device(s) or other concerns or interventions that the study is seeking to gain more information about."
   */
-  protected java.util.List<CodeableConcept> focus = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> focus;
 
   /**
   * Description: "Contact details to assist a user in learning more about or engaging with the study."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "Citations, references and other related documents."
   */
-  protected java.util.List<RelatedArtifact> relatedArtifact = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> relatedArtifact;
 
   /**
   * Description: "Key terms to aid in searching for or filtering the study."
   */
-  protected java.util.List<CodeableConcept> keyword = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> keyword;
 
   /**
   * Description: "Indicates a country, state or other region where the study is taking place."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "A full description of how the study is being conducted."
@@ -116,7 +121,7 @@ public class ResearchStudy  extends DomainResource  {
   /**
   * Description: "Reference to a Group that defines the criteria for and quantity of subjects participating in the study.  E.g. \" 200 female Europeans between the ages of 20 and 45 with early onset diabetes\"."
   */
-  protected java.util.List<Reference> enrollment = new java.util.ArrayList<>();
+  protected java.util.List<Reference> enrollment;
 
   /**
   * Description: "Identifies the start date and the expected (or actual, depending on status) end date for the study."
@@ -136,7 +141,7 @@ public class ResearchStudy  extends DomainResource  {
   /**
   * Description: "Clinic, hospital or other healthcare location that is participating in the study."
   */
-  protected java.util.List<Reference> site = new java.util.ArrayList<>();
+  protected java.util.List<Reference> site;
 
   /**
   * Description: "A description and/or code explaining the premature termination of the study."
@@ -146,12 +151,12 @@ public class ResearchStudy  extends DomainResource  {
   /**
   * Description: "Comments made about the event by the performer, subject or other participants."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Describes an expected sequence of events for one of the participants of a study.  E.g. Exposure to drug A, wash-out, exposure to drug B, wash-out, follow-up."
   */
-  protected java.util.List<ResearchStudyArm> arm = new java.util.ArrayList<>();
+  protected java.util.List<ResearchStudyArm> arm;
 
   public ResearchStudy() {
   }

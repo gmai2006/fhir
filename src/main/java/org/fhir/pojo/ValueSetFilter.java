@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ValueSetFilterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ValueSetFilter  extends BackboneElement  {
   /**
   * Description: "A code that identifies a property defined in the code system."

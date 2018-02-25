@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Details for all kinds of technology mediated contact points for a person or organization, including telephone, email, etc."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ContactPoint  extends Element  {
   /**
   * Description: "Telecommunications form for contact point - what communications system is required to make use of the contact."

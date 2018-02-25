@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ProcedureModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Procedure  extends DomainResource  {
   /**
   * Description: "This is a Procedure resource"
@@ -41,22 +46,22 @@ public class Procedure  extends DomainResource  {
   /**
   * Description: "This records identifiers associated with this procedure that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A protocol, guideline, orderset or other definition that was adhered to in whole or in part by this procedure."
   */
-  protected java.util.List<Reference> definition = new java.util.ArrayList<>();
+  protected java.util.List<Reference> definition;
 
   /**
   * Description: "A reference to a resource that contains details of the request for this procedure."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "A larger event of which this particular procedure is a component or step."
   */
-  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf;
 
   /**
   * Description: "A code specifying the state of the procedure. Generally this will be in-progress or completed state."
@@ -124,7 +129,7 @@ public class Procedure  extends DomainResource  {
   /**
   * Description: "Limited to 'real' people rather than equipment."
   */
-  protected java.util.List<ProcedurePerformer> performer = new java.util.ArrayList<>();
+  protected java.util.List<ProcedurePerformer> performer;
 
   /**
   * Description: "The location where the procedure actually happened.  E.g. a newborn at home, a tracheostomy at a restaurant."
@@ -134,17 +139,17 @@ public class Procedure  extends DomainResource  {
   /**
   * Description: "The coded reason why the procedure was performed. This may be coded entity of some type, or may simply be present as text."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "The condition that is the reason why the procedure was performed."
   */
-  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference;
 
   /**
   * Description: "Detailed and structured anatomical location information. Multiple locations are allowed - e.g. multiple punch biopsies of a lesion."
   */
-  protected java.util.List<CodeableConcept> bodySite = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> bodySite;
 
   /**
   * Description: "The outcome of the procedure - did it resolve reasons for the procedure being performed?"
@@ -154,42 +159,42 @@ public class Procedure  extends DomainResource  {
   /**
   * Description: "This could be a histology result, pathology report, surgical report, etc.."
   */
-  protected java.util.List<Reference> report = new java.util.ArrayList<>();
+  protected java.util.List<Reference> report;
 
   /**
   * Description: "Any complications that occurred during the procedure, or in the immediate post-performance period. These are generally tracked separately from the notes, which will typically describe the procedure itself rather than any 'post procedure' issues."
   */
-  protected java.util.List<CodeableConcept> complication = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> complication;
 
   /**
   * Description: "Any complications that occurred during the procedure, or in the immediate post-performance period."
   */
-  protected java.util.List<Reference> complicationDetail = new java.util.ArrayList<>();
+  protected java.util.List<Reference> complicationDetail;
 
   /**
   * Description: "If the procedure required specific follow up - e.g. removal of sutures. The followup may be represented as a simple note, or could potentially be more complex in which case the CarePlan resource can be used."
   */
-  protected java.util.List<CodeableConcept> followUp = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> followUp;
 
   /**
   * Description: "Any other notes about the procedure.  E.g. the operative notes."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "A device that is implanted, removed or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure."
   */
-  protected java.util.List<ProcedureFocalDevice> focalDevice = new java.util.ArrayList<>();
+  protected java.util.List<ProcedureFocalDevice> focalDevice;
 
   /**
   * Description: "Identifies medications, devices and any other substance used as part of the procedure."
   */
-  protected java.util.List<Reference> usedReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> usedReference;
 
   /**
   * Description: "Identifies coded items that were used as part of the procedure."
   */
-  protected java.util.List<CodeableConcept> usedCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> usedCode;
 
   public Procedure() {
   }

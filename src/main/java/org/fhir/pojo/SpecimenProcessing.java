@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SpecimenProcessingModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A sample to be used for analysis."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SpecimenProcessing  extends BackboneElement  {
   /**
   * Description: "Textual description of procedure."
@@ -50,7 +55,7 @@ public class SpecimenProcessing  extends BackboneElement  {
   /**
   * Description: "Material used in the processing step."
   */
-  protected java.util.List<Reference> additive = new java.util.ArrayList<>();
+  protected java.util.List<Reference> additive;
 
   /**
   * Description: "A record of the time or period when the specimen processing occurred.  For example the time of sample fixation or the period of time the sample was in formalin."

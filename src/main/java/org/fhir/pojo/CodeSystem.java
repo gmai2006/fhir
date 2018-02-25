@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CodeSystemModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CodeSystem  extends DomainResource  {
   /**
   * Description: "This is a CodeSystem resource"
@@ -127,7 +132,7 @@ public class CodeSystem  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A free text natural language description of the code system from a consumer's perspective."
@@ -142,12 +147,12 @@ public class CodeSystem  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate code system instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the code system is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Explaination of why this code system is needed and why it has been designed as it has."
@@ -243,17 +248,17 @@ public class CodeSystem  extends DomainResource  {
   /**
   * Description: "A filter that can be used in a value set compose statement when selecting concepts using a filter."
   */
-  protected java.util.List<CodeSystemFilter> filter = new java.util.ArrayList<>();
+  protected java.util.List<CodeSystemFilter> filter;
 
   /**
   * Description: "A property defines an additional slot through which additional information can be provided about a concept."
   */
-  protected java.util.List<CodeSystemProperty> property = new java.util.ArrayList<>();
+  protected java.util.List<CodeSystemProperty> property;
 
   /**
   * Description: "Concepts that are in the code system. The concept definitions are inherently hierarchical, but the definitions must be consulted to determine what the meaning of the hierarchical relationships are."
   */
-  protected java.util.List<CodeSystemConcept> concept = new java.util.ArrayList<>();
+  protected java.util.List<CodeSystemConcept> concept;
 
   public CodeSystem() {
   }

@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A relationship of two Quantity values - expressed as a numerator and a denominator."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Ratio  extends Element  {
   /**
   * Description: "The value of the numerator."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CoverageModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Financial instrument which may be used to reimburse or pay for health care products and services."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Coverage  extends DomainResource  {
   /**
   * Description: "This is a Coverage resource"
@@ -41,7 +46,7 @@ public class Coverage  extends DomainResource  {
   /**
   * Description: "The main (and possibly only) identifier for the coverage - often referred to as a Member Id, Certificate number, Personal Health Number or Case ID. May be constructed as the concatination of the Coverage.SubscriberID and the Coverage.dependant."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."
@@ -97,7 +102,7 @@ public class Coverage  extends DomainResource  {
   /**
   * Description: "The program or plan underwriter or payor including both insurance and non-insurance agreements, such as patient-pay agreements. May provide multiple identifiers such as insurance company identifier or business identifier (BIN number)."
   */
-  protected java.util.List<Reference> payor = new java.util.ArrayList<>();
+  protected java.util.List<Reference> payor;
 
   /**
   * Description: "A suite of underwrite specific classifiers, for example may be used to identify a class of coverage or employer group, Policy, Plan."
@@ -148,7 +153,7 @@ public class Coverage  extends DomainResource  {
   /**
   * Description: "The policy(s) which constitute this insurance coverage."
   */
-  protected java.util.List<Reference> contract = new java.util.ArrayList<>();
+  protected java.util.List<Reference> contract;
 
   public Coverage() {
   }

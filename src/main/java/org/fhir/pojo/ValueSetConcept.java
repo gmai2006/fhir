@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ValueSetConceptModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ValueSetConcept  extends BackboneElement  {
   /**
   * Description: "Specifies a code for the concept to be included or excluded."
@@ -56,7 +61,7 @@ public class ValueSetConcept  extends BackboneElement  {
   /**
   * Description: "Additional representations for this concept when used in this value set - other languages, aliases, specialized purposes, used for particular purposes, etc."
   */
-  protected java.util.List<ValueSetDesignation> designation = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetDesignation> designation;
 
   public ValueSetConcept() {
   }

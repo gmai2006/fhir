@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SpecimenCollectionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A sample to be used for analysis."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SpecimenCollection  extends BackboneElement  {
   /**
   * Description: "Person who collected the specimen."

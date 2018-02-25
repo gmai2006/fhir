@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.NutritionOrderModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class NutritionOrder  extends DomainResource  {
   /**
   * Description: "This is a NutritionOrder resource"
@@ -41,7 +46,7 @@ public class NutritionOrder  extends DomainResource  {
   /**
   * Description: "Identifiers assigned to this order by the order sender or by the order receiver."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The workflow status of the nutrition order/request."
@@ -83,17 +88,17 @@ public class NutritionOrder  extends DomainResource  {
   /**
   * Description: "A link to a record of allergies or intolerances  which should be included in the nutrition order."
   */
-  protected java.util.List<Reference> allergyIntolerance = new java.util.ArrayList<>();
+  protected java.util.List<Reference> allergyIntolerance;
 
   /**
   * Description: "This modifier is used to convey order-specific modifiers about the type of food that should be given. These can be derived from patient allergies, intolerances, or preferences such as Halal, Vegan or Kosher. This modifier applies to the entire nutrition order inclusive of the oral diet, nutritional supplements and enteral formula feedings."
   */
-  protected java.util.List<CodeableConcept> foodPreferenceModifier = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> foodPreferenceModifier;
 
   /**
   * Description: "This modifier is used to convey order-specific modifiers about the type of food that should NOT be given. These can be derived from patient allergies, intolerances, or preferences such as No Red Meat, No Soy or No Wheat or  Gluten-Free.  While it should not be necessary to repeat allergy or intolerance information captured in the referenced AllergyIntolerance resource in the excludeFoodModifier, this element may be used to convey additional specificity related to foods that should be eliminated from the patient’s diet for any reason.  This modifier applies to the entire nutrition order inclusive of the oral diet, nutritional supplements and enteral formula feedings."
   */
-  protected java.util.List<CodeableConcept> excludeFoodModifier = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> excludeFoodModifier;
 
   /**
   * Description: "Diet given orally in contrast to enteral (tube) feeding."
@@ -103,7 +108,7 @@ public class NutritionOrder  extends DomainResource  {
   /**
   * Description: "Oral nutritional products given in order to add further nutritional value to the patient's diet."
   */
-  protected java.util.List<NutritionOrderSupplement> supplement = new java.util.ArrayList<>();
+  protected java.util.List<NutritionOrderSupplement> supplement;
 
   /**
   * Description: "Feeding provided through the gastrointestinal tract via a tube, catheter, or stoma that delivers nutrition distal to the oral cavity."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ClaimDiagnosisModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ClaimDiagnosis  extends BackboneElement  {
   /**
   * Description: "Sequence of diagnosis which serves to provide a link."
@@ -56,7 +61,7 @@ public class ClaimDiagnosis  extends BackboneElement  {
   /**
   * Description: "The type of the Diagnosis, for example: admitting, primary, secondary, discharge."
   */
-  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type;
 
   /**
   * Description: "The package billing code, for example DRG, based on the assigned grouping code system."

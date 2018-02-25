@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ActivityDefinitionParticipantModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ActivityDefinitionParticipant  extends BackboneElement  {
   /**
   * Description: "The type of participant in the action."

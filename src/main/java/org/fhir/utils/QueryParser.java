@@ -8,9 +8,17 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javax.ws.rs.core.MultivaluedMap;
+
 public class QueryParser {
 	private static final Logger logger = Logger.getLogger(QueryParser.class.getName());
 	
+	public static String convertMap2Str(MultivaluedMap<String, String> map) {
+		return map.entrySet()
+        .stream()
+        .map(entry -> entry.getKey() + "=" + entry.getValue().get(0))
+        .collect(Collectors.joining("&"));
+	}
 	/**
 	 * http://hl7.org/fhir/search.html
 	 * Servers may receive parameters from the client that they do not recognise, or may receive parameters they recognise but do not support (either in general, or for a specific search). 
@@ -19,21 +27,9 @@ public class QueryParser {
 	 * @param valid
 	 * @return
 	 */
-	public static Map<String, String> parse(String params, String valid) {
-		Map<String, String> map = parse(params);
-		java.util.List<String> unknownParams = map.keySet().stream()
-				.filter(key -> !valid.contains(key))
-				.collect(Collectors.toList());
-		
-		logger.info("Unknown params " + unknownParams.toString());
-		
-		return map.keySet().stream()
-				.filter(key -> valid.contains(key))
-				.collect(Collectors.toMap(key -> key, key -> map.get(key)));
-	}
-	
+
 	//https://stackoverflow.com/questions/13592236/parse-a-uri-string-into-name-value-collection
-	private static Map<String, String> parse(String params) {
+	public static Map<String, String> parse(String params) {
 		return 
         Pattern.compile("&").splitAsStream(params)
         .map(s -> Arrays.copyOf(s.split("="), 2))

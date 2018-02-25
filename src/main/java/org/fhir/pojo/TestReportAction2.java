@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.TestReportAction2Model;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A summary of information based on the results of executing a TestScript."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TestReportAction2  extends BackboneElement  {
   /**
   * Description: "An operation would involve a REST request to a server."

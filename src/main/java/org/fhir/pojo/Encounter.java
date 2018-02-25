@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EncounterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Encounter  extends DomainResource  {
   /**
   * Description: "This is a Encounter resource"
@@ -41,7 +46,7 @@ public class Encounter  extends DomainResource  {
   /**
   * Description: "Identifier(s) by which this encounter is known."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "planned | arrived | triaged | in-progress | onleave | finished | cancelled +."
@@ -56,7 +61,7 @@ public class Encounter  extends DomainResource  {
   /**
   * Description: "The status history permits the encounter resource to contain the status history without needing to read through the historical versions of the resource, or even have the server store them."
   */
-  protected java.util.List<EncounterStatusHistory> statusHistory = new java.util.ArrayList<>();
+  protected java.util.List<EncounterStatusHistory> statusHistory;
 
   /**
   * Description: "inpatient | outpatient | ambulatory | emergency +."
@@ -66,12 +71,12 @@ public class Encounter  extends DomainResource  {
   /**
   * Description: "The class history permits the tracking of the encounters transitions without needing to go  through the resource history.\n\nThis would be used for a case where an admission starts of as an emergency encounter, then transisions into an inpatient scenario. Doing this and not restarting a new encounter ensures that any lab/diagnostic results can more easily follow the patient and not require re-processing and not get lost or cancelled during a kindof discharge from emergency to inpatient."
   */
-  protected java.util.List<EncounterClassHistory> classHistory = new java.util.ArrayList<>();
+  protected java.util.List<EncounterClassHistory> classHistory;
 
   /**
   * Description: "Specific type of encounter (e.g. e-mail consultation, surgical day-care, skilled nursing, rehabilitation)."
   */
-  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type;
 
   /**
   * Description: "Indicates the urgency of the encounter."
@@ -86,17 +91,17 @@ public class Encounter  extends DomainResource  {
   /**
   * Description: "Where a specific encounter should be classified as a part of a specific episode(s) of care this field should be used. This association can facilitate grouping of related encounters together for a specific purpose, such as government reporting, issue tracking, association via a common problem.  The association is recorded on the encounter as these are typically created after the episode of care, and grouped on entry rather than editing the episode of care to append another encounter to it (the episode of care could span years)."
   */
-  protected java.util.List<Reference> episodeOfCare = new java.util.ArrayList<>();
+  protected java.util.List<Reference> episodeOfCare;
 
   /**
   * Description: "The referral request this encounter satisfies (incoming referral)."
   */
-  protected java.util.List<Reference> incomingReferral = new java.util.ArrayList<>();
+  protected java.util.List<Reference> incomingReferral;
 
   /**
   * Description: "The list of people responsible for providing the service."
   */
-  protected java.util.List<EncounterParticipant> participant = new java.util.ArrayList<>();
+  protected java.util.List<EncounterParticipant> participant;
 
   /**
   * Description: "The appointment that scheduled this encounter."
@@ -116,17 +121,17 @@ public class Encounter  extends DomainResource  {
   /**
   * Description: "Reason the encounter takes place, expressed as a code. For admissions, this can be used for a coded admission diagnosis."
   */
-  protected java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reason;
 
   /**
   * Description: "The list of diagnosis relevant to this encounter."
   */
-  protected java.util.List<EncounterDiagnosis> diagnosis = new java.util.ArrayList<>();
+  protected java.util.List<EncounterDiagnosis> diagnosis;
 
   /**
   * Description: "The set of accounts that may be used for billing for this Encounter."
   */
-  protected java.util.List<Reference> account = new java.util.ArrayList<>();
+  protected java.util.List<Reference> account;
 
   /**
   * Description: "Details about the admission to a healthcare service."
@@ -136,7 +141,7 @@ public class Encounter  extends DomainResource  {
   /**
   * Description: "List of locations where  the patient has been during this encounter."
   */
-  protected java.util.List<EncounterLocation> location = new java.util.ArrayList<>();
+  protected java.util.List<EncounterLocation> location;
 
   /**
   * Description: "An organization that is in charge of maintaining the information of this Encounter (e.g. who maintains the report or the master service catalog item, etc.). This MAY be the same as the organization on the Patient record, however it could be different. This MAY not be not the Service Delivery Location's Organization."

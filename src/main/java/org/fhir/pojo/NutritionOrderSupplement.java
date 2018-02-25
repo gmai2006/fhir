@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.NutritionOrderSupplementModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class NutritionOrderSupplement  extends BackboneElement  {
   /**
   * Description: "The kind of nutritional supplement product required such as a high protein or pediatric clear liquid supplement."
@@ -50,7 +55,7 @@ public class NutritionOrderSupplement  extends BackboneElement  {
   /**
   * Description: "The time period and frequency at which the supplement(s) should be given.  The supplement should be given for the combination of all schedules if more than one schedule is present."
   */
-  protected java.util.List<Timing> schedule = new java.util.ArrayList<>();
+  protected java.util.List<Timing> schedule;
 
   /**
   * Description: "The amount of the nutritional supplement to be given."

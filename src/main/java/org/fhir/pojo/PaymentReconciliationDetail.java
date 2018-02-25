@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PaymentReconciliationDetailModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides payment details and claim references supporting a bulk payment."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PaymentReconciliationDetail  extends BackboneElement  {
   /**
   * Description: "Code to indicate the nature of the payment, adjustment, funds advance, etc."

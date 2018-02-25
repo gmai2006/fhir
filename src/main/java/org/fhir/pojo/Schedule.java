@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ScheduleModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A container for slots of time that may be available for booking appointments."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Schedule  extends DomainResource  {
   /**
   * Description: "This is a Schedule resource"
@@ -41,7 +46,7 @@ public class Schedule  extends DomainResource  {
   /**
   * Description: "External Ids for this item."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Whether this schedule record is in active use, or should not be used (such as was entered in error)."
@@ -61,18 +66,18 @@ public class Schedule  extends DomainResource  {
   /**
   * Description: "The specific service that is to be performed during this appointment."
   */
-  protected java.util.List<CodeableConcept> serviceType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> serviceType;
 
   /**
   * Description: "The specialty of a practitioner that would be required to perform the service requested in this appointment."
   */
-  protected java.util.List<CodeableConcept> specialty = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> specialty;
 
   /**
   * Description: "The resource this Schedule resource is providing availability information for. These are expected to usually be one of HealthcareService, Location, Practitioner, PractitionerRole, Device, Patient or RelatedPerson."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<Reference> actor = new java.util.ArrayList<>();
+  protected java.util.List<Reference> actor;
 
   /**
   * Description: "The period of time that the slots that are attached to this Schedule resource cover (even if none exist). These  cover the amount of time that an organization's planning horizon; the interval for which they are currently accepting appointments. This does not define a \"template\" for planning outside these dates."

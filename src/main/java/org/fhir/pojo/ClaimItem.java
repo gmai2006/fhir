@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ClaimItemModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ClaimItem  extends BackboneElement  {
   /**
   * Description: "A service line number."
@@ -46,42 +51,42 @@ public class ClaimItem  extends BackboneElement  {
   /**
   * Description: "CareTeam applicable for this service or product line."
   */
-  protected java.util.List<Float> careTeamLinkId = new java.util.ArrayList<>();
+  protected java.util.List<Float> careTeamLinkId;
 
   /**
   * Description: "Extensions for careTeamLinkId"
   */
-  protected transient java.util.List<Element> _careTeamLinkId = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _careTeamLinkId;
 
   /**
   * Description: "Diagnosis applicable for this service or product line."
   */
-  protected java.util.List<Float> diagnosisLinkId = new java.util.ArrayList<>();
+  protected java.util.List<Float> diagnosisLinkId;
 
   /**
   * Description: "Extensions for diagnosisLinkId"
   */
-  protected transient java.util.List<Element> _diagnosisLinkId = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _diagnosisLinkId;
 
   /**
   * Description: "Procedures applicable for this service or product line."
   */
-  protected java.util.List<Float> procedureLinkId = new java.util.ArrayList<>();
+  protected java.util.List<Float> procedureLinkId;
 
   /**
   * Description: "Extensions for procedureLinkId"
   */
-  protected transient java.util.List<Element> _procedureLinkId = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _procedureLinkId;
 
   /**
   * Description: "Exceptions, special conditions and supporting information pplicable for this service or product line."
   */
-  protected java.util.List<Float> informationLinkId = new java.util.ArrayList<>();
+  protected java.util.List<Float> informationLinkId;
 
   /**
   * Description: "Extensions for informationLinkId"
   */
-  protected transient java.util.List<Element> _informationLinkId = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _informationLinkId;
 
   /**
   * Description: "The type of reveneu or cost center providing the product and/or service."
@@ -101,12 +106,12 @@ public class ClaimItem  extends BackboneElement  {
   /**
   * Description: "Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours."
   */
-  protected java.util.List<CodeableConcept> modifier = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> modifier;
 
   /**
   * Description: "For programs which require reason codes for the inclusion or covering of this billed item under the program or sub-program."
   */
-  protected java.util.List<CodeableConcept> programCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> programCode;
 
   /**
   * Description: "The date or dates when the enclosed suite of services were performed or completed."
@@ -168,7 +173,7 @@ public class ClaimItem  extends BackboneElement  {
   /**
   * Description: "List of Unique Device Identifiers associated with this line item."
   */
-  protected java.util.List<Reference> udi = new java.util.ArrayList<>();
+  protected java.util.List<Reference> udi;
 
   /**
   * Description: "Physical service site on the patient (limb, tooth, etc)."
@@ -178,17 +183,17 @@ public class ClaimItem  extends BackboneElement  {
   /**
   * Description: "A region or surface of the site, eg. limb region or tooth surface(s)."
   */
-  protected java.util.List<CodeableConcept> subSite = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> subSite;
 
   /**
   * Description: "A billed item may include goods or services provided in multiple encounters."
   */
-  protected java.util.List<Reference> encounter = new java.util.ArrayList<>();
+  protected java.util.List<Reference> encounter;
 
   /**
   * Description: "Second tier of goods and services."
   */
-  protected java.util.List<ClaimDetail> detail = new java.util.ArrayList<>();
+  protected java.util.List<ClaimDetail> detail;
 
   public ClaimItem() {
   }

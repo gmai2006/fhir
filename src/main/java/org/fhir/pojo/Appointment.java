@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AppointmentModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s)."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Appointment  extends DomainResource  {
   /**
   * Description: "This is a Appointment resource"
@@ -41,7 +46,7 @@ public class Appointment  extends DomainResource  {
   /**
   * Description: "This records identifiers associated with this appointment concern that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The overall status of the Appointment. Each of the participants has their own participation status which indicates their involvement in the process, however this status indicates the shared status."
@@ -61,12 +66,12 @@ public class Appointment  extends DomainResource  {
   /**
   * Description: "The specific service that is to be performed during this appointment."
   */
-  protected java.util.List<CodeableConcept> serviceType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> serviceType;
 
   /**
   * Description: "The specialty of a practitioner that would be required to perform the service requested in this appointment."
   */
-  protected java.util.List<CodeableConcept> specialty = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> specialty;
 
   /**
   * Description: "The style of appointment or patient that has been booked in the slot (not service type)."
@@ -76,12 +81,12 @@ public class Appointment  extends DomainResource  {
   /**
   * Description: "The reason that this appointment is being scheduled. This is more clinical than administrative."
   */
-  protected java.util.List<CodeableConcept> reason = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reason;
 
   /**
   * Description: "Reason the appointment has been scheduled to take place, as specified using information from another resource. When the patient arrives and the encounter begins it may be used as the admission diagnosis. The indication will typically be a Condition (with other resources referenced in the evidence.detail), or a Procedure."
   */
-  protected java.util.List<Reference> indication = new java.util.ArrayList<>();
+  protected java.util.List<Reference> indication;
 
   /**
   * Description: "The priority of the appointment. Can be used to make informed decisions if needing to re-prioritize appointments. (The iCal Standard specifies 0 as undefined, 1 as highest, 9 as lowest priority)."
@@ -107,7 +112,7 @@ public class Appointment  extends DomainResource  {
   /**
   * Description: "Additional information to support the appointment provided when making the appointment."
   */
-  protected java.util.List<Reference> supportingInformation = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingInformation;
 
   /**
   * Description: "Date/Time that the appointment is to take place."
@@ -143,7 +148,7 @@ public class Appointment  extends DomainResource  {
   /**
   * Description: "The slots from the participants' schedules that will be filled by the appointment."
   */
-  protected java.util.List<Reference> slot = new java.util.ArrayList<>();
+  protected java.util.List<Reference> slot;
 
   /**
   * Description: "The date that this appointment was initially created. This could be different to the meta.lastModified value on the initial entry, as this could have been before the resource was created on the FHIR server, and should remain unchanged over the lifespan of the appointment."
@@ -169,18 +174,18 @@ public class Appointment  extends DomainResource  {
   /**
   * Description: "The referral request this appointment is allocated to assess (incoming referral)."
   */
-  protected java.util.List<Reference> incomingReferral = new java.util.ArrayList<>();
+  protected java.util.List<Reference> incomingReferral;
 
   /**
   * Description: "List of participants involved in the appointment."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<AppointmentParticipant> participant = new java.util.ArrayList<>();
+  protected java.util.List<AppointmentParticipant> participant;
 
   /**
   * Description: "A set of date ranges (potentially including times) that the appointment is preferred to be scheduled within. When using these values, the minutes duration should be provided to indicate the length of the appointment to fill and populate the start/end times for the actual allocated time."
   */
-  protected java.util.List<Period> requestedPeriod = new java.util.ArrayList<>();
+  protected java.util.List<Period> requestedPeriod;
 
   public Appointment() {
   }

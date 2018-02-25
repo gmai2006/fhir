@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ExplanationOfBenefitModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ExplanationOfBenefit  extends DomainResource  {
   /**
   * Description: "This is a ExplanationOfBenefit resource"
@@ -41,7 +46,7 @@ public class ExplanationOfBenefit  extends DomainResource  {
   /**
   * Description: "The EOB Business Identifier."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."
@@ -61,7 +66,7 @@ public class ExplanationOfBenefit  extends DomainResource  {
   /**
   * Description: "A finer grained suite of claim subtype codes which may convey Inpatient vs Outpatient and/or a specialty service. In the US the BillType."
   */
-  protected java.util.List<CodeableConcept> subType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> subType;
 
   /**
   * Description: "Patient Resource."
@@ -142,7 +147,7 @@ public class ExplanationOfBenefit  extends DomainResource  {
   /**
   * Description: "Other claims which are related to this claim such as prior claim versions or for related services."
   */
-  protected java.util.List<ExplanationOfBenefitRelated> related = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitRelated> related;
 
   /**
   * Description: "Prescription to support the dispensing of Pharmacy or Vision products."
@@ -162,22 +167,22 @@ public class ExplanationOfBenefit  extends DomainResource  {
   /**
   * Description: "Additional information codes regarding exceptions, special considerations, the condition, situation, prior or concurrent issues. Often there are mutiple jurisdiction specific valuesets which are required."
   */
-  protected java.util.List<ExplanationOfBenefitInformation> information = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitInformation> information;
 
   /**
   * Description: "The members of the team who provided the overall service as well as their role and whether responsible and qualifications."
   */
-  protected java.util.List<ExplanationOfBenefitCareTeam> careTeam = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitCareTeam> careTeam;
 
   /**
   * Description: "Ordered list of patient diagnosis for which care is sought."
   */
-  protected java.util.List<ExplanationOfBenefitDiagnosis> diagnosis = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitDiagnosis> diagnosis;
 
   /**
   * Description: "Ordered list of patient procedures performed to support the adjudication."
   */
-  protected java.util.List<ExplanationOfBenefitProcedure> procedure = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitProcedure> procedure;
 
   /**
   * Description: "Precedence (primary, secondary, etc.)."
@@ -213,12 +218,12 @@ public class ExplanationOfBenefit  extends DomainResource  {
   /**
   * Description: "First tier of goods and services."
   */
-  protected java.util.List<ExplanationOfBenefitItem> item = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitItem> item;
 
   /**
   * Description: "The first tier service adjudications for payor added services."
   */
-  protected java.util.List<ExplanationOfBenefitAddItem> addItem = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitAddItem> addItem;
 
   /**
   * Description: "The total cost of the services reported."
@@ -248,12 +253,12 @@ public class ExplanationOfBenefit  extends DomainResource  {
   /**
   * Description: "Note text."
   */
-  protected java.util.List<ExplanationOfBenefitProcessNote> processNote = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitProcessNote> processNote;
 
   /**
   * Description: "Balance by Benefit Category."
   */
-  protected java.util.List<ExplanationOfBenefitBenefitBalance> benefitBalance = new java.util.ArrayList<>();
+  protected java.util.List<ExplanationOfBenefitBenefitBalance> benefitBalance;
 
   public ExplanationOfBenefit() {
   }

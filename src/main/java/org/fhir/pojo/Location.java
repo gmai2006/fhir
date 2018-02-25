@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.LocationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Details and position information for a physical place where services are provided  and resources and participants may be stored, found, contained or accommodated."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Location  extends DomainResource  {
   /**
   * Description: "This is a Location resource"
@@ -41,7 +46,7 @@ public class Location  extends DomainResource  {
   /**
   * Description: "Unique code or number identifying the location to its users."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status property covers the general availability of the resource, not the current value which may be covered by the operationStatus, or by a schedule/slots if they are configured for the location."
@@ -71,12 +76,12 @@ public class Location  extends DomainResource  {
   /**
   * Description: "A list of alternate names that the location is known as, or was known as in the past."
   */
-  protected java.util.List<String> alias = new java.util.ArrayList<>();
+  protected java.util.List<String> alias;
 
   /**
   * Description: "Extensions for alias"
   */
-  protected transient java.util.List<Element> _alias = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _alias;
 
   /**
   * Description: "Description of the Location, which helps in finding or referencing the place."
@@ -106,7 +111,7 @@ public class Location  extends DomainResource  {
   /**
   * Description: "The contact details of communication devices available at the location. This can include phone numbers, fax numbers, mobile numbers, email addresses and web sites."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   /**
   * Description: "Physical location."
@@ -136,7 +141,7 @@ public class Location  extends DomainResource  {
   /**
   * Description: "Technical endpoints providing access to services operated for the location."
   */
-  protected java.util.List<Reference> endpoint = new java.util.ArrayList<>();
+  protected java.util.List<Reference> endpoint;
 
   public Location() {
   }

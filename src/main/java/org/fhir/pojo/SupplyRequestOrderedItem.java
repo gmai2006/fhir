@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SupplyRequestOrderedItemModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of a request for a medication, substance or device used in the healthcare setting."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SupplyRequestOrderedItem  extends BackboneElement  {
   /**
   * Description: "The amount that is being ordered of the indicated item."

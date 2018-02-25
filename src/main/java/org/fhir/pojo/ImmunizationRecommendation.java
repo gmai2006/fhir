@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ImmunizationRecommendationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImmunizationRecommendation  extends DomainResource  {
   /**
   * Description: "This is a ImmunizationRecommendation resource"
@@ -41,7 +46,7 @@ public class ImmunizationRecommendation  extends DomainResource  {
   /**
   * Description: "A unique identifier assigned to this particular recommendation record."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The patient the recommendations are for."
@@ -53,7 +58,7 @@ public class ImmunizationRecommendation  extends DomainResource  {
   * Description: "Vaccine administration recommendations."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<ImmunizationRecommendationRecommendation> recommendation = new java.util.ArrayList<>();
+  protected java.util.List<ImmunizationRecommendationRecommendation> recommendation;
 
   public ImmunizationRecommendation() {
   }

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MedicationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Medication  extends DomainResource  {
   /**
   * Description: "This is a Medication resource"
@@ -86,7 +91,7 @@ public class Medication  extends DomainResource  {
   /**
   * Description: "Identifies a particular constituent of interest in the product."
   */
-  protected java.util.List<MedicationIngredient> ingredient = new java.util.ArrayList<>();
+  protected java.util.List<MedicationIngredient> ingredient;
 
   /**
   * Description: "Information that only applies to packages (not products)."
@@ -96,7 +101,7 @@ public class Medication  extends DomainResource  {
   /**
   * Description: "Photo(s) or graphic representation(s) of the medication."
   */
-  protected java.util.List<Attachment> image = new java.util.ArrayList<>();
+  protected java.util.List<Attachment> image;
 
   public Medication() {
   }

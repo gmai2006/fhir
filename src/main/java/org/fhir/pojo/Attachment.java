@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "For referring to data content defined in other formats."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Attachment  extends Element  {
   /**
   * Description: "Identifies the type of the data in the attachment and allows a method to be chosen to interpret or render the data. Includes mime type parameters such as charset where appropriate."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ClaimResponseModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides the adjudication details from the processing of a Claim resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ClaimResponse  extends DomainResource  {
   /**
   * Description: "This is a ClaimResponse resource"
@@ -41,7 +46,7 @@ public class ClaimResponse  extends DomainResource  {
   /**
   * Description: "The Response business identifier."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."
@@ -113,17 +118,17 @@ public class ClaimResponse  extends DomainResource  {
   /**
   * Description: "The first tier service adjudications for submitted services."
   */
-  protected java.util.List<ClaimResponseItem> item = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseItem> item;
 
   /**
   * Description: "The first tier service adjudications for payor added services."
   */
-  protected java.util.List<ClaimResponseAddItem> addItem = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseAddItem> addItem;
 
   /**
   * Description: "Mutually exclusive with Services Provided (Item)."
   */
-  protected java.util.List<ClaimResponseError> error = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseError> error;
 
   /**
   * Description: "The total cost of the services reported."
@@ -158,17 +163,17 @@ public class ClaimResponse  extends DomainResource  {
   /**
   * Description: "Note text."
   */
-  protected java.util.List<ClaimResponseProcessNote> processNote = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseProcessNote> processNote;
 
   /**
   * Description: "Request for additional supporting or authorizing information, such as: documents, images or resources."
   */
-  protected java.util.List<Reference> communicationRequest = new java.util.ArrayList<>();
+  protected java.util.List<Reference> communicationRequest;
 
   /**
   * Description: "Financial instrument by which payment information for health care."
   */
-  protected java.util.List<ClaimResponseInsurance> insurance = new java.util.ArrayList<>();
+  protected java.util.List<ClaimResponseInsurance> insurance;
 
   public ClaimResponse() {
   }

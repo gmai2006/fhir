@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A duration of time during which an organism (or a process) has existed."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Age  extends Quantity  {
 
   public Age() {}

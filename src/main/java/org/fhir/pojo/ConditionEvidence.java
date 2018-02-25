@@ -26,21 +26,26 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ConditionEvidenceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ConditionEvidence  extends BackboneElement  {
   /**
   * Description: "A manifestation or symptom that led to the recording of this condition."
   */
-  protected java.util.List<CodeableConcept> code = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> code;
 
   /**
   * Description: "Links to other relevant information, including pathology reports."
   */
-  protected java.util.List<Reference> detail = new java.util.ArrayList<>();
+  protected java.util.List<Reference> detail;
 
   public ConditionEvidence() {
   }

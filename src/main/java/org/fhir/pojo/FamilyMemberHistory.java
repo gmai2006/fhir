@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.FamilyMemberHistoryModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Significant health events and conditions for a person related to the patient relevant in the context of care for the patient."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class FamilyMemberHistory  extends DomainResource  {
   /**
   * Description: "This is a FamilyMemberHistory resource"
@@ -41,12 +46,12 @@ public class FamilyMemberHistory  extends DomainResource  {
   /**
   * Description: "This records identifiers associated with this family member history record that are defined by business processes and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A protocol or questionnaire that was adhered to in whole or in part by this event."
   */
-  protected java.util.List<Reference> definition = new java.util.ArrayList<>();
+  protected java.util.List<Reference> definition;
 
   /**
   * Description: "A code specifying the status of the record of the family history of a specific family member."
@@ -216,22 +221,22 @@ public class FamilyMemberHistory  extends DomainResource  {
   /**
   * Description: "Describes why the family member history occurred in coded or textual form."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "Indicates a Condition, Observation, AllergyIntolerance, or QuestionnaireResponse that justifies this family member history event."
   */
-  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference;
 
   /**
   * Description: "This property allows a non condition-specific note to the made about the related person. Ideally, the note would be in the condition property, but this is not always possible."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "The significant Conditions (or condition) that the family member had. This is a repeating section to allow a system to represent more than one condition per resource, though there is nothing stopping multiple resources - one per condition."
   */
-  protected java.util.List<FamilyMemberHistoryCondition> condition = new java.util.ArrayList<>();
+  protected java.util.List<FamilyMemberHistoryCondition> condition;
 
   public FamilyMemberHistory() {
   }

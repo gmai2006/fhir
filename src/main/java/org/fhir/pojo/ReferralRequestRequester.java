@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ReferralRequestRequesterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Used to record and send details about a request for referral service or transfer of a patient to the care of another provider or provider organization."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ReferralRequestRequester  extends BackboneElement  {
   /**
   * Description: "The device, practitioner, etc. who initiated the request."

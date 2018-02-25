@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.QuestionnaireModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Questionnaire  extends DomainResource  {
   /**
   * Description: "This is a Questionnaire resource"
@@ -51,7 +56,7 @@ public class Questionnaire  extends DomainResource  {
   /**
   * Description: "A formal identifier that is used to identify this questionnaire when it is represented in other formats, or referenced in a specification, model, design or an instance."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The identifier that is used to identify this version of the questionnaire when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the questionnaire author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
@@ -174,17 +179,17 @@ public class Questionnaire  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate questionnaire instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the questionnaire is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A copyright statement relating to the questionnaire and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the questionnaire."
@@ -199,22 +204,22 @@ public class Questionnaire  extends DomainResource  {
   /**
   * Description: "An identifier for this question or group of questions in a particular terminology such as LOINC."
   */
-  protected java.util.List<Coding> code = new java.util.ArrayList<>();
+  protected java.util.List<Coding> code;
 
   /**
   * Description: "The types of subjects that can be the subject of responses created for the questionnaire."
   */
-  protected java.util.List<String> subjectType = new java.util.ArrayList<>();
+  protected java.util.List<String> subjectType;
 
   /**
   * Description: "Extensions for subjectType"
   */
-  protected transient java.util.List<Element> _subjectType = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _subjectType;
 
   /**
   * Description: "A particular question, question grouping or display text that is part of the questionnaire."
   */
-  protected java.util.List<QuestionnaireItem> item = new java.util.ArrayList<>();
+  protected java.util.List<QuestionnaireItem> item;
 
   public Questionnaire() {
   }

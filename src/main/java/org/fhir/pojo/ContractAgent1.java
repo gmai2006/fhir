@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ContractAgent1Model;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ContractAgent1  extends BackboneElement  {
   /**
   * Description: "The agent assigned a role in this Contract Provision."
@@ -41,7 +46,7 @@ public class ContractAgent1  extends BackboneElement  {
   /**
   * Description: "Role played by the agent assigned this role in the execution of this Contract Provision."
   */
-  protected java.util.List<CodeableConcept> role = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> role;
 
   public ContractAgent1() {
   }

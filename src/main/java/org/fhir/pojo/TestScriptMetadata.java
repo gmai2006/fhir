@@ -26,21 +26,22 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TestScriptMetadata  extends BackboneElement  {
   /**
   * Description: "A link to the FHIR specification that this test is covering."
   */
-  protected java.util.List<TestScriptLink> link = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptLink> link;
 
   /**
   * Description: "Capabilities that must exist and are assumed to function correctly on the FHIR server being tested."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<TestScriptCapability> capability = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptCapability> capability;
 
   public TestScriptMetadata() {}
 

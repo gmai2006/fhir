@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.TaskRestrictionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A task to be performed."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TaskRestriction  extends BackboneElement  {
   /**
   * Description: "Indicates the number of times the requested action should occur."
@@ -51,7 +56,7 @@ public class TaskRestriction  extends BackboneElement  {
   /**
   * Description: "For requests that are targeted to more than on potential recipient/target, for whom is fulfillment sought?"
   */
-  protected java.util.List<Reference> recipient = new java.util.ArrayList<>();
+  protected java.util.List<Reference> recipient;
 
   public TaskRestriction() {
   }

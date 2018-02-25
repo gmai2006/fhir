@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SequenceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Raw data describing a biological sequence."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Sequence  extends DomainResource  {
   /**
   * Description: "This is a Sequence resource"
@@ -41,7 +46,7 @@ public class Sequence  extends DomainResource  {
   /**
   * Description: "A unique identifier for this particular sequence instance. This is a FHIR-defined id."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Amino Acid Sequence/ DNA Sequence / RNA Sequence."
@@ -97,7 +102,7 @@ public class Sequence  extends DomainResource  {
   /**
   * Description: "The definition of variant here originates from Sequence ontology ([variant_of](http://www.sequenceontology.org/browser/current_svn/term/variant_of)). This element can represent amino acid or nucleic sequence change(including insertion,deletion,SNP,etc.)  It can represent some complex mutation or segment variation with the assist of CIGAR string."
   */
-  protected java.util.List<SequenceVariant> variant = new java.util.ArrayList<>();
+  protected java.util.List<SequenceVariant> variant;
 
   /**
   * Description: "Sequence that was observed. It is the result marked by referenceSeq along with variant records on referenceSeq. This shall starts from referenceSeq.windowStart and end by referenceSeq.windowEnd."
@@ -112,7 +117,7 @@ public class Sequence  extends DomainResource  {
   /**
   * Description: "An experimental feature attribute that defines the quality of the feature in a quantitative way, such as a phred quality score ([SO:0001686](http://www.sequenceontology.org/browser/current_svn/term/SO:0001686))."
   */
-  protected java.util.List<SequenceQuality> quality = new java.util.ArrayList<>();
+  protected java.util.List<SequenceQuality> quality;
 
   /**
   * Description: "Coverage (read depth or depth) is the average number of reads representing a given nucleotide in the reconstructed sequence."
@@ -128,12 +133,12 @@ public class Sequence  extends DomainResource  {
   /**
   * Description: "Configurations of the external repository. The repository shall store target's observedSeq or records related with target's observedSeq."
   */
-  protected java.util.List<SequenceRepository> repository = new java.util.ArrayList<>();
+  protected java.util.List<SequenceRepository> repository;
 
   /**
   * Description: "Pointer to next atomic sequence which at most contains one variant."
   */
-  protected java.util.List<Reference> pointer = new java.util.ArrayList<>();
+  protected java.util.List<Reference> pointer;
 
   public Sequence() {
   }

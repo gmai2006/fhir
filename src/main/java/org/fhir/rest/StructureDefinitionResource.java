@@ -27,7 +27,6 @@
 package org.fhir.rest;
 
 import static java.util.Objects.requireNonNull;
-import org.fhir.pojo.OperationOutcome;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.DELETE;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,19 +44,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.PUT;
-
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Context;
 import com.google.inject.Inject;
 
 import org.fhir.pojo.StructureDefinition;
 import org.fhir.service.StructureDefinitionService;
 import org.fhir.utils.QueryParser;
 import org.fhir.utils.QueryBuilder;
-import org.fhir.pojo.Narrative;
-import org.fhir.pojo.OperationOutcome;
+import org.fhir.utils.FhirConstant;
 
 @Path("/StructureDefinition")
 @Consumes(MediaType.APPLICATION_JSON)
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_JSON})
 /**
  * Auto generated RESTful class
  */
@@ -83,257 +83,113 @@ public class StructureDefinitionResource {
 		return this.service.update(obj);
 	}
 
-
   @GET
   @Path("{id}")
-  public StructureDefinition find(@PathParam("id") String id) {
-  	return this.service.find(id);
-  }
-
-  @GET
-  public StructureDefinition findById(@QueryParam("_id") String id) {
-  	return this.service.find(id);
-  }
-
-  @GET
-  public List<StructureDefinition> findByLastUpdate(@QueryParam("_lastUpdated") String _lastUpdated) {
-  	java.util.Map<String, String> params = QueryParser.parse(_lastUpdated, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<StructureDefinition> findByTag(@QueryParam("_tag") String _tag) {
-  	java.util.Map<String, String> params = QueryParser.parse(_tag, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<StructureDefinition> findByProfile(@QueryParam("_profile") String _profile) {
-  	java.util.Map<String, String> params = QueryParser.parse(_profile, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<StructureDefinition> findBySecurity(@QueryParam("_security") String _security) {
-  	java.util.Map<String, String> params = QueryParser.parse(_security, VALID_FIELDS);
-  	return this.service.findByMeta(new QueryBuilder(params));
-  }
-
-  @GET
-  public List<StructureDefinition> findByText(@QueryParam("_text") String _text) {
-  	java.util.Map<String, String> params = QueryParser.parse(_text, VALID_FIELDS);
-  	return this.service.findByText(new QueryBuilder(params));
-  }
-
-  @GET
-  public OperationOutcome findByContent(@QueryParam("_content") String _content) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public OperationOutcome findByList(@QueryParam("_list") String _list) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public OperationOutcome findByQuery(@QueryParam("_query") String _query) {
-  	OperationOutcome result = new OperationOutcome();
-  	Narrative narrative = new Narrative();
-  	narrative.setStatus("draft");
-  	narrative.setDiv("<div>this function is not supported yet</div>");
-  	result.setText(narrative);
-  	return result;
-  }
-
-  @GET
-  public List<StructureDefinition> findAll() {
-  	return this.service.selectAll();
+  public Response find(@PathParam("id") String id) {
+  	StructureDefinition result = this.service.find(id);
+  	if (null == result) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
 
   @GET
   @Path("select/{max}")
-  public List<StructureDefinition> findWithLimit(@PathParam("max") String max) {
+  public Response findWithLimit(@PathParam("max") String max) {
   	Integer input = null;
   	try {
   		input = Integer.valueOf(max);
   	} catch (Exception ex) {
   		throw new WebApplicationException(Response.Status.BAD_REQUEST);
   	}
-    return service.select(input);
+  	List<StructureDefinition> result = service.select(input);
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
 
-  /**
-  * Descr: The uri that identifies the structure definition
-  * Type: uri
-  */
   @GET
-  public List<StructureDefinition> url(@QueryParam("url")String url) {
-  	java.util.Map<String, String> params = QueryParser.parse(url, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
+  public Response findByField(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.META_FIELDS.contains(first)
+  			&& !FhirConstant.ACCOUNT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	}
+
+  	List<StructureDefinition> result = null;
+
+  	if (FhirConstant.META_FIELDS.contains(first)) {
+  		java.util.Map<String, String> params = QueryParser.parse(str);
+  		result = this.service.findByMeta(new QueryBuilder(params));
+  	}
+  	else if (FhirConstant.STRUCTUREDEFINITION_FIELDS.contains(first)) {
+  		java.util.Map<String, String> params = QueryParser.parse(str);
+  		result = this.service.findByField(new QueryBuilder(params));
+  	} 
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
-  /**
-  * Descr: External identifier for the structure definition
-  * Type: token
-  */
-  @GET
-  public List<StructureDefinition> identifier(@QueryParam("identifier")String identifier) {
-  	java.util.Map<String, String> params = QueryParser.parse(identifier, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The business version of the structure definition
-  * Type: token
-  */
-  @GET
-  public List<StructureDefinition> version(@QueryParam("version")String version) {
-  	java.util.Map<String, String> params = QueryParser.parse(version, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Computationally friendly name of the structure definition
-  * Type: string
-  */
-  @GET
-  public List<StructureDefinition> name(@QueryParam("name")String name) {
-  	java.util.Map<String, String> params = QueryParser.parse(name, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The human-friendly name of the structure definition
-  * Type: string
-  */
-  @GET
-  public List<StructureDefinition> title(@QueryParam("title")String title) {
-  	java.util.Map<String, String> params = QueryParser.parse(title, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The current status of the structure definition
-  * Type: token
-  */
-  @GET
-  public List<StructureDefinition> status(@QueryParam("status")String status) {
-  	java.util.Map<String, String> params = QueryParser.parse(status, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: For testing purposes, not real usage
-  * Type: token
-  */
-  @GET
-  public List<StructureDefinition> experimental(@QueryParam("experimental")String experimental) {
-  	java.util.Map<String, String> params = QueryParser.parse(experimental, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The structure definition publication date
-  * Type: date
-  */
-  @GET
-  public List<StructureDefinition> date(@QueryParam("date")String date) {
-  	java.util.Map<String, String> params = QueryParser.parse(date, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Name of the publisher of the structure definition
-  * Type: string
-  */
-  @GET
-  public List<StructureDefinition> publisher(@QueryParam("publisher")String publisher) {
-  	java.util.Map<String, String> params = QueryParser.parse(publisher, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: The description of the structure definition
-  * Type: string
-  */
-  @GET
-  public List<StructureDefinition> description(@QueryParam("description")String description) {
-  	java.util.Map<String, String> params = QueryParser.parse(description, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
+
   /**
   * Descr: Intended jurisdiction for the structure definition
   * Type: token
   */
   @GET
-  public List<StructureDefinition> jurisdiction(@QueryParam("jurisdiction")String jurisdiction) {
-  	java.util.Map<String, String> params = QueryParser.parse(jurisdiction, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
+  @Path("jurisdiction")
+  public Response jurisdiction(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
+
+  	if (!FhirConstant.CODEABLECONCEPT_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<StructureDefinition> result = this.service.findByJurisdiction(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
   }
   /**
   * Descr: A code for the profile
   * Type: token
   */
   @GET
-  public List<StructureDefinition> keyword(@QueryParam("keyword")String keyword) {
-  	java.util.Map<String, String> params = QueryParser.parse(keyword, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: primitive-type | complex-type | resource | logical
-  * Type: token
-  */
-  @GET
-  public List<StructureDefinition> kind(@QueryParam("kind")String kind) {
-  	java.util.Map<String, String> params = QueryParser.parse(kind, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: resource | datatype | extension
-  * Type: token
-  */
-  @GET
-  public List<StructureDefinition> contexttype(@QueryParam("contexttype")String contexttype) {
-  	java.util.Map<String, String> params = QueryParser.parse(contexttype, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Where the extension can be used in instances
-  * Type: string
-  */
-  @GET
-  public List<StructureDefinition> extcontext(@QueryParam("extcontext")String extcontext) {
-  	java.util.Map<String, String> params = QueryParser.parse(extcontext, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Type defined or constrained by this structure
-  * Type: token
-  */
-  @GET
-  public List<StructureDefinition> type(@QueryParam("type")String type) {
-  	java.util.Map<String, String> params = QueryParser.parse(type, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: Definition that this type is constrained/specialized from
-  * Type: uri
-  */
-  @GET
-  public List<StructureDefinition> base(@QueryParam("base")String base) {
-  	java.util.Map<String, String> params = QueryParser.parse(base, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
-  /**
-  * Descr: specialization | constraint - How relates to base definition
-  * Type: token
-  */
-  @GET
-  public List<StructureDefinition> derivation(@QueryParam("derivation")String derivation) {
-  	java.util.Map<String, String> params = QueryParser.parse(derivation, VALID_FIELDS);
-  	return this.service.findByField(new QueryBuilder(params));
-  }
+  @Path("keyword")
+  public Response keyword(@Context UriInfo info) {
+  	MultivaluedMap<String, String> parameters = info.getQueryParameters();
+  	if (null == parameters || parameters.isEmpty()) {
+  		return Response.status(Response.Status.OK).entity(service.select(50)).build();
+  	}
+  	String str = QueryParser.convertMap2Str(parameters);
+  	String first = parameters.keySet().iterator().next();
 
-  private static final String VALID_FIELDS = "FHIRabstract|base|basepath|contexttype|date|derivation|description|experimental|extcontext|identifier|jurisdiction|keyword|kind|name|path|publisher|status|title|type|url|valueset|version";
+  	if (!FhirConstant.CODING_FIELDS.contains(first)) {
+  		return Response.status(Response.Status.BAD_REQUEST).entity("Unknown query parameter [" + first + "]").build();
+  	} 
+
+  	java.util.Map<String, String> params = QueryParser.parse(str);
+  	List<StructureDefinition> result = this.service.findByKeyword(new QueryBuilder(params));
+
+  	if (null == result || result.isEmpty()) {
+  		return Response.status(Response.Status.NOT_FOUND).build();
+  	}
+  	return Response.status(Response.Status.OK).entity(result).build();
+  }
 }

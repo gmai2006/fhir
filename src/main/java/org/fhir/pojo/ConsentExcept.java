@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ConsentExceptModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of a healthcare consumer’s policy choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ConsentExcept  extends BackboneElement  {
   /**
   * Description: "Action  to take - permit or deny - when the exception conditions are met."
@@ -50,32 +55,32 @@ public class ConsentExcept  extends BackboneElement  {
   /**
   * Description: "Who or what is controlled by this Exception. Use group to identify a set of actors by some property they share (e.g. 'admitting officers')."
   */
-  protected java.util.List<ConsentActor1> actor = new java.util.ArrayList<>();
+  protected java.util.List<ConsentActor1> actor;
 
   /**
   * Description: "Actions controlled by this Exception."
   */
-  protected java.util.List<CodeableConcept> action = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> action;
 
   /**
   * Description: "A set of security labels that define which resources are controlled by this exception. If more than one label is specified, all resources must have all the specified labels."
   */
-  protected java.util.List<Coding> securityLabel = new java.util.ArrayList<>();
+  protected java.util.List<Coding> securityLabel;
 
   /**
   * Description: "The context of the activities a user is taking - why the user is accessing the data - that are controlled by this exception."
   */
-  protected java.util.List<Coding> purpose = new java.util.ArrayList<>();
+  protected java.util.List<Coding> purpose;
 
   /**
   * Description: "The class of information covered by this exception. The type can be a FHIR resource type, a profile on a type, or a CDA document, or some other type that indicates what sort of information the consent relates to."
   */
-  protected java.util.List<Coding> FHIRclass = new java.util.ArrayList<>();
+  protected java.util.List<Coding> FHIRclass;
 
   /**
   * Description: "If this code is found in an instance, then the exception applies."
   */
-  protected java.util.List<Coding> code = new java.util.ArrayList<>();
+  protected java.util.List<Coding> code;
 
   /**
   * Description: "Clinical or Operational Relevant period of time that bounds the data controlled by this exception."
@@ -85,7 +90,7 @@ public class ConsentExcept  extends BackboneElement  {
   /**
   * Description: "The resources controlled by this exception, if specific resources are referenced."
   */
-  protected java.util.List<ConsentData1> data = new java.util.ArrayList<>();
+  protected java.util.List<ConsentData1> data;
 
   public ConsentExcept() {
   }

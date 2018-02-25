@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SupplyRequestModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of a request for a medication, substance or device used in the healthcare setting."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SupplyRequest  extends DomainResource  {
   /**
   * Description: "This is a SupplyRequest resource"
@@ -114,7 +119,7 @@ public class SupplyRequest  extends DomainResource  {
   /**
   * Description: "Who is intended to fulfill the request."
   */
-  protected java.util.List<Reference> supplier = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supplier;
 
   /**
   * Description: "Why the supply item was requested."

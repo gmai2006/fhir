@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ImagingManifestModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A text description of the DICOM SOP instances selected in the ImagingManifest; or the reason for, or significance of, the selection."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImagingManifest  extends DomainResource  {
   /**
   * Description: "This is a ImagingManifest resource"
@@ -79,7 +84,7 @@ public class ImagingManifest  extends DomainResource  {
   * Description: "Study identity and locating information of the DICOM SOP instances in the selection."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<ImagingManifestStudy> study = new java.util.ArrayList<>();
+  protected java.util.List<ImagingManifestStudy> study;
 
   public ImagingManifest() {
   }

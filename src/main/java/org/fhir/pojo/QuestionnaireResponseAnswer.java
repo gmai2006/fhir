@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.QuestionnaireResponseAnswerModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class QuestionnaireResponseAnswer  extends BackboneElement  {
   /**
   * Description: "The answer (or one of the answers) provided by the respondent to the question."
@@ -140,7 +145,7 @@ public class QuestionnaireResponseAnswer  extends BackboneElement  {
   /**
   * Description: "Nested groups and/or questions found within this particular answer."
   */
-  protected java.util.List<QuestionnaireResponseItem> item = new java.util.ArrayList<>();
+  protected java.util.List<QuestionnaireResponseItem> item;
 
   public QuestionnaireResponseAnswer() {
   }

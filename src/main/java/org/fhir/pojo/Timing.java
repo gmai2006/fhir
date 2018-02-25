@@ -26,20 +26,21 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Timing  extends Element  {
   /**
   * Description: "Identifies specific times when the event occurs."
   */
-  protected java.util.List<String> event = new java.util.ArrayList<>();
+  protected java.util.List<String> event;
 
   /**
   * Description: "Extensions for event"
   */
-  protected transient java.util.List<Element> _event = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _event;
 
   /**
   * Description: "A set of rules that describe when the event is scheduled."

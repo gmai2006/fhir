@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ResourceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This is the base resource type for everything."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Resource  {
   /**
   * Description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."

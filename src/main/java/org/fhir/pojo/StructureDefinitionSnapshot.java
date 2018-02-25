@@ -26,16 +26,17 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A definition of a FHIR structure. This resource is used to describe the underlying resources, data types defined in FHIR, and also for describing extensions and constraints on resources and data types."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class StructureDefinitionSnapshot  extends BackboneElement  {
   /**
   * Description: "Captures constraints on each element within the resource."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<ElementDefinition> element = new java.util.ArrayList<>();
+  protected java.util.List<ElementDefinition> element;
 
   public StructureDefinitionSnapshot() {}
 

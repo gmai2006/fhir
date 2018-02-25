@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A technical identifier - identifies some entity uniquely and unambiguously."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Identifier  extends Element  {
   /**
   * Description: "The purpose of this identifier."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.OperationOutcomeModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A collection of error, warning or information messages that result from a system action."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class OperationOutcome  extends DomainResource  {
   /**
   * Description: "This is a OperationOutcome resource"
@@ -42,7 +47,7 @@ public class OperationOutcome  extends DomainResource  {
   * Description: "An error, warning or information message that results from a system action."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<OperationOutcomeIssue> issue = new java.util.ArrayList<>();
+  protected java.util.List<OperationOutcomeIssue> issue;
 
   public OperationOutcome() {
   }

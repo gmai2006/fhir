@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AppointmentResponseModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AppointmentResponse  extends DomainResource  {
   /**
   * Description: "This is a AppointmentResponse resource"
@@ -41,7 +46,7 @@ public class AppointmentResponse  extends DomainResource  {
   /**
   * Description: "This records identifiers associated with this appointment response concern that are defined by business processes and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Appointment that this response is replying to."
@@ -72,7 +77,7 @@ public class AppointmentResponse  extends DomainResource  {
   /**
   * Description: "Role of participant in the appointment."
   */
-  protected java.util.List<CodeableConcept> participantType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> participantType;
 
   /**
   * Description: "A Person, Location/HealthcareService or Device that is participating in the appointment."

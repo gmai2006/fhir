@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.OrganizationContactModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class OrganizationContact  extends BackboneElement  {
   /**
   * Description: "Indicates a purpose for which the contact can be reached."
@@ -45,7 +50,7 @@ public class OrganizationContact  extends BackboneElement  {
   /**
   * Description: "A contact detail (e.g. a telephone number or an email address) by which the party may be contacted."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   /**
   * Description: "Visiting or postal addresses for the contact."

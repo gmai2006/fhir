@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Captures constraints on each element within the resource, profile, or extension."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ElementDefinitionBinding  extends BackboneElement  {
   /**
   * Description: "Indicates the degree of conformance expectations associated with this binding - that is, the degree to which the provided value set must be adhered to in the instances."

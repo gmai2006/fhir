@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ValueSetIncludeModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ValueSetInclude  extends BackboneElement  {
   /**
   * Description: "An absolute URI which is the code system from which the selected codes come from."
@@ -55,22 +60,22 @@ public class ValueSetInclude  extends BackboneElement  {
   /**
   * Description: "Specifies a concept to be included or excluded."
   */
-  protected java.util.List<ValueSetConcept> concept = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetConcept> concept;
 
   /**
   * Description: "Select concepts by specify a matching criteria based on the properties (including relationships) defined by the system. If multiple filters are specified, they SHALL all be true."
   */
-  protected java.util.List<ValueSetFilter> filter = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetFilter> filter;
 
   /**
   * Description: "Selects concepts found in this value set. This is an absolute URI that is a reference to ValueSet.url."
   */
-  protected java.util.List<String> valueSet = new java.util.ArrayList<>();
+  protected java.util.List<String> valueSet;
 
   /**
   * Description: "Extensions for valueSet"
   */
-  protected transient java.util.List<Element> _valueSet = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _valueSet;
 
   public ValueSetInclude() {
   }

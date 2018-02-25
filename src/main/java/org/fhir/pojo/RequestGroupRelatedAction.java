@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.RequestGroupRelatedActionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RequestGroupRelatedAction  extends BackboneElement  {
   /**
   * Description: "The element id of the action this is related to."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.RequestGroupModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\"."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RequestGroup  extends DomainResource  {
   /**
   * Description: "This is a RequestGroup resource"
@@ -41,22 +46,22 @@ public class RequestGroup  extends DomainResource  {
   /**
   * Description: "Allows a service to provide a unique, business identifier for the request."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A protocol, guideline, orderset or other definition that is adhered to in whole or in part by this request."
   */
-  protected java.util.List<Reference> definition = new java.util.ArrayList<>();
+  protected java.util.List<Reference> definition;
 
   /**
   * Description: "A plan, proposal or order that is fulfilled in whole or in part by this request."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "Completed or terminated request(s) whose function is taken by this new request."
   */
-  protected java.util.List<Reference> replaces = new java.util.ArrayList<>();
+  protected java.util.List<Reference> replaces;
 
   /**
   * Description: "A shared identifier common to all requests that were authorized more or less simultaneously by a single author, representing the identifier of the requisition, prescription or similar form."
@@ -135,12 +140,12 @@ public class RequestGroup  extends DomainResource  {
   /**
   * Description: "Provides a mechanism to communicate additional information about the response."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "The actions, if any, produced by the evaluation of the artifact."
   */
-  protected java.util.List<RequestGroupAction> action = new java.util.ArrayList<>();
+  protected java.util.List<RequestGroupAction> action;
 
   public RequestGroup() {
   }

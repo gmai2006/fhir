@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.GoalModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Goal  extends DomainResource  {
   /**
   * Description: "This is a Goal resource"
@@ -41,7 +46,7 @@ public class Goal  extends DomainResource  {
   /**
   * Description: "This records identifiers associated with this care plan that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Indicates whether the goal has been reached and is still considered relevant."
@@ -56,7 +61,7 @@ public class Goal  extends DomainResource  {
   /**
   * Description: "Indicates a category the goal falls within."
   */
-  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category;
 
   /**
   * Description: "Identifies the mutually agreed level of importance associated with reaching/sustaining the goal."
@@ -124,22 +129,22 @@ public class Goal  extends DomainResource  {
   /**
   * Description: "The identified conditions and other health record elements that are intended to be addressed by the goal."
   */
-  protected java.util.List<Reference> addresses = new java.util.ArrayList<>();
+  protected java.util.List<Reference> addresses;
 
   /**
   * Description: "Any comments related to the goal."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Identifies the change (or lack of change) at the point when the status of the goal is assessed."
   */
-  protected java.util.List<CodeableConcept> outcomeCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> outcomeCode;
 
   /**
   * Description: "Details of what's changed (or not changed)."
   */
-  protected java.util.List<Reference> outcomeReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> outcomeReference;
 
   public Goal() {
   }

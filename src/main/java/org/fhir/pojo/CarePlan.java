@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CarePlanModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CarePlan  extends DomainResource  {
   /**
   * Description: "This is a CarePlan resource"
@@ -41,27 +46,27 @@ public class CarePlan  extends DomainResource  {
   /**
   * Description: "This records identifiers associated with this care plan that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Identifies the protocol, questionnaire, guideline or other specification the care plan should be conducted in accordance with."
   */
-  protected java.util.List<Reference> definition = new java.util.ArrayList<>();
+  protected java.util.List<Reference> definition;
 
   /**
   * Description: "A care plan that is fulfilled in whole or in part by this care plan."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "Completed or terminated care plan whose function is taken by this new care plan."
   */
-  protected java.util.List<Reference> replaces = new java.util.ArrayList<>();
+  protected java.util.List<Reference> replaces;
 
   /**
   * Description: "A larger care plan of which this particular care plan is a component or step."
   */
-  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf;
 
   /**
   * Description: "Indicates whether the plan is currently being acted upon, represents future intentions or is now a historical record."
@@ -86,7 +91,7 @@ public class CarePlan  extends DomainResource  {
   /**
   * Description: "Identifies what \"kind\" of plan this is to support differentiation between multiple co-existing plans; e.g. \"Home health\", \"psychiatric\", \"asthma\", \"disease management\", \"wellness plan\", etc."
   */
-  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category;
 
   /**
   * Description: "Human-friendly name for the CarePlan."
@@ -127,37 +132,37 @@ public class CarePlan  extends DomainResource  {
   /**
   * Description: "Identifies the individual(s) or ogranization who is responsible for the content of the care plan."
   */
-  protected java.util.List<Reference> author = new java.util.ArrayList<>();
+  protected java.util.List<Reference> author;
 
   /**
   * Description: "Identifies all people and organizations who are expected to be involved in the care envisioned by this plan."
   */
-  protected java.util.List<Reference> careTeam = new java.util.ArrayList<>();
+  protected java.util.List<Reference> careTeam;
 
   /**
   * Description: "Identifies the conditions/problems/concerns/diagnoses/etc. whose management and/or mitigation are handled by this plan."
   */
-  protected java.util.List<Reference> addresses = new java.util.ArrayList<>();
+  protected java.util.List<Reference> addresses;
 
   /**
   * Description: "Identifies portions of the patient's record that specifically influenced the formation of the plan.  These might include co-morbidities, recent procedures, limitations, recent assessments, etc."
   */
-  protected java.util.List<Reference> supportingInfo = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingInfo;
 
   /**
   * Description: "Describes the intended objective(s) of carrying out the care plan."
   */
-  protected java.util.List<Reference> goal = new java.util.ArrayList<>();
+  protected java.util.List<Reference> goal;
 
   /**
   * Description: "Identifies a planned action to occur as part of the plan.  For example, a medication to be used, lab tests to perform, self-monitoring, education, etc."
   */
-  protected java.util.List<CarePlanActivity> activity = new java.util.ArrayList<>();
+  protected java.util.List<CarePlanActivity> activity;
 
   /**
   * Description: "General notes about the care plan not covered elsewhere."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   public CarePlan() {
   }

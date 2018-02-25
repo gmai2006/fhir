@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ValueSetExpansionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ValueSetExpansion  extends BackboneElement  {
   /**
   * Description: "An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so."
@@ -78,12 +83,12 @@ public class ValueSetExpansion  extends BackboneElement  {
   /**
   * Description: "A parameter that controlled the expansion process. These parameters may be used by users of expanded value sets to check whether the expansion is suitable for a particular purpose, or to pick the correct expansion."
   */
-  protected java.util.List<ValueSetParameter> parameter = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetParameter> parameter;
 
   /**
   * Description: "The codes that are contained in the value set expansion."
   */
-  protected java.util.List<ValueSetContains> contains = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetContains> contains;
 
   public ValueSetExpansion() {
   }

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DetectedIssueMitigationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DetectedIssueMitigation  extends BackboneElement  {
   /**
   * Description: "Describes the action that was taken or the observation that was made that reduces/eliminates the risk associated with the identified issue."

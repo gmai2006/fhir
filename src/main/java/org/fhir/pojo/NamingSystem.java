@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.NamingSystemModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a \"System\" used within the Identifier and Coding data types."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class NamingSystem  extends DomainResource  {
   /**
   * Description: "This is a NamingSystem resource"
@@ -92,7 +97,7 @@ public class NamingSystem  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "The name of the organization that is responsible for issuing identifiers or codes for this namespace and ensuring their non-collision."
@@ -122,12 +127,12 @@ public class NamingSystem  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate naming system instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the naming system is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Provides guidance on the use of the namespace, including the handling of formatting characters, use of upper vs. lower case, etc."
@@ -143,7 +148,7 @@ public class NamingSystem  extends DomainResource  {
   * Description: "Indicates how the system may be identified when referenced in electronic exchange."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<NamingSystemUniqueId> uniqueId = new java.util.ArrayList<>();
+  protected java.util.List<NamingSystemUniqueId> uniqueId;
 
   /**
   * Description: "For naming systems that are retired, indicates the naming system that should be used in their place (if any)."

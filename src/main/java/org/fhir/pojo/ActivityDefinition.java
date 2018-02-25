@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ActivityDefinitionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ActivityDefinition  extends DomainResource  {
   /**
   * Description: "This is a ActivityDefinition resource"
@@ -51,7 +56,7 @@ public class ActivityDefinition  extends DomainResource  {
   /**
   * Description: "A formal identifier that is used to identify this activity definition when it is represented in other formats, or referenced in a specification, model, design or an instance."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The identifier that is used to identify this version of the activity definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the activity definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active assets."
@@ -184,27 +189,27 @@ public class ActivityDefinition  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate activity definition instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the activity definition is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Descriptive topics related to the content of the activity. Topics provide a high-level categorization of the activity that can be useful for filtering and searching."
   */
-  protected java.util.List<CodeableConcept> topic = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> topic;
 
   /**
   * Description: "A contributor to the content of the asset, including authors, editors, reviewers, and endorsers."
   */
-  protected java.util.List<Contributor> contributor = new java.util.ArrayList<>();
+  protected java.util.List<Contributor> contributor;
 
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A copyright statement relating to the activity definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the activity definition."
@@ -219,12 +224,12 @@ public class ActivityDefinition  extends DomainResource  {
   /**
   * Description: "Related artifacts such as additional documentation, justification, or bibliographic references."
   */
-  protected java.util.List<RelatedArtifact> relatedArtifact = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> relatedArtifact;
 
   /**
   * Description: "A reference to a Library resource containing any formal logic used by the asset."
   */
-  protected java.util.List<Reference> library = new java.util.ArrayList<>();
+  protected java.util.List<Reference> library;
 
   /**
   * Description: "A description of the kind of resource the activity definition is representing. For example, a MedicationRequest, a ProcedureRequest, or a CommunicationRequest. Typically, but not always, this is a Request resource."
@@ -276,7 +281,7 @@ public class ActivityDefinition  extends DomainResource  {
   /**
   * Description: "Indicates who should participate in performing the action described."
   */
-  protected java.util.List<ActivityDefinitionParticipant> participant = new java.util.ArrayList<>();
+  protected java.util.List<ActivityDefinitionParticipant> participant;
 
   /**
   * Description: "Identifies the food, drug or other product being consumed or supplied in the activity."
@@ -296,12 +301,12 @@ public class ActivityDefinition  extends DomainResource  {
   /**
   * Description: "Provides detailed dosage instructions in the same way that they are described for MedicationRequest resources."
   */
-  protected java.util.List<Dosage> dosage = new java.util.ArrayList<>();
+  protected java.util.List<Dosage> dosage;
 
   /**
   * Description: "Indicates the sites on the subject's body where the procedure should be performed (I.e. the target sites)."
   */
-  protected java.util.List<CodeableConcept> bodySite = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> bodySite;
 
   /**
   * Description: "A reference to a StructureMap resource that defines a transform that can be executed to produce the intent resource using the ActivityDefinition instance as the input."
@@ -311,7 +316,7 @@ public class ActivityDefinition  extends DomainResource  {
   /**
   * Description: "Dynamic values that will be evaluated to produce values for elements of the resulting resource. For example, if the dosage of a medication must be computed based on the patient's weight, a dynamic value would be used to specify an expression that calculated the weight, and the path on the intent resource that would contain the result."
   */
-  protected java.util.List<ActivityDefinitionDynamicValue> dynamicValue = new java.util.ArrayList<>();
+  protected java.util.List<ActivityDefinitionDynamicValue> dynamicValue;
 
   public ActivityDefinition() {
   }

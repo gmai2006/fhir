@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DocumentManifestModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A collection of documents compiled for a purpose together with metadata that applies to the collection."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DocumentManifest  extends DomainResource  {
   /**
   * Description: "This is a DocumentManifest resource"
@@ -46,7 +51,7 @@ public class DocumentManifest  extends DomainResource  {
   /**
   * Description: "Other identifiers associated with the document manifest, including version independent  identifiers."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of this document manifest."
@@ -82,12 +87,12 @@ public class DocumentManifest  extends DomainResource  {
   /**
   * Description: "Identifies who is responsible for creating the manifest, and adding  documents to it."
   */
-  protected java.util.List<Reference> author = new java.util.ArrayList<>();
+  protected java.util.List<Reference> author;
 
   /**
   * Description: "A patient, practitioner, or organization for which this set of documents is intended."
   */
-  protected java.util.List<Reference> recipient = new java.util.ArrayList<>();
+  protected java.util.List<Reference> recipient;
 
   /**
   * Description: "Identifies the source system, application, or software that produced the document manifest."
@@ -113,12 +118,12 @@ public class DocumentManifest  extends DomainResource  {
   * Description: "The list of Documents included in the manifest."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<DocumentManifestContent> content = new java.util.ArrayList<>();
+  protected java.util.List<DocumentManifestContent> content;
 
   /**
   * Description: "Related identifiers or resources associated with the DocumentManifest."
   */
-  protected java.util.List<DocumentManifestRelated> related = new java.util.ArrayList<>();
+  protected java.util.List<DocumentManifestRelated> related;
 
   public DocumentManifest() {
   }

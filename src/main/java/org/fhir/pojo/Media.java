@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MediaModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A photo, video, or audio recording acquired or used in healthcare. The actual content may be inline or provided by direct reference."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Media  extends DomainResource  {
   /**
   * Description: "This is a Media resource"
@@ -41,12 +46,12 @@ public class Media  extends DomainResource  {
   /**
   * Description: "Identifiers associated with the image - these may include identifiers for the image itself, identifiers for the context of its collection (e.g. series ids) and context ids such as accession numbers or other workflow identifiers."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A procedure that is fulfilled in whole or in part by the creation of this media."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "Whether the media is a photo (still image), an audio recording, or a video recording."
@@ -102,7 +107,7 @@ public class Media  extends DomainResource  {
   /**
   * Description: "Describes why the event occurred in coded or textual form."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "Indicates the site on the subject's body where the media was collected (i.e. the target site)."
@@ -167,7 +172,7 @@ public class Media  extends DomainResource  {
   /**
   * Description: "Comments made about the media by the performer, subject or other participants."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   public Media() {
   }

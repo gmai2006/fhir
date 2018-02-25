@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.HealthcareServiceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The details of a healthcare service available at a location."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class HealthcareService  extends DomainResource  {
   /**
   * Description: "This is a HealthcareService resource"
@@ -41,7 +46,7 @@ public class HealthcareService  extends DomainResource  {
   /**
   * Description: "External identifiers for this item."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Whether this healthcareservice record is in active use."
@@ -66,17 +71,17 @@ public class HealthcareService  extends DomainResource  {
   /**
   * Description: "The specific type of service that may be delivered or performed."
   */
-  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type;
 
   /**
   * Description: "Collection of specialties handled by the service site. This is more of a medical term."
   */
-  protected java.util.List<CodeableConcept> specialty = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> specialty;
 
   /**
   * Description: "The location(s) where this healthcare service may be provided."
   */
-  protected java.util.List<Reference> location = new java.util.ArrayList<>();
+  protected java.util.List<Reference> location;
 
   /**
   * Description: "Further description of the service as it would be presented to a consumer while searching."
@@ -116,17 +121,17 @@ public class HealthcareService  extends DomainResource  {
   /**
   * Description: "List of contacts related to this specific healthcare service."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   /**
   * Description: "The location(s) that this service is available to (not where the service is provided)."
   */
-  protected java.util.List<Reference> coverageArea = new java.util.ArrayList<>();
+  protected java.util.List<Reference> coverageArea;
 
   /**
   * Description: "The code(s) that detail the conditions under which the healthcare service is available/offered."
   */
-  protected java.util.List<CodeableConcept> serviceProvisionCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> serviceProvisionCode;
 
   /**
   * Description: "Does this service have specific eligibility requirements that need to be met in order to use the service?"
@@ -146,22 +151,22 @@ public class HealthcareService  extends DomainResource  {
   /**
   * Description: "Program Names that can be used to categorize the service."
   */
-  protected java.util.List<String> programName = new java.util.ArrayList<>();
+  protected java.util.List<String> programName;
 
   /**
   * Description: "Extensions for programName"
   */
-  protected transient java.util.List<Element> _programName = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _programName;
 
   /**
   * Description: "Collection of characteristics (attributes)."
   */
-  protected java.util.List<CodeableConcept> characteristic = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> characteristic;
 
   /**
   * Description: "Ways that the service accepts referrals, if this is not provided then it is implied that no referral is required."
   */
-  protected java.util.List<CodeableConcept> referralMethod = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> referralMethod;
 
   /**
   * Description: "Indicates whether or not a prospective consumer will require an appointment for a particular service at a site to be provided by the Organization. Indicates if an appointment is required for access to this service."
@@ -176,12 +181,12 @@ public class HealthcareService  extends DomainResource  {
   /**
   * Description: "A collection of times that the Service Site is available."
   */
-  protected java.util.List<HealthcareServiceAvailableTime> availableTime = new java.util.ArrayList<>();
+  protected java.util.List<HealthcareServiceAvailableTime> availableTime;
 
   /**
   * Description: "The HealthcareService is not available during this period of time due to the provided reason."
   */
-  protected java.util.List<HealthcareServiceNotAvailable> notAvailable = new java.util.ArrayList<>();
+  protected java.util.List<HealthcareServiceNotAvailable> notAvailable;
 
   /**
   * Description: "A description of site availability exceptions, e.g. public holiday availability. Succinctly describing all possible exceptions to normal site availability as details in the available Times and not available Times."
@@ -196,7 +201,7 @@ public class HealthcareService  extends DomainResource  {
   /**
   * Description: "Technical endpoints providing access to services operated for the specific healthcare services defined at this resource."
   */
-  protected java.util.List<Reference> endpoint = new java.util.ArrayList<>();
+  protected java.util.List<Reference> endpoint;
 
   public HealthcareService() {
   }

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ClaimInsuranceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ClaimInsurance  extends BackboneElement  {
   /**
   * Description: "Sequence of coverage which serves to provide a link and convey coordination of benefit order."
@@ -72,12 +77,12 @@ public class ClaimInsurance  extends BackboneElement  {
   /**
   * Description: "A list of references from the Insurer to which these services pertain."
   */
-  protected java.util.List<String> preAuthRef = new java.util.ArrayList<>();
+  protected java.util.List<String> preAuthRef;
 
   /**
   * Description: "Extensions for preAuthRef"
   */
-  protected transient java.util.List<Element> _preAuthRef = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _preAuthRef;
 
   /**
   * Description: "The Coverages adjudication details."

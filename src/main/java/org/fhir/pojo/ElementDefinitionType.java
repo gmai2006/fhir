@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Captures constraints on each element within the resource, profile, or extension."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ElementDefinitionType  extends BackboneElement  {
   /**
   * Description: "URL of Data type or Resource that is a(or the) type used for this element. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition e.g. \"string\" is a reference to http://hl7.org/fhir/StructureDefinition/string. Absolute URLs are only allowed in logical models."
@@ -64,12 +65,12 @@ public class ElementDefinitionType  extends BackboneElement  {
   /**
   * Description: "If the type is a reference to another resource, how the resource is or can be aggregated - is it a contained resource, or a reference, and if the context is a bundle, is it included in the bundle."
   */
-  protected java.util.List<String> aggregation = new java.util.ArrayList<>();
+  protected java.util.List<String> aggregation;
 
   /**
   * Description: "Extensions for aggregation"
   */
-  protected transient java.util.List<Element> _aggregation = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _aggregation;
 
   /**
   * Description: "Whether this reference needs to be version specific or version independent, or whether either can be used."

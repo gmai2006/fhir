@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A time period defined by a start and end date and optionally time."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Period  extends Element  {
   /**
   * Description: "The start of the period. The boundary is inclusive."

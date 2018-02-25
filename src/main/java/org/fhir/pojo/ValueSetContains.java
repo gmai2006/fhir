@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ValueSetContainsModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A value set specifies a set of codes drawn from one or more code systems."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ValueSetContains  extends BackboneElement  {
   /**
   * Description: "An absolute URI which is the code system in which the code for this item in the expansion is defined."
@@ -96,12 +101,12 @@ public class ValueSetContains  extends BackboneElement  {
   /**
   * Description: "Additional representations for this item - other languages, aliases, specialized purposes, used for particular purposes, etc. These are relevant when the conditions of the expansion do not fix to a single correct representation."
   */
-  protected java.util.List<ValueSetDesignation> designation = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetDesignation> designation;
 
   /**
   * Description: "Other codes and entries contained under this entry in the hierarchy."
   */
-  protected java.util.List<ValueSetContains> contains = new java.util.ArrayList<>();
+  protected java.util.List<ValueSetContains> contains;
 
   public ValueSetContains() {
   }

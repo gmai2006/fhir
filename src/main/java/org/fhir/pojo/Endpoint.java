@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EndpointModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Endpoint  extends DomainResource  {
   /**
   * Description: "This is a Endpoint resource"
@@ -41,7 +46,7 @@ public class Endpoint  extends DomainResource  {
   /**
   * Description: "Identifier for the organization that is used to identify the endpoint across multiple disparate systems."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "active | suspended | error | off | test."
@@ -77,7 +82,7 @@ public class Endpoint  extends DomainResource  {
   /**
   * Description: "Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting."
   */
-  protected java.util.List<ContactPoint> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> contact;
 
   /**
   * Description: "The interval during which the endpoint is expected to be operational."
@@ -88,17 +93,17 @@ public class Endpoint  extends DomainResource  {
   * Description: "The payload type describes the acceptable content that can be communicated on the endpoint."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<CodeableConcept> payloadType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> payloadType;
 
   /**
   * Description: "The mime type to send the payload in - e.g. application/fhir+xml, application/fhir+json. If the mime type is not specified, then the sender could send any content (including no content depending on the connectionType)."
   */
-  protected java.util.List<String> payloadMimeType = new java.util.ArrayList<>();
+  protected java.util.List<String> payloadMimeType;
 
   /**
   * Description: "Extensions for payloadMimeType"
   */
-  protected transient java.util.List<Element> _payloadMimeType = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _payloadMimeType;
 
   /**
   * Description: "The uri that describes the actual end-point to connect to."
@@ -113,12 +118,12 @@ public class Endpoint  extends DomainResource  {
   /**
   * Description: "Additional headers / information to send as part of the notification."
   */
-  protected java.util.List<String> header = new java.util.ArrayList<>();
+  protected java.util.List<String> header;
 
   /**
   * Description: "Extensions for header"
   */
-  protected transient java.util.List<Element> _header = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _header;
 
   public Endpoint() {
   }

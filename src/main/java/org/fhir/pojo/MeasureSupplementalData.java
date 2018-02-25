@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MeasureSupplementalDataModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The Measure resource provides the definition of a quality measure."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MeasureSupplementalData  extends BackboneElement  {
   /**
   * Description: "An identifier for the supplemental data."
@@ -40,7 +45,7 @@ public class MeasureSupplementalData  extends BackboneElement  {
   /**
   * Description: "An indicator of the intended usage for the supplemental data element. Supplemental data indicates the data is additional information requested to augment the measure information. Risk adjustment factor indicates the data is additional information used to calculate risk adjustment factors when applying a risk model to the measure calculation."
   */
-  protected java.util.List<CodeableConcept> usage = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> usage;
 
   /**
   * Description: "The criteria for the supplemental data. This must be the name of a valid expression defined within a referenced library, and defines the data to be returned for this element."

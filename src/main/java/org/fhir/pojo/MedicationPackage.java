@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MedicationPackageModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource is primarily used for the identification and definition of a medication. It covers the ingredients and the packaging for a medication."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MedicationPackage  extends BackboneElement  {
   /**
   * Description: "The kind of container that this package comes as."
@@ -40,12 +45,12 @@ public class MedicationPackage  extends BackboneElement  {
   /**
   * Description: "A set of components that go to make up the described item."
   */
-  protected java.util.List<MedicationContent> content = new java.util.ArrayList<>();
+  protected java.util.List<MedicationContent> content;
 
   /**
   * Description: "Information about a group of medication produced or packaged from one production run."
   */
-  protected java.util.List<MedicationBatch> batch = new java.util.ArrayList<>();
+  protected java.util.List<MedicationBatch> batch;
 
   public MedicationPackage() {
   }

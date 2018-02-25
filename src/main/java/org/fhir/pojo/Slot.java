@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SlotModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A slot of time on a schedule that may be available for booking appointments."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Slot  extends DomainResource  {
   /**
   * Description: "This is a Slot resource"
@@ -41,7 +46,7 @@ public class Slot  extends DomainResource  {
   /**
   * Description: "External Ids for this item."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A broad categorisation of the service that is to be performed during this appointment."
@@ -51,12 +56,12 @@ public class Slot  extends DomainResource  {
   /**
   * Description: "The type of appointments that can be booked into this slot (ideally this would be an identifiable service - which is at a location, rather than the location itself). If provided then this overrides the value provided on the availability resource."
   */
-  protected java.util.List<CodeableConcept> serviceType = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> serviceType;
 
   /**
   * Description: "The specialty of a practitioner that would be required to perform the service requested in this appointment."
   */
-  protected java.util.List<CodeableConcept> specialty = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> specialty;
 
   /**
   * Description: "The style of appointment or patient that may be booked in the slot (not service type)."

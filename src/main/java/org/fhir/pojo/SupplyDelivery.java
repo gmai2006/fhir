@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SupplyDeliveryModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Record of delivery of what is supplied."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SupplyDelivery  extends DomainResource  {
   /**
   * Description: "This is a SupplyDelivery resource"
@@ -46,12 +51,12 @@ public class SupplyDelivery  extends DomainResource  {
   /**
   * Description: "A plan, proposal or order that is fulfilled in whole or in part by this event."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "A larger event of which this particular event is a component or step."
   */
-  protected java.util.List<Reference> partOf = new java.util.ArrayList<>();
+  protected java.util.List<Reference> partOf;
 
   /**
   * Description: "A code specifying the state of the dispense event."
@@ -112,7 +117,7 @@ public class SupplyDelivery  extends DomainResource  {
   /**
   * Description: "Identifies the person who picked up the Supply."
   */
-  protected java.util.List<Reference> receiver = new java.util.ArrayList<>();
+  protected java.util.List<Reference> receiver;
 
   public SupplyDelivery() {
   }

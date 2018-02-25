@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "Captures constraints on each element within the resource, profile, or extension."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ElementDefinition  extends Element  {
   /**
   * Description: "The path identifies the element and is expressed as a \".\"-separated list of ancestor elements, beginning with the name of the resource or extension."
@@ -44,12 +45,12 @@ public class ElementDefinition  extends Element  {
   /**
   * Description: "Codes that define how this element is represented in instances, when the deviation varies from the normal case."
   */
-  protected java.util.List<String> representation = new java.util.ArrayList<>();
+  protected java.util.List<String> representation;
 
   /**
   * Description: "Extensions for representation"
   */
-  protected transient java.util.List<Element> _representation = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _representation;
 
   /**
   * Description: "The name of this element definition slice, when slicing is working. The name must be a token with no dots or spaces. This is a unique name referring to a specific set of constraints applied to this element, used to provide a name to different slices of the same element."
@@ -74,7 +75,7 @@ public class ElementDefinition  extends Element  {
   /**
   * Description: "A code that has the same meaning as the element in a particular terminology."
   */
-  protected java.util.List<Coding> code = new java.util.ArrayList<>();
+  protected java.util.List<Coding> code;
 
   /**
   * Description: "Indicates that the element is sliced into a set of alternative definitions (i.e. in a structure definition, there are multiple different constraints on a single element in the base resource). Slicing can be used in any resource that has cardinality ..* on the base resource, or any resource with a choice of types. The set of slices is any elements that come after this in the element sequence that have the same path, until a shorter path occurs (the shorter path terminates the set)."
@@ -124,12 +125,12 @@ public class ElementDefinition  extends Element  {
   /**
   * Description: "Identifies additional names by which this element might also be known."
   */
-  protected java.util.List<String> alias = new java.util.ArrayList<>();
+  protected java.util.List<String> alias;
 
   /**
   * Description: "Extensions for alias"
   */
-  protected transient java.util.List<Element> _alias = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _alias;
 
   /**
   * Description: "The minimum number of times this element SHALL appear in the instance."
@@ -170,7 +171,7 @@ public class ElementDefinition  extends Element  {
   /**
   * Description: "The data type or resource that the value of this element is permitted to be."
   */
-  protected java.util.List<ElementDefinitionType> type = new java.util.ArrayList<>();
+  protected java.util.List<ElementDefinitionType> type;
 
   /**
   * Description: "The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false')."
@@ -1278,7 +1279,7 @@ public class ElementDefinition  extends Element  {
   /**
   * Description: "A sample value for this element demonstrating the type of information that would typically be found in the element."
   */
-  protected java.util.List<ElementDefinitionExample> example = new java.util.ArrayList<>();
+  protected java.util.List<ElementDefinitionExample> example;
 
   /**
   * Description: "The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity."
@@ -1478,17 +1479,17 @@ public class ElementDefinition  extends Element  {
   /**
   * Description: "A reference to an invariant that may make additional statements about the cardinality or value in the instance."
   */
-  protected java.util.List<String> condition = new java.util.ArrayList<>();
+  protected java.util.List<String> condition;
 
   /**
   * Description: "Extensions for condition"
   */
-  protected transient java.util.List<Element> _condition = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _condition;
 
   /**
   * Description: "Formal constraints such as co-occurrence and other constraints that can be computationally evaluated within the context of the instance."
   */
-  protected java.util.List<ElementDefinitionConstraint> constraint = new java.util.ArrayList<>();
+  protected java.util.List<ElementDefinitionConstraint> constraint;
 
   /**
   * Description: "If true, implementations that produce or consume resources SHALL provide \"support\" for the element in some meaningful way.  If false, the element may be ignored and not supported."
@@ -1528,7 +1529,7 @@ public class ElementDefinition  extends Element  {
   /**
   * Description: "Identifies a concept from an external specification that roughly corresponds to this element."
   */
-  protected java.util.List<ElementDefinitionMapping> mapping = new java.util.ArrayList<>();
+  protected java.util.List<ElementDefinitionMapping> mapping;
 
   public ElementDefinition() {}
 

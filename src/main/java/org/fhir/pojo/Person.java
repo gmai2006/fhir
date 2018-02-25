@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PersonModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Demographics and administrative information about a person independent of a specific health-related context."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person  extends DomainResource  {
   /**
   * Description: "This is a Person resource"
@@ -41,17 +46,17 @@ public class Person  extends DomainResource  {
   /**
   * Description: "Identifier for a person within a particular scope."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A name associated with the person."
   */
-  protected java.util.List<HumanName> name = new java.util.ArrayList<>();
+  protected java.util.List<HumanName> name;
 
   /**
   * Description: "A contact detail for the person, e.g. a telephone number or an email address."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   /**
   * Description: "Administrative Gender."
@@ -77,7 +82,7 @@ public class Person  extends DomainResource  {
   /**
   * Description: "One or more addresses for the person."
   */
-  protected java.util.List<Address> address = new java.util.ArrayList<>();
+  protected java.util.List<Address> address;
 
   /**
   * Description: "An image that can be displayed as a thumbnail of the person to enhance the identification of the individual."
@@ -102,7 +107,7 @@ public class Person  extends DomainResource  {
   /**
   * Description: "Link to a resource that concerns the same actual person."
   */
-  protected java.util.List<PersonLink> link = new java.util.ArrayList<>();
+  protected java.util.List<PersonLink> link;
 
   public Person() {
   }

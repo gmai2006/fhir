@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DataElementModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The formal description of a single piece of information that can be gathered and reported."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataElement  extends DomainResource  {
   /**
   * Description: "This is a DataElement resource"
@@ -51,7 +56,7 @@ public class DataElement  extends DomainResource  {
   /**
   * Description: "A formal identifier that is used to identify this data element when it is represented in other formats, or referenced in a specification, model, design or an instance."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The identifier that is used to identify this version of the data element when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the data element author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
@@ -127,17 +132,17 @@ public class DataElement  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate data element instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the data element is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "A copyright statement relating to the data element and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the data element."
@@ -162,13 +167,13 @@ public class DataElement  extends DomainResource  {
   /**
   * Description: "Identifies a specification (other than a terminology) that the elements which make up the DataElement have some correspondence with."
   */
-  protected java.util.List<DataElementMapping> mapping = new java.util.ArrayList<>();
+  protected java.util.List<DataElementMapping> mapping;
 
   /**
   * Description: "Defines the structure, type, allowed values and other constraining characteristics of the data element."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<ElementDefinition> element = new java.util.ArrayList<>();
+  protected java.util.List<ElementDefinition> element;
 
   public DataElement() {
   }

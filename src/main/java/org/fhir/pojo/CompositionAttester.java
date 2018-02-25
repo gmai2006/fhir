@@ -26,21 +26,26 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CompositionAttesterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A set of healthcare-related information that is assembled together into a single logical document that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. While a Composition defines the structure, it does not actually contain the content: rather the full content of a document is contained in a Bundle, of which the Composition is the first resource contained."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CompositionAttester  extends BackboneElement  {
   /**
   * Description: "The type of attestation the authenticator offers."
   */
-  protected java.util.List<String> mode = new java.util.ArrayList<>();
+  protected java.util.List<String> mode;
 
   /**
   * Description: "Extensions for mode"
   */
-  protected transient java.util.List<Element> _mode = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _mode;
 
   /**
   * Description: "When the composition was attested by the party."

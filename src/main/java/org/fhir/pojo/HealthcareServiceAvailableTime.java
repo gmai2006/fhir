@@ -26,21 +26,26 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.HealthcareServiceAvailableTimeModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The details of a healthcare service available at a location."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class HealthcareServiceAvailableTime  extends BackboneElement  {
   /**
   * Description: "Indicates which days of the week are available between the start and end Times."
   */
-  protected java.util.List<String> daysOfWeek = new java.util.ArrayList<>();
+  protected java.util.List<String> daysOfWeek;
 
   /**
   * Description: "Extensions for daysOfWeek"
   */
-  protected transient java.util.List<Element> _daysOfWeek = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _daysOfWeek;
 
   /**
   * Description: "Is this always available? (hence times are irrelevant) e.g. 24 hour service."

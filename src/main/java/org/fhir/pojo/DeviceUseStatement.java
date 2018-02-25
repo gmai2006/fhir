@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DeviceUseStatementModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of a device being used by a patient where the record is the result of a report from the patient or another clinician."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceUseStatement  extends DomainResource  {
   /**
   * Description: "This is a DeviceUseStatement resource"
@@ -41,7 +46,7 @@ public class DeviceUseStatement  extends DomainResource  {
   /**
   * Description: "An external identifier for this statement such as an IRI."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "A code representing the patient or other source's judgment about the state of the device used that this statement is about.  Generally this will be active or completed."
@@ -110,7 +115,7 @@ public class DeviceUseStatement  extends DomainResource  {
   /**
   * Description: "Reason or justification for the use of the device."
   */
-  protected java.util.List<CodeableConcept> indication = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> indication;
 
   /**
   * Description: "Indicates the site on the subject's body where the device was used ( i.e. the target site)."
@@ -120,7 +125,7 @@ public class DeviceUseStatement  extends DomainResource  {
   /**
   * Description: "Details about the device statement that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   public DeviceUseStatement() {
   }

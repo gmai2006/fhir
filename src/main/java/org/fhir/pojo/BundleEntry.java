@@ -26,16 +26,21 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.BundleEntryModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A container for a collection of resources."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BundleEntry  extends BackboneElement  {
   /**
   * Description: "A series of links that provide context to this entry."
   */
-  protected java.util.List<BundleLink> link = new java.util.ArrayList<>();
+  protected java.util.List<BundleLink> link;
 
   /**
   * Description: "The Absolute URL for the resource.  The fullUrl SHALL not disagree with the id in the resource. The fullUrl is a version independent reference to the resource. The fullUrl element SHALL have a value except that: \n* fullUrl can be empty on a POST (although it does not need to when specifying a temporary id for reference in the bundle)\n* Results from operations might involve resources that are not identified."

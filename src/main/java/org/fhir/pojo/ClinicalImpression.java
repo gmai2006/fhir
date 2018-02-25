@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ClinicalImpressionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called \"ClinicalImpression\" rather than \"ClinicalAssessment\" to avoid confusion with the recording of assessment tools such as Apgar score."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ClinicalImpression  extends DomainResource  {
   /**
   * Description: "This is a ClinicalImpression resource"
@@ -41,7 +46,7 @@ public class ClinicalImpression  extends DomainResource  {
   /**
   * Description: "A unique identifier assigned to the clinical impression that remains consistent regardless of what server the impression is stored on."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Identifies the workflow status of the assessment."
@@ -119,22 +124,22 @@ public class ClinicalImpression  extends DomainResource  {
   /**
   * Description: "This a list of the relevant problems/conditions for a patient."
   */
-  protected java.util.List<Reference> problem = new java.util.ArrayList<>();
+  protected java.util.List<Reference> problem;
 
   /**
   * Description: "One or more sets of investigations (signs, symptions, etc.). The actual grouping of investigations vary greatly depending on the type and context of the assessment. These investigations may include data generated during the assessment process, or data previously generated and recorded that is pertinent to the outcomes."
   */
-  protected java.util.List<ClinicalImpressionInvestigation> investigation = new java.util.ArrayList<>();
+  protected java.util.List<ClinicalImpressionInvestigation> investigation;
 
   /**
   * Description: "Reference to a specific published clinical protocol that was followed during this assessment, and/or that provides evidence in support of the diagnosis."
   */
-  protected java.util.List<String> protocol = new java.util.ArrayList<>();
+  protected java.util.List<String> protocol;
 
   /**
   * Description: "Extensions for protocol"
   */
-  protected transient java.util.List<Element> _protocol = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _protocol;
 
   /**
   * Description: "A text summary of the investigations and the diagnosis."
@@ -149,27 +154,27 @@ public class ClinicalImpression  extends DomainResource  {
   /**
   * Description: "Specific findings or diagnoses that was considered likely or relevant to ongoing treatment."
   */
-  protected java.util.List<ClinicalImpressionFinding> finding = new java.util.ArrayList<>();
+  protected java.util.List<ClinicalImpressionFinding> finding;
 
   /**
   * Description: "Estimate of likely outcome."
   */
-  protected java.util.List<CodeableConcept> prognosisCodeableConcept = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> prognosisCodeableConcept;
 
   /**
   * Description: "RiskAssessment expressing likely outcome."
   */
-  protected java.util.List<Reference> prognosisReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> prognosisReference;
 
   /**
   * Description: "Action taken as part of assessment procedure."
   */
-  protected java.util.List<Reference> action = new java.util.ArrayList<>();
+  protected java.util.List<Reference> action;
 
   /**
   * Description: "Commentary about the impression, typically recorded after the impression itself was made, though supplemental notes by the original author could also appear."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   public ClinicalImpression() {
   }

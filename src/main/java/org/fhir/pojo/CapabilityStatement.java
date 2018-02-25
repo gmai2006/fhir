@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CapabilityStatementModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CapabilityStatement  extends DomainResource  {
   /**
   * Description: "This is a CapabilityStatement resource"
@@ -122,7 +127,7 @@ public class CapabilityStatement  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A free text natural language description of the capability statement from a consumer's perspective. Typically, this is used when the capability statement describes a desired rather than an actual solution, for example as a formal expression of requirements as part of an RFP."
@@ -137,12 +142,12 @@ public class CapabilityStatement  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate capability statement instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the capability statement is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Explaination of why this capability statement is needed and why it has been designed as it has."
@@ -177,12 +182,12 @@ public class CapabilityStatement  extends DomainResource  {
   /**
   * Description: "Reference to a canonical URL of another CapabilityStatement that this software implements or uses. This capability statement is a published API description that corresponds to a business service. The rest of the capability statement does not need to repeat the details of the referenced resource, but can do so."
   */
-  protected java.util.List<String> instantiates = new java.util.ArrayList<>();
+  protected java.util.List<String> instantiates;
 
   /**
   * Description: "Extensions for instantiates"
   */
-  protected transient java.util.List<Element> _instantiates = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _instantiates;
 
   /**
   * Description: "Software that is covered by this capability statement.  It is used when the capability statement describes the capabilities of a particular software version, independent of an installation."
@@ -218,52 +223,52 @@ public class CapabilityStatement  extends DomainResource  {
   /**
   * Description: "A list of the formats supported by this implementation using their content types."
   */
-  protected java.util.List<String> format = new java.util.ArrayList<>();
+  protected java.util.List<String> format;
 
   /**
   * Description: "Extensions for format"
   */
-  protected transient java.util.List<Element> _format = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _format;
 
   /**
   * Description: "A list of the patch formats supported by this implementation using their content types."
   */
-  protected java.util.List<String> patchFormat = new java.util.ArrayList<>();
+  protected java.util.List<String> patchFormat;
 
   /**
   * Description: "Extensions for patchFormat"
   */
-  protected transient java.util.List<Element> _patchFormat = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _patchFormat;
 
   /**
   * Description: "A list of implementation guides that the server does (or should) support in their entirety."
   */
-  protected java.util.List<String> implementationGuide = new java.util.ArrayList<>();
+  protected java.util.List<String> implementationGuide;
 
   /**
   * Description: "Extensions for implementationGuide"
   */
-  protected transient java.util.List<Element> _implementationGuide = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _implementationGuide;
 
   /**
   * Description: "A list of profiles that represent different use cases supported by the system. For a server, \"supported by the system\" means the system hosts/produces a set of resources that are conformant to a particular profile, and allows clients that use its services to search using this profile and to find appropriate data. For a client, it means the system will search by this profile and process data according to the guidance implicit in the profile. See further discussion in [Using Profiles](profiling.html#profile-uses)."
   */
-  protected java.util.List<Reference> profile = new java.util.ArrayList<>();
+  protected java.util.List<Reference> profile;
 
   /**
   * Description: "A definition of the restful capabilities of the solution, if any."
   */
-  protected java.util.List<CapabilityStatementRest> rest = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementRest> rest;
 
   /**
   * Description: "A description of the messaging capabilities of the solution."
   */
-  protected java.util.List<CapabilityStatementMessaging> messaging = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementMessaging> messaging;
 
   /**
   * Description: "A document definition."
   */
-  protected java.util.List<CapabilityStatementDocument> document = new java.util.ArrayList<>();
+  protected java.util.List<CapabilityStatementDocument> document;
 
   public CapabilityStatement() {
   }

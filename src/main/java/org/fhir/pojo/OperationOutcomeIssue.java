@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.OperationOutcomeIssueModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A collection of error, warning or information messages that result from a system action."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class OperationOutcomeIssue  extends BackboneElement  {
   /**
   * Description: "Indicates whether the issue indicates a variation from successful processing."
@@ -70,22 +75,22 @@ public class OperationOutcomeIssue  extends BackboneElement  {
   /**
   * Description: "For resource issues, this will be a simple XPath limited to element names, repetition indicators and the default child access that identifies one of the elements in the resource that caused this issue to be raised.  For HTTP errors, will be \"http.\" + the parameter name."
   */
-  protected java.util.List<String> location = new java.util.ArrayList<>();
+  protected java.util.List<String> location;
 
   /**
   * Description: "Extensions for location"
   */
-  protected transient java.util.List<Element> _location = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _location;
 
   /**
   * Description: "A simple FHIRPath limited to element names, repetition indicators and the default child access that identifies one of the elements in the resource that caused this issue to be raised."
   */
-  protected java.util.List<String> expression = new java.util.ArrayList<>();
+  protected java.util.List<String> expression;
 
   /**
   * Description: "Extensions for expression"
   */
-  protected transient java.util.List<Element> _expression = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _expression;
 
   public OperationOutcomeIssue() {
   }

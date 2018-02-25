@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.VisionPrescriptionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An authorization for the supply of glasses and/or contact lenses to a patient."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class VisionPrescription  extends DomainResource  {
   /**
   * Description: "This is a VisionPrescription resource"
@@ -41,7 +46,7 @@ public class VisionPrescription  extends DomainResource  {
   /**
   * Description: "Business identifier which may be used by other parties to reference or identify the prescription."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."
@@ -93,7 +98,7 @@ public class VisionPrescription  extends DomainResource  {
   /**
   * Description: "Deals with details of the dispense part of the supply specification."
   */
-  protected java.util.List<VisionPrescriptionDispense> dispense = new java.util.ArrayList<>();
+  protected java.util.List<VisionPrescriptionDispense> dispense;
 
   public VisionPrescription() {
   }

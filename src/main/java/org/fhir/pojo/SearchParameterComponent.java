@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SearchParameterComponentModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A search parameter that defines a named search item that can be used to search/filter on a resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SearchParameterComponent  extends BackboneElement  {
   /**
   * Description: "The definition of the search parameter that describes this part."

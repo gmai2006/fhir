@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CompartmentDefinitionResourceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A compartment definition that defines how resources are accessed on a server."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CompartmentDefinitionResource  extends BackboneElement  {
   /**
   * Description: "The name of a resource supported by the server."
@@ -46,12 +51,12 @@ public class CompartmentDefinitionResource  extends BackboneElement  {
   /**
   * Description: "The name of a search parameter that represents the link to the compartment. More than one may be listed because a resource may be linked to a compartment in more than one way,."
   */
-  protected java.util.List<String> param = new java.util.ArrayList<>();
+  protected java.util.List<String> param;
 
   /**
   * Description: "Extensions for param"
   */
-  protected transient java.util.List<Element> _param = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _param;
 
   /**
   * Description: "Additional documentation about the resource and compartment."

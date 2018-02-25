@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MedicationRequestModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MedicationRequest  extends DomainResource  {
   /**
   * Description: "This is a MedicationRequest resource"
@@ -41,17 +46,17 @@ public class MedicationRequest  extends DomainResource  {
   /**
   * Description: "This records identifiers associated with this medication request that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate. For example a re-imbursement system might issue its own id for each prescription that is created.  This is particularly important where FHIR only provides part of an entire workflow process where records must be tracked through an entire system."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Protocol or definition followed by this request."
   */
-  protected java.util.List<Reference> definition = new java.util.ArrayList<>();
+  protected java.util.List<Reference> definition;
 
   /**
   * Description: "A plan or request that is fulfilled in whole or in part by this medication request."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "A shared identifier common to all requests that were authorized more or less simultaneously by a single author, representing the identifier of the requisition or prescription."
@@ -117,7 +122,7 @@ public class MedicationRequest  extends DomainResource  {
   /**
   * Description: "Include additional information (for example, patient height and weight) that supports the ordering of the medication."
   */
-  protected java.util.List<Reference> supportingInformation = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingInformation;
 
   /**
   * Description: "The date (and perhaps time) when the prescription was initially written or authored on."
@@ -143,22 +148,22 @@ public class MedicationRequest  extends DomainResource  {
   /**
   * Description: "The reason or the indication for ordering the medication."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "Condition or observation that supports why the medication was ordered."
   */
-  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference;
 
   /**
   * Description: "Extra information about the prescription that could not be conveyed by the other attributes."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Indicates how the medication is to be used by the patient."
   */
-  protected java.util.List<Dosage> dosageInstruction = new java.util.ArrayList<>();
+  protected java.util.List<Dosage> dosageInstruction;
 
   /**
   * Description: "Indicates the specific details for the dispense or medication supply part of a medication request (also known as a Medication Prescription or Medication Order).  Note that this information is not always sent with the order.  There may be in some settings (e.g. hospitals) institutional or system support for completing the dispense details in the pharmacy department."
@@ -178,12 +183,12 @@ public class MedicationRequest  extends DomainResource  {
   /**
   * Description: "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, duplicate therapy, dosage alert etc."
   */
-  protected java.util.List<Reference> detectedIssue = new java.util.ArrayList<>();
+  protected java.util.List<Reference> detectedIssue;
 
   /**
   * Description: "Links to Provenance records for past versions of this resource or fulfilling request or event resources that identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the resource."
   */
-  protected java.util.List<Reference> eventHistory = new java.util.ArrayList<>();
+  protected java.util.List<Reference> eventHistory;
 
   public MedicationRequest() {
   }

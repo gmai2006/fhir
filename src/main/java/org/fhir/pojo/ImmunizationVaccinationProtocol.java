@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ImmunizationVaccinationProtocolModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImmunizationVaccinationProtocol  extends BackboneElement  {
   /**
   * Description: "Nominal position in a series."
@@ -83,7 +88,7 @@ public class ImmunizationVaccinationProtocol  extends BackboneElement  {
   * Description: "The targeted disease."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<CodeableConcept> targetDisease = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> targetDisease;
 
   /**
   * Description: "Indicates if the immunization event should \"count\" against  the protocol."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ProcessRequestModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides the target, request and response, and action details for an action to be performed by the target on or about existing resources."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProcessRequest  extends DomainResource  {
   /**
   * Description: "This is a ProcessRequest resource"
@@ -41,7 +46,7 @@ public class ProcessRequest  extends DomainResource  {
   /**
   * Description: "The ProcessRequest business identifier."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "The status of the resource instance."
@@ -123,27 +128,27 @@ public class ProcessRequest  extends DomainResource  {
   /**
   * Description: "List of top level items to be re-adjudicated, if none specified then the entire submission is re-adjudicated."
   */
-  protected java.util.List<ProcessRequestItem> item = new java.util.ArrayList<>();
+  protected java.util.List<ProcessRequestItem> item;
 
   /**
   * Description: "Names of resource types to include."
   */
-  protected java.util.List<String> include = new java.util.ArrayList<>();
+  protected java.util.List<String> include;
 
   /**
   * Description: "Extensions for include"
   */
-  protected transient java.util.List<Element> _include = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _include;
 
   /**
   * Description: "Names of resource types to exclude."
   */
-  protected java.util.List<String> exclude = new java.util.ArrayList<>();
+  protected java.util.List<String> exclude;
 
   /**
   * Description: "Extensions for exclude"
   */
-  protected transient java.util.List<Element> _exclude = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _exclude;
 
   /**
   * Description: "A period of time during which the fulfilling resources would have been created."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.TestReportTestModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A summary of information based on the results of executing a TestScript."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TestReportTest  extends BackboneElement  {
   /**
   * Description: "The name of this test used for tracking/logging purposes by test engines."
@@ -56,7 +61,7 @@ public class TestReportTest  extends BackboneElement  {
   * Description: "Action would contain either an operation or an assertion."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<TestReportAction1> action = new java.util.ArrayList<>();
+  protected java.util.List<TestReportAction1> action;
 
   public TestReportTest() {
   }

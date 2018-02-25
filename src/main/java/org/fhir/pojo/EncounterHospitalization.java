@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EncounterHospitalizationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class EncounterHospitalization  extends BackboneElement  {
   /**
   * Description: "Pre-admission identifier."
@@ -55,17 +60,17 @@ public class EncounterHospitalization  extends BackboneElement  {
   /**
   * Description: "Diet preferences reported by the patient."
   */
-  protected java.util.List<CodeableConcept> dietPreference = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> dietPreference;
 
   /**
   * Description: "Special courtesies (VIP, board member)."
   */
-  protected java.util.List<CodeableConcept> specialCourtesy = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> specialCourtesy;
 
   /**
   * Description: "Any special requests that have been made for this hospitalization encounter, such as the provision of specific equipment or other things."
   */
-  protected java.util.List<CodeableConcept> specialArrangement = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> specialArrangement;
 
   /**
   * Description: "Location to which the patient is discharged."

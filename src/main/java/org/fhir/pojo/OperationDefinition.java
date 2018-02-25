@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.OperationDefinitionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction)."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class OperationDefinition  extends DomainResource  {
   /**
   * Description: "This is a OperationDefinition resource"
@@ -122,7 +127,7 @@ public class OperationDefinition  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A free text natural language description of the operation definition from a consumer's perspective."
@@ -137,12 +142,12 @@ public class OperationDefinition  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate operation definition instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the operation definition is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Explaination of why this operation definition is needed and why it has been designed as it has."
@@ -193,12 +198,12 @@ public class OperationDefinition  extends DomainResource  {
   /**
   * Description: "The types on which this operation can be executed."
   */
-  protected java.util.List<String> resource = new java.util.ArrayList<>();
+  protected java.util.List<String> resource;
 
   /**
   * Description: "Extensions for resource"
   */
-  protected transient java.util.List<Element> _resource = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _resource;
 
   /**
   * Description: "Indicates whether this operation or named query can be invoked at the system level (e.g. without needing to choose a resource type for the context)."
@@ -233,12 +238,12 @@ public class OperationDefinition  extends DomainResource  {
   /**
   * Description: "The parameters for the operation/query."
   */
-  protected java.util.List<OperationDefinitionParameter> parameter = new java.util.ArrayList<>();
+  protected java.util.List<OperationDefinitionParameter> parameter;
 
   /**
   * Description: "Defines an appropriate combination of parameters to use when invoking this operation, to help code generators when generating overloaded parameter sets for this operation."
   */
-  protected java.util.List<OperationDefinitionOverload> overload = new java.util.ArrayList<>();
+  protected java.util.List<OperationDefinitionOverload> overload;
 
   public OperationDefinition() {
   }

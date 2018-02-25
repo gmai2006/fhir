@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TestScriptRule3  extends BackboneElement  {
   /**
   * Description: "Id of the referenced rule within the external ruleset template."
@@ -45,7 +46,7 @@ public class TestScriptRule3  extends BackboneElement  {
   /**
   * Description: "Each rule template can take one or more parameters for rule evaluation."
   */
-  protected java.util.List<TestScriptParam3> param = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptParam3> param;
 
   public TestScriptRule3() {}
 

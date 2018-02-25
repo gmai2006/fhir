@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CodeSystemDesignationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A code system resource specifies a set of codes drawn from one or more code systems."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CodeSystemDesignation  extends BackboneElement  {
   /**
   * Description: "The language this designation is defined for."

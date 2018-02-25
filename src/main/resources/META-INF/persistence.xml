@@ -9,7 +9,7 @@
 <!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
 <!-- https://stackoverflow.com/questions/39410183/hibernate-5-2-2-no-persistence-provider-for-entitymanager -->
 <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>org.fhir.entity.NamingSystemUniqueId</class>
+  <class>org.fhir.entity.NamingSystemUniqueId</class>
 <class>org.fhir.entity.PlanDefinitionAction</class>
 <class>org.fhir.entity.MedicationDispenseSubstitution</class>
 <class>org.fhir.entity.DeviceRequest</class>
@@ -34,9 +34,11 @@
 <class>org.fhir.entity.CarePlan</class>
 <class>org.fhir.entity.DeviceMetricCalibration</class>
 <class>org.fhir.entity.CapabilityStatementMessaging</class>
+<class>org.fhir.entity.FHIRList</class>
 <class>org.fhir.entity.HealthcareService</class>
 <class>org.fhir.entity.NutritionOrderTexture</class>
 <class>org.fhir.entity.ClaimInsurance</class>
+<class>org.fhir.entity.StructureMap</class>
 <class>org.fhir.entity.ClaimProcedure</class>
 <class>org.fhir.entity.EligibilityResponseFinancial</class>
 <class>org.fhir.entity.ConceptMap</class>
@@ -49,7 +51,9 @@
 <class>org.fhir.entity.ImplementationGuideDependency</class>
 <class>org.fhir.entity.ClinicalImpressionFinding</class>
 <class>org.fhir.entity.EpisodeOfCare</class>
+<class>org.fhir.entity.TestReportParticipant</class>
 <class>org.fhir.entity.SupplyRequestRequester</class>
+<class>org.fhir.entity.TestReportTeardown</class>
 <class>org.fhir.entity.ClaimResponseDetail</class>
 <class>org.fhir.entity.Contract</class>
 <class>org.fhir.entity.Endpoint</class>
@@ -66,10 +70,12 @@
 <class>org.fhir.entity.ContractSigner</class>
 <class>org.fhir.entity.DeviceMetric</class>
 <class>org.fhir.entity.Binary</class>
+<class>org.fhir.entity.TestReportTest</class>
 <class>org.fhir.entity.AppointmentParticipant</class>
 <class>org.fhir.entity.MedicationDispensePerformer</class>
 <class>org.fhir.entity.ImagingStudySeries</class>
 <class>org.fhir.entity.MedicationStatement</class>
+<class>org.fhir.entity.StructureMapTarget</class>
 <class>org.fhir.entity.DeviceComponentProductionSpecification</class>
 <class>org.fhir.entity.CompositionAttester</class>
 <class>org.fhir.entity.AuditEventAgent</class>
@@ -101,6 +107,7 @@
 <class>org.fhir.entity.RelatedPerson</class>
 <class>org.fhir.entity.NutritionOrder</class>
 <class>org.fhir.entity.PersonLink</class>
+<class>org.fhir.entity.ParametersParameter</class>
 <class>org.fhir.entity.ContractFriendly</class>
 <class>org.fhir.entity.HealthcareServiceNotAvailable</class>
 <class>org.fhir.entity.ImagingStudy</class>
@@ -115,6 +122,7 @@
 <class>org.fhir.entity.DeviceComponent</class>
 <class>org.fhir.entity.CapabilityStatementOperation</class>
 <class>org.fhir.entity.CommunicationRequestPayload</class>
+<class>org.fhir.entity.Quantity</class>
 <class>org.fhir.entity.Communication</class>
 <class>org.fhir.entity.ProvenanceAgent</class>
 <class>org.fhir.entity.Subscription</class>
@@ -132,7 +140,6 @@
 <class>org.fhir.entity.Linkage</class>
 <class>org.fhir.entity.SubstanceIngredient</class>
 <class>org.fhir.entity.GraphDefinition</class>
-<class>org.fhir.entity.List</class>
 <class>org.fhir.entity.RequestGroupAction</class>
 <class>org.fhir.entity.ClaimResponseInsurance</class>
 <class>org.fhir.entity.Consent</class>
@@ -144,6 +151,7 @@
 <class>org.fhir.entity.ImmunizationRecommendation</class>
 <class>org.fhir.entity.DataRequirementCodeFilter</class>
 <class>org.fhir.entity.CodeSystemDesignation</class>
+<class>org.fhir.entity.Address</class>
 <class>org.fhir.entity.GroupCharacteristic</class>
 <class>org.fhir.entity.Observation</class>
 <class>org.fhir.entity.ImmunizationRecommendationProtocol</class>
@@ -155,6 +163,7 @@
 <class>org.fhir.entity.EligibilityResponse</class>
 <class>org.fhir.entity.ClaimResponseError</class>
 <class>org.fhir.entity.BundleSearch</class>
+<class>org.fhir.entity.TestReportAction2</class>
 <class>org.fhir.entity.ConsentActor</class>
 <class>org.fhir.entity.DiagnosticReportImage</class>
 <class>org.fhir.entity.ServiceDefinition</class>
@@ -176,6 +185,8 @@
 <class>org.fhir.entity.MeasureReportStratum</class>
 <class>org.fhir.entity.ConsentExcept</class>
 <class>org.fhir.entity.ValueSetInclude</class>
+<class>org.fhir.entity.OperationDefinitionParameter</class>
+<class>org.fhir.entity.TestScript</class>
 <class>org.fhir.entity.CodeSystemProperty1</class>
 <class>org.fhir.entity.Substance</class>
 <class>org.fhir.entity.CodeSystem</class>
@@ -187,6 +198,7 @@
 <class>org.fhir.entity.PatientLink</class>
 <class>org.fhir.entity.AuditEventNetwork</class>
 <class>org.fhir.entity.MeasureReportPopulation</class>
+<class>org.fhir.entity.StructureMapStructure</class>
 <class>org.fhir.entity.CapabilityStatementDocument</class>
 <class>org.fhir.entity.UsageContext</class>
 <class>org.fhir.entity.NutritionOrderOralDiet</class>
@@ -194,12 +206,15 @@
 <class>org.fhir.entity.EligibilityResponseError</class>
 <class>org.fhir.entity.ContractTerm</class>
 <class>org.fhir.entity.AuditEventSource</class>
+<class>org.fhir.entity.TestReportAction</class>
 <class>org.fhir.entity.CapabilityStatement</class>
 <class>org.fhir.entity.EncounterStatusHistory</class>
 <class>org.fhir.entity.OperationDefinitionOverload</class>
 <class>org.fhir.entity.StructureDefinition</class>
 <class>org.fhir.entity.MeasureReportGroup</class>
+<class>org.fhir.entity.TestReportAssert</class>
 <class>org.fhir.entity.CapabilityStatementInteraction1</class>
+<class>org.fhir.entity.StructureMapSource</class>
 <class>org.fhir.entity.ImagingManifestInstance</class>
 <class>org.fhir.entity.Contributor</class>
 <class>org.fhir.entity.TriggerDefinition</class>
@@ -230,7 +245,9 @@
 <class>org.fhir.entity.QuestionnaireResponseAnswer</class>
 <class>org.fhir.entity.AllergyIntolerance</class>
 <class>org.fhir.entity.EncounterParticipant</class>
+<class>org.fhir.entity.StructureMapRule</class>
 <class>org.fhir.entity.Person</class>
+<class>org.fhir.entity.StructureMapGroup</class>
 <class>org.fhir.entity.Specimen</class>
 <class>org.fhir.entity.QuestionnaireItem</class>
 <class>org.fhir.entity.CarePlanActivity</class>
@@ -243,6 +260,7 @@
 <class>org.fhir.entity.CommunicationPayload</class>
 <class>org.fhir.entity.SubscriptionChannel</class>
 <class>org.fhir.entity.ExplanationOfBenefitDiagnosis</class>
+<class>org.fhir.entity.TestReportAction1</class>
 <class>org.fhir.entity.CodeSystemConcept</class>
 <class>org.fhir.entity.ClaimDetail</class>
 <class>org.fhir.entity.LinkageItem</class>
@@ -250,6 +268,7 @@
 <class>org.fhir.entity.ExpansionProfileExclude</class>
 <class>org.fhir.entity.ClaimInformation</class>
 <class>org.fhir.entity.EncounterHospitalization</class>
+<class>org.fhir.entity.StructureMapInput</class>
 <class>org.fhir.entity.Schedule</class>
 <class>org.fhir.entity.MeasureReportStratifier</class>
 <class>org.fhir.entity.SequenceReferenceSeq</class>
@@ -266,10 +285,12 @@
 <class>org.fhir.entity.Organization</class>
 <class>org.fhir.entity.Resource</class>
 <class>org.fhir.entity.CodeSystemFilter</class>
+<class>org.fhir.entity.Money</class>
 <class>org.fhir.entity.PractitionerRoleNotAvailable</class>
 <class>org.fhir.entity.ListEntry</class>
 <class>org.fhir.entity.ValueSetDesignation</class>
 <class>org.fhir.entity.MessageHeaderResponse</class>
+<class>org.fhir.entity.TestReportOperation</class>
 <class>org.fhir.entity.PractitionerRoleAvailableTime</class>
 <class>org.fhir.entity.MedicationRequestSubstitution</class>
 <class>org.fhir.entity.ContactDetail</class>
@@ -288,6 +309,7 @@
 <class>org.fhir.entity.ValueSetExpansion</class>
 <class>org.fhir.entity.CapabilityStatementResource</class>
 <class>org.fhir.entity.MedicationRequest</class>
+<class>org.fhir.entity.CodeableConcept</class>
 <class>org.fhir.entity.ClaimCareTeam</class>
 <class>org.fhir.entity.ImagingStudyInstance</class>
 <class>org.fhir.entity.ExplanationOfBenefitAdjudication</class>
@@ -322,10 +344,13 @@
 <class>org.fhir.entity.ClaimResponseSubDetail</class>
 <class>org.fhir.entity.AccountGuarantor</class>
 <class>org.fhir.entity.EligibilityResponseBenefitBalance</class>
+<class>org.fhir.entity.ValueSetParameter</class>
+<class>org.fhir.entity.TestReportSetup</class>
 <class>org.fhir.entity.MeasureSupplementalData</class>
 <class>org.fhir.entity.Appointment</class>
 <class>org.fhir.entity.RelatedArtifact</class>
 <class>org.fhir.entity.MedicationRequestRequester</class>
+<class>org.fhir.entity.SearchParameter</class>
 <class>org.fhir.entity.ProcessRequest</class>
 <class>org.fhir.entity.ActivityDefinitionDynamicValue</class>
 <class>org.fhir.entity.Provenance</class>
@@ -338,6 +363,7 @@
 <class>org.fhir.entity.ExplanationOfBenefitCareTeam</class>
 <class>org.fhir.entity.ResearchStudy</class>
 <class>org.fhir.entity.ConceptMapUnmapped</class>
+<class>org.fhir.entity.TestReport</class>
 <class>org.fhir.entity.CompartmentDefinitionResource</class>
 <class>org.fhir.entity.HealthcareServiceAvailableTime</class>
 <class>org.fhir.entity.ContractRule</class>
@@ -364,6 +390,7 @@
 <class>org.fhir.entity.LocationPosition</class>
 <class>org.fhir.entity.EligibilityRequest</class>
 <class>org.fhir.entity.GroupMember</class>
+<class>org.fhir.entity.StructureMapDependent</class>
 <class>org.fhir.entity.ClaimResponseItem</class>
 <class>org.fhir.entity.RiskAssessment</class>
 <class>org.fhir.entity.ActivityDefinition</class>
@@ -389,6 +416,7 @@
 <class>org.fhir.entity.MeasurePopulation</class>
 <class>org.fhir.entity.QuestionnaireEnableWhen</class>
 <class>org.fhir.entity.ProcedureFocalDevice</class>
+<class>org.fhir.entity.StructureMapParameter</class>
 <class>org.fhir.entity.EnrollmentRequest</class>
 <class>org.fhir.entity.ValueSet</class>
 <class>org.fhir.entity.DataElement</class>
@@ -402,7 +430,7 @@
 <class>org.fhir.entity.ExplanationOfBenefitAddItem</class>
 <class>org.fhir.entity.ConsentPolicy</class>
 <class>org.fhir.entity.ClaimAccident</class>
-<class>org.fhir.entity.ImplementationGuidePage</class>
+<class>org.fhir.entity.Coding</class>
 <class>org.fhir.entity.Reference</class>
 <class>org.fhir.entity.VisionPrescription</class>
 <class>org.fhir.entity.AdverseEvent</class>

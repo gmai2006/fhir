@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ImmunizationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Describes the event of a patient being administered a vaccination or a record of a vaccination as reported by a patient, a clinician or another party and may include vaccine reaction information and what vaccination protocol was followed."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Immunization  extends DomainResource  {
   /**
   * Description: "This is a Immunization resource"
@@ -41,7 +46,7 @@ public class Immunization  extends DomainResource  {
   /**
   * Description: "A unique identifier assigned to this immunization record."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Indicates the current status of the vaccination event."
@@ -156,12 +161,12 @@ public class Immunization  extends DomainResource  {
   /**
   * Description: "Indicates who or what performed the event."
   */
-  protected java.util.List<ImmunizationPractitioner> practitioner = new java.util.ArrayList<>();
+  protected java.util.List<ImmunizationPractitioner> practitioner;
 
   /**
   * Description: "Extra information about the immunization that is not conveyed by the other attributes."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Reasons why a vaccine was or was not administered."
@@ -171,12 +176,12 @@ public class Immunization  extends DomainResource  {
   /**
   * Description: "Categorical data indicating that an adverse event is associated in time to an immunization."
   */
-  protected java.util.List<ImmunizationReaction> reaction = new java.util.ArrayList<>();
+  protected java.util.List<ImmunizationReaction> reaction;
 
   /**
   * Description: "Contains information about the protocol(s) under which the vaccine was administered."
   */
-  protected java.util.List<ImmunizationVaccinationProtocol> vaccinationProtocol = new java.util.ArrayList<>();
+  protected java.util.List<ImmunizationVaccinationProtocol> vaccinationProtocol;
 
   public Immunization() {
   }

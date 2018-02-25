@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MeasureReportModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MeasureReport  extends DomainResource  {
   /**
   * Description: "This is a MeasureReport resource"
@@ -99,7 +104,7 @@ public class MeasureReport  extends DomainResource  {
   /**
   * Description: "The results of the calculation, one for each population group in the measure."
   */
-  protected java.util.List<MeasureReportGroup> group = new java.util.ArrayList<>();
+  protected java.util.List<MeasureReportGroup> group;
 
   /**
   * Description: "A reference to a Bundle containing the Resources that were used in the evaluation of this report."

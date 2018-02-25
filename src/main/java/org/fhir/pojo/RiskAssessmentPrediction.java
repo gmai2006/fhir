@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.RiskAssessmentPredictionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RiskAssessmentPrediction  extends BackboneElement  {
   /**
   * Description: "One of the potential outcomes for the patient (e.g. remission, death,  a particular condition)."

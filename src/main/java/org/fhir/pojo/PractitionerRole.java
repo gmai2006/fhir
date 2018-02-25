@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PractitionerRoleModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PractitionerRole  extends DomainResource  {
   /**
   * Description: "This is a PractitionerRole resource"
@@ -41,7 +46,7 @@ public class PractitionerRole  extends DomainResource  {
   /**
   * Description: "Business Identifiers that are specific to a role/location."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Whether this practitioner's record is in active use."
@@ -71,37 +76,37 @@ public class PractitionerRole  extends DomainResource  {
   /**
   * Description: "Roles which this practitioner is authorized to perform for the organization."
   */
-  protected java.util.List<CodeableConcept> code = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> code;
 
   /**
   * Description: "Specific specialty of the practitioner."
   */
-  protected java.util.List<CodeableConcept> specialty = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> specialty;
 
   /**
   * Description: "The location(s) at which this practitioner provides care."
   */
-  protected java.util.List<Reference> location = new java.util.ArrayList<>();
+  protected java.util.List<Reference> location;
 
   /**
   * Description: "The list of healthcare services that this worker provides for this role's Organization/Location(s)."
   */
-  protected java.util.List<Reference> healthcareService = new java.util.ArrayList<>();
+  protected java.util.List<Reference> healthcareService;
 
   /**
   * Description: "Contact details that are specific to the role/location/service."
   */
-  protected java.util.List<ContactPoint> telecom = new java.util.ArrayList<>();
+  protected java.util.List<ContactPoint> telecom;
 
   /**
   * Description: "A collection of times that the Service Site is available."
   */
-  protected java.util.List<PractitionerRoleAvailableTime> availableTime = new java.util.ArrayList<>();
+  protected java.util.List<PractitionerRoleAvailableTime> availableTime;
 
   /**
   * Description: "The HealthcareService is not available during this period of time due to the provided reason."
   */
-  protected java.util.List<PractitionerRoleNotAvailable> notAvailable = new java.util.ArrayList<>();
+  protected java.util.List<PractitionerRoleNotAvailable> notAvailable;
 
   /**
   * Description: "A description of site availability exceptions, e.g. public holiday availability. Succinctly describing all possible exceptions to normal site availability as details in the available Times and not available Times."
@@ -116,7 +121,7 @@ public class PractitionerRole  extends DomainResource  {
   /**
   * Description: "Technical endpoints providing access to services operated for the practitioner with this role."
   */
-  protected java.util.List<Reference> endpoint = new java.util.ArrayList<>();
+  protected java.util.List<Reference> endpoint;
 
   public PractitionerRole() {
   }

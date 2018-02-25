@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DataRequirementCodeFilterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataRequirementCodeFilter  extends BackboneElement  {
   /**
   * Description: "The code-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type code, Coding, or CodeableConcept."
@@ -60,22 +65,22 @@ public class DataRequirementCodeFilter  extends BackboneElement  {
   /**
   * Description: "The codes for the code filter. Only one of valueSet, valueCode, valueCoding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified codes."
   */
-  protected java.util.List<String> valueCode = new java.util.ArrayList<>();
+  protected java.util.List<String> valueCode;
 
   /**
   * Description: "Extensions for valueCode"
   */
-  protected transient java.util.List<Element> _valueCode = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _valueCode;
 
   /**
   * Description: "The Codings for the code filter. Only one of valueSet, valueCode, valueConding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified Codings."
   */
-  protected java.util.List<Coding> valueCoding = new java.util.ArrayList<>();
+  protected java.util.List<Coding> valueCoding;
 
   /**
   * Description: "The CodeableConcepts for the code filter. Only one of valueSet, valueCode, valueConding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified CodeableConcepts."
   */
-  protected java.util.List<CodeableConcept> valueCodeableConcept = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> valueCodeableConcept;
 
   public DataRequirementCodeFilter() {
   }

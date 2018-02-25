@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DocumentReferenceContextModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A reference to a document."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DocumentReferenceContext  extends BackboneElement  {
   /**
   * Description: "Describes the clinical encounter or type of care that the document content is associated with."
@@ -40,7 +45,7 @@ public class DocumentReferenceContext  extends BackboneElement  {
   /**
   * Description: "This list of codes represents the main clinical acts, such as a colonoscopy or an appendectomy, being documented. In some cases, the event is inherent in the typeCode, such as a \"History and Physical Report\" in which the procedure being documented is necessarily a \"History and Physical\" act."
   */
-  protected java.util.List<CodeableConcept> event = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> event;
 
   /**
   * Description: "The time period over which the service that is described by the document was provided."
@@ -65,7 +70,7 @@ public class DocumentReferenceContext  extends BackboneElement  {
   /**
   * Description: "Related identifiers or resources associated with the DocumentReference."
   */
-  protected java.util.List<DocumentReferenceRelated> related = new java.util.ArrayList<>();
+  protected java.util.List<DocumentReferenceRelated> related;
 
   public DocumentReferenceContext() {
   }

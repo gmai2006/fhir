@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ContractTermModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A formal agreement between parties regarding the conduct of business, exchange of information or other matters."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ContractTerm  extends BackboneElement  {
   /**
   * Description: "Unique identifier for this particular Contract Provision."
@@ -66,27 +71,27 @@ public class ContractTerm  extends BackboneElement  {
   /**
   * Description: "The matter of concern in the context of this provision of the agrement."
   */
-  protected java.util.List<Reference> topic = new java.util.ArrayList<>();
+  protected java.util.List<Reference> topic;
 
   /**
   * Description: "Action stipulated by this Contract Provision."
   */
-  protected java.util.List<CodeableConcept> action = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> action;
 
   /**
   * Description: "Reason or purpose for the action stipulated by this Contract Provision."
   */
-  protected java.util.List<CodeableConcept> actionReason = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> actionReason;
 
   /**
   * Description: "A set of security labels that define which terms are controlled by this condition."
   */
-  protected java.util.List<Coding> securityLabel = new java.util.ArrayList<>();
+  protected java.util.List<Coding> securityLabel;
 
   /**
   * Description: "An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place."
   */
-  protected java.util.List<ContractAgent1> agent = new java.util.ArrayList<>();
+  protected java.util.List<ContractAgent1> agent;
 
   /**
   * Description: "Human readable form of this Contract Provision."
@@ -101,12 +106,12 @@ public class ContractTerm  extends BackboneElement  {
   /**
   * Description: "Contract Provision Valued Item List."
   */
-  protected java.util.List<ContractValuedItem1> valuedItem = new java.util.ArrayList<>();
+  protected java.util.List<ContractValuedItem1> valuedItem;
 
   /**
   * Description: "Nested group of Contract Provisions."
   */
-  protected java.util.List<ContractTerm> group = new java.util.ArrayList<>();
+  protected java.util.List<ContractTerm> group;
 
   public ContractTerm() {
   }

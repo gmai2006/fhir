@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ExplanationOfBenefitDiagnosisModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ExplanationOfBenefitDiagnosis  extends BackboneElement  {
   /**
   * Description: "Sequence of diagnosis which serves to provide a link."
@@ -56,7 +61,7 @@ public class ExplanationOfBenefitDiagnosis  extends BackboneElement  {
   /**
   * Description: "The type of the Diagnosis, for example: admitting, primary, secondary, discharge."
   */
-  protected java.util.List<CodeableConcept> type = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> type;
 
   /**
   * Description: "The package billing code, for example DRG, based on the assigned grouping code system."

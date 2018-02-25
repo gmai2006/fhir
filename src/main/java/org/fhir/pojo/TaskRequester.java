@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.TaskRequesterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A task to be performed."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TaskRequester  extends BackboneElement  {
   /**
   * Description: "The device, practitioner, etc. who initiated the task."

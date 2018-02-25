@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ConditionStageModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ConditionStage  extends BackboneElement  {
   /**
   * Description: "A simple summary of the stage such as \"Stage 3\". The determination of the stage is disease-specific."
@@ -40,7 +45,7 @@ public class ConditionStage  extends BackboneElement  {
   /**
   * Description: "Reference to a formal record of the evidence on which the staging assessment is based."
   */
-  protected java.util.List<Reference> assessment = new java.util.ArrayList<>();
+  protected java.util.List<Reference> assessment;
 
   public ConditionStage() {
   }

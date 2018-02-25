@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.CarePlanDetailModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CarePlanDetail  extends BackboneElement  {
   /**
   * Description: "High-level categorization of the type of activity in a care plan."
@@ -50,17 +55,17 @@ public class CarePlanDetail  extends BackboneElement  {
   /**
   * Description: "Provides the rationale that drove the inclusion of this particular activity as part of the plan or the reason why the activity was prohibited."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "Provides the health condition(s) that drove the inclusion of this particular activity as part of the plan."
   */
-  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference;
 
   /**
   * Description: "Internal reference that identifies the goals that this activity is intended to contribute towards meeting."
   */
-  protected java.util.List<Reference> goal = new java.util.ArrayList<>();
+  protected java.util.List<Reference> goal;
 
   /**
   * Description: "Identifies what progress is being made for the specific activity."
@@ -120,7 +125,7 @@ public class CarePlanDetail  extends BackboneElement  {
   /**
   * Description: "Identifies who's expected to be involved in the activity."
   */
-  protected java.util.List<Reference> performer = new java.util.ArrayList<>();
+  protected java.util.List<Reference> performer;
 
   /**
   * Description: "Identifies the food, drug or other product to be consumed or supplied in the activity."

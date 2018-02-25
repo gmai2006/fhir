@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DeviceComponentModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The characteristics, operational status and capabilities of a medical-related component of a medical device."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceComponent  extends DomainResource  {
   /**
   * Description: "This is a DeviceComponent resource"
@@ -73,7 +78,7 @@ public class DeviceComponent  extends DomainResource  {
   /**
   * Description: "The current operational status of the device. For example: On, Off, Standby, etc."
   */
-  protected java.util.List<CodeableConcept> operationalStatus = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> operationalStatus;
 
   /**
   * Description: "The parameter group supported by the current device component that is based on some nomenclature, e.g. cardiovascular."
@@ -93,7 +98,7 @@ public class DeviceComponent  extends DomainResource  {
   /**
   * Description: "The production specification such as component revision, serial number, etc."
   */
-  protected java.util.List<DeviceComponentProductionSpecification> productionSpecification = new java.util.ArrayList<>();
+  protected java.util.List<DeviceComponentProductionSpecification> productionSpecification;
 
   /**
   * Description: "The language code for the human-readable text string produced by the device. This language code will follow the IETF language tag. Example: en-US."

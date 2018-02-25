@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MeasureReportStratumModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The MeasureReport resource contains the results of evaluating a measure."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MeasureReportStratum  extends BackboneElement  {
   /**
   * Description: "The value for this stratum, expressed as a string. When defining stratifiers on complex values, the value must be rendered such that the value for each stratum within the stratifier is unique."
@@ -45,7 +50,7 @@ public class MeasureReportStratum  extends BackboneElement  {
   /**
   * Description: "The populations that make up the stratum, one for each type of population appropriate to the measure."
   */
-  protected java.util.List<MeasureReportPopulation1> population = new java.util.ArrayList<>();
+  protected java.util.List<MeasureReportPopulation1> population;
 
   /**
   * Description: "The measure score for this stratum, calculated as appropriate for the measure type and scoring method, and based on only the members of this stratum."

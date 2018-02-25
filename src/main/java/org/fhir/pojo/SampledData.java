@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A series of measurements taken by a device, with upper and lower limits. There may be more than one dimension in the data."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SampledData  extends Element  {
   /**
   * Description: "The base quantity that a measured value of zero represents. In addition, this provides the units of the entire measurement series."

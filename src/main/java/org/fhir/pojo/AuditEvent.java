@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.AuditEventModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AuditEvent  extends DomainResource  {
   /**
   * Description: "This is a AuditEvent resource"
@@ -47,7 +52,7 @@ public class AuditEvent  extends DomainResource  {
   /**
   * Description: "Identifier for the category of event."
   */
-  protected java.util.List<Coding> subtype = new java.util.ArrayList<>();
+  protected java.util.List<Coding> subtype;
 
   /**
   * Description: "Indicator for type of action performed during the event that generated the audit."
@@ -92,13 +97,13 @@ public class AuditEvent  extends DomainResource  {
   /**
   * Description: "The purposeOfUse (reason) that was used during the event being recorded."
   */
-  protected java.util.List<CodeableConcept> purposeOfEvent = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> purposeOfEvent;
 
   /**
   * Description: "An actor taking an active role in the event or activity that is logged."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<AuditEventAgent> agent = new java.util.ArrayList<>();
+  protected java.util.List<AuditEventAgent> agent;
 
   /**
   * Description: "The system that is reporting the event."
@@ -109,7 +114,7 @@ public class AuditEvent  extends DomainResource  {
   /**
   * Description: "Specific instances of data or objects that have been accessed."
   */
-  protected java.util.List<AuditEventEntity> entity = new java.util.ArrayList<>();
+  protected java.util.List<AuditEventEntity> entity;
 
   public AuditEvent() {
   }

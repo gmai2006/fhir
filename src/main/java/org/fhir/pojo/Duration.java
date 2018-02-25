@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A length of time."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Duration  extends Quantity  {
 
   public Duration() {}

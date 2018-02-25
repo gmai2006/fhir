@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ObservationComponentModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Measurements and simple assertions made about a patient, device or other subject."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ObservationComponent  extends BackboneElement  {
   /**
   * Description: "Describes what was observed. Sometimes this is called the observation \"code\"."
@@ -118,7 +123,7 @@ public class ObservationComponent  extends BackboneElement  {
   /**
   * Description: "Guidance on how to interpret the value by comparison to a normal or recommended range."
   */
-  protected java.util.List<ObservationReferenceRange> referenceRange = new java.util.ArrayList<>();
+  protected java.util.List<ObservationReferenceRange> referenceRange;
 
   public ObservationComponent() {
   }

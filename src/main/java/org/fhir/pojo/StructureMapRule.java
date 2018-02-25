@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.StructureMapRuleModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A Map of relationships between 2 structures that can be used to transform data."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class StructureMapRule  extends BackboneElement  {
   /**
   * Description: "Name of the rule for internal references."
@@ -47,22 +52,22 @@ public class StructureMapRule  extends BackboneElement  {
   * Description: "Source inputs to the mapping."
   */
   @javax.validation.constraints.NotNull
-  protected java.util.List<StructureMapSource> source = new java.util.ArrayList<>();
+  protected java.util.List<StructureMapSource> source;
 
   /**
   * Description: "Content to create because of this mapping rule."
   */
-  protected java.util.List<StructureMapTarget> target = new java.util.ArrayList<>();
+  protected java.util.List<StructureMapTarget> target;
 
   /**
   * Description: "Rules contained in this rule."
   */
-  protected java.util.List<StructureMapRule> rule = new java.util.ArrayList<>();
+  protected java.util.List<StructureMapRule> rule;
 
   /**
   * Description: "Which other rules to apply in the context of this rule."
   */
-  protected java.util.List<StructureMapDependent> dependent = new java.util.ArrayList<>();
+  protected java.util.List<StructureMapDependent> dependent;
 
   /**
   * Description: "Documentation for this instance of data."

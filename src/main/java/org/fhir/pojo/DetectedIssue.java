@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DetectedIssueModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DetectedIssue  extends DomainResource  {
   /**
   * Description: "This is a DetectedIssue resource"
@@ -93,7 +98,7 @@ public class DetectedIssue  extends DomainResource  {
   /**
   * Description: "Indicates the resource representing the current activity or proposed activity that is potentially problematic."
   */
-  protected java.util.List<Reference> implicated = new java.util.ArrayList<>();
+  protected java.util.List<Reference> implicated;
 
   /**
   * Description: "A textual explanation of the detected issue."
@@ -118,7 +123,7 @@ public class DetectedIssue  extends DomainResource  {
   /**
   * Description: "Indicates an action that has been taken or is committed to to reduce or eliminate the likelihood of the risk identified by the detected issue from manifesting.  Can also reflect an observation of known mitigating factors that may reduce/eliminate the need for any action."
   */
-  protected java.util.List<DetectedIssueMitigation> mitigation = new java.util.ArrayList<>();
+  protected java.util.List<DetectedIssueMitigation> mitigation;
 
   public DetectedIssue() {
   }

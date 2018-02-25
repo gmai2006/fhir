@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.MessageDefinitionModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MessageDefinition  extends DomainResource  {
   /**
   * Description: "This is a MessageDefinition resource"
@@ -127,7 +132,7 @@ public class MessageDefinition  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A free text natural language description of the message definition from a consumer's perspective."
@@ -142,12 +147,12 @@ public class MessageDefinition  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate message definition instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the message definition is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Explaination of why this message definition is needed and why it has been designed as it has."
@@ -177,12 +182,12 @@ public class MessageDefinition  extends DomainResource  {
   /**
   * Description: "Identifies a protocol or workflow that this MessageDefinition represents a step in."
   */
-  protected java.util.List<Reference> parent = new java.util.ArrayList<>();
+  protected java.util.List<Reference> parent;
 
   /**
   * Description: "A MessageDefinition that is superseded by this definition."
   */
-  protected java.util.List<Reference> replaces = new java.util.ArrayList<>();
+  protected java.util.List<Reference> replaces;
 
   /**
   * Description: "A coded identifier of a supported messaging event."
@@ -204,7 +209,7 @@ public class MessageDefinition  extends DomainResource  {
   /**
   * Description: "Identifies the resource (or resources) that are being addressed by the event.  For example, the Encounter for an admit message or two Account records for a merge."
   */
-  protected java.util.List<MessageDefinitionFocus> focus = new java.util.ArrayList<>();
+  protected java.util.List<MessageDefinitionFocus> focus;
 
   /**
   * Description: "Indicates whether a response is required for this message."
@@ -219,7 +224,7 @@ public class MessageDefinition  extends DomainResource  {
   /**
   * Description: "Indicates what types of messages may be sent as an application-level response to this message."
   */
-  protected java.util.List<MessageDefinitionAllowedResponse> allowedResponse = new java.util.ArrayList<>();
+  protected java.util.List<MessageDefinitionAllowedResponse> allowedResponse;
 
   public MessageDefinition() {
   }

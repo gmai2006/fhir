@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DeviceMetricModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Describes a measurement, calculation or setting capability of a medical device."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceMetric  extends DomainResource  {
   /**
   * Description: "This is a DeviceMetric resource"
@@ -103,7 +108,7 @@ public class DeviceMetric  extends DomainResource  {
   /**
   * Description: "Describes the calibrations that have been performed or that are required to be performed."
   */
-  protected java.util.List<DeviceMetricCalibration> calibration = new java.util.ArrayList<>();
+  protected java.util.List<DeviceMetricCalibration> calibration;
 
   public DeviceMetric() {
   }

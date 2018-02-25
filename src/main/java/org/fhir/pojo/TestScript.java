@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.TestScriptModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TestScript  extends DomainResource  {
   /**
   * Description: "This is a TestScript resource"
@@ -127,7 +132,7 @@ public class TestScript  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "A free text natural language description of the test script from a consumer's perspective."
@@ -142,12 +147,12 @@ public class TestScript  extends DomainResource  {
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate test script instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the test script is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Explaination of why this test script is needed and why it has been designed as it has."
@@ -172,12 +177,12 @@ public class TestScript  extends DomainResource  {
   /**
   * Description: "An abstract server used in operations within this test script in the origin element."
   */
-  protected java.util.List<TestScriptOrigin> origin = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptOrigin> origin;
 
   /**
   * Description: "An abstract server used in operations within this test script in the destination element."
   */
-  protected java.util.List<TestScriptDestination> destination = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptDestination> destination;
 
   /**
   * Description: "The required capability must exist and are assumed to function correctly on the FHIR server being tested."
@@ -187,27 +192,27 @@ public class TestScript  extends DomainResource  {
   /**
   * Description: "Fixture in the test script - by reference (uri). All fixtures are required for the test script to execute."
   */
-  protected java.util.List<TestScriptFixture> fixture = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptFixture> fixture;
 
   /**
   * Description: "Reference to the profile to be used for validation."
   */
-  protected java.util.List<Reference> profile = new java.util.ArrayList<>();
+  protected java.util.List<Reference> profile;
 
   /**
   * Description: "Variable is set based either on element value in response body or on header field value in the response headers."
   */
-  protected java.util.List<TestScriptVariable> variable = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptVariable> variable;
 
   /**
   * Description: "Assert rule to be used in one or more asserts within the test script."
   */
-  protected java.util.List<TestScriptRule> rule = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptRule> rule;
 
   /**
   * Description: "Contains one or more rules.  Offers a way to group rules so assertions could reference the group of rules and have them all applied."
   */
-  protected java.util.List<TestScriptRuleset> ruleset = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptRuleset> ruleset;
 
   /**
   * Description: "A series of required setup operations before tests are executed."
@@ -217,7 +222,7 @@ public class TestScript  extends DomainResource  {
   /**
   * Description: "A test in this script."
   */
-  protected java.util.List<TestScriptTest> test = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptTest> test;
 
   /**
   * Description: "A series of operations required to clean up after the all the tests are executed (successfully or otherwise)."

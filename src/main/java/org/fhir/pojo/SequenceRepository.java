@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SequenceRepositoryModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "Raw data describing a biological sequence."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SequenceRepository  extends BackboneElement  {
   /**
   * Description: "Click and see / RESTful API / Need login to see / RESTful API with authentication / Other ways to see resource."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ImmunizationRecommendationRecommendationModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A patient's point-in-time immunization and recommendation (i.e. forecasting a patient's immunization eligibility according to a published schedule) with optional supporting justification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImmunizationRecommendationRecommendation  extends BackboneElement  {
   /**
   * Description: "The date the immunization recommendation was created."
@@ -73,7 +78,7 @@ public class ImmunizationRecommendationRecommendation  extends BackboneElement  
   /**
   * Description: "Vaccine date recommendations.  For example, earliest date to administer, latest date to administer, etc."
   */
-  protected java.util.List<ImmunizationRecommendationDateCriterion> dateCriterion = new java.util.ArrayList<>();
+  protected java.util.List<ImmunizationRecommendationDateCriterion> dateCriterion;
 
   /**
   * Description: "Contains information about the protocol under which the vaccine was administered."
@@ -83,12 +88,12 @@ public class ImmunizationRecommendationRecommendation  extends BackboneElement  
   /**
   * Description: "Immunization event history that supports the status and recommendation."
   */
-  protected java.util.List<Reference> supportingImmunization = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingImmunization;
 
   /**
   * Description: "Patient Information that supports the status and recommendation.  This includes patient observations, adverse reactions and allergy/intolerance information."
   */
-  protected java.util.List<Reference> supportingPatientInformation = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingPatientInformation;
 
   public ImmunizationRecommendationRecommendation() {
   }

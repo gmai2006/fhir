@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ProcedureRequestModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A record of a request for diagnostic investigations, treatments, or operations to be performed."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProcedureRequest  extends DomainResource  {
   /**
   * Description: "This is a ProcedureRequest resource"
@@ -41,22 +46,22 @@ public class ProcedureRequest  extends DomainResource  {
   /**
   * Description: "Identifiers assigned to this order instance by the orderer and/or the receiver and/or order fulfiller."
   */
-  protected java.util.List<Identifier> identifier = new java.util.ArrayList<>();
+  protected java.util.List<Identifier> identifier;
 
   /**
   * Description: "Protocol or definition followed by this request."
   */
-  protected java.util.List<Reference> definition = new java.util.ArrayList<>();
+  protected java.util.List<Reference> definition;
 
   /**
   * Description: "Plan/proposal/order fulfilled by this request."
   */
-  protected java.util.List<Reference> basedOn = new java.util.ArrayList<>();
+  protected java.util.List<Reference> basedOn;
 
   /**
   * Description: "The request takes the place of the referenced completed or terminated request(s)."
   */
-  protected java.util.List<Reference> replaces = new java.util.ArrayList<>();
+  protected java.util.List<Reference> replaces;
 
   /**
   * Description: "A shared identifier common to all procedure or diagnostic requests that were authorized more or less simultaneously by a single author, representing the composite or group identifier."
@@ -109,7 +114,7 @@ public class ProcedureRequest  extends DomainResource  {
   /**
   * Description: "A code that classifies the procedure for searching, sorting and display purposes (e.g. \"Surgical Procedure\")."
   */
-  protected java.util.List<CodeableConcept> category = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> category;
 
   /**
   * Description: "A code that identifies a particular procedure, diagnostic investigation, or panel of investigations, that have been requested."
@@ -193,37 +198,37 @@ public class ProcedureRequest  extends DomainResource  {
   /**
   * Description: "An explanation or justification for why this diagnostic investigation is being requested in coded or textual form.   This is often for billing purposes.  May relate to the resources referred to in supportingInformation."
   */
-  protected java.util.List<CodeableConcept> reasonCode = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> reasonCode;
 
   /**
   * Description: "Indicates another resource that provides a justification for why this diagnostic investigation is being requested.   May relate to the resources referred to in supportingInformation."
   */
-  protected java.util.List<Reference> reasonReference = new java.util.ArrayList<>();
+  protected java.util.List<Reference> reasonReference;
 
   /**
   * Description: "Additional clinical information about the patient or specimen that may influence the procedure or diagnostics or their interpretations.     This information includes diagnosis, clinical findings and other observations.  In laboratory ordering these are typically referred to as \"ask at order entry questions (AOEs)\".  This includes observations explicitly requested by the producer (filler) to provide context or supporting information needed to complete the order. For example,  reporting the amount of inspired oxygen for blood gas measurements."
   */
-  protected java.util.List<Reference> supportingInfo = new java.util.ArrayList<>();
+  protected java.util.List<Reference> supportingInfo;
 
   /**
   * Description: "One or more specimens that the laboratory procedure will use."
   */
-  protected java.util.List<Reference> specimen = new java.util.ArrayList<>();
+  protected java.util.List<Reference> specimen;
 
   /**
   * Description: "Anatomic location where the procedure should be performed. This is the target site."
   */
-  protected java.util.List<CodeableConcept> bodySite = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> bodySite;
 
   /**
   * Description: "Any other notes and comments made about the service request. For example, letting provider know that \"patient hates needles\" or other provider instructions."
   */
-  protected java.util.List<Annotation> note = new java.util.ArrayList<>();
+  protected java.util.List<Annotation> note;
 
   /**
   * Description: "Key events in the history of the request."
   */
-  protected java.util.List<Reference> relevantHistory = new java.util.ArrayList<>();
+  protected java.util.List<Reference> relevantHistory;
 
   public ProcedureRequest() {
   }

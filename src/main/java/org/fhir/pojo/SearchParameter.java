@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.SearchParameterModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A search parameter that defines a named search item that can be used to search/filter on a resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SearchParameter  extends DomainResource  {
   /**
   * Description: "This is a SearchParameter resource"
@@ -112,17 +117,17 @@ public class SearchParameter  extends DomainResource  {
   /**
   * Description: "Contact details to assist a user in finding and communicating with the publisher."
   */
-  protected java.util.List<ContactDetail> contact = new java.util.ArrayList<>();
+  protected java.util.List<ContactDetail> contact;
 
   /**
   * Description: "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate search parameter instances."
   */
-  protected java.util.List<UsageContext> useContext = new java.util.ArrayList<>();
+  protected java.util.List<UsageContext> useContext;
 
   /**
   * Description: "A legal or geographic region in which the search parameter is intended to be used."
   */
-  protected java.util.List<CodeableConcept> jurisdiction = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> jurisdiction;
 
   /**
   * Description: "Explaination of why this search parameter is needed and why it has been designed as it has."
@@ -148,12 +153,12 @@ public class SearchParameter  extends DomainResource  {
   /**
   * Description: "The base resource type(s) that this search parameter can be used against."
   */
-  protected java.util.List<String> base = new java.util.ArrayList<>();
+  protected java.util.List<String> base;
 
   /**
   * Description: "Extensions for base"
   */
-  protected transient java.util.List<Element> _base = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _base;
 
   /**
   * Description: "The type of value a search parameter refers to, and how the content is interpreted."
@@ -218,47 +223,47 @@ public class SearchParameter  extends DomainResource  {
   /**
   * Description: "Types of resource (if a resource is referenced)."
   */
-  protected java.util.List<String> target = new java.util.ArrayList<>();
+  protected java.util.List<String> target;
 
   /**
   * Description: "Extensions for target"
   */
-  protected transient java.util.List<Element> _target = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _target;
 
   /**
   * Description: "Comparators supported for the search parameter."
   */
-  protected java.util.List<String> comparator = new java.util.ArrayList<>();
+  protected java.util.List<String> comparator;
 
   /**
   * Description: "Extensions for comparator"
   */
-  protected transient java.util.List<Element> _comparator = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _comparator;
 
   /**
   * Description: "A modifier supported for the search parameter."
   */
-  protected java.util.List<String> modifier = new java.util.ArrayList<>();
+  protected java.util.List<String> modifier;
 
   /**
   * Description: "Extensions for modifier"
   */
-  protected transient java.util.List<Element> _modifier = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _modifier;
 
   /**
   * Description: "Contains the names of any search parameters which may be chained to the containing search parameter. Chained parameters may be added to search parameters of type reference, and specify that resources will only be returned if they contain a reference to a resource which matches the chained parameter value. Values for this field should be drawn from SearchParameter.code for a parameter on the target resource type."
   */
-  protected java.util.List<String> chain = new java.util.ArrayList<>();
+  protected java.util.List<String> chain;
 
   /**
   * Description: "Extensions for chain"
   */
-  protected transient java.util.List<Element> _chain = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _chain;
 
   /**
   * Description: "Used to define the parts of a composite search parameter."
   */
-  protected java.util.List<SearchParameterComponent> component = new java.util.ArrayList<>();
+  protected java.util.List<SearchParameterComponent> component;
 
   public SearchParameter() {
   }

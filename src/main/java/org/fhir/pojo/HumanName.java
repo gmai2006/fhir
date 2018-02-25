@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A human's name with the ability to identify parts and usage."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class HumanName  extends Element  {
   /**
   * Description: "Identifies the purpose for this name."
@@ -64,32 +65,32 @@ public class HumanName  extends Element  {
   /**
   * Description: "Given name."
   */
-  protected java.util.List<String> given = new java.util.ArrayList<>();
+  protected java.util.List<String> given;
 
   /**
   * Description: "Extensions for given"
   */
-  protected transient java.util.List<Element> _given = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _given;
 
   /**
   * Description: "Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the start of the name."
   */
-  protected java.util.List<String> prefix = new java.util.ArrayList<>();
+  protected java.util.List<String> prefix;
 
   /**
   * Description: "Extensions for prefix"
   */
-  protected transient java.util.List<Element> _prefix = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _prefix;
 
   /**
   * Description: "Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name."
   */
-  protected java.util.List<String> suffix = new java.util.ArrayList<>();
+  protected java.util.List<String> suffix;
 
   /**
   * Description: "Extensions for suffix"
   */
-  protected transient java.util.List<Element> _suffix = new java.util.ArrayList<>();
+  protected transient java.util.List<Element> _suffix;
 
   /**
   * Description: "Indicates the period of time when this name was valid for the named person."

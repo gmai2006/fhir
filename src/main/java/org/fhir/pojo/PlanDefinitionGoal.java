@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.PlanDefinitionGoalModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PlanDefinitionGoal  extends BackboneElement  {
   /**
   * Description: "Indicates a category the goal falls within."
@@ -56,17 +61,17 @@ public class PlanDefinitionGoal  extends BackboneElement  {
   /**
   * Description: "Identifies problems, conditions, issues, or concerns the goal is intended to address."
   */
-  protected java.util.List<CodeableConcept> addresses = new java.util.ArrayList<>();
+  protected java.util.List<CodeableConcept> addresses;
 
   /**
   * Description: "Didactic or other informational resources associated with the goal that provide further supporting information about the goal. Information resources can include inline text commentary and links to web resources."
   */
-  protected java.util.List<RelatedArtifact> documentation = new java.util.ArrayList<>();
+  protected java.util.List<RelatedArtifact> documentation;
 
   /**
   * Description: "Indicates what should be done and within what timeframe."
   */
-  protected java.util.List<PlanDefinitionTarget> target = new java.util.ArrayList<>();
+  protected java.util.List<PlanDefinitionTarget> target;
 
   public PlanDefinitionGoal() {
   }

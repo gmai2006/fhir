@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EpisodeOfCareStatusHistoryModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class EpisodeOfCareStatusHistory  extends BackboneElement  {
   /**
   * Description: "planned | waitlist | active | onhold | finished | cancelled."

@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.EligibilityResponseInsuranceModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "This resource provides eligibility and plan details from the processing of an Eligibility resource."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class EligibilityResponseInsurance  extends BackboneElement  {
   /**
   * Description: "A suite of updated or additional Coverages from the Insurer."
@@ -45,7 +50,7 @@ public class EligibilityResponseInsurance  extends BackboneElement  {
   /**
   * Description: "Benefits and optionally current balances by Category."
   */
-  protected java.util.List<EligibilityResponseBenefitBalance> benefitBalance = new java.util.ArrayList<>();
+  protected java.util.List<EligibilityResponseBenefitBalance> benefitBalance;
 
   public EligibilityResponseInsurance() {
   }

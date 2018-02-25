@@ -26,10 +26,11 @@
 
 package org.fhir.pojo;
 import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
 * "A structured set of tests against a FHIR server implementation to determine compliance against the FHIR specification."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TestScriptOperation  extends BackboneElement  {
   /**
   * Description: "Server interaction or operation type."
@@ -132,7 +133,7 @@ public class TestScriptOperation  extends BackboneElement  {
   /**
   * Description: "Header elements would be used to set HTTP headers."
   */
-  protected java.util.List<TestScriptRequestHeader> requestHeader = new java.util.ArrayList<>();
+  protected java.util.List<TestScriptRequestHeader> requestHeader;
 
   /**
   * Description: "The fixture id (maybe new) to map to the request."

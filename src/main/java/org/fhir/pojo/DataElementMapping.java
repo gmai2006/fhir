@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.DataElementMappingModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "The formal description of a single piece of information that can be gathered and reported."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataElementMapping  extends BackboneElement  {
   /**
   * Description: "An internal id that is used to identify this mapping set when specific mappings are made on a per-element basis."

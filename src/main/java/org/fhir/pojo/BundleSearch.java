@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.BundleSearchModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A container for a collection of resources."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BundleSearch  extends BackboneElement  {
   /**
   * Description: "Why this entry is in the result set - whether it's included as a match or because of an _include requirement."

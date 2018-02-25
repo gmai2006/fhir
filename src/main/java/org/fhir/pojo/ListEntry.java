@@ -26,11 +26,16 @@
 
 package org.fhir.pojo;
 import org.fhir.entity.ListEntryModel;
-import com.google.gson.GsonBuilder;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
 * "A set of information summarized from a list of other resources."
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ListEntry  extends BackboneElement  {
   /**
   * Description: "The flag allows the system constructing the list to indicate the role and significance of the item in the list."
