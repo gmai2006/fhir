@@ -36,7 +36,7 @@ SUM:                              3543          51266          99722         662
 -----------------------------------------------------------------------------------
 </pre>
 
-##Instruction
+## Instruction
 All instructions should be run in a terminal
 a. clone the project
 ```git clone https://github.com/gmai2006/fhir.git```
