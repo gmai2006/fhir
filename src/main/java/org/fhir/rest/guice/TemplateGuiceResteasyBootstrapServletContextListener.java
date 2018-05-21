@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import org.fhir.pojo.Patient;
 import org.jboss.resteasy.plugins.guice.GuiceResteasyBootstrapServletContextListener;
 
 import com.google.inject.Module;
