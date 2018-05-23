@@ -52,7 +52,7 @@ dependencies {
   compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.5'
   compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.5'
   compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '2.3.5.Final'
-  runtime group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+  compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 
 	runtime group: 'org.codehaus.jackson', name: 'jackson-jaxrs', version: '1.9.13'
  
@@ -85,5 +85,10 @@ task cleanlibdir (type: Delete) {
             delete(file)
         }
     }
+}
+
+task deploy(type: Copy) {
+    from file("${buildDir}/libs/FHIR.war")
+    into file("/media/paul/workspace/home/tomcat/apache-tomcat-9.0.8/webapps/")
 }
 
